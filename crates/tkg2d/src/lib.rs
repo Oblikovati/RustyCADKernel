@@ -11,7 +11,7 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of ModelingData/TKG2d (Geom2d, Adaptor2d, Geom2dAdaptor, Geom2dEval and Geom2dHash packages) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of ModelingData/TKG2d (Geom2d, Adaptor2d, Geom2dAdaptor, Geom2dEval, Geom2dGridEval and Geom2dHash packages) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! OCCT TKG2d: transient 2D geometry and the 2D curve adaptors.
 //!
@@ -24,4 +24,5 @@ pub mod adaptor2d;
 pub mod geom2d;
 pub mod geom2d_adaptor;
 pub mod geom2d_eval;
+pub mod geom2d_grid_eval;
 pub mod geom2d_hash;
