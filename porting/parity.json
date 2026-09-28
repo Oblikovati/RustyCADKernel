@@ -56890,6 +56890,2094 @@
       "rust_item": "<*const T as PartialEq<rustycad_tkernel::standard::Handle<T>>>::ne",
       "status": "implemented",
       "notes": "Friend form with the raw pointer on the left; compares the pointer with the projected address, as the member form does. Rust takes the pointer of the handle's own projection type T; a pointer to another type is projected first with Handle::cast."
+    },
+    {
+      "upstream_id": "Units::UnitsFile(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::set_units_file",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::LexiconFile(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::set_lexicon_file",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::DictionaryOfUnits(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::dictionary_of_units",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::Quantity(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::quantity",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::FirstQuantity(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::first_quantity",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. The static result string becomes Option<AsciiString>; the empty-symbol cache quirk (FirstQuantity(\"\") answers \"\") is kept. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::LexiconUnits(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::lexicon_units",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::LexiconFormula()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::lexicon_formula",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::NullDimensions()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::null_dimensions",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::Convert(double,const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::convert",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::ToSI(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::to_si",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. The last-unit cache starts as the empty unit with factor 0, as the zero-initialized native statics. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::ToSI(double,const char* const,occ::handle<Units_Dimensions>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::to_si_dimensions",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::FromSI(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::from_si",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::FromSI(double,const char* const,occ::handle<Units_Dimensions>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::from_si_dimensions",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units::Dimensions(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units.hxx",
+      "rust_item": "rustycad_tkernel::units::Units::dimensions",
+      "status": "implemented",
+      "notes": "Manual Units package mapping. The package statics are fields of the injected `Units` context, so the function is a method of it. A null C string is None (the shared ALess object). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions(double,double,double,double,double,double,double,double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the nine exponents are one [f64; 9] in native argument order. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::Mass() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::mass",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Dimensions::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::length",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Dimensions::Time() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::time",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Dimensions::ElectricCurrent() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::electric_current",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Dimensions::ThermodynamicTemperature() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::thermodynamic_temperature",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Dimensions::AmountOfSubstance() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::amount_of_substance",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Dimensions::LuminousIntensity() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::luminous_intensity",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Dimensions::PlaneAngle() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::plane_angle",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Dimensions::SolidAngle() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::solid_angle",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Dimensions::Quantity() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Takes the Units context holding the native static quantity-sequence cache, captured on the first call and never refreshed; returns Option<AsciiString>. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::Multiply(const occ::handle<Units_Dimensions>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::multiply",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::Divide(const occ::handle<Units_Dimensions>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::divide",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::Power(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::power",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::IsEqual(const occ::handle<Units_Dimensions>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::is_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::IsNotEqual(const occ::handle<Units_Dimensions>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::is_not_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::Dump(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; writes the native std::cout text into an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::ALess()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_less",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::AMass()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_mass",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::ALength()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_length",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::ATime()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_time",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::AElectricCurrent()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_electric_current",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::AThermodynamicTemperature()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_thermodynamic_temperature",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::AAmountOfSubstance()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_amount_of_substance",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::ALuminousIntensity()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_luminous_intensity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::APlaneAngle()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_plane_angle",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::ASolidAngle()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": "rustycad_tkernel::units::Dimensions::a_solid_angle",
+      "status": "implemented",
+      "notes": "Manual Units mapping; one shared immutable object per process, as the native function-local static. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Dimensions::DEFINE_STANDARD_RTTIEXT(Units_Dimensions,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Dimensions.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_Explorer()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::default",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively."
+    },
+    {
+      "upstream_id": "Units_Explorer(const occ::handle<Units_UnitsSystem>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::for_system",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively."
+    },
+    {
+      "upstream_id": "Units_Explorer(const occ::handle<Units_UnitsDictionary>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::for_dictionary",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively."
+    },
+    {
+      "upstream_id": "Units_Explorer(const occ::handle<Units_UnitsSystem>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::for_system_quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively."
+    },
+    {
+      "upstream_id": "Units_Explorer(const occ::handle<Units_UnitsDictionary>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::for_dictionary_quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively."
+    },
+    {
+      "upstream_id": "Units_Explorer::Init(const occ::handle<Units_UnitsSystem>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::init_system",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::Init(const occ::handle<Units_UnitsDictionary>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::init_dictionary",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::Init(const occ::handle<Units_UnitsSystem>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::init_system_quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::Init(const occ::handle<Units_UnitsDictionary>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::init_dictionary_quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::MoreQuantity() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::more_quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Unchecked native null-sequence dereferences are Standard_NullObject failures. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::NextQuantity()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::next_quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Unchecked native null-sequence dereferences are Standard_NullObject failures. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::Quantity() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Unchecked native null-sequence dereferences are Standard_NullObject failures. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::MoreUnit() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::more_unit",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Unchecked native null-sequence dereferences are Standard_NullObject failures. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::NextUnit()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::next_unit",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Unchecked native null-sequence dereferences are Standard_NullObject failures. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::Unit() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::unit",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Unchecked native null-sequence dereferences are Standard_NullObject failures. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Explorer::IsActive() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Explorer.hxx",
+      "rust_item": "rustycad_tkernel::units::Explorer::is_active",
+      "status": "implemented",
+      "notes": "Manual Units mapping; positions are one-based usize and a failed quantity look-up leaves position 0 as natively. Unchecked native null-sequence dereferences are Standard_NullObject failures. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Lexicon()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Lexicon.hxx",
+      "rust_item": "rustycad_tkernel::units::Lexicon::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the sequence stays null until Creates, as natively."
+    },
+    {
+      "upstream_id": "Units_Lexicon::Creates()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Lexicon.hxx",
+      "rust_item": "rustycad_tkernel::units::Lexicon::creates",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the native THE_LEXICON table with its ISO 8859-1 bytes, kept in descending byte order by AddToken. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Lexicon::Sequence() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Lexicon.hxx",
+      "rust_item": "rustycad_tkernel::units::Lexicon::sequence",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Lexicon::AddToken(const char* const,const char* const,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Lexicon.hxx",
+      "rust_item": "rustycad_tkernel::units::Lexicon::add_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the duplicate-meaning warning of Units_Token::Update goes to an injected writer (native std::cout). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Lexicon::Dump() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Lexicon.hxx",
+      "rust_item": "rustycad_tkernel::units::LexiconHandle::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the virtual Dump dispatches on the handle's dynamic type (UnitsLexicon adds its heading); output to an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Lexicon::DEFINE_STANDARD_RTTIEXT(Units_Lexicon,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Lexicon.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_MathSentence(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_MathSentence.hxx",
+      "rust_item": "rustycad_tkernel::units::MathSentence::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; takes the Units context owning the formula lexicon; derefs to Sentence. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle."
+    },
+    {
+      "upstream_id": "Units_Measurement(double,const occ::handle<Units_Token>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::with_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::with_unit",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Takes the Units context. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Convert(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::convert",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Takes the Units context; Message::SendWarning goes to its diagnostics. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Integer() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::integer",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. The (int) cast reproduces x86-64 cvttsd2si (INT_MIN for NaN/out of range). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Fractional() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::fractional",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Measurement() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::measurement",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle."
+    },
+    {
+      "upstream_id": "Units_Measurement::Token() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle."
+    },
+    {
+      "upstream_id": "Units_Measurement::Add(const Units_Measurement&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::add",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::operator+(const Units_Measurement&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Add>::add",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Subtract(const Units_Measurement&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::subtract",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::operator-(const Units_Measurement&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Sub>::sub",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Multiply(const Units_Measurement&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::multiply",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::operator*(const Units_Measurement&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Mul>::mul",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Multiply(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::multiply_real",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::operator*(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Mul<f64>>::mul",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Divide(const Units_Measurement&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::divide",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::operator/(const Units_Measurement&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Div>::div",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Divide(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::divide_real",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::operator/(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::<&Measurement as core::ops::Div<f64>>::div",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::Power(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::power",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Operators return Result because a null token (dereferenced natively) is a Standard_NullObject failure. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Measurement::HasToken() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::has_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle."
+    },
+    {
+      "upstream_id": "Units_Measurement::Dump() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Measurement.hxx",
+      "rust_item": "rustycad_tkernel::units::Measurement::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; Units_Measurement is a Clone value holding a shared token handle. Message::SendInfo goes to the Units context diagnostics, the token dump to an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_NoSuchType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_NoSuchType.hxx",
+      "rust_item": "rustycad_tkernel::units::no_such_type",
+      "status": "implemented",
+      "notes": "Manual Units mapping; declared with define_standard_exceptions! (UNITS_HIERARCHY) so Failure::is_kind(\"Standard_NoSuchObject\") holds; the message is the offending name. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_NoSuchUnit",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_NoSuchUnit.hxx",
+      "rust_item": "rustycad_tkernel::units::no_such_unit",
+      "status": "implemented",
+      "notes": "Manual Units mapping; declared with define_standard_exceptions! (UNITS_HIERARCHY) so Failure::is_kind(\"Standard_NoSuchObject\") holds; the message is the offending unit. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator==(const occ::handle<Units_Quantity>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::quantity_equals",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator==(const occ::handle<Units_Token>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_equals",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator==(const occ::handle<Units_Unit>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::unit_equals",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator*(const occ::handle<Units_Dimensions>&,const occ::handle<Units_Dimensions>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::dimensions_multiply",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator/(const occ::handle<Units_Dimensions>&,const occ::handle<Units_Dimensions>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::dimensions_divide",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::pow(const occ::handle<Units_Dimensions>&,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::dimensions_pow",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::pow(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_pow_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::pow(const occ::handle<Units_Token>&,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_pow",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator+(const occ::handle<Units_Token>&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_add_integer",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator+(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_add",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator-(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_subtract",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator*(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_multiply",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator/(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_divide",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator!=(const occ::handle<Units_Token>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_not_equals",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator<=(const occ::handle<Units_Token>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_less_or_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator>(const occ::handle<Units_Token>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_greater",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator>(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_greater_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Operators::operator>=(const occ::handle<Units_Token>&,const occ::handle<Units_Token>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Operators.hxx",
+      "rust_item": "rustycad_tkernel::units::operators::token_greater_or_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping; free operators on handles are named functions of units::operators forwarding to the member natively named. Natively a null handle argument is dereferenced unchecked; Rust returns a Standard_NullObject failure instead. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Quantity(const char* const,const occ::handle<Units_Dimensions>&,const occ::handle<NCollection_HSequence<occ::handle<Units_Unit>>>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Quantity.hxx",
+      "rust_item": "rustycad_tkernel::units::Quantity::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; shares the dimensions and unit sequence handles. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Quantity::Name() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Quantity.hxx",
+      "rust_item": "rustycad_tkernel::units::Quantity::name",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the TCollection_HAsciiString name is an AsciiString value (never edited natively)."
+    },
+    {
+      "upstream_id": "Units_Quantity::Dimensions() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Quantity.hxx",
+      "rust_item": "rustycad_tkernel::units::Quantity::dimensions",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Quantity::Sequence() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Quantity.hxx",
+      "rust_item": "rustycad_tkernel::units::Quantity::sequence",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Quantity::IsEqual(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Quantity.hxx",
+      "rust_item": "rustycad_tkernel::units::Quantity::is_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Quantity::Dump(int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Quantity.hxx",
+      "rust_item": "rustycad_tkernel::units::Quantity::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; output to an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Quantity::DEFINE_STANDARD_RTTIEXT(Units_Quantity,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Quantity.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_Sentence(const occ::handle<Units_Lexicon>&,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Sentence.hxx",
+      "rust_item": "rustycad_tkernel::units::Sentence::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; a lexicon with a null sequence raises Units_NoSuchType(\"BAD LEXICON descriptor\"). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Sentence::SetConstants()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Sentence.hxx",
+      "rust_item": "rustycad_tkernel::units::Sentence::set_constants",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Sentence::Sequence() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Sentence.hxx",
+      "rust_item": "rustycad_tkernel::units::Sentence::sequence",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Sentence::Sequence(const occ::handle<NCollection_HSequence<occ::handle<Units_Token>>>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Sentence.hxx",
+      "rust_item": "rustycad_tkernel::units::Sentence::set_sequence",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_Sentence::Evaluate()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Sentence.hxx",
+      "rust_item": "rustycad_tkernel::units::Sentence::evaluate",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the destructive CalculateLocal (skl 15.09.2005) with native index errors (Standard_OutOfRange NCollection_Sequence::Value, removeSeq ranges) and null results for operator-free remainders. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Sentence::IsDone() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Sentence.hxx",
+      "rust_item": "rustycad_tkernel::units::Sentence::is_done",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Sentence::Dump() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Sentence.hxx",
+      "rust_item": "rustycad_tkernel::units::Sentence::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; output to an injected writer."
+    },
+    {
+      "upstream_id": "Units_ShiftedToken(const char* const,const char* const,double,double,const occ::handle<Units_Dimensions>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedToken.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedToken::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedToken::Creates() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedToken.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedToken::creates",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Reached through TokenHandle on a Handle<Token> whose object is a ShiftedToken. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedToken::Move() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedToken.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedToken::movement",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Reached through TokenHandle on a Handle<Token> whose object is a ShiftedToken. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedToken::Multiplied(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedToken.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedToken::multiplied",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Reached through TokenHandle on a Handle<Token> whose object is a ShiftedToken. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedToken::Divided(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedToken.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedToken::divided",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Reached through TokenHandle on a Handle<Token> whose object is a ShiftedToken. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedToken::Dump(int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedToken.hxx",
+      "rust_item": "rustycad_tkernel::units::TokenHandle::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Reached through TokenHandle on a Handle<Token> whose object is a ShiftedToken. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedToken::DEFINE_STANDARD_RTTIEXT(Units_ShiftedToken,Units_Token)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedToken.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_ShiftedUnit(const char* const,const char* const,double,double,const occ::handle<Units_Quantity>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedUnit.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedUnit::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedUnit(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedUnit.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedUnit::with_symbol",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedUnit(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedUnit.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedUnit::with_name",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedUnit::Move(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedUnit.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedUnit::set_movement",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Reached through UnitHandle on a Handle<Unit> whose object is a ShiftedUnit. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedUnit::Move() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedUnit.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedUnit::movement",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Reached through UnitHandle on a Handle<Unit> whose object is a ShiftedUnit. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedUnit::Token() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedUnit.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedUnit::token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Reached through UnitHandle on a Handle<Unit> whose object is a ShiftedUnit. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedUnit::Dump(int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedUnit.hxx",
+      "rust_item": "rustycad_tkernel::units::ShiftedUnit::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Reached through UnitHandle on a Handle<Unit> whose object is a ShiftedUnit. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_ShiftedUnit::DEFINE_STANDARD_RTTIEXT(Units_ShiftedUnit,Units_Unit)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_ShiftedUnit.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_Token()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::with_word",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token(const occ::handle<Units_Token>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::from_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. The copy constructor shares, not copies, the dimensions object, as natively. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::with_mean",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token(const char* const,const char* const,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::with_value",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token(const char* const,const char* const,double,const occ::handle<Units_Dimensions>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::with_dimensions",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Creates() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::TokenHandle::creates",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. The virtual member dispatches on the handle's dynamic type through the TokenHandle trait (Units_ShiftedToken overrides). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::length",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Word() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::word",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Word(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::set_word",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Mean() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::mean",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Mean(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::set_mean",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::value",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Value(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::set_value",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Dimensions() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::dimensions",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Dimensions(const occ::handle<Units_Dimensions>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::set_dimensions",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Stores a copy; a null handle gives zero exponents. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Update(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::update",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. The duplicate-meaning warning goes to an injected writer (native std::cout). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Add(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::add_integer",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Returns a blank token (the native body is commented out). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Add(const occ::handle<Units_Token>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::add",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Subtract(const occ::handle<Units_Token>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::subtract",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Multiply(const occ::handle<Units_Token>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::multiply",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Multiplied(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::TokenHandle::multiplied",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. The virtual member dispatches on the handle's dynamic type through the TokenHandle trait (Units_ShiftedToken overrides). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Divide(const occ::handle<Units_Token>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::TokenHandle::divide",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. It returns `this` for a near-zero divisor, so it is a TokenHandle member that can return the handle itself. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Divided(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::TokenHandle::divided",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. The virtual member dispatches on the handle's dynamic type through the TokenHandle trait (Units_ShiftedToken overrides). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Power(const occ::handle<Units_Token>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::power_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Power(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::power",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. The exponent is spelled with C %g in the word. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::IsEqual(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::is_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::IsEqual(const occ::handle<Units_Token>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::is_equal_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::IsNotEqual(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::is_not_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::IsNotEqual(const occ::handle<Units_Token>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::is_not_equal_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::IsLessOrEqual(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::is_less_or_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::IsGreater(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::is_greater",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. strncmp over the word length, as natively. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::IsGreater(const occ::handle<Units_Token>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::is_greater_token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::IsGreaterOrEqual(const occ::handle<Units_Token>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::Token::is_greater_or_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::Dump(int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": "rustycad_tkernel::units::TokenHandle::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; tokens are Handle<Token> with lock-protected fields because the analysers edit them in place. The virtual member dispatches on the handle's dynamic type through the TokenHandle trait (Units_ShiftedToken overrides). Output to an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Token::DEFINE_STANDARD_RTTIEXT(Units_Token,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Token.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_Unit(const char* const,const char* const,double,const occ::handle<Units_Quantity>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::with_symbol",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::with_name",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::Name() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::name",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::Symbol(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::symbol",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::value",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::Quantity() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::SymbolsSequence() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::symbols_sequence",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::Value(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::set_value",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::Quantity(const occ::handle<Units_Quantity>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::set_quantity",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::Token() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitHandle::token",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). The virtual member dispatches on the handle's dynamic type through the UnitHandle trait. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::IsEqual(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::Unit::is_equal",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::Dump(int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitHandle::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; symbols are a shared HSequence of AsciiString values (the native HAsciiString handles are never edited). The virtual member dispatches on the handle's dynamic type through the UnitHandle trait. Output to an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_Unit::DEFINE_STANDARD_RTTIEXT(Units_Unit,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_Unit.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_UnitSentence(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitSentence.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitSentence::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; takes the Units context (LexiconUnits(true), DictionaryOfUnits()); derefs to Sentence. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitSentence(const char* const,const occ::handle<NCollection_HSequence<occ::handle<Units_Quantity>>>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitSentence.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitSentence::with_quantities",
+      "status": "implemented",
+      "notes": "Manual Units mapping; takes the Units context (LexiconUnits(false)). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitSentence::Analyse()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitSentence.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitSentence::analyse",
+      "status": "implemented",
+      "notes": "Manual Units mapping; literal port of the four passes including their index arithmetic (the sq./cu. exchange that breaks OCC23497). Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitSentence::SetUnits(const occ::handle<NCollection_HSequence<occ::handle<Units_Quantity>>>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitSentence.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitSentence::set_units",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsDictionary()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsDictionary.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsDictionary::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the sequence stays null until Creates."
+    },
+    {
+      "upstream_id": "Units_UnitsDictionary::Creates()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsDictionary.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsDictionary::creates",
+      "status": "implemented",
+      "notes": "Manual Units mapping; line-by-line reader of the vendored UnitsAPI_Units_dat with the native sscanf field widths, persistent coeff/move locals and the counting matrix propagation. Takes the Units context whose units lexicon receives the symbols. A disconnected conversion graph, an infinite loop natively, is an error. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsDictionary::Sequence() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsDictionary.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsDictionary::sequence",
+      "status": "implemented",
+      "notes": "Manual Units mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsDictionary::ActiveUnit(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsDictionary.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsDictionary::active_unit",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the French unknown-quantity message goes to an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsDictionary::Dump(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsDictionary.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsDictionary::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; output to an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsDictionary::Dump(const occ::handle<Units_Dimensions>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsDictionary.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsDictionary::dump_dimensions",
+      "status": "implemented",
+      "notes": "Manual Units mapping; output to an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsDictionary::DEFINE_STANDARD_RTTIEXT(Units_UnitsDictionary,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsDictionary.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_UnitsLexicon()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsLexicon.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsLexicon::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping."
+    },
+    {
+      "upstream_id": "Units_UnitsLexicon::Creates(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsLexicon.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsLexicon::creates",
+      "status": "implemented",
+      "notes": "Manual Units mapping; takes the Units context whose dictionary it builds when the mode is true. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsLexicon::Dump() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsLexicon.hxx",
+      "rust_item": "rustycad_tkernel::units::LexiconHandle::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; the override is selected through the handle's dynamic type. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsLexicon::DEFINE_STANDARD_RTTIEXT(Units_UnitsLexicon,Units_Lexicon)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsLexicon.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::new",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem(const char* const,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::with_resource",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. The resource file is loaded through injected ResourceIo/ResourceEnvironment and dropped, as natively; the verbose flag has no counterpart in the catalog API. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::QuantitiesSequence() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::quantities_sequence",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::ActiveUnitsSequence() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::active_units_sequence",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::Specify(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::specify",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Takes the Units context; its warnings go to the context console. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::Remove(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::remove",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Removing the last unit of a quantity removes the quantity and then raises Units_NoSuchUnit, as the native loop does. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::Activate(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::activate",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. The native search bound is the number of quantities (Standard_OutOfRange or a missed unit), kept. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::Activates()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::activates",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::ActiveUnit(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::active_unit",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::ConvertValueToUserSystem(const char* const,double,const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::convert_value_to_user_system",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Takes the Units context. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::ConvertSIValueToUserSystem(const char* const,double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::convert_si_value_to_user_system",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Takes the Units context. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::ConvertUserSystemValueToSI(const char* const,double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::convert_user_system_value_to_si",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Takes the Units context. The native shifted formula value*(factor+move) is kept. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::Dump() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::dump",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Output to an injected writer. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": "rustycad_tkernel::units::UnitsSystem::is_empty",
+      "status": "implemented",
+      "notes": "Manual Units mapping; copies share the two sequences like a native value copy. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "Units_UnitsSystem::DEFINE_STANDARD_RTTIEXT(Units_UnitsSystem,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Units/Units_UnitsSystem.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust registers the native type name through impl_transient!, so Handle::dynamic_type/is_kind_name report it."
+    },
+    {
+      "upstream_id": "UnitsAPI::CurrentToLS(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::current_to_ls",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::CurrentToSI(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::current_to_si",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::CurrentFromLS(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::current_from_ls",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::CurrentFromSI(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::current_from_si",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::AnyToLS(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::any_to_ls",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::AnyToLS(double,const char* const,occ::handle<Units_Dimensions>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::any_to_ls_dimensions",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. The native overload queries the dimensions before its null check; a null result (invalid unit with a null input handle) is a Standard_NullObject failure instead of a crash. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::AnyToSI(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::any_to_si",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::AnyToSI(double,const char* const,occ::handle<Units_Dimensions>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::any_to_si_dimensions",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::AnyFromLS(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::any_from_ls",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. An invalid unit leaves null dimensions that the native code dereferences; Rust returns Standard_NullObject. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::AnyFromSI(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::any_from_si",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::CurrentToAny(double,const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::current_to_any",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::CurrentFromAny(double,const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::current_from_any",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::AnyToAny(double,const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::any_to_any",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::LSToSI(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::ls_to_si",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::SIToLS(double,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::si_to_ls",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::SetLocalSystem(UnitsAPI_SystemUnits)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::set_local_system",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::LocalSystem()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::local_system",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::SetCurrentUnit(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::set_current_unit",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::CurrentUnit(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::current_unit",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Returns the AsciiString instead of a pointer into a static; Resource_NoSuchResource propagates. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::Save()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::save",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Returns the Resource_Manager::Save result the native call ignores. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::Reload()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::reload",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::Dimensions(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimensions",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionLess()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_less",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionMass()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_mass",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionLength()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_length",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionTime()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_time",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionElectricCurrent()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_electric_current",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionThermodynamicTemperature()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_thermodynamic_temperature",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionAmountOfSubstance()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_amount_of_substance",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionLuminousIntensity()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_luminous_intensity",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionPlaneAngle()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_plane_angle",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::DimensionSolidAngle()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::dimension_solid_angle",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI::Check(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI.hxx",
+      "rust_item": "rustycad_tkernel::units_api::UnitsApi::check",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; the native statics (current/SI/MDTV Resource_Manager handles, local units systems, selected systems) are fields of the injected UnitsApi context, whose resources are read through ResourceIo/ResourceEnvironment. Always false; the native body is commented out. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsAPI_SystemUnits",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsAPI/UnitsAPI_SystemUnits.hxx",
+      "rust_item": "rustycad_tkernel::units_api::SystemUnits",
+      "status": "implemented",
+      "notes": "Manual UnitsAPI mapping; UnitsAPI_DEFAULT/SI/MDTV are Default/Si/Mdtv."
+    },
+    {
+      "upstream_id": "UnitsMethods::GetLengthFactorValue(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::UnitsMethods::get_length_factor_value",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsMethods::GetCasCadeLengthUnit(UnitsMethods_LengthUnit)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::UnitsMethods::get_cascade_length_unit",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. The native process-wide atomic is the atomic field of an injected UnitsMethods value. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsMethods::SetCasCadeLengthUnit(double,UnitsMethods_LengthUnit)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::UnitsMethods::set_cascade_length_unit",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. Stored in the injected UnitsMethods value. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsMethods::SetCasCadeLengthUnit(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::UnitsMethods::set_cascade_length_unit_code",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. The IGES-code overload; stored in the injected UnitsMethods value. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsMethods::GetLengthUnitScale(UnitsMethods_LengthUnit,UnitsMethods_LengthUnit)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::UnitsMethods::get_length_unit_scale",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsMethods::GetLengthUnitByFactorValue(double,UnitsMethods_LengthUnit)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::UnitsMethods::get_length_unit_by_factor_value",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsMethods::DumpLengthUnit(double,UnitsMethods_LengthUnit)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::UnitsMethods::dump_length_unit_factor",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. The factor overload. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsMethods::DumpLengthUnit(UnitsMethods_LengthUnit)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::UnitsMethods::dump_length_unit",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsMethods::LengthUnitFromString(const char*,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::UnitsMethods::length_unit_from_string",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. Compared bit-for-bit with OCCT by the units_* differential probe family."
+    },
+    {
+      "upstream_id": "UnitsMethods_LengthUnit",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/UnitsMethods/UnitsMethods_LengthUnit.hxx",
+      "rust_item": "rustycad_tkernel::units_methods::LengthUnit",
+      "status": "implemented",
+      "notes": "Manual UnitsMethods mapping. The enumerator values are the IGES codes; unknown codes map to Undefined, which has the same factor and name natively."
     }
   ],
   "tests": [
