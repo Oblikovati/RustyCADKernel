@@ -1397,8 +1397,8 @@ call cannot link.
 ### Classic math package (API completion)
 
 This work adds no upstream suite. `tools/audit_api_rows.py` now reports no missing member
-and no stale row for `src/FoundationClasses/TKMath/math` (515 rows: 496 implemented,
-16 excluded, 3 partial). Supplemental tests are in `math_vector_base_behavior`,
+and no stale row for `src/FoundationClasses/TKMath/math` (515 rows: 499 implemented,
+16 excluded). Supplemental tests are in `math_vector_base_behavior`,
 `math_recipes_behavior` and `math_solver_api_behavior`. Three probes send 746 differential
 requests: `int_vector`, `real_vector_extra` and `matrix_extra` (207), `recipes_lu`,
 `recipes_svd`, `recipes_jacobi`, `recipes_dactcl` and `linear_dump` (358), and
@@ -1464,9 +1464,25 @@ Deliberate Rust deviations: `Standard_OStream` is any `std::fmt::Write`; the zer
 `operator()`; `Array1()` returns a shared view; the untyped `void*` buffer constructors
 take borrowed `f64` slices. Excluded rows: the destructors, and
 `math_NewtonMinimum::IsConvex` and `math_NewtonFunctionSetRoot::StateNumber`, which the
-headers declare but no pinned source defines. Partial rows: the `Message_ProgressRange`
-argument of math_Gauss and both LU_Decompose overloads is not ported (TKernel's Message
-progress scopes are pending); the Rust calls are the default, never-aborting range.
+headers declare but no pinned source defines.
+
+**Progress and cancellation in math_Gauss and LU_Decompose.** The three rows that were
+partial (the `Message_ProgressRange` argument of the math_Gauss constructor and of both
+LU_Decompose overloads) are implemented now that TKernel ports the Message progress classes.
+`Gauss::with_progress`, `lu_decompose_with_progress` and
+`lu_decompose_with_scales_and_progress` take a `&ProgressRange`; the earlier functions keep
+their signatures and pass the default (unbound) range. As natively, LU_Decompose opens a
+`"math_Gauss LU_Decompose"` scope of `n` steps before the row scaling, polls the user break
+before each column (the `j <= n && aPS.More()` loop condition), advances one step per
+finished column through a temporary `Next()` range, and returns `math_Status_UserAborted`
+(-1) with the partial factorization in place when the break stops the loop; the Gauss solver
+is then not done. Every exit, the singular ones included, closes the scope and completes the
+range. A non-square matrix is refused before the range is consumed (natively
+`math_NotSquare` is raised first as well). `math_progress_behavior` tests a cancelling user
+indicator, and the `progress_lu`/`progress_gauss` probes (149 requests in
+`tools/tkmath_progress_corpus.py`) compare status, factors, pivots, determinant, poll count
+and every Show position bit-for-bit with OCCT for sizes 1..6, every break point and singular
+early exits.
 
 ### Bnd (API completion)
 
