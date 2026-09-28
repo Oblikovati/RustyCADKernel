@@ -24,8 +24,8 @@ mod shared_state;
 mod triangle;
 mod triangulation;
 pub use coherent::{
-    CoherentLink, CoherentNode, CoherentTriPtr, CoherentTriangle, CoherentTriangulation,
-    TwoIntegers,
+    CoherentLink, CoherentNode, CoherentTriPtr, CoherentTriPtrIterator, CoherentTriangle,
+    CoherentTriangulation, TwoIntegers,
 };
 pub use connect::Connect;
 pub use harray::HArray1OfReal;

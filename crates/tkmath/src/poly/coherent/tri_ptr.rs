@@ -79,13 +79,63 @@ impl CoherentTriPtr {
     pub fn remove(&mut self, member: usize) {
         self.ring.remove(member);
     }
-    /// Triangles from the head, as `Iterator`; `ring.iter().collect::<Vec<_>>()`.
+    /// Triangles from the head; `ring.iter().collect::<Vec<_>>()`.
     pub fn iter(&self) -> impl Iterator<Item = usize> + '_ {
         self.ring.iter().copied()
     }
-    /// Triangles once round the ring from any member, as `Iterator(member)`; `ring.iter_from(2)`.
-    pub fn iter_from(&self, member: usize) -> impl Iterator<Item = usize> + '_ {
-        let count = self.ring.len();
-        (0..count).map(move |step| self.ring[(member + step) % count])
+    /// The native cursor started at a member, going once round the ring, as
+    /// `Iterator(member)`; `ring.iter_from(2)`.
+    pub fn iter_from(&self, member: usize) -> CoherentTriPtrIterator<'_> {
+        CoherentTriPtrIterator {
+            ring: Some(self),
+            first: member,
+            current: (member < self.ring.len()).then_some(member),
+        }
+    }
+    /// Drops the whole ring, as the static `RemoveList`; `ring.remove_list()`.
+    pub fn remove_list(self) {}
+}
+/// `Poly_CoherentTriPtr::Iterator`: a cursor that stops before reaching its first member
+/// again; the default cursor is empty; `ring.iter_from(0)`.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct CoherentTriPtrIterator<'a> {
+    ring: Option<&'a CoherentTriPtr>,
+    first: usize,
+    current: Option<usize>,
+}
+impl CoherentTriPtrIterator<'_> {
+    /// Triangle of the starting member, `None` for the empty cursor, as `First`; `cursor.first()`.
+    pub fn first(&self) -> Option<usize> {
+        self.ring.and_then(|ring| ring.triangle_at(self.first))
+    }
+    /// True while a member is current, as `More`; `cursor.more()`.
+    pub const fn more(&self) -> bool {
+        self.current.is_some()
+    }
+    /// Moves to the next member, ending at the starting one, as `Next`; `cursor.advance()`.
+    pub fn advance(&mut self) {
+        let (Some(ring), Some(current)) = (self.ring, self.current) else {
+            return;
+        };
+        let next = ring.next(current);
+        self.current = (next != self.first).then_some(next);
+    }
+    /// Triangle of the current member, as `Value` and `ChangeValue`; `cursor.value()`.
+    pub fn value(&self) -> Option<usize> {
+        self.ring
+            .zip(self.current)
+            .and_then(|(ring, member)| ring.triangle_at(member))
+    }
+    /// Position of the current member, as `PtrValue`; `cursor.ptr_value()`.
+    pub const fn ptr_value(&self) -> Option<usize> {
+        self.current
+    }
+}
+impl Iterator for CoherentTriPtrIterator<'_> {
+    type Item = usize;
+    fn next(&mut self) -> Option<usize> {
+        let value = self.value()?;
+        self.advance();
+        Some(value)
     }
 }

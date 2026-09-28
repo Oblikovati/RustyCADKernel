@@ -138,7 +138,7 @@ impl Connect {
             .copied()
             .map_err(|e| array_failure("Poly_Connect::Triangle", e))
     }
-    /// The triangles across the sides opposite to nodes 1, 2 and 3, 0 on a boundary;
+    /// The triangles across the sides (n1,n2), (n2,n3) and (n3,n1), 0 on a boundary;
     /// `connect.triangles(1)?`.
     pub fn triangles(&self, triangle: i32) -> Result<(i32, i32, i32), Failure> {
         self.adjacent_triple(triangle, 1)
