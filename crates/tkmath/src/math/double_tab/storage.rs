@@ -1,0 +1,109 @@
+// Created on: 1992-02-07
+// Created by: Laurent PAINNOT
+// Copyright (c) 1992-1999 Matra Datavision
+// Copyright (c) 1999-2014 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+use rustycad_tkernel::ncollection::ArrayError;
+// The 64-element inline alternative intentionally avoids a heap allocation, as OCCT does.
+#[allow(clippy::large_enum_variant)]
+pub(super) enum TableStorage<'a> {
+    Inline([f64; 64]),
+    Owned(Vec<f64>),
+    Borrowed(&'a mut [f64]),
+}
+impl TableStorage<'_> {
+    pub(super) fn new(length: usize, inline_allowed: bool) -> Self {
+        if inline_allowed && length <= 64 {
+            Self::Inline([0.0; 64])
+        } else {
+            Self::Owned(vec![0.0; length])
+        }
+    }
+    pub(super) fn slice(&self) -> &[f64] {
+        match self {
+            Self::Inline(values) => values,
+            Self::Owned(values) => values,
+            Self::Borrowed(values) => values,
+        }
+    }
+    pub(super) fn slice_mut(&mut self) -> &mut [f64] {
+        match self {
+            Self::Inline(values) => values,
+            Self::Owned(values) => values,
+            Self::Borrowed(values) => values,
+        }
+    }
+}
+#[derive(Clone, Copy)]
+pub(super) struct TableShape {
+    pub(super) lower: [i32; 2],
+    pub(super) size: [usize; 2],
+}
+impl TableShape {
+    pub(super) fn new(lower: [i32; 2], size: [usize; 2]) -> Self {
+        size[0]
+            .checked_mul(size[1])
+            .expect("table dimensions must fit usize");
+        Self { lower, size }
+    }
+    pub(super) fn with_bounds(rl: i32, ru: i32, cl: i32, cu: i32) -> Result<Self, ArrayError> {
+        Ok(Self::new(
+            [rl, cl],
+            [dimension(rl, ru)?, dimension(cl, cu)?],
+        ))
+    }
+    pub(super) fn len(self) -> usize {
+        self.size[0] * self.size[1]
+    }
+    pub(super) fn dimensions(self) -> (usize, usize) {
+        (self.size[0], self.size[1])
+    }
+    pub(super) fn upper(self, axis: usize) -> i32 {
+        (i64::from(self.lower[axis]) + self.size[axis] as i64 - 1) as i32
+    }
+    pub(super) fn indices(self, row: i32, col: i32) -> Result<[usize; 2], ArrayError> {
+        Ok([
+            bounded(row, self.lower[0], self.upper(0))?,
+            bounded(col, self.lower[1], self.upper(1))?,
+        ])
+    }
+    pub(super) fn offset(self, row: usize, col: usize) -> Result<usize, ArrayError> {
+        for (index, length) in [(row, self.size[0]), (col, self.size[1])] {
+            if index >= length {
+                return Err(ArrayError::Index {
+                    index: index as i64,
+                    lower: 0,
+                    upper: length as i64 - 1,
+                });
+            }
+        }
+        Ok(row * self.size[1] + col)
+    }
+}
+fn dimension(lower: i32, upper: i32) -> Result<usize, ArrayError> {
+    if upper < lower {
+        return Err(ArrayError::Bounds { lower, upper });
+    }
+    Ok((i64::from(upper) - i64::from(lower) + 1) as usize)
+}
+fn bounded(index: i32, lower: i32, upper: i32) -> Result<usize, ArrayError> {
+    if index < lower || index > upper {
+        return Err(ArrayError::Index {
+            index: index.into(),
+            lower: lower.into(),
+            upper: upper.into(),
+        });
+    }
+    Ok((i64::from(index) - i64::from(lower)) as usize)
+}

@@ -1,0 +1,69 @@
+// Copyright (c) 2026 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+//! MathOpt_GlobOpt.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+use super::*;
+/// Native bounded Powell restarts; `multi_start(&mut f,&lower,&upper,&config)`.
+pub fn multi_start(
+    function: &mut impl MultipleVarFunction,
+    lower: &Vector<'_>,
+    upper: &Vector<'_>,
+    config: &GlobalConfig,
+) -> VectorResult {
+    let bounds: BoxBounds<'_> = BoxBounds { lower, upper };
+    if !valid(&bounds, config) || config.starts == 0 {
+        return failure_result(Status::InvalidInput);
+    }
+    let mut checked: Checked<'_, _> = Checked {
+        function,
+        failure: Status::Ok,
+    };
+    let mut rng: RandomGenerator = RandomGenerator::new(config.seed as u64);
+    let local: Config =
+        config.local(((config.solver.max_iterations as usize / config.starts) as u32).max(10));
+    let mut result: VectorResult = VectorResult::default();
+    for _ in 0..config.starts {
+        let start: Vector<'static> = random_point(&bounds, &mut rng);
+        let mut bounded: BoundedCallback<'_, '_, _> = BoundedCallback {
+            function: &mut checked,
+            bounds: &bounds,
+        };
+        let solved: VectorResult = powell(&mut bounded, &start, &local);
+        let mut candidate: Vector<'static> = match (solved.value, solved.solution) {
+            (Some(_), Some(solution)) => solution,
+            _ => start,
+        };
+        bounds.clamp(&mut candidate);
+        retain(&mut checked, &mut result, candidate);
+    }
+    if result.value.is_none() {
+        result.status = if checked.failure != Status::Ok {
+            checked.failure
+        } else {
+            Status::NumericalError
+        };
+    }
+    result
+}
+fn retain(
+    function: &mut impl MultipleVarFunction,
+    result: &mut VectorResult,
+    candidate: Vector<'static>,
+) {
+    let mut value: f64 = 0.0;
+    if function.value(&candidate, &mut value) && result.value.is_none_or(|old| value < old) {
+        result.status = Status::Ok;
+        result.solution = Some(candidate);
+        result.value = Some(value);
+    }
+}

@@ -1,0 +1,17 @@
+[package]
+name = "rustycad-tkmath"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license = "LGPL-2.1-only WITH OCCT-exception-1.0"
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+num-complex = "=0.4.6"
+rustc_apfloat = "=0.2.3"
+rustycad-tkernel = { path = "../tkernel" }
+
+[features]
+# Matches checks compiled into OCCT's out-of-line gp_Mat methods under OCCT_DEBUG.
+occt-debug-checks = []

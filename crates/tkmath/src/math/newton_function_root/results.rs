@@ -1,0 +1,47 @@
+// Copyright (c) 1997-1999 Matra Datavision
+// Copyright (c) 1999-2014 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+use super::{Failure, NewtonFunctionRoot};
+impl NewtonFunctionRoot {
+    /// Reports native convergence; `solver.is_done()`.
+    pub fn is_done(&self) -> bool {
+        self.done
+    }
+    /// Reads the resulting scalar root; `solver.root()?`.
+    pub fn root(&self) -> Result<f64, Failure> {
+        self.check_done()?;
+        Ok(self.root)
+    }
+    /// Reads the last combined callback's function output; `solver.value()?`.
+    pub fn value(&self) -> Result<f64, Failure> {
+        self.check_done()?;
+        Ok(self.value)
+    }
+    /// Reads the Newton iteration's saved derivative; `solver.derivative()?`.
+    pub fn derivative(&self) -> Result<f64, Failure> {
+        self.check_done()?;
+        Ok(self.derivative)
+    }
+    /// Reads the Newton iteration's convergence iteration; `solver.iterations()?`.
+    pub fn iterations(&self) -> Result<i32, Failure> {
+        self.check_done()?;
+        Ok(self.iterations)
+    }
+    fn check_done(&self) -> Result<(), Failure> {
+        if !self.done {
+            return Err(Failure::with_type("StdFail_NotDone", " ", ""));
+        }
+        Ok(())
+    }
+}

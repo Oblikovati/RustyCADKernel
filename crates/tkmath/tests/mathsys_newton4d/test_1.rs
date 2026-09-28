@@ -1,0 +1,32 @@
+#[test]
+fn MathSys_Newton4DTest__Solve4D_Bounded() {
+    let mut aFunc = |x: &[f64; 4], theF: &mut [f64; 4], theJ: &mut [[f64; 4]; 4]| -> bool {
+        let [theX1, theX2, theX3, theX4] = *x;
+        theF[0] = theX1 - 1.0;
+        theF[1] = theX2 - 2.0;
+        theF[2] = theX3 - 3.0;
+        theF[3] = theX4 - 4.0;
+
+        for r in 0..4 {
+            for c in 0..4 {
+                theJ[r][c] = if r == c { 1.0 } else { 0.0 };
+            }
+        }
+        true
+    };
+
+    let mut aBounds: NewtonBoundsN<4> = NewtonBoundsN::default();
+    aBounds.min = [-10.0, -10.0, -10.0, -10.0];
+    aBounds.max = [10.0, 10.0, 10.0, 10.0];
+
+    let mut aOptions: NewtonOptions = NewtonOptions::default();
+    aOptions.solver.f_tolerance = THE_TOL;
+
+    let aResult: NewtonResultN<4> = solve_4d(&mut aFunc, [9.0, 8.0, 7.0, 6.0], &aBounds, &aOptions);
+
+    assert!(aResult.is_done());
+    near(aResult.x[0], 1.0, 1.0e-12);
+    near(aResult.x[1], 2.0, 1.0e-12);
+    near(aResult.x[2], 3.0, 1.0e-12);
+    near(aResult.x[3], 4.0, 1.0e-12);
+}
