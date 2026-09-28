@@ -307,16 +307,38 @@ def normalize_param(param: str) -> str:
     'const gp_Vec&'
     >>> normalize_param('const double theX')
     'double'
+    >>> normalize_param('gp_Pnt theP[8]')
+    'gp_Pnt*'
     """
     tokens = [token for token in type_tokens(split_default(param).strip()) if token != "typename"]
+    tokens, extents = split_extents(tokens)
     words = [token for token in tokens if re.match(r"\w", token)]
     type_words = [word for word in words if word not in {"const", "volatile", "unsigned", "signed"}]
     if len(type_words) >= 2 and tokens[-1] == words[-1]:
         tokens = tokens[:-1]
     tokens = [TYPE_ALIASES.get(token, token) for token in tokens]
-    if tokens and tokens[0] == "const" and not any(token[0] in "&*" for token in tokens):
+    if tokens and tokens[0] == "const" and not any(token[0] in "&*" for token in tokens) and not extents:
         tokens = tokens[1:]
-    return re.sub(r" ([&*])", r"\1", " ".join(tokens))
+    return re.sub(r" ([&*])", r"\1", " ".join(tokens)) + decayed(extents)
+
+
+def split_extents(tokens: list[str]) -> tuple[list[str], list[str]]:
+    """Separate trailing array extents (`theP [8]`) from the declarator tokens before them."""
+    split = len(tokens)
+    while split > 0 and tokens[split - 1].startswith("["):
+        split -= 1
+    return tokens[:split], tokens[split:]
+
+
+def decayed(extents: list[str]) -> str:
+    """Pointer spelling of an array parameter: C++ adjusts `T p[8]` to `T*` and `T p[2][3]` to `T(*)[3]`.
+
+    >>> decayed(['[2]', '[3]'])
+    '(*)[3]'
+    """
+    if not extents:
+        return ""
+    return "*" if len(extents) == 1 else "(*)" + "".join(squeeze(extent) for extent in extents[1:])
 
 
 def type_tokens(param: str) -> list[str]:
