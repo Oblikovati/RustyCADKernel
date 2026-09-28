@@ -4,9 +4,6 @@
 Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
-A row with status `native_blocked` (and a `native_block_reason`) is a translated suite whose
-unchanged upstream file cannot be built against the shared oracle closure; it is listed in
-the report and never counted as a native or Rust pass.
 """
 from __future__ import annotations
 import argparse
@@ -22,7 +19,7 @@ from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
-from native_build import locked_cmake
+from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags, locked_cmake
 
 # The numeric differential verifier of each toolkit: script, evidence directory.
 NUMERIC_VERIFIERS = {
@@ -33,9 +30,6 @@ NUMERIC_VERIFIERS = {
     'TKBRep': ('tools/verify_tkbrep_numeric.py', 'target/oracle-tkbrep/numeric'),
 }
 
-# A translated suite whose native file needs toolkits outside the oracle closure.
-BLOCKED_STATUS = 'native_blocked'
-
 
 def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
     """Reject stale, partial, or unsupported mappings before building; selected_rows('TKMath', snapshot)."""
@@ -45,26 +39,9 @@ def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
     candidates = {row['name'] for entry in inventory['toolkits'] if entry['name'] == toolkit
                   for row in entry['gtest_declaration_candidates']}
     if len({row['upstream_id'] for row in rows}) != len(rows): raise ValueError('Duplicate declaration mappings')
-    if any(row['status'] not in ('translated', BLOCKED_STATUS) for row in rows):
-        raise ValueError('This verifier accepts only translated, unskipped suites')
-    if any(row['status'] == BLOCKED_STATUS and not row.get('native_block_reason') for row in rows):
-        raise ValueError(f'A {BLOCKED_STATUS} row needs a native_block_reason')
+    if any(row['status'] != 'translated' for row in rows): raise ValueError('This verifier accepts only translated, unskipped suites')
     if {row['upstream_id'] for row in rows} - candidates: raise ValueError('Mappings outside selected toolkit inventory')
     return rows
-
-
-def gated_rows(rows: list[dict]) -> tuple[list[dict], list[dict]]:
-    """Split rows into the gated translated rows and the native-blocked ones; gated_rows(rows).
-
-    A source is gated whole or not at all, so a blocked row may not share a source
-    with a translated one.
-    """
-    gated = [row for row in rows if row['status'] == 'translated']
-    blocked = [row for row in rows if row['status'] == BLOCKED_STATUS]
-    shared = {row['source'] for row in gated} & {row['source'] for row in blocked}
-    if shared: raise ValueError(f'Sources mix translated and {BLOCKED_STATUS} rows: {sorted(shared)}')
-    if not gated: raise ValueError('No gated declarations: every mapped suite is native-blocked')
-    return gated, blocked
 
 
 def verify_sources(source: Path, rows: list[dict]) -> list[str]:
@@ -90,11 +67,7 @@ def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, enviro
         if not (reuse/'CMakeCache.txt').is_file(): raise ValueError(f'No configured native build at {reuse}; expected a CMake build directory')
         return reuse
     build = ROOT/'target/occt-tkernel-full'
-    flags = ['-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DBUILD_GTEST=ON',
-             '-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON', '-DGTEST_USE_FETCHCONTENT=ON',
-             '-DBUILD_ADDITIONAL_TOOLKITS=TKTopAlgo']
-    flags += [f'-DBUILD_MODULE_{name}={"ON" if name == "FoundationClasses" else "OFF"}' for name in inventory['modules']]
-    return locked_cmake(source,build,flags,['TKTopAlgo','gtest_main'],jobs,output/'configure.log',output/'build.log',run,environment)
+    return locked_cmake(source,build,closure_flags(inventory['modules']),CLOSURE_TARGETS,jobs,output/'configure.log',output/'build.log',run,environment)
 
 
 def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict) -> list[Path]:
@@ -103,7 +76,7 @@ def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs
     common = [compiler,'-std=c++17','-O2','-pthread','-I'+str(build/'include/opencascade'),
               '-I'+str(build/'_deps/googletest-src/googletest/include')]
     objects = compile_sources(source,paths,common,output,jobs)
-    libraries = [unique(build,f'lib{name}.so') for name in ['TKTopAlgo','TKGeomAlgo','TKBRep','TKGeomBase','TKG3d','TKG2d','TKMath','TKernel','gtest_main','gtest']]
+    libraries = [unique(build,f'lib{name}.so') for name in [*LINKED_TOOLKITS,'gtest_main','gtest']]
     executable = output/'legacy-tests'
     run([*common,*objects,*libraries,'-Wl,-rpath,'+str(libraries[0].parent),'-o',executable],output/'link.log',env=environment)
     listing = run([executable,'--gtest_list_tests'],output/'native-list.txt',env=environment)
@@ -140,8 +113,7 @@ def main() -> None:
     # A partial run writes elsewhere so it never deletes or overwrites full-gate evidence.
     output = ROOT/'target'/('oracle-'+args.toolkit.lower()+('-partial' if args.only else '')); output.mkdir(parents=True,exist_ok=True)
     (output/'report.json').unlink(missing_ok=True)
-    inventory = snapshot(source); rows, blocked = gated_rows(selected_rows(args.toolkit,inventory))
-    for row in blocked: print(f"NATIVE BLOCKED (not gated): {row['upstream_id']}: {row['native_block_reason']}")
+    inventory = snapshot(source); rows = selected_rows(args.toolkit,inventory)
     if args.only:
         rows = [row for row in rows if any(text in row['source'] for text in args.only)]
         if not rows: raise ValueError(f'--only {args.only} selects no mapped sources; expected a substring of a mapped source path')
@@ -158,10 +130,10 @@ def main() -> None:
     script, evidence = NUMERIC_VERIFIERS[args.toolkit]
     run([sys.executable,ROOT/script,'--source',source,'--native-build',build],output/'numeric-verification.log',env=environment)
     numeric = json.loads((ROOT/evidence/'report.json').read_text())
-    record_report(output,args.toolkit,inventory,rows,native,rust,libraries,numeric,blocked)
+    record_report(output,args.toolkit,inventory,rows,native,rust,libraries,numeric)
 
 
-def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict], native: set, rust: set, libraries: list[Path], numeric: dict | None, blocked: list[dict]) -> None:
+def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict], native: set, rust: set, libraries: list[Path], numeric: dict | None) -> None:
     """Record hashes and scope without inferring whole-toolkit acceptance; record_report(...)."""
     inputs = [p for p in (ROOT/'crates').rglob('*') if p.is_file()]
     inputs += list((ROOT/'tools/oracle').glob('*.cxx'))
@@ -170,7 +142,6 @@ def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict],
     report = {'revision':inventory['revision'],'profile':'linux-gcc-c-locale','toolkit':toolkit,
               'numeric_report':numeric,'declarations_mapped':len(rows),'legacy_runtime_cases_passed':len(native),
               'rust_runtime_cases_passed':len(rust),'toolkit_complete':False,
-              'native_blocked':[row['upstream_id'] for row in blocked],
               'scope':'Mapped GoogleTest suites only; full toolkit API and test inventories pending',
               'source_hashes':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},
               'oracle_libraries_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in libraries}}

@@ -1,18 +1,14 @@
-"""The TKBRep verifier wiring: its numeric oracle entry, the native-blocked rows that are
-kept out of the native gate, and a deterministic corpus that reaches every probe
-operation with purely numeric requests."""
+"""The TKBRep verifier wiring: its numeric oracle entry, the native closure its unchanged
+suites link against, and a deterministic corpus that reaches every probe operation with
+purely numeric requests."""
 import re
 import unittest
 from pathlib import Path
 from tkbrep_corpus import EDGE, REVERSED, VERTEX, Script, append_tkbrep_requests
-from verify_toolkit import BLOCKED_STATUS, NUMERIC_VERIFIERS, gated_rows
+from native_build import LINKED_TOOLKITS, closure_flags
+from verify_toolkit import NUMERIC_VERIFIERS
 
 ROOT = Path(__file__).resolve().parents[2]
-
-
-def row(upstream_id: str, source: str, status: str = 'translated') -> dict:
-    return {'upstream_id': upstream_id, 'source': source, 'status': status,
-            'native_block_reason': 'needs TKPrim' if status == BLOCKED_STATUS else None}
 
 
 class VerifierTableTests(unittest.TestCase):
@@ -22,21 +18,13 @@ class VerifierTableTests(unittest.TestCase):
         self.assertEqual(evidence, 'target/oracle-tkbrep/numeric')
 
 
-class GatedRowsTests(unittest.TestCase):
-    def test_blocked_rows_are_separated_from_the_gate(self):
-        rows = [row('A.a', 'a.cxx'), row('B.b', 'b.cxx', BLOCKED_STATUS)]
-        gated, blocked = gated_rows(rows)
-        self.assertEqual([r['upstream_id'] for r in gated], ['A.a'])
-        self.assertEqual([r['upstream_id'] for r in blocked], ['B.b'])
-
-    def test_a_source_is_gated_whole_or_not_at_all(self):
-        rows = [row('A.a', 'a.cxx'), row('A.b', 'a.cxx', BLOCKED_STATUS)]
-        with self.assertRaises(ValueError):
-            gated_rows(rows)
-
-    def test_a_toolkit_needs_at_least_one_gated_suite(self):
-        with self.assertRaises(ValueError):
-            gated_rows([row('B.b', 'b.cxx', BLOCKED_STATUS)])
+class NativeClosureTests(unittest.TestCase):
+    def test_closure_builds_and_links_tkprim_for_the_unchanged_tkbrep_suites(self):
+        # TopExp_Test builds its shapes with BRepPrimAPI_MakeBox (TKPrim).
+        flags = closure_flags(['FoundationClasses', 'ModelingData'])
+        self.assertIn('-DBUILD_ADDITIONAL_TOOLKITS=TKTopAlgo TKPrim', flags)
+        self.assertEqual(LINKED_TOOLKITS[0], 'TKPrim')
+        self.assertEqual(LINKED_TOOLKITS[-1], 'TKernel')
 
 
 class CorpusTests(unittest.TestCase):

@@ -12,6 +12,7 @@ from pathlib import Path
 import random
 import subprocess
 from porting import ROOT, snapshot
+from native_build import LINKED_TOOLKITS
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
@@ -78,7 +79,7 @@ def main() -> None:
     output.mkdir(parents=True, exist_ok=True)
     (output/'report.json').unlink(missing_ok=True)
     build = ROOT/'target/occt-tkernel-full'
-    libraries = [next(build.rglob('lib'+name+'.so')) for name in ['TKTopAlgo','TKGeomAlgo','TKBRep','TKGeomBase','TKG3d','TKG2d','TKMath','TKernel']]
+    libraries = [next(build.rglob('lib'+name+'.so')) for name in LINKED_TOOLKITS]
     library = libraries[-1]
     executable = output/'native-probe'
     run(['c++', '-std=c++17', '-O2', '-I'+str(build/'include/opencascade'),

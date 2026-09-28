@@ -15,7 +15,7 @@ import xml.etree.ElementTree as ET
 from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, verified_native_skips
 from tkernel_native_baseline import compile_sources
-from native_build import locked_cmake
+from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags, locked_cmake
 import tkernel_ncollection_corpus
 import tkernel_quantity_corpus
 import tkernel_resource_corpus
@@ -131,9 +131,8 @@ def main():
     build = locked_cmake(source, build, flags, ["TKernel", "gtest_main"], args.jobs, output/"configure.log", output/"build.log", run, env)
     if any(m["rust_target"] in {"standard_dump", "toploc_location"} for m in mappings):
         build = ROOT / "target/occt-tkernel-full"
-        flags = [flag.replace("-DBUILD_ADDITIONAL_TOOLKITS=", "-DBUILD_ADDITIONAL_TOOLKITS=TKTopAlgo") if flag == "-DBUILD_ADDITIONAL_TOOLKITS=" else flag for flag in flags]
         print("Building the geometry dependency closure used by TKernel legacy tests", flush=True)
-        build = locked_cmake(source, build, flags, ["TKTopAlgo", "gtest_main"], args.jobs, output/"configure-geometry.log", output/"build-geometry.log", run, env)
+        build = locked_cmake(source, build, closure_flags(inventory["modules"]), CLOSURE_TARGETS, args.jobs, output/"configure-geometry.log", output/"build-geometry.log", run, env)
     compiler = re.search(r"^CMAKE_CXX_COMPILER:FILEPATH=(.*)$", (build/"CMakeCache.txt").read_text(), re.M)[1]
     kernel = unique(build, "libTKernel.so")
     gtest = unique(build, "libgtest.so")
@@ -145,7 +144,7 @@ def main():
     common = [compiler,"-std=c++17","-O2","-pthread",f"-I{include}", f"-I{gtest_include}"]
     libraries = [kernel,gtest_main,gtest]
     if build.name == "occt-tkernel-full":
-        libraries = [unique(build, f"lib{name}.so") for name in ["TKTopAlgo", "TKGeomAlgo", "TKBRep", "TKGeomBase", "TKG3d", "TKG2d", "TKMath"]] + libraries
+        libraries = [unique(build, f"lib{name}.so") for name in LINKED_TOOLKITS if name != "TKernel"] + libraries
     rpaths = [f"-Wl,-rpath,{path}" for path in sorted({p.parent for p in libraries})]
     legacy = output/"legacy-tests"
     objects = compile_sources(source, sources, common, output, args.jobs)

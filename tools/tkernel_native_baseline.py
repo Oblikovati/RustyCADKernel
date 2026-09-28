@@ -15,6 +15,7 @@ from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
 
+from native_build import CLOSURE_TARGETS, LINKED_TOOLKITS, closure_flags
 from porting import ROOT, snapshot
 
 
@@ -27,12 +28,8 @@ def execute(command: list[str], log: Path) -> None:
 
 def configure(source: Path, build: Path, output: Path, modules: list[str]) -> None:
     """Configure the native dependency closure; configure(source, build, output, modules)."""
-    flags = ['-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DBUILD_GTEST=ON',
-             '-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON', '-DGTEST_USE_FETCHCONTENT=ON',
-             '-DBUILD_ADDITIONAL_TOOLKITS=TKTopAlgo']
-    flags += [f'-DBUILD_MODULE_{name}={"ON" if name == "FoundationClasses" else "OFF"}'
-              for name in modules]
-    execute(['cmake', '-S', str(source), '-B', str(build), *flags], output/'configure.log')
+    execute(['cmake', '-S', str(source), '-B', str(build.resolve()), *closure_flags(modules)],
+            output/'configure.log')
 
 
 def compile_sources(source: Path, sources: list[str], common: list[str], output: Path,
@@ -72,14 +69,13 @@ def record_runtime(source: Path, output: Path, revision: str, sources: list[str]
 
 def build_runtime(source: Path, build: Path, output: Path, sources: list[str], jobs: int) -> None:
     """Link only TKernel tests against their native dependencies; build_runtime(source, build, out, paths, 4)."""
-    execute(['cmake', '--build', str(build), '--target', 'TKTopAlgo', 'gtest_main',
+    execute(['cmake', '--build', str(build.resolve()), '--target', *CLOSURE_TARGETS,
              '--parallel', str(jobs)], output/'build.log')
     common = ['c++', '-std=c++17', '-O2', '-pthread', '-I'+str(build/'include/opencascade'),
               '-I'+str(build/'_deps/googletest-src/googletest/include')]
     objects = compile_sources(source, sources, common, output, jobs)
     libraries = build/'lin64/gcc/libi'
-    names = ['TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase', 'TKG3d', 'TKG2d', 'TKMath',
-             'TKernel', 'gtest_main', 'gtest']
+    names = [*LINKED_TOOLKITS, 'gtest_main', 'gtest']
     executable = output/'legacy-tests'
     execute([*common, *map(str, objects), '-L'+str(libraries), *['-l'+n for n in names],
              '-Wl,-rpath,'+str(libraries), '-o', str(executable)], output/'link.log')

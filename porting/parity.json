@@ -91825,7 +91825,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91857,7 +91857,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -178572,11 +178572,10 @@
       "rust_target": "topexp",
       "rust_test": "TopExp_Test__MapShapes_Faces",
       "rust_source": "crates/tkbrep/tests/topexp.rs",
-      "status": "native_blocked",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
-      ],
-      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+      ]
     },
     {
       "upstream_id": "TopExp_Test.MapShapes_Edges",
@@ -178587,11 +178586,10 @@
       "rust_target": "topexp",
       "rust_test": "TopExp_Test__MapShapes_Edges",
       "rust_source": "crates/tkbrep/tests/topexp.rs",
-      "status": "native_blocked",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
-      ],
-      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+      ]
     },
     {
       "upstream_id": "TopExp_Test.MapShapes_Vertices",
@@ -178602,11 +178600,10 @@
       "rust_target": "topexp",
       "rust_test": "TopExp_Test__MapShapes_Vertices",
       "rust_source": "crates/tkbrep/tests/topexp.rs",
-      "status": "native_blocked",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
-      ],
-      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+      ]
     },
     {
       "upstream_id": "TopExp_Test.FirstVertex_LastVertex",
@@ -178617,11 +178614,10 @@
       "rust_target": "topexp",
       "rust_test": "TopExp_Test__FirstVertex_LastVertex",
       "rust_source": "crates/tkbrep/tests/topexp.rs",
-      "status": "native_blocked",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
-      ],
-      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+      ]
     },
     {
       "upstream_id": "TopExp_Test.Vertices",
@@ -178632,11 +178628,10 @@
       "rust_target": "topexp",
       "rust_test": "TopExp_Test__Vertices",
       "rust_source": "crates/tkbrep/tests/topexp.rs",
-      "status": "native_blocked",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
-      ],
-      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+      ]
     },
     {
       "upstream_id": "TopExp_Test.CommonVertex",
@@ -178647,11 +178642,10 @@
       "rust_target": "topexp",
       "rust_test": "TopExp_Test__CommonVertex",
       "rust_source": "crates/tkbrep/tests/topexp.rs",
-      "status": "native_blocked",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
-      ],
-      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+      ]
     },
     {
       "upstream_id": "TopExp_Test.Explorer_NestedFaceEdge_Terminates",
@@ -178662,11 +178656,10 @@
       "rust_target": "topexp",
       "rust_test": "TopExp_Test__Explorer_NestedFaceEdge_Terminates",
       "rust_source": "crates/tkbrep/tests/topexp.rs",
-      "status": "native_blocked",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
-      ],
-      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+      ]
     },
     {
       "upstream_id": "TopExp_Test.Explorer_ReInit_Terminates",
@@ -178677,11 +178670,10 @@
       "rust_target": "topexp",
       "rust_test": "TopExp_Test__Explorer_ReInit_Terminates",
       "rust_source": "crates/tkbrep/tests/topexp.rs",
-      "status": "native_blocked",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
-      ],
-      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+      ]
     },
     {
       "upstream_id": "TopExp_Test.MapShapesAndAncestors",
@@ -178692,11 +178684,10 @@
       "rust_target": "topexp",
       "rust_test": "TopExp_Test__MapShapesAndAncestors",
       "rust_source": "crates/tkbrep/tests/topexp.rs",
-      "status": "native_blocked",
+      "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
-      ],
-      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+      ]
     }
   ]
 }

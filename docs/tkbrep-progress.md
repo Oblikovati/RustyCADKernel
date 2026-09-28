@@ -27,12 +27,11 @@ TopoDS classes (as BRep_TVertex and BRep_TEdge are), and a six-face box that sha
 orientations), which the fakes reproduce. They are replaced by the real builders when
 those toolkits are ported.
 
-`TopExp_Test.cxx` is translated and passes in Rust, but its unchanged file calls
-BRepPrimAPI_MakeBox, and the shared native oracle closure (FoundationClasses plus
-TKTopAlgo) does not build TKPrim, so the native suite cannot be compiled. Its ledger
-rows have the status `native_blocked` with that reason: `verify_toolkit.py` lists them
-and never counts them as passes. The TopExp behaviour is compared with the native
-kernel by the numeric oracle instead (`br_explore`, `br_maps`, `br_vertices`). The
+`TopExp_Test.cxx` calls BRepPrimAPI_MakeBox, so the shared native oracle closure builds
+TKPrim beside TKTopAlgo (`tools/native_build.py`), and the unchanged file runs natively
+like every other suite. The Rust translation builds the box with the fakes above; the
+suite asserts only the topology they reproduce. The TopExp behaviour is compared with the native
+kernel by the numeric oracle as well (`br_explore`, `br_maps`, `br_vertices`). The
 other TKBRep suites (BRep_Tool, BRepTools, BRepAdaptor, BRepGraph, and TopoDS_Edge,
 TopoDS_Iterator and TopoDS_TShape, which also build BRep shapes) wait for BRep.
 

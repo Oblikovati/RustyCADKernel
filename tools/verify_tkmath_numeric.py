@@ -42,6 +42,7 @@ from tkmath_mathopt_api_corpus import append_mathopt_api_requests
 from tkmath_mathroot_api_corpus import append_mathroot_api_requests
 from tkmath_mathsys_api_corpus import append_mathsys_api_requests
 from tkmath_bnd_corpus import append_bnd_requests
+from native_build import LINKED_TOOLKITS
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
@@ -494,7 +495,7 @@ def main() -> None:
     output = ROOT/'target/oracle-tkmath/numeric'
     output.mkdir(parents=True, exist_ok=True)
     (output/'report.json').unlink(missing_ok=True)
-    libraries = [next(build.rglob('lib'+name+'.so')) for name in ['TKTopAlgo','TKGeomAlgo','TKBRep','TKGeomBase','TKG3d','TKG2d','TKMath','TKernel']]
+    libraries = [next(build.rglob('lib'+name+'.so')) for name in LINKED_TOOLKITS]
     library = libraries[-1]
     executable = output/'native-probe'
     run(['c++', '-std=c++17', '-O2', '-I'+str(build/'include/opencascade'),

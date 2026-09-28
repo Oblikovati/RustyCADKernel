@@ -19,6 +19,27 @@ from typing import Callable
 
 Runner = Callable[..., str]
 
+# Toolkits the shared oracle closure builds beyond FoundationClasses (with their
+# dependencies). TKPrim is here because unchanged TKBRep suites (TopExp_Test) build their
+# shapes with BRepPrimAPI_MakeBox.
+ADDITIONAL_TOOLKITS: tuple[str, ...] = ('TKTopAlgo', 'TKPrim')
+# The closure's shared libraries in link order, dependants first.
+LINKED_TOOLKITS: tuple[str, ...] = ('TKPrim', 'TKTopAlgo', 'TKGeomAlgo', 'TKBRep', 'TKGeomBase',
+                                    'TKG3d', 'TKG2d', 'TKMath', 'TKernel')
+# The targets that build the whole closure plus GoogleTest.
+CLOSURE_TARGETS: list[str] = [ADDITIONAL_TOOLKITS[-1], 'gtest_main']
+
+
+def closure_flags(modules: list[str]) -> list[str]:
+    """CMake flags of the shared oracle closure; one spelling for every tool, so the tools
+    never reconfigure the tree back and forth; closure_flags(snapshot(source)['modules'])."""
+    flags = ['-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON',
+             '-DBUILD_GTEST=ON', '-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON',
+             '-DGTEST_USE_FETCHCONTENT=ON',
+             '-DBUILD_ADDITIONAL_TOOLKITS=' + ' '.join(ADDITIONAL_TOOLKITS)]
+    return flags + [f'-DBUILD_MODULE_{name}={"ON" if name == "FoundationClasses" else "OFF"}'
+                    for name in modules]
+
 
 def lock_path(build: Path) -> Path:
     """Return the lock file beside the canonical build; lock_path(Path('/b/occt'))."""
