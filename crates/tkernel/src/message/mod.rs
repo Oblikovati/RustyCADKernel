@@ -1,6 +1,7 @@
-// Created on: 2001-01-06
-// Created by: OCC Team
-// Copyright (c) 2001-2014 OPEN CASCADE SAS
+// Created on: 1999-07-29
+// Created by: Roman LYGIN
+// Copyright (c) 1999 Matra Datavision
+// Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -13,93 +14,57 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! Ordered message delivery with injected printers and scoped stream buffers.
-use crate::tcollection::AsciiString;
-use std::rc::Rc;
+//! OCCT's Message package: messengers and printers, alerts and reports, the message
+//! catalog, algorithm statuses and progress indication.
+mod c_format;
+mod json;
+
+mod gravity;
+pub use gravity::{ConsoleColor, Gravity, MetricType};
+mod status;
+pub use status::{Status, StatusType};
+mod exec_status;
+pub use exec_status::ExecStatus;
+
+mod printer;
+pub use printer::{Printer, PrinterBase, PrinterHandle, PrinterType};
+mod printer_ostream;
+pub use printer_ostream::PrinterOStream;
+mod printer_system_log;
+pub use printer_system_log::PrinterSystemLog;
+mod printer_to_report;
+pub use printer_to_report::PrinterToReport;
+mod messenger;
+pub use messenger::Messenger;
 mod stream;
 pub use stream::MessageStream;
-/// Ordered OCCT severity levels; `Gravity::Warning > Gravity::Info`.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
-#[repr(i32)]
-pub enum Gravity {
-    /// Low-level algorithm detail.
-    Trace = 0,
-    /// Informational output.
-    Info = 1,
-    /// Warning condition.
-    Warning = 2,
-    /// Nonfatal error.
-    Alarm = 3,
-    /// Fatal error.
-    Fail = 4,
-}
-/// Application-owned output destination; implement `send` for a console or collector.
-pub trait Printer {
-    /// Minimum accepted gravity; the native default is `Gravity::Info`.
-    fn trace_level(&self) -> Gravity {
-        Gravity::Info
-    }
-    /// Receive one complete message after gravity filtering; `send(&text, Gravity::Info)`.
-    fn send(&self, text: &AsciiString, gravity: Gravity);
-}
-/// Ordered shared printers with identity-based duplicate detection.
-/// Example: `Messenger::with_printer(printer)`.
-pub struct Messenger {
-    printers: Vec<Rc<dyn Printer>>,
-}
-impl Messenger {
-    /// Inject a printer instead of selecting process-global output; `Messenger::with_printer(printer)`.
-    pub fn with_printer(printer: Rc<dyn Printer>) -> Self {
-        Self {
-            printers: vec![printer],
-        }
-    }
-    /// Borrow the output sequence; `messenger.printers().len()`.
-    pub fn printers(&self) -> &[Rc<dyn Printer>] {
-        &self.printers
-    }
-    /// Edit the output sequence explicitly; `messenger.printers_mut().clear()`.
-    pub fn printers_mut(&mut self) -> &mut Vec<Rc<dyn Printer>> {
-        &mut self.printers
-    }
-    /// Append unless the same printer is already present; `messenger.add_printer(printer)`.
-    pub fn add_printer(&mut self, printer: Rc<dyn Printer>) -> bool {
-        if self
-            .printers
-            .iter()
-            .any(|existing| Rc::ptr_eq(existing, &printer))
-        {
-            return false;
-        }
-        self.printers.push(printer);
-        true
-    }
-    /// Remove the first printer with the same identity; `messenger.remove_printer(&printer)`.
-    pub fn remove_printer(&mut self, printer: &Rc<dyn Printer>) -> bool {
-        let Some(index) = self
-            .printers
-            .iter()
-            .position(|existing| Rc::ptr_eq(existing, printer))
-        else {
-            return false;
-        };
-        self.printers.remove(index);
-        true
-    }
-    /// Send a C-compatible string with OCCT's default Warning gravity; `messenger.send("text")`.
-    pub fn send(&self, text: &str) {
-        self.send_at(&AsciiString::new(text), Gravity::Warning);
-    }
-    /// Deliver to each eligible printer in order; `messenger.send_at(&text, Gravity::Info)`.
-    pub fn send_at(&self, text: &AsciiString, gravity: Gravity) {
-        for printer in &self.printers {
-            if gravity >= printer.trace_level() {
-                printer.send(text, gravity);
-            }
-        }
-    }
-    /// Create a buffer whose destruction sends nonempty contents; `messenger.stream(Gravity::Info)`.
-    pub fn stream(&self, gravity: Gravity) -> MessageStream<'_> {
-        MessageStream::new(self, gravity)
-    }
-}
+
+mod alert;
+pub use alert::{Alert, AlertHandle, BaseAlert, downcast_alert};
+mod alert_extended;
+pub use alert_extended::AlertExtended;
+mod composite_alerts;
+pub use composite_alerts::CompositeAlerts;
+mod attribute;
+pub use attribute::{Attribute, AttributeBase, AttributeHandle, BaseAttribute, downcast_attribute};
+mod attribute_meter;
+pub use attribute_meter::AttributeMeter;
+mod attribute_object;
+pub use attribute_object::AttributeObject;
+mod attribute_stream;
+pub use attribute_stream::AttributeStream;
+mod metric_sampler;
+pub use metric_sampler::{MetricSampler, NativeMetricSampler};
+mod report;
+pub use report::Report;
+mod level;
+pub use level::Level;
+
+mod msg;
+pub use msg::Msg;
+mod msg_file;
+pub use msg_file::{MsgFile, MsgFileSource, NativeMsgFileSource};
+mod algorithm;
+pub use algorithm::Algorithm;
+mod defaults;
+pub use defaults::Message;
