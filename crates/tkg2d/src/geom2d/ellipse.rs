@@ -14,14 +14,13 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_Ellipse.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_Ellipse`: an ellipse parameterized by angle from its major axis.
-use super::cell::GeometryCell;
 use super::conic::{Geom2dConic, dump_conic, impl_conic_position, reverse_conic_position};
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
 use super::errors;
 use super::geometry::{Geom2dGeometry, dump_base, dump_class_name};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis2d, Axis22d, Ellipse2, Point2, Transform2, Vector2};
@@ -38,7 +37,7 @@ struct EllipseState {
 /// An ellipse; `Handle::new(Geom2dEllipse::from_axis(axis, 3.0, 2.0, true)?)`.
 pub struct Geom2dEllipse {
     parent: StandardTransient,
-    state: GeometryCell<EllipseState>,
+    state: SharedState<EllipseState>,
 }
 impl_transient!(
     Geom2dEllipse,
@@ -67,7 +66,7 @@ impl Geom2dEllipse {
     fn stored(state: EllipseState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Ellipse from a gp ellipse (`Geom2d_Ellipse(gp_Elips2d)`); `Geom2dEllipse::from_elips2d(e)`.

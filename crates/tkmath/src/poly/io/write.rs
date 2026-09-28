@@ -17,7 +17,7 @@
 //! Compact "save" text and the informative "dump" text with the native `setw` columns.
 use crate::{
     gp::Point3,
-    poly::{Polygon2D, Polygon3D, Triangulation, errors::array_failure},
+    poly::{Polygon2D, Polygon3D, Triangulation},
     stream_format::{general, padded},
 };
 use rustycad_tkernel::standard::Failure;
@@ -160,7 +160,7 @@ pub fn write_polygon3d(
     for index in 1..=count {
         let value = parameters
             .value(index)
-            .map_err(|e| array_failure("Poly::Write", e))?;
+            .map_err(|e| e.into_failure("Poly::Write"))?;
         columns.text(&format!("{} ", general(*value)))?;
     }
     columns.text("\n")

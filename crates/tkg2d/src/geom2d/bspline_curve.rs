@@ -24,14 +24,13 @@ mod state;
 mod traits;
 use super::arrays::at;
 use super::bounded_curve::Geom2dBoundedCurve;
-use super::cell::GeometryCell;
 use super::curve::Geom2dCurve;
 use super::errors;
 use super::geometry::Geom2dGeometry;
 use crate::geom2d_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::gp::{Point2, Vector2, resolution};
 use state::{BSplineState, check_curve_data};
@@ -39,7 +38,7 @@ use state::{BSplineState, check_curve_data};
 /// A B-spline curve; `Handle::new(Geom2dBSplineCurve::new(&poles, &knots, &mults, 3, false)?)`.
 pub struct Geom2dBSplineCurve {
     parent: StandardTransient,
-    state: GeometryCell<BSplineState>,
+    state: SharedState<BSplineState>,
 }
 impl_transient!(
     Geom2dBSplineCurve,
@@ -72,7 +71,7 @@ impl Geom2dBSplineCurve {
     fn from_state(state: BSplineState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Non-rational curve (`Geom2d_BSplineCurve(Poles, Knots, Multiplicities, Degree, Periodic)`);

@@ -14,7 +14,7 @@
 // Rust translation of the inline element accessors of FoundationClasses/TKMath/Poly/Poly_Triangulation.hxx
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-use super::{Triangle, Triangulation, array_failure, in_member};
+use super::{Triangle, Triangulation, in_member};
 use crate::{
     gp::{Direction3, Point2, Point3},
     poly::errors::zero_based,
@@ -86,7 +86,7 @@ impl Triangulation {
             .triangles
             .value(index)
             .copied()
-            .map_err(|e| array_failure(&member(), e))
+            .map_err(|e| e.into_failure(&member()))
     }
     /// Sets the triangle at an index of the triangle array; `triangulation.set_triangle(1, t)?`.
     pub fn set_triangle(&self, index: i32, triangle: Triangle) -> Result<(), Failure> {
@@ -95,7 +95,7 @@ impl Triangulation {
         fields
             .triangles
             .set_value(index, triangle)
-            .map_err(|e| array_failure(&member(), e))
+            .map_err(|e| e.into_failure(&member()))
     }
     /// Returns the stored single-precision normal; `triangulation.normal_vec3(1)?`.
     pub fn normal_vec3(&self, index: i32) -> Result<Vec3<f32>, Failure> {
@@ -105,7 +105,7 @@ impl Triangulation {
             .normals
             .value(index.saturating_sub(1))
             .copied()
-            .map_err(|e| array_failure(&member(), e))
+            .map_err(|e| e.into_failure(&member()))
     }
     /// Returns the normal widened to a `gp_Dir`, which fails for a null vector;
     /// `triangulation.normal(1)?`.
@@ -124,7 +124,7 @@ impl Triangulation {
         fields
             .normals
             .set_value(index.saturating_sub(1), normal)
-            .map_err(|e| array_failure(&member(), e))
+            .map_err(|e| e.into_failure(&member()))
     }
     /// Stores a direction narrowed to single precision; `triangulation.set_normal(1, Direction3::Z)?`.
     pub fn set_normal(&self, index: i32, normal: Direction3) -> Result<(), Failure> {

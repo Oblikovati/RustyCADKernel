@@ -15,7 +15,6 @@
 
 //! `Adaptor2d_Line2d`: a bounded line seen as an adapted curve.
 use super::curve2d::Adaptor2dCurve2d;
-use crate::geom2d::cell::GeometryCell;
 use crate::geom2d::errors::{array_bounds, no_such_object, out_of_range};
 use crate::geom2d::{
     Geom2dBSplineCurve, Geom2dBezierCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3,
@@ -23,7 +22,7 @@ use crate::geom2d::{
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::{CurveType, Shape};
 use rustycad_tkmath::gp::{
@@ -42,7 +41,7 @@ struct Line2dState {
 #[derive(Default)]
 pub struct Adaptor2dLine2d {
     parent: StandardTransient,
-    state: GeometryCell<Line2dState>,
+    state: SharedState<Line2dState>,
 }
 impl_transient!(
     Adaptor2dLine2d,
@@ -71,7 +70,7 @@ impl Adaptor2dLine2d {
         };
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Load an unbounded line: the bounds become `-/+Precision::Infinite()`

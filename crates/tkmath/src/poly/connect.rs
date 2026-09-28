@@ -15,7 +15,7 @@
 // commercial license or contractual agreement.
 // Rust translation of FoundationClasses/TKMath/Poly/Poly_Connect.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-use super::{Triangulation, errors::array_failure};
+use super::Triangulation;
 use rustycad_tkernel::{
     ncollection::{Array1, PackedMap},
     standard::{Failure, Handle},
@@ -58,9 +58,9 @@ impl Connect {
         let mesh = self.mesh()?;
         let (nb_nodes, nb_triangles) = (mesh.nb_nodes(), mesh.nb_triangles());
         self.triangles =
-            Array1::with_bounds(1, nb_nodes).map_err(|e| array_failure("Poly_Connect::Load", e))?;
+            Array1::with_bounds(1, nb_nodes).map_err(|e| e.into_failure("Poly_Connect::Load"))?;
         self.adjacents = Array1::with_bounds(1, 6 * nb_triangles)
-            .map_err(|e| array_failure("Poly_Connect::Load", e))?;
+            .map_err(|e| e.into_failure("Poly_Connect::Load"))?;
         let edges = self.collect_edges(nb_nodes, nb_triangles)?;
         self.fill_adjacents(&edges, nb_triangles)
     }
@@ -90,7 +90,7 @@ impl Connect {
             for node in nodes {
                 self.triangles
                     .set_value(node, triangle)
-                    .map_err(|e| array_failure("Poly_Connect::Load", e))?;
+                    .map_err(|e| e.into_failure("Poly_Connect::Load"))?;
             }
             for side in 0..3 {
                 record_edge(&mut edges, nodes, side, triangle)?;
@@ -125,7 +125,7 @@ impl Connect {
     fn set_adjacent(&mut self, slot: i32, value: i32) -> Result<(), Failure> {
         self.adjacents
             .set_value(slot, value)
-            .map_err(|e| array_failure("Poly_Connect::Load", e))
+            .map_err(|e| e.into_failure("Poly_Connect::Load"))
     }
     /// The triangulation analysed by this tool; `connect.triangulation()`.
     pub const fn triangulation(&self) -> &Handle<Triangulation> {
@@ -136,7 +136,7 @@ impl Connect {
         self.triangles
             .value(node)
             .copied()
-            .map_err(|e| array_failure("Poly_Connect::Triangle", e))
+            .map_err(|e| e.into_failure("Poly_Connect::Triangle"))
     }
     /// The triangles across the sides (n1,n2), (n2,n3) and (n3,n1), 0 on a boundary;
     /// `connect.triangles(1)?`.
@@ -153,7 +153,7 @@ impl Connect {
             self.adjacents
                 .value(base + first + offset)
                 .copied()
-                .map_err(|e| array_failure("Poly_Connect::Triangles", e))
+                .map_err(|e| e.into_failure("Poly_Connect::Triangles"))
         };
         Ok((value(0)?, value(1)?, value(2)?))
     }
