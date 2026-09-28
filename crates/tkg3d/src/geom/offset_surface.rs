@@ -22,6 +22,7 @@ mod equivalent;
 mod iso;
 mod traits;
 use super::errors;
+use super::offset_surface_utils::OsculatingQuery;
 use super::osculating_surface::GeomOsculatingSurface;
 use super::surface::GeomSurface;
 use crate::geom::GeomBSplineSurface;
@@ -226,6 +227,35 @@ impl GeomOffsetSurface {
         match desc.get() {
             Some(desc) if desc.kind() == RepSurfaceKind::Full => desc.representation(),
             _ => Handle::default(),
+        }
+    }
+}
+
+// GeomAdaptor_Surface passes the offset surface itself as the osculating query of
+// Geom_OffsetSurfaceUtils; its members forward to the osculating surface, if any.
+impl OsculatingQuery for GeomOffsetSurface {
+    fn u_osculating_surface(
+        &self,
+        u: f64,
+        v: f64,
+        is_opposite: &mut bool,
+        surface: &mut Handle<dyn GeomSurface>,
+    ) -> Result<bool, Failure> {
+        match self.state.read().osc.as_ref() {
+            Some(osc) => osc.u_osculating_surface(u, v, is_opposite, surface),
+            None => Ok(false),
+        }
+    }
+    fn v_osculating_surface(
+        &self,
+        u: f64,
+        v: f64,
+        is_opposite: &mut bool,
+        surface: &mut Handle<dyn GeomSurface>,
+    ) -> Result<bool, Failure> {
+        match self.state.read().osc.as_ref() {
+            Some(osc) => osc.v_osculating_surface(u, v, is_opposite, surface),
+            None => Ok(false),
         }
     }
 }

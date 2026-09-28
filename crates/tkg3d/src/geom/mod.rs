@@ -15,7 +15,9 @@
 
 //! The Geom package: transient 3D points, vectors, axes, transformations, curves
 //! and surfaces.
+pub mod basis_eval;
 pub mod errors;
+pub use basis_eval::{BasisCurveEvaluator, BasisSurfaceEvaluator};
 pub mod protected;
 
 mod geometry;
@@ -73,7 +75,7 @@ mod trimmed_curve;
 pub use trimmed_curve::GeomTrimmedCurve;
 pub mod offset_curve_utils;
 
-mod elementary_results;
+pub(crate) mod elementary_results;
 pub mod extrusion_utils;
 mod parametric;
 mod plane;

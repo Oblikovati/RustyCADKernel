@@ -16,7 +16,7 @@
 //! The derivatives of `N = D1U ^ D1V` from the surface derivatives, optionally
 //! mixing the derivatives of an osculating surface along a degenerate boundary.
 use super::{at, put, zero_table};
-use crate::geom::GeomSurface;
+use crate::geom::{BasisSurfaceEvaluator, GeomSurface};
 use rustycad_tkernel::ncollection::Array2;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::cslib;
@@ -41,10 +41,10 @@ pub struct DerivativeOrders {
 /// osculating surface (`along = (AlongU, AlongV)`) the extra order is forced to 0
 /// and the normal mixes the osculating D1 with the basis one, as natively;
 /// `compute_derivatives(orders, (u, v), &*basis, (false, false), None, &mut nuv, &mut surf)?`.
-pub fn compute_derivatives(
+pub fn compute_derivatives<B: BasisSurfaceEvaluator + ?Sized>(
     orders: DerivativeOrders,
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     along: (bool, bool),
     osculating: Option<&dyn GeomSurface>,
     der_nuv: &mut Array2<'_, Vector3>,
@@ -136,10 +136,10 @@ fn first_osculating_orders(
 
 // The osculating branch: DN of both surfaces at (i, j) and, below the diagonal
 // bound, at (j, i); the scan runs over the smaller of Nu and Nv first.
-fn fill_osculating(
+fn fill_osculating<B: BasisSurfaceEvaluator + ?Sized>(
     orders: DerivativeOrders,
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     osc: &dyn GeomSurface,
     der_surf_l: &mut Array2<'_, Vector3>,
     der_surf: &mut Array2<'_, Vector3>,
@@ -166,11 +166,11 @@ fn fill_osculating(
                 continue;
             }
             let osc_dn: Vector3 = osc.eval_dn(u, v, i, j)?;
-            let basis_dn: Vector3 = basis.eval_dn(u, v, i, j)?;
+            let basis_dn: Vector3 = basis.basis_dn(u, v, i, j)?;
             put(der_surf_l, i, j, osc_dn)?;
             put(der_surf, i, j, basis_dn)?;
             if i != j && b <= mirror_bound {
-                let basis_ji: Vector3 = basis.eval_dn(u, v, j, i)?;
+                let basis_ji: Vector3 = basis.basis_dn(u, v, j, i)?;
                 let osc_ji: Vector3 = osc.eval_dn(u, v, j, i)?;
                 put(der_surf, j, i, basis_ji)?;
                 put(der_surf_l, j, i, osc_ji)?;
@@ -181,10 +181,10 @@ fn fill_osculating(
 }
 
 // The plain branch: basis DN at (i, j) for j >= i and at (j, i) inside the table.
-fn fill_basis(
+fn fill_basis<B: BasisSurfaceEvaluator + ?Sized>(
     orders: DerivativeOrders,
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     der_surf: &mut Array2<'_, Vector3>,
 ) -> Result<(), Failure> {
     let (u, v) = uv;
@@ -193,9 +193,9 @@ fn fill_basis(
             if i + j <= orders.min_order {
                 continue;
             }
-            put(der_surf, i, j, basis.eval_dn(u, v, i, j)?)?;
+            put(der_surf, i, j, basis.basis_dn(u, v, i, j)?)?;
             if i != j && j <= der_surf.upper_row() && i <= der_surf.upper_col() {
-                put(der_surf, j, i, basis.eval_dn(u, v, j, i)?)?;
+                put(der_surf, j, i, basis.basis_dn(u, v, j, i)?)?;
             }
         }
     }

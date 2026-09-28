@@ -18,8 +18,10 @@
 //! Geom_SurfaceOfLinearExtrusion and the adaptors.
 //!
 //! The native templates over the curve type become functions generic over the
-//! curve trait; the `Calculate*` functions work on already evaluated values.
-use super::curve::{GeomCurve, GeomCurveD1, GeomCurveD2, GeomCurveD3};
+//! [`BasisCurveEvaluator`] (Geom curves and adaptors); the `Calculate*` functions
+//! work on already evaluated values.
+use super::basis_eval::BasisCurveEvaluator;
+use super::curve::{GeomCurveD1, GeomCurveD2, GeomCurveD3};
 use super::surface::{GeomSurfaceD1, GeomSurfaceD2, GeomSurfaceD3};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Point3, Vector3, Xyz};
@@ -86,43 +88,48 @@ pub fn calculate_dn(curve_dn: Vector3, dir: Xyz, der_u: i32, der_v: i32) -> Vect
 }
 
 /// `D0<CurveType>`: evaluate the basis at `u`, then CalculateD0; `d0(u, v, &*basis, dir)?`.
-pub fn d0<C: GeomCurve + ?Sized>(u: f64, v: f64, basis: &C, dir: Xyz) -> Result<Point3, Failure> {
-    Ok(calculate_d0(basis.eval_d0(u)?, v, dir))
+pub fn d0<C: BasisCurveEvaluator + ?Sized>(
+    u: f64,
+    v: f64,
+    basis: &C,
+    dir: Xyz,
+) -> Result<Point3, Failure> {
+    Ok(calculate_d0(basis.basis_d0(u)?, v, dir))
 }
 
 /// `D1<CurveType>`; `d1(u, v, &*basis, dir)?`.
-pub fn d1<C: GeomCurve + ?Sized>(
+pub fn d1<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     v: f64,
     basis: &C,
     dir: Xyz,
 ) -> Result<GeomSurfaceD1, Failure> {
-    Ok(calculate_d1(&basis.eval_d1(u)?, v, dir))
+    Ok(calculate_d1(&basis.basis_d1(u)?, v, dir))
 }
 
 /// `D2<CurveType>`; `d2(u, v, &*basis, dir)?`.
-pub fn d2<C: GeomCurve + ?Sized>(
+pub fn d2<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     v: f64,
     basis: &C,
     dir: Xyz,
 ) -> Result<GeomSurfaceD2, Failure> {
-    Ok(calculate_d2(&basis.eval_d2(u)?, v, dir))
+    Ok(calculate_d2(&basis.basis_d2(u)?, v, dir))
 }
 
 /// `D3<CurveType>`; `d3(u, v, &*basis, dir)?`.
-pub fn d3<C: GeomCurve + ?Sized>(
+pub fn d3<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     v: f64,
     basis: &C,
     dir: Xyz,
 ) -> Result<GeomSurfaceD3, Failure> {
-    Ok(calculate_d3(&basis.eval_d3(u)?, v, dir))
+    Ok(calculate_d3(&basis.basis_d3(u)?, v, dir))
 }
 
 /// `DN<CurveType>`: the basis derivative of order `der_u` is evaluated only when
 /// `der_v == 0`; `dn(u, &*basis, dir, 2, 0)?`.
-pub fn dn<C: GeomCurve + ?Sized>(
+pub fn dn<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     basis: &C,
     dir: Xyz,
@@ -130,7 +137,7 @@ pub fn dn<C: GeomCurve + ?Sized>(
     der_v: i32,
 ) -> Result<Vector3, Failure> {
     let curve_dn: Vector3 = if der_v == 0 {
-        basis.eval_dn(u, der_u)?
+        basis.basis_dn(u, der_u)?
     } else {
         Vector3::default()
     };

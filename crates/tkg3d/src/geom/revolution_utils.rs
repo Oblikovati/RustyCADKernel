@@ -20,7 +20,7 @@
 //! The derivatives in U are computed in the frame of the basis curve (the axis
 //! direction crossed with the vector from the axis), then everything is rotated
 //! by the same gp_Trsf, as natively.
-use super::curve::GeomCurve;
+use super::basis_eval::BasisCurveEvaluator;
 use super::surface::{GeomSurfaceD1, GeomSurfaceD2, GeomSurfaceD3};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
@@ -160,52 +160,52 @@ pub fn calculate_dn(
 
 /// `D0<CurveType>`: the basis point of parameter `v` rotated by `u`;
 /// `d0(u, v, &*basis, axis)?`.
-pub fn d0<C: GeomCurve + ?Sized>(
+pub fn d0<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     v: f64,
     basis: &C,
     axis: Axis1,
 ) -> Result<Point3, Failure> {
-    calculate_d0(basis.eval_d0(v)?, u, axis)
+    calculate_d0(basis.basis_d0(v)?, u, axis)
 }
 
 /// `D1<CurveType>`; `d1(u, v, &*basis, axis)?`.
-pub fn d1<C: GeomCurve + ?Sized>(
+pub fn d1<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     v: f64,
     basis: &C,
     axis: Axis1,
 ) -> Result<GeomSurfaceD1, Failure> {
-    let curve = basis.eval_d1(v)?;
+    let curve = basis.basis_d1(v)?;
     calculate_d1(curve.point, curve.d1, u, axis)
 }
 
 /// `D2<CurveType>`; `d2(u, v, &*basis, axis)?`.
-pub fn d2<C: GeomCurve + ?Sized>(
+pub fn d2<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     v: f64,
     basis: &C,
     axis: Axis1,
 ) -> Result<GeomSurfaceD2, Failure> {
-    let curve = basis.eval_d2(v)?;
+    let curve = basis.basis_d2(v)?;
     calculate_d2(curve.point, [curve.d1, curve.d2], u, axis)
 }
 
 /// `D3<CurveType>`; `d3(u, v, &*basis, axis)?`.
-pub fn d3<C: GeomCurve + ?Sized>(
+pub fn d3<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     v: f64,
     basis: &C,
     axis: Axis1,
 ) -> Result<GeomSurfaceD3, Failure> {
-    let curve = basis.eval_d3(v)?;
+    let curve = basis.basis_d3(v)?;
     calculate_d3(curve.point, [curve.d1, curve.d2, curve.d3], u, axis)
 }
 
 /// `DN<CurveType>`: the basis derivative of order `der_v`, or for `der_v == 0` the
 /// vector from the axis origin to the basis point, then CalculateDN;
 /// `dn(u, v, &*basis, axis, 1, 1)?`.
-pub fn dn<C: GeomCurve + ?Sized>(
+pub fn dn<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     v: f64,
     basis: &C,
@@ -214,10 +214,10 @@ pub fn dn<C: GeomCurve + ?Sized>(
 ) -> Result<Vector3, Failure> {
     let (der_u, der_v) = der;
     let curve_point_or_dn: Vector3 = if der_u != 0 && der_v == 0 {
-        let point: Point3 = basis.eval_d0(v)?;
+        let point: Point3 = basis.basis_d0(v)?;
         Vector3::from(point.xyz() - axis.location().xyz())
     } else {
-        basis.eval_dn(v, der_v)?
+        basis.basis_dn(v, der_v)?
     };
     calculate_dn(curve_point_or_dn, u, axis, der_u, der_v)
 }

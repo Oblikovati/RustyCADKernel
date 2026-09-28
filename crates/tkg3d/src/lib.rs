@@ -24,6 +24,8 @@
 //! iso curves, is ported in full. The other TKG3d packages (Adaptor3d,
 //! GeomAdaptor, GeomEval curves and surfaces, GeomGridEval, GeomHash, TopAbs)
 //! are later work.
+pub mod adaptor3d;
 pub mod adv_approx;
 pub mod geom;
+pub mod geom_adaptor;
 pub mod geom_eval;

@@ -21,7 +21,7 @@ use super::{
     BasisDomain, OsculatingInfo, OsculatingQuery, THE_D1_MAGNITUDE_TOL, is_infinite_coord,
     offset_point, put, query_osculating, shift_point, zero_table,
 };
-use crate::geom::{GeomSurface, GeomSurfaceD2, GeomSurfaceD3};
+use crate::geom::{BasisSurfaceEvaluator, GeomSurface, GeomSurfaceD2, GeomSurfaceD3};
 use rustycad_tkernel::ncollection::Array2;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::cslib::{self, NormalStatus, SingularNormal};
@@ -74,9 +74,9 @@ struct NormalData {
     scale: f64,
 }
 
-fn normal_data(
+fn normal_data<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     orders: (i32, &GeomSurfaceD3),
@@ -136,32 +136,32 @@ impl NormalData {
 
 /// Offset point and derivatives up to order 2 from the basis D3 at `(u, v)`
 /// (`EvaluateD2`); `evaluate_d2((u, v), &*basis, 2.0, None)?`.
-pub fn evaluate_d2(
+pub fn evaluate_d2<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
 ) -> Result<Option<GeomSurfaceD2>, Failure> {
-    let d3: GeomSurfaceD3 = basis.eval_d3(uv.0, uv.1)?;
+    let d3: GeomSurfaceD3 = basis.basis_d3(uv.0, uv.1)?;
     evaluate_d2_from(uv, basis, offset, osc, d3)
 }
 
 /// `EvaluateD2` with the basis derivatives up to order 3 already evaluated;
 /// `evaluate_d2_from((u, v), &*basis, 2.0, None, d3)?`.
-pub fn evaluate_d2_from(
+pub fn evaluate_d2_from<B: BasisSurfaceEvaluator + ?Sized>(
     start: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     first: GeomSurfaceD3,
 ) -> Result<Option<GeomSurfaceD2>, Failure> {
-    let domain = BasisDomain::of(basis);
+    let domain = BasisDomain::of(basis)?;
     let mut uv: (f64, f64) = start;
     let mut current: GeomSurfaceD3 = first;
     let mut is_first_iteration: bool = true;
     loop {
         if !is_first_iteration {
-            current = basis.eval_d3(uv.0, uv.1)?;
+            current = basis.basis_d3(uv.0, uv.1)?;
         }
         is_first_iteration = false;
         if is_infinite_coord(current.d1u) || is_infinite_coord(current.d1v) {
@@ -177,16 +177,16 @@ pub fn evaluate_d2_from(
 }
 
 // The D1 and D2 of the offset at a point whose normal is defined.
-fn second_order(
+fn second_order<B: BasisSurfaceEvaluator + ?Sized>(
     data: &NormalData,
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
 ) -> Result<GeomSurfaceD2, Failure> {
     let (u, v) = uv;
     let (d1u, d1v) = (data.first(1, 0)?, data.first(0, 1)?);
-    let dn20: Vector3 = basis.eval_dn(u, v, 2, 0)?;
-    let dn02: Vector3 = basis.eval_dn(u, v, 0, 2)?;
-    let dn11: Vector3 = basis.eval_dn(u, v, 1, 1)?;
+    let dn20: Vector3 = basis.basis_dn(u, v, 2, 0)?;
+    let dn02: Vector3 = basis.basis_dn(u, v, 0, 2)?;
+    let dn11: Vector3 = basis.basis_dn(u, v, 1, 1)?;
     Ok(GeomSurfaceD2 {
         point: data.point,
         d1u,
@@ -200,16 +200,16 @@ fn second_order(
 /// Offset point and derivatives up to order 3 at `(u, v)` (`EvaluateD3`); unlike
 /// the lower orders it evaluates the basis D3 at every pass, the first included;
 /// `evaluate_d3((u, v), &*basis, 2.0, None)?`.
-pub fn evaluate_d3(
+pub fn evaluate_d3<B: BasisSurfaceEvaluator + ?Sized>(
     start: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
 ) -> Result<Option<GeomSurfaceD3>, Failure> {
-    let domain = BasisDomain::of(basis);
+    let domain = BasisDomain::of(basis)?;
     let mut uv: (f64, f64) = start;
     loop {
-        let current: GeomSurfaceD3 = basis.eval_d3(uv.0, uv.1)?;
+        let current: GeomSurfaceD3 = basis.basis_d3(uv.0, uv.1)?;
         if is_infinite_coord(current.d1u) || is_infinite_coord(current.d1v) {
             return Ok(None);
         }
@@ -224,17 +224,17 @@ pub fn evaluate_d3(
 
 // The derivatives up to order 3 of the offset at a point whose normal is defined;
 // all basis DN are evaluated before the normal terms are added, as natively.
-fn third_order(
+fn third_order<B: BasisSurfaceEvaluator + ?Sized>(
     data: &NormalData,
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
 ) -> Result<GeomSurfaceD3, Failure> {
     let (u, v) = uv;
     let (d1u, d1v) = (data.first(1, 0)?, data.first(0, 1)?);
     let orders: [(i32, i32); 7] = [(2, 0), (0, 2), (1, 1), (3, 0), (0, 3), (2, 1), (1, 2)];
     let mut basis_dn: [Vector3; 7] = [Vector3::default(); 7];
     for (slot, (nu, nv)) in basis_dn.iter_mut().zip(orders) {
-        *slot = basis.eval_dn(u, v, nu, nv)?;
+        *slot = basis.basis_dn(u, v, nu, nv)?;
     }
     let mut summed: [Vector3; 7] = basis_dn;
     for (slot, (nu, nv)) in summed.iter_mut().zip(orders) {
@@ -257,34 +257,34 @@ fn third_order(
 
 /// Offset derivative of orders `(nu, nv)` at `(u, v)` from the basis D1
 /// (`EvaluateDN`); `evaluate_dn((u, v), (1, 1), &*basis, 2.0, None)?`.
-pub fn evaluate_dn(
+pub fn evaluate_dn<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
     orders: (i32, i32),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
 ) -> Result<Option<Vector3>, Failure> {
-    let d1 = basis.eval_d1(uv.0, uv.1)?;
+    let d1 = basis.basis_d1(uv.0, uv.1)?;
     evaluate_dn_from(uv, orders, basis, offset, osc, (d1.d1u, d1.d1v))
 }
 
 /// `EvaluateDN` with the basis first derivatives already evaluated;
 /// `evaluate_dn_from((u, v), (1, 1), &*basis, 2.0, None, (d1u, d1v))?`.
-pub fn evaluate_dn_from(
+pub fn evaluate_dn_from<B: BasisSurfaceEvaluator + ?Sized>(
     start: (f64, f64),
     orders: (i32, i32),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     first: (Vector3, Vector3),
 ) -> Result<Option<Vector3>, Failure> {
-    let domain = BasisDomain::of(basis);
+    let domain = BasisDomain::of(basis)?;
     let mut uv: (f64, f64) = start;
     let (mut d1u, mut d1v) = first;
     let mut is_first_iteration: bool = true;
     loop {
         if !is_first_iteration {
-            let r = basis.eval_d1(uv.0, uv.1)?;
+            let r = basis.basis_d1(uv.0, uv.1)?;
             (d1u, d1v) = (r.d1u, r.d1v);
         }
         is_first_iteration = false;
@@ -301,10 +301,10 @@ pub fn evaluate_dn_from(
 }
 
 // One pass of the EvaluateDN loop body; None to shift the point.
-fn attempt_dn(
+fn attempt_dn<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
     orders: (i32, i32),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset_osc: (f64, Option<&dyn OsculatingQuery>),
     d1: (Vector3, Vector3),
     domain: BasisDomain,
@@ -336,7 +336,7 @@ fn attempt_dn(
         return Ok(None);
     }
     let scale: f64 = offset * info.sign();
-    let basis_dn: Vector3 = basis.eval_dn(uv.0, uv.1, nu, nv)?;
+    let basis_dn: Vector3 = basis.basis_dn(uv.0, uv.1, nu, nv)?;
     let normal_dn: Vector3 = cslib::dn_normal(nu, nv, &der_nuv, found.order_u, found.order_v)?;
     Ok(Some(basis_dn + normal_dn * scale))
 }
