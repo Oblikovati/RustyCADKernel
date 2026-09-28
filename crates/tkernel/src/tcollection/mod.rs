@@ -5,3 +5,5 @@ mod extended_string;
 pub use extended_string::ExtendedString;
 mod h_ascii_string;
 pub use h_ascii_string::HAsciiString;
+mod h_extended_string;
+pub use h_extended_string::{HExtendedString, HExtendedStringHasher};
