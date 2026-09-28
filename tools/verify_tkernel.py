@@ -15,6 +15,7 @@ import xml.etree.ElementTree as ET
 from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, verified_native_skips
 from tkernel_native_baseline import compile_sources
+from native_build import locked_cmake
 import tkernel_ncollection_corpus
 import tkernel_quantity_corpus
 import tkernel_resource_corpus
@@ -121,14 +122,12 @@ def main():
     flags = ["-DCMAKE_BUILD_TYPE=RelWithDebInfo", "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON", "-DBUILD_GTEST=ON", "-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON", "-DGTEST_USE_FETCHCONTENT=ON", "-DBUILD_ADDITIONAL_TOOLKITS="]
     flags += [f"-DBUILD_MODULE_{module}={'ON' if module == 'FoundationClasses' else 'OFF'}" for module in inventory["modules"]]
     print("Building TKernel and GoogleTest for the focused oracle", flush=True)
-    run(["cmake", "-S", source, "-B", build, *flags], output/"configure.log", env=env)
-    run(["cmake", "--build", build, "--target", "TKernel", "gtest_main", "--parallel", args.jobs], output/"build.log", env=env)
+    build = locked_cmake(source, build, flags, ["TKernel", "gtest_main"], args.jobs, output/"configure.log", output/"build.log", run, env)
     if any(m["rust_target"] in {"standard_dump", "toploc_location"} for m in mappings):
         build = ROOT / "target/occt-tkernel-full"
         flags = [flag.replace("-DBUILD_ADDITIONAL_TOOLKITS=", "-DBUILD_ADDITIONAL_TOOLKITS=TKTopAlgo") if flag == "-DBUILD_ADDITIONAL_TOOLKITS=" else flag for flag in flags]
         print("Building the geometry dependency closure used by TKernel legacy tests", flush=True)
-        run(["cmake", "-S", source, "-B", build, *flags], output/"configure-geometry.log", env=env)
-        run(["cmake", "--build", build, "--target", "TKTopAlgo", "gtest_main", "--parallel", args.jobs], output/"build-geometry.log", env=env)
+        build = locked_cmake(source, build, flags, ["TKTopAlgo", "gtest_main"], args.jobs, output/"configure-geometry.log", output/"build-geometry.log", run, env)
     compiler = re.search(r"^CMAKE_CXX_COMPILER:FILEPATH=(.*)$", (build/"CMakeCache.txt").read_text(), re.M)[1]
     kernel = unique(build, "libTKernel.so")
     gtest = unique(build, "libgtest.so")
