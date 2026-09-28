@@ -13,8 +13,40 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
+use super::super::relation::TransformView;
 use super::{BoxReal, CompactBox2};
 use crate::gp::{Axis2d, Transform2, TransformForm, Xy};
+impl<T: BoxReal> CompactBox2<T> {
+    /// `IsOut(theBox, theTrsf)`: tests `other` mapped by `transform`; simple forms compare in
+    /// the storage scalar, general forms test both boxes' separating axes in double;
+    /// `bounds.is_out_transformed_box(&other, transform)`.
+    pub fn is_out_transformed_box(&self, other: &Self, transform: Transform2) -> bool {
+        self.out_of_transformed(other, &transform_view(other, transform))
+    }
+    /// `IsIn(theBox, theTrsf)`: strict inclusion of `self` in the transformed `other`;
+    /// `bounds.is_in_transformed_box(&other, transform)`.
+    pub fn is_in_transformed_box(&self, other: &Self, transform: Transform2) -> bool {
+        self.in_transformed(other, &transform_view(other, transform))
+    }
+}
+fn transform_view<T: BoxReal>(other: &CompactBox2<T>, transform: Transform2) -> TransformView<2> {
+    let center = Xy::new(other.center[0].to_double(), other.center[1].to_double());
+    let moved = transform.apply_coordinates(center);
+    let offset = transform.translation_part();
+    TransformView {
+        simple: matches!(
+            transform.form(),
+            TransformForm::Translation
+                | TransformForm::Identity
+                | TransformForm::PointMirror
+                | TransformForm::Scale
+        ),
+        scale: transform.scale_factor(),
+        translation: [offset.x(), offset.y()],
+        matrix: *transform.matrix().coefficients(),
+        moved_center: [moved.x(), moved.y()],
+    }
+}
 impl<T: BoxReal> CompactBox2<T> {
     /// Tests a disk or hollow circle, retaining strict hollow tangency; `bounds.is_out_circle(center,radius,false)`.
     pub fn is_out_circle(&self, center: Xy, radius: f64, hollow: bool) -> bool {
