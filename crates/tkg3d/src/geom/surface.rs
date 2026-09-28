@@ -108,9 +108,14 @@ pub trait GeomSurface: GeomGeometry {
         (u, v)
     }
     /// The parametric transformation matching `transform`; identity by default
-    /// (`ParametricTransformation`); `surface.parametric_transformation(t)`.
-    fn parametric_transformation(&self, _transform: Transform3) -> GeneralTransform2 {
-        GeneralTransform2::default()
+    /// (`ParametricTransformation`). It is fallible because a product of gp_GTrsf2d
+    /// (surface of linear extrusion) can raise natively;
+    /// `surface.parametric_transformation(t)?`.
+    fn parametric_transformation(
+        &self,
+        _transform: Transform3,
+    ) -> Result<GeneralTransform2, Failure> {
+        Ok(GeneralTransform2::default())
     }
     /// Parametric bounds `(U1, U2, V1, V2)`, infinite ones included (`Bounds`);
     /// `let (u1, u2, v1, v2) = surface.bounds();`.
