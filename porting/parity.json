@@ -104458,6 +104458,1278 @@
       "rust_item": "rustycad_tkgeombase::extrema_pc::perform_planar",
       "status": "implemented",
       "notes": "ExtremaPC mapping (docs/tkgeombase-progress.md): the namespace is the module extrema_pc; Result and ExtremumResult are the aliases ExtremaResult and ExtremumResult of the generic extrema_pc_core types that ExtremaPC2d shares, and Status, SearchMode, the THE_* constants and the validity functions are the shared core items; each class drops the ExtremaPC_ prefix and the constructor with a domain is with_domain; operator[] is Index<usize>; every Perform returns Result<&ExtremaResult, Failure> because the plane projections construct gp and Geom2d objects whose native constructors can raise, and the Bezier, BSpline, offset and other-curve constructors return Result for the same reason; the ExtremaPC_Curve constructors are from_adaptor, from_adaptor_range, from_transformed, from_transformed_range, from_geom and from_geom_range; DistanceFunction and GridEvaluator are the generic core types over Space3d, with output references returned as values; ExtremaPC_Planar out-parameters (gp_Pln&, the 2D curve handle) stay &mut parameters, the template parameters of PerformPlanar are the PlanarEvaluator2d and CurveEvaluator traits, and its scalar query arguments are grouped in PlanarQuery."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Length(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::length",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Length(const Adaptor3d_Curve&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::length_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Length(const Adaptor2d_Curve2d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::length_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Length(const Adaptor3d_Curve&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::length_between",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Length(const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::length_between",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Length(const Adaptor3d_Curve&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::length_between_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Length(const Adaptor2d_Curve2d&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::length_between_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint(const Adaptor3d_Curve&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::with_resolution",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint(const Adaptor2d_Curve2d&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::with_resolution",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint(const Adaptor3d_Curve&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::with_start",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint(const Adaptor2d_Curve2d&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::with_start",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Init(const Adaptor3d_Curve&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::init",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Init(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::init",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Init(const Adaptor3d_Curve&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::init_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Init(const Adaptor2d_Curve2d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::init_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Init(const Adaptor3d_Curve&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::init_between",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Init(const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::init_between",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Init(const Adaptor3d_Curve&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::init_between_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Init(const Adaptor2d_Curve2d&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::init_between_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Perform(double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::perform",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Perform(double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::perform_from",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::AdvPerform(double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::adv_perform",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::is_done",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Parameter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::parameter",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::SetParameter(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::set_parameter",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyGaussFunction()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyGaussFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyGaussFunction::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyGaussFunction::Init(const CPnts_RealFunction&,void* const)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyGaussFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyGaussFunction::init",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyGaussFunction::Value(double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyGaussFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyGaussFunction::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyRootFunction()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyRootFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyRootFunction::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyRootFunction::Init(const CPnts_RealFunction&,void* const,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyRootFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyRootFunction::init_function",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyRootFunction::Init(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyRootFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyRootFunction::init_target",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyRootFunction::Init(double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyRootFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyRootFunction::init_target_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyRootFunction::Value(double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyRootFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyRootFunction::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyRootFunction::Derivative(double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyRootFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyRootFunction::derivative",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_MyRootFunction::Values(double,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_MyRootFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::MyRootFunction::values",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection(const Adaptor3d_Curve&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::with_curve",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection(const Adaptor2d_Curve2d&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::with_curve",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection(const Adaptor3d_Curve&,double,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection(const Adaptor2d_Curve2d&,double,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection::Initialize(const Adaptor3d_Curve&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection::Initialize(const Adaptor2d_Curve2d&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection::Initialize(const Adaptor3d_Curve&,double,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection::Initialize(const Adaptor2d_Curve2d&,double,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection::IsAllDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::is_all_done",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection::Next()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::next",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection::More()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::more",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_UniformDeflection::Point() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::UniformDeflection::point",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::Length(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::length",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::Length(const Adaptor3d_Curve&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::length_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::Length(const Adaptor2d_Curve2d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::length_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::Length(const Adaptor3d_Curve&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::length_between",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::Length(const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::length_between",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::Length(const Adaptor3d_Curve&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::length_between_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::Length(const Adaptor2d_Curve2d&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::length_between_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint(const Adaptor3d_Curve&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::from_abscissa",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint(double,const Adaptor3d_Curve&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint(double,const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint(const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::from_abscissa",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint(const Adaptor3d_Curve&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::from_start",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint(const Adaptor2d_Curve2d&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::from_start",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint(const Adaptor3d_Curve&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::from_start_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint(const Adaptor2d_Curve2d&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::from_start_with_tolerance",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::is_done",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::Parameter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::parameter",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaType.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaType",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DeflectionType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DeflectionType.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::DeflectionType",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunction(const Adaptor3d_Curve&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunction::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunction(const GCPnts_DistFunction&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunction::clone",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors. The header declares this copy constructor but TKGeomBase never defines it, so native code cannot link a call to it; the port provides the member-wise copy it declares (Clone), with a fresh failure capture."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunction::Value(double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunction::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunctionMV(GCPnts_DistFunction&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunctionMV::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunctionMV::Value(const math_Vector&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunctionMV::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunctionMV::NbVariables() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunctionMV::variables",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunction2d(const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunction::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunction2d(const GCPnts_DistFunction2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunction::clone",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors. The header declares this copy constructor but TKGeomBase never defines it, so native code cannot link a call to it; the port provides the member-wise copy it declares (Clone), with a fresh failure capture."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunction2d::Value(double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunction::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunction2dMV(GCPnts_DistFunction2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunctionMV::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunction2dMV::Value(const math_Vector&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunctionMV::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_DistFunction2dMV::NbVariables() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_DistFunction2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TDistFunctionMV::variables",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa(const Adaptor3d_Curve&,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::with_nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa(const Adaptor3d_Curve&,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa::Initialize(const Adaptor3d_Curve&,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa::Initialize(const Adaptor3d_Curve&,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa(const Adaptor2d_Curve2d&,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::with_nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa(const Adaptor2d_Curve2d&,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa::Initialize(const Adaptor2d_Curve2d&,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa::Initialize(const Adaptor2d_Curve2d&,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::is_done",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformAbscissa::Parameter(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformAbscissa::parameter",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection(const Adaptor3d_Curve&,double,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::with_curve",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection(const Adaptor2d_Curve2d&,double,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::with_curve",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection(const Adaptor3d_Curve&,double,double,double,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection(const Adaptor2d_Curve2d&,double,double,double,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection::Initialize(const Adaptor3d_Curve&,double,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection::Initialize(const Adaptor2d_Curve2d&,double,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection::Initialize(const Adaptor3d_Curve&,double,double,double,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection::Initialize(const Adaptor2d_Curve2d&,double,double,double,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::is_done",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection::Parameter(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::parameter",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection::Value(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_QuasiUniformDeflection::Deflection() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_QuasiUniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::QuasiUniformDeflection::deflection",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection(const Adaptor3d_Curve&,double,double,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::with_curve",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection(const Adaptor3d_Curve&,double,double,double,double,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection(const Adaptor2d_Curve2d&,double,double,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::with_curve",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection(const Adaptor2d_Curve2d&,double,double,double,double,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection::Initialize(const Adaptor3d_Curve&,double,double,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection::Initialize(const Adaptor3d_Curve&,double,double,double,double,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection::Initialize(const Adaptor2d_Curve2d&,double,double,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection::Initialize(const Adaptor2d_Curve2d&,double,double,double,double,int,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection::AddPoint(const gp_Pnt&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::add_point",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection::Parameter(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::parameter",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection::Value(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_TangentialDeflection::ArcAngularStep(double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_TangentialDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::TangentialDeflection::arc_angular_step",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa(const Adaptor3d_Curve&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::with_abscissa",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa(const Adaptor3d_Curve&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::with_abscissa_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa(const Adaptor3d_Curve&,int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::with_nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa(const Adaptor3d_Curve&,int,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::with_nb_points_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Initialize(const Adaptor3d_Curve&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::initialize_with_abscissa",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Initialize(const Adaptor3d_Curve&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::initialize_abscissa_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Initialize(const Adaptor3d_Curve&,int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::initialize_with_nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Initialize(const Adaptor3d_Curve&,int,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::initialize_nb_points_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa(const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::with_abscissa",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa(const Adaptor2d_Curve2d&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::with_abscissa_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa(const Adaptor2d_Curve2d&,int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::with_nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa(const Adaptor2d_Curve2d&,int,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::with_nb_points_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Initialize(const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::initialize_with_abscissa",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Initialize(const Adaptor2d_Curve2d&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::initialize_abscissa_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Initialize(const Adaptor2d_Curve2d&,int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::initialize_with_nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Initialize(const Adaptor2d_Curve2d&,int,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::initialize_nb_points_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::is_done",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Parameter(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::parameter",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformAbscissa::Abscissa() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformAbscissa.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformAbscissa::abscissa",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::new",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection(const Adaptor3d_Curve&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::with_curve",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection(const Adaptor2d_Curve2d&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::with_curve",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection(const Adaptor3d_Curve&,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection(const Adaptor2d_Curve2d&,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::with_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection::Initialize(const Adaptor3d_Curve&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection::Initialize(const Adaptor2d_Curve2d&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::initialize",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection::Initialize(const Adaptor3d_Curve&,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection::Initialize(const Adaptor2d_Curve2d&,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::initialize_range",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::is_done",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::nb_points",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection::Parameter(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::parameter",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection::Value(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::value",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_UniformDeflection::Deflection() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_UniformDeflection.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::deflection",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "CPnts_AbscissaPoint::Length(const Adaptor3d_Curve&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/CPnts/CPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::cpnts::AbscissaPoint::length",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "GCPnts_AbscissaPoint::Length(const Adaptor3d_Curve&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCPnts/GCPnts_AbscissaPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::gcpnts::AbscissaPoint::length",
+      "status": "implemented",
+      "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
     }
   ],
   "tests": [
