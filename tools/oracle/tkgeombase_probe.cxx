@@ -44,6 +44,8 @@
 #include "tkgeombase_probe_lprop.cxx"
 #include "tkgeombase_probe_gprop.cxx"
 #include "tkgeombase_probe_hermit.cxx"
+#include "tkgeombase_probe_femtool.cxx"
+#include "tkgeombase_probe_femtool_curve.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -136,6 +138,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gprop_hoperator", gb_gprop_hoperator_case},
  // Hermit (tkgeombase_probe_hermit.cxx)
  {"hermit", gb_hermit_case},
+ // FEmTool (tkgeombase_probe_femtool.cxx, tkgeombase_probe_femtool_curve.cxx)
+ {"fem_elements", gb_fem_elements_case},
+ {"fem_criterion", gb_fem_criterion_case},
+ {"fem_profile", gb_fem_profile_case},
+ {"fem_curve", gb_fem_curve_case},
+ {"fem_assembly", gb_fem_assembly_case},
 };
 int main() {
  std::string line;

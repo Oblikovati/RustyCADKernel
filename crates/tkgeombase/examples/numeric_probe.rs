@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod gb_probe;
-use gb_probe::{gc, gce, gprop, hermit, int_ana, int_ana2d, lprop};
+use gb_probe::{fem_tool, gc, gce, gprop, hermit, int_ana, int_ana2d, lprop};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -101,6 +101,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gprop_hoperator", gprop::hoperator_case),
     // Hermit (gb_probe/hermit.rs)
     ("hermit", hermit::hermit_case),
+    // FEmTool (gb_probe/fem_tool)
+    ("fem_elements", fem_tool::elements_case),
+    ("fem_criterion", fem_tool::criterion_case),
+    ("fem_profile", fem_tool::profile_case),
+    ("fem_curve", fem_tool::curve_case),
+    ("fem_assembly", fem_tool::assembly_case),
 ];
 
 fn main() {

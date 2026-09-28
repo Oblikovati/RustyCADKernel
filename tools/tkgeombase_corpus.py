@@ -19,3 +19,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_intana').append_intana_requests(requests)
     # LProp, GeomLProp, GProp and Hermit (tkgeombase_corpus_lprop.py)
     __import__('tkgeombase_corpus_lprop').append_lprop_requests(requests)
+    # FEmTool (tkgeombase_corpus_femtool.py)
+    __import__('tkgeombase_corpus_femtool').append_femtool_requests(requests)

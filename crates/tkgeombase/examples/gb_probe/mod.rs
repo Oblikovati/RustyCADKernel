@@ -3,6 +3,7 @@
 // uses a subset of them, so unused ones are expected in these two modules.
 #[allow(dead_code, unused_imports)]
 pub mod common;
+pub mod fem_tool;
 pub mod gc;
 pub mod gce;
 pub mod gprop;
