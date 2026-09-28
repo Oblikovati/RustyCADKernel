@@ -13,7 +13,7 @@
 
 //! Handles of abstract classes written as traits (`Handle<dyn Trait>`): RTTI,
 //! down casts, identity and shared mutation through interior mutability.
-use rustycad_tkernel::standard::{Handle, RuntimeTyped, StandardTransient, Transient};
+use rustycad_tkernel::standard::{Handle, RuntimeType, RuntimeTyped, StandardTransient, Transient};
 use rustycad_tkernel::{impl_transient, impl_transient_interface};
 use std::sync::RwLock;
 
@@ -140,4 +140,31 @@ fn interface_handles_share_mutation_across_threads() {
     });
     assert_eq!(shape.cast::<dyn FakeRound>().radius(), 16.0);
     assert_eq!(shape.ref_count(), 1);
+}
+
+#[test]
+fn abstract_descriptors_keep_the_size_bounded_subtype_walk() {
+    // `is_subtype` stops at the first ancestor smaller than the base, so an abstract
+    // descriptor (a trait object has no size) must take its parent's size.
+    let shape: &RuntimeType = <dyn FakeShape>::static_type();
+    let round: &RuntimeType = <dyn FakeRound>::static_type();
+    assert_eq!(shape.size(), StandardTransient::static_type().size());
+    assert_eq!(round.size(), shape.size());
+    let disk_handle: Handle<dyn FakeRound> = disk(1.0).cast();
+    assert!(disk_handle.is_kind(StandardTransient::static_type()));
+    assert!(disk_handle.is_kind(round) && disk_handle.is_kind(shape));
+    assert!(!disk_handle.is_kind(<dyn FakeUnrelated>::static_type()));
+}
+
+#[test]
+fn interface_handles_order_and_hash_by_object_identity() {
+    let concrete: Handle<FakeDisk> = disk(1.0);
+    let shape: Handle<dyn FakeShape> = concrete.cast();
+    let round: Handle<dyn FakeRound> = concrete.cast();
+    assert_eq!(shape.hash_code(), concrete.hash_code());
+    assert_eq!(shape.partial_cmp(&round), Some(std::cmp::Ordering::Equal));
+    let null: Handle<dyn FakeShape> = Handle::default();
+    assert!(null < shape && null.hash_code() == 0);
+    let moved: Handle<dyn FakeRound> = shape.into_cast::<dyn FakeRound>();
+    assert!(moved == round && concrete.ref_count() == 3);
 }

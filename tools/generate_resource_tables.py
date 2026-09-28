@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+"""Carry the Resource_Unicode conversion tables over from the pinned OCCT sources exactly.
+
+Usage: python3 tools/generate_resource_tables.py --source ../OCCT [--check]
+
+The OCCT Resource package ships five table headers: Resource_Shiftjis.pxx (unisjis,
+sjisuni), Resource_GB2312.pxx (unigb, gbuni), Resource_GBK.pxx (gbkuni),
+Resource_Big5.pxx (big5uni) and Resource_CodePages.pxx (THE_CODEPAGES_ANSI). Their
+literals are integers, so they are carried as little-endian binary blobs that the Rust
+crate embeds with `include_bytes!`:
+
+* the four 65,536-entry SJIS/GB2312 tables are mostly zero, so they are stored sparse:
+  sorted `(index: u16, value: u16)` pairs for the nonzero entries (a zero entry reads
+  back as 0, exactly the native value);
+* gbkuni (u16), big5uni (u32) and the 19x128 code pages (u16) are stored dense.
+
+`crates/tkernel/src/resource/tables.rs` is generated beside the blobs: it embeds them and
+records each table's entry count and FNV-1a-64 digest, which a Rust test recomputes, so the
+compiled bytes provably equal the ones this script derived from the headers. `--check`
+regenerates everything in memory and fails on any difference.
+"""
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+import re
+import struct
+import sys
+
+ROOT = Path(__file__).resolve().parent.parent
+TARGET = ROOT / "crates/tkernel/src/resource"
+PACKAGE = "src/FoundationClasses/TKernel/Resource"
+ARRAY = re.compile(r"static\s+(?:const\s+)?[\w ]+?\s+(\w+)\s*\[[^\]]*\](?:\[\d+\])?\s*=\s*\{(.*?)\};", re.S)
+NUMBER = re.compile(r"0[xX][0-9a-fA-F]+|\d+")
+# (table, header, layout, element format, expected entries)
+TABLES = [
+    ("unisjis", "Resource_Shiftjis.pxx", "sparse", "H", 65536),
+    ("sjisuni", "Resource_Shiftjis.pxx", "sparse", "H", 65536),
+    ("unigb", "Resource_GB2312.pxx", "sparse", "H", 65536),
+    ("gbuni", "Resource_GB2312.pxx", "sparse", "H", 65536),
+    ("gbkuni", "Resource_GBK.pxx", "dense", "H", 23940),
+    ("big5uni", "Resource_Big5.pxx", "dense", "I", 19782),
+    ("THE_CODEPAGES_ANSI", "Resource_CodePages.pxx", "dense", "H", 19 * 128),
+]
+
+
+def strip_comments(text: str) -> str:
+    """Remove C and C++ comments; strip_comments('a /* b */ c // d') == 'a   c '."""
+    return re.sub(r"//[^\n]*", " ", re.sub(r"/\*.*?\*/", " ", text, flags=re.S))
+
+
+def parse_arrays(text: str) -> dict[str, list[int]]:
+    """Map each static array of a header to its integer literals; parse_arrays(pxx_text)."""
+    return {name: [int(token, 0) for token in NUMBER.findall(body)]
+            for name, body in ARRAY.findall(strip_comments(text))}
+
+
+def encode(values: list[int], layout: str, element: str) -> bytes:
+    """Serialize one table; sparse tables keep only nonzero `(index, value)` pairs."""
+    if layout == "dense":
+        return struct.pack(f"<{len(values)}{element}", *values)
+    pairs = [(index, value) for index, value in enumerate(values) if value]
+    return b"".join(struct.pack("<HH", index, value) for index, value in pairs)
+
+
+def fnv1a64(blob: bytes) -> int:
+    """FNV-1a 64-bit digest, mirrored by the Rust table test; fnv1a64(b'') == 0xcbf29ce484222325."""
+    digest = 0xCBF29CE484222325
+    for byte in blob:
+        digest = ((digest ^ byte) * 0x100000001B3) & 0xFFFFFFFFFFFFFFFF
+    return digest
+
+
+def file_stem(name: str) -> str:
+    """Blob/constant stem of a native table name; file_stem('THE_CODEPAGES_ANSI') == 'code_pages'."""
+    return "code_pages" if name == "THE_CODEPAGES_ANSI" else name
+
+
+def build(source: Path) -> dict[Path, bytes]:
+    """Every generated file (blobs and tables.rs) keyed by its repository path."""
+    headers: dict[str, dict[str, list[int]]] = {}
+    outputs: dict[Path, bytes] = {}
+    constants = []
+    for name, header, layout, element, expected in TABLES:
+        if header not in headers:
+            headers[header] = parse_arrays((source / PACKAGE / header).read_text(encoding="latin-1"))
+        values = headers[header].get(name)
+        if values is None or len(values) != expected:
+            found = None if values is None else len(values)
+            raise ValueError(f"{header}:{name} has {found} literals; expected {expected}")
+        limit = 0xFFFF if element == "H" else 0xFFFFFFFF
+        if any(value < 0 or value > limit for value in values):
+            raise ValueError(f"{header}:{name} holds a literal outside 0..={limit:#x}")
+        blob = encode(values, layout, element)
+        outputs[TARGET / "tables" / f"{file_stem(name)}.bin"] = blob
+        constants.append((file_stem(name), name, header, layout, len(blob), fnv1a64(blob)))
+    outputs[TARGET / "tables.rs"] = rust_module(constants).encode()
+    return outputs
+
+
+def rust_module(constants: list[tuple[str, str, str, str, int, int]]) -> str:
+    """The generated Rust module embedding the blobs with their sizes and digests."""
+    lines = [
+        "// Copyright (c) 1998-1999 Matra Datavision",
+        "// Copyright (c) 1999-2014 OPEN CASCADE SAS",
+        "//",
+        "// This file is part of Open CASCADE Technology software library.",
+        "//",
+        "// This library is free software; you can redistribute it and/or modify it under",
+        "// the terms of the GNU Lesser General Public License version 2.1 as published",
+        "// by the Free Software Foundation, with special exception defined in the file",
+        "// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT",
+        "// distribution for complete text of the license and disclaimer of any warranty.",
+        "//",
+        "// Alternatively, this file may be used under the terms of Open CASCADE",
+        "// commercial license or contractual agreement.",
+        "",
+        "//! Resource_Unicode tables generated by tools/generate_resource_tables.py; do not edit.",
+        "//!",
+        "//! Sparse blobs hold sorted little-endian `(index, value)` u16 pairs for the nonzero",
+        "//! entries; dense blobs hold every entry little-endian. `(bytes, FNV-1a-64)` per table.",
+    ]
+    for stem, name, header, layout, size, digest in constants:
+        head = f"pub(super) const {stem.upper()}: (&[u8], u64) ="
+        body = f"(include_bytes!(\"tables/{stem}.bin\"), {digest:#018x});"
+        # rustfmt keeps the item on one line up to max_width (100) and wraps it otherwise.
+        item = [f"{head} {body}"] if len(head) + len(body) < 100 else [head, f"    {body}"]
+        lines += [f"/// `{name}` from `{header}` ({layout}, {size} bytes).", *item]
+    return "\n".join(lines) + "\n"
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", type=Path, default=ROOT / "../OCCT")
+    parser.add_argument("--check", action="store_true", help="fail when a generated file differs")
+    args = parser.parse_args()
+    outputs = build(args.source.resolve())
+    stale = [path for path, blob in outputs.items() if not path.is_file() or path.read_bytes() != blob]
+    if args.check:
+        for path in stale:
+            print(f"stale: {path.relative_to(ROOT)}", file=sys.stderr)
+        return 1 if stale else 0
+    for path in stale:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(outputs[path])
+        print(f"wrote {path.relative_to(ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

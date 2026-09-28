@@ -14,7 +14,6 @@
 // commercial license or contractual agreement.
 
 use super::{Gravity, Messenger};
-use crate::tcollection::AsciiString;
 use std::fmt;
 /// Scoped buffered message; `write!(messenger.stream(Gravity::Info), "text")`.
 pub struct MessageStream<'a> {
@@ -31,10 +30,13 @@ impl<'a> MessageStream<'a> {
         }
     }
     /// Send accumulated contents, optionally sending an empty message; `stream.flush(true)`.
+    ///
+    /// Passing a manipulator (`std::endl`, `std::ends`, `std::flush`) is `flush(true)`
+    /// natively: the manipulator itself never reaches the text.
     pub fn flush(&mut self, force: bool) {
         if force || !self.text.is_empty() {
             self.messenger
-                .send_at(&AsciiString::new(&self.text), self.gravity);
+                .send_string_stream(self.text.as_bytes(), self.gravity);
             self.text.clear();
         }
     }

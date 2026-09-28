@@ -16,6 +16,7 @@ use super::hash_policy::next_map_prime;
 use std::marker::PhantomData;
 mod integer;
 mod iteration;
+mod legacy_algebra;
 mod queries;
 pub use integer::{PackedInteger, PackedWord};
 pub use iteration::PackedMapIter;
@@ -54,6 +55,15 @@ impl<T: PackedInteger> PackedMap<T> {
             count: 0,
             integer: PhantomData,
         }
+    }
+    /// The signed constructor: counts below one select a single bucket, never an error;
+    /// `PackedMap::<i32>::from_int(-5).bucket_count() == 1`.
+    pub fn from_int(bucket_count: i32) -> Self {
+        Self::new(usize::try_from(bucket_count).unwrap_or(0))
+    }
+    /// Signed `ReSize`: a negative request behaves as zero; `map.resize_int(-1)`.
+    pub fn resize_int(&mut self, requested: i32) {
+        self.resize(usize::try_from(requested).unwrap_or(0));
     }
     /// Count stored values; `map.len()`.
     pub fn len(&self) -> usize {

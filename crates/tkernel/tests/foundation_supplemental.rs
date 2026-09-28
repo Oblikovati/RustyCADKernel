@@ -16,7 +16,7 @@ fn failure_printing_and_shared_copies() {
 }
 #[test]
 fn byte_string_terminators_and_owned_copies() {
-    let original = AsciiString::from_bytes(&[255, b'A', 0, b'B']);
+    let original = AsciiString::from_bytes([255, b'A', 0, b'B']);
     let mut copy = original.clone();
     copy.append(&AsciiString::from_integer(-12));
     assert_eq!(original.as_bytes(), &[255, b'A']);
@@ -26,17 +26,18 @@ fn byte_string_terminators_and_owned_copies() {
 
 #[test]
 fn parallel_pool_configuration_and_worker_ids() {
-    use rustycad_tkernel::osd::ThreadPool;
+    use rustycad_tkernel::osd::{Launcher, ThreadPool};
     use std::sync::atomic::{AtomicUsize, Ordering};
-    assert!(ThreadPool::new(0).is_err());
-    let pool = ThreadPool::new(2).unwrap();
-    assert_eq!(pool.thread_count(), 2);
+    let pool = ThreadPool::new(2);
+    assert_eq!(pool.nb_threads(), 2);
     let count = AtomicUsize::new(0);
-    pool.launcher().perform(0..100, |worker, index| {
-        assert!(worker < 2);
-        assert!(index < 100);
-        count.fetch_add(1, Ordering::SeqCst);
-    });
+    Launcher::new(&pool, -1)
+        .perform(0, 100, |worker, index| {
+            assert!(worker < 2);
+            assert!(index < 100);
+            count.fetch_add(1, Ordering::SeqCst);
+        })
+        .unwrap();
     assert_eq!(count.load(Ordering::SeqCst), 100);
 }
 

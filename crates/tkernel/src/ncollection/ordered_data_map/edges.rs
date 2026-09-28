@@ -11,8 +11,19 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Debug, Failure, HashPolicy, OrderedDataMap, OrderedNode, missing_ordered_node};
+use super::{
+    Debug, Failure, HashPolicy, OrderedDataMap, OrderedNode, OrderedNodeMut, OrderedNodeRef,
+    missing_ordered_node,
+};
 impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
+    /// The head of the insertion order as a node view, `None` when empty; `map.first_node()`.
+    pub fn first_node(&self) -> Option<OrderedNodeRef<'_, K, V>> {
+        OrderedNodeRef::at(&self.table.slots, self.table.first)
+    }
+    /// The head node with an exclusive item, `None` when empty; `map.first_node_mut()`.
+    pub fn first_node_mut(&mut self) -> Option<OrderedNodeMut<'_, K, V>> {
+        OrderedNodeMut::at(&mut self.table.slots, self.table.first)
+    }
     /// Borrows the first inserted remaining key; `map.first()?`.
     pub fn first(&self) -> Result<&K, Failure> {
         Ok(&self.node(self.table.first)?.key)

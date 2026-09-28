@@ -133,5 +133,7 @@ fn guid_encoding_assignment_and_c_string_contracts() {
     let mut output = String::new();
     guid.shallow_dump(&mut output).unwrap();
     assert_eq!(output, "12345678-1234-5678-9abc-def012345678");
-    assert_eq!("bad".parse::<Guid>().unwrap_err().kind(), ErrorKind::Range);
+    let failure = "bad".parse::<Guid>().unwrap_err();
+    assert_eq!(failure.exception_type(), "Standard_RangeError");
+    assert_eq!(failure.message(), "Invalid format of GUID");
 }

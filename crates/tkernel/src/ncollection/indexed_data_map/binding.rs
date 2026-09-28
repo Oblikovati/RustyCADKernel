@@ -50,7 +50,7 @@ impl<K: Debug, V, H: HashPolicy<K>> IndexedDataMap<K, V, H> {
         let index = self.place(key, construct, false);
         &mut self.values[index - 1].value
     }
-    fn place(&mut self, key: K, construct: impl FnOnce() -> V, replace: bool) -> usize {
+    pub(super) fn place(&mut self, key: K, construct: impl FnOnce() -> V, replace: bool) -> usize {
         if self.is_empty() || self.len() > self.bucket_count() {
             self.resize(self.len());
         }

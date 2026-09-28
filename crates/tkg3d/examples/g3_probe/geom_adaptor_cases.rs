@@ -146,7 +146,8 @@ pub fn curve_load_case(values: &[f64]) {
         curve_adaptor_summary(&dyn_a, &u);
         Ok(())
     });
-    a.reset();
+    // `a->Reset()`: `Handle::reset` is `a.reset(new ...)`, so dereference explicitly.
+    (*a).reset();
     empty_curve(&a);
     attempt(|| {
         a.load(&c2)?;
