@@ -20,6 +20,7 @@ from tkmath_plib_corpus import append_plib_requests
 from tkmath_elementary_corpus import append_elementary_requests
 from tkmath_bvh_corpus import append_bvh_requests
 from tkmath_bvh_query_corpus import append_bvh_query_requests
+from tkmath_bvh_tool_classes_corpus import append_bvh_tool_classes_requests
 from tkmath_bsplclib_corpus import append_bsplclib_requests
 from tkmath_bsplslib_corpus import append_bsplslib_requests
 from tkmath_gp_planar_corpus import append_gp_planar_requests
@@ -34,6 +35,7 @@ from tkmath_integ_lin_api_corpus import append_integ_lin_api_requests
 from tkmath_mathopt_api_corpus import append_mathopt_api_requests
 from tkmath_mathroot_api_corpus import append_mathroot_api_requests
 from tkmath_mathsys_api_corpus import append_mathsys_api_requests
+from tkmath_bnd_corpus import append_bnd_requests
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
@@ -437,6 +439,8 @@ def corpus() -> str:
     append_mathopt_api_requests(requests)
     append_mathroot_api_requests(requests)
     append_mathsys_api_requests(requests)
+    append_bnd_requests(requests)
+    append_bvh_tool_classes_requests(requests)
     return '\n'.join(requests)+'\n'           
 
 

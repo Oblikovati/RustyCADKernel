@@ -11,23 +11,35 @@ macros, then walks namespace, class and struct scopes tracking access labels.
 Every public member function, constructor, operator and nested enum becomes an
 expected row; namespace-scope free functions (such as `operator*(double, gp_Vec)`)
 are attributed to the header's primary class, which is the ledger convention.
-Inside a named namespace (the modern `MathUtils`/`MathPoly`-style packages, which have
-no primary class) the namespace's structs, classes, `using` aliases and `constexpr`
-constants are public API too, so each becomes one bare `Namespace::Name` row.
 
 Row identities follow the ledger: `Class(params)` for constructors,
 `Class::Name` when the name is not overloaded, `Class::Name(params)[ const]`
 when it is. Parameter lists are compared after dropping parameter names,
 default values, top-level `const` on by-value parameters and whitespace.
 
+Class template specializations keep their argument list in the scope name
+(`BVH_Tree<T,N,BVH_BinaryTree>::Child`); primary templates use the bare name
+(`NCollection_Lerp::Init`), as the ledger already spells them.
+
+Beside the expected members the scanner records *known* identities: public or
+protected typedefs, `using` aliases, data members, class/struct names,
+enumerators, and protected member functions. A row naming a known identity is
+not stale, but a known identity never needs a row. Rows whose `status` is
+`excluded` cover members that have no Rust counterpart by design (destructors,
+the RTTI macro); they must carry a `notes` reason.
+
 Known false-positive sources and how they are handled:
-- Out-of-class definitions (`inline gp_Vec::gp_Vec(...)`) are recognised by
-  the qualified name and ignored; only in-class declarations count.
-- `= delete` members, `friend` declarations, typedefs, data members (also those whose
-  default initializer calls a function, such as `= std::numeric_limits<double>::quiet_NaN()`)
-  and protected/private members are never expected; `using` aliases only in a namespace.
-- A row with status `excluded` still covers its member but must carry a `notes` reason;
-  rows that do not are reported as `excluded without notes`.
+- Out-of-class definitions (`inline gp_Vec::gp_Vec(...)`,
+  `BVH_Box<T, N>::Area() const`) are recognised by the qualified name and
+  ignored; only in-class declarations count.
+- `= delete` members, `friend` declarations and private members are never
+  expected or known.
+- `DEFINE_STANDARD_RTTIEXT(Class, Base)` expands to `public:` plus the RTTI
+  members, so it is rewritten to that label and a statement of its own: it can
+  no longer swallow the next declaration, members after it are public as in
+  C++, and it is expected as `Class::DEFINE_STANDARD_RTTIEXT(Class,Base)`,
+  mapped by an excluded row. `DEFINE_STANDARD_HANDLE` only declares a handle
+  typedef and is dropped.
 - A bare `Class::Name` row does not cover an overloaded name; overloads that
   differ only in cv-qualification must carry the trailing ` const`.
 - Macros that expand to members are not expanded; an unknown macro that ends
@@ -40,14 +52,17 @@ import argparse
 import json
 import re
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 IGNORED_MACROS = r"\b(?:DEFINE_STANDARD_ALLOC|DEFINE_NCOLLECTION_ALLOC|Standard_EXPORT|Standard_NODISCARD)\b"
 TOKEN_NOISE = re.compile(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\'', re.S)
 ACCESS_LABEL = re.compile(r"^\s*(public|protected|private)\s*:(?!:)")
-SCOPE_HEAD = re.compile(r"^(?:template\s*<[^{]*?>\s*)?(class|struct|union|namespace|enum(?:\s+class)?)\s+([\w:]+(?:\s*<[^{]*>)?)")
+SCOPE_HEAD = re.compile(r"^(class|struct|union|namespace|enum(?:\s+class)?)\s+([\w:]+)\s*(<)?")
+RTTI_MACRO = re.compile(r"\b(DEFINE_STANDARD_RTTIEXT|DEFINE_STANDARD_RTTI_INLINE)\s*\(([^)]*)\)")
+PARAM_TOKEN = re.compile(r"[A-Za-z_]\w*|[&*]+|\[[^\]]*\]")
+HANDLE_MACRO = re.compile(r"\bDEFINE_STANDARD_HANDLE\s*\([^)]*\)")
 TYPE_ALIASES = {"Standard_Real": "double", "Standard_Integer": "int", "Standard_Boolean": "bool"}
 
 
@@ -58,6 +73,7 @@ class Member:
     prefix: str
     params: str | None
     qualifier: str
+    required: bool = field(default=True, compare=False, repr=False)
 
 
 def clean_source(text: str) -> str:
@@ -70,6 +86,7 @@ def clean_source(text: str) -> str:
     text = re.sub(r"^\s*#(?:[^\n]*\\\n)*[^\n]*$", "", text, flags=re.M)
     text = re.sub(r"\[\[[^\]]*\]\]|__attribute__\s*\(\([^)]*\)\)", "", text)
     text = re.sub(r"\bStandard_DEPRECATED\s*\(\s*\"*\s*\)", "", text)
+    text = RTTI_MACRO.sub(r"public: \1(\2);", HANDLE_MACRO.sub(";", text))  # the macro opens with `public:`
     return re.sub(IGNORED_MACROS, "", text)
 
 
@@ -138,120 +155,137 @@ def strip_access(head: str) -> tuple[str | None, str]:
     return label, head
 
 
-@dataclass(frozen=True)
-class Scope:
-    """Where a statement is declared: qualified name, the header's primary class, namespace-ness."""
+def scan_scope(body: str, scope: str, public_default: bool, primary: str, exposed: bool = True) -> list[Member]:
+    """Collect expected and known members declared in one namespace or class body.
 
-    name: str
-    primary: str
-    is_namespace: bool = False
-
-
-def scan_scope(body: str, scope: Scope, public_default: bool) -> list[Member]:
-    """Collect expected members declared in one namespace or class body."""
+    `exposed` is False inside a protected nested scope, where nothing is required.
+    """
     members: list[Member] = []
-    public = public_default
+    access = "public" if public_default else "private"
     for head, braced in split_statements(body):
         label, head = strip_access(head)
-        public = public if label is None else label == "public"
-        if public:
-            members.extend(statement_members(head.strip(), braced, scope))
+        access = label or access
+        if access != "private":
+            members.extend(statement_members(head.strip(), braced, scope, primary, exposed and access == "public"))
     return members
 
 
-def statement_members(head: str, braced: str | None, scope: Scope) -> list[Member]:
-    """Expected members produced by one statement of a scope."""
+def statement_members(head: str, braced: str | None, scope: str, primary: str, exposed: bool) -> list[Member]:
+    """Members produced by one statement of a scope; non-exposed ones are only known."""
+    head = strip_template_heads(head)
     scope_match = SCOPE_HEAD.match(head)
     if scope_match is not None and "(" not in head:
-        return nested_scope_members(scope_match, braced, scope)
-    if scope.is_namespace and (entity := namespace_entity(head)) is not None:
-        return [Member(f"{scope.name}::{entity}", None, "")]
-    if not head or re.match(r"(friend|typedef|using|static_assert)\b", head) or "(" not in head:
+        return nested_scope_members(head, scope_match, braced, scope, primary, exposed)
+    if re.fullmatch(r"enum", head) and braced is not None:
+        return enumerator_members(braced, scope)  # anonymous enum: its constants join the scope
+    if not head or re.match(r"(friend|static_assert)\b", head):
         return []
-    return function_members(head, scope)
+    if re.match(r"(typedef|using)\b", head):
+        return alias_members(head, scope)
+    if is_data_member(head):
+        return data_members(head, scope)
+    return exposure(function_members(head, scope, primary), exposed)
 
 
-def namespace_entity(head: str) -> str | None:
-    """Name of a namespace-scope `using X = ...` alias or `constexpr` constant, else None.
+def strip_template_heads(head: str) -> str:
+    """Drop leading `template <...>` parameter lists, balancing nested template-template ones.
 
-    >>> namespace_entity("inline constexpr int THE_MAX = 20")
-    'THE_MAX'
-    >>> namespace_entity("using LongCoefficients = std::array<long double, 21>")
-    'LongCoefficients'
+    >>> strip_template_heads('template <class T, template <class> class D> class B')
+    'class B'
     """
-    alias = re.match(r"using\s+(\w+)\s*=", head)
-    if alias is not None:
-        return alias.group(1)
-    constant = re.match(r"(?:(?:inline|static)\s+)*constexpr\b[^(=]*?\b(\w+)\s*=", head)
-    return None if constant is None else constant.group(1)
+    while (match := re.match(r"\s*template\s*<", head)) is not None:
+        head = head[matching_close(head, match.end() - 1) + 1:].lstrip()
+    return head
 
 
-def nested_scope_members(match: re.Match[str], braced: str | None, scope: Scope) -> list[Member]:
-    """Members of a nested class/namespace, or the enum itself as one member.
+def exposure(members: list[Member], exposed: bool) -> list[Member]:
+    """Keep `members` required when exposed, otherwise demote them to known identities."""
+    return members if exposed else [replace(member, required=False) for member in members]
 
-    A struct/class defined directly in a named namespace is itself public API (there is no
-    primary class to hang it on), so it is expected as one bare type row besides its members.
-    """
-    kind, name = match.group(1), re.sub(r"\s+", "", match.group(2))
-    qualified = f"{scope.name}::{name}" if scope.name else name
+
+def qualify(scope: str, name: str) -> str:
+    """`scope::name`, or `name` at file scope."""
+    return f"{scope}::{name}" if scope else name
+
+
+def nested_scope_members(head: str, match: re.Match[str], braced: str | None, scope: str, primary: str,
+                         exposed: bool) -> list[Member]:
+    """A nested class/namespace's members, or an enum and its enumerators."""
+    kind, name = match.group(1), match.group(2)
+    if match.group(3) is not None:  # partial/explicit specialization keeps its argument list
+        opening = match.end() - 1
+        name += squeeze(head[opening:matching_close(head, opening) + 1])
+    qualified = qualify(scope, name)
     if braced is None:
         return []
     if kind.startswith("enum"):
-        return [Member(qualified, None, "")]
+        enumerator_scope = qualified if kind != "enum" else scope
+        return exposure([Member(qualified, None, "")], exposed) + enumerator_members(braced, enumerator_scope)
     if kind == "namespace":
-        # `namespace std` only holds hash/equal_to specializations of this library's types.
-        return scan_scope(braced, Scope(qualified, scope.primary, name != "std"), True)
-    # A specialization (`VecComp<T, 2>`) refines the primary template's row, not a new type.
-    own = [Member(qualified, None, "")] if scope.is_namespace and "<" not in name else []
-    return own + scan_scope(braced, Scope(qualified, scope.primary), kind != "class")
+        return scan_scope(braced, qualified, True, primary, exposed)
+    body = scan_scope(braced, qualified, kind != "class", primary, exposed)
+    return [Member(qualified, None, "", required=False)] + body
 
 
-def function_members(head: str, scope: Scope) -> list[Member]:
+def enumerator_members(braced: str, scope: str) -> list[Member]:
+    """Known identities for the enumerators of an enum body."""
+    names = [re.match(r"\s*(\w+)", part) for part in split_top_level(braced)]
+    return [Member(qualify(scope, name.group(1)), None, "", required=False) for name in names if name]
+
+
+def alias_members(head: str, scope: str) -> list[Member]:
+    """The known identity declared by a `typedef` or `using X = ...` alias."""
+    using = re.match(r"using\s+(\w+)\s*=", head)
+    typedef = re.search(r"(\w+)\s*(?:\[[^\]]*\]\s*)*$", head) if head.startswith("typedef") else None
+    name = using or typedef
+    return [] if name is None else [Member(qualify(scope, name.group(1)), None, "", required=False)]
+
+
+def is_data_member(head: str) -> bool:
+    """True for a variable declaration: no call parentheses, or an `=` initializer before them."""
+    if "(" not in head:
+        return True
+    return "operator" not in head and "=" in head[:head.index("(")]
+
+
+def data_members(head: str, scope: str) -> list[Member]:
+    """The known identity of a data member or namespace-scope constant (`T myX`, `constexpr T X = v`)."""
+    declarator = re.sub(r"\[[^\]]*\]", "", split_default(head)).strip()
+    words = re.findall(r"[A-Za-z_]\w*", declarator)
+    name = re.search(r"([A-Za-z_]\w*)$", declarator)
+    if len(words) < 2 or name is None:
+        return []
+    return [Member(qualify(scope, name.group(1)), None, "", required=False)]
+
+
+def function_members(head: str, scope: str, primary: str) -> list[Member]:
     """The member declared by a function statement, or nothing for definitions/deletions."""
     if re.search(r"=\s*delete\s*$", head):
         return []
-    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+[A-Za-z_][\w:]*\s*[&*]*"
-                           r"|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
-    if name_match is None or is_data_initializer(head[:name_match.start()]):
+    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
+    if name_match is None:
         return []
-    name = conversion_spelling(name_match.group(1))
-    if "::" in name and not name.startswith("operator"):
-        return []  # out-of-class definition of an already declared member
+    name = re.sub(r"\s+", "", name_match.group(1))
+    if "::" in name and not name.startswith("operator") or head[:name_match.start(1)].rstrip().endswith("::"):
+        return []  # out-of-class definition (`X::f`, `X<T, N>::f`) of an already declared member
     params_open = name_match.end() - 1
     params_close = matching_close(head, params_open)
     params = normalize_params(head[params_open + 1:params_close])
     qualifier = "const" if re.match(r"\s*const\b", head[params_close + 1:]) else ""
-    owner = scope.name or scope.primary
-    prefix = owner if name == owner.split("<")[0].split("::")[-1] else f"{owner}::{name}"
+    owner = scope or primary
+    prefix = owner if name == class_name(owner) else f"{owner}::{name}"
     return [Member(prefix, params, qualifier)]
 
 
-def is_data_initializer(before_name: str) -> bool:
-    """True when the call found in a statement sits in a data member's default initializer.
+def class_name(owner: str) -> str:
+    """Unqualified class name of a scope, without template arguments.
 
-    `double Fa = std::numeric_limits<double>::quiet_NaN();` declares data, not `quiet_NaN`.
-
-    >>> is_data_initializer("double Fa = std::numeric_limits<double>::")
-    True
-    >>> is_data_initializer("bool ")
-    False
+    >>> class_name('BVH_Tree<T,N,BVH_BinaryTree>::BVH_Range')
+    'BVH_Range'
     """
-    if (template := re.match(r"\s*template\s*<", before_name)) is not None:
-        before_name = before_name[matching_close(before_name, template.end() - 1) + 1:]  # `<class T = double>`
-    return re.search(r"(?<![=!<>])=(?!=)", before_name) is not None
-
-
-def conversion_spelling(raw: str) -> str:
-    """Compact a member name, keeping the one space of a conversion operator (`operator bool`).
-
-    >>> conversion_spelling("operator bool")
-    'operator bool'
-    >>> conversion_spelling("operator ()")
-    'operator()'
-    """
-    match = re.fullmatch(r"operator\s+([A-Za-z_].*)", raw.strip())
-    compact = re.sub(r"\s+", "", raw)
-    return compact if match is None else "operator " + re.sub(r"\s+", "", match.group(1))
+    while (stripped := re.sub(r"<[^<>]*>", "", owner)) != owner:
+        owner = stripped
+    return owner.split("::")[-1]
 
 
 def split_top_level(text: str) -> list[str]:
@@ -274,48 +308,54 @@ def normalize_param(param: str) -> str:
     >>> normalize_param('const double theX')
     'double'
     """
-    param = split_default(param).strip()
-    if (array := array_param(param)) is not None:
-        return array
-    tokens = re.findall(r"[A-Za-z_]\w*(?:\s*::\s*\w+)*(?:\s*<[^>]*>)?|[&*]+|\[[^\]]*\]", param)
+    tokens = [token for token in type_tokens(split_default(param).strip()) if token != "typename"]
     words = [token for token in tokens if re.match(r"\w", token)]
     type_words = [word for word in words if word not in {"const", "volatile", "unsigned", "signed"}]
-    if len(type_words) >= 2 and tokens[-1] == words[-1] and not is_builtin_pair(type_words):
+    if len(type_words) >= 2 and tokens[-1] == words[-1]:
         tokens = tokens[:-1]
-    tokens = [TYPE_ALIASES.get(token, re.sub(r"\s+", "", token)) for token in tokens]
+    tokens = [TYPE_ALIASES.get(token, token) for token in tokens]
     if tokens and tokens[0] == "const" and not any(token[0] in "&*" for token in tokens):
         tokens = tokens[1:]
     return re.sub(r" ([&*])", r"\1", " ".join(tokens))
 
 
-def is_builtin_pair(type_words: list[str]) -> bool:
-    """True when the last two words spell one builtin type (`long double`), not `Type name`.
+def type_tokens(param: str) -> list[str]:
+    """Split a parameter into qualified names, `&`/`*` runs and array extents.
 
-    >>> is_builtin_pair(["long", "double"])
-    True
+    Template argument lists are balanced, so `handle<B<T, N>>` and the dependent
+    `typename B<T, N>::V` each stay one token.
+
+    >>> type_tokens('const typename BVH_Box<T, N>::BVH_VecNt& theV')
+    ['const', 'typename', 'BVH_Box<T,N>::BVH_VecNt', '&', 'theV']
     """
-    return type_words[-2] in {"long", "short"} and type_words[-1] in {"long", "int", "double"}
+    tokens: list[str] = []
+    index = 0
+    while (match := PARAM_TOKEN.search(param, index)) is not None:
+        token, index = match.group(0), match.end()
+        if token[0] not in "&*[":
+            token, index = extend_qualified(param, token, index)
+        tokens.append(squeeze(token))
+    return tokens
 
 
-def array_param(param: str) -> str | None:
-    """Canonical spelling of an array or reference-to-array parameter, else None.
+def extend_qualified(param: str, token: str, index: int) -> tuple[str, int]:
+    """Append balanced `<...>` argument lists and `::Name` parts that follow `token`."""
+    while (step := re.compile(r"\s*(<|::\s*~?[A-Za-z_]\w*)").match(param, index)) is not None:
+        if step.group(1) != "<":
+            token, index = token + step.group(1), step.end()
+            continue
+        close = matching_close(param, step.end() - 1)
+        token, index = token + param[step.end() - 1:close + 1], close + 1
+    return token, index
 
-    Arrays keep their `const` (it is not top-level) and extents; only the name goes.
 
-    >>> array_param("const double theJ[3][3]")
-    'const double[3][3]'
-    >>> array_param("const double (&theF)[N]")
-    'const double(&)[N]'
+def squeeze(text: str) -> str:
+    """Drop whitespace except the single space separating two words.
+
+    >>> squeeze('NCollection_Vec2 < unsigned  int >')
+    'NCollection_Vec2<unsigned int>'
     """
-    match = re.fullmatch(r"(.*?)(\(\s*[&*]+\s*\w*\s*\)|\b\w+)?\s*((?:\[[^\]]*\]\s*)+)", param, re.S)
-    if match is None:
-        return None
-    base, declarator = match.group(1), match.group(2) or ""
-    if not set(base.split()) - {"const", "volatile", "unsigned", "signed"} and not declarator.startswith("("):
-        base, declarator = f"{base} {declarator}", ""  # nameless `const double[9]`: the word is the type
-    base = " ".join(TYPE_ALIASES.get(word, word) for word in base.split())
-    declarator = re.sub(r"\w+|\s+", "", declarator)
-    return base + declarator + re.sub(r"\s+", "", match.group(3))
+    return re.sub(r" ?([^\w ]) ?", r"\1", re.sub(r"\s+", " ", text.strip()))
 
 
 def split_default(param: str) -> str:
@@ -343,7 +383,7 @@ def header_members(path: Path) -> list[Member]:
     text = clean_source(path.read_text(errors="replace"))
     exception = re.compile(r"\bDEFINE_STANDARD_EXCEPTION\s*\(\s*(\w+)\s*,[^)]*\)")
     exceptions = [Member(name, None, "") for name in exception.findall(text)]
-    return exceptions + scan_scope(exception.sub(";", text), Scope("", path.stem), True)
+    return exceptions + scan_scope(exception.sub(";", text), "", True, path.stem)
 
 
 def parse_row_id(upstream_id: str) -> Member:
@@ -368,7 +408,7 @@ def constructor_prefix(prefix: str) -> str:
     'NCollection_Vec4'
     """
     owner, _, name = prefix.rpartition("::")
-    return owner if owner and owner.split("<")[0].split("::")[-1] == name else prefix
+    return owner if owner and class_name(owner) == name else prefix
 
 
 def owner_of(member: Member) -> str:
@@ -391,27 +431,24 @@ def covers(row: Member, member: Member, members: list[Member]) -> bool:
         return False
     same_prefix = [other for other in members if other.prefix == member.prefix]
     if row.params is None:
-        # A bare row names a type/constant exactly, or a function only when it is not overloaded.
-        return member.params is None or len(same_prefix) == 1
+        # A bare row names a function only when it is not overloaded, and a class,
+        # alias or data member regardless of the constructors sharing its prefix.
+        return len([other for other in same_prefix if (other.params is None) == (member.params is None)]) == 1
     twins = [other for other in same_prefix if same_params(row, other)]
     return same_params(row, member) and (len(twins) == 1 or row.qualifier == member.qualifier)
 
 
 def audit_header(header: Path, source: str, ledger: dict[str, list[dict[str, str]]]) -> tuple[list[Member], list[str]]:
     """Members of one header without rows, and row ids of that header matching no member."""
-    ids = [row["upstream_id"] for row in ledger["api"] if row["source"] == source]
+    entries = [row for row in ledger["api"] if row["source"] == source]
+    ids = [row["upstream_id"] for row in entries]
     rows = [parse_row_id(upstream_id) for upstream_id in ids]
     members = header_members(header)
-    missing = [m for m in members if not any(covers(row, m, members) for row in rows)]
+    missing = [m for m in members if m.required and not any(covers(row, m, members) for row in rows)]
     stale = [i for i, row in zip(ids, rows) if not any(covers(row, m, members) for m in members)]
-    return missing, stale
-
-
-def excluded_without_reason(ledger: dict[str, list[dict[str, str]]], relative: str) -> list[str]:
-    """Ids of a package's `excluded` rows that carry no `notes` justification."""
-    return [row["upstream_id"] for row in ledger["api"]
-            if row["source"].startswith(f"{relative}/") and row.get("status") == "excluded"
-            and not row.get("notes", "").strip()]
+    unjustified = [f"{row['upstream_id']} (excluded without notes)" for row in entries
+                   if row.get("status") == "excluded" and not row.get("notes", "").strip()]
+    return missing, stale + unjustified
 
 
 def audit_package(package: Path, ledger: dict[str, list[dict[str, str]]], relative: str) -> tuple[list[str], list[str]]:
@@ -444,16 +481,14 @@ def main() -> int:
         return 2
     if args.members:
         for header in sorted(package.glob("*.hxx")):
-            print("\n".join(f"{header.name}: {render(m)}" for m in header_members(header)))
+            print("\n".join(f"{header.name}: {render(m)}{'' if m.required else ' (known)'}"
+                            for m in header_members(header)))
         return 0
     ledger = json.loads(args.ledger.read_text())
     gaps, stale = audit_package(package, ledger, args.package.rstrip("/"))
-    unjustified = excluded_without_reason(ledger, args.package.rstrip("/"))
-    print("\n".join(gaps + [f"stale row {row}" for row in stale]
-                    + [f"excluded without notes {row}" for row in unjustified]))
-    print(f"{len(gaps)} public members without api rows; {len(stale)} rows matching no member; "
-          f"{len(unjustified)} excluded rows without notes", file=sys.stderr)
-    return 1 if gaps or stale or unjustified else 0
+    print("\n".join(gaps + [f"stale row {row}" for row in stale]))
+    print(f"{len(gaps)} public members without api rows; {len(stale)} rows matching no member", file=sys.stderr)
+    return 1 if gaps or stale else 0
 
 if __name__ == "__main__":
     sys.exit(main())

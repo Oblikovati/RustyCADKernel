@@ -5,9 +5,9 @@ from pathlib import Path
 
 import time
 
-from audit_api_rows import (Member, audit_header, clean_source, excluded_without_reason, header_members,
-                            is_brace_initializer, matching_close, normalize_param, normalize_params,
-                            parse_row_id, split_statements)
+from audit_api_rows import (Member, audit_header, clean_source, header_members, is_brace_initializer,
+                            matching_close, normalize_param, normalize_params, parse_row_id,
+                            split_statements)
 
 HEADER = """
 #define X_Raise_if(C, M) \\
@@ -43,7 +43,54 @@ def members_of(text: str) -> list[str]:
     with tempfile.TemporaryDirectory() as folder:
         path = Path(folder) / "gp_Demo.hxx"
         path.write_text(text)
-        return [f"{m.prefix}|{m.params}|{m.qualifier}" for m in header_members(path)]
+        return [f"{m.prefix}|{m.params}|{m.qualifier}" for m in header_members(path) if m.required]
+
+
+def known_of(text: str, stem: str = "gp_Demo") -> list[str]:
+    with tempfile.TemporaryDirectory() as folder:
+        path = Path(folder) / f"{stem}.hxx"
+        path.write_text(text)
+        return [f"{m.prefix}|{m.params}|{m.qualifier}" for m in header_members(path) if not m.required]
+
+
+TEMPLATE_HEADER = """
+template <class T, int N> class BVH_Tree;
+template <class T, int N>
+class BVH_Tree<T, N, BVH_BinaryTree> : public BVH_TreeBase<T, N>
+{
+public:
+  typedef typename BVH_TreeBase<T, N>::BVH_VecNt BVH_VecNt;
+  BVH_Tree() {}
+  int EstimateSAH() const;
+  void Build(const opencascade::handle<BVH_Builder<T, N>>& theB);
+  static T Area(const typename BVH_Box<T, N>::BVH_VecNt& theSize);
+  BVH_VecNt Origin;
+  ~BVH_Tree() override = default;
+protected:
+  struct BVH_Range
+  {
+    BVH_Range(int theS) {}
+  };
+  int myDepth;
+};
+template <class T, int N>
+int BVH_Tree<T, N, BVH_BinaryTree>::EstimateSAH() const { return 0; }
+template <class T, int N, template <class, int> class TheBox>
+class BVH_BaseBox {};
+enum
+{
+  BVH_Constants_MaxTreeDepth = 32,
+};
+namespace BVH
+{
+constexpr double THE_NODE_MIN_SIZE = std::numeric_limits<double>::epsilon();
+}
+class BVH_Transient : public Standard_Transient
+{
+  DEFINE_STANDARD_RTTIEXT(BVH_Transient, Standard_Transient)
+  int Depth() const;
+};
+"""
 
 
 class HeaderParsingTests(unittest.TestCase):
@@ -85,77 +132,43 @@ class HeaderParsingTests(unittest.TestCase):
             matching_close("(a", 0)
 
 
-NAMESPACE_HEADER = """
-namespace MathDemo
-{
-inline constexpr int THE_MAX_DEGREE = 20;
-using LongCoefficients = std::array<long double, THE_MAX_DEGREE + 1>;
-struct Result
-{
-  double Fa = std::numeric_limits<double>::quiet_NaN();
-  explicit operator bool() const { return true; }
-  double operator[](size_t theIndex) const { return 0.0; }
-};
-template <typename F>
-struct Sum
-{
-  Sum(F theF, F theG) : myF(theF) {}
-};
-namespace Utils
-{
-inline long double ToDouble(long double theValue) { return theValue; }
-inline bool Solve3x3(const double theJ[3][3], double theDelta[3]) { return true; }
-template <size_t N>
-inline double SafeNormN(const double (&theValues)[N]) { return 0.0; }
-} // namespace Utils
-} // namespace MathDemo
-namespace std
-{
-template <>
-struct hash<MathDemo::Result>
-{
-  size_t operator()(const MathDemo::Result& theResult) const noexcept { return 0; }
-};
-} // namespace std
-"""
+class TemplateAndKnownIdentityTests(unittest.TestCase):
+    def test_specializations_keep_arguments_and_out_of_class_definitions_are_ignored(self):
+        self.assertEqual(members_of(TEMPLATE_HEADER), [
+            "BVH_Tree<T,N,BVH_BinaryTree>||", "BVH_Tree<T,N,BVH_BinaryTree>::EstimateSAH||const",
+            "BVH_Tree<T,N,BVH_BinaryTree>::Build|const opencascade::handle<BVH_Builder<T,N>>&|",
+            "BVH_Tree<T,N,BVH_BinaryTree>::Area|const BVH_Box<T,N>::BVH_VecNt&|",
+            "BVH_Tree<T,N,BVH_BinaryTree>::~BVH_Tree||",
+            "BVH_Transient::DEFINE_STANDARD_RTTIEXT|BVH_Transient,Standard_Transient|",
+            "BVH_Transient::Depth||const"])
 
+    def test_types_data_enumerators_and_protected_members_are_known_only(self):
+        self.assertEqual(known_of(TEMPLATE_HEADER), [
+            "BVH_Tree<T,N,BVH_BinaryTree>|None|", "BVH_Tree<T,N,BVH_BinaryTree>::BVH_VecNt|None|",
+            "BVH_Tree<T,N,BVH_BinaryTree>::Origin|None|", "BVH_Tree<T,N,BVH_BinaryTree>::BVH_Range|None|",
+            "BVH_Tree<T,N,BVH_BinaryTree>::BVH_Range|int|", "BVH_Tree<T,N,BVH_BinaryTree>::myDepth|None|",
+            "BVH_BaseBox|None|", "BVH_Constants_MaxTreeDepth|None|", "BVH::THE_NODE_MIN_SIZE|None|",
+            "BVH_Transient|None|"])
 
-class NamespaceParsingTests(unittest.TestCase):
-    def test_namespace_types_aliases_and_constants_become_bare_rows(self):
-        self.assertEqual(members_of(NAMESPACE_HEADER), [
-            "MathDemo::THE_MAX_DEGREE|None|", "MathDemo::LongCoefficients|None|", "MathDemo::Result|None|",
-            "MathDemo::Result::operator bool||const", "MathDemo::Result::operator[]|size_t|const",
-            "MathDemo::Sum|None|", "MathDemo::Sum|F,F|", "MathDemo::Utils::ToDouble|long double|",
-            "MathDemo::Utils::Solve3x3|const double[3][3],double[3]|",
-            "MathDemo::Utils::SafeNormN|const double(&)[N]|",
-            "std::hash<MathDemo::Result>::operator()|const MathDemo::Result&|const"])
-
-    def test_nameless_multiword_builtins_and_arrays_normalize_like_named_ones(self):
-        self.assertEqual(normalize_param("long double"), normalize_param("long double theValue"))
-        self.assertEqual(normalize_param("const double theJ[3][3]"), "const double[3][3]")
-        self.assertEqual(normalize_param("const double (&theF)[N]"), "const double(&)[N]")
-        self.assertEqual(normalize_param("const double[9]"), "const double[9]")
-        self.assertEqual(normalize_param("Standard_Real theP[2]"), "double[2]")
-
-    def test_bare_type_row_and_constructor_row_are_distinct(self):
+    def test_known_rows_are_not_stale_and_excluded_rows_need_notes(self):
         with tempfile.TemporaryDirectory() as folder:
-            header = Path(folder) / "MathDemo_Types.hxx"
-            header.write_text(NAMESPACE_HEADER)
-            rows = [{"upstream_id": upstream_id, "source": "x.hxx"} for upstream_id in [
-                "MathDemo::Sum", "MathDemo::Result::operator bool() const", "MathDemo::Utils::ToDouble(long double)"]]
-            missing, stale = audit_header(header, "x.hxx", {"api": rows})
-        rendered = {f"{m.prefix}({m.params})" for m in missing}
-        self.assertIn("MathDemo::Sum(F,F)", rendered)
-        self.assertNotIn("MathDemo::Sum(None)", rendered)
-        self.assertNotIn("MathDemo::Utils::ToDouble(long double)", rendered)
-        self.assertEqual(stale, [])
+            header = Path(folder) / "BVH_Tree.hxx"
+            header.write_text(TEMPLATE_HEADER)
+            rows = [{"upstream_id": upstream_id, "source": "BVH/BVH_Tree.hxx"} for upstream_id in [
+                "BVH_Tree<T,N,BVH_BinaryTree>::Origin", "BVH_Constants_MaxTreeDepth", "BVH_Tree<T,N,BVH_BinaryTree>",
+                "BVH_Tree<T,N,BVH_BinaryTree>::BVH_Range::BVH_Range(int)", "BVH_Tree<T,N,BVH_BinaryTree>::Private"]]
+            rows.append({"upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::~BVH_Tree()", "source": "BVH/BVH_Tree.hxx",
+                         "status": "excluded"})
+            missing, stale = audit_header(header, "BVH/BVH_Tree.hxx", {"api": rows})
+        self.assertNotIn("BVH_Tree<T,N,BVH_BinaryTree>::~BVH_Tree", [m.prefix for m in missing])
+        self.assertEqual(stale, ["BVH_Tree<T,N,BVH_BinaryTree>::Private",
+                                 "BVH_Tree<T,N,BVH_BinaryTree>::~BVH_Tree() (excluded without notes)"])
 
-    def test_excluded_rows_need_a_reason(self):
-        ledger = {"api": [
-            {"upstream_id": "A::B", "source": "src/P/A.hxx", "status": "excluded", "notes": ""},
-            {"upstream_id": "A::C", "source": "src/P/A.hxx", "status": "excluded", "notes": "C++ only"},
-            {"upstream_id": "A::D", "source": "src/Q/A.hxx", "status": "excluded"}]}
-        self.assertEqual(excluded_without_reason(ledger, "src/P"), ["A::B"])
+    def test_nested_templates_and_dependent_types_normalize(self):
+        self.assertEqual(normalize_param("const occ::handle<NCollection_HArray1<Bnd_Box>>& theSet"),
+                         "const occ::handle<NCollection_HArray1<Bnd_Box>>&")
+        self.assertEqual(normalize_param("std::array<long double, 4>& theRoots"), "std::array<long double,4>&")
+        self.assertEqual(normalize_param("unsigned int theX"), "unsigned int")
 
 
 class RowMatchingTests(unittest.TestCase):

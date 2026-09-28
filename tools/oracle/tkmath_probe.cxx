@@ -147,6 +147,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_elementary_probe.cxx"
 #include "tkmath_bvh_probe.cxx"
 #include "tkmath_bvh_query_probe.cxx"
+#include "tkmath_bvh_tool_classes_probe.cxx"
 #include "tkmath_bspl_probe.cxx"
 #include "tkmath_bspl_curves_probe.cxx"
 #include "tkmath_bspl_eval_probe.cxx"
@@ -165,6 +166,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_mathutils_functor_api_probe.cxx"
 #include "tkmath_mathutils_core_api_probe.cxx"
 #include "tkmath_mathopt_api_probe.cxx"
+#include "tkmath_bnd_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -303,6 +305,7 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"bvh_traverse", bvh_traverse_case},
  {"bvh_nearest", bvh_nearest_case},
  {"bvh_field", bvh_field_case},
+ {"bvh_tool_classes", bvh_tool_classes_case},
  {"bspl_knots", bspl_probe::knots_case},
  {"bspl_locate", bspl_probe::locate_case},
  {"bspl_scheme", bspl_probe::scheme_case},
@@ -362,6 +365,12 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"gp3d_pln", gpc_pln_case},
  {"gp3d_frame", gpc_frame_case},
  {"gp3d_lerp", gpc_lerp_case},
+ {"obb_build", bnd_probe::obb_build_case},
+ {"obb_pair", bnd_probe::obb_pair_case},
+ {"sortbox", bnd_probe::sortbox_case},
+ {"box_extra", bnd_probe::box_extra_case},
+ {"box2_extra", bnd_probe::box2_extra_case},
+ {"compact_trsf", bnd_probe::compact_trsf_case},
 };
 int main() {
  std::string line;

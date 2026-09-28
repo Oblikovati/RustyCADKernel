@@ -13,8 +13,9 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
+use super::super::relation::TransformView;
 use super::{BoxReal, CompactBox3, triple};
-use crate::gp::{Axis1, Axis3, Xyz};
+use crate::gp::{Axis1, Axis3, Transform3, TransformForm, Xyz};
 impl<T: BoxReal> CompactBox3<T> {
     /// Tests a solid or hollow sphere with native strict boundaries; `bounds.is_out_sphere(center,radius,false)`.
     pub fn is_out_sphere(&self, center: Xyz, radius: f64, hollow: bool) -> bool {
@@ -96,4 +97,33 @@ fn line_out(difference: [f64; 3], direction: [f64; 3], half: [f64; 3], ray: bool
 }
 fn disjoint(first: [f64; 2], second: [f64; 2]) -> bool {
     first[0] > second[1] + RESOLUTION || first[1] < second[0] - RESOLUTION
+}
+impl<T: BoxReal> CompactBox3<T> {
+    /// `IsOut(theBox, theTrsf)`: tests `other` mapped by `transform`; simple forms compare in
+    /// the storage scalar, general forms test both boxes' separating axes in double;
+    /// `bounds.is_out_transformed_box(&other, transform)`.
+    pub fn is_out_transformed_box(&self, other: &Self, transform: Transform3) -> bool {
+        self.out_of_transformed(other, &transform_view(other, transform))
+    }
+    /// `IsIn(theBox, theTrsf)`: strict inclusion of `self` in the transformed `other`;
+    /// `bounds.is_in_transformed_box(&other, transform)`.
+    pub fn is_in_transformed_box(&self, other: &Self, transform: Transform3) -> bool {
+        self.in_transformed(other, &transform_view(other, transform))
+    }
+}
+fn transform_view<T: BoxReal>(other: &CompactBox3<T>, transform: Transform3) -> TransformView<3> {
+    let center = triple(other.center.map(BoxReal::to_double));
+    TransformView {
+        simple: matches!(
+            transform.form(),
+            TransformForm::Translation
+                | TransformForm::Identity
+                | TransformForm::PointMirror
+                | TransformForm::Scale
+        ),
+        scale: transform.scale_factor(),
+        translation: *transform.translation_part().coordinates(),
+        matrix: *transform.matrix().coefficients(),
+        moved_center: *transform.apply_coordinates(center).coordinates(),
+    }
 }
