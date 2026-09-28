@@ -13,6 +13,7 @@
 // commercial license or contractual agreement.
 
 //! Hashing and equality are one injected policy, as in OCCT's NCollection maps.
+use crate::standard::Failure;
 /// A key's OCCT hash representation; `42_i32.occt_hash()`.
 pub trait HashKey {
     /// Returns the native-width hash used by NCollection.
@@ -54,13 +55,43 @@ pub fn next_map_prime(size: usize) -> usize {
         2359297, 4478977, 9437185, 17915905, 35831809, 71663617, 150994945, 301989889, 573308929,
         1019215873, 2038431745,
     ];
+    // Native `std::lower_bound(table, theN + 1)` in size_t arithmetic: `theN + 1` wraps to 0
+    // for SIZE_MAX, so that request yields the first table entry, 101.
+    let target = size.wrapping_add(1);
     STEPS
         .into_iter()
-        .find(|&prime| prime > size)
-        .unwrap_or_else(|| {
-            size.checked_add(1)
-                .expect("map size exceeds native address space")
-        })
+        .find(|&prime| prime >= target)
+        .unwrap_or(target)
+}
+
+/// `NCollection_BaseMap::nbBucketsFromInt`, the check behind every `int` bucket-count
+/// overload (`NCollection_DataMap(int)`, `ReSize(int)`); `buckets_from_int(-1)` is an error.
+///
+/// ```
+/// use rustycad_tkernel::ncollection::buckets_from_int;
+/// assert_eq!(buckets_from_int(7).unwrap(), 7);
+/// assert_eq!(buckets_from_int(-1).unwrap_err().exception_type(), "Standard_OutOfRange");
+/// ```
+pub fn buckets_from_int(count: i32) -> Result<usize, Failure> {
+    usize::try_from(count).map_err(|_| {
+        Failure::with_type(
+            "Standard_OutOfRange",
+            &format!("NCollection_BaseMap: negative bucket count {count}; expected >= 0"),
+            "",
+        )
+    })
+}
+
+// NCollection_DefaultHasher<T*> hashes the address itself and compares pointers.
+impl<T> HashKey for *const T {
+    fn occt_hash(&self) -> usize {
+        *self as usize
+    }
+}
+impl<T> HashKey for *mut T {
+    fn occt_hash(&self) -> usize {
+        *self as usize
+    }
 }
 
 // libstdc++ hash<double> in the pinned Linux oracle profile; signed zeros share a bucket.

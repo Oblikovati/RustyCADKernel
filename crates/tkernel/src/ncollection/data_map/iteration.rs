@@ -11,15 +11,13 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
+use super::cursor::settle;
 use super::{DataMapItems, Entry};
 impl<K, V> DataMapItems<'_, K, V> {
     pub(super) fn seek(&mut self) {
-        while self.bucket < self.buckets.len() && self.index >= self.buckets[self.bucket].len() {
-            self.bucket += 1;
-            self.index = 0;
-        }
+        (self.bucket, self.index) = settle(self.buckets, self.bucket, self.index);
     }
-    fn current(&self) -> Option<*const Entry<K, V>> {
+    pub(super) fn current(&self) -> Option<*const Entry<K, V>> {
         self.buckets
             .get(self.bucket)?
             .get(self.index)

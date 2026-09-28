@@ -1,42 +1,56 @@
 //! Delivery identities, filtering, copied streams and exact empty-flush behavior.
-use rustycad_tkernel::message::{Gravity, Messenger, Printer};
+use rustycad_tkernel::message::{
+    Gravity, Messenger, Printer, PrinterBase, PrinterHandle, PrinterType,
+};
+use rustycad_tkernel::standard::{RuntimeType, RuntimeTyped};
 use rustycad_tkernel::tcollection::AsciiString;
-use std::{cell::RefCell, fmt::Write, rc::Rc};
+use std::fmt::Write;
+use std::sync::{Arc, Mutex};
+
+/// Printer recording every delivered message with its gravity.
 #[derive(Default)]
 struct RecordingPrinter {
-    messages: RefCell<Vec<(Vec<u8>, Gravity)>>,
+    base: PrinterBase,
+    messages: Mutex<Vec<(Vec<u8>, Gravity)>>,
 }
 impl Printer for RecordingPrinter {
+    fn printer_base(&self) -> &PrinterBase {
+        &self.base
+    }
+    fn dynamic_type(&self) -> &'static RuntimeType {
+        PrinterType::static_type()
+    }
     fn send(&self, text: &AsciiString, gravity: Gravity) {
         self.messages
-            .borrow_mut()
+            .lock()
+            .unwrap()
             .push((text.as_bytes().to_vec(), gravity));
     }
 }
 #[test]
 fn printer_identity_and_gravity_filtering() {
-    let printer: Rc<RecordingPrinter> = Rc::default();
-    let erased: Rc<dyn Printer> = printer.clone();
-    let mut messenger = Messenger::with_printer(erased.clone());
+    let printer: Arc<RecordingPrinter> = Arc::default();
+    let erased: PrinterHandle = printer.clone();
+    let messenger = Messenger::with_printer(erased.clone());
     assert!(!messenger.add_printer(erased.clone()));
-    messenger.send_at(&AsciiString::new("trace"), Gravity::Trace);
+    messenger.send_ascii(&AsciiString::new("trace"), Gravity::Trace);
     for gravity in [
         Gravity::Info,
         Gravity::Warning,
         Gravity::Alarm,
         Gravity::Fail,
     ] {
-        messenger.send_at(&AsciiString::new("kept"), gravity);
+        messenger.send_ascii(&AsciiString::new("kept"), gravity);
     }
-    assert_eq!(printer.messages.borrow().len(), 4);
+    assert_eq!(printer.messages.lock().unwrap().len(), 4);
     assert!(messenger.remove_printer(&erased));
     assert!(!messenger.remove_printer(&erased));
     messenger.send("absent");
-    assert_eq!(printer.messages.borrow().len(), 4);
+    assert_eq!(printer.messages.lock().unwrap().len(), 4);
 }
 #[test]
 fn empty_forced_flush_and_formal_copy_contents() {
-    let printer: Rc<RecordingPrinter> = Rc::default();
+    let printer: Arc<RecordingPrinter> = Arc::default();
     let messenger = Messenger::with_printer(printer.clone());
     let mut stream = messenger.stream(Gravity::Info);
     assert!(std::ptr::eq(stream.messenger(), &messenger));
@@ -50,7 +64,7 @@ fn empty_forced_flush_and_formal_copy_contents() {
     write!(stream, "\0not delivered").unwrap();
     drop(stream);
     assert_eq!(
-        printer.messages.borrow().as_slice(),
+        printer.messages.lock().unwrap().as_slice(),
         [
             (Vec::new(), Gravity::Info),
             (b"copy".to_vec(), Gravity::Info),

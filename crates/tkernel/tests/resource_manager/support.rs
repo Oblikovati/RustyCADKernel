@@ -1,4 +1,4 @@
-use rustycad_tkernel::resource::{ResourceEnvironment, ResourceIo};
+use rustycad_tkernel::resource::{ResourceConsole, ResourceEnvironment, ResourceHost, ResourceIo};
 use std::{
     cell::RefCell,
     collections::{BTreeMap, BTreeSet},
@@ -11,8 +11,12 @@ pub struct FakeResourceSystem {
     pub files: Rc<RefCell<BTreeMap<PathBuf, Vec<u8>>>>,
     pub directories: RefCell<BTreeSet<PathBuf>>,
     environment: RefCell<BTreeMap<String, PathBuf>>,
+    pub console: RefCell<Vec<u8>>,
 }
 impl FakeResourceSystem {
+    pub fn host(self: &Rc<Self>) -> ResourceHost {
+        ResourceHost::new(self.clone(), self.clone(), self.clone())
+    }
     pub fn write_resource(&self, directory: &Path, name: &str, key: &str, value: &str) {
         self.add_directory(directory.to_path_buf());
         self.files.borrow_mut().insert(
@@ -74,5 +78,10 @@ impl ResourceIo for FakeResourceSystem {
             files: self.files.clone(),
             path: path.to_path_buf(),
         }))
+    }
+}
+impl ResourceConsole for FakeResourceSystem {
+    fn write(&self, bytes: &[u8]) {
+        self.console.borrow_mut().extend_from_slice(bytes);
     }
 }

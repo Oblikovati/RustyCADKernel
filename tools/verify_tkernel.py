@@ -15,6 +15,15 @@ import xml.etree.ElementTree as ET
 from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, verified_native_skips
 from tkernel_native_baseline import compile_sources
+from native_build import locked_cmake
+import tkernel_ncollection_corpus
+import tkernel_quantity_corpus
+import tkernel_resource_corpus
+import tkernel_message_corpus
+import tkernel_message_progress_corpus
+import tkernel_osd_corpus
+import tkernel_units_corpus
+import tkernel_storage_corpus
 
 
 def run(args, log, *, input=None, timeout=900, env=None):
@@ -64,6 +73,16 @@ def corpus():
         cases.extend([f"date {a}", f"date_diff {a} {b}", f"date_add {a} {rng.randrange(1000000)} {rng.randrange(3000000)}", f"date_sub {a} {rng.randrange(1000000)} {rng.randrange(3000000)}"])
         value = f"{rng.getrandbits(128):032x}"
         cases.append(f"guid {value[:8]}-{value[8:12]}-{value[12:16]}-{value[16:20]}-{value[20:]}")
+    cases += tkernel_ncollection_corpus.cases()
+    cases += tkernel_quantity_corpus.cases()
+    cases += tkernel_resource_corpus.cases()
+    cases += tkernel_message_progress_corpus.cases()
+    cases += tkernel_message_corpus.cases()
+    cases += tkernel_osd_corpus.cases()
+    cases += tkernel_storage_corpus.cases()
+    # Last: the native units probe replaces the default messenger printers and unsets the
+    # CSF_* resource variables for the rest of the process.
+    cases += tkernel_units_corpus.cases()
     return "\n".join(cases) + "\n"
 
 
@@ -109,14 +128,12 @@ def main():
     flags = ["-DCMAKE_BUILD_TYPE=RelWithDebInfo", "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON", "-DBUILD_GTEST=ON", "-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON", "-DGTEST_USE_FETCHCONTENT=ON", "-DBUILD_ADDITIONAL_TOOLKITS="]
     flags += [f"-DBUILD_MODULE_{module}={'ON' if module == 'FoundationClasses' else 'OFF'}" for module in inventory["modules"]]
     print("Building TKernel and GoogleTest for the focused oracle", flush=True)
-    run(["cmake", "-S", source, "-B", build, *flags], output/"configure.log", env=env)
-    run(["cmake", "--build", build, "--target", "TKernel", "gtest_main", "--parallel", args.jobs], output/"build.log", env=env)
+    build = locked_cmake(source, build, flags, ["TKernel", "gtest_main"], args.jobs, output/"configure.log", output/"build.log", run, env)
     if any(m["rust_target"] in {"standard_dump", "toploc_location"} for m in mappings):
         build = ROOT / "target/occt-tkernel-full"
         flags = [flag.replace("-DBUILD_ADDITIONAL_TOOLKITS=", "-DBUILD_ADDITIONAL_TOOLKITS=TKTopAlgo") if flag == "-DBUILD_ADDITIONAL_TOOLKITS=" else flag for flag in flags]
         print("Building the geometry dependency closure used by TKernel legacy tests", flush=True)
-        run(["cmake", "-S", source, "-B", build, *flags], output/"configure-geometry.log", env=env)
-        run(["cmake", "--build", build, "--target", "TKTopAlgo", "gtest_main", "--parallel", args.jobs], output/"build-geometry.log", env=env)
+        build = locked_cmake(source, build, flags, ["TKTopAlgo", "gtest_main"], args.jobs, output/"configure-geometry.log", output/"build-geometry.log", run, env)
     compiler = re.search(r"^CMAKE_CXX_COMPILER:FILEPATH=(.*)$", (build/"CMakeCache.txt").read_text(), re.M)[1]
     kernel = unique(build, "libTKernel.so")
     gtest = unique(build, "libgtest.so")
@@ -150,11 +167,15 @@ def main():
         wanted = {name for mapped_target, name in rust_expected if mapped_target == target}
         if passed != wanted:
             raise RuntimeError(f"Rust tests missing, skipped or unmapped in {target}")
+    if any(m["rust_target"] == "quantity_color" for m in mappings):
+        # The named-color table is generated data; a stale copy would pass the Rust tests alone.
+        run([sys.executable, ROOT/"tools/generate_quantity_color_table.py", "--check", "--source", source], output/"quantity-color-table-check.log", env=env)
     probe = output/"occt-probe"
     run([*common, ROOT/"tools/oracle/tkernel_probe.cxx", kernel, *rpaths, "-o", probe],output/"compile-probe.log",env=env)
     requests = corpus()
     (output/"inputs.txt").write_text(requests)
     oracle = run([probe],output/"occt-output.txt",input=requests,env=env)
+    run([sys.executable, ROOT/"tools/generate_resource_tables.py", "--check", "--source", source], output/"resource-tables-check.log", env=env)
     run(["cargo","build","--locked","-p","rustycad-tkernel","--example","oracle_probe"],output/"build-rust-probe.log",env=env)
     rust = run([ROOT/"target/debug/examples/oracle_probe"],output/"rust-output.txt",input=requests,env=env)
     if len(oracle.splitlines()) != len(requests.splitlines()):
@@ -185,11 +206,13 @@ def main():
         run([sys.executable, ROOT/"tools/generate_units_data.py", "--check", "--source", source], output/"units-data-check.log", env=env)
         run([sys.executable, ROOT/"tools/verify_units.py", "--source", source], output/"units-verification.log", env=env)
         units_report = json.loads((output/"units/report.json").read_text())
+    run([sys.executable, ROOT/"tools/verify_tkernel_api.py", "--source", source], output/"api-verification.log", env=env)
+    api_report = json.loads((output/"api/report.json").read_text())
     geometry_report = None
     if any(m["rust_target"] == "standard_dump" for m in mappings):
         run([sys.executable, ROOT/"tools/verify_geometry.py", "--source", source], output/"geometry-verification.log", env=env)
         geometry_report = json.loads((output/"geometry/report.json").read_text())
-    files = sorted(set([p for p in (ROOT/"crates").rglob("*") if p.is_file()] + list((ROOT/"tools/oracle").glob("*.cxx")) + [ROOT/"Cargo.toml", ROOT/"tools/verify_geometry.py", ROOT/"tools/verify_units.py", ROOT/"tools/generate_units_data.py", ROOT/"porting/units-data.json", ROOT/"tools/verify_kdtree.py", ROOT/"crates/tkernel/Cargo.toml", ROOT/"porting/parity.json", Path(__file__).resolve(), ROOT/"tools/oracle/tkernel_probe.cxx", ROOT/"tools/oracle/strtod_probe.cxx", ROOT/"tools/verify_strtod.py", ROOT/"tools/tkernel_mapping.py", ROOT/"tools/verify_ascii_string.py", ROOT/"tools/oracle/ascii_string_probe.cxx", ROOT/"tools/verify_extended_string.py", ROOT/"tools/oracle/extended_string_probe.cxx", ROOT/"Cargo.lock", ROOT/"rust-toolchain.toml"]))
+    files = sorted(set([p for p in (ROOT/"crates").rglob("*") if p.is_file()] + list((ROOT/"tools/oracle").glob("*.cxx")) + [ROOT/"Cargo.toml", ROOT/"tools/verify_geometry.py", ROOT/"tools/verify_units.py", ROOT/"tools/generate_units_data.py", ROOT/"tools/generate_quantity_color_table.py", ROOT/"tools/generate_resource_tables.py", ROOT/"porting/units-data.json", ROOT/"tools/verify_kdtree.py", ROOT/"crates/tkernel/Cargo.toml", ROOT/"porting/parity.json", Path(__file__).resolve(), ROOT/"tools/oracle/tkernel_probe.cxx", ROOT/"tools/oracle/strtod_probe.cxx", ROOT/"tools/verify_strtod.py", ROOT/"tools/tkernel_mapping.py", ROOT/"tools/verify_ascii_string.py", ROOT/"tools/oracle/ascii_string_probe.cxx", ROOT/"tools/verify_extended_string.py", ROOT/"tools/oracle/extended_string_probe.cxx", ROOT/"tools/verify_tkernel_api.py", *(ROOT/"tools").glob("tkernel_*_corpus.py"), *(ROOT/"tools/oracle").glob("*.hxx"), ROOT/"Cargo.lock", ROOT/"rust-toolchain.toml"]))
     report = {"schema_version":1,"profile":"linux-gcc-c-locale","revision":inventory['revision'],
               "platform":platform.platform(),"python":platform.python_version(),
               "cmake_definitions":flags,
@@ -200,13 +223,14 @@ def main():
               "legacy_tests_passed":native_passed,"upstream_skips":native_skips,
               "declarations_mapped":len(mappings),"rust_translations_passed":sum(m["status"]=="translated" for m in mappings),
               "current_behavior_regressions_passed":len(native_skips),"rust_runtime_cases_passed":len(rust_expected),
-              "differential_cases_passed":len(requests.splitlines()) + (numeric_report["cases_passed"] if numeric_report else 0) + (string_report["cases_passed"] if string_report else 0) + (extended_report["cases_passed"] if extended_report else 0) + (kdtree_report["cases_passed"] if kdtree_report else 0) + (units_report["cases_passed"] if units_report else 0) + (geometry_report["cases_passed"] if geometry_report else 0),
+              "differential_cases_passed":len(requests.splitlines()) + (numeric_report["cases_passed"] if numeric_report else 0) + (string_report["cases_passed"] if string_report else 0) + (extended_report["cases_passed"] if extended_report else 0) + (kdtree_report["cases_passed"] if kdtree_report else 0) + (units_report["cases_passed"] if units_report else 0) + (geometry_report["cases_passed"] if geometry_report else 0) + api_report["cases_passed"],
               "numeric_prefix_report":numeric_report,
               "ascii_string_report":string_report,
               "extended_string_report":extended_report,
               "kdtree_report":kdtree_report,
               "units_report":units_report,
               "geometry_report":geometry_report,
+              "api_report":api_report,
               "input_sha256":hashlib.sha256(requests.encode()).hexdigest(),
               "output_sha256":hashlib.sha256(oracle.encode()).hexdigest(),
               "source_hashes":{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files},

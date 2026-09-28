@@ -15,7 +15,7 @@
 
 //! Linear RGB storage with OCCT color-space conversion and equality tolerance.
 use super::NamedColor;
-use crate::standard::Failure;
+use crate::{ncollection::Vec3, standard::Failure};
 use std::sync::atomic::{AtomicU64, Ordering};
 static COLOR_EPSILON: AtomicU64 = AtomicU64::new(0.0001_f64.to_bits());
 
@@ -54,13 +54,60 @@ impl Color {
     pub fn named(name: NamedColor) -> Self {
         Self { rgb: name.rgb() }
     }
+    /// `Quantity_Color(const NCollection_Vec3<float>&)`: linear RGB validated to [0; 1];
+    /// `Color::from_vec3(Vec3::new(1.0, 0.0, 0.0))?`.
+    pub fn from_vec3(rgb: Vec3<f32>) -> Result<Self, Failure> {
+        let rgb = rgb.data();
+        validate_components(rgb.map(f64::from), ColorSpace::Rgb)?;
+        Ok(Self { rgb })
+    }
     /// Replaces the named color; `color.set_named(NamedColor::BLUE)`.
     pub fn set_named(&mut self, name: NamedColor) {
         self.rgb = name.rgb();
     }
+    /// `Name()`: the named color nearest in sRGB (closer to human perception than linear
+    /// RGB); the first table entry wins ties; `Color::named(NamedColor::RED).name()`.
+    pub fn name(self) -> NamedColor {
+        // The double conversion is narrowed to float, as the native Vec3<float> ctor does.
+        let srgb = self.rgb.map(|v| Self::linear_to_srgb(f64::from(v)) as f32);
+        let mut best = (f32::MAX, NamedColor::BLACK);
+        for candidate in NamedColor::all() {
+            let distance = float_square_distance(srgb, candidate.srgb());
+            if distance < best.0 {
+                best = (distance, candidate);
+                if distance == 0.0 {
+                    break;
+                }
+            }
+        }
+        best.1
+    }
+    /// Static `Name(r, g, b)`: validates linear RGB like the constructor, then searches;
+    /// `Color::nearest_name(1.0, 0.0, 0.0)? == NamedColor::RED`.
+    pub fn nearest_name(r: f64, g: f64, b: f64) -> Result<NamedColor, Failure> {
+        Ok(Self::new(r, g, b, ColorSpace::Rgb)?.name())
+    }
+    /// `StringName(Quantity_NameOfColor)`; the native "UNDEFINED" answer for integers outside
+    /// the enumeration is unreachable through the typed `NamedColor`;
+    /// `Color::string_name(NamedColor::RED) == "RED"`.
+    pub fn string_name(name: NamedColor) -> &'static str {
+        name.name()
+    }
+    /// `ColorFromName(const char*, Quantity_Color&)`; `Color::from_name("RED")`.
+    pub fn from_name(text: &str) -> Option<Self> {
+        NamedColor::from_name(text).map(Self::named)
+    }
     /// Borrows stored components by value; `color.rgb()[0]`.
     pub const fn rgb(self) -> [f32; 3] {
         self.rgb
+    }
+    /// `Rgb()` and the `NCollection_Vec3<float>` conversion operator; `color.rgb_vec3().x()`.
+    pub const fn rgb_vec3(self) -> Vec3<f32> {
+        Vec3::new(self.rgb[0], self.rgb[1], self.rgb[2])
+    }
+    /// Stores already converted linear RGB, as the native conversions assign `myRgb` directly.
+    pub(super) const fn set_rgb_unchecked(&mut self, rgb: [f32; 3]) {
+        self.rgb = rgb;
     }
     /// Returns red promoted to double; `Color::default().red() == 1.0`.
     pub const fn red(self) -> f64 {
@@ -168,6 +215,11 @@ fn validate_components([a, b, c]: [f64; 3], space: ColorSpace) -> Result<(), Fai
         return Err(Failure::out_of_range("Color out"));
     }
     Ok(())
+}
+/// `(a - b).SquareModulus()` on `NCollection_Vec3<float>`, evaluated in float.
+fn float_square_distance(a: [f32; 3], b: [f32; 3]) -> f32 {
+    let [x, y, z] = std::array::from_fn(|i| a[i] - b[i]);
+    x * x + y * y + z * z
 }
 // Deliberately preserve OCCT's NaN comparison behavior rather than Range::contains.
 fn outside(value: f64, lower: f64, upper: f64) -> bool {

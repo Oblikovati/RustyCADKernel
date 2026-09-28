@@ -13,53 +13,80 @@
 
 //! OCC31189 and the complete legacy stream-buffer suite.
 #![allow(non_snake_case)]
-use rustycad_tkernel::message::{Gravity, Messenger, Printer};
+use rustycad_tkernel::message::{
+    Gravity, Message, Printer, PrinterBase, PrinterHandle, PrinterType,
+};
+use rustycad_tkernel::standard::{RuntimeType, RuntimeTyped};
 use rustycad_tkernel::tcollection::AsciiString;
-use std::{cell::RefCell, fmt::Write, rc::Rc};
+use std::fmt::Write;
+use std::sync::{Arc, Mutex};
+
+/// Custom message printer that collects messages into a shared string.
 struct TestMessagePrinter {
-    output: Rc<RefCell<String>>,
+    base: PrinterBase,
+    output: Arc<Mutex<String>>,
 }
 impl Printer for TestMessagePrinter {
+    fn printer_base(&self) -> &PrinterBase {
+        &self.base
+    }
+    fn dynamic_type(&self) -> &'static RuntimeType {
+        PrinterType::static_type()
+    }
     fn send(&self, text: &AsciiString, gravity: Gravity) {
         if gravity >= Gravity::Info {
-            self.output
-                .borrow_mut()
-                .push_str(&String::from_utf8_lossy(text.as_bytes()));
-            self.output.borrow_mut().push('\n');
+            let mut output = self.output.lock().unwrap();
+            output.push_str(&String::from_utf8_lossy(text.as_bytes()));
+            output.push('\n');
         }
     }
 }
-fn fixture() -> (Messenger, Rc<RefCell<String>>) {
-    let output: Rc<RefCell<String>> = Rc::default();
-    let printer: Rc<dyn Printer> = Rc::new(TestMessagePrinter {
+
+/// Both upstream tests swap the printers of the process-wide messenger; serialize them.
+static DEFAULT_MESSENGER_GUARD: Mutex<()> = Mutex::new(());
+
+/// Installs a collecting printer on the default messenger; returns the saved printers.
+fn install_test_printer(output: &Arc<Mutex<String>>) -> Vec<PrinterHandle> {
+    let printer: PrinterHandle = Arc::new(TestMessagePrinter {
+        base: PrinterBase::default(),
         output: output.clone(),
     });
-    (Messenger::with_printer(printer), output)
-}
-#[test]
-fn Message_Messenger_Test__OCC31189_StreamBufferMessageOrdering() {
-    let (mut messenger, output) = fixture();
-    let original = messenger.printers().to_vec();
-    let printer = original[0].clone();
+    let messenger = Message::default_messenger();
+    // `anOriginalPrinters.Append(ChangePrinters())` moves the printers out.
+    let original = std::mem::take(&mut *messenger.printers_mut());
     messenger.printers_mut().clear();
     messenger.add_printer(printer);
+    original
+}
+
+fn restore_printers(original: Vec<PrinterHandle>) {
+    let messenger = Message::default_messenger();
+    messenger.printers_mut().clear();
+    messenger.printers_mut().extend(original);
+}
+
+#[test]
+fn Message_Messenger_Test__OCC31189_StreamBufferMessageOrdering() {
+    let _guard = DEFAULT_MESSENGER_GUARD
+        .lock()
+        .unwrap_or_else(|poisoned| poisoned.into_inner());
+    let output: Arc<Mutex<String>> = Arc::default();
+    let original = install_test_printer(&output);
+    let messenger = Message::default_messenger();
     {
-        let mut sender = messenger.stream(Gravity::Info);
+        let mut sender = Message::send_info();
         write!(sender, "Sender message 1: start ...").unwrap();
         messenger.send("Direct message 1");
         write!(sender, "... end").unwrap();
         sender.flush(true);
-        drop(messenger.stream(Gravity::Info));
+        drop(Message::send_info());
         messenger.send("Direct message 2");
-        let mut empty = messenger.stream(Gravity::Info);
-        empty.flush(true);
+        let mut empty_sender = Message::send_info();
+        empty_sender.flush(true);
         write!(sender, "Sender message 2").unwrap();
     }
-    messenger.printers_mut().clear();
-    messenger.printers_mut().extend(original);
-    check_message_order(&output.borrow());
-}
-fn check_message_order(output: &str) {
+    restore_printers(original);
+    let output = output.lock().unwrap();
     assert!(output.contains("Direct message 1"));
     assert!(output.contains("Sender message 1: start ...... end"));
     assert!(output.contains("Direct message 2"));
@@ -72,18 +99,18 @@ fn check_message_order(output: &str) {
     assert!(sender1 < direct2);
     assert!(direct2 < sender2);
 }
+
 #[test]
 fn Message_Messenger_Test__StreamBufferBasicUsage() {
-    let (mut messenger, output) = fixture();
-    let original = messenger.printers().to_vec();
-    let printer = original[0].clone();
-    messenger.printers_mut().clear();
-    messenger.add_printer(printer);
+    let _guard = DEFAULT_MESSENGER_GUARD
+        .lock()
+        .unwrap_or_else(|poisoned| poisoned.into_inner());
+    let output: Arc<Mutex<String>> = Arc::default();
+    let original = install_test_printer(&output);
     {
-        let mut buffer = messenger.stream(Gravity::Info);
+        let mut buffer = Message::send_info();
         writeln!(buffer, "Test message").unwrap();
     }
-    messenger.printers_mut().clear();
-    messenger.printers_mut().extend(original);
-    assert!(output.borrow().contains("Test message"));
+    restore_printers(original);
+    assert!(output.lock().unwrap().contains("Test message"));
 }

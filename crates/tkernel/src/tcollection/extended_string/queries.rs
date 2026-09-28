@@ -11,69 +11,74 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::ExtendedString;
-use crate::{standard::Failure, tcollection::AsciiString};
+//! Element access, classification and the numeric conversions.
+use super::{
+    ExtendedString,
+    errors::{int_length, offset, out_of_range},
+};
+use crate::{
+    standard::{Failure, exceptions},
+    tcollection::AsciiString,
+};
 impl ExtendedString {
-    /// Finds a member of a code-unit set within inclusive bounds; `text.first_location_in_set(&set,1,text.len())`.
-    pub fn first_location_in_set(&self, set: &Self, first: usize, last: usize) -> usize {
-        self.locate_set(set, first, last, true)
+    /// Returns the signed length in code units (`Length`); `text.length() == 5`.
+    pub fn length(&self) -> i32 {
+        int_length(self.len())
     }
-    /// Finds a code unit outside a set within inclusive bounds; `text.first_location_not_in_set(&set,1,text.len())`.
-    pub fn first_location_not_in_set(&self, set: &Self, first: usize, last: usize) -> usize {
-        self.locate_set(set, first, last, false)
+    /// Reads the code unit at a one-based position in 1..=len; `text.value(2)?`.
+    pub fn value(&self, index: i32) -> Result<u16, Failure> {
+        if index < 1 || index > self.length() {
+            return Err(out_of_range(
+                "TCollection_ExtendedString::Value : parameter theWhere",
+                format_args!("theWhere {index}; expected 1..={}", self.len()),
+            ));
+        }
+        Ok(self.terminated[offset(index)])
     }
-    fn locate_set(&self, set: &Self, first: usize, last: usize, inside: bool) -> usize {
-        assert!(
-            first > 0 && first <= last && last <= self.len(),
-            "ExtendedString interval {first}..={last}; expected within 1..={}",
-            self.len()
-        );
-        self.as_utf16()[first - 1..last]
-            .iter()
-            .position(|unit| set.as_utf16().contains(unit) == inside)
-            .map_or(0, |index| index + first)
+    /// True when every unit is in OCCT's eight-bit "ASCII range" (`IsAnAscii`: no bit of
+    /// 0xFF00 set); `ExtendedString::from_char(255).is_ascii()`.
+    pub fn is_ascii(&self) -> bool {
+        self.as_utf16().iter().all(|&unit| unit & 0xFF00 == 0)
     }
-    /// Parses a decimal prefix, returning zero for empty strings; `text.integer_value()?`.
+    /// Parses the UTF-8 form with `strtol`; zero for an empty string, Standard_NumericError
+    /// when no digit is read; `text.integer_value()?`.
     pub fn integer_value(&self) -> Result<i32, Failure> {
         if self.is_empty() {
-            Ok(0)
-        } else {
-            AsciiString::from_extended(self, None).integer_value()
+            return Ok(0);
         }
+        self.as_ascii().integer_value().map_err(|_| {
+            self.numeric_error("TCollection_AsciiString::IntegerValue", "a decimal integer")
+        })
     }
-    /// Checks for a decimal integer prefix; `text.is_integer_value()`.
+    /// Whether the UTF-8 form starts with an integer not followed by a '.'; false when
+    /// empty; `text.is_integer_value()`.
     pub fn is_integer_value(&self) -> bool {
-        !self.is_empty() && AsciiString::from_extended(self, None).is_integer_value()
+        !self.is_empty() && self.as_ascii().is_integer_value()
     }
-    /// Parses a real prefix, returning zero for empty strings; `text.real_value()?`.
+    /// Parses the UTF-8 form with OCCT's `Strtod`; zero for an empty string,
+    /// Standard_NumericError when nothing is read; `text.real_value()?`.
     pub fn real_value(&self) -> Result<f64, Failure> {
         if self.is_empty() {
-            Ok(0.0)
-        } else {
-            AsciiString::from_extended(self, None).real_value()
+            return Ok(0.0);
         }
+        self.as_ascii()
+            .real_value()
+            .map_err(|_| self.numeric_error("TCollection_AsciiString::RealValue", "a real number"))
     }
-    /// Checks a real prefix with optional full consumption; `text.is_real_value(true)`.
+    /// Whether the UTF-8 form starts with (or, when `full`, entirely is) a real value;
+    /// false when empty; `text.is_real_value(true)`.
     pub fn is_real_value(&self, full: bool) -> bool {
-        !self.is_empty() && AsciiString::from_extended(self, None).is_real_value(full)
+        !self.is_empty() && self.as_ascii().is_real_value(full)
     }
-    /// Compares with optional ASCII case folding; `text.is_same_string(&other,false)`.
-    pub fn is_same_string(&self, other: &Self, case_sensitive: bool) -> bool {
-        if case_sensitive {
-            return self.is_equal(other);
-        }
-        self.len() == other.len()
-            && self
-                .as_utf16()
-                .iter()
-                .zip(other.as_utf16())
-                .all(|(&a, &b)| lower_ascii(a) == lower_ascii(b))
+    /// OCCT converts with `TCollection_AsciiString(*this)`: UTF-8, no replacement.
+    fn as_ascii(&self) -> AsciiString {
+        AsciiString::from_extended(self, None)
     }
-}
-fn lower_ascii(unit: u16) -> u16 {
-    if (65..=90).contains(&unit) {
-        unit + 32
-    } else {
-        unit
+    /// The Standard_NumericError that TCollection_AsciiString raises for this content.
+    fn numeric_error(&self, occt_message: &str, expected: &str) -> Failure {
+        exceptions::numeric_error(&format!(
+            "{occt_message} (text {:?}; expected {expected})",
+            self.to_utf8()
+        ))
     }
 }

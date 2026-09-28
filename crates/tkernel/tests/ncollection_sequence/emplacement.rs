@@ -54,7 +54,7 @@ fn NCollection_SequenceTest__EmplaceAfterIterator() {
     let mut sequence = pair_sequence();
     let cursor = sequence.cursor();
     check_pair(
-        sequence.emplace_after_cursor(&cursor, || Pair(20, 2.0)),
+        sequence.emplace_after_cursor(&cursor, || Pair(20, 2.0)).unwrap(),
         20,
         2.0,
     );
@@ -63,13 +63,13 @@ fn NCollection_SequenceTest__EmplaceAfterIterator() {
 #[test]
 fn NCollection_SequenceTest__EmplaceAfterIndex() {
     let mut sequence = pair_sequence();
-    check_pair(sequence.emplace_after(1, || Pair(20, 2.0)), 20, 2.0);
+    check_pair(sequence.emplace_after(1, || Pair(20, 2.0)).unwrap(), 20, 2.0);
     check_order(&sequence);
 }
 #[test]
 fn NCollection_SequenceTest__EmplaceBeforeIndex() {
     let mut sequence = pair_sequence();
-    check_pair(sequence.emplace_before(2, || Pair(20, 2.0)), 20, 2.0);
+    check_pair(sequence.emplace_before(2, || Pair(20, 2.0)).unwrap(), 20, 2.0);
     check_order(&sequence);
 }
 #[test]
