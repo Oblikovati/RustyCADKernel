@@ -1,7 +1,9 @@
 //! Rust side of the differential cases for Standard memory managers, synchronization, locale, buffered readers, dump and Plugin.
 use super::common::Case;
+mod locale;
 mod memory;
 mod mmgr;
+mod sync;
 
 /// Operation name and handler of every case this area answers.
 pub const CASES: &[(&str, Case)] = &[
@@ -14,4 +16,7 @@ pub const CASES: &[(&str, Case)] = &[
     ("services_standard_aligned", memory::aligned_case),
     ("services_standard_misc", memory::misc_case),
     ("services_mmgr", mmgr::script_case),
+    ("services_mutex", sync::mutex_case),
+    ("services_condition", sync::condition_case),
+    ("services_clocale", locale::clocale_case),
 ];
