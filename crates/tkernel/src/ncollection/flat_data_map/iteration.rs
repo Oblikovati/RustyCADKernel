@@ -73,6 +73,14 @@ impl<K, V> Clone for FlatDataItems<'_, K, V> {
         }
     }
 }
+/// The native default `Iterator()`: exhausted, equal to every end iterator.
+impl<K, V> Default for FlatDataItems<'_, K, V> {
+    fn default() -> Self {
+        Self {
+            inner: FlatItems::default(),
+        }
+    }
+}
 impl<K, V> PartialEq for FlatDataItems<'_, K, V> {
     fn eq(&self, other: &Self) -> bool {
         self.inner == other.inner
@@ -89,6 +97,14 @@ impl<K, V> Clone for FlatDataValues<'_, K, V> {
     fn clone(&self) -> Self {
         Self {
             inner: self.inner.clone(),
+        }
+    }
+}
+/// The exhausted value iterator a default native `const_iterator` denotes.
+impl<K, V> Default for FlatDataValues<'_, K, V> {
+    fn default() -> Self {
+        Self {
+            inner: FlatItems::default(),
         }
     }
 }

@@ -269,6 +269,10 @@ class MacroAndFriendTests(unittest.TestCase):
                   'template <class T>\nusing NCollection_Old = NCollection_New<T> Standard_DEPRECATED("x");\n')
         self.assertEqual(members_of(header), [])
         self.assertEqual(known_of(header), ["NCollection_Old|None|"])
+    def test_deprecation_with_concatenated_literals_keeps_the_member(self):
+        header = ('class gp_Demo\n{\npublic:\n  Standard_DEPRECATED("Use the "\n'
+                  '                      "algo instead.")\n  bool Unite(const gp_Demo& theOther);\n};\n')
+        self.assertEqual(members_of(header), ["gp_Demo::Unite|const gp_Demo&|"])
 
     def test_standard_rtti_macros_are_never_expanded(self):
         header = "#define DEFINE_STANDARD_RTTIEXT(C, B) public: int Bad();\n" + TEMPLATE_HEADER
