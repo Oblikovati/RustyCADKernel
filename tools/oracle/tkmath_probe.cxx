@@ -159,6 +159,10 @@ void planar_case(std::istream& input) {
 #include "tkmath_gp_transform_probe.cxx"
 #include "tkmath_convert_probe.cxx"
 #include "tkmath_gp_core_probe.cxx"
+#include <functional>
+#include "tkmath_poly_probe.cxx"
+#include "tkmath_poly_tools_probe.cxx"
+#include "tkmath_toploc_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -324,6 +328,16 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"gp3d_pln", gpc_pln_case},
  {"gp3d_frame", gpc_frame_case},
  {"gp3d_lerp", gpc_lerp_case},
+ {"poly_mesh", poly_probe::mesh_case},
+ {"poly_pot", poly_probe::point_on_triangle_case},
+ {"poly_triline", poly_probe::tri_line_case},
+ {"poly_props", poly_probe::properties_case},
+ {"poly_io", poly_probe::io_case},
+ {"poly_connect", poly_probe::connect_case},
+ {"poly_coherent", poly_tools_probe::coherent_case},
+ {"poly_merge", poly_tools_probe::merge_case},
+ {"poly_loops", poly_tools_probe::loops_case},
+ {"toploc", toploc_probe::location_case},
 };
 int main() {
  std::string line;

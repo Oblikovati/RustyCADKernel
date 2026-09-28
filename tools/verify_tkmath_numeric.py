@@ -27,6 +27,8 @@ from tkmath_mathpoly_utils_corpus import append_mathpoly_utils_requests
 from tkmath_ncollection_vec_corpus import append_ncollection_vec_requests
 from tkmath_gp_transform_corpus import append_gp_transform_requests
 from tkmath_convert_corpus import append_convert_requests
+from tkmath_polymesh_corpus import append_polymesh_requests
+from tkmath_toploc_corpus import append_toploc_requests
 from tkmath_gp_core_corpus import append_gp_core_requests
 
 
@@ -424,6 +426,8 @@ def corpus() -> str:
     append_ncollection_vec_requests(requests)
     append_gp_transform_requests(requests)
     append_convert_requests(requests)
+    append_polymesh_requests(requests)
+    append_toploc_requests(requests)
     append_gp_core_requests(requests)
     return '\n'.join(requests)+'\n'           
 
