@@ -17,7 +17,7 @@ fn allocate_zero_fills_and_refuses_impossible_sizes() {
     let failure = memory::allocate(usize::MAX).unwrap_err();
     assert_eq!(failure.exception_type(), "Standard_OutOfMemory");
     assert_eq!(
-        failure.message(),
+        String::from_utf8_lossy(failure.what()),
         "Standard_MMgrRaw::Allocate(): malloc failed"
     );
     assert!(failure.is_kind("Standard_ProgramError"));
@@ -60,7 +60,7 @@ fn reallocate_failure_keeps_the_block_but_zero_size_releases_it() {
     let mut slot = Some(memory::allocate(4).unwrap());
     let failure = memory::reallocate(&mut slot, usize::MAX).unwrap_err();
     assert_eq!(
-        failure.message(),
+        String::from_utf8_lossy(failure.what()),
         "Standard_MMgrRaw::Reallocate(): realloc failed"
     );
     assert_eq!(slot.as_ref().map(|b| b.len()), Some(4));

@@ -49,7 +49,11 @@ impl Script {
         let result = self.step(manager, token).unwrap_or_else(|failure| {
             // A failed allocation may have purged cached blocks; forget them.
             self.forget_cached();
-            format!("E{}:{}", failure.exception_type(), failure.message())
+            format!(
+                "E{}:{}",
+                failure.exception_type(),
+                String::from_utf8_lossy(failure.what())
+            )
         });
         format!("{}/{result}", event_text())
     }

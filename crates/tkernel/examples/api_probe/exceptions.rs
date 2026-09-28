@@ -68,7 +68,7 @@ fn kind_case(input: &mut SplitWhitespace<'_>) -> String {
     format!(
         "{matrix} {} {} {}",
         failure.exception_type(),
-        hex(failure.message().as_bytes()),
+        hex(failure.what()),
         hex(failure.to_string().as_bytes())
     )
 }

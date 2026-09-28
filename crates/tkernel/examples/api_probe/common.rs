@@ -44,10 +44,14 @@ pub fn next<T: std::str::FromStr>(input: &mut SplitWhitespace<'_>) -> T {
     dead_code,
     reason = "shared by the areas; unused until one reports errors"
 )]
-/// "OK <text>" or "ERR <type>: <message>", as `tkernel_probe::guarded` prints.
+/// "OK <text>" or "ERR <type>: <what()>", as `tkernel_probe::guarded` prints.
 pub fn guarded(result: Result<String, Failure>) -> String {
     match result {
         Ok(text) => format!("OK {text}"),
-        Err(failure) => format!("ERR {}: {}", failure.exception_type(), failure.message()),
+        Err(failure) => format!(
+            "ERR {}: {}",
+            failure.exception_type(),
+            String::from_utf8_lossy(failure.what())
+        ),
     }
 }

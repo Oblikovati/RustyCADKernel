@@ -82,15 +82,18 @@ fn sizes_near_usize_max_wrap_like_the_macros() {
     let failure = opt.allocate(usize::MAX - 8).unwrap_err();
     assert_eq!(failure.exception_type(), "Standard_OutOfMemory");
     assert_eq!(
-        failure.message(),
+        String::from_utf8_lossy(failure.what()),
         "Invalid argument",
         "mmap of the wrapped zero length"
     );
     let huge = opt.allocate(1 << 62).unwrap_err();
-    assert_eq!(huge.message(), "Cannot allocate memory");
+    assert_eq!(
+        String::from_utf8_lossy(huge.what()),
+        "Cannot allocate memory"
+    );
     let unmapped = manager(true, false).allocate(1 << 62).unwrap_err();
     assert_eq!(
-        unmapped.message(),
+        String::from_utf8_lossy(unmapped.what()),
         "Standard_MMgrOpt::Allocate(): malloc failed"
     );
 }
