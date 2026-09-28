@@ -5,6 +5,7 @@
 pub mod common;
 pub mod gc;
 pub mod gce;
+pub mod pc2d;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;

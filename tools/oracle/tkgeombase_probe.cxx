@@ -39,6 +39,7 @@
 #include "tkgeombase_probe_common.cxx"
 #include "tkgeombase_probe_gce.cxx"
 #include "tkgeombase_probe_gc.cxx"
+#include "tkgeombase_probe_extrema_pc2d.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -98,6 +99,13 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gc_scale2d", gb_gc_scale2d_case},
  {"gc_translation", gb_gc_translation_case},
  {"gc_translation2d", gb_gc_translation2d_case},
+ // ExtremaPC2d, GCPnts_TangentialDeflection (tkgeombase_probe_extrema_pc2d.cxx)
+ {"pc2d_curve", gb_pc2d_curve_case},
+ {"pc2d_grid", gb_pc2d_grid_case},
+ {"pc2d_uniform", gb_pc2d_uniform_case},
+ {"pc2d_distance", gb_pc2d_distance_case},
+ {"pc2d_endpoints", gb_pc2d_endpoints_case},
+ {"gcpnts_td2d", gb_gcpnts_td2d_case},
 };
 int main() {
  std::string line;

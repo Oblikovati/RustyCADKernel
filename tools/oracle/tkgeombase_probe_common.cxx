@@ -39,6 +39,7 @@ struct GbReader{
  gp_Dir2d dir2d(){double x=real();return gp_Dir2d(x,real());}
  gp_Ax2d ax2d(){gp_Pnt2d p=pnt2d();return gp_Ax2d(p,dir2d());}
  gp_Ax22d ax22d(){gp_Pnt2d p=pnt2d();gp_Dir2d x=dir2d();return gp_Ax22d(p,x,dir2d());}
+ std::vector<double> reals(){int n=integer();std::vector<double> v(n);for(double& x:v)x=real();return v;}
 };
 // The gp results of the construction algorithms: each value's frame and parameters.
 void gb_lin(const gp_Lin& l){gb_ax1(l.Position());}
