@@ -72,16 +72,7 @@ impl BoundingBox3 {
             ));
         }
         Ok(std::array::from_fn(|index| {
-            let axis = index % 3;
-            let upper = index >= 3;
-            let bit = 1 << (1 + 2 * axis + usize::from(upper));
-            if self.flags & bit != 0 {
-                if upper { 1e100 } else { -1e100 }
-            } else if upper {
-                self.maximum[axis] + self.gap
-            } else {
-                self.minimum[axis] - self.gap
-            }
+            self.bound(index % 3, index >= 3)
         }))
     }
     /// Writes corners, gap and flags in native field order; `bounds.dump_json(&mut stream)?`.
@@ -113,12 +104,24 @@ mod range;
 pub use range::{IntersectStatus, Range1};
 
 mod box3;
+pub use box3::BoxLimits3;
+
+mod text_dump;
 
 mod box2;
-pub use box2::BoundingBox2;
+pub use box2::{BoundingBox2, BoxLimits2};
 
 mod sphere;
 pub use sphere::BoundingSphere;
 
 mod compact;
 pub use compact::{BoxReal, CompactBox2, CompactBox3};
+
+mod obb;
+pub use obb::{ObbHalfSizes, OrientedBoundingBox};
+
+mod sort_box;
+pub use sort_box::BoundSortBox;
+
+mod tools;
+pub use tools::{box2_to_bvh, box3_to_bvh};

@@ -132,7 +132,8 @@ fn box2_values(bounds: &rustycad_tkmath::bnd::BoundingBox2) {
         bounds.gap().to_bits(),
         bounds.square_extent().to_bits()
     );
-    for value in bounds.limits() {
+    let limits = bounds.limits();
+    for value in [limits.x_min, limits.y_min, limits.x_max, limits.y_max] {
         print!("{} ", value.to_bits());
     }
 }

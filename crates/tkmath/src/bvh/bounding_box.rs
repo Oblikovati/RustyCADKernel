@@ -120,8 +120,10 @@ impl<V: BvhVector> BvhBox<V> {
 
 /// `BVH::SurfaceCalculator<T, N>::Area`: SAH surface measure of a box diagonal.
 ///
-/// Only X, Y and Z enter for N >= 3; W is ignored by design upstream.
-fn surface_area<V: BvhVector>(size: &V) -> V::Scalar {
+/// Only X, Y and Z enter for N >= 3; W is ignored by design upstream. A
+/// degenerate (below `epsilon`) measure falls back to the sum of the absolute
+/// extents. Example: `bvh::surface_area(&Vec3::new(1.0, 2.0, 3.0)) == 22.0`.
+pub fn surface_area<V: BvhVector>(size: &V) -> V::Scalar {
     let epsilon = V::Scalar::EPSILON;
     if V::DIMENSION == 2 {
         let area = (size[0] * size[1]).absolute();

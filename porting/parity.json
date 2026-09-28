@@ -7996,15 +7996,15 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "BVH::VectorType<T,N>::Type",
+      "upstream_id": "BVH::VectorType<T,1>::Type",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
-      "rust_item": "rustycad_tkmath::bvh::VectorType",
+      "rust_item": "rustycad_tkmath::bvh::BvhVecNt",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::ArrayType<T,N>::Type",
+      "upstream_id": "BVH::ArrayType::Type",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhArrayNt",
@@ -8020,7 +8020,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::ToBndBox(min,max)",
+      "upstream_id": "BVH::ToBndBox(const NCollection_Vec3<T>&,const NCollection_Vec3<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::to_bnd_box",
@@ -8028,7 +8028,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::VecComp<T,N>::Get(vec,int)",
+      "upstream_id": "BVH::VecComp<T,2>::Get(const BVH_Vec2t&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::component",
@@ -8036,7 +8036,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::Array<T,N>::Value(const array&,int)",
+      "upstream_id": "BVH::Array::Value(const BVH_ArrayNt&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::array::value",
@@ -8044,7 +8044,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::Array<T,N>::ChangeValue(array&,int)",
+      "upstream_id": "BVH::Array::ChangeValue(BVH_ArrayNt&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::array::change_value",
@@ -8052,7 +8052,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::Array<T,N>::Append(array&,const vec&)",
+      "upstream_id": "BVH::Array::Append(BVH_ArrayNt&,const BVH::VectorType<T,N>::Type&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::array::append",
@@ -8060,7 +8060,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::Array<T,N>::Size(const array&)",
+      "upstream_id": "BVH::Array::Size(const BVH_ArrayNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::array::size",
@@ -8068,7 +8068,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::Array<T,N>::Clear(array&)",
+      "upstream_id": "BVH::Array::Clear(BVH_ArrayNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::array::clear",
@@ -8076,7 +8076,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::Array<T,N>::Reserve(array&,int)",
+      "upstream_id": "BVH::Array::Reserve(BVH_ArrayNt&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::array::reserve",
@@ -8248,6 +8248,78 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhMat4d",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::VectorType<T,2>::Type",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVecNt",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::VectorType<T,3>::Type",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVecNt",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::VectorType<T,4>::Type",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVecNt",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::VectorType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::VectorType",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::ToBndBox(const T&,const T&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::to_bnd_box_scalar",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::ToBndBox(const NCollection_Vec2<T>&,const NCollection_Vec2<T>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::to_bnd_box",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::ToBndBox(const NCollection_Vec4<T>&,const NCollection_Vec4<T>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::to_bnd_box",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::VecComp<T,3>::Get(const BVH_Vec3t&,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::component",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::VecComp<T,4>::Get(const BVH_Vec4t&,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::component",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -8452,7 +8524,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Box::IsOut(const BVH_Box&) const",
+      "upstream_id": "BVH_Box::IsOut(const BVH_Box<T,N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::is_out",
@@ -8468,7 +8540,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Box::Contains(const BVH_Box&,bool&) const",
+      "upstream_id": "BVH_Box::Contains(const BVH_Box<T,N>&,bool&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::contains",
@@ -8492,7 +8564,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BaseBox<T,3>::Transform(const NCollection_Mat4<T>&)",
+      "upstream_id": "BVH_BaseBox<T,3,BVH_Box>::Transform(const NCollection_Mat4<T>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::transform",
@@ -8500,7 +8572,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BaseBox<T,3>::Transformed(const NCollection_Mat4<T>&) const",
+      "upstream_id": "BVH_BaseBox<T,3,BVH_Box>::Transformed(const NCollection_Mat4<T>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::transformed",
@@ -8508,7 +8580,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::CenterAxis<T,N>::Center(const BVH_Box&,int)",
+      "upstream_id": "BVH::CenterAxis::Center(const BVH_Box<T,N>&,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBox::center_axis",
@@ -8516,15 +8588,15 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::SurfaceCalculator<T,N>::Area(const BVH_VecNt&)",
+      "upstream_id": "BVH::SurfaceCalculator::Area(const BVH_Box<T,N>::BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhBox::area",
+      "rust_item": "rustycad_tkmath::bvh::surface_area",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::BoxMinMax<T,N>::CwiseMin(BVH_VecNt&,const BVH_VecNt&)",
+      "upstream_id": "BVH::BoxMinMax::CwiseMin(BVH_VecNt&,const BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::cwise_std_min",
@@ -8532,7 +8604,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::BoxMinMax<T,N>::CwiseMax(BVH_VecNt&,const BVH_VecNt&)",
+      "upstream_id": "BVH::BoxMinMax::CwiseMax(BVH_VecNt&,const BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Box.hxx",
       "rust_item": "rustycad_tkmath::bvh::cwise_std_max",
@@ -8588,7 +8660,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::BoxBoxSquareDistance(const BVH_Box&,const BVH_Box&)",
+      "upstream_id": "BVH_Tools::BoxBoxSquareDistance(const BVH_Box<T,N>&,const BVH_Box<T,N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::box_box_square_distance",
@@ -8596,7 +8668,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::BoxBoxSquareDistance(4 corners)",
+      "upstream_id": "BVH_Tools::BoxBoxSquareDistance(const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::box_box_square_distance_by_corners",
@@ -8604,7 +8676,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::PointBoxSquareDistance(const BVH_VecNt&,const BVH_Box&)",
+      "upstream_id": "BVH_Tools::PointBoxSquareDistance(const BVH_VecNt&,const BVH_Box<T,N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::point_box_square_distance",
@@ -8612,7 +8684,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::PointBoxSquareDistance(point,cmin,cmax)",
+      "upstream_id": "BVH_Tools::PointBoxSquareDistance(const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::point_box_square_distance_by_corners",
@@ -8620,7 +8692,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::PointBoxProjection(const BVH_VecNt&,const BVH_Box&)",
+      "upstream_id": "BVH_Tools::PointBoxProjection(const BVH_VecNt&,const BVH_Box<T,N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::point_box_projection",
@@ -8628,7 +8700,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::PointBoxProjection(point,cmin,cmax)",
+      "upstream_id": "BVH_Tools::PointBoxProjection(const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::point_box_projection_by_corners",
@@ -8636,7 +8708,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::PointTriangleProjection(point,n0,n1,n2,state*,first*,last*)",
+      "upstream_id": "BVH_Tools::PointTriangleProjection(const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,BVH_PrjStateInTriangle*,int*,int*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::point_triangle_projection",
@@ -8644,7 +8716,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::PointTriangleSquareDistance(point,n0,n1,n2)",
+      "upstream_id": "BVH_Tools::PointTriangleSquareDistance(const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::point_triangle_square_distance",
@@ -8652,7 +8724,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_Ray&,const BVH_Box&,T&,T&)",
+      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_Ray<T,N>&,const BVH_Box<T,N>&,T&,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::ray_box_intersection",
@@ -8660,7 +8732,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_Ray&,cmin,cmax,T&,T&)",
+      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_Ray<T,N>&,const BVH_VecNt&,const BVH_VecNt&,T&,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::ray_box_intersection_by_corners",
@@ -8668,7 +8740,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::RayBoxIntersection(origin,direction,const BVH_Box&,T&,T&)",
+      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_VecNt&,const BVH_VecNt&,const BVH_Box<T,N>&,T&,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::ray_box_intersection_by_direction",
@@ -8676,7 +8748,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tools::RayBoxIntersection(origin,direction,cmin,cmax,T&,T&)",
+      "upstream_id": "BVH_Tools::RayBoxIntersection(const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,T&,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Tools.hxx",
       "rust_item": "rustycad_tkmath::bvh::tools::ray_box_intersection_by_direction_corners",
@@ -8892,6 +8964,22 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "BVH_TreeBaseTransient::DEFINE_STANDARD_RTTIEXT(BVH_TreeBaseTransient,Standard_Transient)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
+    },
+    {
+      "upstream_id": "BVH_TreeBase::~BVH_TreeBase()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Tree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
       "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::BVH_Tree()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
@@ -8916,7 +9004,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::Child<K>(int) const",
+      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::Child(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::child",
@@ -8924,7 +9012,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::Child<K>(int)",
+      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::Child(int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::child_mut",
@@ -8932,7 +9020,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::ChangeChild<K>(int)",
+      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::ChangeChild(int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::child_mut",
@@ -8956,7 +9044,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddLeafNode(min,max,int,int)",
+      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddLeafNode(const BVH_VecNt&,const BVH_VecNt&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_leaf_node",
@@ -8964,7 +9052,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddInnerNode(min,max,int,int)",
+      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddInnerNode(const BVH_VecNt&,const BVH_VecNt&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_inner_node",
@@ -8972,7 +9060,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddLeafNode(const BVH_Box&,int,int)",
+      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddLeafNode(const BVH_Box<T,N>&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_leaf_node_box",
@@ -8980,7 +9068,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddInnerNode(const BVH_Box&,int,int)",
+      "upstream_id": "BVH_Tree<T,N,BVH_BinaryTree>::AddInnerNode(const BVH_Box<T,N>&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::add_inner_node_box",
@@ -9012,7 +9100,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::EstimateSAH(tree,int,T,T&)",
+      "upstream_id": "BVH::EstimateSAH(const BVH_Tree<T,N,BVH_BinaryTree>*,int,T,T&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinaryTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::estimate_sah",
@@ -9036,7 +9124,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Tree<T,N,BVH_QuadTree>::Child<K>(int) const",
+      "upstream_id": "BVH_Tree<T,N,BVH_QuadTree>::Child(int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuadTree.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTree::child",
@@ -9092,7 +9180,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Transform::Apply(const BVH_Box&) const",
+      "upstream_id": "BVH_Transform::Apply(const BVH_Box<T,N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTransform::apply",
@@ -9100,7 +9188,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,N>::DX()",
+      "upstream_id": "BVH::UnitVector<T,3>::DX()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_x",
@@ -9108,7 +9196,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,N>::DY()",
+      "upstream_id": "BVH::UnitVector<T,3>::DY()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_y",
@@ -9116,12 +9204,100 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UnitVector<T,N>::DZ()",
+      "upstream_id": "BVH::UnitVector<T,3>::DZ()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_z",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::UnitVector<T,2>::DX()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_x",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::UnitVector<T,2>::DY()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_y",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::UnitVector<T,2>::DZ()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_z",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::UnitVector<T,4>::DX()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_x",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::UnitVector<T,4>::DY()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_y",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::UnitVector<T,4>::DZ()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhVector::unit_z",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::MatrixOp<T,4>::Inverse(const BVH_Mat4t&,BVH_Mat4t&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::matrix_op_inverse",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::MatrixOp<T,4>::Multiply(const BVH_Mat4t&,const BVH_Vec4t&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": "rustycad_tkmath::bvh::matrix_op_multiply",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Properties::DEFINE_STANDARD_RTTIEXT(BVH_Properties,Standard_Transient)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
+    },
+    {
+      "upstream_id": "BVH_Properties::~BVH_Properties()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "BVH_Transform::~BVH_Transform()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Properties.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BVH_ObjectTransient::Properties() const",
@@ -9132,7 +9308,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_ObjectTransient::SetProperties(const handle&)",
+      "upstream_id": "BVH_ObjectTransient::SetProperties(const occ::handle<BVH_Properties>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhObject::set_properties",
@@ -9180,6 +9356,30 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "BVH_Object()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectTransient::default",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending. BVH_Object() runs the protected BVH_ObjectTransient() (myIsDirty = false, null properties); implementors embed a default BvhObjectTransient."
+    },
+    {
+      "upstream_id": "BVH_ObjectTransient::DEFINE_STANDARD_RTTIEXT(BVH_ObjectTransient,Standard_Transient)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
+    },
+    {
+      "upstream_id": "BVH_Object::~BVH_Object()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Object.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
       "upstream_id": "BVH_Set::Box() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Set.hxx",
@@ -9220,6 +9420,22 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "BVH_Set()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Set.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: defaulted constructor of an abstract, stateless interface; the Rust trait BvhSet has nothing to construct."
+    },
+    {
+      "upstream_id": "BVH_Set::~BVH_Set()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Set.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
       "upstream_id": "BVH_PrimitiveSet::BVH_PrimitiveSet()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
@@ -9228,7 +9444,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_PrimitiveSet::BVH_PrimitiveSet(const handle<BVH_Builder>&)",
+      "upstream_id": "BVH_PrimitiveSet(const opencascade::handle<BVH_Builder<T,N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSet::new",
@@ -9268,7 +9484,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_PrimitiveSet::SetBuilder(const handle<BVH_Builder>&)",
+      "upstream_id": "BVH_PrimitiveSet::SetBuilder(const opencascade::handle<BVH_Builder<T,N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSetAccess::set_builder",
@@ -9282,6 +9498,14 @@
       "rust_item": "rustycad_tkmath::bvh::BvhPrimitiveSetAccess::update",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PrimitiveSet::~BVH_PrimitiveSet()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PrimitiveSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BVH_PrimitiveSet3d",
@@ -9308,7 +9532,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Triangulation::BVH_Triangulation(const handle<BVH_Builder>&)",
+      "upstream_id": "BVH_Triangulation(const opencascade::handle<BVH_Builder<T,N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTriangulation::new",
@@ -9364,7 +9588,15 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Sorter::Perform(BVH_Set*)",
+      "upstream_id": "BVH_Triangulation::~BVH_Triangulation()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Triangulation.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "BVH_Sorter::Perform(BVH_Set<T,N>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Sorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhSorter::perform",
@@ -9372,7 +9604,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Sorter::Perform(BVH_Set*,int,int)",
+      "upstream_id": "BVH_Sorter::Perform(BVH_Set<T,N>*,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Sorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhSorter::perform_range",
@@ -9396,6 +9628,22 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "BVH_Sorter()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Sorter.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSorter",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending. The abstract BVH_Sorter() only sets myIsParallel = false; every BvhSorter implementor (BvhQuickSorter::new, BvhRadixSorter::new) starts serial the same way."
+    },
+    {
+      "upstream_id": "BVH_Sorter::~BVH_Sorter()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Sorter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
       "upstream_id": "BVH_QuickSorter::BVH_QuickSorter(int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx",
@@ -9404,7 +9652,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_QuickSorter::Perform(BVH_Set*)",
+      "upstream_id": "BVH_QuickSorter::Perform(BVH_Set<T,N>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhQuickSorter::perform",
@@ -9412,7 +9660,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_QuickSorter::Perform(BVH_Set*,int,int)",
+      "upstream_id": "BVH_QuickSorter::Perform(BVH_Set<T,N>*,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QuickSorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhQuickSorter::perform_range",
@@ -9436,7 +9684,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::EncodeMortonCode(unsigned,unsigned,unsigned)",
+      "upstream_id": "BVH::EncodeMortonCode(unsigned int,unsigned int,unsigned int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::encode_morton_code",
@@ -9444,7 +9692,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_RadixSorter::BVH_RadixSorter(const BVH_Box&)",
+      "upstream_id": "BVH_RadixSorter(const BVH_Box<T,N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter::new",
@@ -9452,7 +9700,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_RadixSorter::Perform(BVH_Set*)",
+      "upstream_id": "BVH_RadixSorter::Perform(BVH_Set<T,N>*)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter::perform",
@@ -9460,7 +9708,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_RadixSorter::Perform(BVH_Set*,int,int)",
+      "upstream_id": "BVH_RadixSorter::Perform(BVH_Set<T,N>*,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_RadixSorter.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhRadixSorter::perform_range",
@@ -9556,6 +9804,14 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "BVH_BuildQueue::~BVH_BuildQueue()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildQueue.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
       "upstream_id": "BVH_BuildTool::Perform(int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
@@ -9596,6 +9852,14 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "BVH_BuildThread::DEFINE_STANDARD_RTTIEXT(BVH_BuildThread,Standard_Transient)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BuildThread.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
+    },
+    {
       "upstream_id": "BVH_BuilderTransient::MaxTreeDepth() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
@@ -9628,7 +9892,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Builder::Build(BVH_Set*,BVH_Tree*,const BVH_Box&) const",
+      "upstream_id": "BVH_Builder::Build(BVH_Set<T,N>*,BVH_Tree<T,N>*,const BVH_Box<T,N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBuilder::build",
@@ -9636,12 +9900,20 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Builder::updateDepth(BVH_Tree*,int) const",
+      "upstream_id": "BVH_Builder::updateDepth(BVH_Tree<T,N>*,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
       "rust_item": "rustycad_tkmath::bvh::update_depth",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BuilderTransient::DEFINE_STANDARD_RTTIEXT(BVH_BuilderTransient,Standard_Transient)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Builder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
       "upstream_id": "BVH_QueueBuilder::BVH_QueueBuilder(int,int,int)",
@@ -9652,7 +9924,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_QueueBuilder::Build(BVH_Set*,BVH_Tree*,const BVH_Box&) const",
+      "upstream_id": "BVH_QueueBuilder::Build(BVH_Set<T,N>*,BVH_Tree<T,N>*,const BVH_Box<T,N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::queue_build",
@@ -9660,7 +9932,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_QueueBuilder::buildNode(BVH_Set*,BVH_Tree*,int) const",
+      "upstream_id": "BVH_QueueBuilder::buildNode(BVH_Set<T,N>*,BVH_Tree<T,N>*,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder::build_node",
@@ -9668,7 +9940,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_QueueBuilder::addChildren(BVH_Tree*,BVH_BuildQueue&,int,const BVH_ChildNodes&) const",
+      "upstream_id": "BVH_QueueBuilder::addChildren(BVH_Tree<T,N>*,BVH_BuildQueue&,int,const BVH_ChildNodes&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhQueueBuilder::add_children",
@@ -9716,7 +9988,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_QueueBuilder::BVH_ChildNodes::BVH_ChildNodes(box,box,range,range)",
+      "upstream_id": "BVH_QueueBuilder::BVH_ChildNodes::BVH_ChildNodes(const BVH_Box<T,N>&,const BVH_Box<T,N>&,const BVH_PrimitiveRange&,const BVH_PrimitiveRange&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhChildNodes::new",
@@ -9738,6 +10010,14 @@
       "rust_item": "rustycad_tkmath::bvh::BvhChildNodes::is_valid",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_QueueBuilder::~BVH_QueueBuilder()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_QueueBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BVH_Bin",
@@ -9764,7 +10044,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BinnedBuilder::buildNode(BVH_Set*,BVH_Tree*,int) const",
+      "upstream_id": "BVH_BinnedBuilder::buildNode(BVH_Set<T,N>*,BVH_Tree<T,N>*,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBinnedBuilder::build_node",
@@ -9772,7 +10052,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BinnedBuilder::getSubVolumes(BVH_Set*,BVH_Tree*,int,BVH_BinVector&,int) const",
+      "upstream_id": "BVH_BinnedBuilder::getSubVolumes(BVH_Set<T,N>*,BVH_Tree<T,N>*,int,BVH_BinVector&,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::get_sub_volumes",
@@ -9780,7 +10060,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::SplitPrimitives(BVH_Set*,const BVH_Box&,int,int,int,int,int)",
+      "upstream_id": "BVH::SplitPrimitives(BVH_Set<T,N>*,const BVH_Box<T,N>&,int,int,int,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::split_primitives",
@@ -9788,12 +10068,28 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::BVH_AxisSelector<T,N>::MainAxis(const BVH_VecNt&)",
+      "upstream_id": "BVH::BVH_AxisSelector::MainAxis(const BVH_VecNt&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::main_axis",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::BVH_AxisSelector<T,2>::MainAxis(const BVH_VecNt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::main_axis",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilder::~BVH_BinnedBuilder()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BinnedBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "NCollection_Vec2",
@@ -10284,7 +10580,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_LinearBuilder::Build(BVH_Set*,BVH_Tree*,const BVH_Box&) const",
+      "upstream_id": "BVH_LinearBuilder::Build(BVH_Set<T,N>*,BVH_Tree<T,N>*,const BVH_Box<T,N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::build",
@@ -10292,7 +10588,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_LinearBuilder::emitHierachy(BVH_Tree*,const NCollection_Array1<BVH_EncodedLink>&,int,int,int,int) const",
+      "upstream_id": "BVH_LinearBuilder::emitHierachy(BVH_Tree<T,N>*,const NCollection_Array1<BVH_EncodedLink>&,int,int,int,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::emit_hierarchy",
@@ -10308,7 +10604,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UpdateBounds(BVH_Set*,BVH_Tree*,int)",
+      "upstream_id": "BVH::UpdateBounds(BVH_Set<T,N>*,BVH_Tree<T,N>*,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::update_bounds",
@@ -10332,12 +10628,20 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH::UpdateBoundTask::operator()(const BoundData&) const",
+      "upstream_id": "BVH::UpdateBoundTask::operator()(const BoundData<T,N>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhUpdateBoundTask::run",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_LinearBuilder::~BVH_LinearBuilder()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BVH_SpatialMedianBuilder::BVH_SpatialMedianBuilder(int,int,bool)",
@@ -10348,6 +10652,14 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "BVH_SpatialMedianBuilder::~BVH_SpatialMedianBuilder()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_SpatialMedianBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
       "upstream_id": "BVH_SweepPlaneBuilder::BVH_SweepPlaneBuilder(int,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_SweepPlaneBuilder.hxx",
@@ -10356,12 +10668,20 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_SweepPlaneBuilder::buildNode(BVH_Set*,BVH_Tree*,int) const",
+      "upstream_id": "BVH_SweepPlaneBuilder::buildNode(BVH_Set<T,N>*,BVH_Tree<T,N>*,int) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_SweepPlaneBuilder.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhSweepPlaneBuilder::build_node",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilder::~BVH_SweepPlaneBuilder()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_SweepPlaneBuilder.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BVH_BaseTraverse::IsMetricBetter(const MetricType&,const MetricType&) const",
@@ -10433,10 +10753,10 @@
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhSetTraverse::select",
       "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending. The BVHSetType::BVH() requirement of Select() is the BvhTreeOwner trait."
     },
     {
-      "upstream_id": "BVH_Traverse::Select(const handle<BVH_Tree>&)",
+      "upstream_id": "BVH_Traverse::Select(const opencascade::handle<BVH_Tree<NumType,Dimension>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhTraverse::select_tree",
@@ -10492,7 +10812,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_PairTraverse::Select(const handle<BVH_Tree>&,const handle<BVH_Tree>&)",
+      "upstream_id": "BVH_PairTraverse::Select(const opencascade::handle<BVH_Tree<NumType,Dimension>>&,const opencascade::handle<BVH_Tree<NumType,Dimension>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhPairTraverse::select_trees",
@@ -10504,14 +10824,6 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhPairNodesInStack",
-      "status": "implemented",
-      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
-    },
-    {
-      "upstream_id": "BVHSetType::BVH() (Select requirement)",
-      "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
-      "rust_item": "rustycad_tkmath::bvh::BvhTreeOwner",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
@@ -10652,7 +10964,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_PairDistance::RejectNode(cmin1,cmax1,cmin2,cmax2,NumType&) const",
+      "upstream_id": "BVH_PairDistance::RejectNode(const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,NumType&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::reject_node",
@@ -10692,7 +11004,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BoxSet::BVH_BoxSet(const handle<BVH_Builder>&)",
+      "upstream_id": "BVH_BoxSet(const opencascade::handle<BVH_Builder<NumType,Dimension>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::new",
@@ -10708,7 +11020,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_BoxSet::Add(const DataType&,const BVH_Box&)",
+      "upstream_id": "BVH_BoxSet::Add(const DataType&,const BVH_Box<NumType,Dimension>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::add",
@@ -10780,7 +11092,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_IndexedBoxSet::BVH_IndexedBoxSet(const handle<BVH_Builder>&)",
+      "upstream_id": "BVH_IndexedBoxSet(const opencascade::handle<BVH_Builder<NumType,Dimension>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::new",
@@ -10796,7 +11108,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_IndexedBoxSet::Add(const DataType&,const BVH_Box&)",
+      "upstream_id": "BVH_IndexedBoxSet::Add(const DataType&,const BVH_Box<NumType,Dimension>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::add",
@@ -10908,6 +11220,14 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "BVH_ObjectSet::~BVH_ObjectSet()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
       "upstream_id": "BVH_Geometry::BVH_Geometry()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
@@ -10916,7 +11236,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Geometry::BVH_Geometry(const handle<BVH_Builder>&)",
+      "upstream_id": "BVH_Geometry(const opencascade::handle<BVH_Builder<T,N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhGeometry::new",
@@ -10964,7 +11284,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_Geometry::SetBuilder(const handle<BVH_Builder>&)",
+      "upstream_id": "BVH_Geometry::SetBuilder(const opencascade::handle<BVH_Builder<T,N>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhGeometry::set_builder",
@@ -10980,6 +11300,14 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
+      "upstream_id": "BVH_Geometry::~BVH_Geometry()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
       "upstream_id": "BVH_DistanceField::BVH_DistanceField(int,bool)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
@@ -10988,7 +11316,7 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_DistanceField::Build(BVH_Geometry&)",
+      "upstream_id": "BVH_DistanceField::Build(BVH_Geometry<T,N>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::build",
@@ -11084,12 +11412,20 @@
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     },
     {
-      "upstream_id": "BVH_DistanceField::BuildSlices(BVH_Geometry&,int,int)",
+      "upstream_id": "BVH_DistanceField::BuildSlices(BVH_Geometry<T,N>&,int,int)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
       "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::build_slices",
       "status": "implemented",
       "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::~BVH_DistanceField()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BVH::DistanceToBox(pnt,min,max)",
@@ -12436,6 +12772,22 @@
       "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "BSplCLib::DN(double,int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: declared in the pinned BSplCLib.hxx but defined nowhere in OCCT 3d097a0 (libTKMath exports only the three B-spline DN overloads), so any call fails to link and there is no behaviour to port."
+    },
+    {
+      "upstream_id": "BSplCLib::DN(double,int,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>&,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: declared in the pinned BSplCLib.hxx but defined nowhere in OCCT 3d097a0 (libTKMath exports only the three B-spline DN overloads), so any call fails to link and there is no behaviour to port."
+    },
+    {
       "upstream_id": "BSplCLib_KnotDistribution",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_KnotDistribution.hxx",
@@ -12466,6 +12818,22 @@
       "rust_item": "rustycad_tkmath::bsplclib::EvaluatorFunction::evaluate",
       "status": "implemented",
       "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_EvaluatorFunction()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_EvaluatorFunction.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: defaulted constructor of a stateless abstract functor; the Rust trait EvaluatorFunction has nothing to construct."
+    },
+    {
+      "upstream_id": "BSplCLib_EvaluatorFunction::~BSplCLib_EvaluatorFunction()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_EvaluatorFunction.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "BSplCLib_CacheParams::BSplCLib_CacheParams(int,bool,const NCollection_Array1<double>&)",
@@ -12666,6 +13034,14 @@
       "rust_item": "rustycad_tkmath::bsplclib::Cache::is_cache_valid",
       "status": "implemented",
       "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::DEFINE_STANDARD_RTTIEXT(BSplCLib_Cache,Standard_Transient)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
     },
     {
       "upstream_id": "BSplSLib::RationalDerivative(int,int,int,int,double&,double&,bool)",
@@ -13036,6 +13412,14 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "BSplSLib_Cache::DEFINE_STANDARD_RTTIEXT(BSplSLib_Cache,Standard_Transient)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
+    },
+    {
       "upstream_id": "BSplSLib_EvaluatorFunction::Evaluate(int,double,double,double&,int&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_EvaluatorFunction.hxx",
@@ -13050,6 +13434,22 @@
       "rust_item": "rustycad_tkmath::bsplslib::EvaluatorFunction::evaluate",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_EvaluatorFunction()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_EvaluatorFunction.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: defaulted constructor of a stateless abstract functor; the Rust trait EvaluatorFunction has nothing to construct."
+    },
+    {
+      "upstream_id": "BSplSLib_EvaluatorFunction::~BSplSLib_EvaluatorFunction()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_EvaluatorFunction.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
     },
     {
       "upstream_id": "gp_Trsf::SetTransformation(const gp_Ax3&)",
@@ -20652,7 +21052,7 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "BuildPolynomialCosAndSin(double,double,int,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "upstream_id": "Convert_PolynomialCosAndSin::BuildPolynomialCosAndSin(double,double,int,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_PolynomialCosAndSin.hxx",
       "rust_item": "rustycad_tkmath::convert::build_polynomial_cos_and_sin",
@@ -20900,7 +21300,7 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::Convert_CompBezierCurvesToBSplineCurveBase(double)",
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase(double)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
       "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::new",
@@ -20908,7 +21308,7 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::AddCurve(const NCollection_Array1<PointType>&)",
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase::AddCurve(const NCollection_Array1<PointType>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
       "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::add_curve",
@@ -20916,7 +21316,7 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::Perform()",
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase::Perform()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
       "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::perform",
@@ -20924,7 +21324,7 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::Degree() const",
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase::Degree() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
       "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::degree",
@@ -20932,7 +21332,7 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::NbPoles() const",
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase::NbPoles() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
       "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::nb_poles",
@@ -20940,7 +21340,7 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::Poles(NCollection_Array1<PointType>&) const",
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase::Poles(NCollection_Array1<PointType>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
       "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::poles",
@@ -20948,7 +21348,7 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::NbKnots() const",
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase::NbKnots() const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
       "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::nb_knots",
@@ -20956,7 +21356,7 @@
       "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::KnotsAndMults(NCollection_Array1<double>&,NCollection_Array1<int>&) const",
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase::KnotsAndMults(NCollection_Array1<double>&,NCollection_Array1<int>&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
       "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::knots_and_mults",
@@ -23538,6 +23938,526 @@
       "rust_item": "rustycad_tkernel::ncollection::Lerp::interpolate",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Bnd_OBB()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Bnd_OBB(const gp_Pnt&,const gp_Dir&,const gp_Dir&,const gp_Dir&,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Bnd_OBB(const Bnd_Box&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::from_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::ReBuild(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::rebuild",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::SetCenter(const gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::set_center",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::SetXComponent(const gp_Dir&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::set_x_component",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::SetYComponent(const gp_Dir&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::set_y_component",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::SetZComponent(const gp_Dir&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::set_z_component",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Position() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::position",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Center() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::center",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::XDirection() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::x_direction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::YDirection() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::y_direction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::ZDirection() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::z_direction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::XHSize() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::x_h_size",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::YHSize() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::y_h_size",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::ZHSize() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::z_h_size",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::GetHalfSizes() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::half_sizes",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::IsVoid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::is_void",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::SetVoid()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::set_void",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::SetAABox(const bool&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::set_aa_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::IsAABox() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::is_aa_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Enlarge(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::enlarge",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::GetVertex(gp_Pnt*) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::vertices",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::SquareExtent() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::square_extent",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::IsOut(const Bnd_OBB&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::is_out_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::IsOut(const gp_Pnt&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::is_out_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Contains(const gp_Pnt&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::contains",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Intersects(const Bnd_OBB&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::intersects",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::IsCompletelyInside(const Bnd_OBB&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::is_completely_inside",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Add(const Bnd_OBB&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::add_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::Add(const gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::add_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_OBB::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_OBB.hxx",
+      "rust_item": "rustycad_tkmath::bnd::OrientedBoundingBox::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the seven-argument constructor takes the three axes as one array, GetVertex returns Option<[Point3; 8]>, ReBuild/Add return Failure results where the native code reads outside its arrays (empty list, mismatched tolerance bounds), and the debug-only Standard_ASSERT_VOID size checks are not raised. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_BoundSortBox::Bnd_BoundSortBox()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundSortBox::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the shared NCollection_HArray1 handle becomes an owned Array1 exposed by boxes(), overloads become named methods, Compare returns Result<&List<i32>> and native null-handle dereferences become Standard_NullObject failures. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_BoundSortBox::Initialize(const handle<NCollection_HArray1<Bnd_Box>>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundSortBox::initialize",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the shared NCollection_HArray1 handle becomes an owned Array1 exposed by boxes(), overloads become named methods, Compare returns Result<&List<i32>> and native null-handle dereferences become Standard_NullObject failures. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_BoundSortBox::Initialize(const Bnd_Box&,const handle<NCollection_HArray1<Bnd_Box>>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundSortBox::initialize_with_enclosing",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the shared NCollection_HArray1 handle becomes an owned Array1 exposed by boxes(), overloads become named methods, Compare returns Result<&List<i32>> and native null-handle dereferences become Standard_NullObject failures. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_BoundSortBox::Initialize(const Bnd_Box&,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundSortBox::initialize_with_count",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the shared NCollection_HArray1 handle becomes an owned Array1 exposed by boxes(), overloads become named methods, Compare returns Result<&List<i32>> and native null-handle dereferences become Standard_NullObject failures. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_BoundSortBox::Add(const Bnd_Box&,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundSortBox::add",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the shared NCollection_HArray1 handle becomes an owned Array1 exposed by boxes(), overloads become named methods, Compare returns Result<&List<i32>> and native null-handle dereferences become Standard_NullObject failures. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_BoundSortBox::Compare(const Bnd_Box&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundSortBox::compare_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the shared NCollection_HArray1 handle becomes an owned Array1 exposed by boxes(), overloads become named methods, Compare returns Result<&List<i32>> and native null-handle dereferences become Standard_NullObject failures. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_BoundSortBox::Compare(const gp_Pln&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundSortBox::compare_plane",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the shared NCollection_HArray1 handle becomes an owned Array1 exposed by boxes(), overloads become named methods, Compare returns Result<&List<i32>> and native null-handle dereferences become Standard_NullObject failures. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Tools::Bnd2BVH(const Bnd_Box2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Tools.hxx",
+      "rust_item": "rustycad_tkmath::bnd::box2_to_bvh",
+      "status": "implemented",
+      "notes": "Manual explicit mapping; the static overloads become box2_to_bvh/box3_to_bvh and the Get() Standard_ConstructionError of a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Tools::Bnd2BVH(const Bnd_Box&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Tools.hxx",
+      "rust_item": "rustycad_tkmath::bnd::box3_to_bvh",
+      "status": "implemented",
+      "notes": "Manual explicit mapping; the static overloads become box2_to_bvh/box3_to_bvh and the Get() Standard_ConstructionError of a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Update(double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::update_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Get() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::limits",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::GetXMin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::x_min",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::GetXMax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::x_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::GetYMin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::y_min",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::GetYMax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::y_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::GetZMin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::z_min",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::GetZMax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::z_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Dump() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::dump",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Set(const gp_Pnt2d&,const gp_Dir2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::set_ray",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Update(double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::update_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Get() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::limits",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::GetXMin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::x_min",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::GetXMax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::x_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::GetYMin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::y_min",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::GetYMax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::y_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Add(const gp_Pnt2d&,const gp_Dir2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::add_ray",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOut(const Bnd_Box2d&,const gp_Trsf2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_out_transformed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOut(const gp_Trsf2d&,const Bnd_Box2d&,const gp_Trsf2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_out_both",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Dump() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::dump",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3<RealType>::IsOut(const Bnd_B3<RealType>&,const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_transformed_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the gp_Trsf/gp_Trsf2d overloads of IsOut/IsIn become is_out_transformed_box/is_in_transformed_box on CompactBox3/CompactBox2<T>. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3<RealType>::IsIn(const Bnd_B3<RealType>&,const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_in_transformed_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the gp_Trsf/gp_Trsf2d overloads of IsOut/IsIn become is_out_transformed_box/is_in_transformed_box on CompactBox3/CompactBox2<T>. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2<RealType>::IsOut(const Bnd_B2<RealType>&,const gp_Trsf2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_transformed_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the gp_Trsf/gp_Trsf2d overloads of IsOut/IsIn become is_out_transformed_box/is_in_transformed_box on CompactBox3/CompactBox2<T>. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2<RealType>::IsIn(const Bnd_B2<RealType>&,const gp_Trsf2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_in_transformed_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; the gp_Trsf/gp_Trsf2d overloads of IsOut/IsIn become is_out_transformed_box/is_in_transformed_box on CompactBox3/CompactBox2<T>. Authoritative toolkit API enumeration pending."
     }
   ],
   "tests": [

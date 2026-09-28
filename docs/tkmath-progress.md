@@ -991,3 +991,101 @@ Deliberate Rust deviations: gp_Pnt::ChangeCoord returns a write-back view
 move constructors and assignments of gp_Dir are Rust copies. The 2D conics' noexcept
 `Reverse` and hyperbola branches, which turn stored unit directions, use an infallible
 quarter turn.
+
+### Bnd package completion: OBB, BoundSortBox and Tools
+
+Every file of the Bnd package is now ported (65 new API rows). `OrientedBoundingBox`
+is Bnd_OBB with the DiTO construction of `ReBuild`: the closed forms for one and two
+points, the 7-axis extremal-point search, the ditetrahedron of the default mode and
+the all-triangle search of the optimal mode, which projects the points through a
+linear BVH (30 elements per leaf) with the `OBB_ExtremePointsSelector` traversal.
+`BoundSortBox` is Bnd_BoundSortBox with its voxel grid and large-box list, and
+`box2_to_bvh`/`box3_to_bvh` are Bnd_Tools. The Bnd_Box and Bnd_Box2d members that
+no legacy test calls are added too (`update_point`, the structured `limits()`, the
+`x_min()`..`z_max()` getters, `Dump()` as `dump(&mut impl Write)`, the Box2d rays
+and transformed IsOut overloads), as are the transformed `IsOut`/`IsIn` overloads of
+Bnd_B2/Bnd_B3 (`is_out_transformed_box`, `is_in_transformed_box`). The Box2d
+`limits()` now returns `BoxLimits2` in the native Xmin, Xmax, Ymin, Ymax field order;
+before, it returned the `Get(x,y,X,Y)` order under the structured-Get name.
+
+Bnd_OBB_Test.cxx and Bnd_BoundSortBox_Test.cxx link BRepPrimAPI/BRepBndLib, so their
+native GoogleTest runs are not mapped and their 15 declarations are not counted
+above. Every body is translated in `bnd_obb_supplemental.rs` and
+`bnd_bound_sort_box_supplemental.rs` (named after the upstream case); the B-rep
+inputs become plain data: the eight corners of the MakeBox cube for OCC30704 (the
+native CheckPoints list repeats each vertex once per incident edge and face, which
+changes nothing for an axis-aligned cube), and the cube and face boxes enlarged by
+`Precision::Confusion()` for BUC60729. Another 2,909 differential requests
+(`tools/tkmath_bnd_corpus.py`) match with raw bits; the numeric gate now passes
+58,478 cases. They cover ReBuild on random, box-corner,
+grid, collinear, coplanar, duplicate, elongated, spherical, tiny and huge clouds in
+both modes, with and without tolerances, with array bounds not based at 1 and with
+mismatched tolerance bounds; the OBB separating-axis, containment, Add, Enlarge,
+SetVoid, Position and DumpJson results; BoundSortBox in all initialization modes up to
+1,100 boxes (grid resolutions 8, 16 and 32), with void, open, degenerate and large
+boxes, reporting every Compare result list in order; the new Box/Box2d members; and
+the transformed B2/B3 relations in double and float for every transform form.
+
+Preserved quirks: equally extreme points are resolved by the first point visited, in
+list order in the default mode and in BVH traversal order in the optimal mode, so
+ties change the chosen axes; `IsOut(gp_Pnt)` has no void guard; `Enlarge` also grows
+a void box; `SetVoid` leaves null axes, so `Position()` of a void box raises
+Standard_ConstructionError; the size checks of the constructor and the
+`Set?Component` setters are `Standard_ASSERT_VOID`, compiled out of release builds, so
+negative sizes are stored; the "use Precision::SquareConfusion()" test of BuildBox is
+the literal `1.0e-14` on the product of the three squared axis norms. BoundSortBox
+never resets its enclosing box in `Initialize(boxes)`, so repeated calls grow it; a
+void enclosing box keeps the previous grid, coefficients and large-box list; a box
+with an open side under a closed enclosing box maps that side to `INT_MIN`
+(`cvttsd2si`), the ±1 voxel margin wraps and the clamped range is empty, so the box
+never enters the grid and is never reported (the native result is the same); large
+boxes are reported before grid boxes, which follow the Z slices of the query.
+`bnd_obb_behavior.rs`, `bnd_sort_box_behavior.rs` and `bnd_members_behavior.rs` pin
+them.
+
+Deviations are limited to undefined native behaviour and ownership. ReBuild of an
+empty list reads `First()` of an empty array natively; the port raises
+Standard_OutOfRange, as it does for a NaN cloud that leaves a base triangle index at
+`INT_MAX`. Add and Compare before any Initialize dereference a null handle natively;
+the port raises Standard_NullObject for Add and returns an empty list for Compare.
+The native class shares the caller's `NCollection_HArray1` handle, so `Add` writes
+into the caller's array; the port owns the array and exposes it through `boxes()`.
+The Bnd_Array1OfBox/Bnd_HArray1OfBox (and 2d) typedefs live in the deprecated
+NCollection alias headers and carry no behavior of their own; this revision has no
+Bnd_SeqOfBox and no Bnd_BoundSortBox2d.
+
+### BVH, Convert, BSplCLib and BSplSLib (API completion)
+
+This work adds no upstream suite. `tools/audit_api_rows.py` now reports no missing
+member and no stale row for the BVH, Convert, BSplCLib and BSplSLib packages. Most gaps
+were ledger spellings: rows used informal parameter names (`min`, `cmax`, `4 corners`)
+or wrote the template arguments of a primary template (`BVH_Box<T,N>::`,
+`Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::`), which the ledger
+spells as the bare class name. The rows now carry the exact header signatures.
+
+The audit itself had gaps, fixed with tests in `tools/tests/test_audit_api_rows.py`:
+out-of-class template definitions (`BVH_Box<T, N>::Area() const`) were counted as new
+members; a class specialization's base clause leaked into its scope name;
+`handle<B<T, N>>` and dependent `typename B<T, N>::V` parameters were cut at the first
+`>`; and `DEFINE_STANDARD_RTTIEXT`, which expands to `public:` and has no semicolon,
+swallowed the next declaration and its access label (in Poly this hid every public
+member of Poly_Triangulation and Poly_PolygonOnTriangulation). Typedefs, `using`
+aliases, data members, class names, enumerators and protected members are now known
+identities: a row that names one is not stale, but none of them needs a row. A row
+with status `excluded` must carry a `notes` reason.
+
+Newly ported: `BVH::ToBndBox(const T&, const T&)` (`to_bnd_box_scalar`),
+`BVH::MatrixOp<T, 4>::Inverse`/`Multiply` (`matrix_op_inverse`/`matrix_op_multiply`,
+now also used by `BvhTransform`), and `BVH::SurfaceCalculator::Area` is public as
+`surface_area`. The `bvh_tool_classes` probe sends 96 differential requests that cover
+every `BVH` namespace tool class (ToBndBox, VecComp, UnitVector, MatrixOp,
+SurfaceCalculator, BVH_AxisSelector, CenterAxis, BoxMinMax) for float and double in
+2D, 3D and 4D, including tied, signed-zero, tiny and huge components and singular and
+W = 0 matrices; they all match the native bits.
+
+Excluded rows (status `excluded`, with the reason in `notes`): the destructors, the
+`DEFINE_STANDARD_RTTIEXT` members, the defaulted constructors of the stateless abstract
+`BVH_Set` and `BSplCLib/BSplSLib_EvaluatorFunction`, and the two Bezier overloads
+`BSplCLib::DN(U, N, Poles, Weights, P, VN)`, which the pinned header declares but no
+pinned source defines (libTKMath exports only the three B-spline `DN` overloads), so a
+call cannot link.

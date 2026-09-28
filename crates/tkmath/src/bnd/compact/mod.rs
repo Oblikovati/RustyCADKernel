@@ -19,6 +19,7 @@ pub use real::BoxReal;
 mod box2;
 pub use box2::CompactBox2;
 mod box3;
+mod relation;
 mod storage;
 pub use box3::CompactBox3;
 mod ball;

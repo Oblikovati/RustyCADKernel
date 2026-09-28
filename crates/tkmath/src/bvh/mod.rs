@@ -54,7 +54,7 @@ mod vector;
 pub use binned_builder::{
     BvhBin, BvhBinnedBuilder, BvhSplitPlane, get_sub_volumes, main_axis, split_primitives,
 };
-pub use bounding_box::{BvhBox, cwise_std_max, cwise_std_min};
+pub use bounding_box::{BvhBox, cwise_std_max, cwise_std_min, surface_area};
 pub use box_set::{BvhBoxSet, BvhIndexedBoxSet};
 pub use build_queue::BvhBuildQueue;
 pub use build_thread::{BvhBuildThread, BvhBuildTool};
@@ -73,7 +73,7 @@ pub use pair_distance::{BvhPairDistance, BvhPairDistanceTraverse};
 pub use primitive_set::{
     BvhBuilderHandle, BvhPrimitiveSet, BvhPrimitiveSet3d, BvhPrimitiveSetAccess,
 };
-pub use properties::{BvhProperties, BvhTransform};
+pub use properties::{BvhProperties, BvhTransform, matrix_op_inverse, matrix_op_multiply};
 pub use queue_builder::{
     BvhChildNodes, BvhPrimitiveRange, BvhQueueBuilder, add_queued_children, queue_build,
 };
@@ -99,4 +99,5 @@ pub use vector::{
     BvhArray2d, BvhArray2f, BvhArray2i, BvhArray3d, BvhArray3f, BvhArray3i, BvhArray4d, BvhArray4f,
     BvhArray4i, BvhArrayNt, BvhMat4d, BvhMat4f, BvhVec2d, BvhVec2f, BvhVec2i, BvhVec3d, BvhVec3f,
     BvhVec3i, BvhVec4d, BvhVec4f, BvhVec4i, BvhVecNt, BvhVector, Dimension, VectorType,
+    to_bnd_box_scalar,
 };

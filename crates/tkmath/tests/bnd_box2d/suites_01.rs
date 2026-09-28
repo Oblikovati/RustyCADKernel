@@ -100,7 +100,12 @@ fn Bnd_Box2dTest__Get_WithGap() {
 fn Bnd_Box2dTest__Get_StructuredBindings() {
     let mut aBox = BoundingBox2::default();
     aBox.update_bounds([1.0, 2.0], [10.0, 20.0]);
-    let [aXmin, aYmin, aXmax, aYmax] = aBox.limits();
+    let BoxLimits2 {
+        x_min: aXmin,
+        x_max: aXmax,
+        y_min: aYmin,
+        y_max: aYmax,
+    } = aBox.limits();
     assert_eq!(aXmin, 1.0);
     assert_eq!(aXmax, 10.0);
     assert_eq!(aYmin, 2.0);
