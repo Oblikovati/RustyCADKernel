@@ -90,14 +90,17 @@ fn integer_prefix(bytes: &[u8]) -> (i64, usize) {
     if count == 0 {
         return (0, 0);
     }
-    let magnitude = bytes[digits..digits + count]
-        .iter()
-        .fold(0_u64, |value, byte| {
-            value
-                .saturating_mul(10)
-                .saturating_add(u64::from(byte - b'0'))
-        });
+    let magnitude = decimal_magnitude(&bytes[digits..digits + count]);
     (clamp_long(magnitude, negative), digits + count)
+}
+
+/// The value of ASCII digits, saturating at `u64::MAX`; any overflow clamps to `long` anyway.
+fn decimal_magnitude(digits: &[u8]) -> u64 {
+    digits.iter().fold(0, |value: u64, byte| {
+        value
+            .saturating_mul(10)
+            .saturating_add(u64::from(byte - b'0'))
+    })
 }
 
 /// `LONG_MIN`/`LONG_MAX` saturation of a signed magnitude, as `strtol` reports overflow.
@@ -111,34 +114,32 @@ fn clamp_long(magnitude: u64, negative: bool) -> i64 {
 
 /// C's `%g` with the default precision 6 in the C locale.
 fn format_general(value: f64) -> String {
-    if value.is_nan() {
-        return if value.is_sign_negative() {
-            "-nan"
-        } else {
-            "nan"
-        }
-        .into();
-    }
-    if value.is_infinite() {
-        return if value.is_sign_negative() {
-            "-inf"
-        } else {
-            "inf"
-        }
-        .into();
+    if !value.is_finite() {
+        return format_non_finite(value);
     }
     let scientific = format!("{value:.5e}");
     let (mantissa, exponent) = scientific.split_once('e').unwrap_or((&scientific, "0"));
     let exponent: i32 = exponent.parse().unwrap_or(0);
+    // %g picks %e when the exponent is below -4 or at least the precision.
     if !(-4..6).contains(&exponent) {
-        let mantissa = mantissa.trim_end_matches('0').trim_end_matches('.');
-        return format!("{mantissa}e{exponent:+03}");
+        return format!("{}e{exponent:+03}", trim_fraction(mantissa));
     }
     let decimals = (5 - exponent).max(0) as usize;
-    let fixed = format!("{value:.decimals$}");
-    if fixed.contains('.') {
-        fixed.trim_end_matches('0').trim_end_matches('.').into()
+    trim_fraction(&format!("{value:.decimals$}")).into()
+}
+
+/// glibc's `inf`/`nan` spellings, signed by the sign bit.
+fn format_non_finite(value: f64) -> String {
+    let sign = if value.is_sign_negative() { "-" } else { "" };
+    let name = if value.is_nan() { "nan" } else { "inf" };
+    format!("{sign}{name}")
+}
+
+/// `%g` drops trailing fraction zeros and a bare decimal point.
+fn trim_fraction(digits: &str) -> &str {
+    if digits.contains('.') {
+        digits.trim_end_matches('0').trim_end_matches('.')
     } else {
-        fixed
+        digits
     }
 }
