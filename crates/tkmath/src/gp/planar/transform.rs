@@ -101,6 +101,24 @@ impl Transform2 {
             scale: 1.0,
         }
     }
+    /// Maps coordinates expressed in `from` onto the same coordinates in `to`
+    /// (gp_Trsf2d::SetTransformation(gp_Ax2d, gp_Ax2d)), keeping the native order: the
+    /// frame change into `to` first, then the product with the `from` columns;
+    /// `Transform2::transformation_between(circle.x_axis(), Axis2d::default())`.
+    pub fn transformation_between(from: Axis2d, to: Axis2d) -> Self {
+        let into_to = Self::transformation_to(to);
+        let third = from.direction().xy();
+        let fourth = Xy::new(-third.y(), third.x());
+        // gp_Mat2d(V3, V4) takes its arguments as columns.
+        let from_columns = [[third.x(), fourth.x()], [third.y(), fourth.y()]];
+        let from_origin = from.location().xy().multiplied_matrix(into_to.matrix);
+        Self {
+            form: TransformForm::Compound,
+            matrix: multiply_matrix(into_to.matrix, from_columns),
+            offset: into_to.offset + from_origin,
+            scale: 1.0,
+        }
+    }
     /// Reads a scaled matrix coefficient or the translation (column 3) by one-based index;
     /// `transform.value(1,3)?`.
     pub fn value(&self, row: i32, column: i32) -> Result<f64, Failure> {

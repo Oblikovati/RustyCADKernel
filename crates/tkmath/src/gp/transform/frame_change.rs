@@ -11,7 +11,7 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of FoundationClasses/TKMath/gp/gp_Trsf.cxx SetTransformation(gp_Ax3) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of FoundationClasses/TKMath/gp/gp_Trsf.cxx SetTransformation(gp_Ax3) and SetTransformation(gp_Ax3, gp_Ax3) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 use super::super::{Axis3, Failure, Matrix3, Transform3, TransformForm, Xyz};
 impl Transform3 {
@@ -29,6 +29,25 @@ impl Transform3 {
             form: TransformForm::Compound,
             matrix,
             offset,
+            scale: 1.0,
+        }
+    }
+    /// Maps coordinates expressed in `from` onto the same coordinates in `to`
+    /// (gp_Trsf::SetTransformation(gp_Ax3, gp_Ax3)), keeping the native order: the frame
+    /// change into `to` first, then the product with the `from` direction columns;
+    /// `Transform3::transformation_between(sphere.position(), Axis3::default())`.
+    pub fn transformation_between(from: Axis3, to: Axis3) -> Self {
+        let into_to = Self::transformation_to(to);
+        let from_columns = Matrix3::from_columns(
+            Xyz::from(from.x_direction()),
+            Xyz::from(from.y_direction()),
+            Xyz::from(from.direction()),
+        );
+        let from_origin = into_to.matrix.apply(from.location().xyz());
+        Self {
+            form: TransformForm::Compound,
+            matrix: into_to.matrix * from_columns,
+            offset: into_to.offset + from_origin,
             scale: 1.0,
         }
     }
