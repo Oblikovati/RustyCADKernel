@@ -16,7 +16,7 @@
 
 //! The 2D arc algorithms: trimmed Geom2d conics.
 use crate::gce::{self, ErrorType, Root};
-use crate::line_extrema::{lines2d_intersection, lines2d_point};
+use crate::int_ana2d::AnaIntersection;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::{
     Geom2dCircle, Geom2dCurve, Geom2dEllipse, Geom2dHyperbola, Geom2dParabola, Geom2dTrimmedCurve,
@@ -85,9 +85,11 @@ impl MakeArcOfCircle2d {
         let middle = Point2::new((p1.x() + p2.x()) / 2.0, (p1.y() + p2.y()) / 2.0);
         let bisector = Line2::new(middle, Direction2::new(-dir.y(), dir.x())?);
         let normal = Line2::new(p1, Direction2::new(-tangent.y(), tangent.x())?);
-        let Some(center) = lines2d_point(lines2d_intersection(bisector, normal))? else {
+        let intersection = AnaIntersection::lines(bisector, normal);
+        if !intersection.is_done() || intersection.is_empty()? {
             return Ok(Self::failed(ErrorType::ConfusedPoints));
-        };
+        }
+        let center: Point2 = intersection.point(1)?.value();
         let radius: f64 = (center.distance(p1) + center.distance(p2)) / 2.0;
         let circle: Circle2 = gce::MakeCirc2d::from_center(center, radius, true)?.operator()?;
         let sense: bool = tangent.crossed(Vector2::from(dir)) > 0.0;

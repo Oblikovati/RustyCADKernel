@@ -15,7 +15,7 @@
 
 //! gce_MakeCirc2d: construction of gp_Circ2d.
 use super::{ErrorType, gce_result};
-use crate::line_extrema::{lines2d_intersection, lines2d_point};
+use crate::int_ana2d::AnaIntersection;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{
@@ -110,8 +110,8 @@ impl MakeCirc2d {
 
     /// gce_MakeCirc2d(P1, P2, P3): the circle through three points, centered at
     /// the intersection of two perpendicular bisectors and oriented so that the
-    /// points follow each other; gce_IntersectionError never happens because the
-    /// line intersection is always done. Points within gp::Resolution() give a
+    /// points follow each other; gce_IntersectionError when the line intersection
+    /// is not done (never: IntAna2d always completes two lines). Points within gp::Resolution() give a
     /// null circle; collinear points leave the status unassigned natively (see
     /// [`super::Root`]) and the circle at its default value.
     /// `MakeCirc2d::through_points(a, b, c)?`.
@@ -122,10 +122,14 @@ impl MakeCirc2d {
             return Ok(Self::built(Circle2::from_x_axis(x_axis_at(p1), 0.0, true)?));
         }
         let (l1, l2) = bisectors([p1, p2, p3], dists)?;
-        match lines2d_point(lines2d_intersection(l1, l2))? {
-            Some(center) => Self::around_center(center, [p1, p2, p3]),
-            None => Ok(Self::default()),
+        let intersection = AnaIntersection::lines(l1, l2);
+        if !intersection.is_done() {
+            return Ok(Self::failed(ErrorType::IntersectionError));
         }
+        if intersection.is_empty()? {
+            return Ok(Self::default());
+        }
+        Self::around_center(intersection.point(1)?.value(), [p1, p2, p3])
     }
 
     /// The circle of center `center` through `points`, of mean radius, reversed

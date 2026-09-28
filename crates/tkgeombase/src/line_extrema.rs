@@ -11,21 +11,20 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of the line cases of Extrema_ExtElC.cxx, Extrema_ExtPElC.cxx and
-// IntAna2d_AnaIntersection_1.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of the line cases of Extrema_ExtElC.cxx and Extrema_ExtPElC.cxx
+// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! The line computations of the Extrema and IntAna2d packages that the gce and GC
-//! constructions call: the extremum between two 3D lines
-//! (`Extrema_ExtElC(gp_Lin, gp_Lin, Tol)`), the projection of a point on a bounded
-//! line (`Extrema_ExtPElC(gp_Pnt, gp_Lin, Tol, Uinf, Usup)`) and the intersection
-//! of two 2D lines (`IntAna2d_AnaIntersection(gp_Lin2d, gp_Lin2d)`).
-//! They keep the native operation order; the complete Extrema and IntAna2d
-//! packages will replace them when they are ported.
+//! The line computations of the Extrema package that the gce and GC constructions
+//! call: the extremum between two 3D lines (`Extrema_ExtElC(gp_Lin, gp_Lin, Tol)`)
+//! and the projection of a point on a bounded line
+//! (`Extrema_ExtPElC(gp_Pnt, gp_Lin, Tol, Uinf, Usup)`). They keep the native
+//! operation order; the complete Extrema package will replace them when it is
+//! ported. (The 2D line intersection they also held is now the IntAna2d port,
+//! crate::int_ana2d.)
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkmath::elclib;
-use rustycad_tkmath::gp::{self, Line2, Line3, Point2, Point3, Vector3, Xyz};
+use rustycad_tkmath::gp::{self, Line3, Point3, Vector3, Xyz};
 
 /// The result of `Extrema_ExtElC(gp_Lin, gp_Lin, Tol)`: always done, with one
 /// extremum (NbExt() == 1).
@@ -114,72 +113,4 @@ pub(crate) fn line_projection(
         return Err(Failure::with_type("StdFail_NotDone", &message, ""));
     }
     Ok(origin.translated(v1 * distance))
-}
-
-/// The line-line case of IntAna2d_AnaIntersection, which is always done: one
-/// point, parallel distinct lines or identical lines ([`lines2d_point`] reads it
-/// as the callers do through IsEmpty and Point(1)).
-pub(crate) fn lines2d_intersection(first: Line2, second: Line2) -> Lines2dIntersection {
-    let (a1, b1, c1) = first.coefficients();
-    let (a2, b2, c2) = second.coefficients();
-    // std::max, not f64::max: the pivot choice must follow the native comparisons.
-    let det: f64 = std_max(a1.abs(), std_max(a2.abs(), std_max(b1.abs(), b2.abs())));
-    let ((al1, be1, ga1), (al2, be2, ga2)) = pivot_rows(det, (a1, b1, c1), (a2, b2, c2));
-    let rap: f64 = al2 / al1;
-    let denom: f64 = be2 - rap * be1;
-    if denom.abs() <= f64::EPSILON {
-        if (ga2 - rap * ga1).abs() <= f64::EPSILON {
-            return Lines2dIntersection::Identical;
-        }
-        return Lines2dIntersection::Parallel;
-    }
-    let xs: f64 = (be1 * ga2 / al1 - be2 * ga1 / al1) / denom;
-    let ys: f64 = (rap * ga1 - ga2) / denom;
-    // The solution is in the pivoted variables: undo the exchange of X and Y.
-    let exchanged: bool = (a1.abs() != det && b1.abs() == det)
-        || (a1.abs() != det && b1.abs() != det && a2.abs() != det);
-    if exchanged {
-        return Lines2dIntersection::Point(Point2::new(ys, xs));
-    }
-    Lines2dIntersection::Point(Point2::new(xs, ys))
-}
-
-/// The outcome of the 2D line intersection.
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub(crate) enum Lines2dIntersection {
-    /// One intersection point (NbPoints() == 1).
-    Point(Point2),
-    /// Parallel distinct lines: IsEmpty() is true.
-    Parallel,
-    /// Identical lines: IsEmpty() is false but there is no point.
-    Identical,
-}
-
-/// `Intp.IsEmpty()` then `Intp.Point(1).Value()`: `Ok(None)` when empty,
-/// Standard_OutOfRange for identical lines (NbPoints() == 0).
-pub(crate) fn lines2d_point(intersection: Lines2dIntersection) -> Result<Option<Point2>, Failure> {
-    match intersection {
-        Lines2dIntersection::Point(point) => Ok(Some(point)),
-        Lines2dIntersection::Parallel => Ok(None),
-        Lines2dIntersection::Identical => Err(Failure::out_of_range(
-            "IntAna2d_AnaIntersection::Point(1) - identical lines have 0 points; expected 1 <= N <= NbPoints()",
-        )),
-    }
-}
-
-type Row = (f64, f64, f64);
-
-/// The row and column exchange of IntAna2d_AnaIntersection_1.cxx: the largest
-/// coefficient `det` becomes the pivot `al1`.
-fn pivot_rows(det: f64, first: Row, second: Row) -> (Row, Row) {
-    let ((a1, b1, c1), (a2, b2, c2)) = (first, second);
-    if a1.abs() == det {
-        ((a1, b1, c1), (a2, b2, c2))
-    } else if b1.abs() == det {
-        ((b1, a1, c1), (b2, a2, c2))
-    } else if a2.abs() == det {
-        ((a2, b2, c2), (a1, b1, c1))
-    } else {
-        ((b2, a2, c2), (b1, a1, c1))
-    }
 }
