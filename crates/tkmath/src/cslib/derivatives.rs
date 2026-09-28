@@ -61,7 +61,7 @@ pub fn dnnuv_osculating(
             let left: Vector3 = derivative_at(der_surf1, i + 1, j)?;
             let right: Vector3 = derivative_at(der_surf2, nu - i, nv + 1 - j)?;
             let binomial: f64 = plib_bin(nu, i)? * plib_bin(nv, j)?;
-            result = result + left.crossed(right) * binomial;
+            result += left.crossed(right) * binomial;
         }
     }
     Ok(result)

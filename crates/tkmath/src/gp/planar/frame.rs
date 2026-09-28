@@ -221,7 +221,11 @@ mod tests {
         let zero = Direction2::from_stored(Xy::new(0.0, 0.0));
         let failure = Axis22d::new(Point2::default(), zero, true).unwrap_err();
         assert_eq!(failure.exception_type(), "Standard_ConstructionError");
-        assert!(failure.message().contains("(-0, 0)"), "{}", failure.message());
+        assert!(
+            failure.message().contains("(-0, 0)"),
+            "{}",
+            failure.message()
+        );
         let axis = Axis2d::new(Point2::new(1.0, 2.0), zero);
         assert!(Axis22d::from_axis(axis, false).is_err());
         assert!(Axis22d::with_directions(Point2::default(), zero, Direction2::Y).is_err());

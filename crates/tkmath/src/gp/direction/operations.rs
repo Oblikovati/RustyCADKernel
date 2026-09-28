@@ -13,7 +13,7 @@
 // commercial license or contractual agreement.
 
 use super::super::{
-    Axis1, Axis2, Direction3, Failure, Transform3, TransformForm, Vector3, Xyz, cross, dot,
+    Axis1, Axis2, Direction3, Failure, Transform3, TransformForm, Vector3, Xyz, cross, dot, reflect,
 };
 use rustycad_tkernel::standard::dump::{self, DumpOutput};
 use std::io;
@@ -140,15 +140,8 @@ impl Direction3 {
         *self = self.mirrored_plane(frame);
     }
     fn mirror_coefficients(self, normal: [f64; 3]) -> Self {
-        let [a, b, c] = normal;
-        let [x, y, z] = self.coordinates;
-        let (m1, m2, m3) = (2.0 * a * b, 2.0 * a * c, 2.0 * b * c);
         Self {
-            coordinates: [
-                ((2.0 * a * a) - 1.0) * x + m1 * y + m2 * z,
-                m1 * x + ((2.0 * b * b) - 1.0) * y + m3 * z,
-                m2 * x + m3 * y + ((2.0 * c * c) - 1.0) * z,
-            ],
+            coordinates: reflect(normal, self.coordinates),
         }
     }
     /// Rotates without the extra normalization performed by Transform; `direction.rotated(axis,angle)?`.

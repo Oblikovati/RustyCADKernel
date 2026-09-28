@@ -14,7 +14,9 @@
 // Rust translation of FoundationClasses/TKMath/gp/gp_Vec2d.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! gp_Vec2d: a planar vector with magnitude.
-use super::{Direction2, Failure, Point2, Xy, construction, oriented_angle};
+use super::{
+    Direction2, Failure, Point2, Xy, construction, oriented_angle, vector_with_null_magnitude,
+};
 use std::cmp::Ordering;
 mod geometry;
 mod operators;
@@ -135,11 +137,9 @@ impl Vector2 {
         let first = self.magnitude();
         let second = other.magnitude();
         if first <= f64::MIN_POSITIVE || second <= f64::MIN_POSITIVE {
-            return Err(Failure::with_type(
-                "gp_VectorWithNullMagnitude",
-                &format!("gp_Vec2d::Angle() - magnitudes {first} and {second}"),
-                "",
-            ));
+            return Err(vector_with_null_magnitude(&format!(
+                "gp_Vec2d::Angle() - magnitudes {first} and {second}"
+            )));
         }
         let product = first * second;
         Ok(oriented_angle(
