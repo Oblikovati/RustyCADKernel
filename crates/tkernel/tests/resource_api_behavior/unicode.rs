@@ -161,6 +161,12 @@ fn current_format_is_process_wide_and_read_from_charset() {
     assert_eq!(manager.ext_value("title").unwrap().as_utf16(), &[0xE9]);
     manager.set_resource_ext("ext", &[0x20AC, 0, 0x41]).unwrap();
     assert_eq!(manager.value("ext").unwrap().as_bytes(), "€".as_bytes());
+    let mut text = ExtendedString::default();
+    ResourceUnicode::convert_current_to_unicode("€".as_bytes(), &mut text).unwrap();
+    assert_eq!(text.as_utf16(), &[0x20AC]);
+    let mut buffer = [0u8; 4];
+    assert!(ResourceUnicode::convert_unicode_to_current(&text, &mut buffer).unwrap());
+    assert_eq!(buffer, [0xE2, 0x82, 0xAC, 0]);
     ResourceUnicode::set_format(FormatType::Cp1252);
     assert!(manager.set_resource_ext("cp", &[0x20AC]).is_err());
     assert_eq!(manager.ext_value("cp").unwrap().as_utf16(), &[0x20AC]);

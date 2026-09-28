@@ -107,6 +107,19 @@ impl ResourceUnicode {
         }
         Ok(())
     }
+    /// Converts bytes in the current format (`get_format`) to UTF-16 (the format-less native
+    /// `ConvertFormatToUnicode`); `ResourceUnicode::convert_current_to_unicode(b"text", &mut text)?`.
+    pub fn convert_current_to_unicode(from: &[u8], to: &mut ExtendedString) -> Result<(), Failure> {
+        Self::convert_format_to_unicode(Self::get_format()?, from, to)
+    }
+    /// Converts UTF-16 to the current format (the format-less native `ConvertUnicodeToFormat`);
+    /// `ResourceUnicode::convert_unicode_to_current(&text, &mut buffer)?`.
+    pub fn convert_unicode_to_current(
+        from: &ExtendedString,
+        to: &mut [u8],
+    ) -> Result<bool, Failure> {
+        Self::convert_unicode_to_format(Self::get_format()?, from, to)
+    }
     /// Converts UTF-16 to `format` in a buffer of `maxsize = to.len()` bytes (native
     /// `ConvertUnicodeToFormat`); GBK and Big5 raise Standard_NotImplemented;
     /// `ResourceUnicode::convert_unicode_to_format(FormatType::Utf8, &text, &mut buffer)?`.
