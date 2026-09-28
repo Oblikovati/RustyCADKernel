@@ -49,8 +49,8 @@ pub use hyperbola::Hyperbola;
 pub use line::Line;
 pub use parabola::Parabola;
 pub use planar::{
-    convert_planar_result, line_plane, project_bezier, project_bspline, project_offset,
-    to_search_mode_2d,
+    PlanarEvaluator2d, PlanarQuery, convert_planar_result, line_plane, perform_planar,
+    project_bezier, project_bspline, project_offset, to_search_mode_2d,
 };
 
 pub(crate) use crate::extrema_pc_core::analytic::{found_status, is_invalid_input};
