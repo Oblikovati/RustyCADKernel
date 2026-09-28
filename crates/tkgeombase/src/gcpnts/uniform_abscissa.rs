@@ -179,16 +179,7 @@ impl UniformAbscissa {
         u2: f64,
         toler: f64,
     ) -> Result<(), Failure> {
-        if nb_points <= 1 {
-            let message = format!(
-                "GCPnts_UniformAbscissa::Initialize() - number of points should be >= 2, got {nb_points}"
-            );
-            return Err(Failure::with_type(
-                "Standard_ConstructionError",
-                &message,
-                "",
-            ));
-        }
+        check_nb_points("GCPnts_UniformAbscissa::Initialize()", nb_points)?;
         self.my_nb_points = 0;
         self.my_done = false;
         let (eps, l) = resolution_and_length(curve, u1, u2, toler)?;
@@ -211,6 +202,21 @@ impl UniformAbscissa {
             size,
         )
     }
+}
+
+/// Standard_ConstructionError_Raise_if(NbPoints <= 1) of the NbPoints initializations
+/// of GCPnts_UniformAbscissa and GCPnts_QuasiUniformAbscissa;
+/// `check_nb_points("GCPnts_UniformAbscissa::Initialize()", 2)?`.
+pub(super) fn check_nb_points(member: &str, nb_points: i32) -> Result<(), Failure> {
+    if nb_points > 1 {
+        return Ok(());
+    }
+    let message = format!("{member} - number of points should be >= 2, got {nb_points}");
+    Err(Failure::with_type(
+        "Standard_ConstructionError",
+        &message,
+        "",
+    ))
 }
 
 // The parametric resolution of max(Toler, Confusion) and the length of [U1, U2]

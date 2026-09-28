@@ -19,6 +19,7 @@
 //! `GCPnts_QuasiUniformAbscissa`: a given number of points at about equal
 //! curvilinear distances, from the chord lengths of a polygon for Bezier and B-spline
 //! curves.
+use super::uniform_abscissa::check_nb_points;
 use super::{TCurveTypes, UniformAbscissa};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
@@ -98,16 +99,17 @@ impl QuasiUniformAbscissa {
                 curve, nb_points, u1, u2, -1.0,
             )?);
         }
-        if nb_points <= 1 {
-            let message = format!(
-                "GCPnts_QuasiUniformAbscissa::Initialize(), number of points should be >= 2, got {nb_points}"
-            );
-            return Err(Failure::with_type(
-                "Standard_ConstructionError",
-                &message,
-                "",
-            ));
-        }
+        check_nb_points("GCPnts_QuasiUniformAbscissa::Initialize()", nb_points)?;
+        self.polygon_grid(curve, nb_points, (u1, u2))
+    }
+    // The Bezier and B-spline path: parameters at equal lengths of the polygon of
+    // `2 NbPoints` points, or at equal parameter steps for a null polygon.
+    fn polygon_grid<C: TCurveTypes + ?Sized>(
+        &mut self,
+        curve: &C,
+        nb_points: i32,
+        (u1, u2): (f64, f64),
+    ) -> Result<(), Failure> {
         self.my_nb_points = nb_points;
         let (table, length) = length_table(curve, nb_points, (u1, u2))?;
         // The new array replaces the old one before it is filled, as natively.

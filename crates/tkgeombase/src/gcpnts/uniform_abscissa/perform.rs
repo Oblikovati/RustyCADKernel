@@ -109,18 +109,9 @@ pub(super) fn perform<C: TCurveTypes + ?Sized>(
     set(params, index, uu1)?;
     loop {
         let start: f64 = at(params, index)?;
-        // MSV 21.04.2004: OCC5739 (GCPnts_UniformAbscissa gives incorrect distribution
-        // of points): the start is clamped to U2 instead of ending the distribution.
-        let ui: f64 = if start + delta > uu2 {
-            uu2
-        } else {
-            start + delta
-        };
-        let finder =
-            AbscissaPoint::from_start_with_tolerance(curve, run.abscissa, start, ui, run.eps)?;
-        if finder.is_done() {
+        if let Some(found) = search_next(curve, run, (start, delta), uu2)? {
             index += 1;
-            if !store_found(params, index, finder.parameter()?, (uu2, run.eps))? {
+            if !store_found(params, index, found, (uu2, run.eps))? {
                 break;
             }
             continue;
@@ -133,6 +124,28 @@ pub(super) fn perform<C: TCurveTypes + ?Sized>(
     }
     *nb_points = index;
     Ok(is_local_done)
+}
+
+// The GCPnts_AbscissaPoint search of the point at the abscissa from `start`, started
+// one step `delta` ahead; None when it is not done.
+fn search_next<C: TCurveTypes + ?Sized>(
+    curve: &C,
+    run: AbscissaRun,
+    (start, delta): (f64, f64),
+    uu2: f64,
+) -> Result<Option<f64>, Failure> {
+    // MSV 21.04.2004: OCC5739 (GCPnts_UniformAbscissa gives incorrect distribution of
+    // points): the start is clamped to U2 instead of ending the distribution.
+    let ui: f64 = if start + delta > uu2 {
+        uu2
+    } else {
+        start + delta
+    };
+    let finder = AbscissaPoint::from_start_with_tolerance(curve, run.abscissa, start, ui, run.eps)?;
+    if !finder.is_done() {
+        return Ok(None);
+    }
+    Ok(Some(finder.parameter()?))
 }
 
 // Store the found parameter at `index` (U2 when within EPSILON of it or beyond);
