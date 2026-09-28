@@ -13,137 +13,187 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of FoundationClasses/TKMath/TopLoc/TopLoc_Location.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of FoundationClasses/TKMath/TopLoc/TopLoc_Location.cxx and
+// TopLoc_Location.lxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! Shared datum chains with eagerly computed transformations (OCCT OCC25545).
+use super::{Datum3, ItemLocation, SListOfItemLocation};
 use crate::gp::Transform3;
-use rustycad_tkernel::standard::Failure;
-use std::sync::Arc;
-/// A datum's identity is distinct from its numeric transform; `Datum3::new(transform)`.
-#[derive(Debug)]
-pub struct Datum3 {
-    transform: Transform3,
-}
-impl Datum3 {
-    /// Creates an independently identifiable coordinate system; `Datum3::new(transform)`.
-    pub const fn new(transform: Transform3) -> Self {
-        Self { transform }
-    }
-    /// Borrows the original transform; `datum.transformation()`.
-    pub const fn transformation(&self) -> &Transform3 {
-        &self.transform
-    }
-}
-#[derive(Debug)]
-struct LocationItem {
-    datum: Arc<Datum3>,
-    power: i32,
-    tail: Location,
-    cached: Transform3,
-}
-/// Immutable TopLoc_Location chain, safe for concurrent reads; `Location::default()`.
-#[derive(Clone, Debug, Default)]
+use rustycad_tkernel::{
+    ncollection::HashKey,
+    standard::{
+        Failure, Handle,
+        dump::{self, DumpOutput, DumpStream},
+        hash_bytes,
+    },
+};
+use std::io::{self, Write};
+/// `TopLoc_Location`: an immutable chain of powered datums, safe for concurrent reads; `Location::default()`.
+#[derive(Clone, Default)]
 pub struct Location {
-    head: Option<Arc<LocationItem>>,
+    items: SListOfItemLocation,
 }
 impl Location {
     /// Allocates a new datum even for an identity matrix; `Location::new(transform)`.
     pub fn new(transform: Transform3) -> Self {
-        Self::from_datum(Arc::new(Datum3::new(transform)))
+        Self::from_datum(Handle::new(Datum3::new(transform)))
     }
     /// Shares datum identity across locations; `Location::from_datum(datum.clone())`.
-    pub fn from_datum(datum: Arc<Datum3>) -> Self {
-        Self::default()
-            .prepend(datum, 1)
-            .expect("power one never inverts a datum")
+    pub fn from_datum(datum: Handle<Datum3>) -> Self {
+        let mut location = Self::default();
+        // Power one never inverts the datum, so gp_Trsf::Powered cannot fail here.
+        let item = ItemLocation::new(datum, 1).expect("power one never inverts a datum");
+        location.items.construct(item);
+        location
+    }
+    pub(super) const fn from_items(items: SListOfItemLocation) -> Self {
+        Self { items }
+    }
+    pub(super) const fn items(&self) -> &SListOfItemLocation {
+        &self.items
+    }
+    pub(super) const fn items_mut(&mut self) -> &mut SListOfItemLocation {
+        &mut self.items
     }
     /// Empty chains alone are identity locations; `Location::default().is_identity()`.
     pub const fn is_identity(&self) -> bool {
-        self.head.is_none()
+        self.items.is_empty()
     }
-    /// Returns the construction-time cached transformation; `location.transformation()`.
+    /// Resets to the identity, as `Identity`; `location.identity()`.
+    pub fn identity(&mut self) {
+        self.items.clear();
+    }
+    /// Clears the item list, as `Clear`; `location.clear()`.
+    pub fn clear(&mut self) {
+        self.items.clear();
+    }
+    /// Borrows the most recently prepended datum, or fails with `Standard_NoSuchObject`; `location.first_datum()?`.
+    pub fn first_datum(&self) -> Result<&Handle<Datum3>, Failure> {
+        Ok(&self.items.value()?.datum)
+    }
+    /// Returns the first datum's exponent, or fails with `Standard_NoSuchObject`; `location.first_power()?`.
+    pub fn first_power(&self) -> Result<i32, Failure> {
+        Ok(self.items.value()?.power)
+    }
+    /// Borrows the chain without its first item; the identity is its own tail; `location.next_location()`.
+    pub fn next_location(&self) -> &Self {
+        self.items.node().map_or(self, |node| node.tail_location())
+    }
+    /// Returns the cached product of every datum power; `location.transformation()`.
     pub fn transformation(&self) -> Transform3 {
-        self.head
-            .as_ref()
-            .map_or_else(Transform3::default, |item| item.cached)
+        self.items
+            .value()
+            .map_or_else(|_| Transform3::default(), |item| item.trsf)
     }
-    fn prepend(self, datum: Arc<Datum3>, power: i32) -> Result<Self, Failure> {
-        let cached = self
-            .transformation()
-            .multiplied(datum.transform.powered(power)?);
-        Ok(Self {
-            head: Some(Arc::new(LocationItem {
-                datum,
-                power,
-                tail: self,
-                cached,
-            })),
-        })
-    }
-    /// Borrows the most recently prepended datum; `location.first_datum()`.
-    pub fn first_datum(&self) -> Option<&Arc<Datum3>> {
-        self.head.as_ref().map(|item| &item.datum)
-    }
-    /// Returns the first datum's exponent; `location.first_power()`.
-    pub fn first_power(&self) -> Option<i32> {
-        self.head.as_ref().map(|item| item.power)
-    }
-    /// Borrows the remaining chain; `location.next_location()`.
-    pub fn next_location(&self) -> Option<&Self> {
-        self.head.as_ref().map(|item| &item.tail)
-    }
-    /// Composes datum chains and cancels adjacent inverse powers; `left.multiplied(&right)`.
-    pub fn multiplied(&self, other: &Self) -> Result<Self, Failure> {
-        if self.is_identity() {
-            return Ok(other.clone());
-        }
+    /// Hashes datum addresses and powers with OCCT's Murmur chain; the identity hashes to zero.
+    /// Addresses make the value specific to one process, as natively; `location.hash_code()`.
+    pub fn hash_code(&self) -> usize {
         let mut items = Vec::new();
-        let mut cursor = other;
-        while let Some(item) = &cursor.head {
-            items.push(item);
-            cursor = &item.tail;
+        let mut cursor = &self.items;
+        while let Ok(item) = cursor.value() {
+            items.push((item.datum.as_ptr() as usize, item.power));
+            cursor = cursor.tail();
         }
-        let mut result = self.clone();
-        for item in items.into_iter().rev() {
-            result = result.append_item(item)?;
-        }
-        Ok(result)
+        Self::hash_items(&items)
     }
-    fn append_item(mut self, item: &LocationItem) -> Result<Self, Failure> {
-        let mut power = item.power;
-        if let Some(head) = &self.head
-            && Arc::ptr_eq(&head.datum, &item.datum)
-        {
-            power += head.power;
-            self = head.tail.clone();
+    /// The HashCode recurrence over `(datum address, power)` pairs, head first;
+    /// `Location::hash_items(&[(0x1000, 1)])`.
+    pub fn hash_items(items: &[(usize, i32)]) -> usize {
+        if items.is_empty() {
+            return 0;
         }
-        if power == 0 {
-            Ok(self)
+        let mut hash: usize = if cfg!(target_pointer_width = "64") {
+            0xA329_F1D3_A586_u64 as usize
         } else {
-            self.prepend(item.datum.clone(), power)
+            0xc70f_6907
+        };
+        for (address, power) in items {
+            let power_hash = hash_bytes(&power.to_ne_bytes());
+            let combined = [*address, power_hash, hash];
+            let bytes: Vec<u8> = combined
+                .iter()
+                .flat_map(|word| word.to_ne_bytes())
+                .collect();
+            hash = hash_bytes(&bytes);
         }
+        hash
     }
-    /// Reverses datum order and negates exponents; `location.inverted()`.
-    pub fn inverted(&self) -> Result<Self, Failure> {
-        let mut result = Self::default();
-        let mut cursor = self;
-        while let Some(item) = &cursor.head {
-            result = result.prepend(item.datum.clone(), -item.power)?;
-            cursor = &item.tail;
+    /// Same datums (by identity) with the same powers, in order; `left.is_equal(&right)`.
+    pub fn is_equal(&self, other: &Self) -> bool {
+        if self.items.same_node(&other.items) {
+            return true;
         }
-        Ok(result)
+        let (mut left, mut right) = (&self.items, &other.items);
+        while let (Ok(a), Ok(b)) = (left.value(), right.value()) {
+            if a.datum != b.datum || a.power != b.power {
+                return false;
+            }
+            (left, right) = (left.tail(), right.tail());
+        }
+        left.is_empty() && right.is_empty()
+    }
+    /// Negation of [`Location::is_equal`]; `left.is_different(&right)`.
+    pub fn is_different(&self, other: &Self) -> bool {
+        !self.is_equal(other)
+    }
+    /// OCCT's scale comparison precision; `Location::scale_prec() == 1e-14`.
+    pub const fn scale_prec() -> f64 {
+        1.0e-14
+    }
+    /// Writes the transformation and the identity flag; `location.dump_json(&mut stream, -1)?`.
+    pub fn dump_json(&self, output: &mut impl DumpOutput, depth: i32) -> io::Result<()> {
+        dump::dump_class_begin(output, "TopLoc_Location")?;
+        if depth != 0 {
+            let mut field = DumpStream::default();
+            self.transformation().dump_json(&mut field)?;
+            dump::dump_key_to_class(output, "Transformation", field.text())?;
+        }
+        dump::dump_integer(output, "IsIdentity", i32::from(self.is_identity()))
+    }
+    /// Prints each exponent and datum, head first; `location.shallow_dump(&mut out)?`.
+    pub fn shallow_dump(&self, output: &mut impl Write) -> io::Result<()> {
+        write!(output, "TopLoc_Location : ")?;
+        if self.is_identity() {
+            writeln!(output, "Identity")?;
+        }
+        let mut cursor = &self.items;
+        while let Ok(item) = cursor.value() {
+            writeln!(output)?;
+            writeln!(output, "       Exponent : {}", item.power)?;
+            item.datum.shallow_dump(output)?;
+            cursor = cursor.tail();
+        }
+        writeln!(output)
+    }
+}
+impl From<&Location> for Transform3 {
+    fn from(location: &Location) -> Self {
+        location.transformation()
     }
 }
 impl PartialEq for Location {
     fn eq(&self, other: &Self) -> bool {
-        let (mut left, mut right) = (self, other);
-        while let (Some(a), Some(b)) = (&left.head, &right.head) {
-            if !Arc::ptr_eq(&a.datum, &b.datum) || a.power != b.power {
-                return false;
-            }
-            (left, right) = (&a.tail, &b.tail);
-        }
-        left.is_identity() && right.is_identity()
+        self.is_equal(other)
     }
 }
 impl Eq for Location {}
+impl std::hash::Hash for Location {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        state.write_usize(self.hash_code());
+    }
+}
+impl HashKey for Location {
+    fn occt_hash(&self) -> usize {
+        self.hash_code()
+    }
+}
+impl std::fmt::Debug for Location {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let mut list = formatter.debug_list();
+        let mut cursor = &self.items;
+        while let Ok(item) = cursor.value() {
+            list.entry(&(item.datum.as_ptr(), item.power));
+            cursor = cursor.tail();
+        }
+        list.finish()
+    }
+}
