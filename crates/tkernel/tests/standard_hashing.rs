@@ -23,7 +23,10 @@ fn hash_bytes_is_murmur64a_with_the_optimal_seed() {
     // A four-byte int goes through the tail path only.
     assert_eq!(hash_bytes(&3_i32.to_le_bytes()), 1372453362253495625);
     // 24 bytes: three full 8-byte blocks.
-    assert_eq!(hash_bytes(b"Geom2dEval_SineWaveCurve"), 12281767022877799982);
+    assert_eq!(
+        hash_bytes(b"Geom2dEval_SineWaveCurve"),
+        12281767022877799982
+    );
 }
 
 #[test]
@@ -37,6 +40,10 @@ fn short_c_strings_use_fnv_over_signed_chars() {
 fn ascii_string_hash_is_the_c_string_hash() {
     for text in ["", "a", "abc", "abcd", "Geom2dEval_TBezierCurve"] {
         let ascii = AsciiString::from(text);
-        assert_eq!(ascii.hash_code(), c_string_hash(text.as_bytes()), "{text:?}");
+        assert_eq!(
+            ascii.hash_code(),
+            c_string_hash(text.as_bytes()),
+            "{text:?}"
+        );
     }
 }
