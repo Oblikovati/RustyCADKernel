@@ -133,6 +133,25 @@ evaluators are `const` and fill the mutable cache; the port takes the write lock
 `EvalD0` to `EvalD3` and a read lock elsewhere. An offset curve holds a nested
 adaptor on its basis, which is a separate object with its own lock.
 
+`Adaptor3d_Curve` and `Adaptor3d_Surface` are the traits `Adaptor3dCurve` and
+`Adaptor3dSurface` with the same Standard_NotImplemented defaults and the base
+instances `Adaptor3dCurveBase` and `Adaptor3dSurfaceBase`. `GeomAdaptor_Curve` and
+`GeomAdaptor_Surface` keep their kind, gp geometry, span caches and swept or offset
+data in one `SharedState`. `GeomAdaptor_SurfaceOfLinearExtrusion` and
+`GeomAdaptor_SurfaceOfRevolution` derive from `GeomAdaptor_Surface` natively: each
+struct embeds a `GeomAdaptorSurface` parent, writes the protected base state
+through it when the direction or axis is loaded, overrides the native virtual
+members and forwards the inherited ones. `Adaptor3d_HVertex` and
+`Adaptor3d_TopolTool` are `Handle`-shared structs whose virtual members are
+inherent methods, because no port overrides them.
+
+The native offset, extrusion and revolution templates take either a Geom object
+or an adaptor as their basis. In Rust they are generic over
+`BasisCurveEvaluator`/`BasisSurfaceEvaluator` (`geom::basis_eval`), implemented for
+the Geom curves and surfaces, for `dyn Adaptor3dCurve` and for
+`GeomAdaptorSurface`. `Geom_OsculatingSurface` samples its basis through the full
+`GeomAdaptorSurface`.
+
 ## 8. Eval curves and hashers
 
 The Geom2dEval curves (`Geom2dEvalSineWaveCurve`, `Geom2dEvalTBezierCurve`...) follow

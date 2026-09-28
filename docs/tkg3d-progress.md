@@ -8,10 +8,10 @@ private helpers `Geom_OffsetCurveUtils.pxx`, `Geom_OffsetSurfaceUtils.pxx`,
 `Geom_OsculatingSurface`, and the whole `AdvApprox` package, which
 `Geom_OffsetSurface::UIso`/`VIso` need. The whole `GeomEval` package (the eleven
 curves and surfaces), the whole `GeomHash` package (every public and private
-hasher, mesh hashers included) and the `TopAbs` package are ported too. The other
-TKG3d packages (`Adaptor3d`, `GeomAdaptor`, `GeomGridEval`) are not ported yet;
-only the `GeomAdaptor_Surface` D1 path that `Geom_OsculatingSurface` samples with
-is ported, next to that class. TKG3d depends on TKG2d as in OCCT: it reuses the
+hasher, mesh hashers included), the `TopAbs` package and the whole `Adaptor3d`
+and `GeomAdaptor` packages (every file of their `FILES.cmake`) are ported too;
+`Geom_OsculatingSurface` samples its basis through the full `GeomAdaptorSurface`.
+`GeomGridEval` is not ported yet. TKG3d depends on TKG2d as in OCCT: it reuses the
 TKernel lock (`SharedState`), the array, dump, spline-data and `std::min`/`max`
 helpers, the curve descriptor family (`define_rep_curve_descriptors!`), the
 generic T-Bezier and AHT-Bezier basis evaluators of
@@ -23,20 +23,25 @@ The class mapping follows [geom-design.md](geom-design.md): abstract classes are
 traits behind `Handle<dyn Trait>`, each object keeps its state behind one lock,
 and native exceptions are `Failure` results.
 
-The toolkit test inventory has 11 `Geom_*_Test.cxx`, 11 `GeomEval_*_Test.cxx` and
-3 `GeomHash_*_Test.cxx` suites (TopAbs has none). 22 complete suites account for
-438 mapped declarations, with matching native and Rust passes:
+The toolkit test inventory has 11 `Geom_*_Test.cxx`, 11 `GeomEval_*_Test.cxx`,
+3 `GeomHash_*_Test.cxx` and 3 `GeomAdaptor_*_Test.cxx` suites (TopAbs and
+Adaptor3d have none). 26 complete suites account for 554 mapped declarations, with
+matching native and Rust passes:
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
 | Geom_BSplineCurve_Test.cxx | geom_bspline_curve | 43 |
+| Geom_BSplineSurface_Test.cxx | geom_bspline_surface | 50 |
 | Geom_BezierCurve_Test.cxx | geom_bezier_curve | 38 |
 | Geom_BezierSurface_Test.cxx | geom_bezier_surface | 45 |
 | Geom_Circle_Test.cxx | geom_circle | 8 |
 | Geom_Line_Test.cxx | geom_line | 10 |
 | Geom_OffsetCurve_Test.cxx | geom_offset_curve | 4 |
+| Geom_OffsetSurface_Test.cxx | geom_offset_surface | 33 |
 | Geom_Plane_Test.cxx | geom_plane | 8 |
 | Geom_SurfaceEval_Test.cxx | geom_surface_eval | 9 |
+| GeomAdaptor_Curve_Test.cxx | geom_adaptor_curve | 17 |
+| GeomAdaptor_TransformedCurve_Test.cxx | geom_adaptor_transformed_curve | 16 |
 | GeomEval_AHTBezierCurve_Test.cxx | geom_eval_aht_bezier_curve | 18 |
 | GeomEval_AHTBezierSurface_Test.cxx | geom_eval_aht_bezier_surface | 14 |
 | GeomEval_CircularHelicoidSurface_Test.cxx | geom_eval_circular_helicoid_surface | 14 |
@@ -53,8 +58,12 @@ The toolkit test inventory has 11 `Geom_*_Test.cxx`, 11 `GeomEval_*_Test.cxx` an
 | GeomHash_SurfaceHasher_Test.cxx | geom_hash_surface_hasher | 43 |
 
 Behaviour tests cover the other classes: `geom_behavior_surfaces.rs`,
-`geom_behavior_bspline_surface*.rs`, `adv_approx_behavior.rs` and
-`top_abs_behavior.rs`.
+`geom_behavior_bspline_surface*.rs`, `adv_approx_behavior.rs`,
+`top_abs_behavior.rs` and `adaptor3d_behavior.rs`.
+
+`GeomAdaptor_TransformedSurface_Test.cxx` (12) is not mapped: its case
+`GridEvalUsesTransformedGeometryOnlyOnce` needs `GeomGridEval`, and a suite is
+mapped whole or not at all. The numeric corpus covers the class member by member.
 
 ## Verification
 
@@ -68,7 +77,7 @@ the Rust targets, checks exact runtime names, then runs
 `tools/verify_tkg3d_numeric.py` uses the shared driver `tools/toolkit_numeric.py`
 (also used by TKG2d). It builds `tools/oracle/tkg3d_probe.cxx` (a table of
 operations over `tkg3d_probe_*.cxx`) and its twin
-`crates/tkg3d/examples/numeric_probe.rs`, runs both on the 2395 requests of
+`crates/tkg3d/examples/numeric_probe.rs`, runs both on the 3986 requests of
 `tools/tkg3d_corpus.py` (one `tkg3d_corpus_*.py` module per probe file) and
 requires identical bits for finite values, infinities and signed zeros, NaN by
 classification, identical exception types and identical `DumpJson` text.
@@ -98,6 +107,19 @@ tolerance pairs (default, zero, tiny, huge), with aliases and null handles; hash
 are printed as integers and must match bit for bit, including the fallback on the
 class name of GeomEval geometry. The TopAbs requests cover the orientation algebra,
 every name and 68 `FromString` inputs (cases, NUL bytes, padding, non-ASCII).
+
+The adaptor requests load a `GeomAdaptor_Curve` and `GeomAdaptor_Surface` on every
+curve and surface kind (whole and ranged, reloaded, with evaluation
+representations) and compare every member: parameters, continuity, intervals of
+each continuity, resolutions, the canonical and spline queries, `EvalD0` to
+`EvalDN`, `Trim`/`UTrim`/`VTrim`, `ShallowCopy` and `GeomAdaptor::MakeCurve`/
+`MakeSurface`. Other requests cover the extrusion and revolution adaptors (load
+orders, directions, axes and canonical kinds), the transformed curve and surface
+(every `gp_Trsf` form, a curve on a surface), the `Adaptor3d_Curve`/`Surface` base
+instances, `Adaptor3d_CurveOnSurface`, `Adaptor3d_IsoCurve`, `Adaptor3d_InterFunc`,
+`Adaptor3d_HSurfaceTool`, `Adaptor3d_HVertex`, and `Adaptor3d_TopolTool`
+(restrictions, vertices, `Classify` on sides, corners and far points, the sample
+points, `SamplePnts`, `BSplSamplePnts` and `GetConeApexParam`).
 
 ## Preserved native behaviour
 
@@ -269,6 +291,32 @@ TopAbs:
   `TCollection_AsciiString`: the name ends at the first NUL and only ASCII letters
   change case. Their `bool (..., T&)` overloads return an `Option` in Rust.
 
+Adaptors:
+
+- The offset-curve `EvalDN(U, 3)` passes one dummy vector for the D1, D2 and D3
+  outputs of `CalculateD3`, so the aliased writes change the result; the port
+  keeps it (`evaluate_d3_aliased`), as in Geom2d.
+- `GeomAdaptor_Curve` on an offset curve counts its `Intervals` with absolute
+  indices from 2 (`T(++myNbIntervals)`), whatever the lower bound of `T`.
+- `GeomAdaptor_Curve::Continuity` raises with the misspelt message "Contunuity";
+  `GeomAdaptor_Surface::OffsetValue` raises with a message naming BasisSurface.
+- Loading the same surface again into a `GeomAdaptor_Surface` changes only its
+  bounds and tolerances: the kind, data and caches stay. A rectangular trimmed
+  surface reloads its basis through the public `Load` on the same bounds, which
+  sets both tolerances to 0.
+- The file-local `LocalContinuity` of the surface adaptor moves the first index
+  past a knot at the first bound without a bound check; a single span is CN even
+  on a periodic surface.
+- `GeomAdaptor_SurfaceOfLinearExtrusion::UTrim` ignores its range; `VTrim` trims
+  the basis curve with the V bounds.
+- `GeomAdaptor_SurfaceOfRevolution::Load(gp_Ax1)` records the axis and data before
+  it computes the frame; when that fails, `GetType` and the canonical queries use
+  the previous frame.
+- `Adaptor3d_TopolTool::Classify` tests `>= Usup + Tol` for U on a range infinite
+  below, and `>` for V. `Analyse` carries the convexity sign over from the V scan
+  to the U scan. `BSplSamplePnts` adds two samples with a stale `j` when only two
+  are flagged.
+
 ## Deliberate Rust deviations
 
 - Getters that return `const&` natively return copies; `WeightsArray` lends the
@@ -293,14 +341,25 @@ TopAbs:
   object with the first object's pole count; equal knots with a different pole
   count terminate the native process, and the port returns "different". The corpus
   never compares such pairs.
+- Adaptors keep their state behind one lock, so members take `&self`. A
+  `Handle<GeomAdaptorSurface>` up-cast of a derived adaptor dispatches to the
+  `GeomAdaptorSurface` members statically; the derived adaptors are used as
+  `Handle<dyn Adaptor3dSurface>`, which dispatches as the native virtual calls do.
+- Where native adaptors dereference a null curve, surface or spline, the port
+  returns Standard_NullObject (or Standard_NoSuchObject where the native class
+  raises it on a missing spline).
+- `Adaptor3d_HVertex()` and `Adaptor3d_TopolTool()` have the zero-filled state of
+  the native allocation (FORWARD, no surface). The `UParameters`/`VParameters`
+  arrays are returned as values.
+- When `BSplSamplePnts` flags fewer samples than its count (a direction of three
+  candidates with two flags), the native array keeps uninitialised values; the
+  port fills them with 0. The corpus uses minimum counts of at least 4.
 - `GeomEval_HyperboloidSurface::SheetMode` is a Rust enum with the two sheet modes;
   natively `SetMode` stores any integer cast to the enumeration.
 
 ## Remaining coverage
 
-- `Geom_BSplineSurface_Test.cxx` (50) and `Geom_OffsetSurface_Test.cxx` (33) use
-  `GeomAdaptor_Surface` and wait for the GeomAdaptor package;
-  `Geom_CurveEval_Test.cxx` (11) needs `GeomAPI_PointsToBSpline`.
-- The Adaptor3d, GeomAdaptor, GeomGridEval and GeomAPI suites wait for their
-  packages.
+- `Geom_CurveEval_Test.cxx` (11) needs `GeomAPI_PointsToBSpline`.
+- `GeomAdaptor_TransformedSurface_Test.cxx` (12), the GeomGridEval and the GeomAPI
+  suites wait for their packages.
 - `InitFromJson` does not exist in Geom; `DumpJson` is compared on the corpus.
