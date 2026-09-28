@@ -42,24 +42,27 @@ pub use sparse_array::SparseArray;
 mod sequence;
 pub use sequence::{Sequence, SequenceCursor, SequenceIter, SequenceIterMut};
 mod hash_policy;
-pub use hash_policy::{DefaultHashPolicy, HashKey, HashPolicy, next_map_prime};
+pub use hash_policy::{DefaultHashPolicy, HashKey, HashPolicy, buckets_from_int, next_map_prime};
+mod base_map;
+pub use base_map::BaseMap;
 mod data_map;
-pub use data_map::{DataMap, DataMapItems};
+pub use data_map::{DataMap, DataMapItems, DataMapIterator, DataMapIteratorMut};
 
 mod map;
-pub use map::{Map, MapIter};
+pub use map::{Map, MapIter, MapIterator};
 pub mod map_algo;
 
 mod indexed_map;
-pub use indexed_map::{IndexedMap, IndexedMapItems, IndexedMapIter};
+pub use indexed_map::{IndexedMap, IndexedMapItems, IndexedMapIter, IndexedMapIterator};
 
 mod indexed_data_map;
 pub use indexed_data_map::{
-    IndexedDataItems, IndexedDataMap, IndexedDataValues, IndexedDataValuesMut,
+    IndexedDataItems, IndexedDataMap, IndexedDataMapIterator, IndexedDataMapIteratorMut,
+    IndexedDataValues, IndexedDataValuesMut,
 };
 
 mod double_map;
-pub use double_map::{DoubleMap, DoubleMapItems, DoubleMapValues};
+pub use double_map::{DoubleMap, DoubleMapItems, DoubleMapIterator, DoubleMapValues};
 
 mod flat_map;
 mod flat_table;
