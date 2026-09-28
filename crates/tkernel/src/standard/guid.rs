@@ -11,13 +11,22 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
+// Rust translation of FoundationClasses/TKernel/Standard/Standard_GUID.hxx and .cxx
+// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! OCCT `Standard_GUID` and `Standard_UUID`.
-use crate::{Error, ErrorKind};
+//!
+//! The value is kept as its `Standard_UUID` fields; the C++ class stores `Data4[0..2]` as
+//! one `char16_t` (`my16b3`), which matters only for the byte image hashed by
+//! `std::hash<Standard_GUID>` ([`Guid::hash_code`]). The text forms live in `guid/text.rs`.
 
-/// Number of ASCII characters in a GUID representation.
+mod text;
+
+use super::hashing::hash_bytes;
+
+/// Number of ASCII characters in a GUID representation (`Standard_GUID_SIZE`).
 pub const GUID_SIZE: usize = 36;
-/// Number of ASCII/UTF-16 code units including the NUL terminator.
+/// Number of ASCII/UTF-16 code units including the NUL terminator (`Standard_GUID_SIZE_ALLOC`).
 pub const GUID_SIZE_ALLOC: usize = GUID_SIZE + 1;
 
 /// Field layout of `Standard_UUID` (also usable in const contexts).
@@ -35,11 +44,18 @@ pub struct Uuid {
 }
 
 /// A GUID with OCCT's strict 8-4-4-4-12 hexadecimal text format.
+///
+/// `operator==`/`operator!=` are `PartialEq`, the copy constructor and `operator=` are
+/// `Copy`, and `std::hash<Standard_GUID>` is [`Guid::hash_code`] (also fed to `Hash`).
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 pub struct Guid(Uuid);
 
 impl Guid {
-    /// Constructs the all-zero GUID.
+    /// `Standard_GUID()`: the all-zero GUID.
+    ///
+    /// ```
+    /// assert_eq!(rustycad_tkernel::standard::Guid::new().to_string(), "00000000-0000-0000-0000-000000000000");
+    /// ```
     pub const fn new() -> Self {
         Self(Uuid {
             data1: 0,
@@ -49,59 +65,14 @@ impl Guid {
         })
     }
 
-    /// Checks OCCT's ASCII format, including null pointers (`None`) and C string termination.
-    pub fn check_format(text: Option<&[u8]>) -> bool {
-        let Some(text) = text else {
-            return false;
-        };
-        let text = &text[..text.iter().position(|&c| c == 0).unwrap_or(text.len())];
-        text.len() == GUID_SIZE
-            && text.iter().enumerate().all(|(i, byte)| {
-                if matches!(i, 8 | 13 | 18 | 23) {
-                    *byte == b'-'
-                } else {
-                    byte.is_ascii_hexdigit()
-                }
-            })
-    }
-
-    /// Constructs from ASCII bytes, applying OCCT's C-string semantics.
-    pub fn from_ascii(text: &[u8]) -> Result<Self, Error> {
-        if !Self::check_format(Some(text)) {
-            return Err(Error::new(ErrorKind::Range, "Invalid format of GUID"));
-        }
-        let mut bytes = [0; 16];
-        let mut nibble = 0;
-        for &ch in &text[..GUID_SIZE] {
-            if ch == b'-' {
-                continue;
-            }
-            let value = if ch.is_ascii_digit() {
-                ch - b'0'
-            } else {
-                ch.to_ascii_lowercase() - b'a' + 10
-            };
-            bytes[nibble / 2] = bytes[nibble / 2] * 16 + value;
-            nibble += 1;
-        }
-        Ok(Self(Uuid {
-            data1: u32::from_be_bytes(bytes[0..4].try_into().expect("fixed slice")),
-            data2: u16::from_be_bytes(bytes[4..6].try_into().expect("fixed slice")),
-            data3: u16::from_be_bytes(bytes[6..8].try_into().expect("fixed slice")),
-            data4: bytes[8..16].try_into().expect("fixed slice"),
-        }))
-    }
-}
-
-impl std::str::FromStr for Guid {
-    type Err = Error;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Self::from_ascii(s.as_bytes())
-    }
-}
-
-impl Guid {
-    /// Constructs from the ten OCCT components, preserving the first field's bit pattern.
+    /// `Standard_GUID(int, char16_t, char16_t, char16_t, uint8_t x 6)`: the ten components;
+    /// the first field keeps its bit pattern and `d` supplies `Data4[0..2]` high byte first.
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::Guid;
+    /// let guid = Guid::from_components(-1, 2, 3, 0x0405, 6, 7, 8, 9, 10, 11);
+    /// assert_eq!(guid.to_string(), "ffffffff-0002-0003-0405-060708090a0b");
+    /// ```
     #[allow(clippy::too_many_arguments)]
     pub const fn from_components(
         a: i32,
@@ -123,15 +94,32 @@ impl Guid {
         })
     }
 
-    /// Constructs from UUID fields.
+    /// `Standard_GUID(const Standard_UUID&)`.
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::{Guid, Uuid};
+    /// assert_eq!(Guid::from_uuid(Uuid::default()), Guid::new());
+    /// ```
     pub const fn from_uuid(uuid: Uuid) -> Self {
         Self(uuid)
     }
-    /// Converts to UUID fields.
+
+    /// `ToUUID()`: the UUID fields.
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::Guid;
+    /// assert_eq!(Guid::new().to_uuid().data1, 0);
+    /// ```
     pub const fn to_uuid(self) -> Uuid {
         self.0
     }
-    /// Tests equality in a const context (Rust's derived `==` is runtime only).
+
+    /// `IsSame` (and `operator==` in const contexts, where the derived `==` is unavailable).
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::Guid;
+    /// assert!(Guid::new().is_same(Guid::new()));
+    /// ```
     pub const fn is_same(self, other: Self) -> bool {
         if self.0.data1 != other.0.data1
             || self.0.data2 != other.0.data2
@@ -148,58 +136,80 @@ impl Guid {
         }
         true
     }
-    /// Tests inequality in a const context.
+
+    /// `IsNotSame` (and `operator!=` in const contexts).
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::Guid;
+    /// assert!(!Guid::new().is_not_same(Guid::new()));
+    /// ```
     pub const fn is_not_same(self, other: Self) -> bool {
         !self.is_same(other)
     }
-    /// Copies another GUID (`Assign`).
+
+    /// `Assign(const Standard_GUID&)` / `operator=`: copies another GUID.
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::Guid;
+    /// let mut guid = Guid::new();
+    /// guid.assign(Guid::from_components(1, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+    /// assert_eq!(guid.to_uuid().data1, 1);
+    /// ```
     pub const fn assign(&mut self, other: Self) {
         *self = other;
     }
-    /// Copies UUID fields (`Assign` overload).
+
+    /// `Assign(const Standard_UUID&)` / `operator=(const Standard_UUID&)`: copies UUID fields.
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::{Guid, Uuid};
+    /// let mut guid = Guid::from_components(1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    /// guid.assign_uuid(Uuid::default());
+    /// assert_eq!(guid, Guid::new());
+    /// ```
     pub const fn assign_uuid(&mut self, uuid: Uuid) {
         self.0 = uuid;
     }
 
-    /// Constructs from UTF-16 using OCCT's low-byte conversion of the first 36 code units.
-    /// A shorter slice is rejected safely; OCCT would read beyond its input buffer.
-    pub fn from_utf16(text: &[u16]) -> Result<Self, Error> {
-        if text.len() < GUID_SIZE {
-            return Err(Error::new(ErrorKind::Range, "Invalid format of GUID"));
-        }
-        let bytes: [u8; GUID_SIZE] = std::array::from_fn(|i| text[i] as u8);
-        Self::from_ascii(&bytes)
+    /// The 16-byte image of the C++ fields in declaration order, native byte order.
+    fn field_bytes(self) -> [u8; 16] {
+        let uuid: Uuid = self.0;
+        let packed: u16 = u16::from_be_bytes([uuid.data4[0], uuid.data4[1]]);
+        let mut bytes: [u8; 16] = [0; 16];
+        bytes[0..4].copy_from_slice(&uuid.data1.to_ne_bytes());
+        bytes[4..6].copy_from_slice(&uuid.data2.to_ne_bytes());
+        bytes[6..8].copy_from_slice(&uuid.data3.to_ne_bytes());
+        bytes[8..10].copy_from_slice(&packed.to_ne_bytes());
+        bytes[10..16].copy_from_slice(&uuid.data4[2..8]);
+        bytes
     }
 
-    /// Returns the lowercase ASCII representation with its NUL terminator (`ToCString`).
-    pub fn to_c_string(self) -> [u8; GUID_SIZE_ALLOC] {
-        let mut output = [0; GUID_SIZE_ALLOC];
-        output[..GUID_SIZE].copy_from_slice(self.to_string().as_bytes());
-        output
-    }
-
-    /// Returns the UTF-16 representation with its NUL terminator (`ToExtString`).
-    pub fn to_ext_string(self) -> [u16; GUID_SIZE_ALLOC] {
-        self.to_c_string().map(u16::from)
-    }
-
-    /// Writes the text representation (`ShallowDump`).
-    pub fn shallow_dump(self, output: &mut impl std::fmt::Write) -> std::fmt::Result {
-        write!(output, "{self}")
+    /// `std::hash<Standard_GUID>::operator()`: `hashBytes` over the 16-byte field image
+    /// (`int`, three `char16_t`, six `uint8_t`; no padding).
+    ///
+    /// ```
+    /// use rustycad_tkernel::standard::Guid;
+    /// assert_eq!(Guid::new().hash_code(), rustycad_tkernel::standard::hash_bytes(&[0; 16]));
+    /// ```
+    pub fn hash_code(self) -> usize {
+        hash_bytes(&self.field_bytes())
     }
 }
 
-impl std::fmt::Display for Guid {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        let uuid = self.0;
-        write!(
-            f,
-            "{:08x}-{:04x}-{:04x}-{:02x}{:02x}-",
-            uuid.data1, uuid.data2, uuid.data3, uuid.data4[0], uuid.data4[1]
-        )?;
-        for byte in &uuid.data4[2..] {
-            write!(f, "{byte:02x}")?;
-        }
-        Ok(())
+impl std::hash::Hash for Guid {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        state.write_usize(self.hash_code());
+    }
+}
+
+impl From<Uuid> for Guid {
+    fn from(uuid: Uuid) -> Self {
+        Self::from_uuid(uuid)
+    }
+}
+
+impl From<Guid> for Uuid {
+    fn from(guid: Guid) -> Self {
+        guid.to_uuid()
     }
 }
