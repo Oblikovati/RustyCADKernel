@@ -142,6 +142,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_swarm_probe.cxx"
 #include "tkmath_global_modern_probe.cxx"
 #include "tkmath_cslib_probe.cxx"
+#include "tkmath_bvh_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -216,6 +217,11 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"cslib_dn", cslib_dn_case},
  {"cslib_poly", cslib_poly_case},
  {"cslib_class2d", cslib_class2d_case},
+ {"bvh_box", bvh_box_case},
+ {"bvh_int_floor", bvh_int_floor_case},
+ {"bvh_sort", bvh_sort_case},
+ {"bvh_build", bvh_build_case},
+ {"bvh_transform", bvh_transform_case},
 };
 int main() {
  std::string line;

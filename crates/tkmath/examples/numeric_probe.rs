@@ -261,6 +261,7 @@ fn planar_case(v: &[f64]) {
     println!();
 }
 mod bounds_probe;
+mod bvh_probe;
 mod quaternion_probe;
 mod scale_probe;
 fn main() {
@@ -269,7 +270,17 @@ fn main() {
         let mut words = line.split_whitespace();
         let op = words.next().unwrap();
         let values: Vec<f64> = words.map(|w| w.parse().unwrap()).collect();
-        if op == "cslib_normal" {
+        if op == "bvh_box" {
+            bvh_probe::bvh_box_case(&values);
+        } else if op == "bvh_int_floor" {
+            bvh_probe::bvh_int_floor_case(&values);
+        } else if op == "bvh_sort" {
+            bvh_probe::bvh_sort_case(&values);
+        } else if op == "bvh_build" {
+            bvh_probe::bvh_build_case(&values);
+        } else if op == "bvh_transform" {
+            bvh_probe::bvh_transform_case(&values);
+        } else if op == "cslib_normal" {
             cslib_probe::cslib_normal_case(&values);
         } else if op == "cslib_singular" {
             cslib_probe::cslib_singular_case(&values);
