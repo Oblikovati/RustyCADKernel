@@ -98082,6 +98082,38 @@
       "rust_item": "rustycad_tkernel::fsd::File::magic_number",
       "status": "implemented",
       "notes": "FSD_File is TextFile<FsdDialect>; the fstream is the libstdc++-faithful IoStream over an injected DriverFileSystem. GetReal reads at most 99 bytes like the optimised native char[100] extraction; ReadExtendedLine appends each unit's decimal digits (native operator+=(int) binding). Compared byte for byte with OCCT by the stor_* requests of tools/tkernel_storage_corpus.py."
+    },
+    {
+      "upstream_id": "Quantity_Color::operator const NCollection_Vec3<float>&() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::rgb_vec3",
+      "status": "implemented",
+      "notes": "The implicit conversion to the stored linear RGB triple is the explicit rgb_vec3 accessor; Rust has no implicit conversion operators."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::operator const NCollection_Vec4<float>&() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::to_vec4",
+      "status": "implemented",
+      "notes": "The reinterpret_cast view of RGB plus alpha as one Vec4 is the explicit to_vec4 copy; Rust has no implicit conversion operators."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator const handle<T2>&() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::view",
+      "status": "implemented",
+      "notes": "The upcast to a const reference of a base handle, without a count change, is Handle::view::<Base>(); both preprocessor branches (SFINAE and legacy) declare it."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator handle<T2>&()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Deprecated upcast to a non-const reference of a base handle (#26377): assigning through it would store a base-typed object in a derived handle. Safe Rust cannot alias one handle as another handle type mutably; callers assign Handle::cast or Handle::into_cast results instead."
     }
   ],
   "tests": [
