@@ -96,6 +96,8 @@ mod ebtree;
 mod ubtree;
 pub use ebtree::EBTree;
 pub use ubtree::{BoundingNode, BoundingVolume, TreeSelector, UBTree};
+mod ubtree_filler;
+pub use ubtree_filler::{ObjBnd, UBTreeFiller};
 
 mod packed_map;
 pub use packed_map::{PackedCursor, PackedInteger, PackedMap, PackedMapIter, PackedWord};
