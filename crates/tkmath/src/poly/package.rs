@@ -140,16 +140,10 @@ pub fn intersect(
     distance: &mut f64,
 ) -> Result<bool, Failure> {
     const CONFUSION: f64 = 1E-15;
-    let start = axis.location().xyz();
-    let direction = axis.direction();
     let mut best = if closest { f64::MAX } else { 0.0 };
     for index in 1..=triangulation.nb_triangles() {
         let candidate = triangulation.triangle(index)?;
-        let (a, b, c) = candidate.get();
-        let v0 = triangulation.node(a)?.xyz();
-        let v1 = triangulation.node(b)?.xyz();
-        let v2 = triangulation.node(c)?.xyz();
-        let Some(parameter) = intersect_tri_line(start, direction, v0, v1, v2) else {
+        let Some(parameter) = ray_parameter(triangulation, axis, candidate)? else {
             continue;
         };
         let better = if closest {
@@ -167,6 +161,33 @@ pub fn intersect(
         return Ok(true);
     }
     Ok(false)
+}
+fn ray_parameter(
+    triangulation: &Triangulation,
+    axis: Axis1,
+    triangle: Triangle,
+) -> Result<Option<f64>, Failure> {
+    let (a, b, c) = triangle.get();
+    let v0 = triangulation.node(a)?.xyz();
+    let v1 = triangulation.node(b)?.xyz();
+    let v2 = triangulation.node(c)?.xyz();
+    Ok(intersect_tri_line(
+        axis.location().xyz(),
+        axis.direction(),
+        v0,
+        v1,
+        v2,
+    ))
+}
+// The barycentric tests of the native branches, with `sign` +1 for a positive
+// determinant and -1 for a negative one; the second minor is computed only when needed.
+fn within(m: &[[f64; 4]; 3], d: f64, sign: f64) -> bool {
+    const CONFUSION: f64 = 1E-15;
+    let da = determinant(m, 0, 3, 2);
+    sign * da > -CONFUSION && {
+        let db = determinant(m, 0, 1, 3);
+        sign * db > -CONFUSION && sign * (da + db) <= sign * d + CONFUSION
+    }
 }
 // Minor of the 3x4 matrix over columns c1, c2, c3, in the native term order.
 fn determinant(a: &[[f64; 4]; 3], c1: usize, c2: usize, c3: usize) -> f64 {
@@ -194,17 +215,9 @@ pub fn intersect_tri_line(
     let d = determinant(&m, 0, 1, 2);
     let dt = determinant(&m, 3, 1, 2);
     let inside = if d > CONFUSION {
-        let da = determinant(&m, 0, 3, 2);
-        da > -CONFUSION && {
-            let db = determinant(&m, 0, 1, 3);
-            db > -CONFUSION && da + db <= d + CONFUSION
-        }
+        within(&m, d, 1.0)
     } else if d < -CONFUSION {
-        let da = determinant(&m, 0, 3, 2);
-        da < CONFUSION && {
-            let db = determinant(&m, 0, 1, 3);
-            db < CONFUSION && da + db >= d - CONFUSION
-        }
+        within(&m, d, -1.0)
     } else {
         false
     };

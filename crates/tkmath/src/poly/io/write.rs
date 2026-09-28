@@ -16,7 +16,8 @@
 
 //! Compact "save" text and the informative "dump" text with the native `setw` columns.
 use crate::{
-    poly::{Polygon2D, Polygon3D, Triangulation},
+    gp::Point3,
+    poly::{Polygon2D, Polygon3D, Triangulation, errors::array_failure},
     stream_format::{general, padded},
 };
 use rustycad_tkernel::standard::Failure;
@@ -63,6 +64,15 @@ impl<W: Write> Columns<'_, W> {
             self.text(text)
         }
     }
+    fn counts(&mut self, compact: &str, dump: &str) -> Result<(), Failure> {
+        self.text(if self.compact { compact } else { dump })
+    }
+    fn point3(&mut self, index: i32, point: Point3) -> Result<(), Failure> {
+        self.row_label(index)?;
+        self.real(point.x(), " ")?;
+        self.real(point.y(), " ")?;
+        self.real(point.z(), "\n")
+    }
     fn deflection(&mut self, deflection: f64) -> Result<(), Failure> {
         self.dump_only("Deflection : ")?;
         self.text(&format!("{}\n", general(deflection)))
@@ -76,28 +86,21 @@ pub fn write_triangulation(
     compact: bool,
 ) -> Result<(), Failure> {
     let mut columns = Columns { output, compact };
-    let (nodes, triangles, has_uv) = (
-        triangulation.nb_nodes(),
-        triangulation.nb_triangles(),
-        triangulation.has_uv_nodes(),
-    );
-    columns.text("Poly_Triangulation\n")?;
-    if compact {
-        columns.text(&format!("{nodes} {triangles} {}\n", u8::from(has_uv)))?;
+    let (nodes, triangles) = (triangulation.nb_nodes(), triangulation.nb_triangles());
+    let with = if triangulation.has_uv_nodes() {
+        "with"
     } else {
-        let with = if has_uv { "with" } else { "without" };
-        columns.text(&format!(
-            "{nodes:>8} Nodes\n{triangles:>8} Triangles\n{with} UV nodes\n"
-        ))?;
-    }
+        "without"
+    };
+    columns.text("Poly_Triangulation\n")?;
+    columns.counts(
+        &format!("{nodes} {triangles} {}\n", u8::from(with == "with")),
+        &format!("{nodes:>8} Nodes\n{triangles:>8} Triangles\n{with} UV nodes\n"),
+    )?;
     columns.deflection(triangulation.deflection())?;
     columns.dump_only("\n3D Nodes :\n")?;
     for index in 1..=nodes {
-        let node = triangulation.node(index)?;
-        columns.row_label(index)?;
-        columns.real(node.x(), " ")?;
-        columns.real(node.y(), " ")?;
-        columns.real(node.z(), "\n")?;
+        columns.point3(index, triangulation.node(index)?)?;
     }
     write_uv_nodes(&mut columns, triangulation)?;
     columns.dump_only("\nTriangles :\n")?;
@@ -133,24 +136,23 @@ pub fn write_polygon3d(
     compact: bool,
 ) -> Result<(), Failure> {
     let mut columns = Columns { output, compact };
-    let (count, has_parameters) = (polygon.nb_nodes(), polygon.has_parameters());
-    columns.text("Poly_Polygon3D\n")?;
-    if compact {
-        columns.text(&format!("{count} {}\n", u8::from(has_parameters)))?;
+    let count = polygon.nb_nodes();
+    let with = if polygon.has_parameters() {
+        "with"
     } else {
-        let with = if has_parameters { "with" } else { "without" };
-        columns.text(&format!("{count:>8} Nodes\n{with} parameters\n"))?;
-    }
+        "without"
+    };
+    columns.text("Poly_Polygon3D\n")?;
+    columns.counts(
+        &format!("{count} {}\n", u8::from(with == "with")),
+        &format!("{count:>8} Nodes\n{with} parameters\n"),
+    )?;
     columns.deflection(polygon.deflection())?;
     columns.dump_only("\nNodes :\n")?;
-    let nodes = polygon.nodes();
-    for (offset, node) in nodes.iter().enumerate() {
-        columns.row_label(offset as i32 + 1)?;
-        columns.real(node.x(), " ")?;
-        columns.real(node.y(), " ")?;
-        columns.real(node.z(), "\n")?;
+    for (offset, node) in polygon.nodes().iter().enumerate() {
+        columns.point3(offset as i32 + 1, *node)?;
     }
-    if !has_parameters {
+    if !polygon.has_parameters() {
         return Ok(());
     }
     columns.dump_only("\nParameters :\n")?;
@@ -158,7 +160,7 @@ pub fn write_polygon3d(
     for index in 1..=count {
         let value = parameters
             .value(index)
-            .map_err(|e| crate::poly::errors::array_failure("Poly::Write", e))?;
+            .map_err(|e| array_failure("Poly::Write", e))?;
         columns.text(&format!("{} ", general(*value)))?;
     }
     columns.text("\n")

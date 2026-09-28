@@ -122,38 +122,37 @@ impl MergedNodesMap {
             self.resize(self.size);
         }
         let home = self.position_hash(position, self.bucket_count);
-        if let Some(found) = self.search(home, position, normal) {
+        let found = self
+            .search(home, position, normal)
+            .or_else(|| self.search_neighbours(position, normal));
+        if let Some(found) = found {
             return Binding {
                 index: found,
                 is_new: false,
             };
         }
-        if self.inverse_tolerance > 0.0 {
-            let center = self.cell(position);
-            for offset in NEIGHBOURS {
-                let neighbour = std::array::from_fn(|k| center[k].wrapping_add(offset[k]));
-                let bucket = cell_hash(neighbour, self.bucket_count);
-                if let Some(found) = self.search(bucket, position, normal) {
-                    return Binding {
-                        index: found,
-                        is_new: false,
-                    };
-                }
-            }
-        }
-        self.buckets[home].insert(
-            0,
-            MapNode {
-                position,
-                normal,
-                index,
-            },
-        );
+        let node = MapNode {
+            position,
+            normal,
+            index,
+        };
+        self.buckets[home].insert(0, node);
         self.size += 1;
         Binding {
             index,
             is_new: true,
         }
+    }
+    // With a tolerance a match may sit in any of the 26 cells around the node's cell.
+    fn search_neighbours(&self, position: Vec3<f32>, normal: Vec3<f32>) -> Option<i32> {
+        if self.inverse_tolerance <= 0.0 {
+            return None;
+        }
+        let center = self.cell(position);
+        NEIGHBOURS.iter().find_map(|offset| {
+            let neighbour = std::array::from_fn(|k| center[k].wrapping_add(offset[k]));
+            self.search(cell_hash(neighbour, self.bucket_count), position, normal)
+        })
     }
     fn search(&self, bucket: usize, position: Vec3<f32>, normal: Vec3<f32>) -> Option<i32> {
         self.buckets[bucket]

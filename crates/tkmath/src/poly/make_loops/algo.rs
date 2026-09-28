@@ -15,10 +15,21 @@
 // Rust translation of FoundationClasses/TKMath/Poly/Poly_MakeLoops.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 use super::{
-    HeapOfInteger, Link, LinkFlag, LinkHasher, LinkTable, ListOfLink, LoopWay, get_link,
-    result_code,
+    HeapOfInteger, Link, LinkFlag, LinkHasher, LinkTable, ListOfLink, LoopWay, contour::Contour,
+    get_link, result_code,
 };
 use rustycad_tkernel::{ncollection::PackedMap, standard::Failure};
+/// Nothing was consumed, so the native loop would repeat this step forever (seen when
+/// helper links and stored links disagree on node order).
+fn no_progress(start: i32) -> Failure {
+    Failure::with_type(
+        "Standard_ProgramError",
+        &format!(
+            "Poly_MakeLoops::Perform: start link {start} consumed nothing; the native loop never ends"
+        ),
+        "",
+    )
+}
 /// The loop builder over a [`LoopWay`] strategy; `MakeLoops::new(LeftWay3D::new(&helper))`.
 pub struct MakeLoops<W: LoopWay> {
     pub(super) way: W,
@@ -104,16 +115,7 @@ impl<W: LoopWay> MakeLoops<W> {
     /// Builds loops in two passes (the second one restarts from hanging links) and returns
     /// `result_code` bits; `builder.perform()?`.
     pub fn perform(&mut self) -> Result<i32, Failure> {
-        self.start_indices.clear();
-        for index in 1..=self.links.len() as i32 {
-            let flags = self.stored(index as usize)?.flags;
-            if flags & LinkFlag::Fwd as i32 != 0 {
-                self.start_indices.add(index);
-            }
-            if flags & LinkFlag::Rev as i32 != 0 {
-                self.start_indices.add(-index);
-            }
-        }
+        self.fill_start_indices()?;
         for pass in 0..2 {
             self.hang_indices.clear();
             if !self.search_loops()? {
@@ -135,6 +137,20 @@ impl<W: LoopWay> MakeLoops<W> {
         }
         Ok(result)
     }
+    // Every allowed orientation of every link, signed by direction, in index order.
+    fn fill_start_indices(&mut self) -> Result<(), Failure> {
+        self.start_indices.clear();
+        for index in 1..=self.links.len() as i32 {
+            let flags = self.stored(index as usize)?.flags;
+            if flags & LinkFlag::Fwd as i32 != 0 {
+                self.start_indices.add(index);
+            }
+            if flags & LinkFlag::Rev as i32 != 0 {
+                self.start_indices.add(-index);
+            }
+        }
+        Ok(())
+    }
     // One pass of the main loop; false when a contour search fails.
     fn search_loops(&mut self) -> Result<bool, Failure> {
         while !self.start_indices.is_empty() {
@@ -148,27 +164,22 @@ impl<W: LoopWay> MakeLoops<W> {
                 self.accept_contour(&contour)?;
             }
             if contour.start > 1 {
-                let (node, from) = if contour.start <= contour.len() {
-                    (self.first_node(start)?, start)
-                } else {
-                    let last = contour.at(contour.start - 1);
-                    (self.last_node(last)?, last)
-                };
-                self.mark_hang_chain(node, from)?;
+                self.mark_hanging_part(&contour, start)?;
             }
             if self.start_indices.extent() == remaining {
-                // Nothing was consumed, so the native loop would repeat this step forever
-                // (seen when helper links and stored links disagree on node order).
-                return Err(Failure::with_type(
-                    "Standard_ProgramError",
-                    &format!(
-                        "Poly_MakeLoops::Perform: start link {start} consumed nothing; the native loop never ends"
-                    ),
-                    "",
-                ));
+                return Err(no_progress(start));
             }
         }
         Ok(true)
+    }
+    // A closed contour hangs from the first node of its start link; an open one from the
+    // last node of its last link.
+    fn mark_hanging_part(&mut self, contour: &Contour, start: i32) -> Result<(), Failure> {
+        if contour.start <= contour.len() {
+            return self.mark_hang_chain(self.first_node(start)?, start);
+        }
+        let last = contour.at(contour.start - 1);
+        self.mark_hang_chain(self.last_node(last)?, last)
     }
     /// Number of loops; `builder.get_nb_loops()`.
     pub fn get_nb_loops(&self) -> i32 {

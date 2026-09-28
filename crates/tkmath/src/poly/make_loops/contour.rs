@@ -55,41 +55,54 @@ impl<W: LoopWay> MakeLoops<W> {
             start: 0,
         };
         let mut node_link: HashMap<i32, i32> = HashMap::new();
-        let mut segment = start;
-        let mut last = self.last_node(segment)?;
+        let (mut segment, mut last) = (start, self.last_node(start)?);
         loop {
             if contour.position(segment).is_none() {
                 contour.indices.push(segment);
             }
             node_link.insert(self.first_node(segment)?, segment);
-            let candidates = self.candidates(last, segment.unsigned_abs() as usize)?;
-            let next = match candidates.as_slice() {
-                [] => 0,
-                [first, ..] if Some(first) == candidates.last() => *first,
-                _ => self
-                    .way
-                    .choose_left_way(&self.links, last, segment, &candidates),
-            };
-            if next == 0 {
-                contour.start = contour.len() + 1;
-                return Ok(contour);
-            }
-            segment = next;
-            if let Some(position) = contour.position(segment) {
-                contour.start = position;
-                return Ok(contour);
-            }
-            if let Some(position) = contour.position(-segment) {
-                contour.start = position + 1;
-                return Ok(contour);
-            }
-            last = self.last_node(segment)?;
-            if let Some(&closing) = node_link.get(&last) {
-                contour.indices.push(segment);
-                contour.start = contour.position(closing).unwrap_or(0);
+            segment = self.next_segment(last, segment)?;
+            if let Some(start) = self.stop_position(&mut contour, &node_link, segment, &mut last)? {
+                contour.start = start;
                 return Ok(contour);
             }
         }
+    }
+    // The single usable continuation, or the strategy's choice among several; 0 for none.
+    fn next_segment(&self, last: i32, segment: i32) -> Result<i32, Failure> {
+        let candidates = self.candidates(last, segment.unsigned_abs() as usize)?;
+        Ok(match candidates.as_slice() {
+            [] => 0,
+            [first, ..] if Some(first) == candidates.last() => *first,
+            _ => self
+                .way
+                .choose_left_way(&self.links, last, segment, &candidates),
+        })
+    }
+    // Where the loop starts when `segment` ends the search: an open end, a link met again
+    // (in either orientation), or a node met again, which closes the loop.
+    fn stop_position(
+        &self,
+        contour: &mut Contour,
+        node_link: &HashMap<i32, i32>,
+        segment: i32,
+        last: &mut i32,
+    ) -> Result<Option<usize>, Failure> {
+        if segment == 0 {
+            return Ok(Some(contour.len() + 1));
+        }
+        if let Some(position) = contour.position(segment) {
+            return Ok(Some(position));
+        }
+        if let Some(position) = contour.position(-segment) {
+            return Ok(Some(position + 1));
+        }
+        *last = self.last_node(segment)?;
+        let Some(&closing) = node_link.get(last) else {
+            return Ok(None);
+        };
+        contour.indices.push(segment);
+        Ok(Some(contour.position(closing).unwrap_or(0)))
     }
     // Links at `node`, other than link `current`, that can continue the chain, signed so
     // that they leave the node.

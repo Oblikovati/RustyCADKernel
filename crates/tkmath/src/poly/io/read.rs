@@ -56,6 +56,21 @@ fn read_points2<R: BufRead>(
     }
     Ok(())
 }
+fn read_triangles<R: BufRead>(
+    reader: &mut TokenReader<'_, R>,
+    count: i32,
+) -> Result<Array1<'static, Triangle>, Failure> {
+    let mut triangles = table("Poly::ReadTriangulation", count)?;
+    for triangle in triangles.iter_mut() {
+        let (a, b, c) = (
+            reader.integer("n1")?,
+            reader.integer("n2")?,
+            reader.integer("n3")?,
+        );
+        *triangle = Triangle::new(a, b, c);
+    }
+    Ok(triangles)
+}
 /// `Poly::ReadTriangulation`: reads the compact text of [`super::write_triangulation`];
 /// `read_triangulation(&mut input)?`.
 pub fn read_triangulation(input: &mut impl BufRead) -> Result<Handle<Triangulation>, Failure> {
@@ -72,15 +87,7 @@ pub fn read_triangulation(input: &mut impl BufRead) -> Result<Handle<Triangulati
     if has_uv {
         read_points2(&mut reader, &mut uv_nodes)?;
     }
-    let mut triangles = table("Poly::ReadTriangulation", nb_triangles)?;
-    for triangle in triangles.iter_mut() {
-        let (a, b, c) = (
-            reader.integer("n1")?,
-            reader.integer("n2")?,
-            reader.integer("n3")?,
-        );
-        *triangle = Triangle::new(a, b, c);
-    }
+    let triangles = read_triangles(&mut reader, nb_triangles)?;
     let triangulation = if has_uv {
         Triangulation::from_nodes_and_uv(&nodes, &uv_nodes, &triangles)?
     } else {

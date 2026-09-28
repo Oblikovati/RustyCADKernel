@@ -68,41 +68,25 @@ impl CoherentTriangle {
         Self::link_pair(triangles, (this, own), (other, theirs), opposite_node)?;
         Ok(true)
     }
-    // The native decision tree of SetConnection(Poly_CoherentTriangle&).
+    // The native decision tree of SetConnection(Poly_CoherentTriangle&): the first node of
+    // `other` equal to this triangle's node 0 selects two candidate sides, otherwise side 0
+    // is tried against the three rotations of `other`.
     fn shared_side(triangles: &[Self], this: usize, other: usize) -> Option<Pairing> {
         let mine = triangles[this].nodes;
         let t = triangles[other].nodes;
         let free = |side: usize| triangles[this].connected[side] != Some(other);
-        let first =
-            |pairs: [(bool, Pairing); 2]| pairs.into_iter().find(|(ok, _)| *ok).map(|(_, p)| p);
-        if mine[0] == t[0] {
-            return first([
-                (mine[1] == t[2] && free(2), (2, 1, 1)),
-                (mine[2] == t[1] && free(1), (1, 2, 2)),
-            ]);
-        }
-        if mine[0] == t[1] {
-            return first([
-                (mine[1] == t[0] && free(2), (2, 2, 2)),
-                (mine[2] == t[2] && free(1), (1, 0, 0)),
-            ]);
-        }
-        if mine[0] == t[2] {
-            return first([
-                (mine[1] == t[1] && free(2), (2, 0, 0)),
-                (mine[2] == t[0] && free(1), (1, 1, 1)),
-            ]);
+        if let Some(at) = (0..3).find(|k| mine[0] == t[*k]) {
+            let (next, previous) = ((at + 1) % 3, (at + 2) % 3);
+            let first = (mine[1] == t[previous] && free(2)).then_some((2, next, next));
+            let second = (mine[2] == t[next] && free(1)).then_some((1, previous, previous));
+            return first.or(second);
         }
         if !free(0) {
             return None;
         }
-        [
-            (mine[1] == t[0] && mine[2] == t[2], (0, 1, 1)),
-            (mine[1] == t[2] && mine[2] == t[1], (0, 0, 0)),
-            (mine[1] == t[1] && mine[2] == t[0], (0, 2, 2)),
-        ]
-        .into_iter()
-        .find(|(ok, _)| *ok)
-        .map(|(_, pairing)| pairing)
+        [0, 2, 1].into_iter().find_map(|k| {
+            let side = (k + 1) % 3;
+            (mine[1] == t[k] && mine[2] == t[(k + 2) % 3]).then_some((0, side, side))
+        })
     }
 }
