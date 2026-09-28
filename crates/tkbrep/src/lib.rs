@@ -24,5 +24,6 @@
 //! `brep` is not the BRep package: it is the vertex geometry subset that the TKernel
 //! legacy TopLoc test needed before TKBRep was ported (see its module note).
 pub mod brep;
+pub mod topexp;
 pub mod topods;
 pub mod toptools;
