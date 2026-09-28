@@ -13,16 +13,16 @@
 // commercial license or contractual agreement.
 
 use super::{Handle, RuntimeTyped, Transient};
-use std::{any::TypeId, marker::PhantomData, sync::Arc};
+use std::{marker::PhantomData, sync::Arc};
 /// A const handle reference projected to a base type, with no extra owning reference.
-pub struct HandleView<'a, T: RuntimeTyped> {
+pub struct HandleView<'a, T: ?Sized + RuntimeTyped> {
     owner: Option<&'a Arc<dyn Transient>>,
     projected: PhantomData<T>,
 }
-impl<'a, T: RuntimeTyped> HandleView<'a, T> {
+impl<'a, T: ?Sized + RuntimeTyped> HandleView<'a, T> {
     pub(super) fn new(owner: Option<&'a Arc<dyn Transient>>) -> Self {
         Self {
-            owner: owner.filter(|owner| owner.project(TypeId::of::<T>()).is_some()),
+            owner: owner.filter(|owner| T::project_from(owner.as_ref()).is_some()),
             projected: PhantomData,
         }
     }
@@ -30,16 +30,20 @@ impl<'a, T: RuntimeTyped> HandleView<'a, T> {
     pub fn is_null(&self) -> bool {
         self.owner.is_none()
     }
-    /// Borrow the projected subobject; `view.get()`.
+    /// Borrow the projected subobject or interface view; `view.get()`.
     pub fn get(&self) -> Option<&T> {
-        self.owner?.project(TypeId::of::<T>())?.downcast_ref()
+        T::project_from(self.owner?.as_ref())
     }
+}
+impl<T: RuntimeTyped> HandleView<'_, T> {
     /// Observe the projected address; `view.as_ptr()`.
     pub fn as_ptr(&self) -> *const T {
         self.get().map_or(std::ptr::null(), std::ptr::from_ref)
     }
 }
-impl<T: RuntimeTyped, U: RuntimeTyped> PartialEq<Handle<U>> for HandleView<'_, T> {
+impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> PartialEq<Handle<U>>
+    for HandleView<'_, T>
+{
     fn eq(&self, other: &Handle<U>) -> bool {
         match (self.owner, other.owner.as_ref()) {
             (Some(left), Some(right)) => Arc::ptr_eq(left, right),

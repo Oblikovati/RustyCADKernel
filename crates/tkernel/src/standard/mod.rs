@@ -16,7 +16,9 @@ mod handle;
 mod runtime_type;
 mod transient;
 pub use handle::{Handle, HandleView};
-pub use runtime_type::{RuntimeType, RuntimeTyped};
+pub use runtime_type::{
+    InterfaceCaster, InterfaceEntry, RuntimeType, RuntimeTyped, project_interface,
+};
 pub use transient::{StandardTransient, Transient};
 pub mod dump;
 pub mod integer;

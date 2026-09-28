@@ -14,14 +14,14 @@
 
 use super::{Handle, RuntimeTyped};
 use std::{ops::Deref, sync::Arc};
-impl<T: RuntimeTyped> Deref for Handle<T> {
+impl<T: ?Sized + RuntimeTyped> Deref for Handle<T> {
     type Target = T;
     fn deref(&self) -> &T {
         self.get()
             .expect("Null handle; expected a live object for dereference")
     }
 }
-impl<T: RuntimeTyped, U: RuntimeTyped> PartialEq<Handle<U>> for Handle<T> {
+impl<T: ?Sized + RuntimeTyped, U: ?Sized + RuntimeTyped> PartialEq<Handle<U>> for Handle<T> {
     fn eq(&self, other: &Handle<U>) -> bool {
         match (&self.owner, &other.owner) {
             (Some(left), Some(right)) => Arc::ptr_eq(left, right),
@@ -30,7 +30,7 @@ impl<T: RuntimeTyped, U: RuntimeTyped> PartialEq<Handle<U>> for Handle<T> {
         }
     }
 }
-impl<T: RuntimeTyped> Eq for Handle<T> {}
+impl<T: ?Sized + RuntimeTyped> Eq for Handle<T> {}
 impl<T: RuntimeTyped> PartialEq<*const T> for Handle<T> {
     fn eq(&self, other: &*const T) -> bool {
         self.as_ptr() == *other

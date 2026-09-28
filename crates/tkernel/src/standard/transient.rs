@@ -80,6 +80,9 @@ impl RuntimeTyped for StandardTransient {
         static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
         DESCRIPTOR.get_or_init(|| RuntimeType::new::<Self>("Standard_Transient", None))
     }
+    fn project_from(object: &dyn Transient) -> Option<&Self> {
+        object.project(TypeId::of::<Self>())?.downcast_ref::<Self>()
+    }
 }
 impl Transient for StandardTransient {
     fn dynamic_type(&self) -> &'static RuntimeType {
@@ -93,20 +96,43 @@ impl Transient for StandardTransient {
     }
 }
 /// Implement safe single inheritance through an actual embedded parent field.
-/// Example: `impl_transient!(Derived, "Derived", Base, parent)`.
+///
+/// `$parent` names the descriptor parent; `$field` is the embedded subobject that
+/// base projections and the reference counter delegate to. The optional
+/// `interfaces` list registers one caster per abstract ancestor trait, so that
+/// `Handle<dyn Trait>` can view the object (see docs/geom-design.md).
+/// Example: `impl_transient!(Derived, "Derived", Base, parent)` or
+/// `impl_transient!(Circle, "Circle", dyn Conic, parent, interfaces: [dyn Curve, dyn Conic])`.
 #[macro_export]
 macro_rules! impl_transient {
     ($class:ty, $name:literal, $parent:ty, $field:ident) => {
+        $crate::impl_transient!($class, $name, $parent, $field, interfaces: []);
+    };
+    ($class:ty, $name:literal, $parent:ty, $field:ident, interfaces: [$($interface:ty),* $(,)?]) => {
         impl $crate::standard::RuntimeTyped for $class {
             fn static_type() -> &'static $crate::standard::RuntimeType {
                 static DESCRIPTOR: std::sync::OnceLock<$crate::standard::RuntimeType> =
                     std::sync::OnceLock::new();
                 DESCRIPTOR.get_or_init(|| {
-                    $crate::standard::RuntimeType::new::<Self>(
+                    $crate::standard::RuntimeType::with_interfaces::<Self>(
                         $name,
                         Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
+                        vec![$($crate::standard::InterfaceEntry::new(
+                            $crate::standard::InterfaceCaster::<$interface>::new(|object| {
+                                let concrete: &$class = $crate::standard::Transient::project(
+                                    object,
+                                    std::any::TypeId::of::<$class>(),
+                                )?
+                                .downcast_ref::<$class>()?;
+                                Some(concrete as &$interface)
+                            }),
+                        )),*],
                     )
                 })
+            }
+            fn project_from(object: &dyn $crate::standard::Transient) -> Option<&Self> {
+                $crate::standard::Transient::project(object, std::any::TypeId::of::<Self>())?
+                    .downcast_ref::<Self>()
             }
         }
         impl $crate::standard::Transient for $class {
@@ -121,6 +147,32 @@ macro_rules! impl_transient {
             }
             fn transient_base(&self) -> &$crate::standard::StandardTransient {
                 $crate::standard::Transient::transient_base(&self.$field)
+            }
+        }
+    };
+}
+/// Register an abstract class, written as a trait, in the runtime type system.
+///
+/// The trait must have `Transient` as a supertrait. Handles of the trait object
+/// (`Handle<dyn Trait>`) then see every concrete class that lists the trait in
+/// the `interfaces` of its `impl_transient!`.
+/// Example: `impl_transient_interface!(dyn Curve, "Geom2d_Curve", dyn Geometry)`.
+#[macro_export]
+macro_rules! impl_transient_interface {
+    ($interface:ty, $name:literal, $parent:ty) => {
+        impl $crate::standard::RuntimeTyped for $interface {
+            fn static_type() -> &'static $crate::standard::RuntimeType {
+                static DESCRIPTOR: std::sync::OnceLock<$crate::standard::RuntimeType> =
+                    std::sync::OnceLock::new();
+                DESCRIPTOR.get_or_init(|| {
+                    $crate::standard::RuntimeType::new::<Self>(
+                        $name,
+                        Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
+                    )
+                })
+            }
+            fn project_from(object: &dyn $crate::standard::Transient) -> Option<&Self> {
+                $crate::standard::project_interface::<Self>(object)
             }
         }
     };
