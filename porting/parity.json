@@ -24204,7 +24204,7 @@
       "notes": "Manual explicit member mapping; the shared NCollection_HArray1 handle becomes an owned Array1 exposed by boxes(), overloads become named methods, Compare returns Result<&List<i32>> and native null-handle dereferences become Standard_NullObject failures. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_BoundSortBox::Initialize(const handle<NCollection_HArray1<Bnd_Box>>&)",
+      "upstream_id": "Bnd_BoundSortBox::Initialize(const occ::handle<NCollection_HArray1<Bnd_Box>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundSortBox::initialize",
@@ -24212,7 +24212,7 @@
       "notes": "Manual explicit member mapping; the shared NCollection_HArray1 handle becomes an owned Array1 exposed by boxes(), overloads become named methods, Compare returns Result<&List<i32>> and native null-handle dereferences become Standard_NullObject failures. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_BoundSortBox::Initialize(const Bnd_Box&,const handle<NCollection_HArray1<Bnd_Box>>&)",
+      "upstream_id": "Bnd_BoundSortBox::Initialize(const Bnd_Box&,const occ::handle<NCollection_HArray1<Bnd_Box>>&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_BoundSortBox.hxx",
       "rust_item": "rustycad_tkmath::bnd::BoundSortBox::initialize_with_enclosing",
@@ -24428,36 +24428,1132 @@
       "notes": "Manual explicit member mapping of the members the legacy suite does not call; the structured Get() returns BoxLimits3/BoxLimits2 and Dump() writes to an injected io::Write. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_B3<RealType>::IsOut(const Bnd_B3<RealType>&,const gp_Trsf&) const",
+      "upstream_id": "Bnd_B2::Bnd_B2()",
       "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
-      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_transformed_box",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::default",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the gp_Trsf/gp_Trsf2d overloads of IsOut/IsIn become is_out_transformed_box/is_in_transformed_box on CompactBox3/CompactBox2<T>. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_B3<RealType>::IsIn(const Bnd_B3<RealType>&,const gp_Trsf&) const",
+      "upstream_id": "Bnd_B2::Bnd_B2(const gp_XY&,const gp_XY&)",
       "toolkit": "TKMath",
-      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
-      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_in_transformed_box",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::new",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the gp_Trsf/gp_Trsf2d overloads of IsOut/IsIn become is_out_transformed_box/is_in_transformed_box on CompactBox3/CompactBox2<T>. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_B2<RealType>::IsOut(const Bnd_B2<RealType>&,const gp_Trsf2d&) const",
+      "upstream_id": "Bnd_B2::Bnd_B2(const std::array<RealType,2>&,const std::array<RealType,2>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::from_arrays",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::IsVoid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_void",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::Clear()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::clear",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::Add(const gp_XY&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::add_xy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::Add(const gp_Pnt2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::add_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::Add(const Bnd_B2<RealType>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::add_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::CornerMin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::corner_min",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::CornerMax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::corner_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::SquareExtent() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::square_extent",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::Enlarge(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::enlarge",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::Limit(const Bnd_B2<RealType>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::limit",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::Transformed(const gp_Trsf2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::transformed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::IsOut(const gp_XY&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::IsOut(const gp_XY&,double,bool) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_circle",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::IsOut(const Bnd_B2<RealType>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::IsOut(const Bnd_B2<RealType>&,const gp_Trsf2d&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_transformed_box",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the gp_Trsf/gp_Trsf2d overloads of IsOut/IsIn become is_out_transformed_box/is_in_transformed_box on CompactBox3/CompactBox2<T>. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Bnd_B2<RealType>::IsIn(const Bnd_B2<RealType>&,const gp_Trsf2d&) const",
+      "upstream_id": "Bnd_B2::IsIn(const Bnd_B2<RealType>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_in_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::IsIn(const Bnd_B2<RealType>&,const gp_Trsf2d&) const",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
       "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_in_transformed_box",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; the gp_Trsf/gp_Trsf2d overloads of IsOut/IsIn become is_out_transformed_box/is_in_transformed_box on CompactBox3/CompactBox2<T>. Authoritative toolkit API enumeration pending."
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::SetCenter(const gp_XY&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::set_center",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::SetCenter(const std::array<RealType,2>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::set_center_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::SetHSize(const gp_XY&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::set_half_size",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::SetHSize(const std::array<RealType,2>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::set_half_size_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::Center() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::center",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::HSize() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::half_size",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::IsOut(const gp_Ax2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_line",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B2::IsOut(const gp_XY&,const gp_XY&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B2.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_out_segment",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B2<RealType> is the generic CompactBox2<T> (T = f64 for Bnd_B2d, f32 for Bnd_B2f), overloads become named methods (add_xy/add_point/add_box, is_out_point/is_out_circle/is_out_box/is_out_line/is_out_segment, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Bnd_B3()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Bnd_B3(const gp_XYZ&,const gp_XYZ&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Bnd_B3(const std::array<RealType,3>&,const std::array<RealType,3>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::from_arrays",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::IsVoid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_void",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Clear()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::clear",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Add(const gp_XYZ&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::add_xyz",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Add(const gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::add_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Add(const Bnd_B3<RealType>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::add_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::CornerMin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::corner_min",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::CornerMax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::corner_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::SquareExtent() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::square_extent",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Enlarge(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::enlarge",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Limit(const Bnd_B3<RealType>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::limit",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Transformed(const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::transformed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::IsOut(const gp_XYZ&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::IsOut(const gp_XYZ&,double,bool) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_sphere",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::IsOut(const Bnd_B3<RealType>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::IsOut(const Bnd_B3<RealType>&,const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_transformed_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::IsIn(const Bnd_B3<RealType>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_in_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::IsIn(const Bnd_B3<RealType>&,const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_in_transformed_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::SetCenter(const gp_XYZ&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::set_center",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::SetCenter(const std::array<RealType,3>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::set_center_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::SetHSize(const gp_XYZ&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::set_half_size",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::SetHSize(const std::array<RealType,3>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::set_half_size_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::Center() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::center",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::HSize() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::half_size",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::IsOut(const gp_Ax1&,bool,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_line",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_B3::IsOut(const gp_Ax3&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_B3.hxx",
+      "rust_item": "rustycad_tkmath::bnd::CompactBox3::is_out_plane",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; Bnd_B3<RealType> is the generic CompactBox3<T> (T = f64 for Bnd_B3d, f32 for Bnd_B3f), overloads become named methods (add_xyz/add_point/add_box, is_out_point/is_out_sphere/is_out_box/is_out_line/is_out_plane, set_center/set_center_array) and HSize becomes half_size. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Bnd_Box()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Bnd_Box(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::SetWhole()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::set_whole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::SetVoid()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::set_void",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Set(const gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::set_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Set(const gp_Pnt&,const gp_Dir&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::set_ray",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Update(double,double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::update_bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::GetGap() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::gap",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::SetGap(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::set_gap",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Enlarge(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::enlarge",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Get(double&,double&,double&,double&,double&,double&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::get",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::CornerMin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::corner_min",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::CornerMax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::corner_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Center() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::center",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::OpenXmin()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::open_xmin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOpenXmin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_xmin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::OpenXmax()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::open_xmax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOpenXmax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_xmax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::OpenYmin()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::open_ymin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOpenYmin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_ymin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::OpenYmax()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::open_ymax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOpenYmax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_ymax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::OpenZmin()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::open_zmin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOpenZmin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_zmin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::OpenZmax()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::open_zmax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOpenZmax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open_zmax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsXThin(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_x_thin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsYThin(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_y_thin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsZThin(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_z_thin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOpen() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_open",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsWhole() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_whole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsVoid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_void",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsThin(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_thin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Transformed(const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::transformed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Add(const Bnd_Box&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::add_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Add(const gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::add_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Add(const gp_Pnt&,const gp_Dir&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::add_ray",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Add(const gp_Dir&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::add_direction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOut(const gp_Pnt&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_out_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOut(const gp_Lin&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_out_line",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOut(const gp_Pln&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_out_plane",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOut(const Bnd_Box&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_out_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOut(const Bnd_Box&,const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_out_transformed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOut(const gp_Trsf&,const Bnd_Box&,const gp_Trsf&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_out_both",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::IsOut(const gp_Pnt&,const gp_Pnt&,const gp_Dir&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::is_out_segment",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Contains(const gp_Pnt&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::contains",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Intersects(const Bnd_Box&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::intersects",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::Distance(const Bnd_Box&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::distance",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::SquareExtent() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::square_extent",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::FinitePart() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::finite_part",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::HasFinitePart() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::has_finite_part",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box::InitFromJson(const Standard_SStream&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox3::init_from_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point/set_ray, add_box/add_point/add_ray/add_direction, is_out_point/is_out_line/is_out_plane/is_out_box/is_out_transformed/is_out_both/is_out_segment), GetGap becomes gap, Get(six outputs) returns an array, and the Standard_ConstructionError of Get/CornerMin/CornerMax on a void box becomes a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::SetWhole()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::set_whole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::SetVoid()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::set_void",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Set(const gp_Pnt2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::set_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Update(double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::update_bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::GetGap() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::gap",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::SetGap(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::set_gap",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Enlarge(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::enlarge",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Get(double&,double&,double&,double&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::get",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Center() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::center",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::OpenXmin()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::open_xmin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOpenXmin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_open_xmin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::OpenXmax()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::open_xmax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOpenXmax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_open_xmax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::OpenYmin()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::open_ymin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOpenYmin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_open_ymin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::OpenYmax()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::open_ymax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOpenYmax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_open_ymax",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsWhole() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_whole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsVoid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_void",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Transformed(const gp_Trsf2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::transformed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Add(const Bnd_Box2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::add_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Add(const gp_Pnt2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::add_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Add(const gp_Dir2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::add_direction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOut(const gp_Pnt2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_out_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOut(const gp_Lin2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_out_line",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOut(const gp_Pnt2d&,const gp_Pnt2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_out_segment",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::IsOut(const Bnd_Box2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::is_out_box",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Contains(const gp_Pnt2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::contains",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Intersects(const Bnd_Box2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::intersects",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::Distance(const Bnd_Box2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::distance",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Box2d::SquareExtent() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Box2d.hxx",
+      "rust_item": "rustycad_tkmath::bnd::BoundingBox2::square_extent",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; overloads become named methods (set_point, add_box/add_point/add_direction, is_out_point/is_out_line/is_out_segment/is_out_box), GetGap becomes gap, and Get(four outputs) returns an array with the Standard_ConstructionError of a void box as a Failure result. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Bnd_Range::IntersectStatus",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Bnd/Bnd_Range.hxx",
+      "rust_item": "rustycad_tkmath::bnd::IntersectStatus",
+      "status": "implemented",
+      "notes": "Explicit overload mapping; the unscoped IntersectStatus enum becomes the Rust enum IntersectStatus with Out/In/Boundary variants of the native values. API inventory completeness remains pending."
     }
   ],
   "tests": [
