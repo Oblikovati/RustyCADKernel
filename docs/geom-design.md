@@ -143,6 +143,14 @@ raise Standard_NotImplemented), so they keep plain fields without a
 `operator()(key, key)` becomes `equal`, and the value and curve hashers also implement
 the NCollection `HashPolicy`, so they can drive the ported hashed containers.
 
+The GeomEval classes of TKG3d follow the same rules: the curves and the Bezier
+surfaces keep plain fields, while the elementary surfaces (`GeomEvalEllipsoidSurface`...)
+derive from `Geom_ElementarySurface`, whose position and parameter setters succeed, so
+they keep their state in a `SharedState`. Their T-Bezier and AHT-Bezier curves run the
+generic evaluators of `rustycad_tkg2d::geom2d_eval::eval_basis` with `gp_XYZ` poles.
+The GeomHash structs mirror the Geom2dHash ones and share their rounding, combining
+and class-dispatch helpers.
+
 ## 9. Grid evaluators
 
 The Geom2dGridEval evaluators are plain structs, not transient classes: each holds the
