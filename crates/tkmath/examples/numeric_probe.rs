@@ -269,7 +269,25 @@ fn main() {
         let mut words = line.split_whitespace();
         let op = words.next().unwrap();
         let values: Vec<f64> = words.map(|w| w.parse().unwrap()).collect();
-        if op == "cslib_normal" {
+        if op == "elclib3" {
+            elementary_probe::elclib3_case(&values);
+        } else if op == "elclib2" {
+            elementary_probe::elclib2_case(&values);
+        } else if op == "elperiod" {
+            elementary_probe::elperiod_case(&values);
+        } else if op == "elto3d" {
+            elementary_probe::elto3d_case(&values);
+        } else if op == "elslib" {
+            elementary_probe::elslib_case(&values);
+        } else if op == "gpconic3" {
+            elementary_probe::gpconic3_case(&values);
+        } else if op == "gpconic2" {
+            elementary_probe::gpconic2_case(&values);
+        } else if op == "gpquadric" {
+            elementary_probe::gpquadric_case(&values);
+        } else if op == "gpaxis" {
+            elementary_probe::gpaxis_case(&values);
+        } else if op == "cslib_normal" {
             cslib_probe::cslib_normal_case(&values);
         } else if op == "cslib_singular" {
             cslib_probe::cslib_singular_case(&values);
@@ -483,3 +501,4 @@ mod swarm_probe;
 mod global_modern_probe;
 
 mod cslib_probe;
+mod elementary_probe;
