@@ -2,6 +2,7 @@
 pub mod advapprox;
 pub mod bezier_surface;
 pub mod bspl;
+pub mod bspline_surface;
 pub mod common;
 pub mod conics;
 pub mod curves;

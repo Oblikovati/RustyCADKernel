@@ -68,6 +68,7 @@
 #include <GeomEval_RepCurveDesc.hxx>
 #include "tkg3d_probe_bspl.cxx"
 #include "tkg3d_probe_bezier_surface.cxx"
+#include "tkg3d_probe_bspline_surface.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_point", g3_point_case},
  {"g3_direction", g3_direction_case},
@@ -99,6 +100,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_evalrep_edit", g3_evalrep_edit_case},
  {"g3_bezier_surface", g3_bezier_surface_case},
  {"g3_bezier_surface_evalrep", g3_bezier_surface_evalrep_case},
+ {"g3_bspline_surface", g3_bspline_surface_case},
+ {"g3_bspline_surface_edit", g3_bspline_surface_edit_case},
 };
 int main() {
  std::string line;

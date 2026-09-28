@@ -15,12 +15,12 @@
 
 //! Knot, multiplicity, weight and array steps that the 2D and 3D Bezier and
 //! B-spline curves share word for word; the point dimension never enters them.
-use super::arrays::{any_weight_step, at, one_based, put};
+use super::arrays::{any_weight_step, at, one_based, put, rebased};
 use super::errors;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, real};
 use rustycad_tkmath::bsplclib;
-use rustycad_tkmath::geom_abs::Shape;
+use rustycad_tkmath::geom_abs::{BSplKnotDistribution, Shape};
 
 /// The file-static `CheckCurveData` of Geom2d_BSplineCurve.cxx and Geom_BSplineCurve.cxx;
 /// `check_curve_data(&poles, &k, &m, 3, false)?`.
@@ -99,6 +99,65 @@ pub fn smoothness(degree: i32, max_knot_mult: i32) -> Shape {
         2 => Shape::C2,
         _ => Shape::C3,
     }
+}
+
+/// What `updateKnots` (B-spline curves) and `updateUKnots`/`updateVKnots` (B-spline
+/// surfaces) derive from the knots and multiplicities of one parametric direction.
+pub struct KnotData {
+    /// The knot distribution (`KnotAnalysis`).
+    pub knot_set: BSplKnotDistribution,
+    /// The flat knot sequence; a copy of the knots for uniform non-periodic data.
+    pub flat_knots: Array1<'static, f64>,
+    /// The continuity from the highest interior multiplicity.
+    pub smooth: Shape,
+}
+
+/// The shared body of `updateKnots`, `updateUKnots` and `updateVKnots`;
+/// `knot_data(3, false, &knots, &mults)?.smooth`.
+pub fn knot_data(
+    degree: i32,
+    periodic: bool,
+    knots: &Array1<'_, f64>,
+    mults: &Array1<'_, i32>,
+) -> Result<KnotData, Failure> {
+    let (knot_set, max_knot_mult) = bsplclib::knot_analysis(degree, periodic, knots, mults)?;
+    let flat_knots: Array1<'static, f64> = if knot_set == BSplKnotDistribution::Uniform && !periodic
+    {
+        // The stored knots are one-based, so the rebased copy has their bounds.
+        rebased(knots)?
+    } else {
+        let length: i32 = bsplclib::knot_sequence_length(mults, degree, periodic)?;
+        let mut flat: Array1<'static, f64> = one_based(length)?;
+        bsplclib::knot_sequence_with_degree(knots, mults, degree, periodic, &mut flat)?;
+        flat
+    };
+    Ok(KnotData {
+        knot_set,
+        flat_knots,
+        smooth: smoothness(degree, max_knot_mult),
+    })
+}
+
+/// The `IsCN` switch of the B-spline curves and the `IsCNu`/`IsCNv` switch of the
+/// surfaces, for `n >= 0`: C3 data is CN up to `Degree - MaxKnotMult` of the interior
+/// knots, computed only when `n > 3`; `spline_is_cn(Shape::C2, 2, 3, &mults)?`.
+pub fn spline_is_cn(
+    smooth: Shape,
+    n: i32,
+    degree: i32,
+    mults: &Array1<'_, i32>,
+) -> Result<bool, Failure> {
+    Ok(match smooth {
+        Shape::CN => true,
+        Shape::C0 | Shape::G1 => n <= 0,
+        Shape::C1 | Shape::G2 => n <= 1,
+        Shape::C2 => n <= 2,
+        Shape::C3 => {
+            n <= 3
+                || n <= degree
+                    - bsplclib::max_knot_mult(mults, mults.lower() + 1, mults.upper() - 1)?
+        }
+    })
 }
 
 /// The deprecated `Knots(K)` / `KnotSequence(K)`: K's bounds must lie inside the

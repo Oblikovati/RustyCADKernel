@@ -70,6 +70,7 @@ pub fn surface(r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
             Ok(Handle::new(GeomSurfaceOfRevolution::new(&basis, a)?).cast())
         }
         7 => bezier_surface(r),
+        8 => super::bspline_surface::spec(r),
         _ => panic!("surface kind {kind} has no Rust builder in the probe"),
     }
 }

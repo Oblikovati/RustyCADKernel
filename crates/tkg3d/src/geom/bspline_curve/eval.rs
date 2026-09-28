@@ -20,8 +20,8 @@ use crate::geom::{GeomCurveD1, GeomCurveD2, GeomCurveD3};
 use crate::geom_eval::rep_utils;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::arrays::at;
+use rustycad_tkg2d::geom2d::spline_data::spline_is_cn;
 use rustycad_tkmath::bsplclib::{self, CurveSpan};
-use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point3, Vector3, resolution};
 
 impl BSplineState {
@@ -169,16 +169,7 @@ impl BSplineState {
                 "Geom_BSplineCurve::IsCN: N = {n}; expected N >= 0"
             )));
         }
-        Ok(match self.smooth {
-            Shape::CN => true,
-            Shape::C0 | Shape::G1 => n <= 0,
-            Shape::C1 | Shape::G2 => n <= 1,
-            Shape::C2 => n <= 2,
-            Shape::C3 => n <= 3 || n <= self.deg - self.interior_max_mult()?,
-        })
-    }
-    fn interior_max_mult(&self) -> Result<i32, Failure> {
-        bsplclib::max_knot_mult(&self.mults, self.mults.lower() + 1, self.mults.upper() - 1)
+        spline_is_cn(self.smooth, n, self.deg, &self.mults)
     }
     pub(super) fn start_point(&self) -> Result<Point3, Failure> {
         if at(&self.mults, 1)? == self.deg + 1 {

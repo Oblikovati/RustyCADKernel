@@ -102,3 +102,6 @@ pub use offset_curve::GeomOffsetCurve;
 mod bezier_surface;
 pub mod offset_surface_utils;
 pub use bezier_surface::GeomBezierSurface;
+
+mod bspline_surface;
+pub use bspline_surface::{GeomBSplineSurface, KnotVector, LocalKnots, ModifiedPoles};

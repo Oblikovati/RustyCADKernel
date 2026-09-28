@@ -18,7 +18,7 @@ use crate::geom_eval::RepCurveDesc;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::arrays::{at, one_based, rebased};
-use rustycad_tkg2d::geom2d::spline_data::smoothness;
+use rustycad_tkg2d::geom2d::spline_data::{KnotData, knot_data};
 pub(super) use rustycad_tkg2d::geom2d::spline_data::{
     bspline_rational as rational, check_curve_data,
 };
@@ -112,24 +112,10 @@ impl BSplineState {
     /// `updateKnots`: knot form, flat knots and continuity from the knots and multiplicities.
     pub(super) fn update_knots(&mut self) -> Result<(), Failure> {
         self.max_deriv_inv_ok = false;
-        let (knot_set, max_knot_mult) =
-            bsplclib::knot_analysis(self.deg, self.periodic, &self.knots, &self.mults)?;
-        self.knot_set = knot_set;
-        if knot_set == BSplKnotDistribution::Uniform && !self.periodic {
-            self.flat_knots = self.knots.clone();
-        } else {
-            let length: i32 = bsplclib::knot_sequence_length(&self.mults, self.deg, self.periodic)?;
-            let mut flat: Array1<'static, f64> = one_based(length)?;
-            bsplclib::knot_sequence_with_degree(
-                &self.knots,
-                &self.mults,
-                self.deg,
-                self.periodic,
-                &mut flat,
-            )?;
-            self.flat_knots = flat;
-        }
-        self.smooth = smoothness(self.deg, max_knot_mult);
+        let data: KnotData = knot_data(self.deg, self.periodic, &self.knots, &self.mults)?;
+        self.knot_set = data.knot_set;
+        self.flat_knots = data.flat_knots;
+        self.smooth = data.smooth;
         Ok(())
     }
     /// `FirstUKnotIndex`; `state.first_u_knot_index()?`.
