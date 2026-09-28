@@ -20,17 +20,15 @@ use crate::extrema::curve_tool::ExtremaCurveTool;
 use crate::extrema::failures::{sequence_value, type_mismatch};
 use crate::extrema::gp_space::{GpPoint, GpVector};
 use crate::extrema::pon::POnCurve;
+use crate::extrema::singular::{SingularSearch, singular_derivative, singular_step};
 use crate::failure_capture::FailureCapture;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkg2d::geom2d::native::{std_max, std_min};
+use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkmath::geom_abs::CurveType;
 use rustycad_tkmath::math::{Function, FunctionWithDerivative};
 
-const TOL_FACTOR: f64 = 1.0e-12;
-const MIN_TOL: f64 = 1.0e-20;
-const MIN_STEP: f64 = 1.0e-7;
-const MAX_ORDER: i32 = 3;
+use crate::extrema::singular::{MAX_ORDER, MIN_TOL, TOL_FACTOR};
 
 /// `Extrema_GFuncExtPC<TheCurve, TheCurveTool, ...>` over one [`ExtremaCurveTool`]:
 /// the math function of the point-curve extrema. The native members raise; here
@@ -174,18 +172,7 @@ impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
 
 // `Precision::IsInfinite(V.X()) || Precision::IsInfinite(V.Y())` (Z is not checked).
 fn is_infinite_xy<V: GpVector>(vector: &V) -> bool {
-    precision::is_infinite(vector.first_coordinate())
-        || precision::is_infinite(vector.second_coordinate())
-}
-
-// `max(du * factor, MinStep)` with `du` null for an infinite interval.
-fn singular_step(uinfium: f64, usupremum: f64, factor: f64) -> f64 {
-    let du: f64 = if (usupremum >= f64::MAX) || (uinfium <= f64::MIN) {
-        0.0
-    } else {
-        usupremum - uinfium
-    };
-    std_max(du * factor, MIN_STEP)
+    precision::is_infinite(vector.coordinate(0)) || precision::is_infinite(vector.coordinate(1))
 }
 
 impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
@@ -215,57 +202,16 @@ impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {
         Ok(true)
     }
 
-    // The first non-null higher derivative (oriented along the curve), or the
-    // three-point difference when none reaches the tolerance.
+    // The derivative of the singular case, on this function's interval.
     fn singular_derivative(&self) -> Result<T::Vector, Failure> {
-        let curve: &T::Curve = self.curve()?;
-        let delta: f64 = singular_step(self.uinfium, self.usupremum, 1.0e-3);
-        let mut n: i32 = 1;
-        let mut v: T::Vector;
-        let mut found: bool;
-        loop {
-            n += 1;
-            v = T::dn(curve, self.u, n)?;
-            found = v.norm() > self.tol;
-            if found || n >= self.max_deriv_order {
-                break;
-            }
-        }
-        if found {
-            let u: f64 = if self.u - self.uinfium < delta {
-                self.u + delta
-            } else {
-                self.u - delta
-            };
-            let p1: T::Point = T::d0(curve, std_min(self.u, u))?;
-            let p2: T::Point = T::d0(curve, std_max(self.u, u))?;
-            let dir_factor: f64 = v.dot_with(&p1.vector_to(&p2));
-            return Ok(if dir_factor < 0.0 { -v } else { v });
-        }
-        three_point_derivative::<T>(curve, self.u, self.uinfium, delta)
+        let search = SingularSearch {
+            uinf: self.uinfium,
+            usup: self.usupremum,
+            tol: self.tol,
+            max_order: self.max_deriv_order,
+        };
+        singular_derivative::<T>(self.curve()?, self.u, &search)
     }
-}
-
-/// The derivative approximated by three points `delta` apart, forward near the
-/// start of the interval and backward elsewhere, from vectors to the origin
-/// (`TheVector V1(Ptemp, P1)` with a default `Ptemp`).
-pub(crate) fn three_point_derivative<T: ExtremaCurveTool>(
-    curve: &T::Curve,
-    u: f64,
-    uinfium: f64,
-    delta: f64,
-) -> Result<T::Vector, Failure> {
-    let origin: T::Point = T::Point::default();
-    if u - uinfium < 2.0 * delta {
-        let v1 = origin.vector_to(&T::d0(curve, u)?);
-        let v2 = origin.vector_to(&T::d0(curve, u + delta)?);
-        let v3 = origin.vector_to(&T::d0(curve, u + 2.0 * delta)?);
-        return Ok(v1 * -3.0 + v2 * 4.0 - v3);
-    }
-    let v1 = origin.vector_to(&T::d0(curve, u - 2.0 * delta)?);
-    let v2 = origin.vector_to(&T::d0(curve, u - delta)?);
-    let v3 = origin.vector_to(&T::d0(curve, u)?);
-    Ok(v1 - v2 * 4.0 + v3 * 3.0)
 }
 
 impl<'a, T: ExtremaCurveTool> GFuncExtPC<'a, T> {

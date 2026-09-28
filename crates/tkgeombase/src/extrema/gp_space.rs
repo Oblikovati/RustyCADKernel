@@ -22,6 +22,10 @@ use std::ops::{Add, Div, Mul, Neg, Sub};
 pub trait GpPoint: Copy + Default + Debug + PartialEq + 'static {
     /// The matching gp vector.
     type Vector: GpVector;
+    /// 3 or 2.
+    const DIMENSION: usize;
+    /// `Coord(index + 1)` (`X()`, `Y()`, `Z()`); `point.coordinate(0)`.
+    fn coordinate(&self, index: usize) -> f64;
     /// `SquareDistance(theOther)`; `point.square_distance_to(&other)`.
     fn square_distance_to(&self, other: &Self) -> f64;
     /// `Distance(theOther)`; `point.distance_to(&other)`.
@@ -45,16 +49,18 @@ pub trait GpVector:
 {
     /// `Dot(theOther)`; `vector.dot_with(&other)`.
     fn dot_with(&self, other: &Self) -> f64;
+    /// `Coord(index + 1)` (`X()`, `Y()`, `Z()`); `vector.coordinate(0)`.
+    fn coordinate(&self, index: usize) -> f64;
     /// `Magnitude()`; `vector.norm()`.
     fn norm(&self) -> f64;
-    /// `X()`; `vector.first_coordinate()`.
-    fn first_coordinate(&self) -> f64;
-    /// `Y()`; `vector.second_coordinate()`.
-    fn second_coordinate(&self) -> f64;
 }
 
 impl GpPoint for Point3 {
     type Vector = Vector3;
+    const DIMENSION: usize = 3;
+    fn coordinate(&self, index: usize) -> f64 {
+        [self.x(), self.y(), self.z()][index]
+    }
     fn square_distance_to(&self, other: &Self) -> f64 {
         self.square_distance(other)
     }
@@ -68,6 +74,10 @@ impl GpPoint for Point3 {
 
 impl GpPoint for Point2 {
     type Vector = Vector2;
+    const DIMENSION: usize = 2;
+    fn coordinate(&self, index: usize) -> f64 {
+        [self.x(), self.y()][index]
+    }
     fn square_distance_to(&self, other: &Self) -> f64 {
         self.square_distance(*other)
     }
@@ -83,14 +93,11 @@ impl GpVector for Vector3 {
     fn dot_with(&self, other: &Self) -> f64 {
         self.dot(*other)
     }
+    fn coordinate(&self, index: usize) -> f64 {
+        [self.x(), self.y(), self.z()][index]
+    }
     fn norm(&self) -> f64 {
         self.magnitude()
-    }
-    fn first_coordinate(&self) -> f64 {
-        self.x()
-    }
-    fn second_coordinate(&self) -> f64 {
-        self.y()
     }
 }
 
@@ -98,13 +105,10 @@ impl GpVector for Vector2 {
     fn dot_with(&self, other: &Self) -> f64 {
         self.dot(*other)
     }
+    fn coordinate(&self, index: usize) -> f64 {
+        [self.x(), self.y()][index]
+    }
     fn norm(&self) -> f64 {
         self.magnitude()
-    }
-    fn first_coordinate(&self) -> f64 {
-        self.x()
-    }
-    fn second_coordinate(&self) -> f64 {
-        self.y()
     }
 }

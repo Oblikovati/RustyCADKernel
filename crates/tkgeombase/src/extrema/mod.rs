@@ -25,6 +25,7 @@
 //! or [`Curve2dTool`]. An object that keeps a curve (`TheCurve*` natively) borrows it
 //! for its lifetime. docs/tkgeombase-progress.md gives the full mapping;
 //! `ExtPElC::with_line(point, line, 1e-7, -10.0, 10.0).nb_ext()? == 1`.
+mod curve_curve;
 mod curve_tool;
 mod curve_tools;
 mod elementary_point_curve;
@@ -40,7 +41,12 @@ mod gp_space;
 mod pair_result;
 mod point_curve;
 mod pon;
+mod singular;
 
+pub use curve_curve::{
+    CCLocFOfLocECC, ECC, ECC2d, ExtCC, ExtCC2d, GFuncExtCC, GGenExtCC, GenLocateExtCC,
+    GlobOptFuncCCC0, GlobOptFuncCCC1, GlobOptFuncCCC2, LocECC, LocateExtCC,
+};
 pub use curve_tool::{ExtremaCurveTool, SplineKnots, ToolD1, ToolD2, ToolD3};
 pub use curve_tools::{Curve2dTool, CurveTool};
 pub use elementary_point_curve::ElementaryPointCurve;

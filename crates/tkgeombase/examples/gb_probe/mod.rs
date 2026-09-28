@@ -5,6 +5,7 @@ pub mod app_par_curves;
 pub mod bndlib;
 #[allow(dead_code, unused_imports)]
 pub mod common;
+pub mod extrema_cc;
 pub mod extrema_el;
 pub mod extrema_pc;
 pub mod fem_tool;
