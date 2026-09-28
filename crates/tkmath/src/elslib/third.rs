@@ -135,27 +135,36 @@ fn spherical_d3(
     let (circle, meridian) = (frame.pair(a1, a2), frame.pair(a3, a4));
     let tangent = frame.difference(a2, a1);
     let (axial_cos, axial_sin) = (frame.z * cosine, frame.z * sine);
-    let point = frame.point(circle + axial_sin);
+    let (dvv, duvv) = tube_terms(frame, (circle, tangent, axial_sin), tube);
+    let dv = meridian.reversed() + axial_cos;
     let mut second = lower(
-        point,
+        frame.point(circle + axial_sin),
         tangent.reversed(),
-        meridian.reversed() + axial_cos,
+        dv,
         circle.reversed(),
     );
     second.duv = vector(frame.difference(a4, a3));
-    second.dvv = vector(match tube {
-        Some((a5, a6)) => frame.x * -a5 - frame.y * a6 - axial_sin,
-        None => circle.reversed() - axial_sin,
-    });
-    let duvv = match tube {
-        Some((a5, a6)) => frame.difference(a6, a5),
-        None => tangent,
-    };
+    second.dvv = vector(dvv);
     SurfaceD3 {
         second,
         duuu: vector(tangent),
         dvvv: vector(meridian - axial_cos),
         duuv: vector(meridian),
         duvv: vector(duvv),
+    }
+}
+/// `(dvv, duvv)`: the torus uses its `A5/A6` terms; the sphere reuses `-circle - axial` and,
+/// as native SphereD3 does, the `du`-derived tangent for `duvv`.
+fn tube_terms(
+    frame: &Frame,
+    (circle, tangent, axial_sin): (Xyz, Xyz, Xyz),
+    tube: Option<(f64, f64)>,
+) -> (Xyz, Xyz) {
+    match tube {
+        Some((a5, a6)) => (
+            frame.x * -a5 - frame.y * a6 - axial_sin,
+            frame.difference(a6, a5),
+        ),
+        None => (circle.reversed() - axial_sin, tangent),
     }
 }

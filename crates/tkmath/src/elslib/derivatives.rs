@@ -156,76 +156,76 @@ pub fn torus_dn(
     if invalid_order(nu, nv) {
         return Vector3::default();
     }
-    let (cos_u, sin_u) = (u.cos(), u.sin());
-    let tolerance = torus_tolerance(major, minor);
+    let torus = TorusTerms::new(u, v, major, minor);
     let frame = Frame::of(position);
     if nv == 0 {
-        let ring = major + minor * v.cos();
-        let (a1, a2) = if is_odd(nu) {
-            (-ring * sin_u, ring * cos_u)
-        } else {
-            (-ring * cos_u, -ring * sin_u)
-        };
-        let local = frame.pair(flush(a1, tolerance), flush(a2, tolerance));
-        return negated_unless(local, quarter(nu, 2) || quarter(nu, 3));
+        return torus.ring_dn(&frame, nu, major);
     }
     if nu == 0 {
-        return torus_meridian_dn(&frame, (cos_u, sin_u), minor, v, nv, tolerance);
+        return torus.meridian_dn(&frame, nv);
     }
-    torus_mixed(&frame, (cos_u, sin_u), minor, v, (nu, nv), tolerance)
+    torus.mixed_dn(&frame, nu, nv)
 }
-fn torus_meridian_dn(
-    frame: &Frame,
-    (cos_u, sin_u): (f64, f64),
-    minor: f64,
-    v: f64,
-    nv: i32,
+/// The trigonometric terms every TorusDN branch reads; each equals the native expression.
+struct TorusTerms {
+    cos_u: f64,
+    sin_u: f64,
+    tube_cos: f64,
+    tube_sin: f64,
     tolerance: f64,
-) -> Vector3 {
-    let (cos_v, sin_v) = (minor * v.cos(), minor * v.sin());
-    let (a1, a2, a3) = if is_odd(nv) {
-        (-sin_v * cos_u, -sin_v * sin_u, cos_v)
-    } else {
-        (-cos_v * cos_u, -cos_v * sin_u, -sin_v)
-    };
-    let local = frame.triple(
-        flush(a1, tolerance),
-        flush(a2, tolerance),
-        flush(a3, tolerance),
-    );
-    negated_unless(local, quarter(nv, 2) || quarter(nv, 3))
 }
-fn torus_mixed(
-    frame: &Frame,
-    (cos_u, sin_u): (f64, f64),
-    minor: f64,
-    v: f64,
-    (nu, nv): (i32, i32),
-    tolerance: f64,
-) -> Vector3 {
-    let (odd_u, odd_v) = (is_odd(nu), is_odd(nv));
-    let (a1, a2, flips) = match (odd_u, odd_v) {
-        (true, true) => {
-            let sine = minor * v.sin();
-            (sine * sin_u, -sine * cos_u, false)
+impl TorusTerms {
+    fn new(u: f64, v: f64, major: f64, minor: f64) -> Self {
+        Self {
+            cos_u: u.cos(),
+            sin_u: u.sin(),
+            tube_cos: minor * v.cos(),
+            tube_sin: minor * v.sin(),
+            tolerance: torus_tolerance(major, minor),
         }
-        (false, false) => {
-            let cosine = minor * v.cos();
-            (cosine * cos_u, cosine * sin_u, false)
-        }
-        (true, false) => {
-            let cosine = minor * v.cos();
-            (
+    }
+    fn flush(&self, value: f64) -> f64 {
+        flush(value, self.tolerance)
+    }
+    /// `nv == 0`: derivatives of the ring of radius `R + r·cos(v)`.
+    fn ring_dn(&self, frame: &Frame, nu: i32, major: f64) -> Vector3 {
+        let ring = major + self.tube_cos;
+        let (a1, a2) = if is_odd(nu) {
+            (-ring * self.sin_u, ring * self.cos_u)
+        } else {
+            (-ring * self.cos_u, -ring * self.sin_u)
+        };
+        let local = frame.pair(self.flush(a1), self.flush(a2));
+        negated_unless(local, quarter(nu, 2) || quarter(nu, 3))
+    }
+    /// `nu == 0`: derivatives along the tube circle.
+    fn meridian_dn(&self, frame: &Frame, nv: i32) -> Vector3 {
+        let (cos_v, sin_v) = (self.tube_cos, self.tube_sin);
+        let (a1, a2, a3) = if is_odd(nv) {
+            (-sin_v * self.cos_u, -sin_v * self.sin_u, cos_v)
+        } else {
+            (-cos_v * self.cos_u, -cos_v * self.sin_u, -sin_v)
+        };
+        let local = frame.triple(self.flush(a1), self.flush(a2), self.flush(a3));
+        negated_unless(local, quarter(nv, 2) || quarter(nv, 3))
+    }
+    fn mixed_dn(&self, frame: &Frame, nu: i32, nv: i32) -> Vector3 {
+        let (a1, a2, flips) = self.mixed_terms(nu, nv);
+        let local = frame.pair(self.flush(a1), self.flush(a2));
+        negated_unless(local, !flips)
+    }
+    /// Parity table of the mixed orders: coefficients and whether the result is negated.
+    fn mixed_terms(&self, nu: i32, nv: i32) -> (f64, f64, bool) {
+        let (cos_u, sin_u, cosine, sine) = (self.cos_u, self.sin_u, self.tube_cos, self.tube_sin);
+        match (is_odd(nu), is_odd(nv)) {
+            (true, true) => (sine * sin_u, -sine * cos_u, false),
+            (false, false) => (cosine * cos_u, cosine * sin_u, false),
+            (true, false) => (
                 cosine * sin_u,
                 -cosine * cos_u,
                 quarter(nv.wrapping_add(nu), 3),
-            )
+            ),
+            (false, true) => (sine * cos_u, sine * sin_u, quarter(nu.wrapping_add(nv), 3)),
         }
-        (false, true) => {
-            let sine = minor * v.sin();
-            (sine * cos_u, sine * sin_u, quarter(nu.wrapping_add(nv), 3))
-        }
-    };
-    let local = frame.pair(flush(a1, tolerance), flush(a2, tolerance));
-    negated_unless(local, !flips)
+    }
 }

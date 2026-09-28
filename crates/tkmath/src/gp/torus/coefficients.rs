@@ -71,34 +71,33 @@ impl Columns {
 /// Evaluates gp_Torus::Coefficients for the frame-change rows; `quartic(rows,5.0,1.0)`.
 pub(super) fn quartic(rows: [[f64; 4]; 3], major: f64, minor: f64) -> [f64; 35] {
     let c = Columns::new(rows, major, minor);
-    let squares = [0, 1, 2].map(|a| c.all[a][a] * c.all[a][a]);
-    let linear = [(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)].map(|(a, b)| c.linear(a, b));
-    let pairs = [(0, 1), (0, 2), (1, 2)].map(|(a, b)| 2.0 * c.mixed(a, b, b));
-    let triples = [(0, 1, 2), (1, 0, 2), (2, 0, 1)].map(|(a, b, d)| 4.0 * c.mixed(a, b, d));
-    let offsets = [0, 1, 2].map(|a| c.linear(a, 3));
-    let offset_mixed =
-        [(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)].map(|(a, d)| 4.0 * c.mixed(a, 3, d));
-    let radial_squares = [0, 1, 2].map(|i| 2.0 * c.radial(i, i));
-    let radial_cross = [(0, 1), (0, 2), (1, 2)].map(|(i, j)| 4.0 * c.radial(i, j));
-    let axial = [0, 1, 2].map(|i| 4.0 * c.axial(i));
-    let mut values = [0.0; 35];
-    let groups: [&[f64]; 11] = [
-        &squares,
-        &linear,
-        &pairs,
-        &triples,
-        &offsets,
-        &offset_mixed,
-        &[c.cross_terms()],
-        &radial_squares,
-        &radial_cross,
-        &axial,
-        &[c.constant()],
-    ];
-    let mut index = 0;
-    for group in groups {
-        values[index..index + group.len()].copy_from_slice(group);
-        index += group.len();
+    let mut out = Coefficients {
+        values: [0.0; 35],
+        next: 0,
+    };
+    out.extend(&[0, 1, 2].map(|a| c.all[a][a] * c.all[a][a]));
+    out.extend(&CROSS_PAIRS.map(|(a, b)| c.linear(a, b)));
+    out.extend(&[(0, 1), (0, 2), (1, 2)].map(|(a, b)| 2.0 * c.mixed(a, b, b)));
+    out.extend(&[(0, 1, 2), (1, 0, 2), (2, 0, 1)].map(|(a, b, d)| 4.0 * c.mixed(a, b, d)));
+    out.extend(&[0, 1, 2].map(|a| c.linear(a, 3)));
+    out.extend(&CROSS_PAIRS.map(|(a, d)| 4.0 * c.mixed(a, 3, d)));
+    out.extend(&[c.cross_terms()]);
+    out.extend(&[0, 1, 2].map(|i| 2.0 * c.radial(i, i)));
+    out.extend(&[(0, 1), (0, 2), (1, 2)].map(|(i, j)| 4.0 * c.radial(i, j)));
+    out.extend(&[0, 1, 2].map(|i| 4.0 * c.axial(i)));
+    out.extend(&[c.constant()]);
+    out.values
+}
+/// Ordered pairs of distinct spatial columns in the native entry order (3-8 and 18-23).
+const CROSS_PAIRS: [(usize, usize); 6] = [(0, 1), (0, 2), (1, 0), (1, 2), (2, 0), (2, 1)];
+/// Sequential writer over the 35 entries.
+struct Coefficients {
+    values: [f64; 35],
+    next: usize,
+}
+impl Coefficients {
+    fn extend(&mut self, group: &[f64]) {
+        self.values[self.next..self.next + group.len()].copy_from_slice(group);
+        self.next += group.len();
     }
-    values
 }
