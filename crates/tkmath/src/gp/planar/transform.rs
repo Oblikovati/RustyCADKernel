@@ -12,7 +12,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Axis2d, Point2, TransformForm, Xy};
+use super::{Axis2d, Failure, Point2, TransformForm, Xy};
 /// Planar identity, translation, rotation, and axial mirror transforms; `Transform2::default()`.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Transform2 {
@@ -85,6 +85,38 @@ impl Transform2 {
             offset,
             scale: -1.0,
         }
+    }
+    /// Maps global coordinates into the axis system (gp_Trsf2d::SetTransformation(gp_Ax2d));
+    /// `Transform2::transformation_to(axis)`.
+    pub fn transformation_to(axis: Axis2d) -> Self {
+        let first = axis.direction().xy();
+        let second = Xy::new(-first.y(), first.x());
+        // SetCol(1/2) then Transpose leaves the directions as rows.
+        let matrix = [[first.x(), first.y()], [second.x(), second.y()]];
+        let offset = axis.location().xy().multiplied_matrix(matrix).reversed();
+        Self {
+            form: TransformForm::Compound,
+            matrix,
+            offset,
+            scale: 1.0,
+        }
+    }
+    /// Reads a scaled matrix coefficient or the translation (column 3) by one-based index;
+    /// `transform.value(1,3)?`.
+    pub fn value(&self, row: i32, column: i32) -> Result<f64, Failure> {
+        if !(1..=2).contains(&row) || !(1..=3).contains(&column) {
+            return Err(Failure::out_of_range(&format!(
+                "gp_Trsf2d::Value() - index ({row}, {column}) outside rows [1, 2] and columns [1, 3]"
+            )));
+        }
+        Ok(self.coefficient(row as usize, column as usize))
+    }
+    /// Reads `value` for indices already known to be in range; `transform.coefficient(1,3)`.
+    pub(in crate::gp) fn coefficient(&self, row: usize, column: usize) -> f64 {
+        if column < 3 {
+            return self.scale * self.matrix[row - 1][column - 1];
+        }
+        self.offset.coordinates()[row - 1]
     }
     /// Returns the retained form; `transform.form()`.
     pub const fn form(&self) -> TransformForm {

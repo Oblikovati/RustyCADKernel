@@ -12,7 +12,9 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Direction2, Transform2, Vector2, Xy};
+use super::{Axis2d, Transform2, Vector2, Xy};
+use rustycad_tkernel::standard::dump::{self, DumpOutput};
+use std::io;
 /// A planar point, initially the origin; `Point2::new(1.0,2.0)`.
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Point2 {
@@ -85,32 +87,17 @@ impl Point2 {
     pub fn transformed(self, transform: Transform2) -> Self {
         transform.apply(self)
     }
+    /// Adds the destination then subtracts the origin, as gp_Pnt2d::Translate does; `point.translated_between(from,to)`.
+    pub fn translated_between(self, from: Self, to: Self) -> Self {
+        Self::from(self.coordinates + to.coordinates - from.coordinates)
+    }
+    /// Writes the native `gp_Pnt2d` vector fragment; `point.dump_json(&mut stream)?`.
+    pub fn dump_json(&self, output: &mut impl DumpOutput) -> io::Result<()> {
+        dump::dump_vector(output, "gp_Pnt2d", self.coordinates.coordinates())
+    }
 }
 impl From<Xy> for Point2 {
     fn from(coordinates: Xy) -> Self {
         Self { coordinates }
-    }
-}
-/// A planar oriented axis; `Axis2d::new(Point2::default(),Direction2::X)`.
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
-pub struct Axis2d {
-    location: Point2,
-    direction: Direction2,
-}
-impl Axis2d {
-    /// Stores an origin and unit direction; `Axis2d::new(origin,direction)`.
-    pub const fn new(location: Point2, direction: Direction2) -> Self {
-        Self {
-            location,
-            direction,
-        }
-    }
-    /// Returns the origin; `axis.location()`.
-    pub const fn location(&self) -> Point2 {
-        self.location
-    }
-    /// Returns the direction; `axis.direction()`.
-    pub const fn direction(&self) -> Direction2 {
-        self.direction
     }
 }

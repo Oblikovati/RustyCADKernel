@@ -118,3 +118,5 @@ impl Axis3 {
 mod directions;
 
 mod transformations;
+
+mod placement;

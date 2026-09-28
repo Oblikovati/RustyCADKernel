@@ -54,6 +54,19 @@ impl Direction3 {
             coordinates: coordinates.map(|value| value / magnitude),
         })
     }
+    /// Applies gp_Dir's normalization where the zero-norm raise is unreachable or compiled out
+    /// (ElSLib builds with `No_Exception`); a zero input yields NaN components like the
+    /// unchecked native division; `Direction3::normalize_unchecked([1.0,1.0,0.0])`.
+    pub(crate) fn normalize_unchecked(coordinates: [f64; 3]) -> Self {
+        let squared = dot(coordinates, coordinates);
+        if squared == 1.0 {
+            return Self { coordinates };
+        }
+        let magnitude = squared.sqrt();
+        Self {
+            coordinates: coordinates.map(|value| value / magnitude),
+        }
+    }
     /// Borrows normalized coordinates; `direction.coordinates()`.
     pub const fn coordinates(&self) -> &[f64; 3] {
         &self.coordinates
@@ -81,3 +94,5 @@ impl Direction3 {
 }
 
 mod operations;
+mod products;
+pub(crate) use products::{CheckedProducts, DirectionProducts, UncheckedProducts};

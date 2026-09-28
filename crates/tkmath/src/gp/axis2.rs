@@ -13,6 +13,7 @@
 // commercial license or contractual agreement.
 
 //! gp_Ax2 right-handed frame with native automatic X-axis selection.
+use super::direction::CheckedProducts;
 use super::{Axis1, Axis3, Direction3, Failure, Point3, Transform3, Vector3};
 /// A right-handed coordinate frame; `Axis2::new(origin,normal)?`.
 #[derive(Clone, Copy, Debug, Default)]
@@ -26,9 +27,7 @@ impl Axis2 {
         normal: Direction3,
         x: Direction3,
     ) -> Result<Self, Failure> {
-        Ok(Self {
-            frame: Axis3::new(origin, normal, x)?,
-        })
+        Self::frame_using::<CheckedProducts>(origin, normal, x)
     }
     /// Copies the complete frame into gp_Ax3's representation; `frame.axis3()`.
     pub const fn axis3(&self) -> Axis3 {
@@ -123,3 +122,5 @@ impl Axis2 {
         })
     }
 }
+mod orientation;
+mod symmetry;

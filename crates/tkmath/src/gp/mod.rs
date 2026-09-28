@@ -1,6 +1,6 @@
 //! OCCT geometric primitives with explicit native numeric behavior.
 mod axis;
-mod direction;
+pub(crate) mod direction;
 mod point;
 pub use axis::Axis3;
 pub use direction::Direction3;
@@ -19,6 +19,10 @@ pub(crate) fn dot(left: [f64; 3], right: [f64; 3]) -> f64 {
 fn construction(message: &str) -> Failure {
     Failure::with_type("Standard_ConstructionError", message, "")
 }
+fn domain(message: &str) -> Failure {
+    Failure::with_type("Standard_DomainError", message, "")
+}
+mod placement;
 
 mod transform;
 pub use transform::{Transform3, TransformForm};
@@ -36,16 +40,30 @@ pub use vector::Vector3;
 mod general_transform;
 pub use general_transform::GeneralTransform3;
 mod planar;
-pub use planar::{Axis2d, Direction2, Point2, Transform2, Vector2, Xy};
+pub use planar::{Axis2d, Axis22d, Direction2, Point2, Transform2, Vector2, Xy};
 mod line;
 pub use line::Line3;
-pub use planar::Line2;
+pub use planar::{Circle2, Ellipse2, Hyperbola2, Line2, Parabola2};
 
 mod plane;
 pub use plane::Plane3;
 
 mod circle;
 pub use circle::Circle3;
+mod ellipse;
+pub use ellipse::Ellipse3;
+mod hyperbola;
+pub use hyperbola::Hyperbola3;
+mod parabola;
+pub use parabola::Parabola3;
+mod cone;
+mod cylinder;
+mod sphere;
+mod torus;
+pub use cone::Cone3;
+pub use cylinder::Cylinder3;
+pub use sphere::Sphere3;
+pub use torus::Torus3;
 
 mod quaternion;
 pub use quaternion::{EulerSequence, Quaternion};
