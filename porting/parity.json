@@ -54764,6 +54764,574 @@
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
+      "upstream_id": "GeomEval_AHTBezierSurface(const NCollection_Array2<gp_Pnt>&,int,int,double,double,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>&,int,int,double,double,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::with_weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::Poles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::Weights() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::AlgDegreeU() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::alg_degree_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::AlgDegreeV() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::alg_degree_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::AlphaU() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::alpha_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::AlphaV() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::alpha_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::BetaU() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::beta_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::BetaV() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::beta_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::NbPolesU() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::nb_poles_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::NbPolesV() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::nb_poles_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::IsURational() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::is_u_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::IsVRational() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::is_v_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::UReverse()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::u_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::VReverse()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::v_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::UReversedParameter(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::VReversedParameter(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::Bounds(double&,double&,double&,double&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::IsUClosed() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::IsVClosed() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::IsUPeriodic() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::IsVPeriodic() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::UIso(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::VIso(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::Continuity() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::continuity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::IsCNu(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::is_cn_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::IsCNv(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::is_cn_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::EvalD0(double,double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::EvalD1(double,double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::EvalD2(double,double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::EvalD3(double,double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::EvalDN(double,double,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::Transform(const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::Copy() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurface::DEFINE_STANDARD_RTTIEXT(GeomEval_AHTBezierSurface,Geom_BoundedSurface)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface(const NCollection_Array2<gp_Pnt>&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::with_weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::Poles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::Weights() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::AlphaU() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::alpha_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::AlphaV() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::alpha_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::NbUPoles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::nb_u_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::NbVPoles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::nb_v_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::OrderU() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::order_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::OrderV() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::order_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::IsRational() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::is_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::UReverse()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::u_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::UReversedParameter(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::VReverse()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::v_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::VReversedParameter(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::Bounds(double&,double&,double&,double&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::IsUClosed() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::IsVClosed() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::IsUPeriodic() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::IsVPeriodic() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::Continuity() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::continuity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::IsCNu(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::is_cn_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::IsCNv(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::is_cn_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::UIso(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::VIso(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::EvalD0(double,double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::EvalD1(double,double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::EvalD2(double,double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::EvalD3(double,double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::EvalDN(double,double,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::Transform(const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::Copy() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): eval surfaces keep plain fields (no successful mutator), const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurface::DEFINE_STANDARD_RTTIEXT(GeomEval_TBezierSurface,Geom_BoundedSurface)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
       "upstream_id": "Geom2dGridEval_Line(const occ::handle<Geom2d_Line>&)",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Line.hxx",
@@ -112520,6 +113088,440 @@
       "rust_target": "geom_surface_eval",
       "rust_test": "Geom_SurfaceEvalTest__RevolutionSurface_EvalD1_ValidResults",
       "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.Construction_ValidParams",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__Construction_ValidParams",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.ParameterRange",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__ParameterRange",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.EvalD0_Corners",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__EvalD0_Corners",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.EvalD1_ConsistentWithD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__EvalD1_ConsistentWithD0",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.Periodicity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__Periodicity",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.Reverse_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__Reverse_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.Iso_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__Iso_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.Transform_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__Transform_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.Copy_Independent",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__Copy_Independent",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.DumpJson_NoCrash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__DumpJson_NoCrash",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.EvalD2_ConsistentWithD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__EvalD2_ConsistentWithD1",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.EvalD3_ConsistentWithD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__EvalD3_ConsistentWithD2",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.EvalDN_ConsistentWithD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__EvalDN_ConsistentWithD1",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierSurfaceTest.RationalUniformScale_Invariant",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierSurface_Test.cxx",
+      "source_sha256": "9096f0241fee63ba26a4751b27d763832edc25c1941107cbe578a795c251683a",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_surface",
+      "rust_test": "GeomEval_AHTBezierSurfaceTest__RationalUniformScale_Invariant",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.Construction_ValidParams",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__Construction_ValidParams",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.Construction_InvalidParams_Throws",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__Construction_InvalidParams_Throws",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.ParameterRange",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__ParameterRange",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.EvalD0_Corners",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__EvalD0_Corners",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.EvalD1_ConsistentWithD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__EvalD1_ConsistentWithD0",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.Periodicity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__Periodicity",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.Reverse_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__Reverse_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.Iso_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__Iso_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.Transform_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__Transform_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.Copy_Independent",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__Copy_Independent",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.DumpJson_NoCrash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__DumpJson_NoCrash",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.EvalD2_ConsistentWithD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__EvalD2_ConsistentWithD1",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.EvalD3_ConsistentWithD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__EvalD3_ConsistentWithD2",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.EvalDN_ConsistentWithD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__EvalDN_ConsistentWithD1",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.EvalD0_MatchesSphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__EvalD0_MatchesSphere",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.EvalD1_MatchesSphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__EvalD1_MatchesSphere",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierSurfaceTest.EvalD2_MatchesSphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierSurface_Test.cxx",
+      "source_sha256": "690083e145393433da2cc16caeac18caf04e35661a67d05e2fe4d5b553795369",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_surface",
+      "rust_test": "GeomEval_TBezierSurfaceTest__EvalD2_MatchesSphere",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_surface.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
