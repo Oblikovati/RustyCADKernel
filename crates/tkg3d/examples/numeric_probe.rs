@@ -22,6 +22,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("g3_conic_build", conics::conic_build_case),
     ("g3_trimmed", curves::trimmed_case),
     ("g3_offset_utils", curves::offset_utils_case),
+    ("g3_offset", curves::offset_case),
     ("g3_surface", surfaces::surface_case),
     ("g3_surface_moves", surfaces::surface_moves_case),
     ("g3_elementary", surfaces::elementary_case),

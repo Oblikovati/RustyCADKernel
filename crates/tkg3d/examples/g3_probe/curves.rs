@@ -3,11 +3,13 @@
 use super::common::{
     Reader, attempt, ax1, built_curve, curve_summary, dump, end, name, pnt, real, show, trsf,
 };
-use super::common::{flag, vec};
+use super::common::{dir, flag, int, vec};
 use super::simple::moves;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::offset_curve_utils as utils;
-use rustycad_tkg3d::geom::{GeomBoundedCurve, GeomCurve, GeomGeometry, GeomLine, GeomTrimmedCurve};
+use rustycad_tkg3d::geom::{
+    GeomBoundedCurve, GeomCurve, GeomGeometry, GeomLine, GeomOffsetCurve, GeomTrimmedCurve,
+};
 use rustycad_tkmath::gp::Line3;
 use std::cell::RefCell;
 
@@ -151,5 +153,43 @@ pub fn offset_utils_case(values: &[f64]) {
     ));
     pnt(v);
     [a1, a2, a3].into_iter().for_each(vec);
+    end();
+}
+
+fn offset_state(o: &GeomOffsetCurve, u: &[f64]) {
+    real(o.offset());
+    dir(o.direction());
+    int(o.basis_curve_continuity() as i32);
+    name(&o.basis_curve());
+    flag(o.has_eval_representation());
+    curve_summary(o, u);
+    dump(o, -1);
+}
+
+/// Offset curve state, copy, setters, reversal and transformation (g3_offset).
+pub fn offset_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let Some(c) = built_curve(&mut r) else { return };
+    let u = r.reals();
+    let o: Handle<GeomOffsetCurve> = c.cast();
+    let (d, v, no_check) = (r.real(), r.dir(), r.flag());
+    let m = trsf(&mut r);
+    let basis = super::shapes::curve(&mut r).unwrap();
+    offset_state(&o, &u);
+    offset_state(&o.copy().unwrap().cast::<GeomOffsetCurve>(), &u);
+    o.set_offset_value(d);
+    offset_state(&o, &u);
+    o.set_direction(v);
+    offset_state(&o, &u);
+    attempt(|| o.reverse());
+    offset_state(&o, &u);
+    attempt(|| o.transform(m));
+    offset_state(&o, &u);
+    attempt(|| o.set_basis_curve(&basis, no_check));
+    offset_state(&o, &u);
+    attempt(|| o.set_basis_curve(&o.cast(), no_check));
+    offset_state(&o, &u);
+    real(o.transformed_parameter(0.5, m));
+    real(o.parametric_transformation(m));
     end();
 }

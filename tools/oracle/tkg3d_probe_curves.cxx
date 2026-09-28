@@ -86,3 +86,18 @@ void g3_offset_utils_case(std::istream& in){
  gp_Vec a3=d3;a2=d2;a1=d1;v=p;g3_flag(Geom_OffsetCurveUtils::CalculateD3(v,a1,a2,a3,d4,dir,offset,change,tol));
  g3_pnt(v);g3_vec(a1);g3_vec(a2);g3_vec(a3);std::cout<<'\n';
 }
+void g3_offset_state(const occ::handle<Geom_OffsetCurve>& o,const std::vector<double>& u){
+ g3_real(o->Offset());g3_dir(o->Direction());g3_int(o->GetBasisCurveContinuity());g3_name(o->BasisCurve());
+ g3_flag(o->HasEvalRepresentation());g3_curve_summary(o,u);g3_dump(o,-1);
+}
+// Offset curves: state, Copy, the setters (a failing SetBasisCurve keeps the folded
+// offset and direction), Reverse, Transform and the parameter transformations.
+void g3_offset_case(std::istream& in){
+ G3Reader r{in};occ::handle<Geom_Curve> c=g3_built_curve(r);if(c.IsNull())return;std::vector<double> u=r.reals();
+ occ::handle<Geom_OffsetCurve> o=occ::down_cast<Geom_OffsetCurve>(c);double d=r.real();gp_Dir v=r.dir();bool nocheck=r.flag();
+ gp_Trsf m=g3_trsf(r);occ::handle<Geom_Curve> basis=g3_curve(r);
+ g3_offset_state(o,u);g3_offset_state(occ::down_cast<Geom_OffsetCurve>(o->Copy()),u);o->SetOffsetValue(d);g3_offset_state(o,u);
+ o->SetDirection(v);g3_offset_state(o,u);G3_TRY(o->Reverse());g3_offset_state(o,u);G3_TRY(o->Transform(m));g3_offset_state(o,u);
+ G3_TRY(o->SetBasisCurve(basis,nocheck));g3_offset_state(o,u);G3_TRY(o->SetBasisCurve(o,nocheck));g3_offset_state(o,u);
+ g3_real(o->TransformedParameter(0.5,m));g3_real(o->ParametricTransformation(m));std::cout<<'\n';
+}

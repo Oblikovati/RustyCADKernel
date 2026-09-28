@@ -7,7 +7,7 @@ use super::shapes;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped};
 use rustycad_tkg3d::geom::{
-    GeomBSplineCurve, GeomBezierCurve, GeomBoundedCurve, GeomCurve, GeomGeometry,
+    GeomBSplineCurve, GeomBezierCurve, GeomBoundedCurve, GeomCurve, GeomGeometry, GeomOffsetCurve,
 };
 use rustycad_tkg3d::geom_eval::{
     Domain1d, Map1d, RepCurveDesc, RepCurveDescDerivBounded, RepCurveDescFull, RepCurveDescMapped,
@@ -387,6 +387,7 @@ macro_rules! eval_represented {
 }
 eval_represented!(GeomBezierCurve);
 eval_represented!(GeomBSplineCurve);
+eval_represented!(GeomOffsetCurve);
 
 fn evalrep_on<C: EvalRepresented + RuntimeTyped>(
     c: &Handle<C>,
@@ -425,6 +426,9 @@ pub fn evalrep_case(values: &[f64]) {
     }
     if c.cast::<GeomBSplineCurve>().is_some() {
         evalrep_on(&c.cast::<GeomBSplineCurve>(), &d, &u, t);
+    }
+    if c.cast::<GeomOffsetCurve>().is_some() {
+        evalrep_on(&c.cast::<GeomOffsetCurve>(), &d, &u, t);
     }
     end();
 }

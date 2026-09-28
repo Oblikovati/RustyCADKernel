@@ -81,6 +81,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_conic_build", g3_conic_build_case},
  {"g3_trimmed", g3_trimmed_case},
  {"g3_offset_utils", g3_offset_utils_case},
+ {"g3_offset", g3_offset_case},
  {"g3_surface", g3_surface_case},
  {"g3_surface_moves", g3_surface_moves_case},
  {"g3_elementary", g3_elementary_case},

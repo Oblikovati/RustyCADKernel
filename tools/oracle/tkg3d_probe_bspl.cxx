@@ -146,6 +146,7 @@ void g3_evalrep_case(std::istream& in){
  occ::handle<Geom_Curve> rep=g3_curve(r);occ::handle<GeomEval_RepCurveDesc::Base> d=g3_desc(r,rep);gp_Trsf t=g3_trsf(r);
  if(auto b=occ::down_cast<Geom_BezierCurve>(c))g3_evalrep_on(b,d,u,t);
  if(auto b=occ::down_cast<Geom_BSplineCurve>(c))g3_evalrep_on(b,d,u,t);
+ if(auto b=occ::down_cast<Geom_OffsetCurve>(c))g3_evalrep_on(b,d,u,t);
  std::cout<<'\n';
 }
 // B-spline edits after a descriptor is set: whether each one keeps the descriptor.

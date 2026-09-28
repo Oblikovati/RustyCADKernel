@@ -5,9 +5,9 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{
     GeomBSplineCurve, GeomBezierCurve, GeomCircle, GeomConicalSurface, GeomCurve,
-    GeomCylindricalSurface, GeomEllipse, GeomHyperbola, GeomLine, GeomParabola, GeomPlane,
-    GeomSphericalSurface, GeomSurface, GeomSurfaceOfLinearExtrusion, GeomSurfaceOfRevolution,
-    GeomToroidalSurface, GeomTrimmedCurve,
+    GeomCylindricalSurface, GeomEllipse, GeomHyperbola, GeomLine, GeomOffsetCurve, GeomParabola,
+    GeomPlane, GeomSphericalSurface, GeomSurface, GeomSurfaceOfLinearExtrusion,
+    GeomSurfaceOfRevolution, GeomToroidalSurface, GeomTrimmedCurve,
 };
 use rustycad_tkmath::gp::Point3;
 
@@ -23,6 +23,7 @@ pub fn curve(r: &mut Reader) -> Result<Handle<dyn GeomCurve>, Failure> {
         5 => bezier_curve(r),
         6 => bspline_curve(r),
         7 => trimmed(r),
+        8 => offset(r),
         _ => panic!("curve kind {kind} has no Rust builder in the probe"),
     }
 }
@@ -44,6 +45,13 @@ fn trimmed(r: &mut Reader) -> Result<Handle<dyn GeomCurve>, Failure> {
     let (sense, adjust) = (r.flag(), r.flag());
     let basis = curve(r)?;
     Ok(Handle::new(GeomTrimmedCurve::new(&basis, u1, u2, sense, adjust)?).cast())
+}
+
+// Kind 8: offset d D notcheck <curve>.
+fn offset(r: &mut Reader) -> Result<Handle<dyn GeomCurve>, Failure> {
+    let (d, v, no_check) = (r.real(), r.dir(), r.flag());
+    let basis = curve(r)?;
+    Ok(Handle::new(GeomOffsetCurve::new(&basis, d, v, no_check)?).cast())
 }
 
 /// One surface specification, as g3_surface reads it.
