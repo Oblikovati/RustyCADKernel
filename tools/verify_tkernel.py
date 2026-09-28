@@ -15,6 +15,7 @@ import xml.etree.ElementTree as ET
 from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, verified_native_skips
 from tkernel_native_baseline import compile_sources
+import tkernel_ncollection_corpus
 
 
 def run(args, log, *, input=None, timeout=900, env=None):
@@ -64,6 +65,7 @@ def corpus():
         cases.extend([f"date {a}", f"date_diff {a} {b}", f"date_add {a} {rng.randrange(1000000)} {rng.randrange(3000000)}", f"date_sub {a} {rng.randrange(1000000)} {rng.randrange(3000000)}"])
         value = f"{rng.getrandbits(128):032x}"
         cases.append(f"guid {value[:8]}-{value[8:12]}-{value[12:16]}-{value[16:20]}-{value[20:]}")
+    cases += tkernel_ncollection_corpus.cases()
     return "\n".join(cases) + "\n"
 
 

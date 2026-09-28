@@ -7,6 +7,8 @@
 #include <sstream>
 #include <string>
 
+#include "tkernel_ncollection_probe.cxx"
+
 static Quantity_Date date(std::istream& in) {
   int mm, dd, yy, hh, mn, ss, mis, mics;
   if (!(in >> mm >> dd >> yy >> hh >> mn >> ss >> mis >> mics)) throw std::runtime_error("invalid date input");
@@ -54,7 +56,7 @@ int main() {
         Standard_GUID guid(value.c_str()); char text[37]; guid.ToCString(text);
         const auto uuid = guid.ToUUID(); out << text << ' ' << uuid.Data1 << ' ' << uuid.Data2 << ' ' << uuid.Data3;
         for (auto byte : uuid.Data4) out << ' ' << static_cast<unsigned>(byte);
-      } else { return 2; }
+      } else if (!ncollection_probe(op, in, out)) { return 2; }
       std::cout << "OK " << out.str() << '\n';
     } catch (const Standard_Failure& error) {
       std::cout << "ERR " << error.ExceptionType() << ": " << error.what() << '\n';
