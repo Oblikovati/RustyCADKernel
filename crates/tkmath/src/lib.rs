@@ -17,3 +17,6 @@ pub mod math_poly;
 pub mod math_integ;
 
 pub mod math_sys;
+
+pub mod geom_abs;
+pub mod plib;

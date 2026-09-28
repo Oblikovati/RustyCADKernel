@@ -762,6 +762,542 @@
       "rust_item": "rustycad_tkmath::bnd::BoundingSphere::square_extent",
       "status": "implemented",
       "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::NoWeights()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::no_weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::NoWeights2()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::no_weights2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::SetPoles(const NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::set_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::SetPoles(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::set_rational_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::GetPoles(const NCollection_Array1<double>&,NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::get_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::GetPoles(const NCollection_Array1<double>&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::get_rational_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::SetPoles(const NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::set_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::SetPoles(const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::set_rational_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::GetPoles(const NCollection_Array1<double>&,NCollection_Array1<gp_Pnt2d>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::get_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::GetPoles(const NCollection_Array1<double>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::get_rational_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::Bin(int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::bin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::RationalDerivative(int,int,int,double&,double&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::rational_derivative",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::RationalDerivatives(int,int,double&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::rational_derivatives",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::EvalPolynomial(double,int,int,int,const double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::eval_polynomial",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::NoDerivativeEvalPolynomial(double,int,int,int,const double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::no_derivative_eval_polynomial",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::EvalPoly2Var(double,double,int,int,int,int,int,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::eval_poly_2var",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::EvalLagrange(double,int,int,int,double&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::eval_lagrange",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::EvalCubicHermite(double,int,int,double&,double&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::eval_cubic_hermite",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::HermiteCoefficients(double,double,int,int,math_Matrix&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::hermite_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::CoefficientsPoles(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::coefficients_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::CoefficientsPoles(const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::coefficients_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::CoefficientsPoles(const NCollection_Array1<double>&,const NCollection_Array1<double>*,NCollection_Array1<double>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::coefficients_poles_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::CoefficientsPoles(int,const NCollection_Array1<double>&,const NCollection_Array1<double>*,NCollection_Array1<double>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::coefficients_poles_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::Trimming(double,double,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::trimming",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::Trimming(double,double,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::trimming",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::Trimming(double,double,NCollection_Array1<double>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::trimming_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::Trimming(double,double,int,NCollection_Array1<double>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::trimming_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::CoefficientsPoles(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::coefficients_poles_grid",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::UTrimming(double,double,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::u_trimming",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::VTrimming(double,double,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::v_trimming",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::HermiteInterpolate(int,double,double,int,int,const NCollection_Array2<double>&,const NCollection_Array2<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::hermite_interpolate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::JacobiParameters(GeomAbs_Shape,int,int,int&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::jacobi_parameters",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::NivConstr(GeomAbs_Shape)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::niv_constr",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::ConstraintOrder(int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::constraint_order",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::EvalLength(int,int,double&,double,double,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::eval_length",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib::EvalLength(int,int,double&,double,double,double,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
+      "rust_item": "rustycad_tkmath::plib::eval_length_with_tolerance",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::PLib_JacobiPolynomial(int,GeomAbs_Shape)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::Points(int,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::points",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::Weights(int,NCollection_Array2<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::MaxValue(NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::max_value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::MaxError(int,double&,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::max_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::ReduceDegree(int,int,double,double&,int&,double&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::reduce_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::AverageError(int,double&,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::average_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::ToCoefficients(int,int,const NCollection_Array1<double>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::to_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::D0(double,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::D1(double,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::D2(double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::D3(double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::WorkDegree() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::work_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_JacobiPolynomial::NivConstr() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_JacobiPolynomial.hxx",
+      "rust_item": "rustycad_tkmath::plib::JacobiPolynomial::niv_constr",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::PLib_HermitJacobi(int,GeomAbs_Shape)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::MaxError(int,double&,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::max_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::ReduceDegree(int,int,double,double&,int&,double&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::reduce_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::AverageError(int,double&,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::average_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::ToCoefficients(int,int,const NCollection_Array1<double>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::to_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::D0(double,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::D1(double,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::D2(double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::D3(double,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::WorkDegree() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::work_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "PLib_HermitJacobi::NivConstr() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/PLib/PLib_HermitJacobi.hxx",
+      "rust_item": "rustycad_tkmath::plib::HermitJacobi::niv_constr",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& coefficient buffers become slices, reference outputs become tuples, exceptions and table overruns become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "GeomAbs_Shape",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GeomAbs/GeomAbs_Shape.hxx",
+      "rust_item": "rustycad_tkmath::geom_abs::Shape",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "GeomAbs_CurveType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GeomAbs/GeomAbs_CurveType.hxx",
+      "rust_item": "rustycad_tkmath::geom_abs::CurveType",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "GeomAbs_SurfaceType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GeomAbs/GeomAbs_SurfaceType.hxx",
+      "rust_item": "rustycad_tkmath::geom_abs::SurfaceType",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "GeomAbs_IsoType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GeomAbs/GeomAbs_IsoType.hxx",
+      "rust_item": "rustycad_tkmath::geom_abs::IsoType",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "GeomAbs_JoinType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GeomAbs/GeomAbs_JoinType.hxx",
+      "rust_item": "rustycad_tkmath::geom_abs::JoinType",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "GeomAbs_BSplKnotDistribution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GeomAbs/GeomAbs_BSplKnotDistribution.hxx",
+      "rust_item": "rustycad_tkmath::geom_abs::BSplKnotDistribution",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants. Authoritative toolkit API enumeration pending."
     }
   ],
   "tests": [
@@ -40478,6 +41014,552 @@
       "rust_target": "mathopt_global",
       "rust_test": "MathOpt_GlobOptTest__GlobalMinimum_NonPSOStrategies_UnchangedWithPSOOptions",
       "rust_source": "crates/tkmath/tests/mathopt_global.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.NoWeightsPointers",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__NoWeightsPointers",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.SetGetPoles3D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__SetGetPoles3D",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.SetGetPoles3DWithWeights",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__SetGetPoles3DWithWeights",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.SetGetPoles2D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__SetGetPoles2D",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.SetGetPoles2DWithWeights",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__SetGetPoles2DWithWeights",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.ZeroWeightsHandling",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__ZeroWeightsHandling",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.BinomialCoefficient_BasicValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__BinomialCoefficient_BasicValues",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.BinomialCoefficient_Symmetry",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__BinomialCoefficient_Symmetry",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.BinomialCoefficient_Recurrence",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__BinomialCoefficient_Recurrence",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.BinomialCoefficient_LargeValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__BinomialCoefficient_LargeValues",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.BinomialCoefficient_EdgeColumns",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__BinomialCoefficient_EdgeColumns",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.BinomialCoefficient_CompleteRows",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__BinomialCoefficient_CompleteRows",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.BinomialCoefficient_SumProperty",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__BinomialCoefficient_SumProperty",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.EvalPolynomial",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__EvalPolynomial",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.EvalPolynomialWithDerivatives",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__EvalPolynomialWithDerivatives",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.ConstraintOrderConversion",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__ConstraintOrderConversion",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.HermiteInterpolate",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__HermiteInterpolate",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.EdgeCases",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__EdgeCases",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibTest.JacobiParameters",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_Test.cxx",
+      "source_sha256": "d57527521ae624e18ca0afe07cb53c8c280e2a5d1c7e7103db1de3c7f79dd31a",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib",
+      "rust_test": "PLibTest__JacobiParameters",
+      "rust_source": "crates/tkmath/tests/plib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.ConstructorAndBasicProperties",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__ConstructorAndBasicProperties",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.ConstructorEdgeCases",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__ConstructorEdgeCases",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.GaussIntegrationPoints",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__GaussIntegrationPoints",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.GaussIntegrationWeights",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__GaussIntegrationWeights",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.MaxValue",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__MaxValue",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.BasisFunctionD0",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__BasisFunctionD0",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.BasisFunctionDerivatives",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__BasisFunctionDerivatives",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.CoefficientConversion",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__CoefficientConversion",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.DegreeReduction",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__DegreeReduction",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.ErrorEstimation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__ErrorEstimation",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibJacobiPolynomialTest.StressTests",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_JacobiPolynomial_Test.cxx",
+      "source_sha256": "0efbef44054b559a6265fbf861a58a9d886f42749d68dd6bcc1ea367f6da52e4",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_jacobi_polynomial",
+      "rust_test": "PLibJacobiPolynomialTest__StressTests",
+      "rust_source": "crates/tkmath/tests/plib_jacobi_polynomial.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibHermitJacobiTest.ConstructorAndBasicProperties",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_HermitJacobi_Test.cxx",
+      "source_sha256": "5a71311b71d7fad135840083c047c5d58bb3e3887a77c4140b3e9ea76d60c6e8",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_hermit_jacobi",
+      "rust_test": "PLibHermitJacobiTest__ConstructorAndBasicProperties",
+      "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibHermitJacobiTest.BasisFunctionD0",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_HermitJacobi_Test.cxx",
+      "source_sha256": "5a71311b71d7fad135840083c047c5d58bb3e3887a77c4140b3e9ea76d60c6e8",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_hermit_jacobi",
+      "rust_test": "PLibHermitJacobiTest__BasisFunctionD0",
+      "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibHermitJacobiTest.BasisFunctionDerivatives",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_HermitJacobi_Test.cxx",
+      "source_sha256": "5a71311b71d7fad135840083c047c5d58bb3e3887a77c4140b3e9ea76d60c6e8",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_hermit_jacobi",
+      "rust_test": "PLibHermitJacobiTest__BasisFunctionDerivatives",
+      "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibHermitJacobiTest.CoefficientConversion",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_HermitJacobi_Test.cxx",
+      "source_sha256": "5a71311b71d7fad135840083c047c5d58bb3e3887a77c4140b3e9ea76d60c6e8",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_hermit_jacobi",
+      "rust_test": "PLibHermitJacobiTest__CoefficientConversion",
+      "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibHermitJacobiTest.DegreeReduction",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_HermitJacobi_Test.cxx",
+      "source_sha256": "5a71311b71d7fad135840083c047c5d58bb3e3887a77c4140b3e9ea76d60c6e8",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_hermit_jacobi",
+      "rust_test": "PLibHermitJacobiTest__DegreeReduction",
+      "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibHermitJacobiTest.ErrorEstimation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_HermitJacobi_Test.cxx",
+      "source_sha256": "5a71311b71d7fad135840083c047c5d58bb3e3887a77c4140b3e9ea76d60c6e8",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_hermit_jacobi",
+      "rust_test": "PLibHermitJacobiTest__ErrorEstimation",
+      "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibHermitJacobiTest.ExtremeParameterValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_HermitJacobi_Test.cxx",
+      "source_sha256": "5a71311b71d7fad135840083c047c5d58bb3e3887a77c4140b3e9ea76d60c6e8",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_hermit_jacobi",
+      "rust_test": "PLibHermitJacobiTest__ExtremeParameterValues",
+      "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibHermitJacobiTest.DerivativeConsistency",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_HermitJacobi_Test.cxx",
+      "source_sha256": "5a71311b71d7fad135840083c047c5d58bb3e3887a77c4140b3e9ea76d60c6e8",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_hermit_jacobi",
+      "rust_test": "PLibHermitJacobiTest__DerivativeConsistency",
+      "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "PLibHermitJacobiTest.PerformanceTest",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/PLib_HermitJacobi_Test.cxx",
+      "source_sha256": "5a71311b71d7fad135840083c047c5d58bb3e3887a77c4140b3e9ea76d60c6e8",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "plib_hermit_jacobi",
+      "rust_test": "PLibHermitJacobiTest__PerformanceTest",
+      "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
