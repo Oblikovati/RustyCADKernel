@@ -20,6 +20,41 @@ use rustycad_tkernel::ncollection::ArrayError;
 pub struct Matrix<'a> {
     table: DoubleTab<'a>,
 }
+impl<'a> Matrix<'a> {
+    /// Allocates zero-based dimensions; `Matrix::with_size(2,3)`.
+    pub fn with_size(rows: usize, columns: usize) -> Self {
+        Self {
+            table: DoubleTab::with_size(rows, columns),
+        }
+    }
+    /// Allocates zero-based dimensions set to one value; `Matrix::with_size_filled(2,3,0.0)`.
+    pub fn with_size_filled(rows: usize, columns: usize, value: f64) -> Self {
+        let mut result = Self::with_size(rows, columns);
+        result.table.init(value);
+        result
+    }
+    /// Borrows external row-major cells, the `void* Tab` constructor;
+    /// `Matrix::from_buffer(&mut cells,1,2,1,3)?`.
+    pub fn from_buffer(
+        buffer: &'a mut [f64],
+        rl: i32,
+        ru: i32,
+        cl: i32,
+        cu: i32,
+    ) -> Result<Self, ArrayError> {
+        Ok(Self {
+            table: DoubleTab::from_buffer(buffer, rl, ru, cl, cu)?,
+        })
+    }
+    /// Counts rows as `size_t`; `matrix.row_size()`.
+    pub fn row_size(&self) -> usize {
+        self.table.row_size()
+    }
+    /// Counts columns as `size_t`; `matrix.col_size()`.
+    pub fn col_size(&self) -> usize {
+        self.table.col_size()
+    }
+}
 impl Matrix<'_> {
     /// Allocates inclusive matrix bounds; `Matrix::with_bounds(1,2,1,3)?`.
     pub fn with_bounds(rl: i32, ru: i32, cl: i32, cu: i32) -> Result<Self, ArrayError> {
@@ -88,7 +123,9 @@ impl std::ops::IndexMut<(i32, i32)> for Matrix<'_> {
 }
 
 mod algebra;
+mod blocks;
 mod inverse;
+mod operators;
 mod products;
 mod rows;
 mod storage;

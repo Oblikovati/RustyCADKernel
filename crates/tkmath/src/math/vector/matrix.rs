@@ -12,21 +12,21 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Failure, Vector, failure};
+use super::{Failure, VectorBase, VectorItem, failure};
 use crate::math::Matrix;
-impl Vector<'_> {
+impl<T: VectorItem> VectorBase<'_, T> {
     /// Stores matrix times column vector; `result.set_matrix_vector(&matrix,&vector)?`.
     pub fn set_matrix_vector(
         &mut self,
         matrix: &Matrix<'_>,
-        vector: &Vector<'_>,
+        vector: &VectorBase<'_, T>,
     ) -> Result<(), Failure> {
         self.matrix_product(matrix, vector, false, false, "Multiply")
     }
     /// Stores row vector times matrix; `result.set_vector_matrix(&vector,&matrix)?`.
     pub fn set_vector_matrix(
         &mut self,
-        vector: &Vector<'_>,
+        vector: &VectorBase<'_, T>,
         matrix: &Matrix<'_>,
     ) -> Result<(), Failure> {
         self.matrix_product(matrix, vector, true, true, "Multiply")
@@ -35,14 +35,14 @@ impl Vector<'_> {
     pub fn set_transpose_matrix_vector(
         &mut self,
         matrix: &Matrix<'_>,
-        vector: &Vector<'_>,
+        vector: &VectorBase<'_, T>,
     ) -> Result<(), Failure> {
         self.matrix_product(matrix, vector, true, false, "TMultiply")
     }
     /// Stores row vector times transposed matrix; `result.set_vector_transpose_matrix(&vector,&matrix)?`.
     pub fn set_vector_transpose_matrix(
         &mut self,
-        vector: &Vector<'_>,
+        vector: &VectorBase<'_, T>,
         matrix: &Matrix<'_>,
     ) -> Result<(), Failure> {
         self.matrix_product(matrix, vector, false, true, "TMultiply")
@@ -62,7 +62,7 @@ impl Vector<'_> {
     fn matrix_product(
         &mut self,
         matrix: &Matrix<'_>,
-        vector: &Vector<'_>,
+        vector: &VectorBase<'_, T>,
         transpose: bool,
         vector_first: bool,
         operation: &str,
@@ -95,15 +95,17 @@ impl Vector<'_> {
 }
 // Operand order preserves the native overloads, including NaN representation choices.
 #[allow(clippy::if_same_then_else)]
-fn matrix_component(
+fn matrix_component<T: VectorItem>(
     matrix: &Matrix<'_>,
-    vector: &Vector<'_>,
+    vector: &VectorBase<'_, T>,
     output: usize,
     inputs: usize,
     transpose: bool,
     vector_first: bool,
-) -> f64 {
-    let mut sum = 0.0;
+) -> T {
+    // The native accumulator has the item type: each `aSum += double` is a double sum
+    // converted back, which truncates every partial sum of an integer vector.
+    let mut sum = T::ZERO;
     for input in 0..inputs {
         let coefficient = *if transpose {
             matrix.at(input, output)
@@ -111,12 +113,13 @@ fn matrix_component(
             matrix.at(output, input)
         }
         .unwrap();
-        let value = vector.values()[input];
-        sum += if vector_first {
+        let value = vector.values()[input].to_real();
+        let product = if vector_first {
             value * coefficient
         } else {
             coefficient * value
         };
+        sum = T::from_real(sum.to_real() + product);
     }
     sum
 }

@@ -1,10 +1,12 @@
 //! Bounded numeric storage and mathematical algorithms.
+mod exceptions;
+pub use exceptions::{not_square, singular_matrix};
 mod double_tab;
 pub use double_tab::DoubleTab;
 mod matrix;
 mod vector;
 pub use matrix::Matrix;
-pub use vector::Vector;
+pub use vector::{IntegerVector, Vector, VectorBase, VectorItem};
 mod gauss;
 pub use gauss::Gauss;
 mod crout;

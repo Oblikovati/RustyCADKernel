@@ -32,7 +32,7 @@ impl Crout {
     pub fn with_min_pivot(matrix: &Matrix<'_>, minimum: f64) -> Result<Self, Failure> {
         let n = matrix.row_number();
         if n != matrix.col_number() {
-            return Err(Failure::with_type("math_NotSquare", " ", ""));
+            return Err(super::not_square(" "));
         }
         let mut result = Self {
             inverse: Matrix::with_bounds(1, n, 1, n).unwrap(),

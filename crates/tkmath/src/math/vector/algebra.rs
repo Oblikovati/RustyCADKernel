@@ -12,19 +12,22 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Failure, Vector, failure};
-impl Vector<'_> {
+use super::{Failure, VectorBase, VectorItem, failure};
+impl<T: VectorItem> VectorBase<'_, T> {
     /// Returns the four-accumulator native squared norm; `vector.norm2()`.
     pub fn norm2(&self) -> Result<f64, Failure> {
         self.value(self.lower())?;
         let mut sums = [0.0; 4];
         let (chunks, tail) = self.values().as_chunks::<4>();
+        // Each element is widened to double before squaring, as the template does.
         for chunk in chunks {
             for lane in 0..4 {
-                sums[lane] += chunk[lane] * chunk[lane];
+                let value = chunk[lane].to_real();
+                sums[lane] += value * value;
             }
         }
         for value in tail {
+            let value = value.to_real();
             sums[0] += value * value;
         }
         Ok((sums[0] + sums[1]) + (sums[2] + sums[3]))
@@ -38,8 +41,8 @@ impl Vector<'_> {
         let mut index = 0;
         let mut greatest = -f64::MAX;
         for i in self.lower()..=self.upper() {
-            if self[i] > greatest {
-                greatest = self[i];
+            if self[i].to_real() > greatest {
+                greatest = self[i].to_real();
                 index = i;
             }
         }
@@ -50,8 +53,8 @@ impl Vector<'_> {
         let mut index = 0;
         let mut least = f64::MAX;
         for i in self.lower()..=self.upper() {
-            if self[i] < least {
-                least = self[i];
+            if self[i].to_real() < least {
+                least = self[i].to_real();
                 index = i;
             }
         }
@@ -66,8 +69,9 @@ impl Vector<'_> {
                 "math_VectorBase::Normalize() - vector has zero norm",
             ));
         }
+        // `Array(i) / Result` is a double quotient converted back to the item type.
         for value in self.values_mut() {
-            *value /= norm;
+            *value = T::from_real(value.to_real() / norm);
         }
         Ok(())
     }
@@ -94,46 +98,53 @@ impl Vector<'_> {
         Ok(result)
     }
     /// Multiplies each cell in place; `vector.multiply(2.0)`.
-    pub fn multiply(&mut self, scalar: f64) {
+    pub fn multiply(&mut self, scalar: T) {
         for value in self.values_mut() {
-            *value *= scalar;
+            *value = value.item_mul(scalar);
         }
     }
     /// Produces native element-times-scalar products; `vector.multiplied(2.0)`.
-    pub fn multiplied(&self, scalar: f64) -> Self {
+    pub fn multiplied(&self, scalar: T) -> Self {
         let mut result = Self::with_bounds(self.lower(), self.upper()).unwrap();
         for (target, source) in result.values_mut().iter_mut().zip(self.values()) {
-            *target = source * scalar;
+            *target = source.item_mul(scalar);
         }
         result
     }
+    /// Native TMultiplied, identical to `multiplied` for a vector; `vector.t_multiplied(2.0)`.
+    pub fn t_multiplied(&self, scalar: T) -> Self {
+        self.multiplied(scalar)
+    }
     /// Divides each cell directly after checking epsilon; `vector.divide(2.0)?`.
-    pub fn divide(&mut self, scalar: f64) -> Result<(), Failure> {
-        checked_divisor(scalar, "Divide")?;
+    pub fn divide(&mut self, scalar: T) -> Result<(), Failure> {
+        checked_divisor(scalar.to_real(), "Divide")?;
         for value in self.values_mut() {
-            *value /= scalar;
+            *value = value.item_div(scalar);
         }
         Ok(())
     }
     /// Multiplies by the reciprocal, matching native Divided; `vector.divided(2.0)?`.
-    pub fn divided(&self, scalar: f64) -> Result<Self, Failure> {
-        checked_divisor(scalar, "Divided")?;
-        Ok(self.multiplied(1.0 / scalar))
+    ///
+    /// The reciprocal `1. / theRight` is converted to the item type before the
+    /// product, so an integer vector divided by anything but +-1 becomes zero.
+    pub fn divided(&self, scalar: T) -> Result<Self, Failure> {
+        checked_divisor(scalar.to_real(), "Divided")?;
+        Ok(self.multiplied(T::from_real(1.0 / scalar.to_real())))
     }
     /// Returns the sign-reversed vector; `vector.opposite()`.
     pub fn opposite(&self) -> Self {
         let mut result = Self::with_bounds(self.lower(), self.upper()).unwrap();
         for (target, source) in result.values_mut().iter_mut().zip(self.values()) {
-            *target = -source;
+            *target = source.item_neg();
         }
         result
     }
     /// Computes a sequential dot product with positional alignment; `left.dot(&right)?`.
-    pub fn dot(&self, right: &Self) -> Result<f64, Failure> {
+    pub fn dot(&self, right: &Self) -> Result<T, Failure> {
         self.check_length(right, "Multiplied")?;
-        let mut result = 0.0;
+        let mut result = T::ZERO;
         for (left, right) in self.values().iter().zip(right.values()) {
-            result += left * right;
+            result = result.item_add(left.item_mul(*right));
         }
         Ok(result)
     }
@@ -141,7 +152,7 @@ impl Vector<'_> {
     pub fn add(&mut self, right: &Self) -> Result<(), Failure> {
         self.check_length(right, "Add")?;
         for (left, right) in self.values_mut().iter_mut().zip(right.values()) {
-            *left += right;
+            *left = left.item_add(*right);
         }
         Ok(())
     }
@@ -149,7 +160,7 @@ impl Vector<'_> {
     pub fn subtract(&mut self, right: &Self) -> Result<(), Failure> {
         self.check_length(right, "Subtract")?;
         for (left, right) in self.values_mut().iter_mut().zip(right.values()) {
-            *left -= right;
+            *left = left.item_sub(*right);
         }
         Ok(())
     }
@@ -207,7 +218,7 @@ impl Vector<'_> {
     pub fn set_sum(&mut self, left: &Self, right: &Self) -> Result<(), Failure> {
         self.check_pair(left, right, "Add")?;
         for index in 0..self.length {
-            self.values_mut()[index] = left.values()[index] + right.values()[index];
+            self.values_mut()[index] = left.values()[index].item_add(right.values()[index]);
         }
         Ok(())
     }
@@ -215,15 +226,15 @@ impl Vector<'_> {
     pub fn set_difference(&mut self, left: &Self, right: &Self) -> Result<(), Failure> {
         self.check_pair(left, right, "Subtract")?;
         for index in 0..self.length {
-            self.values_mut()[index] = left.values()[index] - right.values()[index];
+            self.values_mut()[index] = left.values()[index].item_sub(right.values()[index]);
         }
         Ok(())
     }
     /// Uses matching declared indices, retaining the native overload's bound behavior; `result.set_scaled(2.0,&source)?`.
-    pub fn set_scaled(&mut self, scalar: f64, source: &Self) -> Result<(), Failure> {
+    pub fn set_scaled(&mut self, scalar: T, source: &Self) -> Result<(), Failure> {
         self.check_length(source, "Multiply")?;
         for index in self.lower()..=self.upper() {
-            self[index] = scalar * source.value(index)?;
+            self[index] = scalar.item_mul(*source.value(index)?);
         }
         Ok(())
     }

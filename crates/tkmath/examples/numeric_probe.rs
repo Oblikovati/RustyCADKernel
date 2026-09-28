@@ -440,6 +440,9 @@ fn main() {
             "gp3d_frame" => gp_core_probe::gp3_frame_case(&values),
             "gp3d_lerp" => gp_core_probe::gp3_lerp_case(&values),
             "mathpoly_utils_complex" => mathpoly_utils_probe::mathpoly_utils_complex_case(&values),
+            "int_vector" => vector_base_probe::int_vector_case(&values),
+            "real_vector_extra" => vector_base_probe::real_vector_extra_case(&values),
+            "matrix_extra" => vector_base_probe::matrix_extra_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }
@@ -516,3 +519,4 @@ mod convert_probe;
 mod cslib_probe;
 mod elementary_probe;
 mod plib_probe;
+mod vector_base_probe;

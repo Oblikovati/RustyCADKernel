@@ -37,7 +37,7 @@ impl Gauss {
     /// Decomposes using the supplied absolute pivot threshold; `Gauss::with_min_pivot(&matrix,1e-12)?`.
     pub fn with_min_pivot(matrix: &Matrix<'_>, minimum: f64) -> Result<Self, Failure> {
         if matrix.row_number() != matrix.col_number() {
-            return Err(error("math_NotSquare", " "));
+            return Err(super::not_square(" "));
         }
         let n = matrix.row_number();
         let mut lu = Matrix::with_bounds(1, n, 1, n).unwrap();

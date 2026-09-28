@@ -29,7 +29,7 @@ impl Jacobi {
     pub fn new(matrix: &Matrix<'_>) -> Result<Self, Failure> {
         let n: i32 = matrix.row_number();
         if n != matrix.col_number() {
-            return Err(Failure::with_type("math_NotSquare", " ", ""));
+            return Err(super::not_square(" "));
         }
         let mut work: Matrix<'static> = Matrix::with_bounds(1, n, 1, n).unwrap();
         work.initialized(matrix)?;
