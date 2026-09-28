@@ -1,5 +1,7 @@
 //! OSD_Process and OSD_Host: every public member, driven through named fake sources, plus
 //! native smoke checks on the running host.
+// Most cases exercise the Linux native profile; other hosts compile the shared fakes only.
+#![cfg_attr(not(target_os = "linux"), allow(unused_imports, dead_code))]
 use rustycad_tkernel::osd::{
     CadPath, Host, HostSource, LocalTime, OemType, OsdErrorAccess, Process, ProcessSource, SysType,
     SystemNames, WhoAmI, executable_folder_of, machine_type_of, system_id_of,

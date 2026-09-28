@@ -1,5 +1,7 @@
 //! OSD_Environment, OSD_SharedLibrary and OSD_MemInfo: every public member, through named
 //! fake sources where the answer depends on the host, plus native smoke checks.
+// Most cases exercise the Linux native profile; other hosts compile the shared fakes only.
+#![cfg_attr(not(target_os = "linux"), allow(unused_imports, dead_code))]
 use rustycad_tkernel::osd::{
     Environment, EnvironmentSource, LoadMode, MemCounter, MemInfo, MemInfoSource, OsdErrorAccess,
     SharedLibrary, WhoAmI,

@@ -59466,6 +59466,574 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Path(OSD_Path&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::path",
+      "status": "implemented",
+      "notes": "The output reference becomes the returned CadPath. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileNode::SetPath(const OSD_Path&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::set_path",
+      "status": "implemented",
+      "notes": "Resets the recorded error, then stores the path. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Exists()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::exists",
+      "status": "partial",
+      "notes": "access(SystemName, F_OK) == 0; an empty path is absent (OSD_FileTest.FClassesBug_710). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Remove()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::remove",
+      "status": "partial",
+      "notes": "access(W_OK) on the node itself (native quirk: a read-only file cannot be removed), then rmdir for directories, unlink for regular files/links/FIFOs, EINVAL otherwise; errors recorded with OSD_WFileNode 'Remove'. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Move(const OSD_Path&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::move_to",
+      "status": "partial",
+      "notes": "rename(2) to the target's SystemName; errors recorded 'Move'. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Copy(const OSD_Path&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::copy_to",
+      "status": "partial",
+      "notes": "The native copy_file (4096-byte chunks, 0644 target, ENOSPC for a short write); any failure records errno -1 'Copy failed' (native quirk, Perror reads 'Unknowm error #-1'). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Protection()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::protection",
+      "status": "partial",
+      "notes": "Mode bits to (system = group, user, group, world) rights. A failing stat records the error and natively maps an uninitialized buffer; Rust maps no rights (deliberate deviation, excluded from the probe). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileNode::SetProtection(const OSD_Protection&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::set_protection",
+      "status": "partial",
+      "notes": "chmod with OSD_Protection::Internal (delete maps to write, system folds into world). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileNode::AccessMoment()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::access_moment",
+      "status": "partial",
+      "notes": "Native quirk kept: reads st_ctime (not st_atime) through localtime; 1/1/1979 when stat fails; returns Result because a time before 1979 raises Quantity_DateDefinitionError. Compared with OCCT by the osd_files probe. Windows: UTC instead of local time (std has no time-zone database). Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileNode::CreationMoment()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::creation_moment",
+      "status": "partial",
+      "notes": "st_ctime through localtime; 1/1/1979 when stat fails; Result as AccessMoment. Compared with OCCT by the osd_files probe. Windows: UTC instead of local time. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Failed() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::failed",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::reset",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Perror()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::perror",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileNode::Error() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileNode.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileNode::error",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the node's OsdError (see OSD_Error). Host independent."
+    },
+    {
+      "upstream_id": "OSD_File()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::empty",
+      "status": "implemented",
+      "notes": "Empty path, closed, no lock, mode ReadWrite. Host independent."
+    },
+    {
+      "upstream_id": "OSD_File(const OSD_Path&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::with_path",
+      "status": "implemented",
+      "notes": "File::new(text) is OSD_File(OSD_Path(text)); File::with_calls injects the POSIX calls. Host independent."
+    },
+    {
+      "upstream_id": "OSD_File::~OSD_File()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::drop",
+      "status": "implemented",
+      "notes": "Drop unlocks and closes an open file. Natively Close re-raises a pending error from the destructor (terminating the process); Drop does not re-raise. Host independent."
+    },
+    {
+      "upstream_id": "OSD_File::Build(OSD_OpenMode,const OSD_Protection&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::build",
+      "status": "partial",
+      "notes": "open(2) with O_CREAT|O_TRUNC and the protection's Unix mode, then fdopen; Standard_ProgramError (as Err) for a directory, an already open file or an empty name; open failures recorded 'Open'. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::Open(OSD_OpenMode,const OSD_Protection&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::open",
+      "status": "partial",
+      "notes": "open(2) with no creation and the protection's Unix mode, then fdopen; Standard_ProgramError (as Err) for a directory, an already open file or an empty name; open failures recorded 'Open'. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::Append(OSD_OpenMode,const OSD_Protection&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::append",
+      "status": "partial",
+      "notes": "open(2) with O_APPEND, O_CREAT when the file does not exist and the protection's Unix mode, then fdopen; Standard_ProgramError (as Err) for a directory, an already open file or an empty name; open failures recorded 'Open'. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::Read(TCollection_AsciiString&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::read",
+      "status": "partial",
+      "notes": "One read(2); the buffer keeps the text before the first NUL; a short read sets IsAtEnd until Close; preconditions raise Standard_ProgramError and a pending error re-raises OSD_OSDError, as natively. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::ReadLine(TCollection_AsciiString&,int,int&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::read_line",
+      "status": "partial",
+      "notes": "fgets on the fdopen'd FILE*, modelled on glibc 2.28+ stdio (st_blksize read-ahead buffer shared with raw Read/Seek, unknown initial offset, sticky end of file); both overloads return the byte count. On a read error native leaves the outputs unassigned; Rust keeps the buffer and returns 0. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::ReadLine(TCollection_AsciiString&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::read_line",
+      "status": "partial",
+      "notes": "fgets on the fdopen'd FILE*, modelled on glibc 2.28+ stdio (st_blksize read-ahead buffer shared with raw Read/Seek, unknown initial offset, sticky end of file); both overloads return the byte count. On a read error native leaves the outputs unassigned; Rust keeps the buffer and returns 0. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::Read(void* const,int,int&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::read_bytes",
+      "status": "partial",
+      "notes": "One read(2) into the slice, returning the count; a count above the slice length is refused with Standard_OutOfRange (natively a buffer overrun). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::Write(const TCollection_AsciiString&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::write",
+      "status": "partial",
+      "notes": "Writes the first N bytes of the NUL-terminated string (N = length + 1 writes the NUL); a larger N is refused (natively an over-read). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::Write(void* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::write_bytes",
+      "status": "partial",
+      "notes": "One write(2); a short write sets IsAtEnd; errors recorded 'Write'. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::Seek(int,OSD_FromWhere)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::seek",
+      "status": "partial",
+      "notes": "lseek(2) of the descriptor only (the FILE* buffer is not told) and, natively, the end-of-file state is kept. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::Close()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::close",
+      "status": "partial",
+      "notes": "Re-raises a pending error, closes the descriptor (the native second close by fclose is an ignored EBADF), drops the stream, clears IsAtEnd. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::IsAtEnd()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::is_at_end",
+      "status": "partial",
+      "notes": "myIO == EOF: a short read/write since opening; raises when not open. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::KindOfFile() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::kind_of_file",
+      "status": "partial",
+      "notes": "stat(2) follows links, so OSD_LINK is never returned for a link, as natively. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::BuildTemporary()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::build_temporary",
+      "status": "partial",
+      "notes": "Closes an open file, mkstemp('/tmp/CSFXXXXXX') and fdopen 'w+'; returns Result because the Close may re-raise. Compared with OCCT by the osd_files probe. Windows: a unique file in the std temp directory. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::SetLock(OSD_LockType)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::set_lock",
+      "status": "partial",
+      "notes": "The SYSV branch compiled on Linux/macOS: blocking fcntl F_SETLKW read/write lock over the whole file; ExclusiveLock also sets S_ISGID even when locking failed. Compared with OCCT by the osd_files probe. Windows: std File::lock/lock_shared instead of LockFileEx. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::UnLock()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::unlock",
+      "status": "partial",
+      "notes": "Clears S_ISGID after an exclusive lock, then F_SETLK F_UNLCK over the whole file. Deliberate deviation: the native flock has uninitialized l_whence/l_start/l_len, so its result depends on stack contents (on the verified Linux profile it fails with EINVAL and keeps the lock); kept out of the probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::GetLock() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::lock",
+      "status": "implemented",
+      "notes": "The last lock set successfully. Host independent."
+    },
+    {
+      "upstream_id": "OSD_File::IsLocked() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::is_locked",
+      "status": "implemented",
+      "notes": "The Unix header branch: myLock != OSD_NoLock (the Win32 branch returns its LockFileEx flag). Compared with OCCT by the osd_files probe."
+    },
+    {
+      "upstream_id": "OSD_File::Size()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::size",
+      "status": "partial",
+      "notes": "stat(2) st_size of the named file (0 and an error when it fails); Standard_ProgramError for an empty name. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::IsOpen() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::is_open",
+      "status": "implemented",
+      "notes": "The descriptor is not -1. Host independent."
+    },
+    {
+      "upstream_id": "OSD_File::IsReadable()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::is_readable",
+      "status": "partial",
+      "notes": "access(2) with F_OK|R_OK. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::IsWriteable()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::is_writeable",
+      "status": "partial",
+      "notes": "access(2) with F_OK|R_OK|W_OK. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::IsExecutable()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::is_executable",
+      "status": "partial",
+      "notes": "access(2) with F_OK|X_OK. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::ReadLastLine(TCollection_AsciiString&,int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::read_last_line",
+      "status": "partial",
+      "notes": "Up to N ReadLine(line, 1000) calls with OSD::SecSleep(delay) after each empty one (microseconds computed in int, as natively). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_File::Edit()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::edit",
+      "status": "implemented",
+      "notes": "Prints 'Function OSD_File::Edit() not yet implemented.' and returns false, as natively on every host."
+    },
+    {
+      "upstream_id": "OSD_File::Rewind()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_File.hxx",
+      "rust_item": "rustycad_tkernel::osd::File::rewind",
+      "status": "partial",
+      "notes": "rewind(3) of the FILE* model: the in-buffer shortcut with descriptor resync, else a seek to 0; clears end of file. A never-opened file natively dereferences a NULL FILE*; Rust does nothing. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_Directory::BuildTemporary()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Directory.hxx",
+      "rust_item": "rustycad_tkernel::osd::Directory::build_temporary",
+      "status": "partial",
+      "notes": "mkdtemp('/tmp/CSFXXXXXX') (mode 0700) or an empty directory object; the native unlink of the directory fails and is ignored; build_temporary_with injects the calls. Compared with OCCT by the osd_files probe. Windows: a unique directory in the std temp directory. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_Directory()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Directory.hxx",
+      "rust_item": "rustycad_tkernel::osd::Directory::empty",
+      "status": "implemented",
+      "notes": "Empty path over the native calls. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Directory(const OSD_Path&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Directory.hxx",
+      "rust_item": "rustycad_tkernel::osd::Directory::with_path",
+      "status": "implemented",
+      "notes": "Directory::with_calls injects the POSIX calls. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Directory::Build(const OSD_Protection&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Directory.hxx",
+      "rust_item": "rustycad_tkernel::osd::Directory::build",
+      "status": "partial",
+      "notes": "umask(0) (process-wide, never restored), mkdir with the protection's mode (the default protection gives no execute bit, as natively); on ENOENT the parent is built from the last trek component keeping the extension (native quirk); EEXIST is not an error; a missing parent of a trek-less path raises Standard_NumericError from TrekValue, as natively. Compared with OCCT by the osd_files probe. Windows: no umask; the Win32 recursive CreateDirectoryW build is not ported. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::empty",
+      "status": "implemented",
+      "notes": "Nothing to iterate until Initialize. Host independent."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator(const OSD_Path&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::new",
+      "status": "implemented",
+      "notes": "with_calls injects the POSIX calls. Host independent."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::Destroy()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::destroy",
+      "status": "implemented",
+      "notes": "A no-op on the Unix build (kept for Windows compatibility), as natively. Host independent."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::~OSD_DirectoryIterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor that only calls the no-op Destroy; Rust drops the state through Drop glue."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::Initialize(const OSD_Path&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::initialize",
+      "status": "implemented",
+      "notes": "SystemName of the place ('.' when empty) and the mask; the directory opens on the next More. Host independent."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::More()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::more",
+      "status": "partial",
+      "notes": "Opens the directory on first use (an unreadable one has no entries) and selects the first match. readdir entries are read at opendir time (the native reads lazily). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::next",
+      "status": "partial",
+      "notes": "Selects the next of the directories including . and .. whose name matches the strcmp_joker '*' mask (mask_matches), in readdir order; stat follows links; a failing stat keeps the previous entry's type, as the native stale buffer does within one call. Next on a closed directory natively calls readdir(NULL); Rust ends. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::Values()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::values",
+      "status": "implemented",
+      "notes": "The entry as a node whose path holds the name before, and the extension from, its first dot. Compared with OCCT by the osd_files probe. Host independent."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::Failed() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::failed",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::reset",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::Perror()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::perror",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+    },
+    {
+      "upstream_id": "OSD_DirectoryIterator::Error() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_DirectoryIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::DirectoryIterator::error",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileIterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::empty",
+      "status": "implemented",
+      "notes": "Nothing to iterate until Initialize. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileIterator(const OSD_Path&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::new",
+      "status": "implemented",
+      "notes": "with_calls injects the POSIX calls. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::Destroy()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::destroy",
+      "status": "implemented",
+      "notes": "A no-op on the Unix build (kept for Windows compatibility), as natively. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::~OSD_FileIterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor that only calls the no-op Destroy; Rust drops the state through Drop glue."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::Initialize(const OSD_Path&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::initialize",
+      "status": "implemented",
+      "notes": "SystemName of the place ('.' when empty) and the mask; the directory opens on the next More. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::More()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::more",
+      "status": "partial",
+      "notes": "Opens the directory on first use (an unreadable one has no entries) and selects the first match. readdir entries are read at opendir time (the native reads lazily). Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::next",
+      "status": "partial",
+      "notes": "Selects the next of the regular files (. and .. skipped before the type test) whose name matches the strcmp_joker '*' mask (mask_matches), in readdir order; stat follows links; a failing stat keeps the previous entry's type, as the native stale buffer does within one call. Next on a closed directory natively calls readdir(NULL); Rust ends. Compared with OCCT by the osd_files probe. Windows: the Win32 build of this member (handles, ACL protections, LockFileEx) is not ported; the Unix-build algorithm runs over std::fs emulations of the POSIX calls (NativePosixCalls in native_std.rs). macOS: the same libc calls as Linux."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::Values()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::values",
+      "status": "implemented",
+      "notes": "The entry as a node whose path holds the name before, and the extension from, its first dot. Compared with OCCT by the osd_files probe. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::Failed() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::failed",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::reset",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::Perror()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::perror",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
+    },
+    {
+      "upstream_id": "OSD_FileIterator::Error() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileIterator.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileIterator::error",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait; the Unix iterators never record an error. Host independent."
     }
   ],
   "tests": [

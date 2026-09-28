@@ -1,5 +1,7 @@
 //! OSD_Timer, OSD_Chronometer and the OSD statics on named fake clocks, sleepers and
 //! signal hosts, plus smoke checks of the native implementations.
+// Most cases exercise the Linux native profile; other hosts compile the shared fakes only.
+#![cfg_attr(not(target_os = "linux"), allow(unused_imports, dead_code))]
 use rustycad_tkernel::osd::{
     Chronometer, CpuTimes, NativeCpuTimes, Osd, SignalHost, SignalMode, SignalState, Sleeper,
     Timer, WallClock, milli_sec_sleep_duration, sec_sleep_duration,

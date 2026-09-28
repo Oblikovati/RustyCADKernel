@@ -144,9 +144,16 @@ fn control_break() -> String {
     format!("{} {unset} {}", calls.join(" "), Osd::signal_mode() as i32)
 }
 
+#[cfg(unix)]
 #[allow(unsafe_code)]
 fn raise_interrupt() {
     // SAFETY: raise has no memory preconditions; the installed SIGINT handler only stores
     // an atomic flag.
     unsafe { libc::raise(libc::SIGINT) };
+}
+
+// The oracle profile is Linux-only; other hosts only need the probe to compile.
+#[cfg(not(unix))]
+fn raise_interrupt() {
+    panic!("SIGINT probe requests run on the Linux oracle profile only");
 }

@@ -1,5 +1,7 @@
 //! OSD enumerations, OSD_Error, OSD_Protection and exception classes: every public
 //! member, with the native quirks each keeps.
+// Most cases exercise the Linux native profile; other hosts compile the shared fakes only.
+#![cfg_attr(not(target_os = "linux"), allow(unused_imports, dead_code))]
 use SingleProtection::*;
 use rustycad_tkernel::osd::{
     self, OsdError, OsdErrorAccess, Protection, SignalMode, SingleProtection, SysType, WhoAmI,
