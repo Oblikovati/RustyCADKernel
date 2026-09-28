@@ -11,6 +11,7 @@ import hashlib
 import json
 from pathlib import Path
 from porting import ROOT, snapshot
+from tkg2d_adaptor_corpus import append_tkg2d_adaptor_requests
 from tkg2d_corpus import append_tkg2d_requests
 from verify_tkmath_numeric import compare, reject_unknown_operation, run, selected_paths
 
@@ -21,6 +22,7 @@ def corpus() -> str:
     """The whole TKG2d request corpus, one request per line."""
     requests: list[str] = []
     append_tkg2d_requests(requests)
+    append_tkg2d_adaptor_requests(requests)
     return '\n'.join(requests)+'\n'
 
 

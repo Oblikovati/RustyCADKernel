@@ -319,7 +319,8 @@ pub fn bspline_case(values: &[f64]) {
     end();
 }
 
-fn desc(r: &mut Reader, rep: Handle<dyn Geom2dCurve>) -> Handle<dyn RepCurveDesc> {
+/// A descriptor over a representation curve, as g2_desc reads it.
+pub fn desc(r: &mut Reader, rep: Handle<dyn Geom2dCurve>) -> Handle<dyn RepCurveDesc> {
     let (kind, order) = (r.integer(), r.integer() as usize);
     let domain = r.flag();
     let (first, last, scale, offset) = (r.real(), r.real(), r.real(), r.real());

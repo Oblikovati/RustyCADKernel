@@ -107,3 +107,19 @@ The descriptor and `Geom2dEval_RepUtils.pxx` are header-only parts of the
 `Geom2dEval` package in TKG2d that `Geom2d` includes. They are ported in
 `geom2d_eval::rep_curve_desc` with the Geom2d classes, and the remainder of
 `Geom2dEval` stays a later work item.
+
+## 7. Adaptors
+
+`Adaptor2d_Curve2d` follows the same rules: a trait `Adaptor2dCurve2d` with a
+`Transient` supertrait, reached through `Handle<dyn Adaptor2dCurve2d>`, with one
+struct per concrete adaptor (`Adaptor2dLine2d`, `Adaptor2dOffsetCurve`,
+`Geom2dAdaptorCurve`). Unlike the Geom2d abstract classes, the native base class is
+not abstract: every member raises Standard_NotImplemented except `NbSamples`, so
+every trait member returns `Result` and has that default, and
+`Adaptor2dCurve2dBase` is an instance of the base class itself.
+
+`Geom2dAdaptor_Curve` keeps the curve kind, its gp geometry and the `BSplCLib_Cache`
+of Bezier and B-spline curves (`CurveDataVariant`) in its locked state. The native
+evaluators are `const` and fill the mutable cache; the port takes the write lock for
+`EvalD0` to `EvalD3` and a read lock elsewhere. An offset curve holds a nested
+adaptor on its basis, which is a separate object with its own lock.

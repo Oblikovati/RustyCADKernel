@@ -12668,6 +12668,14 @@
       "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "BSplCLib_Cache::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache",
+      "status": "excluded",
+      "notes": "BSplCLib_Cache derives from Standard_Transient only so that adaptors can share it by handle; the Rust Cache is a plain value owned by its user (Geom2dAdaptorCurve keeps it in its locked state), so there is no runtime type descriptor to register."
+    },
+    {
       "upstream_id": "BSplSLib::RationalDerivative(int,int,int,int,double&,double&,bool)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
@@ -13034,6 +13042,14 @@
       "rust_item": "rustycad_tkmath::bsplslib::Cache::d2_local",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache",
+      "status": "excluded",
+      "notes": "BSplSLib_Cache derives from Standard_Transient only so that adaptors can share it by handle; the Rust Cache is a plain value owned by its user (Geom2dAdaptorCurve keeps it in its locked state), so there is no runtime type descriptor to register."
     },
     {
       "upstream_id": "BSplSLib_EvaluatorFunction::Evaluate(int,double,double,double&,int&) const",
@@ -24716,6 +24732,14 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom2d_BoundedCurve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_BoundedCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dBoundedCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
       "upstream_id": "Geom2d_CartesianPoint(const gp_Pnt2d&)",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_CartesianPoint.hxx",
@@ -25316,6 +25340,14 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom2d_Curve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
       "upstream_id": "Geom2d_Direction(double,double)",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Direction.hxx",
@@ -25418,6 +25450,14 @@
       "rust_item": "rustycad_tkg2d::geom2d::Geom2dDirection::copy",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom2d_Direction::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Direction.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dDirection::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
       "upstream_id": "Geom2d_Ellipse(const gp_Elips2d&)",
@@ -25786,6 +25826,14 @@
       "rust_item": "rustycad_tkg2d::geom2d::Geom2dGeometry::dump_json",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom2d_Geometry::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Geometry.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dGeometry::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
       "upstream_id": "Geom2d_Hyperbola(const gp_Hypr2d&)",
@@ -26844,6 +26892,14 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom2d_Point::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Point.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dPoint::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
       "upstream_id": "Geom2d_Transformation()",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Transformation.hxx",
@@ -27620,6 +27676,14 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom2d_VectorWithMagnitude::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_VectorWithMagnitude.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dVectorWithMagnitude::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
       "upstream_id": "Geom2d_OffsetCurveUtils::CalculateD0",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_OffsetCurveUtils.pxx",
@@ -27898,6 +27962,1190 @@
       "rust_item": "rustycad_tkg2d::geom2d_eval::rep_utils::try_eval_curve_dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::ShallowCopy",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::shallow_copy",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::FirstParameter",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::first_parameter",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::LastParameter",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::last_parameter",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Continuity",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::continuity",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::NbIntervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::nb_intervals",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Intervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::intervals",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Trim",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::trim",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::IsClosed",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::is_closed",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::IsPeriodic",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::is_periodic",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Period",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::period",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Value",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::value",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::D0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::d0",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::d1",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::D2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::d2",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::D3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::d3",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::DN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::dn",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Resolution",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::resolution",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::GetType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::get_type",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Line",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::line",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Circle",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::circle",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Ellipse",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::ellipse",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Hyperbola",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::hyperbola",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Parabola",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::parabola",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Degree",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::degree",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::IsRational",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::is_rational",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::NbPoles",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::nb_poles",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::NbKnots",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::nb_knots",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::NbSamples",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::nb_samples",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::Bezier",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::bezier",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::BSpline",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::bspline",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::EvalD0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::eval_d0",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::EvalD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::eval_d1",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::EvalD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::eval_d2",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::EvalD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::eval_d3",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::EvalDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d::eval_dn",
+      "status": "implemented",
+      "notes": "Adaptor2d_Curve2d is the trait Adaptor2dCurve2d reached through Handle<dyn Adaptor2dCurve2d> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values."
+    },
+    {
+      "upstream_id": "Adaptor2d_Curve2d::~Adaptor2d_Curve2d()",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Curve2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d",
+      "status": "excluded",
+      "notes": "C++ virtual destructor: Rust drops the adaptor with its last Handle; nothing to port."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d()",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::default",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d(const gp_Pnt2d&,const gp_Dir2d&,double,double)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::new",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::ShallowCopy",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::shallow_copy",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Load(const gp_Lin2d&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::load",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Load(const gp_Lin2d&,double,double)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::load_bounded",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::FirstParameter",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::first_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::LastParameter",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::last_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Continuity",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::NbIntervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::nb_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Intervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Trim",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::IsClosed",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::is_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::IsPeriodic",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::is_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Period",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::EvalD0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_d0",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::EvalD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_d1",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::EvalD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_d2",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::EvalD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_d3",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::EvalDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::eval_dn",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Resolution",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::GetType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::get_type",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Line",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::line",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Circle",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::circle",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Ellipse",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::ellipse",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Hyperbola",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::hyperbola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Parabola",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::parabola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Degree",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::IsRational",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::is_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::NbPoles",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::nb_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::NbKnots",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::nb_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::Bezier",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::bezier",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2d::BSpline",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_Line2d.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dLine2d::bspline",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve()",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::default",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::with_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve(const occ::handle<Adaptor2d_Curve2d>&,double)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::with_offset",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve(const occ::handle<Adaptor2d_Curve2d>&,double,double,double)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::with_bounds",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::ShallowCopy",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::shallow_copy",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Load(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::load_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Load(double)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::load_offset",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Load(double,double,double)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::load_offset_bounded",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Curve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Offset",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::offset",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::FirstParameter",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::LastParameter",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Continuity",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::NbIntervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::nb_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Intervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Trim",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::IsClosed",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::is_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::IsPeriodic",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Period",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::EvalD0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::EvalD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::EvalD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::EvalD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::EvalDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Resolution",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::GetType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::get_type",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Line",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::line",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Circle",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::circle",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Ellipse",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::ellipse",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Hyperbola",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::hyperbola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Parabola",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::parabola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Degree",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::IsRational",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::is_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::NbPoles",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::NbKnots",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::nb_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::Bezier",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::bezier",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::BSpline",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::bspline",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurve::NbSamples",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Adaptor2d/Adaptor2d_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::adaptor2d::Adaptor2dOffsetCurve::nb_samples",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor::MakeCurve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::make_curve",
+      "status": "implemented",
+      "notes": "Package function Geom2dAdaptor::MakeCurve as a free function taking &dyn Adaptor2dCurve2d."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve()",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::default",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::with_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve(const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::with_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::ShallowCopy",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::shallow_copy",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Reset",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::reset",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Load(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::load",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Load(const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::load_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::IsInitialized",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::is_initialized",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Curve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::FirstParameter",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::LastParameter",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Continuity",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::NbIntervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::nb_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Intervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Trim",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::IsClosed",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::is_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::IsPeriodic",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Period",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Resolution",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::GetType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::get_type",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Line",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::line",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Circle",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::circle",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Ellipse",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::ellipse",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Hyperbola",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::hyperbola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Parabola",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::parabola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Degree",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::IsRational",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::is_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::NbPoles",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::NbKnots",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::nb_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::NbSamples",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::nb_samples",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::Bezier",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::bezier",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::BSpline",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::bspline",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::EvalD0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::EvalD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::EvalD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::EvalD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve::EvalDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dAdaptor/Geom2dAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor2dCurve2d trait (docs/geom-design.md); state behind one lock, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg2d_numeric.py."
     },
     {
       "upstream_id": "Bnd_OBB::Bnd_OBB()",
@@ -79474,6 +80722,804 @@
       "rust_target": "geom2d_vector_with_magnitude",
       "rust_test": "Geom2d_VectorWithMagnitudeTest__Transform_Rotation",
       "rust_source": "crates/tkg2d/tests/geom2d_vector_with_magnitude.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.DefaultConstructor",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__DefaultConstructor",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.ParameterBounds",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__ParameterBounds",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.Continuity",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__Continuity",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.NbIntervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__NbIntervals",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.Intervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__Intervals",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.IsNotClosed",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__IsNotClosed",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.IsNotPeriodic",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__IsNotPeriodic",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.GetType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__GetType",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.Value_AtOrigin",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__Value_AtOrigin",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.Value_AtParameter",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__Value_AtParameter",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.Value_DiagonalLine",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__Value_DiagonalLine",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.D0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__D0",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.D1_FirstDerivativeIsDirection",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__D1_FirstDerivativeIsDirection",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.D2_SecondDerivativeIsZero",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__D2_SecondDerivativeIsZero",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.D3_ThirdDerivativeIsZero",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__D3_ThirdDerivativeIsZero",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.DN_FirstOrderMatchesD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__DN_FirstOrderMatchesD1",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.DN_HigherOrderIsZero",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__DN_HigherOrderIsZero",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.Resolution",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__Resolution",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.LineGeometry",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__LineGeometry",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.Load_WithLine",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__Load_WithLine",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.Load_WithBounds",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__Load_WithBounds",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.Trim",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__Trim",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_Line2dTest.ShallowCopy",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_Line2d_Test.cxx",
+      "source_sha256": "fc226b3ee6b9bbfb56055ed6606b275aa52b81a4d0abebf9c5b3acae65fa9a20",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_line2d",
+      "rust_test": "Adaptor2d_Line2dTest__ShallowCopy",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_line2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.DefaultConstructor",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__DefaultConstructor",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.ConstructWithCurve_OffsetIsZero",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__ConstructWithCurve_OffsetIsZero",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.ConstructWithOffset",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__ConstructWithOffset",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.ConstructWithOffsetAndBounds",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__ConstructWithOffsetAndBounds",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.Value_PositiveOffset",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__Value_PositiveOffset",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.Value_NegativeOffset",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__Value_NegativeOffset",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.Value_ZeroOffset_MatchesBaseCurve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__Value_ZeroOffset_MatchesBaseCurve",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.D1_OffsetLine",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__D1_OffsetLine",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.Continuity",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__Continuity",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.NbIntervals",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__NbIntervals",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.GetType_Line",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__GetType_Line",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.IsNotClosed",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__IsNotClosed",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.IsNotPeriodic",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__IsNotPeriodic",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.LoadCurve_ResetsOffset",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__LoadCurve_ResetsOffset",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.LoadOffset",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__LoadOffset",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.LoadOffsetWithBounds",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__LoadOffsetWithBounds",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.Curve_ReturnsBaseCurve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__Curve_ReturnsBaseCurve",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.Trim",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__Trim",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.ShallowCopy",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__ShallowCopy",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Adaptor2d_OffsetCurveTest.Resolution",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Adaptor2d_OffsetCurve_Test.cxx",
+      "source_sha256": "516a2d39c737d72a6968054aa9e2855320fe72effcfe0c4faeaa989c2ec4f7c9",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "adaptor2d_offset_curve",
+      "rust_test": "Adaptor2d_OffsetCurveTest__Resolution",
+      "rust_source": "crates/tkg2d/tests/adaptor2d_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Load_ValidParameters_Success",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Load_ValidParameters_Success",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Load_EqualParameters_Success",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Load_EqualParameters_Success",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Load_ParametersWithinConfusion_Success",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Load_ParametersWithinConfusion_Success",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Load_ParametersAtConfusionBoundary_Success",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Load_ParametersAtConfusionBoundary_Success",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Load_FirstGreaterThanLastWithinConfusion_Success",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Load_FirstGreaterThanLastWithinConfusion_Success",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Load_FirstGreaterThanLastBeyondConfusion_ThrowsException",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Load_FirstGreaterThanLastBeyondConfusion_ThrowsException",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Load_FirstSlightlyGreaterThanLast_ThrowsException",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Load_FirstSlightlyGreaterThanLast_ThrowsException",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Constructor_DegeneratedCurve_Success",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Constructor_DegeneratedCurve_Success",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Constructor_InvalidParameters_ThrowsException",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Constructor_InvalidParameters_ThrowsException",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.Load_NullCurve_ThrowsException",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__Load_NullCurve_ThrowsException",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.DegeneratedCurve_CircleAtZeroLength_Success",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__DegeneratedCurve_CircleAtZeroLength_Success",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.DegeneratedCurve_TrimmedCurve_Success",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__DegeneratedCurve_TrimmedCurve_Success",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.ToleranceBoundary_NegativeCase_ThrowsException",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__ToleranceBoundary_NegativeCase_ThrowsException",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dAdaptor_Curve_Test.LoadWithoutParameters_Success",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dAdaptor_Curve_Test.cxx",
+      "source_sha256": "8e4382560268f957a1f77ab9786ab897c8ff33849c5bb89bc16fd92295df149e",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_adaptor_curve",
+      "rust_test": "Geom2dAdaptor_Curve_Test__LoadWithoutParameters_Success",
+      "rust_source": "crates/tkg2d/tests/geom2d_adaptor_curve.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

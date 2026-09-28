@@ -55,6 +55,33 @@ class HeaderParsingTests(unittest.TestCase):
             "gp_Demo::operator()|int|const", "gp_Demo::DumpJson|Standard_OStream&,int|const",
             "gp_Demo::operator*|double,const gp_Demo&|"])
 
+    def test_rtti_macro_opens_a_public_section(self):
+        # Regression: DEFINE_STANDARD_RTTIEXT right after `{` swallowed the `public:` label
+        # that follows it, hiding every member of Adaptor2d_Curve2d; at the end of a class
+        # it still yields the ledger's RTTI row.
+        header = """
+class Adaptor2d_Demo : public Standard_Transient
+{
+  DEFINE_STANDARD_RTTIEXT(Adaptor2d_Demo, Standard_Transient)
+public:
+  double FirstParameter() const;
+private:
+  double myFirst;
+};
+class Geom2d_Demo : public Standard_Transient
+{
+public:
+  void Reverse();
+  DEFINE_STANDARD_RTTIEXT(Geom2d_Demo, Standard_Transient)
+private:
+  double myU;
+};
+"""
+        self.assertEqual(members_of(header), [
+            "Adaptor2d_Demo::DEFINE_STANDARD_RTTIEXT|Adaptor2d_Demo,Standard_Transient|",
+            "Adaptor2d_Demo::FirstParameter||const", "Geom2d_Demo::Reverse||",
+            "Geom2d_Demo::DEFINE_STANDARD_RTTIEXT|Geom2d_Demo,Standard_Transient|"])
+
     def test_cleaning_drops_comments_literals_attributes_and_continued_macros(self):
         cleaned = clean_source('#define A \\\n  b\n[[nodiscard]] int f(); // x\nchar* s = "{";')
         self.assertNotIn("define", cleaned)

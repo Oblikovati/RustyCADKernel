@@ -1,8 +1,8 @@
-//! Exact Geom2d (TKG2d) numeric oracle counterpart of tools/oracle/tkg2d_probe.cxx:
+//! Exact Geom2d, Adaptor2d and Geom2dAdaptor (TKG2d) numeric oracle counterpart of tools/oracle/tkg2d_probe.cxx:
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod g2_probe;
-use g2_probe::{bspl, curves, simple};
+use g2_probe::{adaptor_cases, bspl, curves, simple};
 
 fn main() {
     for line in io::stdin().lock().lines() {
@@ -27,6 +27,10 @@ fn main() {
             "g2_bezier" => bspl::bezier_case(&values),
             "g2_bspline" => bspl::bspline_case(&values),
             "g2_evalrep" => bspl::evalrep_case(&values),
+            "a2_adaptor" => adaptor_cases::adaptor_case(&values),
+            "a2_load" => adaptor_cases::load_case(&values),
+            "a2_offset_load" => adaptor_cases::offset_load_case(&values),
+            "a2_evalrep" => adaptor_cases::evalrep_case(&values),
             _ => {
                 eprintln!("Unknown probe operation: {op}");
                 std::process::exit(2);

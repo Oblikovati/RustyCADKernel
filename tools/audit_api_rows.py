@@ -64,6 +64,11 @@ def clean_source(text: str) -> str:
     text = re.sub(r"^\s*#(?:[^\n]*\\\n)*[^\n]*$", "", text, flags=re.M)
     text = re.sub(r"\[\[[^\]]*\]\]|__attribute__\s*\(\([^)]*\)\)", "", text)
     text = re.sub(r"\bStandard_DEPRECATED\s*\(\s*\"*\s*\)", "", text)
+    # DEFINE_STANDARD_RTTIEXT/_INLINE expand to `public:` plus the RTTI members. Without a
+    # semicolon the macro swallowed the next access label, which hid every public member
+    # of a class that opens with it (Adaptor2d_Curve2d). The expansion keeps one public
+    # `Class::DEFINE_STANDARD_RTTIEXT` row (the ledger's RTTI convention) and ends public.
+    text = re.sub(r"\b(DEFINE_STANDARD_RTTI(?:EXT|_INLINE))\s*(\([^)]*\))", r"public: \1\2; public:", text)
     return re.sub(IGNORED_MACROS, "", text)
 
 
