@@ -12,9 +12,9 @@
 // commercial license or contractual agreement.
 
 //! Direct translation of TopExp_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-//! BRepPrimAPI_MakeBox is the topology fake of `support` (TKPrim is not ported, and
-//! the shared native oracle build has no TKPrim either, so this suite is not gated
-//! natively; see docs/tkbrep-progress.md).
+//! BRepPrimAPI_MakeBox is the BRep fake of `support` (TKPrim is not ported; the
+//! unchanged upstream file runs natively against the shared oracle build, which has
+//! TKPrim).
 #![allow(non_snake_case)]
 mod support;
 use rustycad_tkbrep::topexp::{self, Explorer};
