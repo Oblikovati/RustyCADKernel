@@ -14,17 +14,17 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_VectorWithMagnitude.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_VectorWithMagnitude`: a vector of any length as transient geometry.
-use super::cell::{GeometryCell, ProtectedAccess};
 use super::geometry::Geom2dGeometry;
+use super::protected::ProtectedAccess;
 use super::vector::Geom2dVector;
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::gp::{Point2, Transform2, Vector2};
 
 /// A vector with magnitude; `Handle::new(Geom2dVectorWithMagnitude::new(3.0, 4.0))`.
 pub struct Geom2dVectorWithMagnitude {
     parent: StandardTransient,
-    state: GeometryCell<Vector2>,
+    state: SharedState<Vector2>,
 }
 impl_transient!(
     Geom2dVectorWithMagnitude,
@@ -44,7 +44,7 @@ impl Geom2dVectorWithMagnitude {
     pub fn from_vec2d(vector: Vector2) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(vector),
+            state: SharedState::new(vector),
         }
     }
     /// Vector from coordinates (`Geom2d_VectorWithMagnitude(X, Y)`);
@@ -137,7 +137,7 @@ impl Geom2dGeometry for Geom2dVectorWithMagnitude {
     }
 }
 impl Geom2dVector for Geom2dVectorWithMagnitude {
-    fn vector_cell(&self, _access: ProtectedAccess) -> &GeometryCell<Vector2> {
+    fn vector_cell(&self, _access: ProtectedAccess) -> &SharedState<Vector2> {
         &self.state
     }
     fn magnitude(&self) -> f64 {

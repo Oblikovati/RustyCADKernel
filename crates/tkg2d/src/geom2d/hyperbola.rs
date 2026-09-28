@@ -14,7 +14,6 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_Hyperbola.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_Hyperbola`: the main branch of a hyperbola, parameterized by `cosh`/`sinh`.
-use super::cell::GeometryCell;
 use super::conic::{Geom2dConic, dump_conic, impl_conic_position, reverse_conic_position};
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
 use super::errors;
@@ -22,7 +21,7 @@ use super::geometry::{Geom2dGeometry, dump_base, dump_class_name};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{
@@ -40,7 +39,7 @@ struct HyperbolaState {
 /// A hyperbola branch; `Handle::new(Geom2dHyperbola::from_axis(axis, 3.0, 2.0, true)?)`.
 pub struct Geom2dHyperbola {
     parent: StandardTransient,
-    state: GeometryCell<HyperbolaState>,
+    state: SharedState<HyperbolaState>,
 }
 impl_transient!(
     Geom2dHyperbola,
@@ -78,7 +77,7 @@ impl Geom2dHyperbola {
     fn stored(state: HyperbolaState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     fn gp(&self) -> Result<Hyperbola2, Failure> {

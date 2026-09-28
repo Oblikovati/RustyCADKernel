@@ -14,12 +14,11 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_CartesianPoint.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_CartesianPoint`: a point defined by its coordinates.
-use super::cell::GeometryCell;
 use super::geometry::{Geom2dGeometry, dump_base, dump_class_name, dump_field};
 use super::point::{Geom2dPoint, dump_point};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::standard::dump::DumpStream;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::gp::{Point2, Transform2};
 use std::io;
 
@@ -27,7 +26,7 @@ use std::io;
 #[derive(Default)]
 pub struct Geom2dCartesianPoint {
     parent: StandardTransient,
-    state: GeometryCell<Point2>,
+    state: SharedState<Point2>,
 }
 impl_transient!(
     Geom2dCartesianPoint,
@@ -47,7 +46,7 @@ impl Geom2dCartesianPoint {
     pub fn from_pnt2d(point: Point2) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(point),
+            state: SharedState::new(point),
         }
     }
     /// Point from coordinates (`Geom2d_CartesianPoint(X, Y)`); `Geom2dCartesianPoint::new(1.0, 2.0)`.

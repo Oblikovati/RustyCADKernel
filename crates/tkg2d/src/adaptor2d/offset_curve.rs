@@ -16,7 +16,6 @@
 //! `Adaptor2d_OffsetCurve`: an adapted curve moved along its normal by a distance.
 use super::curve2d::Adaptor2dCurve2d;
 use super::{offset_curve_kind as kind, offset_curve_shape as shape};
-use crate::geom2d::cell::GeometryCell;
 use crate::geom2d::errors::{not_implemented, null_object};
 use crate::geom2d::offset_curve_utils::{calculate_d0, calculate_d1, calculate_d2, calculate_d3};
 use crate::geom2d::{
@@ -25,7 +24,7 @@ use crate::geom2d::{
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::geom_abs::{CurveType, Shape};
 use rustycad_tkmath::gp::{Circle2, Ellipse2, Hyperbola2, Line2, Parabola2, Point2, Vector2};
 
@@ -53,7 +52,7 @@ impl OffsetState {
 #[derive(Default)]
 pub struct Adaptor2dOffsetCurve {
     parent: StandardTransient,
-    state: GeometryCell<OffsetState>,
+    state: SharedState<OffsetState>,
 }
 impl_transient!(
     Adaptor2dOffsetCurve,
@@ -67,7 +66,7 @@ impl Adaptor2dOffsetCurve {
     fn from_state(state: OffsetState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// The curve with a null offset and bounds `[0, 0]` (`Adaptor2d_OffsetCurve(C)`);

@@ -15,7 +15,6 @@
 
 //! `Geom2d_OffsetCurve`: the curve at a constant distance along the normal of a basis.
 use super::bspline_curve::Geom2dBSplineCurve;
-use super::cell::GeometryCell;
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3, dump_curve};
 use super::errors;
 use super::geometry::{Geom2dGeometry, dump_base, dump_class_name, dump_field};
@@ -27,7 +26,7 @@ use crate::geom2d_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point2, Transform2, Vector2, resolution};
 use std::io;
@@ -44,7 +43,7 @@ struct OffsetState {
 /// Unless trimmed, the basis curve is shared with the caller, as natively.
 pub struct Geom2dOffsetCurve {
     parent: StandardTransient,
-    state: GeometryCell<OffsetState>,
+    state: SharedState<OffsetState>,
 }
 impl_transient!(
     Geom2dOffsetCurve,
@@ -149,7 +148,7 @@ impl Geom2dOffsetCurve {
         };
         Ok(Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         })
     }
     /// The native copy constructor: the basis and the evaluation representation are
@@ -165,7 +164,7 @@ impl Geom2dOffsetCurve {
         };
         Ok(Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         })
     }
     /// Whether an evaluation representation is set (`HasEvalRepresentation`);
