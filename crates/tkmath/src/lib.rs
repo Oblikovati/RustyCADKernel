@@ -3,6 +3,7 @@ pub mod bnd;
 mod cmath;
 pub mod cslib;
 pub mod elclib;
+pub mod elslib;
 pub mod gp;
 pub mod math;
 pub mod math_utils;
