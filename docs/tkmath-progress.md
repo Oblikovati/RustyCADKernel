@@ -447,7 +447,7 @@ All 39 declarations of the three PLib suites pass in both kernels. The port
 covers the complete public API of PLib, PLib_JacobiPolynomial and
 PLib_HermitJacobi, and the whole GeomAbs enumeration package. Another 2,240
 differential requests match with raw bits, including NaN payloads; the numeric
-gate now passes 19,095 cases.
+gate now passes 22,647 cases.
 
 `tools/generate_plib_jacobi_tables.py` copies every Jacobi table literal from
 the pinned `.pxx` files as text, so both compilers round the same decimal

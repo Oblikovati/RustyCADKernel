@@ -14,16 +14,9 @@
 //! Direct translation of PLib_HermitJacobi_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 #![allow(non_snake_case, unused_mut, unused_assignments)]
 use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::precision;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::plib::HermitJacobi;
-
-// Precision::Confusion()
-const CONFUSION: f64 = 1e-7;
-
-// Precision::IsInfinite(R): |R| >= 0.5 * Precision::Infinite() (2e100)
-fn IsInfinite(R: f64) -> bool {
-    R.abs() >= 0.5 * 2e100
-}
 
 fn reals(lower: i32, upper: i32) -> Array1<'static, f64> {
     Array1::with_bounds(lower, upper).unwrap()
@@ -67,7 +60,7 @@ fn PLibHermitJacobiTest__BasisFunctionD0() {
         // Basic sanity checks
         for i in aBasisValue.lower()..=aBasisValue.upper() {
             assert!(
-                !IsInfinite(aBasisValue[i]),
+                !precision::is_infinite(aBasisValue[i]),
                 "Basis value should be finite at index {i}, U={aU}"
             );
         }
@@ -117,19 +110,19 @@ fn PLibHermitJacobiTest__BasisFunctionDerivatives() {
     // Verify all values are finite
     for i in aBasisValue.lower()..=aBasisValue.upper() {
         assert!(
-            !IsInfinite(aBasisValue[i]),
+            !precision::is_infinite(aBasisValue[i]),
             "Basis value should be finite at {i}"
         );
         assert!(
-            !IsInfinite(aBasisD1[i]),
+            !precision::is_infinite(aBasisD1[i]),
             "First derivative should be finite at {i}"
         );
         assert!(
-            !IsInfinite(aBasisD2[i]),
+            !precision::is_infinite(aBasisD2[i]),
             "Second derivative should be finite at {i}"
         );
         assert!(
-            !IsInfinite(aBasisD3[i]),
+            !precision::is_infinite(aBasisD3[i]),
             "Third derivative should be finite at {i}"
         );
     }
@@ -167,7 +160,7 @@ fn PLibHermitJacobiTest__CoefficientConversion() {
     // Verify output is finite
     for i in aCoefficients.lower()..=aCoefficients.upper() {
         assert!(
-            !IsInfinite(aCoefficients[i]),
+            !precision::is_infinite(aCoefficients[i]),
             "Converted coefficient should be finite at index {i}"
         );
     }
@@ -203,7 +196,10 @@ fn PLibHermitJacobiTest__DegreeReduction() {
     );
     assert!(aNewDegree >= 0, "New degree should be non-negative");
     assert!(aMaxError >= 0.0, "Max error should be non-negative");
-    assert!(!IsInfinite(aMaxError), "Max error should be finite");
+    assert!(
+        !precision::is_infinite(aMaxError),
+        "Max error should be finite"
+    );
 }
 
 // Test error estimation
@@ -228,7 +224,10 @@ fn PLibHermitJacobiTest__ErrorEstimation() {
     aMaxErr = aMaxResult.unwrap();
 
     assert!(aMaxErr >= 0.0, "Max error should be non-negative");
-    assert!(!IsInfinite(aMaxErr), "Max error should be finite");
+    assert!(
+        !precision::is_infinite(aMaxErr),
+        "Max error should be finite"
+    );
 
     // Test AverageError
     let mut aAvgErr: f64 = -1.0;
@@ -237,11 +236,14 @@ fn PLibHermitJacobiTest__ErrorEstimation() {
     aAvgErr = aAvgResult.unwrap();
 
     assert!(aAvgErr >= 0.0, "Average error should be non-negative");
-    assert!(!IsInfinite(aAvgErr), "Average error should be finite");
+    assert!(
+        !precision::is_infinite(aAvgErr),
+        "Average error should be finite"
+    );
 
     // Average error should typically be <= max error
     assert!(
-        aAvgErr <= aMaxErr + CONFUSION,
+        aAvgErr <= aMaxErr + precision::confusion(),
         "Average error should not exceed max error significantly"
     );
 }
@@ -265,7 +267,7 @@ fn PLibHermitJacobiTest__ExtremeParameterValues() {
         // Check that results are finite
         for i in aBasisValue.lower()..=aBasisValue.upper() {
             assert!(
-                !IsInfinite(aBasisValue[i]),
+                !precision::is_infinite(aBasisValue[i]),
                 "Basis value should be finite at extreme parameter U={aU}"
             );
         }
@@ -295,11 +297,11 @@ fn PLibHermitJacobiTest__DerivativeConsistency() {
     // Values and first derivatives should be consistent
     for i in aBasisValue1.lower()..=aBasisValue1.upper() {
         assert!(
-            (aBasisValue1[i] - aBasisValue2[i]).abs() <= CONFUSION,
+            (aBasisValue1[i] - aBasisValue2[i]).abs() <= precision::confusion(),
             "Function values should be consistent between D1 and D2 calls at index {i}"
         );
         assert!(
-            (aBasisD1_1[i] - aBasisD1_2[i]).abs() <= CONFUSION,
+            (aBasisD1_1[i] - aBasisD1_2[i]).abs() <= precision::confusion(),
             "First derivatives should be consistent between D1 and D2 calls at index {i}"
         );
     }
