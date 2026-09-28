@@ -16,23 +16,27 @@
 
 //! The line computations of the Extrema and IntAna2d packages that the gce and GC
 //! constructions call: the extremum between two 3D lines
-//! (`Extrema_ExtElC(gp_Lin, gp_Lin, Tol)`) and the intersection of two 2D lines
-//! (`IntAna2d_AnaIntersection(gp_Lin2d, gp_Lin2d)`).
+//! (`Extrema_ExtElC(gp_Lin, gp_Lin, Tol)`), the projection of a point on a bounded
+//! line (`Extrema_ExtPElC(gp_Pnt, gp_Lin, Tol, Uinf, Usup)`) and the intersection
+//! of two 2D lines (`IntAna2d_AnaIntersection(gp_Lin2d, gp_Lin2d)`).
 //! They keep the native operation order; the complete Extrema and IntAna2d
 //! packages will replace them when they are ported.
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::elclib;
-use rustycad_tkmath::gp::{self, Line2, Line3, Point2, Point3, Xyz};
+use rustycad_tkmath::gp::{self, Line2, Line3, Point2, Point3, Vector3, Xyz};
 
 /// The result of `Extrema_ExtElC(gp_Lin, gp_Lin, Tol)`: always done, with one
-/// extremum; parallel lines (myIsPar) have no extremum points.
+/// extremum (NbExt() == 1).
 #[derive(Clone, Copy, Debug)]
 pub(crate) struct LinesExtremum {
+    /// myIsPar: the lines are parallel, or the solution is infinite.
+    pub parallel: bool,
     /// mySqDist[0]: the square distance of the extremum.
     pub square_distance: f64,
-    /// myPoint[0]: the points of the extremum on each line (unset when parallel).
-    pub points: Option<(Point3, Point3)>,
+    /// The points of `Points(1, P1, P2)`: the default Extrema_POnCurv (the origin)
+    /// on both lines when they are parallel, as the native arrays are never set then.
+    pub points: (Point3, Point3),
 }
 
 /// Extrema_ExtElC(theC1, theC2, Tol): the closest points of two lines, solving
@@ -55,18 +59,45 @@ pub(crate) fn lines_extremum(first: Line3, second: Line3) -> LinesExtremum {
     }
     if parallel {
         let square_distance: f64 = second.square_distance(first.location());
+        let points = (Point3::default(), Point3::default());
         return LinesExtremum {
+            parallel,
             square_distance,
-            points: None,
+            points,
         };
     }
     let p1: Point3 = elclib::value(parameters.0, &first);
     let p2: Point3 = elclib::value(parameters.1, &second);
     let square_distance: f64 = p1.square_distance(&p2);
     LinesExtremum {
+        parallel,
         square_distance,
-        points: Some((p1, p2)),
+        points: (p1, p2),
     }
+}
+
+/// `Extrema_ExtPElC(P, L, Tol, Uinf, Usup).Point(1).Value()`: the projection of
+/// `point` on `line`, which exists when its parameter lies in
+/// `[uinf - tol, usup + tol]`; otherwise the extremum is not done and `Point(1)`
+/// raises StdFail_NotDone through NbExt().
+pub(crate) fn line_projection(
+    point: Point3,
+    line: Line3,
+    tolerance: f64,
+    bounds: (f64, f64),
+) -> Result<Point3, Failure> {
+    let v1: Vector3 = Vector3::from(line.direction());
+    let origin: Point3 = line.location();
+    let distance: f64 = v1.dot(Vector3::between(origin, point));
+    if !(distance >= bounds.0 - tolerance && distance <= bounds.1 + tolerance) {
+        let message = format!(
+            "Extrema_ExtPElC::NbExt() - the projection parameter {distance} is outside [{}, {}]; expected a done extremum",
+            bounds.0 - tolerance,
+            bounds.1 + tolerance
+        );
+        return Err(Failure::with_type("StdFail_NotDone", &message, ""));
+    }
+    Ok(origin.translated(v1 * distance))
 }
 
 /// The line-line case of IntAna2d_AnaIntersection, which is always done: one

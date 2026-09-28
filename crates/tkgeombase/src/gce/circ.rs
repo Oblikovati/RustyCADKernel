@@ -180,9 +180,10 @@ impl MakeCirc {
         // Extrema_ExtElC(L1, L2, Precision::PConfusion()) is always done on two lines
         // and ignores its tolerance.
         let extremum = lines_extremum(l1, l2);
-        let Some((pon1, pon2)) = extremum.points else {
+        if extremum.parallel {
             return Ok(Self::failed(ErrorType::IntersectionError));
-        };
+        }
+        let (pon1, pon2) = extremum.points;
         // NbExt() is 1: the loop keeps the only extremum, whose square distance is
         // below RealLast() unless it is NaN, when the center stays at the origin.
         let center: Point3 = if extremum.square_distance < f64::MAX {

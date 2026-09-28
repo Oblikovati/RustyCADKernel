@@ -38,6 +38,7 @@
 #include <gp_Trsf2d.hxx>
 #include "tkgeombase_probe_common.cxx"
 #include "tkgeombase_probe_gce.cxx"
+#include "tkgeombase_probe_gc.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -64,6 +65,39 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gce_translation", gb_gce_translation_case},
  {"gce_translation2d", gb_gce_translation2d_case},
  {"gce_status", gb_gce_status_case},
+ // GC (tkgeombase_probe_gc.cxx)
+ {"gc_arc_circle", gb_gc_arc_circle_case},
+ {"gc_arc_ellipse", gb_gc_arc_ellipse_case},
+ {"gc_arc_hyperbola", gb_gc_arc_hyperbola_case},
+ {"gc_arc_parabola", gb_gc_arc_parabola_case},
+ {"gc_arc_circle2d", gb_gc_arc_circle2d_case},
+ {"gc_arc_ellipse2d", gb_gc_arc_ellipse2d_case},
+ {"gc_arc_hyperbola2d", gb_gc_arc_hyperbola2d_case},
+ {"gc_arc_parabola2d", gb_gc_arc_parabola2d_case},
+ {"gc_circle", gb_gc_circle_case},
+ {"gc_circle2d", gb_gc_circle2d_case},
+ {"gc_ellipse", gb_gc_ellipse_case},
+ {"gc_hyperbola", gb_gc_hyperbola_case},
+ {"gc_ellipse2d", gb_gc_ellipse2d_case},
+ {"gc_hyperbola2d", gb_gc_hyperbola2d_case},
+ {"gc_parabola2d", gb_gc_parabola2d_case},
+ {"gc_line", gb_gc_line_case},
+ {"gc_line2d", gb_gc_line2d_case},
+ {"gc_segment", gb_gc_segment_case},
+ {"gc_segment2d", gb_gc_segment2d_case},
+ {"gc_plane", gb_gc_plane_case},
+ {"gc_conical", gb_gc_conical_case},
+ {"gc_cylindrical", gb_gc_cylindrical_case},
+ {"gc_trimmed_cone", gb_gc_trimmed_cone_case},
+ {"gc_trimmed_cylinder", gb_gc_trimmed_cylinder_case},
+ {"gc_mirror", gb_gc_mirror_case},
+ {"gc_mirror2d", gb_gc_mirror2d_case},
+ {"gc_rotation", gb_gc_rotation_case},
+ {"gc_rotation2d", gb_gc_rotation2d_case},
+ {"gc_scale", gb_gc_scale_case},
+ {"gc_scale2d", gb_gc_scale2d_case},
+ {"gc_translation", gb_gc_translation_case},
+ {"gc_translation2d", gb_gc_translation2d_case},
 };
 int main() {
  std::string line;

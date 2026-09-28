@@ -11,3 +11,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     """Append every TKGeomBase request family in a fixed order."""
     # gce (tkgeombase_corpus_gce.py)
     __import__('tkgeombase_corpus_gce').append_gce_requests(requests)
+    # GC (tkgeombase_corpus_gc.py, tkgeombase_corpus_gc_surfaces.py)
+    __import__('tkgeombase_corpus_gc').append_gc_curve_requests(requests)

@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod gb_probe;
-use gb_probe::gce;
+use gb_probe::{gc, gce};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -35,6 +35,39 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gce_translation", gce::translation_case),
     ("gce_translation2d", gce::translation2d_case),
     ("gce_status", gce::status_case),
+    // GC (gb_probe/gc)
+    ("gc_arc_circle", gc::arc_circle_case),
+    ("gc_arc_ellipse", gc::arc_ellipse_case),
+    ("gc_arc_hyperbola", gc::arc_hyperbola_case),
+    ("gc_arc_parabola", gc::arc_parabola_case),
+    ("gc_arc_circle2d", gc::arc_circle2d_case),
+    ("gc_arc_ellipse2d", gc::arc_ellipse2d_case),
+    ("gc_arc_hyperbola2d", gc::arc_hyperbola2d_case),
+    ("gc_arc_parabola2d", gc::arc_parabola2d_case),
+    ("gc_circle", gc::circle_case),
+    ("gc_circle2d", gc::circle2d_case),
+    ("gc_ellipse", gc::ellipse_case),
+    ("gc_hyperbola", gc::hyperbola_case),
+    ("gc_ellipse2d", gc::ellipse2d_case),
+    ("gc_hyperbola2d", gc::hyperbola2d_case),
+    ("gc_parabola2d", gc::parabola2d_case),
+    ("gc_line", gc::line_case),
+    ("gc_line2d", gc::line2d_case),
+    ("gc_segment", gc::segment_case),
+    ("gc_segment2d", gc::segment2d_case),
+    ("gc_plane", gc::plane_case),
+    ("gc_conical", gc::conical_case),
+    ("gc_cylindrical", gc::cylindrical_case),
+    ("gc_trimmed_cone", gc::trimmed_cone_case),
+    ("gc_trimmed_cylinder", gc::trimmed_cylinder_case),
+    ("gc_mirror", gc::mirror_case),
+    ("gc_mirror2d", gc::mirror2d_case),
+    ("gc_rotation", gc::rotation_case),
+    ("gc_rotation2d", gc::rotation2d_case),
+    ("gc_scale", gc::scale_case),
+    ("gc_scale2d", gc::scale2d_case),
+    ("gc_translation", gc::translation_case),
+    ("gc_translation2d", gc::translation2d_case),
 ];
 
 fn main() {

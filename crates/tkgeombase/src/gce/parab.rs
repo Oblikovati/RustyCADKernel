@@ -119,7 +119,8 @@ impl MakeParab2d {
     /// axis toward `s` and focal length `|center s|`; gce_NullAxis when the points
     /// are closer than gp::Resolution(). `MakeParab2d::from_points(s, c, true)?`.
     pub fn from_points(s: Point2, center: Point2, sense: bool) -> Result<Self, Failure> {
-        if s.distance(center) < gp::resolution() {
+        let dist: f64 = s.distance(center);
+        if dist.is_nan() || dist < gp::resolution() {
             return Ok(Self::failed(ErrorType::NullAxis));
         }
         let x_axis: Direction2 = Direction2::from_xy(s.xy() - center.xy())?;

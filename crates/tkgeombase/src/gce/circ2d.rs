@@ -50,7 +50,7 @@ impl MakeCirc2d {
     /// gce_MakeCirc2d(XAxis, Radius, Sense): the circle whose X axis is `x_axis`;
     /// gce_NegativeRadius when `radius < 0`. `MakeCirc2d::new(axis, 1.0, true)?`.
     pub fn new(x_axis: Axis2d, radius: f64, sense: bool) -> Result<Self, Failure> {
-        if radius < 0.0 {
+        if radius.is_nan() || radius < 0.0 {
             return Ok(Self::failed(ErrorType::NegativeRadius));
         }
         Ok(Self::built(Circle2::from_x_axis(x_axis, radius, sense)?))
@@ -59,7 +59,7 @@ impl MakeCirc2d {
     /// gce_MakeCirc2d(Axis, Radius): the circle of frame `frame`;
     /// gce_NegativeRadius when `radius < 0`. `MakeCirc2d::from_frame(frame, 1.0)?`.
     pub fn from_frame(frame: Axis22d, radius: f64) -> Result<Self, Failure> {
-        if radius < 0.0 {
+        if radius.is_nan() || radius < 0.0 {
             return Ok(Self::failed(ErrorType::NegativeRadius));
         }
         Ok(Self::built(Circle2::new(frame, radius)?))
@@ -87,7 +87,7 @@ impl MakeCirc2d {
     /// direction gp::DX2d(); gce_NegativeRadius when `radius < 0`.
     /// `MakeCirc2d::from_center(p, 1.0, true)?`.
     pub fn from_center(center: Point2, radius: f64, sense: bool) -> Result<Self, Failure> {
-        if radius < 0.0 {
+        if radius.is_nan() || radius < 0.0 {
             return Ok(Self::failed(ErrorType::NegativeRadius));
         }
         Ok(Self::built(Circle2::from_x_axis(

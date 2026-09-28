@@ -3,14 +3,15 @@
 **In progress; toolkit acceptance is not complete.** `crates/tkgeombase`
 (`rustycad-tkgeombase`) is the port of the ModelingData toolkit TKGeomBase. It
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
-does. Packages are added one module at a time. The `gce` package is ported in full,
-and `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for it.
+does. Packages are added one module at a time. The `gce`, `GC` and `GCE2d` packages
+are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0 stale api
+rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (42 declarations):
+passes (62 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -19,9 +20,16 @@ passes (42 declarations):
 | gce_MakeCylinder_Test.cxx | gce_make_cylinder | 3 |
 | gce_MakeElips_Test.cxx | gce_make_elips | 3 |
 | gce_MakeHypr_Test.cxx | gce_make_hypr | 24 |
+| GC_MakeArcOfCircle_Test.cxx | gc_make_arc_of_circle | 3 |
+| GC_MakeCircle2d_Test.cxx | gc_make_circle2d | 3 |
+| GC_MakeConicalSurface_Test.cxx | gc_make_conical_surface | 2 |
+| GC_MakeParabola2d_Test.cxx | gc_make_parabola2d | 3 |
+| GC_MakePlane_Test.cxx | gc_make_plane | 3 |
+| GC_MakeSegment2d_Test.cxx | gc_make_segment2d | 6 |
 
-`gce_behavior.rs` covers the status enumeration, the StdFail_NotDone results, the
-conversion operators and the unassigned-status paths.
+`gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
+StdFail_NotDone results, the conversion operators, the GCE2d aliases and the native
+quirks below.
 
 ## Class mapping
 
@@ -36,10 +44,20 @@ status in the message, when the construction failed), and the conversion operato
 not gce_Root algorithms: `value()` returns the transformation and the conversion is
 `From`.
 
-`gce_MakeCirc` and `gce_MakeCirc2d` call `Extrema_ExtElC` on two lines and
-`IntAna2d_AnaIntersection` on two 2D lines, which are TKGeomBase packages not ported
-yet. `src/line_extrema.rs` ports exactly those line cases in the native operation
-order; the Extrema and IntAna2d ports will replace it.
+The `GC_Make*` classes follow the same rules and build Geom objects (the `*2d`
+classes Geom2d objects) held by `Handle`: `value()` returns the handle, and
+`operator const occ::handle<T>&()` is `TryFrom<&MakeCircle> for Handle<GeomCircle>`
+(`From` for the transformation makers). GC_Root has the members of gce_Root, so the
+port shares the `Root` trait (`gc::Root` re-exports it). Since OCCT 8.0.0 every GCE2d
+header is a deprecated alias of a GC class (`using GCE2d_MakeCircle = GC_MakeCircle2d`);
+`gce2d` declares them as `#[deprecated]` type aliases with the native message, and
+re-exports `Root` for GCE2d_Root.
+
+`gce_MakeCirc`, `gce_MakeCirc2d`, `GC_MakeArcOfCircle(2d)` and `GC_MakeTrimmedCone` call
+`Extrema_ExtElC` on two lines, `IntAna2d_AnaIntersection` on two 2D lines and
+`Extrema_ExtPElC` on a point and a line, which are TKGeomBase packages not ported yet.
+`src/line_extrema.rs` ports exactly those cases in the native operation order; the
+Extrema and IntAna2d ports will replace it.
 
 ## Verification
 
@@ -67,6 +85,18 @@ and magnitudes near 1e-160 and 1e150 where squares underflow or overflow. Each
 request prints the status, `IsDone`, `IsError`, `Value()` and `Operator()` (or the
 raised exception). The native algorithm is created with `new`, which zeroes it, so
 the paths that never assign the status compare as the port reads them.
+
+The GC requests build every overload of every class the same way, and print the Geom or
+Geom2d result by its class name and defining data (the gp element of each conic, line,
+plane, cone and cylinder, the bounds and basis of each trimmed curve and surface, the
+gp_Trsf of each transformation), through `Value()` and the conversion operator. They
+add equal trim parameters, points on and off the conics, tangents null, along and
+1e-13 rad from the chord, projections outside the `Extrema_ExtPElC` bounds, null
+scale factors and bad cone angles at both resolution bounds. They leave out the inputs
+for which a GC constructor reads the status of a stack gce algorithm on one of its
+unassigned paths (three points within gp::Resolution() for `GC_MakeCircle` and
+`GC_MakeArcOfCircle`, collinear points for their 2D versions): the native status is
+indeterminate there. The corpus has 4449 requests (gce and GC).
 
 ## Preserved native behaviour
 
@@ -100,3 +130,36 @@ gce:
   compare the square length with gp::Resolution().
 - `gce_MakeScale` raises Standard_ConstructionError for a null factor (gp_Trsf), while
   `gce_MakeScale2d` accepts it (gp_Trsf2d).
+
+GC and GCE2d:
+
+- The GC constructors that wrap a gce algorithm on a stack object read its status as
+  it is; on the unassigned gce paths the native value is indeterminate, while the port
+  reads gce_Done (and the 3D arc through three coincident points then raises
+  Standard_ConstructionError from the trimmed curve, whose bounds are equal).
+- `GC_MakeArcOfCircle(P1, V, P2)` does not test `IsParallel` on the extremum of the
+  bisector and the normal at P1, unlike gce_MakeCirc: for a tangent a few 1e-13 rad
+  from the chord, the lines are parallel and the center is the default
+  Extrema_POnCurv point, the origin. A tangent along the chord raises
+  Standard_ConstructionError from `gp_Dir::Crossed`.
+- `GC_MakeArcOfCircle2d(P1, V, P2)` converts gce_MakeLin2d(P1, P2) directly, so confused
+  points raise StdFail_NotDone; a tangent along the chord (parallel bisector and
+  normal) leaves the initial gce_ConfusedPoints; the arc is direct when
+  `V ^ chord > 0`.
+- `GC_MakeArcOfCircle2d(P1, P2, P3)` trims from the parameter of P1 to that of P3; the
+  3D version trims from 0 (the X axis of the gce circle passes through P1).
+- `GC_MakeSegment(P1, P2)` converts GC_MakeLine(P1, P2), so confused points raise
+  StdFail_NotDone, while `GC_MakeSegment2d(P1, P2)` reports gce_ConfusedPoints first.
+- `GC_MakeEllipse(A2, ...)` reports gce_NegativeRadius first, then gce_InvertAxis (not
+  gce_InvertRadius) for a major radius smaller than the minor one.
+- `GC_MakeConicalSurface(A2, Ang, R)` refuses `Ang >= PI/2 - Resolution` where
+  gce_MakeCone tests `PI/2 - Ang <= Resolution`; `GC_MakePlane(A, B, C, D)` compares
+  `sqrt(A² + B² + C²)` with gp::Resolution() where gce_MakePln compares the square.
+- `GC_MakeCylindricalSurface(Cyl, Dist)` uses the radius `|R - Dist|` (always done)
+  where gce_MakeCylinder uses `R + Dist`.
+- `GC_MakeTrimmedCone(P1, P2, P3, P4)` projects P3 and P4 with `Extrema_ExtPElC`
+  bounded to `[-2e100, 2e100]` (tolerance 1e-7); a projection outside raises
+  StdFail_NotDone from `NbExt()`.
+- The GC transformation makers set a new Geom transformation through its own setter:
+  `GC_MakeTranslation(P1, P2)` uses `gp_Trsf::SetTranslation(P1, P2)` where
+  gce_MakeTranslation builds `gp_Vec(P1, P2)` first.

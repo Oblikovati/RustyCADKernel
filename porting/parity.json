@@ -60482,6 +60482,1670 @@
       "rust_item": "rustycad_tkgeombase::gce::Root::status",
       "status": "implemented",
       "notes": "gce mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp constructor can raise; gce_Root is the Root trait; Value()/Operator() return Result with StdFail_NotDone for a failed construction; the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle(const gp_Circ&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle(const gp_Circ&,const gp_Pnt&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle(const gp_Circ&,const gp_Pnt&,const gp_Pnt&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle::through_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle(const gp_Pnt&,const gp_Vec&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle::from_tangent",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle::operator const occ::handle<Geom_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeArcOfCircle>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle2d(const gp_Circ2d&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle2d::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle2d(const gp_Circ2d&,const gp_Pnt2d&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle2d::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle2d(const gp_Circ2d&,const gp_Pnt2d&,const gp_Pnt2d&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle2d(const gp_Pnt2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle2d::through_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle2d(const gp_Pnt2d&,const gp_Vec2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle2d::from_tangent",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfCircle2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircle2d::operator const occ::handle<Geom2d_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfCircle2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeArcOfCircle2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse(const gp_Elips&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfEllipse::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse(const gp_Elips&,const gp_Pnt&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfEllipse::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse(const gp_Elips&,const gp_Pnt&,const gp_Pnt&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfEllipse::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfEllipse::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse::operator const occ::handle<Geom_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeArcOfEllipse>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse2d(const gp_Elips2d&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfEllipse2d::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse2d(const gp_Elips2d&,const gp_Pnt2d&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfEllipse2d::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse2d(const gp_Elips2d&,const gp_Pnt2d&,const gp_Pnt2d&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfEllipse2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfEllipse2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfEllipse2d::operator const occ::handle<Geom2d_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfEllipse2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeArcOfEllipse2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola(const gp_Hypr&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfHyperbola::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola(const gp_Hypr&,const gp_Pnt&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfHyperbola::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola(const gp_Hypr&,const gp_Pnt&,const gp_Pnt&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfHyperbola::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfHyperbola::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola::operator const occ::handle<Geom_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeArcOfHyperbola>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola2d(const gp_Hypr2d&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfHyperbola2d::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola2d(const gp_Hypr2d&,const gp_Pnt2d&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfHyperbola2d::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola2d(const gp_Hypr2d&,const gp_Pnt2d&,const gp_Pnt2d&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfHyperbola2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfHyperbola2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfHyperbola2d::operator const occ::handle<Geom2d_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfHyperbola2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeArcOfHyperbola2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola(const gp_Parab&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfParabola::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola(const gp_Parab&,const gp_Pnt&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfParabola::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola(const gp_Parab&,const gp_Pnt&,const gp_Pnt&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfParabola::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfParabola::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola::operator const occ::handle<Geom_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeArcOfParabola>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola2d(const gp_Parab2d&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfParabola2d::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola2d(const gp_Parab2d&,const gp_Pnt2d&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfParabola2d::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola2d(const gp_Parab2d&,const gp_Pnt2d&,const gp_Pnt2d&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfParabola2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeArcOfParabola2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeArcOfParabola2d::operator const occ::handle<Geom2d_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeArcOfParabola2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeArcOfParabola2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle(const gp_Circ&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle::from_circ",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle(const gp_Ax2&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle(const gp_Circ&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle::from_circ_distance",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle(const gp_Circ&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle::from_circ_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle::through_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle(const gp_Pnt&,const gp_Dir&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle::from_center_normal",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle(const gp_Pnt&,const gp_Pnt&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle::from_center_axis_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle(const gp_Ax1&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle::from_axis",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle::operator const occ::handle<Geom_Circle>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomCircle> as TryFrom<&rustycad_tkgeombase::gc::MakeCircle>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d(const gp_Circ2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle2d::from_circ",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d(const gp_Ax2d&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle2d::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d(const gp_Ax22d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle2d::from_frame",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d(const gp_Circ2d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle2d::from_circ_distance",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d(const gp_Circ2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle2d::from_circ_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d(const gp_Pnt2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle2d::through_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d(const gp_Pnt2d&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle2d::from_center",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d(const gp_Pnt2d&,const gp_Pnt2d&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle2d::from_center_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCircle2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCircle2d::operator const occ::handle<Geom2d_Circle>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCircle2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dCircle> as TryFrom<&rustycad_tkgeombase::gc::MakeCircle2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeConicalSurface(const gp_Ax2&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeConicalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeConicalSurface::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeConicalSurface(const gp_Cone&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeConicalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeConicalSurface::from_cone",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeConicalSurface(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeConicalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeConicalSurface::through_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeConicalSurface(const gp_Pnt&,const gp_Pnt&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeConicalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeConicalSurface::from_points_radii",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeConicalSurface::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeConicalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeConicalSurface::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeConicalSurface::operator const occ::handle<Geom_ConicalSurface>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeConicalSurface.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomConicalSurface> as TryFrom<&rustycad_tkgeombase::gc::MakeConicalSurface>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCylindricalSurface(const gp_Ax2&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCylindricalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCylindricalSurface::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCylindricalSurface(const gp_Cylinder&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCylindricalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCylindricalSurface::from_cylinder",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCylindricalSurface(const gp_Cylinder&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCylindricalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCylindricalSurface::from_cylinder_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCylindricalSurface(const gp_Cylinder&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCylindricalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCylindricalSurface::from_cylinder_distance",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCylindricalSurface(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCylindricalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCylindricalSurface::through_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCylindricalSurface(const gp_Ax1&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCylindricalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCylindricalSurface::from_axis",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCylindricalSurface(const gp_Circ&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCylindricalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCylindricalSurface::from_circ",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCylindricalSurface::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCylindricalSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeCylindricalSurface::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeCylindricalSurface::operator const occ::handle<Geom_CylindricalSurface>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeCylindricalSurface.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomCylindricalSurface> as TryFrom<&rustycad_tkgeombase::gc::MakeCylindricalSurface>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse(const gp_Elips&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeEllipse::from_elips",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse(const gp_Ax2&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeEllipse::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeEllipse::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeEllipse::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse::operator const occ::handle<Geom_Ellipse>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomEllipse> as TryFrom<&rustycad_tkgeombase::gc::MakeEllipse>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse2d(const gp_Elips2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeEllipse2d::from_elips",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse2d(const gp_Ax2d&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeEllipse2d::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse2d(const gp_Ax22d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeEllipse2d::from_frame",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse2d(const gp_Pnt2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeEllipse2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeEllipse2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeEllipse2d::operator const occ::handle<Geom2d_Ellipse>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeEllipse2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dEllipse> as TryFrom<&rustycad_tkgeombase::gc::MakeEllipse2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola(const gp_Hypr&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeHyperbola::from_hypr",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola(const gp_Ax2&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeHyperbola::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeHyperbola::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeHyperbola::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola::operator const occ::handle<Geom_Hyperbola>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomHyperbola> as TryFrom<&rustycad_tkgeombase::gc::MakeHyperbola>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola2d(const gp_Hypr2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeHyperbola2d::from_hypr",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola2d(const gp_Ax2d&,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeHyperbola2d::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola2d(const gp_Ax22d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeHyperbola2d::from_frame",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola2d(const gp_Pnt2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeHyperbola2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeHyperbola2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeHyperbola2d::operator const occ::handle<Geom2d_Hyperbola>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeHyperbola2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dHyperbola> as TryFrom<&rustycad_tkgeombase::gc::MakeHyperbola2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine(const gp_Ax1&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine::from_axis",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine(const gp_Lin&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine::from_lin",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine(const gp_Pnt&,const gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine(const gp_Lin&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine::from_line_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine::operator const occ::handle<Geom_Line>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomLine> as TryFrom<&rustycad_tkgeombase::gc::MakeLine>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine2d(const gp_Ax2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine2d::from_axis",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine2d(const gp_Lin2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine2d::from_lin",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine2d(const gp_Pnt2d&,const gp_Dir2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine2d::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine2d(const gp_Lin2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine2d::from_line_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine2d(const gp_Lin2d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine2d::from_line_distance",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine2d(const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeLine2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeLine2d::operator const occ::handle<Geom2d_Line>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeLine2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dLine> as TryFrom<&rustycad_tkgeombase::gc::MakeLine2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror(const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror::from_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror(const gp_Ax1&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror::from_axis",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror(const gp_Lin&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror::from_line",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror(const gp_Pnt&,const gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror::from_point_direction",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror(const gp_Pln&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror::from_plane",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror(const gp_Ax2&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror::from_frame",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror::operator const occ::handle<Geom_Transformation>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomTransformation> as From<&rustycad_tkgeombase::gc::MakeMirror>>::from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror2d(const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror2d::from_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror2d(const gp_Ax2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror2d::from_axis",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror2d(const gp_Lin2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror2d::from_line",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror2d(const gp_Pnt2d&,const gp_Dir2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror2d::from_point_direction",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeMirror2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeMirror2d::operator const occ::handle<Geom2d_Transformation>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeMirror2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dTransformation> as From<&rustycad_tkgeombase::gc::MakeMirror2d>>::from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d(const gp_Parab2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeParabola2d::from_parab",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d(const gp_Ax22d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeParabola2d::from_frame",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d(const gp_Ax2d&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeParabola2d::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d(const gp_Ax2d&,const gp_Pnt2d&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeParabola2d::from_directrix",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d(const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeParabola2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeParabola2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeParabola2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d::operator const occ::handle<Geom2d_Parabola>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeParabola2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dParabola> as TryFrom<&rustycad_tkgeombase::gc::MakeParabola2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakePlane(const gp_Pln&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakePlane.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakePlane::from_pln",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakePlane(const gp_Pnt&,const gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakePlane.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakePlane::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakePlane(double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakePlane.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakePlane::from_equation",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakePlane(const gp_Pln&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakePlane.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakePlane::from_plane_point",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakePlane(const gp_Pln&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakePlane.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakePlane::from_plane_distance",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakePlane(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakePlane.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakePlane::through_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakePlane(const gp_Ax1&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakePlane.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakePlane::from_axis",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakePlane::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakePlane.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakePlane::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakePlane::operator const occ::handle<Geom_Plane>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakePlane.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomPlane> as TryFrom<&rustycad_tkgeombase::gc::MakePlane>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeRotation(const gp_Lin&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeRotation.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeRotation::from_line",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeRotation(const gp_Ax1&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeRotation.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeRotation::from_axis",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeRotation(const gp_Pnt&,const gp_Dir&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeRotation.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeRotation::from_point_direction",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeRotation::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeRotation.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeRotation::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeRotation::operator const occ::handle<Geom_Transformation>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeRotation.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomTransformation> as From<&rustycad_tkgeombase::gc::MakeRotation>>::from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeRotation2d(const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeRotation2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeRotation2d::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeRotation2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeRotation2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeRotation2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeRotation2d::operator const occ::handle<Geom2d_Transformation>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeRotation2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dTransformation> as From<&rustycad_tkgeombase::gc::MakeRotation2d>>::from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeScale(const gp_Pnt&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeScale.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeScale::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeScale::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeScale.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeScale::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeScale::operator const occ::handle<Geom_Transformation>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeScale.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomTransformation> as From<&rustycad_tkgeombase::gc::MakeScale>>::from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeScale2d(const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeScale2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeScale2d::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeScale2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeScale2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeScale2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeScale2d::operator const occ::handle<Geom2d_Transformation>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeScale2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dTransformation> as From<&rustycad_tkgeombase::gc::MakeScale2d>>::from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment(const gp_Lin&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment(const gp_Lin&,const gp_Pnt&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment(const gp_Lin&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment::from_line_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment::operator const occ::handle<Geom_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeSegment>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment2d(const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment2d(const gp_Pnt2d&,const gp_Dir2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment2d::from_direction",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment2d(const gp_Lin2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment2d::from_parameters",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment2d(const gp_Lin2d&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment2d::from_point_parameter",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment2d(const gp_Lin2d&,const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment2d::from_line_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeSegment2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeSegment2d::operator const occ::handle<Geom2d_TrimmedCurve>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeSegment2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dTrimmedCurve> as TryFrom<&rustycad_tkgeombase::gc::MakeSegment2d>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTranslation(const gp_Vec&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTranslation.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTranslation::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTranslation(const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTranslation.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTranslation::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTranslation::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTranslation.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTranslation::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTranslation::operator const occ::handle<Geom_Transformation>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTranslation.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomTransformation> as From<&rustycad_tkgeombase::gc::MakeTranslation>>::from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTranslation2d(const gp_Vec2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTranslation2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTranslation2d::new",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTranslation2d(const gp_Pnt2d&,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTranslation2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTranslation2d::from_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTranslation2d::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTranslation2d.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTranslation2d::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTranslation2d::operator const occ::handle<Geom2d_Transformation>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTranslation2d.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg2d::geom2d::Geom2dTransformation> as From<&rustycad_tkgeombase::gc::MakeTranslation2d>>::from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTrimmedCone(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTrimmedCone.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTrimmedCone::through_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTrimmedCone(const gp_Pnt&,const gp_Pnt&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTrimmedCone.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTrimmedCone::from_points_radii",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTrimmedCone::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTrimmedCone.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTrimmedCone::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTrimmedCone::operator const occ::handle<Geom_RectangularTrimmedSurface>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTrimmedCone.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomRectangularTrimmedSurface> as TryFrom<&rustycad_tkgeombase::gc::MakeTrimmedCone>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTrimmedCylinder(const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTrimmedCylinder.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTrimmedCylinder::through_points",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTrimmedCylinder(const gp_Circ&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTrimmedCylinder.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTrimmedCylinder::from_circ",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTrimmedCylinder(const gp_Ax1&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTrimmedCylinder.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTrimmedCylinder::from_axis",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTrimmedCylinder::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTrimmedCylinder.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::MakeTrimmedCylinder::value",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_MakeTrimmedCylinder::operator const occ::handle<Geom_RectangularTrimmedSurface>&() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_MakeTrimmedCylinder.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle<rustycad_tkg3d::geom::GeomRectangularTrimmedSurface> as TryFrom<&rustycad_tkgeombase::gc::MakeTrimmedCylinder>>::try_from",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_Root::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_Root.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::Root::is_done",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_Root::IsError() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_Root.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::Root::is_error",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GC_Root::Status() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GC/GC_Root.hxx",
+      "rust_item": "rustycad_tkgeombase::gc::Root::status",
+      "status": "implemented",
+      "notes": "GC mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload, returning Result when a gp, Geom or Geom2d constructor can raise; GC_Root is the Root trait shared with gce; Value() returns the handle (Result with StdFail_NotDone for a failed construction); the conversion operator is TryFrom (From for the transformation makers)."
+    },
+    {
+      "upstream_id": "GCE2d_MakeArcOfCircle",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeArcOfCircle",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeArcOfEllipse",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeArcOfEllipse",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeArcOfHyperbola",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeArcOfHyperbola",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeArcOfParabola",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeArcOfParabola.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeArcOfParabola",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeCircle",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeCircle.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeCircle",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeEllipse",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeEllipse.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeEllipse",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeHyperbola",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeHyperbola.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeHyperbola",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeLine",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeLine.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeLine",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeMirror",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeMirror.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeMirror",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeParabola",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeParabola.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeParabola",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeRotation",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeRotation.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeRotation",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeScale",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeScale.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeScale",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeSegment",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeSegment.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeSegment",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_MakeTranslation",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_MakeTranslation.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::MakeTranslation",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
+    },
+    {
+      "upstream_id": "GCE2d_Root",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GCE2d/GCE2d_Root.hxx",
+      "rust_item": "rustycad_tkgeombase::gce2d::Root",
+      "status": "implemented",
+      "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
     }
   ],
   "tests": [
@@ -121828,6 +123492,286 @@
       "rust_target": "gce_make_hypr",
       "rust_test": "gce_MakeHypr2dTest__FromPoints_Collinear_ColinearPoints",
       "rust_source": "crates/tkgeombase/tests/gce_make_hypr.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircleTest.FromPointsAndTangent_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeArcOfCircle_Test.cxx",
+      "source_sha256": "716dd4e5e158196b91abbe0a3b9d227adde87fe189020f948298a1b1757eeb2b",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_arc_of_circle",
+      "rust_test": "GC_MakeArcOfCircleTest__FromPointsAndTangent_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_arc_of_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircleTest.FromThreePoints_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeArcOfCircle_Test.cxx",
+      "source_sha256": "716dd4e5e158196b91abbe0a3b9d227adde87fe189020f948298a1b1757eeb2b",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_arc_of_circle",
+      "rust_test": "GC_MakeArcOfCircleTest__FromThreePoints_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_arc_of_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeArcOfCircleTest.FromPointsAndTangent_ConfusionScale_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeArcOfCircle_Test.cxx",
+      "source_sha256": "716dd4e5e158196b91abbe0a3b9d227adde87fe189020f948298a1b1757eeb2b",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_arc_of_circle",
+      "rust_test": "GC_MakeArcOfCircleTest__FromPointsAndTangent_ConfusionScale_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_arc_of_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeCircle2dTest.FromCircAndPoint_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeCircle2d_Test.cxx",
+      "source_sha256": "60b7fea515042c1dc0aea4d1780739c6bfc1d4caf0cf51ddaea511d4775ea8f7",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_circle2d",
+      "rust_test": "GC_MakeCircle2dTest__FromCircAndPoint_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_circle2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeCircle2dTest.FromCircAndDist_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeCircle2d_Test.cxx",
+      "source_sha256": "60b7fea515042c1dc0aea4d1780739c6bfc1d4caf0cf51ddaea511d4775ea8f7",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_circle2d",
+      "rust_test": "GC_MakeCircle2dTest__FromCircAndDist_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_circle2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeCircle2dTest.FromCircAndPoint_AtCenter_DoneZeroRadius",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeCircle2d_Test.cxx",
+      "source_sha256": "60b7fea515042c1dc0aea4d1780739c6bfc1d4caf0cf51ddaea511d4775ea8f7",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_circle2d",
+      "rust_test": "GC_MakeCircle2dTest__FromCircAndPoint_AtCenter_DoneZeroRadius",
+      "rust_source": "crates/tkgeombase/tests/gc_make_circle2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeConicalSurfaceTest.FromAxis_AngleBelowResolution_BadAngle",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeConicalSurface_Test.cxx",
+      "source_sha256": "4ce7134880405866103947382c3e9188140bfb1f34e5fea3503fdf6a1eaf82df",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_conical_surface",
+      "rust_test": "GC_MakeConicalSurfaceTest__FromAxis_AngleBelowResolution_BadAngle",
+      "rust_source": "crates/tkgeombase/tests/gc_make_conical_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeConicalSurfaceTest.FromAxis_ValidAngle_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeConicalSurface_Test.cxx",
+      "source_sha256": "4ce7134880405866103947382c3e9188140bfb1f34e5fea3503fdf6a1eaf82df",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_conical_surface",
+      "rust_test": "GC_MakeConicalSurfaceTest__FromAxis_ValidAngle_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_conical_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d_Test.OCC26747_1_ParabolaOpeningRight",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeParabola2d_Test.cxx",
+      "source_sha256": "11b16565a04a740763cb428b6ca360041e7e06909aa290e077100eb4a9670872",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_parabola2d",
+      "rust_test": "GC_MakeParabola2d_Test__OCC26747_1_ParabolaOpeningRight",
+      "rust_source": "crates/tkgeombase/tests/gc_make_parabola2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d_Test.OCC26747_2_ParabolaOpeningLeft",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeParabola2d_Test.cxx",
+      "source_sha256": "11b16565a04a740763cb428b6ca360041e7e06909aa290e077100eb4a9670872",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_parabola2d",
+      "rust_test": "GC_MakeParabola2d_Test__OCC26747_2_ParabolaOpeningLeft",
+      "rust_source": "crates/tkgeombase/tests/gc_make_parabola2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeParabola2d_Test.OCC26747_3_DegenerateParabola",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeParabola2d_Test.cxx",
+      "source_sha256": "11b16565a04a740763cb428b6ca360041e7e06909aa290e077100eb4a9670872",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_parabola2d",
+      "rust_test": "GC_MakeParabola2d_Test__OCC26747_3_DegenerateParabola",
+      "rust_source": "crates/tkgeombase/tests/gc_make_parabola2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakePlaneTest.FromPlaneAndDist_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakePlane_Test.cxx",
+      "source_sha256": "45f3695995073f5e9bac70ee0e6103e224f54f9bd99ea698850b9bfed1499fe0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_plane",
+      "rust_test": "GC_MakePlaneTest__FromPlaneAndDist_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakePlaneTest.FromPlaneAndPoint_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakePlane_Test.cxx",
+      "source_sha256": "45f3695995073f5e9bac70ee0e6103e224f54f9bd99ea698850b9bfed1499fe0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_plane",
+      "rust_test": "GC_MakePlaneTest__FromPlaneAndPoint_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakePlaneTest.FromAxis_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakePlane_Test.cxx",
+      "source_sha256": "45f3695995073f5e9bac70ee0e6103e224f54f9bd99ea698850b9bfed1499fe0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_plane",
+      "rust_test": "GC_MakePlaneTest__FromAxis_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeSegment2dTest.FromPoints_BelowResolution_ConfusedPoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeSegment2d_Test.cxx",
+      "source_sha256": "9b80e54bc6e64dc9ecea8548240883f93a02635ecabff123ac08cd599be3533e",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_segment2d",
+      "rust_test": "GC_MakeSegment2dTest__FromPoints_BelowResolution_ConfusedPoints",
+      "rust_source": "crates/tkgeombase/tests/gc_make_segment2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeSegment2dTest.FromPoints_AboveResolution_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeSegment2d_Test.cxx",
+      "source_sha256": "9b80e54bc6e64dc9ecea8548240883f93a02635ecabff123ac08cd599be3533e",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_segment2d",
+      "rust_test": "GC_MakeSegment2dTest__FromPoints_AboveResolution_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_segment2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeSegment2dTest.FromPoints_AtResolution_ConfusedPoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeSegment2d_Test.cxx",
+      "source_sha256": "9b80e54bc6e64dc9ecea8548240883f93a02635ecabff123ac08cd599be3533e",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_segment2d",
+      "rust_test": "GC_MakeSegment2dTest__FromPoints_AtResolution_ConfusedPoints",
+      "rust_source": "crates/tkgeombase/tests/gc_make_segment2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeSegment2dTest.FromPointDir_BelowResolutionParameter_ConfusedPoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeSegment2d_Test.cxx",
+      "source_sha256": "9b80e54bc6e64dc9ecea8548240883f93a02635ecabff123ac08cd599be3533e",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_segment2d",
+      "rust_test": "GC_MakeSegment2dTest__FromPointDir_BelowResolutionParameter_ConfusedPoints",
+      "rust_source": "crates/tkgeombase/tests/gc_make_segment2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeSegment2dTest.FromPointDir_AboveResolutionParameter_Done",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeSegment2d_Test.cxx",
+      "source_sha256": "9b80e54bc6e64dc9ecea8548240883f93a02635ecabff123ac08cd599be3533e",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_segment2d",
+      "rust_test": "GC_MakeSegment2dTest__FromPointDir_AboveResolutionParameter_Done",
+      "rust_source": "crates/tkgeombase/tests/gc_make_segment2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GC_MakeSegment2dTest.FromPointDir_AtResolutionParameter_ConfusedPoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GC_MakeSegment2d_Test.cxx",
+      "source_sha256": "9b80e54bc6e64dc9ecea8548240883f93a02635ecabff123ac08cd599be3533e",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gc_make_segment2d",
+      "rust_test": "GC_MakeSegment2dTest__FromPointDir_AtResolutionParameter_ConfusedPoints",
+      "rust_source": "crates/tkgeombase/tests/gc_make_segment2d.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
