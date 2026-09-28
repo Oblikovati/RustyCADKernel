@@ -57650,6 +57650,294 @@
       "rust_item": "rustycad_tkernel::quantity::ColorSpace",
       "status": "implemented",
       "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Rgb, Srgb, Hls, Lab, Lch in native order."
+    },
+    {
+      "upstream_id": "Resource_FormatType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_FormatType.hxx",
+      "rust_item": "rustycad_tkernel::resource::FormatType",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Same discriminants; the legacy aliases are FormatType::ANSI and the Sjis/Euc/Gb variants."
+    },
+    {
+      "upstream_id": "Resource_Manager::DEFINE_STANDARD_RTTIEXT(Resource_Manager,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
+    },
+    {
+      "upstream_id": "Resource_Manager(const char* const,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::new",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. Quirks preserved: the user file loads into the reference map, the Load message always says Reference, the process-wide ResourceDebug flag is re-read here, and a line starting with a NUL byte raises Standard_OutOfRange from GetLine."
+    },
+    {
+      "upstream_id": "Resource_Manager()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::empty",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Manager(const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::with_directories",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. Both directories load into the reference map, as natively."
+    },
+    {
+      "upstream_id": "Resource_Manager::Save() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::save",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. The destination variable is read at save time; write errors after a successful open are ignored, as natively."
+    },
+    {
+      "upstream_id": "Resource_Manager::Find(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::find",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Manager::Find(const TCollection_AsciiString&,TCollection_AsciiString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::find_value",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. The output reference becomes an Option return."
+    },
+    {
+      "upstream_id": "Resource_Manager::Integer(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::integer",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Manager::Real(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::real",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Manager::Value(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::value",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. Resource_NoSuchResource carries the resource name."
+    },
+    {
+      "upstream_id": "Resource_Manager::ExtValue(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::ext_value",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. Quirk preserved: the per-name cache is never refreshed by a later byte-string SetResource."
+    },
+    {
+      "upstream_id": "Resource_Manager::SetResource(const char* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::set_resource_integer",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Manager::SetResource(const char* const,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::set_resource_real",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. The value is spelled with %g, as TCollection_AsciiString(double)."
+    },
+    {
+      "upstream_id": "Resource_Manager::SetResource(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::set_resource",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Manager::SetResource(const char* const,const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::set_resource_ext",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. Quirk preserved: code-page formats raise Standard_OutOfRange (their encoder reads past the source) and GBK/Big5 raise Standard_NotImplemented, after the cache was updated."
+    },
+    {
+      "upstream_id": "Resource_Manager::GetResourcePath(TCollection_AsciiString&,const char* const,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::resource_path / rustycad_tkernel::resource::ResourceManager::resource_path_with",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family. The output reference becomes the return value; resource_path_with takes the environment seam."
+    },
+    {
+      "upstream_id": "Resource_Manager::GetMap(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::get_map",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Manager::IsInitialized() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Manager.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceManager::is_initialized",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; the host services Resource_Manager reaches globally (OSD_File, OSD_Environment, std::cout) are one injected ResourceHost, and C++ exceptions become Failure errors. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_NoSuchResource",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_NoSuchResource.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; DEFINE_STANDARD_EXCEPTION(Resource_NoSuchResource, Standard_NoSuchObject) is a Failure whose exception_type() is \"Resource_NoSuchResource\", returned by ResourceManager::value/integer/real/ext_value."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertSJISToUnicode(const char* const,TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_sjis_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. A lead byte right before the terminator reads the NUL as its trail and ends the text (the native loop runs past it)."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertEUCToUnicode(const char* const,TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_euc_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertGBToUnicode(const char* const,TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_gb_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertGBKToUnicode(const char* const,TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_gbk_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Quirks preserved: the four-byte state is never reset and indexes the two-byte table; invalid ASCII-range trails raise Standard_OutOfRange from Insert(0, ...), keeping the partial text."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertBig5ToUnicode(const char* const,TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_big5_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Quirks preserved: unmapped pairs append U+0000 units; astral table values return false (the native one-element char32_t array is read past its end, so the surrogate-pair size check fails); invalid ASCII-range trails raise Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertUnicodeToSJIS(const TCollection_ExtendedString&,Standard_PCharacter&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_unicode_to_sjis",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertUnicodeToEUC(const TCollection_ExtendedString&,Standard_PCharacter&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_unicode_to_euc",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Truncation writes the terminator over the previous byte; truncating before any byte (native tostr[-1]) raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertUnicodeToGB(const TCollection_ExtendedString&,Standard_PCharacter&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_unicode_to_gb",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Unmapped non-ASCII units keep their low byte, as natively."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertUnicodeToANSI(const TCollection_ExtendedString&,Standard_PCharacter&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_unicode_to_ansi",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Quirk preserved: a text filling maxsize - 1 bytes reports false although complete."
+    },
+    {
+      "upstream_id": "Resource_Unicode::SetFormat(Resource_FormatType)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::set_format",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. The format is process-wide and lock-protected, as the native atomics and mutex."
+    },
+    {
+      "upstream_id": "Resource_Unicode::GetFormat()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::get_format / rustycad_tkernel::resource::ResourceUnicode::get_format_with",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Read on first use from the CharSet resources; get_format_with takes the host seams."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ReadFormat()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::read_format / rustycad_tkernel::resource::ResourceUnicode::read_format_with",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Only SJIS, EUC and GB are recognized; anything else selects ANSI."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertFormatToUnicode(const char* const,TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_current_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertFormatToUnicode(Resource_FormatType,const char* const,TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_format_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. UTF-8 follows NCollection_UtfIterator (byte widening at the first symbol above U+10FFFF); SystemLocale is the C locale."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertUnicodeToFormat(Resource_FormatType,const TCollection_ExtendedString&,Standard_PCharacter&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_unicode_to_format",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family. Quirks preserved: code pages search only their 128 upper slots (ASCII becomes '?') and read the source up to maxsize - 1 units, raising Standard_OutOfRange past its end; GBK/Big5 raise Standard_NotImplemented. UTF-8 into a buffer of exactly the encoded size (native one-byte overflow) raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "Resource_Unicode::ConvertUnicodeToFormat(const TCollection_ExtendedString&,Standard_PCharacter&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_Unicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::ResourceUnicode::convert_unicode_to_current",
+      "status": "implemented",
+      "notes": "Manual Resource member mapping; `const char*` inputs are byte slices read up to their first NUL, `Standard_PCharacter` outputs with a maxsize are `&mut [u8]` buffers of that size, and C++ exceptions become Failure errors. The SJIS/EUC/GB2312/GBK/Big5 and code-page tables are the OCCT literals, carried by tools/generate_resource_tables.py. Compared bit-for-bit with OCCT by the res_* probe family."
     }
   ],
   "tests": [
