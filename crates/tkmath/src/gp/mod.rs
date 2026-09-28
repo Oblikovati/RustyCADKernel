@@ -25,7 +25,7 @@ fn domain(message: &str) -> Failure {
 mod placement;
 
 mod transform;
-pub use transform::{Transform3, TransformForm};
+pub use transform::{Transform3, TransformForm, TransformNLerp};
 mod xyz;
 pub use xyz::Xyz;
 mod matrix;

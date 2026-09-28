@@ -15,7 +15,9 @@ mod square_matrix;
 pub use square_matrix::MatrixScalar;
 mod mat3;
 pub use mat3::Mat3;
+mod lerp;
 mod mat4;
+pub use lerp::Lerp;
 pub use mat4::Mat4;
 // The allocator trait requires unsafe implementation; ownership proofs are local.
 #[allow(unsafe_code)]
