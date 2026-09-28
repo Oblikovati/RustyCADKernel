@@ -1,17 +1,17 @@
 //! Parser and persistence edge cases from Resource_Manager.cxx.
-use rustycad_tkernel::{resource::ResourceCatalog, tcollection::AsciiString};
+use rustycad_tkernel::resource::ResourceManager;
 use std::{path::PathBuf, rc::Rc};
 #[path = "resource_manager/support.rs"]
 mod support;
 use support::FakeResourceSystem;
-fn fixture(bytes: &[u8]) -> (Rc<FakeResourceSystem>, ResourceCatalog) {
+fn fixture(bytes: &[u8]) -> (Rc<FakeResourceSystem>, ResourceManager) {
     let system: Rc<FakeResourceSystem> = Rc::default();
     system.set_environment("CSF_AppDefaults", PathBuf::from("defaults"));
     system
         .files
         .borrow_mut()
         .insert(PathBuf::from("defaults/App"), bytes.to_vec());
-    let catalog = ResourceCatalog::new("App", system.clone(), system.clone());
+    let catalog = ResourceManager::new("App", false, system.host()).unwrap();
     (system, catalog)
 }
 #[test]
@@ -45,7 +45,7 @@ fn user_defaults_override_reference_but_save_only_explicit_overrides() {
     assert!(catalog.save());
     assert!(system.files.borrow()[&PathBuf::from("user/App")].is_empty());
     system.write_resource(&PathBuf::from("user"), "App", "key", "user");
-    catalog = ResourceCatalog::new("App", system.clone(), system.clone());
+    catalog = ResourceManager::new("App", false, system.host()).unwrap();
     assert_eq!(catalog.value("key").unwrap().as_bytes(), b"user");
     for (key, value) in [
         ("z", "\\path"),
@@ -53,7 +53,7 @@ fn user_defaults_override_reference_but_save_only_explicit_overrides() {
         ("m", "\ttab"),
         ("empty", ""),
     ] {
-        catalog.set_resource(key, AsciiString::new(value));
+        catalog.set_resource(key, value.as_bytes());
     }
     system.set_environment("CSF_AppUserDefaults", PathBuf::from("new/nested"));
     assert!(catalog.save());
@@ -81,8 +81,12 @@ fn numeric_conversion_missing_resources_and_missing_save_path() {
         "Resource_NoSuchResource"
     );
     assert!(!catalog.save());
-    catalog.set_resource("int", AsciiString::from_integer(123));
+    catalog.set_resource_integer("int", 123);
     assert_eq!(catalog.integer("int").unwrap(), 123);
     let missing = Rc::new(FakeResourceSystem::default());
-    assert!(!ResourceCatalog::new("missing", missing.clone(), missing).is_initialized());
+    assert!(
+        !ResourceManager::new("missing", false, missing.host())
+            .unwrap()
+            .is_initialized()
+    );
 }
