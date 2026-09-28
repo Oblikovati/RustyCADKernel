@@ -269,7 +269,17 @@ fn main() {
         let mut words = line.split_whitespace();
         let op = words.next().unwrap();
         let values: Vec<f64> = words.map(|w| w.parse().unwrap()).collect();
-        if op == "modern_lbfgs" {
+        if op == "cslib_normal" {
+            cslib_probe::cslib_normal_case(&values);
+        } else if op == "cslib_singular" {
+            cslib_probe::cslib_singular_case(&values);
+        } else if op == "cslib_dn" {
+            cslib_probe::cslib_dn_case(&values);
+        } else if op == "cslib_poly" {
+            cslib_probe::cslib_poly_case(&values);
+        } else if op == "cslib_class2d" {
+            cslib_probe::cslib_class2d_case(&values);
+        } else if op == "modern_lbfgs" {
             modern_opt_probe::modern_lbfgs_case(&values);
         } else if op == "modern_newton" {
             modern_opt_probe::modern_newton_case(&values);
@@ -471,3 +481,5 @@ mod small_probe;
 mod swarm_probe;
 
 mod global_modern_probe;
+
+mod cslib_probe;
