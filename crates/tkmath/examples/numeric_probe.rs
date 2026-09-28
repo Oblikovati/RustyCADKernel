@@ -371,6 +371,10 @@ fn main() {
             "bvh_sort" => bvh_probe::bvh_sort_case(&values),
             "bvh_build" => bvh_probe::bvh_build_case(&values),
             "bvh_transform" => bvh_probe::bvh_transform_case(&values),
+            "bvh_builders" => bvh_probe::bvh_builders_case(&values),
+            "bvh_traverse" => bvh_probe::bvh_traverse_case(&values),
+            "bvh_nearest" => bvh_probe::bvh_nearest_case(&values),
+            "bvh_field" => bvh_probe::bvh_field_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }
