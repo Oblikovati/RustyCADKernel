@@ -78,6 +78,13 @@ impl<T> OccAllocator<T> {
         AllocatorList::with_allocator(self.resource.clone())
     }
 }
+impl<T> OccAllocator<T> {
+    // The bound resource, for containers that take an `allocator_type` and keep its
+    // `Allocator()` handle (NCollection_DynamicArray's allocator_type constructor).
+    pub(crate) fn bound_resource(&self) -> &BaseAllocator {
+        &self.resource
+    }
+}
 impl<T> Default for OccAllocator<T> {
     fn default() -> Self {
         Self::new(BaseAllocator::common())
