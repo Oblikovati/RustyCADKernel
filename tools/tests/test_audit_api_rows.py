@@ -269,6 +269,48 @@ class MacroAndFriendTests(unittest.TestCase):
         self.assertNotIn("BVH_Transient::Bad||", members_of(header))
 
 
+TRAITS_HEADER = """
+namespace Detail
+{
+template <typename T, typename = void>
+struct HasValue : std::false_type {};
+template <typename T>
+struct HasValue<T, std::void_t<decltype(std::declval<const T&>().Value())>> : std::true_type
+{
+  static int Get(const T& theIter) { return 0; }
+};
+template <class K>
+struct KeyRef
+{
+  template <std::size_t I>
+  decltype(auto) get() const noexcept { return 0; }
+};
+}
+template <typename H>
+class Range
+{
+public:
+  explicit Range(H&& theHost) {}
+};
+template <typename T>
+Range(T&&) -> Range<std::remove_reference_t<T>>;
+"""
+
+
+class TemplateMachineryTests(unittest.TestCase):
+    def test_specialization_arguments_with_calls_open_a_scope(self):
+        members = members_of(TRAITS_HEADER)
+        self.assertIn("Detail::HasValue<T,std::void_t<decltype(std::declval<const T&>().Value())>>::Get|const T&|",
+                      members)
+        self.assertFalse([m for m in members if "decltype(std" in m.split("|")[0].split("<")[0]])
+
+    def test_decltype_return_types_are_not_names(self):
+        self.assertIn("Detail::KeyRef::get||const", members_of(TRAITS_HEADER))
+
+    def test_deduction_guides_are_not_constructors(self):
+        self.assertEqual([m for m in members_of(TRAITS_HEADER) if m.startswith("Range")], ["Range|H&&|"])
+
+
 class RowMatchingTests(unittest.TestCase):
     def test_row_ids_split_prefix_params_and_qualifier(self):
         self.assertEqual(parse_row_id("gp_GTrsf::operator()(int,int) const"),
