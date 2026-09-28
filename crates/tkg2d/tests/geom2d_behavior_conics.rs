@@ -87,7 +87,10 @@ fn circle_members() {
     circle.set_circ2d(Circle2::new(frame(), 4.0).unwrap());
     assert_eq!(circle.radius(), 4.0);
     assert_eq!(
-        (circle.reversed_parameter(1.0), circle.period().unwrap()),
+        (
+            circle.reversed_parameter(1.0).unwrap(),
+            circle.period().unwrap()
+        ),
         (2.0 * PI - 1.0, 2.0 * PI)
     );
     assert!(circle.is_closed().unwrap() && circle.is_periodic());
@@ -143,7 +146,7 @@ fn ellipse_members() {
         "Geom2d_UndefinedDerivative"
     );
     assert_eq!(
-        (e.reversed_parameter(0.5), e.last_parameter()),
+        (e.reversed_parameter(0.5).unwrap(), e.last_parameter()),
         (2.0 * PI - 0.5, 2.0 * PI)
     );
 }
@@ -177,7 +180,7 @@ fn hyperbola_members() {
         (h.first_parameter(), h.is_closed().unwrap(), h.is_periodic()),
         (-2e100, false, false)
     );
-    assert_eq!(h.reversed_parameter(2.0), -2.0);
+    assert_eq!(h.reversed_parameter(2.0).unwrap(), -2.0);
     // At u = 0 the main branch is at its vertex (a, 0).
     near(h.value(0.0).unwrap(), 3.0, 0.0);
     assert_eq!(
@@ -247,7 +250,7 @@ fn parabola_members() {
     assert_eq!(d.eval_dn(1.0, 2).unwrap(), d.eval_d2(1.0).unwrap().d2);
     d.transform(scale).unwrap();
     assert_eq!(d.focal(), 4.0);
-    assert_eq!(d.reversed_parameter(1.0), -1.0);
+    assert_eq!(d.reversed_parameter(1.0).unwrap(), -1.0);
 }
 
 #[test]

@@ -68,8 +68,8 @@ impl Geom2dCurve for Geom2dBSplineCurve {
     fn reverse(&self) -> Result<(), Failure> {
         self.state.write().reverse()
     }
-    fn reversed_parameter(&self, u: f64) -> f64 {
-        self.first_parameter() + self.last_parameter() - u
+    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(self.first_parameter() + self.last_parameter() - u)
     }
     fn first_parameter(&self) -> f64 {
         self.state.read().first_parameter()

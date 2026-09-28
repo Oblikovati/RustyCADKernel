@@ -120,8 +120,8 @@ impl Geom2dCurve for Geom2dLine {
         self.state.write().reverse();
         Ok(())
     }
-    fn reversed_parameter(&self, u: f64) -> f64 {
-        -u
+    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(-u)
     }
     fn transformed_parameter(&self, u: f64, transform: Transform2) -> f64 {
         if precision::is_infinite(u) {

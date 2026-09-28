@@ -188,7 +188,7 @@ fn Geom2d_EllipseTest__ReversedParameter() {
     let myEllipse = setup();
     let aU: f64 = PI / 4.0;
     EXPECT_NEAR(
-        myEllipse.reversed_parameter(aU),
+        myEllipse.reversed_parameter(aU).unwrap(),
         2.0 * PI - aU,
         precision::confusion(),
     );

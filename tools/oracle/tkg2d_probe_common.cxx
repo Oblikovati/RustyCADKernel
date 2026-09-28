@@ -80,6 +80,6 @@ void g2_summary(const occ::handle<Geom2d_Curve>& c,const std::vector<double>& pa
   G2_TRY(auto r=c->EvalD2(u);g2_pnt(r.Point);g2_vec(r.D1);g2_vec(r.D2));
   G2_TRY(auto r=c->EvalD3(u);g2_pnt(r.Point);g2_vec(r.D1);g2_vec(r.D2);g2_vec(r.D3));
   for(int n=0;n<=5;++n)G2_TRY(g2_vec(c->EvalDN(u,n)));
-  G2_TRY(g2_pnt(c->Value(u)));g2_real(c->ReversedParameter(u));
+  G2_TRY(g2_pnt(c->Value(u)));G2_TRY(g2_real(c->ReversedParameter(u)));
  }
 }

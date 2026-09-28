@@ -194,7 +194,7 @@ fn Geom2d_LineTest__Transform_Rotation() {
 #[test]
 fn Geom2d_LineTest__ReversedParameter() {
     let myLine = setup();
-    EXPECT_DOUBLE_EQ(myLine.reversed_parameter(5.0), -5.0);
+    EXPECT_DOUBLE_EQ(myLine.reversed_parameter(5.0).unwrap(), -5.0);
 }
 
 #[test]

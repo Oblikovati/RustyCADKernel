@@ -274,5 +274,5 @@ fn evaluations(c: &dyn Geom2dCurve, u: f64) {
         show(c.eval_dn(u, n), vec);
     }
     show(c.value(u), pnt);
-    real(c.reversed_parameter(u));
+    show(c.reversed_parameter(u), real);
 }

@@ -284,8 +284,9 @@ impl Geom2dCurve for Geom2dOffsetCurve {
         state.offset_value = -state.offset_value;
         Ok(())
     }
-    fn reversed_parameter(&self, u: f64) -> f64 {
-        self.state.read().basis.reversed_parameter(u)
+    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        let basis: Handle<dyn Geom2dCurve> = self.state.read().basis.clone();
+        basis.reversed_parameter(u)
     }
     fn transformed_parameter(&self, u: f64, transform: Transform2) -> f64 {
         self.state.read().basis.transformed_parameter(u, transform)

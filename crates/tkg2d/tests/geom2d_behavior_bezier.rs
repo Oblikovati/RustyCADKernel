@@ -103,7 +103,7 @@ fn queries_and_evaluation() {
         c.eval_dn(0.5, 0).unwrap_err().exception_type(),
         "Geom2d_UndefinedDerivative"
     );
-    assert_eq!(c.reversed_parameter(0.25), 0.75);
+    assert_eq!(c.reversed_parameter(0.25).unwrap(), 0.75);
     assert_eq!(c.knots().as_slice(), &[0.0, 1.0]);
     assert_eq!(c.multiplicities().unwrap().as_slice(), &[4, 4]);
     assert_eq!(

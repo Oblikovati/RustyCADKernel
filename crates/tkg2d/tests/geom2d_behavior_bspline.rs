@@ -214,7 +214,7 @@ fn periodic_curves_normalize_and_repeat() {
         ),
         (1, 6)
     );
-    assert_eq!(c.reversed_parameter(1.0), 4.0);
+    assert_eq!(c.reversed_parameter(1.0).unwrap(), 4.0);
     let before = c.value(2.5).unwrap();
     c.set_origin(3).unwrap();
     assert_eq!(c.knots().as_slice(), &[2.0, 3.0, 4.0, 5.0, 6.0, 7.0]);

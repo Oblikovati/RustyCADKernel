@@ -160,7 +160,7 @@ fn Geom2d_CircleTest__EvalDN_Order1() {
 fn Geom2d_CircleTest__ReversedParameter() {
     let myCircle = setup();
     let aU: f64 = PI / 3.0;
-    let aRev: f64 = myCircle.reversed_parameter(aU);
+    let aRev: f64 = myCircle.reversed_parameter(aU).unwrap();
     EXPECT_NEAR(aRev, 2.0 * PI - aU, precision::confusion());
 }
 

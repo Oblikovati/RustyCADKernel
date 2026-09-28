@@ -157,8 +157,8 @@ impl Geom2dCurve for Geom2dParabola {
     fn reverse(&self) -> Result<(), Failure> {
         reverse_conic_position(&mut self.state.write().pos)
     }
-    fn reversed_parameter(&self, u: f64) -> f64 {
-        -u
+    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(-u)
     }
     fn transformed_parameter(&self, u: f64, transform: Transform2) -> f64 {
         if precision::is_infinite(u) {
