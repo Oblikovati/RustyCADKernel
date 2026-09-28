@@ -51,17 +51,30 @@ pub fn compute_derivatives(
     der_surf: &mut Array2<'_, Vector3>,
 ) -> Result<bool, Failure> {
     if let (true, Some(osc)) = (along.0 || along.1, osculating) {
-        let orders = DerivativeOrders { max_order: 0, ..orders };
+        let orders = DerivativeOrders {
+            max_order: 0,
+            ..orders
+        };
         let mut der_surf_l = zero_table(orders.nu + 1, orders.nv + 1)?;
         first_osculating_orders(orders.min_order, uv, osc, &mut der_surf_l)?;
         fill_osculating(orders, uv, basis, osc, &mut der_surf_l, der_surf)?;
         for i in 0..=orders.nu {
             for j in 0..=orders.nv {
                 if along.0 {
-                    put(der_nuv, i, j, cslib::dnnuv_osculating(i, j, &der_surf_l, der_surf)?)?;
+                    put(
+                        der_nuv,
+                        i,
+                        j,
+                        cslib::dnnuv_osculating(i, j, &der_surf_l, der_surf)?,
+                    )?;
                 }
                 if along.1 {
-                    put(der_nuv, i, j, cslib::dnnuv_osculating(i, j, der_surf, &der_surf_l)?)?;
+                    put(
+                        der_nuv,
+                        i,
+                        j,
+                        cslib::dnnuv_osculating(i, j, der_surf, &der_surf_l)?,
+                    )?;
                 }
             }
         }
@@ -91,13 +104,26 @@ fn first_osculating_orders(
         }
         2 => {
             let r = osc.eval_d2(u, v)?;
-            vec![(1, 0, r.d1u), (0, 1, r.d1v), (1, 1, r.d2uv), (2, 0, r.d2u), (0, 2, r.d2v)]
+            vec![
+                (1, 0, r.d1u),
+                (0, 1, r.d1v),
+                (1, 1, r.d2uv),
+                (2, 0, r.d2u),
+                (0, 2, r.d2v),
+            ]
         }
         3 => {
             let r = osc.eval_d3(u, v)?;
             vec![
-                (1, 0, r.d1u), (0, 1, r.d1v), (1, 1, r.d2uv), (2, 0, r.d2u), (0, 2, r.d2v),
-                (3, 0, r.d3u), (2, 1, r.d3uuv), (1, 2, r.d3uvv), (0, 3, r.d3v),
+                (1, 0, r.d1u),
+                (0, 1, r.d1v),
+                (1, 1, r.d2uv),
+                (2, 0, r.d2u),
+                (0, 2, r.d2v),
+                (3, 0, r.d3u),
+                (2, 1, r.d3uuv),
+                (1, 2, r.d3uvv),
+                (0, 3, r.d3v),
             ]
         }
         _ => Vec::new(),
@@ -121,9 +147,17 @@ fn fill_osculating(
     let (u, v) = uv;
     let u_first: bool = orders.nu <= orders.nv;
     let (outer_last, inner_last, mirror_bound) = if u_first {
-        (orders.max_order + 1 + orders.nu, orders.max_order + orders.nv + 1, orders.nu + 1)
+        (
+            orders.max_order + 1 + orders.nu,
+            orders.max_order + orders.nv + 1,
+            orders.nu + 1,
+        )
     } else {
-        (orders.max_order + 1 + orders.nv, orders.max_order + orders.nu + 1, orders.nv + 1)
+        (
+            orders.max_order + 1 + orders.nv,
+            orders.max_order + orders.nu + 1,
+            orders.nv + 1,
+        )
     };
     for a in 0..=outer_last {
         for b in a..=inner_last {

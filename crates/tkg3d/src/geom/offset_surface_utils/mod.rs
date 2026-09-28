@@ -163,7 +163,13 @@ fn project_normal_derivative(mut raw: Vector3, scale: f64, normal: Vector3) -> V
 }
 
 /// U derivative of the unit normal (`ComputeDNormalU`); `compute_dnormal_u(d1u, d1v, d2u, d2uv, n)`.
-pub fn compute_dnormal_u(d1u: Vector3, d1v: Vector3, d2u: Vector3, d2uv: Vector3, normal: Vector3) -> Vector3 {
+pub fn compute_dnormal_u(
+    d1u: Vector3,
+    d1v: Vector3,
+    d2u: Vector3,
+    d2uv: Vector3,
+    normal: Vector3,
+) -> Vector3 {
     let scale: f64 = d1u.crossed(d1v).dot(normal);
     project_normal_derivative(raw_normal_derivative(d2u, d1v, d1u, d2uv), scale, normal)
 }
@@ -172,7 +178,13 @@ pub fn compute_dnormal_u(d1u: Vector3, d1v: Vector3, d2u: Vector3, d2uv: Vector3
 ///
 /// The native formula groups the products differently from the U one; the terms
 /// are `D2UV x D1V + D1U x D2V` written with their operands swapped where it does.
-pub fn compute_dnormal_v(d1u: Vector3, d1v: Vector3, d2v: Vector3, d2uv: Vector3, normal: Vector3) -> Vector3 {
+pub fn compute_dnormal_v(
+    d1u: Vector3,
+    d1v: Vector3,
+    d2v: Vector3,
+    d2uv: Vector3,
+    normal: Vector3,
+) -> Vector3 {
     let scale: f64 = d1u.crossed(d1v).dot(normal);
     let raw = Vector3::new(
         d2uv.y() * d1v.z() + d2v.z() * d1u.y() - d2uv.z() * d1v.y() - d2v.y() * d1u.z(),
@@ -189,7 +201,13 @@ pub(super) fn offset_point(value: &mut Point3, scale: f64, normal: Vector3) {
 
 /// Offset point along the regular normal; `value` enters as the basis point
 /// (`CalculateD0`); `calculate_d0(&mut p, d1u, d1v, 2.0, 1.0)?`.
-pub fn calculate_d0(value: &mut Point3, d1u: Vector3, d1v: Vector3, offset: f64, sign: f64) -> Result<bool, Failure> {
+pub fn calculate_d0(
+    value: &mut Point3,
+    d1u: Vector3,
+    d1v: Vector3,
+    offset: f64,
+    sign: f64,
+) -> Result<bool, Failure> {
     let Some(normal) = compute_normal(d1u, d1v, THE_D1_MAGNITUDE_TOL)? else {
         return Ok(false);
     };
@@ -243,7 +261,13 @@ impl BasisDomain {
 /// Move `(u, v)` from the start point towards the middle of the domain by twice
 /// the distance already travelled (at least PConfusion); false when the step
 /// would pass the middle (`ShiftPoint`); `shift_point((u0, v0), &mut uv, domain, d1u, d1v)`.
-pub fn shift_point(start: (f64, f64), uv: &mut (f64, f64), domain: BasisDomain, d1u: Vector3, d1v: Vector3) -> bool {
+pub fn shift_point(
+    start: (f64, f64),
+    uv: &mut (f64, f64),
+    domain: BasisDomain,
+    d1u: Vector3,
+    d1v: Vector3,
+) -> bool {
     let (u_min, u_max, v_min, v_max) = domain.bounds;
     let tol2: f64 = THE_D1_MAGNITUDE_TOL * THE_D1_MAGNITUDE_TOL;
     let is_u_singular: bool = d1u.square_magnitude() < tol2;
@@ -289,10 +313,18 @@ pub fn replace_derivative(
     let (u_min, u_max, v_min, v_max) = bounds;
     let step: f64 = if replace_dv {
         let step: f64 = precision::confusion() * du.magnitude();
-        if step > u_max - u_min { (u_max - u_min) / 100. } else { step }
+        if step > u_max - u_min {
+            (u_max - u_min) / 100.
+        } else {
+            step
+        }
     } else {
         let step: f64 = precision::confusion() * dv.magnitude();
-        if step > v_max - v_min { (v_max - v_min) / 100. } else { step }
+        if step > v_max - v_min {
+            (v_max - v_min) / 100.
+        } else {
+            step
+        }
     };
     for step_sign in [-1.0, 1.0] {
         let (mut u, mut v) = uv;
@@ -339,6 +371,11 @@ pub(crate) fn at(table: &Array2<'_, Vector3>, i: i32, j: i32) -> Result<Vector3,
 }
 
 /// `table.SetValue(i, j, value)` with the native bound check; `put(&mut t, 1, 0, v)?`.
-pub(crate) fn put(table: &mut Array2<'_, Vector3>, i: i32, j: i32, value: Vector3) -> Result<(), Failure> {
+pub(crate) fn put(
+    table: &mut Array2<'_, Vector3>,
+    i: i32,
+    j: i32,
+    value: Vector3,
+) -> Result<(), Failure> {
     table.set_value(i, j, value).map_err(errors::array_bounds)
 }

@@ -18,8 +18,8 @@
 use super::derivatives::{DerivativeOrders, compute_derivatives, entry};
 use super::{
     BasisDomain, OsculatingInfo, OsculatingQuery, THE_D1_MAGNITUDE_TOL, calculate_d0,
-    compute_dnormal_u, compute_dnormal_v, is_infinite_coord, offset_point, put,
-    query_osculating, replace_derivative, shift_point, zero_table,
+    compute_dnormal_u, compute_dnormal_v, is_infinite_coord, offset_point, put, query_osculating,
+    replace_derivative, shift_point, zero_table,
 };
 use crate::geom::{GeomSurface, GeomSurfaceD1};
 use rustycad_tkernel::ncollection::Array2;
@@ -30,7 +30,14 @@ use rustycad_tkmath::gp::{Direction3, Point3, Vector3};
 /// The position record of CSLib::Normal at `(u, v)` in `domain`.
 pub(super) fn position(uv: (f64, f64), domain: BasisDomain) -> ParametricPosition {
     let (u_min, u_max, v_min, v_max) = domain.bounds;
-    ParametricPosition { u: uv.0, v: uv.1, u_min, u_max, v_min, v_max }
+    ParametricPosition {
+        u: uv.0,
+        v: uv.1,
+        u_min,
+        u_max,
+        v_min,
+        v_max,
+    }
 }
 
 /// CSLib::Normal(MaxOrder, DerNUV, THE_D1_MAGNITUDE_TOL, U, V, bounds...).
@@ -40,7 +47,12 @@ pub(super) fn singular_normal(
     uv: (f64, f64),
     domain: BasisDomain,
 ) -> Result<SingularNormal, Failure> {
-    cslib::normal_at_singularity(max_order, der_nuv, THE_D1_MAGNITUDE_TOL, position(uv, domain))
+    cslib::normal_at_singularity(
+        max_order,
+        der_nuv,
+        THE_D1_MAGNITUDE_TOL,
+        position(uv, domain),
+    )
 }
 
 /// ComputeDerivatives through the osculating surface when there is one, through
@@ -55,7 +67,15 @@ pub(super) fn derivatives_with(
     let (info, surface) = oscillating;
     let (der_nuv, der_surf) = tables;
     match surface.get().filter(|_| info.has_osculating()) {
-        Some(osc) => compute_derivatives(orders, uv, basis, (info.along_u, info.along_v), Some(osc), der_nuv, der_surf),
+        Some(osc) => compute_derivatives(
+            orders,
+            uv,
+            basis,
+            (info.along_u, info.along_v),
+            Some(osc),
+            der_nuv,
+            der_surf,
+        ),
         None => compute_derivatives(orders, uv, basis, (false, false), None, der_nuv, der_surf),
     }
 }
@@ -122,8 +142,19 @@ fn singular_d0(
     let mut der_surf = zero_table(MAX_ORDER + 1, MAX_ORDER + 1)?;
     put(&mut der_surf, 1, 0, d1u)?;
     put(&mut der_surf, 0, 1, d1v)?;
-    let orders = DerivativeOrders { max_order: MAX_ORDER, min_order: 1, nu: 0, nv: 0 };
-    if !derivatives_with(orders, uv, basis, (&info, &surface), (&mut der_nuv, &mut der_surf))? {
+    let orders = DerivativeOrders {
+        max_order: MAX_ORDER,
+        min_order: 1,
+        nu: 0,
+        nv: 0,
+    };
+    if !derivatives_with(
+        orders,
+        uv,
+        basis,
+        (&info, &surface),
+        (&mut der_nuv, &mut der_surf),
+    )? {
         return Ok(None);
     }
     let found = singular_normal(MAX_ORDER, &der_nuv, uv, domain)?;
@@ -154,7 +185,11 @@ pub fn evaluate_d1(
     osc: Option<&dyn OsculatingQuery>,
 ) -> Result<Option<GeomSurfaceD1>, Failure> {
     let d2 = basis.eval_d2(uv.0, uv.1)?;
-    let first = GeomSurfaceD1 { point: d2.point, d1u: d2.d1u, d1v: d2.d1v };
+    let first = GeomSurfaceD1 {
+        point: d2.point,
+        d1u: d2.d1u,
+        d1v: d2.d1v,
+    };
     evaluate_d1_from(uv, basis, offset, osc, (first, [d2.d2u, d2.d2v, d2.d2uv]))
 }
 
@@ -174,7 +209,11 @@ pub fn evaluate_d1_from(
     loop {
         if !is_first_iteration {
             let r = basis.eval_d2(uv.0, uv.1)?;
-            current = GeomSurfaceD1 { point: r.point, d1u: r.d1u, d1v: r.d1v };
+            current = GeomSurfaceD1 {
+                point: r.point,
+                d1u: r.d1u,
+                d1v: r.d1v,
+            };
             d2 = [r.d2u, r.d2v, r.d2uv];
         }
         is_first_iteration = false;
@@ -217,9 +256,20 @@ fn attempt_d1(
         let n1u: Vector3 = compute_dnormal_u(d1u, d1v, d2u, d2uv, normal);
         let n1v: Vector3 = compute_dnormal_v(d1u, d1v, d2v, d2uv, normal);
         let point = value;
-        return Ok(Some(GeomSurfaceD1 { point, d1u: d1u + n1u * (offset * sign), d1v: d1v + n1v * (offset * sign) }));
+        return Ok(Some(GeomSurfaceD1 {
+            point,
+            d1u: d1u + n1u * (offset * sign),
+            d1v: d1v + n1v * (offset * sign),
+        }));
     }
-    singular_d1(uv, basis, (offset, sign), (&info, &surface), (current, [d2u, d2v, d2uv]), domain)
+    singular_d1(
+        uv,
+        basis,
+        (offset, sign),
+        (&info, &surface),
+        (current, [d2u, d2v, d2uv]),
+        domain,
+    )
 }
 
 // The singular branch of EvaluateD1, with the retry after a replaced derivative.
@@ -236,12 +286,29 @@ fn singular_d1(
     let (current, [d2u, d2v, d2uv]) = derivatives;
     let mut der_nuv = zero_table(MAX_ORDER + 1, MAX_ORDER + 1)?;
     let mut der_surf = zero_table(MAX_ORDER + 2, MAX_ORDER + 2)?;
-    let initial = [(1, 0, current.d1u), (0, 1, current.d1v), (1, 1, d2uv), (2, 0, d2u), (0, 2, d2v)];
+    let initial = [
+        (1, 0, current.d1u),
+        (0, 1, current.d1v),
+        (1, 1, d2uv),
+        (2, 0, d2u),
+        (0, 2, d2v),
+    ];
     for (i, j, value) in initial {
         put(&mut der_surf, i, j, value)?;
     }
-    let orders = DerivativeOrders { max_order: MAX_ORDER, min_order: 2, nu: 1, nv: 1 };
-    if !derivatives_with(orders, uv, basis, oscillating, (&mut der_nuv, &mut der_surf))? {
+    let orders = DerivativeOrders {
+        max_order: MAX_ORDER,
+        min_order: 2,
+        nu: 1,
+        nv: 1,
+    };
+    if !derivatives_with(
+        orders,
+        uv,
+        basis,
+        oscillating,
+        (&mut der_nuv, &mut der_surf),
+    )? {
         return Ok(None);
     }
     let mut found: SingularNormal = singular_normal(MAX_ORDER, &der_nuv, uv, domain)?;
@@ -251,7 +318,13 @@ fn singular_d1(
         if replace_derivative(uv, domain.bounds, [&mut new_du, &mut new_dv], tol2, basis)? {
             put(&mut der_surf, 1, 0, new_du)?;
             put(&mut der_surf, 0, 1, new_dv)?;
-            if !derivatives_with(orders, uv, basis, oscillating, (&mut der_nuv, &mut der_surf))? {
+            if !derivatives_with(
+                orders,
+                uv,
+                basis,
+                oscillating,
+                (&mut der_nuv, &mut der_surf),
+            )? {
                 return Ok(None);
             }
             found = singular_normal(MAX_ORDER, &der_nuv, uv, domain)?;
@@ -272,5 +345,7 @@ fn singular_d1(
 
 /// The normal of a CSLib result whose status is Defined.
 pub(super) fn defined_normal(found: &SingularNormal) -> Option<Direction3> {
-    (found.result.status == NormalStatus::Defined).then_some(found.result.normal).flatten()
+    (found.result.status == NormalStatus::Defined)
+        .then_some(found.result.normal)
+        .flatten()
 }

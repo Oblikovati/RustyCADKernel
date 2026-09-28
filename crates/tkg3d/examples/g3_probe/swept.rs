@@ -60,7 +60,7 @@ pub fn swept_case(values: &[f64]) {
 }
 
 // One descriptor spec, as g3_surface_desc reads it.
-fn surface_desc(r: &mut Reader, rep: Handle<dyn GeomSurface>) -> Handle<dyn RepSurfaceDesc> {
+pub fn surface_desc(r: &mut Reader, rep: Handle<dyn GeomSurface>) -> Handle<dyn RepSurfaceDesc> {
     let kind = r.integer();
     if kind == 0 {
         return Handle::new(RepSurfaceDescFull::new(rep)).cast();

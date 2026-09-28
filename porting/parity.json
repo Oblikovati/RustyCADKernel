@@ -35674,6 +35674,590 @@
       "rust_item": "rustycad_tkg3d::geom::offset_curve_utils::evaluate_dn",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface(const NCollection_Array2<gp_Pnt>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface(const Geom_BezierSurface&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::copy_of",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::HasEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::has_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::EvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::ClearEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::clear_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::with_weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::ExchangeUV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::exchange_uv",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Increase",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::increase",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::InsertPoleColAfter(int,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::insert_pole_col_after",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::InsertPoleColAfter(int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::insert_pole_col_after_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::InsertPoleColBefore(int,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::insert_pole_col_before",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::InsertPoleColBefore(int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::insert_pole_col_before_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::InsertPoleRowAfter(int,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::insert_pole_row_after",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::InsertPoleRowAfter(int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::insert_pole_row_after_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::InsertPoleRowBefore(int,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::insert_pole_row_before",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::InsertPoleRowBefore(int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::insert_pole_row_before_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::RemovePoleCol",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::remove_pole_col",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::RemovePoleRow",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::remove_pole_row",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Segment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::segment",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetPole(int,int,const gp_Pnt&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetPole(int,int,const gp_Pnt&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_pole_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetPoleCol(int,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_pole_col",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetPoleCol(int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_pole_col_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetPoleRow(int,const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_pole_row",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetPoleRow(int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_pole_row_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetWeight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_weight",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetWeightCol",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_weight_col",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::SetWeightRow",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::set_weight_row",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::UReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::u_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::VReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::v_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::continuity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::NbUPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::nb_u_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::NbVPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::nb_v_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Pole",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Poles(NCollection_Array2<gp_Pnt>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Poles()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::UDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::u_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::VDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::v_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Weight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::weight",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Weights(NCollection_Array2<double>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Weights()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::WeightsArray",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::weights_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::IsCNu",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::is_cn_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::IsCNv",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::is_cn_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::IsURational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::is_u_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::IsVRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::is_v_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::MaxDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::max_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::resolution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::UKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::u_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::VKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::v_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::UMultiplicities",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::u_multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::VMultiplicities",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::v_multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::UKnotSequence",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::u_knot_sequence",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::VKnotSequence",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::v_knot_sequence",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierSurface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     }
   ],
   "tests": [
@@ -88284,6 +88868,636 @@
       "rust_target": "geom_offset_curve",
       "rust_test": "Geom_OffsetCurve_Test__CopyIndependence",
       "rust_source": "crates/tkg3d/tests/geom_offset_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.CopyConstructorBasicProperties",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__CopyConstructorBasicProperties",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.CopyConstructorPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__CopyConstructorPoles",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.CopyMethodUsesOptimizedConstructor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__CopyMethodUsesOptimizedConstructor",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.RationalSurfaceCopyConstructor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__RationalSurfaceCopyConstructor",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.CopyIndependence",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__CopyIndependence",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Evaluation_D0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Evaluation_D0",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Evaluation_D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Evaluation_D1",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Evaluation_D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Evaluation_D2",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Evaluation_DN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Evaluation_DN",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Properties",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Properties",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Bounds",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.SetPole",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__SetPole",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.SetWeight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__SetWeight",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Increase",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Increase",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Segment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Segment",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.ExchangeUV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__ExchangeUV",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.UReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__UReverse",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.VReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__VReverse",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__UIso",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__VIso",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Resolution",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Transform",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.InsertPoleRowAfter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__InsertPoleRowAfter",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.InsertPoleColAfter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__InsertPoleColAfter",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.RemovePoleRow",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__RemovePoleRow",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.RemovePoleCol",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__RemovePoleCol",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.SetPoleRow",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__SetPoleRow",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.SetPoleCol",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__SetPoleCol",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.WeightsAccess_NonRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__WeightsAccess_NonRational",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.PolesAccess",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__PolesAccess",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.MaxDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__MaxDegree",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.RationalSurface_UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__RationalSurface_UIso",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.Evaluation_D3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__Evaluation_D3",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.InsertPoleRowBefore",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__InsertPoleRowBefore",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.InsertPoleColBefore",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__InsertPoleColBefore",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.RationalSegment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__RationalSegment",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.RationalIncrease",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__RationalIncrease",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.SetWeightRow",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__SetWeightRow",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.SetWeightCol",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__SetWeightCol",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.InsertPoleRowAfterWithWeights",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__InsertPoleRowAfterWithWeights",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.VIso_Rational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__VIso_Rational",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.SetPoleWithWeight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__SetPoleWithWeight",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.SetPoleColWithWeights",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__SetPoleColWithWeights",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.WeightsArray_NonRational_ReturnsUnitWeights",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__WeightsArray_NonRational_ReturnsUnitWeights",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierSurface_Test.WeightsArray_Rational_ReturnsOwning",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierSurface_Test.cxx",
+      "source_sha256": "0addec3f5ec6a21b952271c8196780fdd22790b421fab13a69c29d74954e8c33",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_surface",
+      "rust_test": "Geom_BezierSurface_Test__WeightsArray_Rational_ReturnsOwning",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

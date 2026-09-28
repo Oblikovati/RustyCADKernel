@@ -49,8 +49,15 @@ fn osculating_setup(
 fn third_order_table(rows: i32, d3: &GeomSurfaceD3) -> Result<Array2<'static, Vector3>, Failure> {
     let mut table = zero_table(rows, rows)?;
     let values = [
-        (1, 0, d3.d1u), (0, 1, d3.d1v), (1, 1, d3.d2uv), (2, 0, d3.d2u), (0, 2, d3.d2v),
-        (3, 0, d3.d3u), (2, 1, d3.d3uuv), (1, 2, d3.d3uvv), (0, 3, d3.d3v),
+        (1, 0, d3.d1u),
+        (0, 1, d3.d1v),
+        (1, 1, d3.d2uv),
+        (2, 0, d3.d2u),
+        (0, 2, d3.d2v),
+        (3, 0, d3.d3u),
+        (2, 1, d3.d3uuv),
+        (1, 2, d3.d3uvv),
+        (0, 3, d3.d3v),
     ];
     for (i, j, value) in values {
         put(&mut table, i, j, value)?;
@@ -79,8 +86,19 @@ fn normal_data(
     let (max_order, info, surface) = osculating_setup(uv, (d3.d1u, d3.d1v), osc)?;
     let mut der_nuv = zero_table(max_order + extra, max_order + extra)?;
     let mut der_surf = third_order_table(max_order + extra + 1, d3)?;
-    let orders = DerivativeOrders { max_order, min_order: 3, nu: extra, nv: extra };
-    if !derivatives_with(orders, uv, basis, (&info, &surface), (&mut der_nuv, &mut der_surf))? {
+    let orders = DerivativeOrders {
+        max_order,
+        min_order: 3,
+        nu: extra,
+        nv: extra,
+    };
+    if !derivatives_with(
+        orders,
+        uv,
+        basis,
+        (&info, &surface),
+        (&mut der_nuv, &mut der_surf),
+    )? {
         return Ok(None);
     }
     let found: SingularNormal = singular_normal(max_order, &der_nuv, uv, domain)?;
@@ -90,13 +108,25 @@ fn normal_data(
     let scale: f64 = offset * info.sign();
     let mut point: Point3 = d3.point;
     offset_point(&mut point, scale, Vector3::from(normal));
-    Ok(Some(NormalData { point, der_nuv, der_surf, found, scale }))
+    Ok(Some(NormalData {
+        point,
+        der_nuv,
+        der_surf,
+        found,
+        scale,
+    }))
 }
 
 impl NormalData {
     // CSLib::DNNormal(nu, nv, DerNUV, OrderU, OrderV) * scale.
     fn term(&self, nu: i32, nv: i32) -> Result<Vector3, Failure> {
-        Ok(cslib::dn_normal(nu, nv, &self.der_nuv, self.found.order_u, self.found.order_v)? * self.scale)
+        Ok(cslib::dn_normal(
+            nu,
+            nv,
+            &self.der_nuv,
+            self.found.order_u,
+            self.found.order_v,
+        )? * self.scale)
     }
     // DerSurf(i, j) + DNNormal(i, j) * scale, for the first derivatives.
     fn first(&self, i: i32, j: i32) -> Result<Vector3, Failure> {
@@ -147,7 +177,11 @@ pub fn evaluate_d2_from(
 }
 
 // The D1 and D2 of the offset at a point whose normal is defined.
-fn second_order(data: &NormalData, uv: (f64, f64), basis: &dyn GeomSurface) -> Result<GeomSurfaceD2, Failure> {
+fn second_order(
+    data: &NormalData,
+    uv: (f64, f64),
+    basis: &dyn GeomSurface,
+) -> Result<GeomSurfaceD2, Failure> {
     let (u, v) = uv;
     let (d1u, d1v) = (data.first(1, 0)?, data.first(0, 1)?);
     let dn20: Vector3 = basis.eval_dn(u, v, 2, 0)?;
@@ -190,7 +224,11 @@ pub fn evaluate_d3(
 
 // The derivatives up to order 3 of the offset at a point whose normal is defined;
 // all basis DN are evaluated before the normal terms are added, as natively.
-fn third_order(data: &NormalData, uv: (f64, f64), basis: &dyn GeomSurface) -> Result<GeomSurfaceD3, Failure> {
+fn third_order(
+    data: &NormalData,
+    uv: (f64, f64),
+    basis: &dyn GeomSurface,
+) -> Result<GeomSurfaceD3, Failure> {
     let (u, v) = uv;
     let (d1u, d1v) = (data.first(1, 0)?, data.first(0, 1)?);
     let orders: [(i32, i32); 7] = [(2, 0), (0, 2), (1, 1), (3, 0), (0, 3), (2, 1), (1, 2)];
@@ -203,7 +241,18 @@ fn third_order(data: &NormalData, uv: (f64, f64), basis: &dyn GeomSurface) -> Re
         *slot += data.term(nu, nv)?;
     }
     let [d2u, d2v, d2uv, d3u, d3v, d3uuv, d3uvv] = summed;
-    Ok(GeomSurfaceD3 { point: data.point, d1u, d1v, d2u, d2v, d2uv, d3u, d3v, d3uuv, d3uvv })
+    Ok(GeomSurfaceD3 {
+        point: data.point,
+        d1u,
+        d1v,
+        d2u,
+        d2v,
+        d2uv,
+        d3u,
+        d3v,
+        d3uuv,
+        d3uvv,
+    })
 }
 
 /// Offset derivative of orders `(nu, nv)` at `(u, v)` from the basis D1
@@ -267,8 +316,19 @@ fn attempt_dn(
     let mut der_surf = zero_table(max_order + nu + 1, max_order + nv + 1)?;
     put(&mut der_surf, 1, 0, d1.0)?;
     put(&mut der_surf, 0, 1, d1.1)?;
-    let request = DerivativeOrders { max_order, min_order: 1, nu, nv };
-    if !derivatives_with(request, uv, basis, (&info, &surface), (&mut der_nuv, &mut der_surf))? {
+    let request = DerivativeOrders {
+        max_order,
+        min_order: 1,
+        nu,
+        nv,
+    };
+    if !derivatives_with(
+        request,
+        uv,
+        basis,
+        (&info, &surface),
+        (&mut der_nuv, &mut der_surf),
+    )? {
         return Ok(None);
     }
     let found: SingularNormal = singular_normal(max_order, &der_nuv, uv, domain)?;
