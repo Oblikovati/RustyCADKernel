@@ -71,6 +71,7 @@ pub use flat_data_map::{FlatDataItems, FlatDataMap, FlatDataValues, FlatDataValu
 mod ordered_map;
 mod ordered_table;
 pub use ordered_map::{OrderedMap, OrderedMapIter};
+pub use ordered_table::{OrderedNodeMut, OrderedNodeRef};
 
 mod ordered_data_map;
 pub use ordered_data_map::{

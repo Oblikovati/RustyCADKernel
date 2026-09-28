@@ -17,10 +17,22 @@ impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     pub fn cursor(&self) -> OrderedDataCursor {
         OrderedDataCursor {
             slot: self.table.first,
+            bound: true,
         }
     }
 }
 impl OrderedDataCursor {
+    /// Rebinds the cursor to `map`'s first binding, native `Initialize`; `cursor.initialize(&map)`.
+    pub fn initialize<K: Debug, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
+        *self = map.cursor();
+    }
+    /// Native `Reset`: a bound cursor restarts at the current first binding of `map` (the map
+    /// it was created on), a default cursor stays exhausted; `cursor.reset(&map)`.
+    pub fn reset<K: Debug, V, H: HashPolicy<K>>(&mut self, map: &OrderedDataMap<K, V, H>) {
+        if self.bound {
+            self.slot = map.table.first;
+        }
+    }
     /// Checks whether the cursor is exhausted; `cursor.more()`.
     pub fn more(&self) -> bool {
         self.slot.is_some()
