@@ -47,7 +47,8 @@ Use `python` instead of `python3` if that is your Python launcher.
 | `crates/kernel` | Public kernel facade |
 | `crates/tkernel` | First OCCT TKernel API implementations and translated legacy tests |
 | `crates/tkmath` | Mathematical and geometry foundations, in progress |
-| `crates/tkbrep`, `crates/tktopalgo` | Vertex dependency path required by TKernel legacy tests |
+| `crates/tkbrep` | TKBRep topology (TopoDS, TopExp, TopTools), in progress |
+| `crates/tktopalgo` | Vertex dependency path required by TKernel legacy tests |
 | `crates/parity` | Numerical assertions for future differential tests |
 | `porting` | Pinned upstream identity, source inventory, API/test mapping ledger |
 | `tools` | Reproducible developer setup and inventory commands |

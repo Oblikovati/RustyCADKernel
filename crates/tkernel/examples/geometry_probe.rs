@@ -76,8 +76,11 @@ fn geometry(op: &str, input: &mut std::str::SplitWhitespace<'_>) {
     let power: i32 = input.next().unwrap().parse().unwrap();
     let transform = Transform3::translation(coordinates).powered(power).unwrap();
     let builder = MakeVertex::new(Point3::new(0.125, -0.25, 0.5));
-    let moved = builder.shape().moved(&Location::new(transform)).unwrap();
-    let point = Tool::point(&Vertex::from_shape(&moved)).unwrap();
+    let moved = builder
+        .shape()
+        .moved(&Location::new(transform), false)
+        .unwrap();
+    let point = Tool::point(&Vertex::unchecked(moved)).unwrap();
     println!(
         "{} {} {}",
         point.x().to_bits(),

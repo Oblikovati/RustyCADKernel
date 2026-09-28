@@ -91825,7 +91825,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91857,7 +91857,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -104858,6 +104858,1790 @@
       "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "TopoDS::Vertex(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::vertex",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Vertex(TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::vertex",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The non-const overload returns an alias of its argument natively; Rust cannot reinterpret a reference without unsafe, so it returns the same typed copy as the const overload."
+    },
+    {
+      "upstream_id": "TopoDS_Vertex()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Vertex.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Vertex as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "std::hash<TopoDS_Vertex>::operator()(const TopoDS_Vertex&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Vertex.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Vertex as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Edge(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::edge",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Edge(TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::edge",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The non-const overload returns an alias of its argument natively; Rust cannot reinterpret a reference without unsafe, so it returns the same typed copy as the const overload."
+    },
+    {
+      "upstream_id": "TopoDS_Edge()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Edge.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Edge as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "std::hash<TopoDS_Edge>::operator()(const TopoDS_Edge&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Edge.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Edge as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Wire(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::wire",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Wire(TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::wire",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The non-const overload returns an alias of its argument natively; Rust cannot reinterpret a reference without unsafe, so it returns the same typed copy as the const overload."
+    },
+    {
+      "upstream_id": "TopoDS_Wire()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Wire.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Wire as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "std::hash<TopoDS_Wire>::operator()(const TopoDS_Wire&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Wire.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Wire as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Face(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::face",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Face(TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::face",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The non-const overload returns an alias of its argument natively; Rust cannot reinterpret a reference without unsafe, so it returns the same typed copy as the const overload."
+    },
+    {
+      "upstream_id": "TopoDS_Face()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Face.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Face as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "std::hash<TopoDS_Face>::operator()(const TopoDS_Face&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Face.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Face as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Shell(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::shell",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Shell(TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::shell",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The non-const overload returns an alias of its argument natively; Rust cannot reinterpret a reference without unsafe, so it returns the same typed copy as the const overload."
+    },
+    {
+      "upstream_id": "TopoDS_Shell()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shell.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Shell as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "std::hash<TopoDS_Shell>::operator()(const TopoDS_Shell&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shell.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Shell as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Solid(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::solid",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Solid(TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::solid",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The non-const overload returns an alias of its argument natively; Rust cannot reinterpret a reference without unsafe, so it returns the same typed copy as the const overload."
+    },
+    {
+      "upstream_id": "TopoDS_Solid()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Solid.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Solid as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "std::hash<TopoDS_Solid>::operator()(const TopoDS_Solid&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Solid.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Solid as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::CompSolid(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::comp_solid",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::CompSolid(TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::comp_solid",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The non-const overload returns an alias of its argument natively; Rust cannot reinterpret a reference without unsafe, so it returns the same typed copy as the const overload."
+    },
+    {
+      "upstream_id": "TopoDS_CompSolid()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_CompSolid.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::CompSolid as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "std::hash<TopoDS_CompSolid>::operator()(const TopoDS_CompSolid&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_CompSolid.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::CompSolid as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Compound(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::compound",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS::Compound(TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS.hxx",
+      "rust_item": "rustycad_tkbrep::topods::compound",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The non-const overload returns an alias of its argument natively; Rust cannot reinterpret a reference without unsafe, so it returns the same typed copy as the const overload."
+    },
+    {
+      "upstream_id": "TopoDS_Compound()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Compound.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Compound as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "std::hash<TopoDS_Compound>::operator()(const TopoDS_Compound&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Compound.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Compound as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_AlertAttribute::DEFINE_STANDARD_RTTIEXT(TopoDS_AlertAttribute,Message_AttributeStream)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertAttribute.hxx",
+      "rust_item": "rustycad_tkbrep::topods::AlertAttribute::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_AlertAttribute(const TopoDS_Shape&,const TCollection_AsciiString&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertAttribute.hxx",
+      "rust_item": "rustycad_tkbrep::topods::AlertAttribute::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_AlertAttribute::GetShape() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertAttribute.hxx",
+      "rust_item": "rustycad_tkbrep::topods::AlertAttribute::get_shape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_AlertAttribute::Send(const occ::handle<Message_Messenger>&,const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertAttribute.hxx",
+      "rust_item": "rustycad_tkbrep::topods::AlertAttribute::send",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. A printer is recognised by its Message_PrinterToReport descriptor, then reached as the Rust PrinterToReport."
+    },
+    {
+      "upstream_id": "TopoDS_AlertAttribute::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertAttribute.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::AlertAttribute as rustycad_tkernel::message::Attribute>::dump_json",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The base-class dump is the plain Message_Attribute dump, as natively (the stream is not dumped)."
+    },
+    {
+      "upstream_id": "TopoDS_AlertAttribute::operator<<(const occ::handle<Message_Messenger>&,const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertAttribute.hxx",
+      "rust_item": "rustycad_tkbrep::topods::AlertAttribute::send",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The inline operator only calls Send and returns the messenger."
+    },
+    {
+      "upstream_id": "TopoDS_AlertWithShape(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertWithShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::AlertWithShape::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_AlertWithShape::GetShape() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertWithShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::AlertWithShape::get_shape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. Returns a copy: the shape sits behind a lock."
+    },
+    {
+      "upstream_id": "TopoDS_AlertWithShape::SetShape(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertWithShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::AlertWithShape::set_shape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_AlertWithShape::SupportsMerge() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertWithShape.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::AlertWithShape as rustycad_tkernel::message::Alert>::supports_merge",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_AlertWithShape::Merge(const occ::handle<Message_Alert>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertWithShape.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::AlertWithShape as rustycad_tkernel::message::Alert>::merge",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_AlertWithShape::DEFINE_STANDARD_RTTIEXT(TopoDS_AlertWithShape,Message_Alert)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_AlertWithShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::AlertWithShape::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_Builder::MakeWire(TopoDS_Wire&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Builder.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Builder::make_wire",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Builder::MakeShell(TopoDS_Shell&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Builder.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Builder::make_shell",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Builder::MakeSolid(TopoDS_Solid&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Builder.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Builder::make_solid",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Builder::MakeCompSolid(TopoDS_CompSolid&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Builder.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Builder::make_comp_solid",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Builder::MakeCompound(TopoDS_Compound&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Builder.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Builder::make_compound",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Builder::Add(TopoDS_Shape&,const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Builder.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Builder::add",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Builder::Remove(TopoDS_Shape&,const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Builder.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Builder::remove",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_FrozenShape",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_FrozenShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::errors::frozen_shape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its type name."
+    },
+    {
+      "upstream_id": "TopoDS_LockedShape",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_LockedShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::errors::locked_shape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its type name; no TKBRep member raises it."
+    },
+    {
+      "upstream_id": "TopoDS_UnCompatibleShapes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_UnCompatibleShapes.hxx",
+      "rust_item": "rustycad_tkbrep::topods::errors::uncompatible_shapes",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its type name."
+    },
+    {
+      "upstream_id": "TopoDS_HShape()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_HShape.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::HShape as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_HShape(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_HShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::HShape::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_HShape::Shape(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_HShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::HShape::set_shape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_HShape::Shape() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_HShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::HShape::shape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. Returns a copy: the shape sits behind the object lock."
+    },
+    {
+      "upstream_id": "TopoDS_HShape::ChangeShape()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_HShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::HShape::change_shape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. Lends the locked shape to a closure instead of returning a reference."
+    },
+    {
+      "upstream_id": "TopoDS_HShape::DEFINE_STANDARD_RTTIEXT(TopoDS_HShape,Standard_Transient)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_HShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::HShape::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_Iterator()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Iterator.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::ShapeIterator as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Iterator(const TopoDS_Shape&,bool,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::topods::ShapeIterator::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Iterator::Initialize(const TopoDS_Shape&,bool,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::topods::ShapeIterator::initialize",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Iterator::More() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::topods::ShapeIterator::more",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Iterator::Next()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::topods::ShapeIterator::next",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. Past the end it does nothing, as the native list iterator."
+    },
+    {
+      "upstream_id": "TopoDS_Iterator::Value() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Iterator.hxx",
+      "rust_item": "rustycad_tkbrep::topods::ShapeIterator::value",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Iterator::begin()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Iterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for ShapeIterator`."
+    },
+    {
+      "upstream_id": "TopoDS_Iterator::end() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Iterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for ShapeIterator`."
+    },
+    {
+      "upstream_id": "TopoDS_Shape()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Shape as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape(T2&&,std::enable_if<opencascade::std::is_base_of<TopoDS_Shape,T2>::value>::type*)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Shape as From<rustycad_tkbrep::topods::Vertex>>::from",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The generalized move from a typed shape is `From<Typed> for Shape` (all eight typed shapes) or `into_shape`."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::operator=(T2&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Shape as From<rustycad_tkbrep::topods::Vertex>>::from",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The generalized move assignment is an assignment of `typed.into()`."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::IsNull() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::is_null",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Nullify()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::nullify",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Location() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::location",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Location(const TopLoc_Location&,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_location",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Located(const TopLoc_Location&,bool) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::located",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Orientation() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::orientation",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Orientation(TopAbs_Orientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_orientation",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Oriented(TopAbs_Orientation) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::oriented",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::TShape() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::tshape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::ShapeType() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::shape_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Move(const TopLoc_Location&,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::move_by",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Moved(const TopLoc_Location&,bool) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::moved",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Reverse()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::reverse",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Reversed() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::reversed",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Complement()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::complement",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Complemented() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::complemented",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Compose(TopAbs_Orientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::compose",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Composed(TopAbs_Orientation) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::composed",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::NbChildren() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::nb_children",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::IsPartner(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::is_partner",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::IsSame(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::is_same",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::IsEqual(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::is_equal",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::operator==(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Shape as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::IsNotEqual(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::is_not_equal",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::operator!=(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Shape as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::EmptyCopy()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::empty_copy",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::EmptyCopied() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::empty_copied",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::TShape(const occ::handle<TopoDS_TShape>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_tshape",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::dump_json",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "std::hash<TopoDS_Shape>::operator()(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::Shape as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. Shape::hash_code, the native formula over the TShape address and the location hash; Shape::hash_from_parts exposes it on explicit parts."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Free() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::free",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Free(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_free",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Locked() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::locked",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Locked(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_locked",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Modified() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::modified",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Modified(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_modified",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Checked() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::checked",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Checked(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_checked",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Orientable() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::orientable",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Orientable(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_orientable",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Closed() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::closed",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Closed(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_closed",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Infinite() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::infinite",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Infinite(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_infinite",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Convex() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::convex",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_Shape::Convex(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_Shape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::Shape::set_convex",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TCompSolid()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TCompSolid.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TCompSolid::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TCompSolid::EmptyCopy() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TCompSolid.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::TCompSolid as rustycad_tkbrep::topods::TShape>::empty_copy",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TCompSolid::DEFINE_STANDARD_RTTIEXT(TopoDS_TCompSolid,TopoDS_TShape)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TCompSolid.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TCompSolid::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_TCompound()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TCompound.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TCompound::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TCompound::EmptyCopy() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TCompound.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::TCompound as rustycad_tkbrep::topods::TShape>::empty_copy",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TCompound::DEFINE_STANDARD_RTTIEXT(TopoDS_TCompound,TopoDS_TShape)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TCompound.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TCompound::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_TFace()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TFace.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TFace::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TFace::EmptyCopy() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TFace.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::TFace as rustycad_tkbrep::topods::TShape>::empty_copy",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TFace::DEFINE_STANDARD_RTTIEXT(TopoDS_TFace,TopoDS_TShape)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TFace.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TFace::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_TShell()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShell.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShell::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShell::EmptyCopy() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShell.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::TShell as rustycad_tkbrep::topods::TShape>::empty_copy",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShell::DEFINE_STANDARD_RTTIEXT(TopoDS_TShell,TopoDS_TShape)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShell.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShell::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_TSolid()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TSolid.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TSolid::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TSolid::EmptyCopy() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TSolid.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::TSolid as rustycad_tkbrep::topods::TShape>::empty_copy",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TSolid::DEFINE_STANDARD_RTTIEXT(TopoDS_TSolid,TopoDS_TShape)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TSolid.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TSolid::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_TWire()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TWire.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TWire::new",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TWire::EmptyCopy() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TWire.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::TWire as rustycad_tkbrep::topods::TShape>::empty_copy",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TWire::DEFINE_STANDARD_RTTIEXT(TopoDS_TWire,TopoDS_TShape)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TWire.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TWire::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_TEdge::EmptyCopy() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TEdge.hxx",
+      "rust_item": "<rustycad_tkbrep::topods::TEdge as rustycad_tkbrep::topods::TShape>::empty_copy",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. Returns a plain TopoDS_TEdge, as natively for a derived edge class that does not override it."
+    },
+    {
+      "upstream_id": "TopoDS_TEdge::DEFINE_STANDARD_RTTIEXT(TopoDS_TEdge,TopoDS_TShape)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TEdge.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TEdge::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_TVertex::DEFINE_STANDARD_RTTIEXT(TopoDS_TVertex,TopoDS_TShape)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TVertex.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TVertex::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::BitLayout",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::bit_layout",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. The anonymous enumeration of bit masks becomes a module of u16 constants."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Free() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::free",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Free(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::set_free",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Locked() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::locked",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Locked(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::set_locked",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Modified() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::modified",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Modified(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::set_modified",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. Setting Modified also clears Checked."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Checked() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::checked",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Checked(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::set_checked",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Orientable() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::orientable",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Orientable(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::set_orientable",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Closed() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::closed",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Closed(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::set_closed",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Infinite() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::infinite",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Infinite(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::set_infinite",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Convex() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::convex",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::Convex(bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::set_convex",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::ShapeType() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::shape_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::EmptyCopy() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::empty_copy",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::NbChildren() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::nb_children",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "rustycad_tkbrep::topods::TShape::dump_json",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes."
+    },
+    {
+      "upstream_id": "TopoDS_TShape::DEFINE_STANDARD_RTTIEXT(TopoDS_TShape,Standard_Transient)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopoDS/TopoDS_TShape.hxx",
+      "rust_item": "<dyn rustycad_tkbrep::topods::TShape as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Manual TopoDS mapping (docs/topology-design.md): TopoDS_Shape is a value with a Handle<dyn TShape>, a TopLoc location and an orientation; getter/setter pairs become name/set_name; members that dereference the TShape of a null shape raise Standard_NullObject; C++ exceptions become Failure errors. Compared with OCCT by the br_topods and br_dump probes. DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; the Rust registration gives the same descriptor chain through RuntimeTyped::static_type and the dynamic type."
+    },
+    {
+      "upstream_id": "TopExp::MapShapes(const TopoDS_Shape&,TopAbs_ShapeEnum,NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::map_shapes_of_type",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp::MapShapes(const TopoDS_Shape&,NCollection_IndexedMap<TopoDS_Shape,TopTools_ShapeMapHasher>&,bool,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::map_shapes",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp::MapShapes(const TopoDS_Shape&,NCollection_Map<TopoDS_Shape,TopTools_ShapeMapHasher>&,bool,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::map_shapes_into_map",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp::MapShapesAndAncestors(const TopoDS_Shape&,TopAbs_ShapeEnum,TopAbs_ShapeEnum,NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::map_shapes_and_ancestors",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp::MapShapesAndUniqueAncestors(const TopoDS_Shape&,TopAbs_ShapeEnum,TopAbs_ShapeEnum,NCollection_IndexedDataMap<TopoDS_Shape,NCollection_List<TopoDS_Shape>,TopTools_ShapeMapHasher>&,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::map_shapes_and_unique_ancestors",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp::FirstVertex(const TopoDS_Edge&,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::first_vertex",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp::LastVertex(const TopoDS_Edge&,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::last_vertex",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp::Vertices(const TopoDS_Edge&,TopoDS_Vertex&,TopoDS_Vertex&,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::vertices",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes. The two output vertices are returned as a pair."
+    },
+    {
+      "upstream_id": "TopExp::Vertices(const TopoDS_Wire&,TopoDS_Vertex&,TopoDS_Vertex&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::wire_vertices",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes. The two output vertices are returned as a pair."
+    },
+    {
+      "upstream_id": "TopExp::CommonVertex(const TopoDS_Edge&,const TopoDS_Edge&,TopoDS_Vertex&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::common_vertex",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes. The bool result and the output vertex become an Option."
+    },
+    {
+      "upstream_id": "TopExp_Explorer()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "<rustycad_tkbrep::topexp::Explorer as Default>::default",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer(const TopoDS_Shape&,TopAbs_ShapeEnum,TopAbs_ShapeEnum)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::new",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::Init(const TopoDS_Shape&,TopAbs_ShapeEnum,TopAbs_ShapeEnum)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::init",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::More() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::more",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::Next()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::next",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes. After the end it restarts from the root, as natively; a null explored shape raises Standard_NullObject (a crash natively)."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::Value() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::value",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::Current() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::current",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::ReInit()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::re_init",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::ExploredShape() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::explored_shape",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::Depth() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::depth",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": "rustycad_tkbrep::topexp::Explorer::clear",
+      "status": "implemented",
+      "notes": "Manual TopExp mapping: static members are module functions, output references become returned values, and the casts stay unchecked (TopExp.cxx defines No_Standard_TypeMismatch). Compared with OCCT by the br_explore, br_maps and br_vertices probes."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::~TopExp_Explorer()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ destructor (it only calls Clear): Rust drops the stack with the explorer; nothing to port."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::begin()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for Explorer`."
+    },
+    {
+      "upstream_id": "TopExp_Explorer::end() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopExp/TopExp_Explorer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for Explorer`."
+    },
+    {
+      "upstream_id": "TopTools_FormatVersion",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_FormatVersion.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::format_version",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes. The enumeration and its LOWER/UPPER bounds become i32 constants, as FormatNb is an int."
+    },
+    {
+      "upstream_id": "TopTools_LocationSet()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::LocationSet::new",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_LocationSet::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::LocationSet::clear",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_LocationSet::Add(const TopLoc_Location&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::LocationSet::add",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_LocationSet::Location(int) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::LocationSet::location",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_LocationSet::Index(const TopLoc_Location&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::LocationSet::index",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_LocationSet::Dump(Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::LocationSet::dump",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_LocationSet::Write(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::LocationSet::write",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_LocationSet::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_LocationSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::LocationSet::read",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeMapHasher::operator()(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeMapHasher.hxx",
+      "rust_item": "<rustycad_tkbrep::toptools::ShapeMapHasher as rustycad_tkernel::ncollection::HashPolicy<rustycad_tkbrep::topods::Shape>>::hash",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeMapHasher::operator()(const TopoDS_Shape&,const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeMapHasher.hxx",
+      "rust_item": "<rustycad_tkbrep::toptools::ShapeMapHasher as rustycad_tkernel::ncollection::HashPolicy<rustycad_tkbrep::topods::Shape>>::equal",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::TopToolsShapeSet::new",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes. The base class instance; derived sets embed ShapeSetData and implement ShapeSet."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::~TopTools_ShapeSet()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "C++ virtual destructor: Rust drops the set data with its owner; nothing to port."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::SetFormatNb(int)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::set_format_nb",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes. A number outside LOWER..=UPPER is ignored, as Standard_ASSERT_RETURN in a release build."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::FormatNb() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::format_nb",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Clear()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::clear",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes. Virtual; the base body is toptools::shape_set_io::clear."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Add(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::add",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Shape(int) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::shape",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Index(const TopoDS_Shape&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::index",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Locations() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::locations",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::ChangeLocations()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::change_locations",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::DumpExtent(Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::dump_extent",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::DumpExtent(TCollection_AsciiString&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::dump_extent_string",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Dump(Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::dump",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes. Virtual; the base body is toptools::shape_set_io::dump."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Write(Standard_OStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::write",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes. Virtual; the base body is toptools::shape_set_io::write."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::read",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes. Virtual; the base body is toptools::shape_set_io::read."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Dump(const TopoDS_Shape&,Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::dump_shape",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Write(const TopoDS_Shape&,Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::write_shape",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Read(TopoDS_Shape&,Standard_IStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::read_shape",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes. The output shape is returned."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::AddGeometry(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::add_geometry",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::DumpGeometry(Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::dump_geometry",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::WriteGeometry(Standard_OStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::write_geometry",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::ReadGeometry(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::read_geometry",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::DumpGeometry(const TopoDS_Shape&,Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::dump_shape_geometry",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::WriteGeometry(const TopoDS_Shape&,Standard_OStream&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::write_shape_geometry",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::ReadGeometry(TopAbs_ShapeEnum,Standard_IStream&,TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::read_shape_geometry",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::AddShapes(TopoDS_Shape&,const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::add_shapes",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::Check(TopAbs_ShapeEnum,TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::check",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
+    },
+    {
+      "upstream_id": "TopTools_ShapeSet::NbShapes() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/TopTools/TopTools_ShapeSet.hxx",
+      "rust_item": "rustycad_tkbrep::toptools::ShapeSet::nb_shapes",
+      "status": "implemented",
+      "notes": "Manual TopTools mapping: Standard_OStream/IStream are the TKernel IoStream model, std::cout text goes to the injected GeomTools ConsoleOutput, and virtual members of TopTools_ShapeSet are provided methods of the ShapeSet trait. Compared with OCCT by the br_shapeset, br_setread, br_locset and br_locread probes."
     }
   ],
   "tests": [
@@ -176512,6 +178296,407 @@
       "profiles": [
         "linux-gcc-c-locale"
       ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeWire",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeWire",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeShell",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeShell",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeSolid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeSolid",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeCompSolid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeCompSolid",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeCompound",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Add_VerticesToCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Add_VerticesToCompound",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Add_EdgesToWire",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Add_EdgesToWire",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_FromCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_FromCompound",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Add_ManyShapes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Add_ManyShapes",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.TShapeFlags",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__TShapeFlags",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_FirstChild",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_FirstChild",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_LastChild",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_LastChild",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_AllChildren",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_AllChildren",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_FromWire",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_FromWire",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.NestedCompounds",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__NestedCompounds",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Add_SetsModifiedFlag",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Add_SetsModifiedFlag",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_SetsModifiedFlag",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_SetsModifiedFlag",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.AllTypes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__AllTypes",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MixedShapesInCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MixedShapesInCompound",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopExp_Test.MapShapes_Faces",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__MapShapes_Faces",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.MapShapes_Edges",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__MapShapes_Edges",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.MapShapes_Vertices",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__MapShapes_Vertices",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.FirstVertex_LastVertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__FirstVertex_LastVertex",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.Vertices",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__Vertices",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.CommonVertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__CommonVertex",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.Explorer_NestedFaceEdge_Terminates",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__Explorer_NestedFaceEdge_Terminates",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.Explorer_ReInit_Terminates",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__Explorer_ReInit_Terminates",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.MapShapesAndAncestors",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__MapShapesAndAncestors",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
     }
   ]
 }

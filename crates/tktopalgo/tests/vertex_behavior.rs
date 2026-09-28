@@ -15,11 +15,14 @@ fn located_copies_share_geometry_without_mutating_original() {
     assert_eq!(Tool::tolerance(builder.vertex()).unwrap(), 0.01);
     let moved = builder
         .shape()
-        .moved(&Location::new(Transform3::translation([5.0, 6.0, 7.0])))
+        .moved(
+            &Location::new(Transform3::translation([5.0, 6.0, 7.0])),
+            false,
+        )
         .unwrap();
     assert!(builder.shape().is_partner(&moved));
     assert_eq!(
-        Tool::point(&Vertex::from_shape(&moved)).unwrap(),
+        Tool::point(&Vertex::unchecked(moved.clone())).unwrap(),
         Point3::new(6.0, 8.0, 10.0)
     );
     assert_eq!(

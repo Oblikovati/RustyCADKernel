@@ -46,7 +46,7 @@ impl MakeVertex {
         &self.vertex
     }
     /// Borrows the shared shape; `builder.shape()`.
-    pub const fn shape(&self) -> &Shape {
-        self.vertex.shape()
+    pub fn shape(&self) -> &Shape {
+        &self.vertex
     }
 }
