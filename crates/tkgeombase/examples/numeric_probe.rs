@@ -3,9 +3,9 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    app_par_curves as apc, bndlib, extrema_cc, extrema_cs, extrema_el, extrema_pc, extrema_ps,
-    extrema_ss, fem_tool, gc, gce, gcpnts, geom_tools, gprop, hermit, int_ana, int_ana2d, lprop,
-    pc2d, pc3d,
+    app_par_curves as apc, bndlib, extrema_cc, extrema_cs, extrema_el, extrema_el_surf, extrema_pc,
+    extrema_ps, extrema_ss, extrema_swept, fem_tool, gc, gce, gcpnts, geom_tools, gprop, hermit,
+    int_ana, int_ana2d, lprop, pc2d, pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -172,9 +172,9 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ex_pelc2d", extrema_el::pelc2d_case),
     ("ex_elc", extrema_el::elc_case),
     ("ex_elc2d", extrema_el::elc2d_case),
-    ("ex_pels", extrema_el::pels_case),
-    ("ex_elcs", extrema_el::elcs_case),
-    ("ex_elss", extrema_el::elss_case),
+    ("ex_pels", extrema_el_surf::pels_case),
+    ("ex_elcs", extrema_el_surf::elcs_case),
+    ("ex_elss", extrema_el_surf::elss_case),
     // Extrema point-curve classes (gb_probe/extrema_pc.rs)
     ("ex_pc", extrema_pc::pc_case),
     ("ex_pc2d", extrema_pc::pc2d_case),
@@ -203,8 +203,8 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ex_glps", extrema_ps::glps_case),
     ("ex_genps", extrema_ps::genps_case),
     ("ex_ps", extrema_ps::ps_case),
-    ("ex_pexts", extrema_ps::pexts_case),
-    ("ex_prevs", extrema_ps::prevs_case),
+    ("ex_pexts", extrema_swept::pexts_case),
+    ("ex_prevs", extrema_swept::prevs_case),
     // Extrema curve-surface classes (gb_probe/extrema_cs.rs)
     ("ex_fecs", extrema_cs::fecs_case),
     ("ex_gofcs", extrema_cs::gofcs_case),
