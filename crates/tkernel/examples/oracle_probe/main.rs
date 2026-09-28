@@ -34,7 +34,8 @@ fn number(input: &mut std::str::SplitWhitespace<'_>) -> i32 {
         .parse()
         .expect("integer input")
 }
-fn evaluate(line: &str) -> Result<String, Error> {
+// Quantity operations fail with `Error`, GUID parsing with `Failure`; both print "Type: message".
+fn evaluate(line: &str) -> Result<String, Box<dyn std::error::Error>> {
     let mut input = line.split_whitespace();
     let op = input.next().expect("operation");
     let output = match op {

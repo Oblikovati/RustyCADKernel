@@ -26,6 +26,10 @@ impl<'a, T: RuntimeTyped> HandleView<'a, T> {
             projected: PhantomData,
         }
     }
+    /// The viewed owner, for building a new owning handle from this view.
+    pub(super) fn owner(&self) -> Option<&'a Arc<dyn Transient>> {
+        self.owner
+    }
     /// Check a borrowed null handle; `view.is_null()`.
     pub fn is_null(&self) -> bool {
         self.owner.is_none()
@@ -37,6 +41,11 @@ impl<'a, T: RuntimeTyped> HandleView<'a, T> {
     /// Observe the projected address; `view.as_ptr()`.
     pub fn as_ptr(&self) -> *const T {
         self.get().map_or(std::ptr::null(), std::ptr::from_ref)
+    }
+    /// Borrow the viewed object as a transient, as a `const Standard_Transient*`;
+    /// `occ::is_kind::<Base>(view.transient())`.
+    pub fn transient(&self) -> Option<&'a dyn Transient> {
+        self.owner.map(|owner| owner.as_ref())
     }
 }
 impl<T: RuntimeTyped, U: RuntimeTyped> PartialEq<Handle<U>> for HandleView<'_, T> {

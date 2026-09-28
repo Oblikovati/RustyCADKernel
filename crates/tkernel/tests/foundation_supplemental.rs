@@ -16,7 +16,7 @@ fn failure_printing_and_shared_copies() {
 }
 #[test]
 fn byte_string_terminators_and_owned_copies() {
-    let original = AsciiString::from_bytes(&[255, b'A', 0, b'B']);
+    let original = AsciiString::from_bytes([255, b'A', 0, b'B']);
     let mut copy = original.clone();
     copy.append(&AsciiString::from_integer(-12));
     assert_eq!(original.as_bytes(), &[255, b'A']);

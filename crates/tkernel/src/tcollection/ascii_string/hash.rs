@@ -13,18 +13,16 @@
 
 use super::AsciiString;
 impl AsciiString {
-    /// Computes OCCT's native-width hash with signed-char short-input compatibility; `text.hash_code()`.
+    /// `HashCode`: FNV-1a over signed `char` bytes below four bytes, Murmur otherwise, at the
+    /// native pointer width; `AsciiString::new("abc").hash_code()`.
     pub fn hash_code(&self) -> usize {
         if self.len() < 4 {
             return short_hash(self.as_bytes());
         }
-        if usize::BITS == 64 {
-            crate::standard::hashing::murmur64(self.as_bytes(), 0xA329_F1D3_A586) as usize
-        } else {
-            crate::standard::hashing::murmur32(self.as_bytes(), 0xc70f_6907) as usize
-        }
+        crate::standard::hash_bytes(self.as_bytes())
     }
 }
+/// `FNVHash::hash_combine(*myString, myLength)`: OCCT feeds sign-extended `char` values.
 fn short_hash(bytes: &[u8]) -> usize {
     let (mut hash, prime) = if usize::BITS == 64 {
         (14695981039346656037_u64, 1099511628211_u64)
