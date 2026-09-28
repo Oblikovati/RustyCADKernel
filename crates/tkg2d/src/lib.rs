@@ -11,7 +11,7 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of ModelingData/TKG2d (Geom2d package and the Geom2dEval evaluation descriptors it includes) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of ModelingData/TKG2d (Geom2d and Geom2dEval packages) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! OCCT TKG2d: transient 2D geometry.
 //!

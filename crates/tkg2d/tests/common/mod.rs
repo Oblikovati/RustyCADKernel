@@ -44,3 +44,16 @@ fn ordered_bits(value: f64) -> u64 {
         bits | (1 << 63)
     }
 }
+
+/// GoogleTest `EXPECT_THROW(statement, Type)`: the statement fails with the native
+/// exception `exception`.
+pub fn EXPECT_THROW<T>(result: Result<T, rustycad_tkernel::standard::Failure>, exception: &str) {
+    match result {
+        Ok(_) => panic!("EXPECT_THROW: no exception; expected {exception}"),
+        Err(error) => assert_eq!(
+            error.exception_type(),
+            exception,
+            "EXPECT_THROW: wrong exception; expected {exception}"
+        ),
+    }
+}

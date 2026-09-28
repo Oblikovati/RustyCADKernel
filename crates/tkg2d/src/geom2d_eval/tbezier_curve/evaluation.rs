@@ -1,0 +1,192 @@
+// Copyright (c) 2025 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+// Rust translation of ModelingData/TKG2d/Geom2dEval/Geom2dEval_TBezierCurve.cxx (evalCurveBasis, evalBasis, evalBasisDeriv, EvalD0..EvalDN) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+
+//! T-Bezier evaluation: the basis sums of orders 0..3, the rational quotients, and
+//! the order-N derivative (direct for non-rational curves, Leibniz recurrence for
+//! rational ones).
+use super::super::basis_sums::{BasisDerivatives, BasisSums};
+use super::super::eval_math::{pow_int, trig_shift};
+use rustycad_tkmath::gp::{Point2, Xy};
+
+/// The poles, the optional weights and alpha of one T-Bezier curve, as slices in
+/// storage order (the native code indexes `&Value(Lower())` pointers).
+#[derive(Clone, Copy)]
+pub(super) struct TBezierView<'a> {
+    pub(super) poles: &'a [Point2],
+    pub(super) weights: Option<&'a [f64]>,
+    pub(super) alpha: f64,
+}
+
+// The sin/cos pair of frequency k * alpha, advanced by the angle-addition recurrence.
+struct TrigRecurrence {
+    sin1: f64,
+    cos1: f64,
+    sin_k: f64,
+    cos_k: f64,
+}
+impl TrigRecurrence {
+    fn new(theta: f64) -> Self {
+        let (sin1, cos1) = (theta.sin(), theta.cos());
+        Self {
+            sin1,
+            cos1,
+            sin_k: sin1,
+            cos_k: cos1,
+        }
+    }
+    // Only called while k < order, as natively, so the last pair is never advanced.
+    fn advance(&mut self) {
+        let sin_next: f64 = self.sin_k * self.cos1 + self.cos_k * self.sin1;
+        let cos_next: f64 = self.cos_k * self.cos1 - self.sin_k * self.sin1;
+        (self.sin_k, self.cos_k) = (sin_next, cos_next);
+    }
+}
+
+// Derivatives 0..3 of sin(f t) and cos(f t) at the current pair.
+fn pair_derivatives(freq: f64, sin: f64, cos: f64) -> [BasisDerivatives; 2] {
+    let freq2: f64 = freq * freq;
+    let freq3: f64 = freq2 * freq;
+    [
+        [sin, freq * cos, -freq2 * sin, -freq3 * cos],
+        [cos, -freq * sin, -freq2 * cos, freq3 * sin],
+    ]
+}
+
+// The constant basis function 1: `N0 += P0` or `N0 += P0 * w0; W0 += w0`.
+fn add_constant_pole(sums: &mut BasisSums, view: &TBezierView<'_>) {
+    let pole0: Xy = view.poles[0].xy();
+    match view.weights {
+        None => sums.n[0] += pole0,
+        Some(weights) => {
+            sums.n[0] += pole0 * weights[0];
+            sums.w[0] += weights[0];
+        }
+    }
+}
+
+/// `evalCurveBasis<MAX>`: the sums of orders `0..=MAX` at `u`;
+/// `curve_basis::<1>(&view, 0.5).n[1]`.
+pub(super) fn curve_basis<const MAX: usize>(view: &TBezierView<'_>, u: f64) -> BasisSums {
+    let mut sums = BasisSums::default();
+    add_constant_pole(&mut sums, view);
+    let order: usize = (view.poles.len() - 1) / 2;
+    let mut trig = TrigRecurrence::new(view.alpha * u);
+    let mut freq: f64 = view.alpha;
+    for k in 1..=order {
+        let index: usize = 2 * k - 1;
+        let [b_sin, b_cos] = pair_derivatives(freq, trig.sin_k, trig.cos_k);
+        let poles: [Xy; 2] = [view.poles[index].xy(), view.poles[index + 1].xy()];
+        let weights: Option<[f64; 2]> = view.weights.map(|w| [w[index], w[index + 1]]);
+        sums.add_pair::<MAX>(poles, weights, [&b_sin, &b_cos]);
+        if k < order {
+            trig.advance();
+        }
+        freq += view.alpha;
+    }
+    sums
+}
+
+/// The rational point `N0 / W0`; `rational_point(&sums)`.
+pub(super) fn rational_point(sums: &BasisSums) -> Xy {
+    sums.n[0] / sums.w[0]
+}
+
+/// The rational derivatives 1..=`count` by the quotient rule, divided by W0 as natively;
+/// `rational_derivatives(&sums, c, 2)`.
+pub(super) fn rational_derivatives(sums: &BasisSums, c: Xy, count: usize) -> [Xy; 3] {
+    let (n, w) = (&sums.n, &sums.w);
+    let mut d = [Xy::default(); 3];
+    d[0] = (n[1] - w[1] * c) / w[0];
+    if count >= 2 {
+        d[1] = (n[2] - 2.0 * w[1] * d[0] - w[2] * c) / w[0];
+    }
+    if count >= 3 {
+        d[2] = (n[3] - 3.0 * w[2] * d[0] - 3.0 * w[1] * d[1] - w[3] * c) / w[0];
+    }
+    d
+}
+
+/// `EvalDN` of a non-rational curve: the poles weighted by the N-th derivative of
+/// each sin/cos pair; `non_rational_dn(&view, 0.5, 4)`.
+pub(super) fn non_rational_dn(view: &TBezierView<'_>, u: f64, n: i32) -> Xy {
+    let mut sum = Xy::new(0.0, 0.0);
+    let order: usize = (view.poles.len() - 1) / 2;
+    let mut trig = TrigRecurrence::new(view.alpha * u);
+    let mut freq: f64 = view.alpha;
+    for k in 1..=order {
+        let index: usize = 2 * k - 1;
+        let freq_pow: f64 = pow_int(freq, n);
+        let (sin_deriv, cos_deriv) = trig_shift(trig.sin_k, trig.cos_k, n);
+        sum += view.poles[index].xy() * (freq_pow * sin_deriv);
+        sum += view.poles[index + 1].xy() * (freq_pow * cos_deriv);
+        if k < order {
+            trig.advance();
+        }
+        freq += view.alpha;
+    }
+    sum
+}
+
+/// `evalBasisDeriv` (with `evalBasis` as order 0): the value of every basis function's
+/// `order`-th derivative at `u`; `basis_derivative(&view, 0.5, 0)[0] == 1.0`.
+fn basis_derivative(view: &TBezierView<'_>, u: f64, order: i32) -> Vec<f64> {
+    let mut basis: Vec<f64> = vec![if order == 0 { 1.0 } else { 0.0 }; view.poles.len()];
+    let trig_order: usize = (view.poles.len() - 1) / 2;
+    let mut trig = TrigRecurrence::new(view.alpha * u);
+    let mut freq: f64 = view.alpha;
+    for k in 1..=trig_order {
+        let (sin_value, cos_value) = if order == 0 {
+            (trig.sin_k, trig.cos_k)
+        } else {
+            let freq_pow: f64 = pow_int(freq, order);
+            let (sin_deriv, cos_deriv) = trig_shift(trig.sin_k, trig.cos_k, order & 3);
+            (freq_pow * sin_deriv, freq_pow * cos_deriv)
+        };
+        (basis[2 * k - 1], basis[2 * k]) = (sin_value, cos_value);
+        freq += view.alpha;
+        if k < trig_order {
+            trig.advance();
+        }
+    }
+    basis
+}
+
+/// `EvalDN` of a rational curve above order 3: `C^(d) = (Cw^(d) - sum_k C(d,k) w^(k)
+/// C^(d-k)) / w`, from the basis derivatives of every order up to N;
+/// `rational_dn(&view, weights, 0.5, 5)`.
+pub(super) fn rational_dn(view: &TBezierView<'_>, weights: &[f64], u: f64, n: i32) -> Xy {
+    let count: usize = n as usize + 1;
+    let mut w_derivs: Vec<f64> = Vec::with_capacity(count);
+    let mut cw_derivs: Vec<Xy> = Vec::with_capacity(count);
+    for d in 0..=n {
+        let basis: Vec<f64> = basis_derivative(view, u, d);
+        let (mut wd, mut cwd) = (0.0_f64, Xy::new(0.0, 0.0));
+        for ((&wi, &bd), pole) in weights.iter().zip(&basis).zip(view.poles) {
+            cwd += (wi * bd) * pole.xy();
+            wd += wi * bd;
+        }
+        w_derivs.push(wd);
+        cw_derivs.push(cwd);
+    }
+    let mut c_derivs: Vec<Xy> = vec![cw_derivs[0] / w_derivs[0]];
+    for d in 1..count {
+        let (mut sum, mut binom) = (Xy::new(0.0, 0.0), 1.0_f64);
+        for k in 1..=d {
+            binom *= (d - k + 1) as f64 / k as f64;
+            sum += binom * w_derivs[k] * c_derivs[d - k];
+        }
+        c_derivs.push((cw_derivs[d] - sum) / w_derivs[0]);
+    }
+    c_derivs[n as usize]
+}
