@@ -32,8 +32,17 @@ Known false-positive sources and how they are handled:
 - Out-of-class definitions (`inline gp_Vec::gp_Vec(...)`,
   `BVH_Box<T, N>::Area() const`) are recognised by the qualified name and
   ignored; only in-class declarations count.
-- `= delete` members, `friend` declarations and private members are never
-  expected or known.
+- `= delete` members, body-less `friend` declarations, friend classes and
+  private members are never expected or known. An in-class friend *definition*
+  (a hidden friend such as `friend Vec2 operator+(...) {...}`) is expected as a
+  member of the enclosing class.
+- SFINAE machinery: a specialization whose argument list holds calls
+  (`HasValue<T, void_t<decltype(x.Value())>>`) still opens a scope, a
+  `decltype(...)` return type is never read as the member name, and class
+  template deduction guides (`Range(T&&) -> Range<T>;`) are not constructors.
+- Function-like macros defined in the header itself (the NCollection_Vec
+  swizzle generators) are expanded before scanning; the `DEFINE_STANDARD_*`
+  macros are not, since they keep their dedicated identities.
 - `DEFINE_STANDARD_RTTIEXT(Class, Base)` expands to `public:` plus the RTTI
   members, so it is rewritten to that label and a statement of its own: it can
   no longer swallow the next declaration, members after it are public as in
@@ -55,15 +64,16 @@ import sys
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 
+from audit_api_params import (matching_close, normalize_param, normalize_params, split_default, split_top_level,
+                              squeeze)
+
 ROOT = Path(__file__).resolve().parents[1]
 IGNORED_MACROS = r"\b(?:DEFINE_STANDARD_ALLOC|DEFINE_NCOLLECTION_ALLOC|Standard_EXPORT|Standard_NODISCARD)\b"
 TOKEN_NOISE = re.compile(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\'', re.S)
 ACCESS_LABEL = re.compile(r"^\s*(public|protected|private)\s*:(?!:)")
 SCOPE_HEAD = re.compile(r"^(class|struct|union|namespace|enum(?:\s+class)?)\s+([\w:]+)\s*(<)?")
 RTTI_MACRO = re.compile(r"\b(DEFINE_STANDARD_RTTIEXT|DEFINE_STANDARD_RTTI_INLINE)\s*\(([^)]*)\)")
-PARAM_TOKEN = re.compile(r"[A-Za-z_]\w*|[&*]+|\[[^\]]*\]")
 HANDLE_MACRO = re.compile(r"\bDEFINE_STANDARD_HANDLE\s*\([^)]*\)")
-TYPE_ALIASES = {"Standard_Real": "double", "Standard_Integer": "int", "Standard_Boolean": "bool"}
 
 
 @dataclass(frozen=True)
@@ -76,33 +86,84 @@ class Member:
     required: bool = field(default=True, compare=False, repr=False)
 
 
-def clean_source(text: str) -> str:
+def clean_source(text: str, included_macros: dict[str, tuple[list[str], str]] | None = None) -> str:
     """Remove comments, literals, preprocessor lines, attributes and ignored macros.
 
     >>> clean_source('int a; // x\\n#define B 1\\n[[nodiscard]] int b();')
     'int a;  \\n\\n int b();'
     """
     text = TOKEN_NOISE.sub(lambda m: '""' if m.group(0)[0] in "\"'" else " ", text)
+    macros = {**(included_macros or {}), **header_macros(text)}
     text = re.sub(r"^\s*#(?:[^\n]*\\\n)*[^\n]*$", "", text, flags=re.M)
+    text = expand_header_macros(text, macros)
     text = re.sub(r"\[\[[^\]]*\]\]|__attribute__\s*\(\([^)]*\)\)", "", text)
-    text = re.sub(r"\bStandard_DEPRECATED\s*\(\s*\"*\s*\)", "", text)
+    # Deprecation markers carry only (possibly concatenated) literals; NCollection_Vector.hxx
+    # opens with a file-scope `Standard_HEADER_DEPRECATED("..." "...");` that is no member.
+    text = re.sub(r"\bStandard_(?:HEADER_)?DEPRECATED\s*\(\s*(?:\"\"\s*)*\)", "", text)
+    text = re.sub(r"\bHandle\s*\(\s*(\w+)\s*\)", r"opencascade::handle<\1>", text)  # Standard_Handle.hxx macro
     text = RTTI_MACRO.sub(r"public: \1(\2);", HANDLE_MACRO.sub(";", text))  # the macro opens with `public:`
     return re.sub(IGNORED_MACROS, "", text)
 
 
-def matching_close(text: str, start: int) -> int:
-    """Index of the bracket closing the one at `start` (`(`, `{`, `[` or `<`).
+def header_macros(text: str) -> dict[str, tuple[list[str], str]]:
+    """Function-like macros `#define`d in the header itself, as `{name: (params, body)}`.
 
-    >>> matching_close('(a(b)c)', 0)
-    6
+    NCollection_Vec2/3 declare their GLSL-style swizzles (`xy()`, `zyx()`) through
+    `NCOLLECTION_VEC_COMPONENTS_2D/3D`, defined and invoked in the same header; expanding
+    them is the only way those members become visible to the scanner.
+
+    >>> header_macros('#define M(a, b) \\\\\\n  int a##b();')
+    {'M': (['a', 'b'], 'int a##b();')}
     """
-    pairs = {"(": ")", "{": "}", "[": "]", "<": ">"}
-    opening, depth = text[start], 0
-    for index in range(start, len(text)):
-        depth += (text[index] == opening) - (text[index] == pairs[opening])
-        if depth == 0:
-            return index
-    raise ValueError(f"unbalanced {opening!r} at offset {start}; expected a matching {pairs[opening]!r}")
+    pattern = re.compile(r"^\s*#\s*define\s+(\w+)\(([^)]*)\)((?:[^\n]*\\\n)*[^\n]*)$", re.M)
+    # The RTTI/handle/exception macros keep their dedicated ledger identities (see
+    # `clean_source`), even inside Standard_Type.hxx, which defines them.
+    return {match.group(1): ([param.strip() for param in match.group(2).split(",") if param.strip()],
+                             re.sub(r"\\\n", " ", match.group(3)).strip())
+            for match in pattern.finditer(text) if not match.group(1).startswith("DEFINE_STANDARD_")}
+
+
+def expand_header_macros(text: str, macros: dict[str, tuple[list[str], str]]) -> str:
+    """Replace each invocation of a header-local function-like macro by its body.
+
+    >>> expand_header_macros('struct S { M(x, y) };', {'M': (['a', 'b'], 'int a##b();')})
+    'struct S { int xy(); };'
+    """
+    for name, (params, body) in macros.items():
+        while (match := re.search(rf"\b{name}\s*\(", text)) is not None:
+            close = matching_close(text, match.end() - 1)
+            arguments = macro_arguments(text[match.end():close])
+            if len(arguments) != len(params):
+                raise ValueError(f"macro {name} invoked with {arguments!r}; expected {len(params)} arguments")
+            text = text[:match.start()] + substitute_macro(body, params, arguments) + text[close + 1:]
+    return text
+
+
+def macro_arguments(text: str) -> list[str]:
+    """Split macro arguments as the preprocessor does: only parentheses nest, not `<>`.
+
+    >>> macro_arguments('a <= b || c, "x"')
+    ['a <= b || c', '"x"']
+    """
+    parts, depth, start = [], 0, 0
+    for index, char in enumerate(text):
+        depth += (char == "(") - (char == ")")
+        if char == "," and depth == 0:
+            parts.append(text[start:index].strip())
+            start = index + 1
+    return parts + [text[start:].strip()] if text.strip() else parts
+
+
+def substitute_macro(body: str, params: list[str], arguments: list[str]) -> str:
+    """Macro body with parameters replaced, `#param` stringized to `""` and `##` pasted.
+
+    >>> substitute_macro('T a##b() { return #a; }', ['a', 'b'], ['x', 'y'])
+    'T xy() { return ""; }'
+    """
+    values = dict(zip(params, arguments))
+    body = re.sub(r"(?<!#)#\s*(\w+)", lambda m: '""' if m.group(1) in values else m.group(0), body)
+    body = re.sub(r"\b\w+\b", lambda m: values.get(m.group(0), m.group(0)), body)
+    return re.sub(r"\s*##\s*", "", body)
 
 
 def is_brace_initializer(head: str) -> bool:
@@ -173,11 +234,19 @@ def scan_scope(body: str, scope: str, public_default: bool, primary: str, expose
 def statement_members(head: str, braced: str | None, scope: str, primary: str, exposed: bool) -> list[Member]:
     """Members produced by one statement of a scope; non-exposed ones are only known."""
     head = strip_template_heads(head)
+    if braced is not None and re.fullmatch(r'extern\s*""', head):
+        # A linkage block (`extern "C" { ... }`, its literal blanked) declares members of the
+        # enclosing scope; Standard_CString.hxx declares Atof/Strtod/Printf there.
+        return scan_scope(braced, scope, True, primary, exposed)
     scope_match = SCOPE_HEAD.match(head)
-    if scope_match is not None and "(" not in head:
+    if scope_match is not None and "(" not in without_scope_arguments(head, scope_match):
         return nested_scope_members(head, scope_match, braced, scope, primary, exposed)
     if re.fullmatch(r"enum", head) and braced is not None:
         return enumerator_members(braced, scope)  # anonymous enum: its constants join the scope
+    if braced is not None and (friend := re.match(r"friend\s+(?!class\b|struct\b)", head)) is not None:
+        # An in-class friend definition (`friend Vec2 operator+(...) {...}`) is a hidden friend:
+        # public API reachable only through argument-dependent lookup, attributed to the class.
+        return exposure(function_members(head[friend.end():], scope, primary), exposed)
     if not head or re.match(r"(friend|static_assert)\b", head):
         return []
     if re.match(r"(typedef|using)\b", head):
@@ -185,6 +254,20 @@ def statement_members(head: str, braced: str | None, scope: str, primary: str, e
     if is_data_member(head):
         return data_members(head, scope)
     return exposure(function_members(head, scope, primary), exposed)
+
+
+def without_scope_arguments(head: str, match: re.Match[str]) -> str:
+    """`head` minus a specialization's argument list, which may hold a macro call.
+
+    `struct hash<Handle(T)>` is still a scope although its arguments contain parentheses.
+
+    >>> without_scope_arguments('struct hash<Handle(T)>', SCOPE_HEAD.match('struct hash<Handle(T)>'))
+    'struct hash'
+    """
+    if match.group(3) is None:
+        return head
+    opening = match.end() - 1
+    return head[:opening] + head[matching_close(head, opening) + 1:]
 
 
 def strip_template_heads(head: str) -> str:
@@ -258,11 +341,49 @@ def data_members(head: str, scope: str) -> list[Member]:
     return [Member(qualify(scope, name.group(1)), None, "", required=False)]
 
 
+def without_scope_arguments(head: str, match: re.Match[str]) -> str:
+    """A class head with its specialization argument list removed.
+
+    Specialization arguments may hold calls (`HasValue<T, void_t<decltype(x.Value())>>`);
+    they must not make the head look like a function declaration.
+
+    >>> head = 'struct H<T, decltype(f())> : B'
+    >>> without_scope_arguments(head, SCOPE_HEAD.match(head))
+    'struct H : B'
+    """
+    if match.group(3) is None:
+        return head
+    opening = match.end() - 1
+    return head[:opening] + head[matching_close(head, opening) + 1:]
+
+
+def strip_decltypes(head: str) -> str:
+    """Replace each balanced `decltype(...)` by one type token, so it is never read as a name.
+
+    >>> strip_decltypes('decltype(auto) get() const')
+    'decltype_t get() const'
+    """
+    while (match := re.search(r"\bdecltype\s*\(", head)) is not None:
+        head = head[:match.start()] + "decltype_t" + head[matching_close(head, match.end() - 1) + 1:]
+    return head
+
+
+def is_deduction_guide(head: str, name_start: int, params_close: int) -> bool:
+    """True for a class template deduction guide: `Name(T&&) -> Name<T>;`, no return type.
+
+    >>> is_deduction_guide('R(T&&) -> R<T>', 0, 5)
+    True
+    """
+    prefix = re.sub(r"\bexplicit\b", "", head[:name_start]).strip()
+    return not prefix and re.match(r"\s*->", head[params_close + 1:]) is not None
+
+
 def function_members(head: str, scope: str, primary: str) -> list[Member]:
     """The member declared by a function statement, or nothing for definitions/deletions."""
     if re.search(r"=\s*delete\s*$", head):
         return []
-    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+[A-Za-z_][\w:]*\s*[&*]*"
+    head = mask_type_expressions(strip_decltypes(head))
+    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+(?:(?:const|volatile)\s+)*[A-Za-z_][\w:]*\s*[&*]*"
                            r"|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
     if name_match is None:
         return []
@@ -271,11 +392,26 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
         return []  # out-of-class definition (`X::f`, `X<T, N>::f`) of an already declared member
     params_open = name_match.end() - 1
     params_close = matching_close(head, params_open)
+    if is_deduction_guide(head, name_match.start(1), params_close):
+        return []
     params = normalize_params(head[params_open + 1:params_close])
     qualifier = "const" if re.match(r"\s*const\b", head[params_close + 1:]) else ""
     owner = scope or primary
     prefix = owner if name == class_name(owner) else f"{owner}::{name}"
     return [Member(prefix, params, qualifier)]
+
+
+def mask_type_expressions(head: str) -> str:
+    """Blank `sizeof(...)`, `alignof(...)` and `decltype(...)` so they never read as the function name.
+
+    `enable_if<sizeof(T) == 8, R>::type hash_combine(...)` declares `hash_combine`, not `sizeof`.
+
+    >>> mask_type_expressions('enable_if<sizeof(T) == 8, R>::type f(int)')
+    'enable_if<0 == 8, R>::type f(int)'
+    """
+    while (match := re.search(r"\b(?:sizeof|alignof|decltype)\s*\(", head)) is not None:
+        head = head[:match.start()] + "0" + head[matching_close(head, match.end() - 1) + 1:]
+    return head
 
 
 def conversion_spelling(raw: str) -> str:
@@ -287,10 +423,12 @@ def conversion_spelling(raw: str) -> str:
     'operator bool'
     >>> conversion_spelling("operator ()")
     'operator()'
+    >>> conversion_spelling("operator const  Element_t *")
+    'operator const Element_t*'
     """
     match = re.fullmatch(r"operator\s+([A-Za-z_].*)", raw.strip())
     compact = re.sub(r"\s+", "", raw)
-    return compact if match is None else "operator " + re.sub(r"\s+", "", match.group(1))
+    return compact if match is None else "operator " + squeeze(match.group(1))
 
 
 def class_name(owner: str) -> str:
@@ -304,131 +442,23 @@ def class_name(owner: str) -> str:
     return owner.split("::")[-1]
 
 
-def split_top_level(text: str) -> list[str]:
-    """Split on commas that are not nested in (), <>, {} or []."""
-    parts, depth, start = [], 0, 0
-    for index, char in enumerate(text):
-        depth += (char in "(<{[") - (char in ")>}]")
-        if char == "," and depth == 0:
-            parts.append(text[start:index])
-            start = index + 1
-    parts.append(text[start:])
-    return [part for part in parts if part.strip()]
+def sibling_macros(path: Path, seen: set[Path] | None = None) -> dict[str, tuple[list[str], str]]:
+    """Function-like macros of the same-package headers that `path` includes, transitively.
 
-
-def normalize_param(param: str) -> str:
-    """Drop the default value, the parameter name and by-value top-level `const`.
-
-    >>> normalize_param('const gp_Vec& theV = gp_Vec()')
-    'const gp_Vec&'
-    >>> normalize_param('const double theX')
-    'double'
+    NCollection_Vec3 invokes `NCOLLECTION_VEC_COMPONENTS_2D` from the included
+    NCollection_Vec2.hxx, and NCollection_Vec4 invokes it through NCollection_Vec3.hxx;
+    only includes that live beside `path` are followed, each at most once.
     """
-    param = split_default(param).strip()
-    if (array := array_param(param)) is not None:
-        return array
-    tokens = [token for token in type_tokens(param) if token != "typename"]
-    words = [token for token in tokens if re.match(r"\w", token)]
-    type_words = [word for word in words if word not in {"const", "volatile", "unsigned", "signed"}]
-    if len(type_words) >= 2 and tokens[-1] == words[-1] and not is_builtin_pair(type_words):
-        tokens = tokens[:-1]
-    tokens = [TYPE_ALIASES.get(token, token) for token in tokens]
-    if tokens and tokens[0] == "const" and not any(token[0] in "&*" for token in tokens):
-        tokens = tokens[1:]
-    return re.sub(r" ([&*])", r"\1", " ".join(tokens))
-
-
-def is_builtin_pair(type_words: list[str]) -> bool:
-    """True when the last two words spell one builtin type (`long double`), not `Type name`.
-
-    >>> is_builtin_pair(["long", "double"])
-    True
-    """
-    return type_words[-2] in {"long", "short"} and type_words[-1] in {"long", "int", "double"}
-
-
-def array_param(param: str) -> str | None:
-    """Canonical spelling of an array or reference-to-array parameter, else None.
-
-    Arrays keep their `const` (it is not top-level); a by-value array decays to a pointer
-    as in C++, while a reference or pointer to an array keeps its extents.
-
-    >>> array_param("const double theJ[3][3]")
-    'const double(*)[3]'
-    >>> array_param("const double (&theF)[N]")
-    'const double(&)[N]'
-    >>> array_param("const double[9]")
-    'const double*'
-    """
-    match = re.fullmatch(r"(.*?)(\(\s*[&*]+\s*\w*\s*\)|\b\w+)?\s*((?:\[[^\]]*\]\s*)+)", param, re.S)
-    if match is None:
-        return None
-    base, declarator = match.group(1), match.group(2) or ""
-    if not set(base.split()) - {"const", "volatile", "unsigned", "signed"} and not declarator.startswith("("):
-        base, declarator = f"{base} {declarator}", ""  # nameless `const double[9]`: the word is the type
-    base = " ".join(TYPE_ALIASES.get(word, word) for word in base.split())
-    extents = re.findall(r"\[[^\]]*\]", match.group(3))
-    declarator = re.sub(r"\w+|\s+", "", declarator)
-    if declarator:  # a reference or pointer to an array keeps every extent
-        return base + declarator + "".join(re.sub(r"\s+", "", extent) for extent in extents)
-    # C++ adjusts an array parameter to a pointer: `T p[8]` is `T*`, `T p[2][3]` is `T(*)[3]`.
-    rest = "".join(re.sub(r"\s+", "", extent) for extent in extents[1:])
-    return base + ("(*)" + rest if rest else "*")
-
-
-def type_tokens(param: str) -> list[str]:
-    """Split a parameter into qualified names, `&`/`*` runs and array extents.
-
-    Template argument lists are balanced, so `handle<B<T, N>>` and the dependent
-    `typename B<T, N>::V` each stay one token.
-
-    >>> type_tokens('const typename BVH_Box<T, N>::BVH_VecNt& theV')
-    ['const', 'typename', 'BVH_Box<T,N>::BVH_VecNt', '&', 'theV']
-    """
-    tokens: list[str] = []
-    index = 0
-    while (match := PARAM_TOKEN.search(param, index)) is not None:
-        token, index = match.group(0), match.end()
-        if token[0] not in "&*[":
-            token, index = extend_qualified(param, token, index)
-        tokens.append(squeeze(token))
-    return tokens
-
-
-def extend_qualified(param: str, token: str, index: int) -> tuple[str, int]:
-    """Append balanced `<...>` argument lists and `::Name` parts that follow `token`."""
-    while (step := re.compile(r"\s*(<|::\s*~?[A-Za-z_]\w*)").match(param, index)) is not None:
-        if step.group(1) != "<":
-            token, index = token + step.group(1), step.end()
+    seen = {path} if seen is None else seen
+    macros: dict[str, tuple[list[str], str]] = {}
+    for name in re.findall(r'^\s*#\s*include\s*[<"]([\w.]+)[>"]', path.read_text(errors="replace"), re.M):
+        sibling = path.parent / name
+        if not sibling.is_file() or sibling in seen:
             continue
-        close = matching_close(param, step.end() - 1)
-        token, index = token + param[step.end() - 1:close + 1], close + 1
-    return token, index
-
-
-def squeeze(text: str) -> str:
-    """Drop whitespace except the single space separating two words.
-
-    >>> squeeze('NCollection_Vec2 < unsigned  int >')
-    'NCollection_Vec2<unsigned int>'
-    """
-    return re.sub(r" ?([^\w ]) ?", r"\1", re.sub(r"\s+", " ", text.strip()))
-
-
-def split_default(param: str) -> str:
-    """Return the parameter text before a top-level `=` default value."""
-    depth = 0
-    for index, char in enumerate(param):
-        depth += (char in "(<{[") - (char in ")>}]")
-        if char == "=" and depth == 0:
-            return param[:index]
-    return param
-
-
-def normalize_params(params: str) -> str:
-    """Canonical comma-joined parameter list (`void` means empty)."""
-    parts = [normalize_param(part) for part in split_top_level(params)]
-    return "" if parts == ["void"] else ",".join(parts)
+        seen.add(sibling)
+        macros.update(sibling_macros(sibling, seen))
+        macros.update(header_macros(TOKEN_NOISE.sub(" ", sibling.read_text(errors="replace"))))
+    return macros
 
 
 def header_members(path: Path) -> list[Member]:
@@ -437,7 +467,7 @@ def header_members(path: Path) -> list[Member]:
     `DEFINE_STANDARD_EXCEPTION(Name, Base)` declares a whole exception class through a
     macro; it is expected as one `Name` row (the Rust `Failure` type-name mapping).
     """
-    text = clean_source(path.read_text(errors="replace"))
+    text = clean_source(path.read_text(errors="replace"), sibling_macros(path))
     exception = re.compile(r"\bDEFINE_STANDARD_EXCEPTION\s*\(\s*(\w+)\s*,[^)]*\)")
     exceptions = [Member(name, None, "") for name in exception.findall(text)]
     return exceptions + scan_scope(exception.sub(";", text), "", True, path.stem)

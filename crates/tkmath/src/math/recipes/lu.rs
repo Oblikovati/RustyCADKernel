@@ -14,26 +14,41 @@
 
 //! Crout LU with implicit row scaling and partial pivoting (LU_Decompose/Solve/Invert).
 use super::{
-    Failure, IntegerVector, Matrix, STATUS_OK, STATUS_SINGULAR_MATRIX, Vector, checked,
-    require_square, require_vector,
+    Failure, IntegerVector, Matrix, STATUS_OK, STATUS_SINGULAR_MATRIX, STATUS_USER_ABORTED, Vector,
+    checked, require_square, require_vector,
 };
+use rustycad_tkernel::message::{ProgressRange, ProgressScope};
 
-/// Decomposes `a` in place with a scratch scale vector; returns a `math_Status_*` code.
+/// Decomposes `a` in place with a scratch scale vector and the default (unbound,
+/// never aborting) progress range; returns a `math_Status_*` code.
 ///
-/// `indx` receives the pivot rows and `d` the permutation sign. The native
-/// `Message_ProgressRange` argument is not ported; this is the default (never
-/// aborting) range. `lu_decompose(&mut a,&mut indx,&mut d,1e-20)?`.
+/// `indx` receives the pivot rows and `d` the permutation sign.
+/// `lu_decompose(&mut a,&mut indx,&mut d,1e-20)?`.
 pub fn lu_decompose(
     a: &mut Matrix<'_>,
     indx: &mut IntegerVector<'_>,
     d: &mut f64,
     tiny: f64,
 ) -> Result<i32, Failure> {
-    let mut scales = Vector::with_bounds(1, a.row_number())?;
-    lu_decompose_with_scales(a, indx, d, &mut scales, tiny)
+    lu_decompose_with_progress(a, indx, d, tiny, &ProgressRange::default())
 }
 
-/// The overload taking the caller's scale workspace `vv` (native default TINY 1e-30);
+/// `LU_Decompose(a, indx, d, TINY, theProgress)`: allocates the scale workspace and
+/// runs [`lu_decompose_with_scales_and_progress`];
+/// `lu_decompose_with_progress(&mut a,&mut indx,&mut d,1e-20,&indicator.start())?`.
+pub fn lu_decompose_with_progress(
+    a: &mut Matrix<'_>,
+    indx: &mut IntegerVector<'_>,
+    d: &mut f64,
+    tiny: f64,
+    progress: &ProgressRange<'_>,
+) -> Result<i32, Failure> {
+    let mut scales = Vector::with_bounds(1, a.row_number())?;
+    lu_decompose_with_scales_and_progress(a, indx, d, &mut scales, tiny, progress)
+}
+
+/// The overload taking the caller's scale workspace `vv` (native default TINY 1e-30)
+/// with the default progress range;
 /// `lu_decompose_with_scales(&mut a,&mut indx,&mut d,&mut vv,1e-30)?`.
 pub fn lu_decompose_with_scales(
     a: &mut Matrix<'_>,
@@ -42,29 +57,75 @@ pub fn lu_decompose_with_scales(
     vv: &mut Vector<'_>,
     tiny: f64,
 ) -> Result<i32, Failure> {
+    lu_decompose_with_scales_and_progress(a, indx, d, vv, tiny, &ProgressRange::default())
+}
+
+/// `LU_Decompose(a, indx, d, vv, TINY, theProgress)`: the Crout decomposition inside a
+/// `"math_Gauss LU_Decompose"` progress scope of `n` steps, one per column.
+///
+/// The user break is polled before each column; a break stops with
+/// `STATUS_USER_ABORTED` (-1) and leaves the partial decomposition in `a`. Every
+/// exit, the singular ones included, closes the scope and so completes `progress`,
+/// as the native scope destructor does.
+/// `lu_decompose_with_scales_and_progress(&mut a,&mut indx,&mut d,&mut vv,1e-30,&range)?`.
+pub fn lu_decompose_with_scales_and_progress(
+    a: &mut Matrix<'_>,
+    indx: &mut IntegerVector<'_>,
+    d: &mut f64,
+    vv: &mut Vector<'_>,
+    tiny: f64,
+    progress: &ProgressRange<'_>,
+) -> Result<i32, Failure> {
     let n = require_square(a, indx, "LU_Decompose")?;
     require_vector(vv, n, "LU_Decompose")?;
     *d = 1.0;
+    let scope = ProgressScope::with_literal(progress, "math_Gauss LU_Decompose", n.into(), false);
     if !row_scales(a, vv, n, tiny) {
         return Ok(STATUS_SINGULAR_MATRIX);
     }
-    for j in 1..=n {
-        upper_column(a, j);
-        let pivot = pivot_row(a, vv, j, n);
-        if j != pivot {
-            swap_rows(a, j, pivot, n);
-            *d = -*d;
-            vv[pivot] = vv[j];
-        }
-        indx[j] = pivot;
-        if a[(j, j)].abs() <= tiny {
+    // Native `for (j = 1; j <= n && aPS.More(); j++, aPS.Next())`: each Next() range
+    // is a temporary, so it advances the indicator at once.
+    let mut j = 1;
+    while j <= n && scope.more() {
+        if !decompose_column(a, indx, d, vv, j, tiny) {
             return Ok(STATUS_SINGULAR_MATRIX);
         }
-        if j != n {
-            scale_column(a, j, n);
-        }
+        j += 1;
+        drop(scope.next(1.));
     }
-    Ok(STATUS_OK)
+    Ok(if j <= n {
+        STATUS_USER_ABORTED
+    } else {
+        STATUS_OK
+    })
+}
+
+/// One Crout column: reduce, pivot, record and scale; false when the pivot is at or
+/// below `tiny` (singular).
+fn decompose_column(
+    a: &mut Matrix<'_>,
+    indx: &mut IntegerVector<'_>,
+    d: &mut f64,
+    vv: &mut Vector<'_>,
+    j: i32,
+    tiny: f64,
+) -> bool {
+    let n = a.row_number();
+    upper_column(a, j);
+    let pivot = pivot_row(a, vv, j, n);
+    if j != pivot {
+        swap_rows(a, j, pivot, n);
+        *d = -*d;
+        vv[pivot] = vv[j];
+    }
+    indx[j] = pivot;
+    if a[(j, j)].abs() <= tiny {
+        return false;
+    }
+    if j != n {
+        scale_column(a, j, n);
+    }
+    true
 }
 
 /// Stores `1 / max |a(i, j)|` per row; a row at or below `tiny` stops with the earlier

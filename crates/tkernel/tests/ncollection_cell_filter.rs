@@ -176,7 +176,7 @@ fn NCollection_CellFilterTest__Reset() {
     aFilter.add(&10, &[0.5, 0.5]);
 
     // Reset with new cell size
-    aFilter.reset(2.0);
+    aFilter.reset(2.0, None).unwrap();
 
     // After reset, all data should be cleared
     let mut anInspector = TestInspector::<2>::default();

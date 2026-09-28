@@ -12,7 +12,10 @@
 // commercial license or contractual agreement.
 
 //! Key/value hash nodes threaded in insertion order with stable entry storage.
-use super::ordered_table::{OrderedItems, OrderedItemsMut, OrderedNode, OrderedTable};
+use super::ordered_table::{
+    OrderedItems, OrderedItemsMut, OrderedNode, OrderedNodeMut, OrderedNodeRef, OrderedTable,
+    buckets_from_int,
+};
 use super::{BaseAllocator, DefaultHashPolicy, HashPolicy};
 use crate::standard::Failure;
 use std::fmt::Debug;
@@ -40,7 +43,17 @@ pub struct OrderedDataValuesMut<'a, K, V> {
 #[derive(Clone, Default)]
 pub struct OrderedDataCursor {
     slot: Option<usize>,
+    // Native iterators remember their map; a default-constructed one resets to exhausted.
+    bound: bool,
 }
+/// Native `IsEqual`: two cursors of the same map are equal on the same node, and every
+/// exhausted cursor equals every other; `map.cursor() == map.cursor()`.
+impl PartialEq for OrderedDataCursor {
+    fn eq(&self, other: &Self) -> bool {
+        self.slot == other.slot
+    }
+}
+impl Eq for OrderedDataCursor {}
 impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
     /// Injects hash/equality policy and initial buckets; `OrderedDataMap::with_hasher(policy,10)`.
     pub fn with_hasher(hasher: H, buckets: usize) -> Self {
@@ -51,6 +64,29 @@ impl<K: Debug, V, H: HashPolicy<K>> OrderedDataMap<K, V, H> {
         Self {
             table: OrderedTable::new(hasher, buckets, resource),
         }
+    }
+    /// The signed-count constructors; a negative count raises Standard_OutOfRange;
+    /// `OrderedDataMap::with_int_buckets(policy, 10, BaseAllocator::common())?`.
+    pub fn with_int_buckets(
+        hasher: H,
+        buckets: i32,
+        resource: BaseAllocator,
+    ) -> Result<Self, Failure> {
+        Ok(Self::with_allocator(
+            hasher,
+            buckets_from_int(buckets)?,
+            resource,
+        ))
+    }
+    /// `ReSize(int)`: a negative size raises Standard_OutOfRange; `map.resize_int(200)?`.
+    pub fn resize_int(&mut self, size: i32) -> Result<(), Failure> {
+        self.resize(buckets_from_int(size)?);
+        Ok(())
+    }
+    /// Drops bindings and adopts `resource` (the common allocator for `None`), releasing
+    /// bucket storage only when the allocator changes; `map.clear_with_allocator(None)`.
+    pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
+        self.table.clear_with_allocator(resource);
     }
     /// Counts bindings; `map.len()==3`.
     pub fn len(&self) -> usize {
@@ -141,9 +177,10 @@ impl<K: Debug, V, H: HashPolicy<K> + Clone> OrderedDataMap<K, V, H> {
         );
         std::mem::replace(source, empty)
     }
-    /// Replaces bindings with a moved source; `map.move_assign(&mut source)`.
+    /// Native move assignment, which swaps rather than empties: the source receives this
+    /// map's former bindings, policy and allocator; `map.move_assign(&mut source)`.
     pub fn move_assign(&mut self, source: &mut Self) {
-        *self = Self::move_from(source);
+        self.exchange(source);
     }
 }
 impl<K: Debug, V, H: HashPolicy<K> + Default> Default for OrderedDataMap<K, V, H> {

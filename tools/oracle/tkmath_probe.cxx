@@ -163,6 +163,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_gp_core_probe.cxx"
 #include "tkmath_vector_base_probe.cxx"
 #include "tkmath_recipes_probe.cxx"
+#include "tkmath_progress_probe.cxx"
 #include "tkmath_mathsys_api_probe.cxx"
 #include "tkmath_integ_lin_api_probe.cxx"
 #include "tkmath_mathutils_functor_api_probe.cxx"
@@ -178,6 +179,8 @@ void planar_case(std::istream& input) {
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
  {"modern_global", modern_global_case},
+ {"progress_lu", progress_probe::lu_case},
+ {"progress_gauss", progress_probe::gauss_case},
  {"mathsys_small_linear", mathsys_small_linear_case},
  {"mathsys_small_box", mathsys_small_box_case},
  {"mathsys_linear_api", mathsys_linear_api_case},

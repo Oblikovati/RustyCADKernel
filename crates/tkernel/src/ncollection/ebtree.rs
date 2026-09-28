@@ -80,8 +80,18 @@ impl<T: Clone + Default + HashKey + PartialEq + std::fmt::Debug, B: BoundingVolu
     }
     /// Release both nodes and object bindings; `tree.clear()`.
     pub fn clear(&mut self) {
+        self.clear_with_allocator(None);
+    }
+    /// Release nodes and bindings, then adopt `allocator` for future nodes when given
+    /// (native `Clear(aNewAlloc)`); `tree.clear_with_allocator(Some(arena))`.
+    pub fn clear_with_allocator(&mut self, allocator: Option<BaseAllocator>) {
         self.objects.clear(false);
-        self.tree.clear();
+        self.tree.clear_with_allocator(allocator);
+    }
+    /// The underlying UBTree, for the inherited read-only members (`Root`, `IsEmpty`,
+    /// `Allocator`, `Select`); `tree.as_ubtree().root()`.
+    pub fn as_ubtree(&self) -> &UBTree<T, B> {
+        &self.tree
     }
     /// Transfer tree and index together; `EBTree::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {

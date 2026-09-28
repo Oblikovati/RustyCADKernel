@@ -15,37 +15,37 @@
 fn TCollection_ExtendedStringTest__FirstLocationInSet_FindsCharacter() {
     let string = ExtendedString::new("Hello World");
     let set = ExtendedString::new("aeiou");
-    assert_eq!(string.first_location_in_set(&set, 1, string.len()), 2);
+    assert_eq!(string.first_location_in_set(&set, 1, string.length()).unwrap(), 2);
 }
 #[test]
 fn TCollection_ExtendedStringTest__FirstLocationInSet_NotFound() {
     let string = ExtendedString::new("BCDFG");
     let set = ExtendedString::new("aeiou");
-    assert_eq!(string.first_location_in_set(&set, 1, string.len()), 0);
+    assert_eq!(string.first_location_in_set(&set, 1, string.length()).unwrap(), 0);
 }
 #[test]
 fn TCollection_ExtendedStringTest__FirstLocationInSet_EmptySet() {
     let string = ExtendedString::new("Hello");
     let set = ExtendedString::new("");
-    assert_eq!(string.first_location_in_set(&set, 1, string.len()), 0);
+    assert_eq!(string.first_location_in_set(&set, 1, string.length()).unwrap(), 0);
 }
 #[test]
 fn TCollection_ExtendedStringTest__FirstLocationNotInSet_FindsCharacter() {
     let string = ExtendedString::new("aaaHello");
     let set = ExtendedString::new("a");
-    assert_eq!(string.first_location_not_in_set(&set, 1, string.len()), 4);
+    assert_eq!(string.first_location_not_in_set(&set, 1, string.length()).unwrap(), 4);
 }
 #[test]
 fn TCollection_ExtendedStringTest__FirstLocationNotInSet_AllInSet() {
     let string = ExtendedString::new("aaa");
     let set = ExtendedString::new("a");
-    assert_eq!(string.first_location_not_in_set(&set, 1, string.len()), 0);
+    assert_eq!(string.first_location_not_in_set(&set, 1, string.length()).unwrap(), 0);
 }
 #[test]
 fn TCollection_ExtendedStringTest__FirstLocationNotInSet_EmptySet() {
     let string = ExtendedString::new("Hello");
     let set = ExtendedString::new("");
-    assert_eq!(string.first_location_not_in_set(&set, 1, string.len()), 1);
+    assert_eq!(string.first_location_not_in_set(&set, 1, string.length()).unwrap(), 1);
 }
 #[test]
 fn TCollection_ExtendedStringTest__IntegerValue_ValidInteger() {

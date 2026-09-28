@@ -17,18 +17,15 @@ use super::{BoundingNode, BoundingVolume, UBTree};
 impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
     pub(in crate::ncollection) fn insert_leaf(&mut self, object: T, bounds: B) -> usize {
         let Some(mut branch) = self.root else {
-            let index: usize = self.allocate_node(BoundingNode {
-                bounds,
-                object,
-                children: None,
-                parent: None,
-            });
+            let index: usize = self.allocate_node(BoundingNode::new(object, bounds));
             self.root = Some(index);
             return index;
         };
         loop {
             if self.node(branch).bounds.is_out(&bounds) || self.node(branch).is_leaf() {
-                return self.gemmate(branch, object, bounds);
+                let mut union: B = bounds.clone();
+                union.add(&self.node(branch).bounds);
+                return self.gemmate(branch, union, object, bounds).unwrap();
             }
             self.node_mut(branch).bounds.add(&bounds);
             branch = self.best_child(branch, &bounds);
@@ -50,24 +47,6 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
         } else {
             first
         }
-    }
-    fn gemmate(&mut self, branch: usize, object: T, bounds: B) -> usize {
-        let mut union: B = bounds.clone();
-        union.add(&self.node(branch).bounds);
-        let first: usize = self.allocate_node(self.node(branch).clone());
-        self.node_mut(first).parent = Some(branch);
-        let second: usize = self.allocate_node(BoundingNode {
-            bounds,
-            object,
-            parent: Some(branch),
-            children: None,
-        });
-        self.reparent_children(first);
-        let node: &mut BoundingNode<T, B> = self.node_mut(branch);
-        node.children = Some([first, second]);
-        node.bounds = union;
-        node.object = T::default();
-        second
     }
     pub(in crate::ncollection) fn reparent_children(&mut self, parent: usize) {
         if let Some(children) = self.node(parent).children {

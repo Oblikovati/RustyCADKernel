@@ -15,6 +15,10 @@
 
 use super::{List, ListCursor, ListIter, ListIterMut, Node, address};
 impl ListCursor {
+    /// Repositions on the head of `list`, as OCCT's `Iterator::Init`; `cursor.init(&list)`.
+    pub fn init<T>(&mut self, list: &List<T>) {
+        *self = list.cursor();
+    }
     /// Checks whether this cursor names a node; `cursor.more()`.
     pub fn more(self) -> bool {
         self.address.is_some()
@@ -65,5 +69,12 @@ impl<'a, T> IntoIterator for &'a List<T> {
     type IntoIter = ListIter<'a, T>;
     fn into_iter(self) -> Self::IntoIter {
         self.iter()
+    }
+}
+impl<'a, T> IntoIterator for &'a mut List<T> {
+    type Item = &'a mut T;
+    type IntoIter = ListIterMut<'a, T>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter_mut()
     }
 }
