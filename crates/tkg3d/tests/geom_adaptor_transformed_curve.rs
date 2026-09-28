@@ -22,9 +22,7 @@ use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
 use rustycad_tkg3d::geom::{GeomCircle, GeomCurve, GeomLine};
 use rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve;
 use rustycad_tkmath::geom_abs::CurveType;
-use rustycad_tkmath::gp::{
-    Axis1, Axis2, Direction3, Point3, Transform3, TransformForm, Vector3,
-};
+use rustycad_tkmath::gp::{Axis1, Axis2, Direction3, Point3, Transform3, TransformForm, Vector3};
 use std::f64::consts::PI;
 
 const THE_TOLERANCE: f64 = 1e-10;
@@ -39,7 +37,10 @@ fn CreateTranslation(theDx: f64, theDy: f64, theDz: f64) -> Transform3 {
 // Helper function to create a rotation transformation around Z axis.
 fn CreateRotationZ(theAngleRad: f64) -> Transform3 {
     let mut aTrsf = Transform3::default();
-    let anAxis = Axis1::new(Point3::new(0.0, 0.0, 0.0), Direction3::new(0.0, 0.0, 1.0).unwrap());
+    let anAxis = Axis1::new(
+        Point3::new(0.0, 0.0, 0.0),
+        Direction3::new(0.0, 0.0, 1.0).unwrap(),
+    );
     aTrsf.set_rotation(anAxis, theAngleRad).unwrap();
     aTrsf
 }
@@ -49,12 +50,19 @@ fn line(p: Point3, d: Direction3) -> Handle<dyn GeomCurve> {
 }
 
 fn circle_z(radius: f64) -> Handle<dyn GeomCurve> {
-    let frame = Axis2::new(Point3::new(0.0, 0.0, 0.0), Direction3::new(0.0, 0.0, 1.0).unwrap()).unwrap();
+    let frame = Axis2::new(
+        Point3::new(0.0, 0.0, 0.0),
+        Direction3::new(0.0, 0.0, 1.0).unwrap(),
+    )
+    .unwrap();
     Handle::new(GeomCircle::new(frame, radius).unwrap()).cast()
 }
 
 fn x_line() -> Handle<dyn GeomCurve> {
-    line(Point3::new(0.0, 0.0, 0.0), Direction3::new(1.0, 0.0, 0.0).unwrap())
+    line(
+        Point3::new(0.0, 0.0, 0.0),
+        Direction3::new(1.0, 0.0, 0.0).unwrap(),
+    )
 }
 
 //==================================================================================================
@@ -96,7 +104,10 @@ fn GeomAdaptor_TransformedCurveTest__ConstructWithBounds() {
 
 #[test]
 fn GeomAdaptor_TransformedCurveTest__Line_IdentityTransform() {
-    let aLine = line(Point3::new(1.0, 2.0, 3.0), Direction3::new(1.0, 0.0, 0.0).unwrap());
+    let aLine = line(
+        Point3::new(1.0, 2.0, 3.0),
+        Direction3::new(1.0, 0.0, 0.0).unwrap(),
+    );
     let aTrsf = Transform3::default(); // identity
 
     let aCurve = GeomAdaptorTransformedCurve::with_curve(&aLine, aTrsf).unwrap();
@@ -192,8 +203,11 @@ fn GeomAdaptor_TransformedCurveTest__D1_Translation() {
 
         // Point should be translated
         let aLocalPnt: Point3 = aCircle.value(aParams[i]).unwrap();
-        let aExpectedPnt =
-            Point3::new(aLocalPnt.x() + 10.0, aLocalPnt.y() + 20.0, aLocalPnt.z() + 30.0);
+        let aExpectedPnt = Point3::new(
+            aLocalPnt.x() + 10.0,
+            aLocalPnt.y() + 20.0,
+            aLocalPnt.z() + 30.0,
+        );
         EXPECT_NEAR(aPnt.distance(&aExpectedPnt), 0.0, THE_TOLERANCE);
 
         // D1 vector: translation doesn't change vectors, so should match local D1

@@ -62866,6 +62866,710 @@
       "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::offset_value",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_HVertex()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::default",
+      "status": "implemented",
+      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_HVertex(const gp_Pnt2d&,TopAbs_Orientation,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::new",
+      "status": "implemented",
+      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_HVertex::Value",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::value",
+      "status": "implemented",
+      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_HVertex::Parameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::parameter",
+      "status": "implemented",
+      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_HVertex::Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::resolution",
+      "status": "implemented",
+      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_HVertex::Orientation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::orientation",
+      "status": "implemented",
+      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_HVertex::IsSame",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::is_same",
+      "status": "implemented",
+      "notes": "Adaptor3d_HVertex is the Handle-shared class Adaptor3dHVertex; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_HVertex::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HVertex.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dHVertex::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::default",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::with_surface",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Initialize()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::initialize",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Initialize(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::initialize_surface",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Initialize(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::initialize_curve",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Init",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::init",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::More",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::more",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Value",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::value",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Next",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::next",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::InitVertexIterator",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::init_vertex_iterator",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::MoreVertex",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::more_vertex",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Vertex",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::vertex",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::NextVertex",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::next_vertex",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Classify",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::classify",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::IsThePointOn",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::is_the_point_on",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Orientation(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::curve_orientation",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Orientation(const occ::handle<Adaptor3d_HVertex>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::vertex_orientation",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Identical",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::identical",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Has3d",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::has_3d",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Tol3d(const occ::handle<Adaptor2d_Curve2d>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::curve_tol_3d",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Tol3d(const occ::handle<Adaptor3d_HVertex>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::vertex_tol_3d",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Pnt",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::pnt",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::ComputeSamplePoints",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::compute_sample_points",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::NbSamplesU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::nb_samples_u",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::NbSamplesV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::nb_samples_v",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::NbSamples",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::nb_samples",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::UParameters",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::u_parameters",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::VParameters",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::v_parameters",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::SamplePoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::sample_point",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::DomainIsInfinite",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::domain_is_infinite",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::Edge",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::edge",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::SamplePnts",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::sample_pnts",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::BSplSamplePnts",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::bspl_sample_pnts",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::IsUniformSampling",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::is_uniform_sampling",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::GetConeApexParam",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::get_cone_apex_param",
+      "status": "implemented",
+      "notes": "Adaptor3d_TopolTool is the Handle-shared class Adaptor3dTopolTool; the native virtual members are inherent methods (no port overrides them), members take &self with the state behind one lock, overloads take distinct names, output arguments become returned values and native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "Adaptor3d_TopolTool::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_TopolTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dTopolTool::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::default",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve(const occ::handle<Geom_Curve>&,const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::with_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve(const occ::handle<Geom_Curve>&,double,double,const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::with_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::shallow_copy",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Load(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::load",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Load(const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::load_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::LoadCurveOnSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::load_curve_on_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::SetTrsf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::set_trsf",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Trsf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::trsf",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Is3DCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::is_3d_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::IsCurveOnSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::is_curve_on_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Curve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::ChangeCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::change_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::CurveOnSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::curve_on_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::GeomCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::geom_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::FirstParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::LastParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::NbIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::nb_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Intervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Trim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::IsClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::is_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::IsPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Period",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::get_type",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Line",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::line",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Circle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::circle",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Ellipse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::ellipse",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Hyperbola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::hyperbola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Parabola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::parabola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Degree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::IsRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::is_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::NbPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::NbKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::nb_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::bezier",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::bspline",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedCurve::OffsetCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::offset_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
     }
   ],
   "tests": [
