@@ -1,4 +1,6 @@
 //! The TKG3d probe operations, one module per C++ probe file under tools/oracle.
+pub mod adaptor3d;
+pub mod adaptor3d_inputs;
 pub mod advapprox;
 pub mod bezier_surface;
 pub mod bspl;
@@ -9,6 +11,8 @@ pub mod curves;
 pub mod eval_bezier_surfaces;
 pub mod eval_curves;
 pub mod eval_surfaces;
+pub mod geom_adaptor;
+pub mod geom_adaptor_cases;
 pub mod hash;
 pub mod offset_surface;
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
@@ -18,3 +22,4 @@ pub mod simple;
 pub mod surfaces;
 pub mod swept;
 pub mod top_abs;
+pub mod topology;

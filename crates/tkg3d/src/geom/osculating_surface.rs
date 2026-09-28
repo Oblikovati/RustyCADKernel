@@ -17,12 +17,13 @@
 //! B-spline or Bezier surface with a degenerate (quasi-punctual) boundary, one
 //! reduced osculating B-spline per span along that boundary, used to find the
 //! normal of an offset where the basis normal vanishes.
-mod adaptor;
 mod build;
+mod punctual;
 use crate::geom::offset_surface_utils::OsculatingQuery;
 use crate::geom::{GeomBSplineSurface, GeomBezierSurface, GeomSurface};
-use adaptor::{SplineAdaptor, is_q_punctual};
+use crate::geom_adaptor::GeomAdaptorSurface;
 use build::{Along, build_osculating_surface};
+use punctual::is_q_punctual;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::bsplclib;
@@ -95,11 +96,11 @@ impl GeomOsculatingSurface {
         }
         let bounds = source.bounds();
         let (u1, u2, v1, v2) = bounds;
-        let mut adaptor = SplineAdaptor::new(surface.clone(), bounds)?;
-        self.along[0] = is_q_punctual(&mut adaptor, v1, true, 0.0, tol)?;
-        self.along[1] = is_q_punctual(&mut adaptor, v2, true, 0.0, tol)?;
-        self.along[2] = is_q_punctual(&mut adaptor, u1, false, 0.0, tol)?;
-        self.along[3] = is_q_punctual(&mut adaptor, u2, false, 0.0, tol)?;
+        let adaptor = GeomAdaptorSurface::with_bounds(surface, bounds)?;
+        self.along[0] = is_q_punctual(&adaptor, v1, true, 0.0, tol)?;
+        self.along[1] = is_q_punctual(&adaptor, v2, true, 0.0, tol)?;
+        self.along[2] = is_q_punctual(&adaptor, u1, false, 0.0, tol)?;
+        self.along[3] = is_q_punctual(&adaptor, u2, false, 0.0, tol)?;
         if !self.has_osc_surf() {
             return Ok(false);
         }
@@ -189,16 +190,15 @@ impl GeomOsculatingSurface {
             v: self.is_along_v(),
         };
         let (mut surface, mut knots, mut reductions) = (init.clone(), knots, 0usize);
+        let adaptor = GeomAdaptorSurface::default();
         loop {
             let current: &GeomBSplineSurface = surface.get().expect("reductions are never null");
             let Some(reduced) = build_osculating_surface(param, knots, current, along)? else {
                 return Ok(None);
             };
             reductions += 1;
-            let reduced_surface: Handle<dyn GeomSurface> = reduced.cast();
-            let bounds = reduced_surface.bounds();
-            let mut adaptor = SplineAdaptor::new(reduced_surface, bounds)?;
-            let still_punctual: bool = is_q_punctual(&mut adaptor, param, iso_v, 0.0, self.tol)?;
+            adaptor.load(&reduced.cast())?;
+            let still_punctual: bool = is_q_punctual(&adaptor, param, iso_v, 0.0, self.tol)?;
             knots = (1, 1);
             surface = reduced;
             if !still_punctual {

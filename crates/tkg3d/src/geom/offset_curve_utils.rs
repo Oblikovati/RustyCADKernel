@@ -19,7 +19,8 @@
 //! direction. The formulas and their evaluation order are the native ones,
 //! including the unstable fallback used when `|N|` is tiny. The `calculate_*`
 //! functions return false where the native ones do (degenerate normal).
-use super::curve::{GeomCurve, GeomCurveD1, GeomCurveD2, GeomCurveD3};
+use super::basis_eval::BasisCurveEvaluator;
+use super::curve::{GeomCurveD1, GeomCurveD2, GeomCurveD3};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::native::{std_max, std_min};
 use rustycad_tkmath::gp::{Direction3, Point3, Vector3, Xyz, resolution};
@@ -249,7 +250,7 @@ fn third_order_terms(
 /// `derivatives` holds D1..D4 and only D1..D`max_derivative` are written. Returns
 /// whether the direction changed (`AdjustDerivative`, whose native bool is always true);
 /// `adjust_derivative(&*basis, 3, u, [&mut d1, &mut d2, &mut d3, &mut d4])?`.
-pub fn adjust_derivative<C: GeomCurve + ?Sized>(
+pub fn adjust_derivative<C: BasisCurveEvaluator + ?Sized>(
     curve: &C,
     max_derivative: i32,
     u: f64,
@@ -258,7 +259,10 @@ pub fn adjust_derivative<C: GeomCurve + ?Sized>(
     const MIN_STEP: f64 = 1e-7;
     const MAX_DERIV_ORDER: i32 = 3;
     const DIVISION_FACTOR: f64 = 1.0e-3;
-    let (inf, sup) = (curve.first_parameter(), curve.last_parameter());
+    let (inf, sup) = (
+        curve.basis_first_parameter()?,
+        curve.basis_last_parameter()?,
+    );
     // RealLast() and RealFirst() are +/-DBL_MAX.
     let du: f64 = if sup >= f64::MAX || inf <= -f64::MAX {
         0.0
@@ -271,7 +275,7 @@ pub fn adjust_derivative<C: GeomCurve + ?Sized>(
     let mut v: Vector3;
     loop {
         index += 1;
-        v = curve.eval_dn(u, index)?;
+        v = curve.basis_dn(u, index)?;
         if !(v.square_magnitude() <= resolution() && index < MAX_DERIV_ORDER) {
             break;
         }
@@ -281,40 +285,40 @@ pub fn adjust_derivative<C: GeomCurve + ?Sized>(
     } else {
         u - delta
     };
-    let p1: Point3 = curve.eval_d0(std_min(u, other))?;
-    let p2: Point3 = curve.eval_d0(std_max(u, other))?;
+    let p1: Point3 = curve.basis_d0(std_min(u, other))?;
+    let p2: Point3 = curve.basis_d0(std_max(u, other))?;
     let is_direction_change: bool = v.dot(Vector3::between(p1, p2)) < 0.0;
     let sign: f64 = if is_direction_change { -1.0 } else { 1.0 };
     let [d1, rest @ ..] = derivatives;
     *d1 = v * sign;
     for (i, target) in (1..max_derivative).zip(rest) {
-        *target = curve.eval_dn(u, index + i)? * sign;
+        *target = curve.basis_dn(u, index + i)? * sign;
     }
     Ok(is_direction_change)
 }
 
 /// Offset point from the basis D1 (`EvaluateD0`); `None` for a degenerate normal;
 /// `evaluate_d0(u, &*basis, dir, 2.0)?`.
-pub fn evaluate_d0<C: GeomCurve + ?Sized>(
+pub fn evaluate_d0<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     basis: &C,
     dir: Direction3,
     offset: f64,
 ) -> Result<Option<Point3>, Failure> {
-    let result: GeomCurveD1 = basis.eval_d1(u)?;
+    let result: GeomCurveD1 = basis.basis_d1(u)?;
     let mut value: Point3 = result.point;
     let computed: bool = calculate_d0(&mut value, result.d1, dir.xyz(), offset, resolution());
     Ok(computed.then_some(value))
 }
 
 /// Offset point and D1 from the basis D2 (`EvaluateD1`); `evaluate_d1(u, &*basis, dir, 2.0)?`.
-pub fn evaluate_d1<C: GeomCurve + ?Sized>(
+pub fn evaluate_d1<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     basis: &C,
     dir: Direction3,
     offset: f64,
 ) -> Result<Option<GeomCurveD1>, Failure> {
-    let result: GeomCurveD2 = basis.eval_d2(u)?;
+    let result: GeomCurveD2 = basis.basis_d2(u)?;
     let (mut point, mut d1) = (result.point, result.d1);
     let computed: bool = calculate_d1(
         &mut point,
@@ -329,13 +333,13 @@ pub fn evaluate_d1<C: GeomCurve + ?Sized>(
 
 /// Offset point, D1 and D2 from the basis D3, adjusting a singular D1
 /// (`EvaluateD2`); `evaluate_d2(u, &*basis, dir, 2.0)?`.
-pub fn evaluate_d2<C: GeomCurve + ?Sized>(
+pub fn evaluate_d2<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     basis: &C,
     dir: Direction3,
     offset: f64,
 ) -> Result<Option<GeomCurveD2>, Failure> {
-    let result: GeomCurveD3 = basis.eval_d3(u)?;
+    let result: GeomCurveD3 = basis.basis_d3(u)?;
     let (mut point, mut d1, mut d2, mut d3) = (result.point, result.d1, result.d2, result.d3);
     let mut is_direction_change: bool = false;
     if d1.square_magnitude() <= resolution() {
@@ -358,15 +362,15 @@ pub fn evaluate_d2<C: GeomCurve + ?Sized>(
 
 /// Offset point and three derivatives from the basis D3 and D4, adjusting a singular
 /// D1 (`EvaluateD3`); `evaluate_d3(u, &*basis, dir, 2.0)?`.
-pub fn evaluate_d3<C: GeomCurve + ?Sized>(
+pub fn evaluate_d3<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     basis: &C,
     dir: Direction3,
     offset: f64,
 ) -> Result<Option<GeomCurveD3>, Failure> {
-    let result: GeomCurveD3 = basis.eval_d3(u)?;
+    let result: GeomCurveD3 = basis.basis_d3(u)?;
     let (mut point, mut d1, mut d2, mut d3) = (result.point, result.d1, result.d2, result.d3);
-    let mut d4: Vector3 = basis.eval_dn(u, 4)?;
+    let mut d4: Vector3 = basis.basis_dn(u, 4)?;
     let mut is_direction_change: bool = false;
     if d1.square_magnitude() <= resolution() {
         let derivatives = [&mut d1, &mut d2, &mut d3, &mut d4];
@@ -387,7 +391,9 @@ pub fn evaluate_d3<C: GeomCurve + ?Sized>(
 
 /// Offset derivative of order `n`: D1..D3 through the functions above, the basis
 /// derivative beyond (`EvaluateDN`); `evaluate_dn(u, &*basis, dir, 2.0, 2)?`.
-pub fn evaluate_dn<C: GeomCurve + ?Sized>(
+///
+/// Quirk kept for `n == 3`: see [`evaluate_d3_aliased`].
+pub fn evaluate_dn<C: BasisCurveEvaluator + ?Sized>(
     u: f64,
     basis: &C,
     dir: Direction3,
@@ -397,7 +403,47 @@ pub fn evaluate_dn<C: GeomCurve + ?Sized>(
     Ok(match n {
         1 => evaluate_d1(u, basis, dir, offset)?.map(|result| result.d1),
         2 => evaluate_d2(u, basis, dir, offset)?.map(|result| result.d2),
-        3 => evaluate_d3(u, basis, dir, offset)?.map(|result| result.d3),
-        _ => Some(basis.eval_dn(u, n)?),
+        3 => evaluate_d3_aliased(u, basis, dir, offset)?,
+        _ => Some(basis.basis_dn(u, n)?),
     })
+}
+
+/// The third derivative as native `EvaluateDN` computes it: it passes one dummy vector
+/// as both `theD1` and `theD2` of `EvaluateD3`, so the basis D2 overwrites D1. The
+/// singularity test, AdjustDerivative and the normal of CalculateD3 then all read the
+/// basis second derivative where D1 belongs (a line offset raises there). Only the D3
+/// output is kept, which the aliased writes do not reach; the same quirk as Geom2d;
+/// `evaluate_d3_aliased(u, &*basis, dir, 2.0)?`.
+pub fn evaluate_d3_aliased<C: BasisCurveEvaluator + ?Sized>(
+    u: f64,
+    basis: &C,
+    dir: Direction3,
+    offset: f64,
+) -> Result<Option<Vector3>, Failure> {
+    let result: GeomCurveD3 = basis.basis_d3(u)?;
+    let (mut point, mut dummy, mut d3) = (result.point, result.d2, result.d3);
+    let mut d4: Vector3 = basis.basis_dn(u, 4)?;
+    let mut is_direction_change: bool = false;
+    if dummy.square_magnitude() <= resolution() {
+        // AdjustDerivative writes theD1 first and then theD2, the same vector: the
+        // tangent it finds is overwritten by the next derivative.
+        let mut overwritten = Vector3::default();
+        let slots = [&mut overwritten, &mut dummy, &mut d3, &mut d4];
+        is_direction_change = adjust_derivative(basis, 4, u, slots)?;
+    }
+    // CalculateD3 reads theD1 and theD2 before writing either, so two copies of the
+    // dummy reproduce the aliased reads.
+    let (mut first, mut second) = (dummy, dummy);
+    let derivatives = [&mut first, &mut second, &mut d3];
+    let xyz = dir.xyz();
+    let computed: bool = calculate_d3(
+        &mut point,
+        derivatives,
+        d4,
+        xyz,
+        offset,
+        is_direction_change,
+        resolution(),
+    );
+    Ok(computed.then_some(d3))
 }

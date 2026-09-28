@@ -349,7 +349,7 @@ pub fn bspline_case(values: &[f64]) {
     end();
 }
 
-fn desc(r: &mut Reader, rep: Handle<dyn GeomCurve>) -> Handle<dyn RepCurveDesc> {
+pub fn desc(r: &mut Reader, rep: Handle<dyn GeomCurve>) -> Handle<dyn RepCurveDesc> {
     let (kind, order) = (r.integer(), r.integer() as usize);
     let domain = r.flag();
     let (first, last, scale, offset) = (r.real(), r.real(), r.real(), r.real());

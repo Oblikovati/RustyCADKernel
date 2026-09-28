@@ -20,7 +20,8 @@
 //! Standard exceptions are shared with Geom2d.
 use rustycad_tkernel::standard::Failure;
 pub use rustycad_tkg2d::geom2d::errors::{
-    array_bounds, construction, dimension, domain, no_such_object, out_of_range, program, range,
+    array_bounds, construction, dimension, domain, no_such_object, null_object, out_of_range,
+    program, range,
 };
 
 /// `Geom_UndefinedDerivative`; `undefined_derivative("Geom_Line::EvalDN: N = 0; expected >= 1")`.
