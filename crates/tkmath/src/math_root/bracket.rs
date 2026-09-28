@@ -11,7 +11,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::newton::valid_config;
+use super::utils::{have_opposite_signs, is_valid_bounds, is_valid_config};
 use crate::math::Function;
 use crate::math_utils::{Config, ScalarResult, Status};
 pub(super) fn finite_value(
@@ -45,7 +45,7 @@ pub(super) fn initialize(
     config: &Config,
 ) -> Result<[f64; 4], ScalarResult> {
     let mut result: ScalarResult = ScalarResult::default();
-    if !lower.is_finite() || !upper.is_finite() || lower >= upper || !valid_config(config) {
+    if !is_valid_bounds(lower, upper) || !is_valid_config(config) {
         result.status = Status::InvalidInput;
         return Err(result);
     }
@@ -61,7 +61,7 @@ pub(super) fn initialize(
     if fb.abs() <= config.f_tolerance {
         return Err(endpoint_result(upper, fb));
     }
-    if fa.is_sign_negative() == fb.is_sign_negative() {
+    if !have_opposite_signs(fa, fb) {
         result.status = Status::InvalidInput;
         return Err(result);
     }

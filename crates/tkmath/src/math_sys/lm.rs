@@ -15,7 +15,7 @@
 use super::{
     SystemResult,
     linear::{safe_norm, zero_matrix},
-    newton::owned,
+    newton::{owned, same_bounds},
 };
 use crate::{
     math::{FunctionSetWithDerivatives, Matrix, Vector},
@@ -27,6 +27,9 @@ mod config;
 mod damping;
 mod finish;
 pub use config::LMConfig;
+pub use finish::finish_lm;
+/// Damping retries tried in one LM iteration before giving up (`THE_LM_DAMPING_MAX`).
+pub const LM_DAMPING_MAX: u32 = 24;
 struct LMState {
     solution: Vector<'static>,
     residual: Vector<'static>,
@@ -45,7 +48,7 @@ pub fn levenberg_marquardt(
     start: &Vector<'_>,
     config: &LMConfig,
 ) -> SystemResult {
-    run(f, start, config, None)
+    lm_impl(f, start, config, None, None)
 }
 /// Projects LM steps onto box constraints; `levenberg_marquardt_bounded(&mut f,&start,&lower,&upper,&LMConfig::default())`.
 pub fn levenberg_marquardt_bounded(
@@ -55,14 +58,20 @@ pub fn levenberg_marquardt_bounded(
     upper: &Vector<'_>,
     config: &LMConfig,
 ) -> SystemResult {
-    run(f, start, config, Some((lower, upper)))
+    lm_impl(f, start, config, Some(lower), Some(upper))
 }
-fn run(
+/// Shared LM driver (`LMImpl`): validates the start and configuration, clamps into the box,
+/// iterates damped scaled steps with gain-ratio control and finishes with [`finish_lm`].
+/// Bounds apply only when both `lower` and `upper` are given, as with the native pointers;
+/// `lm_impl(&mut f, &start, &LMConfig::default(), None, None)`.
+pub fn lm_impl(
     f: &mut impl FunctionSetWithDerivatives,
     start: &Vector<'_>,
     config: &LMConfig,
-    bounds: Option<(&Vector<'_>, &Vector<'_>)>,
+    lower: Option<&Vector<'_>>,
+    upper: Option<&Vector<'_>>,
 ) -> SystemResult {
+    let bounds: Option<(&Vector<'_>, &Vector<'_>)> = lower.zip(upper);
     if f.variables() <= 0 || f.equations() <= 0 {
         return invalid();
     }
@@ -154,7 +163,10 @@ impl LMState {
             self.result.status = Status::NumericalError;
             return true;
         }
-        if self.projected_norm(&gradient) <= self.config.solver.tolerance {
+        let bounds = self.bounds.as_ref().map(|(lower, upper)| (lower, upper));
+        if finish::projected_gradient_norm(&self.solution, &gradient, bounds)
+            <= self.config.solver.tolerance
+        {
             self.result.status = Status::Ok;
             self.result.is_stationary = true;
             return true;
@@ -192,24 +204,6 @@ impl LMState {
             Status::NotConverged
         };
         true
-    }
-    fn projected_norm(&self, gradient: &Vector<'_>) -> f64 {
-        let mut norm: f64 = 0.0;
-        for i in 0..self.solution.length() as usize {
-            let mut component: f64 = *gradient.at(i).unwrap();
-            if self.blocked(i, component) {
-                component = 0.0;
-            }
-            norm = norm.hypot(component);
-        }
-        norm
-    }
-    fn blocked(&self, i: usize, component: f64) -> bool {
-        let Some((lower, upper)) = &self.bounds else {
-            return false;
-        };
-        (*self.solution.at(i).unwrap() <= *lower.at(i).unwrap() && component > 0.0)
-            || (*self.solution.at(i).unwrap() >= *upper.at(i).unwrap() && component < 0.0)
     }
 }
 fn gradient(jacobian: &Matrix<'_>, residual: &Vector<'_>) -> Vector<'static> {

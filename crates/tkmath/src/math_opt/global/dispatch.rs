@@ -81,7 +81,8 @@ fn hybrid(
         return swarm;
     }
     let local: Config = config.local((config.solver.max_iterations / 2).max(1));
-    let mut bounded: BoundedCallback<'_, '_, _> = BoundedCallback { function, bounds };
+    let mut bounded: BoundedFunction<'_, '_, _> =
+        BoundedFunction::new(function, bounds.lower, bounds.upper);
     let mut result: VectorResult = powell(&mut bounded, swarm.solution.as_ref().unwrap(), &local);
     if matches!(
         result.status,

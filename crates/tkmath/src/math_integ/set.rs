@@ -17,6 +17,9 @@ use crate::{
     math::{FunctionSet, Vector, ordered_gauss_points_and_weights},
     math_utils::Status,
 };
+/// Highest Gauss order `gauss_set` uses; larger requests are clamped
+/// (`MathInteg::THE_SET_GAUSS_MAX_ORDER`); `assert_eq!(SET_GAUSS_MAX_ORDER, 61)`.
+pub const SET_GAUSS_MAX_ORDER: usize = 61;
 /// Native vector-integral result, including callback count; `SetResult::default()`.
 #[derive(Default)]
 pub struct SetResult {
@@ -66,7 +69,7 @@ pub fn gauss_set(f: &mut impl FunctionSet, lower: f64, upper: f64, order: usize)
         result.status = Status::Ok;
         return result;
     }
-    let Some(mut rule) = SetRule::new(equations as usize, order.min(61)) else {
+    let Some(mut rule) = SetRule::new(equations as usize, order.min(SET_GAUSS_MAX_ORDER)) else {
         result.status = Status::InvalidInput;
         return result;
     };

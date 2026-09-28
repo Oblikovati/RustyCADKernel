@@ -14,12 +14,11 @@
 //! MathSys native behavior at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 use crate::math::{Matrix, Vector};
 use crate::math_lin::utils::is_finite_vector;
-pub(super) fn solve_scaled_qr(
-    a: &Matrix<'_>,
-    b: &Vector<'_>,
-    x: &mut Vector<'_>,
-    tolerance: f64,
-) -> bool {
+/// Least-squares solve of a full-column-rank system by Householder QR (`SolveQR`). Refuses
+/// `rows < cols`, a zero or non-finite column norm and a diagonal not above `tolerance`;
+/// entries of `x` are written during back substitution even when the call then fails.
+/// Example: `solve_qr(&a, &b, &mut x, RANK_TOLERANCE)`.
+pub fn solve_qr(a: &Matrix<'_>, b: &Vector<'_>, x: &mut Vector<'_>, tolerance: f64) -> bool {
     let rows: usize = a.row_number() as usize;
     let cols: usize = a.col_number() as usize;
     if rows < cols {

@@ -12,6 +12,7 @@
 // commercial license or contractual agreement.
 
 //! MathInteg_DoubleExp.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+use super::{DOUBLE_EXP_MAX_TRANSFORM_ARGUMENT, EXP_SINH_MIN_TRANSFORM_ARGUMENT};
 use std::f64::consts::FRAC_PI_2;
 #[derive(Clone, Copy)]
 pub(super) enum Transform {
@@ -48,7 +49,7 @@ impl Transform {
     }
 }
 fn finite_sample(u: f64, cosh_t: f64, bounds: [f64; 4]) -> Option<(f64, f64)> {
-    if u.abs() > 700.0 {
+    if u.abs() > DOUBLE_EXP_MAX_TRANSFORM_ARGUMENT {
         return None;
     }
     let cosh_u: f64 = u.cosh();
@@ -64,18 +65,21 @@ fn finite_sample(u: f64, cosh_t: f64, bounds: [f64; 4]) -> Option<(f64, f64)> {
     Some((x, weight))
 }
 fn semi_sample(u: f64, cosh_t: f64, lower: f64) -> Option<(f64, f64)> {
-    if u > 700.0 {
+    if u > DOUBLE_EXP_MAX_TRANSFORM_ARGUMENT {
         return None;
     }
     let exponential: f64 = u.exp();
     let weight: f64 = FRAC_PI_2 * cosh_t * exponential;
-    if weight < crate::math_utils::ZERO_TOL || !weight.is_finite() || u < -30.0 {
+    if weight < crate::math_utils::ZERO_TOL
+        || !weight.is_finite()
+        || u < EXP_SINH_MIN_TRANSFORM_ARGUMENT
+    {
         return None;
     }
     Some((lower + exponential, weight))
 }
 fn infinite_sample(u: f64, cosh_t: f64) -> Option<(f64, f64)> {
-    if u.abs() > 700.0 {
+    if u.abs() > DOUBLE_EXP_MAX_TRANSFORM_ARGUMENT {
         return None;
     }
     let x: f64 = u.sinh();

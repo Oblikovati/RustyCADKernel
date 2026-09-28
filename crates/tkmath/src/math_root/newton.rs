@@ -12,15 +12,9 @@
 // commercial license or contractual agreement.
 
 //! MathRoot_Newton.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+use super::utils::{have_opposite_signs, is_valid_config, midpoint};
 use crate::math::FunctionWithDerivative;
 use crate::math_utils::{Config, ScalarResult, Status, clamp};
-pub(super) fn valid_config(config: &Config) -> bool {
-    config.max_iterations > 0
-        && config.x_tolerance.is_finite()
-        && config.x_tolerance > 0.0
-        && config.f_tolerance.is_finite()
-        && config.f_tolerance >= 0.0
-}
 pub(super) struct NewtonState {
     pub(super) x: f64,
     pub(super) fx: f64,
@@ -52,7 +46,7 @@ impl NewtonState {
 }
 /// Preserves native residual and step stopping rules; `newton(&mut f,1.0,&Config::default())`.
 pub fn newton(f: &mut impl FunctionWithDerivative, guess: f64, config: &Config) -> ScalarResult {
-    if !guess.is_finite() || !valid_config(config) {
+    if !guess.is_finite() || !is_valid_config(config) {
         return ScalarResult {
             status: Status::InvalidInput,
             ..Default::default()
@@ -140,13 +134,13 @@ pub(super) fn bounded_endpoints(
         lower,
         upper,
         f_lower: fl,
-        bracketed: fl.is_sign_negative() != fu.is_sign_negative(),
+        bracketed: have_opposite_signs(fl, fu),
     })
 }
 impl Bounds {
     fn next(&mut self, state: &NewtonState) -> f64 {
         if self.bracketed {
-            if self.f_lower.is_sign_negative() != state.fx.is_sign_negative() {
+            if have_opposite_signs(self.f_lower, state.fx) {
                 self.upper = state.x;
             } else {
                 self.lower = state.x;
@@ -159,7 +153,7 @@ impl Bounds {
         }
         if !next.is_finite() || next <= self.lower || next >= self.upper {
             next = if self.bracketed {
-                0.5 * self.lower + 0.5 * self.upper
+                midpoint(self.lower, self.upper)
             } else {
                 clamp(next, self.lower, self.upper)
             };
@@ -179,7 +173,7 @@ pub fn newton_bounded(
         || !lower.is_finite()
         || !upper.is_finite()
         || lower == upper
-        || !valid_config(config)
+        || !is_valid_config(config)
     {
         return ScalarResult {
             status: Status::InvalidInput,

@@ -11,7 +11,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::perturbations;
+use super::{is_finite_vector, perturbed_pair};
 use crate::math::{FunctionSet, Matrix, Vector};
 fn sample(
     f: &mut impl FunctionSet,
@@ -22,7 +22,7 @@ fn sample(
 ) -> bool {
     let saved: f64 = *point.at(index).unwrap();
     *point.change_at(index).unwrap() = x;
-    let success: bool = f.value(point, residual) && residual.values().iter().all(|v| v.is_finite());
+    let success: bool = f.value(point, residual) && is_finite_vector(residual);
     *point.change_at(index).unwrap() = saved;
     success
 }
@@ -51,7 +51,7 @@ fn jacobian_column(
     samples: &mut [Vector<'_>; 2],
 ) -> bool {
     let x: f64 = *point.at(column).unwrap();
-    let Some((minus, plus)) = perturbations(x, step * x.abs().max(1.0)) else {
+    let Some((minus, plus)) = perturbed_pair(x, step * x.abs().max(1.0)) else {
         return false;
     };
     if !sample(f, point, column, plus, &mut samples[0])
@@ -72,7 +72,7 @@ pub fn numerical_jacobian(
         || matrix.row_number() == 0
         || !step.is_finite()
         || step <= 0.0
-        || !point.values().iter().all(|v| v.is_finite())
+        || !is_finite_vector(point)
     {
         return false;
     }

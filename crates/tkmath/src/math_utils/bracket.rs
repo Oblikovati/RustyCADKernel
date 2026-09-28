@@ -12,26 +12,16 @@
 // commercial license or contractual agreement.
 
 //! Translation of MathUtils_Bracket.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+use super::utils::{evaluate_finite, is_valid, limited};
 use super::{GOLDEN_RATIO, Status};
 use crate::math::Function;
 mod minimum;
 mod options;
 mod root;
-pub use minimum::{MinBracketResult, bracket_minimum};
+pub use minimum::{MinBracketResult, bracket_minimum, bracket_minimum_iterations};
 pub use options::MinBracketOptions;
 pub use root::{BracketResult, bracket_root};
 
-fn evaluate_finite(f: &mut impl Function, x: f64, value: &mut f64, status: &mut Status) -> bool {
-    if !f.value(x, value) {
-        *status = Status::CallbackError;
-        return false;
-    }
-    if !value.is_finite() {
-        *status = Status::NumericalError;
-        return false;
-    }
-    true
-}
 fn expansion(point: f64, previous: f64) -> f64 {
     point + GOLDEN_RATIO * (point - previous)
 }

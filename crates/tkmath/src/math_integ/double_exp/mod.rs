@@ -25,6 +25,17 @@ mod refine;
 mod transform;
 pub use dispatch::{double_exponential, tanh_sinh_singular, tanh_sinh_with_singularity};
 use transform::Transform;
+/// Default callback budget of one refinement level
+/// (`MathInteg::THE_DOUBLE_EXP_DEFAULT_MAX_POINTS_PER_LEVEL`);
+/// `assert_eq!(DOUBLE_EXP_DEFAULT_MAX_POINTS_PER_LEVEL, 10000)`.
+pub const DOUBLE_EXP_DEFAULT_MAX_POINTS_PER_LEVEL: usize = 10000;
+/// Largest transformed argument sampled before `exp` overflows the weights
+/// (`MathInteg::THE_DOUBLE_EXP_MAX_TRANSFORM_ARGUMENT`);
+/// `assert_eq!(DOUBLE_EXP_MAX_TRANSFORM_ARGUMENT, 700.0)`.
+pub const DOUBLE_EXP_MAX_TRANSFORM_ARGUMENT: f64 = 700.0;
+/// Most negative exp-sinh argument still sampled (`MathInteg::THE_EXP_SINH_MIN_TRANSFORM_ARGUMENT`);
+/// `assert_eq!(EXP_SINH_MIN_TRANSFORM_ARGUMENT, -30.0)`.
+pub const EXP_SINH_MIN_TRANSFORM_ARGUMENT: f64 = -30.0;
 /// Native double-exponential options; `DoubleExpConfig::default()`.
 #[derive(Clone, Copy, Debug)]
 pub struct DoubleExpConfig {
@@ -49,7 +60,7 @@ impl DoubleExpConfig {
             integration: IntegConfig::new(tolerance, max_iterations),
             nb_levels: 10,
             step_factor: 0.5,
-            max_points_per_level: 10000,
+            max_points_per_level: DOUBLE_EXP_DEFAULT_MAX_POINTS_PER_LEVEL,
         }
     }
     fn valid(&self) -> bool {

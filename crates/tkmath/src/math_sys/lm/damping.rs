@@ -26,7 +26,7 @@ impl LMState {
         f: &mut impl FunctionSetWithDerivatives,
         gradient: &Vector<'_>,
     ) -> bool {
-        for _ in 0..24 {
+        for _ in 0..super::LM_DAMPING_MAX {
             let (matrix, rhs): (Matrix<'static>, Vector<'static>) = self.augmented();
             let step = solve_linearized(&matrix, &rhs, self.config.rank_tolerance);
             let Some(step) = step.solution else {
