@@ -120,5 +120,8 @@ pub use compact::{BoxReal, CompactBox2, CompactBox3};
 mod obb;
 pub use obb::{ObbHalfSizes, OrientedBoundingBox};
 
+mod sort_box;
+pub use sort_box::BoundSortBox;
+
 mod tools;
 pub use tools::{box2_to_bvh, box3_to_bvh};
