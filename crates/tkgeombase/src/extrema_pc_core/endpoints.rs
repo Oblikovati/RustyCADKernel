@@ -136,3 +136,14 @@ impl<P: PcPoint, E: CurveEvaluator<P> + ?Sized> Endpoint<'_, P, E> {
         Ok(())
     }
 }
+
+/// A closure as a [`CurveEvaluator`], for the evaluators that pass their geometry
+/// apart from their own result; `ValueFn(|u| Ok::<_, Infallible>(line.value(u)))`.
+pub(crate) struct ValueFn<F>(pub F);
+
+impl<P, E, F: Fn(f64) -> Result<P, E>> CurveEvaluator<P> for ValueFn<F> {
+    type Error = E;
+    fn evaluate(&self, u: f64) -> Result<P, E> {
+        (self.0)(u)
+    }
+}

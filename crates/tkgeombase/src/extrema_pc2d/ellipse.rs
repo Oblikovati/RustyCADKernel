@@ -15,12 +15,13 @@
 
 //! `ExtremaPC2d_Ellipse`: the stationary points of the distance to an ellipse from a
 //! trigonometric equation.
-use super::analytic::{self, AnalyticEvaluator};
 use super::circle::lift;
 use super::{
     CurveEvaluator, Domain1D, ExtremaResult, ExtremumResult, SearchMode, Status,
     THE_PARAM_TOLERANCE, found_status, is_closed_periodic_domain,
 };
+use crate::extrema_pc_core::NeighborStep;
+use crate::extrema_pc_core::analytic::{self, AnalyticEvaluator};
 use rustycad_tkernel::precision;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{self, Ellipse2, Point2, Vector2};
@@ -42,16 +43,16 @@ pub struct Ellipse {
 
 /// The ellipse radii and the local query coordinates of one computation.
 #[derive(Clone, Copy)]
-struct Frame {
-    a: f64,
-    b: f64,
-    x: f64,
-    y: f64,
+pub(crate) struct EllipseFrame {
+    pub a: f64,
+    pub b: f64,
+    pub x: f64,
+    pub y: f64,
 }
 
-impl Frame {
-    // The stationarity lambda: the sign of the distance derivative at `u`.
-    fn stationarity(&self, u: f64) -> f64 {
+impl EllipseFrame {
+    /// The stationarity lambda: the sign of the distance derivative at `u`.
+    pub fn stationarity(&self, u: f64) -> f64 {
         let (cos, sin) = (u.cos(), u.sin());
         (self.b * self.b - self.a * self.a) * cos * sin - self.b * self.y * cos
             + self.a * self.x * sin
@@ -116,7 +117,8 @@ impl Ellipse {
         tol: f64,
         mode: SearchMode,
     ) -> &ExtremaResult {
-        analytic::perform_with_endpoints(self, point, tol, mode)
+        let Ok(result) = analytic::perform_with_endpoints(self, point, tol, mode);
+        result
     }
     // `performCore`: solve, canonicalize, classify and lift the roots.
     fn perform_core(&mut self, point: Point2, domain: &Domain1D, tol: f64, mode: SearchMode) {
@@ -150,7 +152,7 @@ impl Ellipse {
     }
     // The local frame; `None` after setting InfiniteSolutions for a point at the
     // center of a circular ellipse.
-    fn frame(&mut self, point: Point2) -> Option<Frame> {
+    fn frame(&mut self, point: Point2) -> Option<EllipseFrame> {
         let (a, b) = (self.ellipse.major_radius(), self.ellipse.minor_radius());
         let center_to_point: Vector2 = Vector2::between(self.ellipse.location(), point);
         if center_to_point.magnitude() <= gp::resolution() && a == b {
@@ -162,7 +164,7 @@ impl Ellipse {
         let axis = self.ellipse.axis();
         let x: f64 = center_to_point.dot(Vector2::from(axis.x_direction()));
         let y: f64 = center_to_point.dot(Vector2::from(axis.y_direction()));
-        Some(Frame { a, b, x, y })
+        Some(EllipseFrame { a, b, x, y })
     }
     // Classifies the canonical roots by the stationarity sign at the mid-points to
     // their neighbors (cyclically) and adds the extrema.
@@ -170,7 +172,7 @@ impl Ellipse {
         &mut self,
         point: Point2,
         domain: &Domain1D,
-        frame: Frame,
+        frame: EllipseFrame,
         roots: &[f64],
         mode: SearchMode,
     ) {
@@ -273,15 +275,23 @@ impl CurveEvaluator<Point2> for Ellipse {
     }
 }
 
-impl AnalyticEvaluator for Ellipse {
+impl AnalyticEvaluator<Point2> for Ellipse {
     const IS_PERIODIC: bool = true;
+    const NEIGHBOR_STEP: NeighborStep = super::neighbor_step;
+    type PerformError = Infallible;
     fn fixed_domain(&self) -> Option<Domain1D> {
         self.domain
     }
     fn result_slot(&mut self) -> &mut ExtremaResult {
         &mut self.result
     }
-    fn perform_interior(&mut self, point: Point2, tol: f64, mode: SearchMode) {
+    fn perform_interior(
+        &mut self,
+        point: Point2,
+        tol: f64,
+        mode: SearchMode,
+    ) -> Result<(), Infallible> {
         let _ = self.perform(point, tol, mode);
+        Ok(())
     }
 }

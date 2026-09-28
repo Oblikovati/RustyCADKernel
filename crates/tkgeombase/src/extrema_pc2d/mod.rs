@@ -27,7 +27,6 @@
 //! code of [`crate::extrema_pc_core`], instantiated for `gp_Pnt2d`;
 //! `let mut extrema = Circle::new(circle); extrema.perform(point, 1e-9, SearchMode::MinMax)`.
 mod adaptor_curve;
-mod analytic;
 mod bezier_curve;
 mod bspline_curve;
 mod circle;
@@ -42,12 +41,16 @@ pub use adaptor_curve::{OffsetCurve, OtherCurve};
 pub use bezier_curve::BezierCurve;
 pub use bspline_curve::BSplineCurve;
 pub use circle::Circle;
+pub(crate) use circle::lift;
 pub use curve::{Curve, EvaluatorVariant};
 pub use ellipse::Ellipse;
+pub(crate) use ellipse::{EllipseFrame, canonical_roots};
 pub use hyperbola::Hyperbola;
 pub use line::Line;
+pub(crate) use line::std_clamp;
 pub use parabola::Parabola;
 
+pub(crate) use crate::extrema_pc_core::analytic::{found_status, is_invalid_input};
 use crate::extrema_pc_core::{self as core, PcPoint, Space2d};
 pub use crate::extrema_pc_core::{
     CurveEvaluator, SearchMode, Status, THE_BEZIER_DEGREE_MULTIPLIER, THE_BEZIER_MIN_SAMPLES,
@@ -104,8 +107,8 @@ pub fn add_endpoint_extrema<E: CurveEvaluator<Point2> + ?Sized>(
     )
 }
 
-// The 2D neighbor step of AddEndpointExtrema.
-fn neighbor_step(_parameter: f64, span: f64, has_finite_span: bool) -> f64 {
+/// The 2D neighbor step of AddEndpointExtrema.
+pub(crate) fn neighbor_step(_parameter: f64, span: f64, has_finite_span: bool) -> f64 {
     let resolution: f64 = precision::p_confusion();
     if has_finite_span {
         return std_min(
@@ -114,19 +117,4 @@ fn neighbor_step(_parameter: f64, span: f64, has_finite_span: bool) -> f64 {
         );
     }
     resolution
-}
-
-/// The InvalidInput test of every evaluator: a bad tolerance, a non-finite point or an
-/// invalid domain.
-pub(crate) fn is_invalid_input(tol: f64, point: &Point2, domain: Option<&Domain1D>) -> bool {
-    !is_valid_tolerance(tol) || !is_finite_point(point) || domain.is_some_and(|d| !d.is_valid())
-}
-
-/// `myResult.Status = Extrema.IsEmpty() ? NoSolution : OK`.
-pub(crate) fn found_status(result: &ExtremaResult) -> Status {
-    if result.extrema.is_empty() {
-        Status::NoSolution
-    } else {
-        Status::OK
-    }
 }

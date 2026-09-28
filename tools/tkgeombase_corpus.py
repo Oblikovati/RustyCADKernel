@@ -15,3 +15,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_gc').append_gc_curve_requests(requests)
     # ExtremaPC2d, GCPnts_TangentialDeflection (tkgeombase_corpus_extrema_pc2d.py)
     __import__('tkgeombase_corpus_extrema_pc2d').append_extrema_pc2d_requests(requests)
+    # ExtremaPC (tkgeombase_corpus_extrema_pc.py)
+    __import__('tkgeombase_corpus_extrema_pc').append_extrema_pc_requests(requests)

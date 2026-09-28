@@ -14,8 +14,9 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `ExtremaPC2d_Parabola`: the extrema on a parabola from a cubic.
-use super::analytic::{self, AnalyticEvaluator};
 use super::{CurveEvaluator, Domain1D, ExtremaResult, ExtremumResult, SearchMode, Status};
+use crate::extrema_pc_core::NeighborStep;
+use crate::extrema_pc_core::analytic::{self, AnalyticEvaluator};
 use crate::extrema_pc_core::conic_roots::{PolynomialRoots, add_polynomial_extrema};
 use rustycad_tkmath::gp::{self, Parabola2, Point2, Vector2};
 use rustycad_tkmath::math_poly::{PolyResult, cubic};
@@ -139,7 +140,8 @@ impl Parabola {
         tol: f64,
         mode: SearchMode,
     ) -> &ExtremaResult {
-        analytic::perform_with_endpoints(self, point, tol, mode)
+        let Ok(result) = analytic::perform_with_endpoints(self, point, tol, mode);
+        result
     }
     // A degenerate parabola: the projection on the mirror axis, within the domain
     // widened by `tol`.
@@ -181,15 +183,23 @@ impl CurveEvaluator<Point2> for Parabola {
     }
 }
 
-impl AnalyticEvaluator for Parabola {
+impl AnalyticEvaluator<Point2> for Parabola {
     const IS_PERIODIC: bool = false;
+    const NEIGHBOR_STEP: NeighborStep = super::neighbor_step;
+    type PerformError = Infallible;
     fn fixed_domain(&self) -> Option<Domain1D> {
         self.domain
     }
     fn result_slot(&mut self) -> &mut ExtremaResult {
         &mut self.result
     }
-    fn perform_interior(&mut self, point: Point2, tol: f64, mode: SearchMode) {
+    fn perform_interior(
+        &mut self,
+        point: Point2,
+        tol: f64,
+        mode: SearchMode,
+    ) -> Result<(), Infallible> {
         let _ = self.perform(point, tol, mode);
+        Ok(())
     }
 }

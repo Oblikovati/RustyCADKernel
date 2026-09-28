@@ -14,8 +14,9 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `ExtremaPC2d_Hyperbola`: the extrema on a hyperbola from a quartic in `v = e^u`.
-use super::analytic::{self, AnalyticEvaluator};
 use super::{CurveEvaluator, Domain1D, ExtremaResult, SearchMode, Status};
+use crate::extrema_pc_core::NeighborStep;
+use crate::extrema_pc_core::analytic::{self, AnalyticEvaluator};
 use crate::extrema_pc_core::conic_roots::{PolynomialRoots, add_polynomial_extrema};
 use rustycad_tkmath::gp::{Hyperbola2, Point2};
 use rustycad_tkmath::math_poly::{PolyResult, quartic};
@@ -128,7 +129,8 @@ impl Hyperbola {
         tol: f64,
         mode: SearchMode,
     ) -> &ExtremaResult {
-        analytic::perform_with_endpoints(self, point, tol, mode)
+        let Ok(result) = analytic::perform_with_endpoints(self, point, tol, mode);
+        result
     }
     // `solveQuartic`: the quartic in v = e^u from the local query coordinates.
     fn solve_quartic(&self, point: Point2) -> PolyResult {
@@ -149,15 +151,23 @@ impl CurveEvaluator<Point2> for Hyperbola {
     }
 }
 
-impl AnalyticEvaluator for Hyperbola {
+impl AnalyticEvaluator<Point2> for Hyperbola {
     const IS_PERIODIC: bool = false;
+    const NEIGHBOR_STEP: NeighborStep = super::neighbor_step;
+    type PerformError = Infallible;
     fn fixed_domain(&self) -> Option<Domain1D> {
         self.domain
     }
     fn result_slot(&mut self) -> &mut ExtremaResult {
         &mut self.result
     }
-    fn perform_interior(&mut self, point: Point2, tol: f64, mode: SearchMode) {
+    fn perform_interior(
+        &mut self,
+        point: Point2,
+        tol: f64,
+        mode: SearchMode,
+    ) -> Result<(), Infallible> {
         let _ = self.perform(point, tol, mode);
+        Ok(())
     }
 }

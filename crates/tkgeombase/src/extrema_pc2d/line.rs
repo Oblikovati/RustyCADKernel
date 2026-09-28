@@ -14,8 +14,9 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `ExtremaPC2d_Line`: the projection of a point on a line.
-use super::analytic::{self, AnalyticEvaluator};
 use super::{CurveEvaluator, Domain1D, ExtremaResult, ExtremumResult, SearchMode, Status};
+use crate::extrema_pc_core::NeighborStep;
+use crate::extrema_pc_core::analytic::{self, AnalyticEvaluator};
 use rustycad_tkmath::gp::{Line2, Point2, Vector2};
 use std::convert::Infallible;
 
@@ -102,7 +103,8 @@ impl Line {
         tol: f64,
         mode: SearchMode,
     ) -> &ExtremaResult {
-        analytic::perform_with_endpoints(self, point, tol, mode)
+        let Ok(result) = analytic::perform_with_endpoints(self, point, tol, mode);
+        result
     }
 }
 
@@ -124,15 +126,23 @@ impl CurveEvaluator<Point2> for Line {
     }
 }
 
-impl AnalyticEvaluator for Line {
+impl AnalyticEvaluator<Point2> for Line {
     const IS_PERIODIC: bool = false;
+    const NEIGHBOR_STEP: NeighborStep = super::neighbor_step;
+    type PerformError = Infallible;
     fn fixed_domain(&self) -> Option<Domain1D> {
         self.domain
     }
     fn result_slot(&mut self) -> &mut ExtremaResult {
         &mut self.result
     }
-    fn perform_interior(&mut self, point: Point2, tol: f64, mode: SearchMode) {
+    fn perform_interior(
+        &mut self,
+        point: Point2,
+        tol: f64,
+        mode: SearchMode,
+    ) -> Result<(), Infallible> {
         let _ = self.perform(point, tol, mode);
+        Ok(())
     }
 }

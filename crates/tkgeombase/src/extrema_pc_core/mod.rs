@@ -19,6 +19,7 @@
 //! [`PcSpace`], and each package names its instantiation with the native class name
 //! (`extrema_pc2d::GridEvaluator` is `PcGridEvaluator<Space2d>`). Where the two
 //! native copies differ, the difference is a member of [`PcSpace`] or an argument.
+pub(crate) mod analytic;
 pub(crate) mod conic_roots;
 mod constant_distance;
 mod curve_ref;
@@ -34,7 +35,7 @@ mod validity;
 pub use curve_ref::PcCurveRef;
 pub use distance::PcDistanceFunction;
 pub use endpoints::CurveEvaluator;
-pub(crate) use endpoints::add_endpoint_extrema_with;
+pub(crate) use endpoints::{NeighborStep, ValueFn, add_endpoint_extrema_with};
 pub use grid::{GridFailurePolicy, PcGridEvaluator};
 pub use result::{PcExtremum, PcResult, SearchMode, Status};
 pub use space::{PcD1, PcD2, PcPoint, PcSpace, PcVector, Space2d, Space3d};

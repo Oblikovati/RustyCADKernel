@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod gb_probe;
-use gb_probe::{gc, gce, pc2d};
+use gb_probe::{gc, gce, pc2d, pc3d};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -75,6 +75,13 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("pc2d_distance", pc2d::distance_case),
     ("pc2d_endpoints", pc2d::endpoints_case),
     ("gcpnts_td2d", pc2d::td2d_case),
+    // ExtremaPC (gb_probe/pc3d.rs)
+    ("pc_curve", pc3d::curve_case),
+    ("pc_grid", pc3d::grid_case),
+    ("pc_distance", pc3d::distance_case),
+    ("pc_endpoints", pc3d::endpoints_case),
+    ("pc_project", pc3d::project_case),
+    ("gcpnts_td3d", pc3d::td3d_case),
 ];
 
 fn main() {

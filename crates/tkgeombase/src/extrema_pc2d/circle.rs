@@ -14,11 +14,12 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `ExtremaPC2d_Circle`: the nearest and farthest points of a circle.
-use super::analytic::{self, AnalyticEvaluator};
 use super::{
     CurveEvaluator, Domain1D, ExtremaResult, ExtremumResult, SearchMode, Status,
     THE_PARAM_TOLERANCE, found_status, is_closed_periodic_domain,
 };
+use crate::extrema_pc_core::NeighborStep;
+use crate::extrema_pc_core::analytic::{self, AnalyticEvaluator};
 use rustycad_tkernel::precision;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{self, Axis22d, Circle2, Point2, Vector2};
@@ -105,7 +106,8 @@ impl Circle {
         tol: f64,
         mode: SearchMode,
     ) -> &ExtremaResult {
-        analytic::perform_with_endpoints(self, point, tol, mode)
+        let Ok(result) = analytic::perform_with_endpoints(self, point, tol, mode);
+        result
     }
     // The minimum angle (snapped to +-PI within Angular), its opposite, both lifted
     // into the domain.
@@ -211,15 +213,23 @@ impl CurveEvaluator<Point2> for Circle {
     }
 }
 
-impl AnalyticEvaluator for Circle {
+impl AnalyticEvaluator<Point2> for Circle {
     const IS_PERIODIC: bool = true;
+    const NEIGHBOR_STEP: NeighborStep = super::neighbor_step;
+    type PerformError = Infallible;
     fn fixed_domain(&self) -> Option<Domain1D> {
         self.domain
     }
     fn result_slot(&mut self) -> &mut ExtremaResult {
         &mut self.result
     }
-    fn perform_interior(&mut self, point: Point2, tol: f64, mode: SearchMode) {
+    fn perform_interior(
+        &mut self,
+        point: Point2,
+        tol: f64,
+        mode: SearchMode,
+    ) -> Result<(), Infallible> {
         let _ = self.perform(point, tol, mode);
+        Ok(())
     }
 }
