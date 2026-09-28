@@ -80,6 +80,15 @@ class HeaderParsingTests(unittest.TestCase):
         self.assertEqual(normalize_param("const NCollection_Mat4<T>& theMat"), "const NCollection_Mat4<T>&")
         self.assertEqual(normalize_params("void"), "")
 
+    def test_nested_template_parameters_round_trip(self):
+        # Regression: `occ::handle<NCollection_HArray1<double>>` lost its last `>`,
+        # so the row of such a constructor could never match its header member.
+        param = "const occ::handle<NCollection_HArray1<double>>& theTol"
+        self.assertEqual(normalize_param(param), "const occ::handle<NCollection_HArray1<double>>&")
+        row = "AdvApprox_Demo(int,const occ::handle<NCollection_HArray1<double>>&)"
+        self.assertEqual(parse_row_id(row),
+                         Member("AdvApprox_Demo", "int,const occ::handle<NCollection_HArray1<double>>&", ""))
+
     def test_unbalanced_brackets_name_the_offset(self):
         with self.assertRaisesRegex(ValueError, "offset 0"):
             matching_close("(a", 0)

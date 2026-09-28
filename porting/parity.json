@@ -28418,6 +28418,358 @@
       "rust_item": "rustycad_tkmath::bnd::CompactBox2::is_in_transformed_box",
       "status": "implemented",
       "notes": "Manual explicit member mapping; the gp_Trsf/gp_Trsf2d overloads of IsOut/IsIn become is_out_transformed_box/is_in_transformed_box on CompactBox3/CompactBox2<T>. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction(int,int,int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,double,double,GeomAbs_Shape,int,int,const AdvApprox_EvaluatorFunction&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction(int,int,int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,double,double,GeomAbs_Shape,int,int,const AdvApprox_EvaluatorFunction&,const AdvApprox_Cutting&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::with_cutting",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Approximation(int,int,const NCollection_Array1<int>&,double,double,AdvApprox_EvaluatorFunction&,const AdvApprox_Cutting&,int,int,int,const NCollection_Array1<double>&,int,int&,NCollection_Array1<int>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,int&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::approximation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::IsDone() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::is_done",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::HasResult() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::has_result",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Poles1d() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::poles_1d",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Poles2d() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::poles_2d",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Poles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::NbPoles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::nb_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Poles1d(int,NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::poles_1d_of",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Poles2d(int,NCollection_Array1<gp_Pnt2d>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::poles_2d_of",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Poles(int,NCollection_Array1<gp_Pnt>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::poles_of",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Degree() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::NbKnots() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::nb_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::NumSubSpaces(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::num_sub_spaces",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Knots() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Multiplicities() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::MaxError(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::max_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::AverageError(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::average_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::MaxError(int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::max_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::AverageError(int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::average_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_ApproxAFunction::Dump(Standard_OStream&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_ApproxAFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxApproxAFunction::dump",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_Cutting::~AdvApprox_Cutting()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_Cutting.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxCutting",
+      "status": "excluded",
+      "notes": "C++-only syntax: an abstract-class constructor or virtual destructor has no Rust counterpart."
+    },
+    {
+      "upstream_id": "AdvApprox_Cutting::Value(double,double,double&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_Cutting.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxCutting::value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_DichoCutting()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_DichoCutting.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxDichoCutting::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_DichoCutting::Value(double,double,double&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_DichoCutting.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxDichoCutting::value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_EvaluatorFunction()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction",
+      "status": "excluded",
+      "notes": "C++-only syntax: an abstract-class constructor or virtual destructor has no Rust counterpart."
+    },
+    {
+      "upstream_id": "AdvApprox_EvaluatorFunction::~AdvApprox_EvaluatorFunction()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction",
+      "status": "excluded",
+      "notes": "C++-only syntax: an abstract-class constructor or virtual destructor has no Rust counterpart."
+    },
+    {
+      "upstream_id": "AdvApprox_EvaluatorFunction::Evaluate(int*,double StartEnd [2],double*,int*,double*,int*)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_EvaluatorFunction::operator()(int*,double StartEnd [2],double*,int*,double*,int*)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_EvaluatorFunction.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxEvaluatorFunction::evaluate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_PrefAndRec(const NCollection_Array1<double>&,const NCollection_Array1<double>&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_PrefAndRec.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxPrefAndRec::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_PrefAndRec::Value(double,double,double&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_PrefAndRec.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxPrefAndRec::value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox(int,int,GeomAbs_Shape,int,int,const PLib_JacobiPolynomial&,const AdvApprox_EvaluatorFunction&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::Perform(const NCollection_Array1<int>&,const NCollection_Array1<double>&,double,double,int)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::perform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::IsDone() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::is_done",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::Degree() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::Coefficients() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::FirstConstr() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::first_constr",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::LastConstr() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::last_constr",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::SomTab() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::som_tab",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::DifTab() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::dif_tab",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::MaxError(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::max_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::AverageError(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::average_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApprox_SimpleApprox::Dump(Standard_OStream&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/AdvApprox/AdvApprox_SimpleApprox.hxx",
+      "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::dump",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
     }
   ],
   "tests": [
