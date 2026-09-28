@@ -5,15 +5,15 @@
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
 `IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC`,
-`GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts` and
-`GCPnts` packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0
+`GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts`,
+`GCPnts` and `AdvApp2Var` packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0
 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (694 declarations):
+passes (702 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -352,6 +352,8 @@ the `AdvApp2VarEvaluatorFunc2Var` trait (closures implement it), the criterion t
 the native base class keeps in protected fields), and the cuttings the TKG3d
 `AdvApproxCutting` trait. `AdvApp2Var_ApproxAFunc2Var` computes everything in its
 constructor; `new` and `with_criterion` return the native exceptions as `Failure`.
+`adv_app2var_behavior.rs` covers the full approximation, its getters and exceptions,
+the criterion hooks and `Dump`, which the upstream suites do not reach.
 
 ## Verification
 
@@ -550,10 +552,10 @@ results, the resulting surface (knots, multiplicities and poles) and the FNV-1a 
 (see Preserved native behaviour) and a patch discretisation after an iso without
 result, which dereferences a null handle natively.
 
-The corpus has 33298 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+The corpus has 33623 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
-FEmTool, 2045 AppParCurves, 3587 AppCont, 15198 GeomBndLib and BndLib, and 2210 CPnts
-and GCPnts.
+FEmTool, 2045 AppParCurves, 3587 AppCont, 15198 GeomBndLib and BndLib, 2210 CPnts
+and GCPnts, and 325 AdvApp2Var.
 
 ## Preserved native behaviour
 
