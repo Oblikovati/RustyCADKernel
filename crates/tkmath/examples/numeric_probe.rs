@@ -517,6 +517,8 @@ fn main() {
             "real_vector_extra" => vector_base_probe::real_vector_extra_case(&values),
             "matrix_extra" => vector_base_probe::matrix_extra_case(&values),
             "recipes_lu" => recipes_probe::lu_case(&values),
+            "progress_lu" => progress_probe::lu_case(&values),
+            "progress_gauss" => progress_probe::gauss_case(&values),
             "recipes_svd" => recipes_probe::svd_case(&values),
             "recipes_jacobi" => recipes_probe::jacobi_case(&values),
             "recipes_dactcl" => recipes_probe::dactcl_case(&values),
@@ -608,6 +610,7 @@ mod convert_probe;
 mod cslib_probe;
 mod elementary_probe;
 mod plib_probe;
+mod progress_probe;
 mod recipes_probe;
 mod solver_dump_probe;
 mod vector_base_probe;
