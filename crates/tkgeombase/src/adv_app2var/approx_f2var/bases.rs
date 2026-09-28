@@ -87,7 +87,8 @@ fn legendre_roots(nbpnt: i32, roots: &mut [f64]) {
 
 /// The maxima on [-1,1] of the normalised Jacobi polynomials of order `iordre`
 /// and degrees `2*(iordre+1)..=ndgjac` into `xjacmx` (`mma2jmx_`); nothing for an
-/// order outside -1..=2. Returns 0. `mma2jmx_(20, 1, &mut xjacmx)`.
+/// order outside -1..=2, nor past the table of the order. Returns 0.
+/// `mma2jmx_(20, 1, &mut xjacmx)`.
 pub fn mma2jmx_(ndgjac: i32, iordre: i32, xjacmx: &mut [f64]) -> i32 {
     let numax: i32 = ndgjac - ((iordre + 1) << 1);
     let table: &[f64] = match iordre {
@@ -103,8 +104,15 @@ pub fn mma2jmx_(ndgjac: i32, iordre: i32, xjacmx: &mut [f64]) -> i32 {
         2 => &XMAXJ_ORDER6,
         _ => return 0,
     };
-    for ii in 0..=numax {
-        xjacmx[ii as usize] = table[ii as usize];
+    // Natively a degree past the table (57, 55 or 53 maxima) reads the static memory
+    // after it; those entries are left unwritten here. Only a Context whose Jacobi
+    // degree reaches that far calls it, and mmapptt_ then refuses the degree (31).
+    for (slot, value) in xjacmx
+        .iter_mut()
+        .zip(table)
+        .take((numax + 1).max(0) as usize)
+    {
+        *slot = *value;
     }
     0
 }

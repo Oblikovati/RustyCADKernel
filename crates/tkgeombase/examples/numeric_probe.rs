@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    adv_f2var, adv_f2var2, adv_math, adv_math2, gc, gce, gprop, hermit, int_ana, int_ana2d, lprop,
-    pc2d, pc3d,
+    adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, gc, gce, gprop, hermit, int_ana,
+    int_ana2d, lprop, pc2d, pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -168,6 +168,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("aa_mma2ce1", adv_f2var2::mma2ce1_case),
     ("aa_mma2fnc", adv_f2var2::mma2fnc_case),
     ("aa_mma2fx6", adv_f2var2::mma2fx6_case),
+    // AdvApp2Var classes (gb_probe/adv_class.rs)
+    ("aa_context", adv_class::context_case),
+    ("aa_grid", adv_class::grid_case),
+    ("aa_patch", adv_class::patch_case),
+    ("aa_approx", adv_class::approx_case),
 ];
 
 fn main() {

@@ -2,8 +2,9 @@
 
 The MathBase requests feed each public kernel normal, boundary and error inputs;
 the arrays come from a fixed linear congruential generator, printed with repr so
-both probes parse the same doubles. The ApproxF2var and class requests live in
-tkgeombase_corpus_advapp2var_approx.py.
+both probes parse the same doubles. The ApproxF2var requests live in
+tkgeombase_corpus_advapp2var_approx.py, the class requests in
+tkgeombase_corpus_advapp2var_class.py.
 """
 from __future__ import annotations
 
@@ -38,6 +39,7 @@ def append_advapp2var_requests(requests: list[str]) -> None:
     append_math_requests(requests)
     approx = __import__('tkgeombase_corpus_advapp2var_approx')
     approx.append_f2var_requests(requests)
+    __import__('tkgeombase_corpus_advapp2var_class').append_class_requests(requests)
 
 
 def append_math_requests(requests: list[str]) -> None:
