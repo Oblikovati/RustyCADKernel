@@ -32,7 +32,10 @@ mod svd_qr;
 mod svd_reduce;
 pub use dactcl::{dactcl_decompose, dactcl_solve};
 pub use jacobi::jacobi;
-pub use lu::{lu_decompose, lu_decompose_with_scales, lu_invert, lu_solve};
+pub use lu::{
+    lu_decompose, lu_decompose_with_progress, lu_decompose_with_scales,
+    lu_decompose_with_scales_and_progress, lu_invert, lu_solve,
+};
 pub use svd::{svd_decompose, svd_decompose_with_work, svd_solve};
 
 /// `math_Status_UserAborted`: a progress scope stopped the decomposition.

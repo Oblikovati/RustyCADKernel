@@ -1,9 +1,8 @@
 //! `units_system` requests on the probe's single units system.
-use super::super::common::{EmptyEnvironment, NoResourceIo, arg, bits, flag, hex, real, word};
+use super::super::common::{arg, bits, flag, hex, real, resource_host, word};
 use super::super::{UnitsProbeState, run};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::units::UnitsSystem;
-use std::rc::Rc;
 use std::str::SplitWhitespace;
 
 fn state_text(state: &UnitsProbeState, res: &mut String) -> Result<(), Failure> {
@@ -38,12 +37,8 @@ pub fn system(state: &mut UnitsProbeState, input: &mut SplitWhitespace<'_>) -> S
         match op.as_str() {
             "new" => state.system = Handle::new(UnitsSystem::new()),
             "named" => {
-                let named = UnitsSystem::with_resource(
-                    "Units",
-                    false,
-                    Rc::new(NoResourceIo),
-                    Rc::new(EmptyEnvironment),
-                );
+                let host = resource_host(&state.capture);
+                let named = UnitsSystem::with_resource("Units", false, host)?;
                 state.system = Handle::new(named);
             }
             "specify" => state

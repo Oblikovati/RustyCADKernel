@@ -8,7 +8,6 @@ use rustycad_tkernel::units::{Units, UnitsSystem};
 use rustycad_tkernel::units_api::UnitsApi;
 use rustycad_tkernel::units_methods::UnitsMethods;
 use std::cell::RefCell;
-use std::rc::Rc;
 use std::str::SplitWhitespace;
 use std::sync::Arc;
 
@@ -16,7 +15,7 @@ mod api;
 mod common;
 mod core;
 mod objects;
-use common::{Capture, EmptyEnvironment, NoResourceIo};
+use common::Capture;
 
 /// The process-lifetime state mirrored from the native statics.
 pub(crate) struct UnitsProbeState {
@@ -34,11 +33,7 @@ thread_local! {
 fn state() -> UnitsProbeState {
     let capture = Capture::default();
     let units = Arc::new(Units::with_diagnostics(Box::new(capture.clone())));
-    let api = UnitsApi::new(
-        units.clone(),
-        Rc::new(NoResourceIo),
-        Rc::new(EmptyEnvironment),
-    );
+    let api = UnitsApi::new(units.clone(), common::resource_host(&capture));
     UnitsProbeState {
         capture,
         units,

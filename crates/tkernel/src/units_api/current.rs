@@ -116,7 +116,7 @@ impl UnitsApi {
         if let Some(catalog) = &self.current_units {
             catalog
                 .borrow_mut()
-                .set_resource(&key(quantity), AsciiString::from_bytes(unit));
+                .set_resource(&key(quantity), super::c_name(unit));
         }
         Ok(())
     }

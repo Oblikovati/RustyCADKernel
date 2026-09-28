@@ -6,7 +6,11 @@ use rustycad_tkernel::{
 };
 use std::io::{self, BufRead};
 
+mod message;
+mod message_progress;
 mod ncollection;
+mod quantity;
+mod resource;
 mod units;
 
 fn date(input: &mut std::str::SplitWhitespace<'_>) -> Result<Date, Error> {
@@ -102,6 +106,10 @@ fn evaluate(line: &str) -> Result<String, Box<dyn std::error::Error>> {
             out
         }
         other => ncollection::evaluate(other, &mut input)
+            .or_else(|| message::evaluate(other, &mut input))
+            .or_else(|| quantity::evaluate(other, &mut input))
+            .or_else(|| resource::evaluate(other, &mut input))
+            .or_else(|| message_progress::evaluate(other, &mut input))
             .or_else(|| units::evaluate(other, &mut input))
             .unwrap_or_else(|| panic!("unknown operation {other}")),
     };

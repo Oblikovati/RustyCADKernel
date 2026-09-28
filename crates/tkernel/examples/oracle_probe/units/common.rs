@@ -1,6 +1,6 @@
 //! Encoding, capture and printing helpers (twin of `tkernel_units_probe_common.cxx`).
 use rustycad_tkernel::ncollection::HSequence;
-use rustycad_tkernel::resource::{ResourceEnvironment, ResourceIo};
+use rustycad_tkernel::resource::{ResourceConsole, ResourceEnvironment, ResourceHost, ResourceIo};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::units::{Dimensions, ShiftedToken, Token, UnitsDiagnostics};
 use std::io::{self, Write};
@@ -48,6 +48,23 @@ impl UnitsDiagnostics for Capture {
     fn info(&self, text: &[u8]) {
         self.message(b"I:", text);
     }
+}
+
+/// Resource traces are native `std::cout` text.
+impl ResourceConsole for Capture {
+    fn write(&self, bytes: &[u8]) {
+        self.console.lock().unwrap().extend_from_slice(bytes);
+    }
+}
+
+/// The resource host of both probes: no variables, no files, the captured console.
+pub fn resource_host(capture: &Capture) -> ResourceHost {
+    let console = std::rc::Rc::new(capture.clone());
+    ResourceHost::new(
+        std::rc::Rc::new(NoResourceIo),
+        std::rc::Rc::new(EmptyEnvironment),
+        console,
+    )
 }
 
 /// `std::cout` of the probe.

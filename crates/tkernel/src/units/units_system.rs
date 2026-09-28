@@ -21,11 +21,10 @@ use super::quantity::Quantity;
 use super::support::{c_str, item, length, new_sequence, object, write_bytes};
 use super::unit::Unit;
 use crate::ncollection::HSequence;
-use crate::resource::{ResourceCatalog, ResourceEnvironment, ResourceIo};
+use crate::resource::{ResourceHost, ResourceManager};
 use crate::standard::{Failure, Handle, StandardTransient};
 use crate::tcollection::AsciiString;
 use std::io::Write;
-use std::rc::Rc;
 
 mod conversion;
 mod editing;
@@ -70,17 +69,12 @@ impl UnitsSystem {
         }
     }
     /// The named constructor: it loads the resource file `name` through the injected
-    /// storage and environment and then drops it, as natively (the loaded resources
-    /// are never read). `verbose` has no counterpart in the catalog API;
-    /// `UnitsSystem::with_resource("Units", false, io, environment)`.
-    pub fn with_resource(
-        name: &str,
-        _verbose: bool,
-        io: Rc<dyn ResourceIo>,
-        environment: Rc<dyn ResourceEnvironment>,
-    ) -> Self {
-        drop(ResourceCatalog::new(name, io, environment));
-        Self::new()
+    /// host and then drops it, as natively (the loaded resources are never read); only a
+    /// resource line starting with a NUL byte fails;
+    /// `UnitsSystem::with_resource("Units", false, ResourceHost::native())?`.
+    pub fn with_resource(name: &str, verbose: bool, host: ResourceHost) -> Result<Self, Failure> {
+        drop(ResourceManager::new(name, verbose, host)?);
+        Ok(Self::new())
     }
     /// The shared quantity sequence; `system.quantities_sequence()`.
     pub fn quantities_sequence(&self) -> Handle<HSequence<Handle<Quantity>>> {

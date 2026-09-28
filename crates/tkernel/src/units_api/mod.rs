@@ -20,7 +20,7 @@
 //! The native statics (current/SI/MDTV resource managers, local units systems,
 //! selected systems) are fields of an injected [`UnitsApi`] context; the resource
 //! files are read through the injected `ResourceIo`/`ResourceEnvironment`.
-use crate::resource::{ResourceCatalog, ResourceEnvironment, ResourceIo};
+use crate::resource::{ResourceHost, ResourceManager};
 use crate::standard::{Failure, Handle};
 use crate::tcollection::AsciiString;
 use crate::units::{Dimensions, Units, UnitsSystem};
@@ -41,13 +41,12 @@ pub enum SystemUnits {
     Mdtv,
 }
 
-type Catalog = Rc<RefCell<ResourceCatalog>>;
+type Catalog = Rc<RefCell<ResourceManager>>;
 
 /// An isolated `UnitsAPI` context; `UnitsApi::new(Arc::new(Units::new()), io, environment)`.
 pub struct UnitsApi {
     units: Arc<Units>,
-    io: Rc<dyn ResourceIo>,
-    environment: Rc<dyn ResourceEnvironment>,
+    host: ResourceHost,
     current_units: Option<Catalog>,
     si_current_units: Option<Catalog>,
     mdtv_current_units: Option<Catalog>,
@@ -60,17 +59,12 @@ pub struct UnitsApi {
 
 impl UnitsApi {
     /// A context in its native initial state (local SI, nothing loaded) over the
-    /// given units context and resource storage;
-    /// `UnitsApi::new(Arc::new(Units::new()), Rc::new(NativeResourceIo), Rc::new(NativeResourceEnvironment))`.
-    pub fn new(
-        units: Arc<Units>,
-        io: Rc<dyn ResourceIo>,
-        environment: Rc<dyn ResourceEnvironment>,
-    ) -> Self {
+    /// given units context and resource host;
+    /// `UnitsApi::new(Arc::new(Units::new()), ResourceHost::native())`.
+    pub fn new(units: Arc<Units>, host: ResourceHost) -> Self {
         Self {
             units,
-            io,
-            environment,
+            host,
             current_units: None,
             si_current_units: None,
             mdtv_current_units: None,
@@ -85,9 +79,9 @@ impl UnitsApi {
     pub fn units(&self) -> &Arc<Units> {
         &self.units
     }
-    fn catalog(&self, name: &str) -> Catalog {
-        let catalog = ResourceCatalog::new(name, self.io.clone(), self.environment.clone());
-        Rc::new(RefCell::new(catalog))
+    fn catalog(&self, name: &str) -> Result<Catalog, Failure> {
+        let manager = ResourceManager::new(name, false, self.host.clone())?;
+        Ok(Rc::new(RefCell::new(manager)))
     }
     /// `CheckLoading`: switches the current resources and local units system,
     /// loading them on first use (the MDTV system is specified once).
@@ -97,25 +91,23 @@ impl UnitsApi {
         }
         match system {
             SystemUnits::Default if self.current_units.is_some() => Ok(()),
-            SystemUnits::Default | SystemUnits::Si => {
-                self.load_si();
-                Ok(())
-            }
+            SystemUnits::Default | SystemUnits::Si => self.load_si(),
             SystemUnits::Mdtv => self.load_mdtv(),
         }
     }
-    fn load_si(&mut self) {
+    fn load_si(&mut self) -> Result<(), Failure> {
         self.current_system = SystemUnits::Si;
         if self.si_current_units.is_none() {
-            self.si_current_units = Some(self.catalog("CurrentUnits"));
+            self.si_current_units = Some(self.catalog("CurrentUnits")?);
         }
         self.current_units = self.si_current_units.clone();
         self.local_system_units = self.si_local_system_units.clone();
+        Ok(())
     }
     fn load_mdtv(&mut self) -> Result<(), Failure> {
         self.current_system = SystemUnits::Mdtv;
         if self.mdtv_current_units.is_none() {
-            self.mdtv_current_units = Some(self.catalog("MDTVCurrentUnits"));
+            self.mdtv_current_units = Some(self.catalog("MDTVCurrentUnits")?);
         }
         self.current_units = self.mdtv_current_units.clone();
         if self.mdtv_local_system_units.is_empty()? {

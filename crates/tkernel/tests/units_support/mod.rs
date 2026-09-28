@@ -14,7 +14,7 @@
 //! Named fakes for the units tests: an in-memory resource store with its own
 //! environment, and a recorder of the units console and messages.
 #![allow(dead_code)]
-use rustycad_tkernel::resource::{ResourceEnvironment, ResourceIo};
+use rustycad_tkernel::resource::{ResourceConsole, ResourceEnvironment, ResourceHost, ResourceIo};
 use rustycad_tkernel::units::{Units, UnitsDiagnostics};
 use rustycad_tkernel::units_api::UnitsApi;
 use std::{
@@ -31,6 +31,7 @@ use std::{
 pub struct InMemoryUnitsResources {
     pub files: Rc<RefCell<BTreeMap<PathBuf, Vec<u8>>>>,
     pub variables: RefCell<BTreeMap<String, PathBuf>>,
+    pub console: RefCell<Vec<u8>>,
 }
 
 impl InMemoryUnitsResources {
@@ -77,6 +78,12 @@ impl Write for InMemoryWriter {
 impl ResourceEnvironment for InMemoryUnitsResources {
     fn directory(&self, name: &str) -> Option<PathBuf> {
         self.variables.borrow().get(name).cloned()
+    }
+}
+
+impl ResourceConsole for InMemoryUnitsResources {
+    fn write(&self, bytes: &[u8]) {
+        self.console.borrow_mut().extend_from_slice(bytes);
     }
 }
 
@@ -135,5 +142,6 @@ pub fn api() -> UnitsApi {
 /// A `UnitsApi` over a fresh context and the given resource store.
 pub fn api_with(resources: Rc<InMemoryUnitsResources>) -> UnitsApi {
     let units = units_with(&RecordingUnitsDiagnostics::default());
-    UnitsApi::new(units, resources.clone(), resources)
+    let host = ResourceHost::new(resources.clone(), resources.clone(), resources);
+    UnitsApi::new(units, host)
 }

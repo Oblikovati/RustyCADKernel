@@ -1,14 +1,13 @@
 //! Unit sentence and conversion probe using byte-exact legacy unit symbols.
 //! One context lives for the whole run, as the native globals do.
 use rustycad_tkernel::{
-    resource::{NativeResourceEnvironment, NativeResourceIo},
+    resource::ResourceHost,
     standard::Failure,
     units::{UnitSentence, Units, UnitsDiagnostics},
     units_api::{SystemUnits, UnitsApi},
 };
 use std::{
     io::{self, BufRead},
-    rc::Rc,
     sync::Arc,
 };
 /// The native probe swallows the conversion warnings; so does this one.
@@ -65,11 +64,8 @@ fn probe(units: &mut UnitsApi, line: &str) -> Result<String, Failure> {
     Ok(output.join(" "))
 }
 fn main() {
-    let mut units = UnitsApi::new(
-        Arc::new(Units::with_diagnostics(Box::new(SilentDiagnostics))),
-        Rc::new(NativeResourceIo),
-        Rc::new(NativeResourceEnvironment),
-    );
+    let silent = Units::with_diagnostics(Box::new(SilentDiagnostics));
+    let mut units = UnitsApi::new(Arc::new(silent), ResourceHost::native());
     for line in io::stdin().lock().lines() {
         match probe(&mut units, &line.unwrap()) {
             Ok(result) => println!("{result}"),
