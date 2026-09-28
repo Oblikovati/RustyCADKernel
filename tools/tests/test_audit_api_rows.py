@@ -264,6 +264,12 @@ class MacroAndFriendTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, r"\['x'\]; expected 2 arguments"):
             members_of(SWIZZLE_HEADER.replace("VEC_COMPONENTS_2D(x, y)", "VEC_COMPONENTS_2D(x)"))
 
+    def test_deprecation_markers_are_not_members(self):
+        header = ('Standard_HEADER_DEPRECATED("a is deprecated. " "Use b.");\n'
+                  'template <class T>\nusing NCollection_Old = NCollection_New<T> Standard_DEPRECATED("x");\n')
+        self.assertEqual(members_of(header), [])
+        self.assertEqual(known_of(header), ["NCollection_Old|None|"])
+
     def test_standard_rtti_macros_are_never_expanded(self):
         header = "#define DEFINE_STANDARD_RTTIEXT(C, B) public: int Bad();\n" + TEMPLATE_HEADER
         self.assertNotIn("BVH_Transient::Bad||", members_of(header))
