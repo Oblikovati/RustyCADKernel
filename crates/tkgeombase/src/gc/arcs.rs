@@ -15,8 +15,9 @@
 // GC_MakeArcOfParabola (.hxx/.cxx) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The 3D arc algorithms: trimmed Geom conics.
+use crate::extrema::ExtElC;
 use crate::gce::{self, ErrorType, Root};
-use crate::line_extrema::lines_extremum;
+use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::geom::{
     GeomCircle, GeomCurve, GeomEllipse, GeomHyperbola, GeomParabola, GeomTrimmedCurve,
@@ -98,9 +99,16 @@ impl MakeArcOfCircle {
             (p1.z() + p2.z()) / 2.0,
         );
         let d: Direction3 = dbid.crossed(daxe)?;
-        // Extrema_ExtElC(bis, norm, Precision::Confusion()) has one extremum, and
-        // parallel lines are not tested: their extremum points are the origin.
-        let center: Point3 = lines_extremum(Line3::new(middle, dir1), Line3::new(p1, d)).middle();
+        // Parallel lines are not tested: their extremum points are the origin.
+        let distmin = ExtElC::lines(
+            Line3::new(middle, dir1),
+            Line3::new(p1, d),
+            precision::confusion(),
+        );
+        if !distmin.is_done() || distmin.nb_ext()? == 0 {
+            return Ok(Self::failed(ErrorType::IntersectionError));
+        }
+        let center: Point3 = gce::nearest_extremum_middle(&distmin)?;
         let radius: f64 = (center.distance(&p1) + center.distance(&p2)) / 2.0;
         let circ = Circle3::new(Axis2::with_x_direction(center, daxe, d)?, radius)?;
         Self::from_points(circ, p1, p2, true)

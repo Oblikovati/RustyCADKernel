@@ -39,7 +39,6 @@ pub mod gprop;
 pub mod hermit;
 pub mod int_ana;
 pub mod int_ana2d;
-mod line_extrema;
 pub mod lprop;
 mod native_failure;
 mod native_text;

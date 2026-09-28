@@ -35,6 +35,7 @@ mod root;
 mod transformations;
 
 pub use circ::MakeCirc;
+pub(crate) use circ::nearest_extremum_middle;
 pub use circ2d::MakeCirc2d;
 pub use cone::MakeCone;
 pub use cylinder::MakeCylinder;
