@@ -28,4 +28,11 @@ pub use rep_surface_desc::{
     Domain2d, Map2d, RepSurfaceDesc, RepSurfaceDescDerivBounded, RepSurfaceDescFull,
     RepSurfaceDescMapped, RepSurfaceKind,
 };
+mod eval_failures;
 pub mod rep_utils;
+
+// GeomEval curves.
+
+// GeomEval elementary surfaces.
+
+// GeomEval Bezier surfaces.

@@ -89,14 +89,14 @@ impl GeomSurface for GeomBezierSurface {
     fn u_reverse(&self) -> Result<(), Failure> {
         self.state.write().u_reverse()
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
-        1. - u
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(1. - u)
     }
     fn v_reverse(&self) -> Result<(), Failure> {
         self.state.write().v_reverse()
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
-        1. - v
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
+        Ok(1. - v)
     }
     fn bounds(&self) -> SurfaceBounds {
         (0.0, 1.0, 0.0, 1.0)

@@ -142,8 +142,8 @@ impl TrimState {
     }
     /// `UReverse`: reverse the basis in U and re-trim with the reversed bounds.
     pub(super) fn u_reverse(&mut self) -> Result<(), Failure> {
-        let u1: f64 = self.basis.u_reversed_parameter(self.utrim2);
-        let u2: f64 = self.basis.u_reversed_parameter(self.utrim1);
+        let u1: f64 = self.basis.u_reversed_parameter(self.utrim2)?;
+        let u2: f64 = self.basis.u_reversed_parameter(self.utrim1)?;
         self.basis.u_reverse()?;
         let (u, v) = (
             self.stored_u(u1, u2),
@@ -153,8 +153,8 @@ impl TrimState {
     }
     /// `VReverse`: reverse the basis in V and re-trim with the reversed bounds.
     pub(super) fn v_reverse(&mut self) -> Result<(), Failure> {
-        let v1: f64 = self.basis.v_reversed_parameter(self.vtrim2);
-        let v2: f64 = self.basis.v_reversed_parameter(self.vtrim1);
+        let v1: f64 = self.basis.v_reversed_parameter(self.vtrim2)?;
+        let v2: f64 = self.basis.v_reversed_parameter(self.vtrim1)?;
         self.basis.v_reverse()?;
         let (u, v) = (
             self.stored_u(self.utrim1, self.utrim2),

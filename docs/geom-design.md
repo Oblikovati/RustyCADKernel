@@ -86,10 +86,11 @@ native exception type (`Geom2d_UndefinedDerivative`, `Geom2d_UndefinedValue`,
 `Standard_DomainError`, `Standard_NoSuchObject`...) and a message with the
 offending value. Checks that OCCT writes with `*_Raise_if` stay active, because
 the pinned oracle build (RelWithDebInfo) does not define `No_Exception`. The
-virtual evaluators (`EvalD0`...`EvalDN`) and `ReversedParameter` always return
-`Result`, because an override can fail even when the base class cannot (the
-Geom2dEval curves raise Standard_NotImplemented from `ReversedParameter`). For the same reason `Copy`
-returns `Result`: a trimmed curve re-trims its bounds when it is copied.
+virtual evaluators (`EvalD0`...`EvalDN`), `ReversedParameter` and the surface
+`UReversedParameter`/`VReversedParameter` always return `Result`, because an
+override can fail even when the base class cannot (the Geom2dEval and GeomEval
+curves and surfaces raise Standard_NotImplemented from them). For the same reason
+`Copy` returns `Result`: a trimmed curve re-trims its bounds when it is copied.
 
 ## 5. Evaluation caches
 

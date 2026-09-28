@@ -27,3 +27,5 @@
 pub mod adv_approx;
 pub mod geom;
 pub mod geom_eval;
+pub mod geom_hash;
+pub mod top_abs;

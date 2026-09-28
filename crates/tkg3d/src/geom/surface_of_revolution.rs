@@ -227,15 +227,15 @@ impl GeomSurface for GeomSurfaceOfRevolution {
         state.direction.reverse();
         Ok(())
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
-        2. * PI - u
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(2. * PI - u)
     }
     fn v_reverse(&self) -> Result<(), Failure> {
         let mut state = self.state.write();
         state.eval_rep = Handle::default();
         state.basis.reverse()
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
         self.basis_curve().reversed_parameter(v)
     }
     fn transform_parameters(&self, u: f64, v: f64, transform: Transform3) -> (f64, f64) {

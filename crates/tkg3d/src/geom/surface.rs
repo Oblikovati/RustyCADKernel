@@ -84,12 +84,14 @@ pub type SurfaceBounds = (f64, f64, f64, f64);
 pub trait GeomSurface: GeomGeometry {
     /// Reverse the U direction (`UReverse`); `surface.u_reverse()?`.
     fn u_reverse(&self) -> Result<(), Failure>;
-    /// U parameter on the U-reversed surface (`UReversedParameter`); `surface.u_reversed_parameter(0.2)`.
-    fn u_reversed_parameter(&self, u: f64) -> f64;
+    /// U parameter on the U-reversed surface (`UReversedParameter`); a `Result` because the
+    /// GeomEval surfaces raise Standard_NotImplemented; `surface.u_reversed_parameter(0.2)?`.
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure>;
     /// Reverse the V direction (`VReverse`); `surface.v_reverse()?`.
     fn v_reverse(&self) -> Result<(), Failure>;
-    /// V parameter on the V-reversed surface (`VReversedParameter`); `surface.v_reversed_parameter(0.2)`.
-    fn v_reversed_parameter(&self, v: f64) -> f64;
+    /// V parameter on the V-reversed surface (`VReversedParameter`); a `Result` like
+    /// `u_reversed_parameter`; `surface.v_reversed_parameter(0.2)?`.
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure>;
     /// U-reversed copy (`UReversed`); `surface.u_reversed()?`.
     fn u_reversed(&self) -> Result<Handle<dyn GeomSurface>, Failure> {
         let copy: Handle<dyn GeomSurface> = self.copy()?.cast::<dyn GeomSurface>();

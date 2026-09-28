@@ -52,6 +52,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ),
     ("g3_rect_trim", offset_surface::rect_trim_case),
     ("g3_offset_surface", offset_surface::offset_surface_case),
+    // GeomEval curves (eval_curves.rs)
+    // GeomEval elementary surfaces (eval_surfaces.rs)
+    // GeomEval Bezier surfaces (eval_bezier_surfaces.rs)
+    // GeomHash (hash.rs)
+    // TopAbs (top_abs.rs)
 ];
 
 fn main() {

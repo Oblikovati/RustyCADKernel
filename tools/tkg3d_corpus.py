@@ -119,6 +119,11 @@ def append_tkg3d_requests(requests: list[str]) -> None:
     __import__('tkg3d_corpus_bezier_surface').append_bezier_surface_requests(requests)
     __import__('tkg3d_corpus_bspline_surface').append_bspline_surface_requests(requests)
     __import__('tkg3d_corpus_offset_surface').append_offset_surface_requests(requests)
+    # GeomEval curves (tkg3d_corpus_eval_curves.py)
+    # GeomEval elementary surfaces (tkg3d_corpus_eval_surfaces.py)
+    # GeomEval Bezier surfaces (tkg3d_corpus_eval_bezier_surfaces.py)
+    # GeomHash (tkg3d_corpus_hash.py)
+    # TopAbs (tkg3d_corpus_topabs.py)
 
 
 __all__ = ['fmt', 'params', 'point', 'unit', 'frame', 'axis', 'trsf', 'moves', 'line', 'circle', 'ellipse',

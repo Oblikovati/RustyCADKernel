@@ -196,8 +196,8 @@ impl GeomSurface for GeomConicalSurface {
         elementary_u_reverse(&mut self.state.write().pos);
         Ok(())
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
-        2. * PI - u
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(2. * PI - u)
     }
     /// Negates the half-angle and reverses the main direction.
     fn v_reverse(&self) -> Result<(), Failure> {
@@ -206,8 +206,8 @@ impl GeomSurface for GeomConicalSurface {
         state.pos.z_reverse();
         Ok(())
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
-        -v
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
+        Ok(-v)
     }
     fn transform_parameters(&self, u: f64, v: f64, transform: Transform3) -> (f64, f64) {
         (u, scaled_parameter(v, transform))

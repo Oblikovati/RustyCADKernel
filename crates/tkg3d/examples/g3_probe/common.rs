@@ -171,7 +171,7 @@ fn curve_evaluations(c: &dyn GeomCurve, u: f64) {
         show(c.eval_dn(u, n), vec);
     }
     show(c.value(u), pnt);
-    real(c.reversed_parameter(u));
+    show(c.reversed_parameter(u), real);
 }
 
 /// The surface summary of g3_surface_summary.
@@ -220,8 +220,8 @@ fn surface_evaluations(s: &dyn GeomSurface, u: f64, v: f64) {
     }
     show(s.eval_dn(u, v, -1, 2), vec);
     show(s.value(u, v), pnt);
-    real(s.u_reversed_parameter(u));
-    real(s.v_reversed_parameter(v));
+    show(s.u_reversed_parameter(u), real);
+    show(s.v_reversed_parameter(v), real);
 }
 
 /// The iso curves of g3_isos.
