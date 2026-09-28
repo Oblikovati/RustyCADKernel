@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 103 complete source suites
-currently account for 1,951 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 114 complete source suites
+currently account for 2,002 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -109,6 +109,17 @@ currently account for 1,951 mapped declarations, with matching native and Rust p
 | BSplCLib_Cache_Test.cxx | bsplclib_cache | 7 |
 | BSplSLib_Test.cxx | bsplslib | 5 |
 | BSplSLib_Cache_Test.cxx | bsplslib_cache | 8 |
+| Convert_CircleToBSplineCurve_Test.cxx | convert_circle_to_bspline_curve | 6 |
+| Convert_EllipseToBSplineCurve_Test.cxx | convert_ellipse_to_bspline_curve | 4 |
+| Convert_HyperbolaToBSplineCurve_Test.cxx | convert_hyperbola_to_bspline_curve | 3 |
+| Convert_ParabolaToBSplineCurve_Test.cxx | convert_parabola_to_bspline_curve | 3 |
+| Convert_CompBezierCurvesToBSplineCurve_Test.cxx | convert_comp_bezier_curves_to_bspline_curve | 7 |
+| Convert_CompPolynomialToPoles_Test.cxx | convert_comp_polynomial_to_poles | 4 |
+| Convert_GridPolynomialToPoles_Test.cxx | convert_grid_polynomial_to_poles | 2 |
+| Convert_SphereToBSplineSurface_Test.cxx | convert_sphere_to_bspline_surface | 6 |
+| Convert_TorusToBSplineSurface_Test.cxx | convert_torus_to_bspline_surface | 7 |
+| Convert_CylinderToBSplineSurface_Test.cxx | convert_cylinder_to_bspline_surface | 5 |
+| Convert_ConeToBSplineSurface_Test.cxx | convert_cone_to_bspline_surface | 4 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -741,3 +752,62 @@ without the NCollection bound check, so a `[max][min]` target is filled through
 row-major offsets; the port raises the checked Standard_OutOfRange, and the
 coefficients take the shape of the poles in the corpus. UnitWeights rejects
 counts whose product is negative.
+
+### Convert conics, quadrics and polynomial pieces to B-splines
+
+Every class of the Convert package is ported (92 API rows, plus the two-frame
+`gp_Trsf::SetTransformation` and `gp_Trsf2d::SetTransformation` overloads the
+conversions need): the conic root class with the circle, ellipse, hyperbola and
+parabola conversions, both public BuildCosAndSin overloads and
+BuildPolynomialCosAndSin, the elementary surface root class with the sphere, torus,
+cylinder and cone conversions, the composite Bezier template in 2D and 3D, and the
+composite polynomial curve and grid conversions. The 51 declarations of the 11
+Convert suites pass in both kernels. Another 3,595 differential requests match
+with raw bits; the numeric gate now passes 45,717 cases. They cover every
+Convert_ParameterisationType on full, trimmed, tiny, empty, negative and oversized
+arcs, in canonical, rotated, offset and indirect frames; hyperbola and parabola arcs
+with reversed and degenerate bounds and zero radii; whole, patch and band surfaces
+with direct and indirect frames, boundary openings and reversed ranges; Bezier chains
+with C1, antiparallel, C0 and coincident junctions, mixed degrees, several angular
+tolerances and non-1 lower bounds; composite polynomials with every constructor,
+per-span coefficient counts, continuities up to the degree and reversed domains;
+single and gridded polynomial patches; and the argument errors of each class.
+
+The OCCT subclasses only add constructors, so they become named constructors of
+`ConicToBSplineCurve` (`from_circle`, `from_circle_arc`, ...) and
+`ElementarySurfaceToBSplineSurface` (`from_sphere`, `from_sphere_patch`,
+`from_sphere_band`, ...). The composite Bezier template is
+`CompBezierCurvesToBSplineCurveBase<P>` with the two native aliases. Handle outputs
+become returned values or `Option` copies, and the long argument lists of the
+polynomial conversions become `PolynomialSpans` and `PolynomialGrid`.
+
+Preserved quirks: the sphere band trimmed in U (`UTrim = true`) weights its meridian
+middles with 0.5 although its two V spans open by PI / 4, so the result is not an
+exact sphere; the periodic TgtThetaOver2 circle drops the closing pole of three spans
+and gives every knot the multiplicity 2; for every negative QuasiAngular opening
+`alpha / 2 < 1e-7` holds, so the Taylor value `b = -6/15` is used; the TgtThetaOver2
+span count is `(int)std::trunc(1.2 * delta / PI) + 1` (INT_MIN for out-of-range values,
+as `cvttsd2si`); the sphere patch accepts `V1 > V2`, where no span gives a single V
+pole, a NaN knot and a multiplicity of 4, and fewer than no span raises
+Standard_OutOfRange from `myVMults(0)`; a periodic cylinder or cone computes seven
+pole rows and keeps six; the composite Bezier conversion assigns a curve that is
+already at the maximal degree to its work array, and `NCollection_Array1::Assign`
+copies the bounds, so a curve not based at 1 shifts the poles read after it and
+fails with Standard_OutOfRange when it is the last curve; an empty sequence keeps
+the previous degree; only the 3D instantiation guards the knot ratio against
+`10 * Epsilon(Det)`; `GridPolynomialToPoles` knots keep the bounds of the true
+breakpoints, while the breakpoints and domains are read from index 1. The ignored
+pivot index of AlgorithmicCosAndSin and the unreachable inversion check of
+CompPolynomialToPoles are kept (BSplCLib::Interpolate raises first).
+`convert_behavior.rs` pins them with regression tests.
+
+Deviations are limited to undefined native behaviour. A sphere band periodic in U
+whose V opening is at least 5 PI / 3 makes the native ComputePoles write a seventh
+meridian pole into a five-entry `std::array` (the oracle aborts with "stack smashing
+detected"); the port raises Standard_OutOfRange before the write. KnotSequence reads
+multiplicities through a raw pointer with the knot index, so gridded true breakpoints
+not based at 1 read past the array; the port raises Standard_OutOfRange. A
+coefficient array shorter than the spans read through `(double*)&Coefficients(i)` is
+refused the same way. An arc whose span count turns negative makes the native code
+allocate a wrapped size; the port raises Standard_OutOfMemory. The corpus never
+enters these paths.
