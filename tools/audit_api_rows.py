@@ -85,7 +85,7 @@ def clean_source(text: str) -> str:
     text = TOKEN_NOISE.sub(lambda m: '""' if m.group(0)[0] in "\"'" else " ", text)
     text = re.sub(r"^\s*#(?:[^\n]*\\\n)*[^\n]*$", "", text, flags=re.M)
     text = re.sub(r"\[\[[^\]]*\]\]|__attribute__\s*\(\([^)]*\)\)", "", text)
-    text = re.sub(r"\bStandard_DEPRECATED\s*\(\s*\"*\s*\)", "", text)
+    text = re.sub(r"\bStandard_DEPRECATED(?:_STD)?\s*\(\s*\"*\s*\)", "", text)
     text = RTTI_MACRO.sub(r"public: \1(\2);", HANDLE_MACRO.sub(";", text))  # the macro opens with `public:`
     return re.sub(IGNORED_MACROS, "", text)
 
@@ -234,7 +234,14 @@ def enumerator_members(braced: str, scope: str) -> list[Member]:
 
 
 def alias_members(head: str, scope: str) -> list[Member]:
-    """The known identity declared by a `typedef` or `using X = ...` alias."""
+    """The known identity declared by a `typedef` or `using X = ...` alias.
+
+    Deprecation macros between the name and `=` are stripped by `clean_source`, so the
+    GCE2d aliases (`using GCE2d_Root Standard_DEPRECATED_STD("...") = GC_Root;`) are known.
+
+    >>> alias_members('using GCE2d_Root = GC_Root', '')
+    [Member(prefix='GCE2d_Root', params=None, qualifier='')]
+    """
     using = re.match(r"using\s+(\w+)\s*=", head)
     typedef = re.search(r"(\w+)\s*(?:\[[^\]]*\]\s*)*$", head) if head.startswith("typedef") else None
     name = using or typedef
@@ -262,7 +269,10 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
     """The member declared by a function statement, or nothing for definitions/deletions."""
     if re.search(r"=\s*delete\s*$", head):
         return []
-    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+[A-Za-z_][\w:]*\s*[&*]*"
+    # A conversion operator may name a cv-qualified template type
+    # (`operator const occ::handle<Geom_Line>&() const`, the GC_Make* conversions).
+    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)"
+                           r"|operator\s+(?:const\s+)?[A-Za-z_][\w:]*(?:\s*<[^()]*>)?\s*[&*]*"
                            r"|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
     if name_match is None:
         return []
@@ -287,10 +297,12 @@ def conversion_spelling(raw: str) -> str:
     'operator bool'
     >>> conversion_spelling("operator ()")
     'operator()'
+    >>> conversion_spelling("operator const occ::handle< Geom_Line > &")
+    'operator const occ::handle<Geom_Line>&'
     """
     match = re.fullmatch(r"operator\s+([A-Za-z_].*)", raw.strip())
     compact = re.sub(r"\s+", "", raw)
-    return compact if match is None else "operator " + re.sub(r"\s+", "", match.group(1))
+    return compact if match is None else "operator " + squeeze(match.group(1))
 
 
 def class_name(owner: str) -> str:

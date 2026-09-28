@@ -1,0 +1,16 @@
+[package]
+name = "rustycad-tkgeombase"
+description = "OCCT TKGeomBase toolkit: construction of elementary geometry and the ModelingData geometry algorithms"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license = "LGPL-2.1-only WITH OCCT-exception-1.0"
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-cmath = { path = "../cmath" }
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkg3d = { path = "../tkg3d" }
