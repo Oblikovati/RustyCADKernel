@@ -497,4 +497,88 @@ Pending.
 
 ### Standard memory managers, synchronization, locale, buffered readers, dump and Plugin
 
-Pending.
+Standard.hxx (except `StackTrace`, ported with Standard_Failure), Standard_MMgrOpt,
+Standard_MMgrRoot, Standard_MemoryUtils, Standard_DefineAlloc, Standard_Mutex,
+Standard_Condition, Standard_CLocaleSentry, Standard_ReadBuffer, Standard_ReadLineBuffer,
+Standard_ArrayStreamBuffer, Standard_Dump and Plugin.hxx have 89 rows (80 implemented,
+9 excluded: destructors and the SunPro-only placement `operator new`). The
+`services_` operations compare 3,931 requests with the native kernel.
+
+- **Standard memory.** The oracle is built with `USE_MMGR_TYPE=NATIVE`, so
+  `standard::memory` follows the C runtime calls it compiles to: `allocate` is zeroed
+  (calloc), `allocate_optimal` returns `None` for null, `purge` returns 1 and
+  `get_allocator_type` is `Native`. Blocks are owned `StandardMemory`/`AlignedMemory`
+  values, a `None` slot is the null pointer, and the nulling template overloads
+  `Free(T*&)` / `FreeAligned(T*&)` are `free_and_null` / `free_aligned_and_null`.
+  Quirks kept: glibc `realloc(p, 0)` frees the block and returns NULL, so `reallocate`
+  empties the slot and raises Standard_OutOfMemory; alignment follows GCC's
+  `_mm_malloc` on x86 (1 is malloc, 2 and 4 widen to a pointer, other values need a
+  power-of-two multiple of a pointer). Aligned blocks over-allocate a `Vec` instead of
+  calling an unsafe allocator. Standard_OutOfMemory is built with
+  `Failure::with_message` until the runtime area's `exceptions::out_of_memory` lands.
+- **Standard_MMgrOpt.** `MMgrOpt` keeps OCCT's 8-byte headers and intrusive
+  newest-first free lists inside real heap regions addressed by their start
+  (`StorageAddress`), so rounded sizes, pool offsets, reuse order and Purge counts
+  match. `bytes`/`bytes_mut` stand for dereferencing a pointer. Mapped memory is a
+  page-aligned zeroed region; the page size comes from a narrow FFI adapter
+  (`sysconf`, Mach `vm_page_size`, `GetSystemInfo`). The callback is process-wide like
+  the native file-static pointer. Quirks kept: `ROUNDUP8` and the header size wrap, so
+  sizes within 7 of `usize::MAX` become zero-size pool blocks and larger ones map
+  length 0 (`strerror` "Invalid argument"); a failed allocation purges, then raises; a
+  fully free pool is never released, because the Purge tally omits the pool's link
+  word (P - 8 is never P). Deviations: native undefined behavior (freeing a foreign or
+  freed address, a header past a too-small block) raises Standard_ProgramError; the
+  manager takes `&mut self` instead of locking; the POSIX mapping path is modeled on
+  every platform; the page the native `munmap` leaks is released.
+- **Standard_MemoryUtils.** `make_shared`/`make_unique` are `Arc`/`Box` on the global
+  allocator; `make_oshared` stores the value in a `BaseAllocator` (`Arc<AllocatedBox<T>>`)
+  and both `NCollection_OccAllocator<T>` overloads are `make_oshared_in` (`OcctShared<T>`).
+  Rust moves a constructed value in where C++ forwards constructor arguments.
+- **Standard_Mutex and Standard_Condition.** The implementation creates a recursive
+  pthread mutex (the header says otherwise), so `StandardMutex` keeps an owner and a
+  depth: the owner re-locks, `try_lock` fails only for other threads, and an unlock by a
+  non-owner does nothing (pthread EPERM). `Sentry` unlocks on drop, also during a panic,
+  which replaces the error-handler callback. `StandardCondition` is the manual-reset
+  event; `Wait(int)` is `wait_timeout`, and a zero or negative limit only tests the flag.
+  Thread scripts are compared token by token.
+- **Standard_CLocaleSentry.** Rust formatting never reads a process locale, so the
+  sentry has nothing to switch or restore; it stays a scope marker, and `get_c_locale`
+  returns one static `CLocale` (radix '.', empty group separator).
+- **Standard_ReadBuffer / Standard_ReadLineBuffer.** Both take any `io::Read` for the
+  `std::istream` and `FILE*` overloads, with the native block-read semantics. Quirks
+  kept: lengths truncate with C++ `%`; a partial last chunk keeps stale cache bytes;
+  a short read ends reading for good; a line's terminator is overwritten with NUL in
+  place; `ReadLine`'s read count is the last block of the call; a backslash that ends a
+  read block in multiline mode makes later newlines part of the line; an empty carry-over
+  that never held a byte ends the stream (its `Data()` is NULL); `Clear` also resets the
+  modes. `ReadChunk<T>` copies the chunk out (`T: AnyBitPattern`). Deviations: a zero
+  chunk (native division by zero) and a `T` larger than a chunk raise
+  Standard_ProgramError, and a failed `Init` hands out no chunk.
+- **Standard_ArrayStreamBuffer.** Adds `xsgetn` and `uflow`. `put_back` compares the
+  request with the previous `char` promoted to `int`, so where `char` is signed a byte of
+  0x80 or more never matches (native quirk). Seeks that native code would leave outside
+  the buffer (before the start, or past the end through a negative end offset) are
+  refused with `InvalidInput` instead of being clamped silently.
+- **Standard_Dump.** Every member is ported on one-based TCollection primitives, so
+  `SubString` and `Location` exceptions (Location's without a message) match. Text
+  arguments are `impl AsRef<[u8]>`; the variadic writers and `InitRealValues` take
+  slices; `GetPointerInfo` is `get_pointer_info(Option<usize>)` and
+  `get_handle_pointer_info(&Handle<T>)`; `HierarchicalValueIndices` returns a `Vec`. The
+  `OCCT_DUMP_*`/`OCCT_INIT_*` macros are not members: `dump_vector`, `dump_real`,
+  `dump_class_begin`, `dump_integer`, `init_vector`, `init_real_field` and
+  `init_integer_field` write or read what their expansions do (the stale
+  `OCCT_DUMP_CLASS_BEGIN` row was dropped). Quirks kept: `SplitJson` raises for any `{` at
+  the level it splits, accepts any key as the pair separator and a one-byte text
+  unparsed; object values keep their closing brace; `FormatJson` never closes the added
+  outer brace when the text ends with a nested `}`; the short pointer text of `0x1234` is
+  `0xx1234`; `DumpFieldToName` strips `an` from "angle" and raises for "()"; strings are
+  streamed as C strings. Existing dump functions now accept byte text; their callers
+  compile unchanged.
+- **Plugin.** Loading native shared libraries has no meaning for the port.
+  `PluginLoader` injects the resource io/environment, a `PluginLibraries` seam
+  (`StaticPluginLibraries` registers `PLUGINFACTORY` factories by library file name)
+  and a console writer, and follows `Plugin.cxx`: `<GUID>.Location` from a fresh
+  "Plugin" catalog, `lib<name>.so`/`.dylib`/`<name>.dll`, Plugin_Failure messages and
+  verbose output as natively, glibc `dlerror` wording, success-only caching (per loader
+  instead of process-wide). The probe exercises the native failure paths with a
+  temporary resource file.
