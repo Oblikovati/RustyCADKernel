@@ -260,3 +260,26 @@ impl BiarcJunction {
         }))
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rustycad_tkg2d::geom2d::Geom2dLine;
+    use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
+
+    // calculateLines has no native caller, so only this test reaches it.
+    #[test]
+    fn calculate_lines_joins_the_scan_parameters_farther_apart_than_the_tolerance() {
+        let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::new(gp::ox2d())).cast();
+        let adaptor = Geom2dAdaptorCurve::with_range(&line, 0.0, 3.0).unwrap();
+        let mut approx = ApproxArcsSegments::new(&adaptor, 0.4, 0.1).unwrap();
+        approx.my_seq_params = (0..=6)
+            .map(|k| PPoint::from_adaptor(f64::from(k) * 0.5, &adaptor).unwrap())
+            .collect();
+        let before: i32 = approx.my_seq_curves.length();
+        let (mut first, mut last) = (approx.my_ext[0], approx.my_ext[1]);
+        assert!(approx.calculate_lines(&mut first, &mut last).unwrap());
+        // The first scan parameter equals `first`; each next one starts a segment.
+        assert_eq!(approx.my_seq_curves.length() - before, 6);
+    }
+}
