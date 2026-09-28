@@ -32,7 +32,7 @@ struct TopLocTransformFunctor<'a> {
 impl TopLocTransformFunctor<'_> {
     fn evaluate(&self, index: usize) {
         if self.races.load(Ordering::SeqCst) == 0 {
-            let vertex = Vertex::from_shape(&self.shapes[index]);
+            let vertex = Vertex::unchecked(self.shapes[index].clone());
             let point = Tool::point(&vertex).unwrap();
             if point.x() != index as f64 {
                 self.races.fetch_add(1, Ordering::SeqCst);
@@ -45,14 +45,14 @@ fn TopLoc_Location_Test__OCC25545_ConcurrentTransformationAccess() {
     let n = 1000;
     let mut shapes = vec![Shape::default(); n];
     let mut locations = vec![Location::default(); n];
-    let shape = MakeVertex::new(Point3::default()).shape().clone();
+    let shape: Shape = MakeVertex::new(Point3::default()).shape().clone();
     shapes[0] = shape.clone();
     for index in 1..n {
         let transform = Transform3::translation([1.0, 0.0, 0.0]);
         locations[index] = locations[index - 1]
             .multiplied(&Location::new(transform))
             .unwrap();
-        shapes[index] = shape.moved(&locations[index]).unwrap();
+        shapes[index] = shape.moved(&locations[index], false).unwrap();
     }
     let functor = TopLocTransformFunctor {
         shapes: &shapes,

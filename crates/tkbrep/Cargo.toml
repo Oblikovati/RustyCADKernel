@@ -1,5 +1,6 @@
 [package]
 name = "rustycad-tkbrep"
+description = "OCCT TKBRep toolkit: the topological data structure (TopoDS), its exploration (TopExp) and tools (TopTools)"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -10,3 +11,6 @@ workspace = true
 [dependencies]
 rustycad-tkernel = { path = "../tkernel" }
 rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkg2d = { path = "../tkg2d" }
+rustycad-tkg3d = { path = "../tkg3d" }
+rustycad-tkgeombase = { path = "../tkgeombase" }
