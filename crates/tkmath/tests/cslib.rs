@@ -80,9 +80,9 @@ fn checkVecEqual(theVec1: Vector3, theVec2: Vector3, theTolerance: f64) {
     );
 }
 
-/// The value a native `gp_Dir aNormal;` output holds: the written normal, else the default +Z.
+/// The value a native `gp_Dir aNormal;` output holds: the written normal, else the default +X.
 fn outputNormal(theNormal: Option<Direction3>) -> Direction3 {
-    theNormal.unwrap_or(Direction3::Z)
+    theNormal.unwrap_or(Direction3::X)
 }
 
 fn dir(x: f64, y: f64, z: f64) -> Direction3 {
