@@ -64,6 +64,9 @@ def clean_source(text: str) -> str:
     text = re.sub(r"^\s*#(?:[^\n]*\\\n)*[^\n]*$", "", text, flags=re.M)
     text = re.sub(r"\[\[[^\]]*\]\]|__attribute__\s*\(\([^)]*\)\)", "", text)
     text = re.sub(r"\bStandard_DEPRECATED\s*\(\s*\"*\s*\)", "", text)
+    # DEFINE_STANDARD_HANDLE declares a Handle typedef without a trailing semicolon; left in
+    # place it merged into the next declaration and surfaced as a bogus member (math_NotSquare).
+    text = re.sub(r"\bDEFINE_STANDARD_HANDLE\s*\([^)]*\)", "", text)
     return re.sub(IGNORED_MACROS, "", text)
 
 
