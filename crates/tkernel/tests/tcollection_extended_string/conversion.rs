@@ -59,14 +59,14 @@ fn TCollection_ExtendedStringTest__ExtendedCharConstructor() {
     let string = ExtendedString::from_char(0x20AC);
     assert_eq!(string.len(), 1);
     assert!(!string.is_ascii());
-    assert_eq!(string.value(1), 0x20AC);
+    assert_eq!(string.value(1).unwrap(), 0x20AC);
 }
 #[test]
 fn TCollection_ExtendedStringTest__UnicodeCharacters() {
     let string = ExtendedString::from_utf16(&[0x41, 0xE9, 0x20AC, 0x4E2D, 0]);
     assert_eq!(string.len(), 4);
     for (i, value) in [0x41, 0xE9, 0x20AC, 0x4E2D].into_iter().enumerate() {
-        assert_eq!(string.value(i + 1), value);
+        assert_eq!(string.value(i as i32 + 1).unwrap(), value);
     }
     assert!(!string.is_ascii());
 }
@@ -100,8 +100,8 @@ fn TCollection_ExtendedStringTest__ConversionRoundTrip() {
 fn TCollection_ExtendedStringTest__LargeStrings() {
     let string = ExtendedString::filled(1000, u16::from(b'A')).unwrap();
     assert_eq!(string.len(), 1000);
-    assert_eq!(string.value(1), 65);
-    assert_eq!(string.value(1000), 65);
+    assert_eq!(string.value(1).unwrap(), 65);
+    assert_eq!(string.value(1000).unwrap(), 65);
     assert!(string.is_ascii());
 }
 #[test]
@@ -109,9 +109,9 @@ fn TCollection_ExtendedStringTest__MemoryAllocation() {
     for length in 1..=16 {
         let string = ExtendedString::filled(length, u16::from(b'X')).unwrap();
         assert_eq!(string.length(), length);
-        assert_eq!(string.value(1), 88);
+        assert_eq!(string.value(1).unwrap(), 88);
         if length > 1 {
-            assert_eq!(string.value(length as usize), 88);
+            assert_eq!(string.value(length).unwrap(), 88);
         }
     }
 }

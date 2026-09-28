@@ -65,6 +65,8 @@ impl<T> std::ops::DerefMut for Shared<T> {
 }
 
 impl<T: Send + Sync + 'static> RuntimeTyped for Shared<T> {
+    // No RTTI of its own upstream: it reports Standard_Transient's name and descriptor.
+    const TYPE_NAME: &'static str = StandardTransient::TYPE_NAME;
     fn static_type() -> &'static RuntimeType {
         StandardTransient::static_type() // no RTTI macro upstream
     }

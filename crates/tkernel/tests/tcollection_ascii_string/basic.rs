@@ -64,7 +64,7 @@ fn TCollection_AsciiStringTest__Concatenation() {
 #[test]
 fn TCollection_AsciiStringTest__SubString() {
     text(
-        &AsciiString::new("ABCDEFGHIJKLMNOPQRSTUVWXYZ").substring(3, 8),
+        &AsciiString::new("ABCDEFGHIJKLMNOPQRSTUVWXYZ").sub_string(3, 8).unwrap(),
         "CDEFGH",
     );
 }
@@ -87,15 +87,15 @@ fn TCollection_AsciiStringTest__SearchAndLocation() {
     assert_eq!(string.search("test"), 11);
     assert_eq!(string.search("nonexistent"), -1);
     assert_eq!(string.search_from_end("test"), 27);
-    assert_eq!(string.location(AsciiString::new("i"), 1, string.len()), 3);
-    assert_eq!(string.location(AsciiString::new("i"), 4, string.len()), 6);
+    assert_eq!(string.location(AsciiString::new("i"), 1, string.length()).unwrap(), 3);
+    assert_eq!(string.location(AsciiString::new("i"), 4, string.length()).unwrap(), 6);
 }
 #[test]
 fn TCollection_AsciiStringTest__RemoveAndInsert() {
     let mut string = AsciiString::new("Hello World");
-    string.remove(6, 6);
+    string.remove(6, 6).unwrap();
     text(&string, "Hello");
-    string.insert(6, " Universe");
+    string.insert(6, " Universe").unwrap();
     text(&string, "Hello Universe");
     string.remove_all(b'e');
     text(&string, "Hllo Univrs");
@@ -163,7 +163,7 @@ fn TCollection_AsciiStringTest__HashCode() {
 #[test]
 fn TCollection_AsciiStringTest__Split() {
     let mut string = AsciiString::new("abcdefghij");
-    let remainder = string.split(5);
+    let remainder = string.split(5).unwrap();
     text(&string, "abcde");
     text(&remainder, "fghij");
 }
@@ -232,8 +232,8 @@ fn TCollection_AsciiStringTest__EdgeCases() {
 fn TCollection_AsciiStringTest__LargeStrings() {
     let string = AsciiString::filled(1000, b'X');
     assert_eq!(string.len(), 1000);
-    assert_eq!(string.value(1), b'X');
-    assert_eq!(string.value(1000), b'X');
+    assert_eq!(string.value(1).unwrap(), b'X');
+    assert_eq!(string.value(1000).unwrap(), b'X');
 }
 #[test]
 fn TCollection_AsciiStringTest__PaddingSafety() {

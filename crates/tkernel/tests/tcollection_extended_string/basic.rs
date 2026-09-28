@@ -99,7 +99,7 @@ fn TCollection_ExtendedStringTest__UnicodeSupport() {
     let string = ExtendedString::from_utf16(&[0x41, 0xA9, 0x2122, 0x20AC, 0]);
     assert_eq!(string.len(), 4);
     for (i, value) in [0x41, 0xA9, 0x2122, 0x20AC].into_iter().enumerate() {
-        assert_eq!(string.value(i + 1), value);
+        assert_eq!(string.value(i as i32 + 1).unwrap(), value);
     }
 }
 #[test]
@@ -113,7 +113,7 @@ fn TCollection_ExtendedStringTest__HashCode() {
 #[test]
 fn TCollection_ExtendedStringTest__Remove() {
     let mut string = ExtendedString::new("Hello World");
-    string.remove(6, 6);
+    string.remove(6, 6).unwrap();
     text(&string, "Hello");
 }
 #[test]
