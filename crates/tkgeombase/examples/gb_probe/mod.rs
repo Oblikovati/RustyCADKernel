@@ -5,6 +5,8 @@
 pub mod common;
 pub mod gc;
 pub mod gce;
+pub mod int_ana;
+pub mod int_ana2d;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
