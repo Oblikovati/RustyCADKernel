@@ -80,5 +80,9 @@ pub(crate) fn check_dn_range(class: &str, nu: i32, nv: i32) -> Result<(), Failur
 /// the orders that EvalDN takes from EvalD1..EvalD3; `low_order_index(2, 1) == Some(8)`.
 pub(crate) fn low_order_index(nu: i32, nv: i32) -> Option<usize> {
     let pair: (usize, usize) = (usize::try_from(nu).ok()?, usize::try_from(nv).ok()?);
-    ORDER_PAIRS.iter().skip(1).position(|&p| p == pair).map(|k| k + 1)
+    ORDER_PAIRS
+        .iter()
+        .skip(1)
+        .position(|&p| p == pair)
+        .map(|k| k + 1)
 }

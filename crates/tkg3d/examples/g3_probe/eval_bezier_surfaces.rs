@@ -1,6 +1,8 @@
 //! The GeomEval Bezier surfaces of the TKG3d probe; the counterpart of
 //! tools/oracle/tkg3d_probe_eval_bezier_surfaces.cxx.
-use super::common::{built_surface, dump, end, flag, int, name, pnt, real, show, surface_summary, trsf, vec};
+use super::common::{
+    built_surface, dump, end, flag, int, name, pnt, real, show, surface_summary, trsf, vec,
+};
 use super::print::Reader;
 use rustycad_tkernel::ncollection::Array2;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -66,7 +68,9 @@ fn grid<T: Copy>(a: &Array2<'_, T>, values: bool, print: impl Fn(T)) {
 fn state(s: &Handle<dyn GeomSurface>) {
     let t: Handle<GeomEvalTBezierSurface> = s.cast();
     if !t.is_null() {
-        [t.nb_u_poles(), t.nb_v_poles(), t.order_u(), t.order_v()].into_iter().for_each(int);
+        [t.nb_u_poles(), t.nb_v_poles(), t.order_u(), t.order_v()]
+            .into_iter()
+            .for_each(int);
         [t.alpha_u(), t.alpha_v()].into_iter().for_each(real);
         flag(t.is_rational());
         grid(&t.poles(), true, pnt);
@@ -74,8 +78,17 @@ fn state(s: &Handle<dyn GeomSurface>) {
     }
     let a: Handle<GeomEvalAHTBezierSurface> = s.cast();
     if !a.is_null() {
-        [a.nb_poles_u(), a.nb_poles_v(), a.alg_degree_u(), a.alg_degree_v()].into_iter().for_each(int);
-        [a.alpha_u(), a.alpha_v(), a.beta_u(), a.beta_v()].into_iter().for_each(real);
+        [
+            a.nb_poles_u(),
+            a.nb_poles_v(),
+            a.alg_degree_u(),
+            a.alg_degree_v(),
+        ]
+        .into_iter()
+        .for_each(int);
+        [a.alpha_u(), a.alpha_v(), a.beta_u(), a.beta_v()]
+            .into_iter()
+            .for_each(real);
         flag(a.is_u_rational());
         flag(a.is_v_rational());
         grid(&a.poles(), true, pnt);

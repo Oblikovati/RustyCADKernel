@@ -292,7 +292,15 @@ fn GeomEval_TBezierSurfaceTest__EvalD0_MatchesSphere() {
     let aTBez = createSpherePatch();
     let aSphere = unit_sphere();
 
-    let aUParams = [0.1, PI / 6.0, PI / 4.0, PI / 3.0, PI / 2.0, 2.0 * PI / 3.0, 2.5];
+    let aUParams = [
+        0.1,
+        PI / 6.0,
+        PI / 4.0,
+        PI / 3.0,
+        PI / 2.0,
+        2.0 * PI / 3.0,
+        2.5,
+    ];
     let aVParams = [0.1, PI / 6.0, PI / 4.0, PI / 3.0, 1.2];
     for aU in aUParams {
         for aV in aVParams {

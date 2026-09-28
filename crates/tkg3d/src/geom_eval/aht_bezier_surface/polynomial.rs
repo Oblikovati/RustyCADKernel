@@ -81,8 +81,19 @@ fn bicubic(grid: &PoleGrid<'_>, u: f64, v: f64, max: usize) -> SurfaceDerivs {
 }
 
 // The U derivatives `D0..D3` of one column at `u`, by Horner from the top degree.
-fn column_derivatives(grid: &PoleGrid<'_>, degree_u: usize, j: usize, u: f64, max: usize) -> [Xyz; 4] {
-    let mut d: [Xyz; 4] = [grid.pole(degree_u, j), Xyz::default(), Xyz::default(), Xyz::default()];
+fn column_derivatives(
+    grid: &PoleGrid<'_>,
+    degree_u: usize,
+    j: usize,
+    u: f64,
+    max: usize,
+) -> [Xyz; 4] {
+    let mut d: [Xyz; 4] = [
+        grid.pole(degree_u, j),
+        Xyz::default(),
+        Xyz::default(),
+        Xyz::default(),
+    ];
     for i in (0..degree_u).rev() {
         if max >= 3 {
             d[3] = d[3] * u + d[2] * 3.0;
@@ -145,7 +156,13 @@ impl HornerRows {
 }
 
 // `evalPolynomialSurfaceNonRational<max>`: columns from the top V degree down.
-fn horner(grid: &PoleGrid<'_>, [degree_u, degree_v]: [usize; 2], u: f64, v: f64, max: usize) -> SurfaceDerivs {
+fn horner(
+    grid: &PoleGrid<'_>,
+    [degree_u, degree_v]: [usize; 2],
+    u: f64,
+    v: f64,
+    max: usize,
+) -> SurfaceDerivs {
     let mut rows = HornerRows::default();
     for j in (0..=degree_v).rev() {
         let d: [Xyz; 4] = column_derivatives(grid, degree_u, j, u, max);

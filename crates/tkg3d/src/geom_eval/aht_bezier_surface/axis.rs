@@ -80,7 +80,11 @@ fn hyperbolic(basis: &mut AxisBasis, t: f64, max: usize, alpha: f64, index: usiz
     let (sinh, cosh) = (alpha_t.sinh(), alpha_t.cosh());
     let mut alpha_pow: f64 = 1.0;
     for d in 0..=max {
-        let (first, second) = if d % 2 == 0 { (sinh, cosh) } else { (cosh, sinh) };
+        let (first, second) = if d % 2 == 0 {
+            (sinh, cosh)
+        } else {
+            (cosh, sinh)
+        };
         *basis.at_mut(d, index) = alpha_pow * first;
         *basis.at_mut(d, index + 1) = alpha_pow * second;
         alpha_pow *= alpha;

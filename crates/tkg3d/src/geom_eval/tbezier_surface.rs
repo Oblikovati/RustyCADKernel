@@ -89,7 +89,12 @@ impl GeomEvalTBezierSurface {
     /// alphas are > 0; `GeomEvalTBezierSurface::new(&poles, 1.0, 1.0)?`.
     pub fn new(poles: &Array2<'_, Point3>, alpha_u: f64, alpha_v: f64) -> Result<Self, Failure> {
         check_poles_and_alphas(poles, [alpha_u, alpha_v])?;
-        Ok(Self::stored(poles, Array2::default(), [alpha_u, alpha_v], false))
+        Ok(Self::stored(
+            poles,
+            Array2::default(),
+            [alpha_u, alpha_v],
+            false,
+        ))
     }
     /// Rational surface (`GeomEval_TBezierSurface(Poles, Weights, AlphaU, AlphaV)`);
     /// also refuses a weight grid of another shape and weights <= 0. Equal weights
@@ -104,7 +109,12 @@ impl GeomEvalTBezierSurface {
         check_poles_and_alphas(poles, [alpha_u, alpha_v])?;
         check_weight_grid(CLASS, weights, poles)?;
         let stored_weights = owned_grid(weights);
-        Ok(Self::stored(poles, stored_weights, [alpha_u, alpha_v], true))
+        Ok(Self::stored(
+            poles,
+            stored_weights,
+            [alpha_u, alpha_v],
+            true,
+        ))
     }
     fn stored(
         poles: &Array2<'_, Point3>,
@@ -189,10 +199,13 @@ impl GeomEvalTBezierSurface {
             }
         };
         let count: usize = if u { cols } else { rows };
-        // `!(d > tol)`, as natively: a NaN distance does not open the surface.
-        (0..count).all(|k| {
+        // Only `d > tol` opens the surface, as natively: a NaN distance does not.
+        for k in 0..count {
             let distance: f64 = poles[index(k, false)].distance(&poles[index(k, true)]);
-            !(distance > precision::confusion())
-        })
+            if distance > precision::confusion() {
+                return false;
+            }
+        }
+        true
     }
 }

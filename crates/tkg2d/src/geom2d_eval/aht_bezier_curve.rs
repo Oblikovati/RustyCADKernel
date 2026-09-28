@@ -14,7 +14,9 @@
 
 //! `Geom2dEval_AHTBezierCurve`: an algebraic-hyperbolic-trigonometric Bezier curve
 //! over `{1, t, ..., t^k, sinh(alpha t), cosh(alpha t), sin(beta t), cos(beta t)}` on `[0, 1]`.
-use super::eval_basis::aht::{AhtView, basis_dimension, mixed, polynomial, quotient_d1, quotient_d2, quotient_d3};
+use super::eval_basis::aht::{
+    AhtView, basis_dimension, mixed, polynomial, quotient_d1, quotient_d2, quotient_d3,
+};
 use super::eval_basis::aht_dn;
 use super::eval_basis::sums::BasisSums;
 use super::eval_math::{check_derivative_order, unsupported};

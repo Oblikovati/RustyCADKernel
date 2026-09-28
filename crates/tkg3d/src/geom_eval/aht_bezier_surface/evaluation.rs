@@ -97,31 +97,58 @@ fn quotients(sums: &TensorSums, max: usize) -> SurfaceDerivs {
         c[5] = (n(1, 1) - c[1] * w(0, 1) - c[2] * w(1, 0) - c[0] * w(1, 1)) * inv_w;
     }
     if max >= 3 {
-        c[6] = (n(3, 0) - c[3] * (3.0 * w(1, 0)) - c[1] * (3.0 * w(2, 0)) - c[0] * w(3, 0)) * inv_w;
-        c[7] = (n(0, 3) - c[4] * (3.0 * w(0, 1)) - c[2] * (3.0 * w(0, 2)) - c[0] * w(0, 3)) * inv_w;
-        c[8] = (n(2, 1) - c[5] * (2.0 * w(1, 0)) - c[3] * w(0, 1) - c[2] * w(2, 0)
-            - c[1] * (2.0 * w(1, 1))
-            - c[0] * w(2, 1))
-            * inv_w;
-        c[9] = (n(1, 2) - c[5] * (2.0 * w(0, 1)) - c[4] * w(1, 0) - c[1] * w(0, 2)
-            - c[2] * (2.0 * w(1, 1))
-            - c[0] * w(1, 2))
-            * inv_w;
+        third_order_quotients(&mut c, n, w, inv_w);
     }
     c
+}
+
+// C30, C03, C21 and C12, term order as natively.
+fn third_order_quotients(
+    c: &mut SurfaceDerivs,
+    n: impl Fn(usize, usize) -> Xyz,
+    w: impl Fn(usize, usize) -> f64,
+    inv_w: f64,
+) {
+    c[6] = (n(3, 0) - c[3] * (3.0 * w(1, 0)) - c[1] * (3.0 * w(2, 0)) - c[0] * w(3, 0)) * inv_w;
+    c[7] = (n(0, 3) - c[4] * (3.0 * w(0, 1)) - c[2] * (3.0 * w(0, 2)) - c[0] * w(0, 3)) * inv_w;
+    c[8] = (n(2, 1)
+        - c[5] * (2.0 * w(1, 0))
+        - c[3] * w(0, 1)
+        - c[2] * w(2, 0)
+        - c[1] * (2.0 * w(1, 1))
+        - c[0] * w(2, 1))
+        * inv_w;
+    c[9] = (n(1, 2)
+        - c[5] * (2.0 * w(0, 1))
+        - c[4] * w(1, 0)
+        - c[1] * w(0, 2)
+        - c[2] * (2.0 * w(1, 1))
+        - c[0] * w(1, 2))
+        * inv_w;
 }
 
 /// `EvalDN` above order 3: the direct basis product for a non-rational surface (the
 /// Horner path is not used here), the full tensor and `computeRationalDerivs`
 /// otherwise; `high_order_dn(&view, 0.5, 0.5, 2, 2)`.
-pub(super) fn high_order_dn(view: &AhtSurfaceView<'_>, u: f64, v: f64, nu: usize, nv: usize) -> Xyz {
+pub(super) fn high_order_dn(
+    view: &AhtSurfaceView<'_>,
+    u: f64,
+    v: f64,
+    nu: usize,
+    nv: usize,
+) -> Xyz {
     let [basis_u, basis_v] = view.bases(u, v, [nu, nv]);
     let bases = [&basis_u, &basis_v];
     if view.grid.weights.is_none() {
         let sums = tensor_sums(&view.grid, bases, &[(nu, nv)], WeightProduct::BasisFirst);
         return sums.n[0];
     }
-    let sums = tensor_sums(&view.grid, bases, &full_tensor(nu, nv), WeightProduct::BasisFirst);
+    let sums = tensor_sums(
+        &view.grid,
+        bases,
+        &full_tensor(nu, nv),
+        WeightProduct::BasisFirst,
+    );
     rational_derivatives(&sums, nu, nv)[nu * (nv + 1) + nv]
 }
 

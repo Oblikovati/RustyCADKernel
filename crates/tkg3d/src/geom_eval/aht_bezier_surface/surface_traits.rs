@@ -20,9 +20,7 @@ use crate::geom::{
     GeomSurfaceD3, SurfaceBounds,
 };
 use crate::geom_eval::bezier_grid::{dump_bounded_surface_base, refuse};
-use crate::geom_eval::bezier_results::{
-    check_dn_range, low_order_index, to_d1, to_d2, to_d3,
-};
+use crate::geom_eval::bezier_results::{check_dn_range, low_order_index, to_d1, to_d2, to_d3};
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{dump_field, dump_flag};
