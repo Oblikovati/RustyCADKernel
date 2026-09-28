@@ -56,7 +56,7 @@ impl Default for IncrementalAllocatorObject {
         Self {
             parent: AllocatorObject {
                 parent: StandardTransient::default(),
-                resource: BaseAllocator::incremental(24_600),
+                resource: BaseAllocator::incremental(super::INC_DEFAULT_BLOCK_SIZE),
             },
         }
     }
@@ -75,9 +75,19 @@ crate::impl_transient!(
 );
 /// Global-heap allocator object; `HeapAllocatorObject::default()`.
 #[repr(C)]
-#[derive(Default)]
 pub struct HeapAllocatorObject {
     parent: AllocatorObject,
+}
+impl Default for HeapAllocatorObject {
+    /// Wraps the process-wide heap allocator (`GlobalHeapAllocator`), not the common one.
+    fn default() -> Self {
+        Self {
+            parent: AllocatorObject {
+                parent: StandardTransient::default(),
+                resource: BaseAllocator::global_heap(),
+            },
+        }
+    }
 }
 impl HeapAllocatorObject {
     /// Borrow the backing heap allocator; `object.resource().allocate(16)`.

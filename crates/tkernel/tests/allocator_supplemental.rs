@@ -25,7 +25,7 @@ fn incremental_allocations_are_aligned_and_retained_until_reset() {
 fn base_allocator_identity_and_bytes() {
     let common = BaseAllocator::common();
     assert_eq!(common, BaseAllocator::common());
-    let mut bytes = common.allocate(1024);
+    let mut bytes = common.allocate(1024).expect("calloc succeeds");
     bytes.as_mut_slice().fill(0xAB);
     assert!(bytes.as_slice().iter().all(|byte| *byte == 0xAB));
     assert_ne!(common, BaseAllocator::incremental(128));

@@ -22,15 +22,25 @@ pub use mat4::Mat4;
 // The allocator trait requires unsafe implementation; ownership proofs are local.
 #[allow(unsafe_code)]
 mod allocator;
-pub use allocator::{AllocatedArray, AllocatedBox, AllocatedBytes, BaseAllocator};
+pub use allocator::{
+    ACC_ALIGN, ACC_DEFAULT_BLOCK_SIZE, ACC_MAX_LOOKUP_BLOCKS, AccBlockState, AllocatedArray,
+    AllocatedBox, AllocatedBytes, BaseAllocator, INC_DEFAULT_BLOCK_SIZE, INC_MINIMUM_BLOCK_SIZE,
+    IncBlock, IncBlockSizeLevel,
+};
 mod dynamic_array;
 pub use dynamic_array::{DynamicArray, DynamicCursor};
 
 mod buffer;
 pub use buffer::Buffer;
+mod object_handle;
+pub use object_handle::ObjectHandle;
+mod shared;
+pub use shared::Shared;
 
+// Raw typed allocation forwards to the allocator's unsafe free/realloc contracts.
+#[allow(unsafe_code)]
 mod occ_allocator;
-pub use occ_allocator::{AllocatorTypes, AllocatorVector, OccAllocator};
+pub use occ_allocator::{AllocatorTypes, AllocatorVector, OccAllocator, StandardAllocator};
 
 mod list;
 pub use list::List as AllocatorList;
