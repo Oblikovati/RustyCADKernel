@@ -51,7 +51,7 @@ fn NCollection_ListTest__EmplaceBefore() {
     list.emplace_append(|| Pair(30, 3.0));
     let mut cursor = list.cursor();
     cursor.next(&list);
-    pair(list.emplace_before(&cursor, || Pair(20, 2.0)), 20, 2.0);
+    pair(list.emplace_before(&cursor, || Pair(20, 2.0)).unwrap(), 20, 2.0);
     check_order(&list);
 }
 #[test]
@@ -60,7 +60,7 @@ fn NCollection_ListTest__EmplaceAfter() {
     list.emplace_append(|| Pair(10, 1.0));
     list.emplace_append(|| Pair(30, 3.0));
     let cursor = list.cursor();
-    pair(list.emplace_after(&cursor, || Pair(20, 2.0)), 20, 2.0);
+    pair(list.emplace_after(&cursor, || Pair(20, 2.0)).unwrap(), 20, 2.0);
     check_order(&list);
 }
 #[test]

@@ -7,6 +7,9 @@ mod local_array;
 pub use local_array::LocalArray;
 mod array2;
 pub use array2::Array2;
+mod generic_transient;
+mod harray;
+pub use harray::{HArray1, HArray2};
 mod linear_vector;
 pub use linear_vector::LinearVector;
 mod vector;
@@ -41,6 +44,8 @@ pub use sparse_array::SparseArray;
 
 mod sequence;
 pub use sequence::{Sequence, SequenceCursor, SequenceIter, SequenceIterMut};
+mod h_sequence;
+pub use h_sequence::HSequence;
 mod hash_policy;
 pub use hash_policy::{DefaultHashPolicy, HashKey, HashPolicy, buckets_from_int, next_map_prime};
 mod base_map;
@@ -74,6 +79,7 @@ pub use flat_data_map::{FlatDataItems, FlatDataMap, FlatDataValues, FlatDataValu
 mod ordered_map;
 mod ordered_table;
 pub use ordered_map::{OrderedMap, OrderedMapIter};
+pub use ordered_table::{OrderedNodeMut, OrderedNodeRef};
 
 mod ordered_data_map;
 pub use ordered_data_map::{
@@ -102,3 +108,15 @@ mod allocator_object;
 pub use allocator_object::{AllocatorObject, HeapAllocatorObject, IncrementalAllocatorObject};
 mod kdtree;
 pub use kdtree::{KDTree, KdPoint};
+
+mod utf_iterator;
+pub use utf_iterator::{UtfBufferError, UtfIterator, UtfUnit, WideChar};
+mod utf_string;
+pub use utf_string::{String8, UtfString};
+mod collection_cursor;
+pub use collection_cursor::{CollectionCursor, CollectionCursorMut, CursorPositions};
+mod items_view;
+pub use items_view::{
+    ItemsSource, ItemsSourceMut, ItemsView, ItemsViewMut, KeyIndexItems, KeyValueIndexItems,
+    KeyValueItems,
+};

@@ -156,6 +156,16 @@ impl<T> LinearVector<T> {
     pub fn to_array1(&mut self) -> Array1<'_, T> {
         Array1::from_slice(&mut self.elements)
     }
+    /// True once storage is allocated, as native `myData != nullptr`: capacity survives
+    /// `clear(false)` and is dropped by `clear(true)`; `LinearVector::<i32>::with_capacity(1).has_data()`.
+    pub fn has_data(&self) -> bool {
+        self.capacity() > 0
+    }
+    /// The largest representable size, `std::numeric_limits<size_t>::max()`;
+    /// `LinearVector::<i32>::max_size() == usize::MAX`.
+    pub const fn max_size() -> usize {
+        usize::MAX
+    }
     fn index_error(&self, index: usize) -> ArrayError {
         ArrayError::Index {
             index: index as i64,
@@ -174,12 +184,14 @@ impl<T: Default> LinearVector<T> {
         self.reserve(size);
         self.elements.resize_with(size, T::default);
     }
-    /// Overwrites or extends to an index; `vector.set_value(5,42)`.
-    pub fn set_value(&mut self, index: usize, value: T) {
+    /// Overwrites or extends to an index, returning the stored slot as natively;
+    /// `*vector.set_value(5, 42) += 1`.
+    pub fn set_value(&mut self, index: usize, value: T) -> &mut T {
         if index >= self.len() {
             self.resize(index + 1);
         }
         self.elements[index] = value;
+        &mut self.elements[index]
     }
 }
 impl<T: Clone> Clone for LinearVector<T> {
@@ -190,6 +202,12 @@ impl<T: Clone> Clone for LinearVector<T> {
     }
 }
 impl<T: Clone> LinearVector<T> {
+    /// A zero-based array viewing the values, as the const native `ToArray1()`; the view
+    /// detaches a private copy on its first write (see [`Array1::from_shared`]);
+    /// `vector.to_array1_view().upper()`.
+    pub fn to_array1_view(&self) -> Array1<'_, T> {
+        Array1::from_shared(&self.elements, 0)
+    }
     /// Constructs repeated values; `LinearVector::with_value(3,42)`.
     pub fn with_value(size: usize, value: T) -> Self {
         Self {

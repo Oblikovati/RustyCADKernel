@@ -269,9 +269,71 @@ class MacroAndFriendTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, r"\['x'\]; expected 2 arguments"):
             members_of(SWIZZLE_HEADER.replace("VEC_COMPONENTS_2D(x, y)", "VEC_COMPONENTS_2D(x)"))
 
+    def test_deprecation_markers_are_not_members(self):
+        header = ('Standard_HEADER_DEPRECATED("a is deprecated. " "Use b.");\n'
+                  'template <class T>\nusing NCollection_Old = NCollection_New<T> Standard_DEPRECATED("x");\n')
+        self.assertEqual(members_of(header), [])
+        self.assertEqual(known_of(header), ["NCollection_Old|None|"])
+    def test_deprecation_with_concatenated_literals_keeps_the_member(self):
+        header = ('class gp_Demo\n{\npublic:\n  Standard_DEPRECATED("Use the "\n'
+                  '                      "algo instead.")\n  bool Unite(const gp_Demo& theOther);\n};\n')
+        self.assertEqual(members_of(header), ["gp_Demo::Unite|const gp_Demo&|"])
+
     def test_standard_rtti_macros_are_never_expanded(self):
         header = "#define DEFINE_STANDARD_RTTIEXT(C, B) public: int Bad();\n" + TEMPLATE_HEADER
         self.assertNotIn("BVH_Transient::Bad||", members_of(header))
+
+    def test_macros_of_transitively_included_siblings_expand(self):
+        # NCollection_Vec4 reaches NCOLLECTION_VEC_COMPONENTS_2D only through NCollection_Vec3.
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "A.hxx").write_text("#define PAIR(a, b) int a##b() const;\n#include <C.hxx>\n")
+            (root / "B.hxx").write_text("#include <A.hxx>\n")
+            (root / "C.hxx").write_text("#include <B.hxx>\nclass C\n{\npublic:\n  PAIR(x, y)\n};\n")
+            members = [f"{m.prefix}|{m.params}|{m.qualifier}" for m in header_members(root / "C.hxx")]
+        self.assertIn("C::xy||const", members)
+
+
+TRAITS_HEADER = """
+namespace Detail
+{
+template <typename T, typename = void>
+struct HasValue : std::false_type {};
+template <typename T>
+struct HasValue<T, std::void_t<decltype(std::declval<const T&>().Value())>> : std::true_type
+{
+  static int Get(const T& theIter) { return 0; }
+};
+template <class K>
+struct KeyRef
+{
+  template <std::size_t I>
+  decltype(auto) get() const noexcept { return 0; }
+};
+}
+template <typename H>
+class Range
+{
+public:
+  explicit Range(H&& theHost) {}
+};
+template <typename T>
+Range(T&&) -> Range<std::remove_reference_t<T>>;
+"""
+
+
+class TemplateMachineryTests(unittest.TestCase):
+    def test_specialization_arguments_with_calls_open_a_scope(self):
+        members = members_of(TRAITS_HEADER)
+        self.assertIn("Detail::HasValue<T,std::void_t<decltype(std::declval<const T&>().Value())>>::Get|const T&|",
+                      members)
+        self.assertFalse([m for m in members if "decltype(std" in m.split("|")[0].split("<")[0]])
+
+    def test_decltype_return_types_are_not_names(self):
+        self.assertIn("Detail::KeyRef::get||const", members_of(TRAITS_HEADER))
+
+    def test_deduction_guides_are_not_constructors(self):
+        self.assertEqual([m for m in members_of(TRAITS_HEADER) if m.startswith("Range")], ["Range|H&&|"])
 
 
 class RowMatchingTests(unittest.TestCase):
