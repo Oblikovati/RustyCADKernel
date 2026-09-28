@@ -11,9 +11,10 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! Coordinate and diagonal stationarity probes from MathOpt_Utils.hxx at the pinned revision.
-use super::utils::{value_status, zero_based};
-use super::*;
+//! Coordinate and diagonal stationarity probes, `MathOpt::Utils::IsStationary`.
+use super::{value_status, zero_based};
+use crate::math::{MultipleVarFunction, Vector};
+use crate::math_utils::{Config, Status};
 struct Probe {
     point: Vector<'static>,
     steps: Vec<f64>,
@@ -26,7 +27,8 @@ impl Probe {
         if status != Status::Ok {
             return Err(status);
         }
-        Ok(value >= self.threshold)
+        // Native rejects only on `value < fx - tol`; a NaN threshold therefore rejects nothing.
+        Ok(value.partial_cmp(&self.threshold) != Some(std::cmp::Ordering::Less))
     }
     fn coordinate(
         &mut self,
@@ -88,7 +90,9 @@ impl Probe {
         Ok(true)
     }
 }
-pub(super) fn stationary_status(
+/// Powell's stationarity verdict: `Ok` when no probe decreases the function, `NotConverged`
+/// when one does, else the failing evaluation status.
+pub(crate) fn stationary_status(
     f: &mut impl MultipleVarFunction,
     x: &Vector<'_>,
     fx: f64,
@@ -103,5 +107,42 @@ pub(super) fn stationary_status(
         Ok(true) => Status::Ok,
         Ok(false) => Status::NotConverged,
         Err(status) => status,
+    }
+}
+
+/// True when no coordinate or pairwise-diagonal perturbation decreases `f` below
+/// `fx - f_tolerance * (1 + |fx|)`; `evaluation_status` receives the last evaluation's status
+/// and stays untouched for an empty point; `MathOpt::Utils::IsStationary`.
+///
+/// ```
+/// use rustycad_tkmath::{math::Vector, math_opt::utils::is_stationary};
+/// use rustycad_tkmath::math_utils::{vector::Sphere, Config, Status};
+/// let mut status = Status::NotConverged;
+/// let x = Vector::with_size(2);
+/// assert!(is_stationary(&mut Sphere::new(2), &x, 0.0, &Config::default(), &mut status));
+/// assert_eq!(status, Status::Ok);
+/// ```
+pub fn is_stationary(
+    f: &mut impl MultipleVarFunction,
+    x: &Vector<'_>,
+    fx: f64,
+    config: &Config,
+    evaluation_status: &mut Status,
+) -> bool {
+    match stationary_status(f, x, fx, config) {
+        Status::Ok => {
+            if x.length() > 0 {
+                *evaluation_status = Status::Ok;
+            }
+            true
+        }
+        Status::NotConverged => {
+            *evaluation_status = Status::Ok;
+            false
+        }
+        failure => {
+            *evaluation_status = failure;
+            false
+        }
     }
 }

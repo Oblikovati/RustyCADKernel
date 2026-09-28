@@ -266,6 +266,7 @@ mod gp_core_probe;
 mod gp_planar_probe;
 mod gp_standard_probe;
 mod gp_transform_probe;
+mod mathopt_api_probe;
 mod mathpoly_utils_probe;
 mod mathutils_core_api_probe;
 mod mathutils_functor_api_probe;
@@ -341,6 +342,14 @@ fn main() {
             "modern_lbfgs" => modern_opt_probe::modern_lbfgs_case(&values),
             "modern_newton" => modern_opt_probe::modern_newton_case(&values),
             "modern_global" => global_modern_probe::modern_global_case(&values),
+            "mathopt_checks" => mathopt_api_probe::mathopt_checks_case(&values),
+            "mathopt_line" => mathopt_api_probe::mathopt_line_case(&values),
+            "mathopt_eval" => mathopt_api_probe::mathopt_eval_case(&values),
+            "mathopt_stationary" => mathopt_api_probe::mathopt_stationary_case(&values),
+            "mathopt_backtrack" => mathopt_api_probe::mathopt_backtrack_case(&values),
+            "mathopt_regularize" => mathopt_api_probe::mathopt_regularize_case(&values),
+            "mathopt_polish" => mathopt_api_probe::mathopt_polish_case(&values),
+            "mathopt_uzawa" => mathopt_api_probe::mathopt_uzawa_case(&values),
             "integ_lin_tridiag" => integ_lin_api_probe::integ_lin_tridiag_case(&values),
             "integ_lin_norm" => integ_lin_api_probe::integ_lin_norm_case(&values),
             "integ_lin_spectral" => integ_lin_api_probe::integ_lin_spectral_case(&values),

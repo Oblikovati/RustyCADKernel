@@ -90,6 +90,7 @@ impl BfgsState {
             &self.direction,
             &self.gradient,
             self.fx,
+            1.0,
             config.step_min,
         );
         if first.is_valid {
@@ -104,10 +105,11 @@ impl BfgsState {
             &self.direction,
             &self.gradient,
             self.fx,
+            1.0,
             config.step_min,
         );
         if !fallback.is_valid {
-            return Err(line_failure(first.status, fallback.status));
+            return Err(failure_after_fallback(first.status, fallback.status));
         }
         self.inverse = identity(self.point.length() as usize);
         Ok(fallback)
@@ -195,7 +197,7 @@ pub fn bfgs(
     start: &Vector<'_>,
     config: &Config,
 ) -> VectorResult {
-    if !valid_config(config) || !finite_vector(start) {
+    if !is_valid_config(config) || !is_finite_vector(start) {
         return VectorResult {
             status: Status::InvalidInput,
             ..Default::default()

@@ -19,7 +19,7 @@ mod polish;
 mod restart;
 mod swarm;
 mod update;
-use super::{bounds::BoxBounds, utils::Checked};
+use super::{bounds::BoxBounds, utils::CheckedFunction};
 use crate::math::{MultipleVarFunction, Vector};
 use crate::math_utils::{Status, VectorResult};
 pub use polish::polish_coordinate_wise;
@@ -56,18 +56,15 @@ pub fn pso_seeded(
             ..Default::default()
         };
     }
-    let mut checked: Checked<'_, _> = Checked {
-        function,
-        failure: Status::Ok,
-    };
+    let mut checked: CheckedFunction<'_, _> = CheckedFunction::new(function);
     let mut swarm: Swarm = Swarm::new(&bounds, config);
     swarm.initialize(&mut checked, seeds);
     let result: VectorResult = if swarm.best_value.is_none() {
         VectorResult {
-            status: if checked.failure == Status::Ok {
+            status: if checked.failure_status == Status::Ok {
                 Status::NumericalError
             } else {
-                checked.failure
+                checked.failure_status
             },
             ..Default::default()
         }

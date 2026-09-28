@@ -143,14 +143,11 @@ pub fn differential_evolution(
     {
         return failure_result(Status::InvalidInput);
     }
-    let mut checked: Checked<'_, _> = Checked {
-        function,
-        failure: Status::Ok,
-    };
+    let mut checked: CheckedFunction<'_, _> = CheckedFunction::new(function);
     let mut population: Population = Population::new(&mut checked, &bounds, config);
     if population.best.is_none() {
-        return failure_result(if checked.failure != Status::Ok {
-            checked.failure
+        return failure_result(if checked.failure_status != Status::Ok {
+            checked.failure_status
         } else {
             Status::NumericalError
         });

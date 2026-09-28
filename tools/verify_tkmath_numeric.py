@@ -31,6 +31,7 @@ from tkmath_gp_core_corpus import append_gp_core_requests
 from tkmath_mathutils_core_api_corpus import append_mathutils_core_api_requests
 from tkmath_mathutils_functor_api_corpus import append_mathutils_functor_api_requests
 from tkmath_integ_lin_api_corpus import append_integ_lin_api_requests
+from tkmath_mathopt_api_corpus import append_mathopt_api_requests
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
@@ -431,6 +432,7 @@ def corpus() -> str:
     append_mathutils_core_api_requests(requests)
     append_mathutils_functor_api_requests(requests)
     append_integ_lin_api_requests(requests)
+    append_mathopt_api_requests(requests)
     return '\n'.join(requests)+'\n'           
 
 

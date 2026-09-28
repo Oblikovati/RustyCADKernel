@@ -12,7 +12,6 @@
 // commercial license or contractual agreement.
 
 //! Shared native box-constraint operations for BFGS and Newton.
-use super::utils::zero_based;
 use super::*;
 pub(super) struct BoxBounds<'a> {
     pub(super) lower: &'a Vector<'a>,
@@ -73,26 +72,5 @@ impl BoxBounds<'_> {
             }
         }
         alpha
-    }
-}
-pub(super) struct BoundedCallback<'a, 'b, F> {
-    pub(super) function: &'a mut F,
-    pub(super) bounds: &'b BoxBounds<'b>,
-}
-impl<F: MultipleVarFunction> MultipleVarFunction for BoundedCallback<'_, '_, F> {
-    fn variables(&self) -> i32 {
-        self.function.variables()
-    }
-    fn value(&mut self, x: &Vector<'_>, value: &mut f64) -> bool {
-        let mut copy: Vector<'static> = zero_based(x);
-        // Native max(lower,min(upper,x)) chooses upper when x is NaN.
-        for i in 0..copy.length() as usize {
-            let lo: f64 = *self.bounds.lower.at(i).unwrap();
-            let hi: f64 = *self.bounds.upper.at(i).unwrap();
-            let p: &mut f64 = copy.change_at(i).unwrap();
-            let v: f64 = if *p < hi { *p } else { hi };
-            *p = if lo < v { v } else { lo };
-        }
-        self.function.value(&copy, value)
     }
 }

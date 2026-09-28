@@ -1134,3 +1134,44 @@ The port keeps these native results and makes these deliberate changes:
   vector. Rust returns a zero one-element vector; the probe compares only its size.
 - C++ default arguments (`TanhSinhSingular` tolerance `1.0e-10`, `KronrodAuto`
   `theMaxOrder = THE_KRONROD_MAX_GAUSS_ORDER`) are explicit Rust parameters.
+
+### MathOpt (API completion)
+
+This work adds no upstream suite. It completes the public API of the modern MathOpt
+namespace: `tools/audit_api_rows.py src/FoundationClasses/TKMath/MathOpt` reports no
+missing member and no stale row (76 rows). `MathOpt::Utils` is now the public module
+`math_opt::utils`; its helpers were private duplicates inside the solvers and are now the
+single implementation the solvers call (`is_valid_config`, `is_finite_vector`/`_matrix`,
+`is_valid_bounds`, `norm`, `scalar_value_status`/`value_status`, `checked_value`,
+`gradient_status`/`checked_gradient`, `hessian_status`/`checked_hessian`, `CheckedFunction`,
+`BoundedFunction`, `is_line_search_evaluation_error`, `line_search_failure_status`,
+`line_search_fallback_failure_status`, `is_stationary`, `backtrack`, `regularize_hessian`,
+`FRPR_WOLFE_CURVATURE`). The modern `MathOpt::Uzawa`/`UzawaEquality` (`math_opt::uzawa`,
+`uzawa_equality`, `UzawaResult`, `UzawaConfig`) is a new port, separate from the classic
+`math::Uzawa`. Supplemental tests are in `math_opt_api_behavior`. The probe sends 2,171
+differential requests (`mathopt_checks`, `mathopt_line`, `mathopt_eval`,
+`mathopt_stationary`, `mathopt_backtrack`, `mathopt_regularize`, `mathopt_polish`,
+`mathopt_uzawa`); they all match the native bits. The solvers themselves stay covered by
+`modern_opt`, `modern_frpr`, `modern_newton`, `modern_lbfgs`, `scalar_opt`,
+`modern_global` and `modern_swarm`.
+
+The port keeps these native results:
+
+- `BoundedFunction` clamps with `std::max(lower, std::min(upper, x))`, so a NaN
+  coordinate reaches the callback as the upper bound.
+- `IsStationary` rejects a probe only when `value < fx - tol`; with a NaN `fx` no probe
+  rejects. Its status output keeps the caller's value for an empty point and otherwise
+  holds the last evaluation's status (`Ok` also when a probe found a decrease).
+- `RegularizeHessian` folds the Jacobi eigenvalues with `std::min`, so a NaN after the
+  first value is ignored and a NaN first value stays the minimum (no shift is applied).
+  The earlier private copy used `f64::min`, which chose the non-NaN value.
+- `Uzawa` stores `InitialError` before it can fail, so Singular and NumericalError
+  results carry it. `InverseCTC` keeps zero-based bounds (native assignment into the
+  zero-based `aCTCinv`). The iterative path projects multipliers with `std::max(0, v)`
+  (NaN becomes 0) and returns `MaxIterations` without a finiteness check.
+
+Deliberate Rust shapes: C++ overloads get distinct names (`scalar_value_status` for
+`ValueStatus(Function&, double, double&)`, `line_search_fallback_failure_status` for the
+two-result `LineSearchFailureStatus`), `Value`/`Gradient`/`Hessian` are
+`checked_value`/`checked_gradient`/`checked_hessian`, and `CheckedFunction` and
+`BoundedFunction` hold `&mut` borrows of the wrapped callback.
