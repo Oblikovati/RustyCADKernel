@@ -91825,7 +91825,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91857,7 +91857,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -176512,6 +176512,407 @@
       "profiles": [
         "linux-gcc-c-locale"
       ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeWire",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeWire",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeShell",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeShell",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeSolid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeSolid",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeCompSolid",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeCompSolid",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MakeCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MakeCompound",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Add_VerticesToCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Add_VerticesToCompound",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Add_EdgesToWire",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Add_EdgesToWire",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_FromCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_FromCompound",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Add_ManyShapes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Add_ManyShapes",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.TShapeFlags",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__TShapeFlags",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_FirstChild",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_FirstChild",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_LastChild",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_LastChild",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_AllChildren",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_AllChildren",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_FromWire",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_FromWire",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.NestedCompounds",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__NestedCompounds",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Add_SetsModifiedFlag",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Add_SetsModifiedFlag",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.Remove_SetsModifiedFlag",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__Remove_SetsModifiedFlag",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.AllTypes",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__AllTypes",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopoDS_Builder_Test.MixedShapesInCompound",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopoDS_Builder_Test.cxx",
+      "source_sha256": "78cd99cf00913f33a670c16546915336240e64eb7bd6d324d5c8ebc9e79d1dc0",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topods_builder",
+      "rust_test": "TopoDS_Builder_Test__MixedShapesInCompound",
+      "rust_source": "crates/tkbrep/tests/topods_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "TopExp_Test.MapShapes_Faces",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__MapShapes_Faces",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.MapShapes_Edges",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__MapShapes_Edges",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.MapShapes_Vertices",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__MapShapes_Vertices",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.FirstVertex_LastVertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__FirstVertex_LastVertex",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.Vertices",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__Vertices",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.CommonVertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__CommonVertex",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.Explorer_NestedFaceEdge_Terminates",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__Explorer_NestedFaceEdge_Terminates",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.Explorer_ReInit_Terminates",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__Explorer_ReInit_Terminates",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
+    },
+    {
+      "upstream_id": "TopExp_Test.MapShapesAndAncestors",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/TopExp_Test.cxx",
+      "source_sha256": "56dee1660a097bd9bfa45ead2ca06f39f6c0e2f7fd140732951d096d2fb910ed",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "topexp",
+      "rust_test": "TopExp_Test__MapShapesAndAncestors",
+      "rust_source": "crates/tkbrep/tests/topexp.rs",
+      "status": "native_blocked",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ],
+      "native_block_reason": "The unchanged upstream file calls BRepPrimAPI_MakeBox (TKPrim), which the shared native oracle closure (FoundationClasses + TKTopAlgo) does not build; the Rust translation runs on the TopoDS box fake of crates/tkbrep/tests/support."
     }
   ]
 }
