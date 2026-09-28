@@ -3258,6 +3258,390 @@
       "rust_item": "rustycad_tkmath::bsplclib::Cache::is_cache_valid",
       "status": "implemented",
       "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::RationalDerivative(int,int,int,int,double&,double&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::rational_derivative",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::D0(double,double,int,int,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,const NCollection_Array1<int>*,int,int,bool,bool,bool,bool,gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::D1(double,double,int,int,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,const NCollection_Array1<int>*,int,int,bool,bool,bool,bool,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::D2(double,double,int,int,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,const NCollection_Array1<int>*,int,int,bool,bool,bool,bool,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::D3(double,double,int,int,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,const NCollection_Array1<int>*,int,int,bool,bool,bool,bool,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::DN(double,double,int,int,int,int,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,const NCollection_Array1<int>*,int,int,bool,bool,bool,bool,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::Iso(double,bool,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,int,bool,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::Reverse(NCollection_Array2<gp_Pnt>&,int,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::HomogeneousD0(double,double,int,int,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,const NCollection_Array1<int>*,int,int,bool,bool,bool,bool,double&,gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::homogeneous_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::HomogeneousD1(double,double,int,int,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,const NCollection_Array1<int>*,int,int,bool,bool,bool,bool,gp_Pnt&,gp_Vec&,gp_Vec&,double&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::homogeneous_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::Reverse(NCollection_Array2<double>&,int,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::IsRational(const NCollection_Array2<double>&,int,int,int,int,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::is_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::SetPoles(const NCollection_Array2<gp_Pnt>&,NCollection_Array1<double>&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::set_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::SetPoles(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>&,NCollection_Array1<double>&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::set_rational_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::GetPoles(const NCollection_Array1<double>&,NCollection_Array2<gp_Pnt>&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::get_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::GetPoles(const NCollection_Array1<double>&,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::get_rational_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::MovePoint(double,double,const gp_Vec&,int,int,int,int,int,int,bool,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,int&,int&,int&,int&,NCollection_Array2<gp_Pnt>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::move_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::InsertKnots(bool,int,bool,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>*,NCollection_Array1<double>&,NCollection_Array1<int>&,double,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::insert_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::RemoveKnot(bool,int,int,int,bool,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>*,NCollection_Array1<double>&,NCollection_Array1<int>&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::remove_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::IncreaseDegree(bool,int,int,bool,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>*,NCollection_Array1<double>&,NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::increase_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::Unperiodize(bool,int,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,NCollection_Array1<int>&,NCollection_Array1<double>&,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::unperiodize",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::NoWeights()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::no_weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::BuildCache(double,double,double,double,bool,bool,int,int,int,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::build_cache",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::BuildCache(double,double,double,double,bool,bool,int,int,int,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,NCollection_Array2<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::build_cache_matrix",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::CacheD0(double,double,int,int,double,double,double,double,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::cache_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::CoefsD0(double,double,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::coefs_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::CacheD1(double,double,int,int,double,double,double,double,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::cache_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::CoefsD1(double,double,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::coefs_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::CacheD2(double,double,int,int,double,double,double,double,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::cache_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::CoefsD2(double,double,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::coefs_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::PolesCoefficients(const NCollection_Array2<gp_Pnt>&,NCollection_Array2<gp_Pnt>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::poles_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::PolesCoefficients(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::poles_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::Resolution(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<int>&,int,int,bool,bool,bool,bool,double,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::resolution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::Interpolate(int,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::interpolate_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::Interpolate(int,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,NCollection_Array2<gp_Pnt>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::interpolate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::FunctionMultiply(const BSplSLib_EvaluatorFunction&,int,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,const NCollection_Array1<int>*,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*,const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int,NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::function_multiply",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib::UnitWeights(int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::unit_weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::BSplSLib_Cache(const int&,const bool&,const NCollection_Array1<double>&,const int&,const bool&,const NCollection_Array1<double>&,const NCollection_Array2<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::IsCacheValid(double,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache::is_cache_valid",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::BuildCache(const double&,const double&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache::build_cache",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::D0(const double&,const double&,gp_Pnt&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache::d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::D1(const double&,const double&,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache::d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::D2(const double&,const double&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache::d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::D0Local(double,double,gp_Pnt&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache::d0_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::D1Local(double,double,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache::d1_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::D2Local(double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache::d2_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_EvaluatorFunction::Evaluate(int,double,double,double&,int&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_EvaluatorFunction.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::EvaluatorFunction::evaluate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_EvaluatorFunction::operator()(int,double,double,double&,int&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_EvaluatorFunction.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::EvaluatorFunction::evaluate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     }
   ],
   "tests": [
@@ -45130,6 +45514,188 @@
       "rust_target": "bsplclib_cache",
       "rust_test": "BSplCLib_CacheTest__D3_NonRationalCurve3D",
       "rust_source": "crates/tkmath/tests/bsplclib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLibTest.UnitWeights_SmallSurface_ReturnsNonOwning",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Test.cxx",
+      "source_sha256": "774368b7205338fff0fcbd4bfb4c6eac5b4fafc723f71042fd98710fa1c2e1e7",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib",
+      "rust_test": "BSplSLibTest__UnitWeights_SmallSurface_ReturnsNonOwning",
+      "rust_source": "crates/tkmath/tests/bsplslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLibTest.UnitWeights_MaxBezierSize_ReturnsNonOwning",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Test.cxx",
+      "source_sha256": "774368b7205338fff0fcbd4bfb4c6eac5b4fafc723f71042fd98710fa1c2e1e7",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib",
+      "rust_test": "BSplSLibTest__UnitWeights_MaxBezierSize_ReturnsNonOwning",
+      "rust_source": "crates/tkmath/tests/bsplslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLibTest.UnitWeights_AtMaxLimit_ReturnsNonOwning",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Test.cxx",
+      "source_sha256": "774368b7205338fff0fcbd4bfb4c6eac5b4fafc723f71042fd98710fa1c2e1e7",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib",
+      "rust_test": "BSplSLibTest__UnitWeights_AtMaxLimit_ReturnsNonOwning",
+      "rust_source": "crates/tkmath/tests/bsplslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLibTest.UnitWeights_OverMaxLimit_ReturnsOwning",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Test.cxx",
+      "source_sha256": "774368b7205338fff0fcbd4bfb4c6eac5b4fafc723f71042fd98710fa1c2e1e7",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib",
+      "rust_test": "BSplSLibTest__UnitWeights_OverMaxLimit_ReturnsOwning",
+      "rust_source": "crates/tkmath/tests/bsplslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLibTest.UnitWeights_SingleElement",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Test.cxx",
+      "source_sha256": "774368b7205338fff0fcbd4bfb4c6eac5b4fafc723f71042fd98710fa1c2e1e7",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib",
+      "rust_test": "BSplSLibTest__UnitWeights_SingleElement",
+      "rust_source": "crates/tkmath/tests/bsplslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLib_CacheTest.D0_NonRationalSurface",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Cache_Test.cxx",
+      "source_sha256": "1d69a30c86d0ee7e8e0cafcf8bb56c616b19df571e5f2424cab33a82e7635ccc",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib_cache",
+      "rust_test": "BSplSLib_CacheTest__D0_NonRationalSurface",
+      "rust_source": "crates/tkmath/tests/bsplslib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLib_CacheTest.D1_NonRationalSurface",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Cache_Test.cxx",
+      "source_sha256": "1d69a30c86d0ee7e8e0cafcf8bb56c616b19df571e5f2424cab33a82e7635ccc",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib_cache",
+      "rust_test": "BSplSLib_CacheTest__D1_NonRationalSurface",
+      "rust_source": "crates/tkmath/tests/bsplslib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLib_CacheTest.D2_NonRationalSurface",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Cache_Test.cxx",
+      "source_sha256": "1d69a30c86d0ee7e8e0cafcf8bb56c616b19df571e5f2424cab33a82e7635ccc",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib_cache",
+      "rust_test": "BSplSLib_CacheTest__D2_NonRationalSurface",
+      "rust_source": "crates/tkmath/tests/bsplslib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLib_CacheTest.D0_RationalSurface",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Cache_Test.cxx",
+      "source_sha256": "1d69a30c86d0ee7e8e0cafcf8bb56c616b19df571e5f2424cab33a82e7635ccc",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib_cache",
+      "rust_test": "BSplSLib_CacheTest__D0_RationalSurface",
+      "rust_source": "crates/tkmath/tests/bsplslib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLib_CacheTest.D1_RationalSurface",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Cache_Test.cxx",
+      "source_sha256": "1d69a30c86d0ee7e8e0cafcf8bb56c616b19df571e5f2424cab33a82e7635ccc",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib_cache",
+      "rust_test": "BSplSLib_CacheTest__D1_RationalSurface",
+      "rust_source": "crates/tkmath/tests/bsplslib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLib_CacheTest.D2_RationalSurface",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Cache_Test.cxx",
+      "source_sha256": "1d69a30c86d0ee7e8e0cafcf8bb56c616b19df571e5f2424cab33a82e7635ccc",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib_cache",
+      "rust_test": "BSplSLib_CacheTest__D2_RationalSurface",
+      "rust_source": "crates/tkmath/tests/bsplslib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLib_CacheTest.D1_DifferentDegrees_UGreaterV",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Cache_Test.cxx",
+      "source_sha256": "1d69a30c86d0ee7e8e0cafcf8bb56c616b19df571e5f2424cab33a82e7635ccc",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib_cache",
+      "rust_test": "BSplSLib_CacheTest__D1_DifferentDegrees_UGreaterV",
+      "rust_source": "crates/tkmath/tests/bsplslib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplSLib_CacheTest.D1_DifferentDegrees_VGreaterU",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplSLib_Cache_Test.cxx",
+      "source_sha256": "1d69a30c86d0ee7e8e0cafcf8bb56c616b19df571e5f2424cab33a82e7635ccc",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplslib_cache",
+      "rust_test": "BSplSLib_CacheTest__D1_DifferentDegrees_VGreaterU",
+      "rust_source": "crates/tkmath/tests/bsplslib_cache.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
