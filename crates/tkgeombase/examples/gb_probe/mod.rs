@@ -5,6 +5,7 @@
 pub mod common;
 pub mod gc;
 pub mod gce;
+pub mod gcpnts;
 pub mod gprop;
 pub mod hermit;
 pub mod int_ana;

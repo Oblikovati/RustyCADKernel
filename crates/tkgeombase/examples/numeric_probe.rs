@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod gb_probe;
-use gb_probe::{gc, gce, gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d};
+use gb_probe::{gc, gce, gcpnts, gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -115,6 +115,18 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("pc_endpoints", pc3d::endpoints_case),
     ("pc_project", pc3d::project_case),
     ("gcpnts_td3d", pc3d::td3d_case),
+    // CPnts and GCPnts (gb_probe/gcpnts)
+    ("gcp_length", gcpnts::length_case),
+    ("cpnts_abscissa", gcpnts::cpnts_abscissa_case),
+    ("cpnts_udefl", gcpnts::cpnts_udefl_case),
+    ("gcp_abscissa", gcpnts::gcp_abscissa_case),
+    ("gcp_uabs", gcpnts::uabs_case),
+    ("gcp_quabs", gcpnts::quabs_case),
+    ("gcp_udefl", gcpnts::udefl_case),
+    ("gcp_qudefl", gcpnts::qudefl_case),
+    ("gcp_tdefl", gcpnts::tdefl_case),
+    ("gcp_arc_step", gcpnts::arc_step_case),
+    ("gcp_dist", gcpnts::dist_case),
 ];
 
 fn main() {
