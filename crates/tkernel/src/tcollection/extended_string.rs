@@ -11,42 +11,41 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! UTF-16 storage used by the byte-string conversion boundary.
+//! `TCollection_ExtendedString`: an owned sequence of UTF-16 code units.
+//!
+//! Lengths and indices count 16-bit code units, as in OCCT: a surrogate pair counts twice.
+//! Members that raise an OCCT exception return `Result<_, Failure>` with the same class.
+//! A C++ `const char16_t*` argument becomes a slice that ends where the C string ends; a
+//! (pointer, length) pair keeps the nullable pointer as `Option<&[u16]>`.
 /// Owned NUL-terminated UTF-16 code units; `ExtendedString::new("Hello")`.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct ExtendedString {
     terminated: Vec<u16>,
 }
 impl ExtendedString {
-    /// Widens ASCII/byte input, matching OCCT's non-multibyte constructor; `ExtendedString::new("Hello")`.
+    /// Widens each byte up to the first NUL (OCCT's non-multibyte `const char*` constructor);
+    /// `ExtendedString::new("Hello")`.
     pub fn new(text: &str) -> Self {
-        Self::from_utf16(
-            &text
-                .as_bytes()
-                .iter()
-                .map(|&byte| u16::from(byte))
-                .collect::<Vec<_>>(),
-        )
+        Self::from_c_string(text.as_bytes(), false)
     }
-    /// Copies UTF-16 through the first zero code unit; `ExtendedString::from_utf16(&[0x20AC,0])`.
+    /// Copies UTF-16 through the first zero code unit (the `const char16_t*` constructor);
+    /// `ExtendedString::from_utf16(&[0x20AC, 0])`.
     pub fn from_utf16(units: &[u16]) -> Self {
-        let mut terminated: Vec<u16> = units
+        let end = units
             .iter()
-            .copied()
-            .take_while(|&unit| unit != 0)
-            .collect();
-        terminated.push(0);
-        Self { terminated }
+            .position(|&unit| unit == 0)
+            .unwrap_or(units.len());
+        Self::from_raw(&units[..end])
     }
-    /// Returns the stored code units; `text.as_utf16()`.
+    /// Returns the stored code units without the terminator; `text.as_utf16()`.
     pub fn as_utf16(&self) -> &[u16] {
         &self.terminated[..self.len()]
     }
-    /// Returns UTF-16 length; `text.len() == 5`.
+    /// Returns the length in code units; `ExtendedString::new("Hello").len() == 5`.
     pub fn len(&self) -> usize {
         self.terminated.len() - 1
     }
-    /// Checks for no code units; `text.is_empty()`.
+    /// Checks for no code units (`IsEmpty`); `ExtendedString::default().is_empty()`.
     pub fn is_empty(&self) -> bool {
         self.len() == 0
     }
@@ -90,7 +89,14 @@ impl super::AsciiString {
     }
 }
 mod adjustment;
+mod append;
 mod comparison;
-mod operations;
+mod construction;
+mod conversion;
+mod editing;
+mod errors;
 mod queries;
+mod search;
+mod spans;
 mod traits;
+mod utf;

@@ -76,6 +76,29 @@ impl<'a> AliasedArray<'a> {
     pub fn is_deletable(&self) -> bool {
         matches!(self.storage, ArrayStorage::Owned(_))
     }
+    /// Return the zero lower index; `array.lower() == 0`.
+    pub fn lower(&self) -> i32 {
+        0
+    }
+    /// Return the inclusive upper index `Length() - 1`; an empty array gives -1; `array.upper()`.
+    pub fn upper(&self) -> i32 {
+        (self.count as i32).wrapping_sub(1)
+    }
+    /// Report storage ownership, the native alias of `IsDeletable`; `array.is_allocated()`.
+    pub fn is_allocated(&self) -> bool {
+        self.is_deletable()
+    }
+    /// Take the source's storage, stride and length, as the native `Move`.
+    ///
+    /// Natively the source keeps pointing at the moved bytes as a non-owning alias of
+    /// storage the destination may later free; Rust cannot express that alias, so the
+    /// source is left empty with its stride instead; `dest.move_from(&mut source)`.
+    pub fn move_from(&mut self, source: &mut Self) {
+        let stride: usize = source.stride;
+        self.storage = std::mem::replace(&mut source.storage, ArrayStorage::Empty);
+        self.stride = stride;
+        self.count = std::mem::take(&mut source.count);
+    }
     /// Return logical byte length, excluding alignment padding; `array.size_bytes()`.
     pub fn size_bytes(&self) -> usize {
         self.stride * self.count

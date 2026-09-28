@@ -13,7 +13,8 @@
 
 //! `opencascade::hashBytes` and `Standard_CStringHasher` against values computed by an
 //! independent MurmurHash64A / FNV-1a implementation of Standard_HashUtils.lxx.
-use rustycad_tkernel::standard::hashing::{c_string_hash, hash_bytes};
+use rustycad_tkernel::standard::c_string::CStringHasher;
+use rustycad_tkernel::standard::hashing::hash_bytes;
 use rustycad_tkernel::tcollection::AsciiString;
 
 #[test]
@@ -32,8 +33,11 @@ fn hash_bytes_is_murmur64a_with_the_optimal_seed() {
 #[test]
 #[cfg(target_pointer_width = "64")]
 fn short_c_strings_use_fnv_over_signed_chars() {
-    assert_eq!(c_string_hash(b"ab"), 620445648566982762);
-    assert_eq!(c_string_hash(b"Geom2d_Line"), hash_bytes(b"Geom2d_Line"));
+    assert_eq!(CStringHasher.hash_code(b"ab"), 620445648566982762);
+    assert_eq!(
+        CStringHasher.hash_code(b"Geom2d_Line"),
+        hash_bytes(b"Geom2d_Line")
+    );
 }
 
 #[test]
@@ -42,7 +46,7 @@ fn ascii_string_hash_is_the_c_string_hash() {
         let ascii = AsciiString::from(text);
         assert_eq!(
             ascii.hash_code(),
-            c_string_hash(text.as_bytes()),
+            CStringHasher.hash_code(text.as_bytes()),
             "{text:?}"
         );
     }

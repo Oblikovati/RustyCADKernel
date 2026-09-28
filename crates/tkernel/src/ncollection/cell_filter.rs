@@ -14,9 +14,10 @@
 // commercial license or contractual agreement.
 
 //! Spatial hash cells with native truncation and newest-first inspection.
-use super::{BaseAllocator, DataMap, HashPolicy, List};
+use super::{Array1, BaseAllocator, DataMap, HashPolicy, List};
 use std::marker::PhantomData;
 mod indices;
+mod setup;
 use indices::{CellIndices, cell_coordinate};
 /// Callback decision; returning `CellAction::Purge` destroys this cell's target copy.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -56,44 +57,25 @@ impl HashPolicy<Vec<i32>> for CellHash {
     }
 }
 /// Hash-indexed cells owning independent target copies; `CellFilter::<Inspector>::new(1.0)`.
+///
+/// As natively, the range methods iterate the first `dimension` axes (fixed at
+/// construction), while a cell index has one entry per cell size, whose count
+/// `reset_sizes` may change.
 pub struct CellFilter<I: CellInspector> {
-    sizes: Vec<f64>,
+    dimension: usize,
+    sizes: Array1<'static, f64>,
     cells: DataMap<Vec<i32>, List<I::Target>, CellHash>,
     resource: BaseAllocator,
     inspector: PhantomData<I>,
 }
 impl<I: CellInspector> CellFilter<I> {
-    /// Use the policy dimension and a fresh arena; `CellFilter::<I>::new(1.0)`.
-    pub fn new(size: f64) -> Self {
-        Self::with_sizes(vec![size; I::DIMENSION], BaseAllocator::incremental(24_600))
-    }
-    /// Inject dimensions, anisotropic sizes and allocation owner; `with_sizes(vec![1.0,2.0], arena)`.
-    pub fn with_sizes(sizes: Vec<f64>, resource: BaseAllocator) -> Self {
-        assert!(
-            !sizes.is_empty(),
-            "Cell dimension 0; expected at least one axis"
-        );
-        Self {
-            sizes,
-            cells: DataMap::with_allocator(CellHash, 1, resource.clone()),
-            resource,
-            inspector: PhantomData,
-        }
-    }
-    /// Clear targets and reset uniform cell sizes with a new arena; `filter.reset(2.0)`.
-    pub fn reset(&mut self, size: f64) {
-        *self = Self::with_sizes(
-            vec![size; self.sizes.len()],
-            BaseAllocator::incremental(24_600),
-        );
-    }
     /// Add a copy to one cell; `filter.add(&target, &point)`.
     pub fn add(&mut self, target: &I::Target, point: &I::Point) {
         self.add_cell(self.indices(point), target);
     }
     /// Add an independent copy to every covered cell; `filter.add_range(&target, &min, &max)`.
     pub fn add_range(&mut self, target: &I::Target, min: &I::Point, max: &I::Point) {
-        for index in CellIndices::new(self.indices(min), self.indices(max)) {
+        for index in self.range(min, max) {
             self.add_cell(index, target);
         }
     }
@@ -103,7 +85,7 @@ impl<I: CellInspector> CellFilter<I> {
     }
     /// Remove equal targets throughout an inclusive range; `filter.remove_range(&target, &min, &max)`.
     pub fn remove_range(&mut self, target: &I::Target, min: &I::Point, max: &I::Point) {
-        for index in CellIndices::new(self.indices(min), self.indices(max)) {
+        for index in self.range(min, max) {
             self.retain_cell(&index, |stored| !I::is_equal(stored, target));
         }
     }
@@ -115,7 +97,7 @@ impl<I: CellInspector> CellFilter<I> {
     }
     /// Visit cells with axis zero varying fastest; `filter.inspect_range(&min, &max, &mut inspector)`.
     pub fn inspect_range(&mut self, min: &I::Point, max: &I::Point, inspector: &mut I) {
-        for index in CellIndices::new(self.indices(min), self.indices(max)) {
+        for index in self.range(min, max) {
             self.retain_cell(&index, |stored| {
                 inspector.inspect(stored) == CellAction::Keep
             });
@@ -123,10 +105,17 @@ impl<I: CellInspector> CellFilter<I> {
     }
     fn indices(&self, point: &I::Point) -> Vec<i32> {
         self.sizes
+            .as_slice()
             .iter()
             .enumerate()
             .map(|(axis, size)| cell_coordinate(I::coord(axis, point) / size))
             .collect()
+    }
+    fn range(&self, min: &I::Point, max: &I::Point) -> CellIndices {
+        // Native iterateAdd/Remove/Inspect start at axis myDim - 1; axes beyond the cell
+        // index length would read past the native LocalArray, so they are clamped.
+        let axes: usize = self.dimension.min(self.sizes.len());
+        CellIndices::new(self.indices(min), self.indices(max), axes)
     }
     fn add_cell(&mut self, index: Vec<i32>, target: &I::Target) {
         let resource: BaseAllocator = self.resource.clone();

@@ -19,6 +19,7 @@ from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
+from native_build import locked_cmake
 
 # The numeric differential verifier of each toolkit: script, evidence directory.
 NUMERIC_VERIFIERS = {
@@ -69,9 +70,7 @@ def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, enviro
              '-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON', '-DGTEST_USE_FETCHCONTENT=ON',
              '-DBUILD_ADDITIONAL_TOOLKITS=TKTopAlgo']
     flags += [f'-DBUILD_MODULE_{name}={"ON" if name == "FoundationClasses" else "OFF"}' for name in inventory['modules']]
-    run(['cmake','-S',source,'-B',build,*flags],output/'configure.log',env=environment)
-    run(['cmake','--build',build,'--target','TKTopAlgo','gtest_main','--parallel',jobs],output/'build.log',env=environment)
-    return build
+    return locked_cmake(source,build,flags,['TKTopAlgo','gtest_main'],jobs,output/'configure.log',output/'build.log',run,environment)
 
 
 def native_tests(source: Path, output: Path, build: Path, paths: list[str], jobs: int, expected: set, environment: dict) -> list[Path]:
@@ -142,7 +141,7 @@ def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict],
     inputs = [p for p in (ROOT/'crates').rglob('*') if p.is_file()]
     inputs += list((ROOT/'tools/oracle').glob('*.cxx'))
     inputs += sorted((ROOT/'tools').rglob('*.py'))
-    inputs += [ROOT/NUMERIC_VERIFIERS[toolkit][0], ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py']
+    inputs += [ROOT/NUMERIC_VERIFIERS[toolkit][0], ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py',ROOT/'tools/native_build.py']
     report = {'revision':inventory['revision'],'profile':'linux-gcc-c-locale','toolkit':toolkit,
               'numeric_report':numeric,'declarations_mapped':len(rows),'legacy_runtime_cases_passed':len(native),
               'rust_runtime_cases_passed':len(rust),'toolkit_complete':False,

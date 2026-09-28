@@ -13,7 +13,9 @@
 // commercial license or contractual agreement.
 
 //! Transient base with native atomic counter ordering and safe base projections.
-use super::{Failure, RuntimeType, RuntimeTyped};
+use super::{
+    Failure, RuntimeType, RuntimeTyped, exceptions, project_concrete, runtime_type::c_prefix,
+};
 use std::{
     any::{Any, TypeId},
     sync::{
@@ -29,6 +31,24 @@ pub trait Transient: Any + Send + Sync {
     fn project(&self, requested: TypeId) -> Option<&dyn Any>;
     /// Borrow the embedded reference-count base; `object.transient_base().ref_count()`.
     fn transient_base(&self) -> &StandardTransient;
+    /// True when the dynamic type is exactly `exact` (descriptor identity, as the C++
+    /// handle comparison); `object.is_instance(StandardTransient::static_type())`.
+    fn is_instance(&self, exact: &RuntimeType) -> bool {
+        std::ptr::eq(self.dynamic_type(), exact)
+    }
+    /// True when the dynamic type's name equals `name` compared as a C string (it ends
+    /// at a NUL); `object.is_instance_name("Standard_Transient")`.
+    fn is_instance_name(&self, name: &str) -> bool {
+        self.dynamic_type().name() == c_prefix(name)
+    }
+    /// True when the dynamic type is `base` or inherits from it; `object.is_kind(base)`.
+    fn is_kind(&self, base: &RuntimeType) -> bool {
+        self.dynamic_type().is_subtype(base)
+    }
+    /// True when the dynamic type or an ancestor is named `name`; `object.is_kind_name("Standard_Transient")`.
+    fn is_kind_name(&self, name: &str) -> bool {
+        self.dynamic_type().is_subtype_name(name)
+    }
 }
 /// Root object with native atomic reference-count behavior; `StandardTransient::default()`.
 #[repr(C)]
@@ -56,13 +76,12 @@ impl StandardTransient {
         }
         remaining
     }
-    /// Reject unowned stack objects as OCCT This does; `object.this()?`.
+    /// Reject an object no handle owns, as `This()` does; the message is OCCT's own
+    /// (the offending value is the reference count 0); `object.this()?`.
     pub fn this(&self) -> Result<&Self, Failure> {
         if self.ref_count() == 0 {
-            return Err(Failure::with_type(
-                "Standard_ProgramError",
-                "Transient reference count 0; expected a constructed handle-owned object",
-                "",
+            return Err(exceptions::program_error(
+                "Attempt to create handle to object created in stack, not yet constructed, or destroyed",
             ));
         }
         Ok(self)
@@ -76,12 +95,15 @@ impl Clone for StandardTransient {
     }
 }
 impl RuntimeTyped for StandardTransient {
+    const TYPE_NAME: &'static str = "Standard_Transient";
     fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| RuntimeType::new::<Self>("Standard_Transient", None))
+        static DESCRIPTOR: OnceLock<&'static RuntimeType> = OnceLock::new();
+        DESCRIPTOR.get_or_init(|| {
+            RuntimeType::register::<Self>(Self::TYPE_NAME, std::mem::size_of::<Self>(), None)
+        })
     }
     fn project_from(object: &dyn Transient) -> Option<&Self> {
-        object.project(TypeId::of::<Self>())?.downcast_ref::<Self>()
+        project_concrete::<Self>(object)
     }
 }
 impl Transient for StandardTransient {
@@ -95,7 +117,8 @@ impl Transient for StandardTransient {
         self
     }
 }
-/// Implement safe single inheritance through an actual embedded parent field.
+/// Implement safe single inheritance through an actual embedded parent field, as
+/// `DEFINE_STANDARD_RTTIEXT` + `IMPLEMENT_STANDARD_RTTIEXT` do.
 ///
 /// `$parent` names the descriptor parent; `$field` is the embedded subobject that
 /// base projections and the reference counter delegate to. The optional
@@ -110,20 +133,20 @@ macro_rules! impl_transient {
     };
     ($class:ty, $name:literal, $parent:ty, $field:ident, interfaces: [$($interface:ty),* $(,)?]) => {
         impl $crate::standard::RuntimeTyped for $class {
+            const TYPE_NAME: &'static str = $name;
             fn static_type() -> &'static $crate::standard::RuntimeType {
-                static DESCRIPTOR: std::sync::OnceLock<$crate::standard::RuntimeType> =
+                // One cached registry lookup per class, as the C++ function-local static handle.
+                static DESCRIPTOR: std::sync::OnceLock<&'static $crate::standard::RuntimeType> =
                     std::sync::OnceLock::new();
                 DESCRIPTOR.get_or_init(|| {
-                    $crate::standard::RuntimeType::with_interfaces::<Self>(
+                    $crate::standard::RuntimeType::register_with_interfaces::<Self>(
                         $name,
+                        std::mem::size_of::<Self>(),
                         Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
                         vec![$($crate::standard::InterfaceEntry::new(
                             $crate::standard::InterfaceCaster::<$interface>::new(|object| {
-                                let concrete: &$class = $crate::standard::Transient::project(
-                                    object,
-                                    std::any::TypeId::of::<$class>(),
-                                )?
-                                .downcast_ref::<$class>()?;
+                                let concrete: &$class =
+                                    $crate::standard::project_concrete::<$class>(object)?;
                                 Some(concrete as &$interface)
                             }),
                         )),*],
@@ -131,8 +154,7 @@ macro_rules! impl_transient {
                 })
             }
             fn project_from(object: &dyn $crate::standard::Transient) -> Option<&Self> {
-                $crate::standard::Transient::project(object, std::any::TypeId::of::<Self>())?
-                    .downcast_ref::<Self>()
+                $crate::standard::project_concrete::<Self>(object)
             }
         }
         impl $crate::standard::Transient for $class {
@@ -155,19 +177,25 @@ macro_rules! impl_transient {
 ///
 /// The trait must have `Transient` as a supertrait. Handles of the trait object
 /// (`Handle<dyn Trait>`) then see every concrete class that lists the trait in
-/// the `interfaces` of its `impl_transient!`.
+/// the `interfaces` of its `impl_transient!`. A trait object has no size, so the
+/// descriptor takes its parent's size: `is_subtype` stops at the first ancestor
+/// smaller than the base, and an abstract C++ class is never smaller than its parent.
 /// Example: `impl_transient_interface!(dyn Curve, "Geom2d_Curve", dyn Geometry)`.
 #[macro_export]
 macro_rules! impl_transient_interface {
     ($interface:ty, $name:literal, $parent:ty) => {
         impl $crate::standard::RuntimeTyped for $interface {
+            const TYPE_NAME: &'static str = $name;
             fn static_type() -> &'static $crate::standard::RuntimeType {
-                static DESCRIPTOR: std::sync::OnceLock<$crate::standard::RuntimeType> =
+                static DESCRIPTOR: std::sync::OnceLock<&'static $crate::standard::RuntimeType> =
                     std::sync::OnceLock::new();
                 DESCRIPTOR.get_or_init(|| {
-                    $crate::standard::RuntimeType::new::<Self>(
+                    let parent: &'static $crate::standard::RuntimeType =
+                        <$parent as $crate::standard::RuntimeTyped>::static_type();
+                    $crate::standard::RuntimeType::register::<Self>(
                         $name,
-                        Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
+                        parent.size(),
+                        Some(parent),
                     )
                 })
             }

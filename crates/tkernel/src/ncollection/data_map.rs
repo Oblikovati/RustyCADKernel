@@ -46,7 +46,8 @@ impl<K: Debug, V, H: HashPolicy<K>> DataMap<K, V, H> {
             resource,
             hasher,
             buckets: Vec::new(),
-            bucket_count: bucket_count.max(1),
+            // The native constructors keep a zero bucket count until the first insertion resizes.
+            bucket_count,
             count: 0,
         }
     }
@@ -198,4 +199,7 @@ fn missing_key<K: Debug>(key: &K) -> Failure {
 mod iteration;
 mod operations;
 
+mod cursor;
 mod keys;
+mod queries;
+pub use cursor::{DataMapIterator, DataMapIteratorMut};
