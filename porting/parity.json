@@ -35111,9 +35111,9 @@
       "upstream_id": "math_Gauss(const math_Matrix&,double,const Message_ProgressRange&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Gauss.hxx",
-      "rust_item": "rustycad_tkmath::math::Gauss::with_min_pivot",
-      "status": "partial",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. The Message_ProgressRange parameter is not ported (TKernel Message progress scopes are pending); the Rust call is the default-range form, which never aborts."
+      "rust_item": "rustycad_tkmath::math::Gauss::with_progress",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. The Message_ProgressRange argument drives a \"math_Gauss LU_Decompose\" progress scope of n steps: the user break is polled before each column and stops with math_Status_UserAborted; every exit closes the scope, completing the range. The default-range form is Gauss::with_min_pivot. Compared bit-for-bit with OCCT (status, factors, Show positions and poll counts under a cancelling indicator) by the progress_lu/progress_gauss numeric probes."
     },
     {
       "upstream_id": "math_Gauss::IsDone() const",
@@ -36791,17 +36791,17 @@
       "upstream_id": "math_Recipes::LU_Decompose(math_Matrix&,math_IntegerVector&,double&,double,const Message_ProgressRange&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Recipes.hxx",
-      "rust_item": "rustycad_tkmath::math::recipes::lu_decompose",
-      "status": "partial",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. The Message_ProgressRange parameter is not ported (TKernel Message progress scopes are pending); the Rust call is the default-range form, which never aborts."
+      "rust_item": "rustycad_tkmath::math::recipes::lu_decompose_with_progress",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. The Message_ProgressRange argument drives a \"math_Gauss LU_Decompose\" progress scope of n steps: the user break is polled before each column and stops with math_Status_UserAborted; every exit closes the scope, completing the range. The default-range form is lu_decompose. Compared bit-for-bit with OCCT (status, factors, Show positions and poll counts under a cancelling indicator) by the progress_lu/progress_gauss numeric probes."
     },
     {
       "upstream_id": "math_Recipes::LU_Decompose(math_Matrix&,math_IntegerVector&,double&,math_Vector&,double,const Message_ProgressRange&)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/math/math_Recipes.hxx",
-      "rust_item": "rustycad_tkmath::math::recipes::lu_decompose_with_scales",
-      "status": "partial",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. The Message_ProgressRange parameter is not ported (TKernel Message progress scopes are pending); the Rust call is the default-range form, which never aborts."
+      "rust_item": "rustycad_tkmath::math::recipes::lu_decompose_with_scales_and_progress",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. The Message_ProgressRange argument drives a \"math_Gauss LU_Decompose\" progress scope of n steps: the user break is polled before each column and stops with math_Status_UserAborted; every exit closes the scope, completing the range. The default-range form is lu_decompose_with_scales. Compared bit-for-bit with OCCT (status, factors, Show positions and poll counts under a cancelling indicator) by the progress_lu/progress_gauss numeric probes."
     },
     {
       "upstream_id": "math_Recipes::LU_Solve(const math_Matrix&,const math_IntegerVector&,math_Vector&)",
@@ -50642,6 +50642,342 @@
       "rust_item": "rustycad_tkernel::ncollection::Shared::new",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
+    },
+    {
+      "upstream_id": "Message_ProgressIndicator::Start()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressIndicator::start",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressIndicator::Start(const occ::handle<Message_ProgressIndicator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressIndicator::start_optional",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. A null handle is None and yields the unbound default range."
+    },
+    {
+      "upstream_id": "Message_ProgressIndicator::GetPosition() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressIndicator::get_position",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. The position is stored as atomic f64 bits read without the increment lock, as natively."
+    },
+    {
+      "upstream_id": "Message_ProgressIndicator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressIndicator::new",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. The protected constructor takes the boxed hooks of the descendant; it creates the active unnamed root scope (max 1)."
+    },
+    {
+      "upstream_id": "Message_ProgressIndicator::UserBreak()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressIndicatorHooks::user_break",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Protected virtual; default false; may run concurrently, so hooks take &self."
+    },
+    {
+      "upstream_id": "Message_ProgressIndicator::Show(const Message_ProgressScope&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressIndicatorHooks::show",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Protected pure virtual; called under the increment lock with the just-stored position passed as an argument (GetPosition() inside Show)."
+    },
+    {
+      "upstream_id": "Message_ProgressIndicator::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressIndicatorHooks::reset",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Protected virtual; default no-op."
+    },
+    {
+      "upstream_id": "Message_ProgressIndicator::~Message_ProgressIndicator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map. ProgressIndicator's Drop disarms the root scope first, as the native destructor does, so no final Show happens."
+    },
+    {
+      "upstream_id": "Message_ProgressIndicator::DEFINE_STANDARD_RTTIEXT(Message_ProgressIndicator,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressIndicator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses static types and Any downcasts instead."
+    },
+    {
+      "upstream_id": "Message_ProgressRange()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressRange.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressRange::default",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. The empty range is bound to no scope."
+    },
+    {
+      "upstream_id": "Message_ProgressRange(const Message_ProgressRange&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressRange.hxx",
+      "rust_item": "rustycad_tkernel::message::<ProgressRange as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Quirk preserved: the copy takes over the advance and the source is disarmed through its mutable flag (a Cell)."
+    },
+    {
+      "upstream_id": "Message_ProgressRange::operator=(const Message_ProgressRange&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressRange.hxx",
+      "rust_item": "rustycad_tkernel::message::<ProgressRange as Clone>::clone_from",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Quirk preserved: the target is overwritten without Close, so its pending advance is lost; the source is disarmed."
+    },
+    {
+      "upstream_id": "Message_ProgressRange::UserBreak() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressRange.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressRange::user_break",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressRange::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressRange.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressRange::more",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressRange::IsActive() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressRange.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressRange::is_active",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressRange::Close()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressRange.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressRange::close",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressRange::~Message_ProgressRange()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressRange.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map. ProgressRange implements Drop as the native destructor's Close()."
+    },
+    {
+      "upstream_id": "Message_ProgressScope()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::default",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. The dummy scope: inactive, portion 1, max 1."
+    },
+    {
+      "upstream_id": "Message_ProgressScope(const Message_ProgressRange&,const TCollection_AsciiString&,double,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::new",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. The name is copied; an empty one becomes null. Max is clamped to at least 1e-6."
+    },
+    {
+      "upstream_id": "Message_ProgressScope(const Message_ProgressRange&,const char(&)[N],double,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::with_literal",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. The literal is kept by reference (&'static str) even when empty, so Name() is non-null."
+    },
+    {
+      "upstream_id": "Message_ProgressScope(const Message_ProgressRange&,const NullString*,double,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::unnamed",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Null name."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::SetName(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::set_name",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::SetName(const char(&)[N])",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::set_literal_name",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::UserBreak() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::user_break",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::more",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::Next(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::next",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Takes &self (the local value is an atomic) so several ranges of one scope can be handed to parallel tasks, as natively."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::Show()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::show",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::IsActive() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::is_active",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::Name() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::name",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Returns the bytes of the C string (up to the first NUL) or None for a null name."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::Parent() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::parent",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::MaxValue() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::max_value",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::value",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Infinite scopes report Precision::Infinite() (2e100) once closed."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::IsInfinite() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::is_infinite",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::GetPortion() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::get_portion",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::Close()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressScope::close",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. The native debug-only assert that the parent is still armed is not checked, as in release builds."
+    },
+    {
+      "upstream_id": "Message_ProgressScope::~Message_ProgressScope()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressScope.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map. ProgressScope implements Drop as the native destructor's Close(); the owned name is freed by Rust."
+    },
+    {
+      "upstream_id": "Message_ProgressSentry(const Message_ProgressRange&,const char* const,double,double,double,bool,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressSentry.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressSentry::new",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Standard_ProgramError becomes Err carrying min, step and span; quirk preserved: the scope is built (and the range consumed) before the check, so a refused sentry still completes its range."
+    },
+    {
+      "upstream_id": "Message_ProgressSentry::Relieve()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ProgressSentry.hxx",
+      "rust_item": "rustycad_tkernel::message::ProgressSentry::relieve",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. Public inheritance from the scope is Deref."
+    },
+    {
+      "upstream_id": "Message_LazyProgressScope(const Message_ProgressRange&,const char*,double,double,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_LazyProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::LazyProgressScope::new",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts. The name goes through the TCollection_AsciiString constructor (copied, empty is null)."
+    },
+    {
+      "upstream_id": "Message_LazyProgressScope::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_LazyProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::LazyProgressScope::next",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_LazyProgressScope::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_LazyProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::LazyProgressScope::more",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message_LazyProgressScope::IsAborted()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_LazyProgressScope.hxx",
+      "rust_item": "rustycad_tkernel::message::LazyProgressScope::is_aborted",
+      "status": "implemented",
+      "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
     }
   ],
   "tests": [
