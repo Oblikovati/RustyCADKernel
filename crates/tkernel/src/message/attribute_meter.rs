@@ -19,7 +19,7 @@ use crate::precision;
 use crate::standard::dump::DumpStream;
 use crate::standard::{RuntimeType, RuntimeTyped};
 use crate::tcollection::AsciiString;
-use std::sync::{Mutex, MutexGuard, OnceLock};
+use std::sync::{Mutex, MutexGuard};
 mod sampling;
 
 /// Metric start/stop pairs in insertion order; `AttributeMeter::new(&AsciiString::default())`.
@@ -83,14 +83,7 @@ impl AttributeMeter {
         }
     }
 }
-impl RuntimeTyped for AttributeMeter {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_AttributeMeter", Some(BaseAttribute::static_type()))
-        })
-    }
-}
+message_runtime_type!(AttributeMeter, "Message_AttributeMeter", BaseAttribute);
 impl Attribute for AttributeMeter {
     fn attribute_base(&self) -> &AttributeBase {
         &self.base

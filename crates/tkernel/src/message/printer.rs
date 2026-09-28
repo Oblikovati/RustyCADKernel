@@ -15,10 +15,9 @@
 
 //! `Message_Printer`: an output context for text messages filtered by gravity.
 use super::Gravity;
-use crate::standard::{Handle, RuntimeType, RuntimeTyped, StandardTransient};
+use crate::standard::{Handle, RuntimeType, StandardTransient};
 use crate::tcollection::{AsciiString, ExtendedString};
 use std::any::Any;
-use std::sync::OnceLock;
 use std::sync::atomic::{AtomicI32, Ordering};
 
 /// Shared printer handle, the Rust `occ::handle<Message_Printer>`; printers are never null.
@@ -53,14 +52,7 @@ impl PrinterBase {
 
 /// Marker type carrying the `Message_Printer` runtime descriptor.
 pub struct PrinterType;
-impl RuntimeTyped for PrinterType {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_Printer", Some(StandardTransient::static_type()))
-        })
-    }
-}
+message_runtime_type!(PrinterType, "Message_Printer", StandardTransient);
 
 /// A message output; implement `send` (the native protected pure virtual) and embed a
 /// [`PrinterBase`]; the public `send_*` overloads filter by trace level first.

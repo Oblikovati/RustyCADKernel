@@ -16,6 +16,30 @@
 
 //! OCCT's Message package: messengers and printers, alerts and reports, the message
 //! catalog, algorithm statuses and progress indication.
+
+/// Registers a Message class under its OCCT name with its parent descriptor, as
+/// `IMPLEMENT_STANDARD_RTTIEXT`; `message_runtime_type!(Report, "Message_Report", StandardTransient)`.
+#[macro_export]
+macro_rules! message_runtime_type {
+    ($class:ty, $name:literal, $parent:ty) => {
+        impl $crate::standard::RuntimeTyped for $class {
+            const TYPE_NAME: &'static str = $name;
+            fn static_type() -> &'static $crate::standard::RuntimeType {
+                // One cached registry lookup per class, as the C++ function-local static handle.
+                static DESCRIPTOR: std::sync::OnceLock<&'static $crate::standard::RuntimeType> =
+                    std::sync::OnceLock::new();
+                DESCRIPTOR.get_or_init(|| {
+                    $crate::standard::RuntimeType::register::<Self>(
+                        $name,
+                        std::mem::size_of::<Self>(),
+                        Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
+                    )
+                })
+            }
+        }
+    };
+}
+
 mod c_format;
 mod json;
 

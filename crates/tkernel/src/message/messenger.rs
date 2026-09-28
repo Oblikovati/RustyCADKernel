@@ -16,9 +16,9 @@
 //! `Message_Messenger`: dispatches each message to every printer of an ordered sequence.
 use super::{Gravity, MessageStream, PrinterHandle, PrinterOStream};
 use crate::standard::dump::DumpStream;
-use crate::standard::{Handle, RuntimeType, RuntimeTyped, StandardTransient};
+use crate::standard::{Handle, RuntimeType, StandardTransient};
 use crate::tcollection::{AsciiString, ExtendedString};
-use std::sync::{Arc, OnceLock, RwLock, RwLockReadGuard, RwLockWriteGuard};
+use std::sync::{Arc, RwLock, RwLockReadGuard, RwLockWriteGuard};
 
 /// Ordered printers with identity-based duplicate detection; `Messenger::with_printer(printer)`.
 ///
@@ -27,14 +27,7 @@ use std::sync::{Arc, OnceLock, RwLock, RwLockReadGuard, RwLockWriteGuard};
 pub struct Messenger {
     printers: RwLock<Vec<PrinterHandle>>,
 }
-impl RuntimeTyped for Messenger {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_Messenger", Some(StandardTransient::static_type()))
-        })
-    }
-}
+message_runtime_type!(Messenger, "Message_Messenger", StandardTransient);
 impl Default for Messenger {
     /// One `PrinterOStream` on standard output, so messages are never lost by default.
     fn default() -> Self {

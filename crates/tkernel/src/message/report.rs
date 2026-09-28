@@ -19,9 +19,9 @@ use super::{
     AlertHandle, CompositeAlerts, Gravity, MetricSampler, MetricType, NativeMetricSampler,
 };
 use crate::ncollection::IndexedMap;
-use crate::standard::{RuntimeType, RuntimeTyped, StandardTransient};
+use crate::standard::{RuntimeType, StandardTransient};
 use std::sync::atomic::{AtomicBool, AtomicI32, Ordering};
-use std::sync::{Arc, Mutex, MutexGuard, OnceLock};
+use std::sync::{Arc, Mutex, MutexGuard};
 mod messenger_link;
 mod output;
 
@@ -40,14 +40,7 @@ pub struct Report {
     is_active_in_messenger: AtomicBool,
     sampler: Arc<dyn MetricSampler>,
 }
-impl RuntimeTyped for Report {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_Report", Some(StandardTransient::static_type()))
-        })
-    }
-}
+message_runtime_type!(Report, "Message_Report", StandardTransient);
 impl Default for Report {
     fn default() -> Self {
         Self::with_metric_sampler(Arc::new(NativeMetricSampler))

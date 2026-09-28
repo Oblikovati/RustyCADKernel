@@ -19,7 +19,7 @@ use crate::standard::{RuntimeType, RuntimeTyped};
 use crate::tcollection::AsciiString;
 use std::io::{self, Write};
 use std::sync::atomic::{AtomicBool, Ordering};
-use std::sync::{Mutex, OnceLock};
+use std::sync::Mutex;
 mod console;
 
 /// The destination of a stream printer; `None` once `close` ran.
@@ -34,14 +34,7 @@ pub struct PrinterOStream {
     output: Mutex<Output>,
     to_colorize: AtomicBool,
 }
-impl RuntimeTyped for PrinterOStream {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_PrinterOStream", Some(PrinterType::static_type()))
-        })
-    }
-}
+message_runtime_type!(PrinterOStream, "Message_PrinterOStream", PrinterType);
 impl PrinterOStream {
     /// Prints to standard output with colors; `PrinterOStream::new(Gravity::Info)`.
     pub fn new(trace_level: Gravity) -> Self {

@@ -18,7 +18,7 @@ use super::{
 use crate::standard::dump::DumpStream;
 use crate::standard::{RuntimeType, RuntimeTyped};
 use crate::tcollection::AsciiString;
-use std::sync::{Arc, Mutex, MutexGuard, OnceLock};
+use std::sync::{Arc, Mutex, MutexGuard};
 
 /// Alert carrying an attribute and a lazily created child container; `AlertExtended::default()`.
 #[derive(Default)]
@@ -26,14 +26,7 @@ pub struct AlertExtended {
     composite: Mutex<Option<Arc<CompositeAlerts>>>,
     attribute: Mutex<Option<AttributeHandle>>,
 }
-impl RuntimeTyped for AlertExtended {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_AlertExtended", Some(BaseAlert::static_type()))
-        })
-    }
-}
+message_runtime_type!(AlertExtended, "Message_AlertExtended", BaseAlert);
 fn locked<T>(mutex: &Mutex<T>) -> MutexGuard<'_, T> {
     mutex
         .lock()

@@ -18,7 +18,7 @@ use super::{
 };
 use crate::standard::{Handle, RuntimeType, RuntimeTyped, StandardTransient};
 use crate::tcollection::AsciiString;
-use std::sync::{Arc, Mutex, MutexGuard, OnceLock};
+use std::sync::{Arc, Mutex, MutexGuard};
 
 /// Printer adding one extended alert per message; `PrinterToReport::new()`.
 ///
@@ -30,14 +30,7 @@ pub struct PrinterToReport {
     name: Mutex<AsciiString>,
     report: Mutex<Option<Arc<Report>>>,
 }
-impl RuntimeTyped for PrinterToReport {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_PrinterToReport", Some(PrinterType::static_type()))
-        })
-    }
-}
+message_runtime_type!(PrinterToReport, "Message_PrinterToReport", PrinterType);
 fn locked<T>(mutex: &Mutex<T>) -> MutexGuard<'_, T> {
     mutex
         .lock()

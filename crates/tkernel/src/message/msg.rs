@@ -17,7 +17,7 @@
 use super::MsgFile;
 use super::c_format::{CArg, c_sprintf};
 use crate::standard::Failure;
-use crate::tcollection::{AsciiString, ExtendedString, HAsciiString};
+use crate::tcollection::{AsciiString, ExtendedString, HAsciiString, HExtendedString};
 mod body;
 use body::{BodyText, FormatKind};
 
@@ -92,7 +92,7 @@ impl Msg {
         };
         let text = c_string(text);
         let formatted = c_sprintf(&format, &[CArg::Text(text.as_bytes())]);
-        let decoded = ExtendedString::from_ascii(&AsciiString::from_bytes(&formatted));
+        let decoded = ExtendedString::from_c_string(&formatted, true);
         self.replace_text(first, format.len(), &decoded)?;
         Ok(self)
     }
@@ -102,9 +102,15 @@ impl Msg {
     }
     /// `Arg(const occ::handle<TCollection_HAsciiString>&)`; `msg.arg_h_ascii(&text)?`.
     pub fn arg_h_ascii(&mut self, text: &HAsciiString) -> Result<&mut Self, Failure> {
-        self.arg_text(text.as_bytes_with_nul())
+        self.arg_text(&text.as_bytes_with_nul())
     }
-    /// Fills the next `%s` with the text itself, ignoring flags and width; `msg.arg_extended(&text)?`.
+    /// `Arg(const occ::handle<TCollection_HExtendedString>&)` (also `operator<<`); `msg.arg_h_extended(&text)?`.
+    pub fn arg_h_extended(&mut self, text: &HExtendedString) -> Result<&mut Self, Failure> {
+        let value = text.string().clone();
+        self.arg_extended(&value)
+    }
+    /// `Arg(const TCollection_ExtendedString&)` (also `operator<<`): fills the next `%s` with
+    /// the text itself, ignoring flags and width; `msg.arg_extended(&text)?`.
     pub fn arg_extended(&mut self, text: &ExtendedString) -> Result<&mut Self, Failure> {
         let Some((first, format)) = self.take_format(FormatKind::String)? else {
             return Ok(self);
@@ -125,8 +131,9 @@ impl Msg {
             return Ok(self);
         };
         let formatted = c_sprintf(&format, &[value]);
-        let widened: Vec<u16> = formatted.iter().map(|&byte| u16::from(byte)).collect();
-        self.replace_text(first, format.len(), &ExtendedString::from_raw(&widened))?;
+        // `TCollection_ExtendedString(buffer)`: the non-multibyte constructor widens bytes.
+        let text = ExtendedString::from_c_string(&formatted, false);
+        self.replace_text(first, format.len(), &text)?;
         Ok(self)
     }
 }

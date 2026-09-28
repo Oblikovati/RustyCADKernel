@@ -19,7 +19,7 @@ use crate::standard::dump::DumpStream;
 use crate::standard::{RuntimeType, RuntimeTyped, StandardTransient};
 use crate::tcollection::AsciiString;
 use std::any::Any;
-use std::sync::{Arc, OnceLock};
+use std::sync::Arc;
 
 /// Shared alert handle, the Rust `occ::handle<Message_Alert>`; alerts are never null.
 pub type AlertHandle = Arc<dyn Alert>;
@@ -56,14 +56,7 @@ pub trait Alert: Any + Send + Sync {
 /// A plain `Message_Alert` instance; `Arc::new(BaseAlert::default())`.
 #[derive(Debug, Default)]
 pub struct BaseAlert;
-impl RuntimeTyped for BaseAlert {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_Alert", Some(StandardTransient::static_type()))
-        })
-    }
-}
+message_runtime_type!(BaseAlert, "Message_Alert", StandardTransient);
 impl Alert for BaseAlert {
     fn dynamic_type(&self) -> &'static RuntimeType {
         Self::static_type()
@@ -83,18 +76,7 @@ macro_rules! define_simple_alert {
         #[doc = concat!("Simple alert `", $name, "`.")]
         #[derive(Debug, Default)]
         pub struct $alert;
-        impl $crate::standard::RuntimeTyped for $alert {
-            fn static_type() -> &'static $crate::standard::RuntimeType {
-                static DESCRIPTOR: std::sync::OnceLock<$crate::standard::RuntimeType> =
-                    std::sync::OnceLock::new();
-                DESCRIPTOR.get_or_init(|| {
-                    $crate::standard::RuntimeType::new::<Self>(
-                        $name,
-                        Some(<$crate::message::BaseAlert as $crate::standard::RuntimeTyped>::static_type()),
-                    )
-                })
-            }
-        }
+        $crate::message_runtime_type!($alert, $name, $crate::message::BaseAlert);
         impl $crate::message::Alert for $alert {
             fn dynamic_type(&self) -> &'static $crate::standard::RuntimeType {
                 <Self as $crate::standard::RuntimeTyped>::static_type()

@@ -15,24 +15,14 @@
 use super::{Alert, AlertHandle, Gravity, json};
 use crate::standard::dump::DumpStream;
 use crate::standard::{RuntimeType, RuntimeTyped, StandardTransient};
-use std::sync::{Arc, Mutex, MutexGuard, OnceLock};
+use std::sync::{Arc, Mutex, MutexGuard};
 
 /// One alert list per gravity; `CompositeAlerts::default()`.
 #[derive(Default)]
 pub struct CompositeAlerts {
     alerts: Mutex<[Vec<AlertHandle>; 5]>,
 }
-impl RuntimeTyped for CompositeAlerts {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>(
-                "Message_CompositeAlerts",
-                Some(StandardTransient::static_type()),
-            )
-        })
-    }
-}
+message_runtime_type!(CompositeAlerts, "Message_CompositeAlerts", StandardTransient);
 
 /// Alert identity: the same allocation.
 pub(crate) fn same_alert(first: &AlertHandle, second: &AlertHandle) -> bool {

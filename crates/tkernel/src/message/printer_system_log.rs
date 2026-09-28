@@ -15,7 +15,6 @@
 use super::{Gravity, Printer, PrinterBase, PrinterType};
 use crate::standard::{RuntimeType, RuntimeTyped};
 use crate::tcollection::AsciiString;
-use std::sync::OnceLock;
 mod system;
 
 /// Printer to the operating system log; `PrinterSystemLog::new(&AsciiString::new("App"), Gravity::Info)`.
@@ -23,14 +22,7 @@ pub struct PrinterSystemLog {
     base: PrinterBase,
     event_source: system::EventSource,
 }
-impl RuntimeTyped for PrinterSystemLog {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_PrinterSystemLog", Some(PrinterType::static_type()))
-        })
-    }
-}
+message_runtime_type!(PrinterSystemLog, "Message_PrinterSystemLog", PrinterType);
 impl PrinterSystemLog {
     /// Opens the log under a source name (`openlog`/`RegisterEventSourceW`);
     /// `PrinterSystemLog::new(&AsciiString::new("App"), Gravity::Info)`.

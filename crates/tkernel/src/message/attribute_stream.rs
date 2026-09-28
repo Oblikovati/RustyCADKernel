@@ -17,7 +17,7 @@ use super::{Attribute, json};
 use crate::standard::dump::DumpStream;
 use crate::standard::{RuntimeType, RuntimeTyped};
 use crate::tcollection::AsciiString;
-use std::sync::{Mutex, OnceLock};
+use std::sync::Mutex;
 
 /// Attribute storing stream content; `AttributeStream::new(b"\"x\": 1", &AsciiString::default())`.
 pub struct AttributeStream {
@@ -50,17 +50,7 @@ impl AttributeStream {
             .unwrap_or_else(|poisoned| poisoned.into_inner()) = text.to_vec();
     }
 }
-impl RuntimeTyped for AttributeStream {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>(
-                "Message_AttributeStream",
-                Some(BaseAttribute::static_type()),
-            )
-        })
-    }
-}
+message_runtime_type!(AttributeStream, "Message_AttributeStream", BaseAttribute);
 impl Attribute for AttributeStream {
     fn attribute_base(&self) -> &AttributeBase {
         &self.base

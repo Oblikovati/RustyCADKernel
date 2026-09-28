@@ -17,7 +17,7 @@ use crate::standard::dump::DumpStream;
 use crate::standard::{RuntimeType, RuntimeTyped, StandardTransient};
 use crate::tcollection::AsciiString;
 use std::any::Any;
-use std::sync::{Arc, Mutex, OnceLock};
+use std::sync::{Arc, Mutex};
 
 /// Shared attribute handle, the Rust `occ::handle<Message_Attribute>`.
 pub type AttributeHandle = Arc<dyn Attribute>;
@@ -100,14 +100,7 @@ impl BaseAttribute {
         }
     }
 }
-impl RuntimeTyped for BaseAttribute {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>("Message_Attribute", Some(StandardTransient::static_type()))
-        })
-    }
-}
+message_runtime_type!(BaseAttribute, "Message_Attribute", StandardTransient);
 impl Attribute for BaseAttribute {
     fn attribute_base(&self) -> &AttributeBase {
         &self.base

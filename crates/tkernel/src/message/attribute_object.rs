@@ -17,7 +17,7 @@ use super::{Attribute, json};
 use crate::standard::dump::DumpStream;
 use crate::standard::{Handle, RuntimeType, RuntimeTyped, StandardTransient};
 use crate::tcollection::AsciiString;
-use std::sync::{Mutex, OnceLock};
+use std::sync::Mutex;
 
 /// Attribute storing an object handle; `AttributeObject::new(object, &AsciiString::default())`.
 pub struct AttributeObject {
@@ -47,17 +47,7 @@ impl AttributeObject {
             .unwrap_or_else(|poisoned| poisoned.into_inner()) = object;
     }
 }
-impl RuntimeTyped for AttributeObject {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| {
-            RuntimeType::new::<Self>(
-                "Message_AttributeObject",
-                Some(BaseAttribute::static_type()),
-            )
-        })
-    }
-}
+message_runtime_type!(AttributeObject, "Message_AttributeObject", BaseAttribute);
 impl Attribute for AttributeObject {
     fn attribute_base(&self) -> &AttributeBase {
         &self.base
