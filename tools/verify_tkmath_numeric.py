@@ -22,6 +22,7 @@ from tkmath_bvh_corpus import append_bvh_requests
 from tkmath_bvh_query_corpus import append_bvh_query_requests
 from tkmath_bsplclib_corpus import append_bsplclib_requests
 from tkmath_bsplslib_corpus import append_bsplslib_requests
+from tkmath_convert_corpus import append_convert_requests
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
@@ -413,6 +414,7 @@ def corpus() -> str:
     append_bvh_query_requests(requests)
     append_bsplclib_requests(requests)
     append_bsplslib_requests(requests)
+    append_convert_requests(requests)
     return '\n'.join(requests)+'\n'           
 
 
