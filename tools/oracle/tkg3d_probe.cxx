@@ -34,6 +34,7 @@
 #include <Geom_Hyperbola.hxx>
 #include <Geom_Line.hxx>
 #include <Geom_OffsetCurve.hxx>
+#include <Geom_OffsetCurveUtils.pxx>
 #include <Geom_OffsetSurface.hxx>
 #include <Geom_Parabola.hxx>
 #include <Geom_Plane.hxx>
@@ -61,6 +62,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_conic", g3_conic_case},
  {"g3_conic_build", g3_conic_build_case},
  {"g3_trimmed", g3_trimmed_case},
+ {"g3_offset_utils", g3_offset_utils_case},
 };
 int main() {
  std::string line;

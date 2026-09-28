@@ -75,3 +75,14 @@ void g3_trimmed_case(std::istream& in){
  G3_TRY(t->Reverse());g3_trimmed_state(t,u);G3_TRY(t->Transform(m));g3_trimmed_state(t,u);
  g3_real(t->TransformedParameter(0.5,m));g3_real(t->ParametricTransformation(m));std::cout<<'\n';
 }
+// Geom_OffsetCurveUtils::CalculateD0..D3 directly: P, D1..D4, reference direction (any
+// vector, used as the XYZ), offset, direction-change flag and tolerance.
+void g3_offset_utils_case(std::istream& in){
+ G3Reader r{in};gp_Pnt p=r.pnt();gp_Vec d1=r.vec(),d2=r.vec(),d3=r.vec(),d4=r.vec();gp_XYZ dir=r.vec().XYZ();
+ double offset=r.real();bool change=r.flag();double tol=r.real();
+ gp_Pnt v=p;g3_flag(Geom_OffsetCurveUtils::CalculateD0(v,d1,dir,offset,tol));g3_pnt(v);
+ gp_Vec a1=d1;v=p;g3_flag(Geom_OffsetCurveUtils::CalculateD1(v,a1,d2,dir,offset,tol));g3_pnt(v);g3_vec(a1);
+ gp_Vec a2=d2;a1=d1;v=p;g3_flag(Geom_OffsetCurveUtils::CalculateD2(v,a1,a2,d3,dir,offset,change,tol));g3_pnt(v);g3_vec(a1);g3_vec(a2);
+ gp_Vec a3=d3;a2=d2;a1=d1;v=p;g3_flag(Geom_OffsetCurveUtils::CalculateD3(v,a1,a2,a3,d4,dir,offset,change,tol));
+ g3_pnt(v);g3_vec(a1);g3_vec(a2);g3_vec(a3);std::cout<<'\n';
+}

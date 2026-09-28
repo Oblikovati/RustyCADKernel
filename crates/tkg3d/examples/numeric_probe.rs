@@ -21,6 +21,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("g3_conic", conics::conic_case),
     ("g3_conic_build", conics::conic_build_case),
     ("g3_trimmed", curves::trimmed_case),
+    ("g3_offset_utils", curves::offset_utils_case),
 ];
 
 fn main() {

@@ -71,3 +71,4 @@ mod parabola;
 pub use parabola::GeomParabola;
 mod trimmed_curve;
 pub use trimmed_curve::GeomTrimmedCurve;
+pub mod offset_curve_utils;

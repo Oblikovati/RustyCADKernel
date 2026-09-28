@@ -3,8 +3,10 @@
 use super::common::{
     Reader, attempt, ax1, ax2, built_curve, curve_summary, dump, end, name, pnt, real, show, trsf,
 };
+use super::common::{flag, vec};
 use super::simple::moves;
 use rustycad_tkernel::standard::Handle;
+use rustycad_tkg3d::geom::offset_curve_utils as utils;
 use rustycad_tkg3d::geom::{GeomBoundedCurve, GeomCurve, GeomGeometry, GeomLine, GeomTrimmedCurve};
 use rustycad_tkmath::gp::Line3;
 use std::cell::RefCell;
@@ -107,5 +109,47 @@ pub fn trimmed_case(values: &[f64]) {
     trimmed_state(&t, &u);
     real(t.transformed_parameter(0.5, m));
     real(t.parametric_transformation(m));
+    end();
+}
+
+/// Geom_OffsetCurveUtils::CalculateD0..D3 directly (g3_offset_utils).
+pub fn offset_utils_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let p = r.pnt();
+    let (d1, d2, d3, d4) = (r.vec(), r.vec(), r.vec(), r.vec());
+    let dir = *r.vec().xyz();
+    let (offset, change, tol) = (r.real(), r.flag(), r.real());
+    let mut v = p;
+    flag(utils::calculate_d0(&mut v, d1, dir, offset, tol));
+    pnt(v);
+    let (mut v, mut a1) = (p, d1);
+    flag(utils::calculate_d1(&mut v, &mut a1, d2, dir, offset, tol));
+    pnt(v);
+    vec(a1);
+    let (mut v, mut a1, mut a2) = (p, d1, d2);
+    flag(utils::calculate_d2(
+        &mut v,
+        [&mut a1, &mut a2],
+        d3,
+        dir,
+        offset,
+        change,
+        tol,
+    ));
+    pnt(v);
+    [a1, a2].into_iter().for_each(vec);
+    let (mut v, mut a1, mut a2, mut a3) = (p, d1, d2, d3);
+    let derivatives = [&mut a1, &mut a2, &mut a3];
+    flag(utils::calculate_d3(
+        &mut v,
+        derivatives,
+        d4,
+        dir,
+        offset,
+        change,
+        tol,
+    ));
+    pnt(v);
+    [a1, a2, a3].into_iter().for_each(vec);
     end();
 }

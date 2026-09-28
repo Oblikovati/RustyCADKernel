@@ -2,6 +2,7 @@
 (tools/oracle/tkg3d_probe_curves.cxx)."""
 from __future__ import annotations
 import math
+import sys
 import random
 from tkg3d_corpus import (axis, circle, ellipse, fmt, frame, hyperbola, line, moves, parabola, params, point,
                           trimmed, trsf, unit)
@@ -54,6 +55,7 @@ def append_curve_family_requests(rng: random.Random, requests: list[str]) -> Non
     valid_conics = [spec for spec in conic_specs(rng) if spec[-1] >= 0.0 and spec[-2] >= 0.0]
     append_conic_requests(rng, requests, valid_conics, [1, 2, 3, 4, 5])
     append_trimmed_requests(rng, requests)
+    append_offset_utils_requests(rng, requests)
 
 
 def append_conic_requests(rng: random.Random, requests: list[str], specs: list[list], build_kinds: list[int]) -> None:
@@ -81,3 +83,16 @@ def append_trimmed_requests(rng: random.Random, requests: list[str]) -> None:
         for u1, u2, sense, adjust in ((0.1, 1.2, 1, 1), (1.2, 0.1, 0, 1), (5.0, 5.0, 1, 1), (-50.0, 50.0, 1, 0)):
             requests.append('g3_trimmed ' + fmt([*spec, *params(curve_params(rng)[:3]), u1, u2, sense, adjust,
                                                  *trsf(rng)]))
+
+
+def append_offset_utils_requests(rng: random.Random, requests: list[str]) -> None:
+    """Geom_OffsetCurveUtils::CalculateD0..D3 with D1 magnitudes that reach every
+    stable and unstable branch (R^n compared with the tolerance) and null normals."""
+    tiny = sys.float_info.min
+    for scale in (1.0, 1e-3, 1e-40, 1e-50, 1e-70, 1e-105, 1e-160, 0.0):
+        for tolerance in (tiny, 1e-12):
+            d1 = [c * scale for c in point(rng, 1.0)]
+            direction = rng.choice([unit(rng), [0.0, 0.0, 1.0], [c * 1e-60 for c in unit(rng)]])
+            requests.append('g3_offset_utils ' + fmt([*point(rng), *d1, *point(rng, 2.0), *point(rng, 3.0),
+                                                      *point(rng, 4.0), *direction, rng.choice([2.0, -0.5, 0.0]),
+                                                      rng.randrange(2), tolerance]))
