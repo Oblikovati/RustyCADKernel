@@ -1,5 +1,5 @@
 //! The adapter must reach libm and keep its special-value contract.
-use rustycad_cmath::{acosh, asinh, atanh};
+use rustycad_cmath::{acosh, asinh, atanh, remainder};
 
 #[test]
 fn special_values_follow_c99() {
@@ -16,4 +16,16 @@ fn values_are_inverse_hyperbolic_functions() {
     }
     assert!((acosh(2.0).cosh() - 2.0).abs() <= 1.0e-15);
     assert!((atanh(0.5).tanh() - 0.5).abs() <= 1.0e-15);
+}
+
+#[test]
+fn remainder_rounds_the_quotient_to_nearest_even() {
+    assert_eq!(remainder(5.0, 2.0), 1.0);
+    assert_eq!(remainder(7.0, 2.0), -1.0);
+    assert_eq!(remainder(-0.0, 1.0).to_bits(), (-0.0f64).to_bits());
+    assert!(remainder(1.0, 0.0).is_nan() && remainder(f64::INFINITY, 1.0).is_nan());
+    assert_eq!(
+        remainder(2.0 * std::f64::consts::PI, std::f64::consts::PI),
+        0.0
+    );
 }
