@@ -84,7 +84,7 @@ impl FunctionRoots {
     ) -> Self {
         Self::with_options(function, lower, upper, samples, [0.0; 3], 0.0)
     }
-    /// Solves F(x)=target with [EpsX,EpsF,EpsNull]; `FunctionRoots::with_options(&mut f,-2.0,2.0,20,[1e-8;3],0.0)`.
+    /// Solves F(x)=target with `[EpsX,EpsF,EpsNull]`; `FunctionRoots::with_options(&mut f,-2.0,2.0,20,[1e-8;3],0.0)`.
     pub fn with_options(
         function: &mut impl FunctionWithDerivative,
         lower: f64,

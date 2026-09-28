@@ -157,6 +157,8 @@ void planar_case(std::istream& input) {
 #include "tkmath_mathpoly_utils_probe.cxx"
 #include "tkmath_ncollection_vec_probe.cxx"
 #include "tkmath_gp_transform_probe.cxx"
+#include "tkmath_convert_probe.cxx"
+#include "tkmath_gp_core_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -308,6 +310,20 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"gp3d_trsf", gp3_trsf_case},
  {"gp3d_gtrsf", gp3_gtrsf_case},
  {"gp3d_quat", gp3_quat_case},
+ {"cv_conic", convert_probe::conic_case},
+ {"cv_cossin", convert_probe::cossin_case},
+ {"cv_polycs", convert_probe::polycs_case},
+ {"cv_surface", convert_probe::surface_case},
+ {"cv_bezier", convert_probe::bezier_case},
+ {"cv_comppoly", convert_probe::comppoly_case},
+ {"cv_grid", convert_probe::grid_case},
+ {"gp3d_vec", gpc_vec_case},
+ {"gp3d_dir", gpc_dir_case},
+ {"gp3d_pnt", gpc_pnt_case},
+ {"gp3d_lin", gpc_lin_case},
+ {"gp3d_pln", gpc_pln_case},
+ {"gp3d_frame", gpc_frame_case},
+ {"gp3d_lerp", gpc_lerp_case},
 };
 int main() {
  std::string line;

@@ -93,6 +93,7 @@ impl Direction3 {
     }
 }
 
+mod coordinates;
 mod operations;
 mod products;
 mod standard;

@@ -13,7 +13,7 @@
 // commercial license or contractual agreement.
 
 //! gp_Dir2d mirror, rotation and transformation members.
-use super::super::{Axis2d, Point2, Transform2, TransformForm, Xy};
+use super::super::{Axis2d, Failure, Point2, Transform2, TransformForm, Xy};
 use super::Direction2;
 impl Direction2 {
     /// Mirrors about an axis direction using the native component expressions;
@@ -68,19 +68,30 @@ impl Direction2 {
     pub fn transform(&mut self, transform: Transform2) {
         *self = self.transformed(transform);
     }
-    /// Applies gp_Dir2d::SetCoord to a quarter turn of this direction; a stored direction is
-    /// never zero, so the native zero-norm raise is unreachable; `direction.quarter_turn(true)`.
-    pub(in crate::gp) fn quarter_turn(self, counter_clockwise: bool) -> Self {
-        let xy = if counter_clockwise {
-            Xy::new(-self.y(), self.x())
-        } else {
-            Xy::new(self.y(), -self.x())
-        };
+    /// Applies gp_Dir2d::SetCoord to a quarter turn of this direction, raising
+    /// Standard_ConstructionError like the native setter when the turned vector has zero norm;
+    /// `direction.quarter_turn(true)?`.
+    pub(in crate::gp) fn quarter_turn(self, counter_clockwise: bool) -> Result<Self, Failure> {
+        let message = "gp_Dir2d::SetCoord() - result vector has zero norm";
+        Self::normalized_with(self.turned(counter_clockwise), message)
+    }
+    /// The same quarter turn for native `noexcept` callers (the 2D conics' Reverse and the
+    /// hyperbola branches), which turn a stored unit direction whose turn cannot have zero
+    /// norm; `direction.quarter_turn_unit(true)`.
+    pub(in crate::gp) fn quarter_turn_unit(self, counter_clockwise: bool) -> Self {
+        let xy = self.turned(counter_clockwise);
         let squared = xy.square_modulus();
-        debug_assert!(squared.is_nan() || squared > 0.0, "zero Direction2 {xy:?}");
+        // Same fast path as gp_Dir2d::SetCoord: 1 +/- gp::Resolution() rounds to 1.
         if squared == 1.0 {
             return Self::from_stored(xy);
         }
         Self::from_stored(xy / squared.sqrt())
+    }
+    fn turned(self, counter_clockwise: bool) -> Xy {
+        if counter_clockwise {
+            Xy::new(-self.y(), self.x())
+        } else {
+            Xy::new(self.y(), -self.x())
+        }
     }
 }

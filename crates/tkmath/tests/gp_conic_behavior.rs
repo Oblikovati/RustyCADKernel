@@ -16,6 +16,7 @@ fn plane_frame() -> Axis22d {
         Direction2::new(0.6, 0.8).unwrap(),
         true,
     )
+    .unwrap()
 }
 /// Evaluates `A·x² + B·y² + 2C·xy + 2D·x + 2E·y + F`.
 fn conic([a, b, c, d, e, f]: [f64; 6], p: Point2) -> f64 {
@@ -197,23 +198,26 @@ fn planar_parabola_from_directrix_handles_focus_on_directrix() {
     // The mirror axis is the directrix turned by -PI/2 for a direct sense.
     assert!((flat.axis_of_symmetry().direction().x() - 1.0).abs() < 1e-15);
     let mut moved = parabola;
-    moved.set_mirror_axis(Axis2d::new(Point2::new(5.0, 5.0), Direction2::Y));
+    moved
+        .set_mirror_axis(Axis2d::new(Point2::new(5.0, 5.0), Direction2::Y))
+        .unwrap();
     assert_eq!(moved.axis_of_symmetry().direction(), Direction2::Y);
     assert_eq!(moved.directrix().location(), Point2::new(5.0, 4.0));
 }
 
 #[test]
 fn planar_frames_keep_their_sense() {
-    let direct = Axis22d::new(Point2::default(), Direction2::X, true);
+    let direct = Axis22d::new(Point2::default(), Direction2::X, true).unwrap();
     assert_eq!(direct.y_direction(), Direction2::Y);
-    let indirect = Axis22d::from_axis(Axis2d::default(), false);
+    let indirect = Axis22d::from_axis(Axis2d::default(), false).unwrap();
     assert_eq!(indirect.y_direction(), Direction2::NEG_Y);
     let mut frame = indirect;
-    frame.set_x_direction(Direction2::Y);
+    frame.set_x_direction(Direction2::Y).unwrap();
     assert_eq!(frame.y_direction().x(), 1.0);
-    frame.set_y_direction(Direction2::X);
+    frame.set_y_direction(Direction2::X).unwrap();
     assert_eq!(frame.x_direction().y(), 1.0);
-    let built = Axis22d::with_directions(Point2::default(), Direction2::X, Direction2::NEG_Y);
+    let built =
+        Axis22d::with_directions(Point2::default(), Direction2::X, Direction2::NEG_Y).unwrap();
     assert_eq!(built, indirect);
     let mut circle = Circle2::new(direct, 1.0).unwrap();
     assert!(circle.is_direct());

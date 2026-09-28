@@ -15,6 +15,7 @@
 // commercial license or contractual agreement.
 
 use super::super::{Axis1, Axis3, Direction3, Failure};
+use rustycad_tkernel::precision;
 impl Axis3 {
     /// Returns the stored X direction; `frame.x_direction()`.
     pub const fn x_direction(&self) -> Direction3 {
@@ -52,7 +53,7 @@ impl Axis3 {
     /// Changes Z while preserving handedness (OCC29406); `frame.set_direction(normal)?`.
     pub fn set_direction(&mut self, normal: Direction3) -> Result<(), Failure> {
         let cosine = normal.dot(self.x_direction);
-        if 1.0 - cosine.abs() <= 1e-12 {
+        if 1.0 - cosine.abs() <= precision::angular() {
             self.align_z_to_x(normal, cosine);
             return Ok(());
         }
@@ -81,7 +82,7 @@ impl Axis3 {
     /// Changes X, including the native collinear-axis swap; `frame.set_x_direction(direction)?`.
     pub fn set_x_direction(&mut self, direction: Direction3) -> Result<(), Failure> {
         let cosine = direction.dot(self.direction);
-        if 1.0 - cosine.abs() <= 1e-12 {
+        if 1.0 - cosine.abs() <= precision::angular() {
             self.direction = self.x_direction;
             if cosine > 0.0 {
                 self.y_direction.reverse();
@@ -97,7 +98,7 @@ impl Axis3 {
     /// Changes Y while preserving handedness (OCC29406); `frame.set_y_direction(direction)?`.
     pub fn set_y_direction(&mut self, direction: Direction3) -> Result<(), Failure> {
         let cosine = direction.dot(self.direction);
-        if 1.0 - cosine.abs() <= 1e-12 {
+        if 1.0 - cosine.abs() <= precision::angular() {
             self.direction = self.y_direction;
             if cosine > 0.0 {
                 self.x_direction.reverse();

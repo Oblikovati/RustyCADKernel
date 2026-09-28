@@ -46,7 +46,7 @@ impl Circle2 {
     }
     /// Uses the axis as X direction with the given sense; `Circle2::from_x_axis(axis,2.0,true)?`.
     pub fn from_x_axis(x_axis: Axis2d, radius: f64, sense: bool) -> Result<Self, Failure> {
-        Self::new(Axis22d::from_axis(x_axis, sense), radius)
+        Self::new(Axis22d::from_axis(x_axis, sense)?, radius)
     }
     /// Rejects negative radii; `circle.set_radius(3.0)?`.
     pub fn set_radius(&mut self, radius: f64) -> Result<(), Failure> {

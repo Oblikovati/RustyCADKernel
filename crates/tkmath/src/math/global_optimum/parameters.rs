@@ -66,7 +66,7 @@ impl<'a> GlobalOptimum<'a> {
         self.tolerance = discretization;
         self.same = same;
     }
-    /// Reads [discretization,same] tolerances; `solver.tolerances()`.
+    /// Reads `[discretization,same]` tolerances; `solver.tolerances()`.
     pub fn tolerances(&self) -> [f64; 2] {
         [self.tolerance, self.same]
     }

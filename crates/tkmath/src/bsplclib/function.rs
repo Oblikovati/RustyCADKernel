@@ -248,7 +248,7 @@ fn check_counts(
 }
 
 /// [`function_multiply_flat`] on a scalar pole array (`BSplCLib::FunctionMultiply` on
-/// NCollection_Array1<double>); Standard_ConstructionError on pole-count mismatch;
+/// `NCollection_Array1<double>`); Standard_ConstructionError on pole-count mismatch;
 /// `bsplclib::function_multiply_scalar(&a, &target, &poles, &mut new_poles, &mut status)?`.
 pub fn function_multiply_scalar(
     function: &dyn EvaluatorFunction,
@@ -269,7 +269,7 @@ pub fn function_multiply_scalar(
 }
 
 /// [`function_reparameterise_flat`] on a scalar pole array
-/// (`BSplCLib::FunctionReparameterise` on NCollection_Array1<double>);
+/// (`BSplCLib::FunctionReparameterise` on `NCollection_Array1<double>`);
 /// `bsplclib::function_reparameterise_scalar(&a, &target, &poles, &mut new_poles, &mut status)?`.
 pub fn function_reparameterise_scalar(
     function: &dyn EvaluatorFunction,

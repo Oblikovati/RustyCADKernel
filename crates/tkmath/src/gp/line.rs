@@ -12,8 +12,11 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
+// Rust translation of FoundationClasses/TKMath/gp/gp_Lin.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+
 //! gp_Lin metric and transformation operations over an oriented axis.
-use super::{Axis1, Direction3, Failure, Point3, Transform3, Vector3, Xyz};
+use super::{Axis1, Direction3, Failure, Point3, Vector3, Xyz};
+mod transforms;
 /// An unbounded oriented line, initially the Z axis; `Line3::new(origin,direction)`.
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct Line3 {
@@ -34,6 +37,34 @@ impl Line3 {
     pub const fn position(&self) -> Axis1 {
         self.axis
     }
+    /// Returns the origin; `line.location()`.
+    pub const fn location(&self) -> Point3 {
+        self.axis.location()
+    }
+    /// Returns the oriented direction; `line.direction()`.
+    pub const fn direction(&self) -> Direction3 {
+        self.axis.direction()
+    }
+    /// Replaces the direction; `line.set_direction(Direction3::X)`.
+    pub const fn set_direction(&mut self, direction: Direction3) {
+        self.axis.set_direction(direction);
+    }
+    /// Replaces the origin; `line.set_location(point)`.
+    pub const fn set_location(&mut self, location: Point3) {
+        self.axis.set_location(location);
+    }
+    /// Replaces the located axis; `line.set_position(axis)`.
+    pub const fn set_position(&mut self, axis: Axis1) {
+        self.axis = axis;
+    }
+    /// Reverses the direction; `line.reverse()`.
+    pub fn reverse(&mut self) {
+        self.axis.reverse();
+    }
+    /// Returns the line with reversed direction; `line.reversed()`.
+    pub fn reversed(self) -> Self {
+        Self::from_axis(self.axis.reversed())
+    }
     /// Builds the perpendicular line through a point off this line; `line.normal(point)?`.
     pub fn normal(&self, point: Point3) -> Result<Self, Failure> {
         let origin = self.location();
@@ -48,14 +79,6 @@ impl Line3 {
             direction.cross_crossed(toward, direction)?,
         ))
     }
-    /// Returns the origin; `line.location()`.
-    pub const fn location(&self) -> Point3 {
-        self.axis.location()
-    }
-    /// Returns the oriented direction; `line.direction()`.
-    pub const fn direction(&self) -> Direction3 {
-        self.axis.direction()
-    }
     /// Computes the norm of the displacement cross direction; `line.distance(point)`.
     pub fn distance(&self, point: Point3) -> f64 {
         self.square_distance(point).sqrt()
@@ -66,18 +89,21 @@ impl Line3 {
             .crossed(Xyz::from(self.direction()))
             .square_modulus()
     }
-    /// Computes line distance, using gp resolution for the parallel branch; `line.distance_line(other)?`.
+    /// Computes line distance, using gp resolution for the parallel branch; the crossing
+    /// branch keeps gp_Dir::Crossed's zero-norm raise; `line.distance_line(other)?`.
     pub fn distance_line(&self, other: Self) -> Result<f64, Failure> {
-        if self
-            .direction()
-            .is_parallel(other.direction(), f64::MIN_POSITIVE)
-        {
+        if self.axis.is_parallel(other.axis, f64::MIN_POSITIVE) {
             return Ok(other.distance(self.location()));
         }
         let normal = self.direction().crossed(other.direction())?;
         Ok(Vector3::between(self.location(), other.location())
             .dot(Vector3::from(normal))
             .abs())
+    }
+    /// Squares the line distance (gp_Lin::SquareDistance(gp_Lin)); `line.square_distance_line(other)?`.
+    pub fn square_distance_line(&self, other: Self) -> Result<f64, Failure> {
+        let distance = self.distance_line(other)?;
+        Ok(distance * distance)
     }
     /// Tests distance within tolerance; `line.contains(point,1e-7)`.
     pub fn contains(&self, point: Point3, tolerance: f64) -> bool {
@@ -87,29 +113,9 @@ impl Line3 {
     pub fn angle(&self, other: Self) -> f64 {
         self.direction().angle(&other.direction())
     }
-    /// Translates the origin without changing orientation; `line.translated(vector)`.
-    pub fn translated(self, vector: Vector3) -> Self {
-        Self::new(self.location().translated(vector), self.direction())
-    }
-    /// Rotates origin and direction by their native paths; `line.rotated(axis,angle)?`.
-    pub fn rotated(self, axis: Axis1, angle: f64) -> Result<Self, Failure> {
-        Ok(Self::new(
-            self.location().rotated(axis, angle)?,
-            self.direction().rotated(axis, angle)?,
-        ))
-    }
-    /// Uses gp_Ax1's direction-overload mirror, not gp_Dir's axis-overload bug; `line.mirrored_axis(axis)`.
-    pub fn mirrored_axis(self, axis: Axis1) -> Self {
-        Self::new(
-            self.location().mirrored_axis(axis),
-            self.direction().mirrored_direction(axis.direction()),
-        )
-    }
-    /// Transforms the located axis; `line.transformed(transform)`.
-    pub fn transformed(self, transform: Transform3) -> Self {
-        Self::new(
-            self.location().transformed(transform),
-            self.direction().transformed(transform),
-        )
+}
+impl From<Axis1> for Line3 {
+    fn from(axis: Axis1) -> Self {
+        Self::from_axis(axis)
     }
 }

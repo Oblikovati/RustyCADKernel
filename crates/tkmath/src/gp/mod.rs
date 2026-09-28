@@ -4,7 +4,7 @@ pub(crate) mod direction;
 mod point;
 pub use axis::Axis3;
 pub use direction::{Direction3, StandardDirection3};
-pub use point::Point3;
+pub use point::{Point3, PointCoordinatesMut, PointHashPolicy};
 use rustycad_tkernel::standard::Failure;
 pub(crate) fn cross(left: [f64; 3], right: [f64; 3]) -> [f64; 3] {
     [
@@ -16,16 +16,34 @@ pub(crate) fn cross(left: [f64; 3], right: [f64; 3]) -> [f64; 3] {
 pub(crate) fn dot(left: [f64; 3], right: [f64; 3]) -> f64 {
     left[0] * right[0] + left[1] * right[1] + left[2] * right[2]
 }
+/// Reflects `value` about the unit line `normal` with the precomputed terms and operation
+/// order shared by gp_Dir::Mirror and gp_Vec::Mirror; `reflect([1.0,0.0,0.0],[1.0,2.0,3.0])`.
+pub(crate) fn reflect(normal: [f64; 3], value: [f64; 3]) -> [f64; 3] {
+    let [a, b, c] = normal;
+    let [x, y, z] = value;
+    let (m1, m2, m3) = (2.0 * a * b, 2.0 * a * c, 2.0 * b * c);
+    [
+        ((2.0 * a * a) - 1.0) * x + m1 * y + m2 * z,
+        m1 * x + ((2.0 * b * b) - 1.0) * y + m3 * z,
+        m2 * x + m3 * y + ((2.0 * c * c) - 1.0) * z,
+    ]
+}
 fn construction(message: &str) -> Failure {
     Failure::with_type("Standard_ConstructionError", message, "")
 }
 fn domain(message: &str) -> Failure {
     Failure::with_type("Standard_DomainError", message, "")
 }
+/// Raises gp_VectorWithNullMagnitude, the gp_Vec/gp_Vec2d angular-query exception (a
+/// Standard_DomainError subclass declared by DEFINE_STANDARD_EXCEPTION);
+/// `gp::vector_with_null_magnitude("magnitude 0")`.
+pub fn vector_with_null_magnitude(message: &str) -> Failure {
+    Failure::with_type("gp_VectorWithNullMagnitude", message, "")
+}
 mod placement;
 
 mod transform;
-pub use transform::{Transform3, TransformForm};
+pub use transform::{Transform3, TransformForm, TransformNLerp};
 mod xyz;
 pub use xyz::Xyz;
 mod matrix;

@@ -172,7 +172,7 @@ fn weights_of<'r, 'a>(
 
 /// Stores the Taylor expansion into one real matrix read from its first cell: rows
 /// along the max-degree direction, each holding (min degree + 1) poles of 3 values
-/// (4 when weighted) (`BSplSLib::BuildCache` into NCollection_Array2<double>);
+/// (4 when weighted) (`BSplSLib::BuildCache` into `NCollection_Array2<double>`);
 /// `bsplslib::build_cache_matrix(&source, &poles, None, &mut cache)?`.
 pub fn build_cache_matrix(
     source: &CacheSource<'_, '_>,

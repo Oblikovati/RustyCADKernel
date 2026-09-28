@@ -17,7 +17,7 @@ use super::{
     kronrod::{invalid, kronrod},
 };
 use crate::{math::Function, math_utils::IntegResult};
-/// Maps a semi-infinite domain onto [0,1]; `kronrod_semi_infinite(&mut f, 0.0, &KronrodConfig::default())`.
+/// Maps a semi-infinite domain onto `[0,1]`; `kronrod_semi_infinite(&mut f, 0.0, &KronrodConfig::default())`.
 pub fn kronrod_semi_infinite(
     f: &mut impl Function,
     lower: f64,

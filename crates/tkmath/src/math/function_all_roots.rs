@@ -38,7 +38,7 @@ struct Scan {
     start: RootState,
 }
 impl FunctionAllRoots {
-    /// Uses [EpsX,EpsF,EpsNull] and reports native NumericError failures; `FunctionAllRoots::new(&mut f,&sample,[1e-6;3])?`.
+    /// Uses `[EpsX,EpsF,EpsNull]` and reports native NumericError failures; `FunctionAllRoots::new(&mut f,&sample,[1e-6;3])?`.
     pub fn new(
         f: &mut impl FunctionWithDerivative,
         s: &impl FunctionSampling,
