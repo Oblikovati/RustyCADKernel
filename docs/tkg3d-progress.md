@@ -10,7 +10,7 @@ private helpers `Geom_OffsetCurveUtils.pxx`, `Geom_OffsetSurfaceUtils.pxx`,
 `GeomAdaptor`, the `GeomEval` curves and surfaces, `GeomGridEval`, `GeomHash`,
 `TopAbs`) are not ported yet; only the `GeomAdaptor_Surface` D1 path that
 `Geom_OsculatingSurface` samples with is ported, next to that class. TKG3d depends
-on TKG2d as in OCCT: it reuses the Geom2d lock (`GeometryCell`), the array, dump,
+on TKG2d as in OCCT: it reuses the TKernel lock (`SharedState`), the array, dump,
 spline-data and `std::min`/`max` helpers, and the curve descriptor family
 (`define_rep_curve_descriptors!`).
 

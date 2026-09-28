@@ -17,7 +17,6 @@
 use super::curve_state::{self as state, AdaptorState};
 use super::{curve_eval as eval, curve_query as query, curve_shape as shape};
 use crate::adaptor2d::Adaptor2dCurve2d;
-use crate::geom2d::cell::GeometryCell;
 use crate::geom2d::offset_curve_utils::OffsetBasisCurve;
 use crate::geom2d::{
     Geom2dBSplineCurve, Geom2dBezierCurve, Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3,
@@ -25,7 +24,7 @@ use crate::geom2d::{
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::geom_abs::{CurveType, Shape};
 use rustycad_tkmath::gp::{Circle2, Ellipse2, Hyperbola2, Line2, Parabola2, Point2, Vector2};
 
@@ -40,7 +39,7 @@ use rustycad_tkmath::gp::{Circle2, Ellipse2, Hyperbola2, Line2, Parabola2, Point
 #[derive(Default)]
 pub struct Geom2dAdaptorCurve {
     parent: StandardTransient,
-    state: GeometryCell<AdaptorState>,
+    state: SharedState<AdaptorState>,
 }
 impl_transient!(
     Geom2dAdaptorCurve,
@@ -104,7 +103,7 @@ impl Geom2dAdaptorCurve {
         let copy: AdaptorState = state::shallow_state(&self.state.read())?;
         Ok(Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(copy),
+            state: SharedState::new(copy),
         })
     }
     fn bounds(&self) -> (f64, f64) {

@@ -14,18 +14,18 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_Direction.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_Direction`: a unit vector as transient geometry.
-use super::cell::{GeometryCell, ProtectedAccess};
 use super::errors;
 use super::geometry::Geom2dGeometry;
+use super::protected::ProtectedAccess;
 use super::vector::Geom2dVector;
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::gp::{Direction2, Transform2, Vector2, resolution};
 
 /// A unit vector; `Handle::new(Geom2dDirection::new(1.0, 1.0)?)`.
 pub struct Geom2dDirection {
     parent: StandardTransient,
-    state: GeometryCell<Vector2>,
+    state: SharedState<Vector2>,
 }
 impl_transient!(
     Geom2dDirection,
@@ -50,7 +50,7 @@ impl Geom2dDirection {
     fn stored(vector: Vector2) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(vector),
+            state: SharedState::new(vector),
         }
     }
     /// Unit vector along `(x, y)` (`Geom2d_Direction(X, Y)`); `Geom2dDirection::new(3.0, 4.0)?`.
@@ -106,7 +106,7 @@ impl Geom2dGeometry for Geom2dDirection {
     }
 }
 impl Geom2dVector for Geom2dDirection {
-    fn vector_cell(&self, _access: ProtectedAccess) -> &GeometryCell<Vector2> {
+    fn vector_cell(&self, _access: ProtectedAccess) -> &SharedState<Vector2> {
         &self.state
     }
     fn magnitude(&self) -> f64 {

@@ -19,9 +19,9 @@
 //! here each descriptor keeps them behind a lock with getters and setters.
 use crate::geom::GeomSurface;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Handle, StandardTransient, Transient};
 use rustycad_tkernel::{impl_transient, impl_transient_interface};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 
 /// Descriptor kind used for dispatch (`Base::Kind`), the same enumeration as the
 /// curve descriptors.
@@ -132,7 +132,7 @@ impl_transient_interface!(dyn RepSurfaceDesc, "Base", StandardTransient);
 /// `GeomEval_RepSurfaceDesc::Full`; `Handle::new(RepSurfaceDescFull::new(surface))`.
 pub struct RepSurfaceDescFull {
     parent: StandardTransient,
-    representation: GeometryCell<Handle<dyn GeomSurface>>,
+    representation: SharedState<Handle<dyn GeomSurface>>,
 }
 impl_transient!(RepSurfaceDescFull, "Full", dyn RepSurfaceDesc, parent, interfaces: [dyn RepSurfaceDesc]);
 impl RepSurfaceDescFull {
@@ -140,7 +140,7 @@ impl RepSurfaceDescFull {
     pub fn new(representation: Handle<dyn GeomSurface>) -> Self {
         Self {
             parent: StandardTransient::default(),
-            representation: GeometryCell::new(representation),
+            representation: SharedState::new(representation),
         }
     }
 }
@@ -166,7 +166,7 @@ impl RepSurfaceDesc for RepSurfaceDescFull {
 /// `Handle::new(RepSurfaceDescDerivBounded::new(surface, 2))`.
 pub struct RepSurfaceDescDerivBounded {
     parent: StandardTransient,
-    state: GeometryCell<(Handle<dyn GeomSurface>, usize)>,
+    state: SharedState<(Handle<dyn GeomSurface>, usize)>,
 }
 impl_transient!(
     RepSurfaceDescDerivBounded,
@@ -180,7 +180,7 @@ impl RepSurfaceDescDerivBounded {
     pub fn new(representation: Handle<dyn GeomSurface>, max_deriv_order: usize) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new((representation, max_deriv_order)),
+            state: SharedState::new((representation, max_deriv_order)),
         }
     }
     /// Change the derivative limit; `desc.set_max_deriv_order(2)`.
@@ -217,7 +217,7 @@ struct MappedState {
 /// `Handle::new(RepSurfaceDescMapped::new(surface, 3, None, Map2d::default()))`.
 pub struct RepSurfaceDescMapped {
     parent: StandardTransient,
-    state: GeometryCell<MappedState>,
+    state: SharedState<MappedState>,
 }
 impl_transient!(
     RepSurfaceDescMapped,
@@ -243,7 +243,7 @@ impl RepSurfaceDescMapped {
         };
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Change the derivative limit; `desc.set_max_deriv_order(2)`.

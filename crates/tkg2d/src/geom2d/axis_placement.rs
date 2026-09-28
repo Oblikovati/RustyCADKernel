@@ -14,16 +14,15 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_AxisPlacement.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_AxisPlacement`: an oriented axis (origin and unit direction).
-use super::cell::GeometryCell;
 use super::geometry::Geom2dGeometry;
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::gp::{Axis2d, Direction2, Point2, Transform2};
 
 /// An axis placement; `Handle::new(Geom2dAxisPlacement::new(axis))`.
 pub struct Geom2dAxisPlacement {
     parent: StandardTransient,
-    state: GeometryCell<Axis2d>,
+    state: SharedState<Axis2d>,
 }
 impl_transient!(
     Geom2dAxisPlacement,
@@ -42,7 +41,7 @@ impl Geom2dAxisPlacement {
     pub fn new(axis: Axis2d) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(axis),
+            state: SharedState::new(axis),
         }
     }
     /// Placement from origin and direction (`Geom2d_AxisPlacement(P, V)`);

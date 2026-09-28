@@ -7,7 +7,6 @@
 mod coherent;
 mod connect;
 mod errors;
-mod harray;
 mod io;
 pub mod make_loops;
 mod merge_nodes;
@@ -20,7 +19,6 @@ mod points;
 mod polygon2d;
 mod polygon3d;
 mod polygon_on_triangulation;
-mod shared_state;
 mod triangle;
 mod triangulation;
 pub use coherent::{
@@ -28,7 +26,6 @@ pub use coherent::{
     CoherentTriangulation, TwoIntegers,
 };
 pub use connect::Connect;
-pub use harray::HArray1OfReal;
 pub use io::{
     dump_polygon2d, dump_polygon3d, dump_triangulation, read_polygon2d, read_polygon3d,
     read_triangulation, write_polygon2d, write_polygon3d, write_triangulation,

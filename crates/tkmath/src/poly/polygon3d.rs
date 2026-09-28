@@ -15,15 +15,12 @@
 // commercial license or contractual agreement.
 // Rust translation of FoundationClasses/TKMath/Poly/Poly_Polygon3D.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-use super::{
-    HArray1OfReal, errors::array_failure, owned::owned_array, shared_state::SharedState,
-    triangulation::dump_size,
-};
+use super::{owned::owned_array, triangulation::dump_size};
 use crate::gp::Point3;
 use rustycad_tkernel::{
-    ncollection::Array1,
+    ncollection::{Array1, HArray1OfReal},
     standard::{
-        Failure, Handle, StandardTransient,
+        Failure, Handle, SharedState, StandardTransient,
         dump::{self, DumpOutput},
     },
 };
@@ -43,7 +40,7 @@ impl Polygon3D {
     /// Allocates nodes and, if asked, parameters at `1..=nb_nodes`; `Polygon3D::new(4, true)?`.
     pub fn new(nb_nodes: i32, has_parameters: bool) -> Result<Self, Failure> {
         const MEMBER: &str = "Poly_Polygon3D::Poly_Polygon3D";
-        let nodes = Array1::with_bounds(1, nb_nodes).map_err(|e| array_failure(MEMBER, e))?;
+        let nodes = Array1::with_bounds(1, nb_nodes).map_err(|e| e.into_failure(MEMBER))?;
         let parameters = if has_parameters {
             Some(Handle::new(HArray1OfReal::with_bounds(1, nb_nodes)?))
         } else {
@@ -65,7 +62,7 @@ impl Polygon3D {
         for (offset, index) in (nodes.lower()..=nodes.upper()).enumerate() {
             let parameter = parameters
                 .value(index)
-                .map_err(|e| array_failure("Poly_Polygon3D::Poly_Polygon3D", e))?;
+                .map_err(|e| e.into_failure("Poly_Polygon3D::Poly_Polygon3D"))?;
             values.set_value(offset as i32 + 1, *parameter)?;
         }
         Ok(Self::from_fields(
@@ -93,11 +90,11 @@ impl Polygon3D {
         let fields = self.fields.read();
         let copy = Self::new(fields.nodes.len() as i32, fields.parameters.is_some())?;
         copy.change_nodes(|nodes| nodes.copy_values(&fields.nodes))
-            .map_err(|e| array_failure("Poly_Polygon3D::Copy", e))?;
+            .map_err(|e| e.into_failure("Poly_Polygon3D::Copy"))?;
         if let Some(source) = &fields.parameters {
             let values = source.array1();
             copy.change_parameters(|target| target.copy_values(&values))?
-                .map_err(|e| array_failure("Poly_Polygon3D::Copy", e))?;
+                .map_err(|e| e.into_failure("Poly_Polygon3D::Copy"))?;
         }
         copy.set_deflection(fields.deflection);
         Ok(Handle::new(copy))

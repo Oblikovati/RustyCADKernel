@@ -19,9 +19,9 @@ use super::curve::{GeomCurve, GeomCurveD1, GeomCurveD2, GeomCurveD3};
 use super::errors;
 use super::geometry::GeomGeometry;
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
@@ -38,7 +38,7 @@ struct CircleState {
 /// A circle; `Handle::new(GeomCircle::new(frame, 2.0)?)`.
 pub struct GeomCircle {
     parent: StandardTransient,
-    state: GeometryCell<CircleState>,
+    state: SharedState<CircleState>,
 }
 impl_transient!(
     GeomCircle,
@@ -66,7 +66,7 @@ impl GeomCircle {
     fn stored(state: CircleState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Circle from a gp circle (`Geom_Circle(gp_Circ)`); `GeomCircle::from_circ(c)`.

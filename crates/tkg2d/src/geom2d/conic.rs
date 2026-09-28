@@ -14,9 +14,9 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_Conic.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_Conic`: circles, ellipses, hyperbolas and parabolas placed by a gp_Ax22d.
-use super::cell::{PROTECTED, ProtectedAccess};
 use super::curve::{Geom2dCurve, dump_curve};
 use super::geometry::{dump_base, dump_class_name, dump_field};
+use super::protected::{PROTECTED, ProtectedAccess};
 use rustycad_tkernel::impl_transient_interface;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::dump::DumpStream;
@@ -102,14 +102,14 @@ macro_rules! impl_conic_position {
         }
         fn change_position(
             &self,
-            _access: $crate::geom2d::cell::ProtectedAccess,
+            _access: $crate::geom2d::protected::ProtectedAccess,
             change: &mut dyn FnMut(&mut rustycad_tkmath::gp::Axis22d),
         ) {
             change(&mut self.state.write().pos);
         }
         fn try_change_position(
             &self,
-            _access: $crate::geom2d::cell::ProtectedAccess,
+            _access: $crate::geom2d::protected::ProtectedAccess,
             change: &mut dyn FnMut(
                 &mut rustycad_tkmath::gp::Axis22d,
             ) -> Result<(), rustycad_tkernel::standard::Failure>,

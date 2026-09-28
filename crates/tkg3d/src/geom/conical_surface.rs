@@ -31,9 +31,9 @@ use super::surface::{
 };
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::elslib;
 use rustycad_tkmath::geom_abs::Shape;
@@ -53,7 +53,7 @@ struct ConeState {
 /// A cone; `Handle::new(GeomConicalSurface::new(frame, 0.3, 2.0)?)`.
 pub struct GeomConicalSurface {
     parent: StandardTransient,
-    state: GeometryCell<ConeState>,
+    state: SharedState<ConeState>,
 }
 impl_transient!(
     GeomConicalSurface,
@@ -86,7 +86,7 @@ impl GeomConicalSurface {
     fn stored(state: ConeState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Cone with reference radius `radius` in the XY plane of `frame` and half-angle

@@ -28,9 +28,9 @@ use super::surface::{
 use super::trimmed_curve::GeomTrimmedCurve;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name, dump_field, dump_flag};
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{GeneralTransform2, Point3, Transform3, Vector3};
@@ -41,7 +41,7 @@ use trim::{DirectionTrim, TrimState};
 /// `Handle::new(GeomRectangularTrimmedSurface::new(&s, 0.0, 1.0, 0.0, 1.0, true, true)?)`.
 pub struct GeomRectangularTrimmedSurface {
     parent: StandardTransient,
-    state: GeometryCell<TrimState>,
+    state: SharedState<TrimState>,
 }
 impl_transient!(
     GeomRectangularTrimmedSurface,
@@ -94,7 +94,7 @@ impl GeomRectangularTrimmedSurface {
     fn stored(state: TrimState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Trim a copy of `surface` to `[u1, u2] x [v1, v2]`; the senses reverse the

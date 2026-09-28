@@ -30,9 +30,9 @@ use crate::geom_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient, real};
 use rustycad_tkg2d::geom2d::arrays::{at, one_based, put};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::gp::{Point3, Vector3, resolution};
 use state::{BSplineState, GivenWeights, check_curve_data};
@@ -40,7 +40,7 @@ use state::{BSplineState, GivenWeights, check_curve_data};
 /// A B-spline curve; `Handle::new(GeomBSplineCurve::new(&poles, &knots, &mults, 3, false)?)`.
 pub struct GeomBSplineCurve {
     parent: StandardTransient,
-    state: GeometryCell<BSplineState>,
+    state: SharedState<BSplineState>,
 }
 impl_transient!(
     GeomBSplineCurve,
@@ -73,7 +73,7 @@ impl GeomBSplineCurve {
     fn from_state(state: BSplineState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Non-rational curve (`Geom_BSplineCurve(Poles, Knots, Multiplicities, Degree, Periodic)`);

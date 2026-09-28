@@ -1,14 +1,12 @@
 //! Supplemental regressions for the Poly polygons, shared parameter arrays, text I/O and
 //! the static Poly geometry functions.
 use rustycad_tkernel::{
-    ncollection::{Array1, List},
+    ncollection::{Array1, HArray1OfReal, List},
     standard::Handle,
 };
 use rustycad_tkmath::{
     gp::{Axis1, Direction3, Point2, Point3, Xy, Xyz},
-    poly::{
-        self, HArray1OfReal, Polygon2D, Polygon3D, PolygonOnTriangulation, Triangle, Triangulation,
-    },
+    poly::{self, Polygon2D, Polygon3D, PolygonOnTriangulation, Triangle, Triangulation},
 };
 use std::io::Cursor;
 /// An owned array holding `values` from `lower`; `table(&[1.0], 1)`.

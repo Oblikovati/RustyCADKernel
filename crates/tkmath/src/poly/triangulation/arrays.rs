@@ -17,7 +17,7 @@
 //! `Map*Array` return one-based copies instead of views that must not outlive the mesh;
 //! `Internal*` and the deprecated `Change*` members lend their array to a closure under the
 //! write lock, because a reference cannot outlive the lock.
-use super::{ArrayOfNodes, ArrayOfUvNodes, Triangle, Triangulation, array_failure};
+use super::{ArrayOfNodes, ArrayOfUvNodes, Triangle, Triangulation};
 use crate::gp::{Point2, Point3};
 use rustycad_tkernel::{
     ncollection::{Array1, Vec3},
@@ -87,9 +87,10 @@ impl Triangulation {
         edit: impl FnOnce(&mut Triangle) -> R,
     ) -> Result<R, Failure> {
         let mut fields = self.fields.write();
-        let triangle = fields.triangles.change_value(index).map_err(|e| {
-            array_failure(&format!("Poly_Triangulation::ChangeTriangle({index})"), e)
-        })?;
+        let triangle = fields
+            .triangles
+            .change_value(index)
+            .map_err(|e| e.into_failure(&format!("Poly_Triangulation::ChangeTriangle({index})")))?;
         Ok(edit(triangle))
     }
     /// `InternalNodes()`; `triangulation.change_internal_nodes(|nodes| nodes.len())`.

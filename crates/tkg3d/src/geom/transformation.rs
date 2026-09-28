@@ -15,9 +15,9 @@
 
 //! `Geom_Transformation`: a shared gp_Trsf.
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::dump_field;
 use rustycad_tkmath::gp::{Axis1, Axis2, Axis3, Point3, Transform3, TransformForm, Vector3};
 use std::io;
@@ -26,7 +26,7 @@ use std::io;
 #[derive(Default)]
 pub struct GeomTransformation {
     parent: StandardTransient,
-    state: GeometryCell<Transform3>,
+    state: SharedState<Transform3>,
 }
 impl_transient!(
     GeomTransformation,
@@ -45,7 +45,7 @@ impl GeomTransformation {
     pub fn new(transform: Transform3) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(transform),
+            state: SharedState::new(transform),
         }
     }
     /// Point symmetry (`SetMirror(gp_Pnt)`); `t.set_mirror_point(p)`.

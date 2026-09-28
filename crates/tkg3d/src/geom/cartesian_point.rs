@@ -17,15 +17,15 @@
 use super::geometry::GeomGeometry;
 use super::point::GeomPoint;
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::{Point3, Transform3};
 
 /// A Cartesian point; `Handle::new(GeomCartesianPoint::new(1.0, 2.0, 3.0))`.
 #[derive(Default)]
 pub struct GeomCartesianPoint {
     parent: StandardTransient,
-    state: GeometryCell<Point3>,
+    state: SharedState<Point3>,
 }
 impl_transient!(
     GeomCartesianPoint,
@@ -45,7 +45,7 @@ impl GeomCartesianPoint {
     pub fn from_pnt(point: Point3) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(point),
+            state: SharedState::new(point),
         }
     }
     /// Point from coordinates (`Geom_CartesianPoint(X, Y, Z)`);

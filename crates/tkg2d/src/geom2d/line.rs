@@ -14,14 +14,13 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_Line.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_Line`: an infinite line parameterized by arc length from its origin.
-use super::cell::GeometryCell;
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3, dump_curve};
 use super::errors;
 use super::geometry::{Geom2dGeometry, dump_base, dump_class_name, dump_field};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::DumpStream;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis2d, Direction2, Line2, Point2, Transform2, Vector2};
@@ -30,7 +29,7 @@ use std::io;
 /// A line through a point along a direction; `Handle::new(Geom2dLine::new(axis))`.
 pub struct Geom2dLine {
     parent: StandardTransient,
-    state: GeometryCell<Axis2d>,
+    state: SharedState<Axis2d>,
 }
 impl_transient!(
     Geom2dLine,
@@ -49,7 +48,7 @@ impl Geom2dLine {
     pub fn new(axis: Axis2d) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(axis),
+            state: SharedState::new(axis),
         }
     }
     /// Line from a gp line (`Geom2d_Line(gp_Lin2d)`); `Geom2dLine::from_lin2d(line)`.

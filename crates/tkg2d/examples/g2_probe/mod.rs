@@ -5,5 +5,6 @@ pub mod bspl;
 pub mod common;
 pub mod curves;
 pub mod eval;
+pub mod grid;
 pub mod print;
 pub mod simple;
