@@ -76,6 +76,17 @@ impl<K: Debug, V, H: HashPolicy<K>> FlatDataMap<K, V, H> {
         let index = self.table.lookup(key)?;
         Some(&mut self.table.slots[index].as_mut()?.value)
     }
+    /// Borrows the stored key and its value, OCCT's optional pair; `map.contained(&42)`.
+    pub fn contained(&self, key: &K) -> Option<(&K, &V)> {
+        let slot = self.table.slots[self.table.lookup(key)?].as_ref()?;
+        Some((&slot.key, &slot.value))
+    }
+    /// Borrows the stored key and its value exclusively; `map.contained_mut(&42)`.
+    pub fn contained_mut(&mut self, key: &K) -> Option<(&K, &mut V)> {
+        let index = self.table.lookup(key)?;
+        let slot = self.table.slots[index].as_mut()?;
+        Some((&slot.key, &mut slot.value))
+    }
     /// Finds a value or reports NoSuchObject; `map.find(&42)?`.
     pub fn find(&self, key: &K) -> Result<&V, Failure> {
         self.seek(key).ok_or_else(|| missing_flat_key(key))
