@@ -15,13 +15,11 @@
 // commercial license or contractual agreement.
 // Rust translation of FoundationClasses/TKMath/Poly/Poly_PolygonOnTriangulation.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-use super::{
-    HArray1OfReal, errors::array_failure, shared_state::SharedState, triangulation::dump_size,
-};
+use super::triangulation::dump_size;
 use rustycad_tkernel::{
-    ncollection::Array1,
+    ncollection::{Array1, HArray1OfReal},
     standard::{
-        Failure, Handle, StandardTransient,
+        Failure, Handle, SharedState, StandardTransient,
         dump::{self, DumpOutput},
     },
 };
@@ -49,7 +47,7 @@ impl PolygonOnTriangulation {
     /// `PolygonOnTriangulation::new(4, true)?`.
     pub fn new(nb_nodes: i32, has_parameters: bool) -> Result<Self, Failure> {
         let nodes = Array1::with_bounds(1, nb_nodes)
-            .map_err(|e| array_failure("Poly_PolygonOnTriangulation", e))?;
+            .map_err(|e| e.into_failure("Poly_PolygonOnTriangulation"))?;
         let parameters = if has_parameters {
             Handle::new(HArray1OfReal::with_bounds(1, nb_nodes)?)
         } else {
@@ -93,11 +91,11 @@ impl PolygonOnTriangulation {
         let fields = self.fields.read();
         let copy = Self::new(fields.nodes.len() as i32, fields.parameters.is_some())?;
         copy.change_node_array(|nodes| nodes.copy_values(&fields.nodes))
-            .map_err(|e| array_failure("Poly_PolygonOnTriangulation::Copy", e))?;
+            .map_err(|e| e.into_failure("Poly_PolygonOnTriangulation::Copy"))?;
         if let Some(source) = fields.parameters.get() {
             let values = source.array1();
             copy.change_parameter_array(|target| target.copy_values(&values))?
-                .map_err(|e| array_failure("Poly_PolygonOnTriangulation::Copy", e))?;
+                .map_err(|e| e.into_failure("Poly_PolygonOnTriangulation::Copy"))?;
         }
         copy.set_deflection(fields.deflection);
         Ok(Handle::new(copy))
@@ -120,7 +118,7 @@ impl PolygonOnTriangulation {
         let node = fields
             .nodes
             .value(index)
-            .map_err(|e| array_failure("Poly_PolygonOnTriangulation::Node", e))?;
+            .map_err(|e| e.into_failure("Poly_PolygonOnTriangulation::Node"))?;
         Ok(*node)
     }
     /// Sets the node index at a table index; `polygon.set_node(1, 7)?`.
@@ -129,7 +127,7 @@ impl PolygonOnTriangulation {
             .write()
             .nodes
             .set_value(index, node)
-            .map_err(|e| array_failure("Poly_PolygonOnTriangulation::SetNode", e))
+            .map_err(|e| e.into_failure("Poly_PolygonOnTriangulation::SetNode"))
     }
     /// Lends the node table, as `ChangeNodeArray()` and deprecated `ChangeNodes()`;
     /// `polygon.change_node_array(|nodes| nodes.len())`.

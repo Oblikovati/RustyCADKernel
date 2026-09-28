@@ -15,8 +15,8 @@
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 use super::{
-    ArrayOfNodes, ArrayOfUvNodes, Triangle, Triangulation, TriangulationFields, array_failure,
-    in_member, node_count,
+    ArrayOfNodes, ArrayOfUvNodes, Triangle, Triangulation, TriangulationFields, in_member,
+    node_count,
 };
 use rustycad_tkernel::{
     ncollection::{Array1, Vec3},
@@ -48,7 +48,7 @@ impl Triangulation {
             .write()
             .triangles
             .resize_bounds(1, nb_triangles, copy)
-            .map_err(|e| array_failure("Poly_Triangulation::ResizeTriangles", e))
+            .map_err(|e| e.into_failure("Poly_Triangulation::ResizeTriangles"))
     }
     /// Allocates UV nodes when absent or of another size; zero nodes raise
     /// `Standard_RangeError` natively; `triangulation.add_uv_nodes()?`.
@@ -77,7 +77,7 @@ impl Triangulation {
             let triangle = *fields
                 .triangles
                 .value(index)
-                .map_err(|e| array_failure("ComputeNormals", e))?;
+                .map_err(|e| e.into_failure("ComputeNormals"))?;
             fields.accumulate_normal(triangle)?;
         }
         for normal in fields.normals.iter_mut() {
@@ -123,7 +123,7 @@ impl TriangulationFields {
         if !self.normals.is_empty() {
             self.normals
                 .resize_bounds(0, nb_nodes.saturating_sub(1), copy)
-                .map_err(|e| array_failure(MEMBER, e))?;
+                .map_err(|e| e.into_failure(MEMBER))?;
         }
         Ok(())
     }
@@ -140,7 +140,7 @@ impl TriangulationFields {
             let upper = self.nodes.len() as i32 - 1;
             self.normals
                 .resize_bounds(0, upper, false)
-                .map_err(|e| array_failure("Poly_Triangulation::AddNormals", e))?;
+                .map_err(|e| e.into_failure("Poly_Triangulation::AddNormals"))?;
         }
         Ok(())
     }
@@ -159,7 +159,7 @@ impl TriangulationFields {
             let slot = self
                 .normals
                 .change_value(node.saturating_sub(1))
-                .map_err(|e| array_failure("Poly_Triangulation::ComputeNormals", e))?;
+                .map_err(|e| e.into_failure("Poly_Triangulation::ComputeNormals"))?;
             *slot += narrowed;
         }
         Ok(())

@@ -1507,14 +1507,12 @@ triangle-ring classes, Poly_MergeNodesTool and Poly_MakeLoops (2D and 3D); TopLo
 TopLoc_ItemLocation, TopLoc_SListOfItemLocation and its node, the rest of
 TopLoc_Location (Divided, Predivided, Powered, HashCode, dumps) and the map aliases.
 
-Shared mutation follows docs/geom-design.md section 3 (written for Geom2d on a parallel
-branch; not yet on this base): each transient Poly class keeps its fields in one
-crate-private `poly::shared_state::SharedState` (an `RwLock` that ignores poisoning),
-every member takes `&self`, and a change through one `Handle` is seen through all.
-Getters that return `const&` natively return copies; `Internal*`/`Change*` lend the
-array to a closure under the write lock. `SharedState` and the local `HArray1OfReal`
-(the shared `NCollection_HArray1<double>` of the polygons) should move to TKernel next
-to the Geom2d `GeometryCell` when the branches meet. Poly_CoherentTriangulation,
+Shared mutation follows docs/geom-design.md section 3: each transient Poly class keeps its
+fields in one TKernel `standard::SharedState` (an `RwLock` that ignores poisoning, shared
+with the Geom2d classes), every member takes `&self`, and a change through one `Handle` is
+seen through all. Getters that return `const&` natively return copies; `Internal*`/`Change*`
+lend the array to a closure under the write lock. The polygons share their parameters as a
+TKernel `ncollection::HArray1OfReal` (`NCollection_HArray1<double>`). Poly_CoherentTriangulation,
 Poly_Connect, Poly_MergeNodesTool and Poly_MakeLoops are algorithm objects with `&mut`
 members. TKernel gains `standard::hash_bytes`, a public `next_map_prime`, and a
 `PackedCursor` that reads a packed map live, as the native iterator does while
