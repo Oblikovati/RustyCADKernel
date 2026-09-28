@@ -565,7 +565,90 @@ Resource_ConvertUnicode gain their C-linkage functions.
 
 ### Standard handles, transients, type descriptors, failures and TColStd handles
 
-Pending.
+Standard_Handle, Standard_Transient, Standard_Type, Standard_Persistent, Standard_Failure,
+Standard_OutOfMemory, Standard_ErrorHandler, Standard_Assert, `Standard::StackTrace` and
+TColStd_HPackedMapOfInteger are ported (109 rows: 101 implemented, 8 excluded destructors,
+moves and RTTI macros). The `standard_runtime` probe compares 488 requests with OCCT.
+
+**Type registry.** `RuntimeType` is `Standard_Type`: `RuntimeType::register` keeps one
+descriptor per class in a process-wide registry, returns the first descriptor unchanged
+on a second registration, and deep-copies the name up to its NUL. `impl_transient!`
+registers each class with `size_of` and its parent, and the descriptors are themselves
+transients of type `Standard_Type`. `is_subtype` keeps the native early exit: the walk
+stops at the first ancestor smaller than the base. `Print`/`operator<<` write
+`0x<address> : <name>`. Deviations: the registry is keyed by the Rust `TypeId`, and
+`system_name()` is `std::any::type_name` (C++ keys by and reports the mangled `typeid`
+name); `size()` is the Rust size. The probe masks the address and does not compare the
+size or the system name. Descriptors are never unregistered.
+
+**Transients and handles.** `Transient` gains `is_instance`/`is_kind` by descriptor and by
+name (a C string, so a name ends at its NUL); `this()` raises `Standard_ProgramError` with
+OCCT's message for an object with count 0. The `handle` members map as follows:
+`Default` (null), `Clone` (copy), `clone_from` (assignment, a no-op when both share the
+object, as `Assign`), `Drop` (release; the last release drops the object, the Rust form of
+`Delete()`), `Deref` (`->`/`*`; a null dereference panics where C++ is undefined),
+`PartialEq` (`==`/`!=` against handles and raw pointers), `PartialOrd`/`Ord` (`<`, by
+address, null first), `Hash` and `hash_code` (`std::hash`, the address). All `DownCast`
+overloads, including the deprecated same- or unrelated-type ones, are one runtime check
+(`Handle::down_cast`, `occ::down_cast`); the compile-time upcast constructors and
+assignments are `cast` (one more reference) and `into_cast` (a move, no count change).
+A raw pointer to an owned object is a `HandleView`: `Handle::from_view` is `handle(const
+T*)`, `operator=(const T*)` and `DownCast(const T2*)`; Rust cannot adopt an unowned
+pointer. `reset(new U)` is `reset(value)`. The C++ move assignment swaps the two handles;
+Rust moves, and `std::mem::swap` is the counterpart when the source is kept (the probe
+compares that swap). The `occ::` helpers take `Option<&dyn Transient>` for a raw pointer.
+`StandardPersistent::type_num` returns an `&AtomicI32` for the C++ `int&`, so a shared
+handle can write it. TColStd_HPackedMapOfInteger wraps the NCollection `PackedMap<i32>` in
+a lock (`map()` / `change_map()` guards) so edits through one handle reach every holder; a
+bucket count below 1 means 1.
+
+**Failures.** `Failure::what()` returns bytes: the message, or the own buffer of
+Standard_OutOfMemory. Copies share the message and stack strings (`Arc`), as the
+reference-counted `StringRef`. The message constructors (`Failure::new`,
+`Failure::with_message` and every exception constructor) capture a stack trace when the
+process-wide `default_stack_trace_length()` is positive, into a buffer of
+`clamp(length*200, 2048, 65536)` bytes (saturating where C++ `int` would overflow); the
+`(message, stack)` constructor `with_type` never captures. `exceptions::out_of_memory`
+keeps its message in a 1024-byte buffer cut to 1023 bytes (possibly inside a UTF-8
+sequence) and at a NUL; the base message stays empty, so `Display` (`operator<<`) prints
+only `Standard_OutOfMemory` plus any stack trace. `set_message_string` replaces the buffer
+and refuses, with Standard_TypeMismatch, a failure of another class.
+
+**Stack traces.** `standard::stack_trace` ports the glibc branch of `Standard::StackTrace`
+with the same `backtrace()`/`backtrace_symbols()` calls and the same buffer arithmetic:
+`"\n==Backtrace=="`, one `binary(symbol+0xoffset) [0xaddress]` line per frame that fits,
+and `"\n============="` when room remains. The frames are Rust frames, so the probe compares
+only the argument checks and traces where no frame or every frame fits; the `theContext`
+argument, ignored on Linux, has no parameter. Deviations: a buffer already longer than its
+size (a C++ overflow) and a skip count beyond the stack depth (a native SIGSEGV, since C++
+passes a negative count to `backtrace_symbols`) return false; platforms without glibc's
+`backtrace` return false (C++ implements Windows with DbgHelp).
+
+**Error handler.** The prebuilt kernel is built with `OCC_CONVERT_SIGNALS`, so the Linux
+behavior is ported (the probe defines the macro too). Handlers form a thread-local stack of
+frames: `ErrorHandler::new` links, `destroy`/`Drop` unlink every handler above, pop, and run
+the registered callbacks newest first. Destroying a handler that is no longer linked
+unlinks the whole stack, and a callback left registered stays bound to its destroyed
+handler, so `register_callback` is then a no-op: both are native quirks the probe
+compares. There is no `longjmp`: `ErrorHandler::abort` stores the failure in the innermost
+handler and returns it as `Err`, and `?` carries it to `ErrorHandler::catch_signals`, the
+`OCC_CATCH_SIGNALS` block (the `Label()` row), which raises the stored failure whatever
+the body returned, as the jump always lands. `abort` accepts only the 23 classes of the C++
+`SignalException` variant (others are Standard_TypeMismatch instead of a compile error).
+`abort` without a handler and `raise` without a failure print OCCT's `*** Abort ***` text
+to stderr and exit with status 1, as C++. A callback's `DestroyCallback()` override is the
+closure given to `ErrorHandlerCallback::new`.
+
+**Asserts.** The reference kernel is a release build, where `Standard_ASSERT` only runs its
+action. `standard_assert_report` writes the POSIX debug text of `Standard_ASSERT_REPORT_` to
+a given stream and returns true; `standard_assert_raise` builds the Standard_ASSERT_RAISE
+`Standard_ProgramError`; `StandardStaticAssert::<true>::assert_ok` exists only for a true
+constant.
+
+The probe excludes C++ undefined behavior and run-dependent values: descriptor sizes,
+system names and addresses, handle ordering and hashes, stack traces whose frames only
+partly fit, prefixes that overflow the trace buffer, large stack lengths, and the
+process-exit paths of `Raise` and `Abort` (covered by Rust tests in a child process).
 
 ### Standard memory managers, synchronization, locale, buffered readers, dump and Plugin
 
