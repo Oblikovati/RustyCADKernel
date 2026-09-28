@@ -112,6 +112,11 @@ class HeaderParsingTests(unittest.TestCase):
         self.assertNotIn("nodiscard", cleaned)
         self.assertNotIn("{", cleaned)
 
+    def test_multi_literal_deprecation_messages_are_dropped(self):
+        # NCollection_Map splits its deprecation message over two adjacent literals.
+        cleaned = clean_source('Standard_DEPRECATED("Use methods from "\n  "MapAlgo.") bool IsEqual();')
+        self.assertEqual(cleaned.strip(), "bool IsEqual();")
+
     def test_brace_initializers_do_not_end_statements(self):
         heads = [head.strip() for head, _ in split_statements("A() : m{{1}, {2}} {} int b;")]
         self.assertEqual(heads, ["A() : m{{1}, {2}}", "int b"])
