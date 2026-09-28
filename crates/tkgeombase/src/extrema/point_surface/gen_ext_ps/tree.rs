@@ -70,7 +70,11 @@ impl TreeSelector<i32, TreeSphere> for SphereSelector<'_> {
         let sphere: BoundingSphere = self.spheres[*object as usize];
         let cur_dist: f64 = sphere.distance(self.xyz);
         let sol_dist: f64 = self.sol.distance(self.xyz);
-        let better: bool = if self.nearest { cur_dist < sol_dist } else { cur_dist > sol_dist };
+        let better: bool = if self.nearest {
+            cur_dist < sol_dist
+        } else {
+            cur_dist > sol_dist
+        };
         if !better {
             return false;
         }
@@ -88,8 +92,20 @@ impl TreeSelector<i32, TreeSphere> for SphereSelector<'_> {
 
 // `LengthOfIso`: the length of the polyline of `nb_pnts` points of the U (`is_u`)
 // or V iso at `par`, from `par1` to `par2`.
-fn length_of_iso(surface: &dyn Adaptor3dSurface, is_u: bool, (par1, par2): (f64, f64), nb_pnts: i32, par: f64) -> Result<f64, Failure> {
-    let value = |t: f64| if is_u { surface.value(par, t) } else { surface.value(t, par) };
+fn length_of_iso(
+    surface: &dyn Adaptor3dSurface,
+    is_u: bool,
+    (par1, par2): (f64, f64),
+    nb_pnts: i32,
+    par: f64,
+) -> Result<f64, Failure> {
+    let value = |t: f64| {
+        if is_u {
+            surface.value(par, t)
+        } else {
+            surface.value(t, par)
+        }
+    };
     let d_par: f64 = (par2 - par1) / f64::from(nb_pnts - 1);
     let mut len: f64 = 0.;
     let mut p1: Point3 = value(par1)?;
@@ -104,19 +120,34 @@ fn length_of_iso(surface: &dyn Adaptor3dSurface, is_u: bool, (par1, par2): (f64,
 }
 
 // The iso length at `par`, or at `inner` when it is not above 1e-3.
-fn iso_length(surface: &dyn Adaptor3dSurface, is_u: bool, range: (f64, f64), nbp: i32, (par, inner): (f64, f64)) -> Result<f64, Failure> {
+fn iso_length(
+    surface: &dyn Adaptor3dSurface,
+    is_u: bool,
+    range: (f64, f64),
+    nbp: i32,
+    (par, inner): (f64, f64),
+) -> Result<f64, Failure> {
     let min_len: f64 = 1.0e-3;
     let len: f64 = length_of_iso(surface, is_u, range, nbp, par)?;
     #[allow(clippy::neg_cmp_op_on_partial_ord)]
     if !(len <= min_len) {
         return Ok(len);
     }
-    Ok(std_max(length_of_iso(surface, is_u, range, nbp, inner)?, len))
+    Ok(std_max(
+        length_of_iso(surface, is_u, range, nbp, inner)?,
+        len,
+    ))
 }
 
 // `CorrectNbSamples`: multiplies the V samples by the logarithm of the ratio of
 // the steps when it is above 10 or below 0.1 (natively the U samples never change).
-fn correct_nb_samples(surface: &dyn Adaptor3dSurface, (u1, u2): (f64, f64), nb_u: i32, (v1, v2): (f64, f64), nb_v: &mut i32) -> Result<(), Failure> {
+fn correct_nb_samples(
+    surface: &dyn Adaptor3dSurface,
+    (u1, u2): (f64, f64),
+    nb_u: i32,
+    (v1, v2): (f64, f64),
+    nb_v: &mut i32,
+) -> Result<(), Failure> {
     let nbp: i32 = 23.min(*nb_v);
     let len_u1 = iso_length(surface, true, (v1, v2), nbp, (u1, 0.7 * u1 + 0.3 * u2))?;
     let len_u2 = iso_length(surface, true, (v1, v2), nbp, (u2, 0.3 * u1 + 0.7 * u2))?;
@@ -160,11 +191,17 @@ impl GenExtPS<'_> {
                 self.vsample = v_value.min(300);
             }
         }
-        correct_nb_samples(surface, (self.umin, self.usup), self.usample, (self.vmin, self.vsup), &mut self.vsample)?;
+        correct_nb_samples(
+            surface,
+            (self.umin, self.usup),
+            self.usample,
+            (self.vmin, self.vsup),
+            &mut self.vsample,
+        )?;
         let u_params: Vec<f64> = uniform_params(self.umin, self.usup, self.usample);
         let v_params: Vec<f64> = uniform_params(self.vmin, self.vsup, self.vsample);
-        let grid: Array2<'static, Point3> =
-            GeomGridEvalSurface::from_adaptor(surface)?.evaluate_grid(&param_array(&u_params)?, &param_array(&v_params)?)?;
+        let grid: Array2<'static, Point3> = GeomGridEvalSurface::from_adaptor(surface)?
+            .evaluate_grid(&param_array(&u_params)?, &param_array(&v_params)?)?;
         (self.u_params, self.v_params) = (Some(u_params), Some(v_params));
         self.fill_tree(&grid)
     }
@@ -173,13 +210,16 @@ impl GenExtPS<'_> {
     // and in the tree by UBTreeFiller.
     fn fill_tree(&mut self, grid: &Array2<'static, Point3>) -> Result<(), Failure> {
         let mut tree: UBTree<i32, TreeSphere> = UBTree::default();
-        self.sphere_array = vec![BoundingSphere::default(); (self.usample * self.vsample + 1) as usize];
+        self.sphere_array =
+            vec![BoundingSphere::default(); (self.usample * self.vsample + 1) as usize];
         {
             let mut filler = UBTreeFiller::new(&mut tree, None, true);
             let mut i: i32 = 0;
             for no_u in 1..=self.usample {
                 for no_v in 1..=self.vsample {
-                    let node: Point3 = *grid.value(no_u, no_v).map_err(|error| array_failure(error, "NCollection_Array2::Value"))?;
+                    let node: Point3 = *grid
+                        .value(no_u, no_v)
+                        .map_err(|error| array_failure(error, "NCollection_Array2::Value"))?;
                     let sphere = BoundingSphere::new(node.xyz(), 0., no_u, no_v);
                     filler.add(i, TreeSphere(sphere));
                     self.sphere_array[i as usize] = sphere;
@@ -193,7 +233,11 @@ impl GenExtPS<'_> {
     }
 
     /// The search from the node nearest to (`nearest`) or farthest from `point`.
-    pub(super) fn find_tree_extremum(&mut self, point: Point3, nearest: bool) -> Result<(), Failure> {
+    pub(super) fn find_tree_extremum(
+        &mut self,
+        point: Point3,
+        nearest: bool,
+    ) -> Result<(), Failure> {
         let sol: BoundingSphere = self.sphere_array[0];
         let sphere: BoundingSphere = {
             let mut selector = SphereSelector {
@@ -223,9 +267,11 @@ fn param_value(params: Option<&[f64]>, index: i32) -> Result<f64, Failure> {
     if index < 1 || index as usize > params.len() {
         return Err(failure(
             "Standard_OutOfRange",
-            &format!("NCollection_Array1::Value - index {index} is outside [1, {}]", params.len()),
+            &format!(
+                "NCollection_Array1::Value - index {index} is outside [1, {}]",
+                params.len()
+            ),
         ));
     }
     Ok(params[(index - 1) as usize])
 }
-

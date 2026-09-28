@@ -12,7 +12,8 @@
 // commercial license or contractual agreement.
 
 //! Direct translation of Extrema_ExtPC_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-#![allow(non_snake_case, dead_code)]
+// 1725.9708621929999 is the upstream literal.
+#![allow(non_snake_case, dead_code, clippy::excessive_precision)]
 mod common;
 #[allow(unused_imports)]
 use common::*;

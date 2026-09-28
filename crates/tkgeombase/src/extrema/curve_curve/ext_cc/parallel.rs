@@ -171,7 +171,7 @@ impl ExtCC<'_> {
         } else {
             POnCurv::new(self.sup[0], self.p1l)
         };
-        let second = if index % 2 == 0 {
+        let second = if index.is_multiple_of(2) {
             POnCurv::new(self.inf[1], self.p2f)
         } else {
             POnCurv::new(self.sup[1], self.p2l)

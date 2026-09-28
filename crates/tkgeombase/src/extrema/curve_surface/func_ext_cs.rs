@@ -51,7 +51,10 @@ impl<'a> FuncExtCS<'a> {
         Self::default()
     }
     /// `Extrema_FuncExtCS(C, S)`; `FuncExtCS::with_curve_surface(&curve, &surface)`.
-    pub fn with_curve_surface(curve: &'a dyn Adaptor3dCurve, surface: &'a dyn Adaptor3dSurface) -> Self {
+    pub fn with_curve_surface(
+        curve: &'a dyn Adaptor3dCurve,
+        surface: &'a dyn Adaptor3dSurface,
+    ) -> Self {
         let mut function: Self = Self::new();
         function.initialize(curve, surface);
         function
@@ -74,7 +77,10 @@ impl<'a> FuncExtCS<'a> {
         3
     }
     // The curve and the surface, Standard_TypeMismatch before Initialize.
-    fn geometry(&self, member: &str) -> Result<(&'a dyn Adaptor3dCurve, &'a dyn Adaptor3dSurface), Failure> {
+    fn geometry(
+        &self,
+        member: &str,
+    ) -> Result<(&'a dyn Adaptor3dCurve, &'a dyn Adaptor3dSurface), Failure> {
         match (self.c, self.s) {
             (Some(curve), Some(surface)) => Ok((curve, surface)),
             _ => Err(type_mismatch(&format!("Extrema_FuncExtCS::{member}"))),
@@ -100,7 +106,12 @@ impl<'a> FuncExtCS<'a> {
         self.values(uv, &mut f, df)
     }
     /// `Values(UV, F, DF)`; `function.values(&tuv, &mut f, &mut df)?`.
-    pub fn values(&mut self, uv: &Vector<'_>, f: &mut Vector<'_>, df: &mut Matrix<'_>) -> Result<bool, Failure> {
+    pub fn values(
+        &mut self,
+        uv: &Vector<'_>,
+        f: &mut Vector<'_>,
+        df: &mut Matrix<'_>,
+    ) -> Result<bool, Failure> {
         let (curve, surface) = self.geometry("Values()")?;
         (self.t, self.u, self.v) = (uv[1], uv[2], uv[3]);
         let (p1, dtc, dttc) = curve.d2(self.t)?;
@@ -203,7 +214,12 @@ impl FunctionSetWithDerivatives for FuncExtCS<'_> {
         let result = FuncExtCS::derivatives(self, point, jacobian);
         self.failure.keep(result).unwrap_or(false)
     }
-    fn values(&mut self, point: &Vector<'_>, residual: &mut Vector<'_>, jacobian: &mut Matrix<'_>) -> bool {
+    fn values(
+        &mut self,
+        point: &Vector<'_>,
+        residual: &mut Vector<'_>,
+        jacobian: &mut Matrix<'_>,
+    ) -> bool {
         let result = FuncExtCS::values(self, point, residual, jacobian);
         self.failure.keep(result).unwrap_or(false)
     }

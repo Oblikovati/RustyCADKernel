@@ -82,7 +82,11 @@ fn within([uinf, usup, vinf, vsup]: [f64; 4], (u, v): (f64, f64), tol: f64) -> b
 }
 
 // The parameters brought into the periods from the lower bounds.
-fn in_periods(surface: &dyn Adaptor3dSurface, bounds: [f64; 4], (u, v): (f64, f64)) -> Result<(f64, f64), Failure> {
+fn in_periods(
+    surface: &dyn Adaptor3dSurface,
+    bounds: [f64; 4],
+    (u, v): (f64, f64),
+) -> Result<(f64, f64), Failure> {
     let (mut u, mut v) = (u, v);
     if surface.is_u_periodic()? {
         u = elclib::in_period(u, bounds[0], bounds[0] + surface.u_period()?);
@@ -100,7 +104,12 @@ impl<'a> ExtSS<'a> {
     }
     /// `Extrema_ExtSS(S1, S2, TolS1, TolS2)`: on the surface bounds;
     /// `ExtSS::with_surfaces(&s1, &s2, 1e-9, 1e-9)?`.
-    pub fn with_surfaces(s1: &dyn Adaptor3dSurface, s2: &'a dyn Adaptor3dSurface, tol_s1: f64, tol_s2: f64) -> Result<Self, Failure> {
+    pub fn with_surfaces(
+        s1: &dyn Adaptor3dSurface,
+        s2: &'a dyn Adaptor3dSurface,
+        tol_s1: f64,
+        tol_s2: f64,
+    ) -> Result<Self, Failure> {
         let mut extrema: Self = Self::new();
         extrema.initialize(s2, natural_bounds(s2)?, tol_s2)?;
         extrema.perform(s1, natural_bounds(s1)?, tol_s1)?;
@@ -123,7 +132,12 @@ impl<'a> ExtSS<'a> {
     }
     /// `Initialize(S2, Uinf2, Usup2, Vinf2, Vsup2, TolS2)`;
     /// `extrema.initialize(&s2, [0., 1., 0., 1.], 1e-9)?`.
-    pub fn initialize(&mut self, s2: &'a dyn Adaptor3dSurface, bounds2: [f64; 4], tol_s2: f64) -> Result<(), Failure> {
+    pub fn initialize(
+        &mut self,
+        s2: &'a dyn Adaptor3dSurface,
+        bounds2: [f64; 4],
+        tol_s2: f64,
+    ) -> Result<(), Failure> {
         self.s2 = Some(s2);
         self.is_par = false;
         self.bounds2 = bounds2;
@@ -134,8 +148,15 @@ impl<'a> ExtSS<'a> {
     /// `Perform(S1, Uinf1, Usup1, Vinf1, Vsup1, TolS1)`: IsParallel keeps the value of
     /// an earlier Perform in the generic case, as natively;
     /// `extrema.perform(&s1, [0., 1., 0., 1.], 1e-9)?`.
-    pub fn perform(&mut self, s1: &dyn Adaptor3dSurface, bounds1: [f64; 4], tol_s1: f64) -> Result<(), Failure> {
-        let s2 = self.s2.ok_or_else(|| null_object("Extrema_ExtSS::Perform()"))?;
+    pub fn perform(
+        &mut self,
+        s1: &dyn Adaptor3dSurface,
+        bounds1: [f64; 4],
+        tol_s1: f64,
+    ) -> Result<(), Failure> {
+        let s2 = self
+            .s2
+            .ok_or_else(|| null_object("Extrema_ExtSS::Perform()"))?;
         self.bounds1 = bounds1;
         self.tol_s1 = tol_s1;
         self.pon_s1.clear();
@@ -149,7 +170,11 @@ impl<'a> ExtSS<'a> {
     }
 
     // The generic search on the whole surfaces.
-    fn perform_generic(&mut self, s1: &dyn Adaptor3dSurface, s2: &dyn Adaptor3dSurface) -> Result<(), Failure> {
+    fn perform_generic(
+        &mut self,
+        s1: &dyn Adaptor3dSurface,
+        s2: &dyn Adaptor3dSurface,
+    ) -> Result<(), Failure> {
         let ext = GenExtSS::with_surfaces(s1, s2, NB_UV, NB_UV, self.tol_s1, self.tol_s2)?;
         self.done = ext.is_done();
         if !self.done {
@@ -181,7 +206,9 @@ impl<'a> ExtSS<'a> {
         }
         for i in 1..=self.ext_el_ss.nb_ext()? {
             let (ps1, ps2) = self.ext_el_ss.points(i)?;
-            if within(self.bounds1, ps1.parameter(), self.tol_s1) && within(self.bounds2, ps2.parameter(), self.tol_s2) {
+            if within(self.bounds1, ps1.parameter(), self.tol_s1)
+                && within(self.bounds2, ps2.parameter(), self.tol_s2)
+            {
                 self.sq_dist.push(self.ext_el_ss.square_distance(i)?);
                 self.pon_s1.push(ps1);
                 self.pon_s2.push(ps2);

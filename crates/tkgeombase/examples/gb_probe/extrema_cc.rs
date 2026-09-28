@@ -1,5 +1,6 @@
 //! The Extrema curve-curve requests; the counterpart of
 //! tools/oracle/tkgeombase_probe_extrema_cc.cxx (same encoding and token order).
+#![allow(clippy::unit_arg, clippy::type_complexity)]
 use super::common::{Reader, attempt, end, flag, int, real};
 use super::extrema_pc::{Space, Space2, Space3};
 use rustycad_tkernel::standard::Failure;

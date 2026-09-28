@@ -23,9 +23,9 @@
 use super::{ExtPExtS, NB_EXT_MAX, get_value, is_original_pnt, perform_ext_p_el_c, project_pnt};
 use crate::extrema::ExtPElC;
 use crate::extrema::pon::POnSurf;
-use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{Axis2, Direction3, Point3, Vector3};
 use rustycad_tkmath::math::{FunctionSetRoot, Vector};
@@ -67,7 +67,10 @@ impl ExtPExtS {
             uv_inf: pair(self.uinf, self.vinf)?,
             uv_sup: pair(self.usup, self.vsup)?,
         };
-        let is_simple_case: bool = self.direction.is_parallel(Vector3::from(self.position.direction()), precision::angular())?;
+        let is_simple_case: bool = self.direction.is_parallel(
+            Vector3::from(self.position.direction()),
+            precision::angular(),
+        )?;
         for i in 1..=an_ext.nb_ext()? {
             if self.treat_curve_extremum(&an_ext, i, &section, is_simple_case)? {
                 break;
@@ -78,12 +81,25 @@ impl ExtPExtS {
     }
 
     // One extremum on the conic; true when the arrays are full.
-    fn treat_curve_extremum(&mut self, an_ext: &ExtPElC, i: i32, section: &Section, is_simple_case: bool) -> Result<bool, Failure> {
+    fn treat_curve_extremum(
+        &mut self,
+        an_ext: &ExtPElC,
+        i: i32,
+        section: &Section,
+        is_simple_case: bool,
+    ) -> Result<bool, Failure> {
         let poc = an_ext.point(i)?;
         let mut u: f64 = poc.parameter();
         // OCC17194 (jgv, 23.12.2008).
         if self.curve()?.is_periodic()? {
-            u = elclib::adjust_periodic(self.uinf, self.uinf + 2. * PI, precision::p_confusion(), u, u).0;
+            u = elclib::adjust_periodic(
+                self.uinf,
+                self.uinf + 2. * PI,
+                precision::p_confusion(),
+                u,
+                u,
+            )
+            .0;
         }
         let e: Point3 = *poc.value();
         let pe: Point3 = project_pnt(&section.ortog, section.dir, e);
@@ -148,6 +164,8 @@ impl ExtPExtS {
     // The additional check of a root of the symmetric start ("FSR sometimes is
     // wrong when starting point is far from solution"): `|F| / dist / |D1|` not above
     // PConfusion in each direction. Evaluating F moves the function's current point.
+    // The negated test keeps the native NaN semantics.
+    #[allow(clippy::neg_cmp_op_on_partial_ord)]
     fn is_valid_root(&mut self, k: i32) -> Result<bool, Failure> {
         let sq_dist: f64 = self.f.square_distance(k)?;
         if !(sq_dist > precision::confusion() * precision::confusion()) {
@@ -181,7 +199,14 @@ impl ExtPExtS {
     // `MakePreciser`: `u` clamped to the range, or moved by steps of a thirtieth of
     // the range while the distance to the projected curve point decreases (a
     // minimum) or increases (a maximum).
-    fn make_preciser(&self, u: &mut f64, point: Point3, is_min: bool, ortog: &Axis2, dir: Direction3) -> Result<(), Failure> {
+    fn make_preciser(
+        &self,
+        u: &mut f64,
+        point: Point3,
+        is_min: bool,
+        ortog: &Axis2,
+        dir: Direction3,
+    ) -> Result<(), Failure> {
         if *u > self.usup {
             *u = self.usup;
             return Ok(());
@@ -191,7 +216,9 @@ impl ExtPExtS {
             return Ok(());
         }
         let curve = self.curve()?;
-        let projected = |t: f64| -> Result<Point3, Failure> { Ok(project_pnt(ortog, dir, get_value(t, curve)?)) };
+        let projected = |t: f64| -> Result<Point3, Failure> {
+            Ok(project_pnt(ortog, dir, get_value(t, curve)?))
+        };
         let mut step: f64 = (self.usup - self.uinf) / 30.;
         let pe: Point3 = projected(*u)?;
         let pprev: Point3 = projected(*u - step)?;

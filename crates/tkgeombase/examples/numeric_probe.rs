@@ -3,8 +3,9 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    app_par_curves as apc, bndlib, extrema_cc, extrema_cs, extrema_el, extrema_pc, extrema_ps, extrema_ss, fem_tool, gc, gce, gcpnts,
-    geom_tools, gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d,
+    app_par_curves as apc, bndlib, extrema_cc, extrema_cs, extrema_el, extrema_pc, extrema_ps,
+    extrema_ss, fem_tool, gc, gce, gcpnts, geom_tools, gprop, hermit, int_ana, int_ana2d, lprop,
+    pc2d, pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.

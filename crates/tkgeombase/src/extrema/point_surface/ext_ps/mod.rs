@@ -30,7 +30,9 @@ use iso::iso_is_deg;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
-use rustycad_tkg3d::geom_adaptor::{GeomAdaptorSurfaceOfLinearExtrusion, GeomAdaptorSurfaceOfRevolution};
+use rustycad_tkg3d::geom_adaptor::{
+    GeomAdaptorSurfaceOfLinearExtrusion, GeomAdaptorSurfaceOfRevolution,
+};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::SurfaceType;
 use rustycad_tkmath::gp::Point3;
@@ -97,7 +99,14 @@ impl<'a> ExtPS<'a> {
     ) -> Result<Self, Failure> {
         let u_range = (surface.first_u_parameter()?, surface.last_u_parameter()?);
         let v_range = (surface.first_v_parameter()?, surface.last_v_parameter()?);
-        Self::with_range(point, surface, u_range, v_range, (tol_u, tol_v), (flag, algo))
+        Self::with_range(
+            point,
+            surface,
+            u_range,
+            v_range,
+            (tol_u, tol_v),
+            (flag, algo),
+        )
     }
     /// `Extrema_ExtPS(P, S, Uinf, Usup, Vinf, Vsup, TolU, TolV, F, A)`;
     /// `ExtPS::with_range(point, &surface, (0., 1.), (0., 1.), (1e-9, 1e-9),
@@ -144,25 +153,43 @@ impl<'a> ExtPS<'a> {
         }
         (self.tolu, self.tolv) = (tol_u, tol_v);
         self.surface_type = surface.get_type()?;
-        let is_b: bool = matches!(self.surface_type, SurfaceType::BSplineSurface | SurfaceType::BezierSurface);
+        let is_b: bool = matches!(
+            self.surface_type,
+            SurfaceType::BSplineSurface | SurfaceType::BezierSurface
+        );
         let (mut nb_u, mut nb_v): (i32, i32) = if is_b { (44, 44) } else { (32, 32) };
         if surface.get_type()? != SurfaceType::Plane {
-            if iso_is_deg(surface, self.uinf, true, 0., 1.0e-9)? || iso_is_deg(surface, self.usup, true, 0., 1.0e-9)? {
+            if iso_is_deg(surface, self.uinf, true, 0., 1.0e-9)?
+                || iso_is_deg(surface, self.usup, true, 0., 1.0e-9)?
+            {
                 nb_u = 300;
             }
-            if iso_is_deg(surface, self.vinf, false, 0., 1.0e-9)? || iso_is_deg(surface, self.vsup, false, 0., 1.0e-9)? {
+            if iso_is_deg(surface, self.vinf, false, 0., 1.0e-9)?
+                || iso_is_deg(surface, self.vsup, false, 0., 1.0e-9)?
+            {
                 nb_v = 300;
             }
         }
-        let sampling = Sampling { nb_u, nb_v, tol_u, tol_v };
-        self.ext_ps.initialize_range(surface, sampling, (self.uinf, self.usup), (self.vinf, self.vsup))?;
+        let sampling = Sampling {
+            nb_u,
+            nb_v,
+            tol_u,
+            tol_v,
+        };
+        self.ext_ps.initialize_range(
+            surface,
+            sampling,
+            (self.uinf, self.usup),
+            (self.vinf, self.vsup),
+        )?;
         self.ext_p_ext_s = None;
         self.ext_p_rev_s = None;
         Ok(())
     }
     // The surface, Standard_NullObject before Initialize.
     fn surface(&self) -> Result<&'a dyn Adaptor3dSurface, Failure> {
-        self.s.ok_or_else(|| null_object("Extrema_ExtPS::Perform()"))
+        self.s
+            .ok_or_else(|| null_object("Extrema_ExtPS::Perform()"))
     }
     /// `Perform(P)`; `extrema.perform(point)?`.
     pub fn perform(&mut self, point: Point3) -> Result<(), Failure> {
@@ -171,11 +198,23 @@ impl<'a> ExtPS<'a> {
         let surface = self.surface()?;
         let conf: f64 = precision::confusion();
         match self.surface_type {
-            SurfaceType::Cylinder => self.ext_p_el_s.perform_cylinder(point, &surface.cylinder()?, conf)?,
-            SurfaceType::Plane => self.ext_p_el_s.perform_plane(point, &surface.plane()?, conf),
-            SurfaceType::Cone => self.ext_p_el_s.perform_cone(point, &surface.cone()?, conf)?,
-            SurfaceType::Sphere => self.ext_p_el_s.perform_sphere(point, &surface.sphere()?, conf)?,
-            SurfaceType::Torus => self.ext_p_el_s.perform_torus(point, &surface.torus()?, conf)?,
+            SurfaceType::Cylinder => {
+                self.ext_p_el_s
+                    .perform_cylinder(point, &surface.cylinder()?, conf)?
+            }
+            SurfaceType::Plane => self
+                .ext_p_el_s
+                .perform_plane(point, &surface.plane()?, conf),
+            SurfaceType::Cone => self
+                .ext_p_el_s
+                .perform_cone(point, &surface.cone()?, conf)?,
+            SurfaceType::Sphere => {
+                self.ext_p_el_s
+                    .perform_sphere(point, &surface.sphere()?, conf)?
+            }
+            SurfaceType::Torus => self
+                .ext_p_el_s
+                .perform_torus(point, &surface.torus()?, conf)?,
             SurfaceType::SurfaceOfExtrusion => return self.perform_extrusion(point, surface),
             SurfaceType::SurfaceOfRevolution => return self.perform_revolution(point, surface),
             _ => return self.perform_general(point),
@@ -183,7 +222,10 @@ impl<'a> ExtPS<'a> {
         self.done = self.ext_p_el_s.is_done();
         if self.done {
             for index in 1..=self.ext_p_el_s.nb_ext()? {
-                let (pon, dist) = (self.ext_p_el_s.point(index)?, self.ext_p_el_s.square_distance(index)?);
+                let (pon, dist) = (
+                    self.ext_p_el_s.point(index)?,
+                    self.ext_p_el_s.square_distance(index)?,
+                );
                 self.treat_solution(&pon, dist)?;
             }
         }
@@ -192,40 +234,74 @@ impl<'a> ExtPS<'a> {
 
     // The extrusion case: Extrema_ExtPExtS on a new adaptor of the basis curve and
     // direction, created at the first Perform after Initialize.
-    fn perform_extrusion(&mut self, point: Point3, surface: &dyn Adaptor3dSurface) -> Result<(), Failure> {
+    fn perform_extrusion(
+        &mut self,
+        point: Point3,
+        surface: &dyn Adaptor3dSurface,
+    ) -> Result<(), Failure> {
         match &mut self.ext_p_ext_s {
             Some(extrema) => extrema.perform(point)?,
             None => {
-                let adaptor = GeomAdaptorSurfaceOfLinearExtrusion::with_curve_and_direction(&surface.basis_curve()?, surface.direction()?);
+                let adaptor = GeomAdaptorSurfaceOfLinearExtrusion::with_curve_and_direction(
+                    &surface.basis_curve()?,
+                    surface.direction()?,
+                );
                 let range = ((self.uinf, self.usup), (self.vinf, self.vsup));
-                let extrema = ExtPExtS::with_range(point, &Handle::new(adaptor), range.0, range.1, (self.tolu, self.tolv))?;
+                let extrema = ExtPExtS::with_range(
+                    point,
+                    &Handle::new(adaptor),
+                    range.0,
+                    range.1,
+                    (self.tolu, self.tolv),
+                )?;
                 self.ext_p_ext_s = Some(extrema);
             }
         }
         let Some(extrema) = self.ext_p_ext_s.take() else {
             return Ok(());
         };
-        let result = self.treat_swept(extrema.is_done(), || extrema.nb_ext(), |i| Ok((extrema.point(i)?, extrema.square_distance(i)?)));
+        let result = self.treat_swept(
+            extrema.is_done(),
+            || extrema.nb_ext(),
+            |i| Ok((extrema.point(i)?, extrema.square_distance(i)?)),
+        );
         self.ext_p_ext_s = Some(extrema);
         result
     }
 
     // The revolution case: Extrema_ExtPRevS on a new adaptor of the basis curve and
     // axis, created at the first Perform after Initialize.
-    fn perform_revolution(&mut self, point: Point3, surface: &dyn Adaptor3dSurface) -> Result<(), Failure> {
+    fn perform_revolution(
+        &mut self,
+        point: Point3,
+        surface: &dyn Adaptor3dSurface,
+    ) -> Result<(), Failure> {
         match &mut self.ext_p_rev_s {
             Some(extrema) => extrema.perform(point)?,
             None => {
-                let adaptor = GeomAdaptorSurfaceOfRevolution::with_curve_and_axis(&surface.basis_curve()?, surface.axe_of_revolution()?)?;
+                let adaptor = GeomAdaptorSurfaceOfRevolution::with_curve_and_axis(
+                    &surface.basis_curve()?,
+                    surface.axe_of_revolution()?,
+                )?;
                 let range = ((self.uinf, self.usup), (self.vinf, self.vsup));
-                let extrema = ExtPRevS::with_range(point, &Handle::new(adaptor), range.0, range.1, (self.tolu, self.tolv))?;
+                let extrema = ExtPRevS::with_range(
+                    point,
+                    &Handle::new(adaptor),
+                    range.0,
+                    range.1,
+                    (self.tolu, self.tolv),
+                )?;
                 self.ext_p_rev_s = Some(extrema);
             }
         }
         let Some(extrema) = self.ext_p_rev_s.take() else {
             return Ok(());
         };
-        let result = self.treat_swept(extrema.is_done(), || extrema.nb_ext(), |i| Ok((extrema.point(i)?, extrema.square_distance(i)?)));
+        let result = self.treat_swept(
+            extrema.is_done(),
+            || extrema.nb_ext(),
+            |i| Ok((extrema.point(i)?, extrema.square_distance(i)?)),
+        );
         self.ext_p_rev_s = Some(extrema);
         result
     }
@@ -238,7 +314,10 @@ impl<'a> ExtPS<'a> {
             return Ok(());
         }
         for index in 1..=self.ext_ps.nb_ext()? {
-            let (pon, dist) = (self.ext_ps.point(index)?, self.ext_ps.square_distance(index)?);
+            let (pon, dist) = (
+                self.ext_ps.point(index)?,
+                self.ext_ps.square_distance(index)?,
+            );
             self.treat_solution(&pon, dist)?;
         }
         Ok(())
@@ -288,7 +367,11 @@ impl<'a> ExtPS<'a> {
                 v += surface.v_period()?;
             }
         }
-        if (self.uinf - u) <= self.tolu && (u - self.usup) <= self.tolu && (self.vinf - v) <= self.tolv && (v - self.vsup) <= self.tolv {
+        if (self.uinf - u) <= self.tolu
+            && (u - self.usup) <= self.tolu
+            && (self.vinf - v) <= self.tolv
+            && (v - self.vsup) <= self.tolv
+        {
             self.points.push(POnSurf::new(u, v, *ps.value()));
             self.sq_dist.push(val);
         }

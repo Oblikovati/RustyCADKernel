@@ -74,7 +74,8 @@ impl GenExtCS<'_> {
         let step_su: f64 = (max_uv[1] - min_uv[1]) / f64::from(u_sample);
         let step_sv: f64 = (max_uv[2] - min_uv[2]) / f64::from(v_sample);
         let surface = self.surface()?;
-        let mut function = GlobOptFuncConicS::with_bounds(surface, (uv_inf[1], uv_sup[1]), (uv_inf[2], uv_sup[2]));
+        let mut function =
+            GlobOptFuncConicS::with_bounds(surface, (uv_inf[1], uv_sup[1]), (uv_inf[2], uv_sup[2]));
         function.load_conic(curve, tuv_inf[1], tuv_sup[1])?;
         let mut su: f64 = min_uv[1];
         for _ in 0..=u_sample {
@@ -98,7 +99,8 @@ impl GenExtCS<'_> {
         function.take_failure()?;
         let mut ct: f64 = function.conic_parameter(&uv)?;
         if curve.is_periodic()?
-            && (ct < tuv_inf[1] - precision::p_confusion() || ct > tuv_sup[1] + precision::p_confusion())
+            && (ct < tuv_inf[1] - precision::p_confusion()
+                || ct > tuv_sup[1] + precision::p_confusion())
         {
             ct = elclib::in_period(ct, tuv_inf[1], tuv_inf[1] + 2. * PI);
         }
@@ -129,19 +131,40 @@ impl GenExtCS<'_> {
         if normal.square_magnitude() < precision::square_confusion() {
             return Ok(());
         }
-        let mut chord = Chord { pc_ps: Vector3::between(p_on_c, d1.point), du: d1.d1u, dv: d1.d1v };
+        let mut chord = Chord {
+            pc_ps: Vector3::between(p_on_c, d1.point),
+            du: d1.d1u,
+            dv: d1.d1v,
+        };
         if !along_surface(chord.pc_ps, normal)? {
             return Ok(());
         }
-        if !neighbours_along(surface, p_on_c, (uv1, uv2), (uv_inf, uv_sup), steps, &mut chord)? {
+        if !neighbours_along(
+            surface,
+            p_on_c,
+            (uv1, uv2),
+            (uv_inf, uv_sup),
+            steps,
+            &mut chord,
+        )? {
             return Ok(());
         }
         self.refine_by_projection(tuv, p_on_c, (sq_dist, dt), &chord)
     }
 
     // The projection of the curve point by Extrema_GenLocateExtPS.
-    fn refine_by_projection(&mut self, tuv: &mut Vector<'_>, p_on_c: Point3, (sq_dist, dt): (f64, Vector3), chord: &Chord) -> Result<(), Failure> {
-        let (f1, f2, f3) = (chord.pc_ps.dot(dt), chord.pc_ps.dot(chord.du), chord.pc_ps.dot(chord.dv));
+    fn refine_by_projection(
+        &mut self,
+        tuv: &mut Vector<'_>,
+        p_on_c: Point3,
+        (sq_dist, dt): (f64, Vector3),
+        chord: &Chord,
+    ) -> Result<(), Failure> {
+        let (f1, f2, f3) = (
+            chord.pc_ps.dot(dt),
+            chord.pc_ps.dot(chord.du),
+            chord.pc_ps.dot(chord.dv),
+        );
         let ff: f64 = f1 * f1 + f2 * f2 + f3 * f3;
         let surface = self.surface()?;
         let mut ext_ps = GenLocateExtPS::new(surface, self.tol2, self.tol2);

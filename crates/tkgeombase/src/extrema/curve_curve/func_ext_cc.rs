@@ -254,6 +254,8 @@ impl<T: ExtremaCurveTool> GFuncExtCC<'_, T> {
         sequence_value("Extrema_GFuncExtCC::SquareDistance()", &self.sq_dist, n)
     }
     /// `Points(N, P1, P2)`, returned as `(P1, P2)`; `function.points(1)?`.
+    // The native output pair (P1, P2) as one value.
+    #[allow(clippy::type_complexity)]
     pub fn points(&self, n: i32) -> Result<(POnCurve<T::Point>, POnCurve<T::Point>), Failure> {
         let member: &str = "Extrema_GFuncExtCC::Points()";
         let first = sequence_value(member, &self.points, 2 * n - 1)?;

@@ -34,7 +34,11 @@ pub(super) struct ParamGrid {
 
 impl ParamGrid {
     /// `Resize(theRowLower, theRowUpper, theColLower, theColUpper, false)`.
-    pub fn resize(&mut self, (row_lower, row_upper): (i32, i32), (col_lower, col_upper): (i32, i32)) -> Result<(), Failure> {
+    pub fn resize(
+        &mut self,
+        (row_lower, row_upper): (i32, i32),
+        (col_lower, col_upper): (i32, i32),
+    ) -> Result<(), Failure> {
         if row_upper < row_lower || col_upper < col_lower {
             return Err(failure(
                 "Standard_RangeError",
@@ -53,7 +57,10 @@ impl ParamGrid {
     }
     // The flat offset of `(row, col)`, Standard_OutOfRange outside the bounds.
     fn offset(&self, row: i32, col: i32) -> Result<usize, Failure> {
-        let (dr, dc) = (i64::from(row) - i64::from(self.lower_row), i64::from(col) - i64::from(self.lower_col));
+        let (dr, dc) = (
+            i64::from(row) - i64::from(self.lower_row),
+            i64::from(col) - i64::from(self.lower_col),
+        );
         if dr < 0 || dc < 0 || dr as usize >= self.rows || dc as usize >= self.cols {
             return Err(failure(
                 "Standard_OutOfRange",

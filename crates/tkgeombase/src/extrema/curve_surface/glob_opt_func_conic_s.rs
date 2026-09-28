@@ -79,7 +79,11 @@ impl<'a> GlobOptFuncConicS<'a> {
     /// `Extrema_GlobOptFuncConicS(S, theUf, theUl, theVf, theVl)`: no conic until
     /// LoadConic (the native members then read an unset pointer);
     /// `GlobOptFuncConicS::with_bounds(&surface, (0., 1.), (0., 1.))`.
-    pub fn with_bounds(surface: &'a dyn Adaptor3dSurface, (uf, ul): (f64, f64), (vf, vl): (f64, f64)) -> Self {
+    pub fn with_bounds(
+        surface: &'a dyn Adaptor3dSurface,
+        (uf, ul): (f64, f64),
+        (vf, vl): (f64, f64),
+    ) -> Self {
         Self {
             s: surface,
             loaded: None,
@@ -99,7 +103,10 @@ impl<'a> GlobOptFuncConicS<'a> {
     }
     /// `Extrema_GlobOptFuncConicS(C, S)`: the surface bounds and the whole conic;
     /// `GlobOptFuncConicS::with_curve(&curve, &surface)?`.
-    pub fn with_curve(curve: &'a dyn Adaptor3dCurve, surface: &'a dyn Adaptor3dSurface) -> Result<Self, Failure> {
+    pub fn with_curve(
+        curve: &'a dyn Adaptor3dCurve,
+        surface: &'a dyn Adaptor3dSurface,
+    ) -> Result<Self, Failure> {
         let mut function: Self = Self::new(surface)?;
         function.load_conic(curve, curve.first_parameter()?, curve.last_parameter()?)?;
         Ok(function)
@@ -107,7 +114,12 @@ impl<'a> GlobOptFuncConicS<'a> {
     /// `LoadConic(C, theTf, theTl)`: the range (brought into `[0, 2 PI]` for a
     /// periodic curve), its end points and the conic;
     /// `function.load_conic(&curve, 0.0, 1.0)?`.
-    pub fn load_conic(&mut self, curve: &'a dyn Adaptor3dCurve, tf: f64, tl: f64) -> Result<(), Failure> {
+    pub fn load_conic(
+        &mut self,
+        curve: &'a dyn Adaptor3dCurve,
+        tf: f64,
+        tl: f64,
+    ) -> Result<(), Failure> {
         let (mut tf, mut tl) = (tf, tl);
         if curve.is_periodic()? {
             let t_max: f64 = 2. * PI + precision::p_confusion();
@@ -125,7 +137,14 @@ impl<'a> GlobOptFuncConicS<'a> {
             CurveType::Parabola => Some(Conic::Parabola(curve.parabola()?)),
             _ => None,
         };
-        self.loaded = Some(LoadedConic { c: curve, conic, cpf, cpl, tf, tl });
+        self.loaded = Some(LoadedConic {
+            c: curve,
+            conic,
+            cpf,
+            cpl,
+            tf,
+            tl,
+        });
         Ok(())
     }
     /// `NbVariables()`: 2; `function.nb_variables()`.
@@ -133,7 +152,9 @@ impl<'a> GlobOptFuncConicS<'a> {
         2
     }
     fn loaded(&self) -> Result<&LoadedConic<'a>, Failure> {
-        self.loaded.as_ref().ok_or_else(|| null_object("Extrema_GlobOptFuncConicS - no conic loaded"))
+        self.loaded
+            .as_ref()
+            .ok_or_else(|| null_object("Extrema_GlobOptFuncConicS - no conic loaded"))
     }
     // The conic parameter of the projection of `ps`, shifted by 2 PI for a closed
     // conic trimmed beyond 2 PI; None for another curve.
@@ -211,4 +232,3 @@ impl MultipleVarFunction for GlobOptFuncConicS<'_> {
         self.failure.keep(result).unwrap_or(false)
     }
 }
-

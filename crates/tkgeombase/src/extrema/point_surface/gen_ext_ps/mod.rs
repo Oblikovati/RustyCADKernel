@@ -154,7 +154,11 @@ impl<'a> GenExtPS<'a> {
     }
     /// `Initialize(S, NbU, NbV, TolU, TolV)`: over the surface bounds;
     /// `extrema.initialize(&surface, sampling)?`.
-    pub fn initialize(&mut self, surface: &'a dyn Adaptor3dSurface, sampling: Sampling) -> Result<(), Failure> {
+    pub fn initialize(
+        &mut self,
+        surface: &'a dyn Adaptor3dSurface,
+        sampling: Sampling,
+    ) -> Result<(), Failure> {
         let u_range = (surface.first_u_parameter()?, surface.last_u_parameter()?);
         let v_range = (surface.first_v_parameter()?, surface.last_v_parameter()?);
         (self.umin, self.usup, self.vmin, self.vsup) = (u_range.0, u_range.1, v_range.0, v_range.1);
@@ -170,7 +174,12 @@ impl<'a> GenExtPS<'a> {
         (umin, usup): (f64, f64),
         (vmin, vsup): (f64, f64),
     ) -> Result<(), Failure> {
-        self.initialize_range_ref(SurfaceRef::Borrowed(surface), sampling, (umin, usup), (vmin, vsup))
+        self.initialize_range_ref(
+            SurfaceRef::Borrowed(surface),
+            sampling,
+            (umin, usup),
+            (vmin, vsup),
+        )
     }
     /// `Initialize(S, NbU, NbV, Umin, Usup, Vmin, Vsup, TolU, TolV)` on a borrowed or a
     /// shared surface.
@@ -222,7 +231,9 @@ impl<'a> GenExtPS<'a> {
     }
     // A copy of the surface reference, for the members that change the grid.
     fn surface_ref(&self) -> Result<SurfaceRef<'a>, Failure> {
-        self.s.clone().ok_or_else(|| null_object("Extrema_GenExtPS::Perform()"))
+        self.s
+            .clone()
+            .ok_or_else(|| null_object("Extrema_GenExtPS::Perform()"))
     }
     /// `Perform(P)`; `extrema.perform(point)?`.
     pub fn perform(&mut self, point: Point3) -> Result<(), Failure> {

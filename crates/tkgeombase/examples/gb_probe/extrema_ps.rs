@@ -1,5 +1,6 @@
 //! The Extrema point-surface requests; the counterpart of
 //! tools/oracle/tkgeombase_probe_extrema_ps.cxx (same encoding and token order).
+#![allow(clippy::unit_arg, clippy::type_complexity)]
 use super::bndlib;
 use super::common::{Reader, attempt, end, flag, int, pnt, real};
 use super::extrema_el::ponsurf;
@@ -251,11 +252,19 @@ fn ext_flag(value: i32) -> ExtFlag {
 }
 
 fn ext_algo(value: i32) -> ExtAlgo {
-    if value == 0 { ExtAlgo::Grad } else { ExtAlgo::Tree }
+    if value == 0 {
+        ExtAlgo::Grad
+    } else {
+        ExtAlgo::Tree
+    }
 }
 
 fn other_algo(algo: ExtAlgo) -> ExtAlgo {
-    if algo == ExtAlgo::Grad { ExtAlgo::Tree } else { ExtAlgo::Grad }
+    if algo == ExtAlgo::Grad {
+        ExtAlgo::Tree
+    } else {
+        ExtAlgo::Grad
+    }
 }
 
 fn genps_body(r: &mut Reader) -> Result<(), Failure> {
@@ -266,7 +275,12 @@ fn genps_body(r: &mut Reader) -> Result<(), Failure> {
     let (fl, al) = (ext_flag(r.integer()), ext_algo(r.integer()));
     let (u1, u2, v1, v2) = (r.real(), r.real(), r.real(), r.real());
     let p2 = r.pnt();
-    let sampling = Sampling { nb_u: nu, nb_v: nv, tol_u: tu, tol_v: tv };
+    let sampling = Sampling {
+        nb_u: nu,
+        nb_v: nv,
+        tol_u: tu,
+        tol_v: tv,
+    };
     attempt(|| {
         let mut e = GenExtPS::with_point(p, &s, sampling, fl, al)?;
         ps_result(&e);
@@ -303,7 +317,15 @@ fn genps_body(r: &mut Reader) -> Result<(), Failure> {
     let mut d = GenExtPS::new();
     flag(d.is_done());
     attempt(|| Ok(int(d.nb_ext()?)));
-    attempt(|| d.initialize(&s, Sampling { nb_u: 1, ..sampling }));
+    attempt(|| {
+        d.initialize(
+            &s,
+            Sampling {
+                nb_u: 1,
+                ..sampling
+            },
+        )
+    });
     Ok(())
 }
 
@@ -378,10 +400,27 @@ fn basis_curve(r: &mut Reader) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
 /// The members gb_ex_swept_runs uses.
 trait Swept: PsView + Sized {
     type Surface: rustycad_tkernel::standard::RuntimeTyped;
-    fn with_surface(p: Point3, s: &Handle<Self::Surface>, tu: f64, tv: f64) -> Result<Self, Failure>;
-    fn with_range(p: Point3, s: &Handle<Self::Surface>, u: (f64, f64), v: (f64, f64), t: (f64, f64)) -> Result<Self, Failure>;
+    fn with_surface(
+        p: Point3,
+        s: &Handle<Self::Surface>,
+        tu: f64,
+        tv: f64,
+    ) -> Result<Self, Failure>;
+    fn with_range(
+        p: Point3,
+        s: &Handle<Self::Surface>,
+        u: (f64, f64),
+        v: (f64, f64),
+        t: (f64, f64),
+    ) -> Result<Self, Failure>;
     fn fresh() -> Self;
-    fn init(&mut self, s: &Handle<Self::Surface>, u: (f64, f64), v: (f64, f64), t: (f64, f64)) -> Result<(), Failure>;
+    fn init(
+        &mut self,
+        s: &Handle<Self::Surface>,
+        u: (f64, f64),
+        v: (f64, f64),
+        t: (f64, f64),
+    ) -> Result<(), Failure>;
     fn run(&mut self, p: Point3) -> Result<(), Failure>;
 }
 
@@ -392,13 +431,25 @@ macro_rules! swept {
             fn with_surface(p: Point3, s: &Handle<$s>, tu: f64, tv: f64) -> Result<Self, Failure> {
                 <$t>::with_surface(p, s, tu, tv)
             }
-            fn with_range(p: Point3, s: &Handle<$s>, u: (f64, f64), v: (f64, f64), t: (f64, f64)) -> Result<Self, Failure> {
+            fn with_range(
+                p: Point3,
+                s: &Handle<$s>,
+                u: (f64, f64),
+                v: (f64, f64),
+                t: (f64, f64),
+            ) -> Result<Self, Failure> {
                 <$t>::with_range(p, s, u, v, t)
             }
             fn fresh() -> Self {
                 <$t>::new()
             }
-            fn init(&mut self, s: &Handle<$s>, u: (f64, f64), v: (f64, f64), t: (f64, f64)) -> Result<(), Failure> {
+            fn init(
+                &mut self,
+                s: &Handle<$s>,
+                u: (f64, f64),
+                v: (f64, f64),
+                t: (f64, f64),
+            ) -> Result<(), Failure> {
                 self.initialize(s, u, v, t)
             }
             fn run(&mut self, p: Point3) -> Result<(), Failure> {
@@ -410,7 +461,13 @@ macro_rules! swept {
 swept!(ExtPExtS, GeomAdaptorSurfaceOfLinearExtrusion);
 swept!(ExtPRevS, GeomAdaptorSurfaceOfRevolution);
 
-fn swept_runs<E: Swept>(s: &Handle<E::Surface>, (p, p2): (Point3, Point3), u: (f64, f64), v: (f64, f64), t: (f64, f64)) {
+fn swept_runs<E: Swept>(
+    s: &Handle<E::Surface>,
+    (p, p2): (Point3, Point3),
+    u: (f64, f64),
+    v: (f64, f64),
+    t: (f64, f64),
+) {
     attempt(|| {
         let mut e = E::with_surface(p, s, t.0, t.1)?;
         ps_result(&e);
@@ -480,4 +537,3 @@ pub fn prevs_case(values: &[f64]) {
     attempt(|| prevs_body(&mut r));
     end();
 }
-

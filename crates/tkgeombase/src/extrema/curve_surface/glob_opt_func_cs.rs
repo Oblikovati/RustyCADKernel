@@ -61,7 +61,11 @@ impl<'a> GlobOptFuncCS<'a> {
     fn value_at(&self, (cu, su, sv): (f64, f64, f64)) -> Result<f64, Failure> {
         Ok(self.c.value(cu)?.square_distance(&self.s.value(su, sv)?))
     }
-    fn gradient_at(&self, (cu, su, sv): (f64, f64, f64), g: &mut Vector<'_>) -> Result<(), Failure> {
+    fn gradient_at(
+        &self,
+        (cu, su, sv): (f64, f64, f64),
+        g: &mut Vector<'_>,
+    ) -> Result<(), Failure> {
         let (cd0, cd1) = self.c.d1(cu)?;
         let s = self.s.d1(su, sv)?;
         let (sd0, sd1u, sd1v) = (s.point, s.d1u, s.d1v);
@@ -76,7 +80,9 @@ impl<'a> GlobOptFuncCS<'a> {
         let s = self.s.d2(su, sv)?;
         let (sd0, sd1u, sd1v) = (s.point, s.d1u, s.d1v);
         let (dx, dy, dz) = (cd0.x() - sd0.x(), cd0.y() - sd0.y(), cd0.z() - sd0.z());
-        h[(1, 1)] = cd1.x() * cd1.x() + cd1.y() * cd1.y() + cd1.z() * cd1.z()
+        h[(1, 1)] = cd1.x() * cd1.x()
+            + cd1.y() * cd1.y()
+            + cd1.z() * cd1.z()
             + dx * cd2.x()
             + dy * cd2.y()
             + dz * cd2.z();
@@ -125,7 +131,13 @@ impl<'a> GlobOptFuncCS<'a> {
         Ok(true)
     }
     /// `Values(X, F, G, H)`; `function.values_hessian(&x, &mut f, &mut g, &mut h)?`.
-    pub fn values_hessian(&self, x: &Vector<'_>, f: &mut f64, g: &mut Vector<'_>, h: &mut Matrix<'_>) -> Result<bool, Failure> {
+    pub fn values_hessian(
+        &self,
+        x: &Vector<'_>,
+        f: &mut f64,
+        g: &mut Vector<'_>,
+        h: &mut Matrix<'_>,
+    ) -> Result<bool, Failure> {
         let Some(at) = self.check_input_data(x)? else {
             return Ok(false);
         };
@@ -163,7 +175,13 @@ impl MultipleVarFunctionWithGradient for GlobOptFuncCS<'_> {
 }
 
 impl MultipleVarFunctionWithHessian for GlobOptFuncCS<'_> {
-    fn values_hessian(&mut self, point: &Vector<'_>, value: &mut f64, gradient: &mut Vector<'_>, hessian: &mut Matrix<'_>) -> bool {
+    fn values_hessian(
+        &mut self,
+        point: &Vector<'_>,
+        value: &mut f64,
+        gradient: &mut Vector<'_>,
+        hessian: &mut Matrix<'_>,
+    ) -> bool {
         let result = GlobOptFuncCS::values_hessian(self, point, value, gradient, hessian);
         self.failure.keep(result).unwrap_or(false)
     }

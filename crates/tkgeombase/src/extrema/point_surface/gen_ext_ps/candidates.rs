@@ -38,7 +38,12 @@ impl GenExtPS<'_> {
 
     // A cell point starts a search when it is inside the cell, on the grid boundary,
     // or when this cell is the first of the cells that share it.
-    fn is_min_candidate(&self, param: &POnSurfParams, no_u: i32, no_v: i32) -> Result<bool, Failure> {
+    fn is_min_candidate(
+        &self,
+        param: &POnSurfParams,
+        no_u: i32,
+        no_v: i32,
+    ) -> Result<bool, Failure> {
         let elem_type: ElementType = param.get_element_type();
         if elem_type == ElementType::Face {
             return Ok(true);
@@ -57,10 +62,18 @@ impl GenExtPS<'_> {
         }
         // A middle element.
         if elem_type == ElementType::UIsoEdge || (elem_type == ElementType::Node && on_u_border) {
-            return self.same_element(self.face_pnt_params.value(no_u, no_v - 1)?, elem_type, (iu, iv));
+            return self.same_element(
+                self.face_pnt_params.value(no_u, no_v - 1)?,
+                elem_type,
+                (iu, iv),
+            );
         }
         if elem_type == ElementType::VIsoEdge || (elem_type == ElementType::Node && on_v_border) {
-            return self.same_element(self.face_pnt_params.value(no_u - 1, no_v)?, elem_type, (iu, iv));
+            return self.same_element(
+                self.face_pnt_params.value(no_u - 1, no_v)?,
+                elem_type,
+                (iu, iv),
+            );
         }
         if iu == no_u && iv == no_v {
             return self.lower_left_node(no_u, no_v, (iu, iv));
@@ -69,7 +82,12 @@ impl GenExtPS<'_> {
     }
 
     // The neighbouring cell point is the same element.
-    fn same_element(&self, other: &POnSurfParams, elem_type: ElementType, indices: (i32, i32)) -> Result<bool, Failure> {
+    fn same_element(
+        &self,
+        other: &POnSurfParams,
+        elem_type: ElementType,
+        indices: (i32, i32),
+    ) -> Result<bool, Failure> {
         Ok(other.get_element_type() == elem_type && other.get_indices() == indices)
     }
 
@@ -104,7 +122,16 @@ impl GenExtPS<'_> {
     // first, as the native references are bound before the test.
     fn is_max_node(&self, no_u: i32, no_v: i32, dist: f64) -> Result<bool, Failure> {
         let mut neighbours: [f64; 8] = [0.0; 8];
-        let offsets: [(i32, i32); 8] = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)];
+        let offsets: [(i32, i32); 8] = [
+            (-1, -1),
+            (-1, 0),
+            (-1, 1),
+            (0, -1),
+            (0, 1),
+            (1, -1),
+            (1, 0),
+            (1, 1),
+        ];
         for (slot, (du, dv)) in neighbours.iter_mut().zip(offsets) {
             *slot = self.points.sqr_distance(no_u + du, no_v + dv)?;
         }

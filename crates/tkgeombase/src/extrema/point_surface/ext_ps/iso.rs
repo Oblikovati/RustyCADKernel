@@ -24,7 +24,13 @@ use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 /// U iso (`is_u`) or V iso at `param`, sampled at ten steps over a finite range, is
 /// within `[tol_min, tol_max]` (true as well over an infinite range; false for a
 /// step below PConfusion); `iso_is_deg(&surface, 0.0, true, 0., 1e-9)?`.
-pub(super) fn iso_is_deg(surface: &dyn Adaptor3dSurface, param: f64, is_u: bool, tol_min: f64, tol_max: f64) -> Result<bool, Failure> {
+pub(super) fn iso_is_deg(
+    surface: &dyn Adaptor3dSurface,
+    param: f64,
+    is_u: bool,
+    tol_min: f64,
+    tol_max: f64,
+) -> Result<bool, Failure> {
     let (u1, u2) = (surface.first_u_parameter()?, surface.last_u_parameter()?);
     let (v1, v2) = (surface.first_v_parameter()?, surface.last_v_parameter()?);
     // GeomAbs_IsoV samples along U, GeomAbs_IsoU along V.
@@ -39,7 +45,11 @@ pub(super) fn iso_is_deg(surface: &dyn Adaptor3dSurface, param: f64, is_u: bool,
     let mut d1_norm_max: f64 = 0.;
     let mut t: f64 = first;
     while t <= last {
-        let d1 = if is_u { surface.d1(param, t)? } else { surface.d1(t, param)? };
+        let d1 = if is_u {
+            surface.d1(param, t)?
+        } else {
+            surface.d1(t, param)?
+        };
         let derivative = if is_u { d1.d1v } else { d1.d1u };
         d1_norm_max = std_max(d1_norm_max, derivative.magnitude());
         t += step;

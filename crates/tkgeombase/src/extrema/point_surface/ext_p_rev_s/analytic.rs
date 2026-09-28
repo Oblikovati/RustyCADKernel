@@ -44,7 +44,9 @@ fn is_extremum(
 ) -> Result<(bool, Point3, f64), Failure> {
     let e: Point3 = surface.value(u, v)?;
     let dist2: f64 = point.square_distance(&e);
-    let d = |su: f64, sv: f64| -> Result<f64, Failure> { Ok(point.square_distance(&surface.value(su, sv)?)) };
+    let d = |su: f64, sv: f64| -> Result<f64, Failure> {
+        Ok(point.square_distance(&surface.value(su, sv)?))
+    };
     let inside_v: f64 = if is_v_sup { v - 1. } else { v + 1. };
     let extremum: bool = if is_min {
         dist2 < d(u + 1., v)? && dist2 < d(u - 1., v)? && dist2 < d(u, inside_v)?
@@ -90,7 +92,13 @@ impl ExtPRevS {
     }
 
     // The extrema of one meridian: `an_ext` computed at the angle `u`.
-    fn treat_meridian(&mut self, an_ext: &ExtPElC, u: f64, point: Point3, curve: &dyn Adaptor3dCurve) -> Result<(), Failure> {
+    fn treat_meridian(
+        &mut self,
+        an_ext: &ExtPElC,
+        u: f64,
+        point: Point3,
+        curve: &dyn Adaptor3dCurve,
+    ) -> Result<(), Failure> {
         let surface_handle = self.s.clone();
         let surface: &dyn Adaptor3dSurface = Self::adaptor(&surface_handle)?;
         for i in 1..=an_ext.nb_ext()? {
@@ -99,9 +107,15 @@ impl ExtPRevS {
             let (e, dist2): (Point3, f64);
             if v > self.vsup || v < self.vinf {
                 let is_v_sup: bool = v > self.vsup;
-                let periodic: bool = matches!(curve.get_type()?, CurveType::Circle | CurveType::Ellipse);
-                v = if is_v_sup { self.above_range(v, periodic) } else { self.below_range(v, periodic) };
-                let (extremum, point_e, d2) = is_extremum((u, v), point, surface, is_v_sup, an_ext.is_min(i)?)?;
+                let periodic: bool =
+                    matches!(curve.get_type()?, CurveType::Circle | CurveType::Ellipse);
+                v = if is_v_sup {
+                    self.above_range(v, periodic)
+                } else {
+                    self.below_range(v, periodic)
+                };
+                let (extremum, point_e, d2) =
+                    is_extremum((u, v), point, surface, is_v_sup, an_ext.is_min(i)?)?;
                 if !extremum {
                     continue;
                 }
@@ -139,7 +153,10 @@ impl ExtPRevS {
             if o.is_equal(&ppp, precision::confusion()) {
                 (ppp, PI / 2.)
             } else {
-                (ppp, Vector3::between(o, ppp).angle_with_ref(Vector3::between(o, pp), dir)?)
+                (
+                    ppp,
+                    Vector3::between(o, ppp).angle_with_ref(Vector3::between(o, pp), dir)?,
+                )
             }
         };
         let adaptor = Self::adaptor(&self.s)?;

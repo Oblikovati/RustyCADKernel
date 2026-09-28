@@ -1,5 +1,6 @@
 //! The Extrema curve-surface requests; the counterpart of
 //! tools/oracle/tkgeombase_probe_extrema_cs.cxx (same encoding and token order).
+#![allow(clippy::unit_arg, clippy::type_complexity)]
 use super::common::{Reader, attempt, end, flag, int, real};
 use super::extrema_el::{poncurv, ponsurf};
 use super::extrema_pc::{Space, Space3};
@@ -235,7 +236,13 @@ fn genecs_body(r: &mut Reader) -> Result<(), Failure> {
         Ok(())
     });
     attempt(|| {
-        gencs_result(&GenExtCS::with_ranges(&*c, &s, (nt, nu, nv), [a, b, u1, u2, v1, v2], (t1, t2))?);
+        gencs_result(&GenExtCS::with_ranges(
+            &*c,
+            &s,
+            (nt, nu, nv),
+            [a, b, u1, u2, v1, v2],
+            (t1, t2),
+        )?);
         Ok(())
     });
     let mut d = GenExtCS::new();
@@ -288,7 +295,14 @@ fn cs_body(r: &mut Reader) -> Result<(), Failure> {
         Ok(())
     });
     attempt(|| {
-        cs_result(&ExtCS::with_ranges(&*c, &s, (a, b), (u1, u2), (v1, v2), (tc, ts))?);
+        cs_result(&ExtCS::with_ranges(
+            &*c,
+            &s,
+            (a, b),
+            (u1, u2),
+            (v1, v2),
+            (tc, ts),
+        )?);
         Ok(())
     });
     let mut d = ExtCS::new();

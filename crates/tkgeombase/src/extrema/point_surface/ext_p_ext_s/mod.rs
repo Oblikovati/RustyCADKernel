@@ -96,7 +96,9 @@ fn project_pnt(plane: &Axis2, dir: Direction3, point: Point3) -> Point3 {
 
 // `IsOriginalPnt`: no kept point is within Precision::Confusion() of `point`.
 fn is_original_pnt(point: &Point3, points: &[POnSurf]) -> bool {
-    !points.iter().any(|kept| kept.value().is_equal(point, precision::confusion()))
+    !points
+        .iter()
+        .any(|kept| kept.value().is_equal(point, precision::confusion()))
 }
 
 // `GetPosition`: the frame of the conic, a frame normal to a line, or the default.
@@ -105,7 +107,11 @@ fn get_position(curve: &dyn Adaptor3dCurve) -> Result<Axis2, Failure> {
         CurveType::Line => {
             let line = curve.line()?;
             let pln: Plane3 = Plane3::new(line.location(), line.direction())?;
-            Axis2::with_x_direction(pln.location(), pln.position().direction(), pln.position().x_direction())?
+            Axis2::with_x_direction(
+                pln.location(),
+                pln.position().direction(),
+                pln.position().x_direction(),
+            )?
         }
         CurveType::Circle => curve.circle()?.position(),
         CurveType::Ellipse => curve.ellipse()?.position(),
@@ -116,10 +122,17 @@ fn get_position(curve: &dyn Adaptor3dCurve) -> Result<Axis2, Failure> {
 }
 
 // `PerformExtPElC`: the point-conic extrema over the whole conic.
-fn perform_ext_p_el_c(extrema: &mut ExtPElC, point: Point3, curve: &dyn Adaptor3dCurve, tol: f64) -> Result<(), Failure> {
+fn perform_ext_p_el_c(
+    extrema: &mut ExtPElC,
+    point: Point3,
+    curve: &dyn Adaptor3dCurve,
+    tol: f64,
+) -> Result<(), Failure> {
     let inf: f64 = precision::infinite();
     match curve.get_type()? {
-        CurveType::Hyperbola => extrema.perform_hyperbola(point, &curve.hyperbola()?, tol, -inf, inf),
+        CurveType::Hyperbola => {
+            extrema.perform_hyperbola(point, &curve.hyperbola()?, tol, -inf, inf)
+        }
         CurveType::Line => {
             extrema.perform_line(point, &curve.line()?, tol, -inf, inf);
             Ok(())
@@ -133,9 +146,17 @@ fn perform_ext_p_el_c(extrema: &mut ExtPElC, point: Point3, curve: &dyn Adaptor3
 
 // `IsCaseAnalyticallyComputable`: a conic whose plane is not parallel to the
 // extrusion direction.
-fn is_case_analytically_computable(curve_type: CurveType, curve_pos: &Axis2, surface_direction: Direction3) -> bool {
+fn is_case_analytically_computable(
+    curve_type: CurveType,
+    curve_pos: &Axis2,
+    surface_direction: Direction3,
+) -> bool {
     match curve_type {
-        CurveType::Line | CurveType::Circle | CurveType::Ellipse | CurveType::Hyperbola | CurveType::Parabola => {
+        CurveType::Line
+        | CurveType::Circle
+        | CurveType::Ellipse
+        | CurveType::Hyperbola
+        | CurveType::Parabola => {
             curve_pos.direction().dot(surface_direction).abs() > gp::resolution()
         }
         _ => false,
@@ -187,8 +208,12 @@ impl ExtPExtS {
         Self::with_range(point, surface, u_range, v_range, (tol_u, tol_v))
     }
     // The adaptor of a handle, Standard_NullObject for a null handle.
-    fn adaptor(surface: &Handle<GeomAdaptorSurfaceOfLinearExtrusion>) -> Result<&GeomAdaptorSurfaceOfLinearExtrusion, Failure> {
-        surface.get().ok_or_else(|| null_object("Extrema_ExtPExtS::Initialize()"))
+    fn adaptor(
+        surface: &Handle<GeomAdaptorSurfaceOfLinearExtrusion>,
+    ) -> Result<&GeomAdaptorSurfaceOfLinearExtrusion, Failure> {
+        surface
+            .get()
+            .ok_or_else(|| null_object("Extrema_ExtPExtS::Initialize()"))
     }
     /// `Initialize(S, Uinf, Usup, Vinf, Vsup, TolU, TolV)`: the analytical case, or
     /// Extrema_GenExtPS on a 32 x 32 grid;
@@ -212,20 +237,34 @@ impl ExtPExtS {
         self.c = curve;
         self.s = surface.clone();
         let basis_handle: Handle<dyn Adaptor3dCurve> = self.c.clone();
-        let basis: &dyn Adaptor3dCurve = basis_handle.get().ok_or_else(|| null_object("Extrema_ExtPExtS::Initialize()"))?;
+        let basis: &dyn Adaptor3dCurve = basis_handle
+            .get()
+            .ok_or_else(|| null_object("Extrema_ExtPExtS::Initialize()"))?;
         self.position = get_position(basis)?;
         let direction: Direction3 = adaptor.direction()?;
         self.direction = Vector3::from(direction);
-        self.is_analytically_computable = is_case_analytically_computable(basis.get_type()?, &self.position, self.direction_dir()?);
+        self.is_analytically_computable = is_case_analytically_computable(
+            basis.get_type()?,
+            &self.position,
+            self.direction_dir()?,
+        );
         if !self.is_analytically_computable {
-            let sampling = Sampling { nb_u: 32, nb_v: 32, tol_u, tol_v };
-            self.ext_ps.initialize_range_ref(shared, sampling, (uinf, usup), (vinf, vsup))?;
+            let sampling = Sampling {
+                nb_u: 32,
+                nb_v: 32,
+                tol_u,
+                tol_v,
+            };
+            self.ext_ps
+                .initialize_range_ref(shared, sampling, (uinf, usup), (vinf, vsup))?;
         }
         Ok(())
     }
     // The basis curve, Standard_NullObject when there is none.
     fn curve(&self) -> Result<&dyn Adaptor3dCurve, Failure> {
-        self.c.get().ok_or_else(|| null_object("Extrema_ExtPExtS::Perform()"))
+        self.c
+            .get()
+            .ok_or_else(|| null_object("Extrema_ExtPExtS::Perform()"))
     }
     // `myDirection` as a gp_Dir (the native implicit conversion normalizes it).
     fn direction_dir(&self) -> Result<Direction3, Failure> {
@@ -260,7 +299,8 @@ impl ExtPExtS {
     }
     /// `SquareDistance(N)`; `extrema.square_distance(1)?`.
     pub fn square_distance(&self, n: i32) -> Result<f64, Failure> {
-        let index: usize = extremum_index("Extrema_ExtPExtS::SquareDistance()", n, || self.nb_ext())?;
+        let index: usize =
+            extremum_index("Extrema_ExtPExtS::SquareDistance()", n, || self.nb_ext())?;
         if self.is_analytically_computable {
             return Ok(self.sq_dist[index]);
         }

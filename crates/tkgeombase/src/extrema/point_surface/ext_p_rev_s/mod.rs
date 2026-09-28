@@ -116,10 +116,17 @@ fn has_singularity(surface: &dyn Adaptor3dSurface) -> Result<bool, Failure> {
 }
 
 // `PerformExtPElC`: the point-conic extrema over the whole conic.
-fn perform_ext_p_el_c(extrema: &mut ExtPElC, point: Point3, curve: &dyn Adaptor3dCurve, tol: f64) -> Result<(), Failure> {
+fn perform_ext_p_el_c(
+    extrema: &mut ExtPElC,
+    point: Point3,
+    curve: &dyn Adaptor3dCurve,
+    tol: f64,
+) -> Result<(), Failure> {
     let inf: f64 = precision::infinite();
     match curve.get_type()? {
-        CurveType::Hyperbola => extrema.perform_hyperbola(point, &curve.hyperbola()?, tol, -inf, inf),
+        CurveType::Hyperbola => {
+            extrema.perform_hyperbola(point, &curve.hyperbola()?, tol, -inf, inf)
+        }
         CurveType::Line => {
             extrema.perform_line(point, &curve.line()?, tol, -inf, inf);
             Ok(())
@@ -133,10 +140,18 @@ fn perform_ext_p_el_c(extrema: &mut ExtPElC, point: Point3, curve: &dyn Adaptor3
 
 // `IsCaseAnalyticallyComputable`: a conic whose plane holds the axis (two axis
 // points 100 apart within Angular() * 100 of the plane).
-fn is_case_analytically_computable(curve_type: CurveType, curve_pos: &Axis2, axis: &Axis1) -> Result<bool, Failure> {
+fn is_case_analytically_computable(
+    curve_type: CurveType,
+    curve_pos: &Axis2,
+    axis: &Axis1,
+) -> Result<bool, Failure> {
     if !matches!(
         curve_type,
-        CurveType::Line | CurveType::Circle | CurveType::Ellipse | CurveType::Hyperbola | CurveType::Parabola
+        CurveType::Line
+            | CurveType::Circle
+            | CurveType::Ellipse
+            | CurveType::Hyperbola
+            | CurveType::Parabola
     ) {
         return Ok(false);
     }
@@ -152,7 +167,9 @@ fn is_case_analytically_computable(curve_type: CurveType, curve_pos: &Axis2, axi
 
 // `IsOriginalPnt`: no kept point is within Precision::Confusion() of `point`.
 fn is_original_pnt(point: &Point3, points: &[POnSurf]) -> bool {
-    !points.iter().any(|kept| kept.value().is_equal(point, precision::confusion()))
+    !points
+        .iter()
+        .any(|kept| kept.value().is_equal(point, precision::confusion()))
 }
 
 impl ExtPRevS {
@@ -188,7 +205,9 @@ impl ExtPRevS {
         Self::with_range(point, surface, u_range, v_range, (tol_u, tol_v))
     }
     // The adaptor of a handle, Standard_NullObject for a null handle.
-    fn adaptor(surface: &Handle<GeomAdaptorSurfaceOfRevolution>) -> Result<&GeomAdaptorSurfaceOfRevolution, Failure> {
+    fn adaptor(
+        surface: &Handle<GeomAdaptorSurfaceOfRevolution>,
+    ) -> Result<&GeomAdaptorSurfaceOfRevolution, Failure> {
         surface.get().ok_or_else(|| null_object("Extrema_ExtPRevS"))
     }
     /// `Initialize(S, Umin, Usup, Vmin, Vsup, TolU, TolV)`. The frame and the
@@ -212,15 +231,27 @@ impl ExtPRevS {
         if self.s != *surface {
             self.s = surface.clone();
             self.position = get_position(adaptor)?;
-            let curve_type: CurveType = curve.get().ok_or_else(|| null_object("Extrema_ExtPRevS::Initialize()"))?.get_type()?;
-            self.is_analytically_computable =
-                is_case_analytically_computable(curve_type, &self.position, &adaptor.axe_of_revolution()?)?;
+            let curve_type: CurveType = curve
+                .get()
+                .ok_or_else(|| null_object("Extrema_ExtPRevS::Initialize()"))?
+                .get_type()?;
+            self.is_analytically_computable = is_case_analytically_computable(
+                curve_type,
+                &self.position,
+                &adaptor.axe_of_revolution()?,
+            )?;
         }
         if !self.is_analytically_computable {
             let nb_v: i32 = if has_singularity(adaptor)? { 100 } else { 32 };
-            let sampling = Sampling { nb_u: 32, nb_v, tol_u, tol_v };
+            let sampling = Sampling {
+                nb_u: 32,
+                nb_v,
+                tol_u,
+                tol_v,
+            };
             let shared = SurfaceRef::Shared(surface.cast::<dyn Adaptor3dSurface>());
-            self.ext_ps.initialize_range_ref(shared, sampling, (umin, usup), (vmin, vsup))?;
+            self.ext_ps
+                .initialize_range_ref(shared, sampling, (umin, usup), (vmin, vsup))?;
         }
         Ok(())
     }
@@ -250,7 +281,8 @@ impl ExtPRevS {
     }
     /// `SquareDistance(N)`; `extrema.square_distance(1)?`.
     pub fn square_distance(&self, n: i32) -> Result<f64, Failure> {
-        let index: usize = extremum_index("Extrema_ExtPRevS::SquareDistance()", n, || self.nb_ext())?;
+        let index: usize =
+            extremum_index("Extrema_ExtPRevS::SquareDistance()", n, || self.nb_ext())?;
         if self.is_analytically_computable {
             return Ok(self.sq_dist[index]);
         }

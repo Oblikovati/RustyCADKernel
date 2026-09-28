@@ -1,5 +1,6 @@
 //! The classic point-curve Extrema requests; the counterpart of
 //! tools/oracle/tkgeombase_probe_extrema_pc_classic.cxx (same encoding and token order).
+#![allow(clippy::unit_arg, clippy::type_complexity)]
 use super::common::{Reader, attempt, end, flag, int, pnt, pnt2d, real};
 use super::extrema_el::{poncurv, poncurv2d};
 use super::pc2d::curve2d;

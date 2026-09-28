@@ -111,7 +111,12 @@ impl<'a> ExtCS<'a> {
     }
     /// `Initialize(S, TolC, TolS)`: on the surface bounds;
     /// `extrema.initialize(&surface, 1e-9, 1e-9)?`.
-    pub fn initialize(&mut self, surface: &'a dyn Adaptor3dSurface, tol_c: f64, tol_s: f64) -> Result<(), Failure> {
+    pub fn initialize(
+        &mut self,
+        surface: &'a dyn Adaptor3dSurface,
+        tol_c: f64,
+        tol_s: f64,
+    ) -> Result<(), Failure> {
         let u = (surface.first_u_parameter()?, surface.last_u_parameter()?);
         let v = (surface.first_v_parameter()?, surface.last_v_parameter()?);
         self.initialize_range(surface, u, v, (tol_c, tol_s))
@@ -133,10 +138,16 @@ impl<'a> ExtCS<'a> {
         Ok(())
     }
     fn surface(&self) -> Result<&'a dyn Adaptor3dSurface, Failure> {
-        self.s.ok_or_else(|| null_object("Extrema_ExtCS::Perform()"))
+        self.s
+            .ok_or_else(|| null_object("Extrema_ExtCS::Perform()"))
     }
     /// `Perform(C, Uinf, Usup)`; `extrema.perform(&curve, 0.0, 1.0)?`.
-    pub fn perform(&mut self, curve: &dyn Adaptor3dCurve, uinf: f64, usup: f64) -> Result<(), Failure> {
+    pub fn perform(
+        &mut self,
+        curve: &dyn Adaptor3dCurve,
+        uinf: f64,
+        usup: f64,
+    ) -> Result<(), Failure> {
         (self.ucinf, self.ucsup) = (uinf, usup);
         self.pon_s.clear();
         self.pon_c.clear();
@@ -157,29 +168,36 @@ impl<'a> ExtCS<'a> {
     // The closed forms of Extrema_ExtElCS: true when one was run (natively
     // `isComputeAnalytic`); a line and a plane that are not parallel go to the
     // general line search instead (false).
-    fn perform_elementary(&mut self, curve: &dyn Adaptor3dCurve, ctype: CurveType) -> Result<bool, Failure> {
+    fn perform_elementary(
+        &mut self,
+        curve: &dyn Adaptor3dCurve,
+        ctype: CurveType,
+    ) -> Result<bool, Failure> {
         let surface = self.surface()?;
         match (ctype, self.stype) {
-            (CurveType::Line, SurfaceType::Sphere) => self.ext_el_cs.perform_line_sphere(&curve.line()?, &surface.sphere()?)?,
-            (CurveType::Line, SurfaceType::Cylinder) => {
-                self.ext_el_cs.perform_line_cylinder(&curve.line()?, &surface.cylinder()?)?
-            }
+            (CurveType::Line, SurfaceType::Sphere) => self
+                .ext_el_cs
+                .perform_line_sphere(&curve.line()?, &surface.sphere()?)?,
+            (CurveType::Line, SurfaceType::Cylinder) => self
+                .ext_el_cs
+                .perform_line_cylinder(&curve.line()?, &surface.cylinder()?)?,
             (CurveType::Line, SurfaceType::Plane) => {
-                self.ext_el_cs.perform_line_plane(&curve.line()?, &surface.plane()?);
+                self.ext_el_cs
+                    .perform_line_plane(&curve.line()?, &surface.plane()?);
                 return self.ext_el_cs.is_parallel();
             }
-            (CurveType::Circle, SurfaceType::Cylinder) => {
-                self.ext_el_cs.perform_circle_cylinder(&curve.circle()?, &surface.cylinder()?)?
-            }
-            (CurveType::Circle, SurfaceType::Plane) => {
-                self.ext_el_cs.perform_circle_plane(&curve.circle()?, &surface.plane()?)?
-            }
-            (CurveType::Circle, SurfaceType::Sphere) => {
-                self.ext_el_cs.perform_circle_sphere(&curve.circle()?, &surface.sphere()?)?
-            }
-            (CurveType::Hyperbola, SurfaceType::Plane) => {
-                self.ext_el_cs.perform_hyperbola_plane(&curve.hyperbola()?, &surface.plane()?)
-            }
+            (CurveType::Circle, SurfaceType::Cylinder) => self
+                .ext_el_cs
+                .perform_circle_cylinder(&curve.circle()?, &surface.cylinder()?)?,
+            (CurveType::Circle, SurfaceType::Plane) => self
+                .ext_el_cs
+                .perform_circle_plane(&curve.circle()?, &surface.plane()?)?,
+            (CurveType::Circle, SurfaceType::Sphere) => self
+                .ext_el_cs
+                .perform_circle_sphere(&curve.circle()?, &surface.sphere()?)?,
+            (CurveType::Hyperbola, SurfaceType::Plane) => self
+                .ext_el_cs
+                .perform_hyperbola_plane(&curve.hyperbola()?, &surface.plane()?),
             _ => return Ok(false),
         }
         Ok(true)
@@ -216,7 +234,9 @@ impl<'a> ExtCS<'a> {
         }
         let known = self.pon_c.iter().zip(&self.pon_s).any(|(pc, ps)| {
             let (uj, vj) = ps.parameter();
-            (t - pc.parameter()).abs() <= self.tol_c && (u - uj).abs() <= self.tol_s && (v - vj).abs() <= self.tol_s
+            (t - pc.parameter()).abs() <= self.tol_c
+                && (u - uj).abs() <= self.tol_s
+                && (v - vj).abs() <= self.tol_s
         });
         if known {
             return Ok(false);

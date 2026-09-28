@@ -157,6 +157,8 @@ impl<T: ExtremaCurveTool> GGenExtCC<'_, T> {
         Ok(p1.value().square_distance_to(p2.value()))
     }
     /// `Points(N, P1, P2)`, returned as `(P1, P2)`; `extrema.points(1)?`.
+    // The native output pair (P1, P2) as one value.
+    #[allow(clippy::type_complexity)]
     pub fn points(&self, n: i32) -> Result<(POnCurve<T::Point>, POnCurve<T::Point>), Failure> {
         let member: &str = "Extrema_GGenExtCC::Points()";
         extremum_index(member, n, || self.nb_ext())?;

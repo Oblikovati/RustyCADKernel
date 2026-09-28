@@ -92,6 +92,8 @@ impl<'a, T: ExtremaCurveTool> GenLocateExtPC<'a, T> {
     /// `Perform(P, U0)`: math_FunctionRoot from `U0` in `[Umin, Usup]`; the root counts
     /// only when F at the saved point is below 1e-7 in absolute value;
     /// `extrema.perform(point, 0.5)?`.
+    // The negated test keeps the native NaN semantics.
+    #[allow(clippy::neg_cmp_op_on_partial_ord)]
     pub fn perform(&mut self, point: T::Point, u0: f64) -> Result<(), Failure> {
         self.function.set_point(point);
         let (tol, umin, usup) = (self.tol_u, self.umin, self.usup);

@@ -154,6 +154,8 @@ impl ExtElCS {
     /// parallel with the square distance of its centre; otherwise the point where the
     /// hyperbola is parallel to the plane, `T = -ln((A + B) / (B - A)) / 2`, when
     /// `|B| > |A|`; `extrema.perform_hyperbola_plane(&hyperbola, &plane)`.
+    // The negated test keeps the native NaN semantics.
+    #[allow(clippy::neg_cmp_op_on_partial_ord)]
     pub fn perform_hyperbola_plane(&mut self, hyperbola: &Hyperbola3, plane: &Plane3) {
         self.done = true;
         self.is_par = false;

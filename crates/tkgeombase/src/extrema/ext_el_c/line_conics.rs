@@ -159,7 +159,7 @@ fn circle_offset(o1: Point3, o2: Point3, axes: [Direction3; 3]) -> Result<Vector
         o2o1.set_coordinates(o2o1.dot(x2), o2o1.dot(y2), o2o1.dot(z2));
         return Ok(o2o1);
     }
-    o2o1 = o2o1 * (1. / length);
+    o2o1 *= 1. / length;
     let mut unit: Direction3 = Direction3::new(1., 0., 0.)?;
     unit.set_coordinates(o2o1.dot(x2), o2o1.dot(y2), o2o1.dot(z2))?;
     refine_dir(&mut unit)?;

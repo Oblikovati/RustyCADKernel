@@ -58,7 +58,12 @@ pub(super) fn uniform_params(min: f64, max: f64, n: i32) -> Vec<f64> {
 
 // `fillParams`: the range ends and `degree` points in each knot span within the
 // range (at least PConfusion apart), or None when there are fewer than `sample`.
-fn fill_params(knots: &[f64], degree: i32, (par_min, par_max): (f64, f64), sample: i32) -> Option<Vec<f64>> {
+fn fill_params(
+    knots: &[f64],
+    degree: i32,
+    (par_min, par_max): (f64, f64),
+    sample: i32,
+) -> Option<Vec<f64>> {
     let conf: f64 = precision::p_confusion();
     let knot = |i: usize| knots[i - 1];
     let mut params: Vec<f64> = vec![par_min];
@@ -99,7 +104,10 @@ fn basis_curve_knots(surface: &dyn Adaptor3dSurface) -> Result<Option<(Vec<f64>,
     }
     if curve.get_type()? == CurveType::BezierCurve {
         let bezier = curve.bezier()?;
-        knots = Some((vec![bezier.first_parameter(), bezier.last_parameter()], bezier.degree()));
+        knots = Some((
+            vec![bezier.first_parameter(), bezier.last_parameter()],
+            bezier.degree(),
+        ));
     }
     Ok(knots)
 }
@@ -199,7 +207,11 @@ impl GenExtPS<'_> {
         }
         let mut grid_param = POnSurfParams::new(u_par, v_par, self.surface()?.value(u_par, v_par)?);
         let (index_u, index_v) = param0.get_indices();
-        grid_param.set_element_type(if is_u_edge { ElementType::UIsoEdge } else { ElementType::VIsoEdge });
+        grid_param.set_element_type(if is_u_edge {
+            ElementType::UIsoEdge
+        } else {
+            ElementType::VIsoEdge
+        });
         grid_param.set_sqr_distance(point.square_distance(grid_param.value()));
         grid_param.set_indices(index_u, index_v);
         Ok(grid_param)
@@ -219,16 +231,25 @@ impl GenExtPS<'_> {
         }
         let (us, vs) = (self.usample, self.vsample);
         self.points.resize((0, us + 1), (0, vs + 1))?;
-        let (u_params, v_params) = (self.u_params.clone().unwrap_or_default(), self.v_params.clone().unwrap_or_default());
-        let grid_points: Array2<'static, Point3> =
-            GeomGridEvalSurface::from_adaptor(surface)?.evaluate_grid(&param_array(&u_params)?, &param_array(&v_params)?)?;
+        let (u_params, v_params) = (
+            self.u_params.clone().unwrap_or_default(),
+            self.v_params.clone().unwrap_or_default(),
+        );
+        let grid_points: Array2<'static, Point3> = GeomGridEvalSurface::from_adaptor(surface)?
+            .evaluate_grid(&param_array(&u_params)?, &param_array(&v_params)?)?;
         if grid_points.is_empty() {
             return Ok(());
         }
         for no_u in 1..=us {
             for no_v in 1..=vs {
-                let node: Point3 = *grid_points.value(no_u, no_v).map_err(|error| array_failure(error, "NCollection_Array2::Value"))?;
-                let mut param = POnSurfParams::new(u_params[(no_u - 1) as usize], v_params[(no_v - 1) as usize], node);
+                let node: Point3 = *grid_points
+                    .value(no_u, no_v)
+                    .map_err(|error| array_failure(error, "NCollection_Array2::Value"))?;
+                let mut param = POnSurfParams::new(
+                    u_params[(no_u - 1) as usize],
+                    v_params[(no_v - 1) as usize],
+                    node,
+                );
                 param.set_element_type(ElementType::Node);
                 param.set_indices(no_u, no_v);
                 self.points.set_value(no_u, no_v, param)?;
@@ -240,11 +261,15 @@ impl GenExtPS<'_> {
         // The boundary has a negative square distance, for the search of maxima.
         for no_v in 0..=vs + 1 {
             self.points.change_value(0, no_v)?.set_sqr_distance(-1.);
-            self.points.change_value(us + 1, no_v)?.set_sqr_distance(-1.);
+            self.points
+                .change_value(us + 1, no_v)?
+                .set_sqr_distance(-1.);
         }
         for no_u in 1..=us {
             self.points.change_value(no_u, 0)?.set_sqr_distance(-1.);
-            self.points.change_value(no_u, vs + 1)?.set_sqr_distance(-1.);
+            self.points
+                .change_value(no_u, vs + 1)?
+                .set_sqr_distance(-1.);
         }
         self.init = true;
         Ok(())
@@ -263,7 +288,10 @@ impl GenExtPS<'_> {
                 param.set_sqr_distance(distance);
             }
         }
-        if matches!(self.flag, crate::extrema::ExtFlag::Min | crate::extrema::ExtFlag::MinMax) {
+        if matches!(
+            self.flag,
+            crate::extrema::ExtFlag::Min | crate::extrema::ExtFlag::MinMax
+        ) {
             let diff_tol: f64 = self.tolu + self.tolv;
             self.edge_distances(point, diff_tol)?;
             self.face_distances(point, diff_tol)?;
@@ -279,12 +307,14 @@ impl GenExtPS<'_> {
                 let param0: POnSurfParams = *self.points.value(no_u, no_v)?;
                 if no_u < self.usample {
                     let param1: POnSurfParams = *self.points.value(no_u + 1, no_v)?;
-                    let edge = self.compute_edge_parameters(true, (&param0, &param1), point, diff_tol)?;
+                    let edge =
+                        self.compute_edge_parameters(true, (&param0, &param1), point, diff_tol)?;
                     self.u_edge_pnt_params.set_value(no_u, no_v, edge)?;
                 }
                 if no_v < self.vsample {
                     let param1: POnSurfParams = *self.points.value(no_u, no_v + 1)?;
-                    let edge = self.compute_edge_parameters(false, (&param0, &param1), point, diff_tol)?;
+                    let edge =
+                        self.compute_edge_parameters(false, (&param0, &param1), point, diff_tol)?;
                     self.v_edge_pnt_params.set_value(no_u, no_v, edge)?;
                 }
             }
@@ -303,19 +333,33 @@ impl GenExtPS<'_> {
         }
         let (us, vs) = (self.usample, self.vsample);
         for no_v in 0..=vs {
-            self.face_pnt_params.change_value(0, no_v)?.set_sqr_distance(f64::MAX);
-            self.face_pnt_params.change_value(us, no_v)?.set_sqr_distance(f64::MAX);
+            self.face_pnt_params
+                .change_value(0, no_v)?
+                .set_sqr_distance(f64::MAX);
+            self.face_pnt_params
+                .change_value(us, no_v)?
+                .set_sqr_distance(f64::MAX);
         }
         for no_u in 1..us {
-            self.face_pnt_params.change_value(no_u, 0)?.set_sqr_distance(f64::MAX);
-            self.face_pnt_params.change_value(no_u, vs)?.set_sqr_distance(f64::MAX);
+            self.face_pnt_params
+                .change_value(no_u, 0)?
+                .set_sqr_distance(f64::MAX);
+            self.face_pnt_params
+                .change_value(no_u, vs)?
+                .set_sqr_distance(f64::MAX);
         }
         Ok(())
     }
 
     // The nearest point of the cell `(no_u, no_v)`: of its nearest edge when the
     // projection is outside the cell, otherwise at the middle parameters.
-    fn face_point(&self, point: Point3, diff_tol: f64, no_u: i32, no_v: i32) -> Result<POnSurfParams, Failure> {
+    fn face_point(
+        &self,
+        point: Point3,
+        diff_tol: f64,
+        no_u: i32,
+        no_v: i32,
+    ) -> Result<POnSurfParams, Failure> {
         let ue0: POnSurfParams = *self.u_edge_pnt_params.value(no_u, no_v)?;
         let ue1: POnSurfParams = *self.u_edge_pnt_params.value(no_u, no_v + 1)?;
         let ve0: POnSurfParams = *self.v_edge_pnt_params.value(no_u, no_v)?;
@@ -326,7 +370,11 @@ impl GenExtPS<'_> {
         };
         if outside(&ue0, &ue1) || outside(&ve0, &ve1) {
             let nearer = |a: POnSurfParams, b: POnSurfParams| {
-                if a.get_sqr_distance() < b.get_sqr_distance() { a } else { b }
+                if a.get_sqr_distance() < b.get_sqr_distance() {
+                    a
+                } else {
+                    b
+                }
             };
             return Ok(nearer(nearer(ue0, ue1), nearer(ve0, ve1)));
         }

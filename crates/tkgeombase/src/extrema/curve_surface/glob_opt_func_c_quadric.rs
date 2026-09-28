@@ -101,11 +101,18 @@ impl<'a> GlobOptFuncCQuadric<'a> {
     /// `Extrema_GlobOptFuncCQuadric(C)`: the curve range, no quadric;
     /// `GlobOptFuncCQuadric::new(&curve)?`.
     pub fn new(curve: &'a dyn Adaptor3dCurve) -> Result<Self, Failure> {
-        Ok(Self::with_range(curve, curve.first_parameter()?, curve.last_parameter()?))
+        Ok(Self::with_range(
+            curve,
+            curve.first_parameter()?,
+            curve.last_parameter()?,
+        ))
     }
     /// `Extrema_GlobOptFuncCQuadric(C, S)`: the curve range and the whole quadric;
     /// `GlobOptFuncCQuadric::with_surface(&curve, &surface)?`.
-    pub fn with_surface(curve: &'a dyn Adaptor3dCurve, surface: &'a dyn Adaptor3dSurface) -> Result<Self, Failure> {
+    pub fn with_surface(
+        curve: &'a dyn Adaptor3dCurve,
+        surface: &'a dyn Adaptor3dSurface,
+    ) -> Result<Self, Failure> {
         let mut function: Self = Self::new(curve)?;
         let u = (surface.first_u_parameter()?, surface.last_u_parameter()?);
         let v = (surface.first_v_parameter()?, surface.last_v_parameter()?);
@@ -115,7 +122,12 @@ impl<'a> GlobOptFuncCQuadric<'a> {
     /// `LoadQuad(S, theUf, theUl, theVf, theVl)`: the bounds (brought into
     /// `[0, 2 PI]` in a periodic direction), the corners and the quadric;
     /// `function.load_quad(&surface, (0., 1.), (0., 1.))?`.
-    pub fn load_quad(&mut self, surface: &'a dyn Adaptor3dSurface, u: (f64, f64), v: (f64, f64)) -> Result<(), Failure> {
+    pub fn load_quad(
+        &mut self,
+        surface: &'a dyn Adaptor3dSurface,
+        u: (f64, f64),
+        v: (f64, f64),
+    ) -> Result<(), Failure> {
         let (uf, ul) = adjust_range(surface.is_u_periodic()?, u);
         let (vf, vl) = adjust_range(surface.is_v_periodic()?, v);
         let p_trim: [Point3; 4] = [
@@ -132,7 +144,15 @@ impl<'a> GlobOptFuncCQuadric<'a> {
             SurfaceType::Torus => Some(Quadric::Torus(surface.torus()?)),
             _ => None,
         };
-        self.loaded = Some(LoadedQuadric { s: surface, quadric, p_trim, uf, ul, vf, vl });
+        self.loaded = Some(LoadedQuadric {
+            s: surface,
+            quadric,
+            p_trim,
+            uf,
+            ul,
+            vf,
+            vl,
+        });
         Ok(())
     }
     /// `NbVariables()`: 1; `function.nb_variables()`.
@@ -140,7 +160,9 @@ impl<'a> GlobOptFuncCQuadric<'a> {
         1
     }
     fn loaded(&self) -> Result<&LoadedQuadric<'a>, Failure> {
-        self.loaded.as_ref().ok_or_else(|| null_object("Extrema_GlobOptFuncCQuadric - no quadric loaded"))
+        self.loaded
+            .as_ref()
+            .ok_or_else(|| null_object("Extrema_GlobOptFuncCQuadric - no quadric loaded"))
     }
     // The quadric parameters of `cp`, shifted by 2 PI beyond a 2 PI bound; None for
     // another surface.

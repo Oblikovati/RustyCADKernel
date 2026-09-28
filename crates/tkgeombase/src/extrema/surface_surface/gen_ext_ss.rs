@@ -30,7 +30,9 @@ use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::adaptor3d::Adaptor3dSurface;
 use rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface;
 use rustycad_tkmath::gp::{Point3, Vector3};
-use rustycad_tkmath::math::{Bfgs, FunctionSetRoot, MultipleVarFunction, MultipleVarFunctionWithGradient, Vector};
+use rustycad_tkmath::math::{
+    Bfgs, FunctionSetRoot, MultipleVarFunction, MultipleVarFunctionWithGradient, Vector,
+};
 
 /// `Extrema_FuncDistSS`: `|S1(u1,v1) - S2(u2,v2)|²` with its half gradient.
 struct FuncDistSS<'a> {
@@ -41,7 +43,10 @@ struct FuncDistSS<'a> {
 
 impl FuncDistSS<'_> {
     fn distance(&self, x: &Vector<'_>) -> Result<f64, Failure> {
-        Ok(self.s1.value(x[1], x[2])?.square_distance(&self.s2.value(x[3], x[4])?))
+        Ok(self
+            .s1
+            .value(x[1], x[2])?
+            .square_distance(&self.s2.value(x[3], x[4])?))
     }
     fn half_gradient(&self, x: &Vector<'_>, g: &mut Vector<'_>) -> Result<(), Failure> {
         let a = self.s1.d1(x[1], x[2])?;
@@ -71,7 +76,10 @@ impl MultipleVarFunctionWithGradient for FuncDistSS<'_> {
         self.failure.keep(result).is_some()
     }
     fn values(&mut self, point: &Vector<'_>, value: &mut f64, gradient: &mut Vector<'_>) -> bool {
-        let result = self.distance(point).map(|d| *value = d).and_then(|()| self.half_gradient(point, gradient));
+        let result = self
+            .distance(point)
+            .map(|d| *value = d)
+            .and_then(|()| self.half_gradient(point, gradient));
         self.failure.keep(result).is_some()
     }
 }
@@ -88,7 +96,8 @@ fn sampling(min: f64, max: f64, n: i32) -> (f64, f64) {
 
 /// The parameters `start + i step` accumulated, 1-based for GeomGridEval.
 fn accumulated((start, step): (f64, f64), n: i32) -> Result<Array1<'static, f64>, Failure> {
-    let mut array = Array1::with_bounds(1, n).map_err(|error| array_failure(error, "Extrema_GenExtSS parameters"))?;
+    let mut array = Array1::with_bounds(1, n)
+        .map_err(|error| array_failure(error, "Extrema_GenExtSS parameters"))?;
     let mut value: f64 = start;
     for index in 1..=n {
         array[index] = value;
@@ -98,13 +107,23 @@ fn accumulated((start, step): (f64, f64), n: i32) -> Result<Array1<'static, f64>
 }
 
 /// The grid points of a surface, `points[i - 1][j - 1]` at `(u_i, v_j)`.
-fn grid_points(surface: &dyn Adaptor3dSurface, u: (f64, f64), v: (f64, f64), (nu, nv): (i32, i32)) -> Result<Vec<Vec<Point3>>, Failure> {
-    let grid = GeomGridEvalSurface::from_adaptor(surface)?.evaluate_grid(&accumulated(u, nu)?, &accumulated(v, nv)?)?;
+fn grid_points(
+    surface: &dyn Adaptor3dSurface,
+    u: (f64, f64),
+    v: (f64, f64),
+    (nu, nv): (i32, i32),
+) -> Result<Vec<Vec<Point3>>, Failure> {
+    let grid = GeomGridEvalSurface::from_adaptor(surface)?
+        .evaluate_grid(&accumulated(u, nu)?, &accumulated(v, nv)?)?;
     let mut points: Vec<Vec<Point3>> = Vec::new();
     for i in 1..=nu {
         let mut row: Vec<Point3> = Vec::new();
         for j in 1..=nv {
-            row.push(*grid.value(i, j).map_err(|error| array_failure(error, "NCollection_Array2::Value"))?);
+            row.push(
+                *grid
+                    .value(i, j)
+                    .map_err(|error| array_failure(error, "NCollection_Array2::Value"))?,
+            );
         }
         points.push(row);
     }
@@ -148,8 +167,18 @@ impl<'a> GenExtSS<'a> {
     }
     /// `Extrema_GenExtSS(S1, S2, NbU, NbV, Tol1, Tol2)`: on the surface bounds;
     /// `GenExtSS::with_surfaces(&s1, &s2, 20, 20, 1e-9, 1e-9)?`.
-    pub fn with_surfaces(s1: &'a dyn Adaptor3dSurface, s2: &'a dyn Adaptor3dSurface, nb_u: i32, nb_v: i32, tol1: f64, tol2: f64) -> Result<Self, Failure> {
-        let mut extrema: Self = Self { f: FuncExtSS::with_surfaces(s1, s2), ..Self::default() };
+    pub fn with_surfaces(
+        s1: &'a dyn Adaptor3dSurface,
+        s2: &'a dyn Adaptor3dSurface,
+        nb_u: i32,
+        nb_v: i32,
+        tol1: f64,
+        tol2: f64,
+    ) -> Result<Self, Failure> {
+        let mut extrema: Self = Self {
+            f: FuncExtSS::with_surfaces(s1, s2),
+            ..Self::default()
+        };
         extrema.initialize(s2, nb_u, nb_v, tol2)?;
         extrema.perform(s1, tol1)?;
         Ok(extrema)
@@ -165,14 +194,23 @@ impl<'a> GenExtSS<'a> {
         [u2min, u2sup, v2min, v2sup]: [f64; 4],
         (tol1, tol2): (f64, f64),
     ) -> Result<Self, Failure> {
-        let mut extrema: Self = Self { f: FuncExtSS::with_surfaces(s1, s2), ..Self::default() };
+        let mut extrema: Self = Self {
+            f: FuncExtSS::with_surfaces(s1, s2),
+            ..Self::default()
+        };
         extrema.initialize_range(s2, (nb_u, nb_v), (u2min, u2sup), (v2min, v2sup), tol2)?;
         extrema.perform_range(s1, (u1min, u1sup), (v1min, v1sup), tol1)?;
         Ok(extrema)
     }
     /// `Initialize(S2, NbU, NbV, Tol2)`: on the bounds of S2;
     /// `extrema.initialize(&s2, 20, 20, 1e-9)?`.
-    pub fn initialize(&mut self, s2: &'a dyn Adaptor3dSurface, nb_u: i32, nb_v: i32, tol2: f64) -> Result<(), Failure> {
+    pub fn initialize(
+        &mut self,
+        s2: &'a dyn Adaptor3dSurface,
+        nb_u: i32,
+        nb_v: i32,
+        tol2: f64,
+    ) -> Result<(), Failure> {
         let u = (s2.first_u_parameter()?, s2.last_u_parameter()?);
         let v = (s2.first_v_parameter()?, s2.last_v_parameter()?);
         self.initialize_range(s2, (nb_u, nb_v), u, v, tol2)
@@ -205,8 +243,16 @@ impl<'a> GenExtSS<'a> {
     /// `Perform(S1, U1min, U1sup, V1min, V1sup, Tol1)`: the minimum and the maximum
     /// (done in any case);
     /// `extrema.perform_range(&s1, (0., 1.), (0., 1.), 1e-9)?`.
-    pub fn perform_range(&mut self, s1: &'a dyn Adaptor3dSurface, (u1min, u1sup): (f64, f64), (v1min, v1sup): (f64, f64), tol1: f64) -> Result<(), Failure> {
-        let s2 = self.s2.ok_or_else(|| null_object("Extrema_GenExtSS::Perform()"))?;
+    pub fn perform_range(
+        &mut self,
+        s1: &'a dyn Adaptor3dSurface,
+        (u1min, u1sup): (f64, f64),
+        (v1min, v1sup): (f64, f64),
+        tol1: f64,
+    ) -> Result<(), Failure> {
+        let s2 = self
+            .s2
+            .ok_or_else(|| null_object("Extrema_GenExtSS::Perform()"))?;
         self.f.initialize(s1, s2);
         (self.u1min, self.u1sup, self.v1min, self.v1sup) = (u1min, u1sup, v1min, v1sup);
         self.tol1 = tol1;
@@ -242,7 +288,12 @@ impl<'a> GenExtSS<'a> {
                 for (i2, row2) in self.points2.iter().enumerate() {
                     for (j2, p2) in row2.iter().enumerate() {
                         let dist: f64 = p1.square_distance(p2);
-                        let pair = SamplePair { n1u: i1 as i32 + 1, n1v: j1 as i32 + 1, n2u: i2 as i32 + 1, n2v: j2 as i32 + 1 };
+                        let pair = SamplePair {
+                            n1u: i1 as i32 + 1,
+                            n1v: j1 as i32 + 1,
+                            n2u: i2 as i32 + 1,
+                            n2v: j2 as i32 + 1,
+                        };
                         if dist < distmin {
                             (distmin, min_pair) = (dist, pair);
                         }
@@ -258,8 +309,17 @@ impl<'a> GenExtSS<'a> {
 
     // The minimum by math_BFGS from `uv` (stored in the function by Value and
     // GetStateNumber), or by math_FunctionSetRoot when BFGS fails.
-    fn refine_minimum(&mut self, s1: &dyn Adaptor3dSurface, s2: &dyn Adaptor3dSurface, uv: Vector<'static>) -> Result<(), Failure> {
-        let mut dist = FuncDistSS { s1, s2, failure: FailureCapture::default() };
+    fn refine_minimum(
+        &mut self,
+        s1: &dyn Adaptor3dSurface,
+        s2: &dyn Adaptor3dSurface,
+        uv: Vector<'static>,
+    ) -> Result<(), Failure> {
+        let mut dist = FuncDistSS {
+            s1,
+            s2,
+            failure: FailureCapture::default(),
+        };
         let mut solver = Bfgs::new(4)?;
         solver.perform(&mut dist, &uv)?;
         dist.failure.take()?;

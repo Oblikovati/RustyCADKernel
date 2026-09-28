@@ -48,7 +48,11 @@ const NB_PARTICLES: i32 = 48;
 fn is_quadric(surface_type: SurfaceType) -> bool {
     matches!(
         surface_type,
-        SurfaceType::Plane | SurfaceType::Cylinder | SurfaceType::Cone | SurfaceType::Sphere | SurfaceType::Torus
+        SurfaceType::Plane
+            | SurfaceType::Cylinder
+            | SurfaceType::Cone
+            | SurfaceType::Sphere
+            | SurfaceType::Torus
     )
 }
 
@@ -56,7 +60,11 @@ fn is_quadric(surface_type: SurfaceType) -> bool {
 fn is_conic(curve_type: CurveType) -> bool {
     matches!(
         curve_type,
-        CurveType::Line | CurveType::Circle | CurveType::Ellipse | CurveType::Hyperbola | CurveType::Parabola
+        CurveType::Line
+            | CurveType::Circle
+            | CurveType::Ellipse
+            | CurveType::Hyperbola
+            | CurveType::Parabola
     )
 }
 
@@ -82,8 +90,14 @@ fn get_curv_max_param_val(curve: &dyn Adaptor3dCurve) -> Result<f64, Failure> {
 // `GetSurfMaxParamVals`: the U and V bounds of a surface (from a swept hyperbola).
 fn get_surf_max_param_vals(surface: &dyn Adaptor3dSurface) -> Result<(f64, f64), Failure> {
     match surface.get_type()? {
-        SurfaceType::SurfaceOfExtrusion => Ok((get_curv_max_param_val(&*surface.basis_curve()?)?, MAX_PARAM_VAL)),
-        SurfaceType::SurfaceOfRevolution => Ok((MAX_PARAM_VAL, get_curv_max_param_val(&*surface.basis_curve()?)?)),
+        SurfaceType::SurfaceOfExtrusion => Ok((
+            get_curv_max_param_val(&*surface.basis_curve()?)?,
+            MAX_PARAM_VAL,
+        )),
+        SurfaceType::SurfaceOfRevolution => Ok((
+            MAX_PARAM_VAL,
+            get_curv_max_param_val(&*surface.basis_curve()?)?,
+        )),
         SurfaceType::OffsetSurface => get_surf_max_param_vals(&*surface.basis_surface()?),
         _ => Ok((MAX_PARAM_VAL, MAX_PARAM_VAL)),
     }
@@ -145,7 +159,13 @@ impl<'a> GenExtCS<'a> {
     }
     /// `Initialize(S, NbU, NbV, Tol2)`: on the surface bounds;
     /// `extrema.initialize(&surface, 10, 10, 1e-9)?`.
-    pub fn initialize(&mut self, surface: &'a dyn Adaptor3dSurface, nb_u: i32, nb_v: i32, tol2: f64) -> Result<(), Failure> {
+    pub fn initialize(
+        &mut self,
+        surface: &'a dyn Adaptor3dSurface,
+        nb_u: i32,
+        nb_v: i32,
+        tol2: f64,
+    ) -> Result<(), Failure> {
         let u = (surface.first_u_parameter()?, surface.last_u_parameter()?);
         let v = (surface.first_v_parameter()?, surface.last_v_parameter()?);
         (self.umin, self.usup, self.vmin, self.vsup) = (u.0, u.1, v.0, v.1);
@@ -189,14 +209,27 @@ impl<'a> GenExtCS<'a> {
         let dv: f64 = (self.vsup - self.vmin) / BORDER_DIVISOR;
         let (min_u, min_v) = (self.umin + du, self.vmin + dv);
         let (max_u, max_v) = (self.usup - du, self.vsup - dv);
-        let u_params = accumulated(min_u, (max_u - min_u) / f64::from(self.usample), self.usample)?;
-        let v_params = accumulated(min_v, (max_v - min_v) / f64::from(self.vsample), self.vsample)?;
-        let grid = GeomGridEvalSurface::from_adaptor(surface)?.evaluate_grid(&u_params, &v_params)?;
+        let u_params = accumulated(
+            min_u,
+            (max_u - min_u) / f64::from(self.usample),
+            self.usample,
+        )?;
+        let v_params = accumulated(
+            min_v,
+            (max_v - min_v) / f64::from(self.vsample),
+            self.vsample,
+        )?;
+        let grid =
+            GeomGridEvalSurface::from_adaptor(surface)?.evaluate_grid(&u_params, &v_params)?;
         self.surf_pnts = Vec::with_capacity((self.usample + 1).max(0) as usize);
         for i in 0..=self.usample {
             let mut row: Vec<Point3> = Vec::with_capacity((self.vsample + 1).max(0) as usize);
             for j in 0..=self.vsample {
-                row.push(*grid.value(i + 1, j + 1).map_err(|error| array_failure(error, "NCollection_Array2::Value"))?);
+                row.push(
+                    *grid
+                        .value(i + 1, j + 1)
+                        .map_err(|error| array_failure(error, "NCollection_Array2::Value"))?,
+                );
             }
             self.surf_pnts.push(row);
         }
@@ -204,10 +237,16 @@ impl<'a> GenExtCS<'a> {
     }
 
     fn surface(&self) -> Result<&'a dyn Adaptor3dSurface, Failure> {
-        self.s.ok_or_else(|| null_object("Extrema_GenExtCS::Perform()"))
+        self.s
+            .ok_or_else(|| null_object("Extrema_GenExtCS::Perform()"))
     }
     /// `Perform(C, NbT, Tol1)`: on the curve range; `extrema.perform(&curve, 12, 1e-9)?`.
-    pub fn perform(&mut self, curve: &'a dyn Adaptor3dCurve, nb_t: i32, tol1: f64) -> Result<(), Failure> {
+    pub fn perform(
+        &mut self,
+        curve: &'a dyn Adaptor3dCurve,
+        nb_t: i32,
+        tol1: f64,
+    ) -> Result<(), Failure> {
         (self.tmin, self.tsup) = (curve.first_parameter()?, curve.last_parameter()?);
         self.perform_range(curve, nb_t, (self.tmin, self.tsup), tol1)
     }
@@ -215,7 +254,13 @@ impl<'a> GenExtCS<'a> {
     /// on each half of a closed curve covering more than two thirds of its period,
     /// then only the minima of a divided curve;
     /// `extrema.perform_range(&curve, 12, (0., 1.), 1e-9)?`.
-    pub fn perform_range(&mut self, curve: &'a dyn Adaptor3dCurve, nb_t: i32, (tmin, tsup): (f64, f64), tol1: f64) -> Result<(), Failure> {
+    pub fn perform_range(
+        &mut self,
+        curve: &'a dyn Adaptor3dCurve,
+        nb_t: i32,
+        (tmin, tsup): (f64, f64),
+        tol1: f64,
+    ) -> Result<(), Failure> {
         self.done = false;
         let surface = self.surface()?;
         self.f.initialize(curve, surface);
@@ -322,7 +367,11 @@ pub(super) fn triple(a: f64, b: f64, c: f64) -> Result<Vector<'static>, Failure>
 
 /// The `n + 1` parameters `start + i step`, accumulated as natively, as a 1-based
 /// array for GeomGridEval.
-fn accumulated(start: f64, step: f64, n: i32) -> Result<rustycad_tkernel::ncollection::Array1<'static, f64>, Failure> {
+fn accumulated(
+    start: f64,
+    step: f64,
+    n: i32,
+) -> Result<rustycad_tkernel::ncollection::Array1<'static, f64>, Failure> {
     let mut array = rustycad_tkernel::ncollection::Array1::with_bounds(1, n + 1)
         .map_err(|error| array_failure(error, "Extrema_GenExtCS parameters"))?;
     let mut value: f64 = start;

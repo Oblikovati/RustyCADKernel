@@ -1,5 +1,6 @@
 //! The Extrema surface-surface requests; the counterpart of
 //! tools/oracle/tkgeombase_probe_extrema_ss.cxx (same encoding and token order).
+#![allow(clippy::unit_arg, clippy::type_complexity)]
 use super::common::{Reader, attempt, end, flag, int, real};
 use super::extrema_el::ponsurf;
 use super::extrema_ps::surface;
@@ -183,7 +184,12 @@ fn ss_body(r: &mut Reader) -> Result<(), Failure> {
         d.initialize(&b, p2, t2)?;
         d.perform(&a, p1, t1)?;
         ss_result(&d);
-        let bounds = [a.first_u_parameter()?, a.last_u_parameter()?, a.first_v_parameter()?, a.last_v_parameter()?];
+        let bounds = [
+            a.first_u_parameter()?,
+            a.last_u_parameter()?,
+            a.first_v_parameter()?,
+            a.last_v_parameter()?,
+        ];
         d.perform(&a, bounds, t1)?;
         ss_result(&d);
         Ok(())

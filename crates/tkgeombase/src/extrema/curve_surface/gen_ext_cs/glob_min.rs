@@ -46,6 +46,8 @@ impl Seeding {
     }
     /// A sample replaces the worst particle when it is nearer (`aSqDist <
     /// aParticle->Distance`).
+    // The negated test keeps the native NaN semantics.
+    #[allow(clippy::neg_cmp_op_on_partial_ord)]
     pub fn offer(&mut self, position: &[f64], sq_dist: f64) -> Result<(), Failure> {
         if !(sq_dist < self.worst) {
             return Ok(());
@@ -61,7 +63,10 @@ impl Seeding {
 }
 
 /// `inf + (sup - inf) / aBorderDivisor` and `sup - (sup - inf) / aBorderDivisor`.
-pub(super) fn inner_bounds(inf: &Vector<'_>, sup: &Vector<'_>) -> Result<(Vector<'static>, Vector<'static>), Failure> {
+pub(super) fn inner_bounds(
+    inf: &Vector<'_>,
+    sup: &Vector<'_>,
+) -> Result<(Vector<'static>, Vector<'static>), Failure> {
     let mut min: Vector<'static> = Vector::with_bounds(1, inf.length())?;
     let mut max: Vector<'static> = Vector::with_bounds(1, inf.length())?;
     for i in 1..=inf.length() {
@@ -88,11 +93,16 @@ impl GenExtCS<'_> {
         let min_resolution: f64 = scale_factor
             * std_min(
                 resolution_cu,
-                std_min(step_su / surface.u_resolution(1.0)?, step_sv / surface.v_resolution(1.0)?),
+                std_min(
+                    step_su / surface.u_resolution(1.0)?,
+                    step_sv / surface.v_resolution(1.0)?,
+                ),
             );
         if min_resolution > real::epsilon(1.0) && resolution_cu > min_resolution {
             let max_nb_nodes: i32 = 50;
-            let raised: i32 = max_nb_nodes.min(real::real_to_int(f64::from(nb_samples) * resolution_cu / min_resolution));
+            let raised: i32 = max_nb_nodes.min(real::real_to_int(
+                f64::from(nb_samples) * resolution_cu / min_resolution,
+            ));
             return Ok((raised, span / f64::from(raised)));
         }
         Ok((nb_samples, step_c))
@@ -111,8 +121,12 @@ impl GenExtCS<'_> {
         let step_cu: f64 = (max_tuv[1] - min_tuv[1]) / f64::from(self.tsample);
         let step_su: f64 = (max_tuv[2] - min_tuv[2]) / f64::from(self.usample);
         let step_sv: f64 = (max_tuv[3] - min_tuv[3]) / f64::from(self.vsample);
-        let (new_csample, step_cu) =
-            self.corrected_curve_samples(curve, (self.tsample, step_cu), (step_su, step_sv), max_tuv[1] - min_tuv[1])?;
+        let (new_csample, step_cu) = self.corrected_curve_samples(
+            curve,
+            (self.tsample, step_cu),
+            (step_su, step_sv),
+            max_tuv[1] - min_tuv[1],
+        )?;
         let mut curv_pnts: Vec<Point3> = Vec::with_capacity((new_csample + 1).max(0) as usize);
         let mut cu1: f64 = min_tuv[1];
         for _ in 0..=new_csample {
@@ -160,8 +174,12 @@ impl GenExtCS<'_> {
         let step_ct: f64 = (max_t[1] - min_t[1]) / f64::from(new_csample);
         let step_su: f64 = (tuv_sup[2] - tuv_inf[2]) / f64::from(self.usample);
         let step_sv: f64 = (tuv_sup[3] - tuv_inf[3]) / f64::from(self.vsample);
-        let (new_csample, step_ct) =
-            self.corrected_curve_samples(curve, (new_csample, step_ct), (step_su, step_sv), max_t[1] - min_t[1])?;
+        let (new_csample, step_ct) = self.corrected_curve_samples(
+            curve,
+            (new_csample, step_ct),
+            (step_su, step_sv),
+            max_t[1] - min_t[1],
+        )?;
         let surface = self.surface()?;
         let mut function = GlobOptFuncCQuadric::with_range(curve, t_inf[1], t_sup[1]);
         function.load_quad(surface, (tuv_inf[2], tuv_sup[2]), (tuv_inf[3], tuv_sup[3]))?;

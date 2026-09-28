@@ -72,9 +72,11 @@ pub use point_curve::{
     LocateExtPC2d, PCFOfEPCOfELPCOfLocateExtPC, PCFOfEPCOfELPCOfLocateExtPC2d, PCFOfEPCOfExtPC,
     PCFOfEPCOfExtPC2d, PCLocFOfLocEPCOfLocateExtPC, PCLocFOfLocEPCOfLocateExtPC2d,
 };
-pub use point_surface::{ExtPExtS, ExtPRevS, ExtPS, FuncPSDist, FuncPSNorm, GenExtPS, GenLocateExtPS, Sampling};
-pub use surface_surface::{ExtSS, FuncExtSS, GenExtSS};
+pub use point_surface::{
+    ExtPExtS, ExtPRevS, ExtPS, FuncPSDist, FuncPSNorm, GenExtPS, GenLocateExtPS, Sampling,
+};
 pub use pon::{POnCurv, POnCurv2d, POnCurve, POnSurf, POnSurfParams};
+pub use surface_surface::{ExtSS, FuncExtSS, GenExtSS};
 
 /// `Extrema_ElementType`: the grid element that holds a point on surface.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash)]

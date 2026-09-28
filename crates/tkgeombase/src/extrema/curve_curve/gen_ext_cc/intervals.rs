@@ -147,12 +147,11 @@ pub(super) fn change_intervals(ints: &[f64], nb_ints: i32) -> Result<Vec<f64>, F
         return Err(out_of_range(message, ints.len() as i32, size as i32));
     }
     new_ints[..ints.len()].copy_from_slice(ints);
-    let mut nb_last: usize = ints.len();
-    for _ in 0..(nb_ints - (ints.len() as i32 - 1)).max(0) {
+    let nb_added: usize = (nb_ints - (ints.len() as i32 - 1)).max(0) as usize;
+    for nb_last in ints.len()..ints.len() + nb_added {
         let max_ind: usize = longest_interval(&new_ints[..nb_last]);
         let t: f64 = (new_ints[max_ind + 1] + new_ints[max_ind]) / 2.;
         new_ints.copy_within(max_ind + 1..nb_last, max_ind + 2);
-        nb_last += 1;
         new_ints[max_ind + 1] = t;
     }
     Ok(new_ints)

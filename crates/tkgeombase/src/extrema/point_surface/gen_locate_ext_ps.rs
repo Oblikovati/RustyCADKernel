@@ -49,6 +49,10 @@ fn pair(first: f64, second: f64) -> Result<Vector<'static>, Failure> {
 
 // The tolerance of `CorrectTol` for one parameter: PConfusion raised by one decade
 // per decade of `Epsilon(value)` above `Epsilon(1)`, or None below it.
+// The negated test keeps the native NaN semantics.
+#[allow(clippy::neg_cmp_op_on_partial_ord)]
+// 0.43429 is the native literal, not LOG10_E.
+#[allow(clippy::approx_constant)]
 fn corrected_tolerance(value: f64) -> Option<f64> {
     let eps_ref: f64 = real::epsilon(1.);
     let eps: f64 = real::epsilon(value);
@@ -115,11 +119,8 @@ impl<'a> GenLocateExtPS<'a> {
         let d0: f64 = point.square_distance(&surface.value(u0, v0)?);
         for iu in -1..=1 {
             let u_range = (surface.first_u_parameter()?, surface.last_u_parameter()?);
-            let u: f64 = clamp_unless_periodic(
-                u0 + f64::from(iu) * du,
-                surface.is_u_periodic()?,
-                u_range,
-            );
+            let u: f64 =
+                clamp_unless_periodic(u0 + f64::from(iu) * du, surface.is_u_periodic()?, u_range);
             for iv in -1..=1 {
                 if iu == 0 && iv == 0 {
                     continue;
@@ -184,7 +185,10 @@ impl<'a> GenLocateExtPS<'a> {
     // math_NewtonFunctionSetRoot when it fails or when the tolerances were corrected.
     fn perform_normal(&mut self, point: Point3, u0: f64, v0: f64) -> Result<(), Failure> {
         let start: Vector<'static> = pair(u0, v0)?;
-        let bound_inf = pair(self.surf.first_u_parameter()?, self.surf.first_v_parameter()?)?;
+        let bound_inf = pair(
+            self.surf.first_u_parameter()?,
+            self.surf.first_v_parameter()?,
+        )?;
         let bound_sup = pair(self.surf.last_u_parameter()?, self.surf.last_v_parameter()?)?;
         let mut function = FuncPSNorm::with_point_surface(point, self.surf);
         let mut tol: Vector<'static> = pair(self.tol_u, self.tol_v)?;

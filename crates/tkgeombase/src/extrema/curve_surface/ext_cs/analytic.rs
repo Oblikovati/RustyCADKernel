@@ -52,7 +52,12 @@ impl ExtCS<'_> {
             let (pc, ps): (POnCurv, POnSurf) = self.ext_el_cs.points(i)?;
             let (u, v) = ps.parameter();
             let dist: f64 = self.ext_el_cs.square_distance(i)?;
-            self.add_solution(curve, (pc.parameter(), u, v), (*pc.value(), *ps.value()), dist)?;
+            self.add_solution(
+                curve,
+                (pc.parameter(), u, v),
+                (*pc.value(), *ps.value()),
+                dist,
+            )?;
         }
         if self.sq_dist.is_empty() && nb_ext > 0 {
             // The analytical extrema seem to be out of the curve or surface bounds:
@@ -78,6 +83,8 @@ impl ExtCS<'_> {
 
     // The ends of the curve (finite ones) projected on the surface; the nearer is
     // added, or both when their square distances are within Confusion.
+    // The negated test keeps the native NaN semantics.
+    #[allow(clippy::neg_cmp_op_on_partial_ord)]
     fn add_curve_ends(&mut self, curve: &dyn Adaptor3dCurve) -> Result<(), Failure> {
         let at: [f64; 2] = [self.ucinf, self.ucsup];
         let mut ends: [Option<(Point3, EndProjection, f64)>; 2] = [None, None];

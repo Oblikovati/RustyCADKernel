@@ -74,7 +74,10 @@ impl<'a> FuncExtSS<'a> {
     pub fn nb_equations(&self) -> i32 {
         4
     }
-    fn surfaces(&self, member: &str) -> Result<(&'a dyn Adaptor3dSurface, &'a dyn Adaptor3dSurface), Failure> {
+    fn surfaces(
+        &self,
+        member: &str,
+    ) -> Result<(&'a dyn Adaptor3dSurface, &'a dyn Adaptor3dSurface), Failure> {
         match (self.s1, self.s2) {
             (Some(s1), Some(s2)) => Ok((s1, s2)),
             _ => Err(type_mismatch(&format!("Extrema_FuncExtSS::{member}"))),
@@ -104,7 +107,12 @@ impl<'a> FuncExtSS<'a> {
         self.values(uv, &mut f, df)
     }
     /// `Values(UV, F, DF)`; `function.values(&uv, &mut f, &mut df)?`.
-    pub fn values(&mut self, uv: &Vector<'_>, f: &mut Vector<'_>, df: &mut Matrix<'_>) -> Result<bool, Failure> {
+    pub fn values(
+        &mut self,
+        uv: &Vector<'_>,
+        f: &mut Vector<'_>,
+        df: &mut Matrix<'_>,
+    ) -> Result<bool, Failure> {
         let (s1, s2) = self.surfaces("Values()")?;
         self.set_parameters(uv);
         let a = s1.d2(self.u1, self.v1)?;
@@ -190,7 +198,12 @@ impl FunctionSetWithDerivatives for FuncExtSS<'_> {
         let result = FuncExtSS::derivatives(self, point, jacobian);
         self.failure.keep(result).unwrap_or(false)
     }
-    fn values(&mut self, point: &Vector<'_>, residual: &mut Vector<'_>, jacobian: &mut Matrix<'_>) -> bool {
+    fn values(
+        &mut self,
+        point: &Vector<'_>,
+        residual: &mut Vector<'_>,
+        jacobian: &mut Matrix<'_>,
+    ) -> bool {
         let result = FuncExtSS::values(self, point, residual, jacobian);
         self.failure.keep(result).unwrap_or(false)
     }

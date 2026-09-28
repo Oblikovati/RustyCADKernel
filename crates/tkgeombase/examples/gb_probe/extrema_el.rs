@@ -1,5 +1,6 @@
 //! The Extrema elementary requests; the counterpart of
 //! tools/oracle/tkgeombase_probe_extrema_el.cxx (same encoding and token order).
+#![allow(clippy::unit_arg, clippy::type_complexity)]
 use super::common::{Reader, attempt, end, flag, int, pnt, pnt2d, real};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkgeombase::extrema::{

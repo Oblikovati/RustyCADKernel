@@ -51,7 +51,12 @@ impl ExtCS<'_> {
             return Ok((cfirst, clast));
         }
         let mut surf_box: BoundingBox3 = BoundingBox3::default();
-        AddSurface::add_range(self.surface()?, patch, precision::confusion(), &mut surf_box)?;
+        AddSurface::add_range(
+            self.surface()?,
+            patch,
+            precision::confusion(),
+            &mut surf_box,
+        )?;
         let [xmin, ymin, zmin, xmax, ymax, zmax] = surf_box.get()?;
         let corners: [Point3; 8] = [
             Point3::new(xmin, ymin, zmin),
@@ -90,17 +95,35 @@ impl ExtCS<'_> {
             return self.project_line_point(curve, (cfirst + clast) / 2., patch);
         }
         let ranges: [f64; 6] = [cfirst, clast, patch[0], patch[1], patch[2], patch[3]];
-        let ext = GenExtCS::with_ranges(curve, surface, (NB_T, nb_u, nb_v), ranges, (self.tol_c, self.tol_s))?;
+        let ext = GenExtCS::with_ranges(
+            curve,
+            surface,
+            (NB_T, nb_u, nb_v),
+            ranges,
+            (self.tol_c, self.tol_s),
+        )?;
         self.add_gen_solutions(curve, &ext)
     }
 
     // The single parameter left of the line: the minima of Extrema_ExtPS from its
     // point, added with a default point on the curve (the origin, as natively).
-    fn project_line_point(&mut self, curve: &dyn Adaptor3dCurve, c_par: f64, patch: [f64; 4]) -> Result<(), Failure> {
+    fn project_line_point(
+        &mut self,
+        curve: &dyn Adaptor3dCurve,
+        c_par: f64,
+        patch: [f64; 4],
+    ) -> Result<(), Failure> {
         let pm: Point3 = curve.value(c_par)?;
         let surface = self.surface()?;
         let tolerances = (self.tol_s, self.tol_s);
-        let ext_ps = ExtPS::with_range(pm, surface, (patch[0], patch[1]), (patch[2], patch[3]), tolerances, (ExtFlag::Min, ExtAlgo::Grad))?;
+        let ext_ps = ExtPS::with_range(
+            pm,
+            surface,
+            (patch[0], patch[1]),
+            (patch[2], patch[3]),
+            tolerances,
+            (ExtFlag::Min, ExtAlgo::Grad),
+        )?;
         self.done = ext_ps.is_done();
         if !self.done {
             return Ok(());
@@ -109,13 +132,22 @@ impl ExtCS<'_> {
         for i in 1..=ext_ps.nb_ext()? {
             let ps: POnSurf = ext_ps.point(i)?;
             let (u, v) = ps.parameter();
-            self.add_solution(curve, (c_par, u, v), (*pc.value(), *ps.value()), ext_ps.square_distance(i)?)?;
+            self.add_solution(
+                curve,
+                (c_par, u, v),
+                (*pc.value(), *ps.value()),
+                ext_ps.square_distance(i)?,
+            )?;
         }
         Ok(())
     }
 
     // The solutions of Extrema_GenExtCS.
-    fn add_gen_solutions(&mut self, curve: &dyn Adaptor3dCurve, ext: &GenExtCS<'_>) -> Result<(), Failure> {
+    fn add_gen_solutions(
+        &mut self,
+        curve: &dyn Adaptor3dCurve,
+        ext: &GenExtCS<'_>,
+    ) -> Result<(), Failure> {
         self.done = ext.is_done();
         if !self.done {
             return Ok(());
@@ -123,14 +155,23 @@ impl ExtCS<'_> {
         for i in 1..=ext.nb_ext()? {
             let (pc, ps) = (ext.point_on_curve(i)?, ext.point_on_surface(i)?);
             let (u, v) = ps.parameter();
-            self.add_solution(curve, (pc.parameter(), u, v), (*pc.value(), *ps.value()), ext.square_distance(i)?)?;
+            self.add_solution(
+                curve,
+                (pc.parameter(), u, v),
+                (*pc.value(), *ps.value()),
+                ext.square_distance(i)?,
+            )?;
         }
         Ok(())
     }
 
     /// The generic solution: Extrema_GenExtCS (a hyperbola within `[-20, 20]`, at
     /// least 13 samples on a circle or a B-spline), then the sharp points.
-    pub(super) fn perform_generic(&mut self, curve: &dyn Adaptor3dCurve, ctype: CurveType) -> Result<(), Failure> {
+    pub(super) fn perform_generic(
+        &mut self,
+        curve: &dyn Adaptor3dCurve,
+        ctype: CurveType,
+    ) -> Result<(), Failure> {
         let surface = self.surface()?;
         let mut ext = GenExtCS::new();
         ext.initialize(surface, NB_UV, NB_UV, self.tol_s)?;
@@ -140,7 +181,11 @@ impl ExtCS<'_> {
             // To avoid an overflow.
             ext.perform_range(curve, NB_T, (tmin, tmax), self.tol_c)?;
         } else {
-            let nb_t: i32 = if matches!(ctype, CurveType::Circle | CurveType::BSplineCurve) { 13 } else { NB_T };
+            let nb_t: i32 = if matches!(ctype, CurveType::Circle | CurveType::BSplineCurve) {
+                13
+            } else {
+                NB_T
+            };
             ext.perform(curve, nb_t, self.tol_c)?;
         }
         self.add_gen_solutions(curve, &ext)?;
@@ -156,8 +201,8 @@ impl ExtCS<'_> {
     // The projections of the inner C1 breaks of the curve: the nearest one of each.
     fn add_sharp_points(&mut self, curve: &dyn Adaptor3dCurve) -> Result<(), Failure> {
         let nb_intervals: i32 = curve.nb_intervals(Shape::C1)?;
-        let mut sharp_points: Array1<'static, f64> =
-            Array1::with_bounds(1, nb_intervals + 1).map_err(|error| array_failure(error, "Extrema_ExtCS sharp points"))?;
+        let mut sharp_points: Array1<'static, f64> = Array1::with_bounds(1, nb_intervals + 1)
+            .map_err(|error| array_failure(error, "Extrema_ExtCS sharp points"))?;
         curve.intervals(&mut sharp_points, Shape::C1)?;
         let surface = self.surface()?;
         let mut proj_ps = ExtPS::new();
