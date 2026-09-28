@@ -26,9 +26,15 @@ pub enum TransformForm {
     Translation = 2,
     /// Rotation, including zero-angle rotations.
     Rotation = 1,
+    /// Point (central) symmetry, gp_PntMirror.
+    PointMirror = 3,
+    /// Plane (bilateral) symmetry, gp_Ax2Mirror.
+    PlaneMirror = 5,
+    /// Non-orthogonal general transformation, gp_Other (gp_GTrsf/gp_GTrsf2d only).
+    Other = 8,
     /// Composition of different transformation forms.
     Compound = 7,
-    /// Axis symmetry (the planar representation has scale -1).
+    /// Axis symmetry, gp_Ax1Mirror (the planar representation has scale -1).
     AxisMirror = 4,
     /// Uniform scaling, including unit and negative factors.
     Scale = 6,

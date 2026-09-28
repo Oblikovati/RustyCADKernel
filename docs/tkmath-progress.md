@@ -535,8 +535,8 @@ gp_Ax22d constructors renormalize the quarter-turned direction through
 `gp_Dir2d::SetCoord`. The native zero-norm raise there is unreachable, because a
 stored direction is never zero. Exception messages add the offending values to the
 native text. The planar conics' `Transform` members accept every Transform2 form.
-Transform2 itself cannot yet build point-mirror or scale forms, so those branches of
-`gp_Dir2d::Transform` stay untested until gp_Trsf2d is complete.
+Transform2 now builds every gp_Trsf2d form, and the point-mirror and scale branches of
+`gp_Dir2d::Transform` are covered by the planar gp probe (see below).
 
 ### BVH core (phase 1)
 
@@ -579,3 +579,46 @@ the schedule, as upstream. A failing build tool releases its busy slot. Upstream
 tests that check constructors with `static_assert` use `const` items, and the
 validity check runs at test time. Uninitialized ray-hit locals start as NaN.
 
+
+### Planar gp algebra and transformations (API completion)
+
+This work adds no upstream suite. It completes the public API of gp_XY, gp_Mat2d
+(`Matrix2`), gp_Trsf2d (`Transform2`), gp_GTrsf2d (`GeneralTransform2`), gp_Dir2d,
+gp_Vec2d, gp_Pnt2d and gp_Lin2d, and adds gp_Dir2d::D (`StandardDirection2`) with the
+gp_Ax2d constructors that use it. `porting/parity.json` maps every public member.
+Supplemental tests are in `gp_planar_behavior`, `gp_planar_primitive_behavior` and
+`gp_trsf2d_behavior`. The planar gp probe sends 4,316 differential requests
+(`gp2d_xy`, `gp2d_mat`, `gp2d_trsf`, `gp2d_gtrsf`, `gp2d_geom`), and all match the
+native bits.
+
+The port keeps these native results:
+
+- `gp_Mat2d::Multiply` stores the new `[0][1]` before it reads the operand's `[0][1]`
+  to compute `[1][1]`. `gp_Mat2d::Power`, `gp_Trsf2d::Power` and `gp_GTrsf2d::Power`
+  square a temporary with `M.Multiply(M)`, so every power of 3 or more, or of -3 or
+  less, mixes the new and the old coefficient. For example, a 0.3 rad rotation cubed
+  is not the 0.9 rad rotation. `Matrix2::square_in_place_aliased` reproduces this. A
+  Rust `multiply` receives a copy, so a user self-product has no such effect.
+- The gp_Mat2d out-of-line index and determinant checks exist only with OCCT_DEBUG.
+  A release build reads and writes column or row 2 for every index other than 1, and
+  inverts a singular matrix to infinities. `occt-debug-checks` enables the raises.
+- `gp_Trsf2d::IsNegative` tests the unscaled matrix, so a point mirror (identity
+  matrix, scale -1) is not negative. `VectorialPart` scales only the diagonal of the
+  scale and point-mirror forms. `PreMultiply` by a translation keeps the Rotation form.
+- `gp_Trsf2d(const gp_Trsf&)` copies the 3D form, including forms that have no planar
+  meaning. `SetValues` raises only for `|det| < Resolution`. If orthogonalization then
+  raises, the scale, the Compound form and the divided matrix stay assigned.
+- `gp_GTrsf2d::Power(n)` with a negative `n` and a similarity form inverts, then calls
+  `gp_Trsf2d::Power(n)`, which inverts again. The result is `T^|n|` up to rounding.
+- A gp_Dir2d built from components whose squared norm overflows is stored as a zero
+  vector. `gp_Lin2d::Normal` is `noexcept`, so natively it calls `std::terminate` for
+  such a direction. Rust returns the ConstructionError, and the corpus avoids that input.
+- `gp_Vec2d::GetNormal` multiplies X by -1 and keeps the sign of a NaN. The copying
+  `gp_Lin2d::Translated(P1,P2)` adds `P2 - P1`, but the in-place `Translate` adds `P2`
+  and then subtracts `P1`.
+
+Deliberate Rust deviations: gp_Trsf2d setters that replace the whole state are
+constructors (`mirror_point`, `scaling`, `transformation_between`, ...) plus `set_*`
+methods that call them. `gp_GTrsf2d::operator*` returns `Result`, because it raises
+for a non-orthogonal similarity pair. gp_Mat2d has no `operator*=(gp_Mat2d)`, so
+`Matrix2` has no `MulAssign<Matrix2>`.

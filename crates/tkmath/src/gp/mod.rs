@@ -40,7 +40,10 @@ pub use vector::Vector3;
 mod general_transform;
 pub use general_transform::GeneralTransform3;
 mod planar;
-pub use planar::{Axis2d, Axis22d, Direction2, Point2, Transform2, Vector2, Xy};
+pub use planar::{
+    Axis2d, Axis22d, Direction2, GeneralTransform2, Matrix2, Point2, StandardDirection2,
+    Transform2, Vector2, Xy,
+};
 mod line;
 pub use line::Line3;
 pub use planar::{Circle2, Ellipse2, Hyperbola2, Line2, Parabola2};

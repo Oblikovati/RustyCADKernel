@@ -80,7 +80,7 @@ impl<T: BoxReal> CompactBox2<T> {
         )
     }
     fn transformed_half(&self, transform: Transform2) -> [f64; 2] {
-        let matrix = transform.matrix();
+        let matrix = *transform.matrix().coefficients();
         let half = self.half.map(BoxReal::to_double);
         std::array::from_fn(|i| {
             transform.scale_factor().abs()

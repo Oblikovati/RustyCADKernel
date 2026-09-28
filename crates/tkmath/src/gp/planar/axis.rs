@@ -14,7 +14,7 @@
 // Rust translation of FoundationClasses/TKMath/gp/gp_Ax2d.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! gp_Ax2d planar oriented axis.
-use super::{Direction2, Point2, Transform2, Vector2};
+use super::{Direction2, Point2, StandardDirection2, Transform2, Vector2};
 use rustycad_tkernel::standard::dump::{self, DumpOutput, DumpStream};
 use std::io;
 /// A planar oriented axis; `Axis2d::new(Point2::default(),Direction2::X)`.
@@ -30,6 +30,14 @@ impl Axis2d {
             location,
             direction,
         }
+    }
+    /// gp_Ax2d(gp_Pnt2d, gp_Dir2d::D); `Axis2d::with_standard(origin,StandardDirection2::Y)`.
+    pub const fn with_standard(location: Point2, direction: StandardDirection2) -> Self {
+        Self::new(location, Direction2::from_standard(direction))
+    }
+    /// gp_Ax2d(gp_Dir2d::D) at the origin; `Axis2d::from_standard(StandardDirection2::Y)`.
+    pub const fn from_standard(direction: StandardDirection2) -> Self {
+        Self::with_standard(Point2::new(0.0, 0.0), direction)
     }
     /// Returns the origin; `axis.location()`.
     pub const fn location(&self) -> Point2 {
