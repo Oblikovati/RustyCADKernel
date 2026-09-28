@@ -51,6 +51,8 @@
 #include "tkgeombase_probe_femtool_curve.cxx"
 #include "tkgeombase_probe_appparcurves.cxx"
 #include "tkgeombase_probe_appparcurves_fit.cxx"
+#include "tkgeombase_probe_bndlib.cxx"
+#include "tkgeombase_probe_gcpnts.cxx"
 #include "tkgeombase_probe_appcont.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
@@ -187,6 +189,24 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"apc_bspfunction", gb_apc_bspfunction_case},
  {"apc_gradient", gb_apc_gradient_case},
  {"apc_bspgradient", gb_apc_bspgradient_case},
+ // GeomBndLib and BndLib (tkgeombase_probe_bndlib.cxx)
+ {"bnd_curve3d", gb_bnd_curve3d_case},
+ {"bnd_curve2d", gb_bnd_curve2d_case},
+ {"bnd_surface", gb_bnd_surface_case},
+ {"bnd_gp", gb_bnd_gp_case},
+ {"bnd_helpers", gb_bnd_helpers_case},
+ // CPnts and GCPnts (tkgeombase_probe_gcpnts.cxx)
+ {"gcp_length", gb_gcp_length_case},
+ {"cpnts_abscissa", gb_cpnts_abscissa_case},
+ {"cpnts_udefl", gb_cpnts_udefl_case},
+ {"gcp_abscissa", gb_gcp_abscissa_case},
+ {"gcp_uabs", gb_gcp_uabs_case},
+ {"gcp_quabs", gb_gcp_quabs_case},
+ {"gcp_udefl", gb_gcp_udefl_case},
+ {"gcp_qudefl", gb_gcp_qudefl_case},
+ {"gcp_tdefl", gb_gcp_tdefl_case},
+ {"gcp_arc_step", gb_gcp_arc_step_case},
+ {"gcp_dist", gb_gcp_dist_case},
  // AppCont (tkgeombase_probe_appcont.cxx)
  {"acc_table", gb_acc_table_case},
  {"acc_offsets", gb_acc_offsets_case},

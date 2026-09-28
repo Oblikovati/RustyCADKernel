@@ -21,6 +21,8 @@
 //! ported; docs/tkgeombase-progress.md lists the ported packages.
 pub mod app_cont;
 pub mod app_par_curves;
+pub mod bnd_lib;
+pub mod cpnts;
 mod defl_curv_intervals;
 pub mod extrema_pc;
 pub mod extrema_pc2d;
@@ -30,6 +32,8 @@ pub mod fem_tool;
 pub mod gc;
 pub mod gce;
 pub mod gce2d;
+pub mod gcpnts;
+pub mod geom_bnd_lib;
 pub mod geom_lprop;
 pub mod geom_tools;
 pub mod gprop;
@@ -43,4 +47,3 @@ mod native_text;
 mod plane_projection;
 #[doc(hidden)]
 pub mod probe_support;
-mod tangential_deflection;

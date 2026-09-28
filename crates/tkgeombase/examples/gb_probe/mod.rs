@@ -3,11 +3,13 @@
 // uses a subset of them, so unused ones are expected in these two modules.
 pub mod app_cont;
 pub mod app_par_curves;
+pub mod bndlib;
 #[allow(dead_code, unused_imports)]
 pub mod common;
 pub mod fem_tool;
 pub mod gc;
 pub mod gce;
+pub mod gcpnts;
 pub mod geom_tools;
 pub mod gprop;
 pub mod hermit;

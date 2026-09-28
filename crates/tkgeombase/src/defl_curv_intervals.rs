@@ -20,9 +20,7 @@
 //!
 //! The classic Extrema package is not ported yet; this crate-private module ports
 //! exactly these two functions for ExtremaPC, and the Extrema port will replace it.
-use crate::tangential_deflection::{
-    DeflectionCriteria, DeflectionCurve, PlanarCurve, SpatialCurve, TangentialDeflection,
-};
+use crate::gcpnts::{TCurveTypes, TangentialCriteria, TangentialDeflection};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
@@ -40,7 +38,7 @@ pub(crate) fn defl_curv_intervals_2d(curve: &dyn Adaptor2dCurve2d) -> Result<Vec
         let t: f64 = sample_parameter(tf, tl, i);
         length += origin.distance(curve.value(t)?);
     }
-    deflection_parameters(&PlanarCurve(curve), (tf, tl), length)
+    deflection_parameters(curve, (tf, tl), length)
 }
 
 /// `Extrema_CurveTool::DeflCurvIntervals(C)`; the values of the 1-based native array,
@@ -53,7 +51,7 @@ pub(crate) fn defl_curv_intervals_3d(curve: &dyn Adaptor3dCurve) -> Result<Vec<f
         let t: f64 = sample_parameter(tf, tl, i);
         length += origin.distance(&curve.value(t)?);
     }
-    deflection_parameters(&SpatialCurve(curve), (tf, tl), length)
+    deflection_parameters(curve, (tf, tl), length)
 }
 
 // `(tf * (nbpnts - i) + (i - 1) * tl) / (nbpnts - 1)` with nbpnts = 23. The sum
@@ -64,8 +62,8 @@ fn sample_parameter(tf: f64, tl: f64, i: i32) -> f64 {
 
 // The deflection-sized sampling of `[tf, tl]`, or its two bounds for a short, slow,
 // long-range or strongly deflected curve.
-fn deflection_parameters(
-    curve: &impl DeflectionCurve,
+fn deflection_parameters<C: TCurveTypes + ?Sized>(
+    curve: &C,
     (tf, tl): (f64, f64),
     length: f64,
 ) -> Result<Vec<f64>, Failure> {
@@ -79,9 +77,9 @@ fn deflection_parameters(
     if defl > maxdefl {
         return Ok(vec![tf, tl]);
     }
-    let criteria = DeflectionCriteria {
-        angular: PI / 6.0,
-        curvature: defl,
+    let criteria = TangentialCriteria {
+        angular_deflection: PI / 6.0,
+        curvature_deflection: defl,
         minimum_of_points: 2,
         u_tol: std_max(0.00001 * (tl - tf), precision::p_confusion()),
         min_len: std_max(0.00001 * length, precision::confusion()),
