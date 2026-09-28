@@ -39,6 +39,9 @@
 #include "tkgeombase_probe_common.cxx"
 #include "tkgeombase_probe_gce.cxx"
 #include "tkgeombase_probe_gc.cxx"
+#include "tkgeombase_probe_lprop.cxx"
+#include "tkgeombase_probe_gprop.cxx"
+#include "tkgeombase_probe_hermit.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -98,6 +101,22 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gc_scale2d", gb_gc_scale2d_case},
  {"gc_translation", gb_gc_translation_case},
  {"gc_translation2d", gb_gc_translation2d_case},
+ // LProp and GeomLProp (tkgeombase_probe_lprop.cxx)
+ {"lprop_cl2d", gb_lprop_cl2d_case},
+ {"lprop_cl3d", gb_lprop_cl3d_case},
+ {"lprop_cl3d_adaptor", gb_lprop_cl3d_adaptor_case},
+ {"lprop_sl", gb_lprop_sl_case},
+ {"lprop_curinf2d", gb_lprop_curinf2d_case},
+ {"lprop_curandinf", gb_lprop_curandinf_case},
+ {"lprop_continuity", gb_lprop_continuity_case},
+ // GProp (tkgeombase_probe_gprop.cxx)
+ {"gprop_points", gb_gprop_points_case},
+ {"gprop_pequation", gb_gprop_pequation_case},
+ {"gprop_elementary", gb_gprop_elementary_case},
+ {"gprop_compose", gb_gprop_compose_case},
+ {"gprop_hoperator", gb_gprop_hoperator_case},
+ // Hermit (tkgeombase_probe_hermit.cxx)
+ {"hermit", gb_hermit_case},
 };
 int main() {
  std::string line;

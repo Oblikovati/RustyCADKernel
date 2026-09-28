@@ -31,7 +31,10 @@ pub(super) struct PolyKnots {
 
 // The loop state of one test: its knots, the poles and the marks.
 struct Test<'a> {
-    knots: Vec<f64>,
+    knots: Array1<'static, f64>,
+    // The native I1 and I3: the LocateU indices of Ux and Uy, reused as the hints
+    // (in and out) of every LocateParameter call.
+    hints: [i32; 2],
     poles: [f64; 4],
     nb_knots: i32,
     boucle: &'a mut i32,
@@ -55,8 +58,10 @@ pub(super) fn poly_test<S: HermitSpline>(
     tol_poles: f64,
     (ux, uy): (f64, f64),
 ) -> Result<PolyKnots, Failure> {
+    let (knots, hints) = test_knots(bs, ux, uy)?;
     let mut test = Test {
-        knots: test_knots(bs, ux, uy)?,
+        knots,
+        hints,
         poles: [
             herm[0],
             herm[0] + herm[1] / 3.0,
@@ -79,8 +84,13 @@ pub(super) fn poly_test<S: HermitSpline>(
 }
 
 // The knots of `bs` completed with Ux and Uy when they fall inside a span
-// (LocateU with a null tolerance gives two different indices), sorted.
-fn test_knots<S: HermitSpline>(bs: &S, ux: f64, uy: f64) -> Result<Vec<f64>, Failure> {
+// (LocateU with a null tolerance gives two different indices), sorted, with the
+// first LocateU indices I1 and I3.
+fn test_knots<S: HermitSpline>(
+    bs: &S,
+    ux: f64,
+    uy: f64,
+) -> Result<(Array1<'static, f64>, [i32; 2]), Failure> {
     let (mut i1, mut i2, mut i3, mut i4): (i32, i32, i32, i32) = (0, 0, 0, 0);
     if ux != 1.0 {
         (i1, i2) = bs.hermit_locate_u(ux)?;
@@ -99,7 +109,12 @@ fn test_knots<S: HermitSpline>(bs: &S, ux: f64, uy: f64) -> Result<Vec<f64>, Fai
         knots.push(uy);
     }
     knots.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
-    Ok(knots)
+    let mut array: Array1<'static, f64> = Array1::with_bounds(1, knots.len() as i32)
+        .map_err(|error| Failure::new(&error.to_string()))?;
+    for (index, knot) in knots.into_iter().enumerate() {
+        array[index as i32 + 1] = knot;
+    }
+    Ok((array, [i1, i3]))
 }
 
 // Polemax: the indices of the first minimum and maximum ordinates.
@@ -193,21 +208,25 @@ impl Test<'_> {
     }
 
     fn knot(&self, index: i32) -> f64 {
-        self.knots[index as usize - 1]
+        self.knots[index]
     }
 
-    // BSplCLib::LocateParameter(3, knots, U, false, 1, len, I, U) on the test knots.
-    fn locate(&self, u: f64) -> Result<(i32, f64), Failure> {
-        let mut array: Vec<f64> = self.knots.clone();
-        let knots = Array1::from_slice(&mut array);
-        let (mut index, mut new_u): (i32, f64) = (0, u);
-        let len: i32 = knots.len() as i32;
-        bsplclib::locate_parameter_flat_knots(3, &knots, u, false, 1, len, &mut index, &mut new_u)?;
-        Ok((index, new_u))
+    fn len(&self) -> i32 {
+        self.knots.len() as i32
+    }
+
+    // BSplCLib::LocateParameter(3, knots, U, false, 1, len, I, U) on the test knots,
+    // with the hint I1 (`hint` 0) or I3 (`hint` 1) updated in place.
+    fn locate(&mut self, u: f64, hint: usize) -> Result<(i32, f64), Failure> {
+        let mut new_u: f64 = u;
+        let len: i32 = self.len();
+        let index: &mut i32 = &mut self.hints[hint];
+        bsplclib::locate_parameter_flat_knots(3, &self.knots, u, false, 1, len, index, &mut new_u)?;
+        Ok((*index, new_u))
     }
 
     // The positivity loop: the knots that keep a(u) positive near either end.
-    fn positivity(self, dercas: bool) -> Result<PolyKnots, Failure> {
+    fn positivity(mut self, dercas: bool) -> Result<PolyKnots, Failure> {
         let mut result = PolyKnots { u4: 0.0, u5: 1.0 };
         let [p0, p1, p2, p3] = self.poles;
         if p1 < 0.0 && p2 >= 0.0 {
@@ -226,27 +245,27 @@ impl Test<'_> {
     }
 
     // A negative second pole only: a knot left of the first sign change.
-    fn left_knot(&self, mut us1: f64) -> Result<f64, Failure> {
+    fn left_knot(&mut self, mut us1: f64) -> Result<f64, Failure> {
         if *self.boucle == 2 {
             us1 *= self.knot(2);
         }
         if *self.boucle == 1 && self.ux != 0.0 {
             us1 *= self.ux;
         }
-        let (i1, us1) = self.locate(us1)?;
+        let (i1, us1) = self.locate(us1, 0)?;
         Ok(if i1 < 2 { us1 } else { self.knot(i1) })
     }
 
     // A negative third pole only: a knot right of the last sign change.
-    fn right_knot(&self, mut us2: f64) -> Result<f64, Failure> {
-        let len: i32 = self.knots.len() as i32;
+    fn right_knot(&mut self, mut us2: f64) -> Result<f64, Failure> {
+        let len: i32 = self.len();
         if *self.boucle == 2 {
             us2 = self.knot(len - 1) + us2 * (1.0 - self.knot(len - 1));
         }
         if *self.boucle == 1 && self.ux != 0.0 {
             us2 = self.uy + us2 * (1.0 - self.uy);
         }
-        let (i1, us2) = self.locate(us2)?;
+        let (i1, us2) = self.locate(us2, 0)?;
         Ok(if i1 >= len - 1 {
             us2
         } else {
@@ -256,7 +275,7 @@ impl Test<'_> {
 
     // Both inner poles negative: one knot for both changes, or one on each side.
     fn both_negative(
-        &self,
+        &mut self,
         mut us1: f64,
         mut us2: f64,
         result: &mut PolyKnots,
@@ -268,9 +287,9 @@ impl Test<'_> {
         if us2 <= us1 {
             return self.one_knot(us1, us2, result);
         }
-        let (i1, us1) = self.locate(us1)?;
+        let (i1, us1) = self.locate(us1, 0)?;
         result.u4 = if i1 >= 2 { self.knot(i1) } else { us1 };
-        let (i3, us2) = self.locate(us2)?;
+        let (i3, us2) = self.locate(us2, 1)?;
         result.u5 = if i3 < self.nb_knots - 1 {
             self.knot(i3 + 1)
         } else {
@@ -281,8 +300,8 @@ impl Test<'_> {
 
     // Both sign changes in one span order: one knot for both when a knot separates
     // them, else a knot on each side, else their midpoint.
-    fn one_knot(&self, us1: f64, us2: f64, result: &mut PolyKnots) -> Result<(), Failure> {
-        let (i1, us1) = self.locate(us1)?;
+    fn one_knot(&mut self, us1: f64, us2: f64, result: &mut PolyKnots) -> Result<(), Failure> {
+        let (i1, us1) = self.locate(us1, 0)?;
         if self.knot(i1) >= us2 {
             result.u4 = self.knot(i1);
             return Ok(());
@@ -292,7 +311,7 @@ impl Test<'_> {
         if i1 >= 2 {
             result.u4 = self.knot(i1);
             let i3: i32;
-            (i3, us2) = self.locate(us2)?;
+            (i3, us2) = self.locate(us2, 1)?;
             if i3 < self.nb_knots - 1 {
                 result.u5 = self.knot(i3 + 1);
                 cas = true;

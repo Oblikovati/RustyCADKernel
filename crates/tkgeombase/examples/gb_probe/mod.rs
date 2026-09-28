@@ -5,6 +5,9 @@
 pub mod common;
 pub mod gc;
 pub mod gce;
+pub mod gprop;
+pub mod hermit;
+pub mod lprop;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;

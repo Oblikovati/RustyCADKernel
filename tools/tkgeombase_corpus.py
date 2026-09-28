@@ -13,3 +13,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_gce').append_gce_requests(requests)
     # GC (tkgeombase_corpus_gc.py, tkgeombase_corpus_gc_surfaces.py)
     __import__('tkgeombase_corpus_gc').append_gc_curve_requests(requests)
+    # LProp, GeomLProp, GProp and Hermit (tkgeombase_corpus_lprop.py)
+    __import__('tkgeombase_corpus_lprop').append_lprop_requests(requests)
