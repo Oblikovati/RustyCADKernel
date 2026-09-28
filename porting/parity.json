@@ -37202,6 +37202,886 @@
       "rust_item": "rustycad_tkg3d::geom::GeomBSplineSurface::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface(const occ::handle<Geom_Surface>&,double,double,double,double,bool,bool)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface(const occ::handle<Geom_Surface>&,double,double,bool,bool)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::with_one_direction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::SetTrim(double,double,double,double,bool,bool)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::set_trim",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::SetTrim(double,double,bool,bool)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::set_trim_direction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::BasisSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::basis_surface",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::UReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::u_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::VReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::v_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::continuity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::IsCNu",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::is_cn_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::IsCNv",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::is_cn_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::UPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::u_period",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::VPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::v_period",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::TransformParameters",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::transform_parameters",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::ParametricTransformation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::parametric_transformation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_RectangularTrimmedSurface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RectangularTrimmedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomRectangularTrimmedSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface(const occ::handle<Geom_Surface>&,double,bool)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::HasEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::has_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::EvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::SetEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::set_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::ClearEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::clear_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::SetBasisSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::set_basis_surface",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface(const Geom_OffsetSurface&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::copy_of",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::~Geom_OffsetSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface",
+      "status": "excluded",
+      "notes": "C++-only syntax: the destructor is Rust Drop; the owned handles release their objects."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::SetOffsetValue",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::set_offset_value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::Offset",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::offset",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::BasisSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::basis_surface",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::UReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::u_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::VReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::v_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::continuity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::IsCNu",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::is_cn_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::IsCNv",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::is_cn_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::UPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::u_period",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::VPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::v_period",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::TransformParameters",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::transform_parameters",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::ParametricTransformation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::parametric_transformation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::Surface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::surface",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::UOsculatingSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::u_osculating_surface",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::VOsculatingSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::v_osculating_surface",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::GetBasisSurfContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::basis_surf_continuity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOffsetSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::OsculatingInfo::Sign",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::OsculatingInfo::sign",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::OsculatingInfo::HasOsculating",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::OsculatingInfo::has_osculating",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::IsInfiniteCoord",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::is_infinite_coord",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::IsSingular",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::is_singular",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::ComputeNormal",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::compute_normal",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::ComputeDNormalU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::compute_dnormal_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::ComputeDNormalV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::compute_dnormal_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::CalculateD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::calculate_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::CalculateD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::calculate_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::ComputeDerivatives",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::compute_derivatives",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::ReplaceDerivative",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::replace_derivative",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::ShiftPoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::shift_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::EvaluateD0(double,double,const BasisSurfType&,double,const OscSurfQueryType&,gp_Pnt&,const gp_Vec&,const gp_Vec&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::evaluate_d0_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::EvaluateD0(double,double,const BasisSurfType&,double,const OscSurfQueryType&,gp_Pnt&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::evaluate_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::EvaluateD1(double,double,const BasisSurfType&,double,const OscSurfQueryType&,gp_Pnt&,gp_Vec&,gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::evaluate_d1_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::EvaluateD1(double,double,const BasisSurfType&,double,const OscSurfQueryType&,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::evaluate_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::EvaluateD2(double,double,const BasisSurfType&,double,const OscSurfQueryType&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::evaluate_d2_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::EvaluateD2(double,double,const BasisSurfType&,double,const OscSurfQueryType&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::evaluate_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::EvaluateD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::evaluate_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::EvaluateDN(double,double,int,int,const BasisSurfType&,double,const OscSurfQueryType&,gp_Vec&,const gp_Vec&,const gp_Vec&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::evaluate_dn_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OffsetSurfaceUtils::EvaluateDN(double,double,int,int,const BasisSurfType&,double,const OscSurfQueryType&,gp_Vec&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OffsetSurfaceUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::offset_surface_utils::evaluate_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface(const occ::handle<Geom_Surface>&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface(const Geom_OsculatingSurface&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::clone",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface(Geom_OsculatingSurface&&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface",
+      "status": "excluded",
+      "notes": "C++-only syntax: move construction and assignment are Rust moves; copying is Clone."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::operator=(const Geom_OsculatingSurface&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::clone",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::operator=(Geom_OsculatingSurface&&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface",
+      "status": "excluded",
+      "notes": "C++-only syntax: move construction and assignment are Rust moves; copying is Clone."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::~Geom_OsculatingSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface",
+      "status": "excluded",
+      "notes": "C++-only syntax: the destructor is Rust Drop; the owned handles release their objects."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::Init",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::init",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::BasisSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::basis_surface",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::Tolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::tolerance",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::HasOscSurf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::has_osc_surf",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::IsAlongU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::is_along_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::IsAlongV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::is_along_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::UOsculatingSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::u_osculating",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_OsculatingSurface::VOsculatingSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_OsculatingSurface.pxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomOsculatingSurface::v_osculating",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     }
   ],
   "tests": [
@@ -90442,6 +91322,132 @@
       "rust_target": "geom_bezier_surface",
       "rust_test": "Geom_BezierSurface_Test__WeightsArray_Rational_ReturnsOwning",
       "rust_source": "crates/tkg3d/tests/geom_bezier_surface/suites_2.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_SurfaceEvalTest.Plane_EvalD0_ReturnsValidPoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_SurfaceEval_Test.cxx",
+      "source_sha256": "670376b7e3ad389dbee7c653baae0ae05a4621b5629db8acc3b8aa40534beae2",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_surface_eval",
+      "rust_test": "Geom_SurfaceEvalTest__Plane_EvalD0_ReturnsValidPoint",
+      "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_SurfaceEvalTest.Plane_EvalD1_ConstantPartials",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_SurfaceEval_Test.cxx",
+      "source_sha256": "670376b7e3ad389dbee7c653baae0ae05a4621b5629db8acc3b8aa40534beae2",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_surface_eval",
+      "rust_test": "Geom_SurfaceEvalTest__Plane_EvalD1_ConstantPartials",
+      "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_SurfaceEvalTest.Sphere_EvalD1_PartialDerivatives",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_SurfaceEval_Test.cxx",
+      "source_sha256": "670376b7e3ad389dbee7c653baae0ae05a4621b5629db8acc3b8aa40534beae2",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_surface_eval",
+      "rust_test": "Geom_SurfaceEvalTest__Sphere_EvalD1_PartialDerivatives",
+      "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_SurfaceEvalTest.BSplineSurface_EvalD2_ConsistentWithOldAPI",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_SurfaceEval_Test.cxx",
+      "source_sha256": "670376b7e3ad389dbee7c653baae0ae05a4621b5629db8acc3b8aa40534beae2",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_surface_eval",
+      "rust_test": "Geom_SurfaceEvalTest__BSplineSurface_EvalD2_ConsistentWithOldAPI",
+      "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_SurfaceEvalTest.OffsetSurface_EvalD0_ValidOnRegularSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_SurfaceEval_Test.cxx",
+      "source_sha256": "670376b7e3ad389dbee7c653baae0ae05a4621b5629db8acc3b8aa40534beae2",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_surface_eval",
+      "rust_test": "Geom_SurfaceEvalTest__OffsetSurface_EvalD0_ValidOnRegularSurface",
+      "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_SurfaceEvalTest.CylindricalSurface_EvalD1_ValidResults",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_SurfaceEval_Test.cxx",
+      "source_sha256": "670376b7e3ad389dbee7c653baae0ae05a4621b5629db8acc3b8aa40534beae2",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_surface_eval",
+      "rust_test": "Geom_SurfaceEvalTest__CylindricalSurface_EvalD1_ValidResults",
+      "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_SurfaceEvalTest.BezierSurface_EvalD2_ConsistentWithOldAPI",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_SurfaceEval_Test.cxx",
+      "source_sha256": "670376b7e3ad389dbee7c653baae0ae05a4621b5629db8acc3b8aa40534beae2",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_surface_eval",
+      "rust_test": "Geom_SurfaceEvalTest__BezierSurface_EvalD2_ConsistentWithOldAPI",
+      "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_SurfaceEvalTest.ExtrusionSurface_EvalD0_ValidResults",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_SurfaceEval_Test.cxx",
+      "source_sha256": "670376b7e3ad389dbee7c653baae0ae05a4621b5629db8acc3b8aa40534beae2",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_surface_eval",
+      "rust_test": "Geom_SurfaceEvalTest__ExtrusionSurface_EvalD0_ValidResults",
+      "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_SurfaceEvalTest.RevolutionSurface_EvalD1_ValidResults",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_SurfaceEval_Test.cxx",
+      "source_sha256": "670376b7e3ad389dbee7c653baae0ae05a4621b5629db8acc3b8aa40534beae2",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_surface_eval",
+      "rust_test": "Geom_SurfaceEvalTest__RevolutionSurface_EvalD1_ValidResults",
+      "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
