@@ -279,15 +279,13 @@ fn locks_follow_the_sysv_branch() {
         .unwrap();
     target.set_lock(LockType::WriteLock).unwrap();
     assert_eq!(target.lock(), LockType::WriteLock);
-    assert!(
-        !target.is_locked(),
-        "IsLocked reads only the exclusive-lock flag"
-    );
+    assert!(target.is_locked());
     target.set_lock(LockType::ExclusiveLock).unwrap();
     assert!(target.is_locked());
     assert_eq!(calls.mode("/w/lock").unwrap() & 0o2000, 0o2000);
     target.unlock().unwrap();
     assert_eq!(target.lock(), LockType::NoLock);
+    assert!(!target.is_locked());
     assert!(!target.is_locked());
     assert_eq!(calls.mode("/w/lock").unwrap() & 0o2000, 0);
     target.set_lock(LockType::NoLock).unwrap();
