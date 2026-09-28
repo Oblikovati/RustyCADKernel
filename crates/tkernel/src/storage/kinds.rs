@@ -91,13 +91,25 @@ pub enum SolveMode {
 /// `Storage_Position`: a `long` stream offset, -1 on error; `let position: Position = -1;`.
 pub type Position = i64;
 
-/// The `Storage_Stream*Error` exceptions, all derived from `Standard_Failure`.
+crate::standard::exceptions::define_standard_exceptions! {
+    STORAGE_HIERARCHY;
+    stream_ext_char_parity_error => "Storage_StreamExtCharParityError" : "Storage_StreamReadError";
+    stream_format_error => "Storage_StreamFormatError" : "Standard_Failure";
+    stream_mode_error => "Storage_StreamModeError" : "Standard_Failure";
+    stream_read_error => "Storage_StreamReadError" : "Standard_Failure";
+    stream_type_mismatch_error => "Storage_StreamTypeMismatchError" : "Storage_StreamReadError";
+    stream_unknown_type_error => "Storage_StreamUnknownTypeError" : "Storage_StreamReadError";
+    stream_write_error => "Storage_StreamWriteError" : "Standard_Failure";
+}
+
+/// The `Storage_Stream*Error` exception classes, as a typed name for raising and catching.
 ///
 /// ```
 /// use rustycad_tkernel::storage::StreamException;
-/// let failure = StreamException::Write.raise("PutInteger: device refused 4 bytes");
-/// assert!(StreamException::Write.is(&failure));
-/// assert_eq!(failure.exception_type(), "Storage_StreamWriteError");
+/// let failure = StreamException::TypeMismatch.raise("GetInteger: expected 4 bytes");
+/// assert!(StreamException::TypeMismatch.is(&failure));
+/// assert!(StreamException::Read.is(&failure));
+/// assert_eq!(failure.exception_type(), "Storage_StreamTypeMismatchError");
 /// ```
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum StreamException {
@@ -133,11 +145,12 @@ impl StreamException {
 
     /// Builds the exception with a diagnostic message; `StreamException::Format.raise("...")`.
     pub fn raise(self, message: &str) -> Failure {
-        Failure::with_type(self.type_name(), message, "")
+        Failure::with_message(self.type_name(), message)
     }
 
-    /// The `catch (Storage_Stream...Error const&)` test; `StreamException::Write.is(&failure)`.
+    /// The `catch (Storage_Stream...Error const&)` test, which also catches derived classes;
+    /// `StreamException::Read.is(&failure)`.
     pub fn is(self, failure: &Failure) -> bool {
-        failure.exception_type() == self.type_name()
+        failure.is_kind(self.type_name())
     }
 }

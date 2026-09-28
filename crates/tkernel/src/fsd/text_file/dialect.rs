@@ -133,14 +133,13 @@ impl TextDialect for FsdDialect {
 pub struct CmpDialect;
 
 /// Drops trailing `\r` and `\n` bytes, as `FSD_CmpFile::ReadLine`/`ReadString` do.
-fn trim_line_end(mut text: AsciiString) -> AsciiString {
-    let keep = text
-        .as_bytes()
+fn trim_line_end(text: AsciiString) -> AsciiString {
+    let bytes = text.as_bytes();
+    let keep = bytes
         .iter()
         .rposition(|byte| *byte != b'\r' && *byte != b'\n')
         .map_or(0, |last| last + 1);
-    text.truncate(keep);
-    text
+    AsciiString::from_raw(&bytes[..keep])
 }
 
 impl TextDialect for CmpDialect {

@@ -13,6 +13,7 @@
 // commercial license or contractual agreement.
 
 //! Type bindings and object registration against the current data set.
+use crate::storage::PersistentNumbers;
 use super::Schema;
 use crate::standard::{Failure, Handle, StandardPersistent};
 use crate::storage::{BaseDriver, CallBack, TypedCallBack};
@@ -78,14 +79,14 @@ impl Schema {
             return Ok(false);
         };
         self.with_current("AddPersistent", |_, internal| {
-            if object.type_num() != 0 {
+            if object.type_number() != 0 {
                 return Ok(false);
             }
             let mut fields = internal.lock();
             let typed = fields.type_binding.find(&AsciiString::new(type_name))?;
             let index = typed.get().map_or(0, TypedCallBack::index);
-            object.set_type_num(index);
-            object.set_ref_num(fields.object_id);
+            object.set_type_number(index);
+            object.set_reference_number(fields.object_id);
             fields.object_id += 1;
             Ok(true)
         })?
@@ -101,10 +102,10 @@ impl Schema {
             return Ok(false);
         };
         self.with_current("PersistentToAdd", |_, internal| {
-            if object.type_num() != 0 || object.ref_num() == -1 {
+            if object.type_number() != 0 || object.reference_number() == -1 {
                 return false;
             }
-            object.set_ref_num(-1);
+            object.set_reference_number(-1);
             internal.lock().objects_to_add.append(persistent);
             true
         })
@@ -125,7 +126,7 @@ impl Schema {
                 "",
             )
         })?;
-        driver.write_persistent_object_header(object.ref_num(), object.type_num())
+        driver.write_persistent_object_header(object.reference_number(), object.type_number())
     }
 
     /// `WritePersistentReference`: the object's reference number, 0 for a null handle.
@@ -135,7 +136,7 @@ impl Schema {
         persistent: &Handle<StandardPersistent>,
         driver: &mut dyn BaseDriver,
     ) -> Result<(), Failure> {
-        let reference = persistent.get().map_or(0, StandardPersistent::ref_num);
+        let reference = persistent.get().map_or(0, PersistentNumbers::reference_number);
         driver.put_reference(reference)
     }
 }

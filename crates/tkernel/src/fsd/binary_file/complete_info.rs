@@ -20,6 +20,7 @@
 //! The reference section creates objects with the callbacks registered by the type
 //! section, which the native code sets to null, so a non-empty reference section is a
 //! native null dereference, reported as `Standard_NullObject`.
+use crate::storage::PersistentNumbers;
 use super::{BinaryFile, FileHeader};
 use crate::ncollection::{ArrayError, HArray1, Sequence};
 use crate::standard::{Failure, Handle, StandardPersistent};
@@ -186,7 +187,7 @@ fn read_references(stream: &mut IoStream, target: &Target<'_>) -> Result<(), Fai
         let object = callbacks.value(type_number, MEMBER)?.new_persistent();
         store_object(internal(target)?, reference, &object)?;
         if let Some(object) = object.get() {
-            object.set_type_num(type_number);
+            object.set_type_number(type_number);
         }
     }
     Ok(())

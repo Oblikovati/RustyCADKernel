@@ -13,6 +13,7 @@
 // commercial license or contractual agreement.
 
 //! `Storage_Schema::Write`: every section of a data set, in native order.
+use crate::storage::PersistentNumbers;
 use super::Schema;
 use crate::ncollection::HSequence;
 use crate::standard::{Failure, Handle, StandardPersistent};
@@ -108,7 +109,7 @@ impl Schema {
         driver.set_ref_section_size(next_object - 1)?;
         step.0 = "WriteReferenceType";
         for object in objects.iter().filter_map(Handle::get) {
-            driver.write_reference_type(object.ref_num(), object.type_num())?;
+            driver.write_reference_type(object.reference_number(), object.type_number())?;
         }
         step.0 = "EndWriteRefSection";
         driver.end_write_ref_section()?;
@@ -130,9 +131,9 @@ impl Schema {
                 continue;
             };
             functions
-                .value(object.type_num(), "Storage_Schema::Write")?
+                .value(object.type_number(), "Storage_Schema::Write")?
                 .write(handle, driver, self)?;
-            object.set_type_num(0);
+            object.set_type_number(0);
         }
         step.0 = "EndWriteDataSection";
         driver.end_write_data_section()?;

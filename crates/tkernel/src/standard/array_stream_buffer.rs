@@ -10,6 +10,7 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
+// Rust translation of FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Borrowed memory streams preserving OCCT's bounded seek behavior.
 use std::io::{self, BufRead, Read, Seek, SeekFrom};
@@ -42,11 +43,15 @@ impl<'a> ArrayStreamBuffer<'a> {
     pub fn peek(&self) -> Option<u8> {
         self.bytes.get(self.position).copied()
     }
-    /// Backs up only for EOF or the matching previous byte; `buffer.put_back(Some(b'A'))`.
+    /// Backs up only for EOF or the matching previous byte (`pbackfail`); `buffer.put_back(Some(b'A'))`.
+    ///
+    /// Native code compares the unsigned `int_type` of the request with the previous `char`
+    /// promoted to `int`, so where `char` is signed a byte of 0x80 or more never matches.
     pub fn put_back(&mut self, byte: Option<u8>) -> Option<u8> {
         let previous = self.position.checked_sub(1)?;
         let actual = self.bytes[previous];
-        if byte.is_some_and(|requested| requested != actual) {
+        let promoted = i32::from(actual as std::ffi::c_char);
+        if byte.is_some_and(|requested| i32::from(requested) != promoted) {
             return None;
         }
         self.position = previous;
@@ -54,13 +59,32 @@ impl<'a> ArrayStreamBuffer<'a> {
     }
     /// Matches OCCT seekoff, whose end offset is subtracted; `buffer.seek_occt(SeekFrom::End(3))?`.
     /// Rust's `Seek` trait uses its conventional signed end-relative offset instead.
+    ///
+    /// Positions past the end clamp to the end for `Start`/`Current` and to the start for
+    /// `End`, as natively. Native code moves before the start (`Start`/`Current`) or past
+    /// the end (a negative `End` offset) without a check, after which reads are undefined;
+    /// the port refuses those seeks with `InvalidInput` and keeps the position.
     pub fn seek_occt(&mut self, offset: SeekFrom) -> io::Result<u64> {
         match offset {
+            SeekFrom::End(distance) if distance < 0 => Err(beyond_end(self.bytes.len(), distance)),
             SeekFrom::End(distance) => {
                 self.set_position((self.bytes.len() as i128 - i128::from(distance)).max(0))
             }
             other => self.seek(other),
         }
+    }
+    /// `xsgetn`: copies up to `destination.len()` bytes and advances; `buffer.xsgetn(&mut out)`.
+    pub fn xsgetn(&mut self, destination: &mut [u8]) -> usize {
+        let count = destination.len().min(self.available());
+        destination[..count].copy_from_slice(&self.bytes[self.position..self.position + count]);
+        self.position += count;
+        count
+    }
+    /// `uflow`: returns the current byte and advances, `None` at the end; `buffer.uflow()`.
+    pub fn uflow(&mut self) -> Option<u8> {
+        let byte = self.peek()?;
+        self.position += 1;
+        Some(byte)
     }
     fn set_position(&mut self, position: i128) -> io::Result<u64> {
         if position < 0 {
@@ -76,11 +100,16 @@ impl<'a> ArrayStreamBuffer<'a> {
 
 impl Read for ArrayStreamBuffer<'_> {
     fn read(&mut self, destination: &mut [u8]) -> io::Result<usize> {
-        let count = destination.len().min(self.available());
-        destination[..count].copy_from_slice(&self.bytes[self.position..self.position + count]);
-        self.position += count;
-        Ok(count)
+        Ok(self.xsgetn(destination))
     }
+}
+fn beyond_end(length: usize, distance: i64) -> io::Error {
+    io::Error::new(
+        io::ErrorKind::InvalidInput,
+        format!(
+            "end offset {distance} would place the position past the end of a {length}-byte buffer; expected 0..={length}"
+        ),
+    )
 }
 impl BufRead for ArrayStreamBuffer<'_> {
     fn fill_buf(&mut self) -> io::Result<&[u8]> {
