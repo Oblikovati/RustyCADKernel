@@ -85,18 +85,18 @@ impl GeomSurface for GeomBSplineSurface {
     fn u_reverse(&self) -> Result<(), Failure> {
         self.state.write().reverse(true)
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         let state = self.state.read();
         let knots = state.u.knots.as_slice();
-        knots[0] + knots[knots.len() - 1] - u
+        Ok(knots[0] + knots[knots.len() - 1] - u)
     }
     fn v_reverse(&self) -> Result<(), Failure> {
         self.state.write().reverse(false)
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
         let state = self.state.read();
         let knots = state.v.knots.as_slice();
-        knots[0] + knots[knots.len() - 1] - v
+        Ok(knots[0] + knots[knots.len() - 1] - v)
     }
     /// The constructor checks guarantee at least `Degree + 3` flat knots per direction,
     /// so the bounds always exist.

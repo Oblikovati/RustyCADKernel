@@ -88,10 +88,11 @@ native exception type (`Geom2d_UndefinedDerivative`, `Geom2d_UndefinedValue`,
 `Standard_DomainError`, `Standard_NoSuchObject`...) and a message with the
 offending value. Checks that OCCT writes with `*_Raise_if` stay active, because
 the pinned oracle build (RelWithDebInfo) does not define `No_Exception`. The
-virtual evaluators (`EvalD0`...`EvalDN`) and `ReversedParameter` always return
-`Result`, because an override can fail even when the base class cannot (the
-Geom2dEval curves raise Standard_NotImplemented from `ReversedParameter`). For the same reason `Copy`
-returns `Result`: a trimmed curve re-trims its bounds when it is copied.
+virtual evaluators (`EvalD0`...`EvalDN`), `ReversedParameter` and the surface
+`UReversedParameter`/`VReversedParameter` always return `Result`, because an
+override can fail even when the base class cannot (the Geom2dEval and GeomEval
+curves and surfaces raise Standard_NotImplemented from them). For the same reason
+`Copy` returns `Result`: a trimmed curve re-trims its bounds when it is copied.
 
 ## 5. Evaluation caches
 
@@ -141,6 +142,14 @@ raise Standard_NotImplemented), so they keep plain fields without a
 `HashTolerance` as fields; `operator()(key)` becomes `hash` and
 `operator()(key, key)` becomes `equal`, and the value and curve hashers also implement
 the NCollection `HashPolicy`, so they can drive the ported hashed containers.
+
+The GeomEval classes of TKG3d follow the same rules: the curves and the Bezier
+surfaces keep plain fields, while the elementary surfaces (`GeomEvalEllipsoidSurface`...)
+derive from `Geom_ElementarySurface`, whose position and parameter setters succeed, so
+they keep their state in a `SharedState`. Their T-Bezier and AHT-Bezier curves run the
+generic evaluators of `rustycad_tkg2d::geom2d_eval::eval_basis` with `gp_XYZ` poles.
+The GeomHash structs mirror the Geom2dHash ones and share their rounding, combining
+and class-dispatch helpers.
 
 ## 9. Grid evaluators
 

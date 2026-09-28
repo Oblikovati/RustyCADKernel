@@ -14,16 +14,17 @@
 
 //! `Geom2dEval_AHTBezierCurve`: an algebraic-hyperbolic-trigonometric Bezier curve
 //! over `{1, t, ..., t^k, sinh(alpha t), cosh(alpha t), sin(beta t), cos(beta t)}` on `[0, 1]`.
-mod derivative_n;
-mod evaluation;
-use super::basis_sums::BasisSums;
+use super::eval_basis::aht::{
+    AhtView, basis_dimension, mixed, polynomial, quotient_d1, quotient_d2, quotient_d3,
+};
+use super::eval_basis::aht_dn;
+use super::eval_basis::sums::BasisSums;
 use super::eval_math::{check_derivative_order, unsupported};
 use crate::geom2d::errors;
 use crate::geom2d::{
     Geom2dBoundedCurve, Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3, Geom2dGeometry,
     dump_base, dump_bounded_curve, dump_class_name, dump_field, dump_flag,
 };
-use evaluation::{AhtView, mixed, polynomial, quotient_d1, quotient_d2, quotient_d3};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
@@ -58,13 +59,6 @@ impl Clone for Geom2dEvalAHTBezierCurve {
     fn clone(&self) -> Self {
         self.copied()
     }
-}
-
-/// The number of basis functions (`basisDimension`): `k + 1`, plus 2 for a hyperbolic
-/// pair when alpha > 0 and 2 for a trigonometric pair when beta > 0;
-/// `basis_dimension(1, 1.0, 1.0) == 6`.
-pub(crate) fn basis_dimension(alg_degree: i32, alpha: f64, beta: f64) -> i32 {
-    alg_degree + 1 + if alpha > 0.0 { 2 } else { 0 } + if beta > 0.0 { 2 } else { 0 }
 }
 
 // The checks both constructors share, in native order.
@@ -219,7 +213,7 @@ impl Geom2dEvalAHTBezierCurve {
     pub fn is_rational(&self) -> bool {
         self.rational
     }
-    fn view(&self) -> AhtView<'_> {
+    fn view(&self) -> AhtView<'_, Point2> {
         AhtView {
             poles: self.poles.as_slice(),
             weights: self.rational.then(|| self.weights.as_slice()),
@@ -229,11 +223,11 @@ impl Geom2dEvalAHTBezierCurve {
         }
     }
     // The purely algebraic basis uses Horner's scheme; any pair uses the direct sums.
-    fn sums<const MAX: usize>(&self, u: f64) -> BasisSums {
+    fn sums<const MAX: usize>(&self, u: f64) -> BasisSums<Xy> {
         if self.alpha <= 0.0 && self.beta <= 0.0 {
-            return polynomial::<MAX>(&self.view(), u);
+            return polynomial::<MAX, _>(&self.view(), u);
         }
-        mixed::<MAX>(&self.view(), u)
+        mixed::<MAX, _>(&self.view(), u)
     }
 }
 impl Geom2dGeometry for Geom2dEvalAHTBezierCurve {
@@ -288,14 +282,14 @@ impl Geom2dCurve for Geom2dEvalAHTBezierCurve {
         Ok(true)
     }
     fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {
-        let sums: BasisSums = self.sums::<0>(u);
+        let sums: BasisSums<Xy> = self.sums::<0>(u);
         if !self.rational {
             return Ok(Point2::from(sums.n[0]));
         }
         Ok(Point2::from(sums.n[0] / sums.w[0]))
     }
     fn eval_d1(&self, u: f64) -> Result<Geom2dCurveD1, Failure> {
-        let sums: BasisSums = self.sums::<1>(u);
+        let sums: BasisSums<Xy> = self.sums::<1>(u);
         let [c, d1, _, _] = sums.n;
         let (c, d1) = if self.rational {
             quotient_d1(&sums)
@@ -308,7 +302,7 @@ impl Geom2dCurve for Geom2dEvalAHTBezierCurve {
         })
     }
     fn eval_d2(&self, u: f64) -> Result<Geom2dCurveD2, Failure> {
-        let sums: BasisSums = self.sums::<2>(u);
+        let sums: BasisSums<Xy> = self.sums::<2>(u);
         let [mut c, mut d1, mut d2, _] = sums.n;
         if self.rational {
             (c, d1) = quotient_d1(&sums);
@@ -322,7 +316,7 @@ impl Geom2dCurve for Geom2dEvalAHTBezierCurve {
         })
     }
     fn eval_d3(&self, u: f64) -> Result<Geom2dCurveD3, Failure> {
-        let sums: BasisSums = self.sums::<3>(u);
+        let sums: BasisSums<Xy> = self.sums::<3>(u);
         let mut values: [Xy; 4] = sums.n;
         if self.rational {
             values = quotient_d3(&sums);
@@ -345,10 +339,10 @@ impl Geom2dCurve for Geom2dEvalAHTBezierCurve {
             3 => return Ok(self.eval_d3(u)?.d3),
             _ => {}
         }
-        let view: AhtView<'_> = self.view();
+        let view: AhtView<'_, Point2> = self.view();
         let value: Xy = match view.weights {
-            None => derivative_n::non_rational_dn(&view, u, n),
-            Some(weights) => derivative_n::rational_dn(&view, weights, u, n),
+            None => aht_dn::non_rational_dn(&view, u, n),
+            Some(weights) => aht_dn::rational_dn(&view, weights, u, n),
         };
         Ok(Vector2::from(value))
     }

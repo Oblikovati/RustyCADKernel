@@ -11,7 +11,7 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of ModelingData/TKG3d/(Geom package and the GeomEval evaluation descriptors it includes) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of ModelingData/TKG3d/(Geom, AdvApprox, GeomEval, GeomHash and TopAbs packages) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! OCCT TKG3d: transient 3D geometry.
 //!
@@ -19,11 +19,12 @@
 //! with the rules of the Geom2d port in `rustycad-tkg2d`: abstract classes are
 //! traits reached through `Handle<dyn Trait>`, and each object keeps its state
 //! behind one lock so that mutation through any handle is shared, as in OCCT.
-//! TKG3d depends on TKG2d natively; this crate reuses the Geom2d lock, array and
-//! dump helpers. The AdvApprox package, which `Geom_OffsetSurface` uses for its
-//! iso curves, is ported in full. The other TKG3d packages (Adaptor3d,
-//! GeomAdaptor, GeomEval curves and surfaces, GeomGridEval, GeomHash, TopAbs)
-//! are later work.
+//! TKG3d depends on TKG2d natively; this crate reuses the Geom2d array and dump
+//! helpers, the Geom2dEval basis evaluators and the Geom2dHash helpers. The
+//! AdvApprox, GeomEval, GeomHash and TopAbs packages are ported in full. The
+//! other TKG3d packages (Adaptor3d, GeomAdaptor, GeomGridEval) are later work.
 pub mod adv_approx;
 pub mod geom;
 pub mod geom_eval;
+pub mod geom_hash;
+pub mod top_abs;

@@ -70,6 +70,11 @@
 #include "tkg3d_probe_bezier_surface.cxx"
 #include "tkg3d_probe_bspline_surface.cxx"
 #include "tkg3d_probe_offset_surface.cxx"
+#include "tkg3d_probe_eval_curves.cxx"
+#include "tkg3d_probe_eval_surfaces.cxx"
+#include "tkg3d_probe_eval_bezier_surfaces.cxx"
+#include "tkg3d_probe_hash.cxx"
+#include "tkg3d_probe_topabs.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_point", g3_point_case},
  {"g3_direction", g3_direction_case},
@@ -105,6 +110,23 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_bspline_surface_edit", g3_bspline_surface_edit_case},
  {"g3_rect_trim", g3_rect_trim_case},
  {"g3_offset_surface", g3_offset_surface_case},
+ // GeomEval curves (tkg3d_probe_eval_curves.cxx)
+ {"g3_eval_curve", g3_eval_curve_case},
+ // GeomEval elementary surfaces (tkg3d_probe_eval_surfaces.cxx)
+ {"g3_eval_surface", g3_eval_surface_case},
+ // GeomEval Bezier surfaces (tkg3d_probe_eval_bezier_surfaces.cxx)
+ {"g3_eval_bezier_surface", g3_eval_bezier_surface_case},
+ // GeomHash (tkg3d_probe_hash.cxx)
+ {"g3_hash_curves", g3_hash_curves_case},
+ {"g3_hash_surfaces", g3_hash_surfaces_case},
+ {"g3_hash_primitives", g3_hash_primitives_case},
+ {"g3_hash_poly2d", g3_hash_poly2d_case},
+ {"g3_hash_poly3d", g3_hash_poly3d_case},
+ {"g3_hash_triangulation", g3_hash_triangulation_case},
+ {"g3_hash_ontri", g3_hash_ontri_case},
+ // TopAbs (tkg3d_probe_topabs.cxx)
+ {"g3_topabs", g3_topabs_case},
+ {"g3_topabs_parse", g3_topabs_parse_case},
 };
 int main() {
  std::string line;

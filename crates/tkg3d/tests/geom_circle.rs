@@ -107,7 +107,7 @@ fn Geom_CircleTest__Reverse() {
     let aCircle = Handle::new(GeomCircle::new(anAxis, 1.0).unwrap());
 
     let aParam: f64 = FRAC_PI_4;
-    let aReversedParam: f64 = aCircle.reversed_parameter(aParam);
+    let aReversedParam: f64 = aCircle.reversed_parameter(aParam).unwrap();
     // For a circle: reversed parameter = 2*PI - U
     EXPECT_NEAR(aReversedParam, 2.0 * PI - aParam, precision::confusion());
 }

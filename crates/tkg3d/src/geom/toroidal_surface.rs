@@ -187,15 +187,15 @@ impl GeomSurface for GeomToroidalSurface {
         elementary_u_reverse(&mut self.state.write().pos);
         Ok(())
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
-        2. * PI - u
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(2. * PI - u)
     }
     fn v_reverse(&self) -> Result<(), Failure> {
         elementary_v_reverse(&mut self.state.write().pos);
         Ok(())
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
-        2. * PI - v
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
+        Ok(2. * PI - v)
     }
     fn bounds(&self) -> SurfaceBounds {
         (0.0, 2.0 * PI, 0.0, 2.0 * PI)

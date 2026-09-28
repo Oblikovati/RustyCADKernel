@@ -100,7 +100,7 @@ impl GeomSurface for GeomOffsetSurface {
         state.offset_value = -state.offset_value;
         Ok(())
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         self.basis_surface().u_reversed_parameter(u)
     }
     fn v_reverse(&self) -> Result<(), Failure> {
@@ -110,7 +110,7 @@ impl GeomSurface for GeomOffsetSurface {
         state.offset_value = -state.offset_value;
         Ok(())
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
         self.basis_surface().v_reversed_parameter(v)
     }
     /// The basis transforms the parameters, then the equivalent surface, if any,

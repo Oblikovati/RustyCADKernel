@@ -49,6 +49,8 @@ gp_Trsf g3_trsf(G3Reader& r){
 // 5 bezier rational n (x y z w)*n | 6 bspline rational periodic degree nk (k m)*nk np (x y z w)*np |
 // 7 trimmed u1 u2 sense adjust <curve> | 8 offset d D notcheck <curve>, where F is a gp_Ax2 (P N X).
 occ::handle<Geom_Curve> g3_curve(G3Reader& r);
+// Kinds 20 and above are the GeomEval curves (tkg3d_probe_eval_curves.cxx).
+occ::handle<Geom_Curve> g3_eval_curve(int kind,G3Reader& r);
 occ::handle<Geom_Curve> g3_bezier_curve(G3Reader& r){
  bool rational=r.flag();int n=r.integer();NCollection_Array1<gp_Pnt> p(1,n);NCollection_Array1<double> w(1,n);
  for(int i=1;i<=n;++i){p(i)=r.pnt();w(i)=r.real();}
@@ -72,6 +74,7 @@ occ::handle<Geom_Curve> g3_curve(G3Reader& r){
  if(kind==6)return g3_bspline_curve(r);
  if(kind==7){double u1=r.real(),u2=r.real();bool sense=r.flag(),adjust=r.flag();occ::handle<Geom_Curve> c=g3_curve(r);return new Geom_TrimmedCurve(c,u1,u2,sense,adjust);}
  if(kind==8){double d=r.real();gp_Dir v=r.dir();bool nocheck=r.flag();occ::handle<Geom_Curve> c=g3_curve(r);return new Geom_OffsetCurve(c,d,v,nocheck);}
+ if(kind>=20)return g3_eval_curve(kind,r);
  throw Standard_ProgramError("unknown curve kind");
 }
 // A surface specification, read recursively:
@@ -82,6 +85,10 @@ occ::handle<Geom_Curve> g3_curve(G3Reader& r){
 // 9 rectangular trim u1 u2 v1 v2 usense vsense <surface> | 10 one-direction trim p1 p2 utrim sense <surface> |
 // 11 offset d notcheck <surface>, where F is a gp_Ax3 (P N X); poles are read row by row (U major).
 occ::handle<Geom_Surface> g3_surface(G3Reader& r);
+// Kinds 20 to 29 are the GeomEval elementary surfaces (tkg3d_probe_eval_surfaces.cxx),
+// kinds 30 and above the GeomEval Bezier surfaces (tkg3d_probe_eval_bezier_surfaces.cxx).
+occ::handle<Geom_Surface> g3_eval_surface(int kind,G3Reader& r);
+occ::handle<Geom_Surface> g3_eval_bezier_surface(int kind,G3Reader& r);
 void g3_net(G3Reader& r,int nu,int nv,NCollection_Array2<gp_Pnt>& p,NCollection_Array2<double>& w){
  for(int i=1;i<=nu;++i)for(int j=1;j<=nv;++j){p(i,j)=r.pnt();w(i,j)=r.real();}
 }
@@ -118,6 +125,8 @@ occ::handle<Geom_Surface> g3_surface(G3Reader& r){
  if(kind==10){double p1=r.real(),p2=r.real();bool ut=r.flag(),sense=r.flag();
   occ::handle<Geom_Surface> s=g3_surface(r);return new Geom_RectangularTrimmedSurface(s,p1,p2,ut,sense);}
  if(kind==11){double d=r.real();bool nocheck=r.flag();occ::handle<Geom_Surface> s=g3_surface(r);return new Geom_OffsetSurface(s,d,nocheck);}
+ if(kind>=20&&kind<30)return g3_eval_surface(kind,r);
+ if(kind>=30)return g3_eval_bezier_surface(kind,r);
  throw Standard_ProgramError("unknown surface kind");
 }
 // Reads a curve (surface) spec, reporting a construction failure and ending the line.
@@ -138,7 +147,7 @@ void g3_curve_summary(const occ::handle<Geom_Curve>& c,const std::vector<double>
   G3_TRY(auto r=c->EvalD2(u);g3_pnt(r.Point);g3_vec(r.D1);g3_vec(r.D2));
   G3_TRY(auto r=c->EvalD3(u);g3_pnt(r.Point);g3_vec(r.D1);g3_vec(r.D2);g3_vec(r.D3));
   for(int n=0;n<=5;++n)G3_TRY(g3_vec(c->EvalDN(u,n)));
-  G3_TRY(g3_pnt(c->Value(u)));g3_real(c->ReversedParameter(u));
+  G3_TRY(g3_pnt(c->Value(u)));G3_TRY(g3_real(c->ReversedParameter(u)));
  }
 }
 // The surface-level summary: bounds, closure, periodicity, continuity, then per (u, v)
@@ -156,7 +165,7 @@ void g3_surface_summary(const occ::handle<Geom_Surface>& s,const std::vector<dou
          g3_vec(r.D3U);g3_vec(r.D3V);g3_vec(r.D3UUV);g3_vec(r.D3UVV));
   for(int nu=0;nu<=3;++nu)for(int nv=0;nv<=3;++nv)G3_TRY(g3_vec(s->EvalDN(u,v,nu,nv)));
   G3_TRY(g3_vec(s->EvalDN(u,v,-1,2)));
-  G3_TRY(g3_pnt(s->Value(u,v)));g3_real(s->UReversedParameter(u));g3_real(s->VReversedParameter(v));
+  G3_TRY(g3_pnt(s->Value(u,v)));G3_TRY(g3_real(s->UReversedParameter(u)));G3_TRY(g3_real(s->VReversedParameter(v)));
  }
 }
 // The iso curves of a surface: for each parameter the class of UIso/VIso and its summary at `params`.

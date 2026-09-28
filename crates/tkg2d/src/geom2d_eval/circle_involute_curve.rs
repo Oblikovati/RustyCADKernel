@@ -15,7 +15,8 @@
 //! `Geom2dEval_CircleInvoluteCurve`:
 //! `C(t) = O + R*(cos(t) + t*sin(t))*XDir + R*(sin(t) - t*cos(t))*YDir`.
 use super::analytic_dump::dump_analytic_curve;
-use super::eval_math::{LocalFrame, check_derivative_order, trig_shift, unsupported};
+use super::eval_basis::trig_shift;
+use super::eval_math::{LocalFrame, check_derivative_order, unsupported};
 use crate::geom2d::errors;
 use crate::geom2d::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3, Geom2dGeometry};
 use rustycad_tkernel::impl_transient;

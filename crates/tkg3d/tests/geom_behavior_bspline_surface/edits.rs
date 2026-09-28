@@ -92,11 +92,14 @@ fn Geom_BSplineSurfaceBehavior__Reverse() {
     surface.u_reverse().unwrap();
     assert_eq!(surface.u_knots().as_slice(), &[0.0, 0.5, 1.0]);
     assert_same_point(surface.pole(1, 1).unwrap(), wavy(5, 1), 0.0);
-    EXPECT_DOUBLE_EQ(surface.u_reversed_parameter(0.2), 0.8);
+    EXPECT_DOUBLE_EQ(surface.u_reversed_parameter(0.2).unwrap(), 0.8);
     assert_same_point(surface.value(0.8, 0.7).unwrap(), before, 1e-14);
     surface.v_reverse().unwrap();
     assert_same_point(surface.pole(1, 1).unwrap(), wavy(5, 3), 0.0);
-    EXPECT_DOUBLE_EQ(surface.v_reversed_parameter(0.7), 0.30000000000000004);
+    EXPECT_DOUBLE_EQ(
+        surface.v_reversed_parameter(0.7).unwrap(),
+        0.30000000000000004,
+    );
 }
 
 #[test]

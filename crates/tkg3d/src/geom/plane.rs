@@ -126,16 +126,16 @@ impl GeomSurface for GeomPlane {
         self.state.write().pos.x_reverse();
         Ok(())
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
-        -u
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(-u)
     }
     /// Reverses the Y direction of the frame, unlike the other elementary surfaces.
     fn v_reverse(&self) -> Result<(), Failure> {
         self.state.write().pos.y_reverse();
         Ok(())
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
-        -v
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
+        Ok(-v)
     }
     fn transform_parameters(&self, u: f64, v: f64, transform: Transform3) -> (f64, f64) {
         (

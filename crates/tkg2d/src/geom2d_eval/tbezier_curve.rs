@@ -14,15 +14,16 @@
 
 //! `Geom2dEval_TBezierCurve`: a trigonometric Bezier curve over the basis
 //! `{1, sin(alpha t), cos(alpha t), ..., sin(n alpha t), cos(n alpha t)}` on `[0, Pi/alpha]`.
-mod evaluation;
-use super::basis_sums::BasisSums;
+use super::eval_basis::sums::BasisSums;
+use super::eval_basis::tbezier::{
+    TBezierView, curve_basis, non_rational_dn, rational_derivatives, rational_dn, rational_point,
+};
 use super::eval_math::{check_derivative_order, unsupported};
 use crate::geom2d::errors;
 use crate::geom2d::{
     Geom2dBoundedCurve, Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3, Geom2dGeometry,
     dump_base, dump_bounded_curve, dump_class_name, dump_flag,
 };
-use evaluation::{TBezierView, curve_basis, non_rational_dn, rational_derivatives, rational_dn};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
@@ -165,7 +166,7 @@ impl Geom2dEvalTBezierCurve {
     pub fn is_rational(&self) -> bool {
         self.rational
     }
-    fn view(&self) -> TBezierView<'_> {
+    fn view(&self) -> TBezierView<'_, Point2> {
         TBezierView {
             poles: self.poles.as_slice(),
             weights: self.rational.then(|| self.weights.as_slice()),
@@ -174,12 +175,12 @@ impl Geom2dEvalTBezierCurve {
     }
     // The point and the first `count` derivatives through the order-`MAX` sums.
     fn evaluate<const MAX: usize>(&self, u: f64) -> (Point2, [Vector2; 3]) {
-        let sums: BasisSums = curve_basis::<MAX>(&self.view(), u);
+        let sums: BasisSums<Xy> = curve_basis::<MAX, Point2>(&self.view(), u);
         if !self.rational {
             let d = [sums.n[1], sums.n[2], sums.n[3]].map(Vector2::from);
             return (Point2::from(sums.n[0]), d);
         }
-        let c: Xy = evaluation::rational_point(&sums);
+        let c: Xy = rational_point(&sums);
         let d: [Xy; 3] = rational_derivatives(&sums, c, MAX);
         (Point2::from(c), d.map(Vector2::from))
     }
@@ -248,7 +249,7 @@ impl Geom2dCurve for Geom2dEvalTBezierCurve {
     // ones delegate orders 1 to 3 to the explicit evaluators, as natively.
     fn eval_dn(&self, u: f64, n: i32) -> Result<Vector2, Failure> {
         check_derivative_order("Geom2dEval_TBezierCurve::EvalDN", n)?;
-        let view: TBezierView<'_> = self.view();
+        let view: TBezierView<'_, Point2> = self.view();
         let Some(weights) = view.weights else {
             return Ok(Vector2::from(non_rational_dn(&view, u, n)));
         };

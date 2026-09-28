@@ -324,7 +324,7 @@ impl GeomCurve for GeomOffsetCurve {
         state.offset_value = -state.offset_value;
         Ok(())
     }
-    fn reversed_parameter(&self, u: f64) -> f64 {
+    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         self.state.read().basis.reversed_parameter(u)
     }
     fn transformed_parameter(&self, u: f64, transform: Transform3) -> f64 {

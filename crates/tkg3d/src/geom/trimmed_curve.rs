@@ -53,8 +53,8 @@ impl_transient!(
 
 // Geom_TrimmedCurve::Reverse on the locked state.
 fn reverse_state(state: &mut TrimmedState) -> Result<(), Failure> {
-    let u1: f64 = state.basis.reversed_parameter(state.u_trim2);
-    let u2: f64 = state.basis.reversed_parameter(state.u_trim1);
+    let u1: f64 = state.basis.reversed_parameter(state.u_trim2)?;
+    let u2: f64 = state.basis.reversed_parameter(state.u_trim1)?;
     state.basis.reverse()?;
     set_trim_state(state, u1, u2, true, false)
 }
@@ -214,7 +214,7 @@ impl GeomCurve for GeomTrimmedCurve {
     fn reverse(&self) -> Result<(), Failure> {
         reverse_state(&mut self.state.write())
     }
-    fn reversed_parameter(&self, u: f64) -> f64 {
+    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         self.state.read().basis.reversed_parameter(u)
     }
     fn transformed_parameter(&self, u: f64, transform: Transform3) -> f64 {
