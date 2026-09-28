@@ -46,7 +46,10 @@ fn rebasing_preserves_values_and_zero_based_access() {
 }
 #[test]
 fn construction_and_copy_reject_invalid_shapes() {
-    assert!(DoubleTab::with_bounds(1, 0, 1, 1).is_err());
+    // `upper == lower - 1` is empty natively; only a negative size is refused.
+    assert!(DoubleTab::with_bounds(1, -1, 1, 1).is_err());
+    assert!(DoubleTab::with_bounds(1, 1, 3, 1).is_err());
+    assert!(DoubleTab::from_buffer(&mut [], 1, -1, 1, 1).is_err());
     assert!(DoubleTab::from_buffer(&mut [0.0], 1, 2, 1, 2).is_err());
     let source = DoubleTab::with_size(2, 3);
     assert!(source.copy_to(&mut DoubleTab::with_size(3, 2)).is_err());
@@ -76,4 +79,25 @@ fn move_assignment_requires_owned_matching_bounds() {
     destination.move_assign(&mut source);
     assert_eq!((source.row_size(), source.lower_row()), (0, 1));
     assert_eq!(*destination.at(0, 64).unwrap(), 7.0);
+}
+#[test]
+fn empty_bounds_build_empty_tables_on_the_inline_buffer() {
+    for (rl, ru, cl, cu) in [(1, 0, 1, 3), (1, 3, 5, 4), (-2, -3, 7, 6)] {
+        let mut table = DoubleTab::with_bounds(rl, ru, cl, cu).unwrap();
+        table.init(5.0);
+        assert_eq!((table.lower_row(), table.upper_row()), (rl, ru));
+        assert_eq!((table.lower_col(), table.upper_col()), (cl, cu));
+        assert_eq!(
+            (table.nb_rows(), table.nb_columns()),
+            (ru - rl + 1, cu - cl + 1)
+        );
+        assert!(!table.is_deletable());
+        assert!(table.value(rl, cl).is_err());
+        assert!(table.at(0, 0).is_err());
+        let mut copy = table.clone();
+        table.copy_to(&mut copy).unwrap();
+    }
+    let mut cells: [f64; 0] = [];
+    let borrowed = DoubleTab::from_buffer(&mut cells, 4, 3, 1, 2).unwrap();
+    assert_eq!((borrowed.nb_rows(), borrowed.nb_columns()), (0, 2));
 }

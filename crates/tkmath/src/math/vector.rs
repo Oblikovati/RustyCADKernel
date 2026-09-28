@@ -14,6 +14,7 @@
 
 //! Bounded numeric vectors, translated from math_VectorBase at pinned OCCT 3d097a0.
 use crate::gp::{Xy, Xyz};
+use rustycad_tkernel::ncollection::ArrayError;
 use rustycad_tkernel::standard::Failure;
 mod algebra;
 mod dump;
@@ -54,8 +55,10 @@ impl<'a, T: VectorItem> VectorBase<'a, T> {
     /// Allocates inclusive bounds, allowing an empty interval; `Vector::with_bounds(-1,2)?`.
     pub fn with_bounds(lower: i32, upper: i32) -> Result<Self, Failure> {
         let length = i64::from(upper) - i64::from(lower) + 1;
+        // Native accepts `upper == lower - 1` (empty); a negative size sign-extends into
+        // a huge `size_t` over the stack buffer (undefined), which the port refuses.
         if length < 0 {
-            return Err(failure("Standard_RangeError", "NCollection_Array1::Create"));
+            return Err(ArrayError::Bounds { lower, upper }.into_failure("math_VectorBase"));
         }
         let mut result = Self::with_size(length as usize);
         result.lower = lower;

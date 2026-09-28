@@ -88,7 +88,7 @@ impl FunctionSetRoot {
                 return false;
             }
             self.run.lambda2 = self.run.gradient_norm;
-            self.run.slope = self.gradient.dot(&self.direction).unwrap();
+            self.run.slope = self.gradient.dot_unchecked(&self.direction);
             self.run.stop = self.run.slope >= 0.0 || self.run.descent >= 10 || self.run.boundary;
         }
         true
@@ -121,7 +121,7 @@ impl FunctionSetRoot {
                 return false;
             }
         }
-        self.run.slope = self.gradient.dot(&self.direction).unwrap();
+        self.run.slope = self.gradient.dot_unchecked(&self.direction);
         true
     }
 }

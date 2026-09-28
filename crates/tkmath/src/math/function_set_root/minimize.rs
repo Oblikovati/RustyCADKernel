@@ -27,12 +27,12 @@ impl FunctionSetRoot {
         self.delta
             .initialized(&self.saved.subtracted(&self.previous).unwrap())
             .unwrap();
-        let norm: f64 = self.delta.norm().unwrap();
+        let norm: f64 = self.delta.norm_unchecked();
         if norm <= 1e-16 {
             return false;
         }
         let reciprocal: f64 = 1.0 / norm;
-        let last: f64 = self.sol.subtracted(&self.saved).unwrap().norm().unwrap() * reciprocal;
+        let last: f64 = self.sol.subtracted(&self.saved).unwrap().norm_unchecked() * reciprocal;
         if last < 1e-2 {
             return false;
         }
@@ -67,8 +67,8 @@ impl FunctionSetRoot {
         if tolerance > 0.9 {
             return false;
         }
-        let df1: f64 = self.saved_gradient.dot(&self.delta).unwrap();
-        let df2: f64 = self.gradient.dot(&self.delta).unwrap();
+        let df1: f64 = self.saved_gradient.dot_unchecked(&self.delta);
+        let df2: f64 = self.gradient.dot_unchecked(&self.delta);
         let mut parameter: f64 = interpolate(value, next, df1, df2);
         if parameter.abs() >= 1.0 {
             return false;
@@ -91,7 +91,7 @@ impl FunctionSetRoot {
                 &mut parameter,
                 &mut best,
                 &mut good,
-                self.saved_gradient.norm2().unwrap(),
+                self.saved_gradient.norm2_unchecked(),
             );
         }
         if good {
