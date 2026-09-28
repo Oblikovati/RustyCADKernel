@@ -171,6 +171,52 @@ class TemplateAndKnownIdentityTests(unittest.TestCase):
         self.assertEqual(normalize_param("unsigned int theX"), "unsigned int")
 
 
+NAMESPACE_HEADER = """
+namespace MathDemo
+{
+struct Result
+{
+  explicit operator bool() const { return true; }
+};
+namespace Utils
+{
+inline long double ToDouble(long double theValue) { return theValue; }
+inline bool Solve3x3(const double theJ[3][3], double theDelta[3]) { return true; }
+template <size_t N>
+inline double SafeNormN(const double (&theValues)[N]) { return 0.0; }
+}
+}
+"""
+
+
+class ConversionAndArrayTests(unittest.TestCase):
+    """Regressions found on the modern Math* namespaces (MathPoly, MathSys)."""
+
+    def test_conversion_operators_and_array_parameters_render_exactly(self):
+        self.assertEqual(members_of(NAMESPACE_HEADER), [
+            "MathDemo::Result::operator bool||const", "MathDemo::Utils::ToDouble|long double|",
+            "MathDemo::Utils::Solve3x3|const double[3][3],double[3]|",
+            "MathDemo::Utils::SafeNormN|const double(&)[N]|"])
+
+    def test_nameless_multiword_builtins_and_arrays_normalize_like_named_ones(self):
+        self.assertEqual(normalize_param("long double"), normalize_param("long double theValue"))
+        self.assertEqual(normalize_param("const double theJ[3][3]"), "const double[3][3]")
+        self.assertEqual(normalize_param("const double (&theF)[N]"), "const double(&)[N]")
+        self.assertEqual(normalize_param("const double[9]"), "const double[9]")
+        self.assertEqual(normalize_param("Standard_Real theP[2]"), "double[2]")
+
+    def test_rows_spelled_like_the_header_are_not_stale(self):
+        with tempfile.TemporaryDirectory() as folder:
+            header = Path(folder) / "MathDemo_Types.hxx"
+            header.write_text(NAMESPACE_HEADER)
+            rows = [{"upstream_id": upstream_id, "source": "x.hxx"} for upstream_id in [
+                "MathDemo::Result::operator bool() const", "MathDemo::Utils::ToDouble(long double)",
+                "MathDemo::Utils::Solve3x3(const double[3][3],double[3])",
+                "MathDemo::Utils::SafeNormN(const double(&)[N])"]]
+            missing, stale = audit_header(header, "x.hxx", {"api": rows})
+        self.assertEqual(([m.prefix for m in missing], stale), ([], []))
+
+
 class RowMatchingTests(unittest.TestCase):
     def test_row_ids_split_prefix_params_and_qualifier(self):
         self.assertEqual(parse_row_id("gp_GTrsf::operator()(int,int) const"),

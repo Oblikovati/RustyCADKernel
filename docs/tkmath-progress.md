@@ -995,13 +995,13 @@ quarter turn.
 ### Modern Math* namespaces (API completion)
 
 The modern packages MathUtils, MathInteg, MathLin, MathOpt, MathRoot, MathSys and MathPoly
-are C++ namespaces with no primary class. `tools/audit_api_rows.py` therefore expects,
-inside a named namespace, every struct/class, `using` alias and `constexpr` constant as one
-bare `Namespace::Name` row, besides the member functions. It reads conversion operators as
-`operator bool`, skips data members whose default initializer calls a function, keeps
-multi-word builtins such as `long double` and spells array parameters `const double[3][3]`
-and `const double(&)[N]`. For each of the seven packages the audit reports no missing
-member and no stale row. The sections below list what each package needed. The new probes
+are C++ namespaces with no primary class. Their structs, `using` aliases and `constexpr`
+constants are known identities for `tools/audit_api_rows.py`, and each has a bare
+`Namespace::Name` row that points at the Rust type or constant. The audit reads conversion
+operators as `operator bool` (it formerly read a member named `bool`), keeps nameless
+multi-word builtins such as `long double` whole and spells array parameters
+`const double[3][3]` and `const double(&)[N]`. For each of the seven packages the audit
+reports no missing member and no stale row. The sections below list what each package needed. The new probes
 add 10,475 requests to the numeric corpus (58,169 to 68,644 comparisons), and all of them
 give the native bits.
 
