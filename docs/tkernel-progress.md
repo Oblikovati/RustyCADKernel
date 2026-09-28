@@ -1281,8 +1281,6 @@ limits, the HLS hue sectors and their edges, the sRGB and CIE Lab thresholds, he
 encodings, JSON round trips, and seeded random colors. The corpus omits the inputs that
 terminate OCCT or hit undefined conversions. All 4,168 requests are identical.
 
-## Message, Resource and Quantity API completion
-
 ### Resource
 
 `python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/Resource --source ../OCCT`
@@ -1339,3 +1337,61 @@ The Resource probe family (`tools/oracle/tkernel_resource_probe.cxx`, Rust twin
 every code page, buffer boundaries, resource files with verbose and debug traces, both
 constructors, Save, GetResourcePath, ExtValue and ReadFormat: 4,117 requests, all identical
 to OCCT.
+
+### Message progress
+
+`Message_ProgressIndicator`, `Message_ProgressRange`, `Message_ProgressScope`,
+`Message_ProgressSentry` and `Message_LazyProgressScope` are ported in
+`crates/tkernel/src/message/` and have 42 api rows: 38 implemented and 4 excluded. The
+excluded rows are the three destructors, which are `Drop` impls with the native side effects,
+and the RTTI macro. Four of the implemented rows map the protected indicator constructor and
+virtuals, which the audit does not require.
+
+- The indicator handle subclass becomes `ProgressIndicator::new(Box<dyn
+  ProgressIndicatorHooks>)`. The hooks are `show(scope, position, force)`, `user_break()` and
+  `reset()`. They take `&self`, because `UserBreak` may run concurrently. `show` gets the
+  position just stored, because it runs under the increment lock. `GetPosition()` stays
+  available and reads the atomic position without the lock, as natively.
+- Increments are serialized by a mutex and clamp `position + step` to 1 before `Show`.
+- The root scope lives inside the indicator. `ProgressRange<'a>` and `ProgressScope<'a>`
+  borrow their parent scope, so a range or sub-scope cannot outlive its parent. The native
+  class documents this contract but does not check it.
+- `next`, `close` and `value` take `&self`. The local value and the armed flag are atomics,
+  so the ranges of one scope can be handed to parallel tasks (test
+  `ranges_advance_the_indicator_from_parallel_tasks`).
+- The three named constructors are `new` (`TCollection_AsciiString`: copied, an empty name is
+  null), `with_literal` (`const char (&)[N]`: kept, so `""` stays a non-null empty name) and
+  `unnamed` (`NullString*`). `Name()` returns the C-string bytes up to the first NUL.
+
+Quirks preserved:
+
+- Copying a range disarms the source (`Clone`, through a `Cell`). Copy assignment
+  (`clone_from`) overwrites the target without closing it, so the target's pending advance is
+  lost.
+- A range that already built a scope builds an inactive scope. Max is clamped to at least
+  1e-6.
+- Finite scopes snap to their portion within `RealSmall()` of max. Infinite scopes advance on
+  `x / (1 + x)`, and their `Value()` is `Precision::Infinite()` once closed.
+- `Next` with a step that is not positive, or that maps to no global advance, returns an
+  unbound range.
+- `Message_ProgressSentry` builds its scope before it checks `min == 0`, `step == 1` and a
+  zero span. A refused sentry has therefore consumed its range, and the unwinding destructor
+  completes it. The Rust `Err` path drops the scope and gives the same Show sequence. The
+  error carries the refused values.
+- `Message_LazyProgressScope` advances and polls only once per patch, and its break state
+  sticks.
+- The native debug-only asserts (a range used twice, a parent closed before its child) are
+  not checked, as in release builds.
+
+The `msgprog` probe family (`tools/oracle/tkernel_message_progress_probe.cxx`, Rust twin
+`crates/tkernel/examples/oracle_probe/message_progress.rs`, requests in
+`tools/tkernel_message_progress_corpus.py`) runs the same nested token script on both
+sides. A script creates scopes of every name kind, takes `Next` steps, drops, copies,
+assigns and closes ranges, forces shows, polls breaks and uses the sentry and the lazy
+scope. Objects die at the end of their block, so destructor side effects are compared as
+well. The probe prints every Show position bit-for-bit, the poll count and the final
+position: 238 requests, all identical to OCCT. `message_progress_behavior` holds 13
+supplemental tests with a named recording fake indicator.
+
+The TKMath consumers are wired: `math_Gauss` and both `LU_Decompose` overloads now honour
+their range (see docs/tkmath-progress.md).
