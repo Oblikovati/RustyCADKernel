@@ -8,7 +8,7 @@ are outside the current port. OCCT's own functionality remains in scope.
 **Status:** All 1,316 TKernel GoogleTest declarations are mapped: 1,315 have
 passing translations, and the one upstream skip has a passing current-behavior
 regression. TKernel API and DRAW coverage remain incomplete. TKMath geometry and
-the vertex-building dependency path are underway. TKMath has 1,419 mapped and passing
+the vertex-building dependency path are underway. TKMath has 1,585 mapped and passing
 legacy declarations; see [TKMath progress](docs/tkmath-progress.md).
 See [current progress and remaining tests](docs/tkernel-progress.md).
 The baseline is OCCT **8.1.0-dev1**, commit

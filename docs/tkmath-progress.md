@@ -85,6 +85,12 @@ currently account for 1,585 mapped declarations, with matching native and Rust p
 | PLib_Test.cxx | plib | 19 |
 | PLib_JacobiPolynomial_Test.cxx | plib_jacobi_polynomial | 11 |
 | PLib_HermitJacobi_Test.cxx | plib_hermit_jacobi | 9 |
+| MathSys_LM_Test.cxx | mathsys_lm | 30 |
+| MathSys_Newton2D_Test.cxx | mathsys_newton2d | 12 |
+| MathSys_Newton3D_Test.cxx | mathsys_newton3d | 10 |
+| MathSys_Newton4D_Test.cxx | mathsys_newton4d | 8 |
+| MathOpt_PSO_Test.cxx | mathopt_pso | 28 |
+| MathOpt_GlobOpt_Test.cxx | mathopt_global | 24 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -345,7 +351,7 @@ order of equal-valued roots with different zero signs is not claimed.
 `num-complex` 0.4.6 is isolated behind `math_poly::Complex` and supplies only
 storage. Version reference: https://docs.rs/num-complex/0.4.6/num_complex/.
 
-The 1,419-declaration gate passes 16,599 numeric cases. All 50 trigonometric
+When 1,419 declarations were mapped, the gate passed 16,599 numeric cases. All 50 trigonometric
 root declarations pass in both implementations. Differential cases compare
 native statuses, all four root slots, the infinite-roots flag, and periodic
 count outputs on success and failure. The periodic count uses software x87
