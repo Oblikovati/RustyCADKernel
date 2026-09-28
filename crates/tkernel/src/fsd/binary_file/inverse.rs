@@ -12,10 +12,8 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! Byte-order primitives from FSD_BinaryFile; storage-driver I/O remains pending.
-
-/// Binary persistence byte-order operations, independent of host endianness.
-pub struct BinaryFile;
+//! The byte-order helpers of `FSD_BinaryFile`, independent of host endianness.
+use super::BinaryFile;
 
 impl BinaryFile {
     /// Reverse every byte of a signed integer, including sign/payload bits.
