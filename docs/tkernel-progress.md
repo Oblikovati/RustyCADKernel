@@ -403,8 +403,8 @@ Native standard-library tie ordering on other platforms still requires oracle pr
 The compiled OCCT unit dictionary is vendored as byte-preserving data with source
 and payload hashes. All nine enabled UnitsAPI legacy tests pass, plus 3900 exact
 comparisons of token spelling, dimensions, conversion bits, shifted units, and
-MDTV local units. Configurable resource units and process-global cache edge cases
-still need API coverage; these results do not establish full Units API parity.
+MDTV local units. The full Units, UnitsAPI and UnitsMethods API is covered by the
+"Units API completion" section below.
 
 Standard_Dump has all 12 legacy tests translated. Point, direction, frame, and
 bounding-box fragments use native formatting and one-based parser cursors.
@@ -1216,6 +1216,87 @@ Standard_ArrayStreamBuffer, Standard_Dump and Plugin.hxx have 89 rows (80 implem
   instead of process-wide). The probe exercises the native failure paths with a
   temporary resource file.
 
+## Units API completion
+
+`python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/<Package> --source ../OCCT`
+reports 0 public members without api rows and 0 stale rows for `Units` (217 rows: 207
+implemented, 10 excluded RTTI macros), `UnitsAPI` (34 implemented) and `UnitsMethods`
+(10 implemented).
+
+The condensed evaluator was replaced by a class-by-class port: `Dimensions`, `Token` and
+`ShiftedToken`, `Unit` and `ShiftedUnit`, `Quantity`, `Lexicon` and `UnitsLexicon`,
+`UnitsDictionary`, `Sentence`, `UnitSentence` and `MathSentence`, `Measurement`,
+`Explorer`, `UnitsSystem`, the `Units_Operators` free functions (`units::operators`) and the
+`Units_NoSuchType`/`Units_NoSuchUnit` exception classes (`UNITS_HIERARCHY`, both
+`Standard_NoSuchObject`). Transient classes are `Handle<T>` with lock-protected fields,
+because the sentence analysers edit shared tokens in place. The virtual members
+(`Creates`, `Multiplied`, `Divided`, `Dump`, `Token`) dispatch on the handle's dynamic
+type through `TokenHandle`, `UnitHandle` and `LexiconHandle`. `Units_Token::Divide`
+returns `this` for a near-zero divisor, so it is a `TokenHandle` member too.
+
+Process-wide statics become injected contexts:
+
+- `units::Units` holds the dictionary, both lexicons, the null dimensions, the
+  `ToSI`/`FromSI` last-unit cache, the `FirstQuantity` cache and the
+  `Units_Dimensions::Quantity` sequence cache. Every class that reads them natively takes
+  the context (`UnitSentence::new(&units, ...)`, `Dimensions::quantity(&units)`).
+  `std::cout` text and `Message::SendWarning`/`SendInfo` payloads go to an injected
+  `UnitsDiagnostics`; `Dump` members write into a `&mut dyn Write`.
+- `units_api::UnitsApi` holds the current/SI/MDTV resource catalogs, the local units
+  systems and the selected systems, and builds its resource managers on an injected
+  `ResourceHost`.
+- `units_methods::UnitsMethods` holds the cascade length unit in an atomic, as the native
+  static does.
+
+Preserved native behaviour:
+
+- The caches start as the zero-initialized statics: `ToSI(x, "")` before any other unit
+  returns 0 (and `FromSI` returns infinity), and `FirstQuantity("")` answers `""`.
+- `Units_Dimensions::Quantity` searches the quantity sequence captured on its first call.
+- `UnitsDictionary::Creates` keeps the native `sscanf` field widths, the `coeff`/`move`
+  locals that survive from one line to the next, and the matrix propagation that counts
+  every assignment. Recreating the dictionary re-adds every symbol to the units lexicon,
+  so each meaning becomes `UU` and the duplicate warning prints for every symbol.
+- `Units_Sentence::Evaluate` is destructive. An operator-free remainder evaluates to a null
+  token. Index errors are `Standard_OutOfRange` with the native messages
+  (`NCollection_Sequence::Value`, the `removeSeq` messages, and the empty `Exchange`
+  message that `sq.km` raises, OCC23497).
+- `Units_UnitsSystem::Remove` of the last unit of a quantity removes the quantity and then
+  raises `Units_NoSuchUnit`. `Activate` bounds its unit search by the number of
+  quantities, so it can raise `Standard_OutOfRange` or miss an existing unit.
+  `ConvertUserSystemValueToSI` of a shifted unit computes `value * (factor + move)`.
+- `UnitsAPI::Check` always answers false. `CurrentUnit` of a quantity without a current
+  unit raises `Resource_NoSuchResource`.
+- `Units_Measurement::Integer` truncates with the x86-64 `cvttsd2si` result.
+  `GetCasCadeLengthUnit(Inch)` after `SetCasCadeLengthUnit(1)` is `25.4 * (1 / 25.4)`, not 1.
+
+Deliberate Rust deviations:
+
+- A null handle that the native code dereferences unchecked is a `Standard_NullObject`
+  failure. This covers `AnyFromLS` and the dimensions overload of `AnyToLS` for an
+  invalid unit, and tokens left null by empty brackets.
+- A dictionary section whose conversion graph never connects is an error. Natively the
+  propagation loops forever, which is what recreating the dictionary triggers.
+- Unit symbols are `AsciiString` values in the shared symbol sequence. The native
+  `TCollection_HAsciiString` handles are never edited after creation.
+- The default `ConsoleDiagnostics` prints messages without the native console colours.
+
+Differential evidence: the `units_*` probe family (`tools/oracle/tkernel_units_probe.cxx`,
+`crates/tkernel/examples/oracle_probe/units/`, `tools/tkernel_units_corpus.py`) runs 1,464
+requests in one long-lived process on both sides, so the package, UnitsAPI and
+UnitsMethods state evolves identically. Captured console text (with token addresses
+masked) and messenger payloads are compared with the results. The requests cover every
+dictionary symbol as a sentence and as a `ToSI`/`FromSI` conversion, composite, prefixed,
+shifted, numeric and invalid expressions, formulas, raw lexicon sentences, every quantity
+look-up, dimension arithmetic, token operators and copies, measurements, units and
+quantities, explorer walks, a units-system session with the quirks above, 552 UnitsAPI
+calls across the SI/MDTV/DEFAULT systems with current-unit overrides, every UnitsMethods
+table entry, and the dictionary and lexicon dumps. All 1,464 are identical; with them the
+combined `verify_tkernel.py` run checks 191,495 differential cases.
+`DictionaryOfUnits(true)` is not in the corpus: natively it never returns (see above).
+Behaviour tests are in `units_classes_api_behavior`; resource I/O uses the named fake
+`InMemoryUnitsResources`.
+
 ## Message, Resource and Quantity API completion
 
 ### Quantity
@@ -1934,3 +2015,84 @@ busy pools, `Perform` coverage (count, index sum, visited-once, index bounds) ov
 reversed, negative and INT_MIN-adjacent ranges, single failures including the kept
 self-thread failure, `For`/`ForEach` on the forced, single-item and pooled paths, the
 processor count and backend switch, and `OSD_Thread` run/wait/timed-wait/copy results.
+
+## Storage and FSD API completion
+
+`python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/<Package> --source ../OCCT`
+reports 0 public members without api rows and 0 stale rows for `Storage` (261 rows: 247
+implemented, 14 excluded RTTI macros and destructors) and `FSD` (201 rows: 195 implemented,
+6 excluded). Before this work only the `FSD_BinaryFile` byte-order helpers existed.
+
+The port is class by class:
+
+- `storage`: `Data`, `HeaderData`, `RootData`, `TypeData`, `Root`, `InternalData`,
+  `TypedCallBack` are handle-shared transients with lock-protected fields, because the
+  native code mutates them through `const` handles (for example `RootData::UpdateRoot`
+  changes the root an earlier `Roots()` sequence holds). `Storage_BaseDriver` is the trait
+  `BaseDriver` over `HeaderSections`, `TableSections`, `DataSections` and
+  `DriverPrimitives`; every step returns `Result`, so the `Storage_Stream*Error`
+  exceptions (declared as real classes in `STORAGE_HIERARCHY`) propagate to the readers
+  that catch them. `Storage_CallBack` is the trait `CallBack` shared as `Arc<dyn CallBack>`.
+  `Schema::write` ports `Storage_Schema::Write` step by step, including its error
+  extensions. `Standard_Persistent` is the upstream `StandardPersistent`; the schema's
+  friend access to its counters goes through `PersistentNumbers`.
+- `fsd`: `File` and `CmpFile` are `TextFile<FsdDialect>`/`TextFile<CmpDialect>`: one
+  implementation of the shared members, with the members `FSD_CmpFile` overrides supplied
+  by the dialect, so `FSD_File`'s own members still reach the overriding line readers.
+  `BinaryFile` keeps the `FSD_FileHeader` offsets (`FileHeader`) and writes native byte
+  order. `Base64` is `FSD_Base64`.
+- I/O: `storage::IoStream` models libstdc++'s `std::basic_iostream<char>` (sentries, state
+  bits, `gcount`, `num_get` integer extraction with its clamping and `unsigned short`
+  negation, `bool` extraction, `getline`, word extraction bounded like GCC's
+  `__builtin_object_size` path, `tellg`/`tellp`, `%.*g` output at precision 17).
+  `FSD_BinaryFile` uses a glibc `FILE*` model (`fread` short reads keep partial bytes and
+  set the end-of-file flag, which only `fseek` clears). Both run over an injected
+  `DriverFileSystem` (`NativeDriverFileSystem`, or `MemoryFileSystem` and the named fakes in
+  the tests). `Storage_Schema::ICreationDate` reads an injected `CreationDateSource` and
+  `CheckTypeMigration` an injected `MigrationSource`.
+
+Native behaviour kept (all probe-compared unless noted):
+
+- `ReadExtendedLine` of `FSD_File` appends each UTF-16 unit as its decimal digits, because
+  `buffer += (char16_t)i` binds to `TCollection_ExtendedString::operator+=(int)`: "AB"
+  written with `WriteExtendedLine` reads back as "6566". `FSD_CmpFile::ReadExtendedLine`
+  loops on the output length, so it reads no unit into an empty string.
+- `ReadChar`/`ReadMagicNumber` append the previous character again when a read fails at
+  the end of the input; `FindTag` reports `SectionNotFound` when the tag line is the last
+  line without a newline.
+- `GetReal`/`GetShortReal` read at most 99 characters (the optimised native `char[100]`
+  extraction) and `CStringToReal` stores its parse before reporting trailing characters;
+  `GetCharacter` keeps an overflowing value after clearing the stream (the SGI
+  workaround); `PutCharacter` writes a byte above 127 as its sign-extended `unsigned short`.
+- `FSD_File::Tell` uses `tellp` in read mode and `tellg` in write mode.
+- `Storage_Schema::Write` never selects types (`AddTypeSelection` is commented out), so a
+  root with an object writes a reference of -1 and fails in the data section with
+  `Standard_OutOfRange`; roots are always written as `PDocStd_Document`.
+- `Storage_BucketIterator` yields one null slot on an empty collection.
+- `FSD_Base64` keeps its padding arithmetic and its decode table (`-` and `.` are 62, `,`
+  and `_` are 63).
+
+Deliberate deviations:
+
+- The current data set of `Storage_Schema` is kept per schema instead of in a process-wide
+  static; the protected bindings return `Standard_NullObject` outside a write.
+- `Storage_Data` starts with `Storage_VSOk`; natively the status is uninitialised.
+- Calls on a closed binary driver, a null callback or a null object return
+  `Standard_NullObject` instead of dereferencing null.
+- `FSD_BinaryFile::ReadCompleteInfo` returns `Storage_StreamFormatError` where the native
+  loop never ends (a stream position that matches no section, including the start of the
+  data section). A non-empty reference section calls the null callbacks the type section
+  installs natively; Rust reports `Standard_NullObject`.
+- Base64 bytes of 0x80 and above index outside the native table (undefined behaviour);
+  Rust decodes them as 0.
+- Buckets hold handles instead of raw pointers; slots never filled read as null.
+
+Differential evidence: the `stor_*` family (`tools/oracle/tkernel_storage_probe.cxx` and
+`crates/tkernel/examples/oracle_probe/storage/`) sends 6,271 requests, all identical:
+number formatting at several precisions, iostream extraction scripts, Base64 with every
+capacity edge, magic numbers, the migration table, 70 random containers written and read
+by all three drivers (including truncated files and the header/root/type `Read` members),
+scalar reads of malformed text and random binary bytes, open-mode and object-framing
+rules, `IsGoodFileType`, `Storage_Data`/bucket/callback scripts, `Storage_Schema::Write`
+through each driver and mode, `ReadCompleteInfo`, and the binary stream overloads. Written
+files are compared byte for byte.

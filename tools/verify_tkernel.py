@@ -22,6 +22,8 @@ import tkernel_resource_corpus
 import tkernel_message_corpus
 import tkernel_message_progress_corpus
 import tkernel_osd_corpus
+import tkernel_units_corpus
+import tkernel_storage_corpus
 
 
 def run(args, log, *, input=None, timeout=900, env=None):
@@ -77,6 +79,10 @@ def corpus():
     cases += tkernel_message_progress_corpus.cases()
     cases += tkernel_message_corpus.cases()
     cases += tkernel_osd_corpus.cases()
+    cases += tkernel_storage_corpus.cases()
+    # Last: the native units probe replaces the default messenger printers and unsets the
+    # CSF_* resource variables for the rest of the process.
+    cases += tkernel_units_corpus.cases()
     return "\n".join(cases) + "\n"
 
 

@@ -12,6 +12,8 @@ mod ncollection;
 mod osd;
 mod quantity;
 mod resource;
+mod storage;
+mod units;
 
 fn date(input: &mut std::str::SplitWhitespace<'_>) -> Result<Date, Error> {
     let values: Vec<i32> = input
@@ -111,6 +113,8 @@ fn evaluate(line: &str) -> Result<String, Box<dyn std::error::Error>> {
             .or_else(|| resource::evaluate(other, &mut input))
             .or_else(|| message_progress::evaluate(other, &mut input))
             .or_else(|| osd::evaluate(other, &mut input))
+            .or_else(|| units::evaluate(other, &mut input))
+            .or_else(|| storage::evaluate(other, &mut input))
             .unwrap_or_else(|| panic!("unknown operation {other}")),
     };
     assert!(input.next().is_none(), "unexpected trailing fields");

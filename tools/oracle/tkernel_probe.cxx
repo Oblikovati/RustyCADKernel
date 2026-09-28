@@ -13,6 +13,8 @@
 #include "tkernel_resource_probe.cxx"
 #include "tkernel_message_progress_probe.cxx"
 #include "tkernel_osd_probe.cxx"
+#include "tkernel_units_probe.cxx"
+#include "tkernel_storage_probe.cxx"
 
 static Quantity_Date date(std::istream& in) {
   int mm, dd, yy, hh, mn, ss, mis, mics;
@@ -61,7 +63,7 @@ int main() {
         Standard_GUID guid(value.c_str()); char text[37]; guid.ToCString(text);
         const auto uuid = guid.ToUUID(); out << text << ' ' << uuid.Data1 << ' ' << uuid.Data2 << ' ' << uuid.Data3;
         for (auto byte : uuid.Data4) out << ' ' << static_cast<unsigned>(byte);
-      } else if (!ncollection_probe(op, in, out) && !message_probe(op, in, out) && !quantity_probe(op, in, out) && !resource_probe(op, in, out) && !message_progress_probe(op, in, out) && !osd_probe(op, in, out)) { return 2; }
+      } else if (!ncollection_probe(op, in, out) && !storage_probe(op, in, out) && !message_probe(op, in, out) && !quantity_probe(op, in, out) && !resource_probe(op, in, out) && !message_progress_probe(op, in, out) && !osd_probe(op, in, out) && !units_probe(op, in, out)) { return 2; }
       std::cout << "OK " << out.str() << '\n';
     } catch (const Standard_Failure& error) {
       std::cout << "ERR " << error.ExceptionType() << ": " << error.what() << '\n';
