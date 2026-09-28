@@ -58,7 +58,7 @@ fn TopLoc_Location_Test__OCC25545_ConcurrentTransformationAccess() {
         shapes: &shapes,
         races: AtomicI32::new(0),
     };
-    Parallel::for_indices(0..n, |index| functor.evaluate(index));
+    Parallel::for_range(0, n as i32, |index| functor.evaluate(index as usize), false).unwrap();
     assert_eq!(
         functor.races.load(Ordering::SeqCst),
         0,

@@ -19,7 +19,7 @@ use super::{
     osd_file::{File, IAM, program_error},
 };
 use crate::{
-    osd::{FromWhere, KindFile, OpenMode},
+    osd::{FromWhere, KindFile, OpenMode, Osd},
     standard::Failure,
     tcollection::AsciiString,
 };
@@ -197,17 +197,10 @@ impl File {
             if !line.is_empty() {
                 return Ok(true);
             }
-            sec_sleep(delay);
+            Osd::sec_sleep(delay);
         }
         Ok(false)
     }
-}
-
-/// `OSD::SecSleep`: `usleep(seconds * 1000 * 1000)` with the native int arithmetic, so
-/// the product wraps and is passed as unsigned microseconds.
-fn sec_sleep(seconds: i32) {
-    let micros: u32 = seconds.wrapping_mul(1_000_000) as u32;
-    std::thread::sleep(std::time::Duration::from_micros(u64::from(micros)));
 }
 
 #[cfg(unix)]

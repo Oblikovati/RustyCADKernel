@@ -17,9 +17,10 @@
 //! protections, `LockFileEx`) is not ported: this backend runs the Unix-build algorithm
 //! with the closest std primitive for each call, and errno values are the raw OS codes.
 use super::calls::{
-    AccessMode, CallResult, Errno, LocalTime, NodeStatus, NodeType, OpenFlags, PosixFileCalls,
-    RecordLock, SeekOrigin,
+    AccessMode, CallResult, Errno, NodeStatus, NodeType, OpenFlags, PosixFileCalls, RecordLock,
+    SeekOrigin,
 };
+use crate::osd::LocalTime;
 use crate::osd::OpenMode;
 use std::{
     collections::BTreeMap,
@@ -199,6 +200,7 @@ impl PosixFileCalls for NativePosixCalls {
             hour: (of_day / 3600) as i32,
             minute: (of_day / 60 % 60) as i32,
             second: (of_day % 60) as i32,
+            millisecond: 0,
         })
     }
 }

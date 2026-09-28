@@ -426,6 +426,7 @@ impl PosixFileCalls for FakePosixCalls {
             hour: 13,
             minute: 20,
             second: 0,
+            millisecond: 0,
         })
     }
 }

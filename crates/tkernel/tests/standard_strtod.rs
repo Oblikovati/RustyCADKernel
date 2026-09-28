@@ -44,7 +44,7 @@ fn Standard_StrtodTest__Parallel_ConsistentResults() {
     let mut results = Array1::with_size(200);
     results.init(-1.0);
     let text = "3.14159265358979323846264338327950288419716939937510";
-    Parallel::for_each_mut(results.as_mut_slice(), |_, slot| *slot = strtod(text).0);
+    Parallel::for_each(results.iter_mut(), |slot| *slot = strtod(text).0, false, -1).unwrap();
     let reference = strtod(text).0;
     for &actual in &results {
         assert_eq!(actual, reference);
@@ -56,7 +56,7 @@ fn Standard_StrtodTest__Parallel_RepeatedRuns() {
     let reference = strtod(text).0;
     for run in 0..10 {
         let mut results = Array1::with_size(100);
-        Parallel::for_each_mut(results.as_mut_slice(), |_, slot| *slot = strtod(text).0);
+        Parallel::for_each(results.iter_mut(), |slot| *slot = strtod(text).0, false, -1).unwrap();
         for (index, actual) in results.iter().enumerate() {
             assert_eq!(*actual, reference, "run {run}, thread {index}");
         }
@@ -69,9 +69,13 @@ fn Standard_StrtodTest__Parallel_ManyDistinctInputs() {
     for (index, value) in expected.iter_mut().enumerate() {
         *value = strtod(CASES[index % CASES.len()].0).0;
     }
-    Parallel::for_each_mut(results.as_mut_slice(), |index, value| {
-        *value = strtod(CASES[index % CASES.len()].0).0
-    });
+    Parallel::for_each(
+        results.iter_mut().enumerate(),
+        |(index, value)| *value = strtod(CASES[index % CASES.len()].0).0,
+        false,
+        -1,
+    )
+    .unwrap();
     for index in 0..100 {
         assert_eq!(results[index], expected[index], "index {index}");
     }

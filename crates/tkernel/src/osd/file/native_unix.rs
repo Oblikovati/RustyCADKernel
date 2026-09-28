@@ -16,9 +16,10 @@
 //! the non-`_WIN32` OSD sources make, so errno values and side effects are native.
 #![allow(unsafe_code)]
 use super::calls::{
-    AccessMode, CallResult, Errno, LocalTime, NodeStatus, NodeType, OpenFlags, PosixFileCalls,
-    RecordLock, SeekOrigin,
+    AccessMode, CallResult, Errno, NodeStatus, NodeType, OpenFlags, PosixFileCalls, RecordLock,
+    SeekOrigin,
 };
+use crate::osd::LocalTime;
 use crate::osd::OpenMode;
 use std::ffi::{CStr, CString};
 
@@ -234,6 +235,7 @@ impl PosixFileCalls for NativePosixCalls {
             hour: fields.tm_hour,
             minute: fields.tm_min,
             second: fields.tm_sec,
+            millisecond: 0,
         })
     }
 }

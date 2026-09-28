@@ -26,6 +26,7 @@ pub use file::*;
 
 // Stream file systems: OSD_FileSystem and its local, cached and selector variants.
 mod file_system;
+pub use file_system::*;
 
 // Process and host queries: OSD_Process, OSD_Host, OSD_Environment, OSD_SharedLibrary,
 // OSD_MemInfo.
@@ -36,6 +37,7 @@ pub use process::*;
 mod perf_meter;
 pub use perf_meter::*;
 mod timing;
+pub use timing::*;
 
 // Threads, the thread pool and parallel loops.
 mod parallel;

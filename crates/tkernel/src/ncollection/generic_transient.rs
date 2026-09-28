@@ -15,25 +15,15 @@
 //! `NCollection_HSequence`), whose `DEFINE_STANDARD_RTTI_INLINE` gives every
 //! instantiation the template's name and `Standard_Transient` as parent.
 use crate::standard::{RuntimeType, RuntimeTyped, StandardTransient};
-use std::{
-    any::TypeId,
-    collections::HashMap,
-    sync::{Mutex, OnceLock, PoisonError},
-};
 
-/// The descriptor of the instantiation `C`, named `name`, created once and cached.
+/// The descriptor of the instantiation `C`, named `name`, registered once.
 ///
-/// A Rust generic cannot own a `static` per instantiation (a `static` in a generic
-/// function is shared by all of them), so descriptors are leaked once and interned by
-/// `TypeId`: `generic_static_type::<HArray1<f64>>("NCollection_HArray1")`.
+/// A Rust generic cannot own a `static` per instantiation, so the TKernel type registry,
+/// keyed by `TypeId`, keeps one descriptor per instantiation:
+/// `generic_static_type::<HArray1<f64>>("NCollection_HArray1")`.
 pub(crate) fn generic_static_type<C: 'static>(name: &'static str) -> &'static RuntimeType {
-    static REGISTRY: OnceLock<Mutex<HashMap<TypeId, &'static RuntimeType>>> = OnceLock::new();
-    let registry = REGISTRY.get_or_init(|| Mutex::new(HashMap::new()));
-    let mut types = registry.lock().unwrap_or_else(PoisonError::into_inner);
-    types.entry(TypeId::of::<C>()).or_insert_with(|| {
-        let parent = Some(<StandardTransient as RuntimeTyped>::static_type());
-        Box::leak(Box::new(RuntimeType::new::<C>(name, parent)))
-    })
+    let parent = Some(<StandardTransient as RuntimeTyped>::static_type());
+    RuntimeType::register::<C>(name, std::mem::size_of::<C>(), parent)
 }
 
 /// Implements `RuntimeTyped` and `Transient` for a generic handle-shared collection
@@ -41,6 +31,7 @@ pub(crate) fn generic_static_type<C: 'static>(name: &'static str) -> &'static Ru
 macro_rules! impl_generic_transient {
     ($class:ident, $name:literal) => {
         impl<T: Send + Sync + 'static> $crate::standard::RuntimeTyped for $class<T> {
+            const TYPE_NAME: &'static str = $name;
             fn static_type() -> &'static $crate::standard::RuntimeType {
                 super::generic_transient::generic_static_type::<Self>($name)
             }

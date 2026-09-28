@@ -28,6 +28,8 @@ struct HandleAdaptor<T> {
 }
 
 impl<T: Send + Sync + 'static> RuntimeTyped for HandleAdaptor<T> {
+    // No RTTI of its own upstream: it reports Standard_Transient's name and descriptor.
+    const TYPE_NAME: &'static str = StandardTransient::TYPE_NAME;
     fn static_type() -> &'static RuntimeType {
         StandardTransient::static_type() // `Ptr` declares no RTTI of its own
     }

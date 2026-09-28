@@ -17,6 +17,7 @@
 //! Every failure is the native `errno` value, which the OSD classes record in their
 //! `OSD_Error` exactly where the C++ code does. `NativePosixCalls` performs the real calls;
 //! tests inject a named fake.
+use crate::osd::LocalTime;
 use std::sync::Arc;
 
 /// A failing call's `errno`; `Errno(libc::ENOENT)`.
@@ -104,23 +105,6 @@ pub enum RecordLock {
     Unlock,
 }
 
-/// `localtime` fields a `Quantity_Date` is built from.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub struct LocalTime {
-    /// Month 1..=12 (`tm_mon + 1`).
-    pub month: i32,
-    /// Day of month.
-    pub day: i32,
-    /// Year (`tm_year + 1900`).
-    pub year: i32,
-    /// Hour.
-    pub hour: i32,
-    /// Minute.
-    pub minute: i32,
-    /// Second.
-    pub second: i32,
-}
-
 /// The POSIX calls of the OSD file classes; paths are the bytes of a C string.
 pub trait PosixFileCalls: Send + Sync {
     /// `access(path, mode)`.
@@ -159,7 +143,8 @@ pub trait PosixFileCalls: Send + Sync {
     fn mkdtemp(&self, template: &[u8]) -> CallResult<Vec<u8>>;
     /// `opendir` + every `readdir` name, in the order `readdir` returns them.
     fn read_directory(&self, path: &[u8]) -> CallResult<Vec<Vec<u8>>>;
-    /// `localtime(seconds)`, or `None` when the time cannot be broken down.
+    /// `localtime(seconds)` (the shared `OSD_Process` broken-down time, millisecond 0), or
+    /// `None` when the time cannot be broken down.
     fn local_time(&self, seconds: i64) -> Option<LocalTime>;
 }
 
