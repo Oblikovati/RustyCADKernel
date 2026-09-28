@@ -37730,6 +37730,654 @@
       "rust_item": "<rustycad_tkmath::math::VectorBase as Display>::fmt",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics. The hidden friend stream insertion forwards to Dump, as Display does."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Selector()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: constructor of the abstract Selector base, which only clears the protected myStop flag. Rust selectors implement the TreeSelector trait and own their stop state, reported through TreeSelector::stop."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Selector::Reject(const TheBndType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::TreeSelector::reject",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Selector::Accept(const TheObjType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::TreeSelector::accept",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Selector::Stop() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::TreeSelector::stop",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Selector::~Selector()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode(const TheObjType&,const TheBndType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::IsLeaf() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::is_leaf",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::IsRoot() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::is_root",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::Bnd() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::bounds",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::ChangeBnd()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::bounds_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::Object() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BoundingNode::object",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::Child(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::child",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::ChangeChild(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::change_child",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::Parent() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::parent",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::ChangeParent()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::change_parent",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::Gemmate(const TheBndType&,const TheObjType&,const TheBndType&,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::gemmate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::Kill(int,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::kill",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::~TreeNode()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::TreeNode::delNode(TreeNode*,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: static storage helper that destroys a detached sub-branch. UBTree::kill and UBTree::clear release sub-branches through the node arena (the private release_subtree mirrors its iterative walk); a public call would leave the parent's child links dangling, which the safe arena cannot represent."
+    },
+    {
+      "upstream_id": "NCollection_UBTree()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::UBTree as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None. A null native handle selects the common allocator; Rust passes BaseAllocator::common() explicitly."
+    },
+    {
+      "upstream_id": "NCollection_UBTree(NCollection_UBTree&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::move_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None. The source is left empty; natively its allocator handle is moved out too, while Rust keeps a clone so the emptied source stays usable."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::operator=(NCollection_UBTree&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::move_assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Add(const TheObjType&,const TheBndType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::add",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Select(Selector&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::select",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Clear(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::clear_with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Root() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::root",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::~NCollection_UBTree()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_UBTree::Allocator() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTree::allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTree<TheObjType, TheBndType> is UBTree<T, B: BoundingVolume>, whose Add/IsOut/SquareExtent interface is the BoundingVolume trait. Native TreeNode pointers become arena node ids (UBTree::root_id, BoundingNode::child_id/parent_id) resolved by the tree; insertion (IsOut/SquareExtent child choice, child-0-first iterative Select with Stop after each Accept) and the branch-object nullification are preserved. Calls that dereference null natively (Root of an empty tree, Child of a leaf) return None."
+    },
+    {
+      "upstream_id": "NCollection_EBTree(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::EBTree::with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
+    },
+    {
+      "upstream_id": "NCollection_EBTree(NCollection_EBTree&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::EBTree::move_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
+    },
+    {
+      "upstream_id": "NCollection_EBTree::operator=(NCollection_EBTree&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::EBTree::move_assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
+    },
+    {
+      "upstream_id": "NCollection_EBTree::Add(const TheObjType&,const TheBndType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::EBTree::add",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
+    },
+    {
+      "upstream_id": "NCollection_EBTree::Remove(const TheObjType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::EBTree::remove",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
+    },
+    {
+      "upstream_id": "NCollection_EBTree::Contains(const TheObjType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::EBTree::contains",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
+    },
+    {
+      "upstream_id": "NCollection_EBTree::FindNode(const TheObjType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::EBTree::find_node",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
+    },
+    {
+      "upstream_id": "NCollection_EBTree::Clear(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_EBTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::EBTree::clear_with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_EBTree is EBTree<T, B>, a UBTree plus the object-to-leaf DataMap (arena node ids instead of TreeNode pointers). Add refuses duplicates and rebinds the displaced neighbour leaf, Remove kills the leaf and refreshes ancestor bounds, as natively; inherited UBTree members are reached through EBTree::as_ubtree."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::ObjBnd(const TheObjType&,const TheBndType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjBnd::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::ObjBnd()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::ObjBnd as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller(UBTree&,const occ::handle<NCollection_BaseAllocator>&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::Add(const TheObjType&,const TheBndType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller::add",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::Fill()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller::fill",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller::reset",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::CheckTree(Standard_OStream&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UBTreeFiller::check_tree",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe. Standard_OStream becomes any std::fmt::Write sink; an empty tree, a native null dereference, returns a Standard_NoSuchObject error."
+    },
+    {
+      "upstream_id": "NCollection_UBTreeFiller::~NCollection_UBTreeFiller()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UBTreeFiller.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::UBTreeFiller as Drop>::drop",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UBTreeFiller is UBTreeFiller<'t, T, B>, borrowing the tree mutably. The pending items live in a DynamicArray of 256-item blocks and are drawn with a bit-exact std::mt19937 seeded 5489 (full random: draw % i; otherwise i - draw % i - 1, the drawn slot taking the last live item). CheckTree's Sprintf text, including glibc's -nan for a one-leaf tree, is compared with the native filler by the differential probe. The destructor has an observable effect (it fills pending items), so it maps to the Drop implementation."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter_Action",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellAction",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter(int,double,const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::with_dimension",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter(double,const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Reset(double,const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::reset",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena). Native quirk preserved: Reset(double) writes indices 0..myDim-1 of the size array through the checked operator(), so after Reset(Array1) with other bounds it throws Standard_OutOfRange part-way (earlier writes kept, targets and allocator untouched); Rust returns that error."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Reset(NCollection_Array1<double>&,const occ::handle<NCollection_IncAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::reset_sizes",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena). The sizes are copied with their bounds (Array1::Assign) while the iterated dimension stays unchanged, as natively."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Add(const Target&,const Point&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::add",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Add(const Target&,const Point&,const Point&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::add_range",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Remove(const Target&,const Point&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::remove",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Remove(const Target&,const Point&,const Point&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::remove_range",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Inspect(const Point&,Inspector&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
+    },
+    {
+      "upstream_id": "NCollection_CellFilter::Inspect(const Point&,const Point&,Inspector&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_CellFilter.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CellFilter::inspect_range",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_CellFilter<Inspector> is CellFilter<I: CellInspector>, the Inspector's Target/Point/Dimension/Coord/IsEqual/Inspect becoming trait items. Cell indices use the native INT_MAX/INT_MIN fmod wrapping and hashBytes; targets are prepended so inspection is newest-first; range methods recurse over the construction dimension with axis zero fastest, as natively. The IncAllocator handle becomes an optional BaseAllocator (None: a fresh incremental arena)."
+    },
+    {
+      "upstream_id": "NCollection_KDTree()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::KDTree as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Build(const ThePointType*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::build",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Build(const NCollection_Array1<ThePointType>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::build_array",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Build(const ThePointType*,const double*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::build_radii",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters. The count is the point slice length; extra radii are ignored and a shorter radius slice (a native buffer overrun) panics."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Build(const NCollection_Array1<ThePointType>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::build_radii_array",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters. A radius array shorter than the point array throws Standard_OutOfRange part-way natively, leaving an unusable tree; Rust returns the error and leaves the tree empty."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::clear",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Point(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::point",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::Radius(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::radius",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::NearestPoint(const ThePointType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::nearest_point",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::NearestPoint(const ThePointType&,double&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::nearest_point",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::NearestPoints(const ThePointType&,double,double&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::nearest_points",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::KNearestPoints(const ThePointType&,size_t,NCollection_Array1<size_t>&,NCollection_Array1<double>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::k_nearest_points",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::RangeSearch(const ThePointType&,double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::range_search",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::ForEachInRange(const ThePointType&,double,Functor) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::for_each_in_range",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::BoxSearch(const ThePointType&,const ThePointType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::box_search",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::ContainingSearch(const ThePointType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::containing_search",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::NearestWeighted(const ThePointType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::nearest_weighted",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::NearestWeighted(const ThePointType&,double&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::nearest_weighted",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree(const NCollection_KDTree&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::KDTree as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree(NCollection_KDTree&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::move_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::operator=(const NCollection_KDTree&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::KDTree as Clone>::clone_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
+    },
+    {
+      "upstream_id": "NCollection_KDTree::operator=(NCollection_KDTree&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_KDTree.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::KDTree::move_assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_KDTree<ThePointType, TheDimension, HasRadii> is KDTree<P: KdPoint, D, R>; median-split build, leaf buckets, traversal order and binary64 results are compared with OCCT by tools/verify_kdtree.py and the trees differential probe. Checked native accesses (Point, Radius) return Standard_OutOfRange errors; output references become Option or &mut parameters."
     }
   ],
   "tests": [
