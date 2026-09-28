@@ -51394,6 +51394,422 @@
       "rust_item": "rustycad_tkernel::osd::CadPath::is_absolute_path",
       "status": "implemented",
       "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
+    },
+    {
+      "upstream_id": "OSD::SetSignal(OSD_SignalMode,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::set_signal",
+      "status": "partial",
+      "notes": "Linux/macOS order kept (SetFloatingSignal, record the mode, then handlers unless AsIs). Ported: the mode record, the floating-point traps, the SIGINT handler that arms ControlBreak (SetUnhandled restores a previous non-default SIGINT handler), and Unset restoring SIG_DFL on all eight managed signals. Rust cannot unwind or long-jump out of a signal handler (or translate Windows structured exceptions into panics), so the handlers that turn SIGSEGV, SIGFPE, SIGILL, SIGBUS, SIGHUP, SIGQUIT, SIGSYS (and SEH) into OSD_SIG*/OSD_Exception_* C++ exceptions are not installed. Windows: records the mode, honours CSF_DEBUG_MODE (message, stack trace length 10 when 0), installs/removes the console Ctrl-C/Ctrl-Break handler (MessageBeep not ported; other console events exit(254)), clears the break flag, then SetThreadLocalSignal; the unhandled-exception filter and signal() translators are not installed. SignalState::set_signal with an injected SignalHost is the testable form. Probes osd_signal/osd_ctrl_break."
+    },
+    {
+      "upstream_id": "OSD::SetSignal(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::set_signal_default",
+      "status": "partial",
+      "notes": "Forwards to SetSignal(OSD_SignalMode_Set, floating), with the same partial port. Rust cannot unwind or long-jump out of a signal handler (or translate Windows structured exceptions into panics), so the handlers that turn SIGSEGV, SIGFPE, SIGILL, SIGBUS, SIGHUP, SIGQUIT, SIGSYS (and SEH) into OSD_SIG*/OSD_Exception_* C++ exceptions are not installed."
+    },
+    {
+      "upstream_id": "OSD::SetThreadLocalSignal(OSD_SignalMode,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::set_thread_local_signal",
+      "status": "partial",
+      "notes": "Unix/macOS: exactly SetFloatingSignal(floating), as natively (mode ignored). Windows: the _set_se_translator part is not ported (SE translation raises C++ exceptions); the floating-point part is. Probe osd_thread_signal."
+    },
+    {
+      "upstream_id": "OSD::SetFloatingSignal(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::set_floating_signal",
+      "status": "implemented",
+      "notes": "Linux/glibc (x86, x86-64, AArch64): feclearexcept(FE_ALL_EXCEPT) then feenable/fedisableexcept(FE_INVALID|FE_DIVBYZERO|FE_OVERFLOW) for the calling thread, as natively; other Unix targets (macOS, musl) do nothing, as the native #else branch. Windows: _fpreset, _clearfp, _controlfp(0 or mask, _EM_INVALID|_EM_DENORMAL|_EM_ZERODIVIDE|_EM_OVERFLOW) (not observed on a Windows host). Probe osd_floating."
+    },
+    {
+      "upstream_id": "OSD::SignalMode()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::signal_mode",
+      "status": "implemented",
+      "notes": "Process-wide atomic, AsIs by default, set by every SetSignal. Host independent."
+    },
+    {
+      "upstream_id": "OSD::ToCatchFloatingSignals()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::to_catch_floating_signals",
+      "status": "implemented",
+      "notes": "Linux/glibc: (fegetexcept() & mask) != 0; macOS/other Unix: false, as natively; Windows: a mask bit cleared in _controlfp(0, 0). Probes osd_signal/osd_floating."
+    },
+    {
+      "upstream_id": "OSD::SecSleep(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::sec_sleep",
+      "status": "implemented",
+      "notes": "std::thread::sleep of the native request: Unix usleep(seconds*1000*1000) with the int product wrapping and read as unsigned useconds_t (sec_sleep_duration), Windows Sleep(seconds*1000) ms. Osd::sec_sleep_with takes an injected Sleeper."
+    },
+    {
+      "upstream_id": "OSD::MilliSecSleep(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::milli_sec_sleep",
+      "status": "implemented",
+      "notes": "Unix usleep(ms*1000) with the same wrapping (milli_sec_sleep_duration); Windows Sleep(ms), where INFINITE (-1) becomes a 49.7-day sleep instead of an endless one. Osd::milli_sec_sleep_with takes an injected Sleeper."
+    },
+    {
+      "upstream_id": "OSD::RealToCString(double,Standard_PCharacter&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::real_to_c_string",
+      "status": "implemented",
+      "notes": "Returns the text the native call writes into the caller's buffer; the true result is implied (Sprintf never fails for a double). glibc %.17e, 'e+00' dropped, trailing zeros and a bare point removed by the native pointer walk; nan/-nan/inf/-inf kept. Host independent (glibc spelling on every host). Probe osd_real_to_cstring (301 values)."
+    },
+    {
+      "upstream_id": "OSD::CStringToReal(const char* const,double&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::c_string_to_real",
+      "status": "implemented",
+      "notes": "Returns (whole text consumed, value) through OCCT Strtod (standard::strtod), so the empty string succeeds with 0 and trailing blanks fail. Host independent. Probe osd_cstring_to_real."
+    },
+    {
+      "upstream_id": "OSD::ControlBreak()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::control_break",
+      "status": "implemented",
+      "notes": "Consumes the flag the SIGINT (Unix) or console Ctrl-C/Ctrl-Break (Windows) handler arms and returns Err(OSD_Exception_CTRL_BREAK '*** INTERRUPT ***'). The flag is an atomic, so the handler stays async-signal-safe. Probe osd_ctrl_break raises SIGINT."
+    },
+    {
+      "upstream_id": "OSD::SignalStackTraceLength()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::signal_stack_trace_length",
+      "status": "implemented",
+      "notes": "Process-wide atomic, 0 by default. Host independent (Windows SetSignal sets 10 when CSF_DEBUG_MODE is defined and it is 0)."
+    },
+    {
+      "upstream_id": "OSD::SetSignalStackTraceLength(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD.hxx",
+      "rust_item": "rustycad_tkernel::osd::Osd::set_signal_stack_trace_length",
+      "status": "implemented",
+      "notes": "Stored as given, negative included. Host independent. The trace itself is only used by the signal-to-exception handlers, which are not ported."
+    },
+    {
+      "upstream_id": "OSD_Chronometer(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::new",
+      "status": "implemented",
+      "notes": "Stopped, zeroed, reading the native CPU clocks; Chronometer::with_clock injects a CpuTimes fake. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::~OSD_Chronometer()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::IsStarted() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::is_started",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::reset",
+      "status": "implemented",
+      "notes": "Virtual in C++: OSD_Timer overrides it (Timer::reset). Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::Restart()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::restart",
+      "status": "implemented",
+      "notes": "Reset then Start; Timer::restart replays the native virtual chain. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::Stop()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::stop",
+      "status": "implemented",
+      "notes": "Adds the lap read from the selected scope; ignored when stopped. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::Start()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::start",
+      "status": "implemented",
+      "notes": "Records the start from the selected scope; ignored when running. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::Show() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::show",
+      "status": "implemented",
+      "notes": "Prints Show(std::cout) through print!. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::Show(Standard_OStream&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::show_to",
+      "status": "implemented",
+      "notes": "Returns the stream text: 'CPU user time: <%.12g> seconds' and 'CPU system time: ...' lines at stream precision 12. Probe osd_chrono."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::UserTimeCPU() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::user_time_cpu",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::SystemTimeCPU() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::system_time_cpu",
+      "status": "implemented",
+      "notes": "Linux thread scope always reports 0 (clock_gettime has no system part), as natively."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::IsThisThreadOnly() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::is_this_thread_only",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::SetThisThreadOnly(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::set_this_thread_only",
+      "status": "implemented",
+      "notes": "Err(Standard_ProgramError 'OSD_Chronometer::SetThreadOnly() called for started Timer') while running, as natively. Probe osd_chrono."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::Show(double&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::show_user",
+      "status": "implemented",
+      "notes": "The output reference becomes the returned user seconds. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::Show(double&,double&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::show_cpu",
+      "status": "implemented",
+      "notes": "Output references become the returned (user, system) pair. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::GetProcessCPU(double&,double&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::get_process_cpu",
+      "status": "implemented",
+      "notes": "Linux: times() ticks / sysconf(_SC_CLK_TCK); macOS: times() ticks over sysconf(_SC_CLK_TCK) where native divides by the CLK_TCK macro (not observed on macOS); Windows: GetProcessTimes user/kernel FILETIMEs * 1e-7. NativeCpuTimes::process_cpu."
+    },
+    {
+      "upstream_id": "OSD_Chronometer::GetThreadCPU(double&,double&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Chronometer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Chronometer::get_thread_cpu",
+      "status": "implemented",
+      "notes": "Linux: clock_gettime(CLOCK_THREAD_CPUTIME_ID) user seconds, system 0; macOS: task_info(TASK_THREAD_TIMES_INFO) user/system; Windows: GetThreadTimes. Shared with the perf-meter clock (NativeCpuTimes::thread_cpu)."
+    },
+    {
+      "upstream_id": "OSD_Timer::GetWallClockTime()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::get_wall_clock_time",
+      "status": "implemented",
+      "notes": "Unix: gettimeofday seconds relative to the tv_sec of the first call, 0.0 when the call fails; Windows: QueryPerformanceCounter / frequency, falling back to 0.001*GetTickCount64 (not observed on a Windows host). NativeWallClock; WallClock is the injectable trait."
+    },
+    {
+      "upstream_id": "OSD_Timer(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::new",
+      "status": "implemented",
+      "notes": "C++ inheritance becomes composition: Timer owns its Chronometer and derefs to it for the inherited read-only members; Timer::with_clocks/with_cpu inject clocks. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Timer::Reset(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::reset_to",
+      "status": "implemented",
+      "notes": "Stops and restarts from the given elapsed time; Probe osd_timer_reset (66 values). Host independent."
+    },
+    {
+      "upstream_id": "OSD_Timer::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::reset",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Timer::Restart()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::restart",
+      "status": "implemented",
+      "notes": "Native virtual chain replayed: reads the wall clock, then the inherited Restart calls the overridden Reset and Start, which reads it again. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Timer::Show() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::show",
+      "status": "implemented",
+      "notes": "Prints Show(std::cout) through print!. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Timer::Show(Standard_OStream&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::show_to",
+      "status": "implemented",
+      "notes": "Returns 'Elapsed time: H Hours M Minutes S Seconds' (S at %.12g) followed by the chronometer lines. The native (int) truncation of out-of-range or NaN times yields INT_MIN on x86 (kept; other targets saturate like the native build). Probe osd_timer_reset."
+    },
+    {
+      "upstream_id": "OSD_Timer::Show(double&,int&,int&,double&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::show_values",
+      "status": "implemented",
+      "notes": "Output references become the returned (seconds, minutes, hours, CPU user seconds). Probe osd_timer_reset compares all four bit-for-bit."
+    },
+    {
+      "upstream_id": "OSD_Timer::Stop()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::stop",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Timer::Start()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::start",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Timer::ElapsedTime() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Timer.hxx",
+      "rust_item": "rustycad_tkernel::osd::Timer::elapsed_time",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfMeter::empty",
+      "status": "implemented",
+      "notes": "The native process singleton StopwatchStorage becomes an explicitly shared PerfRegistry (injected CPU clock; NativeCpuClock = GetThreadCPU user seconds), so each meter names its registry. An unnamed handle creates no watch."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter(const TCollection_AsciiString&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfMeter::new",
+      "status": "implemented",
+      "notes": "The native process singleton StopwatchStorage becomes an explicitly shared PerfRegistry (injected CPU clock; NativeCpuClock = GetThreadCPU user seconds), so each meter names its registry. Init then Start when requested (restarting an existing watch)."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter::~OSD_PerfMeter()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map. The watch stays in the registry, as natively."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter::Init(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfMeter::init",
+      "status": "implemented",
+      "notes": "Reuses an existing watch or creates an inactive one. Host independent."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter::Start() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfMeter::start",
+      "status": "implemented",
+      "notes": "Removed or unknown names are ignored. Host independent."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter::Stop() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfMeter::stop",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter::Elapsed() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfMeter::elapsed",
+      "status": "implemented",
+      "notes": "Thread user CPU seconds; 0 for an absent watch. Clock per GetThreadCPU on each host."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter::Kill() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfMeter::kill",
+      "status": "implemented",
+      "notes": "Unbinds the watch shared by every handle of the name. Host independent."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter::Print() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfMeter::print",
+      "status": "implemented",
+      "notes": "Native texts ('have never been started', 'is still running', '<name>: <AsciiString(real)> sec'); String instead of TCollection_AsciiString. Host independent."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter::PrintALL()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfRegistry::print_all",
+      "status": "implemented",
+      "notes": "The native process singleton StopwatchStorage becomes an explicitly shared PerfRegistry (injected CPU clock; NativeCpuClock = GetThreadCPU user seconds), so each meter names its registry. Native DataMap order."
+    },
+    {
+      "upstream_id": "OSD_PerfMeter::ResetALL()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_PerfMeter.hxx",
+      "rust_item": "rustycad_tkernel::osd::PerfRegistry::reset_all",
+      "status": "implemented",
+      "notes": "The native process singleton StopwatchStorage becomes an explicitly shared PerfRegistry (injected CPU clock; NativeCpuClock = GetThreadCPU user seconds), so each meter names its registry. Clears every watch."
     }
   ],
   "tests": [
