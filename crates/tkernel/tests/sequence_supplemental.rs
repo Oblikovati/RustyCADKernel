@@ -22,7 +22,7 @@ fn sequence_split_and_cross_allocator_splice_preserve_ownership() {
     sequence.append(2);
     let mut tail = Sequence::with_allocator(second.clone());
     tail.append(3);
-    sequence.split(2, &mut tail);
+    sequence.split(2, &mut tail).unwrap();
     assert_eq!(tail.allocator(), &first);
     second.reset(true).unwrap();
     let mut destination = Sequence::with_allocator(second.clone());
