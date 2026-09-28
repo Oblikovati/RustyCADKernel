@@ -13,33 +13,21 @@
 
 //! Typed allocator rebinding preserves a shared allocation resource.
 use super::{AllocatorList, BaseAllocator};
-use std::marker::PhantomData;
-/// Rust counterparts of allocator typedefs; `<OccAllocator<i32> as AllocatorTypes>::Value`.
-pub trait AllocatorTypes {
-    /// Allocated element.
-    type Value;
-    /// Mutable address.
-    type Pointer;
-    /// Constant address.
-    type ConstPointer;
-    /// Allocation count.
-    type Size;
-    /// Address difference.
-    type Difference;
-    /// Exclusive element borrow.
-    type Reference<'a>
-    where
-        Self::Value: 'a;
-    /// Shared element borrow.
-    type ConstReference<'a>
-    where
-        Self::Value: 'a;
-}
-/// Typed view of an allocator; `OccAllocator::<u8>::default().rebind::<i32>()`.
+use crate::standard::Failure;
+use std::{marker::PhantomData, ptr::NonNull};
+mod element;
+pub use element::{AllocatorTypes, StandardAllocator};
+
+/// Typed view of an optional allocator (`NCollection_OccAllocator<T>`).
+///
+/// `None` is the native null handle, which allocates through `Standard::AllocateOptimal`
+/// and compares unequal to every non-null allocator, including the common one.
+/// Example: `OccAllocator::<u8>::default().rebind::<i32>()`.
 pub struct OccAllocator<T> {
-    resource: BaseAllocator,
+    resource: Option<BaseAllocator>,
     element: PhantomData<fn() -> T>,
 }
+
 impl<T> AllocatorTypes for OccAllocator<T> {
     type Value = T;
     type Pointer = *mut T;
@@ -55,39 +43,84 @@ impl<T> AllocatorTypes for OccAllocator<T> {
     where
         T: 'a;
 }
+
 impl<T> OccAllocator<T> {
     /// Binds an element type to a resource; `OccAllocator::<i32>::new(arena)`.
     pub fn new(resource: BaseAllocator) -> Self {
+        Self::with_allocator(Some(resource))
+    }
+    /// Binds an element type to a possibly null resource (`NCollection_OccAllocator(theAlloc)`).
+    ///
+    /// Example: `OccAllocator::<i32>::with_allocator(None) == OccAllocator::default()`.
+    pub fn with_allocator(resource: Option<BaseAllocator>) -> Self {
         Self {
             resource,
             element: PhantomData,
         }
     }
-    /// Changes element type while retaining resource identity; `allocator.rebind::<f64>()`.
+    /// Changes element type while retaining resource identity (converting constructor).
+    ///
+    /// Example: `allocator.rebind::<f64>()`.
     pub fn rebind<U>(&self) -> OccAllocator<U> {
-        OccAllocator::new(self.resource.clone())
+        OccAllocator::with_allocator(self.resource.clone())
     }
+    /// Copies another element type's resource (templated `operator=`); `a.assign(&b)`.
+    pub fn assign<U>(&mut self, other: &OccAllocator<U>) {
+        self.resource = other.resource.clone();
+    }
+    /// Replaces the resource (`SetAllocator`); `allocator.set_allocator(None)`.
+    pub fn set_allocator(&mut self, resource: Option<BaseAllocator>) {
+        self.resource = resource;
+    }
+    /// The resource, `None` for the null handle (`Allocator`); `allocator.allocator()`.
+    pub fn allocator(&self) -> Option<&BaseAllocator> {
+        self.resource.as_ref()
+    }
+    /// The resource used for storage: the null handle means the common Standard policy.
+    fn effective(&self) -> BaseAllocator {
+        self.resource.clone().unwrap_or_else(BaseAllocator::common)
+    }
+
+    /// Raw storage for `count` elements (`allocate`): the resource's `AllocateOptimal`, or
+    /// `Standard::AllocateOptimal` for the null handle. `None` where upstream would get NULL
+    /// or throw, including a byte count that overflows. Example: `allocator.allocate(4)`.
+    pub fn allocate(&self, count: usize) -> Option<NonNull<T>> {
+        let bytes = count.checked_mul(size_of::<T>())?;
+        Some(self.effective().allocate_optimal_raw(bytes)?.cast())
+    }
+
+    /// Releases storage from `allocate` (`deallocate`; the templated overload is `cast` away).
+    ///
+    /// # Safety
+    /// As `BaseAllocator::free_raw`: `pointer` must come from `allocate` on an equal allocator.
+    pub unsafe fn deallocate(&self, pointer: NonNull<T>, _count: usize) -> Result<(), Failure> {
+        // SAFETY: forwarded from this function's contract.
+        unsafe { self.effective().free_raw(pointer.cast()) }
+    }
+
+    /// Estimated maximum element count (`max_size`); zero-sized types report `usize::MAX`.
+    ///
+    /// Example: `OccAllocator::<u64>::default().max_size() == usize::MAX / 8`.
+    pub fn max_size(&self) -> usize {
+        usize::MAX / size_of::<T>().max(1)
+    }
+
     /// Creates contiguous storage using this resource; `allocator.vector().push(value)`.
     pub fn vector(&self) -> AllocatorVector<T> {
         AllocatorVector {
-            elements: allocator_api2::vec::Vec::new_in(self.resource.clone()),
+            elements: allocator_api2::vec::Vec::new_in(self.effective()),
         }
     }
     /// Creates linked storage using this resource for each node; `allocator.list().push_back(value)`.
     pub fn list(&self) -> AllocatorList<T> {
-        AllocatorList::with_allocator(self.resource.clone())
+        AllocatorList::with_allocator(self.effective())
     }
 }
-impl<T> OccAllocator<T> {
-    // The bound resource, for containers that take an `allocator_type` and keep its
-    // `Allocator()` handle (NCollection_DynamicArray's allocator_type constructor).
-    pub(crate) fn bound_resource(&self) -> &BaseAllocator {
-        &self.resource
-    }
-}
+
 impl<T> Default for OccAllocator<T> {
+    /// The null-handle allocator (`NCollection_OccAllocator()`).
     fn default() -> Self {
-        Self::new(BaseAllocator::common())
+        Self::with_allocator(None)
     }
 }
 impl<T> Clone for OccAllocator<T> {
@@ -106,6 +139,7 @@ impl<T> std::fmt::Debug for OccAllocator<T> {
         f.debug_tuple("OccAllocator").field(&self.resource).finish()
     }
 }
+
 /// Contiguous allocator-owned elements; `allocator.vector()`.
 pub struct AllocatorVector<T> {
     elements: allocator_api2::vec::Vec<T, BaseAllocator>,

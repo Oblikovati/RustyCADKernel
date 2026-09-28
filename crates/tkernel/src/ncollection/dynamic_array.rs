@@ -50,7 +50,7 @@ impl<T> DynamicArray<T> {
     /// Keeps the resource of a typed allocator, as the native `allocator_type` constructor
     /// stores `theAllocator.Allocator()`; `DynamicArray::with_occ_allocator(256, &OccAllocator::default())`.
     pub fn with_occ_allocator(increment: usize, allocator: &super::OccAllocator<T>) -> Self {
-        Self::with_allocator(increment, Some(allocator.bound_resource().clone()))
+        Self::with_allocator(increment, allocator.allocator().cloned())
     }
     /// Returns allocator identity, preserving the null/default distinction; `array.allocator()`.
     pub fn allocator(&self) -> Option<&BaseAllocator> {
