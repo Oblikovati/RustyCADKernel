@@ -41,6 +41,8 @@ pub use sparse_array::SparseArray;
 
 mod sequence;
 pub use sequence::{Sequence, SequenceCursor, SequenceIter, SequenceIterMut};
+mod h_sequence;
+pub use h_sequence::HSequence;
 mod hash_policy;
 pub use hash_policy::{DefaultHashPolicy, HashKey, HashPolicy, next_map_prime};
 mod data_map;
