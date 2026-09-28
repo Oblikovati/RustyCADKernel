@@ -24,5 +24,6 @@ pub mod gce;
 pub mod gce2d;
 pub mod geom_lprop;
 pub mod gprop;
+pub mod hermit;
 mod line_extrema;
 pub mod lprop;
