@@ -14,7 +14,7 @@
 
 //! Ray-casting over the normalized, explicitly closed CSLib_Class2d polygon.
 use super::Class2dResult;
-use crate::cslib::precision::P_CONFUSION;
+use rustycad_tkernel::precision::p_confusion;
 
 /// Normalized vertices with the first vertex repeated at index `count`.
 #[derive(Clone, Debug, Default)]
@@ -105,7 +105,7 @@ impl NormalizedPolygon {
         let prev: usize = next - 1;
         let dx: f64 = self.xs[next] - px;
         let edge_dx: f64 = self.xs[next] - self.xs[prev];
-        let straddles: bool = (self.xs[prev] - px) * dx < 0.0 && edge_dx.abs() > P_CONFUSION;
+        let straddles: bool = (self.xs[prev] - px) * dx < 0.0 && edge_dx.abs() > p_confusion();
         if !straddles {
             return false;
         }

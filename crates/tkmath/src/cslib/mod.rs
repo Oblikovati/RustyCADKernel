@@ -24,7 +24,6 @@ mod class2d;
 mod derivatives;
 mod normal;
 mod normal_poly;
-mod precision;
 mod singular;
 mod status;
 

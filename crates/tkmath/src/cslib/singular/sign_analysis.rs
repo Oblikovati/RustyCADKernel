@@ -15,9 +15,9 @@
 //! Sign analysis of CSLib_NormalPolyDef over the angular domain of a singular point.
 use super::ParametricPosition;
 use crate::cslib::NormalPolyDef;
-use crate::cslib::precision::{CONFUSION, P_CONFUSION};
 use crate::math::{Function, FunctionRoots};
 use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::precision::{confusion, p_confusion};
 use rustycad_tkernel::standard::Failure;
 use std::cmp::Ordering;
 use std::f64::consts::PI;
@@ -37,10 +37,10 @@ pub(super) struct Domain {
 impl Domain {
     /// Interior points use `[-pi, pi]`; bounds and corners restrict it as natively.
     pub(super) fn at(position: ParametricPosition) -> Self {
-        let first_u: bool = (position.u - position.u_min).abs() < P_CONFUSION;
-        let last_u: bool = (position.u - position.u_max).abs() < P_CONFUSION;
-        let first_v: bool = (position.v - position.v_min).abs() < P_CONFUSION;
-        let last_v: bool = (position.v - position.v_max).abs() < P_CONFUSION;
+        let first_u: bool = (position.u - position.u_min).abs() < p_confusion();
+        let last_u: bool = (position.u - position.u_max).abs() < p_confusion();
+        let first_v: bool = (position.v - position.v_min).abs() < p_confusion();
+        let last_v: bool = (position.v - position.v_max).abs() < p_confusion();
         if last_u {
             return Self::last_u(first_v, last_v);
         }
@@ -98,7 +98,7 @@ pub(super) fn polynomial_sign(
         domain.inf,
         domain.sup,
         MAX_ROOT_ITERATIONS,
-        [ROOT_FINDING_TOL, CONFUSION, CONFUSION],
+        [ROOT_FINDING_TOL, confusion(), confusion()],
         0.0,
     );
     let solutions: Vec<f64> = sorted_roots(&roots)?;
@@ -146,7 +146,7 @@ fn sign_between_roots(
     let mut next: f64 = 0.0;
     for index in 0..bounds.len() - 1 {
         // Written as the native `>` test so a NaN width also skips the interval.
-        let is_wide: bool = (bounds[index + 1] - bounds[index]).abs() > P_CONFUSION;
+        let is_wide: bool = (bounds[index + 1] - bounds[index]).abs() > p_confusion();
         if !is_wide {
             continue;
         }

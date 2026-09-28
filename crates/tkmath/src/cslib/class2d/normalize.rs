@@ -13,7 +13,7 @@
 // commercial license or contractual agreement.
 
 //! Overflow-safe mapping of CSLib_Class2d coordinates and tolerances to [0,1].
-use crate::cslib::precision::is_infinite;
+use rustycad_tkernel::precision::is_infinite;
 
 /// Ranges at or below this width are not normalized.
 const MIN_NORMALIZATION_RANGE: f64 = 1.0e-10;
