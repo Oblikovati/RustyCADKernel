@@ -268,6 +268,7 @@ mod gp_standard_probe;
 mod gp_transform_probe;
 mod mathpoly_utils_probe;
 mod mathutils_core_api_probe;
+mod mathutils_functor_api_probe;
 mod ncollection_probe;
 mod quaternion_probe;
 mod scale_probe;
@@ -428,6 +429,21 @@ fn main() {
             "gp2d_geom" => gp_planar_probe::geom_case(&values),
             "gp_standard" => gp_standard_probe::gp_standard_case(&values),
             "mathpoly_utils_long" => mathpoly_utils_probe::mathpoly_utils_long_case(&values),
+            "mathutils_functor_poly" => {
+                mathutils_functor_api_probe::mathutils_functor_poly_case(&values)
+            }
+            "mathutils_functor_arith" => {
+                mathutils_functor_api_probe::mathutils_functor_arith_case(&values)
+            }
+            "mathutils_functor_lambda" => {
+                mathutils_functor_api_probe::mathutils_functor_lambda_case(&values)
+            }
+            "mathutils_functor_vlambda" => {
+                mathutils_functor_api_probe::mathutils_functor_vlambda_case(&values)
+            }
+            "mathutils_functor_nd" => {
+                mathutils_functor_api_probe::mathutils_functor_nd_case(&values)
+            }
             "ncollection_vec" => ncollection_probe::ncollection_vec_case(&values),
             "ncollection_mat" => ncollection_probe::ncollection_mat_case(&values),
             "gp3d_trsf" => gp_transform_probe::gp3_trsf_case(&values),

@@ -1034,3 +1034,55 @@ Deliberate Rust differences: pointer+degree/count pairs of the Poly helpers are 
 arguments are explicit parameters. `GetGaussPointsAndWeights` above order 61 sorts its
 eigenpairs with a total fallback (`Equal`) for an unordered NaN pair instead of the UB of
 `std::sort`. Legendre nodes are distinct, so the order does not change.
+
+### MathUtils scalar and vector functors (API completion)
+
+This work adds no upstream suite. It maps every public member of
+MathUtils_FunctorScalar.hxx and MathUtils_FunctorVector.hxx (134 api rows: the functor
+types, constructors, `Value`/`Values`/`Gradient` members and `Make*` helpers). Every member
+was already ported; the rows check each port against the header. The C++ templates are
+Rust generics: `math_utils::scalar` holds the scalar functors and
+`math_utils::vector` holds the N-dimensional functors and `SystemLambda`. The lambda
+wrappers `VectorLambda`/`VectorLambdaWithGradient` and their helpers are in `math_utils`.
+`Value`, `Values` and `Gradient` are the `math::Function`,
+`FunctionWithDerivative`, `MultipleVarFunction`, `MultipleVarFunctionWithGradient` and
+`FunctionSet` trait methods. For `tools/audit_api_rows.py src/FoundationClasses/TKMath/MathUtils`
+these two headers have no missing members and no stale rows. Supplemental tests are in
+`math_utils_functor_api_behavior`. The new `mathutils_functor` probe sends 1,646 differential
+requests (`mathutils_functor_poly` 400, `mathutils_functor_arith` 400,
+`mathutils_functor_lambda` 206, `mathutils_functor_vlambda` 240, `mathutils_functor_nd` 400).
+The requests use coefficient vectors of length 0 to 9 with shifted bounds, a Gaussian that
+fails (zero sigma, NaN input) inside every combinator, a linear operand that becomes zero,
+lambdas that fail after they write their outputs, and 0 to 6 coordinates with non-finite
+values and non-square residual matrices. All requests give the native bits. The existing
+`scalar_functor` and `vector_functor` ops still cover the fixed-size constructors.
+
+The port keeps these native results:
+
+- The binary combinators evaluate the first operand, then the second, and stop at the first
+  failure without writing the output. `Composite` evaluates the inner function first. Only
+  `Quotient` rejects non-finite operands and a zero denominator. `Sum`, `Difference`,
+  `Product`, `Scaled`, `Shifted` and `Negated` return true for non-finite results.
+- `ScalarLambdaWithDerivative::Value` calls the callable with a scratch derivative and keeps
+  its status. The lambda wrappers do not validate. A callable that writes and then fails
+  leaves the written values in the outputs.
+- `VectorLambdaWithGradient::Values` and the `Values` member of every vector functor call
+  `Value` first and call `Gradient` only when `Value` succeeds.
+- `Polynomial` refuses non-finite `x` and an empty coefficient vector. `Degree()` is 0 for an
+  empty polynomial, and `Coefficient` returns 0 past the end. `Rational` evaluates an empty
+  numerator or denominator as 0, so an empty denominator always fails.
+- `math_Vector`/`math_Matrix` arguments are read by zero-based offset (`At`), not by their
+  declared bounds. The `math_Vector` constructors copy `Vector::values()` in that order.
+
+Deliberate Rust deviations:
+
+- `math::MultipleVarFunction` and `math::FunctionSet` report the number of variables. For this
+  reason the `VectorLambda`, `VectorLambdaWithGradient`, `Sphere`, `Rastrigin`, `Ackley` and
+  `SystemLambda` constructors and `make_vector*`/`make_system` take one more leading dimension
+  argument. Evaluation never reads it. The native default constructors of `Sphere`,
+  `Rastrigin` and `Ackley` therefore become `new(dimension, ...)` with explicit defaults.
+  `Rosenbrock`, `Sine`, `Cosine`, `Exponential` and `Gaussian` implement `Default` with the
+  native default arguments.
+- `math::FunctionWithDerivative` requires a derivative-only method. The scalar functors
+  implement it with `Values` and keep only the derivative.
+- The `initializer_list` constructors take slices.

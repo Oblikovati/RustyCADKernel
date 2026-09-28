@@ -159,6 +159,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_gp_transform_probe.cxx"
 #include "tkmath_convert_probe.cxx"
 #include "tkmath_gp_core_probe.cxx"
+#include "tkmath_mathutils_functor_api_probe.cxx"
 #include "tkmath_mathutils_core_api_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
@@ -171,6 +172,11 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"mathutils_core_deriv", mathutils_core_deriv_case},
  {"mathutils_core_gauss", mathutils_core_gauss_case},
  {"mathutils_core_random", mathutils_core_random_case},
+ {"mathutils_functor_poly", mathutils_functor_poly_case},
+ {"mathutils_functor_arith", mathutils_functor_arith_case},
+ {"mathutils_functor_lambda", mathutils_functor_lambda_case},
+ {"mathutils_functor_vlambda", mathutils_functor_vlambda_case},
+ {"mathutils_functor_nd", mathutils_functor_nd_case},
  {"modern_swarm", modern_swarm_case},
  {"modern_small", modern_small_case},
  {"modern_lm", modern_lm_case},
