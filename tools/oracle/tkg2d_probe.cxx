@@ -1,4 +1,4 @@
-// Exact numeric oracle for the Geom2d package (TKG2d) at pinned OCCT 3d097a0.
+// Exact numeric oracle for the Geom2d, Geom2dEval and Geom2dHash packages (TKG2d) at pinned OCCT 3d097a0.
 // Each input line is `operation numbers...`; tools/verify_tkg2d_numeric.py compares the
 // output with crates/tkg2d/examples/numeric_probe.rs bit for bit.
 #include <map>
@@ -32,10 +32,19 @@
 #include <Geom2d_TrimmedCurve.hxx>
 #include <Geom2d_VectorWithMagnitude.hxx>
 #include <Geom2dEval_RepCurveDesc.hxx>
+#include <Geom2dEval_AHTBezierCurve.hxx>
+#include <Geom2dEval_ArchimedeanSpiralCurve.hxx>
+#include <Geom2dEval_CircleInvoluteCurve.hxx>
+#include <Geom2dEval_LogarithmicSpiralCurve.hxx>
+#include <Geom2dEval_SineWaveCurve.hxx>
+#include <Geom2dEval_TBezierCurve.hxx>
+#include <Geom2dHash_CurveHasher.hxx>
+#include <Geom2dHash_AxisPlacement.pxx>
 #include "tkg2d_probe_common.cxx"
 #include "tkg2d_probe_simple.cxx"
 #include "tkg2d_probe_curves.cxx"
 #include "tkg2d_probe_bspl.cxx"
+#include "tkg2d_probe_eval.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g2_point", g2_point_case},
  {"g2_direction", g2_direction_case},
@@ -51,6 +60,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g2_bezier", g2_bezier_case},
  {"g2_bspline", g2_bspline_case},
  {"g2_evalrep", g2_evalrep_case},
+ {"g2_eval", g2_eval_case},
+ {"g2_hash", g2_hash_case},
+ {"g2_hash_frame", g2_hash_frame_case},
 };
 int main() {
  std::string line;

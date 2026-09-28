@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod g2_probe;
-use g2_probe::{bspl, curves, simple};
+use g2_probe::{bspl, curves, eval, simple};
 
 fn main() {
     for line in io::stdin().lock().lines() {
@@ -27,6 +27,9 @@ fn main() {
             "g2_bezier" => bspl::bezier_case(&values),
             "g2_bspline" => bspl::bspline_case(&values),
             "g2_evalrep" => bspl::evalrep_case(&values),
+            "g2_eval" => eval::eval_case(&values),
+            "g2_hash" => eval::hash_case(&values),
+            "g2_hash_frame" => eval::hash_frame_case(&values),
             _ => {
                 eprintln!("Unknown probe operation: {op}");
                 std::process::exit(2);

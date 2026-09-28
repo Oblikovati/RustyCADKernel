@@ -2,4 +2,5 @@
 pub mod bspl;
 pub mod common;
 pub mod curves;
+pub mod eval;
 pub mod simple;
