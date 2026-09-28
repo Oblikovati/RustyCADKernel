@@ -3,8 +3,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from audit_api_rows import (Member, audit_header, clean_source, header_members, matching_close,
-                            normalize_param, normalize_params, parse_row_id, split_statements)
+import time
+
+from audit_api_rows import (Member, audit_header, clean_source, header_members, is_brace_initializer,
+                            matching_close, normalize_param, normalize_params, parse_row_id,
+                            split_statements)
 
 HEADER = """
 #define X_Raise_if(C, M) \\
@@ -62,6 +65,14 @@ class HeaderParsingTests(unittest.TestCase):
         heads = [head.strip() for head, _ in split_statements("A() : m{{1}, {2}} {} int b;")]
         self.assertEqual(heads, ["A() : m{{1}, {2}}", "int b"])
 
+    def test_long_heads_do_not_backtrack(self):
+        # Regression: a nested `(\w+\s*)*` quantifier hung on long NCollection template heads.
+        head = "template <typename T> " + "Type " * 60 + "f() const noexcept"
+        started = time.perf_counter()
+        self.assertFalse(is_brace_initializer(head + " x"))
+        self.assertTrue(is_brace_initializer("A() noexcept : myMat"))
+        self.assertLess(time.perf_counter() - started, 0.5)
+
     def test_parameter_normalization(self):
         self.assertEqual(normalize_param("const gp_Vec& theV = gp_Vec()"), "const gp_Vec&")
         self.assertEqual(normalize_param("const double theX"), "double")
@@ -80,6 +91,7 @@ class RowMatchingTests(unittest.TestCase):
                          Member("gp_GTrsf::operator()", "int,int", "const"))
         self.assertEqual(parse_row_id("gp_Ax1::Rotate"), Member("gp_Ax1::Rotate", None, ""))
         self.assertEqual(parse_row_id("gp_Dir(const gp_Dir::D)"), Member("gp_Dir", "gp_Dir::D", ""))
+        self.assertEqual(parse_row_id("NCollection_Vec2::NCollection_Vec2(int)"), Member("NCollection_Vec2", "int", ""))
 
     def test_overloads_need_signatures_and_cv_twins_need_qualifiers(self):
         with tempfile.TemporaryDirectory() as folder:

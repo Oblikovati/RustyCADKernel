@@ -87,8 +87,12 @@ def is_brace_initializer(head: str) -> bool:
     stripped = head.rstrip()
     if stripped.endswith("=") or stripped.endswith(","):
         return True
-    in_init_list = re.search(r"\)\s*(?:\w+\s*)*:(?!:)", stripped) is not None
-    return in_init_list and re.search(r"\w$", stripped) is not None
+    if re.search(r"\w$", stripped) is None:
+        return False
+    # Qualifiers are an alternation of fixed words, not `(\w+\s*)*`: the nested quantifier
+    # backtracked exponentially on long NCollection template heads.
+    qualifiers = r"(?:\s|\b(?:noexcept|const|override|final|volatile|constexpr)\b)*"
+    return re.search(r"\)" + qualifiers + r":(?!:)", stripped) is not None
 
 
 def split_statements(body: str) -> list[tuple[str, str | None]]:
@@ -254,7 +258,17 @@ def parse_row_id(upstream_id: str) -> Member:
     if not text.endswith(")") or text.endswith("operator()"):
         return Member(text, None, qualifier)
     open_index = len(text) - 1 - matching_close(text[::-1].translate(str.maketrans("()", ")(")), 0)
-    return Member(text[:open_index], normalize_params(text[open_index + 1:-1]), qualifier)
+    return Member(constructor_prefix(text[:open_index]), normalize_params(text[open_index + 1:-1]), qualifier)
+
+
+def constructor_prefix(prefix: str) -> str:
+    """Reduce the qualified constructor spelling `X::X` to the ledger's `X`.
+
+    >>> constructor_prefix('NCollection_Vec4::NCollection_Vec4')
+    'NCollection_Vec4'
+    """
+    owner, _, name = prefix.rpartition("::")
+    return owner if owner and owner.split("<")[0].split("::")[-1] == name else prefix
 
 
 def owner_of(member: Member) -> str:
