@@ -1,6 +1,6 @@
-// Created on: 1992-06-24
-// Created by: Gilles DEBARBOUILLE
-// Copyright (c) 1992-1999 Matra Datavision
+// Created on: 1994-02-24
+// Created by: Jean Claude VAUTHIER
+// Copyright (c) 1994-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
@@ -14,8 +14,10 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-// Native MDTV quantity overrides from UnitsAPI::CheckLoading.
-pub(super) const MDTV: &[(&[u8], &[u8])] = &[
+//! The quantity/unit pairs `UnitsAPI::CheckLoading` specifies, in order, for the
+//! MDTV local system (ISO 8859-1 bytes for the superscripts and degree sign).
+
+pub(super) const MDTV_UNITS: &[(&[u8], &[u8])] = &[
     (b"LENGTH", b"mm"),
     (b"AREA", b"mm\xB2"),
     (b"VOLUME", b"mm\xB3"),
