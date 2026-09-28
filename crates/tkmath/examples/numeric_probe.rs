@@ -260,6 +260,7 @@ fn planar_case(v: &[f64]) {
     xy(point.transformed(second.multiplied(rotation)).xy());
     println!();
 }
+mod bnd_probe;
 mod bounds_probe;
 mod bvh_probe;
 mod gp_core_probe;
@@ -336,6 +337,12 @@ fn main() {
             "cv_bezier" => convert_probe::bezier_case(&values),
             "cv_comppoly" => convert_probe::comppoly_case(&values),
             "cv_grid" => convert_probe::grid_case(&values),
+            "obb_build" => bnd_probe::obb_build_case(&values),
+            "obb_pair" => bnd_probe::obb_pair_case(&values),
+            "sortbox" => bnd_probe::sortbox_case(&values),
+            "box_extra" => bnd_probe::box_extra_case(&values),
+            "box2_extra" => bnd_probe::box2_extra_case(&values),
+            "compact_trsf" => bnd_probe::compact_trsf_case(&values),
             "modern_lbfgs" => modern_opt_probe::modern_lbfgs_case(&values),
             "modern_newton" => modern_opt_probe::modern_newton_case(&values),
             "modern_global" => global_modern_probe::modern_global_case(&values),
