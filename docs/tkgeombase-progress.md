@@ -6,8 +6,8 @@ depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
 `IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC`,
 `GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts`,
-`GCPnts` and `AdvApp2Var` packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0
-stale api rows for each of them.
+`GCPnts` and `AdvApp2Var` packages are ported in full, and `tools/audit_api_rows.py`
+reports 0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
