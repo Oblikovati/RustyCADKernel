@@ -13,12 +13,13 @@
 // Rust translation of ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BezierCurve.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2dGridEval_BezierCurve`: a Bezier curve on a grid through one span cache.
+use super::bezier_arrays::BezierCurveArrays;
 use super::grid::{constant_grid, empty, try_map_grid};
 use super::{Geom2dGridEvalCurveD1, Geom2dGridEvalCurveD2, Geom2dGridEvalCurveD3};
 use crate::geom2d::Geom2dBezierCurve;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkmath::bsplclib::{self, Cache, CurveSpan};
+use rustycad_tkmath::bsplclib::Cache;
 use rustycad_tkmath::gp::{Point2, Vector2};
 
 /// Batch evaluator of a `Geom2d_BezierCurve` (`Geom2dGridEval_BezierCurve`).
@@ -33,45 +34,15 @@ pub struct Geom2dGridEvalBezierCurve {
     geom: Handle<Geom2dBezierCurve>,
 }
 
-// The arrays that the native evaluator reads by reference (`Poles()`, `Weights()`,
-// `KnotSequence()`); here they are copies taken once per call.
-struct BezierArrays {
-    degree: i32,
-    poles: Array1<'static, Point2>,
-    weights: Option<Array1<'static, f64>>,
-    flat_knots: Array1<'static, f64>,
-}
-
-impl BezierArrays {
-    fn read(bezier: &Geom2dBezierCurve) -> Result<Self, Failure> {
-        let flat_knots: Array1<'static, f64> = bezier.knot_sequence()?;
-        Ok(Self {
-            degree: bezier.degree(),
-            poles: bezier.poles(),
-            weights: bezier.weights(),
-            flat_knots,
-        })
-    }
-    // `CreateBezierCache2d`: the cache of the single span, built at 0.5.
-    fn cache(&self) -> Result<Cache, Failure> {
-        let weights: Option<&Array1<'static, f64>> = self.weights.as_ref();
-        let mut cache: Cache =
-            Cache::new(self.degree, false, &self.flat_knots, &self.poles, weights)?;
-        cache.build_cache(0.5, &self.flat_knots, &self.poles, weights)?;
-        Ok(cache)
-    }
-    // `BSplCLib::DN(U, N, 0, Degree, false, Poles, Weights, KnotSequence, nullptr)`.
-    fn dn(&self, u: f64, n: i32) -> Result<Vector2, Failure> {
-        let span = CurveSpan {
-            u,
-            index: 0,
-            degree: self.degree,
-            periodic: false,
-            knots: &self.flat_knots,
-            mults: None,
-        };
-        bsplclib::dn(&span, n, &self.poles, self.weights.as_ref())
-    }
+// The arrays of the curve, read once per call (shared with the 3D evaluator).
+fn read_arrays(bezier: &Geom2dBezierCurve) -> Result<BezierCurveArrays<Point2>, Failure> {
+    let flat_knots: Array1<'static, f64> = bezier.knot_sequence()?;
+    Ok(BezierCurveArrays {
+        degree: bezier.degree(),
+        poles: bezier.poles(),
+        weights: bezier.weights(),
+        flat_knots,
+    })
 }
 
 impl Geom2dGridEvalBezierCurve {
@@ -92,7 +63,7 @@ impl Geom2dGridEvalBezierCurve {
         if params.is_empty() {
             return Ok(None);
         }
-        Ok(Some(BezierArrays::read(bezier)?.cache()?))
+        Ok(Some(read_arrays(bezier)?.cache()?))
     }
     /// Points at every parameter (`EvaluateGrid`); `evaluator.evaluate_grid(&params)?`.
     pub fn evaluate_grid(
@@ -159,7 +130,7 @@ impl Geom2dGridEvalBezierCurve {
         if n > bezier.degree() {
             return Ok(constant_grid(params.len(), Vector2::new(0.0, 0.0)));
         }
-        let arrays: BezierArrays = BezierArrays::read(bezier)?;
+        let arrays: BezierCurveArrays<Point2> = read_arrays(bezier)?;
         try_map_grid(params, |u| arrays.dn(u, n))
     }
 }

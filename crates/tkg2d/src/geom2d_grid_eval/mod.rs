@@ -29,7 +29,9 @@ pub type Geom2dGridEvalCurveD2 = Geom2dCurveD2;
 /// Point and three derivatives of a grid evaluation (`Geom2dGridEval::CurveD3`).
 pub type Geom2dGridEvalCurveD3 = Geom2dCurveD3;
 
+pub mod bezier_arrays;
 mod grid;
+pub mod grid_loops;
 
 mod line;
 pub use line::Geom2dGridEvalLine;
