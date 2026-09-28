@@ -26,8 +26,8 @@ use crate::geom::{
 };
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::geom_abs::{Shape, SurfaceType};
 use rustycad_tkmath::gp::{
     Axis1, Cone3, Cylinder3, Direction3, Plane3, Point3, Sphere3, Torus3, Vector3,
@@ -46,7 +46,7 @@ use rustycad_tkmath::gp::{
 #[derive(Default)]
 pub struct GeomAdaptorSurface {
     parent: StandardTransient,
-    state: GeometryCell<SurfaceState>,
+    state: SharedState<SurfaceState>,
 }
 impl_transient!(
     GeomAdaptorSurface,
@@ -143,11 +143,11 @@ impl GeomAdaptorSurface {
     pub(crate) fn from_state(state: SurfaceState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// The protected state, for the derived adaptors.
-    pub(crate) fn cell(&self) -> &GeometryCell<SurfaceState> {
+    pub(crate) fn cell(&self) -> &SharedState<SurfaceState> {
         &self.state
     }
     /// One `EvalDk` of the native switch (for the equivalent-surface shortcut of

@@ -24,8 +24,8 @@ use crate::geom::{
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::geom_abs::{CurveType, Shape};
 use rustycad_tkmath::gp::{Circle3, Ellipse3, Hyperbola3, Line3, Parabola3, Point3, Vector3};
 
@@ -40,7 +40,7 @@ use rustycad_tkmath::gp::{Circle3, Ellipse3, Hyperbola3, Line3, Parabola3, Point
 #[derive(Default)]
 pub struct GeomAdaptorCurve {
     parent: StandardTransient,
-    state: GeometryCell<AdaptorState>,
+    state: SharedState<AdaptorState>,
 }
 impl_transient!(
     GeomAdaptorCurve,
@@ -100,7 +100,7 @@ impl GeomAdaptorCurve {
         let copy: AdaptorState = state::shallow_state(&self.state.read())?;
         Ok(Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(copy),
+            state: SharedState::new(copy),
         })
     }
     fn bounds(&self) -> (f64, f64) {

@@ -26,8 +26,8 @@ use crate::geom::{
 };
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::geom_abs::{Shape, SurfaceType};
 use rustycad_tkmath::gp::{
     Axis1, Cone3, Cylinder3, Direction3, Plane3, Point3, Sphere3, Torus3, Vector3,
@@ -67,7 +67,7 @@ impl ExtrusionFields {
 #[derive(Default)]
 pub struct GeomAdaptorSurfaceOfLinearExtrusion {
     parent: GeomAdaptorSurface,
-    fields: GeometryCell<ExtrusionFields>,
+    fields: SharedState<ExtrusionFields>,
 }
 impl_transient!(
     GeomAdaptorSurfaceOfLinearExtrusion,
@@ -176,7 +176,7 @@ impl Adaptor3dSurface for GeomAdaptorSurfaceOfLinearExtrusion {
         let base: SurfaceState = Self::shallow_base(&self.parent.cell().read())?;
         let copy = Self {
             parent: GeomAdaptorSurface::from_state(base),
-            fields: GeometryCell::new(fields),
+            fields: SharedState::new(fields),
         };
         Ok(Handle::new(copy).cast())
     }
