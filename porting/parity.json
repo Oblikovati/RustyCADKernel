@@ -268,124 +268,1108 @@
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
     {
-      "upstream_id": "Standard_GUID::Standard_GUID()",
+      "upstream_id": "Standard_Real::ACos(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::acos",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::ASin(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::asin",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::ATanh(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::atanh",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::ACosh(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::acosh",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Cosh(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::cosh",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Sinh(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::sinh",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Log(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::log",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Sqrt(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::sqrt",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Abs(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::abs",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::ATan(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::atan",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Ceiling(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::ceiling",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Cos(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::cos",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Exp(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::exp",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Floor(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::floor",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::IntegerPart(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::integer_part",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Log10(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::log10",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Round(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::round",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Sin(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::sin",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::ASinh(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::asinh",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Tan(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::tan",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Tanh(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::tanh",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::ATan2(double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::atan2",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Sign(double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::sign",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::Pow(double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::pow",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit)."
+    },
+    {
+      "upstream_id": "Standard_Real::NextAfter(double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::next_after",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit). Implemented with next_up/next_down; a NaN argument returns the sum with the direction's payload first, as the glibc build does."
+    },
+    {
+      "upstream_id": "Standard_Real::Max(double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::max",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. std::max/std::min keep the `a < b ? b : a` comparison, so NaN order and signed zeros match."
+    },
+    {
+      "upstream_id": "Standard_Real::Min(double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::min",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. std::max/std::min keep the `a < b ? b : a` comparison, so NaN order and signed zeros match."
+    },
+    {
+      "upstream_id": "Standard_Real::RealSmall()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_small",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealDigits()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_digits",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealEpsilon()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_epsilon",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_first",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealFirst10Exp()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_first10_exp",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_last",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealLast10Exp()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_last10_exp",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealMantissa()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_mantissa",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealRadix()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_radix",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealSize()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_size",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::IntToReal(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::int_to_real",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::Square(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::square",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::IsEqual(double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::is_equal",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealPart(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_part",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::RealToShortReal(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_to_short_real",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Real::Epsilon(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::epsilon",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Transcribes the nextafter expression, so a negative NaN keeps its sign (the former |x| formulation cleared it)."
+    },
+    {
+      "upstream_id": "Standard_Real::RealToInt(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::real_to_int",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. NaN reaches static_cast<int> (undefined behavior); the port returns INT_MIN, the x86-64 cvttsd2si result, and the probe skips NaN."
+    },
+    {
+      "upstream_id": "Standard_Real::ACosApprox(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
+      "rust_item": "rustycad_tkernel::standard::real::acos_approx",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. Results equal the C library's: the transcendental functions reach the platform libm, the inverse hyperbolic ones through rustycad_cmath (Rust's own formulas differ in the last bit). Ports Standard_Real.cxx (apx_for_ACosApprox) with the same literals and operation order."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealSmall()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_small",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealDigits()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_digits",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealEpsilon()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_epsilon",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_first",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealFirst10Exp()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_first10_exp",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_last",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealLast10Exp()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_last10_exp",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealMantissa()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_mantissa",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealRadix()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_radix",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::ShortRealSize()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::short_real_size",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::Abs(float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::abs",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::Max(float,float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::max",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. std::max/std::min keep the `a < b ? b : a` comparison, so NaN order and signed zeros match."
+    },
+    {
+      "upstream_id": "Standard_ShortReal::Min(float,float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ShortReal.hxx",
+      "rust_item": "rustycad_tkernel::standard::short_real::min",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API. std::max/std::min keep the `a < b ? b : a` comparison, so NaN order and signed zeros match."
+    },
+    {
+      "upstream_id": "Standard_Integer::IsEven(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::is_even",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Integer::IsOdd(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::is_odd",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. `value % 2 == 1` as in C++: negative odd values are neither odd nor even."
+    },
+    {
+      "upstream_id": "Standard_Integer::Abs(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::abs",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. -INT_MIN overflows (undefined behavior); the port wraps to INT_MIN, the x86-64 result."
+    },
+    {
+      "upstream_id": "Standard_Integer::Max(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::max",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API."
+    },
+    {
+      "upstream_id": "Standard_Integer::Min(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::min",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated in OCCT but public API."
+    },
+    {
+      "upstream_id": "Standard_Integer::Modulus(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::modulus",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Truncated remainder; a zero divisor and INT_MIN % -1 trap natively (SIGFPE, undefined behavior) and panic in Rust."
+    },
+    {
+      "upstream_id": "Standard_Integer::Square(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::square",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Overflow is documented as undefined; the port wraps like x86-64 imul."
+    },
+    {
+      "upstream_id": "Standard_Integer::IntegerFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::integer_first",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Integer::IntegerLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::integer_last",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Integer::IntegerSize()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
+      "rust_item": "rustycad_tkernel::standard::integer::integer_size",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe."
+    },
+    {
+      "upstream_id": "Standard_Character::IsEqual(char,char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_equal",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsAlphabetic(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_alphabetic",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsDigit(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_digit",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsXDigit(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_xdigit",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsAlphanumeric(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_alphanumeric",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsControl(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_control",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsGraphic(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_graphic",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsLowerCase(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_lower_case",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsPrintable(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_printable",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsPunctuation(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_punctuation",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsSpace(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_space",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::IsUpperCase(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::is_upper_case",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::LowerCase(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::lower_case",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_Character::UpperCase(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Character.hxx",
+      "rust_item": "rustycad_tkernel::standard::character::upper_case",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The C++ casts the char to unsigned char before <cctype>; the port takes that byte (u8), and all 256 values are compared with the native C-locale results."
+    },
+    {
+      "upstream_id": "Standard_ExtCharacter::ToExtCharacter(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ExtCharacter.hxx",
+      "rust_item": "rustycad_tkernel::standard::ext_character::to_ext_character",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Byte-level char/char16_t conversions (zero extension, low byte), not Unicode transcoding."
+    },
+    {
+      "upstream_id": "Standard_ExtCharacter::ToCharacter(char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ExtCharacter.hxx",
+      "rust_item": "rustycad_tkernel::standard::ext_character::to_character",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Byte-level char/char16_t conversions (zero extension, low byte), not Unicode transcoding."
+    },
+    {
+      "upstream_id": "Standard_ExtCharacter::IsAnAscii(char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ExtCharacter.hxx",
+      "rust_item": "rustycad_tkernel::standard::ext_character::is_an_ascii",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Byte-level char/char16_t conversions (zero extension, low byte), not Unicode transcoding."
+    },
+    {
+      "upstream_id": "Standard_ExtCharacter::IsEqual(char16_t,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ExtCharacter.hxx",
+      "rust_item": "rustycad_tkernel::standard::ext_character::is_equal",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Byte-level char/char16_t conversions (zero extension, low byte), not Unicode transcoding."
+    },
+    {
+      "upstream_id": "Standard_CString::IsEqual(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
+      "rust_item": "rustycad_tkernel::standard::c_string::is_equal",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. A C string is a byte slice read up to its first NUL, as strlen/strcmp read it."
+    },
+    {
+      "upstream_id": "Standard_CString::Atof(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
+      "rust_item": "rustycad_tkernel::standard::c_string::atof",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Strtod(text, nullptr): the C-locale numeric prefix, 0 when none. Takes &str; the probe compares ASCII inputs."
+    },
+    {
+      "upstream_id": "Standard_CString::Strtod(const char*,char**)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
+      "rust_item": "rustycad_tkernel::standard::strtod",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The end pointer becomes the returned byte offset of the parsed prefix; an embedded NUL ends the input as in C."
+    },
+    {
+      "upstream_id": "Standard_CString::Printf(const char* const,...)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C variadic function (printf family forced to the C locale). Stable Rust cannot define C variadic functions, and Rust formatting (format!, write!) never depends on a locale, so no C-locale wrapper is needed."
+    },
+    {
+      "upstream_id": "Standard_CString::Fprintf(FILE*,const char*,...)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C variadic function (printf family forced to the C locale). Stable Rust cannot define C variadic functions, and Rust formatting (format!, write!) never depends on a locale, so no C-locale wrapper is needed."
+    },
+    {
+      "upstream_id": "Standard_CString::Sprintf(char*,const char*,...)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C variadic function (printf family forced to the C locale). Stable Rust cannot define C variadic functions, and Rust formatting (format!, write!) never depends on a locale, so no C-locale wrapper is needed."
+    },
+    {
+      "upstream_id": "Standard_CString::Vsprintf(char*,const char*,va_list)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C variadic function (printf family forced to the C locale). Stable Rust cannot define C variadic functions, and Rust formatting (format!, write!) never depends on a locale, so no C-locale wrapper is needed."
+    },
+    {
+      "upstream_id": "Standard_CStringHasher::operator()(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CStringHasher.hxx",
+      "rust_item": "rustycad_tkernel::standard::c_string::CStringHasher::hash_code",
+      "status": "implemented",
+      "notes": "Standard_CStringHasher is the unit struct CStringHasher, which also implements ncollection::HashPolicy for any AsRef<[u8]> key. A C string is a byte slice read up to its first NUL, as strlen/strcmp read it. Strings shorter than 4 bytes hash with FNV-1a, longer ones with hashBytes, as natively."
+    },
+    {
+      "upstream_id": "Standard_CStringHasher::operator()(const char* const,const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CStringHasher.hxx",
+      "rust_item": "rustycad_tkernel::standard::c_string::CStringHasher::is_equal",
+      "status": "implemented",
+      "notes": "Standard_CStringHasher is the unit struct CStringHasher, which also implements ncollection::HashPolicy for any AsRef<[u8]> key. A C string is a byte slice read up to its first NUL, as strlen/strcmp read it."
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::MurmurHash2A(const void*,int,uint32_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::murmur_hash_2a",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The void*/int pair is a byte slice; lengths beyond INT_MAX cannot be expressed natively."
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::MurmurHash64A(const void*,int,uint64_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::murmur_hash_64a",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Whole words load in native byte order, the tail little-endian from unsigned bytes, as the .lxx."
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::hash_combine(const T1&,int,T)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::hash_combine",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both. The C++ defaults (sizeof(T1), optimalSeed) are explicit arguments."
+    },
+    {
+      "upstream_id": "opencascade::MurmurHash::optimalSeed()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::murmur_hash::optimal_seed",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both."
+    },
+    {
+      "upstream_id": "opencascade::FNVHash::FNVHash1A(const void*,int,uint32_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::fnv_hash::fnv_hash_1a",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The loop reads plain char, so bytes >= 0x80 are sign-extended where char is signed (the oracle profile); the port widens through std::ffi::c_char to keep that quirk."
+    },
+    {
+      "upstream_id": "opencascade::FNVHash::FNVHash64A(const void*,int,uint64_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::fnv_hash::fnv_hash_64a",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The loop reads plain char, so bytes >= 0x80 are sign-extended where char is signed (the oracle profile); the port widens through std::ffi::c_char to keep that quirk."
+    },
+    {
+      "upstream_id": "opencascade::FNVHash::hash_combine(const T1&,int,T)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::fnv_hash::hash_combine",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both. The loop reads plain char, so bytes >= 0x80 are sign-extended where char is signed (the oracle profile); the port widens through std::ffi::c_char to keep that quirk."
+    },
+    {
+      "upstream_id": "opencascade::FNVHash::optimalSeed()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::fnv_hash::optimal_seed",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both."
+    },
+    {
+      "upstream_id": "opencascade::hash(const T1&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::hash",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both."
+    },
+    {
+      "upstream_id": "opencascade::hashBytes(const T1*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hash_bytes",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The size_t form over bytes; a typed key array is passed as bytemuck::cast_slice(keys), the bytes C++ reads from the pointer."
+    },
+    {
+      "upstream_id": "opencascade::hash_combine(const T1&,int,T)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::hashing::hash_combine",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The templates hash the object representation (&theValue, theLen bytes); the port takes `&[T]` with T: bytemuck::NoUninit (types without padding, so the byte view equals the C++ one) and panics when the length exceeds the object, where C++ would read out of bounds. The template result type T is the HashWord parameter (u32, u64, usize): an 8-byte word selects the 64-bit engine, any other width the 32-bit one, as the two enable_if overloads do; one row covers both."
+    },
+    {
+      "upstream_id": "Standard_GUID()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::new / Default",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
     },
     {
-      "upstream_id": "Standard_GUID::Standard_GUID(const char*)",
+      "upstream_id": "Standard_GUID(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::FromStr / from_ascii",
+      "rust_item": "rustycad_tkernel::standard::Guid::from_ascii / FromStr",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Invalid text returns Err(Failure) of class Standard_RangeError with the native message \"Invalid format of GUID\". The byte slice is read as a C string (up to the first NUL); a null pointer has no slice form."
     },
     {
-      "upstream_id": "Standard_GUID::Standard_GUID(const char16_t*)",
+      "upstream_id": "Standard_GUID(const char16_t* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::from_utf16",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Invalid text returns Err(Failure) of class Standard_RangeError with the native message \"Invalid format of GUID\". Keeps the low byte of the first 36 units; a shorter slice is also a Standard_RangeError naming its length, where OCCT would read past the buffer."
     },
     {
-      "upstream_id": "Standard_GUID::Standard_GUID(components)",
+      "upstream_id": "Standard_GUID(int,char16_t,char16_t,char16_t,uint8_t,uint8_t,uint8_t,uint8_t,uint8_t,uint8_t)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::from_components",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
     },
     {
-      "upstream_id": "Standard_GUID::Standard_GUID(Standard_UUID)",
+      "upstream_id": "Standard_GUID(const Standard_UUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::from_uuid",
+      "rust_item": "rustycad_tkernel::standard::Guid::from_uuid / From<Uuid>",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
     },
     {
-      "upstream_id": "Standard_GUID::Standard_GUID(copy)",
+      "upstream_id": "Standard_GUID(const Standard_GUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::Copy / Clone",
+      "rust_item": "rustycad_tkernel::standard::Guid: Copy",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). The copy constructor is the Copy impl."
     },
     {
-      "upstream_id": "Standard_GUID::ToCString",
+      "upstream_id": "Standard_GUID::ToCString(Standard_PCharacter) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::to_c_string / Display",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Returns the 37-byte buffer (text and NUL) instead of filling a caller buffer."
     },
     {
-      "upstream_id": "Standard_GUID::ToExtString",
+      "upstream_id": "Standard_GUID::ToExtString(Standard_PExtCharacter) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::to_ext_string",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Returns the 37-unit buffer instead of filling a caller buffer."
     },
     {
-      "upstream_id": "Standard_GUID::ToUUID",
+      "upstream_id": "Standard_GUID::ToUUID() const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::to_uuid",
+      "rust_item": "rustycad_tkernel::standard::Guid::to_uuid / From<Guid> for Uuid",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
     },
     {
-      "upstream_id": "Standard_GUID::IsSame",
+      "upstream_id": "Standard_GUID::IsSame(const Standard_GUID&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::is_same / PartialEq",
+      "rust_item": "rustycad_tkernel::standard::Guid::is_same",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
     },
     {
-      "upstream_id": "Standard_GUID::IsNotSame",
+      "upstream_id": "Standard_GUID::operator==(const Standard_GUID&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
-      "rust_item": "rustycad_tkernel::standard::Guid::is_not_same / PartialEq",
+      "rust_item": "<rustycad_tkernel::standard::Guid as PartialEq>::eq",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Operator mapped to the derived PartialEq; is_same serves const contexts."
     },
     {
-      "upstream_id": "Standard_GUID::Assign(Standard_GUID)",
+      "upstream_id": "Standard_GUID::IsNotSame(const Standard_GUID&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Guid::is_not_same",
+      "status": "implemented",
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
+    },
+    {
+      "upstream_id": "Standard_GUID::operator!=(const Standard_GUID&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Guid as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Operator mapped to the derived PartialEq; is_not_same serves const contexts."
+    },
+    {
+      "upstream_id": "Standard_GUID::Assign(const Standard_GUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::assign",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
     },
     {
-      "upstream_id": "Standard_GUID::Assign(Standard_UUID)",
+      "upstream_id": "Standard_GUID::operator=(const Standard_GUID&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Guid: Copy assignment",
+      "status": "implemented",
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Plain `=` assignment of the Copy type; assign is the named form."
+    },
+    {
+      "upstream_id": "Standard_GUID::Assign(const Standard_UUID&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::assign_uuid",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump)."
     },
     {
-      "upstream_id": "Standard_GUID::ShallowDump",
+      "upstream_id": "Standard_GUID::operator=(const Standard_UUID&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Guid::assign_uuid / From<Uuid>",
+      "status": "implemented",
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Rust has no cross-type assignment operator: `guid = uuid.into()` or assign_uuid."
+    },
+    {
+      "upstream_id": "Standard_GUID::ShallowDump(Standard_OStream&) const",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::shallow_dump",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). Standard_OStream becomes any std::fmt::Write sink."
     },
     {
-      "upstream_id": "Standard_GUID::CheckGUIDFormat",
+      "upstream_id": "Standard_GUID::CheckGUIDFormat(const char* const)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
       "rust_item": "rustycad_tkernel::standard::Guid::check_format",
       "status": "implemented",
-      "notes": "Manual slice mapping; authoritative API enumeration pending."
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). None models the null pointer, which returns false."
+    },
+    {
+      "upstream_id": "std::hash<Standard_GUID>::operator()(const Standard_GUID&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
+      "rust_item": "rustycad_tkernel::standard::Guid::hash_code / Hash",
+      "status": "implemented",
+      "notes": "Standard_GUID is the Copy type Guid, which stores the Standard_UUID fields; results are compared with the native class by the standard_values probe (text, UUID fields, std::hash, ToExtString, ShallowDump). hashBytes over the 16-byte field image (int, three char16_t with Data4[0..2] packed high byte first, six uint8_t) in native byte order; the Hash impl feeds this value to the hasher."
+    },
+    {
+      "upstream_id": "Standard_Time::IsEqual(TheTimeType,TheTimeType)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Time.hxx",
+      "rust_item": "rustycad_tkernel::standard::time::is_equal",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. The template is enabled only for std::time_t, which is the signed 64-bit TimeT alias on the supported profiles."
+    },
+    {
+      "upstream_id": "Standard_Atomic::Standard_Atomic_Increment(volatile int*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "rust_item": "rustycad_tkernel::standard::atomic::atomic_increment",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated; volatile int* becomes &AtomicI32 with SeqCst ordering, matching the full-barrier __sync builtins, and wrapping on overflow. The header's per-platform definitions (one ledger identity each) collapse into this one function."
+    },
+    {
+      "upstream_id": "Standard_Atomic::Standard_Atomic_Decrement(volatile int*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "rust_item": "rustycad_tkernel::standard::atomic::atomic_decrement",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated; volatile int* becomes &AtomicI32 with SeqCst ordering, matching the full-barrier __sync builtins, and wrapping on overflow. The header's per-platform definitions (one ledger identity each) collapse into this one function."
+    },
+    {
+      "upstream_id": "Standard_Atomic::Standard_Atomic_CompareAndSwap(volatile int*,int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "rust_item": "rustycad_tkernel::standard::atomic::atomic_compare_and_swap",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Deprecated; volatile int* becomes &AtomicI32 with SeqCst ordering, matching the full-barrier __sync builtins, and wrapping on overflow. The header's per-platform definitions (one ledger identity each) collapse into this one function."
+    },
+    {
+      "upstream_id": "Standard_Atomic::_InterlockedIncrement(volatile long*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform."
+    },
+    {
+      "upstream_id": "Standard_Atomic::_InterlockedDecrement(volatile long*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform."
+    },
+    {
+      "upstream_id": "Standard_Atomic::_InterlockedCompareExchange(long volatile*,long,long)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Atomic.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: declaration of an MSVC intrinsic inside the header's _WIN32 branch (extern \"C\" _Interlocked*), not OCCT API; the Rust atomics replace it on every platform."
+    },
+    {
+      "upstream_id": "Standard_VersionInfo::OCCT_DevelopmentVersion()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
+      "rust_item": "rustycad_tkernel::standard::version_info::occt_development_version",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
+    },
+    {
+      "upstream_id": "Standard_VersionInfo::OCCT_Version_Double()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
+      "rust_item": "rustycad_tkernel::standard::version_info::occt_version_double",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
+    },
+    {
+      "upstream_id": "Standard_VersionInfo::OCCT_Version_String()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
+      "rust_item": "rustycad_tkernel::standard::version_info::occt_version_string",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
+    },
+    {
+      "upstream_id": "Standard_VersionInfo::OCCT_Version_String_Complete()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
+      "rust_item": "rustycad_tkernel::standard::version_info::occt_version_string_complete",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
+    },
+    {
+      "upstream_id": "Standard_VersionInfo::OCCT_Version_String_Extended()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_VersionInfo.hxx",
+      "rust_item": "rustycad_tkernel::standard::version_info::occt_version_string_extended",
+      "status": "implemented",
+      "notes": "Free function of the header, attributed to its primary class by the ledger convention; ported as a Rust free function and compared bit for bit (IEEE patterns, hashes, text) with native OCCT by the standard_values differential probe. Standard_VersionInfo.hxx became visible to the audit when extern \"C\" blocks were parsed; the values are the generated Standard_Version.hxx of the pinned build (8.1.0, dev1-3d097a0328)."
     },
     {
       "upstream_id": "Bnd_Range::Bnd_Range()",
@@ -7944,30 +8928,6 @@
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/gp/gp_Vec.hxx",
       "rust_item": "rustycad_tkmath::gp::Vector3::angle_with_ref",
-      "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
-    },
-    {
-      "upstream_id": "Epsilon(double)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard_Real.hxx",
-      "rust_item": "rustycad_tkernel::standard::real::epsilon",
-      "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
-    },
-    {
-      "upstream_id": "IsEven(int)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
-      "rust_item": "rustycad_tkernel::standard::integer::is_even",
-      "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
-    },
-    {
-      "upstream_id": "IsOdd(int)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard_Integer.hxx",
-      "rust_item": "rustycad_tkernel::standard::integer::is_odd",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },

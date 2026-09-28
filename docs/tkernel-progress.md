@@ -489,7 +489,79 @@ Pending.
 
 ### Standard scalar, character, hashing, time, GUID and atomic helpers
 
-Pending.
+Headers: Standard_Real (+ .cxx), Standard_ShortReal, Standard_Integer, Standard_Character,
+Standard_ExtCharacter, Standard_CString (+ .cxx), Standard_CStringHasher, Standard_HashUtils
+(+ .lxx), Standard_Time, Standard_GUID (+ .cxx), Standard_Atomic and Standard_VersionInfo.
+138 `api` rows (131 implemented, 7 excluded) replace the former hand-written GUID/Epsilon/IsEven/IsOdd
+rows. `tools/verify_tkernel_api.py --only standard_values_` compares 10,983 requests exactly.
+
+Mapping:
+
+- Free functions of a header are attributed to its primary class in the ledger
+  (`Standard_Real::ACos(double)`); each is a free function of `standard::real`,
+  `short_real`, `integer`, `character`, `ext_character`, `c_string`, `time`, `atomic` or
+  `version_info`. The deprecated `<cmath>` one-liners (ACos, ATanh, Cosh, NextAfter, Round, ...)
+  are ported too. The inverse hyperbolic functions call the platform libm through
+  `rustycad_cmath`, because Rust's own formulas differ in the last bit. `Max`/`Min` keep the
+  `std::max`/`std::min` comparison `a < b ? b : a`, not IEEE `fmax`: NaN order and signed zeros
+  are kept.
+- `standard::hashing` is public: `murmur_hash::{murmur_hash_64a, murmur_hash_2a, hash_combine,
+  optimal_seed}`, `fnv_hash::{fnv_hash_64a, fnv_hash_1a, hash_combine, optimal_seed}`, and the
+  top-level `hash`, `hash_bytes` and `hash_combine`. The C++ templates hash the object
+  representation of a value. The port takes `&[T]` with `T: bytemuck::NoUninit` (no padding, so
+  the byte view equals the C++ one). The result type `T` (default `size_t`) is the `HashWord`
+  parameter (`u32`, `u64`, `usize`): an 8-byte word selects the 64-bit engine and any other width
+  the 32-bit one, as the two `enable_if` overloads do. The crate-internal `murmur64`/`murmur32`
+  keep their signatures and delegate to the engines.
+- `Standard_CStringHasher` is the unit struct `c_string::CStringHasher` (`hash_code`,
+  `is_equal`, and `ncollection::HashPolicy` for any `AsRef<[u8]>` key). C-string arguments are
+  byte slices read up to the first NUL. `Atof` wraps the existing `standard::strtod`.
+- `Standard_GUID`: `from_ascii`/`FromStr`, `from_utf16`, `from_components`,
+  `from_uuid`/`From<Uuid>`, `Copy` for the copy constructor and `operator=`, `PartialEq` for
+  `==`/`!=` (`is_same`/`is_not_same` for const contexts), `assign`/`assign_uuid`,
+  `to_c_string`/`Display`, `to_ext_string`, `to_uuid`, `shallow_dump` (any `fmt::Write`),
+  `check_format` (`None` is the null pointer) and `hash_code` for `std::hash<Standard_GUID>`
+  (also fed to `Hash`). The string constructors now return `Failure` of class
+  `Standard_RangeError` instead of the legacy `crate::Error`.
+- `Standard_Atomic_*` take `&AtomicI32` with `SeqCst` ordering and return the new value, as the
+  full-barrier `__sync` builtins do. The header's per-platform definitions collapse into one
+  function.
+
+Native behavior kept:
+
+- `Epsilon(x)` is transcribed from its `nextafter` expression. The former `|x|` formulation
+  cleared the sign bit of a negative NaN.
+- `NextAfter` with a NaN argument returns `x + y`. glibc's build evaluates it with `y` as the
+  SSE destination, so when both arguments are NaN the direction's payload wins. The port
+  evaluates `direction + value`.
+- `ACosApprox` keeps the Standard_Real.cxx literals and operation order, and returns 0 (not
+  PI) at -1.
+- `IsOdd` is `value % 2 == 1`: negative odd values are neither odd nor even.
+- FNV-1a reads plain `char`. Bytes >= 0x80 are sign-extended where `char` is signed (the oracle
+  profile). The port widens through `c_char`, so it follows the platform like the C++ code.
+- The `std::hash<Standard_GUID>` image packs `Data4[0..2]` into one `char16_t` (high byte
+  first) in native byte order.
+- `Standard_GUID(const char16_t*)` keeps the low byte of each of the first 36 units.
+- The `Standard_VersionInfo` values are those of the generated `Standard_Version.hxx` of the
+  pinned build (`8.1.0`, `dev1-3d097a0328`).
+
+Deliberate deviations (the C++ behavior is undefined or not expressible; none is probed):
+
+- `RealToInt(NaN)` returns `INT_MIN`, the x86-64 `cvttsd2si` result.
+- `Abs(INT_MIN)` and `Square(int)` overflow wrap in two's complement. `Modulus(x, 0)` and
+  `Modulus(INT_MIN, -1)` trap natively (SIGFPE) and panic in Rust.
+- A hash length beyond the object panics; C++ reads out of bounds.
+- `Standard_GUID(const char16_t*)` with fewer than 36 units returns a `Standard_RangeError`
+  naming the length; C++ reads past the buffer.
+- `Printf`, `Fprintf`, `Sprintf` and `Vsprintf` are excluded. Stable Rust cannot define C
+  variadic functions, and Rust formatting never depends on a locale. The MSVC
+  `_Interlocked*` declarations in Standard_Atomic.hxx are excluded for the same reason: they are
+  not OCCT API.
+
+Audit tool: `tools/audit_api_rows.py` now reads `extern "C" { ... }` blocks as members of the
+enclosing scope, with a regression test. This makes Atof/Strtod/Printf and Standard_VersionInfo
+visible. The TKMath and NCollection output is unchanged. OSD_OpenFile, OSD_WNT and
+Resource_ConvertUnicode gain their C-linkage functions.
 
 ### Standard handles, transients, type descriptors, failures and TColStd handles
 
