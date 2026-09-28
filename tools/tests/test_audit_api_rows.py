@@ -228,6 +228,47 @@ class ConversionAndArrayTests(unittest.TestCase):
         self.assertEqual(([m.prefix for m in missing], stale), ([], []))
 
 
+SWIZZLE_HEADER = """
+#define VEC_COMPONENTS_2D(theX, theY) \\
+  constexpr NCollection_Vec2<Element_t> theX##theY() const noexcept \\
+  { return NCollection_Vec2<Element_t>(theX(), theY()); }
+template <typename Element_t>
+class NCollection_Vec2
+{
+public:
+  VEC_COMPONENTS_2D(x, y)
+  constexpr Element_t& x() noexcept { return v[0]; }
+  friend constexpr NCollection_Vec2 operator+(const NCollection_Vec2& theL,
+                                              const NCollection_Vec2& theR) noexcept
+  { return theL; }
+  friend class NCollection_Mat3;
+  friend bool operator==(const NCollection_Vec2& theL, const NCollection_Vec2& theR);
+private:
+  Element_t v[2];
+};
+"""
+
+
+class MacroAndFriendTests(unittest.TestCase):
+    def test_header_local_macros_expand_into_members(self):
+        self.assertIn("NCollection_Vec2::xy||const", members_of(SWIZZLE_HEADER))
+        self.assertIn("NCollection_Vec2::x||", members_of(SWIZZLE_HEADER))
+
+    def test_in_class_friend_definitions_are_public_members(self):
+        members = members_of(SWIZZLE_HEADER)
+        self.assertIn("NCollection_Vec2::operator+|const NCollection_Vec2&,const NCollection_Vec2&|", members)
+        # Friend classes and body-less friend declarations are not API of this class.
+        self.assertFalse([m for m in members if "operator==" in m or "Mat3" in m])
+
+    def test_macro_arity_mismatch_names_the_arguments(self):
+        with self.assertRaisesRegex(ValueError, r"\['x'\]; expected 2 arguments"):
+            members_of(SWIZZLE_HEADER.replace("VEC_COMPONENTS_2D(x, y)", "VEC_COMPONENTS_2D(x)"))
+
+    def test_standard_rtti_macros_are_never_expanded(self):
+        header = "#define DEFINE_STANDARD_RTTIEXT(C, B) public: int Bad();\n" + TEMPLATE_HEADER
+        self.assertNotIn("BVH_Transient::Bad||", members_of(header))
+
+
 class RowMatchingTests(unittest.TestCase):
     def test_row_ids_split_prefix_params_and_qualifier(self):
         self.assertEqual(parse_row_id("gp_GTrsf::operator()(int,int) const"),

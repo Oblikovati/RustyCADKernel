@@ -32,8 +32,13 @@ Known false-positive sources and how they are handled:
 - Out-of-class definitions (`inline gp_Vec::gp_Vec(...)`,
   `BVH_Box<T, N>::Area() const`) are recognised by the qualified name and
   ignored; only in-class declarations count.
-- `= delete` members, `friend` declarations and private members are never
-  expected or known.
+- `= delete` members, body-less `friend` declarations, friend classes and
+  private members are never expected or known. An in-class friend *definition*
+  (a hidden friend such as `friend Vec2 operator+(...) {...}`) is expected as a
+  member of the enclosing class.
+- Function-like macros defined in the header itself (the NCollection_Vec
+  swizzle generators) are expanded before scanning; the `DEFINE_STANDARD_*`
+  macros are not, since they keep their dedicated identities.
 - `DEFINE_STANDARD_RTTIEXT(Class, Base)` expands to `public:` plus the RTTI
   members, so it is rewritten to that label and a statement of its own: it can
   no longer swallow the next declaration, members after it are public as in
@@ -76,18 +81,81 @@ class Member:
     required: bool = field(default=True, compare=False, repr=False)
 
 
-def clean_source(text: str) -> str:
+def clean_source(text: str, included_macros: dict[str, tuple[list[str], str]] | None = None) -> str:
     """Remove comments, literals, preprocessor lines, attributes and ignored macros.
 
     >>> clean_source('int a; // x\\n#define B 1\\n[[nodiscard]] int b();')
     'int a;  \\n\\n int b();'
     """
     text = TOKEN_NOISE.sub(lambda m: '""' if m.group(0)[0] in "\"'" else " ", text)
+    macros = {**(included_macros or {}), **header_macros(text)}
     text = re.sub(r"^\s*#(?:[^\n]*\\\n)*[^\n]*$", "", text, flags=re.M)
+    text = expand_header_macros(text, macros)
     text = re.sub(r"\[\[[^\]]*\]\]|__attribute__\s*\(\([^)]*\)\)", "", text)
     text = re.sub(r"\bStandard_DEPRECATED\s*\(\s*\"*\s*\)", "", text)
     text = RTTI_MACRO.sub(r"public: \1(\2);", HANDLE_MACRO.sub(";", text))  # the macro opens with `public:`
     return re.sub(IGNORED_MACROS, "", text)
+
+
+def header_macros(text: str) -> dict[str, tuple[list[str], str]]:
+    """Function-like macros `#define`d in the header itself, as `{name: (params, body)}`.
+
+    NCollection_Vec2/3 declare their GLSL-style swizzles (`xy()`, `zyx()`) through
+    `NCOLLECTION_VEC_COMPONENTS_2D/3D`, defined and invoked in the same header; expanding
+    them is the only way those members become visible to the scanner.
+
+    >>> header_macros('#define M(a, b) \\\\\\n  int a##b();')
+    {'M': (['a', 'b'], 'int a##b();')}
+    """
+    pattern = re.compile(r"^\s*#\s*define\s+(\w+)\(([^)]*)\)((?:[^\n]*\\\n)*[^\n]*)$", re.M)
+    # The RTTI/handle/exception macros keep their dedicated ledger identities (see
+    # `clean_source`), even inside Standard_Type.hxx, which defines them.
+    return {match.group(1): ([param.strip() for param in match.group(2).split(",") if param.strip()],
+                             re.sub(r"\\\n", " ", match.group(3)).strip())
+            for match in pattern.finditer(text) if not match.group(1).startswith("DEFINE_STANDARD_")}
+
+
+def expand_header_macros(text: str, macros: dict[str, tuple[list[str], str]]) -> str:
+    """Replace each invocation of a header-local function-like macro by its body.
+
+    >>> expand_header_macros('struct S { M(x, y) };', {'M': (['a', 'b'], 'int a##b();')})
+    'struct S { int xy(); };'
+    """
+    for name, (params, body) in macros.items():
+        while (match := re.search(rf"\b{name}\s*\(", text)) is not None:
+            close = matching_close(text, match.end() - 1)
+            arguments = macro_arguments(text[match.end():close])
+            if len(arguments) != len(params):
+                raise ValueError(f"macro {name} invoked with {arguments!r}; expected {len(params)} arguments")
+            text = text[:match.start()] + substitute_macro(body, params, arguments) + text[close + 1:]
+    return text
+
+
+def macro_arguments(text: str) -> list[str]:
+    """Split macro arguments as the preprocessor does: only parentheses nest, not `<>`.
+
+    >>> macro_arguments('a <= b || c, "x"')
+    ['a <= b || c', '"x"']
+    """
+    parts, depth, start = [], 0, 0
+    for index, char in enumerate(text):
+        depth += (char == "(") - (char == ")")
+        if char == "," and depth == 0:
+            parts.append(text[start:index].strip())
+            start = index + 1
+    return parts + [text[start:].strip()] if text.strip() else parts
+
+
+def substitute_macro(body: str, params: list[str], arguments: list[str]) -> str:
+    """Macro body with parameters replaced, `#param` stringized to `""` and `##` pasted.
+
+    >>> substitute_macro('T a##b() { return #a; }', ['a', 'b'], ['x', 'y'])
+    'T xy() { return ""; }'
+    """
+    values = dict(zip(params, arguments))
+    body = re.sub(r"(?<!#)#\s*(\w+)", lambda m: '""' if m.group(1) in values else m.group(0), body)
+    body = re.sub(r"\b\w+\b", lambda m: values.get(m.group(0), m.group(0)), body)
+    return re.sub(r"\s*##\s*", "", body)
 
 
 def matching_close(text: str, start: int) -> int:
@@ -178,6 +246,10 @@ def statement_members(head: str, braced: str | None, scope: str, primary: str, e
         return nested_scope_members(head, scope_match, braced, scope, primary, exposed)
     if re.fullmatch(r"enum", head) and braced is not None:
         return enumerator_members(braced, scope)  # anonymous enum: its constants join the scope
+    if braced is not None and (friend := re.match(r"friend\s+(?!class\b|struct\b)", head)) is not None:
+        # An in-class friend definition (`friend Vec2 operator+(...) {...}`) is a hidden friend:
+        # public API reachable only through argument-dependent lookup, attributed to the class.
+        return exposure(function_members(head[friend.end():], scope, primary), exposed)
     if not head or re.match(r"(friend|static_assert)\b", head):
         return []
     if re.match(r"(typedef|using)\b", head):
@@ -262,7 +334,7 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
     """The member declared by a function statement, or nothing for definitions/deletions."""
     if re.search(r"=\s*delete\s*$", head):
         return []
-    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+[A-Za-z_][\w:]*\s*[&*]*"
+    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+(?:(?:const|volatile)\s+)*[A-Za-z_][\w:]*\s*[&*]*"
                            r"|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
     if name_match is None:
         return []
@@ -287,10 +359,12 @@ def conversion_spelling(raw: str) -> str:
     'operator bool'
     >>> conversion_spelling("operator ()")
     'operator()'
+    >>> conversion_spelling("operator const  Element_t *")
+    'operator const Element_t*'
     """
     match = re.fullmatch(r"operator\s+([A-Za-z_].*)", raw.strip())
     compact = re.sub(r"\s+", "", raw)
-    return compact if match is None else "operator " + re.sub(r"\s+", "", match.group(1))
+    return compact if match is None else "operator " + squeeze(match.group(1))
 
 
 def class_name(owner: str) -> str:
@@ -431,13 +505,28 @@ def normalize_params(params: str) -> str:
     return "" if parts == ["void"] else ",".join(parts)
 
 
+def sibling_macros(path: Path) -> dict[str, tuple[list[str], str]]:
+    """Function-like macros of the same-package headers that `path` includes.
+
+    NCollection_Vec3 invokes `NCOLLECTION_VEC_COMPONENTS_2D`, defined in the included
+    NCollection_Vec2.hxx; only direct includes that live beside `path` are read.
+    """
+    text = path.read_text(errors="replace")
+    macros: dict[str, tuple[list[str], str]] = {}
+    for name in re.findall(r'^\s*#\s*include\s*[<"]([\w.]+)[>"]', text, re.M):
+        sibling = path.parent / name
+        if sibling.is_file() and sibling != path:
+            macros.update(header_macros(TOKEN_NOISE.sub(" ", sibling.read_text(errors="replace"))))
+    return macros
+
+
 def header_members(path: Path) -> list[Member]:
     """Every expected public member of one OCCT header.
 
     `DEFINE_STANDARD_EXCEPTION(Name, Base)` declares a whole exception class through a
     macro; it is expected as one `Name` row (the Rust `Failure` type-name mapping).
     """
-    text = clean_source(path.read_text(errors="replace"))
+    text = clean_source(path.read_text(errors="replace"), sibling_macros(path))
     exception = re.compile(r"\bDEFINE_STANDARD_EXCEPTION\s*\(\s*(\w+)\s*,[^)]*\)")
     exceptions = [Member(name, None, "") for name in exception.findall(text)]
     return exceptions + scan_scope(exception.sub(";", text), "", True, path.stem)

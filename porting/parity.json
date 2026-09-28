@@ -37714,6 +37714,22 @@
       "rust_item": "rustycad_tkmath::math::VectorBase::resize",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "upstream_id": "math_VectorBase::operator*(TheItemType,const math_VectorBase&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
+      "rust_item": "<f64 as Mul<&rustycad_tkmath::math::VectorBase>>::mul",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics. The hidden friend scalar-times-vector forwards to Multiplied; Rust coherence needs one impl per item type (f64 and i32)."
+    },
+    {
+      "upstream_id": "math_VectorBase::operator<<(Standard_OStream&,const math_VectorBase&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/math/math_VectorBase.hxx",
+      "rust_item": "<rustycad_tkmath::math::VectorBase as Display>::fmt",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics. The hidden friend stream insertion forwards to Dump, as Display does."
     }
   ],
   "tests": [
