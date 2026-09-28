@@ -34,11 +34,6 @@ impl_transient!(
     parent,
     interfaces: [dyn Geom2dGeometry, dyn Geom2dVector]
 );
-impl Clone for Geom2dDirection {
-    fn clone(&self) -> Self {
-        Self::stored(*self.state.read())
-    }
-}
 
 // X / D and Y / D after the native zero-length check of `where_` (Standard_ConstructionError).
 fn normalized_coordinates(x: f64, y: f64, where_: &str) -> Result<Vector2, Failure> {
@@ -105,7 +100,9 @@ impl Geom2dGeometry for Geom2dDirection {
         Ok(())
     }
     fn copy(&self) -> Result<Handle<dyn Geom2dGeometry>, Failure> {
-        Ok(Handle::new(self.clone()).cast())
+        // Quirk kept: the native Copy passes gpVec2d to the gp_Dir2d constructor, which
+        // normalizes the stored unit vector once more (the last bit can change).
+        Ok(Handle::new(Self::from_dir2d(self.dir2d()?)).cast())
     }
 }
 impl Geom2dVector for Geom2dDirection {
