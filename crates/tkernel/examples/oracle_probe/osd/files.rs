@@ -117,9 +117,21 @@ fn node_command(
             bit(node.failed()).to_string()
         }
         "moment" => {
+            // The two probes run seconds apart: compare the moments' relation, not values.
             let created: Result<String, Failure> = date_text(node.creation_moment());
             let accessed: Result<String, Failure> = date_text(node.access_moment());
-            return Some(created.and_then(|created| Ok(format!("{created}/{}", accessed?))));
+            return Some(created.and_then(|created| {
+                let relation: &str = if created == accessed? {
+                    "same"
+                } else {
+                    "differ"
+                };
+                let recent: bool = created.split('-').next() >= Some("2020");
+                Ok(format!(
+                    "{relation}/{}",
+                    if recent { "recent" } else { "old" }
+                ))
+            }));
         }
         "path" => lossy(node.path().system_name().as_bytes()),
         _ => return None,

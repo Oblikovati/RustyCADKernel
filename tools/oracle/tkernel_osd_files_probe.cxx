@@ -128,8 +128,13 @@ static bool files_node_command(OSD_FileNode& theNode, const std::string& theCmd,
     out << theNode.Failed();
   }
   else if (theCmd == "moment")
-    out << files_date_text(theNode.CreationMoment()) << "/"
-        << files_date_text(theNode.AccessMoment());
+  {
+    // The native and Rust probes run seconds apart, so only the relation between the two
+    // moments and their plausibility are compared, not the clock values.
+    Quantity_Date aCreated = theNode.CreationMoment(), anAccessed = theNode.AccessMoment();
+    out << (files_date_text(aCreated) == files_date_text(anAccessed) ? "same" : "differ") << "/"
+        << (aCreated.Year() >= 2020 ? "recent" : "old");
+  }
   else if (theCmd == "path")
   {
     OSD_Path aPath;
