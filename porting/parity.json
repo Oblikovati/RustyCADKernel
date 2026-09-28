@@ -104458,6 +104458,406 @@
       "rust_item": "rustycad_tkgeombase::extrema_pc::perform_planar",
       "status": "implemented",
       "notes": "ExtremaPC mapping (docs/tkgeombase-progress.md): the namespace is the module extrema_pc; Result and ExtremumResult are the aliases ExtremaResult and ExtremumResult of the generic extrema_pc_core types that ExtremaPC2d shares, and Status, SearchMode, the THE_* constants and the validity functions are the shared core items; each class drops the ExtremaPC_ prefix and the constructor with a domain is with_domain; operator[] is Index<usize>; every Perform returns Result<&ExtremaResult, Failure> because the plane projections construct gp and Geom2d objects whose native constructors can raise, and the Bezier, BSpline, offset and other-curve constructors return Result for the same reason; the ExtremaPC_Curve constructors are from_adaptor, from_adaptor_range, from_transformed, from_transformed_range, from_geom and from_geom_range; DistanceFunction and GridEvaluator are the generic core types over Space3d, with output references returned as values; ExtremaPC_Planar out-parameters (gp_Pln&, the 2D curve handle) stay &mut parameters, the template parameters of PerformPlanar are the PlanarEvaluator2d and CurveEvaluator traits, and its scalar query arguments are grouped in PlanarQuery."
+    },
+    {
+      "upstream_id": "GeomTools::Dump(const occ::handle<Geom_Surface>&,Standard_OStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::dump_surface",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::Write(const occ::handle<Geom_Surface>&,Standard_OStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::write_surface",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::Read(occ::handle<Geom_Surface>&,Standard_IStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::read_surface",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::Dump(const occ::handle<Geom_Curve>&,Standard_OStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::dump_curve",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::Write(const occ::handle<Geom_Curve>&,Standard_OStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::write_curve",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::Read(occ::handle<Geom_Curve>&,Standard_IStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::read_curve",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::Dump(const occ::handle<Geom2d_Curve>&,Standard_OStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::dump_curve2d",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::Write(const occ::handle<Geom2d_Curve>&,Standard_OStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::write_curve2d",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::Read(occ::handle<Geom2d_Curve>&,Standard_IStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::read_curve2d",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::SetUndefinedTypeHandler(const occ::handle<GeomTools_UndefinedTypeHandler>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::set_undefined_type_handler",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::GetUndefinedTypeHandler()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::get_undefined_type_handler",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools::GetReal(Standard_IStream&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::get_real",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::new",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet::Clear()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::clear",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet::Add(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::add",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet::Curve(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::curve",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet::Index(const occ::handle<Geom_Curve>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::index",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::dump",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet::Write(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::write",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::read",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet::PrintCurve(const occ::handle<Geom_Curve>&,Standard_OStream&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::print_curve",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_CurveSet::ReadCurve(Standard_IStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_CurveSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::CurveSet::read_curve",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::new",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet::Clear()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::clear",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet::Add(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::add",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet::Curve2d(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::curve2d",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet::Index(const occ::handle<Geom2d_Curve>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::index",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::dump",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet::Write(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::write",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::read",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet::PrintCurve2d(const occ::handle<Geom2d_Curve>&,Standard_OStream&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::print_curve2d",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_Curve2dSet::ReadCurve2d(Standard_IStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_Curve2dSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::Curve2dSet::read_curve2d",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::new",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet::Clear()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::clear",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet::Add(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::add",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet::Surface(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::surface",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet::Index(const occ::handle<Geom_Surface>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::index",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::dump",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet::Write(Standard_OStream&,const Message_ProgressRange&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::write",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet::Read(Standard_IStream&,const Message_ProgressRange&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::read",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet::PrintSurface(const occ::handle<Geom_Surface>&,Standard_OStream&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::print_surface",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_SurfaceSet::ReadSurface(Standard_IStream&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_SurfaceSet.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::SurfaceSet::read_surface",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_UndefinedTypeHandler.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandlerBase::default",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler::PrintCurve(const occ::handle<Geom_Curve>&,Standard_OStream&,bool) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_UndefinedTypeHandler.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler::print_curve",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler::ReadCurve(int,Standard_IStream&,occ::handle<Geom_Curve>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_UndefinedTypeHandler.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler::read_curve",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler::PrintCurve2d(const occ::handle<Geom2d_Curve>&,Standard_OStream&,bool) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_UndefinedTypeHandler.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler::print_curve2d",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler::ReadCurve2d(int,Standard_IStream&,occ::handle<Geom2d_Curve>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_UndefinedTypeHandler.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler::read_curve2d",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler::PrintSurface(const occ::handle<Geom_Surface>&,Standard_OStream&,bool) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_UndefinedTypeHandler.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler::print_surface",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler::ReadSurface(int,Standard_IStream&,occ::handle<Geom_Surface>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_UndefinedTypeHandler.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler::read_surface",
+      "status": "implemented",
+      "notes": "GeomTools mapping (docs/tkgeombase-progress.md): the GeomTools statics are free functions of geom_tools, Standard_OStream/Standard_IStream are the TKernel IoStream model of libstdc++ (byte-exact formatting and parsing), std::cout goes to an injected ConsoleOutput, output handles become return values, and a null handle the native code dereferences is Standard_NullObject."
+    },
+    {
+      "upstream_id": "GeomTools_UndefinedTypeHandler::DEFINE_STANDARD_RTTIEXT(GeomTools_UndefinedTypeHandler,Standard_Transient)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomTools/GeomTools_UndefinedTypeHandler.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     }
   ],
   "tests": [

@@ -4,9 +4,9 @@
 (`rustycad-tkgeombase`) is the port of the ModelingData toolkit TKGeomBase. It
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
-`IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d` and `ExtremaPC`
-packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0
-stale api rows for each of them.
+`IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC` and
+`GeomTools` packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing
+and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
@@ -59,7 +59,9 @@ passes (481 declarations):
 `local_props_behavior.rs` covers the LProp, GeomLProp, GProp and Hermit quirks
 below. `gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
 StdFail_NotDone results, the conversion operators, the GCE2d aliases and the native
-quirks below.
+quirks below. GeomTools has no upstream GoogleTest suite; `geom_tools_behavior/`
+covers its layouts, reader contract, sets, handler and quirks with named fakes for the
+console, the text streams, the progress indicator and a custom handler.
 
 Four upstream suites are not mapped:
 
@@ -165,6 +167,29 @@ and the ports of those packages will replace them:
 
 `probe_support` is a hidden public module that exposes them to the numeric probe.
 
+GeomTools (`geom_tools`) keeps the class layout: the statics of `GeomTools` are free
+functions (`GeomTools::Dump(C, OS)` for a `Geom_Curve` is `geom_tools::dump_curve`,
+`GeomTools::Read(C, IS)` returns the curve), and `GeomTools_CurveSet`,
+`GeomTools_Curve2dSet` and `GeomTools_SurfaceSet` are `CurveSet`, `Curve2dSet` and
+`SurfaceSet`, which share one indexed table (`geometry_table.rs`); the three native files
+differ only in labels, element type and null handling. `Standard_OStream` and
+`Standard_IStream` are the TKernel model of the libstdc++ iostream
+(`rustycad_tkernel::storage::IoStream`), so `operator<<(double)` is `printf("%.*g")` at
+the stream precision, `std::setw` pads (the model gained width handling for this), and
+`operator>>` follows the libstdc++ sentry, clamping and failbit rules. The printers
+return `Result`: a null handle, which the native code dereferences, is
+Standard_NullObject. The text native code writes to `std::cout` (the "UNKNOWN ... TYPE"
+line of a compact print, "Not a ... table", the debug dump) goes to an injected
+`ConsoleOutput`: `CurveSet::with_console`, `UndefinedTypeHandlerBase::with_console`, and
+the console argument of `geom_tools_dump`; the defaults write to standard output.
+`GeomTools_UndefinedTypeHandler` is the trait `UndefinedTypeHandler` (its virtual members
+are provided methods with the native behaviour) and the struct
+`UndefinedTypeHandlerBase` is `new GeomTools_UndefinedTypeHandler`; the read members
+return the handle instead of filling an output argument and returning the stream. The
+active handler is process wide, as the native static is. `GeomTools_Dump` of
+GeomTools_Debug.cxx is `geom_tools_dump` for a `Standard_Transient` handle; its `void*`
+overload exists only for debuggers.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -245,8 +270,27 @@ tangential deflection sampling. Each request prints the status, the extrema in t
 order (parameter, point, square distance, minimum and maximum flags), the minimum and
 maximum indices, or the raised exception.
 
-The corpus has 8732 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
-GeomLProp, GProp and Hermit, 1253 ExtremaPC2d and 1252 ExtremaPC.
+The GeomTools requests (`tkgeombase_corpus_geomtools.py`, probes
+`tkgeombase_probe_geomtools*.cxx`) print every text as one hexadecimal token, so the
+comparison is byte exact. They build every Geom curve, Geom2d curve and Geom surface class
+(conics on tilted frames, direct and indirect frames, rational, periodic and clamped
+splines, trimmed and offset curves on every basis, nested trimmed and offset surfaces)
+with numbers that exercise the `%g` layouts (signed zeros, 1e-5, 1e21, 123456.5, 1e300,
+1e-300, repeating fractions), and compare `Dump` and `Write` at precisions 6 and 17, then
+the geometry read back from the precision-17 text by its class name, its compact text at
+17 digits (which identifies every stored double) and a point on it. The read requests feed
+native and malformed text to the three readers: unknown, negative, overflowing and
+non-numeric type codes, null and non-unit directions, parallel axes, invalid radii,
+weights, degrees and knots, booleans other than 0 and 1, `nan`, `inf`, hexadecimal,
+subnormal and overflowing numbers, words longer than the GetReal buffer, and bases that
+fail inside trimmed and offset records; each prints the result, the stream state and the
+unread rest. The set requests cover Add/Index (duplicates, null handles), Dump, Write
+into a precision-3 stream, two appending Reads, Clear, wrong and overlong tags, tables
+with failing records, a progress indicator that breaks after 0 to 10 steps, the debug
+dump and a custom handler that stores the eval helix, sine wave and ellipsoid.
+
+The corpus has 9028 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC and 296 GeomTools.
 
 ## Preserved native behaviour
 
@@ -415,3 +459,48 @@ ExtremaPC2d and ExtremaPC:
   catch failures differently (see above).
 - `std::max` and `std::min` keep their argument order semantics with NaN
   (`geom2d::native::std_max`, `std_min`).
+
+GeomTools:
+
+- `GeomTools::Write` and `GeomTools::Read` for one geometry use the stream precision (6
+  by default, so the text does not round-trip); only the set `Write` sets precision 17,
+  and it restores the caller's precision afterwards.
+- `GeomTools_CurveSet::Add` and `Index` refuse a null handle (0), but
+  `GeomTools_Curve2dSet` and `GeomTools_SurfaceSet` store it like any element and
+  `Index(null)` then returns its index. `Dump` and `Write` dereference a stored null
+  handle; the port returns Standard_NullObject there.
+- `Read` appends to the set (the header says it clears it first). A record that fails to
+  read is stored as a null handle, once, since every null handle is the same key.
+- A table with another tag writes "Not a Curve table", "Not a Curve2d table" or "Not a
+  surface table" to `std::cout` and reads nothing more; the tag is extracted into a
+  `char[255]`, so at most 254 characters are compared.
+- The dumps keep their layout slips: the 2D B-spline count line runs into the pole list
+  (` KnotsPoles :`), the 3D B-spline dump puts two spaces before each knot and the 2D one
+  one, the offset curve has no newline after its tag (`OffsetCurveOffset : `), the torus
+  radii have no comma, the surface table dump says `surfaces` in lower case, and only the
+  surface dumps report `uclosed`/`vclosed`.
+- For a class GeomTools does not know, the base handler writes the "UNKNOWN ... TYPE"
+  line into a dump, but to `std::cout` for the compact form, whose record is then missing
+  from the stream.
+- Every failure inside a record read (a native Standard_Failure) gives a null result with
+  the stream where the failure happened: a null direction raises right after its three
+  words; `gp_Ax2` of a curve conic raises only after the radii are read, while `gp_Ax3`
+  of an elementary surface raises before its radius; the cone record writes the radius
+  before the semi-angle. The offset surface is read with `isNotCheckC0` true, the offset
+  curve with false.
+- A trimmed or offset curve read on a basis that failed dereferences the null basis
+  natively; `OCC_CATCH_SIGNALS` turns that into a caught failure when the OSD signal
+  handlers are installed (DRAW and the oracle install them with `OSD::SetSignal`), which
+  gives a null result. The port refuses the null basis with Standard_ConstructionError,
+  with the same null result.
+- `GetReal` returns 0 without reading at end of file; it extracts at most 30 characters
+  (the stream width is set to 31 and then restored), leaving the tail of a longer word
+  for the next read, and converts the word with `Strtod`, so `1.5abc`, `inf`, `nan` and
+  hexadecimal floats are accepted and garbage reads as 0.
+- A boolean other than 0 or 1 reads as true and fails the stream; every later
+  extraction of the record then fails and reads 0.
+- The type code of a record is extracted into an uninitialised `int`. When the stream
+  has already failed or reached its end (a table that announces more records than it
+  holds), the native value is indeterminate; the port reads 0, an unknown code, which
+  gives a null record. A multiplicity read from a failed stream is 0 in the port. The
+  corpus leaves these inputs out.

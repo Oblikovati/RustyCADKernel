@@ -28,6 +28,7 @@ pub mod gc;
 pub mod gce;
 pub mod gce2d;
 pub mod geom_lprop;
+pub mod geom_tools;
 pub mod gprop;
 pub mod hermit;
 pub mod int_ana;

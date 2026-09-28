@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod gb_probe;
-use gb_probe::{gc, gce, gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d};
+use gb_probe::{gc, gce, geom_tools, gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -115,6 +115,18 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("pc_endpoints", pc3d::endpoints_case),
     ("pc_project", pc3d::project_case),
     ("gcpnts_td3d", pc3d::td3d_case),
+    // GeomTools (gb_probe/geom_tools)
+    ("gt_curve", geom_tools::curve_case),
+    ("gt_curve2d", geom_tools::curve2d_case),
+    ("gt_surface", geom_tools::surface_case),
+    ("gt_read", geom_tools::read_case),
+    ("gt_get_real", geom_tools::get_real_case),
+    ("gt_set", geom_tools::sets::set_case_dispatch),
+    ("gt_set_null", geom_tools::sets::set_null_case),
+    ("gt_set_read", geom_tools::sets::set_read_case),
+    ("gt_progress", geom_tools::sets::progress_case),
+    ("gt_debug_dump", geom_tools::sets::debug_dump_case),
+    ("gt_handler", geom_tools::sets::handler_case),
 ];
 
 fn main() {

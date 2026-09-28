@@ -1,5 +1,6 @@
 //! The libstdc++ iostream model behind every storage driver.
 use rustycad_tkernel::storage::{IoStream, format_general, state};
+use std::io::{Read, Seek};
 
 #[test]
 fn integer_extraction_clamps_out_of_range_values_with_failbit() {
@@ -147,4 +148,32 @@ fn general_format_matches_printf_g() {
         "8796093022208.0312"
     );
     assert_eq!(format_general(2.5, 0), "2");
+}
+
+#[test]
+fn formatted_insertion_pads_to_the_pending_width_once() {
+    // `OS << std::setw(4) << 7 << 8 << std::setw(2) << "abc"`: the width right-aligns
+    // the next insertion only, and a longer text is never cut.
+    let mut stream = IoStream::from_bytes(Vec::new());
+    stream.set_width(4);
+    stream.insert_integer(7).insert_integer(8);
+    assert_eq!(stream.width(), 0);
+    stream.set_width(2);
+    stream.insert_bytes(b"abc");
+    stream.set_width(6);
+    stream.insert_real(-0.5);
+    let mut device = stream.into_device().unwrap();
+    let mut text = Vec::new();
+    device.seek(std::io::SeekFrom::Start(0)).unwrap();
+    device.read_to_end(&mut text).unwrap();
+    assert_eq!(text, b"   78abc  -0.5");
+}
+
+#[test]
+fn a_failed_insertion_keeps_the_pending_width() {
+    let mut stream = IoStream::default();
+    stream.set_state(state::BAD);
+    stream.set_width(3);
+    stream.insert_integer(1);
+    assert_eq!(stream.width(), 3, "the sentry failed before width(0)");
 }

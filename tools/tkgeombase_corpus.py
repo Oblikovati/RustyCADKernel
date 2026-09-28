@@ -23,3 +23,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_extrema_pc2d').append_extrema_pc2d_requests(requests)
     # ExtremaPC (tkgeombase_corpus_extrema_pc.py)
     __import__('tkgeombase_corpus_extrema_pc').append_extrema_pc_requests(requests)
+    # GeomTools (tkgeombase_corpus_geomtools.py)
+    __import__('tkgeombase_corpus_geomtools').append_geomtools_requests(requests)
