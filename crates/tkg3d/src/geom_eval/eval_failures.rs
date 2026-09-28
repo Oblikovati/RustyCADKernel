@@ -21,7 +21,6 @@ use rustycad_tkernel::standard::Failure;
 /// Standard_NotImplemented of a refused member, named as natively (`Class::Member`),
 /// with the offending arguments in `detail`;
 /// `unsupported("GeomEval_SineWaveCurve::ReversedParameter", "(U = 0.5)")`.
-#[allow(dead_code)] // Used by every GeomEval class; the classes land one by one.
 pub(crate) fn unsupported(member: &str, detail: &str) -> Failure {
     errors::not_implemented(&format!(
         "{member}{detail}: GeomEval geometry keeps its defining parameterization; expected no reversal, transformation or iso extraction"

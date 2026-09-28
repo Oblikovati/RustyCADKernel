@@ -34,5 +34,16 @@ pub mod rep_utils;
 // GeomEval curves.
 
 // GeomEval elementary surfaces.
+mod elementary_eval;
+mod ellipsoid_surface;
+pub use ellipsoid_surface::GeomEvalEllipsoidSurface;
+mod hyperboloid_surface;
+pub use hyperboloid_surface::{GeomEvalHyperboloidSurface, HyperboloidSheetMode};
+mod paraboloid_surface;
+pub use paraboloid_surface::GeomEvalParaboloidSurface;
+mod hyp_paraboloid_surface;
+pub use hyp_paraboloid_surface::GeomEvalHypParaboloidSurface;
+mod circular_helicoid_surface;
+pub use circular_helicoid_surface::GeomEvalCircularHelicoidSurface;
 
 // GeomEval Bezier surfaces.
