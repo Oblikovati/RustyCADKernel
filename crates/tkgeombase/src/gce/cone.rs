@@ -80,19 +80,39 @@ impl MakeCone {
         }
         let axis = Line3::new(p1, d1);
         let dif_rad: f64 = axis.distance(p3) - axis.distance(p4);
-        let mut angle: f64 = (dif_rad / (dist13 - dist14)).atan().abs();
+        let angle: f64 = (dif_rad / (dist13 - dist14)).atan().abs();
         if (PI / 2.0 - angle).abs() < gp::resolution() || angle.abs() < gp::resolution() {
             return Ok(Self::failed(ErrorType::NullRadius));
         }
+        Self::from_sections((pp3, p3), (pp4, p4), angle)
+    }
+
+    /// The end of gce_MakeCone(P1, P2, P3, P4): the section radii are the distances
+    /// of P3 and P4 from their projections PP3 and PP4, and the cone starts at PP3.
+    fn from_sections(
+        (pp3, p3): (Point3, Point3),
+        (pp4, p4): (Point3, Point3),
+        angle: f64,
+    ) -> Result<Self, Failure> {
         let (r1, r2) = (pp3.distance(&p3), pp4.distance(&p4));
         if r1 < 0.0 || r2 < 0.0 {
             return Ok(Self::failed(ErrorType::NegativeRadius));
         }
         let dd1: Direction3 = Direction3::from_xyz(pp4.xyz() - pp3.xyz())?;
-        let frame = Axis2::with_x_direction(pp3, dd1, perpendicular_hint(dd1)?)?;
-        if r1 > r2 {
-            angle *= -1.0;
-        }
+        Self::oriented(pp3, dd1, angle, (r1, r2))
+    }
+
+    /// The end of both point constructors: the cone at `origin` of main direction
+    /// `direction` (X direction from [`perpendicular_hint`]) and reference radius
+    /// `r1`, its semi-angle negated when the radius decreases (`r1 > r2`).
+    fn oriented(
+        origin: Point3,
+        direction: Direction3,
+        angle: f64,
+        (r1, r2): (f64, f64),
+    ) -> Result<Self, Failure> {
+        let frame = Axis2::with_x_direction(origin, direction, perpendicular_hint(direction)?)?;
+        let angle: f64 = if r1 > r2 { -angle } else { angle };
         Ok(Self::built(Cone3::new(
             Axis3::from_axis2(frame),
             angle,
@@ -182,20 +202,12 @@ impl MakeCone {
         if r1 < 0.0 || r2 < 0.0 {
             return Ok(Self::failed(ErrorType::NegativeRadius));
         }
-        let mut angle: f64 = ((r1 - r2) / dist).atan().abs();
+        let angle: f64 = ((r1 - r2) / dist).atan().abs();
         if (PI / 2.0 - angle).abs() < gp::resolution() || angle.abs() < gp::resolution() {
             return Ok(Self::failed(ErrorType::NullAngle));
         }
         let d1: Direction3 = Direction3::from_xyz(p2.xyz() - p1.xyz())?;
-        let frame = Axis2::with_x_direction(p1, d1, perpendicular_hint(d1)?)?;
-        if r1 > r2 {
-            angle *= -1.0;
-        }
-        Ok(Self::built(Cone3::new(
-            Axis3::from_axis2(frame),
-            angle,
-            r1,
-        )?))
+        Self::oriented(p1, d1, angle, (r1, r2))
     }
 }
 

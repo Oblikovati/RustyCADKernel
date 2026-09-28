@@ -23,6 +23,7 @@
 //! packages will replace them when they are ported.
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkg2d::geom2d::native::std_max;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{self, Line2, Line3, Point2, Point3, Vector3, Xyz};
 
@@ -39,41 +40,56 @@ pub(crate) struct LinesExtremum {
     pub points: (Point3, Point3),
 }
 
+impl LinesExtremum {
+    /// The point that the callers' extremum loop keeps: the middle of the points of
+    /// the only extremum when its square distance is below RealLast(), else (NaN)
+    /// the default gp_Pnt, the origin.
+    pub fn middle(&self) -> Point3 {
+        if self.square_distance.is_nan() || self.square_distance >= f64::MAX {
+            return Point3::default();
+        }
+        let (on1, on2) = self.points;
+        Point3::from((on1.xyz() + on2.xyz()) / 2.0)
+    }
+}
+
 /// Extrema_ExtElC(theC1, theC2, Tol): the closest points of two lines, solving
 /// `u1 - (D1.D2) u2 = L.D1`, `(D1.D2) u1 - u2 = L.D2`; the tolerance is unused.
 pub(crate) fn lines_extremum(first: Line3, second: Line3) -> LinesExtremum {
+    let Some((u1, u2)) = extremum_parameters(first, second) else {
+        return LinesExtremum {
+            parallel: true,
+            square_distance: second.square_distance(first.location()),
+            points: (Point3::default(), Point3::default()),
+        };
+    };
+    let p1: Point3 = elclib::value(u1, &first);
+    let p2: Point3 = elclib::value(u2, &second);
+    LinesExtremum {
+        parallel: false,
+        square_distance: p1.square_distance(&p2),
+        points: (p1, p2),
+    }
+}
+
+/// The parameters of the closest points of two lines, or `None` (myIsPar) when
+/// the lines are parallel (square sine below gp::Resolution() or directions
+/// parallel within Precision::Angular()) or the solution is infinite.
+fn extremum_parameters(first: Line3, second: Line3) -> Option<(f64, f64)> {
     let (d1, d2) = (first.direction(), second.direction());
     let cos_a: f64 = d1.dot(d2);
     let sq_sin_a: f64 = 1.0 - cos_a * cos_a;
-    let mut parameters: (f64, f64) = (0.0, 0.0);
-    let mut parallel: bool =
-        sq_sin_a < gp::resolution() || d1.is_parallel(d2, precision::angular());
-    if !parallel {
-        let l1l2: Xyz = second.location().xyz() - first.location().xyz();
-        let (d1l, d2l) = (d1.xyz().dot(l1l2), d2.xyz().dot(l1l2));
-        parameters = (
-            (d1l - cos_a * d2l) / sq_sin_a,
-            (cos_a * d1l - d2l) / sq_sin_a,
-        );
-        parallel = precision::is_infinite(parameters.0) || precision::is_infinite(parameters.1);
+    if sq_sin_a < gp::resolution() || d1.is_parallel(d2, precision::angular()) {
+        return None;
     }
-    if parallel {
-        let square_distance: f64 = second.square_distance(first.location());
-        let points = (Point3::default(), Point3::default());
-        return LinesExtremum {
-            parallel,
-            square_distance,
-            points,
-        };
+    let l1l2: Xyz = second.location().xyz() - first.location().xyz();
+    let (d1l, d2l) = (d1.xyz().dot(l1l2), d2.xyz().dot(l1l2));
+    let u1: f64 = (d1l - cos_a * d2l) / sq_sin_a;
+    let u2: f64 = (cos_a * d1l - d2l) / sq_sin_a;
+    if precision::is_infinite(u1) || precision::is_infinite(u2) {
+        return None;
     }
-    let p1: Point3 = elclib::value(parameters.0, &first);
-    let p2: Point3 = elclib::value(parameters.1, &second);
-    let square_distance: f64 = p1.square_distance(&p2);
-    LinesExtremum {
-        parallel,
-        square_distance,
-        points: (p1, p2),
-    }
+    Some((u1, u2))
 }
 
 /// `Extrema_ExtPElC(P, L, Tol, Uinf, Usup).Point(1).Value()`: the projection of
@@ -106,26 +122,24 @@ pub(crate) fn line_projection(
 pub(crate) fn lines2d_intersection(first: Line2, second: Line2) -> Lines2dIntersection {
     let (a1, b1, c1) = first.coefficients();
     let (a2, b2, c2) = second.coefficients();
-    let det: f64 = a1.abs().max(a2.abs().max(b1.abs().max(b2.abs())));
-    let (row1, row2) = pivot_rows(det, (a1, b1, c1), (a2, b2, c2));
-    let (al1, be1, ga1) = row1;
-    let (al2, be2, ga2) = row2;
+    // std::max, not f64::max: the pivot choice must follow the native comparisons.
+    let det: f64 = std_max(a1.abs(), std_max(a2.abs(), std_max(b1.abs(), b2.abs())));
+    let ((al1, be1, ga1), (al2, be2, ga2)) = pivot_rows(det, (a1, b1, c1), (a2, b2, c2));
     let rap: f64 = al2 / al1;
     let denom: f64 = be2 - rap * be1;
     if denom.abs() <= f64::EPSILON {
-        let identical: bool = (ga2 - rap * ga1).abs() <= f64::EPSILON;
-        return if identical {
-            Lines2dIntersection::Identical
-        } else {
-            Lines2dIntersection::Parallel
-        };
+        if (ga2 - rap * ga1).abs() <= f64::EPSILON {
+            return Lines2dIntersection::Identical;
+        }
+        return Lines2dIntersection::Parallel;
     }
-    let mut xs: f64 = (be1 * ga2 / al1 - be2 * ga1 / al1) / denom;
-    let mut ys: f64 = (rap * ga1 - ga2) / denom;
-    if (a1.abs() != det && b1.abs() == det)
-        || (a1.abs() != det && b1.abs() != det && a2.abs() != det)
-    {
-        std::mem::swap(&mut xs, &mut ys);
+    let xs: f64 = (be1 * ga2 / al1 - be2 * ga1 / al1) / denom;
+    let ys: f64 = (rap * ga1 - ga2) / denom;
+    // The solution is in the pivoted variables: undo the exchange of X and Y.
+    let exchanged: bool = (a1.abs() != det && b1.abs() == det)
+        || (a1.abs() != det && b1.abs() != det && a2.abs() != det);
+    if exchanged {
+        return Lines2dIntersection::Point(Point2::new(ys, xs));
     }
     Lines2dIntersection::Point(Point2::new(xs, ys))
 }

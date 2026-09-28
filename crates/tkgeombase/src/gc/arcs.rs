@@ -98,16 +98,9 @@ impl MakeArcOfCircle {
             (p1.z() + p2.z()) / 2.0,
         );
         let d: Direction3 = dbid.crossed(daxe)?;
-        // Extrema_ExtElC(bis, norm, Precision::Confusion()) has one extremum; the
-        // loop keeps it unless its square distance is NaN (the center stays at the
-        // origin). Parallel lines are not tested: their extremum points are the origin.
-        let extremum = lines_extremum(Line3::new(middle, dir1), Line3::new(p1, d));
-        let (pon1, pon2) = extremum.points;
-        let center: Point3 = if extremum.square_distance < f64::MAX {
-            Point3::from((pon1.xyz() + pon2.xyz()) / 2.0)
-        } else {
-            Point3::default()
-        };
+        // Extrema_ExtElC(bis, norm, Precision::Confusion()) has one extremum, and
+        // parallel lines are not tested: their extremum points are the origin.
+        let center: Point3 = lines_extremum(Line3::new(middle, dir1), Line3::new(p1, d)).middle();
         let radius: f64 = (center.distance(&p1) + center.distance(&p2)) / 2.0;
         let circ = Circle3::new(Axis2::with_x_direction(center, daxe, d)?, radius)?;
         Self::from_points(circ, p1, p2, true)

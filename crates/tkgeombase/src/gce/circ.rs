@@ -183,14 +183,8 @@ impl MakeCirc {
         if extremum.parallel {
             return Ok(Self::failed(ErrorType::IntersectionError));
         }
-        let (pon1, pon2) = extremum.points;
-        // NbExt() is 1: the loop keeps the only extremum, whose square distance is
-        // below RealLast() unless it is NaN, when the center stays at the origin.
-        let center: Point3 = if extremum.square_distance < f64::MAX {
-            Point3::from((pon1.xyz() + pon2.xyz()) / 2.0)
-        } else {
-            Point3::default()
-        };
+        // NbExt() is 1: the loop keeps the only extremum.
+        let center: Point3 = extremum.middle();
         Self::around_center(center, [p1, p2, p3], vdir3)
     }
 
