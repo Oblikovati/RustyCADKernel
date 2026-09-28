@@ -21,7 +21,7 @@
 use rustycad_tkmath::gp::{Axis3, Transform3};
 
 /// The rows of `T.SetTransformation(pos)`, read with `T.Value(row, col)`.
-fn frame_rows(pos: Axis3) -> [[f64; 4]; 3] {
+pub(crate) fn frame_rows(pos: Axis3) -> [[f64; 4]; 3] {
     let mut transform = Transform3::default();
     transform.set_transformation_to(pos);
     let mut rows = [[0.0; 4]; 3];

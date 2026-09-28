@@ -55,6 +55,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // GeomEval curves (eval_curves.rs)
     ("g3_eval_curve", g3_probe::eval_curves::eval_curve_case),
     // GeomEval elementary surfaces (eval_surfaces.rs)
+    (
+        "g3_eval_surface",
+        g3_probe::eval_surfaces::eval_surface_case,
+    ),
     // GeomEval Bezier surfaces (eval_bezier_surfaces.rs)
     (
         "g3_eval_bezier_surface",
