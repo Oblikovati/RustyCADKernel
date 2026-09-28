@@ -20,8 +20,10 @@
 //! traits reached through `Handle<dyn Trait>`, and each object keeps its state
 //! behind one lock so that mutation through any handle is shared, as in OCCT.
 //! TKG3d depends on TKG2d natively; this crate reuses the Geom2d lock, array and
-//! dump helpers. The other TKG3d packages (Adaptor3d, GeomAdaptor, GeomEval
-//! curves and surfaces, GeomGridEval, GeomHash, TopAbs) are later work, except
-//! the parts of AdvApprox that `Geom_OffsetSurface` needs.
+//! dump helpers. The AdvApprox package, which `Geom_OffsetSurface` uses for its
+//! iso curves, is ported in full. The other TKG3d packages (Adaptor3d,
+//! GeomAdaptor, GeomEval curves and surfaces, GeomGridEval, GeomHash, TopAbs)
+//! are later work.
+pub mod adv_approx;
 pub mod geom;
 pub mod geom_eval;

@@ -44,6 +44,9 @@ ACCESS_LABEL = re.compile(r"^\s*(public|protected|private)\s*:(?!:)")
 SCOPE_HEAD = re.compile(r"^(?:template\s*<[^{]*?>\s*)?(class|struct|union|namespace|enum(?:\s+class)?)\s+([\w:]+(?:\s*<[^{]*>)?)")
 RTTI_MACRO = re.compile(r"\s*DEFINE_STANDARD_RTTI\w*\s*\([^)]*\)")
 TYPE_ALIASES = {"Standard_Real": "double", "Standard_Integer": "int", "Standard_Boolean": "bool"}
+# A template argument list with up to three nesting levels (`<A<B<C>>>`), so that
+# `occ::handle<NCollection_HArray1<double>>` keeps both closing brackets.
+TEMPLATE_ARGS = r"<(?:[^<>]|<(?:[^<>]|<[^<>]*>)*>)*>"
 
 
 @dataclass(frozen=True)
@@ -230,9 +233,11 @@ def normalize_param(param: str) -> str:
     'const gp_Vec&'
     >>> normalize_param('const double theX')
     'double'
+    >>> normalize_param('const occ::handle<NCollection_HArray1<double>>& theTol')
+    'const occ::handle<NCollection_HArray1<double>>&'
     """
     param = split_default(param).strip()
-    tokens = re.findall(r"[A-Za-z_]\w*(?:\s*::\s*\w+)*(?:\s*<[^>]*>)?|[&*]+|\[[^\]]*\]", param)
+    tokens = re.findall(r"[A-Za-z_]\w*(?:\s*::\s*\w+)*(?:\s*" + TEMPLATE_ARGS + r")?|[&*]+|\[[^\]]*\]", param)
     words = [token for token in tokens if re.match(r"\w", token)]
     type_words = [word for word in words if word not in {"const", "volatile", "unsigned", "signed"}]
     if len(type_words) >= 2 and tokens[-1] == words[-1]:
