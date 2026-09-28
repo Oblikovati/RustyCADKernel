@@ -90457,7 +90457,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -90489,7 +90489,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -162634,6 +162634,1896 @@
       "rust_target": "extrema_pc2d_curve",
       "rust_test": "ExtremaPC2d_CurveTest__ResultStorageIsEvaluatorLocal",
       "rust_source": "crates/tkgeombase/tests/extrema_pc2d_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.SingletonDomain_IsMinimumAndMaximum",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__SingletonDomain_IsMinimumAndMaximum",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.SingletonProjection_IsMinimumAndMaximum",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__SingletonProjection_IsMinimumAndMaximum",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.EffectivelyUnboundedDomain_DoesNotAddEndpoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__EffectivelyUnboundedDomain_DoesNotAddEndpoints",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.LowerBoundedDomain_PreservesFiniteEndpoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__LowerBoundedDomain_PreservesFiniteEndpoint",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.UpperBoundedDomain_PreservesFiniteEndpoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__UpperBoundedDomain_PreservesFiniteEndpoint",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.ReversedDomain_IsInvalidInput",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__ReversedDomain_IsInvalidInput",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.PointOnLine_AtOrigin",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__PointOnLine_AtOrigin",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.PointOnLine_Positive",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__PointOnLine_Positive",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.PointOnLine_Negative",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__PointOnLine_Negative",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.PointOffLine_YOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__PointOffLine_YOffset",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.PointOffLine_ZOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__PointOffLine_ZOffset",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.PointOffLine_YZOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__PointOffLine_YZOffset",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.ProjectionOutsideBounds_Left",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__ProjectionOutsideBounds_Left",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.ProjectionOutsideBounds_Right",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__ProjectionOutsideBounds_Right",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.ProjectionAtLowerBound",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__ProjectionAtLowerBound",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.ProjectionAtUpperBound",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__ProjectionAtUpperBound",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.NarrowBounds",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__NarrowBounds",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.LineAlongY",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__LineAlongY",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.LineAlongZ",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__LineAlongZ",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.LineDiagonal_XY",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__LineDiagonal_XY",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.LineDiagonal_XYZ",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__LineDiagonal_XYZ",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.LineWithOffset_XAxis",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__LineWithOffset_XAxis",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.LineWithOffset_PointOff",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__LineWithOffset_PointOff",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.NegativeParameters",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__NegativeParameters",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.NegativeBoundsClamp",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__NegativeBoundsClamp",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.LargeCoordinates",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__LargeCoordinates",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.SmallCoordinates",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__SmallCoordinates",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.VerifyProjectedPoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__VerifyProjectedPoint",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.VerifyDistanceConsistency",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__VerifyDistanceConsistency",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.EndpointsAsMaxima",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__EndpointsAsMaxima",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_LineTest.PlanarDelegation_PreservesParameterAndHeight",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Line_Test.cxx",
+      "source_sha256": "4a4cc6e1da9f27d6e0b6d19a0a19b2d6fe9b02fe514952090b6e2645270bc9fb",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_line",
+      "rust_test": "ExtremaPC_LineTest__PlanarDelegation_PreservesParameterAndHeight",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_line.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointOutside_OnXAxis",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointOutside_OnXAxis",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.ShiftedFullPeriod_UniqueRepresentatives",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__ShiftedFullPeriod_UniqueRepresentatives",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.LargeTolerance_PreservesOppositeExtrema",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__LargeTolerance_PreservesOppositeExtrema",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.MoreThanOnePeriod_RetainsConstrainedEndpoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__MoreThanOnePeriod_RetainsConstrainedEndpoint",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointOutside_OnYAxis",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointOutside_OnYAxis",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointOutside_Diagonal",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointOutside_Diagonal",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointInside_OnXAxis",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointInside_OnXAxis",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointInside_OnYAxis",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointInside_OnYAxis",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointInside_NearCenter",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointInside_NearCenter",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointAtCenter_Degenerate",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointAtCenter_Degenerate",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointNearCenter_NotDegenerate",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointNearCenter_NotDegenerate",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointAbovePlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointAbovePlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointBelowPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointBelowPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointOnAxis_Degenerate",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointOnAxis_Degenerate",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PartialArc_FirstQuadrant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PartialArc_FirstQuadrant",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PartialArc_SecondQuadrant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PartialArc_SecondQuadrant",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PartialArc_ExtremaOutsideRange",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PartialArc_ExtremaOutsideRange",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.CircleWithOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__CircleWithOffset",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.CircleInYZPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__CircleInYZPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.CircleInXZPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__CircleInXZPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.SmallRadius",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__SmallRadius",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.LargeRadius",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__LargeRadius",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointOnCircle",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointOnCircle",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PointOnCircle_AtPi",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PointOnCircle_AtPi",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.NonFiniteQueryIsRejected",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__NonFiniteQueryIsRejected",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_CircleTest.PlanarDelegation_PreservesParameterAndHeight",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Circle_Test.cxx",
+      "source_sha256": "1f82ce77a848c9409edce8c2d5cbcd95c3624c0803eeff7c1517bb7d9c811579",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_circle",
+      "rust_test": "ExtremaPC_CircleTest__PlanarDelegation_PreservesParameterAndHeight",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.ShiftedFullPeriod_UniqueRepresentatives",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__ShiftedFullPeriod_UniqueRepresentatives",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.SingletonDomain_InvalidTolerance",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__SingletonDomain_InvalidTolerance",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointOnMajorAxis_Outside",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointOnMajorAxis_Outside",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointOnMajorAxis_Inside",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointOnMajorAxis_Inside",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointOnMajorAxis_NegativeSide",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointOnMajorAxis_NegativeSide",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointOnMinorAxis_Outside",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointOnMinorAxis_Outside",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointOnMinorAxis_Inside",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointOnMinorAxis_Inside",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointInFirstQuadrant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointInFirstQuadrant",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointInSecondQuadrant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointInSecondQuadrant",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointInThirdQuadrant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointInThirdQuadrant",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointInFourthQuadrant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointInFourthQuadrant",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointAtCenter_Degenerate",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointAtCenter_Degenerate",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointAbovePlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointAbovePlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointBelowPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointBelowPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PartialArc_FirstQuadrant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PartialArc_FirstQuadrant",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PartialArc_SecondHalf",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PartialArc_SecondHalf",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.EllipseWithOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__EllipseWithOffset",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.EllipseInYZPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__EllipseInYZPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.NearlyCircularEllipse",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__NearlyCircularEllipse",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.VeryFlatEllipse",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__VeryFlatEllipse",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointOnEllipse_MajorVertex",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointOnEllipse_MajorVertex",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointOnEllipse_MinorVertex",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointOnEllipse_MinorVertex",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PointOnEllipse_General",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PointOnEllipse_General",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.FourExtrema_PointInsideEllipse",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__FourExtrema_PointInsideEllipse",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.TwoExtrema_PointOnAxis",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__TwoExtrema_PointOnAxis",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.NarrowRange_VerySmall",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__NarrowRange_VerySmall",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.NarrowRange_MediumSmall",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__NarrowRange_MediumSmall",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.NarrowRange_TinyArc",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__NarrowRange_TinyArc",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.LargeRange_FullCircle",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__LargeRange_FullCircle",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_EllipseTest.PlanarDelegation_PreservesParameterAndHeight",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Ellipse_Test.cxx",
+      "source_sha256": "601b48f911563204d5855d7ace398ae94e8fae36b3216129011a64739c39af70",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_ellipse",
+      "rust_test": "ExtremaPC_EllipseTest__PlanarDelegation_PreservesParameterAndHeight",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointOnMajorAxis_Outside",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointOnMajorAxis_Outside",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointOnMajorAxis_AtVertex",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointOnMajorAxis_AtVertex",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointOnMajorAxis_BetweenBranches",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointOnMajorAxis_BetweenBranches",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointOffAxis_FirstQuadrant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointOffAxis_FirstQuadrant",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointOffAxis_FourthQuadrant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointOffAxis_FourthQuadrant",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointInsideAsymptotes",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointInsideAsymptotes",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointAbovePlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointAbovePlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointBelowPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointBelowPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.BoundsPositive",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__BoundsPositive",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.BoundsNegative",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__BoundsNegative",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.NarrowBounds",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__NarrowBounds",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.SmallSemiAxes",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__SmallSemiAxes",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.LargeSemiAxes",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__LargeSemiAxes",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.NearlyRectangular",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__NearlyRectangular",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointOnHyperbola_AtVertex",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointOnHyperbola_AtVertex",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointOnHyperbola_Positive",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointOnHyperbola_Positive",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PointOnHyperbola_Negative",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PointOnHyperbola_Negative",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.HyperbolaWithOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__HyperbolaWithOffset",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.HyperbolaWithOffset_PointOff",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__HyperbolaWithOffset_PointOff",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.HyperbolaInYZPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__HyperbolaInYZPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.HyperbolaInXZPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__HyperbolaInXZPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.VerifyProjectedPoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__VerifyProjectedPoint",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.VerifyDistanceConsistency",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__VerifyDistanceConsistency",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_HyperbolaTest.PlanarDelegation_PreservesParameterAndHeight",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Hyperbola_Test.cxx",
+      "source_sha256": "2d5455dae2d67427179ce54f208faabac2d8e80b191d26e00aa4e12ef2d2ffb0",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_hyperbola",
+      "rust_test": "ExtremaPC_HyperbolaTest__PlanarDelegation_PreservesParameterAndHeight",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointOnAxis_AtVertex",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointOnAxis_AtVertex",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.ZeroFocal_DegeneratesToLine",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__ZeroFocal_DegeneratesToLine",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointOnAxis_Positive",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointOnAxis_Positive",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointOnAxis_Negative",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointOnAxis_Negative",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointOffAxis_Positive",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointOffAxis_Positive",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointOffAxis_Negative",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointOffAxis_Negative",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointOffAxis_LargeY",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointOffAxis_LargeY",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointAbovePlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointAbovePlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointBelowPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointBelowPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.BoundsPositive",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__BoundsPositive",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.BoundsNegative",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__BoundsNegative",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.NarrowBounds",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__NarrowBounds",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.SmallFocalLength",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__SmallFocalLength",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.LargeFocalLength",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__LargeFocalLength",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointOnParabola_AtVertex",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointOnParabola_AtVertex",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointOnParabola_Positive",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointOnParabola_Positive",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PointOnParabola_Negative",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PointOnParabola_Negative",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.ParabolaWithOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__ParabolaWithOffset",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.ParabolaWithOffset_PointOff",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__ParabolaWithOffset_PointOff",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.ParabolaInYZPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__ParabolaInYZPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.ParabolaInXZPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__ParabolaInXZPlane",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.VerifyProjectedPoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__VerifyProjectedPoint",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.VerifyDistanceConsistency",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__VerifyDistanceConsistency",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "ExtremaPC_ParabolaTest.PlanarDelegation_PreservesParameterAndHeight",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/ExtremaPC_Parabola_Test.cxx",
+      "source_sha256": "57f9cf66ee07f7798126dddfd6dc910b989d2d18746eab8b1d52d088c871d071",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "extrema_pc_parabola",
+      "rust_test": "ExtremaPC_ParabolaTest__PlanarDelegation_PreservesParameterAndHeight",
+      "rust_source": "crates/tkgeombase/tests/extrema_pc_parabola.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
