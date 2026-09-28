@@ -76,9 +76,17 @@ impl ColorRgba {
     }
     /// Parses hex and updates only on success; `rgba.set_hex("#FF000080",false)`.
     pub fn set_hex(&mut self, text: &str, alpha_off: bool) -> bool {
-        let Some((mut integer, base, has_alpha)) = parse_hex(text, alpha_off) else {
+        let Some(parsed) = Self::from_hex(text, alpha_off) else {
             return false;
         };
+        *self = parsed;
+        true
+    }
+    /// `ColorFromHex`: `#RGB` (prefix required), `RGBA`, `RRGGBB` or `RRGGBBAA` sRGB digits
+    /// with an optional `#`; alpha is refused when `alpha_off`;
+    /// `ColorRgba::from_hex("#FF000080", false)`.
+    pub fn from_hex(text: &str, alpha_off: bool) -> Option<Self> {
+        let (mut integer, base, has_alpha) = parse_hex(text, alpha_off)?;
         let alpha = if has_alpha {
             take_component(&mut integer, base)
         } else {
@@ -88,10 +96,9 @@ impl ColorRgba {
         for channel in rgb.iter_mut().rev() {
             *channel = Color::srgb_to_linear_f32(take_component(&mut integer, base));
         }
-        self.rgb = Color::new(rgb[0].into(), rgb[1].into(), rgb[2].into(), ColorSpace::Rgb)
+        let rgb = Color::new(rgb[0].into(), rgb[1].into(), rgb[2].into(), ColorSpace::Rgb)
             .expect("hex channels in range");
-        self.alpha = alpha;
-        true
+        Some(Self::from_rgb(rgb, alpha))
     }
 }
 impl PartialEq for ColorRgba {
