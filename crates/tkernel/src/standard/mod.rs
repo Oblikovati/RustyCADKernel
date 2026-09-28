@@ -11,8 +11,14 @@ pub use strtod::strtod;
 
 pub mod character;
 
-pub(crate) mod hashing;
+pub mod hashing;
 pub use hashing::hash_bytes;
+pub mod atomic;
+pub mod c_string;
+pub mod ext_character;
+pub mod short_real;
+pub mod time;
+pub mod version_info;
 
 mod handle;
 mod runtime_type;
