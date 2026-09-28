@@ -189,7 +189,7 @@ def main():
         kdtree_report = json.loads((output/"kdtree/report.json").read_text())
     units_report = None
     if any(m["rust_target"] == "units_api" for m in mappings):
-        run([sys.executable, ROOT/"tools/generate_units_data.py", ROOT/"tools/generate_quantity_color_table.py", "--check", "--source", source], output/"units-data-check.log", env=env)
+        run([sys.executable, ROOT/"tools/generate_units_data.py", "--check", "--source", source], output/"units-data-check.log", env=env)
         run([sys.executable, ROOT/"tools/verify_units.py", "--source", source], output/"units-verification.log", env=env)
         units_report = json.loads((output/"units/report.json").read_text())
     geometry_report = None
