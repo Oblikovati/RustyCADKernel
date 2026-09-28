@@ -25,3 +25,4 @@
 //! legacy TopLoc test needed before TKBRep was ported (see its module note).
 pub mod brep;
 pub mod topods;
+pub mod toptools;
