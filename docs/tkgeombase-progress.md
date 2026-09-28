@@ -67,8 +67,10 @@ passes (685 declarations):
 | BndLib_Test.cxx | bnd_lib | 63 |
 | GCPnts_AbscissaPoint_Test.cxx | gcpnts_abscissa_point | 5 |
 | GCPnts_QuasiUniformDeflection_Test.cxx | gcpnts_quasi_uniform_deflection | 1 |
+| Geom2dConvert_CompCurveToBSplineCurve_Test.cxx | geom2d_convert_comp_curve_to_bspline_curve | 1 |
 
 `bnd_lib_behavior.rs` covers the GeomBndLib and BndLib quirks below.
+`geom2d_convert_behavior.rs` covers the Geom2dConvert quirks below.
 `gcpnts_behavior.rs` covers the CPnts and GCPnts quirks below.
 `local_props_behavior.rs` covers the LProp, GeomLProp, GProp and Hermit quirks
 below. `gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
@@ -300,6 +302,36 @@ BndLib). The native `GeomBndLib_SplineHelpers` templates `BezierCurveBox`,
 `BSplineCurveBox` and the pole-range `ReduceSplineBox` overload are declared but never
 instantiated in TKGeomBase; they are not ported, and the audit rows say so.
 
+## Geom2dConvert
+
+Geom2dConvert (`geom2d_convert`) ports every class and package member. The static
+members of the native `Geom2dConvert` class are free functions
+(`split_bspline_curve_knots` and `split_bspline_curve` for the two SplitBSplineCurve
+overloads, `curve_to_bspline_curve`, `concat_g1`, `concat_c1` and
+`concat_c1_with_angular`, `c0_bspline_to_c1_bspline_curve`,
+`c0_bspline_to_array_of_c1_bspline_curve` and its `_with_angular` twin). Default
+arguments are explicit. The native members fill their output references
+(`ArrayOfConcatenated`, `ArrayOfIndices`, `ClosedFlag`, `tabBS`, `BS`) before they can
+raise, so they stay `&mut` parameters (`HArrayOfBSplineCurves` is the shared
+`occ::handle<NCollection_HArray1<occ::handle<Geom2d_BSplineCurve>>>`), and the two
+output tables of `concat_c1_with_angular` are grouped in `ConcatOutputs`. The array
+of curves is the caller's `Array1` indexed from 0, as natively, and it is rotated in
+place. The classes are `CompCurveToBSplineCurve` (its private `Add(First, Second,
+After)` is `concat`), `BSplineCurveKnotSplitting`, `BSplineCurveToBezierCurve`,
+`ApproxCurve` (`from_curve`, `from_adaptor`; `Dump` writes to a `fmt::Write` with `%g`
+numbers), `ApproxArcsSegments` (it borrows its adaptor, as the native reference member;
+the private `Status` enumeration is `ApproxArcsStatus`) and `PPoint` (a `Copy` value;
+`operator==` and `operator!=` are `PartialEq` with both methods written out). The file
+statics of Geom2dConvert.cxx are private modules: `continuity` (Continuity,
+GeomAbsToInteger), `concat_support` (Pretreatment, NeedToBeTreated, Need2DegRepara,
+Indexmin, ReorderArrayOfG1), `reparametrize` (the law and reparameterise evaluators,
+MultNumandDenom and the degree-doubling reparametrization, which the native ConcatG1
+and ConcatC1 repeat word for word and the port writes once). An exception that an
+adaptor raises inside an AdvApprox or BSplCLib callback is carried to the end of the
+call (`failure_capture`) and returned there, where the native exception would unwind.
+Nothing is blocked: Convert, GC, GCPnts, Hermit, AdvApprox, BSplCLib and PLib are
+ported.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -467,6 +499,28 @@ patches with negative, large and reversed V, and self-intersecting tori (R < r).
 internal helpers the upstream tests call are probed directly. The legacy `math_PSO` path of
 `GeomBndLib_OtherCurve2d::BoxOptimal` is left out for reversed ranges: native reads an
 uninitialized value there.
+
+The Geom2dConvert requests (`tkgeombase_corpus_geom2dconvert.py`, probe
+`tkgeombase_probe_geom2dconvert.cxx`) convert every Geom2d curve kind with each
+parameterisation: circles and ellipses on direct and indirect frames, whole and
+trimmed (arcs from 1e-9 to beyond 2 Pi, across the seam, reversed), trimmed lines,
+hyperbolas and parabolas, rational and polynomial Bezier and B-spline curves
+(periodic, C0, trimmed beyond their bounds) and offset curves. They split B-splines by
+knot indices (equal, reversed, out of range) and parameters, split them at knots for
+continuity ranges from -1 to 5, cut them into Bezier arcs (ranges that snap to a knot,
+are empty or reversed), join composite curves (circle arcs in and out of order, chains
+that touch, touch reversed, close a loop or miss, mixed degrees, rational weights,
+both constructors), concatenate G1 and C1 arrays (open, closed, with corners, circle
+loops needing the Hermit law or the degree-doubling reparametrization, degree-13
+loops that clear the closed flag, separated curves, too short tolerance tables, a
+single curve), reduce C0 knots in open and closed curves, approximate offset and plain
+curves through a curve or an adaptor at every order, segment count and degree, and
+approximate lines, circles, conics, S-curves, straight parts and closed curves by
+segments and biarcs at four tolerances. Each request prints every resulting curve
+(degree, flags, poles, weights, knots, multiplicities), the output tables and the
+rotated input array, or the raised exception. They are 908 requests. Circle arcs of
+1e-9 are left out of the biarc requests: GC_MakeArcOfCircle2d then reads the status
+that gce_MakeCirc2d leaves unassigned (see GC and GCE2d below).
 
 The corpus has 29711 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
@@ -863,3 +917,43 @@ CPnts and GCPnts:
 - Every native comparison keeps its form where a NaN operand changes the branch
   (`!(a > b)` for the native `if (a > b) ... else`), and `std::min`/`std::max` keep
   their argument order.
+
+Geom2dConvert:
+
+- `SplitBSplineCurve(C, FromU1, ToU2, ParametricTolerance, ...)` ignores the tolerance
+  and checks no bound (the B-spline `Segment` raises); the knot overload raises
+  Standard_DomainError and Standard_OutOfRange without a message.
+- `CurveToBSplineCurve` clamps the bounds of a trimmed curve to a non-periodic basis,
+  but a trimmed line keeps the trimmed curve's own bounds as knots; offset curves are
+  approximated from the trimmed curve, not its basis; an untrimmed line, hyperbola or
+  parabola raises Standard_DomainError. With RationalC1, arcs of 6 radians or more are
+  joined from two halves by CompCurveToBSplineCurve at Precision::PConfusion().
+- `ConcatG1` tests G1 junctions with Precision::Confusion() and Precision::Angular(),
+  not with `ArrayOfToler`, while `ConcatC1` uses them; both call the junction test
+  twice (the first `< GeomAbs_C0` test cannot hold; the port calls it once, as it has
+  no side effect), and raise Standard_Failure ("Courbes non jointives") for separated
+  ends. The open-array loop merges with the input tolerances even after a closed array
+  was rotated (the rotated copy is used only by the closed single-group branch).
+- Pretreatment divides the weights of the caller's own curves in place when their two
+  first and two last weights are equal; ConcatC1 multiplies other rational curves by
+  their Hermit law. A closed single group whose closing curve has a degree above
+  `MaxDegree() / 2` clears `ClosedFlag` instead of doubling the degree.
+- `C0BSplineToArrayOfC1BSplineCurve` counts the first knot among the C0 knots and
+  compares the square distance of the ends with the tolerance itself, while
+  `C0BSplineToC1BSplineCurve` starts after the first knot, squares the tolerance and
+  uses a fixed angular tolerance of 1e-7.
+- `CompCurveToBSplineCurve::Add` raises the degree of the stored curve in place, so a
+  handle returned by an earlier `BSplineCurve()` sees it.
+- The AdvApprox evaluator of ApproxCurve sets error code 1 (dimension) or 2
+  (parameter outside the interval) and still evaluates; an order beyond 2 sets 3.
+- `ApproxArcsSegments`: when a chord shorter than Precision::Confusion() cannot be a
+  checked segment, `makeApproximation` still appends the null segment and fails, so
+  `GetResult()` can end with a null curve; the line test of `getLinearParts` compares
+  the chord's square length with Precision::Confusion(); `makeLine` takes
+  `std::max(AngleTol, 0.01)`; `calculateLines` is declared and defined but never
+  called (a unit test reaches it).
+- `PPoint::operator!=` is its own test (`> PConfusion()`), so `==` and `!=` are both
+  false for a NaN parameter.
+- A null handle, dereferenced natively, raises Standard_NullObject; an empty curve
+  array allocates `NCollection_Array1(0, -2)` natively (an allocation failure) and
+  raises Standard_RangeError in the port; the corpus leaves both out.
