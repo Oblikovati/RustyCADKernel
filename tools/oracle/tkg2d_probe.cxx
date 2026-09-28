@@ -1,4 +1,4 @@
-// Exact numeric oracle for the Geom2d package (TKG2d) at pinned OCCT 3d097a0.
+// Exact numeric oracle for the Geom2d, Adaptor2d and Geom2dAdaptor packages (TKG2d) at pinned OCCT 3d097a0.
 // Each input line is `operation numbers...`; tools/verify_tkg2d_numeric.py compares the
 // output with crates/tkg2d/examples/numeric_probe.rs bit for bit.
 #include <map>
@@ -32,10 +32,17 @@
 #include <Geom2d_TrimmedCurve.hxx>
 #include <Geom2d_VectorWithMagnitude.hxx>
 #include <Geom2dEval_RepCurveDesc.hxx>
+#include <Adaptor2d_Curve2d.hxx>
+#include <Adaptor2d_Line2d.hxx>
+#include <Adaptor2d_OffsetCurve.hxx>
+#include <Geom2dAdaptor.hxx>
+#include <Geom2dAdaptor_Curve.hxx>
+#include <gp_Lin2d.hxx>
 #include "tkg2d_probe_common.cxx"
 #include "tkg2d_probe_simple.cxx"
 #include "tkg2d_probe_curves.cxx"
 #include "tkg2d_probe_bspl.cxx"
+#include "tkg2d_probe_adaptor.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g2_point", g2_point_case},
  {"g2_direction", g2_direction_case},
@@ -51,6 +58,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g2_bezier", g2_bezier_case},
  {"g2_bspline", g2_bspline_case},
  {"g2_evalrep", g2_evalrep_case},
+ {"a2_adaptor", a2_adaptor_case},
+ {"a2_load", a2_load_case},
+ {"a2_offset_load", a2_offset_load_case},
+ {"a2_evalrep", a2_evalrep_case},
 };
 int main() {
  std::string line;
