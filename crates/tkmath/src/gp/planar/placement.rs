@@ -44,12 +44,11 @@ macro_rules! axis22d_curve_placement {
             }
             /// Flips the orientation by rebuilding the frame with a reversed Y; `curve.reverse()`.
             pub fn reverse(&mut self) {
-                let y = self.position.y_direction().reversed();
-                let frame = $crate::gp::Axis22d::with_directions(
-                    self.position.location(),
-                    self.position.x_direction(),
-                    y,
-                );
+                // Native Reverse() is noexcept: it rebuilds gp_Ax22d(P, X, -Y) from the stored
+                // unit X, so only the sense of the reversed Y matters and nothing can raise.
+                let (x, y) = (self.position.x_direction(), self.position.y_direction());
+                let sense = x.crossed(y.reversed()) >= 0.0;
+                let frame = $crate::gp::Axis22d::from_unit(self.position.location(), x, sense);
                 self.position.set_axis(frame);
             }
             /// Returns the reversed curve; `curve.reversed()`.
@@ -115,13 +114,19 @@ pub(in crate::gp) use axis22d_curve_placement;
 macro_rules! axis22d_curve_axes {
     ($curve:ty) => {
         impl $curve {
-            /// Replaces origin and X, keeping the sense; `curve.set_x_axis(axis)`.
-            pub fn set_x_axis(&mut self, axis: $crate::gp::Axis2d) {
-                self.position.set_x_axis(axis);
+            /// Replaces origin and X, keeping the sense; `curve.set_x_axis(axis)?`.
+            pub fn set_x_axis(
+                &mut self,
+                axis: $crate::gp::Axis2d,
+            ) -> Result<(), rustycad_tkernel::standard::Failure> {
+                self.position.set_x_axis(axis)
             }
-            /// Replaces origin and Y, keeping the sense; `curve.set_y_axis(axis)`.
-            pub fn set_y_axis(&mut self, axis: $crate::gp::Axis2d) {
-                self.position.set_y_axis(axis);
+            /// Replaces origin and Y, keeping the sense; `curve.set_y_axis(axis)?`.
+            pub fn set_y_axis(
+                &mut self,
+                axis: $crate::gp::Axis2d,
+            ) -> Result<(), rustycad_tkernel::standard::Failure> {
+                self.position.set_y_axis(axis)
             }
             /// Returns the X (major) axis; `curve.x_axis()`.
             pub fn x_axis(&self) -> $crate::gp::Axis2d {

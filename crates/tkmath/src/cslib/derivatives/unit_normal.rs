@@ -214,12 +214,12 @@ fn unit_derivative(
     let mut der_nor: Vector3 = raw.at(p, q)?;
     for j in 1..=q {
         let scale: f64 = raw.bin_u(p, 0)? * raw.bin_v(q, j)? * tables.norm(0, j);
-        der_nor = der_nor - tables.vector(p, q - j) * scale;
+        der_nor -= tables.vector(p, q - j) * scale;
     }
     for i in 1..=p {
         for j in 0..=q {
             let scale: f64 = raw.bin_u(p, i)? * raw.bin_v(q, j)? * tables.norm(i, j);
-            der_nor = der_nor - tables.vector(p - i, q - j) * scale;
+            der_nor -= tables.vector(p - i, q - j) * scale;
         }
     }
     let divisor: f64 = raw.bin_u(p, 0)? * raw.bin_v(q, 0)? * tables.norm(0, 0);

@@ -225,7 +225,7 @@ fn ElClibTests__To3dConversion() {
     checkDirectorsEqual(aDir3d, aExpectedDir3d, confusion());
     let aLoc2d = Point2::new(0.0, 0.0);
     let aDir2dX = Direction2::X;
-    let anAxis2d = Axis22d::new(aLoc2d, aDir2dX, true);
+    let anAxis2d = Axis22d::new(aLoc2d, aDir2dX, true).unwrap();
     let aRadius = 2.0;
     let aCirc2d = Circle2::new(anAxis2d, aRadius).unwrap();
     let aCirc3d = elclib::to3d_circle(anAxis, aCirc2d).unwrap();
@@ -268,7 +268,8 @@ fn ElClibTests__Parabola2D_NearZeroFocal_DegeneratesToLine() {
         Point2::new(1.0, 2.0),
         Direction2::new(1.0, 0.0).unwrap(),
         true,
-    );
+    )
+    .unwrap();
     let aFocal = 0.5 * f64::MIN_POSITIVE;
     let aU = 3.0;
     let aValue = elclib::parabola_value_2d(aU, anAxis, aFocal);
@@ -312,7 +313,8 @@ fn ElClibTests__Parabola2D_AboveResolutionFocal_NotDegenerate() {
         Point2::new(1.0, 2.0),
         Direction2::new(1.0, 0.0).unwrap(),
         true,
-    );
+    )
+    .unwrap();
     let aFocal = 2.0 * f64::MIN_POSITIVE;
     let aU = 1.0;
     let aValue = elclib::parabola_value_2d(aU, anAxis, aFocal);

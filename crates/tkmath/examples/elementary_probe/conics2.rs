@@ -39,10 +39,10 @@ macro_rules! axes2 {
         ax2d(c.x_axis());
         ax2d(c.y_axis());
         let mut x = c;
-        x.set_x_axis(k.axis);
+        x.set_x_axis(k.axis)?;
         ax22d(x.axis());
         let mut y = c;
-        y.set_y_axis(k.axis);
+        y.set_y_axis(k.axis)?;
         ax22d(y.axis());
     }};
 }
@@ -130,7 +130,7 @@ fn parabola2(a: Axis22d, focal: f64, sense: bool, k: &Motion2, p: Point2) -> Res
     ax2d(c.axis_of_symmetry());
     placed2!(c, k, p);
     let mut x = c;
-    x.set_mirror_axis(k.axis);
+    x.set_mirror_axis(k.axis)?;
     ax22d(x.axis());
     real(c.scaled(k.pivot, k.scale).focal());
     attempt(|| {
@@ -146,17 +146,17 @@ fn dumped(write: impl FnOnce(&mut DumpStream) -> std::io::Result<()>) {
     write(&mut stream).unwrap();
     text(stream.text());
 }
-fn frame2(a: Axis22d, k: &Motion2, p: Point2) {
+fn frame2(a: Axis22d, k: &Motion2, p: Point2) -> Result<(), Failure> {
     ax22d(Axis22d::with_directions(
         a.location(),
         a.x_direction(),
         k.axis.direction(),
-    ));
+    )?);
     let mut g = a;
-    g.set_x_direction(k.axis.direction());
+    g.set_x_direction(k.axis.direction())?;
     ax22d(g);
     g = a;
-    g.set_y_direction(k.axis.direction());
+    g.set_y_direction(k.axis.direction())?;
     ax22d(g);
     let l = Axis2d::new(a.location(), a.x_direction());
     flag(l.is_coaxial(k.axis, 1e-6, 1e-6));
@@ -169,6 +169,7 @@ fn frame2(a: Axis22d, k: &Motion2, p: Point2) {
     dumped(|stream| l.dump_json(stream, -1));
     dumped(|stream| l.dump_json(stream, 0));
     dumped(|stream| a.dump_json(stream));
+    Ok(())
 }
 pub fn gpconic2_case(values: &[f64]) {
     let mut fields = Fields::new(values);
@@ -179,7 +180,7 @@ pub fn gpconic2_case(values: &[f64]) {
     let (angle, scale) = (fields.real(), fields.real());
     let (shift, p) = (Vector2::from(fields.xy()), fields.point2());
     attempt(|| {
-        let a = Axis22d::new(origin, Direction2::from_xy(x)?, sense);
+        let a = Axis22d::new(origin, Direction2::from_xy(x)?, sense)?;
         let axis = Axis2d::new(pivot, Direction2::from_xy(axis)?);
         let transform =
             Transform2::rotation(pivot, angle).multiplied(Transform2::mirror_axis(axis));
@@ -191,7 +192,7 @@ pub fn gpconic2_case(values: &[f64]) {
             shift,
             transform,
         };
-        frame2(a, &k, p);
+        frame2(a, &k, p)?;
         attempt(|| circle2(a, r, &k, p));
         attempt(|| ellipse2(a, big, small, &k, p));
         attempt(|| hyperbola2(a, big, small, &k, p));

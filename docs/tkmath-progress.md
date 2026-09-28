@@ -944,3 +944,50 @@ coefficient array shorter than the spans read through `(double*)&Coefficients(i)
 refused the same way. An arc whose span count turns negative makes the native code
 allocate a wrapped size; the port raises Standard_OutOfMemory. The corpus never
 enters these paths.
+
+### Core gp primitives, frames and interpolators (API completion)
+
+This work adds no upstream suite. It completes the public API of gp_Vec (`Vector3`),
+gp_Dir (`Direction3`), gp_Pnt (`Point3`), gp_Lin (`Line3`), gp_Pln (`Plane3`), gp_Ax2,
+gp_Ax3, gp_TrsfNLerp (`TransformNLerp`, the `NCollection_Lerp<gp_Trsf>` specialization)
+and TKernel's NCollection_Lerp (`Lerp`). `tools/audit_api_rows.py` parses every public
+member of every header in a package and lists members without an api row and rows that
+match no member; for `src/FoundationClasses/TKMath/gp` it reports none. Supplemental
+tests are in `gp_vec_api_behavior`, `gp_core_api_behavior`, `gp_trsf_nlerp_behavior` and
+TKernel's `ncollection_lerp_supplemental`. The core gp probe sends 2,600 differential
+requests (`gp3d_vec`, `gp3d_dir`, `gp3d_pnt`, `gp3d_lin`, `gp3d_pln`, `gp3d_frame`,
+`gp3d_lerp`); they all match the native bits.
+
+The port keeps these native results:
+
+- gp_Dir setters renormalize through `SetCoord(x,y,z)`, which raises before it stores,
+  so a failed set keeps the old direction. `SetCoord(i,v)` checks the index first.
+  `Cross`/`^=`/`CrossCross` keep the unnormalized product when they raise; `^` and `^=`
+  map to the fallible `crossed`/`cross` methods.
+- `gp_Vec::Mirror(gp_Vec)` does nothing for a mirror vector whose magnitude is not above
+  gp::Resolution (NaN included). `Mirror(gp_Ax2)` reverses a vector parallel to the
+  normal and otherwise reflects about the normalized `N ^ (N ^ V)`, so it rounds.
+  `IsEqual` evaluates `Angle` (which may raise gp_VectorWithNullMagnitude) only when both
+  magnitudes exceed the linear tolerance and the lengths already match.
+- `gp_Lin::Translated(P1,P2)` adds the precomputed vector `P2 - P1`, while
+  `Translate(P1,P2)` adds P2 and then subtracts P1; the results can differ in the last
+  ulp.
+- `gp_Pln(A,B,C,D)` places the origin on the axis of the branch that selects the X
+  direction, including ties; the line and plane distance overloads return 0 unless the
+  line is parallel (normal within gp::Resolution) or the normals are parallel.
+- `std::hash<gp_Pnt>` sums the truncating quotients of the six 32-bit words of the
+  coordinates and hashes that sum with libstdc++ `std::hash<double>`
+  (`PointHashPolicy`/`HashKey`); `std::equal_to<gp_Pnt>` accepts differences up to
+  `Epsilon` of the second point, and a NaN difference compares equal.
+- `NCollection_Lerp` evaluates `(1 - t) * start + t * end`. gp_TrsfNLerp returns the
+  stored ends within Precision::Confusion of t = 0 and 1, otherwise sets rotation, then
+  translation, then the scale factor, so an interpolated scale at or below gp::Resolution
+  keeps `SetScaleFactor`'s ConstructionError (a default-constructed interpolator raises).
+- gp_Ax22d constructors and X/Y setters raise gp_Dir2d::SetCoord's ConstructionError for
+  a zero direction; the setters keep the native partial update.
+
+Deliberate Rust deviations: gp_Pnt::ChangeCoord returns a write-back view
+(`PointCoordinatesMut`) because the point stores a plain coordinate triple; the copy and
+move constructors and assignments of gp_Dir are Rust copies. The 2D conics' noexcept
+`Reverse` and hyperbola branches, which turn stored unit directions, use an infallible
+quarter turn.

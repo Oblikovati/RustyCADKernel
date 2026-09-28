@@ -19,6 +19,8 @@ mod compose;
 mod forms;
 mod frame_change;
 mod json;
+mod nlerp;
+pub use nlerp::TransformNLerp;
 mod power;
 mod pre_compose;
 mod setters;

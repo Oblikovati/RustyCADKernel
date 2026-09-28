@@ -250,7 +250,7 @@ pub fn elclib2_case(values: &[f64]) {
     let p = fields.point2();
     attempt(|| {
         let d = Direction2::from_xy(x)?;
-        let (a, l) = (Axis22d::new(origin, d, sense), Axis2d::new(origin, d));
+        let (a, l) = (Axis22d::new(origin, d, sense)?, Axis2d::new(origin, d));
         ax22d(a);
         curve2(a, l, &s, p);
         overloads2(a, l, &s, p);
@@ -339,7 +339,7 @@ pub fn elto3d_case(values: &[f64]) {
         let a = Axis2::with_x_direction(origin, direction(normal)?, direction(x)?)?;
         let d = Direction2::from_xy(x2)?;
         let planar = Planar {
-            frame: Axis22d::new(origin2, d, sense),
+            frame: Axis22d::new(origin2, d, sense)?,
             axis: Axis2d::new(origin2, d),
             point,
             vector: Vector2::from(vector),

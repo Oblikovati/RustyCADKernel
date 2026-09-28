@@ -79,7 +79,7 @@ pub fn frame3(v: &[f64; 10]) -> Result<Axis3, Failure> {
 }
 fn frame2(v: &[f64; 5]) -> Result<Axis22d, Failure> {
     let x = Direction2::from_xy(Xy::new(v[2], v[3]))?;
-    Ok(Axis22d::new(Point2::new(v[0], v[1]), x, v[4] != 0.0))
+    Axis22d::new(Point2::new(v[0], v[1]), x, v[4] != 0.0)
 }
 pub fn parameterisation(code: i32) -> ParameterisationType {
     use ParameterisationType::*;

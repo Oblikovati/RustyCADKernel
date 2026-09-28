@@ -8,7 +8,7 @@ mod matrix;
 mod point;
 mod transform;
 mod vector;
-use super::{Failure, TransformForm, construction};
+use super::{Failure, TransformForm, construction, vector_with_null_magnitude};
 pub use axis::Axis2d;
 pub use coordinates::Xy;
 pub use direction::{Direction2, StandardDirection2};

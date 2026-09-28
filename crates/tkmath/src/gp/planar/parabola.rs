@@ -52,7 +52,7 @@ impl Parabola2 {
         focal_length: f64,
         sense: bool,
     ) -> Result<Self, Failure> {
-        Self::new(Axis22d::from_axis(mirror_axis, sense), focal_length)
+        Self::new(Axis22d::from_axis(mirror_axis, sense)?, focal_length)
     }
     /// Builds the parabola from directrix and focus; a focus on the directrix yields a zero focal
     /// length whose X axis is the directrix turned by ∓90°; `Parabola2::from_directrix(d,f,true)?`.
@@ -73,7 +73,7 @@ impl Parabola2 {
             directrix.rotated(origin, turn).direction()
         };
         Ok(Self {
-            position: Axis22d::with_directions(apex, x, along),
+            position: Axis22d::with_directions(apex, x, along)?,
             focal_length,
         })
     }
@@ -88,9 +88,9 @@ impl Parabola2 {
         Ok(())
     }
     /// Replaces apex and mirror axis, keeping the sense (gp_Parab2d::SetMirrorAxis);
-    /// `parabola.set_mirror_axis(axis)`.
-    pub fn set_mirror_axis(&mut self, axis: Axis2d) {
-        self.position.set_x_axis(axis);
+    /// `parabola.set_mirror_axis(axis)?`.
+    pub fn set_mirror_axis(&mut self, axis: Axis2d) -> Result<(), Failure> {
+        self.position.set_x_axis(axis)
     }
     /// Returns the mirror (X) axis (gp_Parab2d::MirrorAxis); `parabola.axis_of_symmetry()`.
     pub fn axis_of_symmetry(&self) -> Axis2d {

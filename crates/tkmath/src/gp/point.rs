@@ -66,4 +66,8 @@ impl Point3 {
     }
 }
 
+mod access;
+mod hashing;
 mod operations;
+pub use access::PointCoordinatesMut;
+pub use hashing::PointHashPolicy;

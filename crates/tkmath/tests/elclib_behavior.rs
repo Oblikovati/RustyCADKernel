@@ -12,6 +12,7 @@ fn plane_frame(sense: bool) -> Axis22d {
         Direction2::new(0.8, 0.6).unwrap(),
         sense,
     )
+    .unwrap()
 }
 fn space_frame() -> Axis2 {
     Axis2::with_x_direction(

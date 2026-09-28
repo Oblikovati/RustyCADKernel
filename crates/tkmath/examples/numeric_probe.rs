@@ -262,6 +262,7 @@ fn planar_case(v: &[f64]) {
 }
 mod bounds_probe;
 mod bvh_probe;
+mod gp_core_probe;
 mod gp_planar_probe;
 mod gp_standard_probe;
 mod gp_transform_probe;
@@ -431,6 +432,13 @@ fn main() {
             "gp3d_trsf" => gp_transform_probe::gp3_trsf_case(&values),
             "gp3d_gtrsf" => gp_transform_probe::gp3_gtrsf_case(&values),
             "gp3d_quat" => gp_transform_probe::gp3_quat_case(&values),
+            "gp3d_vec" => gp_core_probe::gp3_vec_case(&values),
+            "gp3d_dir" => gp_core_probe::gp3_dir_case(&values),
+            "gp3d_pnt" => gp_core_probe::gp3_pnt_case(&values),
+            "gp3d_lin" => gp_core_probe::gp3_lin_case(&values),
+            "gp3d_pln" => gp_core_probe::gp3_pln_case(&values),
+            "gp3d_frame" => gp_core_probe::gp3_frame_case(&values),
+            "gp3d_lerp" => gp_core_probe::gp3_lerp_case(&values),
             "mathpoly_utils_complex" => mathpoly_utils_probe::mathpoly_utils_complex_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }

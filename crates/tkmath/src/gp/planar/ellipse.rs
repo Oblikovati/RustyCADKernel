@@ -58,7 +58,7 @@ impl Ellipse2 {
         sense: bool,
     ) -> Result<Self, Failure> {
         Self::new(
-            Axis22d::from_axis(major_axis, sense),
+            Axis22d::from_axis(major_axis, sense)?,
             major_radius,
             minor_radius,
         )
