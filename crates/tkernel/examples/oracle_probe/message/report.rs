@@ -1,31 +1,27 @@
 //! Message report operations (twin of `tools/oracle/tkernel_message_report_probe.cxx`).
 use super::{bit, bytes, ext, hex, rest};
 use rustycad_tkernel::message::{
-    Alert, AlertExtended, AlertHandle, AttributeHandle, AttributeMeter, AttributeObject, AttributeStream,
-    BaseAlert, BaseAttribute, CompositeAlerts, Gravity, Level, Message, Messenger, MetricType, Printer,
-    PrinterBase, PrinterToReport, PrinterType, Report, downcast_alert, downcast_attribute,
+    Alert, AlertExtended, AlertHandle, AttributeHandle, AttributeMeter, AttributeObject,
+    AttributeStream, BaseAlert, BaseAttribute, CompositeAlerts, Gravity, Level, Message, Messenger,
+    MetricType, Printer, PrinterBase, PrinterToReport, PrinterType, Report, downcast_alert,
+    downcast_attribute,
 };
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Handle, RuntimeType, RuntimeTyped};
 use rustycad_tkernel::tcollection::{AsciiString, ExtendedString};
 use std::str::SplitWhitespace;
-use std::sync::{Arc, Mutex, OnceLock};
+use std::sync::{Arc, Mutex};
 mod levels;
 
 rustycad_tkernel::define_simple_alert!(MsgProbeAlertX, "MsgProbe_AlertX");
 rustycad_tkernel::define_simple_alert!(MsgProbeAlertY, "MsgProbe_AlertY");
 
-/// Registers a probe alert type deriving `Message_Alert`.
-fn probe_type<T: 'static>(cell: &'static OnceLock<RuntimeType>, name: &'static str) -> &'static RuntimeType {
-    cell.get_or_init(|| RuntimeType::new::<T>(name, Some(BaseAlert::static_type())))
-}
-
 /// `MsgProbe_NoMerge`: refuses to be merged.
 struct MsgProbeNoMerge;
+rustycad_tkernel::message_runtime_type!(MsgProbeNoMerge, "MsgProbe_NoMerge", BaseAlert);
 impl Alert for MsgProbeNoMerge {
     fn dynamic_type(&self) -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        probe_type::<Self>(&DESCRIPTOR, "MsgProbe_NoMerge")
+        Self::static_type()
     }
     fn supports_merge(&self) -> bool {
         false
@@ -33,10 +29,10 @@ impl Alert for MsgProbeNoMerge {
 }
 /// `MsgProbe_Refuse`: supports merging but every merge fails.
 struct MsgProbeRefuse;
+rustycad_tkernel::message_runtime_type!(MsgProbeRefuse, "MsgProbe_Refuse", BaseAlert);
 impl Alert for MsgProbeRefuse {
     fn dynamic_type(&self) -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        probe_type::<Self>(&DESCRIPTOR, "MsgProbe_Refuse")
+        Self::static_type()
     }
     fn merge(&self, _target: &AlertHandle) -> bool {
         false
@@ -68,8 +64,8 @@ fn kind_type(kind: u8) -> &'static RuntimeType {
         b'P' => BaseAlert::static_type(),
         b'X' => MsgProbeAlertX::static_type(),
         b'Y' => MsgProbeAlertY::static_type(),
-        b'N' => MsgProbeNoMerge.dynamic_type(),
-        b'R' => MsgProbeRefuse.dynamic_type(),
+        b'N' => MsgProbeNoMerge::static_type(),
+        b'R' => MsgProbeRefuse::static_type(),
         _ => AlertExtended::static_type(),
     }
 }
@@ -100,7 +96,13 @@ pub(super) fn alert(kind: &str) -> AlertHandle {
 }
 
 /// One alert list: depth, gravity, type, key, meter flags, then the children.
-fn walk_list(out: &mut String, alerts: &[AlertHandle], gravity: Gravity, report: &Report, depth: i32) {
+fn walk_list(
+    out: &mut String,
+    alerts: &[AlertHandle],
+    gravity: Gravity,
+    report: &Report,
+    depth: i32,
+) {
     for alert in alerts {
         out.push_str(&format!(
             " {depth}{}:{}:{}",
@@ -111,13 +113,24 @@ fn walk_list(out: &mut String, alerts: &[AlertHandle], gravity: Gravity, report:
         let Some(extended) = downcast_alert::<AlertExtended>(alert) else {
             continue;
         };
-        let meter = extended.attribute().and_then(|attribute| downcast_attribute::<AttributeMeter>(&attribute));
+        let meter = extended
+            .attribute()
+            .and_then(|attribute| downcast_attribute::<AttributeMeter>(&attribute));
         if let Some(meter) = meter {
             for metric in report.active_metrics() {
-                out.push_str(&format!(":{}{}", bit(meter.has_metric(metric)), bit(meter.is_metric_valid(metric))));
+                out.push_str(&format!(
+                    ":{}{}",
+                    bit(meter.has_metric(metric)),
+                    bit(meter.is_metric_valid(metric))
+                ));
             }
         }
-        walk(out, extended.composite_alerts(false).as_deref(), report, depth + 1);
+        walk(
+            out,
+            extended.composite_alerts(false).as_deref(),
+            report,
+            depth + 1,
+        );
     }
 }
 
@@ -150,7 +163,12 @@ fn report_state(out: &mut String, report: &Report) {
     let messenger = Messenger::with_printer(printer.clone());
     report.send_messages(&messenger);
     let log = printer.log.lock().unwrap().clone();
-    out.push_str(&format!(" D:{} J:{} S:{}", hex(&dump), hex(json.bytes()), hex(log.as_bytes())));
+    out.push_str(&format!(
+        " D:{} J:{} S:{}",
+        hex(&dump),
+        hex(json.bytes()),
+        hex(log.as_bytes())
+    ));
 }
 
 pub(super) fn gravity_of(step: &[&str]) -> Gravity {
@@ -205,13 +223,21 @@ fn report_step(run: &mut ReportRun, step: &[&str], out: &mut String) {
             run.report.add_alert(gravity, &added);
             run.last = Some(added);
         }
-        "ext" => run.last = Some(AlertExtended::add_alert(&run.report, Some(attribute(step[2])), gravity)),
+        "ext" => {
+            run.last = Some(AlertExtended::add_alert(
+                &run.report,
+                Some(attribute(step[2])),
+                gravity,
+            ))
+        }
         "nest" => out.push_str(&format!(" n{}", bit(nest(run, gravity, step[2])))),
         "limit" => run.report.set_limit(step[1].parse().expect("limit")),
         "clear" => run.report.clear(),
         "clearg" => run.report.clear_gravity(gravity),
         "cleart" => run.report.clear_type(kind_type(step[1].as_bytes()[0])),
-        "metric" => run.report.set_active_metric(metric_of(step[1]), step[2] == "1"),
+        "metric" => run
+            .report
+            .set_active_metric(metric_of(step[1]), step[2] == "1"),
         "clearmetrics" => run.report.clear_metrics(),
         "has" => has(out, &run.report, step[1].as_bytes()[0]),
         "merge" => {
@@ -252,7 +278,7 @@ fn report_run(input: &mut SplitWhitespace<'_>) -> String {
 
 /// Bytes of a hex token as an ASCII string (`TCollection_AsciiString(bytes.c_str())`).
 pub(super) fn ascii_text(token: &str) -> AsciiString {
-    AsciiString::from_bytes(&bytes(token))
+    AsciiString::from_bytes(bytes(token))
 }
 
 /// Extended text of a units token.

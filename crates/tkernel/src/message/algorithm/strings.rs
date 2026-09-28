@@ -14,18 +14,33 @@ impl Algorithm {
     }
     /// `SetStatus(stat, const TCollection_AsciiString&)`: decoded as UTF-8 when valid;
     /// `algorithm.set_status_with_ascii(s, &text, true)`.
-    pub fn set_status_with_ascii(&mut self, status: Status, text: &AsciiString, no_repetitions: bool) {
+    pub fn set_status_with_ascii(
+        &mut self,
+        status: Status,
+        text: &AsciiString,
+        no_repetitions: bool,
+    ) {
         let text = Handle::new(HExtendedString::from(ExtendedString::from_ascii(text)));
         self.set_status_with_h_extended(status, &text, no_repetitions);
     }
     /// `SetStatus(stat, const occ::handle<TCollection_HAsciiString>&)`: decoded as UTF-8 when
     /// valid; `algorithm.set_status_with_h_ascii(s, &text, true)`.
-    pub fn set_status_with_h_ascii(&mut self, status: Status, text: &HAsciiString, no_repetitions: bool) {
+    pub fn set_status_with_h_ascii(
+        &mut self,
+        status: Status,
+        text: &HAsciiString,
+        no_repetitions: bool,
+    ) {
         let text = Handle::new(HExtendedString::from_h_ascii_string(text));
         self.set_status_with_h_extended(status, &text, no_repetitions);
     }
     /// `SetStatus(stat, const TCollection_ExtendedString&)`; `algorithm.set_status_with_extended(s, &text, true)`.
-    pub fn set_status_with_extended(&mut self, status: Status, text: &ExtendedString, no_repetitions: bool) {
+    pub fn set_status_with_extended(
+        &mut self,
+        status: Status,
+        text: &ExtendedString,
+        no_repetitions: bool,
+    ) {
         let text = Handle::new(HExtendedString::from(text.clone()));
         self.set_status_with_h_extended(status, &text, no_repetitions);
     }
@@ -46,7 +61,11 @@ impl Algorithm {
         let slots = self.report_strings.get_or_insert_with(status_slots);
         let strings = slots[index].get_or_insert_with(Vec::new);
         let value = text.string().clone();
-        if no_repetitions && strings.iter().any(|existing| existing.string().is_equal(&value)) {
+        if no_repetitions
+            && strings
+                .iter()
+                .any(|existing| existing.string().is_equal(&value))
+        {
             return;
         }
         strings.push(text.clone());

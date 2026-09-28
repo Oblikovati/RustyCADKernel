@@ -56,7 +56,10 @@ INTS = [0, 1, -1, 7, 42, -42, 255, 65535, 65536, -32769, 2147483647, -2147483648
 SMALL_REALS = [0.0, -0.0, 1.5, -1.5, 2.5, 0.125, 1234567.891, 0.1, 999999.5, 9.9999995, 1e-5,
                123.456, -0.000123456, 1e20, 5e-324, 3.141592653589793, float("inf"), float("-inf"),
                float("nan"), 0.5, 1.0, 100.0, 1e15]
-TEXTS = [b"", b"abc", b"hello world", "été".encode(), b"\xff\xfe", b"x" * 40]
+# Formatted text is decoded as UTF-8 by reading each announced sequence in full; a
+# sequence cut by the terminator (invalid bytes, or a precision inside a multibyte symbol)
+# makes OCCT read past the string, so only whole UTF-8 symbols are sent.
+TEXTS = [b"", b"abc", b"hello world", "été".encode(), b"x" * 40]
 
 
 def msg_steps(rng: random.Random, count: int) -> list[str]:
@@ -67,7 +70,7 @@ def msg_steps(rng: random.Random, count: int) -> list[str]:
         # (undefined behavior in Sprintf), so only extended-string arguments may follow.
         kind = rng.choice("eg" if "g" in steps else "siearg")
         if kind in "sa":
-            steps.append(f"{kind}:{hexb(rng.choice(TEXTS))}")
+            steps.append(f"{kind}:{hexb(rng.choice([text for text in TEXTS if text.isascii()]))}")
         elif kind == "e":
             steps.append("e:" + units(rng.choice(["", "ext", "€5", "a b"])))
         elif kind == "i":
@@ -101,14 +104,15 @@ def msg_cases(rng: random.Random) -> list[str]:
     for spec in REAL_FORMATS:
         cases += [f"msg_run {units('<' + spec + '>')} r:{bits(value)}" for value in SMALL_REALS]
     for spec in TEXT_FORMATS:
-        cases += [f"msg_run {units('<' + spec + '>')} s:{hexb(text)}" for text in TEXTS]
+        texts = [text for text in TEXTS if "." not in spec or text.isascii()]
+        cases += [f"msg_run {units('<' + spec + '>')} s:{hexb(text)}" for text in texts]
         cases.append(f"msg_run {units('<' + spec + '>')} e:{units('wide')}")
     # Get() before the arguments leaves stale positions (the native quirk).
     cases += ["msg_run " + units("%-9.4f|%d|%s") + " i:4 g e:41 g",
               "msg_run " + units("%-9d%-9d") + " g g", "msg_run " + units("%s%s") + " g e:61 g"]
     for _ in range(400):
         cases.append(f"msg_run {units(msg_text(rng))} " + " ".join(msg_steps(rng, rng.randint(0, 6))))
-    for text in [b"%d items", b"", "é %s".encode(), b"\xff %d", b"a%%b"]:
+    for text in [b"%d items", b"", "é %s".encode(), b"\x80 %d", b"a%%b"]:
         cases.append(f"msg_set_c {hexb(text)}")
     return cases
 

@@ -19,7 +19,9 @@
 //! calls its factory.
 use super::failure;
 use super::libraries::{PluginFactory, PluginLibraries, library_file_name};
-use crate::resource::{ResourceCatalog, ResourceEnvironment, ResourceIo};
+use crate::resource::{
+    NativeResourceConsole, ResourceEnvironment, ResourceHost, ResourceIo, ResourceManager,
+};
 use crate::standard::{Failure, Guid};
 use std::collections::BTreeMap;
 use std::io::Write;
@@ -92,8 +94,13 @@ impl<P> PluginLoader<P> {
     /// The `<id>.Location` value of a freshly read "Plugin" resource catalog.
     fn library_name(&mut self, id: &str, verbose: bool) -> Result<String, Failure> {
         let resource = format!("{id}.Location");
-        let catalog =
-            ResourceCatalog::new("Plugin", Rc::clone(&self.io), Rc::clone(&self.environment));
+        // `new Resource_Manager("Plugin")`: its traces, when enabled, go to std::cout.
+        let host = ResourceHost::new(
+            Rc::clone(&self.io),
+            Rc::clone(&self.environment),
+            Rc::new(NativeResourceConsole),
+        );
+        let catalog = ResourceManager::new("Plugin", false, host)?;
         if let Ok(value) = catalog.value(&resource) {
             return Ok(c_text(value.as_bytes()));
         }

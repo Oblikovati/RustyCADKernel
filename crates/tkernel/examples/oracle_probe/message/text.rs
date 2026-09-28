@@ -19,7 +19,11 @@ pub fn evaluate(op: &str, input: &mut SplitWhitespace<'_>) -> Option<String> {
         "msg_fill_time" => {
             let hour: i32 = input.next().expect("hour").parse().expect("int");
             let minute: i32 = input.next().expect("minute").parse().expect("int");
-            ascii(&Message::fill_time(hour, minute, real(input.next().expect("second"))))
+            ascii(&Message::fill_time(
+                hour,
+                minute,
+                real(input.next().expect("second")),
+            ))
         }
         "msg_metrics" => metrics(),
         "msg_metric_from" => metric_from(input),
@@ -43,7 +47,9 @@ fn msg_step(message: &mut Msg, step: &str) -> Result<String, Failure> {
     match step.as_bytes()[0] {
         b's' | b'a' => message.arg_text(&bytes(value)).map(|_| String::new()),
         b'e' => message.arg_extended(&ext(value)).map(|_| String::new()),
-        b'i' => message.arg_integer(value.parse().expect("int")).map(|_| String::new()),
+        b'i' => message
+            .arg_integer(value.parse().expect("int"))
+            .map(|_| String::new()),
         b'r' => message.arg_real(real(value)).map(|_| String::new()),
         _ => message.get().map(|text| format!(" {}", units(text))),
     }
@@ -57,7 +63,11 @@ fn msg_run(input: &mut SplitWhitespace<'_>) -> String {
         match msg_step(&mut message, &step) {
             Ok(text) => out.push_str(&text),
             Err(failure) => {
-                out.push_str(&format!(" E{}{}", failure.exception_type(), state(&message)));
+                out.push_str(&format!(
+                    " E{}{}",
+                    failure.exception_type(),
+                    state(&message)
+                ));
                 return out;
             }
         }
@@ -88,7 +98,11 @@ fn metrics() -> String {
     ];
     for counter in counters {
         let metric = Message::to_message_metric(counter);
-        out.push_str(&format!(" {}:{}", bit(metric.is_some()), metric.unwrap_or(MetricType::None) as i32));
+        out.push_str(&format!(
+            " {}:{}",
+            bit(metric.is_some()),
+            metric.unwrap_or(MetricType::None) as i32
+        ));
     }
     out
 }
@@ -96,7 +110,8 @@ fn metrics() -> String {
 fn metric_from(input: &mut SplitWhitespace<'_>) -> String {
     let name = bytes(input.next().expect("name"));
     // `const char*`: the name ends at its first NUL; the corpus sends UTF-8 free names.
-    let name = String::from_utf8_lossy(name.split(|&byte| byte == 0).next().unwrap_or_default()).into_owned();
+    let name = String::from_utf8_lossy(name.split(|&byte| byte == 0).next().unwrap_or_default())
+        .into_owned();
     let found = Message::metric_from_string(&name);
     format!(
         "{} {} {}",
@@ -107,7 +122,11 @@ fn metric_from(input: &mut SplitWhitespace<'_>) -> String {
 }
 
 fn exec_step(status: &mut ExecStatus, step: &str) {
-    let value = Status(step.get(1..).filter(|text| !text.is_empty()).map_or(0, |text| text.parse().expect("int")));
+    let value = Status(
+        step.get(1..)
+            .filter(|text| !text.is_empty())
+            .map_or(0, |text| text.parse().expect("int")),
+    );
     match step.as_bytes()[0] {
         b's' => status.set(value),
         b'c' => status.clear_status(value),
@@ -171,7 +190,7 @@ fn keys(input: &mut SplitWhitespace<'_>) -> String {
     let catalog = MsgFile::global();
     let mut out = String::new();
     for key in rest(input) {
-        let name = AsciiString::from_bytes(&bytes(&key));
+        let name = AsciiString::from_bytes(bytes(&key));
         let known = catalog.has_msg(&name);
         out.push_str(&format!(" {}:{}", bit(known), units(&catalog.msg(&name))));
     }
@@ -226,7 +245,13 @@ fn msgfile_env(input: &mut SplitWhitespace<'_>) -> String {
         }
     }
     let lang = input.next().expect("lang");
-    let lang = (lang != "N").then(|| if lang == "-" { String::new() } else { text_arg(lang) });
+    let lang = (lang != "N").then(|| {
+        if lang == "-" {
+            String::new()
+        } else {
+            text_arg(lang)
+        }
+    });
     let file = text_arg(input.next().expect("file"));
     let out = loaded(MsgFile::global().load_from_env(Some(&variable), &file, lang.as_deref()));
     out + &keys(input)

@@ -84,7 +84,11 @@ fn with_exponent(mantissa: String, exponent: i32) -> Vec<u8> {
 fn general(magnitude: f64, spec: &Spec) -> Vec<u8> {
     let significant = spec.precision.unwrap_or(6).max(1);
     let (_, exponent) = scientific(magnitude, significant - 1);
-    let unrounded = if magnitude == 0.0 { 0 } else { scientific_shortest_exponent(magnitude) };
+    let unrounded = if magnitude == 0.0 {
+        0
+    } else {
+        scientific_shortest_exponent(magnitude)
+    };
     if spec.alternate && unrounded == significant as i32 - 1 && exponent == significant as i32 {
         return with_exponent("1.".to_owned(), exponent);
     }

@@ -22,7 +22,11 @@ use std::sync::{Arc, Mutex, MutexGuard};
 pub struct CompositeAlerts {
     alerts: Mutex<[Vec<AlertHandle>; 5]>,
 }
-message_runtime_type!(CompositeAlerts, "Message_CompositeAlerts", StandardTransient);
+message_runtime_type!(
+    CompositeAlerts,
+    "Message_CompositeAlerts",
+    StandardTransient
+);
 
 /// Alert identity: the same allocation.
 pub(crate) fn same_alert(first: &AlertHandle, second: &AlertHandle) -> bool {

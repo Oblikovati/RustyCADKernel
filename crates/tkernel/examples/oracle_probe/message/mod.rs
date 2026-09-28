@@ -44,7 +44,11 @@ fn units(text: &ExtendedString) -> String {
     if text.is_empty() {
         return "-".to_owned();
     }
-    let parts: Vec<String> = text.as_utf16().iter().map(|unit| format!("{unit:x}")).collect();
+    let parts: Vec<String> = text
+        .as_utf16()
+        .iter()
+        .map(|unit| format!("{unit:x}"))
+        .collect();
     parts.join(",")
 }
 

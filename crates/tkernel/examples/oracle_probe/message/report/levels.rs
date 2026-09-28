@@ -1,8 +1,8 @@
 //! Level and PrinterToReport operations (twin of the second half of
 //! `tools/oracle/tkernel_message_report_probe.cxx`).
 use super::{
-    alert, ascii_text, bit, default_report, extended, gravity_of, hex, metric_of, open_level, printer_to, rest,
-    walk_report,
+    alert, ascii_text, bit, default_report, extended, gravity_of, hex, metric_of, open_level,
+    printer_to, rest, walk_report,
 };
 use rustycad_tkernel::message::{Level, Message, Printer, PrinterToReport, Report};
 use rustycad_tkernel::standard::Handle;
@@ -54,7 +54,11 @@ pub(super) fn level_run(input: &mut SplitWhitespace<'_>) -> String {
     out.push_str(&format!(" D:{}", hex(&dump)));
     report.activate_in_messenger(false, None);
     let printers = Message::default_messenger().printers().len();
-    out.push_str(&format!(" {}{}", bit(report.is_active_in_messenger(None)), printers));
+    out.push_str(&format!(
+        " {}{}",
+        bit(report.is_active_in_messenger(None)),
+        printers
+    ));
     report.clear();
     report.clear_metrics();
     out
@@ -87,6 +91,10 @@ pub(super) fn ptr_run(input: &mut SplitWhitespace<'_>) -> String {
     walk_report(&mut out, &report);
     let mut dump = Vec::new();
     report.dump(&mut dump).expect("in-memory dump");
-    out.push_str(&format!(" D:{} {}", hex(&dump), printer.trace_level() as i32));
+    out.push_str(&format!(
+        " D:{} {}",
+        hex(&dump),
+        printer.trace_level() as i32
+    ));
     out
 }

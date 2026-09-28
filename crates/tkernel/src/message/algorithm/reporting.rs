@@ -182,7 +182,10 @@ impl Algorithm {
     }
     /// Up to `max_count` quoted strings separated by `, `, then ` ... (total N) ` when the
     /// sequence is longer; `Algorithm::prepare_report_strings(&strings, 20)`.
-    pub fn prepare_report_strings(strings: &[Handle<HExtendedString>], max_count: i32) -> ExtendedString {
+    pub fn prepare_report_strings(
+        strings: &[Handle<HExtendedString>],
+        max_count: i32,
+    ) -> ExtendedString {
         let mut report = ExtendedString::default();
         for (number, text) in strings.iter().enumerate().take(max_count.max(0) as usize) {
             report.assign_cat(ExtendedString::new(if number > 0 { ", '" } else { "'" }));

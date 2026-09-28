@@ -2,11 +2,11 @@
 use super::report::MsgProbePrinter;
 use super::{bit, bytes, ext, hex, rest, units};
 use rustycad_tkernel::message::{
-    Algorithm, ConsoleColor, ExecStatus, Gravity, Messenger, Msg, MsgFile, Printer, PrinterHandle, PrinterOStream,
-    PrinterToReport, PrinterType, Status,
+    Algorithm, ConsoleColor, ExecStatus, Gravity, Messenger, Msg, MsgFile, Printer, PrinterHandle,
+    PrinterOStream, PrinterToReport, PrinterType, Status,
 };
 use rustycad_tkernel::standard::dump::DumpStream;
-use rustycad_tkernel::standard::{Failure, RuntimeType, RuntimeTyped};
+use rustycad_tkernel::standard::{Failure, Handle, RuntimeType, RuntimeTyped};
 use rustycad_tkernel::tcollection::AsciiString;
 use std::str::SplitWhitespace;
 use std::sync::Arc;
@@ -26,7 +26,11 @@ pub fn evaluate(op: &str, input: &mut SplitWhitespace<'_>) -> Option<String> {
             let color: usize = input.next().expect("color").parse().expect("int");
             let intense = input.next().expect("intense") != "0";
             let mut stream: Vec<u8> = Vec::new();
-            PrinterOStream::set_console_text_color(Some(&mut stream), CONSOLE_COLORS[color], intense);
+            PrinterOStream::set_console_text_color(
+                Some(&mut stream),
+                CONSOLE_COLORS[color],
+                intense,
+            );
             hex(&stream)
         }
         _ => return None,
@@ -60,7 +64,11 @@ impl Algorithms {
         let mut other = Algorithm::new();
         main.set_messenger(Some(messenger.clone()));
         other.set_messenger(Some(messenger));
-        Self { main, other, printer }
+        Self {
+            main,
+            other,
+            printer,
+        }
     }
 }
 
@@ -75,9 +83,13 @@ fn algo_set(algorithm: &mut Algorithm, step: &[&str]) -> bool {
         "st" => algorithm.set_status(status(step[1])),
         "si" => algorithm.set_status_with_integer(status(step[1]), step[2].parse().expect("int")),
         "ss" => algorithm.set_status_with_c_str(status(step[1]), &c_text(step[2]), no_repetitions),
-        "sa" => algorithm.set_status_with_ascii(status(step[1]), &AsciiString::from_bytes(&bytes(step[2])), no_repetitions),
+        "sa" => algorithm.set_status_with_ascii(
+            status(step[1]),
+            &AsciiString::from_bytes(bytes(step[2])),
+            no_repetitions,
+        ),
         "se" => algorithm.set_status_with_extended(status(step[1]), &ext(step[2]), no_repetitions),
-        "sn" => algorithm.set_status_with_h_extended(status(step[1]), None, true),
+        "sn" => algorithm.set_status_with_h_extended(status(step[1]), &Handle::default(), true),
         "sm" => {
             let mut message = Msg::new();
             message.set(&ext(step[2]));
@@ -92,17 +104,30 @@ fn algo_set(algorithm: &mut Algorithm, step: &[&str]) -> bool {
 /// `const char*` text: the bytes up to the first NUL.
 fn c_text(token: &str) -> Vec<u8> {
     let text = bytes(token);
-    text.split(|&byte| byte == 0).next().unwrap_or_default().to_vec()
+    text.split(|&byte| byte == 0)
+        .next()
+        .unwrap_or_default()
+        .to_vec()
 }
 
 fn algo_query(algorithm: &Algorithm, step: &[&str]) -> String {
     let (status, max) = (status(step[1]), step[2].parse().expect("max"));
     if step[0] == "nums" {
-        let report = algorithm.get_message_numbers(status).map(|numbers| Algorithm::prepare_report_numbers(numbers, max));
-        return format!(" N{}", report.map_or_else(|| "-".to_owned(), |text| units(&text)));
+        let report = algorithm
+            .get_message_numbers(status)
+            .map(|numbers| Algorithm::prepare_report_numbers(numbers, max));
+        return format!(
+            " N{}",
+            report.map_or_else(|| "-".to_owned(), |text| units(&text))
+        );
     }
-    let report = algorithm.get_message_strings(status).map(|strings| Algorithm::prepare_report_strings(strings, max));
-    format!(" S{}", report.map_or_else(|| "-".to_owned(), |text| units(&text)))
+    let report = algorithm
+        .get_message_strings(status)
+        .map(|strings| Algorithm::prepare_report_strings(strings, max));
+    format!(
+        " S{}",
+        report.map_or_else(|| "-".to_owned(), |text| units(&text))
+    )
 }
 
 fn algo_step(algorithms: &mut Algorithms, step: &[&str]) -> Result<String, Failure> {
@@ -117,15 +142,23 @@ fn algo_step(algorithms: &mut Algorithms, step: &[&str]) -> Result<String, Failu
             algo_set(&mut algorithms.other, &renamed);
         }
         "cat" => {
-            MsgFile::global().add_msg(&AsciiString::from_bytes(&bytes(step[1])), &ext(step[2]));
+            MsgFile::global().add_msg(&AsciiString::from_bytes(bytes(step[1])), &ext(step[2]));
         }
-        "send" => algorithms.main.send_messages(gravity(step[1]), step[2].parse().expect("max"))?,
+        "send" => algorithms
+            .main
+            .send_messages(gravity(step[1]), step[2].parse().expect("max"))?,
         "sendst" => {
             let filter = ExecStatus::from_status(status(step[1]));
-            algorithms.main.send_status_messages(&filter, gravity(step[2]), step[3].parse().expect("max"))?;
+            algorithms.main.send_status_messages(
+                &filter,
+                gravity(step[2]),
+                step[3].parse().expect("max"),
+            )?;
         }
         "add" => algorithms.main.add_status(&algorithms.other),
-        "addf" => algorithms.main.add_status_filtered(&ExecStatus::from_status(status(step[1])), &algorithms.other),
+        "addf" => algorithms
+            .main
+            .add_status_filtered(&ExecStatus::from_status(status(step[1])), &algorithms.other),
         _ => return Ok(algo_query(&algorithms.main, step)),
     }
     Ok(String::new())
@@ -144,7 +177,13 @@ fn algo_run(input: &mut SplitWhitespace<'_>) -> String {
     let log = algorithms.printer.log.lock().unwrap().clone();
     out.push_str(&format!(" L:{} ", hex(log.as_bytes())));
     for index in ExecStatus::FIRST_STATUS..ExecStatus::LAST_STATUS {
-        out.push_str(&bit(algorithms.main.get_status().is_set(ExecStatus::status_by_index(index))).to_string());
+        out.push_str(
+            &bit(algorithms
+                .main
+                .get_status()
+                .is_set(ExecStatus::status_by_index(index)))
+            .to_string(),
+        );
     }
     out
 }
@@ -183,25 +222,38 @@ fn messenger_step(ops: &mut MessengerOps, step: &[&str]) -> String {
         "r" => add_printer(ops, Arc::new(PrinterToReport::new())),
         "o" => {
             let path = String::from_utf8(bytes(step[1])).expect("UTF-8 path");
-            add_printer(ops, Arc::new(PrinterOStream::from_file_name(&path, false, Gravity::Info)))
+            add_printer(
+                ops,
+                Arc::new(PrinterOStream::from_file_name(&path, false, Gravity::Info)),
+            )
         }
         "dup" => format!(" {}", bit(ops.messenger.add_printer(last_printer(ops)))),
         "rm" => format!(" {}", bit(ops.messenger.remove_printer(&last_printer(ops)))),
-        "rmt" => format!(" {}", ops.messenger.remove_printers(printer_type(step[1].as_bytes()[0]))),
+        "rmt" => format!(
+            " {}",
+            ops.messenger
+                .remove_printers(printer_type(step[1].as_bytes()[0]))
+        ),
         "send" => {
-            ops.messenger.send_c_str(&bytes(step[2]), Gravity::ALL[step[1].parse::<usize>().expect("gravity")]);
+            ops.messenger.send_c_str(
+                &bytes(step[2]),
+                Gravity::ALL[step[1].parse::<usize>().expect("gravity")],
+            );
             String::new()
         }
         "trace" => {
             let level = Gravity::ALL[step[1].parse::<usize>().expect("gravity")];
-            ops.collectors.iter().for_each(|collector| collector.set_trace_level(level));
+            ops.collectors
+                .iter()
+                .for_each(|collector| collector.set_trace_level(level));
             String::new()
         }
-        _ => {
+        "json" => {
             let mut json = DumpStream::default();
             ops.messenger.dump_json(&mut json, -1);
             format!(" J{}", hex(json.bytes()))
         }
+        _ => String::new(),
     }
 }
 
@@ -220,7 +272,10 @@ fn messenger_ops(input: &mut SplitWhitespace<'_>) -> String {
     }
     out.push_str(&format!(" n{}", ops.messenger.printers().len()));
     for collector in &ops.collectors {
-        out.push_str(&format!(" {}", hex(collector.log.lock().unwrap().as_bytes())));
+        out.push_str(&format!(
+            " {}",
+            hex(collector.log.lock().unwrap().as_bytes())
+        ));
     }
     out
 }
@@ -229,7 +284,11 @@ fn printer_file(input: &mut SplitWhitespace<'_>) -> String {
     let path = String::from_utf8(bytes(input.next().expect("path"))).expect("UTF-8 path");
     let prefill = bytes(input.next().expect("prefill"));
     let append = input.next().expect("append") != "0";
-    let trace = Gravity::ALL[input.next().expect("trace").parse::<usize>().expect("gravity")];
+    let trace = Gravity::ALL[input
+        .next()
+        .expect("trace")
+        .parse::<usize>()
+        .expect("gravity")];
     let colorize = input.next().expect("colorize") != "0";
     if let Some(parent) = std::path::Path::new(&path).parent() {
         std::fs::create_dir_all(parent).expect("probe directory");
@@ -244,7 +303,7 @@ fn printer_file(input: &mut SplitWhitespace<'_>) -> String {
         for step in rest(input) {
             let (gravity, text) = step.split_once(':').expect("gravity:text");
             let gravity = Gravity::ALL[gravity.parse::<usize>().expect("gravity")];
-            printer.send_ascii(&AsciiString::from_bytes(&bytes(text)), gravity);
+            printer.send_ascii(&AsciiString::from_bytes(bytes(text)), gravity);
         }
         printer.close();
         printer.send_ascii(&AsciiString::new("after close"), Gravity::Fail);

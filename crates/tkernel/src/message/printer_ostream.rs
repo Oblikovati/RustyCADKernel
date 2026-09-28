@@ -18,8 +18,8 @@ use super::{ConsoleColor, Gravity, Printer, PrinterBase, PrinterType};
 use crate::standard::{RuntimeType, RuntimeTyped};
 use crate::tcollection::AsciiString;
 use std::io::{self, Write};
-use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Mutex;
+use std::sync::atomic::{AtomicBool, Ordering};
 mod console;
 
 /// The destination of a stream printer; `None` once `close` ran.
