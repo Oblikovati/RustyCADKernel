@@ -105,7 +105,7 @@ fn TCollection_ExtendedStringTest__Prepend_PointerIntoSelfBeginning() {
 #[test]
 fn TCollection_ExtendedStringTest__OCC22744_NonAsciiCharIsNotAsciiAndCanBeUsedAsMapKey() {
     let mut string = ExtendedString::default();
-    string.insert(1, 0x0F00_u16);
+    string.insert(1, 0x0F00_u16).unwrap();
     assert!(!string.is_ascii());
     let mut map = DataMap::<ExtendedString, i32>::default();
     map.bind(string, 0);

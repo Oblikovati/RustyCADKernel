@@ -43,13 +43,13 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
     }
 }
 impl<A, B> DoubleMapItems<'_, A, B> {
-    fn seek(&mut self) {
+    pub(super) fn seek(&mut self) {
         while self.bucket < self.buckets.len() && self.index >= self.buckets[self.bucket].len() {
             self.bucket += 1;
             self.index = 0;
         }
     }
-    fn current(&self) -> Option<*const super::Pair<A, B>> {
+    pub(super) fn current(&self) -> Option<*const super::Pair<A, B>> {
         let slot = *self.buckets.get(self.bucket)?.get(self.index)?;
         Some(&**self.slots[slot].as_ref()? as *const super::Pair<A, B>)
     }

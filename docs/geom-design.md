@@ -30,11 +30,11 @@ dispatch. The handle is extended, not replaced:
 - `RuntimeTyped` gets `project_from(&dyn Transient) -> Option<&Self>`. Structs
   implement it with the existing projection and downcast; trait objects with a
   lookup in the dynamic descriptor.
-- `RuntimeType::with_interfaces` stores, for each abstract ancestor trait, an
+- `RuntimeType::register_with_interfaces` stores, for each abstract ancestor trait, an
   `InterfaceCaster<dyn Trait>`: a plain `fn(&dyn Transient) -> Option<&dyn Trait>`
   that the concrete class generates (`impl_transient!(..., interfaces: [...])`).
-  It downcasts to the concrete type and coerces. There is no `unsafe` and no
-  global registry: the caster lives in the static descriptor of the class.
+  It downcasts to the concrete type and coerces. There is no `unsafe`: the caster
+  lives in the class's registered descriptor (the `Standard_Type` registry).
 - `impl_transient_interface!(dyn Geom2dCurve, "Geom2d_Curve", dyn Geom2dGeometry)`
   gives each abstract class its own descriptor, so `DynamicType`, `IsKind`,
   `IsInstance` and names follow the native chain

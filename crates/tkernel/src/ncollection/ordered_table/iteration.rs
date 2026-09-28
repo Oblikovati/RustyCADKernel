@@ -17,6 +17,9 @@ impl<'a, K, V> OrderedItems<'a, K, V> {
         let node = self.slots.get(self.current?)?.as_ref()?;
         Some((&node.key, &node.value))
     }
+    pub fn restart(&mut self) {
+        self.current = self.first;
+    }
     pub fn advance(&mut self) {
         self.current = self
             .current
@@ -36,6 +39,7 @@ impl<K, V> Clone for OrderedItems<'_, K, V> {
         Self {
             slots: self.slots,
             current: self.current,
+            first: self.first,
         }
     }
 }
@@ -44,6 +48,7 @@ impl<K, V> Default for OrderedItems<'_, K, V> {
         Self {
             slots: &[],
             current: None,
+            first: None,
         }
     }
 }

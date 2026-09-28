@@ -13,10 +13,9 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! One-based sequences retain element allocations while rearranging their order.
+//! One-based OCCT sequences whose items live in individually allocated, stable nodes.
 use super::{AllocatedBox, BaseAllocator};
-// OCCT allocates a node even for empty C++ value types. Keep Rust zero-sized
-// values in nonzero storage so detached cursors still identify distinct nodes.
+use crate::standard::Failure;
 struct SequenceNode<T> {
     value: T,
     _allocation_identity: u8,
@@ -32,23 +31,27 @@ impl<T> std::ops::DerefMut for SequenceNode<T> {
         &mut self.value
     }
 }
-/// Stable allocator-owned elements with one-based access; `Sequence::default().append(42)`.
+/// Allocator-owned one-based sequence; `let mut s = Sequence::default(); s.append(1);`.
 pub struct Sequence<T> {
     resource: BaseAllocator,
     nodes: Vec<AllocatedBox<SequenceNode<T>>>,
 }
-/// Shared bidirectional traversal; `sequence.iter().rev()`.
+/// Shared double-ended iterator in index order; `sequence.iter()`.
 pub struct SequenceIter<'a, T> {
     remaining: std::slice::Iter<'a, AllocatedBox<SequenceNode<T>>>,
 }
-/// Exclusive bidirectional traversal; `sequence.iter_mut().next_back()`.
+/// Exclusive double-ended iterator in index order; `sequence.iter_mut()`.
 pub struct SequenceIterMut<'a, T> {
     remaining: std::slice::IterMut<'a, AllocatedBox<SequenceNode<T>>>,
 }
-/// Detached stable position; `sequence.cursor().value(&sequence)`.
-#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+/// Detached bidirectional node position (OCCT's `Sequence::Iterator`): the current node
+/// and the node before it; `let cursor = sequence.cursor()`.
+///
+/// Equality compares only the current node, as OCCT's `IsEqual` does.
+#[derive(Clone, Copy, Debug, Default)]
 pub struct SequenceCursor {
     address: Option<usize>,
+    previous: Option<usize>,
 }
 impl<T> Sequence<T> {
     /// Creates an empty sequence with a chosen allocator; `Sequence::<i32>::with_allocator(arena)`.
@@ -82,108 +85,46 @@ impl<T> Sequence<T> {
     pub fn upper(&self) -> usize {
         self.len()
     }
-    /// Borrows the first item; `sequence.first() == Some(&10)`.
+    /// Borrows the first item, `None` where OCCT raises NoSuchObject; `sequence.first() == Some(&10)`.
     pub fn first(&self) -> Option<&T> {
         self.nodes.first().map(|node| &node.value)
+    }
+    /// Borrows the first item exclusively (`ChangeFirst`); `*sequence.first_mut().unwrap() = 1`.
+    pub fn first_mut(&mut self) -> Option<&mut T> {
+        self.nodes.first_mut().map(|node| &mut node.value)
     }
     /// Borrows the final item; `sequence.last() == Some(&30)`.
     pub fn last(&self) -> Option<&T> {
         self.nodes.last().map(|node| &node.value)
     }
-    /// Borrows an item by one-based index; `sequence.value(1)`.
-    pub fn value(&self, index: usize) -> &T {
-        &self.nodes[self.offset(index)]
+    /// Borrows the final item exclusively (`ChangeLast`); `*sequence.last_mut().unwrap() = 3`.
+    pub fn last_mut(&mut self) -> Option<&mut T> {
+        self.nodes.last_mut().map(|node| &mut node.value)
     }
-    /// Borrows an item exclusively by one-based index; `*sequence.change_value(1)=10`.
-    pub fn change_value(&mut self, index: usize) -> &mut T {
-        let offset = self.offset(index);
-        &mut self.nodes[offset]
+    /// Borrows an item by one-based index; `sequence.value(1)?`.
+    pub fn value(&self, index: usize) -> Result<&T, Failure> {
+        let offset = self.offset("Value", index)?;
+        Ok(&self.nodes[offset])
     }
-    /// Replaces an existing item; `sequence.set_value(1, 10)`.
-    pub fn set_value(&mut self, index: usize, value: T) {
-        *self.change_value(index) = value;
+    /// Borrows an item exclusively by one-based index; `*sequence.change_value(1)? = 10`.
+    pub fn change_value(&mut self, index: usize) -> Result<&mut T, Failure> {
+        let offset = self.offset("ChangeValue", index)?;
+        Ok(&mut self.nodes[offset])
     }
-    /// Appends an independently allocated item; `sequence.append(10)`.
-    pub fn append(&mut self, value: T) -> &mut T {
-        self.insert_after(self.len(), value)
+    /// Replaces an existing item; `sequence.set_value(1, 10)?`.
+    pub fn set_value(&mut self, index: usize, value: T) -> Result<(), Failure> {
+        *self.change_value(index)? = value;
+        Ok(())
     }
-    /// Prepends an independently allocated item; `sequence.prepend(10)`.
-    pub fn prepend(&mut self, value: T) -> &mut T {
-        self.insert_after(0, value)
+    /// Borrows an item by zero-based offset; `sequence.at(0)?`.
+    pub fn at(&self, offset: usize) -> Result<&T, Failure> {
+        self.zero_based("At", offset)?;
+        self.value(offset + 1)
     }
-    /// Inserts before a one-based position; `sequence.insert_before(1, 10)`.
-    pub fn insert_before(&mut self, index: usize, value: T) -> &mut T {
-        assert!(
-            index > 0,
-            "Sequence index {index}; expected 1..={}",
-            self.len() + 1
-        );
-        self.insert_after(index - 1, value)
-    }
-    /// Inserts after an index, with zero meaning prepend; `sequence.insert_after(0, 10)`.
-    pub fn insert_after(&mut self, index: usize, value: T) -> &mut T {
-        assert!(
-            index <= self.len(),
-            "Sequence index {index}; expected 0..={}",
-            self.len()
-        );
-        self.nodes.insert(
-            index,
-            self.resource.allocate_value(SequenceNode {
-                value,
-                _allocation_identity: 0,
-            }),
-        );
-        &mut self.nodes[index]
-    }
-    /// Removes an existing item; `sequence.remove(1)`.
-    pub fn remove(&mut self, index: usize) {
-        let offset = self.offset(index);
-        self.nodes.remove(offset);
-    }
-    /// Removes an inclusive one-based range; `sequence.remove_range(2, 4)`.
-    pub fn remove_range(&mut self, first: usize, last: usize) {
-        let start = self.offset(first);
-        let end = self.offset(last);
-        assert!(
-            start <= end,
-            "Sequence range {first}..={last}; expected ascending bounds"
-        );
-        self.nodes.drain(start..=end);
-    }
-    /// Frees elements and optionally selects an allocator; `sequence.clear(Some(arena))`.
-    pub fn clear(&mut self, allocator: Option<BaseAllocator>) {
-        self.nodes.clear();
-        if let Some(resource) = allocator {
-            self.resource = resource;
-        }
-    }
-    /// Swaps two node positions without relocating elements; `sequence.exchange(2, 4)`.
-    pub fn exchange(&mut self, first: usize, second: usize) {
-        let a = self.offset(first);
-        let b = self.offset(second);
-        self.nodes.swap(a, b);
-    }
-    /// Reverses node order without relocating elements; `sequence.reverse()`.
-    pub fn reverse(&mut self) {
-        self.nodes.reverse();
-    }
-    /// Transfers the tail into a cleared destination; `sequence.split(2, &mut tail)`.
-    pub fn split(&mut self, index: usize, destination: &mut Self) {
-        let offset = self.offset(index);
-        destination.clear(Some(self.resource.clone()));
-        destination.nodes = self.nodes.split_off(offset);
-    }
-    /// Moves content while leaving the source empty with its allocator; `Sequence::move_from(&mut source)`.
-    pub fn move_from(source: &mut Self) -> Self {
-        Self {
-            resource: source.resource.clone(),
-            nodes: std::mem::take(&mut source.nodes),
-        }
-    }
-    /// Replaces ownership from another sequence; `sequence.move_assign(&mut source)`.
-    pub fn move_assign(&mut self, source: &mut Self) {
-        *self = Self::move_from(source);
+    /// Borrows an item exclusively by zero-based offset; `*sequence.change_at(0)? = 5`.
+    pub fn change_at(&mut self, offset: usize) -> Result<&mut T, Failure> {
+        self.zero_based("ChangeAt", offset)?;
+        self.change_value(offset + 1)
     }
     /// Borrows elements in order; `sequence.iter().sum::<i32>()`.
     pub fn iter(&self) -> SequenceIter<'_, T> {
@@ -199,17 +140,20 @@ impl<T> Sequence<T> {
     }
     /// Captures a position at the first element; `let cursor=sequence.cursor()`.
     pub fn cursor(&self) -> SequenceCursor {
-        SequenceCursor {
-            address: self.nodes.first().map(|node| address(&**node)),
-        }
+        SequenceCursor::new(self, true)
     }
-    fn offset(&self, index: usize) -> usize {
-        assert!(
-            index >= 1 && index <= self.len(),
-            "Sequence index {index}; expected 1..={}",
-            self.len()
-        );
-        index - 1
+    /// One-based index to vector offset, or OCCT's OutOfRange naming the index.
+    fn offset(&self, member: &str, index: usize) -> Result<usize, Failure> {
+        if index == 0 || index > self.len() {
+            return Err(out_of_range(member, index, &format!("1..={}", self.len())));
+        }
+        Ok(index - 1)
+    }
+    fn zero_based(&self, member: &str, offset: usize) -> Result<(), Failure> {
+        if offset >= self.len() {
+            return Err(out_of_range(member, offset, &format!("0..{}", self.len())));
+        }
+        Ok(())
     }
 }
 impl<T> Default for Sequence<T> {
@@ -226,19 +170,40 @@ impl<T> FromIterator<T> for Sequence<T> {
         sequence
     }
 }
+/// `sequence[i]` is OCCT's `operator()(i)`; it panics with the OutOfRange message where
+/// `value` returns the error.
 impl<T> std::ops::Index<usize> for Sequence<T> {
     type Output = T;
     fn index(&self, index: usize) -> &T {
         self.value(index)
+            .unwrap_or_else(|error| panic!("{}", error.message()))
     }
 }
 impl<T> std::ops::IndexMut<usize> for Sequence<T> {
     fn index_mut(&mut self, index: usize) -> &mut T {
         self.change_value(index)
+            .unwrap_or_else(|error| panic!("{}", error.message()))
     }
 }
 fn address<T>(value: &T) -> usize {
     value as *const T as usize
 }
+/// OCCT's `Standard_OutOfRange` for a sequence member, naming index and valid range.
+fn out_of_range(member: &str, index: usize, expected: &str) -> Failure {
+    Failure::out_of_range(&format!(
+        "NCollection_Sequence::{member} index {index}; expected {expected}"
+    ))
+}
+/// OCCT's `Standard_NoSuchObject` for a cursor that names no node of this sequence.
+fn no_such_node(member: &str, cursor: SequenceCursor) -> Failure {
+    Failure::with_type(
+        "Standard_NoSuchObject",
+        &format!(
+            "NCollection_Sequence::{member} cursor {cursor:?}; expected a node of this sequence"
+        ),
+        "",
+    )
+}
+mod editing;
 mod iteration;
 mod operations;

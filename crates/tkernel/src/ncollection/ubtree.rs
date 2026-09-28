@@ -14,8 +14,13 @@
 // commercial license or contractual agreement.
 
 //! Unbalanced bounding tree with explicit parent links and iterative traversal.
+//!
+//! Native `TreeNode*` links become node ids into the tree's arena: `UBTree::root_id`,
+//! `BoundingNode::child_id` and `BoundingNode::parent_id` name nodes, and the tree resolves
+//! them (`UBTree::child`, `UBTree::change_child`, ...).
 use super::{AllocatedBox, BaseAllocator};
 mod insertion;
+mod navigation;
 mod removal;
 /// Bounding geometry required by the native insertion algorithm.
 pub trait BoundingVolume: Clone {
@@ -44,6 +49,15 @@ pub struct BoundingNode<T, B> {
     parent: Option<usize>,
 }
 impl<T, B> BoundingNode<T, B> {
+    /// A detached leaf holding `object`, as `TreeNode(theObj, theBnd)`; `BoundingNode::new(1, bounds)`.
+    pub fn new(object: T, bounds: B) -> Self {
+        Self {
+            bounds,
+            object,
+            children: None,
+            parent: None,
+        }
+    }
     /// Distinguish object leaves from branches; `node.is_leaf()`.
     pub fn is_leaf(&self) -> bool {
         self.children.is_none()
@@ -59,6 +73,22 @@ impl<T, B> BoundingNode<T, B> {
     /// Borrow the geometry; `node.bounds()`.
     pub fn bounds(&self) -> &B {
         &self.bounds
+    }
+    /// Mutable geometry, as native `ChangeBnd`; `node.bounds_mut().add(&other)`.
+    pub fn bounds_mut(&mut self) -> &mut B {
+        &mut self.bounds
+    }
+    /// Arena id of child `index` (0 or 1), `None` for a leaf or another index.
+    /// Example: `tree.change_child(id, 0)` after `node.child_id(0)`.
+    pub fn child_id(&self, index: i32) -> Option<usize> {
+        let children: [usize; 2] = self.children?;
+        usize::try_from(index)
+            .ok()
+            .and_then(|slot| children.get(slot).copied())
+    }
+    /// Arena id of the parent, `None` for the root; `node.parent_id()`.
+    pub fn parent_id(&self) -> Option<usize> {
+        self.parent
     }
 }
 /// OCCT UBTree insertion and selection; `UBTree::<i32, Bounds>::default()`.
@@ -89,14 +119,27 @@ impl<T: Clone + Default, B: BoundingVolume> UBTree<T, B> {
     pub fn root(&self) -> Option<&BoundingNode<T, B>> {
         self.root.map(|index| self.node(index))
     }
+    /// Arena id of the root when present; `tree.root_id()`.
+    pub fn root_id(&self) -> Option<usize> {
+        self.root
+    }
     /// Preserve allocator identity; `tree.allocator()`.
     pub fn allocator(&self) -> &BaseAllocator {
         &self.resource
     }
     /// Release all nodes without recursive destruction; `tree.clear()`.
     pub fn clear(&mut self) {
+        self.clear_with_allocator(None);
+    }
+    /// Release all nodes, then adopt `allocator` for future nodes when given (native
+    /// `Clear(aNewAlloc)`, which also swaps the allocator of an empty tree).
+    /// Example: `tree.clear_with_allocator(Some(BaseAllocator::incremental(1024)))`.
+    pub fn clear_with_allocator(&mut self, allocator: Option<BaseAllocator>) {
         self.nodes.clear();
         self.root = None;
+        if let Some(resource) = allocator {
+            self.resource = resource;
+        }
     }
     /// Transfer nodes and leave an empty source; `UBTree::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {

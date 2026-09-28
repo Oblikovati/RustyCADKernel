@@ -216,7 +216,7 @@ fn OSD_PathTest__OCC310_TrekAndUpTrek() {
 #[test]
 fn OSD_PathTest__OCC309_CurrentDirectoryAndUpTrek() {
     // This legacy regression intentionally exercises the actual process directory.
-    let mut path = Process::current_directory().unwrap();
+    let mut path = Process::new().current_directory();
     let first = path.system_name();
     assert!(!first.is_empty());
     path.up_trek();

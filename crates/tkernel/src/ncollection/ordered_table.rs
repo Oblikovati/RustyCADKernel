@@ -35,6 +35,8 @@ pub(super) struct OrderedTable<K, V, H> {
 pub(super) struct OrderedItems<'a, K, V> {
     pub slots: &'a [Option<AllocatedBox<OrderedNode<K, V>>>],
     pub current: Option<usize>,
+    // The map's head when the iterator was created: native `Reset()` restarts there.
+    pub first: Option<usize>,
 }
 impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
     pub fn new(hasher: H, buckets: usize, resource: BaseAllocator) -> Self {
@@ -43,7 +45,8 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
             free: Vec::new(),
             buckets: Vec::new(),
             count: 0,
-            bucket_count: buckets.max(1),
+            // NCollection_BaseMap keeps a requested zero; the first insertion resizes to a prime.
+            bucket_count: buckets,
             first: None,
             last: None,
             resource,
@@ -152,10 +155,17 @@ impl<K, V, H: HashPolicy<K>> OrderedTable<K, V, H> {
             }
         }
     }
+    /// Native `Clear(theAllocator)`: release bucket storage only when the allocator changes,
+    /// then adopt `resource`, or the common allocator for a null handle.
+    pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
+        self.clear(resource.as_ref() != Some(&self.resource));
+        self.resource = resource.unwrap_or_else(BaseAllocator::common);
+    }
     pub fn items(&self) -> OrderedItems<'_, K, V> {
         OrderedItems {
             slots: &self.slots,
             current: self.first,
+            first: self.first,
         }
     }
 }
@@ -182,7 +192,20 @@ impl<K: Clone, V: Clone, H: HashPolicy<K> + Clone> Clone for OrderedTable<K, V, 
         copy
     }
 }
+/// `NCollection_BaseMap::nbBucketsFromInt`: a negative signed bucket count raises
+/// Standard_OutOfRange; `buckets_from_int(-1)` is an error naming -1.
+pub(super) fn buckets_from_int(buckets: i32) -> Result<usize, crate::standard::Failure> {
+    usize::try_from(buckets).map_err(|_| {
+        crate::standard::Failure::with_type(
+            "Standard_OutOfRange",
+            &format!("bucket count {buckets}; expected a non-negative count"),
+            "",
+        )
+    })
+}
 mod iteration;
+mod nodes;
+pub use nodes::{OrderedNodeMut, OrderedNodeRef};
 
 mod mutable;
 pub(super) use mutable::OrderedItemsMut;

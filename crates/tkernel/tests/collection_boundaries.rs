@@ -21,7 +21,13 @@ fn array_origins_and_checked_errors() {
 }
 #[test]
 fn rectangles_reject_wrong_shapes_and_indices() {
-    assert!(Array2::<i32>::with_bounds(2, 1, 0, 1).is_err());
+    // Native RangeSize(2, 1) == 0: an empty dimension; only a negative extent is refused.
+    let empty = Array2::<i32>::with_bounds(2, 1, 0, 1).unwrap();
+    assert_eq!(
+        (empty.nb_rows(), empty.nb_columns(), empty.len()),
+        (0, 2, 0)
+    );
+    assert!(Array2::<i32>::with_bounds(3, 1, 0, 1).is_err());
     assert!(Array2::<i32>::from_buffer(&mut [0; 3], 2, 2).is_err());
     let mut array = Array2::<i32>::with_size(2, 3);
     assert!(array.value(-1, 0).is_err());

@@ -19,16 +19,19 @@ impl<P: KdPoint, const D: usize> KDTree<P, D, false> {
     }
 }
 impl<P: KdPoint, const D: usize> KDTree<P, D, true> {
-    /// Copies equally sized point/radius arrays; `tree.build_radii(&points,&radii)`.
+    /// Copies the cloud and its first `points.len()` radii (native pointer overload, whose
+    /// count governs both buffers); `tree.build_radii(&points,&radii)`.
+    ///
+    /// # Panics
+    /// When `radii` is shorter than `points`: the native read runs past the buffer.
     pub fn build_radii(&mut self, points: &[P], radii: &[f64]) {
-        assert_eq!(
-            points.len(),
-            radii.len(),
-            "KDTree radii length {}; expected {}",
+        assert!(
+            radii.len() >= points.len(),
+            "KDTree radii length {}; expected at least {}",
             radii.len(),
             points.len()
         );
-        self.initialize(points, radii);
+        self.initialize(points, &radii[..points.len()]);
     }
 }
 impl<P: KdPoint, const D: usize, const R: bool> KDTree<P, D, R> {

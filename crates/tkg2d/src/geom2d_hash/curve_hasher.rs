@@ -25,7 +25,7 @@ use crate::geom2d::{
     Geom2dHyperbola, Geom2dLine, Geom2dOffsetCurve, Geom2dParabola, Geom2dTrimmedCurve,
 };
 use rustycad_tkernel::ncollection::HashPolicy;
-use rustycad_tkernel::standard::hashing::c_string_hash;
+use rustycad_tkernel::standard::c_string::CStringHasher;
 use rustycad_tkernel::standard::{Handle, RuntimeTyped};
 
 hasher_tolerances!(
@@ -84,7 +84,7 @@ impl Geom2dHashCurveHasher {
         if let Some(offset) = exact::<Geom2dOffsetCurve>(curve) {
             return Geom2dHashOffsetCurveHasher::new(comp, hash).hash(&offset);
         }
-        c_string_hash(name.as_bytes())
+        CStringHasher.hash_code(name.as_bytes())
     }
 
     /// Whether two curves are equal for deduplication (`operator()(handle, handle)`):

@@ -87,7 +87,10 @@ impl Color {
         }
         let hue = if hue == 360.0 { 0.0 } else { hue / 60.0 };
         let product = light * saturation;
-        let rgb = match hue as i32 {
+        // A NaN hue makes the native `(int)aHue` undefined; x86-64 cvttss2si yields INT_MIN,
+        // which reaches the "Color out" throw. Rust's saturating cast would give 0 instead.
+        let index = if hue.is_nan() { i32::MIN } else { hue as i32 };
+        let rgb = match index {
             0 => [light, light - product + product * hue, light - product],
             1 => [light + product - product * hue, light, light - product],
             2 => [
