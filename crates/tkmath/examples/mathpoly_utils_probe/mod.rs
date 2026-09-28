@@ -1,10 +1,17 @@
 //! MathPoly::Utils oracle counterpart; prints the same token stream as
 //! tools/oracle/tkmath_mathpoly_utils_probe.cxx.
 use crate::elementary_probe::{Fields, end, flag, real};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::math_poly::utils::{self, IterationResult, LongCoefficients};
 use rustycad_tkmath::math_poly::{Complex, LongDouble, PolyResult};
 mod complex_helpers;
 pub use complex_helpers::mathpoly_utils_complex_case;
+
+/// The corpus only sends requests within the native preconditions, so a precondition
+/// failure is a probe bug; it aborts the run instead of printing a native-looking token.
+pub fn valid<T>(checked: Result<T, Failure>) -> T {
+    checked.unwrap_or_else(|failure| panic!("probe request broke a precondition: {failure}"))
+}
 
 pub fn long(value: LongDouble) {
     if value.is_nan() {
@@ -95,7 +102,7 @@ pub fn mathpoly_utils_long_case(values: &[f64]) {
     flag(narrowed.is_some());
     real(narrowed.unwrap_or(91.0));
     let scaled_pair = ((0..=6).contains(&d))
-        .then(|| utils::scale_polynomial(&q.c, d))
+        .then(|| valid(utils::scale_polynomial(&q.c, d)))
         .flatten();
     flag(scaled_pair.is_some());
     print!("{} ", scaled_pair.map_or(77, |(_, power)| power));
@@ -118,36 +125,38 @@ fn widened(c: &[f64; 7], degree: i32) -> LongCoefficients {
 fn long_queries(q: &Request, scaled: &LongCoefficients) {
     let d = q.degree;
     let x = LongDouble::new(q.x);
-    let (value, derivative, magnitude) = utils::evaluate(scaled, d, x);
+    let (value, derivative, magnitude) = valid(utils::evaluate(scaled, d, x));
     [value, derivative, magnitude].into_iter().for_each(long);
-    flag(utils::has_small_residual(
+    flag(valid(utils::has_small_residual(
         scaled,
         d,
         x,
         utils::distinct_root_residual_tolerance(),
-    ));
-    flag(utils::has_small_residual(
+    )));
+    flag(valid(utils::has_small_residual(
         scaled,
         d,
         x,
         LongDouble::new(q.tolerance),
-    ));
-    long(utils::root_bound(scaled, d));
+    )));
+    long(valid(utils::root_bound(scaled, d)));
     // Only the first `count` seeds are read; the rest are overwritten or never printed.
     let mut roots: [LongDouble; 4] =
         [0, 1, 2, 3].map(|i| LongDouble::new(q.reals.get(i).copied().unwrap_or(0.0)));
     let mut count: usize = q.reals.len().min(3);
-    utils::append_unique(&mut roots, &mut count, x);
+    valid(utils::append_unique(&mut roots, &mut count, x));
     print!("{count} ");
     roots[..count].iter().copied().for_each(long);
     if (1..=4).contains(&d) {
         let mut found: [LongDouble; 4] = [LongDouble::ZERO; 4];
         let mut nb: usize = 0;
-        flag(utils::solve_distinct_real(scaled, d, &mut found, &mut nb));
+        flag(valid(utils::solve_distinct_real(
+            scaled, d, &mut found, &mut nb,
+        )));
         print!("{nb} ");
         found[..nb].iter().copied().for_each(long);
     }
     if d <= 4 {
-        poly_result(&utils::solve_direct(&q.c, d));
+        poly_result(&valid(utils::solve_direct(&q.c, d)));
     }
 }

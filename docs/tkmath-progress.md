@@ -393,10 +393,19 @@ and match OCCT exactly.
 Mapping rules: native pointers become a slice plus the native `int` degree, output
 references become return values (`evaluate` returns the value, derivative and magnitude
 triple) or `&mut` parameters, and the `THE_*` long-double constants are functions. A
-null pointer is `None` in `validate`. A slice shorter than `degree + 1`, a fifth
-distinct root in a four-root buffer, and a negative derivative degree are undefined
-behavior natively and panic on a bounds check here. `solve_distinct_real` with a
-degree below 1 recurses forever natively; Rust returns false.
+null pointer is `None` in `validate`. A slice shorter than `degree + 1`, a degree
+outside the `THE_MAX_POLY_DEGREE + 1` arrays, a fifth distinct root in a four-root
+buffer (`SolveDirect` above degree 4 with five distinct real roots), more than 10
+upper-half-plane roots in `ConsolidateComplexRoots`, and a multiplicity above
+`degree + 1` (a negative derivative degree) are undefined behavior natively. The helpers
+that can reach them return `Result` and raise Standard_OutOfRange there, naming the
+offending sizes and the expected shape; each check sits where native code first reads
+or writes out of range, so `LaguerreIteration` without an iteration and
+`DeflateComplex` with a non-finite factor still succeed on any degree, as natively.
+The solvers validate their input first, so their internal calls never fail (the
+unreachable failure arm would report `InvalidInput`), and every valid result keeps its
+native bits. `solve_distinct_real` with a degree below 1 recurses forever natively;
+Rust returns false.
 
 The differential probe found one earlier deviation: `LaguerreIteration` records a
 candidate only when `|p(z)| <= tolerance * max(1, magnitude)`. The private port tested

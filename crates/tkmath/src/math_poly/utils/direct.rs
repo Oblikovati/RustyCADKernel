@@ -13,27 +13,28 @@
 
 //! `SolveDirect`: closed-form linear and quadratic roots, long-double isolation above.
 use super::{
-    LongCoefficients, derivative, has_small_residual, long_coefficients,
-    root_multiplicity_tolerance, scale_polynomial, solve_distinct_real, to_double, validate,
+    LongCoefficients, derivative, long_coefficients, root_multiplicity_tolerance, scaled,
+    small_residual, solve_distinct_real, to_double, validate,
 };
 use crate::math_poly::PolyResult;
 use crate::math_poly::extended::{LongDouble, exponent, scale_double};
 use crate::math_utils::Status;
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::stl;
 /// `SolveDirect`: real roots with multiplicities of `c[0] + c[1] x + ... + c[degree] x^degree`
 /// after trailing zero coefficients are dropped. Degree 0 reports `InfiniteSolutions` or
 /// `NoSolution`; a failure keeps the roots already appended. Above degree 4 a fifth distinct
-/// real root overruns the native four-root buffer and panics here;
-/// `utils::solve_direct(&[-6.0, 11.0, -6.0, 1.0], 3)`.
-pub fn solve_direct(coefficients: &[f64], degree: i32) -> PolyResult {
+/// real root overruns the native four-root buffer; the port raises Standard_OutOfRange
+/// instead (degree 4 and below never reach it); `utils::solve_direct(&[-6.0, 11.0, -6.0, 1.0], 3)?`.
+pub fn solve_direct(coefficients: &[f64], degree: i32) -> Result<PolyResult, Failure> {
     if !validate(Some(coefficients), degree, 1.0) {
-        return PolyResult::failed(Status::InvalidInput);
+        return Ok(PolyResult::failed(Status::InvalidInput));
     }
     let mut degree: i32 = degree;
     while degree > 0 && coefficients[degree as usize] == 0.0 {
         degree -= 1;
     }
-    match degree {
+    Ok(match degree {
         0 => PolyResult::failed(if coefficients[0] == 0.0 {
             Status::InfiniteSolutions
         } else {
@@ -41,8 +42,8 @@ pub fn solve_direct(coefficients: &[f64], degree: i32) -> PolyResult {
         }),
         1 => linear_result(coefficients),
         2 => quadratic_result(coefficients),
-        _ => higher_result(coefficients, degree),
-    }
+        _ => higher_result(coefficients, degree)?,
+    })
 }
 fn linear_result(c: &[f64]) -> PolyResult {
     let Some(root) = to_double(-LongDouble::new(c[0]) / LongDouble::new(c[1])) else {
@@ -96,13 +97,13 @@ fn distinct_quadratic(first: f64, second: f64) -> PolyResult {
     }
     out
 }
-fn higher_result(c: &[f64], degree: i32) -> PolyResult {
+fn higher_result(c: &[f64], degree: i32) -> Result<PolyResult, Failure> {
     // Native code ignores the result; the trimmed leading coefficient is nonzero anyway.
-    let (scaled, power) = scale_polynomial(c, degree).unwrap_or((long_coefficients(), 0));
+    let (scaled, power) = scaled(c, degree).unwrap_or((long_coefficients(), 0));
     let mut roots: [LongDouble; 4] = [LongDouble::ZERO; 4];
     let mut count: usize = 0;
-    if !solve_distinct_real(&scaled, degree, &mut roots, &mut count) {
-        return PolyResult::failed(Status::NumericalError);
+    if !solve_distinct_real(&scaled, degree, &mut roots, &mut count)? {
+        return Ok(PolyResult::failed(Status::NumericalError));
     }
     stl::sort_by(&mut roots[..count], |a, b| a < b);
     let mut out: PolyResult = PolyResult::failed(Status::NotConverged);
@@ -111,16 +112,16 @@ fn higher_result(c: &[f64], degree: i32) -> PolyResult {
         let multiplicity: usize = multiplicity(&scaled, degree, root);
         let value: Option<f64> = to_double(root.scale(power));
         let (true, Some(value)) = (
-            has_small_residual(&scaled, degree, root, final_tolerance),
+            small_residual(&scaled, degree, root, final_tolerance),
             value,
         ) else {
             out.status = Status::NumericalError;
-            return out;
+            return Ok(out);
         };
         out.append(value, multiplicity);
     }
     out.status = Status::Ok;
-    out
+    Ok(out)
 }
 /// Counts how many successive derivatives also vanish at `root`.
 fn multiplicity(scaled: &LongCoefficients, degree: i32, root: LongDouble) -> usize {
@@ -130,7 +131,7 @@ fn multiplicity(scaled: &LongCoefficients, degree: i32, root: LongDouble) -> usi
     while count < degree as usize && current_degree > 0 {
         let next: LongCoefficients = derivative(&current, current_degree);
         current_degree -= 1;
-        if !has_small_residual(&next, current_degree, root, root_multiplicity_tolerance()) {
+        if !small_residual(&next, current_degree, root, root_multiplicity_tolerance()) {
             break;
         }
         count += 1;
