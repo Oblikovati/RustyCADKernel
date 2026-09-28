@@ -48,6 +48,9 @@
 #include "tkgeombase_probe_extrema_pc.cxx"
 #include "tkgeombase_probe_advapp2var_math.cxx"
 #include "tkgeombase_probe_advapp2var_math2.cxx"
+#include "tkgeombase_probe_advapp2var_eval.cxx"
+#include "tkgeombase_probe_advapp2var_f2var.cxx"
+#include "tkgeombase_probe_advapp2var_f2var2.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -190,6 +193,20 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"aa_mmarcin", gb_aa_mmarcin_case},
  {"aa_mmcvinv", gb_aa_mmcvinv_case},
  {"aa_mmmrslwd", gb_aa_mmmrslwd_case},
+ // AdvApp2Var_ApproxF2var (tkgeombase_probe_advapp2var_f2var.cxx, _f2var2.cxx)
+ {"aa_mma1her", gb_aa_mma1her_case},
+ {"aa_mma2roo", gb_aa_mma2roo_case},
+ {"aa_mma2jmx", gb_aa_mma2jmx_case},
+ {"aa_mmapptt", gb_aa_mmapptt_case},
+ {"aa_mma2ac1", gb_aa_mma2ac1_case},
+ {"aa_mma2ac2", gb_aa_mma2ac2_case},
+ {"aa_mma2ac3", gb_aa_mma2ac3_case},
+ {"aa_mma2can", gb_aa_mma2can_case},
+ {"aa_mma2cdi", gb_aa_mma2cdi_case},
+ {"aa_mma2ds1", gb_aa_mma2ds1_case},
+ {"aa_mma2ce1", gb_aa_mma2ce1_case},
+ {"aa_mma2fnc", gb_aa_mma2fnc_case},
+ {"aa_mma2fx6", gb_aa_mma2fx6_case},
 };
 int main() {
  std::string line;

@@ -36,6 +36,8 @@ def line(op: str, *fields: object) -> str:
 def append_advapp2var_requests(requests: list[str]) -> None:
     """Append every AdvApp2Var request family in a fixed order."""
     append_math_requests(requests)
+    approx = __import__('tkgeombase_corpus_advapp2var_approx')
+    approx.append_f2var_requests(requests)
 
 
 def append_math_requests(requests: list[str]) -> None:

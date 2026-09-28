@@ -3,7 +3,8 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    adv_math, adv_math2, gc, gce, gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d,
+    adv_f2var, adv_f2var2, adv_math, adv_math2, gc, gce, gprop, hermit, int_ana, int_ana2d, lprop,
+    pc2d, pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -153,6 +154,20 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("aa_mmarcin", adv_math2::mmarcin_case),
     ("aa_mmcvinv", adv_math2::mmcvinv_case),
     ("aa_mmmrslwd", adv_math2::mmmrslwd_case),
+    // AdvApp2Var_ApproxF2var (gb_probe/adv_f2var.rs, adv_f2var2.rs)
+    ("aa_mma1her", adv_f2var::mma1her_case),
+    ("aa_mma2roo", adv_f2var::mma2roo_case),
+    ("aa_mma2jmx", adv_f2var::mma2jmx_case),
+    ("aa_mmapptt", adv_f2var::mmapptt_case),
+    ("aa_mma2ac1", adv_f2var::mma2ac1_case),
+    ("aa_mma2ac2", adv_f2var::mma2ac2_case),
+    ("aa_mma2ac3", adv_f2var::mma2ac3_case),
+    ("aa_mma2can", adv_f2var::mma2can_case),
+    ("aa_mma2cdi", adv_f2var::mma2cdi_case),
+    ("aa_mma2ds1", adv_f2var::mma2ds1_case),
+    ("aa_mma2ce1", adv_f2var2::mma2ce1_case),
+    ("aa_mma2fnc", adv_f2var2::mma2fnc_case),
+    ("aa_mma2fx6", adv_f2var2::mma2fx6_case),
 ];
 
 fn main() {

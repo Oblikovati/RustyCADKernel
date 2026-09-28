@@ -42,6 +42,7 @@ mod truncation;
 mod vectors;
 
 pub use approx_errors::mmaperx_;
+pub(crate) use approx_errors::{XMAXJ_ORDER2, XMAXJ_ORDER4, XMAXJ_ORDER6};
 pub use bases::{mmhjcan_, mmpobas_};
 pub use compress::{mmapcmp_, mmfmca8_, mmfmca9_, mmfmcar_, mmfmcb5_, mmfmtb1_};
 pub use derivatives::{mmcdriv_, mmdrc11_, mmdrvck_};
