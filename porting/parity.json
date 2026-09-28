@@ -100786,6 +100786,1542 @@
       "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalTorus::evaluate_grid_dn",
       "status": "implemented",
       "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "LProp_BadContinuity",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_BadContinuity.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::bad_continuity",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CIType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CIType.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::CIType",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurAndInf()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurAndInf.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::CurAndInf::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurAndInf::AddInflection(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurAndInf.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::CurAndInf::add_inflection",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurAndInf::AddExtCur(double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurAndInf.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::CurAndInf::add_ext_cur",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurAndInf::Clear()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurAndInf.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::CurAndInf::clear",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurAndInf::IsEmpty() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurAndInf.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::CurAndInf::is_empty",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurAndInf::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurAndInf.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::CurAndInf::nb_points",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurAndInf::Parameter(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurAndInf.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::CurAndInf::parameter",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurAndInf::Type(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurAndInf.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::CurAndInf::type_of",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::Deref(T&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess",
+      "status": "excluded",
+      "notes": "C++-only template helper: it dereferences an occ::handle or returns a by-value object; a Rust Handle derefs itself, and the access policies return Standard_NullObject for a null handle (lprop::curve_access::live) instead of the native null dereference."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::Deref(occ::handle<T>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess",
+      "status": "excluded",
+      "notes": "C++-only template helper: it dereferences an occ::handle or returns a by-value object; a Rust Handle derefs itself, and the access policies return Standard_NullObject for a null handle (lprop::curve_access::live) instead of the native null dereference."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::Deref(const occ::handle<T>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess",
+      "status": "excluded",
+      "notes": "C++-only template helper: it dereferences an occ::handle or returns a by-value object; a Rust Handle derefs itself, and the access policies return Standard_NullObject for a null handle (lprop::curve_access::live) instead of the native null dereference."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::DirectAccess::D0(C&,double,P&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess::d0",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::DirectAccess::D1(C&,double,P&,V&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess::d1",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::DirectAccess::D2(C&,double,P&,V&,V&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess::d2",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::DirectAccess::D3(C&,double,P&,V&,V&,V&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess::d3",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::DirectAccess::FirstParameter(C&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess::first_parameter",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::DirectAccess::LastParameter(C&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::DirectAccess::last_parameter",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ToolAccess::D0(C&,double,P&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::ToolAccess::d0",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ToolAccess::D1(C&,double,P&,V&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::ToolAccess::d1",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ToolAccess::D2(C&,double,P&,V&,V&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::ToolAccess::d2",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ToolAccess::D3(C&,double,P&,V&,V&,V&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::ToolAccess::d3",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ToolAccess::FirstParameter(C&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::ToolAccess::first_parameter",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ToolAccess::LastParameter(C&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_access::ToolAccess::last_parameter",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::EvalDerivatives(Curve&,double,int,Pnt&,Vec*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::eval_derivatives",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ComputeTangent(Curve&,double,const Vec*,const Pnt&,int,Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::compute_tangent",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ComputeCurvature(const Vec&,const Vec&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::compute_curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ComputeNormal(const Vec&,const Vec&,Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::compute_normal",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::ComputeCentreOfCurvature(const Pnt&,const Vec&,const Vec&,double,Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::compute_centre_of_curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::SetParameter(Curve&,double,double&,int,Pnt&,Vec*,LProp_Status&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::set_parameter",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::EnsureDeriv(Curve&,double,int&,int,Pnt&,Vec*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::ensure_deriv",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::IsTangentDefined(Props&,int,double,int&,LProp_Status&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::is_tangent_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::Tangent(Props&,Curve&,double,const Vec*,const Pnt&,const int&,Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::tangent",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::Curvature(Props&,const Vec&,const Vec&,double,const int&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::Normal(Props&,const Vec&,const Vec&,double,Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::normal",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_CurveUtils::CentreOfCurvature(Props&,const Pnt&,const Vec&,const Vec&,double,double&,Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_CurveUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::curve_utils::centre_of_curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_NotDefined",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_NotDefined.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::not_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_Status",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/LProp/LProp_Status.hxx",
+      "rust_item": "rustycad_tkgeombase::lprop::Status",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp::Continuity(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&,double,double,bool,bool,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::continuity_with_tolerances",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp::Continuity(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&,double,double,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::continuity",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase(const CurveType&,int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase(const CurveType&,double,int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::with_parameter",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase(int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::without_curve",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::SetParameter(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::set_parameter",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::SetCurve(const CurveType&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::set_curve",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::value",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::D1()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::d1",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::D2()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::d2",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::D3()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::d3",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::IsTangentDefined()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::is_tangent_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::Tangent(Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::tangent",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::Curvature()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::Normal(Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::normal",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CLPropsBase::CentreOfCurvature(Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CLPropsBase::centre_of_curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2d()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CurAndInf2d.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CurAndInf2d::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2d::Perform(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CurAndInf2d.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CurAndInf2d::perform",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2d::PerformCurExt(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CurAndInf2d.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CurAndInf2d::perform_cur_ext",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2d::PerformInf(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CurAndInf2d.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CurAndInf2d::perform_inf",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2d::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_CurAndInf2d.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::CurAndInf2d::is_done",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase(const SurfaceType&,double,double,int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::with_parameters",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase(const SurfaceType&,int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase(int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::without_surface",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::SetSurface(const SurfaceType&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::set_surface",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::SetParameters(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::set_parameters",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::value",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::D1U()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::d1u",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::D1V()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::d1v",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::D2U()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::d2u",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::D2V()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::d2v",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::DUV()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::duv",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::IsTangentUDefined()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::is_tangent_u_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::TangentU(gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::tangent_u",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::IsTangentVDefined()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::is_tangent_v_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::TangentV(gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::tangent_v",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::IsNormalDefined()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::is_normal_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::Normal()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::normal",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::IsCurvatureDefined()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::is_curvature_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::IsUmbilic()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::is_umbilic",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::MaxCurvature()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::max_curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::MinCurvature()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::min_curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::CurvatureDirections(gp_Dir&,gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::curvature_directions",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::MeanCurvature()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::mean_curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GeomLProp_SLPropsBase::GaussianCurvature()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SLProps.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::SLPropsBase::gaussian_curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::Deref(T&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::DirectAccess",
+      "status": "excluded",
+      "notes": "C++-only template helper: it dereferences an occ::handle or returns a by-value object; a Rust Handle derefs itself, and the access policies return Standard_NullObject for a null handle (lprop::curve_access::live) instead of the native null dereference."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::Deref(occ::handle<T>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::DirectAccess",
+      "status": "excluded",
+      "notes": "C++-only template helper: it dereferences an occ::handle or returns a by-value object; a Rust Handle derefs itself, and the access policies return Standard_NullObject for a null handle (lprop::curve_access::live) instead of the native null dereference."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::Deref(const occ::handle<T>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::DirectAccess",
+      "status": "excluded",
+      "notes": "C++-only template helper: it dereferences an occ::handle or returns a by-value object; a Rust Handle derefs itself, and the access policies return Standard_NullObject for a null handle (lprop::curve_access::live) instead of the native null dereference."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::GetSurfBounds(const Geom_Surface&,double&,double&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::get_surf_bounds_geom",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::GetSurfBounds(const Adaptor3d_Surface&,double&,double&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::get_surf_bounds_adaptor",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::DirectAccess::D0(S&,double,double,gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::DirectAccess::d0",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::DirectAccess::D1(S&,double,double,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::DirectAccess::d1",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::DirectAccess::D2(S&,double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::DirectAccess::d2",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::DirectAccess::Bounds(S&,double&,double&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::DirectAccess::bounds",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::ToolAccess::D0(S&,double,double,gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::ToolAccess::d0",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::ToolAccess::D1(S&,double,double,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::ToolAccess::d1",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::ToolAccess::D2(S&,double,double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::ToolAccess::d2",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::ToolAccess::Bounds(S&,double&,double&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_access::ToolAccess::bounds",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::EvalSurfDerivatives(Surface&,double,double,int,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::eval_surf_derivatives",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::FindSurfTangentOrder(const gp_Vec&,const gp_Vec&,int,double,int&,LProp_Status&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::find_surf_tangent_order",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::ComputeSurfTangent(Surface&,double,double,const gp_Vec&,const gp_Vec&,int,bool,gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::compute_surf_tangent",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::ComputeSurfNormal(const gp_Vec&,const gp_Vec&,double,gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::compute_surf_normal",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::ComputeSurfCurvatures(const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Dir&,double&,double&,gp_Dir&,gp_Dir&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::compute_surf_curvatures",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::SetParameters(Surface&,double,double,double&,double&,int,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,LProp_Status&,LProp_Status&,LProp_Status&,LProp_Status&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::set_parameters",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::EnsureSurfDeriv(Surface&,double,double,int&,int,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,gp_Vec&,const gp_Vec&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::ensure_surf_deriv",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::IsTangentUDefined(Props&,int,double,int&,LProp_Status&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::is_tangent_u_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::IsTangentVDefined(Props&,int,double,int&,LProp_Status&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::is_tangent_v_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::TangentU(Props&,Surface&,double,double,const gp_Vec&,const gp_Vec&,int,gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::tangent_u",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::TangentV(Props&,Surface&,double,double,const gp_Vec&,const gp_Vec&,int,gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::tangent_v",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::IsNormalDefined(const gp_Vec&,const gp_Vec&,double,gp_Dir&,LProp_Status&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::is_normal_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::Normal(Props&,const gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::normal",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::IsCurvatureDefined(Props&,int,int&,const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Dir&,double&,double&,gp_Dir&,gp_Dir&,double&,double&,LProp_Status&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::is_curvature_defined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::RequireCurvature(Props&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::require_curvature",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::IsUmbilic(Props&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::is_umbilic",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "LProp_SurfaceUtils::CurvatureDirections(Props&,const gp_Dir&,const gp_Dir&,gp_Dir&,gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLProp/GeomLProp_SurfaceUtils.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lprop::surface_utils::curvature_directions",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp::HOperator(const gp_Pnt&,const gp_Pnt&,double,gp_Mat&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::h_operator",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_CelGProps()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_CelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::CelGProps::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_CelGProps(const gp_Circ&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_CelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::CelGProps::from_circle",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_CelGProps(const gp_Circ&,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_CelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::CelGProps::from_circle_arc",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_CelGProps(const gp_Lin&,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_CelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::CelGProps::from_line",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_CelGProps::SetLocation(const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_CelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::CelGProps::set_location",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_CelGProps::Perform(const gp_Circ&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_CelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::CelGProps::perform_circle",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_CelGProps::Perform(const gp_Lin&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_CelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::CelGProps::perform_line",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps(const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::with_location",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps::Add(const GProp_GProps&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::add",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps::Mass() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::mass",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps::CentreOfMass() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::centre_of_mass",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps::MatrixOfInertia() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::matrix_of_inertia",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps::StaticMoments(double&,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::static_moments",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps::MomentOfInertia(const gp_Ax1&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::moment_of_inertia",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps::PrincipalProperties() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::principal_properties",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_GProps::RadiusOfGyration(const gp_Ax1&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_GProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::GProps::radius_of_gyration",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::Type",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquationType",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation(const NCollection_Array1<gp_Pnt>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::GetType() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::get_type",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::IsPlanar() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::is_planar",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::IsLinear() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::is_linear",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::IsPoint() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::is_point",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::IsSpace() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::is_space",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::Plane() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::plane",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::Line() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::line",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::Point() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::point",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::Box(gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::box_",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::Barycentre() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::barycentre",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::PrincipalAxis(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::principal_axis",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PEquation::Extent(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PEquation.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PEquation::extent",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps(const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::from_points",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps(const NCollection_Array2<gp_Pnt>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::from_points_2d",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::from_weighted_points",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::from_weighted_points_2d",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps::AddPoint(const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::add_point",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps::AddPoint(const gp_Pnt&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::add_weighted_point",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps::Barycentre(const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::barycentre",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps::Barycentre(const NCollection_Array2<gp_Pnt>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::barycentre_2d",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps::Barycentre(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,double&,gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::weighted_barycentre",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PGProps::Barycentre(const NCollection_Array2<gp_Pnt>&,const NCollection_Array2<double>&,double&,gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PGProps::weighted_barycentre_2d",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::undefined",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps::HasSymmetryAxis() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::has_symmetry_axis",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps::HasSymmetryAxis(double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::has_symmetry_axis_with_tolerance",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps::HasSymmetryPoint() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::has_symmetry_point",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps::HasSymmetryPoint(double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::has_symmetry_point_with_tolerance",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps::Moments(double&,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::moments",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps::FirstAxisOfInertia() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::first_axis_of_inertia",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps::SecondAxisOfInertia() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::second_axis_of_inertia",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps::ThirdAxisOfInertia() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::third_axis_of_inertia",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_PrincipalProps::RadiusOfGyration(double&,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_PrincipalProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::PrincipalProps::radius_of_gyration",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps(const gp_Cylinder&,double,double,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::from_cylinder",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps(const gp_Cone&,double,double,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::from_cone",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps(const gp_Sphere&,double,double,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::from_sphere",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps(const gp_Torus&,double,double,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::from_torus",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps::SetLocation(const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::set_location",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps::Perform(const gp_Cylinder&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::perform_cylinder",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps::Perform(const gp_Cone&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::perform_cone",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps::Perform(const gp_Sphere&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::perform_sphere",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_SelGProps::Perform(const gp_Torus&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_SelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::SelGProps::perform_torus",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_UndefinedAxis",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_UndefinedAxis.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::undefined_axis",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_ValueType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_ValueType.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::ValueType",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::new",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps(const gp_Cylinder&,double,double,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::from_cylinder",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps(const gp_Cone&,double,double,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::from_cone",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps(const gp_Sphere&,double,double,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::from_sphere",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps(const gp_Torus&,double,double,double,double,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::from_torus",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps::SetLocation(const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::set_location",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps::Perform(const gp_Cylinder&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::perform_cylinder",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps::Perform(const gp_Cone&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::perform_cone",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps::Perform(const gp_Sphere&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::perform_sphere",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "GProp_VelGProps::Perform(const gp_Torus&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GProp/GProp_VelGProps.hxx",
+      "rust_item": "rustycad_tkgeombase::gprop::VelGProps::perform_torus",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Hermit::Solution(const occ::handle<Geom_BSplineCurve>&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Hermit/Hermit.hxx",
+      "rust_item": "rustycad_tkgeombase::hermit::solution_3d",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Hermit::Solution(const occ::handle<Geom2d_BSplineCurve>&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Hermit/Hermit.hxx",
+      "rust_item": "rustycad_tkgeombase::hermit::solution_2d",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Hermit::Solutionbis(const occ::handle<Geom_BSplineCurve>&,double&,double&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Hermit/Hermit.hxx",
+      "rust_item": "rustycad_tkgeombase::hermit::solutionbis",
+      "status": "implemented",
+      "notes": "LProp/GeomLProp/GProp/Hermit mapping (docs/tkgeombase-progress.md): C++ output references become returned values, overloads take distinct Rust names, class templates are generic structs over the curve/surface type and an access-policy trait, derived frameworks reach their base through Deref, and exceptions become Failure errors."
     }
   ],
   "tests": [
@@ -166710,6 +168246,888 @@
       "rust_target": "geom_adaptor_transformed_surface",
       "rust_test": "GeomAdaptor_TransformedSurfaceTest__GridEvalUsesTransformedGeometryOnlyOnce",
       "rust_source": "crates/tkg3d/tests/geom_adaptor_transformed_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.DefaultConstructor_IsEmpty",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__DefaultConstructor_IsEmpty",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.AddInflection",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__AddInflection",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.AddExtCur_Minimum",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__AddExtCur_Minimum",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.AddExtCur_Maximum",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__AddExtCur_Maximum",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.MultiplePoints_SortedByParameter",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__MultiplePoints_SortedByParameter",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.MultiplePoints_CorrectTypes",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__MultiplePoints_CorrectTypes",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.Clear",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__Clear",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.Clear_ThenRefill",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__Clear_ThenRefill",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.Parameter_OutOfRange_Throws",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__Parameter_OutOfRange_Throws",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "LProp_CurAndInfTest.Type_OutOfRange_Throws",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/LProp_CurAndInf_Test.cxx",
+      "source_sha256": "a2c9a42f703add74201caaa75114c9207122013e42982cfe8a00477e6ece8174",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "lprop_cur_and_inf",
+      "rust_test": "LProp_CurAndInfTest__Type_OutOfRange_Throws",
+      "rust_source": "crates/tkgeombase/tests/lprop_cur_and_inf.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Circle_Value",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Circle_Value",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Circle_SetParameter",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Circle_SetParameter",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Circle_TangentDefined",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Circle_TangentDefined",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Circle_TangentAtZero",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Circle_TangentAtZero",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Circle_Curvature",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Circle_Curvature",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Circle_CurvatureConstant",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Circle_CurvatureConstant",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Circle_Normal",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Circle_Normal",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Circle_CentreOfCurvature",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Circle_CentreOfCurvature",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Circle_CentreOfCurvature_AtPiHalf",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Circle_CentreOfCurvature_AtPiHalf",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Line_TangentDefined",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Line_TangentDefined",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Line_Tangent",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Line_Tangent",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Line_CurvatureIsZero",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Line_CurvatureIsZero",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Line_CentreOfCurvature_Throws",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Line_CentreOfCurvature_Throws",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Ellipse_CurvatureAtMajorVertex",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Ellipse_CurvatureAtMajorVertex",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.Ellipse_CurvatureAtMinorVertex",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__Ellipse_CurvatureAtMinorVertex",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.SetCurve",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__SetCurve",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.D1_Circle",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__D1_Circle",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CLProps2dTest.D2_Circle",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CLProps2d_Test.cxx",
+      "source_sha256": "b839a71332efc8fea5fbcda1c4f7e1927222dd12e81ad661074b333bbd4e1434",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_clprops2d",
+      "rust_test": "GeomLProp_CLProps2dTest__D2_Circle",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_clprops2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Circle_Perform_NoInflections",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Circle_Perform_NoInflections",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Circle_PerformInf_NoInflections",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Circle_PerformInf_NoInflections",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Circle_PerformCurExt_NoExtrema",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Circle_PerformCurExt_NoExtrema",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Ellipse_PerformCurExt_HasExtrema",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Ellipse_PerformCurExt_HasExtrema",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Ellipse_PerformCurExt_Types",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Ellipse_PerformCurExt_Types",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Ellipse_PerformCurExt_Parameters",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Ellipse_PerformCurExt_Parameters",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Ellipse_PerformInf_NoInflections",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Ellipse_PerformInf_NoInflections",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Ellipse_Perform_CombinedResult",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Ellipse_Perform_CombinedResult",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Ellipse_CurvatureExtremaAtExpectedParameters",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Ellipse_CurvatureExtremaAtExpectedParameters",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Hyperbola_PerformCurExt_VertexOnly",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Hyperbola_PerformCurExt_VertexOnly",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Hyperbola_PerformInf_NoInflections",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Hyperbola_PerformInf_NoInflections",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.Parabola_PerformCurExt_VertexOnly",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__Parabola_PerformCurExt_VertexOnly",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLProp_CurAndInf2dTest.PerformInf_ClearsPreviousExtrema",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLProp_CurAndInf2d_Test.cxx",
+      "source_sha256": "68b81cc80da343539b67c3bc34aa4634ea0120538510ec154869d7b1baa85cc3",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lprop_cur_and_inf2d",
+      "rust_test": "GeomLProp_CurAndInf2dTest__PerformInf_ClearsPreviousExtrema",
+      "rust_source": "crates/tkgeombase/tests/geom_lprop_cur_and_inf2d.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PEquationTest.CoincidentPoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PEquation_Test.cxx",
+      "source_sha256": "747ee168d5095243d20e5ec7704d27f8b4d17a9a9bf49d98d1cac79b653d7211",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pequation",
+      "rust_test": "GProp_PEquationTest__CoincidentPoints",
+      "rust_source": "crates/tkgeombase/tests/gprop_pequation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PEquationTest.CollinearPoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PEquation_Test.cxx",
+      "source_sha256": "747ee168d5095243d20e5ec7704d27f8b4d17a9a9bf49d98d1cac79b653d7211",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pequation",
+      "rust_test": "GProp_PEquationTest__CollinearPoints",
+      "rust_source": "crates/tkgeombase/tests/gprop_pequation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PEquationTest.CoplanarPoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PEquation_Test.cxx",
+      "source_sha256": "747ee168d5095243d20e5ec7704d27f8b4d17a9a9bf49d98d1cac79b653d7211",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pequation",
+      "rust_test": "GProp_PEquationTest__CoplanarPoints",
+      "rust_source": "crates/tkgeombase/tests/gprop_pequation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PEquationTest.SpacePoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PEquation_Test.cxx",
+      "source_sha256": "747ee168d5095243d20e5ec7704d27f8b4d17a9a9bf49d98d1cac79b653d7211",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pequation",
+      "rust_test": "GProp_PEquationTest__SpacePoints",
+      "rust_source": "crates/tkgeombase/tests/gprop_pequation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PGPropsTest.EmptySet",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PGProps_Test.cxx",
+      "source_sha256": "eb5bf374612b360a5e0e01345cfa8daf7f77ecfd70b0539840964a354f3a0f44",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pgprops",
+      "rust_test": "GProp_PGPropsTest__EmptySet",
+      "rust_source": "crates/tkgeombase/tests/gprop_pgprops.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PGPropsTest.SinglePoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PGProps_Test.cxx",
+      "source_sha256": "eb5bf374612b360a5e0e01345cfa8daf7f77ecfd70b0539840964a354f3a0f44",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pgprops",
+      "rust_test": "GProp_PGPropsTest__SinglePoint",
+      "rust_source": "crates/tkgeombase/tests/gprop_pgprops.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PGPropsTest.TwoPoints_Barycentre",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PGProps_Test.cxx",
+      "source_sha256": "eb5bf374612b360a5e0e01345cfa8daf7f77ecfd70b0539840964a354f3a0f44",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pgprops",
+      "rust_test": "GProp_PGPropsTest__TwoPoints_Barycentre",
+      "rust_source": "crates/tkgeombase/tests/gprop_pgprops.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PGPropsTest.WeightedPoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PGProps_Test.cxx",
+      "source_sha256": "eb5bf374612b360a5e0e01345cfa8daf7f77ecfd70b0539840964a354f3a0f44",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pgprops",
+      "rust_test": "GProp_PGPropsTest__WeightedPoints",
+      "rust_source": "crates/tkgeombase/tests/gprop_pgprops.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PGPropsTest.ArrayConstructor",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PGProps_Test.cxx",
+      "source_sha256": "eb5bf374612b360a5e0e01345cfa8daf7f77ecfd70b0539840964a354f3a0f44",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pgprops",
+      "rust_test": "GProp_PGPropsTest__ArrayConstructor",
+      "rust_source": "crates/tkgeombase/tests/gprop_pgprops.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PGPropsTest.StaticBarycentre",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PGProps_Test.cxx",
+      "source_sha256": "eb5bf374612b360a5e0e01345cfa8daf7f77ecfd70b0539840964a354f3a0f44",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pgprops",
+      "rust_test": "GProp_PGPropsTest__StaticBarycentre",
+      "rust_source": "crates/tkgeombase/tests/gprop_pgprops.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GProp_PGPropsTest.MatrixOfInertia_SymmetricPoints",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GProp_PGProps_Test.cxx",
+      "source_sha256": "eb5bf374612b360a5e0e01345cfa8daf7f77ecfd70b0539840964a354f3a0f44",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "gprop_pgprops",
+      "rust_test": "GProp_PGPropsTest__MatrixOfInertia_SymmetricPoints",
+      "rust_source": "crates/tkgeombase/tests/gprop_pgprops.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solution3D_UniformWeights_ReturnsValidCurve",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solution3D_UniformWeights_ReturnsValidCurve",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solution3D_DistinctWeights_ReturnsValidCurve",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solution3D_DistinctWeights_ReturnsValidCurve",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solution3D_HighWeightRatio_Endpoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solution3D_HighWeightRatio_Endpoint",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solution3D_ReversedWeightRatio_Endpoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solution3D_ReversedWeightRatio_Endpoint",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solution3D_PositivePoles",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solution3D_PositivePoles",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solution2D_UniformWeights_ReturnsValidCurve",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solution2D_UniformWeights_ReturnsValidCurve",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solution2D_DistinctWeights_ReturnsValidCurve",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solution2D_DistinctWeights_ReturnsValidCurve",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solution2D_HighWeightRatio_Endpoint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solution2D_HighWeightRatio_Endpoint",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solutionbis_UniformWeights_KnotsUnchanged",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solutionbis_UniformWeights_KnotsUnchanged",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solutionbis_DistinctWeights_ReturnsValidKnots",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solutionbis_DistinctWeights_ReturnsValidKnots",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "HermitTest.Solution3D_Symmetric_WeightsProduceSymmetricResult",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/Hermit_Test.cxx",
+      "source_sha256": "6eca17ddaa387175a851b4304a05d24302fc0a3496aed46afd5393ad4c9b2240",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "hermit",
+      "rust_test": "HermitTest__Solution3D_Symmetric_WeightsProduceSymmetricResult",
+      "rust_source": "crates/tkgeombase/tests/hermit.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

@@ -17,3 +17,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_intana2d').append_intana2d_requests(requests)
     # IntAna (tkgeombase_corpus_intana.py, tkgeombase_corpus_intana_geo.py)
     __import__('tkgeombase_corpus_intana').append_intana_requests(requests)
+    # LProp, GeomLProp, GProp and Hermit (tkgeombase_corpus_lprop.py)
+    __import__('tkgeombase_corpus_lprop').append_lprop_requests(requests)

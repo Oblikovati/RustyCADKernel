@@ -22,6 +22,10 @@
 pub mod gc;
 pub mod gce;
 pub mod gce2d;
+pub mod geom_lprop;
+pub mod gprop;
+pub mod hermit;
 pub mod int_ana;
 pub mod int_ana2d;
 mod line_extrema;
+pub mod lprop;
