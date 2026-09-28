@@ -3,6 +3,8 @@ mod array1;
 pub use array1::Array1;
 mod array_error;
 pub use array_error::ArrayError;
+mod h_array1_of_real;
+pub use h_array1_of_real::HArray1OfReal;
 mod local_array;
 pub use local_array::LocalArray;
 mod array2;

@@ -45018,6 +45018,38 @@
       "rust_item": "rustycad_tkmath::math::VectorBase::resize",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics."
+    },
+    {
+      "upstream_id": "NCollection_HArray1(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::with_bounds",
+      "status": "implemented",
+      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+    },
+    {
+      "upstream_id": "NCollection_HArray1(const Array1Type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::from_array",
+      "status": "implemented",
+      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+    },
+    {
+      "upstream_id": "NCollection_HArray1::Array1() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::array1",
+      "status": "implemented",
+      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+    },
+    {
+      "upstream_id": "NCollection_HArray1::ChangeArray1()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::change_array1",
+      "status": "implemented",
+      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
     }
   ],
   "tests": [

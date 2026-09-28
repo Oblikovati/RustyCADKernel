@@ -15,11 +15,13 @@ pub use hashing::hash_bytes;
 
 mod handle;
 mod runtime_type;
+mod shared_state;
 mod transient;
 pub use handle::{Handle, HandleView};
 pub use runtime_type::{
     InterfaceCaster, InterfaceEntry, RuntimeType, RuntimeTyped, project_interface,
 };
+pub use shared_state::SharedState;
 pub use transient::{StandardTransient, Transient};
 pub mod dump;
 pub mod integer;
