@@ -10,47 +10,14 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of the anonymous-namespace helpers of ModelingData/TKG2d/Geom2dEval/*.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of the local frame and failures of ModelingData/TKG2d/Geom2dEval/*.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! Helpers that the Geom2dEval curve sources each define in their anonymous
-//! namespace (`trigShiftByQuarterTurns`, `evalTrigPairNthDeriv`, `powInt`,
-//! `fallingFactorial`), written once, plus the local frame and the failures that
-//! every eval curve shares.
+//! The local frame and the failures that every Geom2dEval curve shares; the
+//! numeric helpers of the anonymous namespaces (`powInt`, `trigShiftByQuarterTurns`...)
+//! live in `eval_basis`, which GeomEval shares.
 use crate::geom2d::errors;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Axis2d, Point2, Vector2, Xy};
-
-/// `(sin, cos)` of `t + n * Pi / 2` from `sin t` and `cos t`
-/// (`trigShiftByQuarterTurns`, `evalTrigPairNthDeriv`, the inline `switch (N & 3)`);
-/// `trig_shift(0.0, 1.0, 1) == (1.0, -0.0)`.
-pub(crate) fn trig_shift(sin: f64, cos: f64, n: i32) -> (f64, f64) {
-    match n & 3 {
-        0 => (sin, cos),
-        1 => (cos, -sin),
-        2 => (-sin, -cos),
-        _ => (-cos, sin),
-    }
-}
-
-/// `base` multiplied `exponent` times into 1.0, left to right (`powInt`); a negative
-/// exponent gives 1.0 as the native loop does; `pow_int(2.0, 3) == 8.0`.
-pub(crate) fn pow_int(base: f64, exponent: i32) -> f64 {
-    let mut result: f64 = 1.0;
-    for _ in 0..exponent {
-        result *= base;
-    }
-    result
-}
-
-/// `n * (n - 1) * ... * (n - k + 1)` in doubles (`fallingFactorial`);
-/// `falling_factorial(5, 2) == 20.0`.
-pub(crate) fn falling_factorial(n: i32, k: i32) -> f64 {
-    let mut result: f64 = 1.0;
-    for i in 0..k {
-        result *= f64::from(n - i);
-    }
-    result
-}
 
 /// The `anO`, `aXD` and `aYD = (-aXD.Y(), aXD.X())` that every analytic eval curve
 /// reads from its `gp_Ax2d`; `LocalFrame::new(axis).point(1.0, 0.0)`.
