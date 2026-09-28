@@ -3,15 +3,15 @@
 **In progress; toolkit acceptance is not complete.** `crates/tkgeombase`
 (`rustycad-tkgeombase`) is the port of the ModelingData toolkit TKGeomBase. It
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
-does. Packages are added one module at a time. The `gce`, `GC` and `GCE2d` packages
-are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0 stale api
-rows for each of them.
+does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `LProp`,
+`GeomLProp`, `GProp` and `Hermit` packages are ported in full, and
+`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (62 declarations):
+passes (125 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -26,8 +26,15 @@ passes (62 declarations):
 | GC_MakeParabola2d_Test.cxx | gc_make_parabola2d | 3 |
 | GC_MakePlane_Test.cxx | gc_make_plane | 3 |
 | GC_MakeSegment2d_Test.cxx | gc_make_segment2d | 6 |
+| LProp_CurAndInf_Test.cxx | lprop_cur_and_inf | 10 |
+| GeomLProp_CLProps2d_Test.cxx | geom_lprop_clprops2d | 18 |
+| GeomLProp_CurAndInf2d_Test.cxx | geom_lprop_cur_and_inf2d | 13 |
+| GProp_PEquation_Test.cxx | gprop_pequation | 4 |
+| GProp_PGProps_Test.cxx | gprop_pgprops | 7 |
+| Hermit_Test.cxx | hermit | 11 |
 
-`gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
+`local_props_behavior.rs` covers the LProp, GeomLProp, GProp and Hermit quirks
+below. `gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
 StdFail_NotDone results, the conversion operators, the GCE2d aliases and the native
 quirks below.
 
@@ -96,7 +103,22 @@ scale factors and bad cone angles at both resolution bounds. They leave out the 
 for which a GC constructor reads the status of a stack gce algorithm on one of its
 unassigned paths (three points within gp::Resolution() for `GC_MakeCircle` and
 `GC_MakeArcOfCircle`, collinear points for their 2D versions): the native status is
-indeterminate there. The corpus has 4449 requests (gce and GC).
+indeterminate there.
+
+The LProp, GeomLProp, GProp and Hermit requests (`tkgeombase_corpus_lprop.py`) build
+every Geom and Geom2d curve kind (line, conics, rational Bezier and B-spline curves
+with C0, C1 and C2 joints, trimmed and offset curves) and every surface kind
+(elementary, rational B-spline with a collapsed edge, revolution, extrusion, offset),
+and probe them at regular points, range ends, points outside the range, null first
+derivatives (coincident poles), inflections, straight parts, sphere poles and cone
+apices. The property classes run in four call orders (fresh object, stale-first
+order, one object moved by SetParameter, construction without a curve), because they
+cache lazily and two native reads are by value. GProp prints every property of point
+sets (unit, weighted, 1D and 2D arrays, null and negative masses), point equations at
+three tolerances, every elementary framework (including null ranges, where Jacobi
+fails) and compositions at other locations; Hermit covers weight ratios up to 1e6 and
+the tolerance failures. The corpus has 5282 requests (gce, GC, LProp, GeomLProp, GProp
+and Hermit).
 
 ## Preserved native behaviour
 
@@ -163,3 +185,56 @@ GC and GCE2d:
 - The GC transformation makers set a new Geom transformation through its own setter:
   `GC_MakeTranslation(P1, P2)` uses `gp_Trsf::SetTranslation(P1, P2)` where
   gce_MakeTranslation builds `gp_Vec(P1, P2)` first.
+
+LProp and GeomLProp:
+
+- `GeomLProp_CLPropsBase` and `GeomLProp_SLPropsBase` are class templates over the
+  curve or surface type and an access policy. The port makes them generic structs:
+  `CLPropsBase<V, C, A>` (V the derivative type, `gp_Vec` or `gp_Vec2d`) and
+  `SLPropsBase<S, A>`, with the `DirectAccess`/`ToolAccess` policies as traits;
+  `GeomLProp_CLProps`, `GeomLProp_CLProps2d`, `LProp_CLProps3d` and
+  `GeomLProp_SLProps` are type aliases. The `LProp_CurveUtils` and
+  `LProp_SurfaceUtils` helpers take the property object and read the fields it
+  upgraded after the call, as the native references do; a null curve or surface
+  handle gives Standard_NullObject where the native code dereferences it.
+- `LProp_SurfaceUtils::RequireCurvature` and `IsUmbilic` take the curvature fields by
+  value, read before the curvature is computed: the first `MaxCurvature()`,
+  `MinCurvature()`, `MeanCurvature()`, `GaussianCurvature()` or `IsUmbilic()` of a
+  point answers with the values of the previous point (0 on a fresh object).
+- `LProp_SurfaceUtils::TangentU`/`TangentV` take the significant derivative order by
+  value, read before `IsTangentUDefined()` sets it: on a fresh object the first
+  tangent orients the second derivative along the chord (Standard_ConstructionError
+  where it is null, a plane); the next calls use the first derivative.
+- `FindSurfTangentOrder(D1U(), D2U(), ...)` evaluates its arguments right to left
+  (GCC): D2U() first; the port calls them in that order.
+- `IsNormalDefined()` uses the current D1U and D1V without evaluating them (null with
+  N = 0).
+- `CLProps::Curvature()` returns RealLast() when the first derivative is null without
+  storing it; `CentreOfCurvature()` then divides by the stored curvature of an earlier
+  call (0 initially).
+- `LProp_CurAndInf` drops a parameter equal to the last one stored (and NaN).
+- `GeomLProp_CurAndInf2d::Perform` reports the status of the inflection search only.
+  The private numeric search keeps the curve's evaluation exception in its root
+  function and returns it right after the root finder, where the native exception
+  leaves it.
+
+GProp:
+
+- `math_VectorBase::Multiply(Passage, V)` with V aliasing the result writes each
+  component before the next row reads it; the elementary frameworks keep this
+  sequential product.
+- `GProp_CelGProps::Perform(gp_Lin)` computes Izz with the linear and constant terms of
+  Ixx; the cone surface and solid use the ICn2 formula for ISn2; the solid torus reads
+  `Teta2` as `Alpha2` in its sines and cosines; `GProp_CelGProps::Perform(gp_Circ)`
+  keeps the Z of the circle location as the centre's Z.
+- `GProp_GProps::MatrixOfInertia()` applies the Huygens operator to the centre of mass
+  *relative* to the system location.
+- `GProp_PGProps::Barycentre` on an empty array raises Standard_OutOfRange (the native
+  checked element read); `GProp_PEquation::PrincipalAxis`/`Extent` check the index.
+
+Hermit:
+
+- `PolyTest` locates its parameters on the knots of the original curve (not the ones
+  mapped onto [0, 1]) with the flat-knot `LocateParameter`, reusing the LocateU
+  indices of Ux and Uy as hints; the 3D and 2D copies of the native file share one
+  implementation over `HermitSpline`.
