@@ -1,5 +1,6 @@
 //! Rust implementation of OCCT TKernel foundation APIs.
 
+mod c_format;
 mod error;
 pub mod quantity;
 pub use error::{Error, ErrorKind};

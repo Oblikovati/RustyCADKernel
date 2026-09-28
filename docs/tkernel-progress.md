@@ -188,10 +188,8 @@ These API mappings are manually inventoried and remain `implemented`, not global
   The 999 deterministic round trips and upstream reference tables are retained.
   Epsilon access uses an atomic bit representation; upstream's source uses a
   shared double despite naming its getter/setter test `EpsilonThreadSafety`.
-- Parallel loops and explicit launchers use [Rayon 1.12.0](https://docs.rs/rayon/1.12.0/rayon/struct.ThreadPool.html)
-  behind project-owned types. Mutable callbacks receive exclusive slices or slots.
-  The atomic test retains both 2^24-operation passes. Thread-pool configuration,
-  exception and scheduling APIs are not yet fully ported.
+- Parallel loops and launchers are a port of `OSD_ThreadPool` on `std::thread` (see the OSD
+  API completion section); the atomic test retains both 2^24-operation passes.
 - `strtod` uses Rust's correctly rounded decimal parser with C-prefix scanning,
   plus hexadecimal and NaN-payload handling. An additional 2,091-case oracle
   compares exact binary64 bits and byte end offsets, giving 3,915 differential
@@ -323,7 +321,8 @@ same. The combined verifier now checks 73,088 differential cases.
 - `CadPath` retains native Unix/Windows path predicates, name splitting, portable
   trek encoding and parent traversal. Current-directory and file existence access
   use injectable sources. The legacy current-directory regression also exercises
-  the real process directory; the remaining OSD path/file APIs are pending.
+  the real process directory. The complete OSD port is described in the OSD API
+  completion section.
 
 - `BinaryFile` exposes byte inversion for integer, UTF-16, pointer-sized integer,
   binary32 and binary64 values. The seven OCC24537 tests retain literal expected
@@ -1428,7 +1427,7 @@ Design decisions:
   (`MsgFile::global()` is the process catalog with native I/O), `PrinterOStream::with_writer`,
   and `Report::with_metric_sampler` / `set_metric_sampler` for the clocks and memory counters
   `SetAlertMetrics` reads (`NativeMetricSampler` ports the `OSD_Timer`, `OSD_Chronometer` and
-  `OSD_MemInfo` platform code; `osd::MemInfoCounter` is `OSD_MemInfo::Counter`).
+  `OSD_MemInfo` platform code; `osd::MemCounter` is `OSD_MemInfo::Counter`).
 - Members that raise natively return `Result`: `Msg` arguments and `Get()` (stale positions),
   catalog loading (a lone `.` line), `Algorithm::send_status_messages`.
 
@@ -1473,3 +1472,465 @@ defined C++ behavior (no truncated UTF-8 sequences, no `Clear(type)` over foreig
 `message_api_behavior` (30 tests, named fakes for files, printers and writers) and
 `message_defaults_behavior` (4 tests, serialized, with a fake metric sampler) cover every new
 member.
+
+## OSD API completion
+
+`python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/OSD --source ../OCCT`
+reports 0 public members without api rows and 0 stale rows. The package has 393 rows:
+300 implemented, 53 partial and 40 excluded. Every row's notes say what the Windows and
+macOS builds do. Linux (the non-`_WIN32` sources) is the verified profile. The Windows and
+macOS branches compile for `x86_64-pc-windows-gnu` and `aarch64-apple-darwin`, but they
+have not been observed running.
+
+The partial rows are:
+- 36 file-node members whose Win32 build (handles, ACL protections, `LockFileEx`) is not
+  ported;
+- 14 process-family members whose Win32 services have no standard-library counterpart;
+- the 3 `OSD::SetSignal`/`SetThreadLocalSignal` members, because Rust cannot unwind out of a
+  signal handler.
+
+The excluded rows are destructors, `DEFINE_STANDARD_RTTIEXT`, the never-defined
+`OSD_Path::LocateExecFile`, and the 28 members of `OSD_WNT.hxx`. That header is the raw Win32
+security/ACL C layer of the `_WIN32` build only, and the Rust port does not export it.
+
+Each OSD class family has its own module under `crates/tkernel/src/osd/`, re-exported flat
+as `osd::*`. OS access goes through project-owned traits with `Native*` implementations, and
+the tests use named fakes.
+
+The differential corpus of `tools/verify_tkernel.py` has one OSD probe family per class
+family: `tools/oracle/tkernel_osd_<family>_probe.cxx`, its Rust twin in
+`crates/tkernel/examples/oracle_probe/osd/`, and its requests in
+`tools/tkernel_osd_<family>_corpus.py`. All 4,120 requests are identical to OCCT:
+foundation 690, path 1,627, files 120, stream file systems 877, process 55, timing 500
+and threads 251.
+
+### Enumerations, errors, protection and exception classes
+
+All 51 public members of the OSD enumerations (`OSD_SysType`, `_SingleProtection`, `_FromWhere`,
+`_KindFile`, `_LockType`, `_OpenMode`, `_OEMType`, `_LoadMode`, `_WhoAmI`, `_SignalMode`),
+`OSD_Error`, `OSD_Protection` and the 22 `DEFINE_STANDARD_EXCEPTION` classes have api rows, all
+implemented. The enumerations keep the native order as `i32` discriminants (`ALL`, `from_raw`).
+The exception classes are typed `Failure` constructors (`osd::sigsegv`, `osd::osd_osd_error`, …).
+`OsdError` is `OSD_Error`, and the `OsdErrorAccess` trait gives every OSD class its
+`Failed`/`Reset`/`Perror`/`Error` members from one implementation. `osd::error_list` holds the
+`ERR_*` codes.
+
+Both native builds of `OSD_Error` are kept:
+- Unix: `Perror` classifies errno by the recording class with the native switch (the SUN,
+  IRIX4 and AIX arms are not compiled natively either). It stores the portable code and
+  returns `Err(OSD_OSDError)` with the native text. `Error()` stays 0 until `Perror` ran.
+- Windows: `SetValue` maps the Win32 code through the directory, file or file-node table,
+  then the common table, and `Perror` prints to standard error. The tables and the header are
+  pure functions (`windows_error_code`, `windows_perror_header`), tested on every host.
+
+Native quirks kept:
+- The "Unknowm error #n" spelling, and the ELOOP arm, which writes its text but leaves
+  `ERR_SURPRISE`.
+- ENOENT for a file or node prefixes "File doesn't exist or" (no space) unless the context
+  message is exactly "Open".
+- `Reset` clears errno but keeps the portable code.
+- The Windows tables list `ERROR_INVALID_BLOCK` and `ERROR_INVALID_HANDLE` twice; the first
+  entry wins. `OSD_WProcess` prints "OSD_Environment". The 32-wchar header buffer cuts
+  "Error ( OSD_EnvironmentIterator )" to 31 characters.
+- The Unix `TabProtAdd`/`TabProtSub` tables are copied verbatim. They differ from bit
+  arithmetic in five cells: WX+W=RWX, RWX+D=RWX, X−RW=None, X−RWX=X and X−RWD=None. The
+  Windows build uses the exact mask algebra. `Add` and `Sub` stay member functions that do not
+  read the object.
+- The Unix default protection is (R, RWD, R, R). The Windows default is (RWXD, RWXD, RX, RX).
+  The private `Internal` mode maps delete to write and folds the system right into the world
+  bits.
+
+Differential evidence: 690 `osd_prot_*`, `osd_error`, `osd_exception` and `osd_enums`
+requests, all identical. They cover every Add/Sub cell, every named errno (plus 0 and unknown
+ones) from every class and two out-of-range classes, and every exception type.
+
+### Paths
+
+All 43 public members of `OSD_Path` have api rows: 42 implemented and 1 excluded.
+`LocateExecFile` is declared but never defined natively, so a C++ call cannot link. The earlier
+`CadPath` had only the host-dialect parser and a simplified `SystemName`. It now ports both
+native builds, selected by `PathSyntax` (`native()` follows the host):
+- the Unix build: `UnixExtract`, `DosExtract`, `VmsExtract` and `MacExtract`, the VMS, DOS,
+  MacOS and Unix spellings of `SystemName`, and trek editing by token text;
+- the Windows build: `_splitpath` parsing, `_remove_dup` normalization, the 260-byte
+  `SystemName` buffer, trek editing by bar position and the dialect check.
+
+Native failures become `Result` errors at the same points, and a failing call leaves the trek
+edited up to the point where the native code raised. `TCollection_AsciiString` members that
+`OSD_Path.cxx` calls are mirrored in `osd/path/text.rs` with their `Standard_OutOfRange`
+results, because OSD_Path reaches them with ordinary input and the crate's `AsciiString`
+asserts.
+
+Native quirks kept:
+- `RemoveATrek(n)` and `InsertATrek` on the Unix build act at the first text match of the
+  n-th component (`|ab|b|` minus component 2 is `|a|b|`).
+- `RemoveATrek(name)` on the Unix build may cut inside a longer component.
+- The DOS extractor removes the disk by token length, wherever the colon was.
+- A VMS extension is the second dot token (`a.b.c` gives name `a.c`, extension `.b`).
+- `MacExtract` takes the name one byte after the last bar and removes it at its first match
+  in the trek. `SystemName(MacOs)` computes the converted trek but never appends it.
+- `SystemName(VMS)` appends the name only when there is a trek.
+- `SystemName(WindowsNT)` on the Unix build raises `Standard_OutOfRange` for a non-drive disk
+  with an empty trek.
+- `RelativePath` does not switch to sibling mode after a differing component that is
+  followed by a slash.
+- `RelativePath("")` and `AbsolutePath(dir, "")` raise `Standard_OutOfRange`.
+- `FileNameAndExtension` returns extensions of 1 to 19 bytes, lowercased.
+
+Deliberate Rust deviations:
+- A Mac name that ends in a bar makes the native code read past the string terminator. Rust
+  takes an empty name there.
+- `DownTrek("")` on the Unix build reads the byte before an empty buffer natively. Rust
+  appends `|`.
+- The CRT `_MAX_*` component limits of `_splitpath` are not reproduced.
+- Output references become returned values (`PathComponents`, pairs).
+
+Differential evidence: 1,627 `osd_path_*` requests, all identical. They parse 57 fixed and
+200 seeded random paths in every `OSD_SysType` and spell each in seven dialects. They round
+trip 14 component sets through the constructor and the setters, and run 336 trek edits,
+including out-of-range positions. They also cover 37 relative/absolute cases, the splitters
+and the nine syntax predicates. Two input classes are kept out of the corpus because the
+native code reads indeterminate memory: Mac names that end in a bar, and `DownTrek("")`. The
+Windows build is covered by Rust tests derived from its source; it has not been observed
+running on Windows.
+
+### File-system nodes
+
+All 71 public members of `OSD_FileNode`, `OSD_File`, `OSD_Directory`,
+`OSD_DirectoryIterator` and `OSD_FileIterator` have api rows: 33 implemented, 36 partial and
+2 excluded (the iterator destructors, which only call the no-op `Destroy`). The classes
+follow the non-`_WIN32` sources. Every system call goes through the project-owned
+`PosixFileCalls` interface: `NativePosixCalls` makes the libc calls on Unix hosts, and the
+tests inject the named in-memory `FakePosixCalls`. The Win32 build (handles, ACL
+protections, `LockFileEx`) is not ported. On Windows, `NativePosixCalls` runs the
+Unix-build algorithm over `std::fs` emulations of the POSIX calls, so every member whose
+Win32 behavior differs is `partial`. macOS uses the same libc calls as Linux.
+
+`OSD_File` keeps a descriptor and, like the native code, the `FILE*` it `fdopen`s.
+`ReadLine` (`fgets`) and `Rewind` use a model of glibc 2.28+ stdio:
+
+- The read-ahead buffer is `st_blksize` bytes (at most `BUFSIZ`). It is shared with raw
+  `Read`, `Write` and `Seek`: a `Read` after a `ReadLine` continues after the buffered block.
+- `fdopen` leaves the cached offset unknown, so the first `Rewind` always seeks. A later
+  `Rewind` inside the buffer only moves the read pointer and moves the descriptor to the
+  buffer end.
+- End of file is sticky until `Rewind`.
+
+Native quirks kept:
+
+- `IsAtEnd` stays true after a short read or write until `Close`. `Seek` does not clear it.
+- `Remove` checks `access(W_OK)` on the node itself, so a read-only file cannot be removed.
+- `Copy` records errno -1 for any failure, so `Perror` reads "Unknowm error #-1".
+- `Protection` reports system = group.
+- `AccessMoment` reads `st_ctime`, as `CreationMoment` does.
+- `SetLock(OSD_ExclusiveLock)` sets `S_ISGID` even when the lock failed.
+- `IsLocked` is `myLock != OSD_NoLock` (the Unix header branch).
+- `OSD_Directory::Build` calls `umask(0)` process-wide and never restores it. The default
+  protection gives a directory no execute bit.
+- A missing parent is built from the last trek component, with the child's extension
+  kept. A missing parent of a path without a trek raises `Standard_NumericError`.
+- The iterators split `Values` at the first dot. `OSD_DirectoryIterator` includes `.` and
+  `..`. The `*` mask follows `strcmp_joker`.
+- Native throws (`Standard_ProgramError`, and `OSD_OSDError` from `Perror` when an error
+  is pending) become `Err` results with the native messages.
+
+Deliberate Rust deviations, all for native undefined behavior, which the probe does not
+exercise:
+
+- `UnLock` unlocks the whole file. The native `flock` has uninitialized
+  `l_whence`/`l_start`/`l_len`. On this profile it fails with EINVAL and keeps the lock.
+- `Protection` of a missing node reports no rights. Natively it reads an uninitialized
+  `stat` buffer.
+- `Rewind` of a never-opened file does nothing. Natively it passes a NULL `FILE*`.
+- `Read(void*)`/`Write(void*)` refuse a count larger than the slice. Natively this overruns
+  the buffer.
+- `ReadLine` keeps the buffer and returns 0 on a read error. Natively both outputs are left
+  unassigned.
+- `Drop` does not re-raise a pending error. The native destructor's `Close` can throw and
+  terminate the process.
+- `readdir` entries are read when the directory is opened. The native code reads them
+  lazily.
+
+Differential evidence: 120 `osd_files` requests, all identical to OCCT. Each request is a
+script that the native and Rust interpreters run in a fresh directory. The scripts cover:
+
+- building, opening and appending in every mode;
+- reads, seeks and writes mixed with `ReadLine` and `Rewind`, and seeded random mixes;
+- pending-error re-raises and every precondition failure;
+- locks;
+- removal, move, copy and protection on files, directories, read-only files, FIFOs,
+  symlinks and missing paths;
+- recursive directory builds, temporaries, and the iterators with 18 masks.
+
+Iterator results are sorted, because `readdir` order belongs to the file system. The Rust
+tests check the native order through the fake.
+
+### Stream file systems and OSD_OpenFile
+
+All 46 public members of `OSD_FileSystem`, `OSD_LocalFileSystem`, `OSD_CachedFileSystem`,
+`OSD_FileSystemSelector`, `OSD_StreamBuffer` and `OSD_OpenFile.hxx` have api rows (41
+implemented, 5 excluded: the four `DEFINE_STANDARD_RTTIEXT` macros and the `OSD_FileSystem`
+destructor). The module is `osd::file_system`.
+
+The C++ stream vocabulary is ported as project-owned types instead of a stream library:
+`IosOpenMode` (libstdc++ openmode bits), `SeekDir`, the `StreamBuf` trait (`sgetn`, `sputn`,
+`pubseekoff`, `pubsync`), and the `IStream`/`OStream` traits with the libstdc++ sentry and
+state rules (`read`/`gcount`, `seekg` clearing eofbit first, `tellg` setting failbit on a
+stream that is not good, `seekp`/`tellp` seeking even after the ostream sentry refused an eof
+stream, badbit on a short write or failed sync). `std::filebuf` is `FileBuffer`,
+`std::ifstream`/`ofstream`/`fstream` is `FileStream`, and `OSD_StreamBuffer<T>` is
+`StreamBuffer<D>` with the `IStreamBuffer`/`OStreamBuffer`/`IoStreamBuffer` typedefs.
+`occ::handle<OSD_FileSystem>` is `FileSystemHandle = Arc<dyn FileSystem>`: the crate's
+`Handle<T>` projects to one concrete type, while file systems are an open interface.
+Handle equality stays pointer identity. The base `OpenIStream`/`OpenOStream` are provided
+trait methods and are also public (`default_open_istream`, `default_open_ostream`) so an
+override can call the parent as C++ does.
+
+Native quirks kept:
+- `OSD_OpenFileDescriptor` opens every mode with `out` write-only, created and truncated,
+  even `in|out` or `out|app` without `trunc` (O_RDONLY is 0); a mode without `out` opens
+  read-only; created files get 0600.
+- `std::filebuf::open` accepts only the libstdc++ `fopen_mode` table (`trunc` alone,
+  `in|trunc`, `in|out|trunc|app` and every mode without `in`/`out`/`app` are refused).
+- A write-only append stream (`app`, `out|app`, fopen "a") starts at the end of the file
+  (glibc), while "a+" starts at 0.
+- The libstdc++ put area: small writes stay pending until a seek, read, sync or close, and
+  `pubseekoff(0, cur)` returns the file offset plus the pending bytes. With `app`, `seekp(1)`
+  then a one-byte write reports position 2 although the byte lands at the end of the file.
+- `OSD_LocalFileSystem::OpenStreamBuffer` checks an offset only through `lseek`, so an offset
+  past the end succeeds; with a size output it seeks even for offset 0.
+- `OSD_FileSystem::OpenIStream` reuses an old stream only when it is an `OSD_IStreamBuffer`
+  (an `OSD_IOStreamBuffer` never is) of the same URL that the file system reports open; it
+  clears the state and keeps the position for offset -1.
+- `OSD_CachedFileSystem` ignores the caller's old stream, caches whatever the linked file
+  system returns (a failed open clears the cache) and passes output buffers through.
+- `OSD_FileSystemSelector::AddProtocol` moves an already registered protocol; delegation
+  calls `IsSupportedPath` lazily, protocol by protocol.
+- `Standard_ASSERT_RAISE` offsets (`< -1` for streams, `< 0` for local buffers) raise
+  `Standard_ProgramError` with the native message; the file part names the source basename
+  where the native text carries the absolute build path.
+
+Deliberate Rust deviations: mutating virtuals take `&self` and lock internally, because the
+default file system is a process-wide `OnceLock` selector; reads are unbuffered (logical
+positions are the ones libstdc++ reports); `FILE*` and descriptors are owned
+`std::fs::File` values (`None` for NULL/-1).
+
+Platforms: everything goes through `std::fs`, so Linux, macOS and Windows share the code.
+`OSD_FileStatCTime` reads the status-change time on Unix and the creation time on Windows
+(`_wstat64`). `fopen` modes keep the glibc parsing on every host (MSVC's extra letters are not
+interpreted), and `_wsopen_s` text-mode translation is not reproduced.
+
+Differential evidence: 877 `osd_fs_*` requests, all identical to OCCT. They cover all 64
+openmode combinations against an existing and a missing file for local buffers, output
+streams, descriptors and filebufs; input-stream offsets including reuse, -1 and the raising
+-2; 13 URL classifications; selector ordering, preference, removal and lazy delegation
+through logging fake protocols; cached stream and buffer reuse; the default selector; 22
+fopen modes; and ifstream/ofstream/fstream opening. Rust tests use the named fakes
+`MemoryStreamBuf` and `FakeProtocolFileSystem`, and a per-test scratch directory for the
+local file system.
+
+### Process, host, environment, shared libraries and memory
+
+All 60 public members of `OSD_Process`, `OSD_Host`, `OSD_Environment`, `OSD_SharedLibrary` and
+`OSD_MemInfo` have api rows: 45 implemented, 14 partial and 1 excluded (the
+`OSD_SharedLibrary` destructor: drop glue releases the name and, like `Destroy`, never unloads
+the library). Every partial row is a Windows gap: the Win32 services behind them
+(`GetUserNameW`, token groups, `GetLocalTime`, the `OSD_Host` cache of `GetVersionExW`,
+`GetComputerNameA`, `GlobalMemoryStatus` and Winsock, the `LoadLibraryExW` loader, Psapi and
+`_heapwalk`) have no standard-library counterpart. There the Rust code records
+`ERROR_CALL_NOT_IMPLEMENTED` (process queries), answers empty or 0 (host), fails to open
+(loader) or leaves the counters unknown (memory). Linux is the verified profile. macOS
+follows the Unix branch (`uname`, `getpwuid_r`, `dlopen`, `task_info` with
+`malloc_zone_statistics`).
+
+Each class reads the system through a project-owned trait with a native implementation and
+named fakes in the tests: `ProcessSource`/`NativeProcess`, `HostSource`/`NativeHost`,
+`EnvironmentSource`/`NativeEnvironment` and `MemInfoSource`/`NativeMemInfo`. The FFI stays in
+small `#![allow(unsafe_code)]` modules with `// SAFETY:` comments. Errors go to the object's
+`OsdError` through `OsdErrorAccess` with the native context messages ("GetSystem", "Where",
+"Move to directory", "Host Name", "Set Environment"). The old `DirectorySource` and
+`NativeDirectory` and the static `Process::current_directory*` are replaced by the
+`OSD_Process` object: `Process::new().current_directory()`. `osd_path` and
+`path_supplemental` now use it.
+
+Native quirks kept:
+- `OSD_Process::TerminalType` on Unix reads `TERM` but returns the variable name, "TERM".
+- `CurrentDirectory` on Unix appends `/`, so `/` gives the `//` path. Windows appends nothing.
+- A `SystemDate` clock failure builds the all-zero date and fails with
+  `Quantity_DateDefinitionError`.
+- On Unix, `OSD_Environment::Remove` defines the variable as empty. It does not unset it.
+- The Unix constructor with a value allows `$` in the value. `SetValue` refuses it
+  ("OSD_Environment::Change: bad argument"). `SetName` resets the error before it validates.
+- `Build` keeps the native `putenv` definition buffer. A redefinition replaces the old entry
+  and frees it only after the new one is installed. A name with `=`, or an empty name, behaves
+  as the libc does.
+- `OSD_Host::AvailableMemory` is 0 on Unix. `SystemId` and `MachineType` use the native
+  exact-or-prefix `uname` tables.
+- Before `DlOpen`, `DlSymb` passes the null handle, which glibc reads as `RTLD_DEFAULT`.
+- `OSD_MemInfo` on Linux never fills the swap counters. It sums VmData and VmStk from the
+  unknown value (`++size_t(-1)`). It skips procfs when only heap and swap are active. On
+  macOS, all three task figures are stored when any of them is active.
+
+Deliberate Rust deviations:
+- Failures that are undefined natively are defined in Rust. A failing `gethostname` returns
+  an empty name (natively, the uninitialised buffer). An unresolvable `InternetAddress`
+  returns empty text (natively, a null dereference). A symbol lookup after `DlClose` returns
+  None (natively, a dangling handle). `dlclose` of a null or already-closed handle is
+  skipped.
+- `DlSymb` returns `SymbolAddress` (`NonNull<c_void>`). Callers transmute it to the real
+  signature.
+- `DlClose` takes `&mut self` so that it can remember the close.
+- `MemInfo::ToString` is `to_text`.
+- Writing the environment keeps the native precondition: no concurrent environment access
+  from other threads. This is the contract of `std::env::set_var` under edition 2024.
+
+Differential evidence: 55 `osd_env*`, `osd_host`, `osd_process`, `osd_chdir`, `osd_shlib`
+and `osd_meminfo` requests, all identical to OCCT on the same host. They cover valid and
+refused names and values, `$`, non-ASCII and `=` (an empty name is left out: native `Build` then records whatever errno an earlier call left), redefinition,
+Remove-to-empty, and reads of inherited variables. They also cover every host query with its
+error state, and user, superuser and terminal. The working-directory requests cover
+absolute, `..`, root, missing, relative and empty targets, including the Perror text. The
+loader requests cover lazy and eager opens of libc and libm, the main program, missing
+libraries and missing symbols, with the exact `dlerror` text. The MemInfo requests cover
+every single-counter and mixed activity mask, with and without Update, reduced to which
+counters are known. Values that differ between two processes (pid, executable, memory sizes,
+clock) are compared as shape only. Their exact arithmetic and formatting are checked through
+the fakes in `osd_process_api_behavior` and `osd_process_resources_api_behavior`.
+
+### Timing, signals and package statics
+
+All 52 public members of `OSD`, `OSD_Chronometer`, `OSD_Timer` and `OSD_PerfMeter` have api
+rows: 47 implemented, 3 partial and 2 excluded (the `OSD_Chronometer` and `OSD_PerfMeter`
+destructors). New module `osd::timing` ports `OSD_Chronometer` (`Chronometer`), `OSD_Timer`
+(`Timer`) and the `OSD` statics (`Osd`). The clocks sit behind project-owned traits:
+`CpuTimes` (`NativeCpuTimes`: Linux `times()` and `CLOCK_THREAD_CPUTIME_ID`, macOS
+`times()` and `TASK_THREAD_TIMES_INFO`, Windows `GetProcessTimes`/`GetThreadTimes`) and
+`WallClock` (`NativeWallClock`: `gettimeofday` relative to the first call's second, Windows
+`QueryPerformanceCounter`). The existing perf-meter clock now reads `NativeCpuTimes`, so
+the thread-CPU FFI exists once. `Sleeper` and `SignalHost` do the same for sleeping and
+signal installation. The existing `OSD_PerfMeter` port was already faithful and only
+gained rows: its process singleton stays an explicitly shared `PerfRegistry`.
+
+C++ inheritance becomes composition: `Timer` owns its `Chronometer` and derefs to it for
+the inherited read-only members. `Timer::restart` replays the native virtual chain
+(`OSD_Timer::Restart` → `OSD_Chronometer::Restart` → overridden `Reset` and `Start`),
+including the second wall-clock read.
+
+Native quirks kept:
+- `Show(Standard_OStream&)` prints doubles at stream precision 12 (`%.12g`), with glibc
+  `nan`/`-nan`/`inf` spellings.
+- `timeToHoursMinutesSeconds` truncates with `(int)`. For NaN or times outside the `int`
+  range, x86 `cvttsd2si` gives `INT_MIN` (-596523 hours, -14 minutes, and the remainder in
+  the seconds). This is kept on x86; other targets saturate like the native build.
+- `RealToCString` is `%.17e` followed by the native pointer walk: `e+00` is dropped, and
+  trailing zeros and a bare point are removed (`1e+05`, `1`, `-0`,
+  `1.00000000000000006e-01`).
+- `CStringToReal` succeeds only when OCCT `Strtod` consumes the whole text. So `""`
+  succeeds with 0, and `"1.5 "` fails.
+- `SecSleep`/`MilliSecSleep` compute the microsecond count in `int` (it wraps past 2147
+  seconds) and pass it to `usleep` as unsigned. So negative values sleep about 71 minutes.
+- `SetThisThreadOnly` on a running chronometer raises `Standard_ProgramError` with the
+  native "SetThreadOnly" message. The Linux thread scope reports a system time of 0.
+- `SetSignalStackTraceLength` stores negative lengths unchanged.
+
+Partial by design (`SetSignal` ×2, `SetThreadLocalSignal`): OCCT turns SIGSEGV, SIGFPE,
+SIGILL, SIGBUS, SIGHUP, SIGQUIT and SIGSYS (and Windows structured exceptions) into C++
+exceptions by throwing or long-jumping out of the handler. Rust cannot unwind out of a
+signal handler, so those handlers are not installed. The following parts are ported:
+- the recorded mode;
+- the glibc floating-point traps (`feenableexcept` on x86, x86-64 and AArch64; macOS and
+  musl do nothing, as the native `#else` branch does);
+- the SIGINT handler that arms `ControlBreak`, as an async-signal-safe atomic;
+- `SetUnhandled`, which restores a previous non-default SIGINT handler;
+- `Unset`, which restores `SIG_DFL` on all eight managed signals. This also removes the
+  Rust runtime's stack-overflow reporter, as it removes any handler natively.
+
+On Windows, `CSF_DEBUG_MODE` handling, the console Ctrl-C/Ctrl-Break handler (without
+`MessageBeep`; other events `exit(254)`) and the `_controlfp` traps are ported. The
+unhandled-exception filter and the SE/signal translators are not. The Windows and macOS
+branches compile (clippy-clean for `x86_64-pc-windows-gnu` and `aarch64-apple-darwin`) but
+have not been observed running.
+
+Deliberate Rust deviations: `Show()` prints through `print!`. `Show(ostream)` returns the
+text (`show_to`). Output references become returned tuples. The C++ buffer of
+`RealToCString` becomes a returned `String` (the native `false` result cannot occur).
+Windows `MilliSecSleep(INFINITE)` sleeps 49.7 days instead of forever.
+
+Differential evidence: 500 `osd_*` timing requests, all identical to OCCT:
+- 66 `Timer::Reset(double)` values, comparing elapsed time, the `Show` tuple bit-for-bit and
+  the `Show` text;
+- both chronometer scopes, including the running `SetThisThreadOnly` error;
+- 301 `RealToCString` doubles (special, subnormal, extreme, integral, 260 seeded random);
+- 115 `CStringToReal` texts (malformed, special and round-tripped);
+- the signal-mode, floating-trap and stack-length statics;
+- `raise(SIGINT)` → `ControlBreak`.
+
+### Threads, thread pool and parallel loops
+
+All 40 public members of `OSD_Thread`, `OSD_ThreadPool` (with `Launcher`) and `OSD_Parallel`
+have api rows: 39 implemented and 1 excluded (`DEFINE_STANDARD_RTTIEXT` of the pool; the
+default pool is a `&'static ThreadPool`). `OSD_ThreadFunction.hxx` and `OSD_PThread.hxx`
+declare only typedefs. The profile builds without TBB (`USE_TBB=OFF`), so the port follows
+`OSD_Parallel.cxx` and `OSD_Parallel_Threads.cxx`.
+
+The earlier Rayon pool is replaced, and the `rayon` dependency is gone. Rayon could not
+reproduce the native thread indices: OCCT numbers the locked pool workers from 0 in pool
+order and runs the launcher's caller as the last index. When every worker is locked
+(nested loops), the caller runs alone as index 0. The pool is now a port of
+`OSD_ThreadPool.cxx` on `std::thread`: lazy worker start, the `Lock`/`Free` protocol,
+wake/idle events (a private `Standard_Condition` twin), one atomic index counter per
+`Perform`, and the `Init` refusal. `OSD_Parallel::For` is `Parallel::for_range` (`for` is a
+keyword). `ForEach` takes one Rust iterator, so `iter_mut()` shares mutable elements.
+`Launcher::perform_iter` ports the `UniversalLauncher` item distribution (mutex-guarded
+iterator). A borrowed job is handed to the long-lived workers through one erased pointer
+in `parallel/job.rs`. This is safe because `perform` always waits for every woken worker,
+and every job runs under `catch_unwind`. Call sites (tkmath radix sorter, five tkernel test
+files) moved to the native-shaped API. The `OSD_Parallel_Test` translation keeps
+index-based `For`/`Launcher::Perform` and writes through atomic cells.
+
+Native quirks kept:
+- `Launcher(pool, max)`: `max > 0` is capped by `NbThreads`, `max < 0` takes
+  `max(NbDefaultThreadsToLaunch, 1)`, and `0` means the caller alone.
+- `Init` keeps `NbDefaultThreadsToLaunch` (a pool of 4 re-initialized to 2 still launches 4
+  by default). It refuses with `Standard_ProgramError("Error: active ThreadPool is
+  reinitialized")` while a launcher holds a worker.
+- `DefaultPool(n)` is sized by its first call only.
+- A failure on the launcher's self-thread is never cleared, so every later `Perform` of that
+  launcher raises it again (`performJob` resets only pool-thread failures).
+- `Perform` after `Release` runs nothing.
+- `SetUseOcctThreads` is ignored and `ToUseOcctThreads` is always true (non-TBB build).
+- `NbLogicalProcessors` is `sysconf(_SC_NPROCESSORS_ONLN)`, cached (not the affinity mask).
+- `OSD_Thread` copies share one pthread. The first `Wait` joins it. `Detach`, and dropping
+  any copy, makes it unjoinable for all copies. `SetPriority` only stores the value on
+  pthreads.
+- `Wait(ms)`: on macOS (no `pthread_timedjoin_np`) the timeout is ignored and the call joins.
+  On Windows a negative timeout is the DWORD cast.
+
+Deliberate Rust deviations:
+- A native functor throws; a Rust functor panics. `panic_any(Failure)` keeps `"Type:
+  message"` and the stack. A text panic reads `"panic: <text>"` (natively the
+  `std::exception` clause prints the type name). Other payloads read
+  `"Error: Unknown exception"`. Pooled failures are returned as
+  `Err(Standard_ProgramError)`. Sequential (forced or single-index) loops let the panic
+  unwind unchanged, like a native exception.
+- A worker thread that cannot start records a failure and reports idle. Natively the
+  launcher would wait forever.
+- A panicking `OSD_Thread` function makes `Wait` return false. A throwing native thread
+  terminates the process.
+- `OSD_ThreadFunction` is `fn(usize) -> usize`: the `void*` argument and result are opaque
+  pointer-sized values.
+- `OSD::ToCatchFloatingSignals` FPE trapping in workers has no Rust counterpart.
+- On Windows the native copy duplicates the thread handle, so a copy's `Detach` does not
+  affect the others. The port keeps the pthread sharing on every host.
+
+Platform notes: thread ids are `pthread_t` (Linux/macOS) or Win32 thread ids.
+`SetPriority` calls `SetThreadPriority` on Windows. The `Run` stack size is used on Windows
+only. The processor count comes from `GetSystemInfo` on Windows (the `windows-sys` feature
+`Win32_System_SystemInformation` was added).
+
+Differential evidence: 251 `osd_*` thread-family requests, all identical. They cover pool
+sizes with and without `Init` and a changed default launch size, launcher sizes on idle and
+busy pools, `Perform` coverage (count, index sum, visited-once, index bounds) over empty,
+reversed, negative and INT_MIN-adjacent ranges, single failures including the kept
+self-thread failure, `For`/`ForEach` on the forced, single-item and pooled paths, the
+processor count and backend switch, and `OSD_Thread` run/wait/timed-wait/copy results.

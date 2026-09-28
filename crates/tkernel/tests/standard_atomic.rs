@@ -24,12 +24,24 @@ fn Standard_AtomicTest__OCC22980_AtomicOperations() {
     assert_eq!(sum.fetch_add(1, Ordering::SeqCst) + 1, 2);
     sum.store(0, Ordering::SeqCst);
     const COUNT: usize = 1 << 24;
-    Parallel::for_indices(0..COUNT, |_| {
-        sum.fetch_add(1, Ordering::SeqCst);
-    });
+    Parallel::for_range(
+        0,
+        COUNT as i32,
+        |_| {
+            sum.fetch_add(1, Ordering::SeqCst);
+        },
+        false,
+    )
+    .unwrap();
     assert_eq!(sum.load(Ordering::SeqCst), COUNT as i32);
-    Parallel::for_indices(0..COUNT, |_| {
-        sum.fetch_sub(1, Ordering::SeqCst);
-    });
+    Parallel::for_range(
+        0,
+        COUNT as i32,
+        |_| {
+            sum.fetch_sub(1, Ordering::SeqCst);
+        },
+        false,
+    )
+    .unwrap();
     assert_eq!(sum.load(Ordering::SeqCst), 0);
 }

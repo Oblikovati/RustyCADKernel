@@ -15,7 +15,7 @@
 use super::AttributeMeter;
 use crate::message::{AlertExtended, Message, MetricSampler, MetricType, downcast_attribute};
 use crate::ncollection::IndexedMap;
-use crate::osd::MemInfoCounter;
+use crate::osd::MemCounter;
 use std::sync::Arc;
 
 /// Stores `value` as the start or stop value of `metric`.
@@ -102,7 +102,7 @@ fn record_memory(
     sampler: &dyn MetricSampler,
     is_start: bool,
 ) {
-    let mut counters: IndexedMap<MemInfoCounter> = IndexedMap::default();
+    let mut counters: IndexedMap<MemCounter> = IndexedMap::default();
     for metric in active {
         if let Some(counter) = Message::to_osd_metric(*metric) {
             counters.add(counter);
@@ -111,7 +111,7 @@ fn record_memory(
     if counters.is_empty() {
         return;
     }
-    let counters: Vec<MemInfoCounter> = counters.iter().copied().collect();
+    let counters: Vec<MemCounter> = counters.iter().copied().collect();
     let values = sampler.memory_mib(&counters);
     for (counter, value) in counters.iter().zip(values) {
         if let Some(metric) = Message::to_message_metric(*counter) {

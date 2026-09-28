@@ -21,6 +21,7 @@ import tkernel_quantity_corpus
 import tkernel_resource_corpus
 import tkernel_message_corpus
 import tkernel_message_progress_corpus
+import tkernel_osd_corpus
 
 
 def run(args, log, *, input=None, timeout=900, env=None):
@@ -75,6 +76,7 @@ def corpus():
     cases += tkernel_resource_corpus.cases()
     cases += tkernel_message_progress_corpus.cases()
     cases += tkernel_message_corpus.cases()
+    cases += tkernel_osd_corpus.cases()
     return "\n".join(cases) + "\n"
 
 

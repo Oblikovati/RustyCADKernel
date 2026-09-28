@@ -13,7 +13,8 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! The subset of C `sprintf` used by `Message_Msg::Arg` and `Message::FillTime`.
+//! The subset of C `sprintf` used by `Message_Msg::Arg`, `Message::FillTime` and the OSD
+//! timing classes (`OSD::RealToCString`, `OSD_Timer`/`OSD_Chronometer` stream output).
 //!
 //! Message formats are user data (`%-10.3f`, `%05d`, `%s`), passed verbatim to `Sprintf`,
 //! so their output must follow glibc: flags `-+ #0`, width, precision, the `h`/`hh`/`l`/`ll`
@@ -159,5 +160,41 @@ pub(crate) fn sign_prefix(spec: &Spec, negative: bool) -> Vec<u8> {
         (false, true, _) => b"+".to_vec(),
         (false, false, true) => b" ".to_vec(),
         _ => Vec::new(),
+    }
+}
+
+/// `printf("%.*e", precision, value)`: `OSD::RealToCString`; `format_e(1.5, 2) == "1.50e+00"`.
+pub(crate) fn format_e(value: f64, precision: usize) -> String {
+    format_real(&format!("%.{precision}e"), value)
+}
+
+/// `printf("%.*g", precision, value)`, the default `ostream << double` spelling at
+/// `precision(N)`; `format_g(5.5, 12) == "5.5"`.
+pub(crate) fn format_g(value: f64, precision: usize) -> String {
+    format_real(&format!("%.{precision}g"), value)
+}
+
+fn format_real(format: &str, value: f64) -> String {
+    let bytes: Vec<u8> = c_sprintf(format.as_bytes(), &[CArg::Real(value)]);
+    String::from_utf8(bytes).expect("C float formatting is ASCII")
+}
+
+#[cfg(test)]
+mod real_tests {
+    use super::*;
+    #[test]
+    fn c_spellings_of_finite_and_special_values() {
+        assert_eq!(format_e(1.5, 2), "1.50e+00");
+        assert_eq!(format_e(-1e-300, 1), "-1.0e-300");
+        assert_eq!(format_e(-0.0, 0), "-0e+00");
+        assert_eq!(format_e(f64::NAN, 17), "nan");
+        assert_eq!(format_e(f64::NEG_INFINITY, 17), "-inf");
+        assert_eq!(format_g(5.5, 12), "5.5");
+        assert_eq!(format_g(0.0, 12), "0");
+        assert_eq!(format_g(1e12, 12), "1e+12");
+        assert_eq!(format_g(123456789012.0, 12), "123456789012");
+        assert_eq!(format_g(0.0001, 12), "0.0001");
+        assert_eq!(format_g(0.00001, 12), "1e-05");
+        assert_eq!(format_g(0.125, 2), "0.12");
     }
 }

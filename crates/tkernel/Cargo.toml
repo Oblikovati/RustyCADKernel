@@ -13,17 +13,16 @@ workspace = true
 allocator-api2 = "=0.4.0"
 bytemuck = { version = "=1.25.2", default-features = false }
 rustycad-cmath = { path = "../cmath" }
-rayon = "=1.12.0"
 smallvec = { version = "1.16.2", default-features = false, features = ["const_generics"] }
 
-[target.'cfg(all(unix, not(target_vendor = "apple")))'.dependencies]
+[target.'cfg(unix)'.dependencies]
 libc = "=0.2.189"
 
 [target.'cfg(target_vendor = "apple")'.dependencies]
 mach2 = "=0.7.0"
 
 [target."cfg(windows)".dependencies]
-windows-sys = { version = "=0.61.2", features = ["Win32_Foundation", "Win32_System_SystemInformation", "Win32_System_Threading"] }
+windows-sys = { version = "=0.61.2", features = ["Win32_Foundation", "Win32_System_Console", "Win32_System_Performance", "Win32_System_SystemInformation", "Win32_System_Threading"] }
 
 [dev-dependencies]
 rustycad-tkmath = { path = "../tkmath" }
