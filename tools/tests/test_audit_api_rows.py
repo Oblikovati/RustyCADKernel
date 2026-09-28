@@ -127,6 +127,12 @@ class HeaderParsingTests(unittest.TestCase):
         self.assertEqual(normalize_param("const NCollection_Mat4<T>& theMat"), "const NCollection_Mat4<T>&")
         self.assertEqual(normalize_params("void"), "")
 
+    def test_array_parameters_decay_to_pointers(self):
+        # Bnd_OBB::GetVertex(gp_Pnt theP[8]) is the function GetVertex(gp_Pnt*) in C++.
+        self.assertEqual(normalize_param("gp_Pnt theP [8]"), "gp_Pnt*")
+        self.assertEqual(normalize_param("const double theM[2][3]"), "const double(*)[3]")
+        self.assertEqual(normalize_params("gp_Pnt theP[8]"), normalize_params("gp_Pnt* theP"))
+
     def test_unbalanced_brackets_name_the_offset(self):
         with self.assertRaisesRegex(ValueError, "offset 0"):
             matching_close("(a", 0)

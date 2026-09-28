@@ -1089,3 +1089,29 @@ Excluded rows (status `excluded`, with the reason in `notes`): the destructors, 
 `BSplCLib::DN(U, N, Poles, Weights, P, VN)`, which the pinned header declares but no
 pinned source defines (libTKMath exports only the three B-spline `DN` overloads), so a
 call cannot link.
+
+### Bnd (API completion)
+
+This work adds no upstream suite. `tools/audit_api_rows.py` now reports no missing
+member and no stale row for the Bnd package (before: 144 missing, 7 stale). The
+members were ported with the package, but the ledger had rows only for the members the
+legacy suites do not call: 141 rows are added with the exact header signatures, for
+every public member of Bnd_Box, Bnd_Box2d, Bnd_B2 and Bnd_B3 and for the
+`Bnd_Range::IntersectStatus` enum. Stale spellings are corrected: the transformed
+`IsOut`/`IsIn` rows of Bnd_B2/Bnd_B3 wrote the primary template with its argument
+(`Bnd_B3<RealType>::`), which the ledger spells as the bare class name, and the
+Bnd_BoundSortBox `Initialize` rows now name `occ::handle<NCollection_HArray1<Bnd_Box>>`.
+
+The audit kept the name and extent of an array parameter, so
+`Bnd_OBB::GetVertex(gp_Pnt theP[8])` matched no row. C++ adjusts an array parameter
+to a pointer, and the audit now does the same (`gp_Pnt*`; `T p[2][3]` becomes
+`T(*)[3]`), with a test in `tools/tests/test_audit_api_rows.py`.
+
+Newly ported: the `std::array` overloads of `SetCenter`/`SetHSize` of Bnd_B2/Bnd_B3
+(`set_center_array`, `set_half_size_array`), which copy the storage scalars without
+the double-to-`RealType` conversion of the `gp_XY`/`gp_XYZ` overloads. The
+`compact_arrays` probe sends 200 differential requests that cover, for float and
+double in 2D and 3D, the array constructors, both setter overloads, `Center`/`HSize`,
+`Add` of a point and of a box, and `Clear`, with float-inexact, zero, negative (void)
+and huge half sizes (the float `SquareExtent` overflows to infinity natively too);
+they all match the native bits, and the numeric gate now passes 61,374 cases.
