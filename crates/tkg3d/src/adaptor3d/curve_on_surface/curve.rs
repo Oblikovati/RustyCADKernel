@@ -132,15 +132,24 @@ impl Adaptor3dCurve for Adaptor3dCurveOnSurface {
     }
     fn ellipse(&self) -> Result<Ellipse3, Failure> {
         let state = self.snapshot();
-        to3d_ellipse(&state.surface()?.plane()?, state.curve()?.ellipse()?)
+        // `to3d(mySurface->Plane(), myCurve->Ellipse())`: GCC evaluates the
+        // arguments right to left, so the 2D curve raises first.
+        let conic = state.curve()?.ellipse()?;
+        to3d_ellipse(&state.surface()?.plane()?, conic)
     }
     fn hyperbola(&self) -> Result<Hyperbola3, Failure> {
         let state = self.snapshot();
-        to3d_hyperbola(&state.surface()?.plane()?, state.curve()?.hyperbola()?)
+        // `to3d(mySurface->Plane(), myCurve->Hyperbola())`: GCC evaluates the
+        // arguments right to left, so the 2D curve raises first.
+        let conic = state.curve()?.hyperbola()?;
+        to3d_hyperbola(&state.surface()?.plane()?, conic)
     }
     fn parabola(&self) -> Result<Parabola3, Failure> {
         let state = self.snapshot();
-        to3d_parabola(&state.surface()?.plane()?, state.curve()?.parabola()?)
+        // `to3d(mySurface->Plane(), myCurve->Parabola())`: GCC evaluates the
+        // arguments right to left, so the 2D curve raises first.
+        let conic = state.curve()?.parabola()?;
+        to3d_parabola(&state.surface()?.plane()?, conic)
     }
     fn degree(&self) -> Result<i32, Failure> {
         // On a parametric surface it should multiply (native comment).

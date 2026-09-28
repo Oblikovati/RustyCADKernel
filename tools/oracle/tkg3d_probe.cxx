@@ -70,6 +70,25 @@
 #include "tkg3d_probe_bezier_surface.cxx"
 #include "tkg3d_probe_bspline_surface.cxx"
 #include "tkg3d_probe_offset_surface.cxx"
+#include <Adaptor2d_Line2d.hxx>
+#include <Adaptor3d_CurveOnSurface.hxx>
+#include <Adaptor3d_HSurfaceTool.hxx>
+#include <Adaptor3d_InterFunc.hxx>
+#include <Adaptor3d_IsoCurve.hxx>
+#include <Geom2d_BezierCurve.hxx>
+#include <Geom2d_BSplineCurve.hxx>
+#include <Geom2d_Circle.hxx>
+#include <Geom2d_Ellipse.hxx>
+#include <Geom2d_Hyperbola.hxx>
+#include <Geom2d_Line.hxx>
+#include <Geom2d_Parabola.hxx>
+#include <Geom2d_TrimmedCurve.hxx>
+#include <Geom2dAdaptor_Curve.hxx>
+#include <GeomAdaptor_Curve.hxx>
+#include <GeomAdaptor_Surface.hxx>
+#include <GeomAdaptor_SurfaceOfLinearExtrusion.hxx>
+#include <Precision.hxx>
+#include "tkg3d_probe_adaptor3d.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_point", g3_point_case},
  {"g3_direction", g3_direction_case},
@@ -105,6 +124,11 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_bspline_surface_edit", g3_bspline_surface_edit_case},
  {"g3_rect_trim", g3_rect_trim_case},
  {"g3_offset_surface", g3_offset_surface_case},
+ {"a3_cos", a3_cos_case},
+ {"a3_cos_load", a3_cos_load_case},
+ {"a3_iso", a3_iso_case},
+ {"a3_interfunc", a3_interfunc_case},
+ {"a3_hstool", a3_hstool_case},
 };
 int main() {
  std::string line;
