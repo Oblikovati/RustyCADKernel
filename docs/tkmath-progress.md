@@ -1175,3 +1175,49 @@ Deliberate Rust shapes: C++ overloads get distinct names (`scalar_value_status` 
 two-result `LineSearchFailureStatus`), `Value`/`Gradient`/`Hessian` are
 `checked_value`/`checked_gradient`/`checked_hessian`, and `CheckedFunction` and
 `BoundedFunction` hold `&mut` borrows of the wrapped callback.
+
+### MathRoot helpers and search engine (API completion)
+
+This work adds no upstream suite. It completes the public API of the modern MathRoot
+package: `tools/audit_api_rows.py src/FoundationClasses/TKMath/MathRoot` reports no member
+without an api row and no stale row (66 rows). `MathRoot::Utils` is public as
+`math_root::utils`: the scalar predicates (`IsValidConfig`, `IsValidBounds`,
+`HaveOppositeSigns`, `Midpoint`), `ComputePeriodicRootCount`, the multi-root bookkeeping
+(`IsValidMultipleInput`, `SortRoots`, `AddRoot`, `EffectiveXTolerance`, the `Evaluate*`
+helpers), the functor adapters, `RefineBracketedRoot`, `FindAllRootsImpl`,
+`FindAllRootsWithDerivativeImpl`, `FindMultipleRoots` and the trigonometric root
+bookkeeping (`AddDistinctTrigRoot`, `MapPeriodicTrigRoot`, `AddPeriodicTrigRoot` and the
+three refinement constants). These are the implementations the solvers run, not copies:
+`find_all_roots` wires the four Value-only adapters into `find_all_roots_impl` as
+MathRoot_Multiple.hxx does, `find_all_roots_with_derivative` calls
+`find_all_roots_with_derivative_impl`, the null-interval search calls
+`find_multiple_roots`, `trigonometric` inserts through `add_periodic_trig_root`, and Brent,
+Bisection, Newton and Secant use the shared predicates. The private duplicates they
+replace (inlined sign tests, midpoints, a second config validator, the old value-only
+search and bracket polishing) are deleted, and the trigonometric infinite-bound checks now
+read `Precision::IsPositiveInfinite`/`IsNegativeInfinite` and `Precision::Computational`
+instead of literals. Supplemental tests are in `math_root_api_behavior`. The MathRoot API
+probe sends 1,616 differential requests (`mathroot_utils`, `mathroot_trig_roots`,
+`mathroot_sort`, `mathroot_search`); they all match the native bits, and the existing
+`modern_root`, `modern_multiple` and `modern_trig` requests still match after the refactor.
+
+The port keeps these native results:
+
+- `EffectiveXTolerance`, the extremum probe bounds of `FindAllRootsWithDerivativeImpl` and
+  the trigonometric angle tolerance use `std::max`/`std::min` semantics (the first operand
+  wins unless the comparison holds), so a NaN bound yields the plain X tolerance and signed
+  zeros keep their sign; `f64::max` would differ.
+- `AddRoot` compares `|root - old| < eps`, so NaN roots and a NaN tolerance never count as
+  duplicates; `SortRoots` is the native insertion sort, including its NaN ordering.
+- The sampling adapter stores `f - offset` before checking it, and the Brent value wrapper
+  returns an unshifted-then-shifted value without a finiteness check, as natively; the
+  derivative wrapper replaces the derivative by a non-finite `f` so Brent reports it.
+- `AddDistinctTrigRoot` silently drops a fifth root once the four slots are full.
+
+Deliberate Rust deviations: the C++ adapters alias one `Function&` (and one sample
+`math_Vector`) from several structs at once; Rust shares them through
+`MultipleFunctionCell` (`RefCell<&mut F>`) and `RefCell<Vector>`, borrowing only for each
+call. `operator()` becomes the trait methods `MultipleSampleCallback::sample_at`,
+`MultipleSampleLookup::value_at`, `MultipleRootValueCallback::root_value` and
+`MultipleIntervalHandler::handle_interval`, and the `mutable Status` members become `Cell`
+fields read through `status()`. C++ default arguments become explicit parameters.

@@ -13,6 +13,9 @@
 
 //! Native Newton refinement with its preserved Halley fallback expression.
 use super::*;
+use crate::math_root::utils::{
+    TRIG_REFINEMENT_MAX_ITERATIONS, TRIG_REFINEMENT_MAX_STEP, TRIG_REFINEMENT_STEP_TOLERANCE,
+};
 fn derivatives(c: &[f64; 5], x: f64) -> (f64, f64, f64) {
     let [a, b, c, d, e] = *c;
     let cosine: f64 = x.cos();
@@ -40,18 +43,22 @@ fn refinement_step(c: &[f64; 5], x: f64) -> Option<f64> {
     } else {
         value / first
     };
-    if step.abs() > 0.5 {
-        step = if step > 0.0 { 0.5 } else { -0.5 };
+    if step.abs() > TRIG_REFINEMENT_MAX_STEP {
+        step = if step > 0.0 {
+            TRIG_REFINEMENT_MAX_STEP
+        } else {
+            -TRIG_REFINEMENT_MAX_STEP
+        };
     }
     Some(step)
 }
 fn refined(c: &[f64; 5], mut x: f64) -> f64 {
-    for _ in 0..20 {
+    for _ in 0..TRIG_REFINEMENT_MAX_ITERATIONS {
         let Some(step) = refinement_step(c, x) else {
             break;
         };
         x -= step;
-        if step.abs() < 1e-14 {
+        if step.abs() < TRIG_REFINEMENT_STEP_TOLERANCE {
             break;
         }
     }

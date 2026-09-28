@@ -268,6 +268,7 @@ mod gp_standard_probe;
 mod gp_transform_probe;
 mod mathopt_api_probe;
 mod mathpoly_utils_probe;
+mod mathroot_api_probe;
 mod mathutils_core_api_probe;
 mod mathutils_functor_api_probe;
 mod ncollection_probe;
@@ -363,6 +364,10 @@ fn main() {
             "modern_kronrod" => modern_integ_probe::modern_kronrod_case(&values),
             "modern_integ" => modern_integ_probe::modern_integ_case(&values),
             "modern_multiple" => modern_multiple_probe::modern_multiple_case(&values),
+            "mathroot_utils" => mathroot_api_probe::mathroot_utils_case(&values),
+            "mathroot_trig_roots" => mathroot_api_probe::mathroot_trig_roots_case(&values),
+            "mathroot_sort" => mathroot_api_probe::mathroot_sort_case(&values),
+            "mathroot_search" => mathroot_api_probe::mathroot_search_case(&values),
             "modern_trig" => modern_trig_probe::modern_trig_case(&values),
             "modern_poly" => modern_poly_probe::modern_poly_case(&values),
             "modern_laguerre" => modern_poly_probe::modern_laguerre_case(&values),

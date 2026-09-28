@@ -135,6 +135,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_modern_poly_probe.cxx"
 #include "tkmath_modern_trig_probe.cxx"
 #include "tkmath_modern_multiple_probe.cxx"
+#include "tkmath_mathroot_api_probe.cxx"
 #include "tkmath_modern_integ_probe.cxx"
 #include "tkmath_modern_tensor_probe.cxx"
 #include "tkmath_modern_sys_probe.cxx"
@@ -200,6 +201,10 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"modern_kronrod", modern_kronrod_case},
  {"modern_integ", modern_integ_case},
  {"modern_multiple", modern_multiple_case},
+ {"mathroot_utils", mathroot_utils_case},
+ {"mathroot_trig_roots", mathroot_trig_roots_case},
+ {"mathroot_sort", mathroot_sort_case},
+ {"mathroot_search", mathroot_search_case},
  {"modern_trig", modern_trig_case},
  {"modern_poly", modern_poly_case},
  {"modern_laguerre", modern_laguerre_case},

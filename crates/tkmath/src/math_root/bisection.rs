@@ -13,7 +13,8 @@
 
 //! MathRoot_Bisection.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 use super::bracket::{finite_value, initialize};
-use super::newton::{Bounds, NewtonState, bounded_endpoints, valid_config};
+use super::newton::{Bounds, NewtonState, bounded_endpoints};
+use super::utils::{have_opposite_signs, is_valid_bounds, is_valid_config, midpoint};
 use crate::math::{Function, FunctionWithDerivative};
 use crate::math_utils::{Config, ScalarResult, Status};
 fn finish(mut result: ScalarResult, status: Status, x: f64, value: f64) -> ScalarResult {
@@ -30,7 +31,7 @@ pub fn bisection(f: &mut impl Function, lower: f64, upper: f64, config: &Config)
     };
     let mut result: ScalarResult = ScalarResult::default();
     for iteration in 0..config.max_iterations {
-        let mid: f64 = 0.5 * a + 0.5 * b;
+        let mid: f64 = midpoint(a, b);
         let mut value: f64 = 0.0;
         result.iterations = iteration + 1;
         if !finite_value(f, mid, &mut value, &mut result) {
@@ -43,7 +44,7 @@ pub fn bisection(f: &mut impl Function, lower: f64, upper: f64, config: &Config)
         if mid == a || mid == b {
             return finish(result, Status::NotConverged, mid, value);
         }
-        if fa.is_sign_negative() != value.is_sign_negative() {
+        if have_opposite_signs(fa, value) {
             b = mid;
             fb = value;
         } else {
@@ -59,7 +60,7 @@ pub fn bisection(f: &mut impl Function, lower: f64, upper: f64, config: &Config)
     finish(result, Status::MaxIterations, x, value)
 }
 fn hybrid_update(bounds: &mut Bounds, state: &NewtonState) {
-    if bounds.f_lower.is_sign_negative() != state.fx.is_sign_negative() {
+    if have_opposite_signs(bounds.f_lower, state.fx) {
         bounds.upper = state.x;
     } else {
         bounds.lower = state.x;
@@ -67,9 +68,9 @@ fn hybrid_update(bounds: &mut Bounds, state: &NewtonState) {
     }
 }
 fn hybrid_next(bounds: &Bounds, state: &NewtonState, tolerance: f64) -> f64 {
-    let midpoint: f64 = 0.5 * bounds.lower + 0.5 * bounds.upper;
+    let middle: f64 = midpoint(bounds.lower, bounds.upper);
     if state.df == 0.0 {
-        return midpoint;
+        return middle;
     }
     let newton: f64 = state.x - state.fx / state.df;
     if newton.is_finite()
@@ -79,7 +80,7 @@ fn hybrid_next(bounds: &Bounds, state: &NewtonState, tolerance: f64) -> f64 {
     {
         newton
     } else {
-        midpoint
+        middle
     }
 }
 /// Combines safeguarded Newton steps with interval localization; `bisection_newton(&mut f,0.0,2.0,&config)`.
@@ -89,7 +90,7 @@ pub fn bisection_newton(
     upper: f64,
     config: &Config,
 ) -> ScalarResult {
-    if !lower.is_finite() || !upper.is_finite() || lower >= upper || !valid_config(config) {
+    if !is_valid_bounds(lower, upper) || !is_valid_config(config) {
         return ScalarResult {
             status: Status::InvalidInput,
             ..Default::default()
@@ -106,7 +107,7 @@ pub fn bisection_newton(
         };
     }
     let mut state: NewtonState = NewtonState {
-        x: 0.5 * lower + 0.5 * upper,
+        x: midpoint(lower, upper),
         fx: 0.0,
         df: 0.0,
         result: ScalarResult::default(),
