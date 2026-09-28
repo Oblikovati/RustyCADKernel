@@ -3,7 +3,7 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    app_par_curves as apc, bndlib, fem_tool, gc, gce, geom_tools, gprop, hermit, int_ana,
+    app_par_curves as apc, bndlib, fem_tool, gc, gce, gcpnts, geom_tools, gprop, hermit, int_ana,
     int_ana2d, lprop, pc2d, pc3d,
 };
 
@@ -153,6 +153,18 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("bnd_surface", bndlib::surface_case),
     ("bnd_gp", bndlib::gp::gp_case),
     ("bnd_helpers", bndlib::gp::helpers_case),
+    // CPnts and GCPnts (gb_probe/gcpnts)
+    ("gcp_length", gcpnts::length_case),
+    ("cpnts_abscissa", gcpnts::cpnts_abscissa_case),
+    ("cpnts_udefl", gcpnts::cpnts_udefl_case),
+    ("gcp_abscissa", gcpnts::gcp_abscissa_case),
+    ("gcp_uabs", gcpnts::uabs_case),
+    ("gcp_quabs", gcpnts::quabs_case),
+    ("gcp_udefl", gcpnts::udefl_case),
+    ("gcp_qudefl", gcpnts::qudefl_case),
+    ("gcp_tdefl", gcpnts::tdefl_case),
+    ("gcp_arc_step", gcpnts::arc_step_case),
+    ("gcp_dist", gcpnts::dist_case),
 ];
 
 fn main() {
