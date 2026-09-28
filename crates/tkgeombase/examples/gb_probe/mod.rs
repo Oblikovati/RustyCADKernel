@@ -10,6 +10,8 @@ pub mod hermit;
 pub mod int_ana;
 pub mod int_ana2d;
 pub mod lprop;
+pub mod pc2d;
+pub mod pc3d;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
