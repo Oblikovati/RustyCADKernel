@@ -16,7 +16,7 @@
 //! descriptors and their evaluation helpers.
 mod rep_curve_desc;
 pub use rep_curve_desc::{
-    Domain1d, Map1d, RepCurveDesc, RepCurveDescDerivBounded, RepCurveDescFull, RepCurveDescMapped,
-    RepCurveKind,
+    Domain1d, Map1d, MappedCurveState, RepCurveDesc, RepCurveDescDerivBounded, RepCurveDescFull,
+    RepCurveDescMapped, RepCurveKind,
 };
 pub mod rep_utils;

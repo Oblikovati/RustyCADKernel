@@ -17,11 +17,9 @@
 //!
 //! The native descriptors expose public mutable fields through shared handles;
 //! here each descriptor keeps them behind a lock with getters and setters.
-use crate::geom2d::Geom2dCurve;
-use crate::geom2d::cell::GeometryCell;
+
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::{Handle, StandardTransient, Transient};
-use rustycad_tkernel::{impl_transient, impl_transient_interface};
+use rustycad_tkernel::standard::{Handle, RuntimeTyped};
 
 /// Affine parameter map `uRep = Scale * u + Offset` (`Map1d`); `Map1d::default().map(2.0) == 2.0`.
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -90,174 +88,197 @@ pub enum RepCurveKind {
     Mapped,
 }
 
-/// Abstract descriptor (`Geom2dEval_RepCurveDesc::Base`); `desc.kind()`.
-pub trait RepCurveDesc: Transient {
-    /// The descriptor kind (`GetKind`); `desc.kind()`.
-    fn kind(&self) -> RepCurveKind;
-    /// The curve used for evaluation (`Representation`); `desc.representation()`.
-    fn representation(&self) -> Handle<dyn Geom2dCurve>;
-    /// Replace the curve used for evaluation; `desc.set_representation(curve)`.
-    fn set_representation(&self, curve: Handle<dyn Geom2dCurve>);
-    /// Derivative limit (`MaxDerivOrder`), `None` for a full descriptor; `desc.max_deriv_order()`.
-    fn max_deriv_order(&self) -> Option<usize>;
-    /// Domain and parameter map of a mapped descriptor; `desc.mapping()`.
-    fn mapping(&self) -> Option<(Option<Domain1d>, Map1d)>;
-}
-impl_transient_interface!(dyn RepCurveDesc, "Base", StandardTransient);
-
-/// `Geom2dEval_RepCurveDesc::Full`; `Handle::new(RepCurveDescFull::new(curve))`.
-pub struct RepCurveDescFull {
-    parent: StandardTransient,
-    representation: GeometryCell<Handle<dyn Geom2dCurve>>,
-}
-impl_transient!(RepCurveDescFull, "Full", dyn RepCurveDesc, parent, interfaces: [dyn RepCurveDesc]);
-impl RepCurveDescFull {
-    /// Descriptor evaluating through `representation`; `RepCurveDescFull::new(curve)`.
-    pub fn new(representation: Handle<dyn Geom2dCurve>) -> Self {
-        Self {
-            parent: StandardTransient::default(),
-            representation: GeometryCell::new(representation),
+/// Define the descriptor family of `Geom2dEval_RepCurveDesc` (and its identical 3D
+/// twin `GeomEval_RepCurveDesc`) for a curve trait object type: the abstract
+/// `RepCurveDesc` (`Base`) and the `RepCurveDescFull`, `RepCurveDescDerivBounded`
+/// and `RepCurveDescMapped` classes, in the calling module.
+///
+/// The native namespaces differ only by the curve class the descriptors hold, so
+/// both packages expand this one definition;
+/// `rustycad_tkg2d::define_rep_curve_descriptors!(dyn Geom2dCurve);`.
+#[macro_export]
+macro_rules! define_rep_curve_descriptors {
+    ($curve:ty) => {
+        /// Abstract descriptor (`RepCurveDesc::Base`); `desc.kind()`.
+        pub trait RepCurveDesc: ::rustycad_tkernel::standard::Transient {
+            /// The descriptor kind (`GetKind`); `desc.kind()`.
+            fn kind(&self) -> $crate::geom2d_eval::RepCurveKind;
+            /// The curve used for evaluation (`Representation`); `desc.representation()`.
+            fn representation(&self) -> ::rustycad_tkernel::standard::Handle<$curve>;
+            /// Replace the curve used for evaluation; `desc.set_representation(curve)`.
+            fn set_representation(&self, curve: ::rustycad_tkernel::standard::Handle<$curve>);
+            /// Derivative limit (`MaxDerivOrder`), `None` for a full descriptor; `desc.max_deriv_order()`.
+            fn max_deriv_order(&self) -> Option<usize>;
+            /// Domain and parameter map of a mapped descriptor; `desc.mapping()`.
+            fn mapping(&self) -> Option<(Option<$crate::geom2d_eval::Domain1d>, $crate::geom2d_eval::Map1d)>;
         }
-    }
-}
-impl RepCurveDesc for RepCurveDescFull {
-    fn kind(&self) -> RepCurveKind {
-        RepCurveKind::Full
-    }
-    fn representation(&self) -> Handle<dyn Geom2dCurve> {
-        self.representation.read().clone()
-    }
-    fn set_representation(&self, curve: Handle<dyn Geom2dCurve>) {
-        *self.representation.write() = curve;
-    }
-    fn max_deriv_order(&self) -> Option<usize> {
-        None
-    }
-    fn mapping(&self) -> Option<(Option<Domain1d>, Map1d)> {
-        None
-    }
-}
+        ::rustycad_tkernel::impl_transient_interface!(
+            dyn RepCurveDesc,
+            "Base",
+            ::rustycad_tkernel::standard::StandardTransient
+        );
 
-struct BoundedState {
-    representation: Handle<dyn Geom2dCurve>,
-    max_deriv_order: usize,
-}
-
-/// `Geom2dEval_RepCurveDesc::DerivBounded` (default `MaxDerivOrder` 3);
-/// `Handle::new(RepCurveDescDerivBounded::new(curve, 2))`.
-pub struct RepCurveDescDerivBounded {
-    parent: StandardTransient,
-    state: GeometryCell<BoundedState>,
-}
-impl_transient!(
-    RepCurveDescDerivBounded,
-    "DerivBounded",
-    dyn RepCurveDesc,
-    parent,
-    interfaces: [dyn RepCurveDesc]
-);
-impl RepCurveDescDerivBounded {
-    /// Descriptor limited to `max_deriv_order`; `RepCurveDescDerivBounded::new(curve, 3)`.
-    pub fn new(representation: Handle<dyn Geom2dCurve>, max_deriv_order: usize) -> Self {
-        Self {
-            parent: StandardTransient::default(),
-            state: GeometryCell::new(BoundedState {
-                representation,
-                max_deriv_order,
-            }),
+        /// `RepCurveDesc::Full`; `Handle::new(RepCurveDescFull::new(curve))`.
+        pub struct RepCurveDescFull {
+            parent: ::rustycad_tkernel::standard::StandardTransient,
+            representation: $crate::geom2d::cell::GeometryCell<::rustycad_tkernel::standard::Handle<$curve>>,
         }
-    }
-    /// Change the derivative limit; `desc.set_max_deriv_order(2)`.
-    pub fn set_max_deriv_order(&self, order: usize) {
-        self.state.write().max_deriv_order = order;
-    }
-}
-impl RepCurveDesc for RepCurveDescDerivBounded {
-    fn kind(&self) -> RepCurveKind {
-        RepCurveKind::DerivBounded
-    }
-    fn representation(&self) -> Handle<dyn Geom2dCurve> {
-        self.state.read().representation.clone()
-    }
-    fn set_representation(&self, curve: Handle<dyn Geom2dCurve>) {
-        self.state.write().representation = curve;
-    }
-    fn max_deriv_order(&self) -> Option<usize> {
-        Some(self.state.read().max_deriv_order)
-    }
-    fn mapping(&self) -> Option<(Option<Domain1d>, Map1d)> {
-        None
-    }
-}
-
-struct MappedState {
-    representation: Handle<dyn Geom2dCurve>,
-    max_deriv_order: usize,
-    domain: Option<Domain1d>,
-    param_map: Map1d,
-}
-
-/// `Geom2dEval_RepCurveDesc::Mapped`: optional bounded domain and affine parameter map;
-/// `Handle::new(RepCurveDescMapped::new(curve, 3, None, Map1d::default()))`.
-pub struct RepCurveDescMapped {
-    parent: StandardTransient,
-    state: GeometryCell<MappedState>,
-}
-impl_transient!(
-    RepCurveDescMapped,
-    "Mapped",
-    dyn RepCurveDesc,
-    parent,
-    interfaces: [dyn RepCurveDesc]
-);
-impl RepCurveDescMapped {
-    /// Descriptor with a domain (`None` = full) and a parameter map;
-    /// `RepCurveDescMapped::new(curve, 3, None, Map1d { scale: 2.0, offset: 0.0 })`.
-    pub fn new(
-        representation: Handle<dyn Geom2dCurve>,
-        max_deriv_order: usize,
-        domain: Option<Domain1d>,
-        param_map: Map1d,
-    ) -> Self {
-        let state = MappedState {
-            representation,
-            max_deriv_order,
-            domain,
-            param_map,
-        };
-        Self {
-            parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+        ::rustycad_tkernel::impl_transient!(
+            RepCurveDescFull,
+            "Full",
+            dyn RepCurveDesc,
+            parent,
+            interfaces: [dyn RepCurveDesc]
+        );
+        impl RepCurveDescFull {
+            /// Descriptor evaluating through `representation`; `RepCurveDescFull::new(curve)`.
+            pub fn new(representation: ::rustycad_tkernel::standard::Handle<$curve>) -> Self {
+                Self {
+                    parent: ::rustycad_tkernel::standard::StandardTransient::default(),
+                    representation: $crate::geom2d::cell::GeometryCell::new(representation),
+                }
+            }
         }
-    }
-    /// Change the derivative limit; `desc.set_max_deriv_order(2)`.
-    pub fn set_max_deriv_order(&self, order: usize) {
-        self.state.write().max_deriv_order = order;
-    }
-    /// Change the domain; `desc.set_domain(Some(Domain1d::default()))`.
-    pub fn set_domain(&self, domain: Option<Domain1d>) {
-        self.state.write().domain = domain;
-    }
-    /// Change the parameter map; `desc.set_param_map(Map1d::default())`.
-    pub fn set_param_map(&self, param_map: Map1d) {
-        self.state.write().param_map = param_map;
-    }
+        impl RepCurveDesc for RepCurveDescFull {
+            fn kind(&self) -> $crate::geom2d_eval::RepCurveKind {
+                $crate::geom2d_eval::RepCurveKind::Full
+            }
+            fn representation(&self) -> ::rustycad_tkernel::standard::Handle<$curve> {
+                self.representation.read().clone()
+            }
+            fn set_representation(&self, curve: ::rustycad_tkernel::standard::Handle<$curve>) {
+                *self.representation.write() = curve;
+            }
+            fn max_deriv_order(&self) -> Option<usize> {
+                None
+            }
+            fn mapping(&self) -> Option<(Option<$crate::geom2d_eval::Domain1d>, $crate::geom2d_eval::Map1d)> {
+                None
+            }
+        }
+
+        /// `RepCurveDesc::DerivBounded` (default `MaxDerivOrder` 3);
+        /// `Handle::new(RepCurveDescDerivBounded::new(curve, 2))`.
+        pub struct RepCurveDescDerivBounded {
+            parent: ::rustycad_tkernel::standard::StandardTransient,
+            state: $crate::geom2d::cell::GeometryCell<(::rustycad_tkernel::standard::Handle<$curve>, usize)>,
+        }
+        ::rustycad_tkernel::impl_transient!(
+            RepCurveDescDerivBounded,
+            "DerivBounded",
+            dyn RepCurveDesc,
+            parent,
+            interfaces: [dyn RepCurveDesc]
+        );
+        impl RepCurveDescDerivBounded {
+            /// Descriptor limited to `max_deriv_order`; `RepCurveDescDerivBounded::new(curve, 3)`.
+            pub fn new(representation: ::rustycad_tkernel::standard::Handle<$curve>, max_deriv_order: usize) -> Self {
+                Self {
+                    parent: ::rustycad_tkernel::standard::StandardTransient::default(),
+                    state: $crate::geom2d::cell::GeometryCell::new((representation, max_deriv_order)),
+                }
+            }
+            /// Change the derivative limit; `desc.set_max_deriv_order(2)`.
+            pub fn set_max_deriv_order(&self, order: usize) {
+                self.state.write().1 = order;
+            }
+        }
+        impl RepCurveDesc for RepCurveDescDerivBounded {
+            fn kind(&self) -> $crate::geom2d_eval::RepCurveKind {
+                $crate::geom2d_eval::RepCurveKind::DerivBounded
+            }
+            fn representation(&self) -> ::rustycad_tkernel::standard::Handle<$curve> {
+                self.state.read().0.clone()
+            }
+            fn set_representation(&self, curve: ::rustycad_tkernel::standard::Handle<$curve>) {
+                self.state.write().0 = curve;
+            }
+            fn max_deriv_order(&self) -> Option<usize> {
+                Some(self.state.read().1)
+            }
+            fn mapping(&self) -> Option<(Option<$crate::geom2d_eval::Domain1d>, $crate::geom2d_eval::Map1d)> {
+                None
+            }
+        }
+
+        /// `RepCurveDesc::Mapped`: optional bounded domain and affine parameter map;
+        /// `Handle::new(RepCurveDescMapped::new(curve, 3, None, Map1d::default()))`.
+        pub struct RepCurveDescMapped {
+            parent: ::rustycad_tkernel::standard::StandardTransient,
+            state: $crate::geom2d::cell::GeometryCell<$crate::geom2d_eval::MappedCurveState<$curve>>,
+        }
+        ::rustycad_tkernel::impl_transient!(
+            RepCurveDescMapped,
+            "Mapped",
+            dyn RepCurveDesc,
+            parent,
+            interfaces: [dyn RepCurveDesc]
+        );
+        impl RepCurveDescMapped {
+            /// Descriptor with a domain (`None` = full) and a parameter map;
+            /// `RepCurveDescMapped::new(curve, 3, None, Map1d { scale: 2.0, offset: 0.0 })`.
+            pub fn new(
+                representation: ::rustycad_tkernel::standard::Handle<$curve>,
+                max_deriv_order: usize,
+                domain: Option<$crate::geom2d_eval::Domain1d>,
+                param_map: $crate::geom2d_eval::Map1d,
+            ) -> Self {
+                let state = $crate::geom2d_eval::MappedCurveState {
+                    representation,
+                    max_deriv_order,
+                    domain,
+                    param_map,
+                };
+                Self {
+                    parent: ::rustycad_tkernel::standard::StandardTransient::default(),
+                    state: $crate::geom2d::cell::GeometryCell::new(state),
+                }
+            }
+            /// Change the derivative limit; `desc.set_max_deriv_order(2)`.
+            pub fn set_max_deriv_order(&self, order: usize) {
+                self.state.write().max_deriv_order = order;
+            }
+            /// Change the domain; `desc.set_domain(Some(Domain1d::default()))`.
+            pub fn set_domain(&self, domain: Option<$crate::geom2d_eval::Domain1d>) {
+                self.state.write().domain = domain;
+            }
+            /// Change the parameter map; `desc.set_param_map(Map1d::default())`.
+            pub fn set_param_map(&self, param_map: $crate::geom2d_eval::Map1d) {
+                self.state.write().param_map = param_map;
+            }
+        }
+        impl RepCurveDesc for RepCurveDescMapped {
+            fn kind(&self) -> $crate::geom2d_eval::RepCurveKind {
+                $crate::geom2d_eval::RepCurveKind::Mapped
+            }
+            fn representation(&self) -> ::rustycad_tkernel::standard::Handle<$curve> {
+                self.state.read().representation.clone()
+            }
+            fn set_representation(&self, curve: ::rustycad_tkernel::standard::Handle<$curve>) {
+                self.state.write().representation = curve;
+            }
+            fn max_deriv_order(&self) -> Option<usize> {
+                Some(self.state.read().max_deriv_order)
+            }
+            fn mapping(&self) -> Option<(Option<$crate::geom2d_eval::Domain1d>, $crate::geom2d_eval::Map1d)> {
+                let state = self.state.read();
+                Some((state.domain, state.param_map))
+            }
+        }
+    };
 }
-impl RepCurveDesc for RepCurveDescMapped {
-    fn kind(&self) -> RepCurveKind {
-        RepCurveKind::Mapped
-    }
-    fn representation(&self) -> Handle<dyn Geom2dCurve> {
-        self.state.read().representation.clone()
-    }
-    fn set_representation(&self, curve: Handle<dyn Geom2dCurve>) {
-        self.state.write().representation = curve;
-    }
-    fn max_deriv_order(&self) -> Option<usize> {
-        Some(self.state.read().max_deriv_order)
-    }
-    fn mapping(&self) -> Option<(Option<Domain1d>, Map1d)> {
-        let state = self.state.read();
-        Some((state.domain, state.param_map))
-    }
+
+/// The fields of a mapped curve descriptor (`Mapped`), shared by the 2D and 3D
+/// families that [`define_rep_curve_descriptors`] generates.
+pub struct MappedCurveState<C: ?Sized + RuntimeTyped> {
+    /// The curve used for evaluation.
+    pub representation: Handle<C>,
+    /// Maximum supported derivative order.
+    pub max_deriv_order: usize,
+    /// Parameter domain of the representation, `None` for the full domain.
+    pub domain: Option<Domain1d>,
+    /// Affine map from the owner's parameter to the representation's.
+    pub param_map: Map1d,
 }
+
+crate::define_rep_curve_descriptors!(dyn crate::geom2d::Geom2dCurve);
