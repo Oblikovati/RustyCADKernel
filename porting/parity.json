@@ -55394,6 +55394,2702 @@
       "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::change_array1",
       "status": "implemented",
       "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::shallow_copy",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::FirstParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::LastParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::continuity",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::NbIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::nb_intervals",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Intervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::intervals",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Trim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::trim",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::IsClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::is_closed",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::IsPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Period",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::period",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Value",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::value",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::D0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::d0",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::d1",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::d2",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::D3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::d3",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::DN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::dn",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::resolution",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::get_type",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Line",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::line",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Circle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::circle",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Ellipse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::ellipse",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Hyperbola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::hyperbola",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Parabola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::parabola",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Degree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::degree",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::IsRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::is_rational",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::NbPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::NbKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::nb_knots",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::bezier",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::bspline",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::OffsetCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::offset_curve",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Adaptor3d_Curve is the trait Adaptor3dCurve reached through Handle<dyn Adaptor3dCurve> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dCurveBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Curve::~Adaptor3d_Curve()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurve",
+      "status": "excluded",
+      "notes": "C++ virtual destructor: Rust drops the adaptor with its last Handle; nothing to port."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::shallow_copy",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::FirstUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::first_u_parameter",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::LastUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::last_u_parameter",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::FirstVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::first_v_parameter",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::LastVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::last_v_parameter",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::UContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::u_continuity",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::VContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::v_continuity",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::NbUIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::nb_u_intervals",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::NbVIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::nb_v_intervals",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::UIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::u_intervals",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::VIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::v_intervals",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::UTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::u_trim",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::VTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::v_trim",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::UPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::u_period",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::VPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::v_period",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::Value",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::value",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::D0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::d0",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::d1",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::d2",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::D3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::d3",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::DN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::dn",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::UResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::u_resolution",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::VResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::v_resolution",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::get_type",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::Plane",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::plane",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::Cylinder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::cylinder",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::Cone",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::cone",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::Sphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::sphere",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::Torus",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::torus",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::UDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::u_degree",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::NbUPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::nb_u_poles",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::VDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::v_degree",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::NbVPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::nb_v_poles",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::NbUKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::nb_u_knots",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::NbVKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::nb_v_knots",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::IsURational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::is_u_rational",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::IsVRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::is_v_rational",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::bezier",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::bspline",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::AxeOfRevolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::axe_of_revolution",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::Direction",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::direction",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::BasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::basis_curve",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::BasisSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::basis_surface",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::OffsetValue",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::offset_value",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Adaptor3d_Surface is the trait Adaptor3dSurface reached through Handle<dyn Adaptor3dSurface> (docs/geom-design.md); every member takes &self and returns Result, the native exceptions (Standard_NotImplemented for the base class) becoming Failure values; Adaptor3dSurfaceBase is an instance of the base class itself."
+    },
+    {
+      "upstream_id": "Adaptor3d_Surface::~Adaptor3d_Surface()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dSurface",
+      "status": "excluded",
+      "notes": "C++ virtual destructor: Rust drops the adaptor with its last Handle; nothing to port."
+    },
+    {
+      "upstream_id": "GeomAdaptor::MakeCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::make_curve",
+      "status": "implemented",
+      "notes": "Package function GeomAdaptor::MakeCurve as a free function taking the adaptor trait object."
+    },
+    {
+      "upstream_id": "GeomAdaptor::MakeSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::make_surface",
+      "status": "implemented",
+      "notes": "Package function GeomAdaptor::MakeSurface as a free function taking the adaptor trait object."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::default",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::with_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve(const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::with_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::shallow_copy",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Reset",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::reset",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Load(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::load",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Load(const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::load_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Curve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::FirstParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::LastParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::NbIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::nb_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Intervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Trim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::IsClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::is_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::IsPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Period",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::get_type",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Line",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::line",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Circle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::circle",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Ellipse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::ellipse",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Hyperbola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::hyperbola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Parabola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::parabola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Degree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::IsRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::is_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::NbPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::NbKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::nb_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::bezier",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::bspline",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::OffsetCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::offset_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Curve::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::default",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::with_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface(const occ::handle<Geom_Surface>&,double,double,double,double,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::with_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::shallow_copy",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Load(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::load",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Load(const occ::handle<Geom_Surface>&,double,double,double,double,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::load_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Surface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::FirstUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::first_u_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::LastUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::last_u_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::FirstVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::first_v_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::LastVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::last_v_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::bounds",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::ToleranceU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::tolerance_u",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::ToleranceV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::tolerance_v",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::UContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::u_continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::VContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::v_continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::NbUIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::nb_u_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::NbVIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::nb_v_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::UIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::u_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::VIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::v_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::UTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::u_trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::VTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::v_trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::UPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::u_period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::VPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::v_period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::UResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::u_resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::VResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::v_resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::get_type",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Plane",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::plane",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Cylinder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::cylinder",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Cone",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::cone",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Sphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::sphere",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Torus",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::torus",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::UDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::u_degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::NbUPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::nb_u_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::VDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::v_degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::NbVPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::nb_v_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::NbUKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::nb_u_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::NbVKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::nb_v_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::IsURational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::is_u_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::IsVRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::is_v_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::bezier",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::bspline",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::AxeOfRevolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::axe_of_revolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::Direction",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::direction",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::basis_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::BasisSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::basis_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_Surface::OffsetValue",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurface::offset_value",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::default",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::with_curve",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion(const occ::handle<Adaptor3d_Curve>&,const gp_Dir&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::with_curve_and_direction",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::shallow_copy",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::Load(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::load_curve",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::Load(const gp_Dir&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::load_direction",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::FirstUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::first_u_parameter",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::LastUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::last_u_parameter",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::FirstVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::first_v_parameter",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::LastVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::last_v_parameter",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::UContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::u_continuity",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::VContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::v_continuity",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::NbUIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::nb_u_intervals",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::NbVIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::nb_v_intervals",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::UIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::u_intervals",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::VIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::v_intervals",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::UTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::u_trim",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::VTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::v_trim",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::is_u_closed",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::is_v_closed",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::is_u_periodic",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::UPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::u_period",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::is_v_periodic",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::VPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::v_period",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::UResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::u_resolution",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::VResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::v_resolution",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::get_type",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::Plane",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::plane",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::Cylinder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::cylinder",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::Cone",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::cone",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::Sphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::sphere",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::Torus",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::torus",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::UDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::u_degree",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::NbUPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::nb_u_poles",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::IsURational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::is_u_rational",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::IsVRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::is_v_rational",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::bezier",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::bspline",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::AxeOfRevolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::axe_of_revolution",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::Direction",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::direction",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfLinearExtrusion::BasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfLinearExtrusion::basis_curve",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::default",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::with_curve",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution(const occ::handle<Adaptor3d_Curve>&,const gp_Ax1&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::with_curve_and_axis",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::shallow_copy",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::Load(const occ::handle<Adaptor3d_Curve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::load_curve",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::Load(const gp_Ax1&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::load_axis",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::AxeOfRevolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::axe_of_revolution",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::FirstUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::first_u_parameter",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::LastUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::last_u_parameter",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::FirstVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::first_v_parameter",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::LastVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::last_v_parameter",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::UContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::u_continuity",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::VContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::v_continuity",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::NbUIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::nb_u_intervals",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::NbVIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::nb_v_intervals",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::UIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::u_intervals",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::VIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::v_intervals",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::UTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::u_trim",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::VTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::v_trim",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::is_u_closed",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::is_v_closed",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::is_u_periodic",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::UPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::u_period",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::is_v_periodic",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::VPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::v_period",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::UResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::u_resolution",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::VResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::v_resolution",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::get_type",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::Plane",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::plane",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::Cylinder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::cylinder",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::Cone",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::cone",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::Sphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::sphere",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::Torus",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::torus",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::VDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::v_degree",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::NbVPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::nb_v_poles",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::NbVKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::nb_v_knots",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::IsURational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::is_u_rational",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::IsVRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::is_v_rational",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::bezier",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::bspline",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::Axis",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::axis",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_SurfaceOfRevolution::BasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorSurfaceOfRevolution::basis_curve",
+      "status": "implemented",
+      "notes": "Adaptor deriving from GeomAdaptor_Surface natively: the struct embeds GeomAdaptorSurface as its parent (Handle up-casts reach it) and implements the Adaptor3dSurface trait, overriding the native virtual members and forwarding the inherited ones to the base state (docs/geom-design.md)."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::default",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface(const occ::handle<Geom_Surface>&,const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::with_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface(const occ::handle<Geom_Surface>&,double,double,double,double,const gp_Trsf&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::with_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::shallow_copy",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Load(const occ::handle<Geom_Surface>&,const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::load",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Load(const occ::handle<Geom_Surface>&,double,double,double,double,const gp_Trsf&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::load_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::SetTrsf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::set_trsf",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::HasTrsf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::has_trsf",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Trsf",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::trsf",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Surface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::AdaptorSurfaceOriginal",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::adaptor_surface_original",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::AdaptorSurfaceTransformed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::adaptor_surface_transformed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::GeomSurfaceOriginal",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::geom_surface_original",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::GeomSurfaceTransformed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::geom_surface_transformed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::GeomSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::geom_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::FirstUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::first_u_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::LastUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::last_u_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::FirstVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::first_v_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::LastVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::last_v_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::UContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::u_continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::VContinuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::v_continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::NbUIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::nb_u_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::NbVIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::nb_v_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::UIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::u_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::VIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::v_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::UTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::u_trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::VTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::v_trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::UPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::u_period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::VPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::v_period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::ToleranceU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::tolerance_u",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::ToleranceV",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::tolerance_v",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::UResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::u_resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::VResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::v_resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::get_type",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Plane",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::plane",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Cylinder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::cylinder",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Cone",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::cone",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Sphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::sphere",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Torus",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::torus",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::UDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::u_degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::NbUPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::nb_u_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::VDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::v_degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::NbVPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::nb_v_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::NbUKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::nb_u_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::NbVKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::nb_v_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::IsURational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::is_u_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::IsVRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::is_v_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::bezier",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::bspline",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::AxeOfRevolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::axe_of_revolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::Direction",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::direction",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::BasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::basis_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::BasisSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::basis_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomAdaptor_TransformedSurface::OffsetValue",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomAdaptor/GeomAdaptor_TransformedSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedSurface::offset_value",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
     }
   ],
   "tests": [
