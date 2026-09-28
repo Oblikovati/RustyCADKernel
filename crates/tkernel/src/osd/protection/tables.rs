@@ -95,7 +95,6 @@ pub(super) fn windows_sub(current: SingleProtection, right: SingleProtection) ->
 
 /// Unix `S_I[RWX](USR|GRP|OTH)` bits of one right placed at `shift` (6 user, 3 group,
 /// 0 other); delete implies write, as in `OSD_Protection::Internal`.
-#[allow(dead_code)]
 pub(super) const fn mode_bits(right: SingleProtection, shift: u32) -> u32 {
     let bits: u32 = right as u32;
     let mut mode: u32 = 0;

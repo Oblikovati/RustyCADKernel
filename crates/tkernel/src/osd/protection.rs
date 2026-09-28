@@ -138,8 +138,6 @@ impl Protection {
     ///
     /// Delete maps to write, and the system right is folded into the world bits. Windows
     /// returns 0.
-    // Until the file-node family consumes it, only the unit tests call it.
-    #[allow(dead_code)]
     pub(crate) const fn internal(&self) -> u32 {
         if cfg!(windows) {
             return 0;

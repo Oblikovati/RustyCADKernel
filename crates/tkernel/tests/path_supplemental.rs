@@ -1,32 +1,18 @@
 //! Explicit parser profiles and named environment/filesystem fixtures.
-use rustycad_tkernel::osd::{
-    CadPath, DirectorySource, File, FileStatusSource, PathSyntax, Process,
-};
-use std::{
-    io,
-    path::{Path, PathBuf},
-};
+use rustycad_tkernel::osd::{CadPath, DirectorySource, PathSyntax, Process};
+use std::{io, path::PathBuf};
 struct FakeDirectorySource;
 impl DirectorySource for FakeDirectorySource {
     fn current_directory(&self) -> io::Result<PathBuf> {
         Ok(PathBuf::from("/workspace/project"))
     }
 }
-struct FakeFileStatus;
-impl FileStatusSource for FakeFileStatus {
-    fn exists(&self, path: &Path) -> bool {
-        path == Path::new("present.step")
-    }
-}
 #[test]
-fn injected_directory_and_file_sources_keep_queries_deterministic() {
+fn injected_directory_source_keeps_queries_deterministic() {
     let mut path = Process::current_directory_with(&FakeDirectorySource).unwrap();
     assert_eq!(path.trek().as_bytes(), b"|workspace|project|");
     path.up_trek();
     assert_eq!(path.trek().as_bytes(), b"|workspace|");
-    assert!(File::new("present.step").exists_with(&FakeFileStatus));
-    assert!(!File::new("absent.step").exists_with(&FakeFileStatus));
-    assert!(!File::new("").exists_with(&FakeFileStatus));
 }
 #[test]
 fn syntax_profiles_preserve_unc_parent_markers_and_native_classification_quirks() {

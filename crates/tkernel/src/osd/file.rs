@@ -12,37 +12,34 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! Read-only file existence with explicit treatment of OCCT's empty-path regression.
-use std::path::{Path, PathBuf};
-/// Injectable filesystem metadata query; implement for deterministic tests.
-pub trait FileStatusSource {
-    /// Checks existence, treating inaccessible paths as absent; `source.exists(path)`.
-    fn exists(&self, path: &Path) -> bool;
-}
-/// Native read-only metadata source; `NativeFileStatus.exists(path)`.
-pub struct NativeFileStatus;
-impl FileStatusSource for NativeFileStatus {
-    fn exists(&self, path: &Path) -> bool {
-        path.exists()
-    }
-}
-/// Initial OSD_File path wrapper; `File::new("").exists()`.
-pub struct File {
-    path: PathBuf,
-}
-impl File {
-    /// Stores a filesystem path without touching the filesystem; `File::new("part.step")`.
-    pub fn new(path: impl AsRef<Path>) -> Self {
-        Self {
-            path: path.as_ref().to_owned(),
-        }
-    }
-    /// Checks the native filesystem; empty paths return false without raising; `file.exists()`.
-    pub fn exists(&self) -> bool {
-        self.exists_with(&NativeFileStatus)
-    }
-    /// Queries injected metadata for nonempty paths; `file.exists_with(&source)`.
-    pub fn exists_with(&self, source: &impl FileStatusSource) -> bool {
-        !self.path.as_os_str().is_empty() && source.exists(&self.path)
-    }
-}
+//! File-system nodes: `OSD_FileNode`, `OSD_File`, `OSD_Directory`,
+//! `OSD_DirectoryIterator` and `OSD_FileIterator`.
+//!
+//! The classes follow the non-`_WIN32` OSD sources (the verified Linux profile, also
+//! macOS). Every system call goes through [`PosixFileCalls`]: `NativePosixCalls` makes
+//! the libc calls on Unix hosts; on Windows it emulates them over `std::fs`, because the
+//! Win32 build of these classes (handles, ACL protections, `LockFileEx`) is not ported.
+mod calls;
+mod directory;
+mod file_io;
+mod file_node;
+mod iterators;
+#[cfg(not(unix))]
+mod native_std;
+#[cfg(unix)]
+mod native_unix;
+mod osd_file;
+mod stdio;
+
+pub use calls::{
+    AccessMode, CallResult, Errno, LocalTime, NodeStatus, NodeType, OpenFlags, PosixFileCalls,
+    RecordLock, SeekOrigin, native_calls,
+};
+pub use directory::Directory;
+pub use file_node::FileNode;
+pub use iterators::{DirectoryIterator, FileIterator, mask_matches};
+#[cfg(not(unix))]
+pub use native_std::NativePosixCalls;
+#[cfg(unix)]
+pub use native_unix::NativePosixCalls;
+pub use osd_file::File;
