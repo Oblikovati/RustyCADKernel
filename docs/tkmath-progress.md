@@ -991,3 +991,39 @@ Deliberate Rust deviations: gp_Pnt::ChangeCoord returns a write-back view
 move constructors and assignments of gp_Dir are Rust copies. The 2D conics' noexcept
 `Reverse` and hyperbola branches, which turn stored unit directions, use an infallible
 quarter turn.
+
+### BVH, Convert, BSplCLib and BSplSLib (API completion)
+
+This work adds no upstream suite. `tools/audit_api_rows.py` now reports no missing
+member and no stale row for the BVH, Convert, BSplCLib and BSplSLib packages. Most gaps
+were ledger spellings: rows used informal parameter names (`min`, `cmax`, `4 corners`)
+or wrote the template arguments of a primary template (`BVH_Box<T,N>::`,
+`Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::`), which the ledger
+spells as the bare class name. The rows now carry the exact header signatures.
+
+The audit itself had gaps, fixed with tests in `tools/tests/test_audit_api_rows.py`:
+out-of-class template definitions (`BVH_Box<T, N>::Area() const`) were counted as new
+members; a class specialization's base clause leaked into its scope name;
+`handle<B<T, N>>` and dependent `typename B<T, N>::V` parameters were cut at the first
+`>`; and `DEFINE_STANDARD_RTTIEXT`, which expands to `public:` and has no semicolon,
+swallowed the next declaration and its access label (in Poly this hid every public
+member of Poly_Triangulation and Poly_PolygonOnTriangulation). Typedefs, `using`
+aliases, data members, class names, enumerators and protected members are now known
+identities: a row that names one is not stale, but none of them needs a row. A row
+with status `excluded` must carry a `notes` reason.
+
+Newly ported: `BVH::ToBndBox(const T&, const T&)` (`to_bnd_box_scalar`),
+`BVH::MatrixOp<T, 4>::Inverse`/`Multiply` (`matrix_op_inverse`/`matrix_op_multiply`,
+now also used by `BvhTransform`), and `BVH::SurfaceCalculator::Area` is public as
+`surface_area`. The `bvh_tool_classes` probe sends 96 differential requests that cover
+every `BVH` namespace tool class (ToBndBox, VecComp, UnitVector, MatrixOp,
+SurfaceCalculator, BVH_AxisSelector, CenterAxis, BoxMinMax) for float and double in
+2D, 3D and 4D, including tied, signed-zero, tiny and huge components and singular and
+W = 0 matrices; they all match the native bits.
+
+Excluded rows (status `excluded`, with the reason in `notes`): the destructors, the
+`DEFINE_STANDARD_RTTIEXT` members, the defaulted constructors of the stateless abstract
+`BVH_Set` and `BSplCLib/BSplSLib_EvaluatorFunction`, and the two Bezier overloads
+`BSplCLib::DN(U, N, Poles, Weights, P, VN)`, which the pinned header declares but no
+pinned source defines (libTKMath exports only the three B-spline `DN` overloads), so a
+call cannot link.
