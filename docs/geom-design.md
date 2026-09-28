@@ -66,7 +66,8 @@ state behind interior mutability:
   writes. A basis curve that a trimmed or offset curve owns is a separate object
   with its own lock.
 - Getters that return `const T&` in OCCT (`Poles()`, `Position()`) return
-  copies, because a reference cannot outlive the lock.
+  copies, because a reference cannot outlive the lock. `WeightsArray()`, whose
+  identity the legacy tests check, lends the stored array to a closure instead.
 - Concurrent mutation of one object from several threads is memory safe, and
   each call is atomic, but a sequence of calls is not. OCCT has no
   synchronisation at all here, so the port adds no stronger promise.
@@ -84,7 +85,8 @@ native exception type (`Geom2d_UndefinedDerivative`, `Geom2d_UndefinedValue`,
 offending value. Checks that OCCT writes with `*_Raise_if` stay active, because
 the pinned oracle build (RelWithDebInfo) does not define `No_Exception`. The
 virtual evaluators (`EvalD0`...`EvalDN`) always return `Result`, because an
-override can fail even when the base class cannot.
+override can fail even when the base class cannot. For the same reason `Copy`
+returns `Result`: a trimmed curve re-trims its bounds when it is copied.
 
 ## 5. Evaluation caches
 
