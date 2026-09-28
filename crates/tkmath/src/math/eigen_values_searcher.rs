@@ -44,7 +44,14 @@ impl EigenValuesSearcher {
         Ok(Self {
             diagonal: Vector::with_bounds(1, n)?,
             subdiagonal: Vector::with_bounds(1, n)?,
-            vectors: Matrix::with_bounds(1, n, 1, n).unwrap(),
+            // An empty problem fails the native NCollection_Array2(1, 0, 1, 0) allocation.
+            vectors: Matrix::with_bounds(1, n, 1, n).map_err(|_| {
+                Failure::with_type(
+                    "Standard_RangeError",
+                    &format!("math_EigenValuesSearcher: dimension {n}; expected at least 1"),
+                    "",
+                )
+            })?,
             values: Vector::with_bounds(1, n)?,
             done: false,
         })

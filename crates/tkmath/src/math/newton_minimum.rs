@@ -14,8 +14,9 @@
 
 //! Direct math_NewtonMinimum.cxx at OCCT 3d097a0; Done and Status remain independent.
 use super::optimization::{Optimization, gradient_results};
-use super::{Gauss, Jacobi, Matrix, MultipleVarFunctionWithHessian, Status, Vector};
+use super::{Gauss, Jacobi, Matrix, MultipleVarFunctionWithHessian, Status, Vector, stream_real};
 use rustycad_tkernel::standard::Failure;
+use std::fmt::Write;
 mod bounds;
 mod curvature;
 mod iterate;
@@ -29,7 +30,6 @@ pub struct NewtonMinimum {
     singularity: bool,
     convex: bool,
     min_eigenvalue: f64,
-    status: Status,
     bounds: Option<(Vector<'static>, Vector<'static>)>,
 }
 impl NewtonMinimum {
@@ -46,7 +46,8 @@ impl NewtonMinimum {
         singularity: bool,
     ) -> Result<Self, Failure> {
         let size: i32 = function.variables();
-        let mut result: Optimization = Optimization::new(size, tolerance, limit, 0.0)?;
+        let mut result: Optimization =
+            Optimization::new(size, [tolerance, 0.0], limit, Status::NotBracketed)?;
         result.failure_message = "NewtonMinimum";
         Ok(Self {
             result,
@@ -56,7 +57,6 @@ impl NewtonMinimum {
             singularity,
             convex: true,
             min_eigenvalue: 0.0,
-            status: Status::NotBracketed,
             bounds: None,
         })
     }
@@ -80,13 +80,23 @@ impl NewtonMinimum {
         function: &mut impl MultipleVarFunctionWithHessian,
         start: &Vector<'_>,
     ) -> Result<(), Failure> {
+        self.perform_with_criterion(function, start, &mut |solver: &Self| solver.is_converged())
+    }
+    /// Runs with a replacement for the virtual `IsConverged()` (FairCurve_Newton's hook);
+    /// the criterion reads `current_step`, `current_minimum`, `previous_minimum` and
+    /// `tolerance`. `solver.perform_with_criterion(&mut f,&start,&mut |s| s.is_converged())?`.
+    pub fn perform_with_criterion(
+        &mut self,
+        function: &mut impl MultipleVarFunctionWithHessian,
+        start: &Vector<'_>,
+        criterion: &mut impl FnMut(&Self) -> bool,
+    ) -> Result<(), Failure> {
         let mut previous: Vector<'static> = Vector::with_bounds(1, function.variables())?;
         previous.initialized(start)?;
         let mut next: Vector<'static> = Vector::with_bounds(1, function.variables())?;
-        self.result.done = true;
-        self.status = Status::Ok;
+        self.result.succeed();
         self.result.iterations = 0;
-        self.iterate(function, &mut previous, &mut next);
+        self.iterate(function, [&mut previous, &mut next], criterion);
         Ok(())
     }
     /// Applies the native step or relative-objective criterion; `solver.is_converged()`.
@@ -95,13 +105,31 @@ impl NewtonMinimum {
             || (self.result.minimum - self.result.previous).abs()
                 <= self.result.tolerance * self.result.previous.abs()
     }
-    /// Reads status even when not done, as native GetStatus does; `solver.status()`.
-    pub fn status(&self) -> Status {
-        self.status
+    /// Protected `TheStep`, the last Newton step; `solver.current_step()`.
+    pub fn current_step(&self) -> &Vector<'static> {
+        &self.step
+    }
+    /// Writes the native `Dump` text. Like OCCT, it reads `Location()` and friends, so a
+    /// solver that is not done raises `StdFail_NotDone` after the status lines were
+    /// written. `solver.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl Write) -> Result<(), Failure> {
+        let write = |_| Failure::new("math_NewtonMinimum::Dump: the stream refused a write");
+        write!(stream, "math_Newton Optimisation: ").map_err(write)?;
+        writeln!(stream, " Done   ={}", i32::from(self.result.done)).map_err(write)?;
+        writeln!(stream, " Status = {}", self.result.status as i32).map_err(write)?;
+        write!(stream, " Location Vector = ").map_err(write)?;
+        self.location()?.dump(stream).map_err(write)?;
+        writeln!(stream).map_err(write)?;
+        writeln!(stream, " Minimum value = {}", stream_real(self.minimum()?)).map_err(write)?;
+        let previous = stream_real(self.result.previous);
+        writeln!(stream, " Previous value = {previous}").map_err(write)?;
+        writeln!(stream, " Number of iterations = {}", self.iterations()?).map_err(write)?;
+        writeln!(stream, " Convexity = {}", i32::from(self.convex)).map_err(write)?;
+        let eigen = stream_real(self.min_eigenvalue);
+        writeln!(stream, " Eigen Value = {eigen}").map_err(write)
     }
     fn fail(&mut self, status: Status) -> bool {
-        self.result.done = false;
-        self.status = status;
+        self.result.fail(status);
         false
     }
 }

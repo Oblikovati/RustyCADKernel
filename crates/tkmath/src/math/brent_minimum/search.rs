@@ -14,11 +14,16 @@
 
 use super::{BrentMinimum, Function, History, Sample};
 impl BrentMinimum {
-    pub(super) fn iterate(&mut self, function: &mut impl Function, history: &mut History) {
+    pub(super) fn iterate<F: Function>(
+        &mut self,
+        function: &mut F,
+        history: &mut History,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
+    ) {
         for iteration in 1..=self.limit {
             self.iterations = iteration;
             let tolerance: f64 = self.tolerance * self.current.x.abs() + self.epsilon;
-            if self.is_solution_reached() {
+            if criterion(self, function) {
                 self.done = true;
                 return;
             }

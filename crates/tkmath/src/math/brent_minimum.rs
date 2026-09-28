@@ -13,8 +13,9 @@
 // commercial license or contractual agreement.
 
 //! Brent minimization preserving OCCT's step order and persistent done state.
-use super::Function;
+use super::{Function, stream_real};
 use rustycad_tkernel::standard::Failure;
+use std::fmt;
 mod search;
 mod step;
 #[derive(Clone, Copy)]
@@ -67,7 +68,19 @@ impl BrentMinimum {
         solver
     }
     /// Runs the native minimization on a supplied triplet; `solver.perform(&mut function,0.0,1.5,4.0)`.
-    pub fn perform(&mut self, function: &mut impl Function, first: f64, middle: f64, last: f64) {
+    pub fn perform<F: Function>(&mut self, function: &mut F, first: f64, middle: f64, last: f64) {
+        let mut criterion = |solver: &Self, _: &mut F| solver.is_solution_reached();
+        self.perform_with_criterion(function, [first, middle, last], &mut criterion);
+    }
+    /// Runs with a replacement for the virtual `IsSolutionReached(F)`; the criterion
+    /// reads `bracket`, `current_location`, `current_value`, `tolerance` and
+    /// `zero_epsilon`. `solver.perform_with_criterion(&mut f,[0.0,1.5,4.0],&mut |s, _| s.is_solution_reached())`.
+    pub fn perform_with_criterion<F: Function>(
+        &mut self,
+        function: &mut F,
+        [first, middle, last]: [f64; 3],
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
+    ) {
         self.left = if first < last { first } else { last };
         self.right = if first > last { first } else { last };
         self.current.x = middle;
@@ -81,7 +94,7 @@ impl BrentMinimum {
             d: f64::MAX,
             e: 0.0,
         };
-        self.iterate(function, &mut history);
+        self.iterate(function, &mut history, criterion);
     }
     /// Applies the default native convergence test; `solver.is_solution_reached()`.
     pub fn is_solution_reached(&self) -> bool {
@@ -107,6 +120,41 @@ impl BrentMinimum {
         self.check_done()?;
         Ok(self.iterations)
     }
+    /// Protected bracket `[a, b]` of the running search; `solver.bracket()`.
+    pub fn bracket(&self) -> [f64; 2] {
+        [self.left, self.right]
+    }
+    /// Protected `x`, the best abscissa so far; `solver.current_location()`.
+    pub fn current_location(&self) -> f64 {
+        self.current.x
+    }
+    /// Protected `fx`, the value at `x`; `solver.current_value()`.
+    pub fn current_value(&self) -> f64 {
+        self.current.value
+    }
+    /// Protected `XTol`; `solver.tolerance()`.
+    pub fn tolerance(&self) -> f64 {
+        self.tolerance
+    }
+    /// Protected `EPSZ`; `solver.zero_epsilon()`.
+    pub fn zero_epsilon(&self) -> f64 {
+        self.epsilon
+    }
+    /// Writes the native `Dump` text; `solver.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl fmt::Write) -> fmt::Result {
+        write!(stream, "math_BrentMinimum ")?;
+        if !self.done {
+            return writeln!(stream, " Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        writeln!(stream, " Location value = {}", stream_real(self.current.x))?;
+        writeln!(
+            stream,
+            " Minimum value = {}",
+            stream_real(self.current.value)
+        )?;
+        writeln!(stream, " Number of iterations = {}", self.iterations)
+    }
     fn check_done(&self) -> Result<(), Failure> {
         if !self.done {
             return Err(Failure::with_type("StdFail_NotDone", " ", ""));
@@ -114,3 +162,4 @@ impl BrentMinimum {
         Ok(())
     }
 }
+display_via_dump!(BrentMinimum);

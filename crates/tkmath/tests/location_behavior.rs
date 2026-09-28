@@ -1,9 +1,9 @@
 //! Supplemental numeric and ownership regressions for the OCC25545 dependency path.
+use rustycad_tkernel::standard::Handle;
 use rustycad_tkmath::{
     gp::{Point3, Transform3},
     toploc::{Datum3, Location},
 };
-use std::sync::Arc;
 #[test]
 fn translation_forms_and_integer_powers() {
     let identity = Transform3::default();
@@ -27,12 +27,12 @@ fn translation_forms_and_integer_powers() {
 }
 #[test]
 fn datum_identity_cancellation_and_shared_tails() {
-    let datum = Arc::new(Datum3::new(Transform3::translation([2.0, 3.0, 4.0])));
+    let datum = Handle::new(Datum3::new(Transform3::translation([2.0, 3.0, 4.0])));
     let location = Location::from_datum(datum.clone());
     assert_eq!(*datum.transformation(), location.transformation());
-    assert!(Arc::ptr_eq(location.first_datum().unwrap(), &datum));
-    assert_eq!(location.first_power(), Some(1));
-    assert!(location.next_location().unwrap().is_identity());
+    assert!(*location.first_datum().unwrap() == datum);
+    assert_eq!(location.first_power().unwrap(), 1);
+    assert!(location.next_location().is_identity());
     assert_eq!(location.clone(), location);
     assert_ne!(location, Location::new(*datum.transformation()));
     assert!(
@@ -42,8 +42,12 @@ fn datum_identity_cancellation_and_shared_tails() {
             .is_identity()
     );
     assert_eq!(
-        location.multiplied(&location).unwrap().first_power(),
-        Some(2)
+        location
+            .multiplied(&location)
+            .unwrap()
+            .first_power()
+            .unwrap(),
+        2
     );
     let chain = location
         .multiplied(&Location::new(Transform3::translation([1.0; 3])))

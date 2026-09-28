@@ -42,7 +42,7 @@ pub use sparse_array::SparseArray;
 mod sequence;
 pub use sequence::{Sequence, SequenceCursor, SequenceIter, SequenceIterMut};
 mod hash_policy;
-pub use hash_policy::{DefaultHashPolicy, HashKey, HashPolicy};
+pub use hash_policy::{DefaultHashPolicy, HashKey, HashPolicy, next_map_prime};
 mod data_map;
 pub use data_map::{DataMap, DataMapItems};
 
@@ -89,7 +89,7 @@ pub use ebtree::EBTree;
 pub use ubtree::{BoundingNode, BoundingVolume, TreeSelector, UBTree};
 
 mod packed_map;
-pub use packed_map::{PackedInteger, PackedMap, PackedMapIter, PackedWord};
+pub use packed_map::{PackedCursor, PackedInteger, PackedMap, PackedMapIter, PackedWord};
 pub mod packed_map_algo;
 
 mod aliased_array;

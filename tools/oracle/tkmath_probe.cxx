@@ -161,12 +161,19 @@ void planar_case(std::istream& input) {
 #include "tkmath_gp_transform_probe.cxx"
 #include "tkmath_convert_probe.cxx"
 #include "tkmath_gp_core_probe.cxx"
+#include "tkmath_vector_base_probe.cxx"
+#include "tkmath_recipes_probe.cxx"
 #include "tkmath_mathsys_api_probe.cxx"
 #include "tkmath_integ_lin_api_probe.cxx"
 #include "tkmath_mathutils_functor_api_probe.cxx"
 #include "tkmath_mathutils_core_api_probe.cxx"
 #include "tkmath_mathopt_api_probe.cxx"
+#include <functional>
+#include "tkmath_poly_probe.cxx"
+#include "tkmath_poly_tools_probe.cxx"
+#include "tkmath_toploc_probe.cxx"
 #include "tkmath_bnd_probe.cxx"
+#include "tkmath_solver_dump_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -365,12 +372,35 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"gp3d_pln", gpc_pln_case},
  {"gp3d_frame", gpc_frame_case},
  {"gp3d_lerp", gpc_lerp_case},
+ {"poly_mesh", poly_probe::mesh_case},
+ {"poly_pot", poly_probe::point_on_triangle_case},
+ {"poly_triline", poly_probe::tri_line_case},
+ {"poly_props", poly_probe::properties_case},
+ {"poly_io", poly_probe::io_case},
+ {"poly_connect", poly_probe::connect_case},
+ {"poly_coherent", poly_tools_probe::coherent_case},
+ {"poly_merge", poly_tools_probe::merge_case},
+ {"poly_loops", poly_tools_probe::loops_case},
+ {"toploc", toploc_probe::location_case},
+ {"int_vector", vector_base_probe::int_vector_case},
+ {"real_vector_extra", vector_base_probe::real_vector_extra_case},
+ {"matrix_extra", vector_base_probe::matrix_extra_case},
+ {"recipes_lu", recipes_probe::lu_case},
+ {"recipes_svd", recipes_probe::svd_case},
+ {"recipes_jacobi", recipes_probe::jacobi_case},
+ {"recipes_dactcl", recipes_probe::dactcl_case},
+ {"linear_dump", recipes_probe::linear_dump_case},
  {"obb_build", bnd_probe::obb_build_case},
  {"obb_pair", bnd_probe::obb_pair_case},
  {"sortbox", bnd_probe::sortbox_case},
  {"box_extra", bnd_probe::box_extra_case},
  {"box2_extra", bnd_probe::box2_extra_case},
  {"compact_trsf", bnd_probe::compact_trsf_case},
+ {"dump_minimizers", solver_dump_probe::minimizers_case},
+ {"dump_scalar", solver_dump_probe::scalar_case},
+ {"dump_polynomial", solver_dump_probe::polynomial_dump_case},
+ {"dump_sets", solver_dump_probe::sets_case},
+ {"small_types", solver_dump_probe::small_types_case},
  {"compact_arrays", bnd_probe::compact_arrays_case},
 };
 int main() {

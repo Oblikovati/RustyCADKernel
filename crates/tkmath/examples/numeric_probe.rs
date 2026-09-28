@@ -502,7 +502,30 @@ fn main() {
             "mathutils_core_random" => {
                 mathutils_core_api_probe::mathutils_core_random_case(&values)
             }
+            "poly_mesh" => poly_probe::mesh_case(&values),
+            "poly_pot" => poly_probe::point_on_triangle_case(&values),
+            "poly_triline" => poly_probe::tri_line_case(&values),
+            "poly_props" => poly_probe::properties_case(&values),
+            "poly_io" => poly_probe::io_case(&values),
+            "poly_connect" => poly_probe::connect_case(&values),
+            "poly_coherent" => poly_probe::coherent_case(&values),
+            "poly_merge" => poly_probe::merge_case(&values),
+            "poly_loops" => poly_probe::loops_case(&values),
+            "toploc" => toploc_probe::location_case(&values),
             "mathpoly_utils_complex" => mathpoly_utils_probe::mathpoly_utils_complex_case(&values),
+            "int_vector" => vector_base_probe::int_vector_case(&values),
+            "real_vector_extra" => vector_base_probe::real_vector_extra_case(&values),
+            "matrix_extra" => vector_base_probe::matrix_extra_case(&values),
+            "recipes_lu" => recipes_probe::lu_case(&values),
+            "recipes_svd" => recipes_probe::svd_case(&values),
+            "recipes_jacobi" => recipes_probe::jacobi_case(&values),
+            "recipes_dactcl" => recipes_probe::dactcl_case(&values),
+            "linear_dump" => recipes_probe::linear_dump_case(&values),
+            "dump_minimizers" => solver_dump_probe::minimizers_case(&values),
+            "dump_scalar" => solver_dump_probe::scalar_case(&values),
+            "dump_polynomial" => solver_dump_probe::polynomial_dump_case(&values),
+            "dump_sets" => solver_dump_probe::sets_case(&values),
+            "small_types" => solver_dump_probe::small_types_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }
@@ -511,6 +534,8 @@ fn main() {
 mod table_probe;
 
 mod nodes_probe;
+mod poly_probe;
+mod toploc_probe;
 
 mod vector_probe;
 
@@ -583,3 +608,6 @@ mod convert_probe;
 mod cslib_probe;
 mod elementary_probe;
 mod plib_probe;
+mod recipes_probe;
+mod solver_dump_probe;
+mod vector_base_probe;

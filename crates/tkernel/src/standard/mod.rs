@@ -11,6 +11,7 @@ pub use strtod::strtod;
 pub mod character;
 
 pub mod hashing;
+pub use hashing::hash_bytes;
 
 mod handle;
 mod runtime_type;

@@ -81,10 +81,8 @@ impl Matrix<'_> {
     /// Sets matching declared row/column indices, as OCCT does; `matrix.set_diag(1.0)?`.
     pub fn set_diag(&mut self, value: f64) -> Result<(), Failure> {
         if self.row_number() != self.col_number() {
-            return Err(Failure::with_type(
-                "math_NotSquare",
+            return Err(crate::math::not_square(
                 "math_Matrix::SetDiag() - matrix is not square",
-                "",
             ));
         }
         for index in self.lower_row()..=self.upper_row() {

@@ -13,8 +13,8 @@
 // commercial license or contractual agreement.
 
 //! Direct math_Powell.cxx at OCCT 3d097a0, including direction replacement and ignored Value status.
-use super::optimization::{Optimization, minimum_results};
-use super::{Matrix, MultipleVarFunction, Vector};
+use super::optimization::{Optimization, minimum_results, standard_dump};
+use super::{Matrix, MultipleVarFunction, Status, Vector};
 use rustycad_tkernel::standard::Failure;
 mod extrapolate;
 mod iterate;
@@ -38,7 +38,8 @@ impl Powell {
         epsilon: f64,
     ) -> Result<Self, Failure> {
         let size: i32 = function.variables();
-        let mut result: Optimization = Optimization::new(size, tolerance, limit, epsilon)?;
+        let mut result: Optimization =
+            Optimization::new(size, [tolerance, epsilon], limit, Status::NotBracketed)?;
         result.minimum = f64::MAX;
         result.previous = f64::MAX;
         Ok(Self {
@@ -49,11 +50,27 @@ impl Powell {
         })
     }
     /// Searches along the matrix columns; `solver.perform(&mut function,&start,&directions)?`.
-    pub fn perform(
+    pub fn perform<F: MultipleVarFunction>(
         &mut self,
-        function: &mut impl MultipleVarFunction,
+        function: &mut F,
         start: &Vector<'_>,
         directions: &Matrix<'_>,
+    ) -> Result<(), Failure> {
+        self.perform_with_criterion(
+            function,
+            start,
+            directions,
+            &mut |solver: &Self, _: &mut F| solver.is_solution_reached(),
+        )
+    }
+    /// Searches with a replacement for the virtual `IsSolutionReached(F)`;
+    /// `solver.perform_with_criterion(&mut f,&start,&dirs,&mut |s, _| s.is_solution_reached())?`.
+    pub fn perform_with_criterion<F: MultipleVarFunction>(
+        &mut self,
+        function: &mut F,
+        start: &Vector<'_>,
+        directions: &Matrix<'_>,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> Result<(), Failure> {
         self.result.done = false;
         self.scratch_value = 0.0;
@@ -63,7 +80,7 @@ impl Powell {
         let mut direction: Vector<'static> = Vector::with_bounds(1, previous.upper())?;
         self.result.iterations = 1;
         while self.result.iterations <= self.result.limit {
-            if self.iteration(function, &mut previous, &mut direction) {
+            if self.iteration(function, [&mut previous, &mut direction], criterion) {
                 return Ok(());
             }
             self.result.iterations += 1;
@@ -90,3 +107,4 @@ impl Powell {
     }
 }
 minimum_results!(Powell);
+standard_dump!(Powell, "math_Powell resolution:");

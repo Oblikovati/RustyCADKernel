@@ -120,3 +120,20 @@ impl FunctionRoots {
         self.states.insert(position, function.state_number());
     }
 }
+impl FunctionRoots {
+    /// Writes the native `Dump` text listing every root; `roots.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+        write!(stream, "math_FunctionRoots ")?;
+        if !self.done {
+            return writeln!(stream, " Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        writeln!(stream, " Number of solutions = {}", self.roots.len())?;
+        for (offset, root) in self.roots.iter().enumerate() {
+            let text = crate::math::stream_real(*root);
+            writeln!(stream, " Solution Number {}= {text}", offset + 1)?;
+        }
+        Ok(())
+    }
+}
+display_via_dump!(FunctionRoots);

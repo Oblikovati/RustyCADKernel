@@ -13,8 +13,8 @@
 // commercial license or contractual agreement.
 
 //! Direct math_FRPR.cxx base algorithm at OCCT 3d097a0, including OCC30492.
-use super::optimization::{Optimization, optimization_results};
-use super::{MultipleVarFunctionWithGradient, Vector};
+use super::optimization::{Optimization, optimization_results, standard_dump};
+use super::{MultipleVarFunctionWithGradient, Status, Vector};
 use rustycad_tkernel::standard::Failure;
 mod iterate;
 mod line;
@@ -39,15 +39,32 @@ impl Frpr {
         epsilon: f64,
     ) -> Result<Self, Failure> {
         Ok(Self {
-            result: Optimization::new(function.variables(), tolerance, limit, epsilon)?,
+            result: Optimization::new(
+                function.variables(),
+                [tolerance, epsilon],
+                limit,
+                Status::NotBracketed,
+            )?,
             state: 0,
         })
     }
     /// Performs Polak–Ribiere updates with native line search; `solver.perform(&mut function,&start)?`.
-    pub fn perform(
+    pub fn perform<F: MultipleVarFunctionWithGradient>(
         &mut self,
-        function: &mut impl MultipleVarFunctionWithGradient,
+        function: &mut F,
         start: &Vector<'_>,
+    ) -> Result<(), Failure> {
+        self.perform_with_criterion(function, start, &mut |solver: &Self, _: &mut F| {
+            solver.is_solution_reached()
+        })
+    }
+    /// Runs the search with a replacement for the virtual `IsSolutionReached(F)`;
+    /// `solver.perform_with_criterion(&mut f,&start,&mut |s, _| s.is_solution_reached())?`.
+    pub fn perform_with_criterion<F: MultipleVarFunctionWithGradient>(
+        &mut self,
+        function: &mut F,
+        start: &Vector<'_>,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> Result<(), Failure> {
         if !self.result.initialize(function, start)? {
             return Ok(());
@@ -58,8 +75,13 @@ impl Frpr {
         }
         let mut previous_direction: Vector<'static> = negative.clone();
         self.result.gradient.initialized(&negative)?;
-        self.iterate(function, &mut negative, &mut previous_direction);
+        self.iterate(
+            function,
+            [&mut negative, &mut previous_direction],
+            criterion,
+        );
         Ok(())
     }
 }
 optimization_results!(Frpr);
+standard_dump!(Frpr, "math_FRPR ");

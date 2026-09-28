@@ -15,6 +15,7 @@
 //! General root search with native Newton/gradient selection and boundary handling.
 use super::{FunctionSetWithDerivatives, Matrix, Vector};
 use rustycad_tkernel::standard::Failure;
+use std::fmt;
 mod boundary;
 mod bounds;
 mod descent;
@@ -139,13 +140,33 @@ impl FunctionSetRoot {
         self.perform_bounded(function, start, &lower, &upper, stop_on_divergent)
     }
     /// Searches within supplied bounds and records any attempted divergence; `solver.perform_bounded(&mut function,&start,&lower,&upper,false)?`.
-    pub fn perform_bounded(
+    pub fn perform_bounded<F: FunctionSetWithDerivatives>(
         &mut self,
-        function: &mut impl FunctionSetWithDerivatives,
+        function: &mut F,
         start: &Vector<'_>,
         lower: &Vector<'_>,
         upper: &Vector<'_>,
         stop_on_divergent: bool,
+    ) -> Result<(), Failure> {
+        let mut criterion = |solver: &Self, _: &mut F| solver.is_solution_reached();
+        self.perform_with_criterion(
+            function,
+            start,
+            [lower, upper],
+            stop_on_divergent,
+            &mut criterion,
+        )
+    }
+    /// The bounded search with a replacement for the virtual `IsSolutionReached(F)`; the
+    /// criterion reads `current_step`, `current_solution`, `current_jacobian` and
+    /// `tolerances`. `solver.perform_with_criterion(&mut f,&start,[&lower,&upper],false,&mut |s, _| s.is_solution_reached())?`.
+    pub fn perform_with_criterion<F: FunctionSetWithDerivatives>(
+        &mut self,
+        function: &mut F,
+        start: &Vector<'_>,
+        [lower, upper]: [&Vector<'_>; 2],
+        stop_on_divergent: bool,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> Result<(), Failure> {
         let n: i32 = function.variables();
         if function.equations() <= 0
@@ -179,7 +200,7 @@ impl FunctionSetRoot {
             self.finish(function, true, false);
             return Ok(());
         }
-        self.iterate(function);
+        self.iterate(function, criterion);
         Ok(())
     }
     fn prepare(
@@ -233,6 +254,34 @@ impl FunctionSetRoot {
         }
         true
     }
+    /// Protected `Delta`, the last step used by the criterion; `solver.current_step()`.
+    pub fn current_step(&self) -> &Vector<'static> {
+        &self.delta
+    }
+    /// Protected `Sol` without the `Done` check; `solver.current_solution()`.
+    pub fn current_solution(&self) -> &Vector<'static> {
+        &self.sol
+    }
+    /// Protected `DF`, the current Jacobian; `solver.current_jacobian()`.
+    pub fn current_jacobian(&self) -> &Matrix<'static> {
+        &self.jacobian
+    }
+    /// Protected `Tol`, the per-variable step tolerances; `solver.tolerances()`.
+    pub fn tolerances(&self) -> &Vector<'static> {
+        &self.tol
+    }
+    /// Writes the native `Dump` text; `solver.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl fmt::Write) -> fmt::Result {
+        write!(stream, " math_FunctionSetRoot")?;
+        if !self.done {
+            return writeln!(stream, "Status = Not Done");
+        }
+        writeln!(stream, " Status = Done")?;
+        write!(stream, " Location value = ")?;
+        self.sol.dump(stream)?;
+        writeln!(stream)?;
+        writeln!(stream, " Number of iterations = {}", self.iteration)
+    }
     fn exact_solution(&self) -> bool {
         self.run.objective <= 1e-32 || self.run.gradient_norm <= 1e-64
     }
@@ -256,3 +305,4 @@ impl FunctionSetRoot {
 fn vector(size: i32) -> Result<Vector<'static>, Failure> {
     Vector::with_bounds(1, size)
 }
+display_via_dump!(FunctionSetRoot);

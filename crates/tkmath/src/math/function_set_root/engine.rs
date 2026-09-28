@@ -14,7 +14,11 @@
 
 use super::{FunctionSetRoot, FunctionSetWithDerivatives, direction};
 impl FunctionSetRoot {
-    pub(super) fn iterate(&mut self, function: &mut impl FunctionSetWithDerivatives) {
+    pub(super) fn iterate<F: FunctionSetWithDerivatives>(
+        &mut self,
+        function: &mut F,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
+    ) {
         for iteration in 1..=self.limit {
             self.iteration = iteration;
             if !self.initial_step(function) {
@@ -25,7 +29,7 @@ impl FunctionSetRoot {
             {
                 return;
             }
-            if !self.stopping(function) {
+            if !self.stopping(function, criterion) {
                 return;
             }
         }

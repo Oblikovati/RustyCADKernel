@@ -72,9 +72,89 @@ impl Matrix<'_> {
     }
     /// Applies OCCT's self-aliasing product branch with a saved operand; `matrix.square()?`.
     pub fn square(&mut self) -> Result<(), Failure> {
+        if self.col_number() != self.row_number() {
+            return Err(dimension(
+                "Multiply",
+                "input matrix has incompatible dimensions",
+            ));
+        }
         let previous = self.clone();
-        let product = previous.multiplied_matrix(&previous)?;
-        self.initialized(&product)
+        self.set_product(&previous, &previous)
+    }
+    /// Stores `left * right` into this matrix's bounds with the native i-k-j order, the
+    /// two-operand `Multiply`; `result.set_product(&left,&right)?`.
+    pub fn set_product(&mut self, left: &Matrix<'_>, right: &Matrix<'_>) -> Result<(), Failure> {
+        if left.col_number() != right.row_number()
+            || self.row_number() != left.row_number()
+            || self.col_number() != right.col_number()
+        {
+            return Err(dimension(
+                "Multiply",
+                "matrices have incompatible dimensions",
+            ));
+        }
+        self.init(0.0);
+        for row in 0..self.row_number() {
+            self.accumulate_product_row(left, right, row);
+        }
+        Ok(())
+    }
+    fn accumulate_product_row(&mut self, left: &Matrix<'_>, right: &Matrix<'_>, row: i32) {
+        for inner in 0..left.col_number() {
+            let value = left[(left.lower_row() + row, left.lower_col() + inner)];
+            let target_row = self.lower_row() + row;
+            for col in 0..self.col_number() {
+                let target_col = self.lower_col() + col;
+                self[(target_row, target_col)] +=
+                    value * right[(right.lower_row() + inner, right.lower_col() + col)];
+            }
+        }
+    }
+    /// Returns `transpose(self) * right` bounded by this matrix's columns and the right
+    /// columns, the const `TMultiply`; `left.t_multiply(&right)?`.
+    pub fn t_multiply(&self, right: &Matrix<'_>) -> Result<Self, Failure> {
+        if self.row_number() != right.row_number() {
+            return Err(dimension(
+                "TMultiply",
+                "matrices have incompatible dimensions",
+            ));
+        }
+        let mut result = Self::with_bounds(
+            self.lower_col(),
+            self.upper_col(),
+            right.lower_col(),
+            right.upper_col(),
+        )
+        .unwrap();
+        result.store_transpose_product(self, right);
+        Ok(result)
+    }
+    /// Stores `transpose(t_left) * right` into this matrix's bounds, the two-operand
+    /// `TMultiply`; `result.set_transpose_product(&t_left,&right)?`.
+    pub fn set_transpose_product(
+        &mut self,
+        t_left: &Matrix<'_>,
+        right: &Matrix<'_>,
+    ) -> Result<(), Failure> {
+        if t_left.row_number() != right.row_number()
+            || self.row_number() != t_left.col_number()
+            || self.col_number() != right.col_number()
+        {
+            return Err(dimension(
+                "TMultiply",
+                "matrices have incompatible dimensions",
+            ));
+        }
+        self.store_transpose_product(t_left, right);
+        Ok(())
+    }
+    fn store_transpose_product(&mut self, t_left: &Matrix<'_>, right: &Matrix<'_>) {
+        for row in 0..self.row_number() {
+            for col in 0..self.col_number() {
+                let target = (self.lower_row() + row, self.lower_col() + col);
+                self[target] = transpose_dot(t_left, right, row, col);
+            }
+        }
     }
     /// Stores an outer product using declared indices; `matrix.set_outer_product(&left,&right)?`.
     pub fn set_outer_product(
@@ -134,4 +214,14 @@ impl std::ops::Mul<&Vector<'_>> for &Matrix<'_> {
     fn mul(self, right: &Vector<'_>) -> Self::Output {
         self.multiplied_vector(right).unwrap()
     }
+}
+/// Column `row` of `t_left` dotted with column `col` of `right`, by position.
+fn transpose_dot(t_left: &Matrix<'_>, right: &Matrix<'_>, row: i32, col: i32) -> f64 {
+    let mut sum = 0.0;
+    for inner in 0..t_left.row_number() {
+        // Native `Som = Som + a * b`; `+=` evaluates identically (no contraction).
+        sum += t_left[(t_left.lower_row() + inner, t_left.lower_col() + row)]
+            * right[(right.lower_row() + inner, right.lower_col() + col)];
+    }
+    sum
 }

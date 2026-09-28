@@ -32,7 +32,7 @@ impl Crout {
     pub fn with_min_pivot(matrix: &Matrix<'_>, minimum: f64) -> Result<Self, Failure> {
         let n = matrix.row_number();
         if n != matrix.col_number() {
-            return Err(Failure::with_type("math_NotSquare", " ", ""));
+            return Err(super::not_square(" "));
         }
         let mut result = Self {
             inverse: Matrix::with_bounds(1, n, 1, n).unwrap(),
@@ -115,3 +115,15 @@ impl Crout {
         Ok(())
     }
 }
+impl Crout {
+    /// Writes the native `Dump` status text; `solver.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+        write!(stream, "math_Crout ")?;
+        if self.done {
+            writeln!(stream, " Status = Done ")
+        } else {
+            writeln!(stream, " Status = not Done ")
+        }
+    }
+}
+display_via_dump!(Crout);

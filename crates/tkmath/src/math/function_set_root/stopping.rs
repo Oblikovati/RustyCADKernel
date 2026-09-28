@@ -14,10 +14,14 @@
 
 use super::{FunctionSetRoot, FunctionSetWithDerivatives};
 impl FunctionSetRoot {
-    pub(super) fn stopping(&mut self, function: &mut impl FunctionSetWithDerivatives) -> bool {
+    pub(super) fn stopping<F: FunctionSetWithDerivatives>(
+        &mut self,
+        function: &mut F,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
+    ) -> bool {
         self.history[self.iteration as usize] = self.run.objective;
         let verify: bool = self.should_verify();
-        if verify && self.step_is_small() {
+        if verify && self.step_is_small(function, criterion) {
             if self.run.previous_minimum < self.run.objective {
                 self.sol.initialized(&self.saved).unwrap();
             }
@@ -25,7 +29,7 @@ impl FunctionSetRoot {
             return false;
         }
         if self.run.objective - self.run.previous_minimum <= self.run.function_tolerance {
-            return self.analyze_progress(function, verify);
+            return self.analyze_progress(function, verify, criterion);
         }
         if self.run.change {
             self.finish(function, false, false);
@@ -49,16 +53,21 @@ impl FunctionSetRoot {
         }
         self.run.objective < 1e-6 * self.history[0]
     }
-    fn step_is_small(&mut self) -> bool {
+    fn step_is_small<F: FunctionSetWithDerivatives>(
+        &mut self,
+        function: &mut F,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
+    ) -> bool {
         for index in 1..=self.delta.length() {
             self.delta[index] = self.previous[index] - self.sol[index];
         }
-        self.is_solution_reached()
+        criterion(self, function)
     }
-    fn analyze_progress(
+    fn analyze_progress<F: FunctionSetWithDerivatives>(
         &mut self,
-        function: &mut impl FunctionSetWithDerivatives,
+        function: &mut F,
         verified: bool,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> bool {
         if self.iteration > 5
             && self.run.objective >= 0.95 * self.history[self.iteration as usize - 5]
@@ -76,7 +85,7 @@ impl FunctionSetRoot {
         {
             self.run.change = true;
         }
-        if !self.run.change && !verified && self.step_is_small() {
+        if !self.run.change && !verified && self.step_is_small(function, criterion) {
             self.finish(function, true, true);
             return false;
         }

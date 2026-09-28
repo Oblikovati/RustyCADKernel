@@ -19,6 +19,8 @@ mod iteration;
 mod queries;
 pub use integer::{PackedInteger, PackedWord};
 pub use iteration::PackedMapIter;
+mod cursor;
+pub use cursor::PackedCursor;
 #[derive(Clone, Copy)]
 struct PackedBlock<W: PackedWord> {
     index: W,

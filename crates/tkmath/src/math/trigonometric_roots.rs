@@ -77,3 +77,22 @@ impl TrigonometricRoots {
         self.count += 1;
     }
 }
+impl TrigonometricRoots {
+    /// Writes the native `Dump` text; `roots.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+        writeln!(stream, " math_TrigonometricFunctionRoots: ")?;
+        if !self.done {
+            return writeln!(stream, "Not Done ");
+        }
+        if self.infinite {
+            return writeln!(stream, " There is an infinity of roots");
+        }
+        writeln!(stream, " Number of solutions = {}", self.count)?;
+        for index in 1..=self.count {
+            let root = crate::math::stream_real(self.roots[(index - 1) as usize]);
+            writeln!(stream, " Value number {index}= {root}")?;
+        }
+        Ok(())
+    }
+}
+display_via_dump!(TrigonometricRoots);

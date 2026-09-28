@@ -35,6 +35,10 @@ private:
 };
 inline void gp_Demo::Mirror(const gp_Pnt& theP) noexcept {}
 inline gp_Demo operator*(const double theS, const gp_Demo& theD) { return theD; }
+class gp_DemoError;
+DEFINE_STANDARD_HANDLE(gp_DemoError, Standard_DomainError)
+#if !defined No_Exception
+#endif
 DEFINE_STANDARD_EXCEPTION(gp_DemoError, Standard_DomainError)
 """
 

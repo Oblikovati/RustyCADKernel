@@ -12,54 +12,53 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! Partial-pivoting LU decomposition matching math_Gauss and math_Recipes.
-use super::{Matrix, Vector};
+//! math_Gauss: a stored `LU_Decompose` factorization of a square matrix.
+use super::recipes::{STATUS_OK, lu_decompose, lu_solve};
+use super::{IntegerVector, Matrix, Vector, stream_real};
 use rustycad_tkernel::standard::Failure;
-mod decompose;
-mod solve;
+use std::fmt;
 /// Reusable native-order Gaussian decomposition; `Gauss::new(&matrix)?`.
 pub struct Gauss {
     lu: Matrix<'static>,
-    pivots: Vec<i32>,
+    index: IntegerVector<'static>,
     sign: f64,
     done: bool,
 }
 impl Gauss {
-    // Newton callbacks receive the in-place LU factors before writing the next Jacobian.
-    pub(super) fn factor_matrix(&self) -> &Matrix<'static> {
-        &self.lu
-    }
-
     /// Uses OCCT's default minimum pivot of 1e-20; `Gauss::new(&matrix)?`.
     pub fn new(matrix: &Matrix<'_>) -> Result<Self, Failure> {
         Self::with_min_pivot(matrix, 1e-20)
     }
-    /// Decomposes using the supplied absolute pivot threshold; `Gauss::with_min_pivot(&matrix,1e-12)?`.
+    /// Decomposes a copy of `matrix` with `LU_Decompose` and the given pivot threshold.
+    ///
+    /// The native constructor's `Message_ProgressRange` is not ported; this is its
+    /// default (never aborting) range. `Gauss::with_min_pivot(&matrix,1e-12)?`.
     pub fn with_min_pivot(matrix: &Matrix<'_>, minimum: f64) -> Result<Self, Failure> {
         if matrix.row_number() != matrix.col_number() {
-            return Err(error("math_NotSquare", " "));
+            return Err(super::not_square(" "));
         }
         let n = matrix.row_number();
         let mut lu = Matrix::with_bounds(1, n, 1, n).unwrap();
         lu.initialized(matrix)?;
-        let mut result = Self {
+        let mut index = IntegerVector::with_bounds(1, n)?;
+        let mut sign = 0.0;
+        let done = lu_decompose(&mut lu, &mut index, &mut sign, minimum)? == STATUS_OK;
+        Ok(Self {
             lu,
-            pivots: vec![0; n as usize],
-            sign: 1.0,
-            done: false,
-        };
-        result.done = result.decompose(minimum);
-        Ok(result)
+            index,
+            sign,
+            done,
+        })
     }
     /// Reports successful decomposition; `solver.is_done()`.
     pub fn is_done(&self) -> bool {
         self.done
     }
-    /// Multiplies the signed diagonal in order; `solver.determinant()?`.
+    /// Multiplies the permutation sign by the diagonal in order; `solver.determinant()?`.
     pub fn determinant(&self) -> Result<f64, Failure> {
         self.check_done()?;
         let mut result = self.sign;
-        for index in 1..=self.lu.row_number() {
+        for index in 1..=self.lu.upper_row() {
             result *= self.lu[(index, index)];
         }
         Ok(result)
@@ -68,22 +67,22 @@ impl Gauss {
     pub fn solve(&self, rhs: &mut Vector<'_>) -> Result<(), Failure> {
         self.check_done()?;
         if rhs.length() != self.lu.row_number() {
-            return Err(error("Standard_DimensionError", ""));
+            return Err(Failure::with_type("Standard_DimensionError", "", ""));
         }
-        self.solve_lu(rhs)
+        lu_solve(&self.lu, &self.index, rhs)
     }
     /// Copies RHS to existing bounds then solves, preserving the overload's validation order; `solver.solve_into(&rhs,&mut solution)?`.
     pub fn solve_into(&self, rhs: &Vector<'_>, solution: &mut Vector<'_>) -> Result<(), Failure> {
         self.check_done()?;
         solution.initialized(rhs)?;
-        self.solve_lu(solution)
+        lu_solve(&self.lu, &self.index, solution)
     }
     /// Writes the inverse using one solve per column; `solver.invert(&mut matrix)?`.
     pub fn invert(&self, inverse: &mut Matrix<'_>) -> Result<(), Failure> {
         self.check_done()?;
         let n = self.lu.row_number();
         if inverse.row_number() != n || inverse.col_number() != n {
-            return Err(error("Standard_DimensionError", " "));
+            return Err(Failure::with_type("Standard_DimensionError", " ", ""));
         }
         let mut column = Vector::with_bounds(1, n).unwrap();
         for j in 1..=n {
@@ -99,20 +98,30 @@ impl Gauss {
     ) -> Result<(), Failure> {
         column.init(0.0);
         column[j] = 1.0;
-        self.solve_lu(column)?;
+        lu_solve(&self.lu, &self.index, column)?;
         let (lower_row, lower_col) = (inverse.lower_row(), inverse.lower_col());
         for i in 1..=self.lu.row_number() {
             inverse[(i + lower_row - 1, j + lower_col - 1)] = column[i];
         }
         Ok(())
     }
+    /// Writes the native status text; `solver.dump(&mut text)?`.
+    ///
+    /// The "determinant" line prints the stored permutation sign `D`, not the
+    /// determinant, exactly as OCCT does.
+    pub fn dump(&self, stream: &mut impl fmt::Write) -> fmt::Result {
+        write!(stream, "math_Gauss ")?;
+        if !self.done {
+            return writeln!(stream, " Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        writeln!(stream, " Determinant of A = {}", stream_real(self.sign))
+    }
     fn check_done(&self) -> Result<(), Failure> {
         if !self.done {
-            return Err(error("StdFail_NotDone", " "));
+            return Err(Failure::with_type("StdFail_NotDone", " ", ""));
         }
         Ok(())
     }
 }
-fn error(kind: &'static str, message: &str) -> Failure {
-    Failure::with_type(kind, message, "")
-}
+display_via_dump!(Gauss);

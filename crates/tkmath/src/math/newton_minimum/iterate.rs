@@ -17,8 +17,8 @@ impl NewtonMinimum {
     pub(super) fn iterate(
         &mut self,
         function: &mut impl MultipleVarFunctionWithHessian,
-        previous: &mut Vector<'static>,
-        next: &mut Vector<'static>,
+        [previous, next]: [&mut Vector<'static>; 2],
+        criterion: &mut impl FnMut(&Self) -> bool,
     ) {
         let mut consecutive: i32 = 0;
         let mut value: f64 = 0.0;
@@ -29,11 +29,7 @@ impl NewtonMinimum {
             }
             self.project_step(previous, next);
             self.evaluate_trial(function, previous, next);
-            consecutive = if self.is_converged() {
-                consecutive + 1
-            } else {
-                0
-            };
+            consecutive = if criterion(self) { consecutive + 1 } else { 0 };
             let good: bool = self.correct_trial(function, previous, next, value, consecutive);
             if !good || consecutive >= 2 {
                 break;

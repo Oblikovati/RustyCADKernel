@@ -43,7 +43,7 @@ impl NewtonMinimum {
             .partial_cmp(&old_value)
             .is_none_or(|order| order == std::cmp::Ordering::Greater)
         {
-            self.status = Status::DirectionSearchError;
+            self.result.status = Status::DirectionSearchError;
             return false;
         }
         std::mem::swap(previous, next);
@@ -51,7 +51,7 @@ impl NewtonMinimum {
         self.result.minimum = value;
         let good: bool = self.result.iterations < self.result.limit;
         if !good && consecutive < 2 {
-            self.status = Status::TooManyIterations;
+            self.result.status = Status::TooManyIterations;
         }
         good
     }
