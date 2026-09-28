@@ -361,6 +361,8 @@ pub fn evaluate_d3<C: OffsetBasisCurve + ?Sized>(
 
 /// Offset derivative of order `n`: D1..D3 through the functions above, the basis
 /// derivative beyond (`EvaluateDN`); `evaluate_dn(u, &*basis, 2.0, 2)?`.
+///
+/// Quirk kept for `n == 3`: see [`evaluate_d3_aliased`].
 pub fn evaluate_dn<C: OffsetBasisCurve + ?Sized>(
     u: f64,
     basis: &C,
@@ -370,7 +372,36 @@ pub fn evaluate_dn<C: OffsetBasisCurve + ?Sized>(
     Ok(match n {
         1 => evaluate_d1(u, basis, offset)?.map(|result| result.d1),
         2 => evaluate_d2(u, basis, offset)?.map(|result| result.d2),
-        3 => evaluate_d3(u, basis, offset)?.map(|result| result.d3),
+        3 => evaluate_d3_aliased(u, basis, offset)?,
         _ => Some(basis.basis_dn(u, n)?),
     })
+}
+
+/// The third derivative as native `EvaluateDN` computes it: it passes one dummy vector
+/// as both `theD1` and `theD2` of `EvaluateD3`, so the basis D2 overwrites D1. The
+/// singularity test, AdjustDerivative and the normal of CalculateD3 then all read the
+/// basis second derivative where D1 belongs. Only the D3 output is kept, which the
+/// aliased writes do not reach; `evaluate_d3_aliased(u, &*basis, 2.0)?`.
+pub fn evaluate_d3_aliased<C: OffsetBasisCurve + ?Sized>(
+    u: f64,
+    basis: &C,
+    offset: f64,
+) -> Result<Option<Vector2>, Failure> {
+    let result: Geom2dCurveD3 = basis.basis_d3(u)?;
+    let (mut point, mut dummy, mut d3) = (result.point, result.d2, result.d3);
+    let mut d4: Vector2 = basis.basis_dn(u, 4)?;
+    let mut is_direction_change: bool = false;
+    if dummy.square_magnitude() <= resolution() {
+        // AdjustDerivative writes theD1 first and then theD2, the same vector: the
+        // tangent it finds is overwritten by the next derivative.
+        let mut overwritten = Vector2::default();
+        let slots = [&mut overwritten, &mut dummy, &mut d3, &mut d4];
+        is_direction_change = adjust_derivative(basis, 4, u, slots)?;
+    }
+    // CalculateD3 reads theD1 and theD2 before writing either, so two copies of the
+    // dummy reproduce the aliased reads.
+    let (mut first, mut second) = (dummy, dummy);
+    let derivatives = [&mut first, &mut second, &mut d3];
+    let computed: bool = calculate_d3(&mut point, derivatives, d4, is_direction_change, offset);
+    Ok(computed.then_some(d3))
 }

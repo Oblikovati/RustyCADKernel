@@ -19,7 +19,7 @@ use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Handle, RuntimeTyped};
 use rustycad_tkg2d::geom2d::offset_curve_utils::{
     adjust_derivative, calculate_d0, calculate_d1, calculate_d2, calculate_d3, evaluate_d0,
-    evaluate_d1, evaluate_d2, evaluate_d3, evaluate_dn,
+    evaluate_d1, evaluate_d2, evaluate_d3, evaluate_d3_aliased, evaluate_dn,
 };
 use rustycad_tkg2d::geom2d::{
     Geom2dBSplineCurve, Geom2dBezierCurve, Geom2dCircle, Geom2dCurve, Geom2dGeometry, Geom2dLine,
@@ -243,12 +243,16 @@ fn evaluate_templates_match_the_curve() {
         evaluate_d3(u, &*basis, 0.5).unwrap(),
         Some(curve.eval_d3(u).unwrap())
     );
-    for n in 1..=4 {
+    for n in [1, 2, 4] {
         assert_eq!(
             evaluate_dn(u, &*basis, 0.5, n).unwrap(),
             Some(curve.eval_dn(u, n).unwrap())
         );
     }
+    // EvaluateDN(3) aliases D1 and D2 (native quirk), so it differs from EvalD3.
+    let dn3 = evaluate_dn(u, &*basis, 0.5, 3).unwrap();
+    assert_eq!(dn3, evaluate_d3_aliased(u, &*basis, 0.5).unwrap());
+    assert_ne!(dn3, Some(curve.eval_dn(u, 3).unwrap()));
     assert_eq!(evaluate_d0(0.0, &*cusp(), 0.5).unwrap(), None);
     assert_eq!(evaluate_d1(0.0, &*cusp(), 0.5).unwrap(), None);
     assert!(evaluate_d2(0.0, &*cusp(), 0.5).unwrap().is_some());
