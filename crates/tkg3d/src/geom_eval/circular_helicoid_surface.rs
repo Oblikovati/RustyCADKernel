@@ -21,9 +21,9 @@ use super::elementary_eval::{
 use crate::geom::errors;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::{Axis3, Vector3, Xyz};
 use std::f64::consts::PI;
 use std::io;
@@ -41,7 +41,7 @@ struct HelicoidState {
 /// `GeomEvalCircularHelicoidSurface::new(Axis3::default(), 2.0)?`.
 pub struct GeomEvalCircularHelicoidSurface {
     parent: StandardTransient,
-    state: GeometryCell<HelicoidState>,
+    state: SharedState<HelicoidState>,
 }
 impl_transient!(
     GeomEvalCircularHelicoidSurface,
@@ -76,7 +76,7 @@ impl GeomEvalCircularHelicoidSurface {
     fn stored(state: HelicoidState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Helicoid advancing `pitch` along ZDir per turn; Standard_ConstructionError when

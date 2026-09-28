@@ -17,8 +17,8 @@
 use super::sums::{BasisDerivatives, BasisSums};
 use super::{EvalCoord, EvalPole};
 
-/// The number of basis functions (`basisDimension` of the AHT-Bezier curves and surfaces): `k + 1`, plus 2 for a hyperbolic
-/// pair when alpha > 0 and 2 for a trigonometric pair when beta > 0;
+/// The number of basis functions (`basisDimension` of the AHT-Bezier curves and
+/// surfaces): `k + 1`, plus 2 for a hyperbolic pair when alpha > 0 and 2 for a trigonometric pair when beta > 0;
 /// `basis_dimension(1, 1.0, 1.0) == 6`.
 pub fn basis_dimension(alg_degree: i32, alpha: f64, beta: f64) -> i32 {
     alg_degree + 1 + if alpha > 0.0 { 2 } else { 0 } + if beta > 0.0 { 2 } else { 0 }
@@ -38,13 +38,6 @@ pub struct AhtView<'a, P: EvalPole> {
     pub alpha: f64,
     /// The trigonometric frequency, 0 without the sin/cos pair.
     pub beta: f64,
-}
-
-/// The number of basis functions (`basisDimension`): `k + 1`, plus 2 for a hyperbolic
-/// pair when alpha > 0 and 2 for a trigonometric pair when beta > 0;
-/// `basis_dimension(1, 1.0, 1.0) == 6`.
-pub fn basis_dimension(alg_degree: i32, alpha: f64, beta: f64) -> i32 {
-    alg_degree + 1 + if alpha > 0.0 { 2 } else { 0 } + if beta > 0.0 { 2 } else { 0 }
 }
 
 /// `evalPolynomialNonRational<MAX>` / `evalPolynomialRational<MAX>`: Horner's scheme on

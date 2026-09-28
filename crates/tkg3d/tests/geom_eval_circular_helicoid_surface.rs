@@ -12,9 +12,6 @@
 // commercial license or contractual agreement.
 
 //! Direct translation of GeomEval_CircularHelicoidSurface_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-//!
-//! `ComparisonWithHelix_ConstantV` builds a GeomEval_CircularHelixCurve, which is
-//! ported separately; its translation joins this file with that class.
 #![allow(non_snake_case)]
 #[path = "../../tkg2d/tests/common/mod.rs"]
 mod common;
@@ -23,9 +20,9 @@ mod support;
 use common::{EXPECT_NEAR, EXPECT_THROW};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::DumpStream;
-use rustycad_tkg3d::geom::{GeomGeometry, GeomSurface, GeomSurfaceD1, GeomSurfaceD2};
-use rustycad_tkg3d::geom_eval::GeomEvalCircularHelicoidSurface;
-use rustycad_tkmath::gp::{Axis3, Point3, Transform3, Vector3};
+use rustycad_tkg3d::geom::{GeomCurve, GeomGeometry, GeomSurface, GeomSurfaceD1, GeomSurfaceD2};
+use rustycad_tkg3d::geom_eval::{GeomEvalCircularHelicoidSurface, GeomEvalCircularHelixCurve};
+use rustycad_tkmath::gp::{Axis2, Axis3, Point3, Transform3, Vector3};
 use std::f64::consts::PI;
 use support::{EXPECT_VEC_NEAR, point_difference};
 
@@ -91,6 +88,24 @@ fn GeomEval_CircularHelicoidSurfaceTest__D1V_UnitRadial() {
     for aU in aParams {
         let aD1: GeomSurfaceD1 = aSurf.eval_d1(aU, 2.0).unwrap();
         EXPECT_NEAR(aD1.d1v.magnitude(), 1.0, precision::confusion());
+    }
+}
+
+#[test]
+fn GeomEval_CircularHelicoidSurfaceTest__ComparisonWithHelix_ConstantV() {
+    let anAx3 = Axis3::default();
+    let anAx2 =
+        Axis2::with_x_direction(anAx3.location(), anAx3.direction(), anAx3.x_direction()).unwrap();
+    let (aP, aR) = (10.0, 3.0);
+    let aSurf = GeomEvalCircularHelicoidSurface::new(anAx3, aP).unwrap();
+    let aHelix = GeomEvalCircularHelixCurve::new(anAx2, aR, aP).unwrap();
+
+    // S(u, R) should trace the same path as the helix C(u)
+    let aParams: [f64; 5] = [0.0, 0.5, 1.0, PI, 2.0 * PI];
+    for aU in aParams {
+        let aPS: Point3 = aSurf.eval_d0(aU, aR).unwrap();
+        let aPH: Point3 = aHelix.eval_d0(aU).unwrap();
+        EXPECT_NEAR(aPS.distance(&aPH), 0.0, precision::confusion());
     }
 }
 

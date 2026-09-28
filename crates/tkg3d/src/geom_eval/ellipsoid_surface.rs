@@ -20,9 +20,9 @@ use super::elementary_eval::{
     impl_eval_elementary_surface, positive,
 };
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::{Axis3, Vector3, Xyz};
 use std::f64::consts::PI;
 use std::io;
@@ -42,7 +42,7 @@ struct EllipsoidState {
 /// `Handle::new(GeomEvalEllipsoidSurface::new(Axis3::default(), 3.0, 2.0, 1.0)?)`.
 pub struct GeomEvalEllipsoidSurface {
     parent: StandardTransient,
-    state: GeometryCell<EllipsoidState>,
+    state: SharedState<EllipsoidState>,
 }
 impl_transient!(
     GeomEvalEllipsoidSurface,
@@ -66,7 +66,7 @@ impl GeomEvalEllipsoidSurface {
     fn stored(state: EllipsoidState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Ellipsoid of semi-axes `a` (XDir), `b` (YDir), `c` (ZDir);

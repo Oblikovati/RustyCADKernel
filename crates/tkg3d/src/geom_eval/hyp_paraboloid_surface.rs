@@ -20,9 +20,9 @@ use super::elementary_eval::{
 use crate::geom::quadric::frame_rows;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::{Axis3, Vector3, Xyz};
 use std::io;
 
@@ -39,7 +39,7 @@ struct HypParaboloidState {
 /// Standard_NotImplemented; `GeomEvalHypParaboloidSurface::new(Axis3::default(), 2.0, 3.0)?`.
 pub struct GeomEvalHypParaboloidSurface {
     parent: StandardTransient,
-    state: GeometryCell<HypParaboloidState>,
+    state: SharedState<HypParaboloidState>,
 }
 impl_transient!(
     GeomEvalHypParaboloidSurface,
@@ -63,7 +63,7 @@ impl GeomEvalHypParaboloidSurface {
     fn stored(state: HypParaboloidState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Saddle of semi-axes `a` (along XDir) and `b` (along YDir);

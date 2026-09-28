@@ -21,9 +21,9 @@ use super::elementary_eval::{
 };
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::{Axis3, Vector3, Xyz};
 use std::f64::consts::{FRAC_PI_2, PI};
 use std::io;
@@ -54,7 +54,7 @@ struct HyperboloidState {
 /// `GeomEvalHyperboloidSurface::new(frame, 2.0, 1.0, HyperboloidSheetMode::OneSheet)?`.
 pub struct GeomEvalHyperboloidSurface {
     parent: StandardTransient,
-    state: GeometryCell<HyperboloidState>,
+    state: SharedState<HyperboloidState>,
 }
 impl_transient!(
     GeomEvalHyperboloidSurface,
@@ -78,7 +78,7 @@ impl GeomEvalHyperboloidSurface {
     fn stored(state: HyperboloidState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Hyperboloid of radii `r1` and `r2` (the native default mode is `OneSheet`);

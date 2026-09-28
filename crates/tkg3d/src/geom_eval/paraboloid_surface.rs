@@ -21,9 +21,9 @@ use super::elementary_eval::{
 use crate::geom::quadric::frame_rows;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::{Axis3, Vector3, Xyz};
 use std::f64::consts::{FRAC_PI_2, PI};
 use std::io;
@@ -41,7 +41,7 @@ struct ParaboloidState {
 /// `GeomEvalParaboloidSurface::new(Axis3::default(), 1.0)?`.
 pub struct GeomEvalParaboloidSurface {
     parent: StandardTransient,
-    state: GeometryCell<ParaboloidState>,
+    state: SharedState<ParaboloidState>,
 }
 impl_transient!(
     GeomEvalParaboloidSurface,
@@ -65,7 +65,7 @@ impl GeomEvalParaboloidSurface {
     fn stored(state: ParaboloidState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Paraboloid of focal distance `focal`; Standard_ConstructionError unless > 0;
