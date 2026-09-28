@@ -64,8 +64,9 @@ impl ExtendedString {
         output.write_all(self.to_utf8().as_bytes())
     }
     /// OCCT's `HashCode`: FNV-1a over the native-endian unit bytes (signed-char quirk) for
-    /// fewer than two units, Murmur otherwise; equal to the AsciiString hash of the same
-    /// ASCII text; `text.hash_code()`.
+    /// fewer than two units, Murmur otherwise. The header promises the AsciiString hash for
+    /// ASCII text, but the code hashes two bytes per unit, so the values differ (kept as
+    /// OCCT computes them); `text.hash_code()`.
     pub fn hash_code(&self) -> usize {
         let bytes: Vec<u8> = self
             .as_utf16()
