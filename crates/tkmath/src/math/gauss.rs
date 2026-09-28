@@ -13,8 +13,9 @@
 // commercial license or contractual agreement.
 
 //! math_Gauss: a stored `LU_Decompose` factorization of a square matrix.
-use super::recipes::{STATUS_OK, lu_decompose, lu_solve};
+use super::recipes::{STATUS_OK, lu_decompose_with_progress, lu_solve};
 use super::{IntegerVector, Matrix, Vector, stream_real};
+use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::standard::Failure;
 use std::fmt;
 /// Reusable native-order Gaussian decomposition; `Gauss::new(&matrix)?`.
@@ -29,11 +30,21 @@ impl Gauss {
     pub fn new(matrix: &Matrix<'_>) -> Result<Self, Failure> {
         Self::with_min_pivot(matrix, 1e-20)
     }
-    /// Decomposes a copy of `matrix` with `LU_Decompose` and the given pivot threshold.
-    ///
-    /// The native constructor's `Message_ProgressRange` is not ported; this is its
-    /// default (never aborting) range. `Gauss::with_min_pivot(&matrix,1e-12)?`.
+    /// Decomposes a copy of `matrix` with `LU_Decompose`, the given pivot threshold
+    /// and the default (unbound, never aborting) progress range;
+    /// `Gauss::with_min_pivot(&matrix,1e-12)?`.
     pub fn with_min_pivot(matrix: &Matrix<'_>, minimum: f64) -> Result<Self, Failure> {
+        Self::with_progress(matrix, minimum, &ProgressRange::default())
+    }
+    /// The native constructor `math_Gauss(A, MinPivot, theProgress)`: `progress` is
+    /// handed to `LU_Decompose`, so a user break leaves the solver not done (status
+    /// `math_Status_UserAborted`); a non-square matrix is refused before the range is
+    /// consumed. `Gauss::with_progress(&matrix,1e-20,&indicator.start())?`.
+    pub fn with_progress(
+        matrix: &Matrix<'_>,
+        minimum: f64,
+        progress: &ProgressRange<'_>,
+    ) -> Result<Self, Failure> {
         if matrix.row_number() != matrix.col_number() {
             return Err(super::not_square(" "));
         }
@@ -42,7 +53,8 @@ impl Gauss {
         lu.initialized(matrix)?;
         let mut index = IntegerVector::with_bounds(1, n)?;
         let mut sign = 0.0;
-        let done = lu_decompose(&mut lu, &mut index, &mut sign, minimum)? == STATUS_OK;
+        let status = lu_decompose_with_progress(&mut lu, &mut index, &mut sign, minimum, progress)?;
+        let done = status == STATUS_OK;
         Ok(Self {
             lu,
             index,

@@ -11,3 +11,6 @@ pub use file::{File, FileStatusSource, NativeFileStatus};
 
 mod perf_meter;
 pub use perf_meter::{CpuClock, NativeCpuClock, PerfMeter, PerfRegistry};
+
+mod mem_info_counter;
+pub use mem_info_counter::MemInfoCounter;
