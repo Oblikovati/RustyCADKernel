@@ -15,6 +15,7 @@
 
 //! Singly linked OCCT lists with allocator-owned stable nodes.
 use super::{AllocatedBox, BaseAllocator};
+use crate::standard::Failure;
 type Link<T> = Option<AllocatedBox<Node<T>>>;
 struct Node<T> {
     value: T,
@@ -27,7 +28,9 @@ pub struct List<T> {
     count: usize,
 }
 /// Detached node position, usable across insertions; `list.cursor().value(&list)`.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+///
+/// `ListCursor::default()` is the end position, like a default `NCollection_List::Iterator`.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub struct ListCursor {
     address: Option<usize>,
 }
@@ -68,11 +71,15 @@ impl<T> List<T> {
     pub fn extent(&self) -> i32 {
         self.count as i32
     }
+    /// Returns OCCT's signed length, an alias of the extent; `list.length() == 2`.
+    pub fn length(&self) -> i32 {
+        self.extent()
+    }
     /// Checks whether the chain is empty; `list.is_empty()`.
     pub fn is_empty(&self) -> bool {
         self.count == 0
     }
-    /// Borrows the head; `list.first() == Some(&1)`.
+    /// Borrows the head, `None` where OCCT raises NoSuchObject; `list.first() == Some(&1)`.
     pub fn first(&self) -> Option<&T> {
         self.head.as_ref().map(|node| &node.value)
     }
@@ -83,6 +90,10 @@ impl<T> List<T> {
     /// Borrows the final element; `list.last() == Some(&2)`.
     pub fn last(&self) -> Option<&T> {
         self.iter().last()
+    }
+    /// Borrows the final element for mutation; `*list.last_mut().unwrap() = 42`.
+    pub fn last_mut(&mut self) -> Option<&mut T> {
+        self.iter_mut().last()
     }
     /// Borrows all elements in chain order; `list.iter().count()`.
     pub fn iter(&self) -> ListIter<'_, T> {
@@ -106,11 +117,7 @@ impl<T> List<T> {
     pub fn append(&mut self, value: T) -> &mut T {
         let node = self.resource.allocate_value(Node { value, next: None });
         self.count += 1;
-        let mut tail = &mut self.head;
-        while let Some(node) = tail {
-            tail = &mut node.next;
-        }
-        &mut tail.insert(node).value
+        &mut find_link(&mut self.head, None).insert(node).value
     }
     /// Prepends a freshly allocated node; `*list.prepend(42) == 42`.
     pub fn prepend(&mut self, value: T) -> &mut T {
@@ -134,55 +141,23 @@ impl<T> List<T> {
             self.count -= 1;
         }
     }
-    /// Removes the head if present; `list.remove_first()`.
-    pub fn remove_first(&mut self) {
-        if let Some(mut node) = self.head.take() {
-            self.head = node.next.take();
-            self.count -= 1;
-        }
+    /// Removes the head, reporting OCCT's NoSuchObject when empty; `list.remove_first()?`.
+    pub fn remove_first(&mut self) -> Result<(), Failure> {
+        let Some(mut node) = self.head.take() else {
+            return Err(no_such_object("RemoveFirst", "an empty list"));
+        };
+        self.head = node.next.take();
+        self.count -= 1;
+        Ok(())
     }
     /// Frees all nodes without recursive destruction; `list.clear()`.
     pub fn clear(&mut self) {
-        while self.head.is_some() {
-            self.remove_first();
-        }
+        while self.remove_first().is_ok() {}
     }
-    /// Removes a positioned node and advances the cursor; `list.remove(&mut cursor)`.
-    pub fn remove(&mut self, cursor: &mut ListCursor) {
-        let link = find_link(&mut self.head, cursor.address);
-        let Some(mut node) = link.take() else {
-            return;
-        };
-        *link = node.next.take();
-        cursor.address = address(link);
-        self.count -= 1;
-    }
-    /// Inserts immediately before a cursor; `list.insert_before(20, &cursor)`.
-    pub fn insert_before(&mut self, value: T, cursor: &ListCursor) -> &mut T {
-        assert!(
-            cursor.more(),
-            "List cursor is at end; expected an existing node"
-        );
-        let mut node = self.resource.allocate_value(Node { value, next: None });
-        let link = find_link(&mut self.head, cursor.address);
-        assert!(
-            link.is_some(),
-            "List cursor {:?}; expected a node in this list",
-            cursor
-        );
-        node.next = link.take();
-        self.count += 1;
-        &mut link.insert(node).value
-    }
-    /// Inserts immediately after a cursor; `list.insert_after(20, &cursor)`.
-    pub fn insert_after(&mut self, value: T, cursor: &ListCursor) -> &mut T {
-        let mut node = self.resource.allocate_value(Node { value, next: None });
-        let existing = find_link(&mut self.head, cursor.address)
-            .as_mut()
-            .expect("List cursor missing; expected an existing node");
-        node.next = existing.next.take();
-        self.count += 1;
-        &mut existing.next.insert(node).value
+    /// Frees all nodes, then adopts `resource` for later nodes; `list.clear_with_allocator(arena)`.
+    pub fn clear_with_allocator(&mut self, resource: BaseAllocator) {
+        self.clear();
+        self.resource = resource;
     }
     /// Reverses links without moving values between nodes; `list.reverse()`.
     pub fn reverse(&mut self) {
@@ -198,11 +173,13 @@ impl<T> List<T> {
     pub fn exchange(&mut self, other: &mut Self) {
         std::mem::swap(self, other);
     }
-    /// Transfers ownership, leaving an empty source; `List::move_from(&mut source)`.
+    /// Transfers the nodes, leaving the source empty with its own allocator (as OCCT's move
+    /// constructor does); `List::move_from(&mut source)`.
     pub fn move_from(source: &mut Self) -> Self {
-        std::mem::take(source)
+        let kept = Self::with_allocator(source.resource.clone());
+        std::mem::replace(source, kept)
     }
-    /// Replaces this list with source ownership; `list.move_assign(&mut source)`.
+    /// Replaces this list and its allocator with the source's nodes; `list.move_assign(&mut source)`.
     pub fn move_assign(&mut self, source: &mut Self) {
         *self = Self::move_from(source);
     }
@@ -221,12 +198,15 @@ impl<T: PartialEq> List<T> {
         let mut cursor = self.cursor();
         while cursor.more() {
             if cursor.value(self) == Some(value) {
-                self.remove(&mut cursor);
-                return true;
+                return self.remove(&mut cursor).is_ok();
             }
             cursor.next(self);
         }
         false
+    }
+    /// Checks for an equal value in chain order; `list.contains(&42)`.
+    pub fn contains(&self, value: &T) -> bool {
+        self.iter().any(|item| item == value)
     }
 }
 impl<T> Default for List<T> {
@@ -253,5 +233,14 @@ fn find_link<T>(mut link: &mut Link<T>, target: Option<usize>) -> &mut Link<T> {
     }
     link
 }
+/// OCCT's `Standard_NoSuchObject` for a list member, naming the offending state.
+fn no_such_object(member: &str, state: &str) -> Failure {
+    Failure::with_type(
+        "Standard_NoSuchObject",
+        &format!("NCollection_List::{member} on {state}; expected an existing node"),
+        "",
+    )
+}
 mod iteration;
 mod operations;
+mod positions;

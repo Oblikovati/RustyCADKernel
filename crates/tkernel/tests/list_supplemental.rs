@@ -8,7 +8,7 @@ fn splices_preserve_allocator_identity_and_release_original_nodes() {
     let mut second = List::from_iter_in([2, 3], b.clone());
     let mut cursor = first.cursor();
     cursor.next(&first);
-    first.insert_list_before(&mut second, &cursor);
+    first.insert_list_before(&mut second, &cursor).unwrap();
     assert_eq!(first.iter().copied().collect::<Vec<_>>(), [1, 2, 3, 4]);
     assert_eq!(cursor.value(&first), Some(&4));
     assert_eq!(second.allocator(), &b);
