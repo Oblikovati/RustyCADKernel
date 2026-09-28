@@ -63570,6 +63570,1310 @@
       "rust_item": "rustycad_tkg3d::geom_adaptor::GeomAdaptorTransformedCurve::offset_curve",
       "status": "implemented",
       "notes": "Concrete adaptor implementing the Adaptor3d trait (docs/geom-design.md); state behind one lock, members take &self, output references become returned values, overloads take distinct names, native exceptions become Failure values."
+    },
+    {
+      "upstream_id": "GeomGridEval::EvaluateGridHelper(const NCollection_Array1<double>&,const NCollection_Array1<double>&,Evaluator)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::evaluate_grid_helper",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval::EvaluateGridD1Helper(const NCollection_Array1<double>&,const NCollection_Array1<double>&,Evaluator)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::evaluate_grid_d1_helper",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval::EvaluateGridD2Helper(const NCollection_Array1<double>&,const NCollection_Array1<double>&,Evaluator)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::evaluate_grid_d2_helper",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval::EvaluateGridD3Helper(const NCollection_Array1<double>&,const NCollection_Array1<double>&,Evaluator)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::evaluate_grid_d3_helper",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval::EvaluateGridDNHelper(const NCollection_Array1<double>&,const NCollection_Array1<double>&,Evaluator)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::evaluate_grid_dn_helper",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineCurve(const occ::handle<Geom_BSplineCurve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineCurve::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineCurve::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineCurve::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineCurve::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineCurve::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineCurve::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineCurve::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineCurve::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineSurface(const occ::handle<Geom_BSplineSurface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineSurface::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineSurface::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineSurface::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineSurface::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineSurface::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineSurface::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineSurface::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineSurface::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineSurface::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineSurface::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineSurface::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BSplineSurface::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BSplineSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBSplineSurface::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierCurve(const occ::handle<Geom_BezierCurve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierCurve::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierCurve::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierCurve::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierCurve::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierCurve::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierCurve::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierCurve::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierCurve::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierSurface(const occ::handle<Geom_BezierSurface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierSurface::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierSurface::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierSurface::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierSurface::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierSurface::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierSurface::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierSurface::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierSurface::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierSurface::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierSurface::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierSurface::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_BezierSurface::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_BezierSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalBezierSurface::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Circle(const occ::handle<Geom_Circle>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCircle::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Circle::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCircle::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Circle::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCircle::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Circle::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCircle::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Circle::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCircle::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Circle::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCircle::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Circle::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCircle::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cone(const occ::handle<Geom_ConicalSurface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cone.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCone::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cone::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cone.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCone::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cone::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cone.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCone::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cone::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cone.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCone::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cone::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cone.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCone::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cone::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cone.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCone::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cone::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cone.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCone::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve(const Adaptor3d_Curve&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::from_adaptor",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::from_curve",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Curve::GetType() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCurve::get_type",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cylinder(const occ::handle<Geom_CylindricalSurface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cylinder.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCylinder::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cylinder::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cylinder.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCylinder::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cylinder::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cylinder.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCylinder::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cylinder::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cylinder.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCylinder::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cylinder::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cylinder.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCylinder::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cylinder::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cylinder.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCylinder::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Cylinder::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Cylinder.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalCylinder::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Ellipse(const occ::handle<Geom_Ellipse>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalEllipse::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Ellipse::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalEllipse::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Ellipse::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalEllipse::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Ellipse::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalEllipse::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Ellipse::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalEllipse::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Ellipse::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalEllipse::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Ellipse::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalEllipse::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Hyperbola(const occ::handle<Geom_Hyperbola>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalHyperbola::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Hyperbola::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalHyperbola::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Hyperbola::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalHyperbola::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Hyperbola::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalHyperbola::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Hyperbola::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalHyperbola::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Hyperbola::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalHyperbola::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Hyperbola::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalHyperbola::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Line(const occ::handle<Geom_Line>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalLine::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Line::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalLine::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Line::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalLine::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Line::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalLine::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Line::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalLine::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Line::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalLine::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Line::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalLine::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetCurve(const occ::handle<Geom_OffsetCurve>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetCurve::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetCurve::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetCurve::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetCurve::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetCurve::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetCurve::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetCurve::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetCurve::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetSurface(const occ::handle<Geom_OffsetSurface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetSurface::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetSurface::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetSurface::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetSurface::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetSurface::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetSurface::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetSurface::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetSurface::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetSurface::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetSurface::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetSurface::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OffsetSurface::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OffsetSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOffsetSurface::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherCurve(const Adaptor3d_Curve&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherCurve::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherCurve::Curve() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherCurve::curve",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherCurve::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherCurve::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherCurve::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherCurve::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherCurve::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherSurface(const Adaptor3d_Surface*)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherSurface::from_adaptor",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherSurface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherSurface::from_surface",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherSurface::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherSurface::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherSurface::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherSurface::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherSurface::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherSurface::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherSurface::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherSurface::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_OtherSurface::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_OtherSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalOtherSurface::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Parabola(const occ::handle<Geom_Parabola>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalParabola::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Parabola::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalParabola::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Parabola::EvaluateGrid(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalParabola::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Parabola::EvaluateGridD1(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalParabola::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Parabola::EvaluateGridD2(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalParabola::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Parabola::EvaluateGridD3(const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalParabola::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Parabola::EvaluateGridDN(const NCollection_Array1<double>&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalParabola::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Plane(const occ::handle<Geom_Plane>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalPlane::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Plane::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalPlane::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Plane::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalPlane::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Plane::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalPlane::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Plane::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalPlane::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Plane::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalPlane::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Plane::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalPlane::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Sphere(const occ::handle<Geom_SphericalSurface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Sphere.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSphere::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Sphere::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Sphere.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSphere::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Sphere::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Sphere.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSphere::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Sphere::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Sphere.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSphere::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Sphere::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Sphere.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSphere::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Sphere::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Sphere.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSphere::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Sphere::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Sphere.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSphere::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface(const Adaptor3d_Surface&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::from_adaptor",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::from_surface",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::GetType() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::get_type",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::HasTransformation() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::has_transformation",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Surface::GetTransformation() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Surface.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurface::get_transformation",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfExtrusion(const occ::handle<Geom_SurfaceOfLinearExtrusion>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfExtrusion::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfExtrusion::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfExtrusion::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfExtrusion::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfExtrusion::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfExtrusion::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfExtrusion::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfExtrusion::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfExtrusion::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfExtrusion::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfExtrusion::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfExtrusion::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfExtrusion::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfRevolution(const occ::handle<Geom_SurfaceOfRevolution>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfRevolution::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfRevolution::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfRevolution::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfRevolution::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfRevolution::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfRevolution::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfRevolution::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfRevolution::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfRevolution::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfRevolution::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfRevolution::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_SurfaceOfRevolution::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalSurfaceOfRevolution::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Torus(const occ::handle<Geom_ToroidalSurface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Torus.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalTorus::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Torus::Geometry() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Torus.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalTorus::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Torus::EvaluateGrid(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Torus.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalTorus::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Torus::EvaluateGridD1(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Torus.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalTorus::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Torus::EvaluateGridD2(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Torus.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalTorus::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Torus::EvaluateGridD3(const NCollection_Array1<double>&,const NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Torus.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalTorus::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
+    },
+    {
+      "upstream_id": "GeomGridEval_Torus::EvaluateGridDN(const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomGridEval/GeomGridEval_Torus.hxx",
+      "rust_item": "rustycad_tkg3d::geom_grid_eval::GeomGridEvalTorus::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); curve grids indexed from 1, surface grids 1..NbU x 1..NbV, empty for empty parameters, a null geometry or an invalid order; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg3d_numeric.py (g3_grid requests)."
     }
   ],
   "tests": [
