@@ -92,7 +92,8 @@ def clean_source(text: str, included_macros: dict[str, tuple[list[str], str]] | 
     text = re.sub(r"^\s*#(?:[^\n]*\\\n)*[^\n]*$", "", text, flags=re.M)
     text = expand_header_macros(text, macros)
     text = re.sub(r"\[\[[^\]]*\]\]|__attribute__\s*\(\([^)]*\)\)", "", text)
-    text = re.sub(r"\bStandard_DEPRECATED\s*\(\s*\"*\s*\)", "", text)
+    # Messages may be concatenated literals (`"a " "b"`), each already blanked to `""`.
+    text = re.sub(r"\bStandard_DEPRECATED\s*\((?:\s*\")*\s*\)", "", text)
     text = RTTI_MACRO.sub(r"public: \1(\2);", HANDLE_MACRO.sub(";", text))  # the macro opens with `public:`
     return re.sub(IGNORED_MACROS, "", text)
 

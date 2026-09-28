@@ -264,6 +264,11 @@ class MacroAndFriendTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, r"\['x'\]; expected 2 arguments"):
             members_of(SWIZZLE_HEADER.replace("VEC_COMPONENTS_2D(x, y)", "VEC_COMPONENTS_2D(x)"))
 
+    def test_deprecation_with_concatenated_literals_keeps_the_member(self):
+        header = ('class gp_Demo\n{\npublic:\n  Standard_DEPRECATED("Use the "\n'
+                  '                      "algo instead.")\n  bool Unite(const gp_Demo& theOther);\n};\n')
+        self.assertEqual(members_of(header), ["gp_Demo::Unite|const gp_Demo&|"])
+
     def test_standard_rtti_macros_are_never_expanded(self):
         header = "#define DEFINE_STANDARD_RTTIEXT(C, B) public: int Bad();\n" + TEMPLATE_HEADER
         self.assertNotIn("BVH_Transient::Bad||", members_of(header))
