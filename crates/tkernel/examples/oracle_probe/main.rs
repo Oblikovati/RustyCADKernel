@@ -7,6 +7,7 @@ use rustycad_tkernel::{
 use std::io::{self, BufRead};
 
 mod ncollection;
+mod storage;
 
 fn date(input: &mut std::str::SplitWhitespace<'_>) -> Result<Date, Error> {
     let values: Vec<i32> = input
@@ -101,6 +102,7 @@ fn evaluate(line: &str) -> Result<String, Box<dyn std::error::Error>> {
             out
         }
         other => ncollection::evaluate(other, &mut input)
+            .or_else(|| storage::evaluate(other, &mut input))
             .unwrap_or_else(|| panic!("unknown operation {other}")),
     };
     assert!(input.next().is_none(), "unexpected trailing fields");

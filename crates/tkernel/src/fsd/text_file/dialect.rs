@@ -155,7 +155,8 @@ impl TextDialect for CmpDialect {
 
     /// Reads the unit count, then one `GetExtCharacter` per unit already in `text`, which
     /// is not cleared: the native loop bound is `buffer.Length()`, so an empty buffer reads
-    /// no unit and a non-empty one reads until a zero unit or an exception.
+    /// no unit, and a non-empty one grows by each unit's decimal digits (`operator+=(int)`)
+    /// faster than the loop advances, reading until an exception ends it.
     fn read_extended_line(file: &mut TextFile<Self>, text: &mut ExtendedString) -> Result<(), Failure> {
         let mut count = 0;
         file.get_integer(&mut count)?;
@@ -163,7 +164,8 @@ impl TextDialect for CmpDialect {
         let mut index = 0;
         while index < text.length() {
             file.get_ext_character(&mut unit)?;
-            text.assign_cat(unit);
+            // `buffer += c` binds to `operator+=(const int)`: decimal digits are appended.
+            text.assign_cat(i32::from(unit));
             index += 1;
         }
         file.flush_end_of_line();

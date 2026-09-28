@@ -133,7 +133,9 @@ impl<D: TextDialect> TextFile<D> {
 
     /// `FSD_File::ReadExtendedLine`: byte pairs until a NUL high byte followed by a newline.
     /// A pair that spells the first 16 characters of `BEGIN_REF_SECTION` is an
-    /// ext-character parity error; zero units are dropped (`AssignCat` skips them).
+    /// ext-character parity error. `TCollection_ExtendedString` has no `operator+=` for a
+    /// `char16_t`, so each unit is appended as its decimal text (unit 0x41 reads as "65"),
+    /// which is what the native reader returns.
     pub(crate) fn fsd_read_extended_line(&mut self, text: &mut ExtendedString) -> Result<(), Failure> {
         *text = ExtendedString::default();
         let (mut byte, mut matched, mut finished) = (0_u8, 0_usize, false);
@@ -146,7 +148,9 @@ impl<D: TextDialect> TextFile<D> {
             matched = tag_progress(byte, matched)?;
             if byte != b'\n' {
                 finished = false;
-                text.assign_cat((high << 8) | u16::from(byte));
+                // `buffer += (char16_t)i` binds to `operator+=(const int)`: the unit's
+                // decimal digits are appended, not the unit itself.
+                text.assign_cat(i32::from((high << 8) | u16::from(byte)));
             }
         }
         Ok(())
