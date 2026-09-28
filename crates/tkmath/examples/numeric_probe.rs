@@ -311,6 +311,17 @@ fn main() {
             "bspl_tang" => bspl_probe::tang_case(&values),
             "bspl_merge" => bspl_probe::merge_case(&values),
             "bspl_intervals" => bspl_probe::intervals_case(&values),
+            "bsps_eval" => bsps_probe::eval_case(&values),
+            "bsps_rational" => bsps_probe::rational_case(&values),
+            "bsps_iso" => bsps_probe::iso_case(&values),
+            "bsps_poles" => bsps_probe::poles_case(&values),
+            "bsps_ops" => bsps_probe::ops_case(&values),
+            "bsps_cache" => bsps_probe::cache_case(&values),
+            "bsps_bezier" => bsps_probe::bezier_case(&values),
+            "bsps_move" => bsps_probe::move_case(&values),
+            "bsps_resolution" => bsps_probe::resolution_case(&values),
+            "bsps_interpolate" => bsps_probe::interpolate_case(&values),
+            "bsps_function" => bsps_probe::function_case(&values),
             "modern_lbfgs" => modern_opt_probe::modern_lbfgs_case(&values),
             "modern_newton" => modern_opt_probe::modern_newton_case(&values),
             "modern_global" => global_modern_probe::modern_global_case(&values),
@@ -448,5 +459,6 @@ mod swarm_probe;
 mod global_modern_probe;
 
 mod bspl_probe;
+mod bsps_probe;
 mod cslib_probe;
 mod plib_probe;
