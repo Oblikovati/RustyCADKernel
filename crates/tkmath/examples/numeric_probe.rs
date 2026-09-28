@@ -263,6 +263,7 @@ fn planar_case(v: &[f64]) {
 mod bounds_probe;
 mod bvh_probe;
 mod gp_planar_probe;
+mod gp_standard_probe;
 mod quaternion_probe;
 mod scale_probe;
 fn main() {
@@ -377,6 +378,7 @@ fn main() {
             "gp2d_trsf" => gp_planar_probe::trsf_case(&values),
             "gp2d_gtrsf" => gp_planar_probe::gtrsf_case(&values),
             "gp2d_geom" => gp_planar_probe::geom_case(&values),
+            "gp_standard" => gp_standard_probe::gp_standard_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }

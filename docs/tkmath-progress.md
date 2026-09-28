@@ -622,3 +622,20 @@ constructors (`mirror_point`, `scaling`, `transformation_between`, ...) plus `se
 methods that call them. `gp_GTrsf2d::operator*` returns `Result`, because it raises
 for a non-orthogonal similarity pair. gp_Mat2d has no `operator*=(gp_Mat2d)`, so
 `Matrix2` has no `MulAssign<Matrix2>`.
+
+### gp_Dir::D and the gp statics
+
+gp_Dir::D is `StandardDirection3`. `Direction3::from_standard` and the gp_Ax1, gp_Ax2
+and gp_Ax3 constructors that take it (`with_standard`, `from_standard` and
+`with_standard_frame`) build exact axis-aligned frames. The gp class statics
+(`gp::Resolution`, `gp::Origin`, `gp::DX` ... `gp::OY2d`) are the free functions
+`gp::resolution()` ... `gp::oy2d()`, which return copies. 36 `gp_standard`
+differential requests cover every main/X pair and the statics.
+
+The port keeps these native results:
+
+- The two-direction constructors take Y from the `crossStandardDir` table and do not
+  check orthogonality. For a parallel or opposite pair the table returns a fixed
+  fallback (for example `Z` for `(X, X)`), so the frame is not orthogonal.
+- `gp::ZOX()` is `gp_Ax2(origin, D::Y)`, so its X direction is Z and its Y direction
+  is X.

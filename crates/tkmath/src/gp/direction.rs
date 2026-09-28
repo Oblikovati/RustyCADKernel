@@ -95,4 +95,6 @@ impl Direction3 {
 
 mod operations;
 mod products;
+mod standard;
 pub(crate) use products::{CheckedProducts, DirectionProducts, UncheckedProducts};
+pub use standard::StandardDirection3;

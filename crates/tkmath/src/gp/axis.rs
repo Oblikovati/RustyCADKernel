@@ -15,7 +15,7 @@
 // commercial license or contractual agreement.
 // Rust translation of FoundationClasses/TKMath/gp/gp_Ax3.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-use super::{Direction3, Failure, Point3, cross};
+use super::{Direction3, Failure, Point3, StandardDirection3, cross};
 use rustycad_tkernel::standard::dump::{self, DumpOutput};
 use std::io;
 /// Origin and three frame directions; `Axis3::new(origin,Direction3::Z,Direction3::X)?`.
@@ -67,6 +67,35 @@ impl Axis3 {
             x_direction,
             y_direction,
         })
+    }
+    /// gp_Ax3(gp_Pnt, gp_Dir::D, gp_Dir::D): Y is the table cross product `N x Vx`, and no
+    /// orthogonality is checked, so a parallel pair keeps the native fallback Y;
+    /// `Axis3::with_standard_frame(origin,StandardDirection3::Z,StandardDirection3::X)`.
+    pub const fn with_standard_frame(
+        location: Point3,
+        normal: StandardDirection3,
+        x: StandardDirection3,
+    ) -> Self {
+        Self::from_stored(
+            location,
+            Direction3::from_standard(normal),
+            Direction3::from_standard(x),
+            Direction3::from_standard(normal.cross(x)),
+        )
+    }
+    /// gp_Ax3(gp_Pnt, gp_Dir::D): X and Y are the native perpendicular table entries;
+    /// `Axis3::with_standard(origin,StandardDirection3::Y)`.
+    pub const fn with_standard(location: Point3, normal: StandardDirection3) -> Self {
+        Self::from_stored(
+            location,
+            Direction3::from_standard(normal),
+            Direction3::from_standard(normal.perpendicular_x()),
+            Direction3::from_standard(normal.perpendicular_y()),
+        )
+    }
+    /// gp_Ax3(gp_Dir::D) at the origin; `Axis3::from_standard(StandardDirection3::X)`.
+    pub const fn from_standard(normal: StandardDirection3) -> Self {
+        Self::with_standard(Point3::new(0.0, 0.0, 0.0), normal)
     }
     /// Returns the frame origin; `axis.location()`.
     pub const fn location(&self) -> Point3 {

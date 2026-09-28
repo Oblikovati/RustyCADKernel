@@ -12954,6 +12954,214 @@
       "rust_item": "rustycad_tkmath::gp::Line2::translated_between",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Dir::D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
+      "rust_item": "rustycad_tkmath::gp::StandardDirection3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Dir(const gp_Dir::D)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Dir.hxx",
+      "rust_item": "rustycad_tkmath::gp::Direction3::from_standard",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Ax1(const gp_Pnt&,const gp_Dir::D)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax1.hxx",
+      "rust_item": "rustycad_tkmath::gp::Axis1::with_standard",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Ax1(const gp_Dir::D)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax1.hxx",
+      "rust_item": "rustycad_tkmath::gp::Axis1::from_standard",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Ax2(const gp_Pnt&,const gp_Dir::D,const gp_Dir::D)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax2.hxx",
+      "rust_item": "rustycad_tkmath::gp::Axis2::with_standard_frame",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Ax2(const gp_Pnt&,const gp_Dir::D)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax2.hxx",
+      "rust_item": "rustycad_tkmath::gp::Axis2::with_standard",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Ax2(const gp_Dir::D)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax2.hxx",
+      "rust_item": "rustycad_tkmath::gp::Axis2::from_standard",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Ax3(const gp_Pnt&,const gp_Dir::D,const gp_Dir::D)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax3.hxx",
+      "rust_item": "rustycad_tkmath::gp::Axis3::with_standard_frame",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Ax3(const gp_Pnt&,const gp_Dir::D)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax3.hxx",
+      "rust_item": "rustycad_tkmath::gp::Axis3::with_standard",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Ax3(const gp_Dir::D)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Ax3.hxx",
+      "rust_item": "rustycad_tkmath::gp::Axis3::from_standard",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::Resolution()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::resolution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::Origin()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::origin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::DX()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::dx",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::DY()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::dy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::DZ()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::dz",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::OX()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::ox",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::OY()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::oy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::OZ()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::oz",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::XOY()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::xoy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::ZOX()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::zox",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::YOZ()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::yoz",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::Origin2d()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::origin2d",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::DX2d()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::dx2d",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::DY2d()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::dy2d",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::OX2d()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::ox2d",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp::OY2d()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp.hxx",
+      "rust_item": "rustycad_tkmath::gp::oy2d",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     }
   ],
   "tests": [

@@ -27,6 +27,7 @@ def append_gp_planar_requests(requests: list[str]) -> None:
     append_transform_requests(rng, requests)
     append_general_requests(rng, requests)
     append_geometry_requests(rng, requests)
+    append_standard_requests(requests)
 
 
 def scalar(rng: random.Random, scale: float = 10.0) -> float:
@@ -157,3 +158,10 @@ def append_geometry_requests(rng: random.Random, requests: list[str]) -> None:
         requests.append(line('gp2d_geom', [1, 2, 1, 2, 0, 0, 0, 1, 0.5, 2, lin, ang, 0, 0, 0, 1, 0]))
         requests.append(line('gp2d_geom', [1, 2, 3, 5, 0.6, 0.8, 0, 0, 0.5, 2, lin, ang, 1, 1, 0, 2, 1]))
         requests.append(line('gp2d_geom', [0, 0, 1e-160, 0, 1, 0, -1, 0, 3.0, -1, lin, ang, 3, 4, 5, 1, 2]))
+
+
+def append_standard_requests(requests: list[str]) -> None:
+    """Every gp_Dir::D main/X pair (parallel pairs keep the native fallback Y) and the gp statics."""
+    for main in range(6):
+        for second in range(6):
+            requests.append(line('gp_standard', [main, second, 1.5, -2.0, 0.25]))
