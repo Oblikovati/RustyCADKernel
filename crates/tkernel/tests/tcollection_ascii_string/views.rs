@@ -39,7 +39,7 @@ fn TCollection_AsciiStringTest__StringView_CatAndAssignCat() {
 fn TCollection_AsciiStringTest__StringView_Insert() {
     let mut string = AsciiString::new("HloWorld");
     let view = &b"el"[..];
-    string.insert(2, view);
+    string.insert(2, view).unwrap();
     text(&string, "HelloWorld");
 }
 #[test]
@@ -79,7 +79,7 @@ fn TCollection_AsciiStringTest__StressTest_MultipleOperations() {
     }
     assert_eq!(string.len(), 10);
     for _ in 0..5 {
-        string.insert(6, "B");
+        string.insert(6, "B").unwrap();
     }
     assert_eq!(string.len(), 15);
     string.remove_all(b'B');

@@ -481,7 +481,80 @@ messages and compares the full catch-by-base matrix, `ExceptionType()`, `what()`
 
 ### TCollection_AsciiString, TCollection_HAsciiString and TCollection
 
-Pending.
+All 266 public members have rows (261 implemented, 5 excluded: move constructor, move
+assignment, destructor, the RTTI macro, and the static `IsEqual(string, const char*)`,
+which OCCT declares but never defines). The members follow the `.cxx`/`.lxx` line by line.
+Positions stay `i32`. Every OCCT exception is a `Failure` of the same class:
+`Standard_OutOfRange`, `Standard_NegativeValue`, `Standard_NumericError` or
+`Standard_NullObject`. The message adds the offending value and the accepted range.
+
+`TCollection_HAsciiString` is a `Standard_Transient`. Its string sits behind a lock, so
+every member takes `&self`, and all handles to the object see an edit. A string argument
+is read before the object is locked, so `h->AssignCat(h)` is legal. The three members that
+check for a null handle (`IsDifferent`, both `IsSameString`) take `&Handle` and raise
+`Standard_NullObject`. The other handle parameters are `&HAsciiString`. OCCT dereferences
+those without a check, and a `&Handle` coerces to that type. `TCollection::NextPrimeForMap`
+is `tcollection::next_prime_for_map`.
+
+Overloads and operators map as follows:
+
+- The overloads for a pointer/length pair, `const char*`, `std::string_view`,
+  `const char(&)[N]` and `TCollection_AsciiString` merge into one `impl AsRef<[u8]>`
+  item. A view, a pointer/length pair or a string passes its exact span. A C string
+  passes the bytes before its NUL. Rust slices are never null, so OCCT's `nullptr`
+  branches have no counterpart.
+- `AssignCat` and `+=` take `impl Into<AsciiString>`. A `&str` converts as a C string,
+  a byte slice as a span, `u8` as `char`, `i32` as `%d`, `f64` as `%g` and
+  `&ExtendedString` as UTF-8.
+- `Cat` and `+` take `impl CatOperand`. Its `u8` impl is `Cat(char)`, which appends a NUL
+  byte. `AssignCat(char)` ignores a NUL byte.
+- The `wchar_t` members use `&[u32]`, because `wchar_t` is 32 bits on Linux.
+- The members that take `const char*` only (`Token`, the joining constructor and every
+  HAsciiString C-string parameter) read the argument through its first NUL.
+
+These native quirks are preserved and confirmed by the probe:
+
+- `SubString`, `Split` and `Token` copy their result through the first NUL.
+- `Location` restarts at the failing byte after a partial match. Thus
+  `"aaab".Location("aab")` is 0.
+- `Copy(ToCString(), n)` does nothing.
+- `SetValue(int, char)` refuses NUL.
+- `Insert(int, char)` checks "too big" before "too small".
+- `UsefullLength` decodes with `NCollection_UtfIterator`'s permissive UTF-8 reader.
+  `C0 80` decodes to 0 and ends the scan, and a lead byte can step over an embedded NUL.
+- `IntegerValue` truncates the clamped 64-bit `strtol` result to `int`. Thus
+  `-9223372036854775809` gives 0.
+- `IsIntegerValue` looks for `'.'` after an embedded NUL too.
+- `IsRealValue(true)` accepts a number followed by NUL, and it accepts the empty string.
+- `Print` stops at an embedded NUL.
+- `Read` takes at most 8189 bytes and does not read the delimiter.
+- HAsciiString's `IsDifferent`, `IsSameString(h)` and `IsSameState` use `strncmp`, so
+  `"a\0b"` and `"a\0c"` compare equal.
+- `NextPrimeForMap(-1)` is 101, because `SIZE_MAX + 1` wraps to 0. Negative values and
+  values past the last table prime give `value + 1`, which wraps at `INT_MAX`.
+
+Deliberate deviations cover only inputs for which OCCT has undefined behavior:
+
+- `Remove` with a position below 1 or a negative count raises `Standard_OutOfRange`.
+- `SetValue(string)` past `Length() + 1` raises `Standard_OutOfRange`, where OCCT leaves
+  uninitialized bytes.
+- The fill constructors take `usize`, because a negative length writes before the buffer.
+- `UsefullLength` stops when a sequence runs past the terminator, where OCCT reads
+  allocation padding.
+- `Read` of whitespace-only input gives an empty string and `false`, where OCCT reads an
+  uninitialized stack buffer.
+
+`Print`/`Read` use injected `std::io::Write`/`BufRead`. OCCT's default arguments (`Token`,
+`ChangeAll`, `Remove`) are explicit.
+
+`tools/tkernel_ascii_string_api_corpus.py` sends 64,231 requests, and all of them match the
+native kernel: every member and operator over empty strings, embedded NULs, high-bit and
+malformed UTF-8 bytes, positions 0/1/N/N+1 and `INT_MIN`/`INT_MAX`, special reals, invalid
+`wchar_t` values, unpaired surrogates, self-aliasing handle edits and null handles.
+Exceptions are compared by class. The corpus docstring lists the undefined-behavior inputs
+that it never sends. The translated suites keep all their assertions. Only their call sites
+changed, to the `i32`/`Result` signatures and to `insert_char`/`set_value_char` for the
+`char` overloads.
 
 ### TCollection_ExtendedString and TCollection_HExtendedString
 
