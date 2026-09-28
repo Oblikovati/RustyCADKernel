@@ -2,8 +2,9 @@
 //! tools/oracle/tkgeombase_probe_common.cxx.
 pub use super::print::{Reader, attempt, end, flag, int, real, show};
 use rustycad_tkmath::gp::{
-    Axis1, Axis2, Axis2d, Axis3, Axis22d, Direction2, Direction3, Point2, Point3, Vector2, Vector3,
-    Xy, Xyz,
+    Axis1, Axis2, Axis2d, Axis3, Axis22d, Circle2, Circle3, Cone3, Cylinder3, Direction2,
+    Direction3, Ellipse2, Ellipse3, Hyperbola2, Hyperbola3, Line2, Line3, Parabola2, Parabola3,
+    Plane3, Point2, Point3, Transform2, Transform3, Vector2, Vector3, Xy, Xyz,
 };
 
 pub fn xyz(value: Xyz) {
@@ -113,4 +114,80 @@ impl Reader<'_> {
         let (p, x) = (self.pnt2d(), self.dir2d());
         Axis22d::with_directions(p, x, self.dir2d()).expect("probe frame")
     }
+}
+
+/// The gp results of the construction algorithms (the gb_lin ... gb_trsf2d printers).
+pub fn lin(value: Line3) {
+    ax1(value.position());
+}
+pub fn lin2d(value: Line2) {
+    ax2d(value.position());
+}
+pub fn circ(value: Circle3) {
+    ax2(value.position());
+    real(value.radius());
+}
+pub fn circ2d(value: Circle2) {
+    ax22d(value.position());
+    real(value.radius());
+}
+pub fn elips(value: Ellipse3) {
+    ax2(value.position());
+    real(value.major_radius());
+    real(value.minor_radius());
+}
+pub fn elips2d(value: Ellipse2) {
+    ax22d(value.axis());
+    real(value.major_radius());
+    real(value.minor_radius());
+}
+pub fn hypr(value: Hyperbola3) {
+    ax2(value.position());
+    real(value.major_radius());
+    real(value.minor_radius());
+}
+pub fn hypr2d(value: Hyperbola2) {
+    ax22d(value.axis());
+    real(value.major_radius());
+    real(value.minor_radius());
+}
+pub fn parab(value: Parabola3) {
+    ax2(value.position());
+    real(value.focal());
+}
+pub fn parab2d(value: Parabola2) {
+    ax22d(value.axis());
+    real(value.focal());
+}
+pub fn pln(value: Plane3) {
+    ax3(value.position());
+}
+pub fn cone(value: Cone3) {
+    ax3(value.position());
+    real(value.semi_angle());
+    real(value.ref_radius());
+}
+pub fn cylinder(value: Cylinder3) {
+    ax3(value.position());
+    real(value.radius());
+}
+pub fn trsf(value: Transform3) {
+    int(value.form() as i32);
+    real(value.scale_factor());
+    for i in 1..=3 {
+        for j in 1..=3 {
+            real(value.matrix().value(i, j).unwrap());
+        }
+    }
+    xyz(value.translation_part());
+}
+pub fn trsf2d(value: Transform2) {
+    int(value.form() as i32);
+    real(value.scale_factor());
+    for i in 1..=2 {
+        for j in 1..=2 {
+            real(value.matrix().value(i, j).unwrap());
+        }
+    }
+    xy(value.translation_part());
 }

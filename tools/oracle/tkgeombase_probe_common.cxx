@@ -40,3 +40,27 @@ struct GbReader{
  gp_Ax2d ax2d(){gp_Pnt2d p=pnt2d();return gp_Ax2d(p,dir2d());}
  gp_Ax22d ax22d(){gp_Pnt2d p=pnt2d();gp_Dir2d x=dir2d();return gp_Ax22d(p,x,dir2d());}
 };
+// The gp results of the construction algorithms: each value's frame and parameters.
+void gb_lin(const gp_Lin& l){gb_ax1(l.Position());}
+void gb_lin2d(const gp_Lin2d& l){gb_ax2d(l.Position());}
+void gb_circ(const gp_Circ& c){gb_ax2(c.Position());gb_real(c.Radius());}
+void gb_circ2d(const gp_Circ2d& c){gb_ax22d(c.Position());gb_real(c.Radius());}
+void gb_elips(const gp_Elips& e){gb_ax2(e.Position());gb_real(e.MajorRadius());gb_real(e.MinorRadius());}
+void gb_elips2d(const gp_Elips2d& e){gb_ax22d(e.Axis());gb_real(e.MajorRadius());gb_real(e.MinorRadius());}
+void gb_hypr(const gp_Hypr& h){gb_ax2(h.Position());gb_real(h.MajorRadius());gb_real(h.MinorRadius());}
+void gb_hypr2d(const gp_Hypr2d& h){gb_ax22d(h.Axis());gb_real(h.MajorRadius());gb_real(h.MinorRadius());}
+void gb_parab(const gp_Parab& p){gb_ax2(p.Position());gb_real(p.Focal());}
+void gb_parab2d(const gp_Parab2d& p){gb_ax22d(p.Axis());gb_real(p.Focal());}
+void gb_pln(const gp_Pln& p){gb_ax3(p.Position());}
+void gb_cone(const gp_Cone& c){gb_ax3(c.Position());gb_real(c.SemiAngle());gb_real(c.RefRadius());}
+void gb_cylinder(const gp_Cylinder& c){gb_ax3(c.Position());gb_real(c.Radius());}
+void gb_trsf(const gp_Trsf& t){
+ gb_int(t.Form());gb_real(t.ScaleFactor());
+ for(int i=1;i<=3;++i)for(int j=1;j<=3;++j)gb_real(t.HVectorialPart().Value(i,j));
+ gb_xyz(t.TranslationPart());
+}
+void gb_trsf2d(const gp_Trsf2d& t){
+ gb_int(t.Form());gb_real(t.ScaleFactor());
+ for(int i=1;i<=2;++i)for(int j=1;j<=2;++j)gb_real(t.HVectorialPart().Value(i,j));
+ gb_xy(t.TranslationPart());
+}

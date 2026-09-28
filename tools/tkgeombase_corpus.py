@@ -9,3 +9,5 @@ from __future__ import annotations
 
 def append_tkgeombase_requests(requests: list[str]) -> None:
     """Append every TKGeomBase request family in a fixed order."""
+    # gce (tkgeombase_corpus_gce.py)
+    __import__('tkgeombase_corpus_gce').append_gce_requests(requests)
