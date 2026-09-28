@@ -19,6 +19,7 @@
 //! TKGeomBase depends on TKernel, TKMath, TKG2d and TKG3d natively; this crate
 //! depends on their ports. Each OCCT package is one module, added when it is
 //! ported; docs/tkgeombase-progress.md lists the ported packages.
+pub mod adv_app2var;
 pub mod app_cont;
 pub mod app_par_curves;
 pub mod bnd_lib;

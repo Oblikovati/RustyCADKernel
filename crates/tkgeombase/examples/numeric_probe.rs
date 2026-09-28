@@ -3,8 +3,9 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    app_cont as acc, app_par_curves as apc, bndlib, fem_tool, gc, gce, gcpnts, geom_tools, gprop,
-    hermit, int_ana, int_ana2d, lprop, pc2d, pc3d,
+    adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, app_cont as acc, app_par_curves as apc,
+    bndlib, fem_tool, gc, gce, gcpnts, geom_tools, gprop, hermit, int_ana, int_ana2d, lprop, pc2d,
+    pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -170,6 +171,61 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("acc_offsets", acc::offsets_case),
     ("acc_matrix", acc::matrix_case),
     ("acc_ls", acc::ls_case),
+    // AdvApp2Var_MathBase (gb_probe/adv_math.rs, adv_math2.rs)
+    ("aa_norms", adv_math::norms_case),
+    ("aa_mmwprcs", adv_math::mmwprcs_case),
+    ("aa_mmapcmp", adv_math::mmapcmp_case),
+    ("aa_mmdrc11", adv_math::mmdrc11_case),
+    ("aa_mmfmca8", adv_math::mmfmca8_case),
+    ("aa_mmfmca9", adv_math::mmfmca9_case),
+    ("aa_mmfmcb5", adv_math::mmfmcb5_case),
+    ("aa_mmfmtb1", adv_math::mmfmtb1_case),
+    ("aa_mmfmcar", adv_math::mmfmcar_case),
+    ("aa_mmcglc1", adv_math::mmcglc1_case),
+    ("aa_mmbulld", adv_math::mmbulld_case),
+    ("aa_mvsheld", adv_math::mvsheld_case),
+    ("aa_mmcdriv", adv_math::mmcdriv_case),
+    ("aa_mmdrvck", adv_math::mmdrvck_case),
+    ("aa_mmcvctx", adv_math::mmcvctx_case),
+    ("aa_mdsptpt", adv_math::mdsptpt_case),
+    ("aa_mmaperx", adv_math::mmaperx_case),
+    ("aa_mmtrpjj", adv_math::mmtrpjj_case),
+    ("aa_mmgaus1", adv_math::mmgaus1_case),
+    ("aa_mmhjcan", adv_math2::mmhjcan_case),
+    ("aa_mminltt", adv_math2::mminltt_case),
+    ("aa_mmjacan", adv_math2::mmjacan_case),
+    ("aa_mmjaccv", adv_math2::mmjaccv_case),
+    ("aa_mmpobas", adv_math2::mmpobas_case),
+    ("aa_mmpocrb", adv_math2::mmpocrb_case),
+    ("aa_mmmpocur", adv_math2::mmmpocur_case),
+    ("aa_mmposui", adv_math2::mmposui_case),
+    ("aa_mmresol", adv_math2::mmresol_case),
+    ("aa_mmrtptt", adv_math2::mmrtptt_case),
+    ("aa_mmsrre2", adv_math2::mmsrre2_case),
+    ("aa_mmunivt", adv_math2::mmunivt_case),
+    ("aa_mmvncol", adv_math2::mmvncol_case),
+    ("aa_mmarcin", adv_math2::mmarcin_case),
+    ("aa_mmcvinv", adv_math2::mmcvinv_case),
+    ("aa_mmmrslwd", adv_math2::mmmrslwd_case),
+    // AdvApp2Var_ApproxF2var (gb_probe/adv_f2var.rs, adv_f2var2.rs)
+    ("aa_mma1her", adv_f2var::mma1her_case),
+    ("aa_mma2roo", adv_f2var::mma2roo_case),
+    ("aa_mma2jmx", adv_f2var::mma2jmx_case),
+    ("aa_mmapptt", adv_f2var::mmapptt_case),
+    ("aa_mma2ac1", adv_f2var::mma2ac1_case),
+    ("aa_mma2ac2", adv_f2var::mma2ac2_case),
+    ("aa_mma2ac3", adv_f2var::mma2ac3_case),
+    ("aa_mma2can", adv_f2var::mma2can_case),
+    ("aa_mma2cdi", adv_f2var::mma2cdi_case),
+    ("aa_mma2ds1", adv_f2var::mma2ds1_case),
+    ("aa_mma2ce1", adv_f2var2::mma2ce1_case),
+    ("aa_mma2fnc", adv_f2var2::mma2fnc_case),
+    ("aa_mma2fx6", adv_f2var2::mma2fx6_case),
+    // AdvApp2Var classes (gb_probe/adv_class.rs)
+    ("aa_context", adv_class::context_case),
+    ("aa_grid", adv_class::grid_case),
+    ("aa_patch", adv_class::patch_case),
+    ("aa_approx", adv_class::approx_case),
 ];
 
 fn main() {

@@ -35,3 +35,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_gcpnts').append_gcpnts_requests(requests)
     # AppCont (tkgeombase_corpus_appcont.py)
     __import__('tkgeombase_corpus_appcont').append_appcont_requests(requests)
+    # AdvApp2Var (tkgeombase_corpus_advapp2var.py)
+    __import__('tkgeombase_corpus_advapp2var').append_advapp2var_requests(requests)

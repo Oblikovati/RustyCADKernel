@@ -54,6 +54,12 @@
 #include "tkgeombase_probe_bndlib.cxx"
 #include "tkgeombase_probe_gcpnts.cxx"
 #include "tkgeombase_probe_appcont.cxx"
+#include "tkgeombase_probe_advapp2var_math.cxx"
+#include "tkgeombase_probe_advapp2var_math2.cxx"
+#include "tkgeombase_probe_advapp2var_eval.cxx"
+#include "tkgeombase_probe_advapp2var_f2var.cxx"
+#include "tkgeombase_probe_advapp2var_f2var2.cxx"
+#include "tkgeombase_probe_advapp2var_class.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -212,6 +218,61 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"acc_offsets", gb_acc_offsets_case},
  {"acc_matrix", gb_acc_matrix_case},
  {"acc_ls", gb_acc_ls_case},
+ // AdvApp2Var_MathBase (tkgeombase_probe_advapp2var_math.cxx, _math2.cxx)
+ {"aa_norms", gb_aa_norms_case},
+ {"aa_mmwprcs", gb_aa_mmwprcs_case},
+ {"aa_mmapcmp", gb_aa_mmapcmp_case},
+ {"aa_mmdrc11", gb_aa_mmdrc11_case},
+ {"aa_mmfmca8", gb_aa_mmfmca8_case},
+ {"aa_mmfmca9", gb_aa_mmfmca9_case},
+ {"aa_mmfmcb5", gb_aa_mmfmcb5_case},
+ {"aa_mmfmtb1", gb_aa_mmfmtb1_case},
+ {"aa_mmfmcar", gb_aa_mmfmcar_case},
+ {"aa_mmcglc1", gb_aa_mmcglc1_case},
+ {"aa_mmbulld", gb_aa_mmbulld_case},
+ {"aa_mvsheld", gb_aa_mvsheld_case},
+ {"aa_mmcdriv", gb_aa_mmcdriv_case},
+ {"aa_mmdrvck", gb_aa_mmdrvck_case},
+ {"aa_mmcvctx", gb_aa_mmcvctx_case},
+ {"aa_mdsptpt", gb_aa_mdsptpt_case},
+ {"aa_mmaperx", gb_aa_mmaperx_case},
+ {"aa_mmtrpjj", gb_aa_mmtrpjj_case},
+ {"aa_mmgaus1", gb_aa_mmgaus1_case},
+ {"aa_mmhjcan", gb_aa_mmhjcan_case},
+ {"aa_mminltt", gb_aa_mminltt_case},
+ {"aa_mmjacan", gb_aa_mmjacan_case},
+ {"aa_mmjaccv", gb_aa_mmjaccv_case},
+ {"aa_mmpobas", gb_aa_mmpobas_case},
+ {"aa_mmpocrb", gb_aa_mmpocrb_case},
+ {"aa_mmmpocur", gb_aa_mmmpocur_case},
+ {"aa_mmposui", gb_aa_mmposui_case},
+ {"aa_mmresol", gb_aa_mmresol_case},
+ {"aa_mmrtptt", gb_aa_mmrtptt_case},
+ {"aa_mmsrre2", gb_aa_mmsrre2_case},
+ {"aa_mmunivt", gb_aa_mmunivt_case},
+ {"aa_mmvncol", gb_aa_mmvncol_case},
+ {"aa_mmarcin", gb_aa_mmarcin_case},
+ {"aa_mmcvinv", gb_aa_mmcvinv_case},
+ {"aa_mmmrslwd", gb_aa_mmmrslwd_case},
+ // AdvApp2Var_ApproxF2var (tkgeombase_probe_advapp2var_f2var.cxx, _f2var2.cxx)
+ {"aa_mma1her", gb_aa_mma1her_case},
+ {"aa_mma2roo", gb_aa_mma2roo_case},
+ {"aa_mma2jmx", gb_aa_mma2jmx_case},
+ {"aa_mmapptt", gb_aa_mmapptt_case},
+ {"aa_mma2ac1", gb_aa_mma2ac1_case},
+ {"aa_mma2ac2", gb_aa_mma2ac2_case},
+ {"aa_mma2ac3", gb_aa_mma2ac3_case},
+ {"aa_mma2can", gb_aa_mma2can_case},
+ {"aa_mma2cdi", gb_aa_mma2cdi_case},
+ {"aa_mma2ds1", gb_aa_mma2ds1_case},
+ {"aa_mma2ce1", gb_aa_mma2ce1_case},
+ {"aa_mma2fnc", gb_aa_mma2fnc_case},
+ {"aa_mma2fx6", gb_aa_mma2fx6_case},
+ // AdvApp2Var classes (tkgeombase_probe_advapp2var_class.cxx)
+ {"aa_context", gb_aa_context_case},
+ {"aa_grid", gb_aa_grid_case},
+ {"aa_patch", gb_aa_patch_case},
+ {"aa_approx", gb_aa_approx_case},
 };
 int main() {
  std::string line;
