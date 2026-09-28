@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
-Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d)
+Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -24,6 +24,7 @@ from verify_tkernel import run, unique
 NUMERIC_VERIFIERS = {
     'TKMath': ('tools/verify_tkmath_numeric.py', 'target/oracle-tkmath/numeric'),
     'TKG2d': ('tools/verify_tkg2d_numeric.py', 'target/oracle-tkg2d/numeric'),
+    'TKG3d': ('tools/verify_tkg3d_numeric.py', 'target/oracle-tkg3d/numeric'),
 }
 
 

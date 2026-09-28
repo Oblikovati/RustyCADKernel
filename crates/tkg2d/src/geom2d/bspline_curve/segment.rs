@@ -18,6 +18,7 @@ use super::state::BSplineState;
 use crate::geom2d::arrays::{at, one_based, put};
 use crate::geom2d::errors;
 use crate::geom2d::native::{std_max, std_min};
+use crate::geom2d::spline_data::slice;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, real};
@@ -179,17 +180,4 @@ impl BSplineState {
         put(&mut mults, count, self.deg + 1)?;
         Ok((knots, mults))
     }
-}
-
-// Values `first..=last` of a one-based array, re-indexed from 1.
-fn slice<T: Copy + Default>(
-    values: &Array1<'_, T>,
-    first: i32,
-    last: i32,
-) -> Result<Array1<'static, T>, Failure> {
-    let mut result: Array1<'static, T> = one_based(last - first + 1)?;
-    for (k, i) in (first..=last).enumerate() {
-        put(&mut result, k as i32 + 1, at(values, i)?)?;
-    }
-    Ok(result)
 }

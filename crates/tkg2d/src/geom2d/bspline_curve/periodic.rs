@@ -17,6 +17,7 @@
 use super::state::BSplineState;
 use crate::geom2d::arrays::{at, one_based, put};
 use crate::geom2d::errors;
+use crate::geom2d::spline_data::rotated;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bsplclib;
@@ -184,17 +185,4 @@ impl BSplineState {
             1.,
         )
     }
-}
-
-// Poles or weights starting at one-based `index`, then the ones before it (SetOrigin).
-fn rotated<T: Copy + Default>(
-    values: &Array1<'_, T>,
-    index: i32,
-) -> Result<Array1<'static, T>, Failure> {
-    let count: i32 = values.len() as i32;
-    let mut result: Array1<'static, T> = one_based(count)?;
-    for (k, i) in (1_i32..).zip((index..=values.upper()).chain(values.lower()..index)) {
-        put(&mut result, k, at(values, i)?)?;
-    }
-    Ok(result)
 }

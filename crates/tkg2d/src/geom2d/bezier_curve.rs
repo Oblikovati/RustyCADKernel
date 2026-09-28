@@ -246,7 +246,7 @@ impl Geom2dBezierCurve {
     }
     /// The knots `{0, 1}` (`Knots`); `curve.knots()`.
     pub fn knots(&self) -> Array1<'static, f64> {
-        state::knots()
+        crate::geom2d::spline_data::bezier_knots()
     }
     /// The multiplicities `{Degree+1, Degree+1}` (`Multiplicities`); `curve.multiplicities()?`.
     pub fn multiplicities(&self) -> Result<Array1<'static, i32>, Failure> {
