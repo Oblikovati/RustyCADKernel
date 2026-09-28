@@ -1,0 +1,94 @@
+// Copyright (c) 1993-1999 Matra Datavision
+// Copyright (c) 1999-2014 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+//! AssignCat, Cat and Prepend.
+use super::{
+    ExtendedString,
+    errors::{leading_units, out_of_range},
+};
+use crate::standard::Failure;
+impl ExtendedString {
+    /// Appends converted input: a string, a code-unit slice, a byte (`char`), a unit, an
+    /// integer (`%d`) or a real (`%g`); zero characters append nothing. `text.assign_cat(42)`.
+    pub fn assign_cat(&mut self, input: impl Into<Self>) {
+        let input = input.into();
+        self.append_units(input.as_utf16());
+    }
+    /// Returns a copy with converted input appended; `text.cat(b'!')`.
+    pub fn cat(&self, input: impl Into<Self>) -> Self {
+        let mut copy = self.clone();
+        copy.assign_cat(input);
+        copy
+    }
+    /// The (pointer, length) AssignCat: a null pointer or a length <= 0 appends nothing;
+    /// `text.assign_cat_span(Some(&[65, 66]), 1)`.
+    pub fn assign_cat_span(&mut self, units: Option<&[u16]>, length: i32) {
+        let (Some(units), Ok(count)) = (units, usize::try_from(length)) else {
+            return;
+        };
+        self.append_units(leading_units(units, count));
+    }
+    /// The (pointer, length) Cat. OCCT builds its result with the (length, filler)
+    /// constructor, so a negative total raises Standard_OutOfRange; any other negative
+    /// length overruns the native buffer and is refused the same way.
+    /// `text.cat_span(Some(&[65]), 1)?`.
+    pub fn cat_span(&self, units: Option<&[u16]>, length: i32) -> Result<Self, Failure> {
+        let Ok(count) = usize::try_from(length) else {
+            return Err(out_of_range(
+                "TCollection_ExtendedString : negative length",
+                format_args!(
+                    "theLength {length} with myLength {}; expected theLength >= 0",
+                    self.len()
+                ),
+            ));
+        };
+        let mut result = self.clone();
+        if count > 0 {
+            let units = units.unwrap_or_else(|| {
+                panic!("null code-unit pointer with length {length}; expected a buffer")
+            });
+            result.append_units(leading_units(units, count));
+        }
+        Ok(result)
+    }
+    /// Inserts a string or code-unit slice at the beginning; `text.prepend(&prefix)`.
+    pub fn prepend(&mut self, input: impl AsRef<[u16]>) {
+        self.terminated.splice(0..0, input.as_ref().iter().copied());
+    }
+    /// The (pointer, length) Prepend: a null pointer or a length <= 0 changes nothing;
+    /// `text.prepend_span(Some(&[65]), 1)`.
+    pub fn prepend_span(&mut self, units: Option<&[u16]>, length: i32) {
+        let (Some(units), Ok(count)) = (units, usize::try_from(length)) else {
+            return;
+        };
+        self.prepend(leading_units(units, count));
+    }
+    /// Appends a range of this string's own units (OCCT's aliased-pointer AssignCat);
+    /// `text.assign_cat_self(0..text.len())`.
+    pub fn assign_cat_self(&mut self, range: std::ops::Range<usize>) {
+        let copy = self.as_utf16()[range].to_vec();
+        self.append_units(&copy);
+    }
+    /// Prepends a range of this string's own units (OCCT's aliased-pointer Prepend);
+    /// `text.prepend_self(5..10)`.
+    pub fn prepend_self(&mut self, range: std::ops::Range<usize>) {
+        let copy = self.as_utf16()[range].to_vec();
+        self.prepend(copy);
+    }
+    /// Appends units before the terminator.
+    fn append_units(&mut self, units: &[u16]) {
+        let end = self.len();
+        self.terminated.splice(end..end, units.iter().copied());
+    }
+}

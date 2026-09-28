@@ -39778,6 +39778,1358 @@
       "rust_item": "rustycad_tkernel::standard::stack_trace",
       "status": "implemented",
       "notes": "Port of the glibc branch with the same backtrace()/backtrace_symbols() calls: appends \"\\n==Backtrace==\", one `binary(symbol+0xoffset) [0xaddress]` line per frame that fits, and \"\\n=============\" when room remains, below buffer_size bytes. The frames are Rust frames, so only argument checks and the shape of traces where no frame or every frame fits are compared (runtime_stack_trace probe). theContext is ignored on this platform and has no parameter; a buffer already too long, or a skip beyond the stack depth (a native crash), returns false; other platforms return false."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as Default>::default",
+      "status": "implemented",
+      "notes": "Empty string."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(const char* const,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_c_string",
+      "status": "implemented",
+      "notes": "Reads the C string up to its NUL. With theIsMultiByte it uses OCCT's lenient NCollection_UtfIterator reader (overlong forms and lone continuation bytes decode, C0 80 ends the string, encoded surrogates are dropped) and widens every byte when a symbol exceeds U+10FFFF. A sequence cut by the terminator makes OCCT read past the string (undefined); the port treats it as not UTF-8. new(&str) and from_utf8(&str) are the false/true conveniences. Rust slices are never null, so the Standard_NullObject branch has no counterpart."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_utf16",
+      "status": "implemented",
+      "notes": "Copies through the first zero unit (the slice end acts as the terminator); the null-pointer Standard_NullObject branch has no counterpart because slices are never null."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(const wchar_t*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_wide",
+      "status": "implemented",
+      "notes": "wchar_t is UTF-32 on the Linux profile: values are read through the first zero; surrogates, values above U+10FFFF and negative wchar_t values are dropped (fromWideString<4>)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as From<u8>>::from",
+      "status": "implemented",
+      "notes": "Widens the byte (ToExtCharacter); '\\0' gives an empty string."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_char",
+      "status": "implemented",
+      "notes": "Also From<u16>; the zero unit gives an empty string."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(int,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::filled",
+      "status": "implemented",
+      "notes": "Zero fillers are stored; a negative length raises Standard_OutOfRange as Failure."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_integer",
+      "status": "implemented",
+      "notes": "C's %d; also From<i32>."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_real",
+      "status": "implemented",
+      "notes": "C's %g via AsciiString::from_real; also From<f64>."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as Clone>::clone",
+      "status": "implemented",
+      "notes": "Copy constructor."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(TCollection_ExtendedString&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: move constructor; Rust moves values natively."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(const TCollection_AsciiString&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_ascii_string",
+      "status": "implemented",
+      "notes": "With theIsMultiByte the AsciiString's C string is decoded like from_c_string; otherwise, or when it is not UTF-8, every byte of its length is widened, embedded NULs included. from_ascii is the default (true) form."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(const char16_t* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_span",
+      "status": "implemented",
+      "notes": "None raises Standard_NullObject, a negative length Standard_OutOfRange (in that order), as Failure. The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(const char16_t(&)[N])",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_utf16",
+      "status": "implemented",
+      "notes": "The const char16_t(&)[N] template scans for the first zero like the pointer overload, so it maps to the same item."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString(const std::u16string_view&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::from_raw",
+      "status": "implemented",
+      "notes": "The std::u16string_view overload is the explicit-length slice form, zero units included."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator=(const std::u16string_view&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy",
+      "status": "implemented",
+      "notes": "The std::u16string_view overload is the explicit-length slice form, zero units included. Assignment is the named copy method."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator std::u16string_view() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::as_utf16",
+      "status": "implemented",
+      "notes": "Borrows the units without the terminator."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing. Appending the string to itself is assign_cat_self (borrowing rules forbid the alias)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+=(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "notes": "Operator form of assign_cat (std::ops::AddAssign)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+=(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "notes": "Operator form of assign_cat (std::ops::AddAssign). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+=(char)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "notes": "Operator form of assign_cat (std::ops::AddAssign). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+=(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "notes": "Operator form of assign_cat (std::ops::AddAssign). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(const char16_t* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat_span",
+      "status": "implemented",
+      "notes": "A null pointer or a length <= 0 appends nothing. A pointer into the string itself is assign_cat_self(range). The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "status": "implemented",
+      "notes": "The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+=(const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "notes": "Operator form (std::ops::AddAssign). The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(const char16_t(&)[N])",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "status": "implemented",
+      "notes": "The const char16_t(&)[N] template scans for the first zero like the pointer overload, so it maps to the same item."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+=(const char16_t(&)[N])",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "notes": "Operator form (std::ops::AddAssign). The const char16_t(&)[N] template scans for the first zero like the pointer overload, so it maps to the same item."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::AssignCat(const std::u16string_view&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::assign_cat",
+      "status": "implemented",
+      "notes": "The std::u16string_view overload is the explicit-length slice form, zero units included."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+=(const std::u16string_view&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as AddAssign<T>>::add_assign",
+      "status": "implemented",
+      "notes": "Operator form (std::ops::AddAssign). The std::u16string_view overload is the explicit-length slice form, zero units included."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Cat(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat_span",
+      "status": "implemented",
+      "notes": "OCCT builds the result with the (length, filler) constructor, so a negative total raises Standard_OutOfRange; any other negative length overruns the native buffer (undefined) and the port raises the same failure. A null pointer with a positive length panics (OCCT copies from null). The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Cat(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat",
+      "status": "implemented",
+      "notes": "The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "status": "implemented",
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Cat(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "status": "implemented",
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Cat(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+(double) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "status": "implemented",
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Cat(char) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+(char) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "status": "implemented",
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Cat(char16_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+(char16_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "status": "implemented",
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString). Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Cat(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::cat",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>; the From impls give OCCT's conversions: a byte widened (char), a unit (char16_t), %d (int) and %g (double); a zero char or unit appends nothing."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator+(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<&rustycad_tkernel::tcollection::ExtendedString as Add<T>>::add",
+      "status": "implemented",
+      "notes": "Operator form of cat (std::ops::Add on &ExtendedString)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::ChangeAll(char16_t,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::change_all",
+      "status": "implemented",
+      "notes": "Replaces every equal unit."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::clear",
+      "status": "implemented",
+      "notes": "Empties the string."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Copy(const char16_t* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy_span",
+      "status": "implemented",
+      "notes": "A null pointer or a length <= 0 empties the string. The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Copy(const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Copy(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; self-copy cannot be expressed in Rust (and is a no-op in OCCT)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator=(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as Clone>::clone_from",
+      "status": "implemented",
+      "notes": "Copy assignment."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator=(const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::copy",
+      "status": "implemented",
+      "notes": "Assignment is the named copy method. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Move(TCollection_ExtendedString&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::move_assign",
+      "status": "implemented",
+      "notes": "Takes the source's units and leaves the source empty, as OCCT's Move."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator=(TCollection_ExtendedString&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: move assignment; Rust moves values natively (move_assign ports the named Move)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Swap(TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::swap",
+      "status": "implemented",
+      "notes": "Exchanges the contents."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::~TCollection_ExtendedString()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: destructor; Rust drops the storage."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Insert(int,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert_char",
+      "status": "implemented",
+      "notes": "Inserts the unit even when it is zero (unlike insert(From<u16>)). Raises Standard_OutOfRange for theWhere > Length()+1, then for theWhere < 1, as Failure."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Insert(int,const char16_t* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert_span",
+      "status": "implemented",
+      "notes": "The position is checked first (Standard_OutOfRange as Failure), then a null pointer or a length <= 0 inserts nothing. The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Insert(int,const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0. Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Insert(int,const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::insert",
+      "status": "implemented",
+      "notes": "Generic over Into<ExtendedString>. Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_empty",
+      "status": "implemented",
+      "notes": "No code units."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::RemoveAll(char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::remove_all",
+      "status": "implemented",
+      "notes": "Removes every equal unit, zero included."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Remove(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::remove",
+      "status": "implemented",
+      "notes": "The default theHowMany = 1 is explicit. Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range). The check sums theWhere + theHowMany in i64: OCCT's int sum overflows for huge counts (undefined; the native removal then corrupts memory), where the port raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SetValue(int,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::set_value",
+      "status": "implemented",
+      "notes": "Position in 1..=Length(). Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SetValue(int,const char16_t* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::set_value_span",
+      "status": "implemented",
+      "notes": "The position (1..=Length()+1) is checked first, then a null pointer or a length <= 0 changes nothing. The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SetValue(int,const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::set_value_units",
+      "status": "implemented",
+      "notes": "Overwrites and grows. Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0. Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SetValue(int,const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::set_value_units",
+      "status": "implemented",
+      "notes": "Overwrites and grows. Generic over AsRef<[u16]>. Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Trunc(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::trunc",
+      "status": "implemented",
+      "notes": "Length in 0..=Length(). Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Split(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::split",
+      "status": "implemented",
+      "notes": "theWhere in 0..Length(). OCCT builds the tail with the const char16_t* constructor, so it ends at the first zero unit (quirk kept). Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::LeftAdjust()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::left_adjust",
+      "status": "implemented",
+      "notes": "Removes leading U+0020 units."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::RightAdjust()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::right_adjust",
+      "status": "implemented",
+      "notes": "Removes trailing U+0020 units."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::LeftJustify(int,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::left_justify",
+      "status": "implemented",
+      "notes": "A negative width raises Standard_OutOfRange as Failure."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::RightJustify(int,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::right_justify",
+      "status": "implemented",
+      "notes": "A negative width raises Standard_OutOfRange as Failure."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Center(int,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::center",
+      "status": "implemented",
+      "notes": "The odd extra filler goes to the right; a negative width raises Standard_OutOfRange as Failure."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Capitalize()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::capitalize",
+      "status": "implemented",
+      "notes": "ASCII letters only."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Prepend(const char16_t* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::prepend_span",
+      "status": "implemented",
+      "notes": "A null pointer or a length <= 0 changes nothing; a pointer into the string itself is prepend_self(range). The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Prepend(const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::prepend",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Prepend(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::prepend",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsEqual(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal_span",
+      "status": "implemented",
+      "notes": "The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsEqual(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; unsigned unit order. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator==(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal",
+      "status": "implemented",
+      "notes": "No Rust operator takes a pointer; the named method is the mapping. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsEqual(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; unsigned unit order, a proper prefix first."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator==(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Operator form (PartialEq; Ord compares unsigned units like OCCT's loop)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsDifferent(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different_span",
+      "status": "implemented",
+      "notes": "The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsDifferent(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; unsigned unit order. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator!=(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different",
+      "status": "implemented",
+      "notes": "No Rust operator takes a pointer; the named method is the mapping. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsDifferent(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_different",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; unsigned unit order, a proper prefix first."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator!=(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Operator form (PartialEq; Ord compares unsigned units like OCCT's loop)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsLess(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less_span",
+      "status": "implemented",
+      "notes": "The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsLess(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; unsigned unit order. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator<(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less",
+      "status": "implemented",
+      "notes": "No Rust operator takes a pointer; the named method is the mapping. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsLess(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_less",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; unsigned unit order, a proper prefix first."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator<(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as PartialOrd>::lt",
+      "status": "implemented",
+      "notes": "Operator form (PartialOrd; Ord compares unsigned units like OCCT's loop)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsGreater(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater_span",
+      "status": "implemented",
+      "notes": "The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsGreater(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; unsigned unit order. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator>(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater",
+      "status": "implemented",
+      "notes": "No Rust operator takes a pointer; the named method is the mapping. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsGreater(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_greater",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; unsigned unit order, a proper prefix first."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::operator>(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as PartialOrd>::gt",
+      "status": "implemented",
+      "notes": "Operator form (PartialOrd; Ord compares unsigned units like OCCT's loop)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::StartsWith(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::starts_with_span",
+      "status": "implemented",
+      "notes": "The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::StartsWith(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::starts_with",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::StartsWith(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::starts_with",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; searches return one-based positions or -1."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::EndsWith(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::ends_with_span",
+      "status": "implemented",
+      "notes": "The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::EndsWith(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::ends_with",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::EndsWith(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::ends_with",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; searches return one-based positions or -1."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Search(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_span",
+      "status": "implemented",
+      "notes": "The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Search(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Search(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; searches return one-based positions or -1."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SearchFromEnd(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_from_end_span",
+      "status": "implemented",
+      "notes": "The (pointer, length) core takes Option<&[u16]> for the nullable pointer and keeps OCCT's argument order and null/negative answers; naming more units than the slice holds panics only where OCCT would read them (native undefined behavior)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SearchFromEnd(const char16_t* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_from_end",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>. The const char16_t* overload collapses into the generic item: the Rust caller passes the units before the terminator (a slice carries its length), and a null pointer behaves like an empty string here because extStringLen(nullptr) is 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SearchFromEnd(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::search_from_end",
+      "status": "implemented",
+      "notes": "Generic over AsRef<[u16]>; searches return one-based positions or -1."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsAscii() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_ascii",
+      "status": "implemented",
+      "notes": "IsAnAscii: no bit of 0xFF00 set."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::length",
+      "status": "implemented",
+      "notes": "Signed length in code units (len() is the usize form)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Print(Standard_OStream&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::print",
+      "status": "implemented",
+      "notes": "Writes the UTF-8 form through the first zero unit to an io::Write (OCCT prints through an AsciiString built from the char16_t pointer); operator<< is the Display impl."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::SubString(int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::sub_string",
+      "status": "implemented",
+      "notes": "Both indices in 1..=Length() and from <= to; zero units kept. Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Token(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::token",
+      "status": "implemented",
+      "notes": "Literal port of the two-phase scan: separators end at their first zero, an empty separator set or theWhichOne < 1 gives an empty token, a token ends at a zero unit. The default theWhichOne = 1 is explicit; a null separator pointer (Standard_NullObject) cannot be expressed with a slice."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::ToExtString() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::as_utf16_with_nul",
+      "status": "implemented",
+      "notes": "Borrows the units with their terminating zero."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::ToWideString() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::to_wide_string",
+      "status": "implemented",
+      "notes": "Windows only (#[cfg(windows)]), where wchar_t is UTF-16."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::Value(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::value",
+      "status": "implemented",
+      "notes": "Position in 1..=Length(). Raises Standard_OutOfRange as Failure (OCCT's message plus the offending value and expected range)."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::HashCode() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::hash_code",
+      "status": "implemented",
+      "notes": "FNV-1a (signed-char quirk) below two units, Murmur otherwise, over the native-endian unit bytes. The header says ASCII text hashes like AsciiString; the code hashes two bytes per unit, so it does not, and the port keeps OCCT's values."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::EmptyString()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::empty_string",
+      "status": "implemented",
+      "notes": "A process-wide static empty string."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsEqual(const TCollection_ExtendedString&,const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_equal_strings",
+      "status": "implemented",
+      "notes": "The static form; Rust cannot overload it with the method name."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::ToUTF8CString(Standard_PCharacter&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::write_utf8",
+      "status": "implemented",
+      "notes": "Writes UTF-8 plus NUL through the first zero unit, dropping unpaired surrogates, and returns the byte count; to_utf8() returns a String. OCCT trusts the caller buffer (overflow is undefined); the port raises Standard_OutOfRange for a buffer shorter than utf8_length() + 1."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::LengthOfCString() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::utf8_length",
+      "status": "implemented",
+      "notes": "UTF-8 byte count without the NUL, as usize."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::FirstLocationInSet(const TCollection_ExtendedString&,int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::first_location_in_set",
+      "status": "implemented",
+      "notes": "Both bounds must be in 1..=Length() (Standard_OutOfRange as Failure); a reversed range or an empty set gives 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::FirstLocationNotInSet(const TCollection_ExtendedString&,int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::first_location_not_in_set",
+      "status": "implemented",
+      "notes": "Bounds as FirstLocationInSet; with an empty set it returns theFromIndex when from <= to, else 0."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IntegerValue() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::integer_value",
+      "status": "implemented",
+      "notes": "Zero for an empty string, else AsciiString(UTF-8)::IntegerValue; its Standard_NumericError becomes a Failure of that class."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsIntegerValue() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_integer_value",
+      "status": "implemented",
+      "notes": "False for an empty string, else parsed through the UTF-8 AsciiString."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::RealValue() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::real_value",
+      "status": "implemented",
+      "notes": "Zero for an empty string, else AsciiString(UTF-8)::RealValue (OCCT Strtod); Standard_NumericError as Failure."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsRealValue(bool) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_real_value",
+      "status": "implemented",
+      "notes": "The default theToCheckFull = false is explicit; false for an empty string."
+    },
+    {
+      "upstream_id": "TCollection_ExtendedString::IsSameString(const TCollection_ExtendedString&,bool) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::ExtendedString::is_same_string",
+      "status": "implemented",
+      "notes": "Case folding touches ASCII A-Z only."
+    },
+    {
+      "upstream_id": "std::hash<TCollection_ExtendedString>::operator()(const TCollection_ExtendedString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_ExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::ExtendedString as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "The std::hash specialization is the NCollection HashKey impl returning hash_code()."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::HExtendedString as Default>::default",
+      "status": "implemented",
+      "notes": "Empty string."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::from_c_string",
+      "status": "implemented",
+      "notes": "ExtendedString(const char*) with its default theIsMultiByte = false: bytes widened."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString(const char16_t* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::from_utf16",
+      "status": "implemented",
+      "notes": "Copies through the first zero unit."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString(char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::from_char",
+      "status": "implemented",
+      "notes": "The zero unit gives an empty string."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString(int,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::filled",
+      "status": "implemented",
+      "notes": "Negative length: Standard_OutOfRange as Failure."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::HExtendedString as From<&rustycad_tkernel::tcollection::ExtendedString>>::from",
+      "status": "implemented",
+      "notes": "Copies the string."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString(TCollection_ExtendedString&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::HExtendedString as From<rustycad_tkernel::tcollection::ExtendedString>>::from",
+      "status": "implemented",
+      "notes": "Takes the string by value (the Rust move)."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString(const occ::handle<TCollection_HAsciiString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::from_h_ascii_string",
+      "status": "implemented",
+      "notes": "Converts the HAsciiString's string with ExtendedString(AsciiString, true); takes &HAsciiString (OCCT dereferences the handle unchecked)."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString(const occ::handle<TCollection_HExtendedString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::from_h_extended_string",
+      "status": "implemented",
+      "notes": "Copies the other object's string into a new object."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::AssignCat(const occ::handle<TCollection_HExtendedString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::assign_cat",
+      "status": "implemented",
+      "notes": "The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Cat(const occ::handle<TCollection_HExtendedString>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::cat",
+      "status": "implemented",
+      "notes": "Returns a new Handle. The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::ChangeAll(char16_t,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::change_all",
+      "status": "implemented",
+      "notes": "The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::clear",
+      "status": "implemented",
+      "notes": "The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::is_empty",
+      "status": "implemented",
+      "notes": "No code units."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Insert(int,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::insert_char",
+      "status": "implemented",
+      "notes": "Standard_OutOfRange as Failure. The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Insert(int,const occ::handle<TCollection_HExtendedString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::insert",
+      "status": "implemented",
+      "notes": "Standard_OutOfRange as Failure. The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::IsLess(const occ::handle<TCollection_HExtendedString>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::is_less",
+      "status": "implemented",
+      "notes": "The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::IsGreater(const occ::handle<TCollection_HExtendedString>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::is_greater",
+      "status": "implemented",
+      "notes": "The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::IsAscii() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::is_ascii",
+      "status": "implemented",
+      "notes": "IsAnAscii for every unit."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::length",
+      "status": "implemented",
+      "notes": "Signed length in code units."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Remove(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::remove",
+      "status": "implemented",
+      "notes": "The default ahowmany = 1 is explicit; Standard_OutOfRange as Failure. The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::RemoveAll(char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::remove_all",
+      "status": "implemented",
+      "notes": "The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::SetValue(int,char16_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::set_value",
+      "status": "implemented",
+      "notes": "Standard_OutOfRange as Failure. The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::SetValue(int,const occ::handle<TCollection_HExtendedString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::set_value_string",
+      "status": "implemented",
+      "notes": "Overwrites and grows; Standard_OutOfRange as Failure. The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Split(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::split",
+      "status": "implemented",
+      "notes": "Returns the tail as a new Handle; Standard_OutOfRange as Failure. The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Search(const occ::handle<TCollection_HExtendedString>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::search",
+      "status": "implemented",
+      "notes": "The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::SearchFromEnd(const occ::handle<TCollection_HExtendedString>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::search_from_end",
+      "status": "implemented",
+      "notes": "The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::ToExtString() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::to_ext_string",
+      "status": "implemented",
+      "notes": "Returns a copy of the units with their terminator: a pointer cannot outlive the lock guard."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Token(const char16_t* const,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::token",
+      "status": "implemented",
+      "notes": "Returns a new Handle; the default whichone = 1 is explicit."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Trunc(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::trunc",
+      "status": "implemented",
+      "notes": "Standard_OutOfRange as Failure. The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Value(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::value",
+      "status": "implemented",
+      "notes": "Standard_OutOfRange as Failure."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::String() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::string",
+      "status": "implemented",
+      "notes": "Returns the read guard of the lock, which derefs to &ExtendedString."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::Print(Standard_OStream&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::print",
+      "status": "implemented",
+      "notes": "Writes OCCT's \"begin class HExtendedString \\n\" line, then the UTF-8 string."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::IsSameState(const occ::handle<TCollection_HExtendedString>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "rustycad_tkernel::tcollection::HExtendedString::is_same_state",
+      "status": "implemented",
+      "notes": "The string sits behind one lock and the member takes &self, so edits are seen through every handle; the handle argument is taken as &HExtendedString (a &Handle derefs to it) because OCCT dereferences it unchecked; the argument is copied before the own lock is taken, so passing the same object is well defined."
+    },
+    {
+      "upstream_id": "TCollection_HExtendedString::DEFINE_STANDARD_RTTIEXT(TCollection_HExtendedString,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members. The Rust descriptor comes from impl_transient! (RuntimeTyped::static_type and Transient::dynamic_type, named TCollection_HExtendedString)."
+    },
+    {
+      "upstream_id": "std::hash<occ::handle<TCollection_HExtendedString>>::operator()(const occ::handle<TCollection_HExtendedString>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::HExtendedStringHasher as rustycad_tkernel::ncollection::HashPolicy<Handle<rustycad_tkernel::tcollection::HExtendedString>>>::hash",
+      "status": "implemented",
+      "notes": "0 for a null handle, else the string's hash_code()."
+    },
+    {
+      "upstream_id": "std::equal_to<occ::handle<TCollection_HExtendedString>>::operator()(const occ::handle<TCollection_HExtendedString>&,const occ::handle<TCollection_HExtendedString>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HExtendedString.hxx",
+      "rust_item": "<rustycad_tkernel::tcollection::HExtendedStringHasher as rustycad_tkernel::ncollection::HashPolicy<Handle<rustycad_tkernel::tcollection::HExtendedString>>>::equal",
+      "status": "implemented",
+      "notes": "Equal when both handles share an object (two null handles included) or both are non-null with equal strings."
     }
   ],
   "tests": [
