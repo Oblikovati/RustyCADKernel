@@ -12,20 +12,20 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{MultipleVarFunctionWithHessian, NewtonMinimum, Status, Vector};
+use super::{Failure, MultipleVarFunctionWithHessian, NewtonMinimum, Status, Vector};
 impl NewtonMinimum {
     pub(super) fn iterate(
         &mut self,
         function: &mut impl MultipleVarFunctionWithHessian,
         [previous, next]: [&mut Vector<'static>; 2],
         criterion: &mut impl FnMut(&Self) -> bool,
-    ) {
+    ) -> Result<(), Failure> {
         let mut consecutive: i32 = 0;
         let mut value: f64 = 0.0;
         loop {
             self.result.iterations += 1;
-            if !self.prepare_step(function, previous, &mut value) {
-                return;
+            if !self.prepare_step(function, previous, &mut value)? {
+                return Ok(());
             }
             self.project_step(previous, next);
             self.evaluate_trial(function, previous, next);
@@ -35,25 +35,22 @@ impl NewtonMinimum {
                 break;
             }
         }
-        self.result.location.initialized(previous).unwrap();
+        self.result.location.initialized(previous)
     }
     fn prepare_step(
         &mut self,
         function: &mut impl MultipleVarFunctionWithHessian,
         point: &Vector<'_>,
         value: &mut f64,
-    ) -> bool {
+    ) -> Result<bool, Failure> {
         if !function.values_hessian(point, value, &mut self.result.gradient, &mut self.hessian) {
             self.fail(Status::FunctionError);
-            return false;
+            return Ok(false);
         }
         if self.result.iterations == 1 {
             self.result.previous = *value;
             self.result.minimum = *value;
         }
-        if !self.adjust_curvature() || !self.solve_step() {
-            return false;
-        }
-        true
+        Ok(self.adjust_curvature()? && self.solve_step()?)
     }
 }

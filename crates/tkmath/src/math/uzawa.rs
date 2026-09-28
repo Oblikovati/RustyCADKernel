@@ -79,7 +79,8 @@ impl Uzawa {
             error: Vector::with_bounds(1, columns)?,
             initial: Vector::with_bounds(1, columns)?,
             dual: Vector::with_bounds(1, rows)?,
-            inverse: Matrix::with_bounds(1, rows, 1, rows).unwrap(),
+            inverse: Matrix::with_bounds(1, rows, 1, rows)
+                .map_err(|error| error.into_failure("math_Uzawa"))?,
             iterations: 0,
             done: false,
         })
@@ -95,12 +96,12 @@ impl Uzawa {
         limit: i32,
     ) -> Result<(), Failure> {
         self.check_dimensions(matrix, rhs, start, counts)?;
+        check_one_based(matrix, rhs, start)?;
         self.initial_residual(matrix, rhs, start);
         if counts[1] == 0 {
             return self.direct(matrix, start);
         }
-        self.iterate(matrix, start, counts[0], tolerances, limit);
-        Ok(())
+        self.iterate(matrix, start, counts[0], tolerances, limit)
     }
     fn check_dimensions(
         &self,
@@ -111,9 +112,12 @@ impl Uzawa {
     ) -> Result<(), Failure> {
         let (rows, columns): (i32, i32) = (matrix.row_number(), matrix.col_number());
         // Native Errinit has column count storage but receives row count writes; tall input is undefined.
+        // Without a constraint row, native still reads Cont(1, i) and Vardua(1) for every
+        // column (undefined); only the fully empty problem is defined.
         if rhs.length() != rows
             || counts[0] + counts[1] != rows
             || rows > columns
+            || (rows == 0 && columns > 0)
             || start.length() != columns
             || self.solution.length() != columns
             || self.dual.length() != rows
@@ -121,7 +125,7 @@ impl Uzawa {
             return Err(Failure::with_type(
                 "Standard_DimensionError",
                 &format!(
-                    "Uzawa: matrix {rows}x{columns}, rhs {}, start {}, counts {counts:?}; expected matching lengths/counts and rows <= columns",
+                    "Uzawa: matrix {rows}x{columns}, rhs {}, start {}, counts {counts:?}; expected matching lengths/counts and 1 <= rows <= columns (or an empty problem)",
                     rhs.length(),
                     start.length()
                 ),
@@ -138,6 +142,28 @@ impl Uzawa {
             }
         }
     }
+}
+// math_Uzawa.cxx defines No_Standard_OutOfRange and reads Cont(i, j), Secont(i) and
+// StartingPoint(j) from index 1 whatever their bounds, so any other lower bound reads
+// outside them (undefined). The port raises the Standard_OutOfRange a checked build
+// would raise at the first such read, before any work.
+fn check_one_based(
+    matrix: &Matrix<'_>,
+    rhs: &Vector<'_>,
+    start: &Vector<'_>,
+) -> Result<(), Failure> {
+    let lowers: [i32; 4] = [
+        matrix.lower_row(),
+        matrix.lower_col(),
+        rhs.lower(),
+        start.lower(),
+    ];
+    if matrix.row_number() == 0 || lowers == [1; 4] {
+        return Ok(());
+    }
+    Err(Failure::out_of_range(&format!(
+        "math_Uzawa: lower bounds (matrix row, matrix column, rhs, start) {lowers:?}; expected [1, 1, 1, 1]"
+    )))
 }
 impl Uzawa {
     /// Writes the native `Dump` text with the solution vector; `solver.dump(&mut text)?`.
