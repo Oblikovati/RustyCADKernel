@@ -3,7 +3,7 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    app_par_curves as apc, bndlib, extrema_cc, extrema_el, extrema_pc, extrema_ps, fem_tool, gc, gce, gcpnts,
+    app_par_curves as apc, bndlib, extrema_cc, extrema_cs, extrema_el, extrema_pc, extrema_ps, fem_tool, gc, gce, gcpnts,
     geom_tools, gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d,
 };
 
@@ -204,6 +204,13 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("ex_ps", extrema_ps::ps_case),
     ("ex_pexts", extrema_ps::pexts_case),
     ("ex_prevs", extrema_ps::prevs_case),
+    // Extrema curve-surface classes (gb_probe/extrema_cs.rs)
+    ("ex_fecs", extrema_cs::fecs_case),
+    ("ex_gofcs", extrema_cs::gofcs_case),
+    ("ex_gofconics", extrema_cs::gofconics_case),
+    ("ex_gofcquad", extrema_cs::gofcquad_case),
+    ("ex_genecs", extrema_cs::genecs_case),
+    ("ex_cs", extrema_cs::cs_case),
 ];
 
 fn main() {

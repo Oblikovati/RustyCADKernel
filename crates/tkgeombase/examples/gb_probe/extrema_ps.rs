@@ -18,7 +18,7 @@ use rustycad_tkmath::gp::{Point3, Vector3};
 use rustycad_tkmath::math::{Matrix, Vector};
 
 /// gb_ex_surface: a surface spec, a ranged flag and the adaptor bounds.
-fn surface(r: &mut Reader) -> Result<GeomAdaptorSurface, Failure> {
+pub fn surface(r: &mut Reader) -> Result<GeomAdaptorSurface, Failure> {
     let s = bndlib::surface(r)?;
     if r.flag() {
         let bounds = (r.real(), r.real(), r.real(), r.real());

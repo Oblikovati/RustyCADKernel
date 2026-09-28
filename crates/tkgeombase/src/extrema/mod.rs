@@ -26,6 +26,7 @@
 //! for its lifetime. docs/tkgeombase-progress.md gives the full mapping;
 //! `ExtPElC::with_line(point, line, 1e-7, -10.0, 10.0).nb_ext()? == 1`.
 mod curve_curve;
+mod curve_surface;
 mod curve_tool;
 mod curve_tools;
 mod elementary_point_curve;
@@ -48,6 +49,9 @@ mod surface_ref;
 pub use curve_curve::{
     CCLocFOfLocECC, ECC, ECC2d, ExtCC, ExtCC2d, GFuncExtCC, GGenExtCC, GenLocateExtCC,
     GlobOptFuncCCC0, GlobOptFuncCCC1, GlobOptFuncCCC2, LocECC, LocateExtCC,
+};
+pub use curve_surface::{
+    ExtCS, FuncExtCS, GenExtCS, GlobOptFuncCQuadric, GlobOptFuncCS, GlobOptFuncConicS,
 };
 pub use curve_tool::{ExtremaCurveTool, SplineKnots, ToolD1, ToolD2, ToolD3};
 pub use curve_tools::{Curve2dTool, CurveTool};

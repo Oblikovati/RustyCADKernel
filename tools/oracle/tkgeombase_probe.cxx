@@ -57,6 +57,7 @@
 #include "tkgeombase_probe_extrema_pc_classic.cxx"
 #include "tkgeombase_probe_extrema_cc.cxx"
 #include "tkgeombase_probe_extrema_ps.cxx"
+#include "tkgeombase_probe_extrema_cs.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -249,6 +250,13 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ex_ps", gb_ex_ps_case},
  {"ex_pexts", gb_ex_pexts_case},
  {"ex_prevs", gb_ex_prevs_case},
+ // Extrema curve-surface classes (tkgeombase_probe_extrema_cs.cxx)
+ {"ex_fecs", gb_ex_fecs_case},
+ {"ex_gofcs", gb_ex_gofcs_case},
+ {"ex_gofconics", gb_ex_gofconics_case},
+ {"ex_gofcquad", gb_ex_gofcquad_case},
+ {"ex_genecs", gb_ex_genecs_case},
+ {"ex_cs", gb_ex_cs_case},
 };
 int main() {
  std::string line;
