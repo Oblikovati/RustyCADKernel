@@ -485,7 +485,81 @@ Pending.
 
 ### TCollection_ExtendedString and TCollection_HExtendedString
 
-Pending.
+Every constructor and member of both headers is ported from the `.cxx` files (169 `api`
+rows: 165 implemented, 4 excluded for the move constructor, move assignment, destructor and
+`DEFINE_STANDARD_RTTIEXT`). Members that raise return `Result<_, Failure>` with OCCT's class
+(`Standard_OutOfRange`, `Standard_NullObject`, `Standard_NumericError`); the message is OCCT's
+text followed by the offending value and the expected range.
+
+Overloads and operators map as follows. A `const char16_t*` argument becomes the slice of
+units before its terminator; because `extStringLen(nullptr)` is 0, a null pointer behaves like
+an empty string in every such member except the constructors and `Token`. The pointer,
+`char16_t(&)[N]`, `std::u16string_view` and class overloads of one member share one generic
+item (`impl AsRef<[u16]>` or `impl Into<ExtendedString>`, whose `From` impls give the `char`,
+`char16_t`, `int` and `double` conversions). Each (pointer, length) core is a `*_span` method
+taking `Option<&[u16]>` and the signed length, with OCCT's argument order and null/negative
+answers; it reads only the units OCCT reads. `+=` and `+` are `AddAssign`/`Add`, `==`/`!=`
+are `PartialEq`, `<`/`>` are `PartialOrd` (unsigned unit order), `operator<<` is `Display`,
+the `std::hash` specialization is `HashKey`, and the pointer-taking operators map to the named
+methods. Aliased `AssignCat`/`Prepend` pointers into the string itself are
+`assign_cat_self`/`prepend_self` ranges, because borrowing rules forbid the alias.
+
+`HExtendedString` is a `Standard_Transient` registered with `impl_transient!`. Its string sits
+behind one reader-writer lock, so every member takes `&self` and edits are seen through every
+`Handle`. A handle argument is taken as `&HExtendedString`, because OCCT dereferences it without
+a check. Arguments are copied before the object's own lock is taken, so `AssignCat` of the same
+object is well defined. `String()` returns the read guard, and `ToExtString()` returns a copy
+because a pointer cannot outlive the guard. The `std::hash`/`std::equal_to` handle
+specializations are the `HExtendedStringHasher` NCollection policy: 0 for a null handle, and
+equality for a shared object or equal strings.
+
+Native quirks kept:
+
+- The UTF-8 constructors use `NCollection_UtfIterator`, which does not validate. It sums the
+  bytes that the lead byte announces and subtracts the Unicode offset table in unsigned 32-bit
+  arithmetic. Only a value above U+10FFFF makes the input "not UTF-8" (then every byte is
+  widened). Therefore `C3 41` gives U+0081, a lone continuation byte gives U+0080 to U+00BF,
+  and Latin-1 `E9 74 E9` gives U+8D69. Encoded surrogates are dropped, and the overlong
+  `C0 80` decodes to zero and ends the string.
+- The `AsciiString` constructor decodes only up to the first NUL, but without UTF-8 it widens
+  every byte of the `AsciiString` length, embedded NULs included.
+- UTF-8 output (`ToUTF8CString`, `LengthOfCString`, `Print`) stops at the first zero unit and
+  drops unpaired surrogates. `wchar_t` input (UTF-32 on the Linux profile) drops surrogates,
+  values above U+10FFFF and negative values.
+- `Split` builds the tail with the `const char16_t*` constructor, so the tail ends at its first
+  zero unit. `Token` with an empty separator set or `theWhichOne < 1` gives an empty token,
+  and a token ends at a zero unit. `Insert(int, char16_t)` inserts a zero unit, but
+  `AssignCat(char16_t)` and `Cat(char)` ignore zero.
+- `FirstLocationInSet`/`NotInSet` do not reject `from > to` (the result is 0). With an empty
+  set, `NotInSet` returns `from`.
+- `HashCode` hashes two bytes per unit (FNV-1a with the signed-`char` quirk below two units,
+  Murmur otherwise). Therefore ASCII text does not hash like `AsciiString`, although the
+  header says it does.
+- `HExtendedString(const char*)` widens bytes, because it uses the default
+  `theIsMultiByte = false`.
+
+Deliberate deviations, all at native undefined behavior or at places that Rust cannot express:
+
+- Slices are never null, so the `Standard_NullObject` branches of the `const char*`,
+  `const char16_t*` and `Token` separators arguments have no counterpart (`from_span(None, n)`
+  keeps the one of the (pointer, length) constructor).
+- A UTF-8 sequence cut by the terminator makes OCCT read past the string. The port treats such
+  input as not UTF-8 and widens the bytes.
+- `Cat(ptr, len)` with a negative length copies the whole string into a shorter buffer when the
+  total stays non-negative. The port raises `Standard_OutOfRange`, as OCCT does for a negative
+  total. `Remove` computes `theWhere + theHowMany` in i64, where OCCT's `int` sum overflows (the
+  native call crashed in the probe). `ToUTF8CString` refuses a buffer that is too short instead
+  of writing past it. A span shorter than the units a core must read panics.
+- `ToWideString` exists only on Windows (`#[cfg(windows)]`), where `wchar_t` is UTF-16.
+
+`tools/verify_tkernel_api.py --only extended_string` compares 17,382 requests with the native
+kernel: every constructor on a UTF-8 corpus of fixed and seeded byte strings, UTF-8 output and
+hashes, numeric parsing, every comparison and search overload and span core, `Token`, the set
+locators, every edit at the indices `INT_MIN`, -1, 0, 1, 2, N, N+1, N+2 and `INT_MAX`, and
+the `HExtendedString` members and handle policy. Exceptions are compared by class. The corpus
+docstring lists the undefined-behavior inputs that it never sends. At this revision,
+`HAsciiString` can only be built empty, so the `HAsciiString` constructor is probed with an
+empty object only.
 
 ### Standard scalar, character, hashing, time, GUID and atomic helpers
 
