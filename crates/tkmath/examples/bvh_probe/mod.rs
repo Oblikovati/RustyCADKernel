@@ -2,9 +2,17 @@
 use rustycad_tkernel::ncollection::{Mat4, MatrixScalar, Vec4};
 use rustycad_tkmath::bvh::{BvhBox, BvhScalar, BvhTransform, BvhVector, int_floor};
 mod box_queries;
+mod builders;
+mod distances;
+mod field;
+mod selectors;
 mod sort_build;
+mod traversal;
 pub use box_queries::bvh_box_case;
+pub use builders::bvh_builders_case;
+pub use field::{bvh_field_case, bvh_nearest_case};
 pub use sort_build::{bvh_build_case, bvh_sort_case};
+pub use traversal::bvh_traverse_case;
 
 /// Prints a scalar as the bits of its exact double promotion, like `bits(double(v))`.
 fn scalar_out<T: BvhScalar>(value: T) {

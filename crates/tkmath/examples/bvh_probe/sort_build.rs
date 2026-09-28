@@ -8,7 +8,7 @@ use rustycad_tkmath::bvh::{
 use std::sync::Arc;
 
 /// `bvh_fill`: 3*count vertices of N coordinates, then triangles (3i, 3i+1, 3i+2).
-fn fill<V: BvhVector>(set: &mut BvhTriangulation<V>, coordinates: &[f64], count: usize) {
+pub(super) fn fill<V: BvhVector>(set: &mut BvhTriangulation<V>, coordinates: &[f64], count: usize) {
     for vertex in coordinates.chunks(V::DIMENSION).take(3 * count) {
         array::append(&mut set.vertices, vector_in(vertex));
     }
@@ -17,7 +17,7 @@ fn fill<V: BvhVector>(set: &mut BvhTriangulation<V>, coordinates: &[f64], count:
         array::append(&mut set.elements, record);
     }
 }
-fn order_out<V: BvhVector>(set: &BvhTriangulation<V>) {
+pub(super) fn order_out<V: BvhVector>(set: &BvhTriangulation<V>) {
     for record in set.elements.iter() {
         print!("{} ", record.x / 3);
     }
@@ -64,7 +64,7 @@ pub fn bvh_sort_case(v: &[f64]) {
     dispatch_vector!(v[0], v[1], sort_run, &v[2..]);
 }
 
-fn nodes_out<V: BvhVector, A>(tree: &BvhTree<V, A>) {
+pub(super) fn nodes_out<V: BvhVector, A>(tree: &BvhTree<V, A>) {
     print!("{} {} ", tree.length(), tree.depth());
     for node in 0..tree.length() {
         let record = array::value(tree.node_info_buffer(), node).unwrap();
