@@ -762,6 +762,198 @@
       "rust_item": "rustycad_tkmath::bnd::BoundingSphere::square_extent",
       "status": "implemented",
       "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::Normal(const gp_Vec&,const gp_Vec&,double,CSLib_DerivativeStatus&,gp_Dir&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::normal",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::Normal(const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&,double,bool&,CSLib_NormalStatus&,gp_Dir&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::normal_from_second_derivatives",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::Normal(const gp_Vec&,const gp_Vec&,double,CSLib_NormalStatus&,gp_Dir&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::normal_with_magnitude",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::Normal(int,const NCollection_Array2<gp_Vec>&,double,double,double,double,double,double,double,CSLib_NormalStatus&,gp_Dir&,int&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::normal_at_singularity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::DNNUV(int,int,const NCollection_Array2<gp_Vec>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::dnnuv",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::DNNUV(int,int,const NCollection_Array2<gp_Vec>&,const NCollection_Array2<gp_Vec>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::dnnuv_osculating",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::DNNormal(int,int,const NCollection_Array2<gp_Vec>&,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::dn_normal",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_DerivativeStatus",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_DerivativeStatus.hxx",
+      "rust_item": "rustycad_tkmath::cslib::DerivativeStatus",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalStatus",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalStatus.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalStatus",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalPolyDef::CSLib_NormalPolyDef(int,const NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalPolyDef::Value(double,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalPolyDef::Derivative(double,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::derivative",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalPolyDef::Values(double,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::values",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::Result",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2dResult",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(const NCollection_Array1<gp_Pnt2d>&,double,double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::from_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(const NCollection_Sequence<gp_Pnt2d>&,double,double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::from_sequence",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(const NCollection_DynamicArray<gp_Pnt2d>&,double,double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::from_dynamic_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(const CSLib_Class2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::clone",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::operator=(const CSLib_Class2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::clone_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(CSLib_Class2d&&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::moved_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::operator=(CSLib_Class2d&&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::move_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::SiDans(const gp_Pnt2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::si_dans",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::SiDans_OnMode(const gp_Pnt2d&,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::si_dans_on_mode",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     }
   ],
   "tests": [
@@ -40478,6 +40670,510 @@
       "rust_target": "mathopt_global",
       "rust_test": "MathOpt_GlobOptTest__GlobalMinimum_NonPSOStrategies_UnchangedWithPSOOptions",
       "rust_source": "crates/tkmath/tests/mathopt_global.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_OrthogonalVectors",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_OrthogonalVectors",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_ScaledVectors",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_ScaledVectors",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_ParallelVectors",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_ParallelVectors",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_D1UIsNull",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_D1UIsNull",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_D1VIsNull",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_D1VIsNull",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_BothNull",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_BothNull",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_WithMagTol_Defined",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_WithMagTol_Defined",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_WithMagTol_Singular",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_WithMagTol_Singular",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.DNNUV_ZeroDerivative",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__DNNUV_ZeroDerivative",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_PointInsideSquare",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_PointInsideSquare",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_PointOutsideSquare",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_PointOutsideSquare",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_PointOnBoundary",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_PointOnBoundary",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.DeepCopyPreservesClassification",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__DeepCopyPreservesClassification",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_TriangularPolygon",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_TriangularPolygon",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SequenceConstructor_PointInsideSquare",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SequenceConstructor_PointInsideSquare",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.InternalSiDans_NormalizedCoordinates",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__InternalSiDans_NormalizedCoordinates",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.LazyGridRemainsExactAwayFromBoundary",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__LazyGridRemainsExactAwayFromBoundary",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.LazyGridMatchesExactPathForConcaveDiagonalPolygon",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__LazyGridMatchesExactPathForConcaveDiagonalPolygon",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.LazyGridConcurrentActivationQueriesAreThreadSafe",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__LazyGridConcurrentActivationQueriesAreThreadSafe",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDansHandlesNegativeNonFiniteAndExtremeInputs",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDansHandlesNegativeNonFiniteAndExtremeInputs",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.LazyGridPreservesToleranceAcrossCellBoundary",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__LazyGridPreservesToleranceAcrossCellBoundary",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_OnMode_PointInside",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_OnMode_PointInside",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_OnMode_NormalizesAndReplacesToleranceOnAnisotropicDomain",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_OnMode_NormalizesAndReplacesToleranceOnAnisotropicDomain",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.DegeneratePolygon_InvalidBounds",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__DegeneratePolygon_InvalidBounds",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Value_ConstantPolynomial",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Value_ConstantPolynomial",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Value_LinearPolynomial",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Value_LinearPolynomial",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Value_AtSingularPoints",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Value_AtSingularPoints",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Derivative_AtRegularPoint",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Derivative_AtRegularPoint",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Derivative_AtSingularPoint",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Derivative_AtSingularPoint",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Values_Consistency",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Values_Consistency",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Derivative_NumericalApproximation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Derivative_NumericalApproximation",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibEnumTest.DerivativeStatus_AllValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibEnumTest__DerivativeStatus_AllValues",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibEnumTest.NormalStatus_AllValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibEnumTest__NormalStatus_AllValues",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibIntegrationTest.PlanarSurface_ConstantNormal",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibIntegrationTest__PlanarSurface_ConstantNormal",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibIntegrationTest.CylindricalSurface_VaryingNormal",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibIntegrationTest__CylindricalSurface_VaryingNormal",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibIntegrationTest.Class2d_ComplexPolygon",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibIntegrationTest__Class2d_ComplexPolygon",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
