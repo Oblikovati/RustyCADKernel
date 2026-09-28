@@ -104458,6 +104458,1822 @@
       "rust_item": "rustycad_tkgeombase::extrema_pc::perform_planar",
       "status": "implemented",
       "notes": "ExtremaPC mapping (docs/tkgeombase-progress.md): the namespace is the module extrema_pc; Result and ExtremumResult are the aliases ExtremaResult and ExtremumResult of the generic extrema_pc_core types that ExtremaPC2d shares, and Status, SearchMode, the THE_* constants and the validity functions are the shared core items; each class drops the ExtremaPC_ prefix and the constructor with a domain is with_domain; operator[] is Index<usize>; every Perform returns Result<&ExtremaResult, Failure> because the plane projections construct gp and Geom2d objects whose native constructors can raise, and the Bezier, BSpline, offset and other-curve constructors return Result for the same reason; the ExtremaPC_Curve constructors are from_adaptor, from_adaptor_range, from_transformed, from_transformed_range, from_geom and from_geom_range; DistanceFunction and GridEvaluator are the generic core types over Space3d, with output references returned as values; ExtremaPC_Planar out-parameters (gp_Pln&, the 2D curve handle) stay &mut parameters, the template parameters of PerformPlanar are the PlanarEvaluator2d and CurveEvaluator traits, and its scalar query arguments are grouped in PlanarQuery."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var(int,int,int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray2<double>>&,const occ::handle<NCollection_HArray2<double>>&,const occ::handle<NCollection_HArray2<double>>&,double,double,double,double,GeomAbs_IsoType,GeomAbs_Shape,GeomAbs_Shape,int,int,int,int,const AdvApp2Var_EvaluatorFunc2Var&,AdvApprox_Cutting&,AdvApprox_Cutting&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var(int,int,int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray2<double>>&,const occ::handle<NCollection_HArray2<double>>&,const occ::handle<NCollection_HArray2<double>>&,double,double,double,double,GeomAbs_IsoType,GeomAbs_Shape,GeomAbs_Shape,int,int,int,int,const AdvApp2Var_EvaluatorFunc2Var&,const AdvApp2Var_Criterion&,AdvApprox_Cutting&,AdvApprox_Cutting&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::with_criterion",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::is_done",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::has_result",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::Surface(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::surface",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::UDegree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::u_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::VDegree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::v_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::NumSubSpaces(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::num_sub_spaces",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::MaxError(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::max_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::AverageError(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::average_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::UFrontError(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::u_front_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::VFrontError(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::v_front_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::MaxError(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::max_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::AverageError(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::average_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::UFrontError(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::u_front_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::VFrontError(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::v_front_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::CritError(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::crit_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxAFunc2Var::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxAFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarApproxAFunc2Var::dump",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2fnc_(int*,int*,int*,double*,const AdvApp2Var_EvaluatorFunc2Var&,double*,int*,int*,double*,int*,int*,int*,int*,int*,double*,int*,double*,int*,double*,double*,double*,double*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2fnc_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2roo_(int*,int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2roo_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2jmx_(int*,int*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2jmx_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mmapptt_(const int*,const int*,const int*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mmapptt_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2cdi_(int*,int*,double*,int*,double*,int*,int*,double*,double*,double*,double*,double*,double*,double*,double*,double*,double*,double*,double*,double*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2cdi_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2ds1_(int*,double*,double*,const AdvApp2Var_EvaluatorFunc2Var&,int*,int*,double*,double*,int*,double*,double*,double*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2ds1_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2ce1_(int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,int*,double*,double*,double*,double*,double*,double*,double*,double*,int*,int*,int*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2ce1_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2can_(const int*,const int*,const int*,const int*,const int*,const int*,const int*,const double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2can_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma1her_(const int*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma1her_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2ac2_(const int*,const int*,const int*,const int*,const int*,const int*,const double*,const int*,const double*,const double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2ac2_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2ac3_(const int*,const int*,const int*,const int*,const int*,const int*,const double*,const int*,const double*,const double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2ac3_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2ac1_(const int*,const int*,const int*,const int*,const int*,const double*,const double*,const double*,const double*,const double*,const double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2ac1_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_ApproxF2var::mma2fx6_(int*,int*,int*,int*,int*,int*,int*,int*,int*,double*,double*,double*,double*,int*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_ApproxF2var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::approx_f2var::mma2fx6_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context(int,int,int,int,int,int,int,int,int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray2<double>>&,const occ::handle<NCollection_HArray2<double>>&,const occ::handle<NCollection_HArray2<double>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::TotalDimension() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::total_dimension",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::TotalNumberSSP() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::total_number_ssp",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::FavorIso() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::favor_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::UOrder() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::u_order",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::VOrder() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::v_order",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::ULimit() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::u_limit",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::VLimit() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::v_limit",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::UJacDeg() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::u_jac_deg",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::VJacDeg() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::v_jac_deg",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::UJacMax() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::u_jac_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::VJacMax() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::v_jac_max",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::URoots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::u_roots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::VRoots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::v_roots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::UGauss() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::u_gauss",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::VGauss() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::v_gauss",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::IToler() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::i_toler",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::FToler() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::f_toler",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Context::CToler() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Context.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarContext::c_toler",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Criterion::~AdvApp2Var_Criterion()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Criterion.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarCriterion",
+      "status": "excluded",
+      "notes": "Destructor: Rust drops the value; nothing to translate."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Criterion::Value(AdvApp2Var_Patch&,const AdvApp2Var_Context&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Criterion.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarCriterion::value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Criterion::IsSatisfied(const AdvApp2Var_Patch&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Criterion.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarCriterion::is_satisfied",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Criterion::MaxValue() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Criterion.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarCriterion::max_value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Criterion::Type() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Criterion.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarCriterion::criterion_type",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Criterion::Repartition() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Criterion.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarCriterion::repartition",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_CriterionRepartition",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_CriterionRepartition.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarCriterionRepartition",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_CriterionType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_CriterionType.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarCriterionType",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_EvaluatorFunc2Var()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_EvaluatorFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarEvaluatorFunc2Var",
+      "status": "excluded",
+      "notes": "Constructor of the abstract interface: a Rust implementer builds its own type, the trait has no constructor."
+    },
+    {
+      "upstream_id": "AdvApp2Var_EvaluatorFunc2Var::~AdvApp2Var_EvaluatorFunc2Var()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_EvaluatorFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarEvaluatorFunc2Var",
+      "status": "excluded",
+      "notes": "Destructor: Rust drops the value; nothing to translate."
+    },
+    {
+      "upstream_id": "AdvApp2Var_EvaluatorFunc2Var::Evaluate(int*,double*,double*,int*,double*,int*,double*,int*,int*,double*,int*) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_EvaluatorFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarEvaluatorFunc2Var::evaluate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_EvaluatorFunc2Var::operator()(int*,double*,double*,int*,double*,int*,double*,int*,int*,double*,int*) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_EvaluatorFunc2Var.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarEvaluatorFunc2Var::evaluate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework(const NCollection_Sequence<occ::handle<AdvApp2Var_Node>>&,const NCollection_Sequence<NCollection_Sequence<occ::handle<AdvApp2Var_Iso>>>&,const NCollection_Sequence<NCollection_Sequence<occ::handle<AdvApp2Var_Iso>>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::FirstNotApprox(int&,int&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::first_not_approx",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::FirstNode(GeomAbs_IsoType,int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::first_node",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::LastNode(GeomAbs_IsoType,int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::last_node",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::ChangeIso(int,int,const occ::handle<AdvApp2Var_Iso>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::change_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::Node(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::node",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::Node(double,double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::node_at",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::IsoU(double,double,double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::iso_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::IsoV(double,double,double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::iso_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::UpdateInU(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::update_in_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::UpdateInV(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::update_in_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::UEquation(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::u_equation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Framework::VEquation(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Framework.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarFramework::v_equation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::DEFINE_STANDARD_RTTIEXT(AdvApp2Var_Iso,Standard_Transient)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso",
+      "status": "excluded",
+      "notes": "RTTI macro: the type descriptor comes from impl_transient! on the Rust type."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso(GeomAbs_IsoType,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::with_orders",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso(GeomAbs_IsoType,double,double,double,double,double,int,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::with_domain",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::IsApproximated() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::is_approximated",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::has_result",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::MakeApprox(const AdvApp2Var_Context&,double,double,double,double,const AdvApp2Var_EvaluatorFunc2Var&,AdvApp2Var_Node&,AdvApp2Var_Node&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::make_approx",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::ChangeDomain(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::change_domain",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::ChangeDomain(double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::change_domain_uv",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::SetConstante(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::set_constante",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::SetPosition(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::set_position",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::ResetApprox()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::reset_approx",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::OverwriteApprox()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::overwrite_approx",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::Type() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::iso_type",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::Constante() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::constante",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::T0() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::t0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::T1() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::t1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::U0() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::u0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::U1() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::u1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::V0() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::v0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::V1() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::v1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::UOrder() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::u_order",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::VOrder() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::v_order",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::Position() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::position",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::NbCoeff() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::nb_coeff",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::Polynom() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::polynom",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::SomTab() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::som_tab",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::DifTab() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::dif_tab",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::MaxErrors() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::max_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Iso::MoyErrors() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Iso.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarIso::moy_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmapcmp_(int*,int*,int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmapcmp_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmdrc11_(int*,int*,int*,double*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmdrc11_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmfmca9_(int*,int*,int*,int*,int*,int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmfmca9_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmfmcb5_(int*,int*,int*,double*,int*,int*,int*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmfmcb5_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmwprcs_(double*,double*,double*,double*,int*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmwprcs_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmcglc1_(int*,int*,int*,double*,double*,double*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmcglc1_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmbulld_(int*,int*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmbulld_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmcdriv_(int*,int*,double*,int*,int*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmcdriv_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmcvctx_(int*,int*,int*,double*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmcvctx_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mdsptpt_(int*,double*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mdsptpt_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmaperx_(int*,int*,int*,int*,double*,int*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmaperx_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmdrvck_(int*,int*,double*,int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmdrvck_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmeps1_(double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmeps1_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmfmca8_(const int*,const int*,const int*,const int*,const int*,const int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmfmca8_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmfmcar_(int*,int*,int*,int*,double*,double*,double*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmfmcar_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmfmtb1_(int*,double*,int*,int*,int*,double*,int*,int*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmfmtb1_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmgaus1_(int*,int* bfunx int* ninteg double* parame double* vfunj1 int*,int*,double*,double*,double*,double*,double*,int*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmgaus1_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmhjcan_(int*,int*,int*,int*,int*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmhjcan_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mminltt_(int*,int*,double*,int*,int*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mminltt_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmjaccv_(const int*,const int*,const int*,const double*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmjaccv_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmpobas_(double*,int*,int*,int*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmpobas_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmmpocur_(int*,int*,int*,double*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmmpocur_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmposui_(int*,int*,int*,int*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmposui_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmresol_(int*,int*,int*,int*,int*,double*,double*,double*,double*,int*,int*,int*,int*,int*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmresol_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmrtptt_(int*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmrtptt_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmsrre2_(double*,int*,double*,double*,int*,int*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmsrre2_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmtrpjj_(int*,int*,int*,double*,int*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmtrpjj_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmunivt_(int*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmunivt_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmvncol_(int*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmvncol_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::msc_(int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::msc_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mvsheld_(int*,int*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mvsheld_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmarcin_(int*,int*,int*,double*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmarcin_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmcvinv_(int*,int*,int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmcvinv_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmjacan_(const int*,int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmjacan_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmpocrb_(int*,int*,double*,int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmpocrb_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmmrslwd_(int*,int*,int*,double*,double*,double*,double*,double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmmrslwd_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mmveps3_(double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mmveps3_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::pow__di(double*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::pow__di",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_MathBase::mzsnorm_(int*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_MathBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::math_base::mzsnorm_",
+      "status": "implemented",
+      "notes": "f2c kernel mapping (adv_app2var module docs): the routine keeps its native name, argument order and loop structure; read-only scalars are passed by value, written scalars as &mut, arrays as the slice that starts at the native pointer, and the grouped structs of the module stand for long argument lists."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network(const NCollection_Sequence<occ::handle<AdvApp2Var_Patch>>&,const NCollection_Sequence<double>&,const NCollection_Sequence<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::FirstNotApprox(int&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::first_not_approx",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::ChangePatch(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::change_patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::operator()(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::change_patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::UpdateInU(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::update_in_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::UpdateInV(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::update_in_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::SameDegree(int,int,int&,int&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::same_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::NbPatch() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::nb_patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::NbPatchInU() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::nb_patch_in_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::NbPatchInV() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::nb_patch_in_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::UParameter(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::u_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::VParameter(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::v_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::Patch(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Network::operator()(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Network.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNetwork::patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::DEFINE_STANDARD_RTTIEXT(AdvApp2Var_Node,Standard_Transient)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode",
+      "status": "excluded",
+      "notes": "RTTI macro: the type descriptor comes from impl_transient! on the Rust type."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::with_orders",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node(const gp_XY&,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::with_coord",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::Coord() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::coord",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::SetCoord(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::set_coord",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::UOrder() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::u_order",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::VOrder() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::v_order",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::SetPoint(int,int,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::set_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::Point(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::SetError(int,int,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::set_error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::Error(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::error",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Node::operator=(const AdvApp2Var_Node&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Node.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarNode::assign",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::DEFINE_STANDARD_RTTIEXT(AdvApp2Var_Patch,Standard_Transient)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch",
+      "status": "excluded",
+      "notes": "RTTI macro: the type descriptor comes from impl_transient! on the Rust type."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch(double,double,double,double,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::with_domain",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::IsDiscretised() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::is_discretised",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::Discretise(const AdvApp2Var_Context&,const AdvApp2Var_Framework&,const AdvApp2Var_EvaluatorFunc2Var&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::discretise",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::IsApproximated() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::is_approximated",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::has_result",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::MakeApprox(const AdvApp2Var_Context&,const AdvApp2Var_Framework&,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::make_approx",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::AddConstraints(const AdvApp2Var_Context&,const AdvApp2Var_Framework&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::add_constraints",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::AddErrors(const AdvApp2Var_Framework&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::add_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::ChangeDomain(double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::change_domain",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::ResetApprox()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::reset_approx",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::OverwriteApprox()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::overwrite_approx",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::U0() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::u0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::U1() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::u1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::V0() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::v0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::V1() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::v1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::UOrder() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::u_order",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::VOrder() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::v_order",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::CutSense() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::cut_sense",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::CutSense(const AdvApp2Var_Criterion&,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::cut_sense_with",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::NbCoeffInU() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::nb_coeff_in_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::NbCoeffInV() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::nb_coeff_in_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::ChangeNbCoeff(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::change_nb_coeff",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::Poles(int,const AdvApp2Var_Context&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::Coefficients(int,const AdvApp2Var_Context&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::MaxErrors() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::max_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::AverageErrors() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::average_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::IsoErrors() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::iso_errors",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::CritValue() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::crit_value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_Patch::SetCritValue(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_Patch.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::AdvApp2VarPatch::set_crit_value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (adv_app2var module docs): transient classes are shared through Handle with &self members over SharedState, overloads take distinct Rust names, native handles become Option values (None where null), output references become returned values, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::AdvApp2VarSysBase::new",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::~AdvApp2Var_SysBase()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::AdvApp2VarSysBase",
+      "status": "excluded",
+      "notes": "Destructor: Rust drops the value; nothing to translate."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::mainial_()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::AdvApp2VarSysBase::mainial_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::macinit_(int*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::macinit_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::mcrdelt_(int*,int*,void*,intptr_t*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::AdvApp2VarSysBase::mcrdelt_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::mcrfill_(int*,void*,void*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::mcrfill_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::mcrrqst_(int*,int*,void*,intptr_t*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::AdvApp2VarSysBase::mcrrqst_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::mnfndeb_()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::mnfndeb_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::macrai4_(int*,int*,int*,intptr_t*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::AdvApp2VarSysBase::macrai4_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::macrar8_(int*,int*,double*,intptr_t*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::AdvApp2VarSysBase::macrar8_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::macrdi4_(int*,int*,int*,intptr_t*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::AdvApp2VarSysBase::macrdi4_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::macrdr8_(int*,int*,double*,intptr_t*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::AdvApp2VarSysBase::macrdr8_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::maermsg_(const char*,int*,long)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::maermsg_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::maitbr8_(int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::maitbr8_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::maovsr8_(int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::maovsr8_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::mgenmsg_(const char*,long)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::mgenmsg_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::mgsomsg_(const char*,long)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::mgsomsg_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::miraz_(int*,void*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::miraz_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::msifill_(int*,int*,int*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::msifill_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::msrfill_(int*,double*,double*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::msrfill_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::mswrdbg_(const char*,long)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::mswrdbg_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
+    },
+    {
+      "upstream_id": "AdvApp2Var_SysBase::mvriraz_(int*,void*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AdvApp2Var/AdvApp2Var_SysBase.hxx",
+      "rust_item": "rustycad_tkgeombase::adv_app2var::sys_base::mvriraz_",
+      "status": "implemented",
+      "notes": "SysBase mapping (adv_app2var::sys_base docs): the allocator keeps owned zones in AdvApp2VarSysBase (explicit state instead of the native MCRGENE common), the fills and resets are generic slice routines, and the trace routines do nothing as natively with the debug level 0."
     }
   ],
   "tests": [
