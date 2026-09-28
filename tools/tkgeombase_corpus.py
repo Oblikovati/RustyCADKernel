@@ -21,3 +21,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_lprop').append_lprop_requests(requests)
     # FEmTool (tkgeombase_corpus_femtool.py)
     __import__('tkgeombase_corpus_femtool').append_femtool_requests(requests)
+    # AppParCurves (tkgeombase_corpus_appparcurves.py)
+    __import__('tkgeombase_corpus_appparcurves').append_appparcurves_requests(requests)

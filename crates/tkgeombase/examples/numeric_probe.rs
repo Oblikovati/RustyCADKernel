@@ -2,7 +2,9 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod gb_probe;
-use gb_probe::{fem_tool, gc, gce, gprop, hermit, int_ana, int_ana2d, lprop};
+use gb_probe::{
+    app_par_curves as apc, fem_tool, gc, gce, gprop, hermit, int_ana, int_ana2d, lprop,
+};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -107,6 +109,17 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("fem_profile", fem_tool::profile_case),
     ("fem_curve", fem_tool::curve_case),
     ("fem_assembly", fem_tool::assembly_case),
+    // AppParCurves (gb_probe/app_par_curves)
+    ("apc_bernstein", apc::bernstein_case),
+    ("apc_spline", apc::spline_case),
+    ("apc_multipoint", apc::multipoint_case),
+    ("apc_multicurve", apc::multicurve_case),
+    ("apc_ls", apc::ls_case),
+    ("apc_resol", apc::resol_case),
+    ("apc_function", apc::function_case),
+    ("apc_bspfunction", apc::bspfunction_case),
+    ("apc_gradient", apc::gradient_case),
+    ("apc_bspgradient", apc::bspgradient_case),
 ];
 
 fn main() {

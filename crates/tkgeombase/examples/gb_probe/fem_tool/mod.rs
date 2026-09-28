@@ -38,7 +38,7 @@ pub fn vector(v: &Vector<'_>) {
     (v.lower()..=v.upper()).for_each(|i| p::real(v[i]));
 }
 
-fn matrix(m: &Matrix<'_>) {
+pub fn matrix(m: &Matrix<'_>) {
     p::int(m.lower_row());
     p::int(m.upper_row());
     p::int(m.lower_col());
