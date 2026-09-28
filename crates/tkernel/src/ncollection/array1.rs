@@ -30,6 +30,16 @@ enum Storage<'a, T> {
     Borrowed(&'a mut [T]),
 }
 
+impl<T: std::fmt::Debug> std::fmt::Debug for Array1<'_, T> {
+    fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        formatter
+            .debug_struct("Array1")
+            .field("lower", &self.lower)
+            .field("values", &self.as_slice())
+            .finish()
+    }
+}
+
 impl<T> Default for Array1<'_, T> {
     fn default() -> Self {
         Self {

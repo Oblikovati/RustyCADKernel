@@ -9,5 +9,6 @@ pub mod ncollection;
 pub mod osd;
 pub mod resource;
 pub mod standard;
+pub mod stl;
 pub mod tcollection;
 pub mod units;
