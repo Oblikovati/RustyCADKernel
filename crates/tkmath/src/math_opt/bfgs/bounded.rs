@@ -23,14 +23,11 @@ impl BfgsState {
     ) -> Result<LineSearchResult, Status> {
         self.search_direction();
         bounds.project(&self.point, &mut self.direction, false);
-        let mut callback = BoundedCallback {
-            function: f,
-            bounds,
-        };
+        let mut callback = BoundedFunction::new(f, bounds.lower, bounds.upper);
         let alpha: f64 = bounds.alpha(&self.point, &self.direction);
         let mut line: LineSearchResult = LineSearchResult::default();
         if alpha > 0.0 {
-            line = backtrack_initial(
+            line = backtrack(
                 &mut callback,
                 &self.point,
                 &self.direction,
@@ -50,7 +47,7 @@ impl BfgsState {
         bounds.project(&self.point, &mut self.direction, false);
         let alpha: f64 = bounds.alpha(&self.point, &self.direction);
         if alpha > 0.0 {
-            line = backtrack_initial(
+            line = backtrack(
                 &mut callback,
                 &self.point,
                 &self.direction,
@@ -61,7 +58,7 @@ impl BfgsState {
             );
         }
         if !line.is_valid {
-            return Err(line_failure(first, line.status));
+            return Err(failure_after_fallback(first, line.status));
         }
         self.inverse = identity(self.point.length() as usize);
         Ok(line)
@@ -129,7 +126,7 @@ pub fn bfgs_bounded(
     cfg: &Config,
 ) -> VectorResult {
     let bounds: BoxBounds<'_> = BoxBounds { lower, upper };
-    if !valid_config(cfg) || !finite_vector(start) || !bounds.valid(start.length()) {
+    if !is_valid_config(cfg) || !is_finite_vector(start) || !bounds.valid(start.length()) {
         return VectorResult {
             status: Status::InvalidInput,
             ..Default::default()

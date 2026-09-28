@@ -12,7 +12,6 @@
 // commercial license or contractual agreement.
 
 //! MathOpt_Powell.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-use super::stationary::stationary_status;
 use super::utils::*;
 use super::*;
 struct PowellState {
@@ -65,7 +64,7 @@ impl PowellState {
     fn line(&mut self, f: &mut impl MultipleVarFunction, tolerance: f64) -> Result<bool, Status> {
         let result: LineSearchResult =
             exact_line_search(f, &self.point, &self.direction, 10.0, tolerance, 100);
-        if !result.is_valid && evaluation_error(result.status) {
+        if !result.is_valid && is_line_search_evaluation_error(&result) {
             return Err(result.status);
         }
         if !result.is_valid
@@ -172,12 +171,12 @@ fn run(
     initial: Option<&Matrix<'_>>,
     config: &Config,
 ) -> VectorResult {
-    if !valid_config(config)
-        || !finite_vector(start)
+    if !is_valid_config(config)
+        || !is_finite_vector(start)
         || initial.is_some_and(|m| {
             m.row_number() != start.length()
                 || m.col_number() != start.length()
-                || !finite_matrix(m)
+                || !is_finite_matrix(m)
         })
     {
         return VectorResult {

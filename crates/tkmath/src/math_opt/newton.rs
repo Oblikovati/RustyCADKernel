@@ -14,7 +14,7 @@
 //! MathOpt_Newton.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 use super::utils::*;
 use super::*;
-use crate::math_utils::{EigenResult, LinearResult};
+use crate::math_utils::LinearResult;
 /// Separate Hessian callback used by the modern API; `f.hessian(&x,&mut h)`.
 pub trait HessianFunction: MultipleVarFunctionWithGradient {
     /// Computes only the Hessian, preserving callback ordering; `f.hessian(&x,&mut h)`.
@@ -48,42 +48,11 @@ impl NewtonConfig {
         }
     }
     fn valid(&self, start: &Vector<'_>) -> bool {
-        valid_config(&self.base)
-            && finite_vector(start)
+        is_valid_config(&self.base)
+            && is_finite_vector(start)
             && self.regularization.is_finite()
             && self.regularization > 0.0
     }
-}
-fn hessian_status(f: &mut impl HessianFunction, x: &Vector<'_>, h: &mut Matrix<'_>) -> Status {
-    if !finite_vector(x) {
-        return Status::NumericalError;
-    }
-    if !f.hessian(x, h) {
-        return Status::CallbackError;
-    }
-    if finite_matrix(h) {
-        Status::Ok
-    } else {
-        Status::NumericalError
-    }
-}
-fn regularize(h: &mut Matrix<'_>, minimum: f64) -> bool {
-    let eigen: EigenResult = crate::math_lin::jacobi(h, false);
-    if !eigen.is_done() {
-        return false;
-    }
-    let values: &Vector<'_> = eigen.eigen_values.as_ref().unwrap();
-    let mut lowest: f64 = values[0];
-    for i in 1..values.length() {
-        lowest = lowest.min(values[i]);
-    }
-    if lowest < minimum {
-        let shift: f64 = minimum - lowest;
-        for i in 0..h.row_number() {
-            *h.change_at(i as usize, i as usize).unwrap() += shift;
-        }
-    }
-    finite_matrix(h)
 }
 struct NewtonState {
     x: Vector<'static>,
@@ -140,7 +109,7 @@ impl NewtonState {
     }
     fn direction(&mut self, minimum: f64) -> bool {
         self.steepest();
-        if !regularize(&mut self.h, minimum) {
+        if !regularize_hessian(&mut self.h, minimum) {
             return false;
         }
         let linear: LinearResult = crate::math_lin::solve(&self.h, &self.dir, 1e-15);
@@ -164,16 +133,16 @@ impl NewtonState {
     }
     fn line(&mut self, f: &mut impl MultipleVarFunction, cfg: &Config) -> Result<f64, Status> {
         let first: LineSearchResult =
-            backtrack(f, &self.x, &self.dir, &self.g, self.fx, cfg.step_min);
+            backtrack(f, &self.x, &self.dir, &self.g, self.fx, 1.0, cfg.step_min);
         if first.is_valid {
             self.advance(first.alpha);
             return Ok(first.f_new);
         }
         self.steepest();
         let last: LineSearchResult =
-            backtrack(f, &self.x, &self.dir, &self.g, self.fx, cfg.step_min);
+            backtrack(f, &self.x, &self.dir, &self.g, self.fx, 1.0, cfg.step_min);
         if !last.is_valid {
-            return Err(line_failure(first.status, last.status));
+            return Err(failure_after_fallback(first.status, last.status));
         }
         self.advance(last.alpha);
         Ok(last.f_new)

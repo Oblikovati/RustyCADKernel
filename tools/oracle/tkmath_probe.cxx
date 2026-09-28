@@ -135,6 +135,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_modern_poly_probe.cxx"
 #include "tkmath_modern_trig_probe.cxx"
 #include "tkmath_modern_multiple_probe.cxx"
+#include "tkmath_mathroot_api_probe.cxx"
 #include "tkmath_modern_integ_probe.cxx"
 #include "tkmath_modern_tensor_probe.cxx"
 #include "tkmath_modern_sys_probe.cxx"
@@ -162,12 +163,45 @@ void planar_case(std::istream& input) {
 #include "tkmath_gp_core_probe.cxx"
 #include "tkmath_vector_base_probe.cxx"
 #include "tkmath_recipes_probe.cxx"
+#include "tkmath_mathsys_api_probe.cxx"
+#include "tkmath_integ_lin_api_probe.cxx"
+#include "tkmath_mathutils_functor_api_probe.cxx"
+#include "tkmath_mathutils_core_api_probe.cxx"
+#include "tkmath_mathopt_api_probe.cxx"
 #include "tkmath_bnd_probe.cxx"
 #include "tkmath_solver_dump_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
  {"modern_global", modern_global_case},
+ {"mathsys_small_linear", mathsys_small_linear_case},
+ {"mathsys_small_box", mathsys_small_box_case},
+ {"mathsys_linear_api", mathsys_linear_api_case},
+ {"mathsys_finish_api", mathsys_finish_api_case},
+ {"integ_lin_tridiag", integ_lin_tridiag_case},
+ {"integ_lin_norm", integ_lin_norm_case},
+ {"integ_lin_spectral", integ_lin_spectral_case},
+ {"integ_lin_singular", integ_lin_singular_case},
+ {"mathutils_core_scalar", mathutils_core_scalar_case},
+ {"mathutils_core_defaults", mathutils_core_defaults_case},
+ {"mathutils_core_vector", mathutils_core_vector_case},
+ {"mathutils_core_poly", mathutils_core_poly_case},
+ {"mathutils_core_deriv", mathutils_core_deriv_case},
+ {"mathutils_core_gauss", mathutils_core_gauss_case},
+ {"mathutils_core_random", mathutils_core_random_case},
+ {"mathopt_checks", mathopt_checks_case},
+ {"mathopt_line", mathopt_line_case},
+ {"mathopt_eval", mathopt_eval_case},
+ {"mathopt_stationary", mathopt_stationary_case},
+ {"mathopt_backtrack", mathopt_backtrack_case},
+ {"mathopt_regularize", mathopt_regularize_case},
+ {"mathopt_polish", mathopt_polish_case},
+ {"mathopt_uzawa", mathopt_uzawa_case},
+ {"mathutils_functor_poly", mathutils_functor_poly_case},
+ {"mathutils_functor_arith", mathutils_functor_arith_case},
+ {"mathutils_functor_lambda", mathutils_functor_lambda_case},
+ {"mathutils_functor_vlambda", mathutils_functor_vlambda_case},
+ {"mathutils_functor_nd", mathutils_functor_nd_case},
  {"modern_swarm", modern_swarm_case},
  {"modern_small", modern_small_case},
  {"modern_lm", modern_lm_case},
@@ -177,6 +211,10 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"modern_kronrod", modern_kronrod_case},
  {"modern_integ", modern_integ_case},
  {"modern_multiple", modern_multiple_case},
+ {"mathroot_utils", mathroot_utils_case},
+ {"mathroot_trig_roots", mathroot_trig_roots_case},
+ {"mathroot_sort", mathroot_sort_case},
+ {"mathroot_search", mathroot_search_case},
  {"modern_trig", modern_trig_case},
  {"modern_poly", modern_poly_case},
  {"modern_laguerre", modern_laguerre_case},
@@ -349,6 +387,7 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"dump_polynomial", solver_dump_probe::polynomial_dump_case},
  {"dump_sets", solver_dump_probe::sets_case},
  {"small_types", solver_dump_probe::small_types_case},
+ {"compact_arrays", bnd_probe::compact_arrays_case},
 };
 int main() {
  std::string line;

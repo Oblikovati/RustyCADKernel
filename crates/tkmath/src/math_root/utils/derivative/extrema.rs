@@ -12,36 +12,42 @@
 // commercial license or contractual agreement.
 
 //! Derivative and golden-section extrema candidates preserve native callback order.
+use super::super::{MultipleDerivativeValueWrapper, have_opposite_signs};
 use super::*;
-use crate::math_utils::GOLDEN_SECTION;
+use crate::math_root::brent;
+use crate::math_utils::{Config, GOLDEN_SECTION, ScalarResult};
+use std::cell::RefCell;
 struct Candidate {
     root: f64,
     residual: f64,
     derivative: f64,
+}
+fn derivative_brent<F: FunctionWithDerivative>(
+    search: &mut Search<'_, F>,
+    lower: f64,
+    upper: f64,
+) -> ScalarResult {
+    let config: Config = Config {
+        x_tolerance: search.config.x_tolerance,
+        f_tolerance: 0.0,
+        max_iterations: search.config.max_iterations,
+        ..Default::default()
+    };
+    let shared = RefCell::new(&mut *search.function);
+    let mut wrapper = MultipleDerivativeValueWrapper::new(&shared);
+    brent(&mut wrapper, lower, upper, &config)
 }
 fn derivative_candidate<F: FunctionWithDerivative>(
     search: &mut Search<'_, F>,
     lower: f64,
     upper: f64,
 ) -> Result<Option<Candidate>, Status> {
-    let mut config: Config = search.configuration(search.config.x_tolerance);
-    config.f_tolerance = 0.0;
-    let mut wrapper = |x: f64, out: &mut f64| {
-        let mut value: f64 = 0.0;
-        if !search.function.values(x, &mut value, out) {
-            return false;
-        }
-        if !value.is_finite() {
-            *out = value;
-        }
-        true
-    };
-    let result: ScalarResult = super::super::brent(&mut wrapper, lower, upper, &config);
+    let result: ScalarResult = derivative_brent(search, lower, upper);
     search.result.iterations = search.result.iterations.wrapping_add(result.iterations);
-    if !result.is_done() || result.root.is_none() {
-        return Ok(None);
+    match result.root {
+        Some(root) if result.is_done() => accepted_derivative_candidate(search, root),
+        _ => Ok(None),
     }
-    accepted_derivative_candidate(search, result.root.unwrap())
 }
 fn accepted_derivative_candidate<F: FunctionWithDerivative>(
     search: &mut Search<'_, F>,
@@ -49,6 +55,8 @@ fn accepted_derivative_candidate<F: FunctionWithDerivative>(
 ) -> Result<Option<Candidate>, Status> {
     let mut value: f64 = search.value(root)?;
     let residual: f64 = (value - search.config.offset).abs();
+    // C++ accepts on `aVal1 < FTolerance`; value and offset are finite, so the residual is
+    // never NaN and the complementary `>=` rejects exactly the same cases.
     if residual >= search.config.f_tolerance {
         return Ok(None);
     }
@@ -91,7 +99,10 @@ impl Golden {
             > epsilon * 10.0 * (self.positions[1].abs() + self.positions[2].abs())
             && (self.positions[1] - self.positions[2]).abs() > 0.001 * epsilon
     }
-    fn advance<F: Function>(&mut self, search: &mut Search<'_, F>) -> Result<(), Status> {
+    fn advance<F: FunctionWithDerivative>(
+        &mut self,
+        search: &mut Search<'_, F>,
+    ) -> Result<(), Status> {
         if (self.minimum && self.values[2] < self.values[1])
             || (!self.minimum && self.values[2] > self.values[1])
         {
@@ -119,7 +130,7 @@ impl Golden {
         search: &mut Search<'_, F>,
     ) -> Result<(), Status> {
         for (left, right) in [(0, 1), (2, 3)] {
-            if opposite(self.values[right], self.values[left]) {
+            if have_opposite_signs(self.values[right], self.values[left]) {
                 search.refined_bracket(
                     self.positions[left],
                     self.values[left],
@@ -186,8 +197,8 @@ pub(super) fn search_extremum<F: FunctionWithDerivative>(
     i: usize,
     midpoint: f64,
 ) -> Result<(), Status> {
-    let lower: f64 = search.lower.max(midpoint - search.dx);
-    let upper: f64 = search.upper.min(midpoint + search.dx);
+    let lower: f64 = search.probe_lower(midpoint);
+    let upper: f64 = search.probe_upper(midpoint);
     let first: Option<Candidate> = derivative_candidate(search, lower, upper)?;
     let mut golden: Golden = Golden::new(search, i, midpoint, lower, upper)?;
     while golden.continuing(search.epsilon) {

@@ -13,7 +13,7 @@
 
 //! MathRoot_Secant.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 use super::bracket::finite_value;
-use super::newton::valid_config;
+use super::utils::is_valid_config;
 use crate::math::Function;
 use crate::math_utils::{Config, ScalarResult, Status, is_x_converged};
 fn finish(mut result: ScalarResult, status: Status, x: f64, value: f64) -> ScalarResult {
@@ -25,7 +25,7 @@ fn finish(mut result: ScalarResult, status: Status, x: f64, value: f64) -> Scala
 /// Uses the native secant step and residual check after small steps; `secant(&mut f,1.0,2.0,&Config::default())`.
 pub fn secant(f: &mut impl Function, mut x0: f64, mut x1: f64, config: &Config) -> ScalarResult {
     let mut result: ScalarResult = ScalarResult::default();
-    if !x0.is_finite() || !x1.is_finite() || x0 == x1 || !valid_config(config) {
+    if !x0.is_finite() || !x1.is_finite() || x0 == x1 || !is_valid_config(config) {
         result.status = Status::InvalidInput;
         return result;
     }

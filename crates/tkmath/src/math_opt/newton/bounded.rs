@@ -21,14 +21,11 @@ impl NewtonState {
         bounds: &BoxBounds<'_>,
         cfg: &Config,
     ) -> Result<(), Status> {
-        let mut callback = BoundedCallback {
-            function: f,
-            bounds,
-        };
+        let mut callback = BoundedFunction::new(f, bounds.lower, bounds.upper);
         let alpha: f64 = bounds.alpha(&self.x, &self.dir);
         let mut line: LineSearchResult = LineSearchResult::default();
         if alpha > 0.0 {
-            line = backtrack_initial(
+            line = backtrack(
                 &mut callback,
                 &self.x,
                 &self.dir,
@@ -43,7 +40,7 @@ impl NewtonState {
             self.steepest();
             let alpha: f64 = bounds.alpha(&self.x, &self.dir);
             if alpha > 0.0 {
-                line = backtrack_initial(
+                line = backtrack(
                     &mut callback,
                     &self.x,
                     &self.dir,
@@ -54,7 +51,7 @@ impl NewtonState {
                 );
             }
             if !line.is_valid {
-                return Err(line_failure(first, line.status));
+                return Err(failure_after_fallback(first, line.status));
             }
         }
         self.advance(line.alpha);
@@ -133,7 +130,7 @@ impl NewtonState {
     }
     fn bounded_direction(&mut self, bounds: &BoxBounds<'_>, minimum: f64) -> bool {
         self.steepest();
-        if !regularize(&mut self.h, minimum) {
+        if !regularize_hessian(&mut self.h, minimum) {
             return false;
         }
         let linear: LinearResult = crate::math_lin::solve(&self.h, &self.dir, 1e-15);

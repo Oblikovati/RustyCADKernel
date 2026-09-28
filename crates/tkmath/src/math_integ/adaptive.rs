@@ -65,12 +65,14 @@ fn valid_config(config: &IntegConfig) -> bool {
         && config.initial_order >= 1
         && config.max_order >= config.initial_order
         && config.max_order >= 2
-        && config.max_order <= 61
+        && config.max_order as usize <= super::gauss::GAUSS_MAX_ORDER
         && config.max_iterations >= 1
 }
 fn paired_orders(config: &IntegConfig) -> [usize; 2] {
     let mut coarse: u32 = config.initial_order;
-    let fine: u32 = config.max_order.min(61.min(2 * coarse));
+    let fine: u32 = config
+        .max_order
+        .min((super::gauss::GAUSS_MAX_ORDER as u32).min(2 * coarse));
     if fine == coarse {
         coarse -= 1;
     }

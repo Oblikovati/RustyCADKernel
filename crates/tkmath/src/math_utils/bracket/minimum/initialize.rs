@@ -11,7 +11,10 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Function, MinBracketOptions, MinBracketResult, Status, evaluate_finite, expansion};
+use super::{
+    Function, MinBracketOptions, MinBracketResult, Status, evaluate_finite, expansion, is_valid,
+    limited,
+};
 impl MinBracketResult {
     pub(super) fn initialize(
         &mut self,
@@ -20,12 +23,12 @@ impl MinBracketResult {
         b: f64,
         options: &MinBracketOptions,
     ) -> bool {
-        if !options.is_valid() || !a.is_finite() || !b.is_finite() {
+        if !is_valid(options) || !a.is_finite() || !b.is_finite() {
             self.status = Status::InvalidInput;
             return false;
         }
-        self.a = options.limited(a);
-        self.b = options.limited(b);
+        self.a = limited(a, options);
+        self.b = limited(b, options);
         if self.a == self.b {
             self.status = Status::InvalidInput;
             return false;
@@ -37,7 +40,7 @@ impl MinBracketResult {
             std::mem::swap(&mut self.a, &mut self.b);
             std::mem::swap(&mut self.fa, &mut self.fb);
         }
-        self.c = options.limited(expansion(self.b, self.a));
+        self.c = limited(expansion(self.b, self.a), options);
         self.valid_candidate(self.c, self.b)
             && evaluate_finite(f, self.c, &mut self.fc, &mut self.status)
     }

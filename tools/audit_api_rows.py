@@ -262,10 +262,11 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
     """The member declared by a function statement, or nothing for definitions/deletions."""
     if re.search(r"=\s*delete\s*$", head):
         return []
-    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
+    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+[A-Za-z_][\w:]*\s*[&*]*"
+                           r"|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
     if name_match is None:
         return []
-    name = re.sub(r"\s+", "", name_match.group(1))
+    name = conversion_spelling(name_match.group(1))
     if "::" in name and not name.startswith("operator") or head[:name_match.start(1)].rstrip().endswith("::"):
         return []  # out-of-class definition (`X::f`, `X<T, N>::f`) of an already declared member
     params_open = name_match.end() - 1
@@ -275,6 +276,21 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
     owner = scope or primary
     prefix = owner if name == class_name(owner) else f"{owner}::{name}"
     return [Member(prefix, params, qualifier)]
+
+
+def conversion_spelling(raw: str) -> str:
+    """Compact a member name, keeping the one space of a conversion operator.
+
+    Without this, `explicit operator bool() const` was read as a member named `bool`.
+
+    >>> conversion_spelling("operator bool")
+    'operator bool'
+    >>> conversion_spelling("operator ()")
+    'operator()'
+    """
+    match = re.fullmatch(r"operator\s+([A-Za-z_].*)", raw.strip())
+    compact = re.sub(r"\s+", "", raw)
+    return compact if match is None else "operator " + re.sub(r"\s+", "", match.group(1))
 
 
 def class_name(owner: str) -> str:
@@ -308,15 +324,56 @@ def normalize_param(param: str) -> str:
     >>> normalize_param('const double theX')
     'double'
     """
-    tokens = [token for token in type_tokens(split_default(param).strip()) if token != "typename"]
+    param = split_default(param).strip()
+    if (array := array_param(param)) is not None:
+        return array
+    tokens = [token for token in type_tokens(param) if token != "typename"]
     words = [token for token in tokens if re.match(r"\w", token)]
     type_words = [word for word in words if word not in {"const", "volatile", "unsigned", "signed"}]
-    if len(type_words) >= 2 and tokens[-1] == words[-1]:
+    if len(type_words) >= 2 and tokens[-1] == words[-1] and not is_builtin_pair(type_words):
         tokens = tokens[:-1]
     tokens = [TYPE_ALIASES.get(token, token) for token in tokens]
     if tokens and tokens[0] == "const" and not any(token[0] in "&*" for token in tokens):
         tokens = tokens[1:]
     return re.sub(r" ([&*])", r"\1", " ".join(tokens))
+
+
+def is_builtin_pair(type_words: list[str]) -> bool:
+    """True when the last two words spell one builtin type (`long double`), not `Type name`.
+
+    >>> is_builtin_pair(["long", "double"])
+    True
+    """
+    return type_words[-2] in {"long", "short"} and type_words[-1] in {"long", "int", "double"}
+
+
+def array_param(param: str) -> str | None:
+    """Canonical spelling of an array or reference-to-array parameter, else None.
+
+    Arrays keep their `const` (it is not top-level); a by-value array decays to a pointer
+    as in C++, while a reference or pointer to an array keeps its extents.
+
+    >>> array_param("const double theJ[3][3]")
+    'const double(*)[3]'
+    >>> array_param("const double (&theF)[N]")
+    'const double(&)[N]'
+    >>> array_param("const double[9]")
+    'const double*'
+    """
+    match = re.fullmatch(r"(.*?)(\(\s*[&*]+\s*\w*\s*\)|\b\w+)?\s*((?:\[[^\]]*\]\s*)+)", param, re.S)
+    if match is None:
+        return None
+    base, declarator = match.group(1), match.group(2) or ""
+    if not set(base.split()) - {"const", "volatile", "unsigned", "signed"} and not declarator.startswith("("):
+        base, declarator = f"{base} {declarator}", ""  # nameless `const double[9]`: the word is the type
+    base = " ".join(TYPE_ALIASES.get(word, word) for word in base.split())
+    extents = re.findall(r"\[[^\]]*\]", match.group(3))
+    declarator = re.sub(r"\w+|\s+", "", declarator)
+    if declarator:  # a reference or pointer to an array keeps every extent
+        return base + declarator + "".join(re.sub(r"\s+", "", extent) for extent in extents)
+    # C++ adjusts an array parameter to a pointer: `T p[8]` is `T*`, `T p[2][3]` is `T(*)[3]`.
+    rest = "".join(re.sub(r"\s+", "", extent) for extent in extents[1:])
+    return base + ("(*)" + rest if rest else "*")
 
 
 def type_tokens(param: str) -> list[str]:

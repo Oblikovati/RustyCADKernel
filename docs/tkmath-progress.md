@@ -992,6 +992,310 @@ move constructors and assignments of gp_Dir are Rust copies. The 2D conics' noex
 `Reverse` and hyperbola branches, which turn stored unit directions, use an infallible
 quarter turn.
 
+### Modern Math* namespaces (API completion)
+
+The modern packages MathUtils, MathInteg, MathLin, MathOpt, MathRoot, MathSys and MathPoly
+are C++ namespaces with no primary class. Their structs, `using` aliases and `constexpr`
+constants are known identities for `tools/audit_api_rows.py`, and each has a bare
+`Namespace::Name` row that points at the Rust type or constant. The audit reads conversion
+operators as `operator bool` (it formerly read a member named `bool`), keeps nameless
+multi-word builtins such as `long double` whole and spells array parameters
+`const double[3][3]` and `const double(&)[N]`. For each of the seven packages the audit
+reports no missing member and no stale row. The sections below list what each package needed. The new probes
+add 10,475 requests to the numeric corpus (58,169 to 68,644 comparisons), and all of them
+give the native bits.
+
+### MathUtils core headers (API completion)
+
+This work adds no upstream suite. It completes the public API of the MathUtils headers
+Bracket, Config, Convergence, Core, Deriv, Domain, Gauss, GaussKronrodWeights, LineSearch,
+Poly, Random and Types (171 api rows: namespace constants, structs, constructors, methods
+and free functions). `MathUtils::Utils` is public as `math_utils::utils`
+(`evaluate_finite`, `opposite_signs`, `limited`, `is_valid`, `perturbations`,
+`is_finite_vector`); the bracketing and finite-difference algorithms call these functions,
+so the public helpers are the implementation and not copies of it. The iteration-count
+`BracketMinimum` overload is `bracket_minimum_iterations`. `GetKronrodPointsAndWeights` and
+`GetOrderedGaussPointsAndWeights` are new. `Config::StepMin` and the `BoundedConfig` default
+bounds now read `precision::computational()` and `precision::infinite()` and do not copy the
+values. Supplemental tests are in `math_utils_core_api_behavior`. The core probe sends
+2,652 differential requests (`mathutils_core_scalar`, `mathutils_core_defaults`,
+`mathutils_core_vector`, `mathutils_core_poly`, `mathutils_core_deriv`,
+`mathutils_core_gauss`, `mathutils_core_random`). They all match the native bits. The line
+searches, `BracketRoot`/`BracketMinimum(options)`, `NumericalHessian`, `DotProduct` and the
+norms were already covered by `utils_line`, `utils_core` and `utils_bracket`. The native
+reader cannot parse `inf`/`nan`, so the requests encode them as sentinels that both probes
+decode.
+
+The port keeps these native results:
+
+- `CubeRoot` uses glibc 2.39's `cbrt` (sysdeps/ieee754/dbl-64/s_cbrt.c: a polynomial seed,
+  one Halley step and a 2^(k/3) factor), and this result is not correctly rounded.
+  `cbrt(27)` is `3.0000000000000004`, `cbrt(0.125)` is `0.49999999999999994` and `cbrt(2e100)`
+  ends in ...165. Rust's `f64::cbrt` resolves to the compiler-builtins libm (correctly
+  rounded, ...164), and so does a direct `extern "C" cbrt` from a Rust binary. The kernel is
+  therefore reproduced in `math_utils::glibc_cbrt`. Other Rust callers of `f64::cbrt`
+  outside MathUtils can have the same one-ulp difference.
+- `Utils::Limited` keeps `std::max(Left, std::min(Right, x))`. A NaN value becomes the
+  right limit, and an unordered limit is returned as written. `Utils::Perturbations` writes
+  both outputs before its final finiteness/ordering check, so a failed call leaves the
+  overflowed values in place.
+- `ComputeScaleFactor` uses the same `frexp` as `CubeRoot`. Zero, infinity and NaN return
+  exponent 0.
+
+Deliberate Rust differences: pointer+degree/count pairs of the Poly helpers are slices
+(length = degree + 1 or count), and their out-parameters are returned tuples. Default
+arguments are explicit parameters. `GetGaussPointsAndWeights` above order 61 sorts its
+eigenpairs with a total fallback (`Equal`) for an unordered NaN pair instead of the UB of
+`std::sort`. Legendre nodes are distinct, so the order does not change.
+
+### MathUtils scalar and vector functors (API completion)
+
+This work adds no upstream suite. It maps every public member of
+MathUtils_FunctorScalar.hxx and MathUtils_FunctorVector.hxx (134 api rows: the functor
+types, constructors, `Value`/`Values`/`Gradient` members and `Make*` helpers). Every member
+was already ported; the rows check each port against the header. The C++ templates are
+Rust generics: `math_utils::scalar` holds the scalar functors and
+`math_utils::vector` holds the N-dimensional functors and `SystemLambda`. The lambda
+wrappers `VectorLambda`/`VectorLambdaWithGradient` and their helpers are in `math_utils`.
+`Value`, `Values` and `Gradient` are the `math::Function`,
+`FunctionWithDerivative`, `MultipleVarFunction`, `MultipleVarFunctionWithGradient` and
+`FunctionSet` trait methods. For `tools/audit_api_rows.py src/FoundationClasses/TKMath/MathUtils`
+these two headers have no missing members and no stale rows. Supplemental tests are in
+`math_utils_functor_api_behavior`. The new `mathutils_functor` probe sends 1,646 differential
+requests (`mathutils_functor_poly` 400, `mathutils_functor_arith` 400,
+`mathutils_functor_lambda` 206, `mathutils_functor_vlambda` 240, `mathutils_functor_nd` 400).
+The requests use coefficient vectors of length 0 to 9 with shifted bounds, a Gaussian that
+fails (zero sigma, NaN input) inside every combinator, a linear operand that becomes zero,
+lambdas that fail after they write their outputs, and 0 to 6 coordinates with non-finite
+values and non-square residual matrices. All requests give the native bits. The existing
+`scalar_functor` and `vector_functor` ops still cover the fixed-size constructors.
+
+The port keeps these native results:
+
+- The binary combinators evaluate the first operand, then the second, and stop at the first
+  failure without writing the output. `Composite` evaluates the inner function first. Only
+  `Quotient` rejects non-finite operands and a zero denominator. `Sum`, `Difference`,
+  `Product`, `Scaled`, `Shifted` and `Negated` return true for non-finite results.
+- `ScalarLambdaWithDerivative::Value` calls the callable with a scratch derivative and keeps
+  its status. The lambda wrappers do not validate. A callable that writes and then fails
+  leaves the written values in the outputs.
+- `VectorLambdaWithGradient::Values` and the `Values` member of every vector functor call
+  `Value` first and call `Gradient` only when `Value` succeeds.
+- `Polynomial` refuses non-finite `x` and an empty coefficient vector. `Degree()` is 0 for an
+  empty polynomial, and `Coefficient` returns 0 past the end. `Rational` evaluates an empty
+  numerator or denominator as 0, so an empty denominator always fails.
+- `math_Vector`/`math_Matrix` arguments are read by zero-based offset (`At`), not by their
+  declared bounds. The `math_Vector` constructors copy `Vector::values()` in that order.
+
+Deliberate Rust deviations:
+
+- `math::MultipleVarFunction` and `math::FunctionSet` report the number of variables. For this
+  reason the `VectorLambda`, `VectorLambdaWithGradient`, `Sphere`, `Rastrigin`, `Ackley` and
+  `SystemLambda` constructors and `make_vector*`/`make_system` take one more leading dimension
+  argument. Evaluation never reads it. The native default constructors of `Sphere`,
+  `Rastrigin` and `Ackley` therefore become `new(dimension, ...)` with explicit defaults.
+  `Rosenbrock`, `Sine`, `Cosine`, `Exponential` and `Gaussian` implement `Default` with the
+  native default arguments.
+- `math::FunctionWithDerivative` requires a derivative-only method. The scalar functors
+  implement it with `Values` and keep only the derivative.
+- The `initializer_list` constructors take slices.
+
+### MathInteg and MathLin (API completion)
+
+This work adds no upstream suite. It completes the public API of the MathInteg
+(`math_integ`) and MathLin (`math_lin`) namespaces: `tools/audit_api_rows.py` reports no
+missing member and no stale row for `src/FoundationClasses/TKMath/MathInteg` and
+`src/FoundationClasses/TKMath/MathLin` (96 rows). All solvers were already ported; the
+work is:
+
+- The MathInteg `THE_*` constants are public (`GAUSS_MAX_ORDER`, `SET_GAUSS_MAX_ORDER`,
+  `MULTIPLE_GAUSS_MAX_ORDER`, `KRONROD_MAX_GAUSS_ORDER`, `KRONROD_AUTO_INITIAL_ORDER`,
+  `KRONROD_AUTO_ORDER_STEP`, `KRONROD_AUTO_MAX_ITERATIONS`,
+  `DOUBLE_EXP_DEFAULT_MAX_POINTS_PER_LEVEL`, `DOUBLE_EXP_MAX_TRANSFORM_ARGUMENT`,
+  `EXP_SINH_MIN_TRANSFORM_ARGUMENT`). The rules, configs and transforms read them
+  instead of repeating the literals.
+- The QL helpers of `MathLin::Utils` in MathLin_EigenSearch.hxx are public in
+  `math_lin::utils`: `find_submatrix_end`, `compute_wilkinson_shift`, `perform_ql_step`,
+  `validate_eigenpairs`, `TRIDIAGONAL_DEFLATION_TOLERANCE` and
+  `TRIDIAGONAL_RESIDUAL_TOLERANCE_FACTOR`. `eigen_tridiagonal` now calls them, so the
+  private copies in `eigen.rs` are gone.
+
+Supplemental tests are in `math_integ_api_behavior` and `math_lin_api_behavior`. The
+`integ_lin` probe sends 770 differential requests: `integ_lin_tridiag` (300; every QL
+helper, `EigenTridiagonal` and `GetEigenVector`, with NaN, infinite and -0.0 entries,
+graded and deflated matrices), `integ_lin_norm` (200; `AccumulateNorm`, `Norm`,
+`RelativeTolerance`, both `IsFinite` overloads), `integ_lin_spectral` (150; `EigenValues`,
+`SpectralDecomposition`, `MatrixSqrt`, `MatrixInvSqrt`) and `integ_lin_singular` (120;
+`TanhSinhSingular` with an explicit and a default tolerance, every constant and every
+config default). They all match the native bits. The other members were already covered
+by `modern_integ`, `modern_kronrod`, `modern_double_exp`, `modern_tensor`, `modern_eigen`,
+`modern_lu` and `modern_factors`.
+
+The port keeps these native results and makes these deliberate changes:
+
+- `FindSubmatrixEnd` uses `std::max`, which keeps a NaN first operand. The Rust helper
+  does the same (as do the `std::max` calls in `ValidateEigenpairs`), so a NaN diagonal entry gives a NaN deflation
+  threshold and never deflates (`f64::max` would drop the NaN).
+- `PerformQLStep` always returns true, also after its zero-radius early exit, which
+  only clears the end coupling.
+- The helpers index zero-based like `math_Vector::operator[]` and `math_Matrix::At`. An
+  index that the native code would read out of bounds (undefined behavior) panics with
+  the index and the length.
+- `MathLin::EigenResult` is `math_lin::TridiagonalResult`. The different name keeps it
+  apart from the `math_utils::EigenResult` that `Jacobi` returns.
+- Without eigenvectors, `GetEigenVector` returns an uninitialized one-element native
+  vector. Rust returns a zero one-element vector; the probe compares only its size.
+- C++ default arguments (`TanhSinhSingular` tolerance `1.0e-10`, `KronrodAuto`
+  `theMaxOrder = THE_KRONROD_MAX_GAUSS_ORDER`) are explicit Rust parameters.
+
+### MathOpt (API completion)
+
+This work adds no upstream suite. It completes the public API of the modern MathOpt
+namespace: `tools/audit_api_rows.py src/FoundationClasses/TKMath/MathOpt` reports no
+missing member and no stale row (76 rows). `MathOpt::Utils` is now the public module
+`math_opt::utils`; its helpers were private duplicates inside the solvers and are now the
+single implementation the solvers call (`is_valid_config`, `is_finite_vector`/`_matrix`,
+`is_valid_bounds`, `norm`, `scalar_value_status`/`value_status`, `checked_value`,
+`gradient_status`/`checked_gradient`, `hessian_status`/`checked_hessian`, `CheckedFunction`,
+`BoundedFunction`, `is_line_search_evaluation_error`, `line_search_failure_status`,
+`line_search_fallback_failure_status`, `is_stationary`, `backtrack`, `regularize_hessian`,
+`FRPR_WOLFE_CURVATURE`). The modern `MathOpt::Uzawa`/`UzawaEquality` (`math_opt::uzawa`,
+`uzawa_equality`, `UzawaResult`, `UzawaConfig`) is a new port, separate from the classic
+`math::Uzawa`. Supplemental tests are in `math_opt_api_behavior`. The probe sends 2,171
+differential requests (`mathopt_checks`, `mathopt_line`, `mathopt_eval`,
+`mathopt_stationary`, `mathopt_backtrack`, `mathopt_regularize`, `mathopt_polish`,
+`mathopt_uzawa`); they all match the native bits. The solvers themselves stay covered by
+`modern_opt`, `modern_frpr`, `modern_newton`, `modern_lbfgs`, `scalar_opt`,
+`modern_global` and `modern_swarm`.
+
+The port keeps these native results:
+
+- `BoundedFunction` clamps with `std::max(lower, std::min(upper, x))`, so a NaN
+  coordinate reaches the callback as the upper bound.
+- `IsStationary` rejects a probe only when `value < fx - tol`; with a NaN `fx` no probe
+  rejects. Its status output keeps the caller's value for an empty point and otherwise
+  holds the last evaluation's status (`Ok` also when a probe found a decrease).
+- `RegularizeHessian` folds the Jacobi eigenvalues with `std::min`, so a NaN after the
+  first value is ignored and a NaN first value stays the minimum (no shift is applied).
+  The earlier private copy used `f64::min`, which chose the non-NaN value.
+- `Uzawa` stores `InitialError` before it can fail, so Singular and NumericalError
+  results carry it. `InverseCTC` keeps zero-based bounds (native assignment into the
+  zero-based `aCTCinv`). The iterative path projects multipliers with `std::max(0, v)`
+  (NaN becomes 0) and returns `MaxIterations` without a finiteness check.
+
+Deliberate Rust shapes: C++ overloads get distinct names (`scalar_value_status` for
+`ValueStatus(Function&, double, double&)`, `line_search_fallback_failure_status` for the
+two-result `LineSearchFailureStatus`), `Value`/`Gradient`/`Hessian` are
+`checked_value`/`checked_gradient`/`checked_hessian`, and `CheckedFunction` and
+`BoundedFunction` hold `&mut` borrows of the wrapped callback.
+
+### MathRoot helpers and search engine (API completion)
+
+This work adds no upstream suite. It completes the public API of the modern MathRoot
+package: `tools/audit_api_rows.py src/FoundationClasses/TKMath/MathRoot` reports no member
+without an api row and no stale row (66 rows). `MathRoot::Utils` is public as
+`math_root::utils`: the scalar predicates (`IsValidConfig`, `IsValidBounds`,
+`HaveOppositeSigns`, `Midpoint`), `ComputePeriodicRootCount`, the multi-root bookkeeping
+(`IsValidMultipleInput`, `SortRoots`, `AddRoot`, `EffectiveXTolerance`, the `Evaluate*`
+helpers), the functor adapters, `RefineBracketedRoot`, `FindAllRootsImpl`,
+`FindAllRootsWithDerivativeImpl`, `FindMultipleRoots` and the trigonometric root
+bookkeeping (`AddDistinctTrigRoot`, `MapPeriodicTrigRoot`, `AddPeriodicTrigRoot` and the
+three refinement constants). These are the implementations the solvers run, not copies:
+`find_all_roots` wires the four Value-only adapters into `find_all_roots_impl` as
+MathRoot_Multiple.hxx does, `find_all_roots_with_derivative` calls
+`find_all_roots_with_derivative_impl`, the null-interval search calls
+`find_multiple_roots`, `trigonometric` inserts through `add_periodic_trig_root`, and Brent,
+Bisection, Newton and Secant use the shared predicates. The private duplicates they
+replace (inlined sign tests, midpoints, a second config validator, the old value-only
+search and bracket polishing) are deleted, and the trigonometric infinite-bound checks now
+read `Precision::IsPositiveInfinite`/`IsNegativeInfinite` and `Precision::Computational`
+instead of literals. Supplemental tests are in `math_root_api_behavior`. The MathRoot API
+probe sends 1,616 differential requests (`mathroot_utils`, `mathroot_trig_roots`,
+`mathroot_sort`, `mathroot_search`); they all match the native bits, and the existing
+`modern_root`, `modern_multiple` and `modern_trig` requests still match after the refactor.
+
+The port keeps these native results:
+
+- `EffectiveXTolerance`, the extremum probe bounds of `FindAllRootsWithDerivativeImpl` and
+  the trigonometric angle tolerance use `std::max`/`std::min` semantics (the first operand
+  wins unless the comparison holds), so a NaN bound yields the plain X tolerance and signed
+  zeros keep their sign; `f64::max` would differ.
+- `AddRoot` compares `|root - old| < eps`, so NaN roots and a NaN tolerance never count as
+  duplicates; `SortRoots` is the native insertion sort, including its NaN ordering.
+- The sampling adapter stores `f - offset` before checking it, and the Brent value wrapper
+  returns an unshifted-then-shifted value without a finiteness check, as natively; the
+  derivative wrapper replaces the derivative by a non-finite `f` so Brent reports it.
+- `AddDistinctTrigRoot` silently drops a fifth root once the four slots are full.
+
+Deliberate Rust deviations: the C++ adapters alias one `Function&` (and one sample
+`math_Vector`) from several structs at once; Rust shares them through
+`MultipleFunctionCell` (`RefCell<&mut F>`) and `RefCell<Vector>`, borrowing only for each
+call. `operator()` becomes the trait methods `MultipleSampleCallback::sample_at`,
+`MultipleSampleLookup::value_at`, `MultipleRootValueCallback::root_value` and
+`MultipleIntervalHandler::handle_interval`, and the `mutable Status` members become `Cell`
+fields read through `status()`. C++ default arguments become explicit parameters.
+
+### MathSys namespace (API completion)
+
+This work adds no upstream suite. It completes the public API of the MathSys package:
+`SystemResult`, `LMConfig`, the generic `Newton`/`NewtonBounded`/`LevenbergMarquardt`
+drivers, the fixed-size `Solve2D`/`Solve2DSymmetric`/`Solve3D`/`Solve4D` solvers with
+their result, bound and option types, the curve/surface and surface/surface extrema
+wrappers, and every member of the `MathSys::Utils` namespace. `MathSys::Utils` is public as
+`math_sys::utils`; it re-exports each helper from the solver module that uses it
+(`linear`, `newton`, `lm`, and the small-system modules). `MathSys::Utils::IsFinite` does
+the same all-entries scan as MathLin's, so the port re-exports `math_lin::utils::is_finite_*`.
+Before this work, the fixed-size solvers had private copies of the helpers. Those copies
+(`merit.rs`, `NewtonBoundsN::clamp`/`max_step` and a private `solve2`) are deleted, and the
+solvers now call the public helpers. `tools/audit_api_rows.py` reports 0 missing and
+0 stale members for `src/FoundationClasses/TKMath/MathSys`.
+
+The supplemental tests are in `math_sys_api_behavior`. The MathSys API probe sends 1,620
+differential requests: `mathsys_small_linear` (480), `mathsys_small_box` (360),
+`mathsys_linear_api` (360) and `mathsys_finish_api` (420). All of them match the native
+bits. The inputs include NaN and infinite entries, inverted and inactive boxes,
+rank-deficient and wide matrices, and each combination of the two optional bound pointers.
+After the refactor, the 1,024 existing `modern_small`, `modern_sys` and `modern_lm`
+requests also still match.
+
+The port keeps these native results:
+
+- The libstdc++ `std::clamp` in GCC 13 is `std::min(std::max(v, lo), hi)`. Thus
+  `Clamp2D/3D/4D` return `hi` for an inverted box and keep a NaN coordinate. The port
+  does not use `f64::clamp`, because that function panics when `lo > hi`.
+- For NaN handling, the port keeps the `std::max` operand order. `std::max(a, b)` keeps a
+  NaN `a`, and `std::max({...})` keeps the first maximal element, so a NaN survives only
+  in the first position. This applies to the `MaxStep*D` nesting
+  `max(1, max(d0, max(d1, ...)))` and to the row scales of `Solve2x2`, `Solve3x3`,
+  `Solve4x4` and `SolveSymmetric2x2SVD`.
+- `Solve3x3` refuses a pivot with `!(|p| > tol)`. `Solve4x4` refuses a pivot with
+  `|p| <= tol`, so a NaN pivot gets through. The two routines also round differently:
+  3x3 stores `F/s` and negates during back substitution, and it divides for each factor.
+  4x4 stores `-F/s`, multiplies by the pivot inverse and zeroes the eliminated entry.
+- All the fixed-size solves write their outputs before the finiteness test. A failed call
+  can therefore leave non-finite values in `du`/`dv`/`delta`.
+- `SolveSymmetric2x2SVD` fails for a diagonal matrix with `j11 < j22`, because it builds
+  the eigenvector of the larger eigenvalue from the zero first column.
+- `IsStepWithinTolerance` accepts a NaN difference, because it tests
+  `|l - r| > tol` for rejection.
+- `FinalizeSystemResult` and `FinishLM` copy the caller's solution vector with its lower
+  bound. `FinishLM` keeps the gradient, the residual norm and the value when the gradient
+  is not finite, but it does not store the Jacobian or the rank.
+- The drivers apply bounds only when both bound pointers are given. The port maps each
+  pointer to an `Option<&Vector>`, so one bound alone is ignored.
+- `THE_CRITICAL_GRAD_SQ` is declared but not used upstream. It is exported unchanged.
+
+The port deviates from the native code in these ways:
+
+- The native default arguments are explicit Rust arguments: `theMaxIter = 100`,
+  `SolveSymmetric2x2SVD` `theTol = 1e-15`, the rank tolerances and the default
+  configurations.
+- The template callbacks map to traits: `SmallSystem<N>` (closures work),
+  `SymmetricFunction2D`, and `CurveEvaluatorD2`/`SurfaceEvaluatorD2`. The evaluator traits
+  return a point-and-derivatives struct instead of writing through `D2` out parameters.
+- The three identical dimension-specific helpers (`IsOptionsValid*`, `IsBoundsValid*D`,
+  `MaxStep*D`, `Clamp*D`) keep their native names as wrappers around one const-generic
+  body.
 ### Bnd package completion: OBB, BoundSortBox and Tools
 
 Every file of the Bnd package is now ported (65 new API rows). `OrientedBoundingBox`
@@ -1090,6 +1394,7 @@ Excluded rows (status `excluded`, with the reason in `notes`): the destructors, 
 pinned source defines (libTKMath exports only the three B-spline `DN` overloads), so a
 call cannot link.
 
+<<<<<<< HEAD
 ### Classic math package (API completion)
 
 This work adds no upstream suite. `tools/audit_api_rows.py` now reports no missing member
@@ -1163,3 +1468,30 @@ take borrowed `f64` slices. Excluded rows: the destructors, and
 headers declare but no pinned source defines. Partial rows: the `Message_ProgressRange`
 argument of math_Gauss and both LU_Decompose overloads is not ported (TKernel's Message
 progress scopes are pending); the Rust calls are the default, never-aborting range.
+=======
+### Bnd (API completion)
+
+This work adds no upstream suite. `tools/audit_api_rows.py` now reports no missing
+member and no stale row for the Bnd package (before: 144 missing, 7 stale). The
+members were ported with the package, but the ledger had rows only for the members the
+legacy suites do not call: 141 rows are added with the exact header signatures, for
+every public member of Bnd_Box, Bnd_Box2d, Bnd_B2 and Bnd_B3 and for the
+`Bnd_Range::IntersectStatus` enum. Stale spellings are corrected: the transformed
+`IsOut`/`IsIn` rows of Bnd_B2/Bnd_B3 wrote the primary template with its argument
+(`Bnd_B3<RealType>::`), which the ledger spells as the bare class name, and the
+Bnd_BoundSortBox `Initialize` rows now name `occ::handle<NCollection_HArray1<Bnd_Box>>`.
+
+The audit kept the name and extent of an array parameter, so
+`Bnd_OBB::GetVertex(gp_Pnt theP[8])` matched no row. C++ adjusts an array parameter
+to a pointer, and the audit now does the same (`gp_Pnt*`; `T p[2][3]` becomes
+`T(*)[3]`), with a test in `tools/tests/test_audit_api_rows.py`.
+
+Newly ported: the `std::array` overloads of `SetCenter`/`SetHSize` of Bnd_B2/Bnd_B3
+(`set_center_array`, `set_half_size_array`), which copy the storage scalars without
+the double-to-`RealType` conversion of the `gp_XY`/`gp_XYZ` overloads. The
+`compact_arrays` probe sends 200 differential requests that cover, for float and
+double in 2D and 3D, the array constructors, both setter overloads, `Center`/`HSize`,
+`Add` of a point and of a box, and `Clear`, with float-inexact, zero, negative (void)
+and huge half sizes (the float `SquareExtent` overflows to infinity natively too);
+they all match the native bits, and the numeric gate now passes 61,374 cases.
+>>>>>>> port/tkmath-remaining

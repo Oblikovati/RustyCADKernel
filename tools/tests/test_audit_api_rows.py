@@ -131,6 +131,12 @@ class HeaderParsingTests(unittest.TestCase):
         self.assertEqual(normalize_param("const NCollection_Mat4<T>& theMat"), "const NCollection_Mat4<T>&")
         self.assertEqual(normalize_params("void"), "")
 
+    def test_array_parameters_decay_to_pointers(self):
+        # Bnd_OBB::GetVertex(gp_Pnt theP[8]) is the function GetVertex(gp_Pnt*) in C++.
+        self.assertEqual(normalize_param("gp_Pnt theP [8]"), "gp_Pnt*")
+        self.assertEqual(normalize_param("const double theM[2][3]"), "const double(*)[3]")
+        self.assertEqual(normalize_params("gp_Pnt theP[8]"), normalize_params("gp_Pnt* theP"))
+
     def test_unbalanced_brackets_name_the_offset(self):
         with self.assertRaisesRegex(ValueError, "offset 0"):
             matching_close("(a", 0)
@@ -173,6 +179,53 @@ class TemplateAndKnownIdentityTests(unittest.TestCase):
                          "const occ::handle<NCollection_HArray1<Bnd_Box>>&")
         self.assertEqual(normalize_param("std::array<long double, 4>& theRoots"), "std::array<long double,4>&")
         self.assertEqual(normalize_param("unsigned int theX"), "unsigned int")
+
+
+NAMESPACE_HEADER = """
+namespace MathDemo
+{
+struct Result
+{
+  explicit operator bool() const { return true; }
+};
+namespace Utils
+{
+inline long double ToDouble(long double theValue) { return theValue; }
+inline bool Solve3x3(const double theJ[3][3], double theDelta[3]) { return true; }
+template <size_t N>
+inline double SafeNormN(const double (&theValues)[N]) { return 0.0; }
+}
+}
+"""
+
+
+class ConversionAndArrayTests(unittest.TestCase):
+    """Regressions found on the modern Math* namespaces (MathPoly, MathSys)."""
+
+    def test_conversion_operators_and_array_parameters_render_exactly(self):
+        self.assertEqual(members_of(NAMESPACE_HEADER), [
+            "MathDemo::Result::operator bool||const", "MathDemo::Utils::ToDouble|long double|",
+            "MathDemo::Utils::Solve3x3|const double(*)[3],double*|",
+            "MathDemo::Utils::SafeNormN|const double(&)[N]|"])
+
+    def test_nameless_multiword_builtins_and_arrays_normalize_like_named_ones(self):
+        self.assertEqual(normalize_param("long double"), normalize_param("long double theValue"))
+        # By-value arrays decay as C++ adjusts them; references to arrays keep extents.
+        self.assertEqual(normalize_param("const double theJ[3][3]"), "const double(*)[3]")
+        self.assertEqual(normalize_param("const double (&theF)[N]"), "const double(&)[N]")
+        self.assertEqual(normalize_param("const double[9]"), "const double*")
+        self.assertEqual(normalize_param("Standard_Real theP[2]"), "double*")
+
+    def test_rows_spelled_like_the_header_are_not_stale(self):
+        with tempfile.TemporaryDirectory() as folder:
+            header = Path(folder) / "MathDemo_Types.hxx"
+            header.write_text(NAMESPACE_HEADER)
+            rows = [{"upstream_id": upstream_id, "source": "x.hxx"} for upstream_id in [
+                "MathDemo::Result::operator bool() const", "MathDemo::Utils::ToDouble(long double)",
+                "MathDemo::Utils::Solve3x3(const double[3][3],double[3])",
+                "MathDemo::Utils::SafeNormN(const double(&)[N])"]]
+            missing, stale = audit_header(header, "x.hxx", {"api": rows})
+        self.assertEqual(([m.prefix for m in missing], stale), ([], []))
 
 
 class RowMatchingTests(unittest.TestCase):

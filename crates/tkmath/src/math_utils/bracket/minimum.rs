@@ -11,7 +11,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Function, MinBracketOptions, Status, evaluate_finite, expansion};
+use super::{Function, MinBracketOptions, Status, evaluate_finite, expansion, is_valid, limited};
 mod initialize;
 /// Successful fields satisfy a < b < c and fb < fa,fc; `MinBracketResult::default()`.
 #[derive(Clone, Debug)]
@@ -68,7 +68,7 @@ impl MinBracketResult {
         true
     }
     fn expand(&mut self, f: &mut impl Function, options: &MinBracketOptions) -> bool {
-        let candidate: f64 = options.limited(expansion(self.c, self.b));
+        let candidate: f64 = limited(expansion(self.c, self.b), options);
         if !self.valid_candidate(candidate, self.c) {
             return false;
         }
@@ -121,4 +121,18 @@ pub fn bracket_minimum(
     }
     result.status = Status::MaxIterations;
     result
+}
+/// Native overload taking only an iteration budget (default options otherwise);
+/// `bracket_minimum_iterations(&mut f, 0.0, 1.0, 50)`.
+pub fn bracket_minimum_iterations(
+    f: &mut impl Function,
+    a: f64,
+    b: f64,
+    max_iterations: u32,
+) -> MinBracketResult {
+    let options: MinBracketOptions = MinBracketOptions {
+        max_iterations,
+        ..Default::default()
+    };
+    bracket_minimum(f, a, b, &options)
 }

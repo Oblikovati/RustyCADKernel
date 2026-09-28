@@ -12,7 +12,8 @@
 // commercial license or contractual agreement.
 
 //! Null intervals and isolated roots preserving MathRoot_All.hxx.
-use super::multiple::{MultipleConfig, MultipleResult, find_all_roots};
+use super::multiple::MultipleResult;
+use super::utils::{find_multiple_roots, is_valid_bounds};
 use crate::math::{Function, Vector};
 use crate::math_utils::Status;
 /// Native null-interval record; `NullInterval::default()`.
@@ -101,14 +102,9 @@ impl<F: Function> Scan<'_, F> {
         count: usize,
         offset: f64,
     ) -> Result<MultipleResult, Status> {
-        let cfg: MultipleConfig = MultipleConfig {
-            nb_samples: count,
-            x_tolerance: self.tolerances[0],
-            f_tolerance: self.tolerances[1],
-            offset,
-            ..Default::default()
-        };
-        let result: MultipleResult = find_all_roots(self.function, lower, upper, &cfg);
+        let [eps_x, eps_f, _] = self.tolerances;
+        let result: MultipleResult =
+            find_multiple_roots(self.function, lower, upper, count, eps_x, eps_f, offset);
         if result.is_done() {
             Ok(result)
         } else {
@@ -286,12 +282,7 @@ pub fn find_all_roots_with_intervals(
     count: usize,
     tolerances: [f64; 3],
 ) -> AllRootsResult {
-    if !lower.is_finite()
-        || !upper.is_finite()
-        || lower >= upper
-        || count < 2
-        || !valid_tolerances(tolerances)
-    {
+    if !is_valid_bounds(lower, upper) || count < 2 || !valid_tolerances(tolerances) {
         return AllRootsResult::failed(Status::InvalidInput);
     }
     let mut samples: Vector<'static> = Vector::with_size(count);

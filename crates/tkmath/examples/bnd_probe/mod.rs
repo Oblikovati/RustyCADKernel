@@ -7,8 +7,10 @@ use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkmath::bnd::{BoundingBox3, ObbHalfSizes, OrientedBoundingBox};
 use rustycad_tkmath::gp::{Direction3, Point3, Xyz};
 
+mod arrays;
 mod extra;
 mod sort;
+pub(super) use arrays::compact_arrays_case;
 pub(super) use extra::{box_extra_case, box2_extra_case, compact_trsf_case};
 pub(super) use sort::sortbox_case;
 

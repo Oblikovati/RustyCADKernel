@@ -153,7 +153,7 @@ impl LbfgsState {
     ) -> Result<LineSearchResult, Status> {
         self.history.direction(&self.g, &mut self.dir);
         let first: LineSearchResult =
-            backtrack(f, &self.x, &self.dir, &self.g, self.fx, cfg.step_min);
+            backtrack(f, &self.x, &self.dir, &self.g, self.fx, 1.0, cfg.step_min);
         if first.is_valid {
             return Ok(first);
         }
@@ -161,9 +161,9 @@ impl LbfgsState {
             self.dir[i] = -self.g[i];
         }
         let last: LineSearchResult =
-            backtrack(f, &self.x, &self.dir, &self.g, self.fx, cfg.step_min);
+            backtrack(f, &self.x, &self.dir, &self.g, self.fx, 1.0, cfg.step_min);
         if !last.is_valid {
-            return Err(line_failure(first.status, last.status));
+            return Err(failure_after_fallback(first.status, last.status));
         }
         self.history.count = 0;
         Ok(last)
@@ -222,7 +222,7 @@ pub fn lbfgs(
     memory: usize,
     cfg: &Config,
 ) -> VectorResult {
-    if !valid_config(cfg) || !finite_vector(start) || memory == 0 {
+    if !is_valid_config(cfg) || !is_finite_vector(start) || memory == 0 {
         return VectorResult {
             status: Status::InvalidInput,
             ..Default::default()
