@@ -139,3 +139,18 @@ impl Uzawa {
         }
     }
 }
+impl Uzawa {
+    /// Writes the native `Dump` text with the solution vector; `solver.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+        write!(stream, "math_Uzawa")?;
+        if !self.done {
+            return writeln!(stream, " Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        writeln!(stream, " Number of iterations = {}", self.iterations)?;
+        write!(stream, " The solution vector is: ")?;
+        self.solution.dump(stream)?;
+        writeln!(stream)
+    }
+}
+display_via_dump!(Uzawa);

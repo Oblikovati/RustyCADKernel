@@ -13,8 +13,9 @@
 // commercial license or contractual agreement.
 
 //! Shared storage and guarded result access for the native gradient optimizers.
-use super::{MultipleVarFunctionWithGradient, Vector};
+use super::{MultipleVarFunctionWithGradient, Status, Vector, stream_real};
 use rustycad_tkernel::standard::Failure;
+use std::fmt;
 pub(super) struct Optimization {
     pub location: Vector<'static>,
     pub gradient: Vector<'static>,
@@ -25,10 +26,18 @@ pub(super) struct Optimization {
     pub iterations: i32,
     pub limit: i32,
     pub done: bool,
+    pub status: Status,
     pub failure_message: &'static str,
 }
 impl Optimization {
-    pub fn new(size: i32, tolerance: f64, limit: i32, epsilon: f64) -> Result<Self, Failure> {
+    /// `status` is the constructor's initial `TheStatus` (math_OK for BFGS,
+    /// math_NotBracketed for FRPR and Powell).
+    pub fn new(
+        size: i32,
+        [tolerance, epsilon]: [f64; 2],
+        limit: i32,
+        status: Status,
+    ) -> Result<Self, Failure> {
         Ok(Self {
             location: Vector::with_bounds(1, size)?,
             gradient: Vector::with_bounds(1, size)?,
@@ -39,6 +48,7 @@ impl Optimization {
             iterations: 0,
             limit,
             done: false,
+            status,
             failure_message: " ",
         })
     }
@@ -51,8 +61,18 @@ impl Optimization {
         if function.values(&self.location, &mut self.previous, &mut self.gradient) {
             return Ok(true);
         }
-        self.done = false;
+        self.fail(Status::FunctionError);
         Ok(false)
+    }
+    /// Records a native `Done = true; TheStatus = math_OK` exit.
+    pub fn succeed(&mut self) {
+        self.done = true;
+        self.status = Status::Ok;
+    }
+    /// Records a native `Done = false; TheStatus = status` exit.
+    pub fn fail(&mut self, status: Status) {
+        self.done = false;
+        self.status = status;
     }
     pub fn reached(&self) -> bool {
         2.0 * (self.minimum - self.previous).abs()
@@ -67,6 +87,19 @@ impl Optimization {
             ));
         }
         Ok(())
+    }
+    /// The shared native Dump body after the class-specific `prefix`.
+    pub fn dump(&self, stream: &mut impl fmt::Write, prefix: &str) -> fmt::Result {
+        write!(stream, "{prefix}")?;
+        if !self.done {
+            return writeln!(stream, " Status = not Done because {}", self.status as i32);
+        }
+        writeln!(stream, " Status = Done ")?;
+        write!(stream, " Location Vector = ")?;
+        self.location.dump(stream)?;
+        writeln!(stream)?;
+        writeln!(stream, " Minimum value = {}", stream_real(self.minimum))?;
+        writeln!(stream, " Number of iterations = {}", self.iterations)
     }
 }
 macro_rules! minimum_results {
@@ -96,15 +129,54 @@ macro_rules! minimum_results {
                 self.result.check_done()?;
                 Ok(self.result.iterations)
             }
+            /// Protected `TheMinimum`, readable by convergence criteria before `Done`;
+            /// `solver.current_minimum()`.
+            pub fn current_minimum(&self) -> f64 {
+                self.result.minimum
+            }
+            /// Protected `PreviousMinimum`; `solver.previous_minimum()`.
+            pub fn previous_minimum(&self) -> f64 {
+                self.result.previous
+            }
+            /// Protected `TheLocation` without the `Done` check; `solver.current_location()`.
+            pub fn current_location(&self) -> &Vector<'static> {
+                &self.result.location
+            }
+            /// Protected `XTol`, the relative objective tolerance; `solver.tolerance()`.
+            pub fn tolerance(&self) -> f64 {
+                self.result.tolerance
+            }
+            /// Protected `EPSZ`, the absolute zero guard; `solver.zero_epsilon()`.
+            pub fn zero_epsilon(&self) -> f64 {
+                self.result.epsilon
+            }
+            /// `TheStatus` of the last `perform`, readable even when not done;
+            /// `solver.status()`.
+            pub fn status(&self) -> Status {
+                self.result.status
+            }
         }
     };
 }
 pub(super) use minimum_results;
+macro_rules! standard_dump {
+    ($solver:ty, $prefix:literal) => {
+        impl $solver {
+            /// Writes the native `Dump` text; `solver.dump(&mut text)?`.
+            pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+                self.result.dump(stream, $prefix)
+            }
+        }
+        display_via_dump!($solver);
+    };
+}
+pub(super) use standard_dump;
 macro_rules! optimization_results {
     ($solver:ty) => {
         super::optimization::gradient_results!($solver);
         impl $solver {
-            /// Applies the default native convergence criterion; `solver.is_solution_reached()`.
+            /// Applies the default native convergence criterion (the base-class
+            /// `IsSolutionReached`); `solver.is_solution_reached()`.
             pub fn is_solution_reached(&self) -> bool {
                 self.result.reached()
             }
@@ -127,6 +199,10 @@ macro_rules! gradient_results {
             pub fn copy_gradient(&self, output: &mut Vector<'_>) -> Result<(), Failure> {
                 self.result.check_done()?;
                 output.initialized(&self.result.gradient)
+            }
+            /// Protected `TheGradient` without the `Done` check; `solver.current_gradient()`.
+            pub fn current_gradient(&self) -> &Vector<'static> {
+                &self.result.gradient
             }
         }
     };

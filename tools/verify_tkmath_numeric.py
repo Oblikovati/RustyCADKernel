@@ -31,6 +31,9 @@ from tkmath_convert_corpus import append_convert_requests
 from tkmath_polymesh_corpus import append_polymesh_requests
 from tkmath_toploc_corpus import append_toploc_requests
 from tkmath_gp_core_corpus import append_gp_core_requests
+from tkmath_vector_base_corpus import append_vector_base_requests
+from tkmath_recipes_corpus import append_recipes_requests
+from tkmath_solver_dump_corpus import append_solver_dump_requests
 from tkmath_mathutils_core_api_corpus import append_mathutils_core_api_requests
 from tkmath_mathutils_functor_api_corpus import append_mathutils_functor_api_requests
 from tkmath_integ_lin_api_corpus import append_integ_lin_api_requests
@@ -437,6 +440,9 @@ def corpus() -> str:
     append_polymesh_requests(requests)
     append_toploc_requests(requests)
     append_gp_core_requests(requests)
+    append_vector_base_requests(requests)
+    append_recipes_requests(requests)
+    append_solver_dump_requests(requests)
     append_mathutils_core_api_requests(requests)
     append_mathutils_functor_api_requests(requests)
     append_integ_lin_api_requests(requests)

@@ -12,38 +12,40 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Bfgs, Matrix, MultipleVarFunctionWithGradient, Vector};
+use super::{Bfgs, Matrix, MultipleVarFunctionWithGradient, Status, Vector};
 impl Bfgs {
-    pub(super) fn iterate(
+    pub(super) fn iterate<F: MultipleVarFunctionWithGradient>(
         &mut self,
-        function: &mut impl MultipleVarFunctionWithGradient,
+        function: &mut F,
         direction: &mut Vector<'static>,
         hessian: &mut Matrix<'static>,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) {
         self.result.iterations = 1;
         while self.result.iterations <= self.result.limit {
-            if self.iteration(function, direction, hessian) {
+            if self.iteration(function, direction, hessian, criterion) {
                 return;
             }
             self.result.iterations += 1;
         }
-        self.result.done = false;
+        self.result.fail(Status::TooManyIterations);
     }
-    fn iteration(
+    fn iteration<F: MultipleVarFunctionWithGradient>(
         &mut self,
-        function: &mut impl MultipleVarFunctionWithGradient,
+        function: &mut F,
         direction: &mut Vector<'static>,
         hessian: &mut Matrix<'static>,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> bool {
         self.result.minimum = self.result.previous;
         let good: bool = self.minimize_direction(function, direction);
         // OCC30492: even a failed direction can satisfy the objective stopping test.
-        if self.result.reached() {
-            self.result.done = true;
+        if criterion(self, function) {
+            self.result.succeed();
             return true;
         }
         if !good {
-            self.result.done = false;
+            self.result.fail(Status::DirectionSearchError);
             return true;
         }
         self.result.previous = self.result.minimum;
@@ -53,7 +55,7 @@ impl Bfgs {
             &mut self.result.minimum,
             &mut self.result.gradient,
         ) {
-            self.result.done = false;
+            self.result.fail(Status::FunctionError);
             return true;
         }
         for index in 1..=difference.upper() {

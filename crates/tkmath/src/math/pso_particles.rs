@@ -28,7 +28,19 @@ pub struct PsoParticle {
     /// Best objective, initially RealLast; `particle.best_distance`.
     pub best_distance: f64,
 }
+/// `PSO_Particle()`: a detached particle with no vector storage (the native null
+/// pointers) and `RealLast` distances; `PsoParticle::default().distance == f64::MAX`.
+impl Default for PsoParticle {
+    fn default() -> Self {
+        Self::new(0)
+    }
+}
 impl PsoParticle {
+    /// Native `operator<`, ordering particles by current distance only;
+    /// `PsoParticle::default().less(&other)`.
+    pub fn less(&self, other: &Self) -> bool {
+        self.distance < other.distance
+    }
     fn new(dimension: usize) -> Self {
         Self {
             position: vec![0.0; dimension],
@@ -45,10 +57,28 @@ pub struct PsoParticlesPool {
 }
 impl PsoParticlesPool {
     /// Allocates initialized native particle state; `PsoParticlesPool::new(32,2)?`.
+    ///
+    /// An empty pool is valid natively. A negative count fails the `NCollection_Array1`
+    /// bounds (`Standard_RangeError`); particles without dimensions fail when their
+    /// pointers into the empty memory block are taken (`Standard_OutOfRange`).
     pub fn new(count: i32, dimension: i32) -> Result<Self, Failure> {
-        if count < 1 || dimension < 1 {
+        if count < 0 {
+            return Err(Failure::with_type(
+                "Standard_RangeError",
+                &format!("pool of {count} particles; expected a non-negative count"),
+                "",
+            ));
+        }
+        if count > 0 && dimension < 0 {
+            return Err(Failure::with_type(
+                "Standard_RangeError",
+                &format!("pool {count} x {dimension}; expected a non-negative dimension"),
+                "",
+            ));
+        }
+        if count > 0 && dimension == 0 {
             return Err(Failure::out_of_range(&format!(
-                "pool {count} x {dimension}, expected positive dimensions"
+                "pool {count} x 0; particles need at least one dimension"
             )));
         }
         Ok(Self {
@@ -86,10 +116,11 @@ impl PsoParticlesPool {
     fn extreme(&self, worst: bool) -> usize {
         let mut chosen: usize = 0;
         for index in 1..self.particles.len() {
+            // std::min_element / std::max_element keep the first extreme under operator<.
             let replace: bool = if worst {
-                self.particles[chosen].distance < self.particles[index].distance
+                self.particles[chosen].less(&self.particles[index])
             } else {
-                self.particles[index].distance < self.particles[chosen].distance
+                self.particles[index].less(&self.particles[chosen])
             };
             if replace {
                 chosen = index;
@@ -97,14 +128,26 @@ impl PsoParticlesPool {
         }
         chosen
     }
-    /// Returns the first particle with minimal distance; `pool.best_particle()`.
-    pub fn best_particle(&mut self) -> &mut PsoParticle {
+    /// Returns the first particle with minimal distance; an empty pool (where native code
+    /// dereferences `end()`) raises `Standard_OutOfRange`. `pool.best_particle()?`.
+    pub fn best_particle(&mut self) -> Result<&mut PsoParticle, Failure> {
+        self.check_not_empty()?;
         let index: usize = self.best_index();
-        &mut self.particles[index]
+        Ok(&mut self.particles[index])
     }
-    /// Returns the first particle with maximal distance; `pool.worst_particle()`.
-    pub fn worst_particle(&mut self) -> &mut PsoParticle {
+    /// Returns the first particle with maximal distance; an empty pool raises
+    /// `Standard_OutOfRange`. `pool.worst_particle()?`.
+    pub fn worst_particle(&mut self) -> Result<&mut PsoParticle, Failure> {
+        self.check_not_empty()?;
         let index: usize = self.worst_index();
-        &mut self.particles[index]
+        Ok(&mut self.particles[index])
+    }
+    fn check_not_empty(&self) -> Result<(), Failure> {
+        if self.particles.is_empty() {
+            return Err(Failure::out_of_range(
+                "empty particle pool has no extreme particle",
+            ));
+        }
+        Ok(())
     }
 }

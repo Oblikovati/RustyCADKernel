@@ -13,7 +13,7 @@
 // commercial license or contractual agreement.
 
 use super::Matrix;
-use crate::math::Gauss;
+use crate::math::{Gauss, not_square, singular_matrix};
 use rustycad_tkernel::standard::Failure;
 impl Matrix<'_> {
     /// Returns zero when native LU regards the matrix as singular; `matrix.determinant()?`.
@@ -28,15 +28,11 @@ impl Matrix<'_> {
     /// Inverts via native-order LU, preserving the input on singular failure; `matrix.invert()?`.
     pub fn invert(&mut self) -> Result<(), Failure> {
         if self.row_number() != self.col_number() {
-            return Err(Failure::with_type(
-                "math_NotSquare",
-                "math_Matrix::Invert() - matrix is not square",
-                "",
-            ));
+            return Err(not_square("math_Matrix::Invert() - matrix is not square"));
         }
         let solver = Gauss::new(self)?;
         if !solver.is_done() {
-            return Err(Failure::with_type("math_SingularMatrix", "", ""));
+            return Err(singular_matrix(""));
         }
         solver.invert(self)
     }

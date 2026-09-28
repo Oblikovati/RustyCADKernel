@@ -12,22 +12,22 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Failure, Vector, failure};
+use super::{Failure, VectorBase, VectorItem, failure};
 #[derive(Debug)]
-pub(super) enum VectorStorage<'a> {
+pub(super) enum VectorStorage<'a, T> {
     Inline,
-    Owned(Vec<f64>),
-    Borrowed(&'a mut [f64]),
+    Owned(Vec<T>),
+    Borrowed(&'a mut [T]),
 }
-impl<'a> Vector<'a> {
-    pub(crate) fn values(&self) -> &[f64] {
+impl<T: VectorItem> VectorBase<'_, T> {
+    pub(crate) fn values(&self) -> &[T] {
         match &self.storage {
             VectorStorage::Inline => &self.inline[..self.length],
             VectorStorage::Owned(values) => values,
             VectorStorage::Borrowed(values) => values,
         }
     }
-    pub(super) fn values_mut(&mut self) -> &mut [f64] {
+    pub(super) fn values_mut(&mut self) -> &mut [T] {
         match &mut self.storage {
             VectorStorage::Inline => &mut self.inline[..self.length],
             VectorStorage::Owned(values) => values,
@@ -87,21 +87,21 @@ impl<'a> Vector<'a> {
     }
     fn resize_heap(&mut self, length: usize) {
         if let VectorStorage::Owned(values) = &mut self.storage {
-            values.resize(length, 0.0);
+            values.resize(length, T::ZERO);
             return;
         }
         let count = self.length.min(length);
-        let mut values = vec![0.0; length];
+        let mut values = vec![T::ZERO; length];
         values[..count].copy_from_slice(&self.values()[..count]);
         self.storage = VectorStorage::Owned(values);
     }
 }
-impl Clone for Vector<'_> {
+impl<T: VectorItem> Clone for VectorBase<'_, T> {
     fn clone(&self) -> Self {
         Self {
             lower: self.lower,
             length: self.length,
-            inline: [0.0; 32],
+            inline: [T::ZERO; 32],
             storage: VectorStorage::Owned(self.values().to_vec()),
         }
     }

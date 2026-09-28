@@ -12,27 +12,34 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{MultipleVarFunction, Powell, Vector};
+use super::{MultipleVarFunction, Powell, Status, Vector};
 impl Powell {
-    pub(super) fn iteration(
+    pub(super) fn iteration<F: MultipleVarFunction>(
         &mut self,
-        function: &mut impl MultipleVarFunction,
-        previous: &mut Vector<'static>,
-        direction: &mut Vector<'static>,
+        function: &mut F,
+        [previous, direction]: [&mut Vector<'static>; 2],
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> bool {
         function.value(&self.result.location, &mut self.result.previous);
         let Some((largest, column)) = self.search_columns(function, direction) else {
+            self.result.fail(Status::DirectionSearchError);
             return true;
         };
-        if self.is_solution_reached() {
+        if criterion(self, function) {
             self.state = function.state_number();
-            self.result.done = true;
+            self.result.succeed();
             return true;
         }
         if self.result.iterations == self.result.limit {
+            self.result.fail(Status::TooManyIterations);
             return true;
         }
-        !self.extrapolate(function, previous, direction, largest, column)
+        if self.extrapolate(function, previous, direction, largest, column) {
+            return false;
+        }
+        // A failed extrapolated line search is reported as math_FunctionError natively.
+        self.result.fail(Status::FunctionError);
+        true
     }
     fn search_columns(
         &mut self,

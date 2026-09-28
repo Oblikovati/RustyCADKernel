@@ -13,8 +13,8 @@
 // commercial license or contractual agreement.
 
 //! Direct math_BFGS.cxx base algorithm at OCCT 3d097a0; retains OCC30492 convergence order.
-use super::optimization::{Optimization, optimization_results};
-use super::{Matrix, MultipleVarFunctionWithGradient, Vector};
+use super::optimization::{Optimization, optimization_results, standard_dump};
+use super::{Matrix, MultipleVarFunctionWithGradient, Status, Vector};
 use rustycad_tkernel::standard::Failure;
 mod bounds;
 mod iterate;
@@ -38,7 +38,7 @@ impl Bfgs {
         epsilon: f64,
     ) -> Result<Self, Failure> {
         Ok(Self {
-            result: Optimization::new(size, tolerance, limit, epsilon)?,
+            result: Optimization::new(size, [tolerance, epsilon], limit, Status::Ok)?,
             bounds: None,
         })
     }
@@ -57,10 +57,24 @@ impl Bfgs {
         Ok(())
     }
     /// Runs minimization, preserving native callback and stopping order; `solver.perform(&mut f,&start)?`.
-    pub fn perform(
+    pub fn perform<F: MultipleVarFunctionWithGradient>(
         &mut self,
-        function: &mut impl MultipleVarFunctionWithGradient,
+        function: &mut F,
         start: &Vector<'_>,
+    ) -> Result<(), Failure> {
+        self.perform_with_criterion(function, start, &mut |solver: &Self, _: &mut F| {
+            solver.is_solution_reached()
+        })
+    }
+    /// Runs minimization with a replacement for the virtual `IsSolutionReached(F)`, the
+    /// hook OCCT subclasses override; the criterion sees the protected state through
+    /// `current_minimum`, `previous_minimum`, `tolerance` and `zero_epsilon`.
+    /// `solver.perform_with_criterion(&mut f,&start,&mut |s, _| s.is_solution_reached())?`.
+    pub fn perform_with_criterion<F: MultipleVarFunctionWithGradient>(
+        &mut self,
+        function: &mut F,
+        start: &Vector<'_>,
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> Result<(), Failure> {
         if !self.result.initialize(function, start)? {
             return Ok(());
@@ -72,8 +86,9 @@ impl Bfgs {
             hessian[(index, index)] = 1.0;
             direction[index] = -self.result.gradient[index];
         }
-        self.iterate(function, &mut direction, &mut hessian);
+        self.iterate(function, &mut direction, &mut hessian, criterion);
         Ok(())
     }
 }
 optimization_results!(Bfgs);
+standard_dump!(Bfgs, "math_BFGS resolution: ");

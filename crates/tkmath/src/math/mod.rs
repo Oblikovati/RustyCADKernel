@@ -1,11 +1,26 @@
 //! Bounded numeric storage and mathematical algorithms.
+/// Implements `Display` as the class's free `operator<<`, which forwards to `Dump`.
+macro_rules! display_via_dump {
+    ($type:ty) => {
+        /// The free `operator<<`, which forwards to `Dump`; `format!("{value}")`.
+        impl std::fmt::Display for $type {
+            fn fmt(&self, stream: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                self.dump(stream)
+            }
+        }
+    };
+}
+mod exceptions;
+pub use exceptions::{not_square, singular_matrix};
 mod double_tab;
 pub use double_tab::DoubleTab;
 mod matrix;
 mod vector;
 pub use matrix::Matrix;
-pub use vector::Vector;
+pub(crate) use vector::stream_real;
+pub use vector::{IntegerVector, Vector, VectorBase, VectorItem};
 mod gauss;
+pub mod recipes;
 pub use gauss::Gauss;
 mod crout;
 pub use crout::Crout;
@@ -78,6 +93,8 @@ pub use function_sample::{FunctionSample, FunctionSampling};
 mod function_all_roots;
 pub use function_all_roots::FunctionAllRoots;
 
+mod value_and_weight;
+pub use value_and_weight::ValueAndWeight;
 mod gauss_quadrature;
 pub use gauss_quadrature::GaussPointsAndWeights;
 mod quadrature_tables;
@@ -87,6 +104,8 @@ pub use quadrature_tables::{
 };
 mod gauss_integration;
 pub use gauss_integration::GaussSingleIntegration;
+mod gauss_set_integration;
+pub use gauss_set_integration::GaussSetIntegration;
 
 mod kronrod_integration;
 pub use kronrod_integration::KronrodSingleIntegration;

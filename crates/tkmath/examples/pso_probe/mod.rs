@@ -46,8 +46,8 @@ fn pool_output(pool: &mut PsoParticlesPool, count: i32, dimension: i32) {
     }
     print!(
         "{} {} ",
-        pool.best_particle().distance.to_bits(),
-        pool.worst_particle().distance.to_bits()
+        pool.best_particle().unwrap().distance.to_bits(),
+        pool.worst_particle().unwrap().distance.to_bits()
     );
 }
 pub(super) fn pso_case(v: &[f64]) {

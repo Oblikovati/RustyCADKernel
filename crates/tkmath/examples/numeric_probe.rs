@@ -513,6 +513,19 @@ fn main() {
             "poly_loops" => poly_probe::loops_case(&values),
             "toploc" => toploc_probe::location_case(&values),
             "mathpoly_utils_complex" => mathpoly_utils_probe::mathpoly_utils_complex_case(&values),
+            "int_vector" => vector_base_probe::int_vector_case(&values),
+            "real_vector_extra" => vector_base_probe::real_vector_extra_case(&values),
+            "matrix_extra" => vector_base_probe::matrix_extra_case(&values),
+            "recipes_lu" => recipes_probe::lu_case(&values),
+            "recipes_svd" => recipes_probe::svd_case(&values),
+            "recipes_jacobi" => recipes_probe::jacobi_case(&values),
+            "recipes_dactcl" => recipes_probe::dactcl_case(&values),
+            "linear_dump" => recipes_probe::linear_dump_case(&values),
+            "dump_minimizers" => solver_dump_probe::minimizers_case(&values),
+            "dump_scalar" => solver_dump_probe::scalar_case(&values),
+            "dump_polynomial" => solver_dump_probe::polynomial_dump_case(&values),
+            "dump_sets" => solver_dump_probe::sets_case(&values),
+            "small_types" => solver_dump_probe::small_types_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }
@@ -595,3 +608,6 @@ mod convert_probe;
 mod cslib_probe;
 mod elementary_probe;
 mod plib_probe;
+mod recipes_probe;
+mod solver_dump_probe;
+mod vector_base_probe;

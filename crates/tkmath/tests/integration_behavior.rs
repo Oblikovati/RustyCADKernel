@@ -96,5 +96,8 @@ fn quadrature_validates_lengths_and_computed_order() {
         &mut weights
     ));
     assert!(kronrod_points_and_weights(3, &mut points, &mut weights));
-    assert!(GaussPointsAndWeights::new(0).is_err());
+    // Order 0 is not done natively (the empty eigenproblem raises inside a try block);
+    // a negative order corrupts the native heap and is refused.
+    assert!(!GaussPointsAndWeights::new(0).unwrap().is_done());
+    assert!(GaussPointsAndWeights::new(-1).is_err());
 }

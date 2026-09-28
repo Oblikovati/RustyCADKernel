@@ -24,12 +24,12 @@ fn pool_starts_zeroed_and_selects_first_equal_distance() {
         assert_eq!(p.distance, f64::MAX);
         assert_eq!(p.best_distance, f64::MAX);
     }
-    pool.best_particle().position[0] = 7.0;
+    pool.best_particle().unwrap().position[0] = 7.0;
     assert_eq!(pool.particle(1).unwrap().position[0], 7.0);
-    pool.worst_particle().distance = 2.0;
+    pool.worst_particle().unwrap().distance = 2.0;
     assert_eq!(pool.particle(1).unwrap().distance, 2.0);
     pool.particle_mut(2).unwrap().distance = 2.0;
-    assert_eq!(pool.best_particle().position[0], 7.0);
+    assert_eq!(pool.best_particle().unwrap().position[0], 7.0);
     assert!(pool.particle(0).is_err());
     assert!(pool.particle_mut(4).is_err());
 }
