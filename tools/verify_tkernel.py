@@ -16,6 +16,7 @@ from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases, verified_native_skips
 from tkernel_native_baseline import compile_sources
 import tkernel_ncollection_corpus
+import tkernel_units_corpus
 
 
 def run(args, log, *, input=None, timeout=900, env=None):
@@ -66,6 +67,7 @@ def corpus():
         value = f"{rng.getrandbits(128):032x}"
         cases.append(f"guid {value[:8]}-{value[8:12]}-{value[12:16]}-{value[16:20]}-{value[20:]}")
     cases += tkernel_ncollection_corpus.cases()
+    cases += tkernel_units_corpus.cases()
     return "\n".join(cases) + "\n"
 
 
