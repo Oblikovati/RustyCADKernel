@@ -9,24 +9,28 @@ private helpers `Geom_OffsetCurveUtils.pxx`, `Geom_OffsetSurfaceUtils.pxx`,
 `Geom_OffsetSurface::UIso`/`VIso` need. The whole `GeomEval` package (the eleven
 curves and surfaces), the whole `GeomHash` package (every public and private
 hasher, mesh hashers included), the `TopAbs` package and the whole `Adaptor3d`
-and `GeomAdaptor` packages (every file of their `FILES.cmake`) are ported too;
+and `GeomAdaptor` packages (every file of their `FILES.cmake`) and the whole
+`GeomGridEval` package (every curve and surface grid evaluator, the dispatchers, the
+adaptor fallbacks and the helper templates) are ported too;
 `Geom_OsculatingSurface` samples its basis through the full `GeomAdaptorSurface`.
-`GeomGridEval` is not ported yet. TKG3d depends on TKG2d as in OCCT: it reuses the
+TKG3d depends on TKG2d as in OCCT: it reuses the
 TKernel lock (`SharedState`), the array, dump, spline-data and `std::min`/`max`
 helpers, the curve descriptor family (`define_rep_curve_descriptors!`), the
 generic T-Bezier and AHT-Bezier basis evaluators of
 `rustycad_tkg2d::geom2d_eval::eval_basis` (the GeomEval curves are the Geom2dEval
 algorithms on `gp_XYZ`) and the Geom2dHash rounding, combining and dispatch
-helpers.
+helpers, and the Geom2dGridEval parameter loops and Bezier-curve cache data
+(`grid_loops`, `bezier_arrays`), which the two grid packages repeat natively.
 
 The class mapping follows [geom-design.md](geom-design.md): abstract classes are
 traits behind `Handle<dyn Trait>`, each object keeps its state behind one lock,
 and native exceptions are `Failure` results.
 
-The toolkit test inventory has 11 `Geom_*_Test.cxx`, 11 `GeomEval_*_Test.cxx`,
-3 `GeomHash_*_Test.cxx` and 3 `GeomAdaptor_*_Test.cxx` suites (TopAbs and
-Adaptor3d have none). 26 complete suites account for 554 mapped declarations, with
-matching native and Rust passes:
+The toolkit test inventory has 45 suites: 11 `Geom_*_Test.cxx`, 11
+`GeomEval_*_Test.cxx`, 3 `GeomHash_*_Test.cxx`, 3 `GeomAdaptor_*_Test.cxx`, 15
+`GeomGridEval_*_Test.cxx` and 2 `GeomAPI_*_Test.cxx` (TopAbs and Adaptor3d have none).
+42 complete suites account for 735 mapped declarations, with matching native and Rust
+passes:
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -42,6 +46,7 @@ matching native and Rust passes:
 | Geom_SurfaceEval_Test.cxx | geom_surface_eval | 9 |
 | GeomAdaptor_Curve_Test.cxx | geom_adaptor_curve | 17 |
 | GeomAdaptor_TransformedCurve_Test.cxx | geom_adaptor_transformed_curve | 16 |
+| GeomAdaptor_TransformedSurface_Test.cxx | geom_adaptor_transformed_surface | 12 |
 | GeomEval_AHTBezierCurve_Test.cxx | geom_eval_aht_bezier_curve | 18 |
 | GeomEval_AHTBezierSurface_Test.cxx | geom_eval_aht_bezier_surface | 14 |
 | GeomEval_CircularHelicoidSurface_Test.cxx | geom_eval_circular_helicoid_surface | 14 |
@@ -53,6 +58,21 @@ matching native and Rust passes:
 | GeomEval_SineWaveCurve_Test.cxx | geom_eval_sine_wave_curve | 11 |
 | GeomEval_TBezierCurve_Test.cxx | geom_eval_tbezier_curve | 18 |
 | GeomEval_TBezierSurface_Test.cxx | geom_eval_tbezier_surface | 17 |
+| GeomGridEval_BSplineSurface_Test.cxx | geom_grid_eval_bspline_surface | 18 |
+| GeomGridEval_BezierCurve_Test.cxx | geom_grid_eval_bezier_curve | 10 |
+| GeomGridEval_BezierSurface_Test.cxx | geom_grid_eval_bezier_surface | 14 |
+| GeomGridEval_Cone_Test.cxx | geom_grid_eval_cone | 5 |
+| GeomGridEval_Curve_Test.cxx | geom_grid_eval_curve | 39 |
+| GeomGridEval_Cylinder_Test.cxx | geom_grid_eval_cylinder | 5 |
+| GeomGridEval_Ellipse_Test.cxx | geom_grid_eval_ellipse | 4 |
+| GeomGridEval_Hyperbola_Test.cxx | geom_grid_eval_hyperbola | 4 |
+| GeomGridEval_OffsetSurface_Test.cxx | geom_grid_eval_offset_surface | 14 |
+| GeomGridEval_Parabola_Test.cxx | geom_grid_eval_parabola | 4 |
+| GeomGridEval_Sphere_Test.cxx | geom_grid_eval_sphere | 5 |
+| GeomGridEval_SurfaceOfExtrusion_Test.cxx | geom_grid_eval_surface_of_extrusion | 8 |
+| GeomGridEval_SurfaceOfRevolution_Test.cxx | geom_grid_eval_surface_of_revolution | 7 |
+| GeomGridEval_Surface_Test.cxx | geom_grid_eval_surface | 27 |
+| GeomGridEval_Torus_Test.cxx | geom_grid_eval_torus | 5 |
 | GeomHash_CurveHasher_Test.cxx | geom_hash_curve_hasher | 40 |
 | GeomHash_MeshHasher_Test.cxx | geom_hash_mesh_hasher | 10 |
 | GeomHash_SurfaceHasher_Test.cxx | geom_hash_surface_hasher | 43 |
@@ -60,10 +80,6 @@ matching native and Rust passes:
 Behaviour tests cover the other classes: `geom_behavior_surfaces.rs`,
 `geom_behavior_bspline_surface*.rs`, `adv_approx_behavior.rs`,
 `top_abs_behavior.rs` and `adaptor3d_behavior.rs`.
-
-`GeomAdaptor_TransformedSurface_Test.cxx` (12) is not mapped: its case
-`GridEvalUsesTransformedGeometryOnlyOnce` needs `GeomGridEval`, and a suite is
-mapped whole or not at all. The numeric corpus covers the class member by member.
 
 ## Verification
 
@@ -77,7 +93,7 @@ the Rust targets, checks exact runtime names, then runs
 `tools/verify_tkg3d_numeric.py` uses the shared driver `tools/toolkit_numeric.py`
 (also used by TKG2d). It builds `tools/oracle/tkg3d_probe.cxx` (a table of
 operations over `tkg3d_probe_*.cxx`) and its twin
-`crates/tkg3d/examples/numeric_probe.rs`, runs both on the 3985 requests of
+`crates/tkg3d/examples/numeric_probe.rs`, runs both on the 4694 requests of
 `tools/tkg3d_corpus.py` (one `tkg3d_corpus_*.py` module per probe file) and
 requires identical bits for finite values, infinities and signed zeros, NaN by
 classification, identical exception types and identical `DumpJson` text.
@@ -120,6 +136,19 @@ instances, `Adaptor3d_CurveOnSurface`, `Adaptor3d_IsoCurve`, `Adaptor3d_InterFun
 `Adaptor3d_HSurfaceTool`, `Adaptor3d_HVertex`, and `Adaptor3d_TopolTool`
 (restrictions, vertices, `Classify` on sides, corners and far points, the sample
 points, `SamplePnts`, `BSplSamplePnts` and `GetConeApexParam`).
+
+The GeomGridEval requests (`tkg3d_corpus_grid.py`) print every grid of the curve and
+surface dispatchers on handles and on GeomAdaptor adaptors, of each specialized
+evaluator and of the adaptor or handle fallbacks, with every derivative order (curve
+DN from -1 to 7, surface DN over -1..4 x -1..4): every curve and surface kind,
+degenerate conics and quadrics, periodic, rational and multi-span splines, trimmed,
+offset (singular and osculating bases included), swept and eval geometry; dense,
+Nx1/1xN isoline, shuffled (the sorted-parameter fast path), out-of-range and empty
+grids with varied lower bounds; foreign adaptors (the base class, transformed curves,
+isos, curves on surfaces) and every adaptor resolution path of `GeomGridEval_Surface`
+(transformed with identity and other forms, revolution and extrusion adaptors on
+Geom and foreign curves, plain and foreign surface adaptors); null evaluators and the
+helper templates.
 
 ## Preserved native behaviour
 
@@ -317,6 +346,46 @@ Adaptors:
   to the U scan. `BSplSamplePnts` adds two samples with a stale `j` when only two
   are flagged.
 
+GeomGridEval:
+
+- Every evaluator ignores trimming bounds, adaptor ranges and evaluation
+  representations: the dispatchers strip trimmed wrappers and a `GeomAdaptor_Curve` or
+  `GeomAdaptor_Surface` goes through its underlying geometry.
+- The B-spline curve and surface loops assume ascending parameters: a non-periodic
+  parameter below the end of the current span keeps that span without
+  `LocateParameter`, and a run ends at the first parameter at or above the next flat
+  knot (a NaN never ends it), so unsorted grids evaluate some parameters with the
+  polynomial of another span. The cache threshold is 2 (4 in Geom2dGridEval), and
+  the surface loop compares the U run times the V run with it.
+- `EvaluateGridDN` of the B-spline curve passes the flat-knot span to `BSplCLib::DN`
+  with the knots and multiplicities, as Geom2dGridEval does; the Bezier and B-spline
+  DN return zero above a degree even for rational geometry.
+- The Bezier surface evaluates an Nx1 grid with at least 8 U values through the
+  `VIso` curve and falls back to the patch cache on any failure; the other grids use
+  the cache built at (0.5, 0.5), D3 and DN call `BSplSLib` on the flat knots.
+- The offset surface uses its equivalent surface when there is one, ignores the
+  success flag of `Geom_OffsetSurfaceUtils` (a cell without a normal holds the basis
+  values of the last point tried, and the zero vector for DN) and calls `EvaluateD3`
+  at every cell. `Geom_OffsetSurfaceUtils::evaluate_*_from` now report those output
+  values (`OffsetOutcome`).
+- The offset curve and the offset, revolution and extrusion surfaces return an empty
+  grid when their basis grid is empty (an eval curve or surface basis), but their
+  `EvaluateGridDN` reads the basis grid without testing it: an empty one raises
+  Standard_OutOfRange. The 3D offset curve needs its reference direction; D3 also
+  calls the basis `DN(U, 4)`.
+- The parabola follows the stored X and Y axes (Geom2dGridEval rebuilds Y); its
+  coefficients `1 / (4F)` and `1 / (2F)` can differ in the last bits from ElCLib.
+  The hyperbola's DN alternates D1 and D2; the circle, ellipse, cylinder, sphere, cone
+  and torus DN cycle with period 4, and the sphere and torus add a zero Z term (a -0
+  becomes +0). The torus D3 regroups its terms, so its first and second derivatives
+  can differ in the last bits from D1 and D2.
+- `GeomGridEval_Surface` resolves adaptors in the order transformed (keeping a
+  non-identity transformation, applied to every point and vector), revolution,
+  extrusion (elementary surface, stored surface, surface rebuilt from a GeomAdaptor
+  basis curve, then the fallback), plain `GeomAdaptor_Surface`, then any adaptor
+  with an elementary `GetType`; a Geom class without a specialized evaluator (the
+  GeomEval surfaces) uses the fallback on its handle with the type `OtherSurface`.
+
 ## Deliberate Rust deviations
 
 - Getters that return `const&` natively return copies; `WeightsArray` lends the
@@ -354,12 +423,20 @@ Adaptors:
 - When `BSplSamplePnts` flags fewer samples than its count (a direction of three
   candidates with two flags), the native array keeps uninitialised values; the
   port fills them with 0. The corpus uses minimum counts of at least 4.
+- Where native `GeomGridEval_BSplineCurve::EvaluateGridDN` reads past the knot arrays
+  (a flat span index equal to the last knot index of a non-periodic curve), the port
+  raises Standard_OutOfRange; the corpus drops those parameters. A
+  `GeomGridEval_OtherSurface` on a null Geom handle, which natively dereferences it,
+  raises Standard_NullObject. The grid evaluators are plain structs; the fallbacks
+  borrow their adaptor with a lifetime.
 - `GeomEval_HyperboloidSurface::SheetMode` is a Rust enum with the two sheet modes;
   natively `SetMode` stores any integer cast to the enumeration.
 
 ## Remaining coverage
 
-- `Geom_CurveEval_Test.cxx` (11) needs `GeomAPI_PointsToBSpline`.
-- `GeomAdaptor_TransformedSurface_Test.cxx` (12), the GeomGridEval and the GeomAPI
-  suites wait for their packages.
+- Three suites of the TKG3d GTests directory need the `GeomAPI` package of
+  TKGeomAlgo: `Geom_CurveEval_Test.cxx` (11, `GeomAPI_PointsToBSpline`),
+  `GeomAPI_ExtremaCurveCurve_Test.cxx` (47, `GeomAPI_ExtremaCurveCurve` and
+  `GeomAPI_ExtremaCurveSurface`) and `GeomAPI_Interpolate_Test.cxx` (1,
+  `GeomAPI_Interpolate`).
 - `InitFromJson` does not exist in Geom; `DumpJson` is compared on the corpus.

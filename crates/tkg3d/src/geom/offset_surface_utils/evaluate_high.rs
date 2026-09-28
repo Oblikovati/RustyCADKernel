@@ -18,8 +18,8 @@
 use super::derivatives::{DerivativeOrders, entry};
 use super::evaluate_low::{defined_normal, derivatives_with, singular_normal};
 use super::{
-    BasisDomain, OsculatingInfo, OsculatingQuery, THE_D1_MAGNITUDE_TOL, is_infinite_coord,
-    offset_point, put, query_osculating, shift_point, zero_table,
+    BasisDomain, OffsetOutcome, OsculatingInfo, OsculatingQuery, THE_D1_MAGNITUDE_TOL,
+    is_infinite_coord, offset_point, put, query_osculating, shift_point, zero_table,
 };
 use crate::geom::{BasisSurfaceEvaluator, GeomSurface, GeomSurfaceD2, GeomSurfaceD3};
 use rustycad_tkernel::ncollection::Array2;
@@ -143,18 +143,19 @@ pub fn evaluate_d2<B: BasisSurfaceEvaluator + ?Sized>(
     osc: Option<&dyn OsculatingQuery>,
 ) -> Result<Option<GeomSurfaceD2>, Failure> {
     let d3: GeomSurfaceD3 = basis.basis_d3(uv.0, uv.1)?;
-    evaluate_d2_from(uv, basis, offset, osc, d3)
+    Ok(evaluate_d2_from(uv, basis, offset, osc, d3)?.into_option())
 }
 
-/// `EvaluateD2` with the basis derivatives up to order 3 already evaluated;
-/// `evaluate_d2_from((u, v), &*basis, 2.0, None, d3)?`.
+/// `EvaluateD2` with the basis derivatives up to order 3 already evaluated; a failure
+/// leaves the basis point and derivatives up to order 2 of the last pass in the outputs;
+/// `evaluate_d2_from((u, v), &*basis, 2.0, None, d3)?.into_option()`.
 pub fn evaluate_d2_from<B: BasisSurfaceEvaluator + ?Sized>(
     start: (f64, f64),
     basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     first: GeomSurfaceD3,
-) -> Result<Option<GeomSurfaceD2>, Failure> {
+) -> Result<OffsetOutcome<GeomSurfaceD2>, Failure> {
     let domain = BasisDomain::of(basis)?;
     let mut uv: (f64, f64) = start;
     let mut current: GeomSurfaceD3 = first;
@@ -165,13 +166,13 @@ pub fn evaluate_d2_from<B: BasisSurfaceEvaluator + ?Sized>(
         }
         is_first_iteration = false;
         if is_infinite_coord(current.d1u) || is_infinite_coord(current.d1v) {
-            return Ok(None);
+            return Ok(OffsetOutcome::failure(basis_second(&current)));
         }
         if let Some(data) = normal_data(uv, basis, offset, osc, (2, &current), domain)? {
-            return second_order(&data, uv, basis).map(Some);
+            return second_order(&data, uv, basis).map(OffsetOutcome::success);
         }
         if !shift_point(start, &mut uv, domain, current.d1u, current.d1v) {
-            return Ok(None);
+            return Ok(OffsetOutcome::failure(basis_second(&current)));
         }
     }
 }
@@ -206,19 +207,43 @@ pub fn evaluate_d3<B: BasisSurfaceEvaluator + ?Sized>(
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
 ) -> Result<Option<GeomSurfaceD3>, Failure> {
+    Ok(evaluate_d3_outcome(start, basis, offset, osc)?.into_option())
+}
+
+/// `EvaluateD3` with the outputs it leaves: a failure leaves the basis D3 of the last
+/// pass; `evaluate_d3_outcome((u, v), &*basis, 2.0, None)?.value`.
+pub fn evaluate_d3_outcome<B: BasisSurfaceEvaluator + ?Sized>(
+    start: (f64, f64),
+    basis: &B,
+    offset: f64,
+    osc: Option<&dyn OsculatingQuery>,
+) -> Result<OffsetOutcome<GeomSurfaceD3>, Failure> {
     let domain = BasisDomain::of(basis)?;
     let mut uv: (f64, f64) = start;
     loop {
         let current: GeomSurfaceD3 = basis.basis_d3(uv.0, uv.1)?;
         if is_infinite_coord(current.d1u) || is_infinite_coord(current.d1v) {
-            return Ok(None);
+            return Ok(OffsetOutcome::failure(current));
         }
         if let Some(data) = normal_data(uv, basis, offset, osc, (3, &current), domain)? {
-            return third_order(&data, uv, basis).map(Some);
+            return third_order(&data, uv, basis).map(OffsetOutcome::success);
         }
         if !shift_point(start, &mut uv, domain, current.d1u, current.d1v) {
-            return Ok(None);
+            return Ok(OffsetOutcome::failure(current));
         }
+    }
+}
+
+// The point and derivatives up to order 2 of a basis D3 record (the outputs a failed
+// EvaluateD2 leaves).
+fn basis_second(d3: &GeomSurfaceD3) -> GeomSurfaceD2 {
+    GeomSurfaceD2 {
+        point: d3.point,
+        d1u: d3.d1u,
+        d1v: d3.d1v,
+        d2u: d3.d2u,
+        d2v: d3.d2v,
+        d2uv: d3.d2uv,
     }
 }
 

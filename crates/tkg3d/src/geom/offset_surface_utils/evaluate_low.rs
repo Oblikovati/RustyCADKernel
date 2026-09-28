@@ -17,9 +17,9 @@
 //! surface, higher-order normal, derivative replacement, then a shifted point.
 use super::derivatives::{DerivativeOrders, compute_derivatives, entry};
 use super::{
-    BasisDomain, OsculatingInfo, OsculatingQuery, THE_D1_MAGNITUDE_TOL, calculate_d0,
-    compute_dnormal_u, compute_dnormal_v, is_infinite_coord, offset_point, put, query_osculating,
-    replace_derivative, shift_point, zero_table,
+    BasisDomain, OffsetOutcome, OsculatingInfo, OsculatingQuery, THE_D1_MAGNITUDE_TOL,
+    calculate_d0, compute_dnormal_u, compute_dnormal_v, is_infinite_coord, offset_point, put,
+    query_osculating, replace_derivative, shift_point, zero_table,
 };
 use crate::geom::{BasisSurfaceEvaluator, GeomSurface, GeomSurfaceD1};
 use rustycad_tkernel::ncollection::Array2;
@@ -89,18 +89,19 @@ pub fn evaluate_d0<B: BasisSurfaceEvaluator + ?Sized>(
     osc: Option<&dyn OsculatingQuery>,
 ) -> Result<Option<Point3>, Failure> {
     let d1: GeomSurfaceD1 = basis.basis_d1(uv.0, uv.1)?;
-    evaluate_d0_from(uv, basis, offset, osc, d1)
+    Ok(evaluate_d0_from(uv, basis, offset, osc, d1)?.into_option())
 }
 
-/// `EvaluateD0` with the basis point and first derivatives already evaluated;
-/// `evaluate_d0_from((u, v), &*basis, 2.0, None, d1)?`.
+/// `EvaluateD0` with the basis point and first derivatives already evaluated; a
+/// failure leaves the basis point of the last pass in the output;
+/// `evaluate_d0_from((u, v), &*basis, 2.0, None, d1)?.into_option()`.
 pub fn evaluate_d0_from<B: BasisSurfaceEvaluator + ?Sized>(
     start: (f64, f64),
     basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     first: GeomSurfaceD1,
-) -> Result<Option<Point3>, Failure> {
+) -> Result<OffsetOutcome<Point3>, Failure> {
     let domain = BasisDomain::of(basis)?;
     let mut uv: (f64, f64) = start;
     let mut current: GeomSurfaceD1 = first;
@@ -112,16 +113,16 @@ pub fn evaluate_d0_from<B: BasisSurfaceEvaluator + ?Sized>(
         is_first_iteration = false;
         let (mut value, d1u, d1v) = (current.point, current.d1u, current.d1v);
         if is_infinite_coord(d1u) || is_infinite_coord(d1v) {
-            return Ok(None);
+            return Ok(OffsetOutcome::failure(current.point));
         }
         if calculate_d0(&mut value, d1u, d1v, offset, 1.0)? {
-            return Ok(Some(value));
+            return Ok(OffsetOutcome::success(value));
         }
         if let Some(value) = singular_d0(uv, basis, offset, osc, (value, d1u, d1v), domain)? {
-            return Ok(Some(value));
+            return Ok(OffsetOutcome::success(value));
         }
         if !shift_point(start, &mut uv, domain, d1u, d1v) {
-            return Ok(None);
+            return Ok(OffsetOutcome::failure(current.point));
         }
     }
 }
@@ -190,18 +191,20 @@ pub fn evaluate_d1<B: BasisSurfaceEvaluator + ?Sized>(
         d1u: d2.d1u,
         d1v: d2.d1v,
     };
-    evaluate_d1_from(uv, basis, offset, osc, (first, [d2.d2u, d2.d2v, d2.d2uv]))
+    let second: [Vector3; 3] = [d2.d2u, d2.d2v, d2.d2uv];
+    Ok(evaluate_d1_from(uv, basis, offset, osc, (first, second))?.into_option())
 }
 
-/// `EvaluateD1` with the basis derivatives up to order 2 already evaluated;
-/// `evaluate_d1_from((u, v), &*basis, 2.0, None, (d1, [d2u, d2v, d2uv]))?`.
+/// `EvaluateD1` with the basis derivatives up to order 2 already evaluated; a failure
+/// leaves the basis point and first derivatives of the last pass in the outputs;
+/// `evaluate_d1_from((u, v), &*basis, 2.0, None, (d1, [d2u, d2v, d2uv]))?.into_option()`.
 pub fn evaluate_d1_from<B: BasisSurfaceEvaluator + ?Sized>(
     start: (f64, f64),
     basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     first: (GeomSurfaceD1, [Vector3; 3]),
-) -> Result<Option<GeomSurfaceD1>, Failure> {
+) -> Result<OffsetOutcome<GeomSurfaceD1>, Failure> {
     let domain = BasisDomain::of(basis)?;
     let mut uv: (f64, f64) = start;
     let (mut current, mut d2) = first;
@@ -218,13 +221,13 @@ pub fn evaluate_d1_from<B: BasisSurfaceEvaluator + ?Sized>(
         }
         is_first_iteration = false;
         if is_infinite_coord(current.d1u) || is_infinite_coord(current.d1v) {
-            return Ok(None);
+            return Ok(OffsetOutcome::failure(current));
         }
         if let Some(result) = attempt_d1(uv, basis, offset, osc, (current, d2), domain)? {
-            return Ok(Some(result));
+            return Ok(OffsetOutcome::success(result));
         }
         if !shift_point(start, &mut uv, domain, current.d1u, current.d1v) {
-            return Ok(None);
+            return Ok(OffsetOutcome::failure(current));
         }
     }
 }
