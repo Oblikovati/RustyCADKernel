@@ -341,6 +341,10 @@ fn main() {
             "modern_lbfgs" => modern_opt_probe::modern_lbfgs_case(&values),
             "modern_newton" => modern_opt_probe::modern_newton_case(&values),
             "modern_global" => global_modern_probe::modern_global_case(&values),
+            "integ_lin_tridiag" => integ_lin_api_probe::integ_lin_tridiag_case(&values),
+            "integ_lin_norm" => integ_lin_api_probe::integ_lin_norm_case(&values),
+            "integ_lin_spectral" => integ_lin_api_probe::integ_lin_spectral_case(&values),
+            "integ_lin_singular" => integ_lin_api_probe::integ_lin_singular_case(&values),
             "modern_swarm" => swarm_probe::modern_swarm_case(&values),
             "modern_small" => small_probe::modern_small_case(&values),
             "modern_lm" => modern_sys_probe::modern_lm_case(&values),
@@ -531,6 +535,7 @@ mod modern_eigen_probe;
 mod modern_factors_probe;
 mod modern_integ_probe;
 
+mod integ_lin_api_probe;
 mod modern_multiple_probe;
 mod modern_poly_probe;
 mod modern_sys_probe;

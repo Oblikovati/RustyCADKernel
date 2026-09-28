@@ -18,6 +18,9 @@ use crate::{
     math_utils::{IntegResult, Status},
 };
 use rustycad_tkernel::ncollection::Array1;
+/// Highest per-axis Gauss order (`MathInteg::THE_MULTIPLE_GAUSS_MAX_ORDER`);
+/// `assert_eq!(MULTIPLE_GAUSS_MAX_ORDER, 61)`.
+pub const MULTIPLE_GAUSS_MAX_ORDER: usize = 61;
 /// Native per-axis order cap; `MultipleConfig::default()`.
 #[derive(Clone, Copy, Debug)]
 pub struct MultipleConfig {
@@ -26,7 +29,9 @@ pub struct MultipleConfig {
 }
 impl Default for MultipleConfig {
     fn default() -> Self {
-        Self { max_order: 61 }
+        Self {
+            max_order: MULTIPLE_GAUSS_MAX_ORDER,
+        }
     }
 }
 struct AxisRule {
@@ -81,7 +86,7 @@ fn validate_dimensions(
         || lower.length() as usize != dimensions
         || upper.length() as usize != dimensions
         || orders.len() != dimensions
-        || !(1..=61).contains(&config.max_order)
+        || !(1..=MULTIPLE_GAUSS_MAX_ORDER).contains(&config.max_order)
     {
         return None;
     }
@@ -181,7 +186,7 @@ pub fn gauss_multiple_uniform(
     upper: &Vector<'_>,
     order: usize,
 ) -> IntegResult {
-    if dimensions == 0 || !(1..=61).contains(&order) {
+    if dimensions == 0 || !(1..=MULTIPLE_GAUSS_MAX_ORDER).contains(&order) {
         return super::kronrod::invalid();
     }
     let mut orders: Array1<'static, i32> = Array1::with_size(dimensions);

@@ -12,6 +12,7 @@
 // commercial license or contractual agreement.
 
 //! MathLin_EigenSearch.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+use super::utils;
 use crate::math::{Matrix, Vector};
 use crate::math_utils::Status;
 /// Tridiagonal eigenpairs in native iteration order; `TridiagonalResult::default()`.
@@ -62,59 +63,8 @@ impl TridiagonalState {
             vectors: v,
         }
     }
-    fn end(&self, start: i32) -> i32 {
-        for end in start..self.diag.length() - 1 {
-            let scale: f64 = self.diag[end].abs().max(self.diag[end + 1].abs());
-            if self.sub[end].abs() <= f64::EPSILON * scale {
-                return end;
-            }
-        }
-        self.diag.length() - 1
-    }
-    fn shift(&self, start: i32, end: i32) -> f64 {
-        let shift: f64 = (self.diag[start + 1] - self.diag[start]) / (2.0 * self.sub[start]);
-        let radius: f64 = 1.0_f64.hypot(shift);
-        self.diag[end] - self.diag[start]
-            + self.sub[start]
-                / if shift < 0.0 {
-                    shift - radius
-                } else {
-                    shift + radius
-                }
-    }
-    fn rotate(&mut self, row: i32, sine: f64, cosine: f64) {
-        for i in 0..self.diag.length() {
-            let old: f64 = self.vectors[(i, row + 1)];
-            self.vectors[(i, row + 1)] = sine * self.vectors[(i, row)] + cosine * old;
-            self.vectors[(i, row)] = cosine * self.vectors[(i, row)] - sine * old;
-        }
-    }
-    fn step(&mut self, start: i32, end: i32, mut shift: f64) {
-        let mut sine: f64 = 1.0;
-        let mut cosine: f64 = 1.0;
-        let mut previous: f64 = 0.0;
-        for row in (start..end).rev() {
-            let temp: f64 = sine * self.sub[row];
-            let subtemp: f64 = cosine * self.sub[row];
-            let radius: f64 = temp.hypot(shift);
-            self.sub[row + 1] = radius;
-            if radius == 0.0 {
-                self.diag[row + 1] -= previous;
-                self.sub[end] = 0.0;
-                return;
-            }
-            sine = temp / radius;
-            cosine = shift / radius;
-            shift = self.diag[row + 1] - previous;
-            let radius_temp: f64 = (self.diag[row] - shift) * sine + 2.0 * cosine * subtemp;
-            previous = sine * radius_temp;
-            self.diag[row + 1] = shift + previous;
-            shift = cosine * radius_temp - subtemp;
-            self.rotate(row, sine, cosine);
-        }
-        self.diag[start] -= previous;
-        self.sub[start] = shift;
-        self.sub[end] = 0.0;
+    fn length(&self) -> usize {
+        self.diag.length() as usize
     }
     fn finite(&self) -> bool {
         self.diag
@@ -122,70 +72,37 @@ impl TridiagonalState {
             .iter()
             .chain(self.sub.values())
             .all(|x| x.is_finite())
-            && super::jacobi::finite_matrix(&self.vectors)
+            && utils::is_finite_matrix(&self.vectors)
     }
-    fn converge(&mut self, start: i32, limit: u32) -> Status {
+    /// Native `do { ... } while (aEnd != aStart)` loop for one start row.
+    fn converge(&mut self, start: usize, limit: u32) -> Status {
+        let n: usize = self.length();
         for iteration in 0..=limit {
-            let end: i32 = self.end(start);
+            let end: usize = utils::find_submatrix_end(&self.diag, &self.sub, start, n);
             if end == start {
                 return Status::Ok;
             }
             if iteration == limit {
                 return Status::MaxIterations;
             }
-            let shift: f64 = self.shift(start, end);
-            if !shift.is_finite() {
+            let shift: f64 = utils::compute_wilkinson_shift(&self.diag, &self.sub, start, end);
+            if !shift.is_finite()
+                || !utils::perform_ql_step(
+                    &mut self.diag,
+                    &mut self.sub,
+                    &mut self.vectors,
+                    start,
+                    end,
+                    shift,
+                    n,
+                )
+                || !self.finite()
+            {
                 return Status::NumericalError;
             }
-            self.step(start, end, shift);
-            if !self.finite() {
-                return Status::NumericalError;
-            }
         }
-        unreachable!()
+        unreachable!("the loop returns by iteration == limit")
     }
-}
-fn residual_row(
-    original: &TridiagonalState,
-    result: &TridiagonalState,
-    i: i32,
-    j: i32,
-    scale: f64,
-    lambda: f64,
-) -> f64 {
-    let v: &Matrix<'_> = &result.vectors;
-    let mut residual: f64 = original.diag[i] / scale * v[(i, j)] - lambda * v[(i, j)];
-    if i > 0 {
-        residual += original.sub[i - 1] / scale * v[(i - 1, j)];
-    }
-    if i + 1 < original.diag.length() {
-        residual += original.sub[i] / scale * v[(i + 1, j)];
-    }
-    residual
-}
-fn valid_pairs(original: &TridiagonalState, result: &TridiagonalState) -> bool {
-    let n: i32 = original.diag.length();
-    let mut scale: f64 = 0.0;
-    for i in 0..n {
-        scale = scale.max(original.diag[i].abs());
-        if i + 1 < n {
-            scale = scale.max(original.sub[i].abs());
-        }
-    }
-    if scale == 0.0 {
-        return true;
-    }
-    for j in 0..n {
-        let lambda: f64 = result.diag[j] / scale;
-        let tolerance: f64 = 256.0 * f64::EPSILON * n.max(1) as f64 * lambda.abs().max(1.0);
-        for i in 0..n {
-            let residual: f64 = residual_row(original, result, i, j, scale, lambda);
-            if !residual.is_finite() || residual.abs() > tolerance {
-                return false;
-            }
-        }
-    }
-    true
 }
 /// Accepts natural or legacy subdiagonal layout; `eigen_tridiagonal(&diag,&sub,30)`.
 pub fn eigen_tridiagonal(diag: &Vector<'_>, sub: &Vector<'_>, limit: u32) -> TridiagonalResult {
@@ -206,7 +123,7 @@ pub fn eigen_tridiagonal(diag: &Vector<'_>, sub: &Vector<'_>, limit: u32) -> Tri
     }
     let original: TridiagonalState = TridiagonalState::new(diag, sub);
     let mut state: TridiagonalState = TridiagonalState::new(diag, sub);
-    for start in 0..n as i32 {
+    for start in 0..n {
         let status: Status = state.converge(start, limit);
         if status != Status::Ok {
             return TridiagonalResult {
@@ -216,7 +133,9 @@ pub fn eigen_tridiagonal(diag: &Vector<'_>, sub: &Vector<'_>, limit: u32) -> Tri
             };
         }
     }
-    let status: Status = if state.finite() && valid_pairs(&original, &state) {
+    let status: Status = if state.finite()
+        && utils::validate_eigenpairs(&original.diag, &original.sub, &state.diag, &state.vectors)
+    {
         Status::Ok
     } else {
         Status::NumericalError

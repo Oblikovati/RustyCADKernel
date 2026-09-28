@@ -59,3 +59,9 @@ pub fn relative_tolerance(tolerance: f64, dimension: usize) -> f64 {
     }
     tolerance.max(f64::EPSILON * dimension.max(1) as f64)
 }
+
+mod tridiagonal;
+pub use tridiagonal::{
+    TRIDIAGONAL_DEFLATION_TOLERANCE, TRIDIAGONAL_RESIDUAL_TOLERANCE_FACTOR,
+    compute_wilkinson_shift, find_submatrix_end, perform_ql_step, validate_eigenpairs,
+};

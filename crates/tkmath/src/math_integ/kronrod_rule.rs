@@ -28,9 +28,13 @@ struct EmbeddedRule {
     absolute_sum: f64,
     center: f64,
 }
+/// Highest embedded Gauss order with tabulated Kronrod extensions
+/// (`MathInteg::THE_KRONROD_MAX_GAUSS_ORDER`); `assert_eq!(KRONROD_MAX_GAUSS_ORDER, 30)`.
+pub const KRONROD_MAX_GAUSS_ORDER: usize = 30;
+
 /// Embedded Gauss-Kronrod estimates with QUADPACK error floor; `kronrod_rule(&mut f, 0.0, 1.0, 7)`.
 pub fn kronrod_rule(f: &mut impl Function, lower: f64, upper: f64, order: usize) -> IntegResult {
-    if order == 0 || order > 30 || !valid_interval(lower, upper) {
+    if order == 0 || order > KRONROD_MAX_GAUSS_ORDER || !valid_interval(lower, upper) {
         return IntegResult {
             status: Status::InvalidInput,
             ..Default::default()

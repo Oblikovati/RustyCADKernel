@@ -1086,3 +1086,51 @@ Deliberate Rust deviations:
 - `math::FunctionWithDerivative` requires a derivative-only method. The scalar functors
   implement it with `Values` and keep only the derivative.
 - The `initializer_list` constructors take slices.
+
+### MathInteg and MathLin (API completion)
+
+This work adds no upstream suite. It completes the public API of the MathInteg
+(`math_integ`) and MathLin (`math_lin`) namespaces: `tools/audit_api_rows.py` reports no
+missing member and no stale row for `src/FoundationClasses/TKMath/MathInteg` and
+`src/FoundationClasses/TKMath/MathLin` (96 rows). All solvers were already ported; the
+work is:
+
+- The MathInteg `THE_*` constants are public (`GAUSS_MAX_ORDER`, `SET_GAUSS_MAX_ORDER`,
+  `MULTIPLE_GAUSS_MAX_ORDER`, `KRONROD_MAX_GAUSS_ORDER`, `KRONROD_AUTO_INITIAL_ORDER`,
+  `KRONROD_AUTO_ORDER_STEP`, `KRONROD_AUTO_MAX_ITERATIONS`,
+  `DOUBLE_EXP_DEFAULT_MAX_POINTS_PER_LEVEL`, `DOUBLE_EXP_MAX_TRANSFORM_ARGUMENT`,
+  `EXP_SINH_MIN_TRANSFORM_ARGUMENT`). The rules, configs and transforms read them
+  instead of repeating the literals.
+- The QL helpers of `MathLin::Utils` in MathLin_EigenSearch.hxx are public in
+  `math_lin::utils`: `find_submatrix_end`, `compute_wilkinson_shift`, `perform_ql_step`,
+  `validate_eigenpairs`, `TRIDIAGONAL_DEFLATION_TOLERANCE` and
+  `TRIDIAGONAL_RESIDUAL_TOLERANCE_FACTOR`. `eigen_tridiagonal` now calls them, so the
+  private copies in `eigen.rs` are gone.
+
+Supplemental tests are in `math_integ_api_behavior` and `math_lin_api_behavior`. The
+`integ_lin` probe sends 770 differential requests: `integ_lin_tridiag` (300; every QL
+helper, `EigenTridiagonal` and `GetEigenVector`, with NaN, infinite and -0.0 entries,
+graded and deflated matrices), `integ_lin_norm` (200; `AccumulateNorm`, `Norm`,
+`RelativeTolerance`, both `IsFinite` overloads), `integ_lin_spectral` (150; `EigenValues`,
+`SpectralDecomposition`, `MatrixSqrt`, `MatrixInvSqrt`) and `integ_lin_singular` (120;
+`TanhSinhSingular` with an explicit and a default tolerance, every constant and every
+config default). They all match the native bits. The other members were already covered
+by `modern_integ`, `modern_kronrod`, `modern_double_exp`, `modern_tensor`, `modern_eigen`,
+`modern_lu` and `modern_factors`.
+
+The port keeps these native results and makes these deliberate changes:
+
+- `FindSubmatrixEnd` uses `std::max`, which keeps a NaN first operand. The Rust helper
+  does the same (as do the `std::max` calls in `ValidateEigenpairs`), so a NaN diagonal entry gives a NaN deflation
+  threshold and never deflates (`f64::max` would drop the NaN).
+- `PerformQLStep` always returns true, also after its zero-radius early exit, which
+  only clears the end coupling.
+- The helpers index zero-based like `math_Vector::operator[]` and `math_Matrix::At`. An
+  index that the native code would read out of bounds (undefined behavior) panics with
+  the index and the length.
+- `MathLin::EigenResult` is `math_lin::TridiagonalResult`. The different name keeps it
+  apart from the `math_utils::EigenResult` that `Jacobi` returns.
+- Without eigenvectors, `GetEigenVector` returns an uninitialized one-element native
+  vector. Rust returns a zero one-element vector; the probe compares only its size.
+- C++ default arguments (`TanhSinhSingular` tolerance `1.0e-10`, `KronrodAuto`
+  `theMaxOrder = THE_KRONROD_MAX_GAUSS_ORDER`) are explicit Rust parameters.

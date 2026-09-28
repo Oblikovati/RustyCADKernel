@@ -17,6 +17,10 @@ use crate::{
     math_utils::{IntegResult, Status},
 };
 
+/// Highest tabulated Gauss-Legendre order; larger requests are clamped to it
+/// (`MathInteg::THE_GAUSS_MAX_ORDER`); `assert_eq!(GAUSS_MAX_ORDER, 61)`.
+pub const GAUSS_MAX_ORDER: usize = 61;
+
 /// Native fixed Gauss rule, including order clamping; `gauss(&mut f, 0.0, 1.0, 15)`.
 pub fn gauss(f: &mut impl Function, lower: f64, upper: f64, order: usize) -> IntegResult {
     if order == 0 || !valid_interval(lower, upper) {
@@ -37,7 +41,7 @@ pub fn gauss(f: &mut impl Function, lower: f64, upper: f64, order: usize) -> Int
         result.value = result.value.map(|value| -value);
         return result;
     }
-    fixed_rule(f, lower, upper, order.min(61))
+    fixed_rule(f, lower, upper, order.min(GAUSS_MAX_ORDER))
 }
 pub(super) fn valid_interval(lower: f64, upper: f64) -> bool {
     lower.is_finite() && upper.is_finite() && (upper - lower).is_finite()
