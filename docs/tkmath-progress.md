@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 86 complete source suites
-currently account for 1,597 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 93 complete source suites
+currently account for 1,835 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -92,6 +92,13 @@ currently account for 1,597 mapped declarations, with matching native and Rust p
 | MathOpt_PSO_Test.cxx | mathopt_pso | 28 |
 | MathOpt_GlobOpt_Test.cxx | mathopt_global | 24 |
 | ElCLib_Test.cxx | elclib | 12 |
+| BVH_Box_Test.cxx | bvh_box | 86 |
+| BVH_Ray_Test.cxx | bvh_ray | 19 |
+| BVH_Tools_Test.cxx | bvh_tools | 45 |
+| BVH_RadixSorter_Test.cxx | bvh_radix_sorter | 35 |
+| BVH_QuickSorter_Test.cxx | bvh_quick_sorter | 13 |
+| BVH_BuildQueue_Test.cxx | bvh_build_queue | 17 |
+| BVH_Tree_Test.cxx | bvh_tree | 23 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -530,3 +537,45 @@ stored direction is never zero. Exception messages add the offending values to t
 native text. The planar conics' `Transform` members accept every Transform2 form.
 Transform2 itself cannot yet build point-mirror or scale forms, so those branches of
 `gp_Dir2d::Transform` stay untested until gp_Trsf2d is complete.
+
+### BVH core (phase 1)
+
+All 238 declarations of the seven BVH core suites pass in both kernels. The
+1,331 BVH differential requests (21,738 in the whole corpus) match exactly. They
+cover boxes, rays, tools, JSON, quick and radix sorts, binned builds, SAH, QBVH
+collapse and 4D transforms, in float and double for N = 2, 3 and 4. See
+[the BVH design note](bvh-design.md) for the mapping of the templates to Rust.
+
+The port keeps these native behaviors:
+
+- Float instantiations compute in single precision. `BVH_Transform::Apply` still
+  scales by `(T)(1.0 / w)`, which is computed in double.
+- `BVH_Transform::Apply` offsets only X, Y and Z of the minimum corner, so every
+  transformed corner keeps the minimum W. A zero W gives infinite coordinates.
+- `BVH::IntFloor` follows the x86-64 truncation: NaN and out-of-range values give
+  `INT_MIN`, and -inf wraps to `INT_MAX`. The float correction compares in single
+  precision.
+- Vec3/Vec4 division by a scalar multiplies by the reciprocal, and Vec2 divides.
+  `BoxMinMax` uses `std::min`/`std::max`, while projections use `cwiseMin`/`cwiseMax`.
+  The two resolve signed-zero ties differently.
+- The quick and radix sorters apply the element order of libstdc++ `std::sort`
+  and `std::partition`, so tied centroids end in the same order as in GCC.
+- A new primitive set is not dirty. It has an invalid box and an empty tree until
+  `MarkDirty`.
+- `BVH_Transform(matrix)` keeps an identity inverse. A singular `SetTransform`
+  leaves the unscaled cofactors, as `Inverted` writes them before it checks the
+  determinant.
+- `InitFromJson` keeps a parsed `MinPoint` when `MaxPoint` fails, and it widens
+  the fourth dimension to `[lowest, max]`. `DumpJson` keys follow the macro text,
+  for example `BegPrimitive(theNodeIndex)`.
+- The binned builder splits coincident centroids at `(beg + end) / 2.f`, which is
+  computed in float.
+
+Deliberate Rust deviations: accessors that raise `Standard_OutOfRange` return
+`Failure` errors with the index and the valid range. The quick sorter reads each
+centroid once before it sorts; `Center` is a const query. Multi-threaded queue
+builds serialize node splits behind a mutex, and their node numbering depends on
+the schedule, as upstream. A failing build tool releases its busy slot. Upstream
+tests that check constructors with `static_assert` use `const` items, and the
+validity check runs at test time. Uninitialized ray-hit locals start as NaN.
+

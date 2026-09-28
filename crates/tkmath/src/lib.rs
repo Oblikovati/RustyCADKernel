@@ -1,5 +1,6 @@
 //! OCCT mathematical foundation types. Toolkit API and legacy-test acceptance remain in progress.
 pub mod bnd;
+pub mod bvh;
 pub mod cslib;
 pub mod elclib;
 pub mod elslib;

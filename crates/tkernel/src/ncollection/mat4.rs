@@ -14,6 +14,9 @@
 //! Column-major 4x4 transforms with upstream multiplication ordering.
 use super::{Vec3, Vec4};
 use std::ops::{Add, Mul};
+mod access;
+mod inverse;
+pub use inverse::MatrixScalar;
 
 /// A four-column matrix, initially identity; `Mat4::<f64>::default()`.
 #[derive(Clone, Copy, Debug, PartialEq)]

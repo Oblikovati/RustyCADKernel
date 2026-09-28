@@ -261,6 +261,7 @@ fn planar_case(v: &[f64]) {
     println!();
 }
 mod bounds_probe;
+mod bvh_probe;
 mod quaternion_probe;
 mod scale_probe;
 fn main() {
@@ -365,6 +366,11 @@ fn main() {
             "gpconic2" => elementary_probe::gpconic2_case(&values),
             "gpquadric" => elementary_probe::gpquadric_case(&values),
             "gpaxis" => elementary_probe::gpaxis_case(&values),
+            "bvh_box" => bvh_probe::bvh_box_case(&values),
+            "bvh_int_floor" => bvh_probe::bvh_int_floor_case(&values),
+            "bvh_sort" => bvh_probe::bvh_sort_case(&values),
+            "bvh_build" => bvh_probe::bvh_build_case(&values),
+            "bvh_transform" => bvh_probe::bvh_transform_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }

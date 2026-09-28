@@ -15,6 +15,7 @@
 use super::{Array1, ArrayError};
 
 /// A zero-based growable collection; `LinearVector::<i32>::with_capacity(10)`.
+#[derive(Debug)]
 pub struct LinearVector<T> {
     elements: Vec<T>,
 }
