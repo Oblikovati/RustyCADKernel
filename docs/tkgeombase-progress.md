@@ -5,15 +5,15 @@
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
 `IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC`,
-`GeomTools`, `FEmTool`, `AppParCurves`, `GeomBndLib`, `BndLib`, `CPnts` and `GCPnts`
-packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of
-them.
+`GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts` and
+`GCPnts` packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0
+stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (685 declarations):
+passes (694 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -497,9 +497,10 @@ ranges (degree < 0, no Gauss point, no coordinate), where the native `math_Matri
 builds empty or negative-size tables on its stack buffer (degree -2 crashes) while the
 TKMath `Matrix` refuses them with Standard_RangeError.
 
-The corpus has 29711 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+The corpus has 33298 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
-FEmTool, 2045 AppParCurves, 15198 GeomBndLib and BndLib, and 2210 CPnts and GCPnts.
+FEmTool, 2045 AppParCurves, 3587 AppCont, 15198 GeomBndLib and BndLib, and 2210 CPnts
+and GCPnts.
 
 ## Preserved native behaviour
 
