@@ -102,16 +102,19 @@ occ::handle<GeomEval_RepSurfaceDesc::Base> g3_surface_desc(G3Reader& r,const occ
 }
 bool g3_has_rep(const occ::handle<Geom_Surface>& s){
  if(auto b=occ::down_cast<Geom_BSplineSurface>(s))return b->HasEvalRepresentation();
+ if(auto o=occ::down_cast<Geom_OffsetSurface>(s))return o->HasEvalRepresentation();
  if(auto e=occ::down_cast<Geom_SurfaceOfLinearExtrusion>(s))return e->HasEvalRepresentation();
  return occ::down_cast<Geom_SurfaceOfRevolution>(s)->HasEvalRepresentation();
 }
 void g3_set_rep(const occ::handle<Geom_Surface>& s,const occ::handle<GeomEval_RepSurfaceDesc::Base>& d){
  if(auto b=occ::down_cast<Geom_BSplineSurface>(s)){b->SetEvalRepresentation(d);return;}
+ if(auto o=occ::down_cast<Geom_OffsetSurface>(s)){o->SetEvalRepresentation(d);return;}
  if(auto e=occ::down_cast<Geom_SurfaceOfLinearExtrusion>(s)){e->SetEvalRepresentation(d);return;}
  occ::down_cast<Geom_SurfaceOfRevolution>(s)->SetEvalRepresentation(d);
 }
 void g3_clear_rep(const occ::handle<Geom_Surface>& s){
  if(auto b=occ::down_cast<Geom_BSplineSurface>(s)){b->ClearEvalRepresentation();return;}
+ if(auto o=occ::down_cast<Geom_OffsetSurface>(s)){o->ClearEvalRepresentation();return;}
  if(auto e=occ::down_cast<Geom_SurfaceOfLinearExtrusion>(s)){e->ClearEvalRepresentation();return;}
  occ::down_cast<Geom_SurfaceOfRevolution>(s)->ClearEvalRepresentation();
 }

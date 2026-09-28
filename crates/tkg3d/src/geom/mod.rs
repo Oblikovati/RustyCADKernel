@@ -105,3 +105,10 @@ pub use bezier_surface::GeomBezierSurface;
 
 mod bspline_surface;
 pub use bspline_surface::{GeomBSplineSurface, KnotVector, LocalKnots, ModifiedPoles};
+
+mod osculating_surface;
+pub use osculating_surface::GeomOsculatingSurface;
+mod offset_surface;
+pub use offset_surface::{GeomOffsetSurface, equivalent_surface};
+mod rectangular_trimmed_surface;
+pub use rectangular_trimmed_surface::GeomRectangularTrimmedSurface;

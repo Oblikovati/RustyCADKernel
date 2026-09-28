@@ -118,6 +118,7 @@ def append_tkg3d_requests(requests: list[str]) -> None:
     __import__('tkg3d_corpus_offset').append_offset_requests(requests)
     __import__('tkg3d_corpus_bezier_surface').append_bezier_surface_requests(requests)
     __import__('tkg3d_corpus_bspline_surface').append_bspline_surface_requests(requests)
+    __import__('tkg3d_corpus_offset_surface').append_offset_surface_requests(requests)
 
 
 __all__ = ['fmt', 'params', 'point', 'unit', 'frame', 'axis', 'trsf', 'moves', 'line', 'circle', 'ellipse',

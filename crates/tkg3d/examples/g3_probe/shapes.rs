@@ -71,6 +71,7 @@ pub fn surface(r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
         }
         7 => bezier_surface(r),
         8 => super::bspline_surface::spec(r),
+        9..=11 => super::offset_surface::spec(kind, r),
         _ => panic!("surface kind {kind} has no Rust builder in the probe"),
     }
 }
