@@ -34,9 +34,13 @@ fn NCollection_BaseAllocatorTest__DefaultInstance() {
 #[test]
 fn NCollection_BaseAllocatorTest__Allocate() {
     let allocator = BaseAllocator::common();
-    let first = allocator.allocate(10);
-    let second = allocator.allocate(100);
-    let third = allocator.allocate(1000);
+    let first = allocator.allocate(10).expect("Standard::Allocate succeeds");
+    let second = allocator
+        .allocate(100)
+        .expect("Standard::Allocate succeeds");
+    let third = allocator
+        .allocate(1000)
+        .expect("Standard::Allocate succeeds");
     assert_ne!(first.as_slice().as_ptr(), second.as_slice().as_ptr());
     assert_ne!(first.as_slice().as_ptr(), third.as_slice().as_ptr());
     assert_ne!(second.as_slice().as_ptr(), third.as_slice().as_ptr());
@@ -102,7 +106,9 @@ fn NCollection_BaseAllocatorTest__CopyAndMove() {
 }
 #[test]
 fn NCollection_BaseAllocatorTest__BigAllocation() {
-    let mut bytes = BaseAllocator::common().allocate(1024 * 1024);
+    let mut bytes = BaseAllocator::common()
+        .allocate(1024 * 1024)
+        .expect("Standard::Allocate succeeds");
     bytes.as_mut_slice().fill(0xAB);
     assert!(bytes.as_slice().iter().all(|value| *value == 0xAB));
     drop(bytes);

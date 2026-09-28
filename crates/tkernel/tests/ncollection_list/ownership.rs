@@ -50,7 +50,7 @@ fn NCollection_ListTest__InsertList() {
     let mut second = list(&[20, 30]);
     let mut cursor = first.cursor();
     cursor.next(&first);
-    first.insert_list_before(&mut second, &cursor);
+    first.insert_list_before(&mut second, &cursor).unwrap();
     equal(&first, &[10, 20, 30, 40]);
     assert!(second.is_empty());
 }

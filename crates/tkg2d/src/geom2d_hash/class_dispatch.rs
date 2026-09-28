@@ -14,7 +14,7 @@
 
 //! The exact-type dispatch of the polymorphic hashers: the null and identity cases,
 //! the down cast on an exact dynamic type, and the fallback for unknown classes.
-use rustycad_tkernel::standard::hashing::c_string_hash;
+use rustycad_tkernel::standard::c_string::CStringHasher;
 use rustycad_tkernel::standard::{Handle, RuntimeTyped};
 
 /// The typed handle when the dynamic type of `handle` is exactly `T`
@@ -54,7 +54,7 @@ pub fn decided_equality<S: ?Sized + RuntimeTyped>(
 pub fn unknown_class_hash<S: ?Sized + RuntimeTyped>(handle: &Handle<S>) -> usize {
     handle
         .dynamic_type()
-        .map_or(0, |kind| c_string_hash(kind.name().as_bytes()))
+        .map_or(0, |kind| CStringHasher.hash_code(kind.name().as_bytes()))
 }
 
 /// Returns the typed hasher result for the first listed class that is the exact

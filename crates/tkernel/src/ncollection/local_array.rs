@@ -133,6 +133,15 @@ impl<T, const N: usize> LocalArray<T, N> {
         super::Array1::from_slice(self.as_mut_slice())
     }
 
+    /// A zero-based array viewing the values, as the const native `ToArray1()`; the view
+    /// detaches a private copy on its first write; `array.to_array1_view().len()`.
+    pub fn to_array1_view(&self) -> super::Array1<'_, T>
+    where
+        T: Clone,
+    {
+        super::Array1::from_shared(self.as_slice(), 0)
+    }
+
     /// Transfers storage and leaves the source empty; `dest.move_from(&mut source)`.
     pub fn move_from(&mut self, source: &mut Self) {
         *self = std::mem::take(source);

@@ -94,5 +94,16 @@ fn polymorphic_allocator_objects_own_real_allocations() {
     drop(allocation);
     incremental.resource().reset(false).unwrap();
     let heap = Handle::new(HeapAllocatorObject::default());
-    assert_eq!(heap.resource().allocate(16).as_slice().len(), 16);
+    assert_eq!(
+        heap.resource()
+            .allocate(16)
+            .expect("malloc succeeds")
+            .as_slice()
+            .len(),
+        16
+    );
+    assert_eq!(
+        heap.resource(),
+        &rustycad_tkernel::ncollection::BaseAllocator::global_heap()
+    );
 }

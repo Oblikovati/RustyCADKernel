@@ -36,6 +36,15 @@ impl<K, V> Clone for FlatItems<'_, K, V> {
         }
     }
 }
+// The default-constructed native iterator has no slots and compares equal to every end.
+impl<K, V> Default for FlatItems<'_, K, V> {
+    fn default() -> Self {
+        Self {
+            slots: &[],
+            index: 0,
+        }
+    }
+}
 impl<K, V> PartialEq for FlatItems<'_, K, V> {
     fn eq(&self, other: &Self) -> bool {
         (self.index == self.slots.len() && other.index == other.slots.len())

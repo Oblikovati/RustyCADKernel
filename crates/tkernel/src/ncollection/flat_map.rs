@@ -57,6 +57,10 @@ impl<K, H: HashPolicy<K>> FlatMap<K, H> {
     pub fn contains(&self, key: &K) -> bool {
         self.table.lookup(key).is_some()
     }
+    /// Borrows the stored equivalent key, OCCT's optional reference; `map.contained(&42)`.
+    pub fn contained(&self, key: &K) -> Option<&K> {
+        self.seek(key)
+    }
     /// Optionally borrows the stored key; `map.seek(&42)`.
     pub fn seek(&self, key: &K) -> Option<&K> {
         Some(&self.table.slots[self.table.lookup(key)?].as_ref()?.key)
@@ -130,6 +134,11 @@ impl<K, H: HashPolicy<K> + Default> FlatMap<K, H> {
     pub fn move_from(source: &mut Self) -> Self {
         std::mem::take(source)
     }
+    /// Native move assignment: releases this storage, then takes the source's and leaves
+    /// the source empty with no slots; `map.move_assign(&mut source)`.
+    pub fn move_assign(&mut self, source: &mut Self) {
+        *self = Self::move_from(source);
+    }
 }
 impl<K, H: HashPolicy<K> + Default> Default for FlatMap<K, H> {
     fn default() -> Self {
@@ -153,6 +162,14 @@ impl<K> Clone for FlatMapIter<'_, K> {
     fn clone(&self) -> Self {
         Self {
             items: self.items.clone(),
+        }
+    }
+}
+/// The native default `Iterator()`: exhausted, equal to every end iterator.
+impl<K> Default for FlatMapIter<'_, K> {
+    fn default() -> Self {
+        Self {
+            items: FlatItems::default(),
         }
     }
 }
