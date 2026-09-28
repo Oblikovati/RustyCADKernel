@@ -5,7 +5,9 @@ use super::common::{
 };
 use super::graph::{Graph, chain, desc, graph, make};
 use rustycad_tkbrep::topods::{Builder, Shape, ShapeIterator};
-use rustycad_tkbrep::toptools::{LocationSet, ShapeSet, ShapeSetData, TopToolsShapeSet, shape_set_io};
+use rustycad_tkbrep::toptools::{
+    LocationSet, ShapeSet, ShapeSetData, TopToolsShapeSet, shape_set_io,
+};
 use rustycad_tkernel::message::ProgressRange;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::storage::IoStream;
@@ -52,11 +54,19 @@ impl ShapeSet for ProbeShapeSet {
         stream.insert_bytes(format!("geometry {}\n", self.added).as_bytes());
         Ok(())
     }
-    fn write_geometry(&mut self, stream: &mut IoStream, _: &ProgressRange<'_>) -> Result<(), Failure> {
+    fn write_geometry(
+        &mut self,
+        stream: &mut IoStream,
+        _: &ProgressRange<'_>,
+    ) -> Result<(), Failure> {
         stream.insert_bytes(format!("Probe {}\n", self.added).as_bytes());
         Ok(())
     }
-    fn read_geometry(&mut self, stream: &mut IoStream, _: &ProgressRange<'_>) -> Result<(), Failure> {
+    fn read_geometry(
+        &mut self,
+        stream: &mut IoStream,
+        _: &ProgressRange<'_>,
+    ) -> Result<(), Failure> {
         stream.extract_word(ANY_WORD);
         stream.extract_int(&mut self.added);
         Ok(())
@@ -69,7 +79,12 @@ impl ShapeSet for ProbeShapeSet {
         stream.insert_bytes(format!("g{}", shape.nb_children()).as_bytes());
         Ok(())
     }
-    fn read_shape_geometry(&mut self, kind: ShapeEnum, stream: &mut IoStream, shape: &mut Shape) -> Result<(), Failure> {
+    fn read_shape_geometry(
+        &mut self,
+        kind: ShapeEnum,
+        stream: &mut IoStream,
+        shape: &mut Shape,
+    ) -> Result<(), Failure> {
         stream.extract_word(ANY_WORD);
         *shape = make(kind as i32);
         Ok(())
@@ -97,7 +112,16 @@ fn set_shapes(set: &dyn ShapeSet) {
     for i in 1..=set.nb_shapes() {
         let s = set.shape(i).unwrap();
         int(s.shape_type().unwrap() as i32);
-        for f in [s.free(), s.modified(), s.checked(), s.orientable(), s.closed(), s.infinite(), s.convex(), s.locked()] {
+        for f in [
+            s.free(),
+            s.modified(),
+            s.checked(),
+            s.orientable(),
+            s.closed(),
+            s.infinite(),
+            s.convex(),
+            s.locked(),
+        ] {
             flag(f.unwrap());
         }
         let mut it = ShapeIterator::new(&s, false, false);

@@ -21,7 +21,10 @@ impl TShape for ProbeTVertex {
         self.parent.tshape_base()
     }
     fn empty_copy(&self) -> Handle<dyn TShape> {
-        Handle::new(ProbeTVertex { parent: TVertex::new() }).into_cast()
+        Handle::new(ProbeTVertex {
+            parent: TVertex::new(),
+        })
+        .into_cast()
     }
 }
 
@@ -49,8 +52,14 @@ pub fn make(kind: i32) -> Shape {
         3 => return made(|s: &mut Shell| builder.make_shell(s)),
         4 => Handle::new(TFace::new()).into_cast(),
         5 => return made(|s: &mut Wire| builder.make_wire(s)),
-        6 => Handle::new(ProbeTEdge { parent: TEdge::new() }).into_cast(),
-        _ => Handle::new(ProbeTVertex { parent: TVertex::new() }).into_cast(),
+        6 => Handle::new(ProbeTEdge {
+            parent: TEdge::new(),
+        })
+        .into_cast(),
+        _ => Handle::new(ProbeTVertex {
+            parent: TVertex::new(),
+        })
+        .into_cast(),
     };
     Shape::from_parts(tshape, Location::default(), Orientation::Forward)
 }
@@ -145,7 +154,10 @@ pub fn chain(g: &Graph, l: &Location) {
     let mut items = Vec::new();
     let mut c = l.clone();
     while !c.is_identity() {
-        items.push((g.datum_id(c.first_datum().unwrap()), c.first_power().unwrap()));
+        items.push((
+            g.datum_id(c.first_datum().unwrap()),
+            c.first_power().unwrap(),
+        ));
         c = c.next_location().clone();
     }
     int(items.len() as i32);
@@ -171,7 +183,9 @@ fn orientation(o: i32) -> Orientation {
 
 fn child(g: &Graph, r: &mut Reader<'_>) -> Result<Shape, Failure> {
     let (c, o, l) = (r.integer(), r.integer(), r.integer());
-    g.shape(c).oriented(orientation(o)).located(&g.loc(l), false)
+    g.shape(c)
+        .oriented(orientation(o))
+        .located(&g.loc(l), false)
 }
 
 fn set_flag(s: &Shape, bit: i32, v: bool) -> Result<(), Failure> {
@@ -208,7 +222,10 @@ fn command(g: &mut Graph, r: &mut Reader<'_>) -> Result<(), Failure> {
         }
         5 => {
             let (s, o, l) = (r.integer(), r.integer(), r.integer());
-            let moved = g.shape(s).oriented(orientation(o)).moved(&g.loc(l), false)?;
+            let moved = g
+                .shape(s)
+                .oriented(orientation(o))
+                .moved(&g.loc(l), false)?;
             g.shapes.push(moved);
         }
         6 => {

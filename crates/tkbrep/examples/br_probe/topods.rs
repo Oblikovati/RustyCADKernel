@@ -68,7 +68,10 @@ fn flags(s: &Shape) {
     int(s.nb_children());
     int(t.nb_children());
     word(s.tshape().dynamic_type().unwrap().name());
-    flag(s.tshape().is_kind(<dyn TShape as RuntimeTyped>::static_type()));
+    flag(
+        s.tshape()
+            .is_kind(<dyn TShape as RuntimeTyped>::static_type()),
+    );
     let copy = t.empty_copy();
     word(copy.dynamic_type().unwrap().name());
     int(copy.nb_children());

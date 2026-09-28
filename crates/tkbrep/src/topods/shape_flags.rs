@@ -32,7 +32,7 @@ macro_rules! shape_flag {
                 .$get())
         }
         #[doc = concat!("`", $native, "(bool)`: sets the flag of the shared TShape; `shape.",
-                                stringify!($set), "(true)?`.")]
+                                                stringify!($set), "(true)?`.")]
         pub fn $set(&self, value: bool) -> Result<(), Failure> {
             self.checked_tshape(concat!("TopoDS_Shape::", $native))?
                 .$set(value);

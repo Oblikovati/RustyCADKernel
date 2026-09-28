@@ -4,9 +4,9 @@
 #[allow(dead_code, unused_imports)]
 pub mod common;
 pub mod graph;
-pub mod topexp;
-pub mod topods;
-pub mod toptools;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
+pub mod topexp;
+pub mod topods;
+pub mod toptools;
