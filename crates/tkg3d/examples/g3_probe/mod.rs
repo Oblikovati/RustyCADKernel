@@ -1,5 +1,6 @@
 //! The TKG3d probe operations, one module per C++ probe file under tools/oracle.
 pub mod advapprox;
+pub mod bezier_surface;
 pub mod bspl;
 pub mod common;
 pub mod conics;

@@ -1,13 +1,13 @@
 //! The curve and surface specifications of tools/oracle/tkg3d_probe_common.cxx
 //! (g3_curve and g3_surface), built with the Rust classes.
 use super::print::Reader;
-use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{
-    GeomBSplineCurve, GeomBezierCurve, GeomCircle, GeomConicalSurface, GeomCurve,
-    GeomCylindricalSurface, GeomEllipse, GeomHyperbola, GeomLine, GeomParabola, GeomPlane,
-    GeomSphericalSurface, GeomSurface, GeomSurfaceOfLinearExtrusion, GeomSurfaceOfRevolution,
-    GeomToroidalSurface, GeomTrimmedCurve,
+    GeomBSplineCurve, GeomBezierCurve, GeomBezierSurface, GeomCircle, GeomConicalSurface,
+    GeomCurve, GeomCylindricalSurface, GeomEllipse, GeomHyperbola, GeomLine, GeomParabola,
+    GeomPlane, GeomSphericalSurface, GeomSurface, GeomSurfaceOfLinearExtrusion,
+    GeomSurfaceOfRevolution, GeomToroidalSurface, GeomTrimmedCurve,
 };
 use rustycad_tkmath::gp::Point3;
 
@@ -61,8 +61,29 @@ pub fn surface(r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
             let basis = curve(r)?;
             Ok(Handle::new(GeomSurfaceOfRevolution::new(&basis, a)?).cast())
         }
+        7 => bezier_surface(r),
         _ => panic!("surface kind {kind} has no Rust builder in the probe"),
     }
+}
+
+// Kind 7: bezier rational nu nv (x y z w)*(nu*nv), row by row.
+fn bezier_surface(r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
+    let rational = r.flag();
+    let (nu, nv) = (r.integer(), r.integer());
+    let mut p = Array2::<Point3>::with_bounds(1, nu, 1, nv).unwrap();
+    let mut w = Array2::<f64>::with_bounds(1, nu, 1, nv).unwrap();
+    for i in 1..=nu {
+        for j in 1..=nv {
+            p[(i, j)] = r.pnt();
+            w[(i, j)] = r.real();
+        }
+    }
+    let surface = if rational {
+        GeomBezierSurface::with_weights(&p, &w)?
+    } else {
+        GeomBezierSurface::new(&p)?
+    };
+    Ok(Handle::new(surface).cast())
 }
 
 // Kinds 0 to 4: plane F, cylinder F R, cone F angle R, sphere F R, torus F R r.
