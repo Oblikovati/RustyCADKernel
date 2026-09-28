@@ -453,3 +453,48 @@ reference overloads are field access and `ChangeData` returns an array of compon
 references (a matrix returns its column array). `Map` copies instead of reinterpreting
 memory. `DumpJson` exists only for float and double elements, because the native macro
 reads each argument as a `double`, which is undefined for `int` elements.
+
+## Standard, TCollection, TColStd, StdFail, Plugin and TShort API completion
+
+Every public member of these packages' headers has an `api` row in `porting/parity.json`:
+`python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/<Package> --source ../OCCT`
+reports 0 missing and 0 stale rows for each. TShort has no headers at the pinned revision
+(the package only lists an empty `FILES.cmake`), so it has nothing to map.
+`tools/verify_tkernel_api.py` (run by `verify_tkernel.py`) compiles
+`tools/oracle/tkernel_api_probe.cxx` against the prebuilt TKernel and compares every
+response with the Rust twin `crates/tkernel/examples/api_probe`, byte for byte. Each area
+owns one `tools/oracle/tkernel_<area>_probe.cxx`, one `api_probe/<area>.rs` and one
+`tools/tkernel_<area>_corpus.py`.
+
+### Exception classes (Standard, StdFail, Plugin_Failure)
+
+Each `DEFINE_STANDARD_EXCEPTION(C1, C2)` class is a constructor function returning a
+`Failure` with the class name: `standard::exceptions::out_of_range`, `std_fail::not_done`,
+`plugin::failure`. C++ catches an exception by any base class; Rust has one `Failure`
+type, so the class tree is data (`standard::exceptions::exception_parent`) and
+`Failure::is_kind("Standard_DomainError")` answers what `catch (Standard_DomainError&)`
+would catch. Classes declared by other toolkits (`math_NotSquare`) are not in the TKernel
+table; `is_kind` still reports them as `Standard_Failure`, the root of every OCCT
+exception. The probe throws every class with empty, plain, NUL-truncated and UTF-8
+messages and compares the full catch-by-base matrix, `ExceptionType()`, `what()` and
+`operator<<` output (which omits `": "` for an empty message).
+
+### TCollection_AsciiString, TCollection_HAsciiString and TCollection
+
+Pending.
+
+### TCollection_ExtendedString and TCollection_HExtendedString
+
+Pending.
+
+### Standard scalar, character, hashing, time, GUID and atomic helpers
+
+Pending.
+
+### Standard handles, transients, type descriptors, failures and TColStd handles
+
+Pending.
+
+### Standard memory managers, synchronization, locale, buffered readers, dump and Plugin
+
+Pending.

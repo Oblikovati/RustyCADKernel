@@ -185,11 +185,13 @@ def main():
         run([sys.executable, ROOT/"tools/generate_units_data.py", "--check", "--source", source], output/"units-data-check.log", env=env)
         run([sys.executable, ROOT/"tools/verify_units.py", "--source", source], output/"units-verification.log", env=env)
         units_report = json.loads((output/"units/report.json").read_text())
+    run([sys.executable, ROOT/"tools/verify_tkernel_api.py", "--source", source], output/"api-verification.log", env=env)
+    api_report = json.loads((output/"api/report.json").read_text())
     geometry_report = None
     if any(m["rust_target"] == "standard_dump" for m in mappings):
         run([sys.executable, ROOT/"tools/verify_geometry.py", "--source", source], output/"geometry-verification.log", env=env)
         geometry_report = json.loads((output/"geometry/report.json").read_text())
-    files = sorted(set([p for p in (ROOT/"crates").rglob("*") if p.is_file()] + list((ROOT/"tools/oracle").glob("*.cxx")) + [ROOT/"Cargo.toml", ROOT/"tools/verify_geometry.py", ROOT/"tools/verify_units.py", ROOT/"tools/generate_units_data.py", ROOT/"porting/units-data.json", ROOT/"tools/verify_kdtree.py", ROOT/"crates/tkernel/Cargo.toml", ROOT/"porting/parity.json", Path(__file__).resolve(), ROOT/"tools/oracle/tkernel_probe.cxx", ROOT/"tools/oracle/strtod_probe.cxx", ROOT/"tools/verify_strtod.py", ROOT/"tools/tkernel_mapping.py", ROOT/"tools/verify_ascii_string.py", ROOT/"tools/oracle/ascii_string_probe.cxx", ROOT/"tools/verify_extended_string.py", ROOT/"tools/oracle/extended_string_probe.cxx", ROOT/"Cargo.lock", ROOT/"rust-toolchain.toml"]))
+    files = sorted(set([p for p in (ROOT/"crates").rglob("*") if p.is_file()] + list((ROOT/"tools/oracle").glob("*.cxx")) + [ROOT/"Cargo.toml", ROOT/"tools/verify_geometry.py", ROOT/"tools/verify_units.py", ROOT/"tools/generate_units_data.py", ROOT/"porting/units-data.json", ROOT/"tools/verify_kdtree.py", ROOT/"crates/tkernel/Cargo.toml", ROOT/"porting/parity.json", Path(__file__).resolve(), ROOT/"tools/oracle/tkernel_probe.cxx", ROOT/"tools/oracle/strtod_probe.cxx", ROOT/"tools/verify_strtod.py", ROOT/"tools/tkernel_mapping.py", ROOT/"tools/verify_ascii_string.py", ROOT/"tools/oracle/ascii_string_probe.cxx", ROOT/"tools/verify_extended_string.py", ROOT/"tools/oracle/extended_string_probe.cxx", ROOT/"tools/verify_tkernel_api.py", *(ROOT/"tools").glob("tkernel_*_corpus.py"), *(ROOT/"tools/oracle").glob("*.hxx"), ROOT/"Cargo.lock", ROOT/"rust-toolchain.toml"]))
     report = {"schema_version":1,"profile":"linux-gcc-c-locale","revision":inventory['revision'],
               "platform":platform.platform(),"python":platform.python_version(),
               "cmake_definitions":flags,
@@ -200,13 +202,14 @@ def main():
               "legacy_tests_passed":native_passed,"upstream_skips":native_skips,
               "declarations_mapped":len(mappings),"rust_translations_passed":sum(m["status"]=="translated" for m in mappings),
               "current_behavior_regressions_passed":len(native_skips),"rust_runtime_cases_passed":len(rust_expected),
-              "differential_cases_passed":len(requests.splitlines()) + (numeric_report["cases_passed"] if numeric_report else 0) + (string_report["cases_passed"] if string_report else 0) + (extended_report["cases_passed"] if extended_report else 0) + (kdtree_report["cases_passed"] if kdtree_report else 0) + (units_report["cases_passed"] if units_report else 0) + (geometry_report["cases_passed"] if geometry_report else 0),
+              "differential_cases_passed":len(requests.splitlines()) + (numeric_report["cases_passed"] if numeric_report else 0) + (string_report["cases_passed"] if string_report else 0) + (extended_report["cases_passed"] if extended_report else 0) + (kdtree_report["cases_passed"] if kdtree_report else 0) + (units_report["cases_passed"] if units_report else 0) + (geometry_report["cases_passed"] if geometry_report else 0) + api_report["cases_passed"],
               "numeric_prefix_report":numeric_report,
               "ascii_string_report":string_report,
               "extended_string_report":extended_report,
               "kdtree_report":kdtree_report,
               "units_report":units_report,
               "geometry_report":geometry_report,
+              "api_report":api_report,
               "input_sha256":hashlib.sha256(requests.encode()).hexdigest(),
               "output_sha256":hashlib.sha256(oracle.encode()).hexdigest(),
               "source_hashes":{p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files},

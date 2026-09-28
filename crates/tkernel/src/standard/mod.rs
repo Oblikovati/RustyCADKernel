@@ -5,6 +5,7 @@ mod array_stream_buffer;
 pub use array_stream_buffer::ArrayStreamBuffer;
 mod failure;
 pub use failure::Failure;
+pub mod exceptions;
 mod strtod;
 pub use strtod::strtod;
 

@@ -32,6 +32,12 @@ impl Failure {
     pub fn new(message: &str) -> Self {
         Self::with_type("Standard_Failure", message, "")
     }
+    /// Constructs a named exception class from a message alone, as each
+    /// `DEFINE_STANDARD_EXCEPTION` class's `C1(const char* theMessage = "")` does;
+    /// `Failure::with_message("Standard_DomainError", "bad")`.
+    pub fn with_message(exception_type: &'static str, message: &str) -> Self {
+        Self::with_type(exception_type, message, "")
+    }
     /// Constructs Standard_OutOfRange; `Failure::out_of_range("test")`.
     pub fn out_of_range(message: &str) -> Self {
         Self::with_type("Standard_OutOfRange", message, "")
