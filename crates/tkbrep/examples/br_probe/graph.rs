@@ -20,11 +20,11 @@ impl TShape for ProbeTVertex {
     fn tshape_base(&self) -> &TShapeBase {
         self.parent.tshape_base()
     }
-    fn empty_copy(&self) -> Handle<dyn TShape> {
-        Handle::new(ProbeTVertex {
+    fn empty_copy(&self) -> Result<Handle<dyn TShape>, Failure> {
+        Ok(Handle::new(ProbeTVertex {
             parent: TVertex::new(),
         })
-        .into_cast()
+        .into_cast())
     }
 }
 
@@ -37,7 +37,7 @@ impl TShape for ProbeTEdge {
     fn tshape_base(&self) -> &TShapeBase {
         TShape::tshape_base(&self.parent)
     }
-    fn empty_copy(&self) -> Handle<dyn TShape> {
+    fn empty_copy(&self) -> Result<Handle<dyn TShape>, Failure> {
         TShape::empty_copy(&self.parent)
     }
 }

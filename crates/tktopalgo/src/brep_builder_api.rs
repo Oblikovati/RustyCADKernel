@@ -17,7 +17,7 @@
 
 //! BRepBuilderAPI vertex construction with an explicit precision context.
 use rustycad_tkbrep::{
-    brep::Builder,
+    brep::BRepBuilder,
     topods::{Shape, Vertex},
 };
 use rustycad_tkmath::gp::Point3;
@@ -31,11 +31,16 @@ impl MakeVertex {
     pub fn new(point: Point3) -> Self {
         Self::with_precision(point, 1e-7)
     }
-    /// Injects the BRepLib precision instead of mutating process globals; `MakeVertex::with_precision(point,1e-6)`.
+    /// Injects the BRepLib precision instead of mutating process globals:
+    /// `BRep_Builder::MakeVertex(V, P, BRepLib::Precision())`; `MakeVertex::with_precision(point,1e-6)`.
     pub fn with_precision(point: Point3, precision: f64) -> Self {
-        Self {
-            vertex: Builder::make_vertex(point, precision),
-        }
+        let mut vertex = Vertex::default();
+        // MakeVertex fails only for a locked TShape or a singular vertex location; a new
+        // vertex has neither.
+        BRepBuilder::default()
+            .make_vertex_at(&mut vertex, point, precision)
+            .expect("a new vertex is unlocked and at the identity location");
+        Self { vertex }
     }
     /// Vertex construction completes synchronously; `builder.is_done()`.
     pub const fn is_done(&self) -> bool {

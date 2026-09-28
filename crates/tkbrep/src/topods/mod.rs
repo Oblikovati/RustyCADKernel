@@ -40,6 +40,7 @@ pub use builder::Builder;
 pub use hshape::HShape;
 pub use iterator::ShapeIterator;
 pub use shape::Shape;
+pub(crate) use tshape::dump_tshape;
 pub use tshape::{TShape, TShapeBase, bit_layout};
 pub use tshapes::{TCompSolid, TCompound, TEdge, TFace, TShell, TSolid, TVertex, TWire};
 pub use typed::{

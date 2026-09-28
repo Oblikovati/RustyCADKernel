@@ -21,7 +21,7 @@
 use super::Shape;
 use rustycad_tkernel::impl_transient_interface;
 use rustycad_tkernel::standard::dump::{self, DumpOutput, DumpStream};
-use rustycad_tkernel::standard::{Handle, SharedState, StandardTransient, Transient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient, Transient};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use std::io;
 
@@ -169,8 +169,10 @@ pub trait TShape: Transient {
     fn tshape_base(&self) -> &TShapeBase;
 
     /// `EmptyCopy()`: a new TShape of the same class with the same geometry and no
-    /// sub-shapes; `tshape.empty_copy()`.
-    fn empty_copy(&self) -> Handle<dyn TShape>;
+    /// sub-shapes. It returns `Result` because a derived class can raise from it
+    /// (`BRep_TEdge::EmptyCopy` copies its curve representations, which evaluates their
+    /// curves); `tshape.empty_copy()?`.
+    fn empty_copy(&self) -> Result<Handle<dyn TShape>, Failure>;
 
     /// `DumpJson(theOStream, theDepth)`: the static class name `TopoDS_TShape`, the
     /// object address, the type, the child count, the state word and the eight flags;
@@ -262,8 +264,13 @@ fn stored_shape_type(state: u16) -> ShapeEnum {
     ShapeEnum::ALL[usize::from(state & BITS_SHAPE_TYPE_MASK)]
 }
 
-/// The body of `TopoDS_TShape::DumpJson` for the TShape at `address`.
-fn dump_tshape(base: &TShapeBase, address: usize, output: &mut DumpStream) -> io::Result<()> {
+/// The body of `TopoDS_TShape::DumpJson` for the TShape at `address`, also called by
+/// the BRep TShapes (`OCCT_DUMP_BASE_CLASS`).
+pub(crate) fn dump_tshape(
+    base: &TShapeBase,
+    address: usize,
+    output: &mut DumpStream,
+) -> io::Result<()> {
     let state = base.state();
     dump::dump_class_begin(output, "TopoDS_TShape")?;
     let pointer = dump::get_pointer_info(Some(address), true).map_err(io::Error::other)?;

@@ -179,13 +179,13 @@ fn empty_copies_keep_the_overriding_class() {
     let copy = edge.empty_copied().unwrap();
     assert!(!copy.is_partner(&edge));
     assert_eq!(copy.nb_children(), 0);
-    // The fake overrides EmptyCopy, as BRep_TEdge does; TopoDS_TEdge's own copy is plain.
-    assert_eq!(copy.tshape().dynamic_type().unwrap().name(), "FakeTEdge");
+    // BRep_TEdge overrides EmptyCopy; TopoDS_TEdge's own copy is plain.
+    assert_eq!(copy.tshape().dynamic_type().unwrap().name(), "BRep_TEdge");
     assert!(
         copy.tshape()
             .is_kind(<dyn TShape as RuntimeTyped>::static_type())
     );
-    let plain = TEdge::new().empty_copy();
+    let plain = TEdge::new().empty_copy().unwrap();
     assert_eq!(plain.dynamic_type().unwrap().name(), "TopoDS_TEdge");
     let mut solid = Solid::default();
     Builder.make_solid(&mut solid);

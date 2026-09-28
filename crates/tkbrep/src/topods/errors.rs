@@ -30,8 +30,8 @@ pub fn frozen_shape(message: &str) -> Failure {
     Failure::with_type("TopoDS_FrozenShape", message, "")
 }
 
-/// `TopoDS_LockedShape`: the shape is locked against modifications. No TKBRep member
-/// raises it at the pinned revision; `locked_shape("locked")`.
+/// `TopoDS_LockedShape`: the shape is locked against modifications. TopoDS itself
+/// never raises it; BRep_Builder does for a locked TShape; `locked_shape("locked")`.
 pub fn locked_shape(message: &str) -> Failure {
     Failure::with_type("TopoDS_LockedShape", message, "")
 }
