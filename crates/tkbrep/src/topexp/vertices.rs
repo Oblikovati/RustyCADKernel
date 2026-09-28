@@ -71,6 +71,27 @@ pub fn vertices(edge: &Edge, cum_ori: bool) -> (Vertex, Vertex) {
 /// choice follows the hash order (TShape addresses), natively as here;
 /// `let (first, last) = topexp::wire_vertices(&wire);`.
 pub fn wire_vertices(wire: &Wire) -> (Vertex, Vertex) {
+    let (ends, last_end) = free_ends(wire);
+    if ends.is_empty() {
+        let first = Vertex::unchecked(last_end.oriented(Orientation::Forward));
+        return (
+            first,
+            Vertex::unchecked(last_end.oriented(Orientation::Reversed)),
+        );
+    }
+    if ends.extent() != 2 {
+        return (Vertex::default(), Vertex::default());
+    }
+    (
+        map_end(&ends, Orientation::Forward),
+        map_end(&ends, Orientation::Reversed),
+    )
+}
+
+/// The loop of `Vertices(W)`: each edge start (FORWARD) and end (REVERSED) is added to
+/// the map, or removed when already there; also returns the end of the last edge
+/// (`V2`), which names the vertex of a closed wire.
+fn free_ends(wire: &Wire) -> (MapOfShape, Vertex) {
     let mut ends = MapOfShape::default();
     let mut last_end = Vertex::default();
     let mut iterator = ShapeIterator::new(wire, true, true);
@@ -87,20 +108,7 @@ pub fn wire_vertices(wire: &Wire) -> (Vertex, Vertex) {
         last_end = end;
         iterator.next();
     }
-    if ends.is_empty() {
-        let first = Vertex::unchecked(last_end.oriented(Orientation::Forward));
-        return (
-            first,
-            Vertex::unchecked(last_end.oriented(Orientation::Reversed)),
-        );
-    }
-    if ends.extent() != 2 {
-        return (Vertex::default(), Vertex::default());
-    }
-    (
-        map_end(&ends, Orientation::Forward),
-        map_end(&ends, Orientation::Reversed),
-    )
+    (ends, last_end)
 }
 
 /// `if (!vmap.Add(V)) vmap.Remove(V);`.

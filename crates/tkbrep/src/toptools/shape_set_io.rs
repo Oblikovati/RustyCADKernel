@@ -117,6 +117,16 @@ fn dump_tshape(
     write_flags(stream, shape, true)?;
     // `OS << (void*)&(*S.TShape())`: libstdc++ prints a pointer as 0x and lowercase hex.
     stream.insert_bytes(format!(" {:#x}\n    ", shape.tshape_address()).as_bytes());
+    dump_sub_shapes(data, shape, stream)
+}
+
+/// The sub-shapes line of a `Dump(OS)` entry: orientation code, reversed index and
+/// `(Ln)` for a located sub-shape.
+fn dump_sub_shapes(
+    data: &ShapeSetData,
+    shape: &Shape,
+    stream: &mut IoStream,
+) -> Result<(), Failure> {
     let count = data.shapes.extent() as i32;
     let mut iterator = ShapeIterator::new(shape, false, false);
     while let Ok(child) = iterator.value() {
@@ -149,23 +159,34 @@ pub fn write<S: ShapeSet + ?Sized>(
     let version = THE_ASCII_VERSIONS[set.format_nb() as usize];
     stream.insert_bytes(format!("\n{version}\n").as_bytes());
     let scope = ProgressScope::with_literal(progress, "Writing", 100.0, false);
+    if !write_sections(set, stream, &scope)? {
+        return Ok(());
+    }
+    stream.insert_bytes(b"\n");
+    stream.set_precision(previous);
+    interrupted(&scope, stream);
+    Ok(())
+}
+
+/// The locations, the geometry and the TShapes; false when a user break stopped the
+/// write early (the caller then leaves the precision at 15, as natively).
+fn write_sections<S: ShapeSet + ?Sized>(
+    set: &mut S,
+    stream: &mut IoStream,
+    scope: &ProgressScope<'_>,
+) -> Result<bool, Failure> {
     set.shape_set_data()
         .locations
         .write(stream, &scope.next(10.0));
-    if interrupted(&scope, stream) {
-        return Ok(());
+    if interrupted(scope, stream) {
+        return Ok(false);
     }
     set.write_geometry(stream, &scope.next(75.0))?;
-    if interrupted(&scope, stream) {
-        return Ok(());
+    if interrupted(scope, stream) {
+        return Ok(false);
     }
     write_tshapes(set, stream, &scope.next(15.0))?;
-    stream.insert_bytes(b"\n");
-    stream.set_precision(previous);
-    if scope.user_break() {
-        stream.insert_bytes(b"Interrupted by the user\n");
-    }
-    Ok(())
+    Ok(true)
 }
 
 /// `if (aPS.UserBreak()) { OS << "Interrupted by the user\n"; return; }`.
@@ -190,18 +211,26 @@ fn write_tshapes<S: ShapeSet + ?Sized>(
     let scope = ProgressScope::with_literal(progress, "Shapes", f64::from(count), false);
     let mut index = 1;
     while index <= count && scope.more() {
-        let shape = shape_at(&data.shapes, index)?;
-        print_shape_enum(shape.shape_type()?, stream, true);
-        stream.insert_bytes(b"\n");
-        set.write_shape_geometry(&shape, stream)?;
-        stream.insert_bytes(b"\n");
-        write_flags(stream, &shape, false)?;
-        stream.insert_bytes(b"\n");
-        write_sub_shapes(data, &shape, stream)?;
+        write_tshape(set, &shape_at(&data.shapes, index)?, stream)?;
         index += 1;
         drop(scope.next(1.0));
     }
     Ok(())
+}
+
+/// One record of the `TShapes` table.
+fn write_tshape<S: ShapeSet + ?Sized>(
+    set: &S,
+    shape: &Shape,
+    stream: &mut IoStream,
+) -> Result<(), Failure> {
+    print_shape_enum(shape.shape_type()?, stream, true);
+    stream.insert_bytes(b"\n");
+    set.write_shape_geometry(shape, stream)?;
+    stream.insert_bytes(b"\n");
+    write_flags(stream, shape, false)?;
+    stream.insert_bytes(b"\n");
+    write_sub_shapes(set.shape_set_data(), shape, stream)
 }
 
 fn write_sub_shapes(
@@ -286,8 +315,19 @@ pub(super) fn read_shape_among(
     if code == b'*' {
         return Ok(Shape::default());
     }
+    located_reference(data, stream, &word, count)
+}
+
+/// The shape `count - k + 1` of the word `ok`, oriented by `o` and at the location
+/// whose index follows.
+fn located_reference(
+    data: &ShapeSetData,
+    stream: &mut IoStream,
+    word: &[u8],
+    count: i32,
+) -> Result<Shape, Failure> {
     let mut shape = shape_at(&data.shapes, count - c_atoi(&word[1..]) + 1)?;
-    if let Some(orientation) = orientation_code(code) {
+    if let Some(orientation) = orientation_code(word[0]) {
         shape.set_orientation(orientation);
     }
     let mut location_index = 0;

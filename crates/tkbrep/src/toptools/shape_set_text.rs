@@ -95,15 +95,7 @@ fn is_c_space(byte: u8) -> bool {
 
 /// The text of `DumpExtent`: the number of shapes of each type, then the total.
 pub(super) fn shape_counts(shapes: &IndexedMapOfShape) -> Result<String, Failure> {
-    let mut counts = [0_i32; 8];
-    for index in 1..=shapes.extent() {
-        let kind = shapes.find_key(index)?.shape_type()?;
-        // VERTEX (7) is counted first and COMPOUND (0) last; SHAPE is not counted.
-        if let Some(slot) = 7_usize.checked_sub(kind as usize) {
-            counts[slot] += 1;
-        }
-    }
-    let labels = [
+    const LABELS: [&str; 8] = [
         " VERTEX    : ",
         " EDGE      : ",
         " WIRE      : ",
@@ -114,9 +106,22 @@ pub(super) fn shape_counts(shapes: &IndexedMapOfShape) -> Result<String, Failure
         " COMPOUND  : ",
     ];
     let mut text = String::new();
-    for (label, count) in labels.iter().zip(counts) {
+    for (label, count) in LABELS.iter().zip(count_types(shapes)?) {
         text.push_str(&format!("{label}{count}\n"));
     }
     text.push_str(&format!(" SHAPE     : {}\n", shapes.extent()));
     Ok(text)
+}
+
+/// The number of shapes of each type, VERTEX (7) first and COMPOUND (0) last; SHAPE
+/// is not counted.
+fn count_types(shapes: &IndexedMapOfShape) -> Result<[i32; 8], Failure> {
+    let mut counts = [0_i32; 8];
+    for index in 1..=shapes.extent() {
+        let kind = shapes.find_key(index)?.shape_type()?;
+        if let Some(slot) = 7_usize.checked_sub(kind as usize) {
+            counts[slot] += 1;
+        }
+    }
+    Ok(counts)
 }

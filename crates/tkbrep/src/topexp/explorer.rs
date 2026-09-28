@@ -83,16 +83,11 @@ impl Explorer {
         self.shape = shape.clone();
         self.to_find = to_find;
         self.to_avoid = to_avoid;
-        let Some(tshape) = shape.tshape().get() else {
+        // Nothing is found in a null shape, for SHAPE, or in a shape simpler than `to_find`.
+        let kind = shape.tshape().get().map(|tshape| tshape.shape_type());
+        let Some(kind) = kind.filter(|kind| to_find != ShapeEnum::Shape && *kind <= to_find) else {
             return Ok(());
         };
-        if to_find == ShapeEnum::Shape {
-            return Ok(());
-        }
-        let kind = tshape.shape_type();
-        if kind > to_find {
-            return Ok(());
-        }
         self.has_more = true;
         if kind != to_find {
             self.next()?;

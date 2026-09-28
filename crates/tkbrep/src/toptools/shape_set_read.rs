@@ -86,14 +86,21 @@ pub fn read<S: ShapeSet + ?Sized>(
         return Ok(());
     }
     let scope = ProgressScope::with_literal(progress, "Reading", 100.0, false);
+    read_sections(set, stream, &scope)
+}
+
+/// The locations, the geometry and the TShapes, each followed by the user-break check.
+fn read_sections<S: ShapeSet + ?Sized>(
+    set: &mut S,
+    stream: &mut IoStream,
+    scope: &ProgressScope<'_>,
+) -> Result<(), Failure> {
     set.change_locations().read(stream, &scope.next(10.0))?;
-    if scope.user_break() {
-        console(set, b"Interrupted by the user\n");
+    if interrupted(set, scope) {
         return Ok(());
     }
     set.read_geometry(stream, &scope.next(75.0))?;
-    if scope.user_break() {
-        console(set, b"Interrupted by the user\n");
+    if interrupted(set, scope) {
         return Ok(());
     }
     let mut buffer = WordBuffer {
@@ -105,10 +112,17 @@ pub fn read<S: ShapeSet + ?Sized>(
         return Ok(());
     }
     read_tshapes(set, stream, &mut buffer, &scope.next(15.0))?;
-    if scope.user_break() {
-        console(set, b"Interrupted by the user\n");
-    }
+    interrupted(set, scope);
     Ok(())
+}
+
+/// `if (aPS.UserBreak()) std::cout << "Interrupted by the user" << '\n';`.
+fn interrupted<S: ShapeSet + ?Sized>(set: &S, scope: &ProgressScope<'_>) -> bool {
+    if !scope.user_break() {
+        return false;
+    }
+    console(set, b"Interrupted by the user\n");
+    true
 }
 
 fn console<S: ShapeSet + ?Sized>(set: &S, text: &[u8]) {
@@ -172,18 +186,28 @@ fn read_tshape<S: ShapeSet + ?Sized>(
     let mut shape = Shape::default();
     set.read_shape_geometry(kind, stream, &mut shape)?;
     buffer.extract(stream);
-    loop {
-        let child = read_shape_among(set.shape_set_data(), stream, count)?;
-        if child.is_null() {
-            break;
-        }
-        set.add_shapes(&mut shape, &child)?;
-    }
+    read_sub_shapes(set, stream, &mut shape, count)?;
     apply_flags(set.format_nb(), &shape, buffer)?;
     if set.format_nb() == format_version::VERSION_1 {
         set.check(kind, &mut shape)?;
     }
     Ok(shape)
+}
+
+/// The sub-shape references up to `*`, each added with `add_shapes`.
+fn read_sub_shapes<S: ShapeSet + ?Sized>(
+    set: &mut S,
+    stream: &mut IoStream,
+    shape: &mut Shape,
+    count: i32,
+) -> Result<(), Failure> {
+    loop {
+        let child = read_shape_among(set.shape_set_data(), stream, count)?;
+        if child.is_null() {
+            return Ok(());
+        }
+        set.add_shapes(shape, &child)?;
+    }
 }
 
 /// `S.Free(buffer[0] == '1')` ... `S.Convex(buffer[6] == '1')`; Checked only from
