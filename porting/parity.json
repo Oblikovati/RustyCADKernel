@@ -37730,6 +37730,846 @@
       "rust_item": "<rustycad_tkmath::math::VectorBase as Display>::fmt",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics. The hidden friend stream insertion forwards to Dump, as Display does."
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe."
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator::AllocateOptimal(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe."
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator::Free(void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe."
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator::CommonBaseAllocator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::common",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The singleton is a process-wide OnceLock, never destroyed, as upstream's leaked static."
+    },
+    {
+      "upstream_id": "NCollection_BaseAllocator::DEFINE_STANDARD_RTTIEXT(NCollection_BaseAllocator,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::AllocatorObject as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the allocator's DEFINE_STANDARD_RTTIEXT descriptor is the runtime type of its transient allocator object (impl_transient!), chained to NCollection_BaseAllocator as natively."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::incremental",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The incremental policy is NCollection_IncAllocator's block engine: sizes below THE_MINIMUM_BLOCK_SIZE (2 KB) select 12 KB, every fifth block grows by its IBlockSizeLevel, the allocation heap stays sorted by free space and blocks with fewer than 16 free bytes move to the used heap. Upstream's unaligned bump offsets are kept for raw allocations; typed Rust allocations pad only when the layout alignment is not already met."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::SetThreadSafe(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: Rust allocator handles are Send + Sync, so the incremental engine is always guarded by its Mutex; the opt-in shared_mutex switch has no counterpart because safe Rust cannot share an unsynchronized arena."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The incremental policy is NCollection_IncAllocator's block engine: sizes below THE_MINIMUM_BLOCK_SIZE (2 KB) select 12 KB, every fifth block grows by its IBlockSizeLevel, the allocation heap stays sorted by free space and blocks with fewer than 16 free bytes move to the used heap. Upstream's unaligned bump offsets are kept for raw allocations; typed Rust allocations pad only when the layout alignment is not already met."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::AllocateOptimal(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The incremental policy is NCollection_IncAllocator's block engine: sizes below THE_MINIMUM_BLOCK_SIZE (2 KB) select 12 KB, every fifth block grows by its IBlockSizeLevel, the allocation heap stays sorted by free space and blocks with fewer than 16 free bytes move to the used heap. Upstream's unaligned bump offsets are kept for raw allocations; typed Rust allocations pad only when the layout alignment is not already met."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::Free(void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The incremental policy is NCollection_IncAllocator's block engine: sizes below THE_MINIMUM_BLOCK_SIZE (2 KB) select 12 KB, every fifth block grows by its IBlockSizeLevel, the allocation heap stays sorted by free space and blocks with fewer than 16 free bytes move to the used heap. Upstream's unaligned bump offsets are kept for raw allocations; typed Rust allocations pad only when the layout alignment is not already met."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::~NCollection_IncAllocator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map. The engine's Drop runs clean(), freeing every block."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::Reset(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::reset",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The incremental policy is NCollection_IncAllocator's block engine: sizes below THE_MINIMUM_BLOCK_SIZE (2 KB) select 12 KB, every fifth block grows by its IBlockSizeLevel, the allocation heap stays sorted by free space and blocks with fewer than 16 free bytes move to the used heap. Upstream's unaligned bump offsets are kept for raw allocations; typed Rust allocations pad only when the layout alignment is not already met. Reset(false) relinks the blocks newest-first and rewinds them; Reset(true) runs clean(), which also restores the 12 KB default block size (native quirk: the constructor's size is forgotten). Rust returns Standard_ProgramError while RAII or collection allocations are alive, because rewinding them would alias live data; raw allocations are the caller's responsibility as upstream."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlock(void*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlock::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The incremental policy is NCollection_IncAllocator's block engine: sizes below THE_MINIMUM_BLOCK_SIZE (2 KB) select 12 KB, every fifth block grows by its IBlockSizeLevel, the allocation heap stays sorted by free space and blocks with fewer than 16 free bytes move to the used heap. Upstream's unaligned bump offsets are kept for raw allocations; typed Rust allocations pad only when the layout alignment is not already met. IBlock's CurPointer becomes a byte cursor from the block payload; the payload pointer itself stays private to the engine."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::IBlockSizeLevel",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::IncBlockSizeLevel",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The incremental policy is NCollection_IncAllocator's block engine: sizes below THE_MINIMUM_BLOCK_SIZE (2 KB) select 12 KB, every fifth block grows by its IBlockSizeLevel, the allocation heap stays sorted by free space and blocks with fewer than 16 free bytes move to the used heap. Upstream's unaligned bump offsets are kept for raw allocations; typed Rust allocations pad only when the layout alignment is not already met. IncBlockSizeLevel::of is the file-local computeLevel and grow is increaseBlockSize (x8/x4/x2/lround(x1.5)/none)."
+    },
+    {
+      "upstream_id": "NCollection_IncAllocator::DEFINE_STANDARD_RTTIEXT(NCollection_IncAllocator,NCollection_BaseAllocator)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_IncAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::IncrementalAllocatorObject as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the allocator's DEFINE_STANDARD_RTTIEXT descriptor is the runtime type of its transient allocator object (impl_transient!), chained to NCollection_BaseAllocator as natively."
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HeapAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The heap policy rounds sizes up to 4 bytes before malloc, as upstream."
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::AllocateOptimal(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HeapAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The heap policy rounds sizes up to 4 bytes before malloc, as upstream."
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::Free(void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HeapAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The heap policy rounds sizes up to 4 bytes before malloc, as upstream."
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::GlobalHeapAllocator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HeapAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::global_heap",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The heap policy rounds sizes up to 4 bytes before malloc, as upstream. The singleton is distinct from CommonBaseAllocator, as natively."
+    },
+    {
+      "upstream_id": "NCollection_HeapAllocator::DEFINE_STANDARD_RTTIEXT(NCollection_HeapAllocator,NCollection_BaseAllocator)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HeapAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::HeapAllocatorObject as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the allocator's DEFINE_STANDARD_RTTIEXT descriptor is the runtime type of its transient allocator object (impl_transient!), chained to NCollection_BaseAllocator as natively."
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::aligned",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The aligned policy follows Standard::AllocateAligned on the recorded Linux/GCC x86-64 profile (_mm_malloc): alignment 1 falls back to malloc, 2 and 4 are raised to 8, any other non-power-of-two (including 0) returns NULL (None)."
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The aligned policy follows Standard::AllocateAligned on the recorded Linux/GCC x86-64 profile (_mm_malloc): alignment 1 falls back to malloc, 2 and 4 are raised to 8, any other non-power-of-two (including 0) returns NULL (None)."
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::AllocateOptimal(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The aligned policy follows Standard::AllocateAligned on the recorded Linux/GCC x86-64 profile (_mm_malloc): alignment 1 falls back to malloc, 2 and 4 are raised to 8, any other non-power-of-two (including 0) returns NULL (None)."
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::Free(void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The aligned policy follows Standard::AllocateAligned on the recorded Linux/GCC x86-64 profile (_mm_malloc): alignment 1 falls back to malloc, 2 and 4 are raised to 8, any other non-power-of-two (including 0) returns NULL (None)."
+    },
+    {
+      "upstream_id": "NCollection_AlignedAllocator::DEFINE_STANDARD_RTTIEXT(NCollection_AlignedAllocator,NCollection_BaseAllocator)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AlignedAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::AlignedAllocatorObject as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the allocator's DEFINE_STANDARD_RTTIEXT descriptor is the runtime type of its transient allocator object (impl_transient!), chained to NCollection_BaseAllocator as natively."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::accumulating",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The accumulating policy is NCollection_AccAllocator's: sizes rounded to 4, blocks keyed by address / block size and filled downwards, oversize requests in a dedicated block, a scan of the 15 previous blocks before a new one, an emptied block freed (or, when it is the only one, reallocated to the default size), and Free of an address no block owns, or of a block with no live allocation, raising Standard_ProgramError with the native message. A zero block size, which divides by zero natively, is refused with Standard_ProgramError."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::~NCollection_AccAllocator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map. The engine's Drop frees every block."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The accumulating policy is NCollection_AccAllocator's: sizes rounded to 4, blocks keyed by address / block size and filled downwards, oversize requests in a dedicated block, a scan of the 15 previous blocks before a new one, an emptied block freed (or, when it is the only one, reallocated to the default size), and Free of an address no block owns, or of a block with no live allocation, raising Standard_ProgramError with the native message. A zero block size, which divides by zero natively, is refused with Standard_ProgramError."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::AllocateOptimal(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::allocate_optimal_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The accumulating policy is NCollection_AccAllocator's: sizes rounded to 4, blocks keyed by address / block size and filled downwards, oversize requests in a dedicated block, a scan of the 15 previous blocks before a new one, an emptied block freed (or, when it is the only one, reallocated to the default size), and Free of an address no block owns, or of a block with no live allocation, raising Standard_ProgramError with the native message. A zero block size, which divides by zero natively, is refused with Standard_ProgramError."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::Free(void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::BaseAllocator::free_raw",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the virtual NCollection_BaseAllocator interface is one shared BaseAllocator handle whose policy (common, heap, incremental, accumulating, aligned) is chosen at construction, so every subclass override maps to the same BaseAllocator method. allocate_raw/allocate_optimal_raw return the raw address (None where upstream returns NULL or throws Standard_OutOfMemory) and the unsafe free_raw releases it; BaseAllocator::allocate returns RAII-owned zeroed bytes whose Drop performs the Free. Addresses come from Rust's global allocator with a malloc-style size header; policies are compared with OCCT by the ncoll_allocators differential probe. The accumulating policy is NCollection_AccAllocator's: sizes rounded to 4, blocks keyed by address / block size and filled downwards, oversize requests in a dedicated block, a scan of the 15 previous blocks before a new one, an emptied block freed (or, when it is the only one, reallocated to the default size), and Free of an address no block owns, or of a block with no live allocation, raising Standard_ProgramError with the native message. A zero block size, which divides by zero natively, is refused with Standard_ProgramError."
+    },
+    {
+      "upstream_id": "NCollection_AccAllocator::DEFINE_STANDARD_RTTIEXT(NCollection_AccAllocator,NCollection_BaseAllocator)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::AccumulatingAllocatorObject as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the allocator's DEFINE_STANDARD_RTTIEXT descriptor is the runtime type of its transient allocator object (impl_transient!), chained to NCollection_BaseAllocator as natively."
+    },
+    {
+      "upstream_id": "NCollection_Allocator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+    },
+    {
+      "upstream_id": "NCollection_Allocator(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::from_base",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. The allocator handle is ignored, as upstream."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::operator=(const NCollection_Allocator<OtherType>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+    },
+    {
+      "upstream_id": "NCollection_Allocator(const NCollection_Allocator<OtherType>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::rebind",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::address(reference) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::address_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::address(const_reference) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::address",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::allocate(size_type,const void*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::allocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. The unused hint parameter is dropped."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::deallocate(pointer,size_type) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::deallocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::reallocate(pointer,size_type) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::StandardAllocator::reallocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::construct(_Objty*,_Types&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::construct",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::destroy(pointer)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as AllocatorTypes>::destroy",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::operator==(const NCollection_Allocator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::operator==(const NCollection_Allocator<U>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::operator!=(const NCollection_Allocator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::operator!=(const NCollection_Allocator<U>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers."
+    },
+    {
+      "upstream_id": "NCollection_Allocator::operator==(const NCollection_Allocator<U>&,const NCollection_Allocator<V>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Allocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::StandardAllocator as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Allocator<T> is StandardAllocator<T>, a stateless allocator over the common Standard policy (AllocateOptimal/Free/Reallocate); every instance compares equal. Raw pointers are NonNull, the releasing members are unsafe, and byte counts that overflow return None instead of wrapping. It also implements allocator_api2::Allocator, the Rust counterpart of plugging it into standard containers. The namespace-scope template shares PartialEq<StandardAllocator<U>>."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator(occ::handle<NCollection_BaseAllocator>&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator(const NCollection_OccAllocator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator(NCollection_OccAllocator&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ move constructor. Rust moves the value itself; ownership transfer has no callable counterpart (upstream copies the handle, leaving the source usable; clone/clone_from cover that)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::operator=(const NCollection_OccAllocator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as Clone>::clone_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::operator=(NCollection_OccAllocator&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ move assignment. Rust moves the value itself; ownership transfer has no callable counterpart (upstream copies the handle, leaving the source usable; clone/clone_from cover that)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::operator=(const NCollection_OccAllocator<OtherType>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator(const NCollection_OccAllocator<OtherType>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::rebind",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::SetAllocator(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::set_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::Allocator() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::allocate(size_type,const void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::allocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. The unused hint parameter is dropped."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::deallocate(T*,size_type)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::deallocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. The template overload for other pointee types is covered by NonNull::cast at the call site."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::deallocate(pointer,size_type)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::deallocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::construct(_Objty*,_Types&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::construct",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::address(reference) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::address_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::address(const_reference) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::address",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::destroy(_Uty*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as AllocatorTypes>::destroy",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. address/construct/destroy are the AllocatorTypes provided methods shared by both typed allocators (placement new is NonNull::write, the destructor call is drop_in_place)."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::max_size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::OccAllocator::max_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. size_t(-1) / sizeof(T); zero-sized Rust types, which C++ cannot have, report usize::MAX."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::operator==(const NCollection_OccAllocator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::operator==(const NCollection_OccAllocator<U>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::operator!=(const NCollection_OccAllocator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::operator!=(const NCollection_OccAllocator<U>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping."
+    },
+    {
+      "upstream_id": "NCollection_OccAllocator::operator==(const NCollection_OccAllocator<U>&,const NCollection_OccAllocator<V>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_OccAllocator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::OccAllocator as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_OccAllocator<T> is OccAllocator<T> holding Option<BaseAllocator>, where None is the native null handle: it allocates through the common Standard policy yet compares unequal to every non-null allocator, including CommonBaseAllocator. Raw pointers are NonNull, releasing members are unsafe and return the allocator's Free failure, and byte counts that overflow return None instead of wrapping. The namespace-scope template shares PartialEq<OccAllocator<U>>; natively a mixed-type a == b is ambiguous between it and the member template, so the probe names the member explicitly."
+    },
+    {
+      "upstream_id": "NCollection_Buffer(const occ::handle<NCollection_BaseAllocator>&,size_t,uint8_t*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released. The defaulted theData = nullptr form is Buffer::new; adopting data allocated by theAlloc is Buffer::with_data, whose owned allocation carries its length. A null allocator with a nonzero size dereferences null natively; Rust allocates nothing and reports false."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::~NCollection_Buffer()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map. AllocatedBytes' Drop performs the Free."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::Data() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::as_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released. The pointer itself is Buffer::data_ptr."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::ChangeData()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::as_mut_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::begin()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by Buffer::as_slice().iter() and Buffer::as_mut_slice().iter_mut() (an empty slice when unallocated, as begin() == end() for a null or empty buffer); the raw begin address is Buffer::data_ptr."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by Buffer::as_slice().iter() and Buffer::as_mut_slice().iter_mut() (an empty slice when unallocated, as begin() == end() for a null or empty buffer); the raw begin address is Buffer::data_ptr."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by Buffer::as_slice().iter() and Buffer::as_mut_slice().iter_mut() (an empty slice when unallocated, as begin() == end() for a null or empty buffer); the raw begin address is Buffer::data_ptr."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::end()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by Buffer::as_slice().iter() and Buffer::as_mut_slice().iter_mut() (an empty slice when unallocated, as begin() == end() for a null or empty buffer); the raw begin address is Buffer::data_ptr."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by Buffer::as_slice().iter() and Buffer::as_mut_slice().iter_mut() (an empty slice when unallocated, as begin() == end() for a null or empty buffer); the raw begin address is Buffer::data_ptr."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by Buffer::as_slice().iter() and Buffer::as_mut_slice().iter_mut() (an empty slice when unallocated, as begin() == end() for a null or empty buffer); the raw begin address is Buffer::data_ptr."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::Allocator() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::SetAllocator(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::set_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::allocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::Free()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::free",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Buffer::dump_json",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released. Addresses use GetPointerInfo's short form, which natively keeps the stream's x after prepending 0x (\"0xx7f...\"); an unallocated buffer dumps an empty Data string."
+    },
+    {
+      "upstream_id": "NCollection_Buffer::DEFINE_STANDARD_RTTI_INLINE(NCollection_Buffer,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Buffer.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Buffer as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Buffer is the transient Buffer (Handle<Buffer> shares it); the allocator is Option<BaseAllocator> (None = null handle) and the data an owned AllocatedBytes freed by its allocator. Allocate and Free start with the allocator's Free even without data (Free(nullptr)), which NCollection_AccAllocator refuses, so new/allocate/free/set_allocator return that Standard_ProgramError, checked before anything is released. impl_transient! provides the NCollection_Buffer descriptor."
+    },
+    {
+      "upstream_id": "NCollection_Handle()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::ObjectHandle as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null."
+    },
+    {
+      "upstream_id": "NCollection_Handle(T*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null. A null T* is ObjectHandle::default."
+    },
+    {
+      "upstream_id": "NCollection_Handle::get()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::get",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null."
+    },
+    {
+      "upstream_id": "NCollection_Handle::get() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::get",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null."
+    },
+    {
+      "upstream_id": "NCollection_Handle::operator->()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::get",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null."
+    },
+    {
+      "upstream_id": "NCollection_Handle::operator->() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::get",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null."
+    },
+    {
+      "upstream_id": "NCollection_Handle::operator*()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::get",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null."
+    },
+    {
+      "upstream_id": "NCollection_Handle::operator*() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::get",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null."
+    },
+    {
+      "upstream_id": "NCollection_Handle::DownCast(const opencascade::handle<Standard_Transient>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Handle.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ObjectHandle::down_cast",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Handle<T> is ObjectHandle<T>, a standard Handle to a private transient adaptor owning the object (the native Ptr class, whose dynamic type is Standard_Transient). Shared ownership grants only shared borrows in Rust, so the non-const accessors map to the same get and mutation goes through T's interior mutability; accessors return None for a null handle where upstream dereferences null. The inherited handle<Standard_Transient> base is ObjectHandle::transient."
+    },
+    {
+      "upstream_id": "NCollection_Shared()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Shared.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Shared as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
+    },
+    {
+      "upstream_id": "NCollection_Shared(const T1&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Shared.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Shared::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
+    },
+    {
+      "upstream_id": "NCollection_Shared(T1&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Shared.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Shared::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
+    },
+    {
+      "upstream_id": "NCollection_Shared(const T1&,const T2&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Shared.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Shared::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
+    },
+    {
+      "upstream_id": "NCollection_Shared(T1&,const T2&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Shared.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Shared::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
+    },
+    {
+      "upstream_id": "NCollection_Shared(const T1&,T2&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Shared.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Shared::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
+    },
+    {
+      "upstream_id": "NCollection_Shared(T1&,T2&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Shared.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Shared::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
     }
   ],
   "tests": [

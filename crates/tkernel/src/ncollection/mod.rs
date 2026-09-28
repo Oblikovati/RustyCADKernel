@@ -106,6 +106,9 @@ mod aliased_array;
 pub use aliased_array::{AliasedArray, ArrayValue};
 
 mod allocator_object;
-pub use allocator_object::{AllocatorObject, HeapAllocatorObject, IncrementalAllocatorObject};
+pub use allocator_object::{
+    AccumulatingAllocatorObject, AlignedAllocatorObject, AllocatorObject, HeapAllocatorObject,
+    IncrementalAllocatorObject,
+};
 mod kdtree;
 pub use kdtree::{KDTree, KdPoint};

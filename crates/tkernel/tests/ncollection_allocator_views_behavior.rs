@@ -16,7 +16,8 @@
 #![allow(unsafe_code)]
 use rustycad_tkernel::{
     ncollection::{
-        AllocatorTypes, BaseAllocator, Buffer, ObjectHandle, OccAllocator, Shared,
+        AccumulatingAllocatorObject, AlignedAllocatorObject, AllocatorObject, AllocatorTypes,
+        BaseAllocator, Buffer, IncrementalAllocatorObject, ObjectHandle, OccAllocator, Shared,
         StandardAllocator,
     },
     standard::{Handle, StandardTransient, dump::DumpStream},
@@ -35,6 +36,28 @@ fn buffer_adopts_data_and_reports_native_pointer_state() {
     assert!(buffer.data_ptr().is_null() && buffer.is_empty());
     assert!(!buffer.allocate(8).unwrap()); // upstream dereferences the null allocator here
     assert!(Buffer::new(None, 0).unwrap().is_empty());
+    let shared = Handle::new(Buffer::new(Some(BaseAllocator::common()), 2).unwrap());
+    assert!(shared.is_instance_name("NCollection_Buffer"));
+    assert!(shared.is_kind_name("Standard_Transient"));
+}
+
+#[test]
+fn allocator_objects_chain_to_the_base_allocator_descriptor() {
+    let accumulating = Handle::new(AccumulatingAllocatorObject::with_default_block_size());
+    assert!(accumulating.is_instance_name("NCollection_AccAllocator"));
+    assert!(accumulating.is_kind_name("NCollection_BaseAllocator"));
+    assert!(AccumulatingAllocatorObject::new(0).is_err());
+    let aligned = Handle::new(AlignedAllocatorObject::new(32));
+    assert!(aligned.is_instance_name("NCollection_AlignedAllocator"));
+    assert_eq!(
+        aligned.cast::<AllocatorObject>().resource(),
+        aligned.resource()
+    );
+    let incremental = IncrementalAllocatorObject::new(4096);
+    assert_ne!(
+        incremental.resource(),
+        IncrementalAllocatorObject::default().resource()
+    );
 }
 
 #[test]

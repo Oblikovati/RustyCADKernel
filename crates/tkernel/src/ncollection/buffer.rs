@@ -16,15 +16,18 @@
 //! Byte buffer whose storage retains the original allocator until released.
 use super::{AllocatedBytes, BaseAllocator};
 use crate::standard::{
-    Failure,
+    Failure, StandardTransient,
     dump::{DumpOutput, add_values_separator},
 };
 use std::io;
 
 /// Owned buffer with explicit allocation state; `Buffer::new(Some(allocator), 16)`.
 ///
-/// `None` stands for the native null allocator handle.
+/// `None` stands for the native null allocator handle. Like upstream it is a transient, so it
+/// can be shared by `Handle<Buffer>`.
+#[repr(C)]
 pub struct Buffer {
+    parent: StandardTransient,
     allocator: Option<BaseAllocator>,
     storage: Option<AllocatedBytes>,
 }
@@ -37,6 +40,7 @@ impl Buffer {
     /// Example: `Buffer::new(Some(BaseAllocator::common()), 0)?.is_empty() == false`.
     pub fn new(allocator: Option<BaseAllocator>, size: usize) -> Result<Self, Failure> {
         let mut buffer = Self {
+            parent: StandardTransient::default(),
             allocator,
             storage: None,
         };
@@ -51,6 +55,7 @@ impl Buffer {
     /// upstream would leak it. Example: `Buffer::with_data(Some(a.clone()), a.allocate(4).unwrap())`.
     pub fn with_data(allocator: Option<BaseAllocator>, data: AllocatedBytes) -> Self {
         Self {
+            parent: StandardTransient::default(),
             allocator,
             storage: Some(data),
         }
@@ -137,6 +142,8 @@ impl Buffer {
         dump_pointer(output, "Allocator", allocator)
     }
 }
+
+crate::impl_transient!(Buffer, "NCollection_Buffer", StandardTransient, parent);
 
 /// `OCCT_DUMP_FIELD_VALUE_POINTER`: `"Name": "<GetPointerInfo(address)>"`.
 fn dump_pointer(output: &mut impl DumpOutput, name: &str, address: usize) -> io::Result<()> {
