@@ -14,7 +14,7 @@
 // Rust translation of FoundationClasses/TKMath/gp/gp_Ax22d.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! gp_Ax22d planar coordinate system whose Y direction encodes the orientation sense.
-use super::{Axis2d, Direction2, Point2, Transform2, Vector2};
+use super::{Axis2d, Direction2, Failure, Point2, Transform2, Vector2};
 use rustycad_tkernel::standard::dump::{self, DumpOutput};
 use std::io;
 /// Origin with X and a quarter-turned Y direction; `Axis22d::new(origin,Direction2::X,true)`.
@@ -35,55 +35,71 @@ impl Default for Axis22d {
 }
 impl Axis22d {
     /// Keeps X and rebuilds Y on the side given by the sign of `x ^ y`; only the sense of `y`
-    /// is used, so parallel inputs are not rejected; `Axis22d::with_directions(origin,x,y)`.
-    pub fn with_directions(point: Point2, x: Direction2, y: Direction2) -> Self {
+    /// is used, so parallel inputs are not rejected; `Axis22d::with_directions(origin,x,y)?`.
+    pub fn with_directions(point: Point2, x: Direction2, y: Direction2) -> Result<Self, Failure> {
         Self::new(point, x, x.crossed(y) >= 0.0)
     }
-    /// Builds Y as X turned counterclockwise when `sense` is true; `Axis22d::new(origin,x,true)`.
-    pub fn new(point: Point2, x: Direction2, sense: bool) -> Self {
+    /// Builds Y as X turned counterclockwise when `sense` is true, raising
+    /// Standard_ConstructionError when X has zero norm; `Axis22d::new(origin,x,true)?`.
+    pub fn new(point: Point2, x: Direction2, sense: bool) -> Result<Self, Failure> {
+        Ok(Self {
+            point,
+            y_direction: x.quarter_turn(sense)?,
+            x_direction: x,
+        })
+    }
+    /// gp_Ax22d(P, V, sense) for the native `noexcept` callers that pass a stored unit X,
+    /// whose quarter turn cannot raise; `Axis22d::from_unit(origin,x,true)`.
+    pub(in crate::gp) fn from_unit(point: Point2, x: Direction2, sense: bool) -> Self {
         Self {
             point,
-            y_direction: x.quarter_turn(sense),
+            y_direction: x.quarter_turn_unit(sense),
             x_direction: x,
         }
     }
-    /// Uses the axis as origin and X direction; `Axis22d::from_axis(axis,true)`.
-    pub fn from_axis(axis: Axis2d, sense: bool) -> Self {
+    /// Uses the axis as origin and X direction; `Axis22d::from_axis(axis,true)?`.
+    pub fn from_axis(axis: Axis2d, sense: bool) -> Result<Self, Failure> {
         Self::new(axis.location(), axis.direction(), sense)
     }
     /// Copies another frame; `frame.set_axis(other)`.
     pub fn set_axis(&mut self, other: Self) {
         *self = other;
     }
-    /// Replaces origin and X, keeping the current sense; `frame.set_x_axis(axis)`.
-    pub fn set_x_axis(&mut self, axis: Axis2d) {
+    /// Replaces origin and X, keeping the current sense; on the native raise the origin and
+    /// X are already replaced while Y is kept; `frame.set_x_axis(axis)?`.
+    pub fn set_x_axis(&mut self, axis: Axis2d) -> Result<(), Failure> {
         let sense = self.is_counter_clockwise();
         self.point = axis.location();
         self.x_direction = axis.direction();
-        self.y_direction = self.x_direction.quarter_turn(sense);
+        self.y_direction = self.x_direction.quarter_turn(sense)?;
+        Ok(())
     }
-    /// Replaces origin and Y, deriving X with the current sense; `frame.set_y_axis(axis)`.
-    pub fn set_y_axis(&mut self, axis: Axis2d) {
+    /// Replaces origin and Y, deriving X with the current sense; on the native raise the
+    /// origin and Y are already replaced while X is kept; `frame.set_y_axis(axis)?`.
+    pub fn set_y_axis(&mut self, axis: Axis2d) -> Result<(), Failure> {
         let sense = self.is_counter_clockwise();
         self.point = axis.location();
         self.y_direction = axis.direction();
-        self.x_direction = self.y_direction.quarter_turn(!sense);
+        self.x_direction = self.y_direction.quarter_turn(!sense)?;
+        Ok(())
     }
     /// Replaces the origin; `frame.set_location(point)`.
     pub fn set_location(&mut self, point: Point2) {
         self.point = point;
     }
-    /// Replaces X, keeping the current sense; `frame.set_x_direction(direction)`.
-    pub fn set_x_direction(&mut self, direction: Direction2) {
+    /// Replaces X, keeping the current sense; `frame.set_x_direction(direction)?`.
+    pub fn set_x_direction(&mut self, direction: Direction2) -> Result<(), Failure> {
         let sense = self.is_counter_clockwise();
         self.x_direction = direction;
-        self.y_direction = direction.quarter_turn(sense);
+        self.y_direction = direction.quarter_turn(sense)?;
+        Ok(())
     }
-    /// Replaces Y, deriving X with the current sense; `frame.set_y_direction(direction)`.
-    pub fn set_y_direction(&mut self, direction: Direction2) {
+    /// Replaces Y, deriving X with the current sense; `frame.set_y_direction(direction)?`.
+    pub fn set_y_direction(&mut self, direction: Direction2) -> Result<(), Failure> {
         let sense = self.is_counter_clockwise();
         self.y_direction = direction;
-        self.x_direction = direction.quarter_turn(!sense);
+        self.x_direction = direction.quarter_turn(!sense)?;
+        Ok(())
     }
     fn is_counter_clockwise(&self) -> bool {
         self.x_direction.crossed(self.y_direction) >= 0.0
@@ -190,5 +206,32 @@ impl Axis22d {
         dump::dump_vector(output, "Location", self.point.xy().coordinates())?;
         dump::dump_vector(output, "XAxis", self.x_direction.xy().coordinates())?;
         dump::dump_vector(output, "YAxis", self.y_direction.xy().coordinates())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::gp::Xy;
+
+    // A zero direction cannot be built through the public API, so the native
+    // gp_Dir2d::SetCoord raise is exercised on a stored zero vector.
+    #[test]
+    fn zero_x_direction_raises_the_native_construction_error() {
+        let zero = Direction2::from_stored(Xy::new(0.0, 0.0));
+        let failure = Axis22d::new(Point2::default(), zero, true).unwrap_err();
+        assert_eq!(failure.exception_type(), "Standard_ConstructionError");
+        assert!(failure.message().contains("(-0, 0)"), "{}", failure.message());
+        let axis = Axis2d::new(Point2::new(1.0, 2.0), zero);
+        assert!(Axis22d::from_axis(axis, false).is_err());
+        assert!(Axis22d::with_directions(Point2::default(), zero, Direction2::Y).is_err());
+        let mut frame = Axis22d::default();
+        assert!(frame.set_x_axis(axis).is_err());
+        // Native partial update: origin and X are stored before Y's SetCoord raises.
+        assert_eq!(frame.location(), Point2::new(1.0, 2.0));
+        assert_eq!(frame.y_direction(), Direction2::Y);
+        assert!(frame.set_y_direction(zero).is_err());
+        assert!(frame.set_x_direction(zero).is_err());
+        assert!(Axis22d::default().set_y_axis(axis).is_err());
     }
 }

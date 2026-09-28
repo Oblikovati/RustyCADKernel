@@ -59,7 +59,7 @@ impl Hyperbola2 {
         sense: bool,
     ) -> Result<Self, Failure> {
         Self::new(
-            Axis22d::from_axis(major_axis, sense),
+            Axis22d::from_axis(major_axis, sense)?,
             major_radius,
             minor_radius,
         )
@@ -150,7 +150,7 @@ impl Hyperbola2 {
             (self.major_radius, self.minor_radius)
         };
         Self {
-            position: Axis22d::new(self.location(), x, self.is_direct()),
+            position: Axis22d::from_unit(self.location(), x, self.is_direct()),
             major_radius: major,
             minor_radius: minor,
         }
