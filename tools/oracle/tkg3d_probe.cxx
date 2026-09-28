@@ -115,6 +115,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // GeomEval Bezier surfaces (tkg3d_probe_eval_bezier_surfaces.cxx)
  // GeomHash (tkg3d_probe_hash.cxx)
  // TopAbs (tkg3d_probe_topabs.cxx)
+ {"g3_topabs", g3_topabs_case},
+ {"g3_topabs_parse", g3_topabs_parse_case},
 };
 int main() {
  std::string line;

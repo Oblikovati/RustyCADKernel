@@ -54762,6 +54762,126 @@
       "rust_item": "rustycad_tkg3d::geom::GeomVectorWithMagnitude::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "TopAbs::Compose(TopAbs_Orientation,TopAbs_Orientation)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::compose",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::Reverse(TopAbs_Orientation)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::Complement(TopAbs_Orientation)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::complement",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::Print(TopAbs_ShapeEnum,Standard_OStream&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::print_shape_type",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::Print(TopAbs_Orientation,Standard_OStream&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::print_orientation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::Print(TopAbs_State,Standard_OStream&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::print_state",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::ShapeTypeToString(TopAbs_ShapeEnum)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::shape_type_to_string",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::ShapeTypeFromString(const char*)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::shape_type_from_string",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::ShapeTypeFromString(const char*,TopAbs_ShapeEnum&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::try_shape_type_from_string",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::ShapeOrientationToString(TopAbs_Orientation)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::shape_orientation_to_string",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::ShapeOrientationFromString(const char* const)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::shape_orientation_from_string",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs::ShapeOrientationFromString(const char* const,TopAbs_Orientation&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::try_shape_orientation_from_string",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping: TopAbs has only static members, so they are free functions of rustycad_tkg3d::top_abs; the enumerations keep the native declaration order as i32 discriminants; bool overloads with an output reference return Option; Print writes to std::io::Write."
+    },
+    {
+      "upstream_id": "TopAbs_Orientation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_Orientation.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::Orientation",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants."
+    },
+    {
+      "upstream_id": "TopAbs_ShapeEnum",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_ShapeEnum.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::ShapeEnum",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants."
+    },
+    {
+      "upstream_id": "TopAbs_State",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/TopAbs/TopAbs_State.hxx",
+      "rust_item": "rustycad_tkg3d::top_abs::State",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants."
     }
   ],
   "tests": [
