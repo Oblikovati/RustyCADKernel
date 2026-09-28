@@ -15,7 +15,8 @@
 use super::extended::{Extended as E, exponent, scale_double};
 use super::{PolyResult, Status};
 mod isolation;
-use isolation::{distinct_real, multiplicity, scaled_polynomial, small_residual};
+use super::long_poly::{scaled_polynomial, small_residual};
+use isolation::{distinct_real, multiplicity};
 /// Solves a linear equation with native degenerate statuses; `linear(2.0,-4.0)`.
 pub fn linear(a: f64, b: f64) -> PolyResult {
     solve_direct(&[b, a])
