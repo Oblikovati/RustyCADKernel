@@ -54812,6 +54812,1230 @@
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
+      "upstream_id": "GeomHash_PointHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PointHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPointHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PointHasher::operator()(const gp_Pnt&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PointHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPointHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PointHasher::operator()(const gp_Pnt&,const gp_Pnt&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PointHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPointHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PointHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PointHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPointHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PointHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PointHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPointHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_DirectionHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_DirectionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashDirectionHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_DirectionHasher::operator()(const gp_Dir&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_DirectionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashDirectionHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_DirectionHasher::operator()(const gp_Dir&,const gp_Dir&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_DirectionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashDirectionHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_DirectionHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_DirectionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashDirectionHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_DirectionHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_DirectionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashDirectionHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_VectorHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_VectorHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashVectorHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_VectorHasher::operator()(const gp_Vec&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_VectorHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashVectorHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_VectorHasher::operator()(const gp_Vec&,const gp_Vec&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_VectorHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashVectorHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_VectorHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_VectorHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashVectorHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_VectorHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_VectorHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashVectorHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_AxisPlacement(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_AxisPlacement.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashAxisPlacement::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_AxisPlacement::operator()(const gp_Ax2&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_AxisPlacement.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashAxisPlacement::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_AxisPlacement::operator()(const gp_Ax2&,const gp_Ax2&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_AxisPlacement.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashAxisPlacement::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_AxisPlacement::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_AxisPlacement.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashAxisPlacement::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_AxisPlacement::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_AxisPlacement.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashAxisPlacement::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_LineHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_LineHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashLineHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_LineHasher::operator()(const occ::handle<Geom_Line>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_LineHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashLineHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_LineHasher::operator()(const occ::handle<Geom_Line>&,const occ::handle<Geom_Line>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_LineHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashLineHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_LineHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_LineHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashLineHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_LineHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_LineHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashLineHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CircleHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CircleHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCircleHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CircleHasher::operator()(const occ::handle<Geom_Circle>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CircleHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCircleHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CircleHasher::operator()(const occ::handle<Geom_Circle>&,const occ::handle<Geom_Circle>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CircleHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCircleHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CircleHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CircleHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCircleHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CircleHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CircleHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCircleHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_EllipseHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_EllipseHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashEllipseHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_EllipseHasher::operator()(const occ::handle<Geom_Ellipse>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_EllipseHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashEllipseHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_EllipseHasher::operator()(const occ::handle<Geom_Ellipse>&,const occ::handle<Geom_Ellipse>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_EllipseHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashEllipseHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_EllipseHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_EllipseHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashEllipseHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_EllipseHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_EllipseHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashEllipseHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_HyperbolaHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_HyperbolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashHyperbolaHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_HyperbolaHasher::operator()(const occ::handle<Geom_Hyperbola>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_HyperbolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashHyperbolaHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_HyperbolaHasher::operator()(const occ::handle<Geom_Hyperbola>&,const occ::handle<Geom_Hyperbola>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_HyperbolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashHyperbolaHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_HyperbolaHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_HyperbolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashHyperbolaHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_HyperbolaHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_HyperbolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashHyperbolaHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ParabolaHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ParabolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashParabolaHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ParabolaHasher::operator()(const occ::handle<Geom_Parabola>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ParabolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashParabolaHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ParabolaHasher::operator()(const occ::handle<Geom_Parabola>&,const occ::handle<Geom_Parabola>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ParabolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashParabolaHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ParabolaHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ParabolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashParabolaHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ParabolaHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ParabolaHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashParabolaHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierCurveHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierCurveHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierCurveHasher::operator()(const occ::handle<Geom_BezierCurve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierCurveHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierCurveHasher::operator()(const occ::handle<Geom_BezierCurve>&,const occ::handle<Geom_BezierCurve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierCurveHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierCurveHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierCurveHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierCurveHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierCurveHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineCurveHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineCurveHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineCurveHasher::operator()(const occ::handle<Geom_BSplineCurve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineCurveHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineCurveHasher::operator()(const occ::handle<Geom_BSplineCurve>&,const occ::handle<Geom_BSplineCurve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineCurveHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineCurveHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineCurveHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineCurveHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineCurveHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TrimmedCurveHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TrimmedCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTrimmedCurveHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TrimmedCurveHasher::operator()(const occ::handle<Geom_TrimmedCurve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TrimmedCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTrimmedCurveHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TrimmedCurveHasher::operator()(const occ::handle<Geom_TrimmedCurve>&,const occ::handle<Geom_TrimmedCurve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TrimmedCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTrimmedCurveHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TrimmedCurveHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TrimmedCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTrimmedCurveHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TrimmedCurveHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TrimmedCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTrimmedCurveHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetCurveHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetCurveHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetCurveHasher::operator()(const occ::handle<Geom_OffsetCurve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetCurveHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetCurveHasher::operator()(const occ::handle<Geom_OffsetCurve>&,const occ::handle<Geom_OffsetCurve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetCurveHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetCurveHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetCurveHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetCurveHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetCurveHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetCurveHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PlaneHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PlaneHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPlaneHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PlaneHasher::operator()(const occ::handle<Geom_Plane>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PlaneHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPlaneHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PlaneHasher::operator()(const occ::handle<Geom_Plane>&,const occ::handle<Geom_Plane>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PlaneHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPlaneHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PlaneHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PlaneHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPlaneHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PlaneHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PlaneHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPlaneHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CylindricalSurfaceHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CylindricalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCylindricalSurfaceHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CylindricalSurfaceHasher::operator()(const occ::handle<Geom_CylindricalSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CylindricalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCylindricalSurfaceHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CylindricalSurfaceHasher::operator()(const occ::handle<Geom_CylindricalSurface>&,const occ::handle<Geom_CylindricalSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CylindricalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCylindricalSurfaceHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CylindricalSurfaceHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CylindricalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCylindricalSurfaceHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CylindricalSurfaceHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CylindricalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCylindricalSurfaceHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ConicalSurfaceHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ConicalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashConicalSurfaceHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ConicalSurfaceHasher::operator()(const occ::handle<Geom_ConicalSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ConicalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashConicalSurfaceHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ConicalSurfaceHasher::operator()(const occ::handle<Geom_ConicalSurface>&,const occ::handle<Geom_ConicalSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ConicalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashConicalSurfaceHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ConicalSurfaceHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ConicalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashConicalSurfaceHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ConicalSurfaceHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ConicalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashConicalSurfaceHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SphericalSurfaceHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SphericalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSphericalSurfaceHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SphericalSurfaceHasher::operator()(const occ::handle<Geom_SphericalSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SphericalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSphericalSurfaceHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SphericalSurfaceHasher::operator()(const occ::handle<Geom_SphericalSurface>&,const occ::handle<Geom_SphericalSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SphericalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSphericalSurfaceHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SphericalSurfaceHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SphericalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSphericalSurfaceHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SphericalSurfaceHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SphericalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSphericalSurfaceHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ToroidalSurfaceHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ToroidalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashToroidalSurfaceHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ToroidalSurfaceHasher::operator()(const occ::handle<Geom_ToroidalSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ToroidalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashToroidalSurfaceHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ToroidalSurfaceHasher::operator()(const occ::handle<Geom_ToroidalSurface>&,const occ::handle<Geom_ToroidalSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ToroidalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashToroidalSurfaceHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ToroidalSurfaceHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ToroidalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashToroidalSurfaceHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_ToroidalSurfaceHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_ToroidalSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashToroidalSurfaceHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfRevolutionHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfRevolutionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfRevolutionHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfRevolutionHasher::operator()(const occ::handle<Geom_SurfaceOfRevolution>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfRevolutionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfRevolutionHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfRevolutionHasher::operator()(const occ::handle<Geom_SurfaceOfRevolution>&,const occ::handle<Geom_SurfaceOfRevolution>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfRevolutionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfRevolutionHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfRevolutionHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfRevolutionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfRevolutionHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfRevolutionHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfRevolutionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfRevolutionHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfLinearExtrusionHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfLinearExtrusionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfLinearExtrusionHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfLinearExtrusionHasher::operator()(const occ::handle<Geom_SurfaceOfLinearExtrusion>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfLinearExtrusionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfLinearExtrusionHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfLinearExtrusionHasher::operator()(const occ::handle<Geom_SurfaceOfLinearExtrusion>&,const occ::handle<Geom_SurfaceOfLinearExtrusion>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfLinearExtrusionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfLinearExtrusionHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfLinearExtrusionHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfLinearExtrusionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfLinearExtrusionHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceOfLinearExtrusionHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceOfLinearExtrusionHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceOfLinearExtrusionHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierSurfaceHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierSurfaceHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierSurfaceHasher::operator()(const occ::handle<Geom_BezierSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierSurfaceHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierSurfaceHasher::operator()(const occ::handle<Geom_BezierSurface>&,const occ::handle<Geom_BezierSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierSurfaceHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierSurfaceHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierSurfaceHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BezierSurfaceHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BezierSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBezierSurfaceHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineSurfaceHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineSurfaceHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineSurfaceHasher::operator()(const occ::handle<Geom_BSplineSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineSurfaceHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineSurfaceHasher::operator()(const occ::handle<Geom_BSplineSurface>&,const occ::handle<Geom_BSplineSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineSurfaceHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineSurfaceHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineSurfaceHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_BSplineSurfaceHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_BSplineSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashBSplineSurfaceHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_RectangularTrimmedSurfaceHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_RectangularTrimmedSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashRectangularTrimmedSurfaceHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_RectangularTrimmedSurfaceHasher::operator()(const occ::handle<Geom_RectangularTrimmedSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_RectangularTrimmedSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashRectangularTrimmedSurfaceHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_RectangularTrimmedSurfaceHasher::operator()(const occ::handle<Geom_RectangularTrimmedSurface>&,const occ::handle<Geom_RectangularTrimmedSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_RectangularTrimmedSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashRectangularTrimmedSurfaceHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_RectangularTrimmedSurfaceHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_RectangularTrimmedSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashRectangularTrimmedSurfaceHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_RectangularTrimmedSurfaceHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_RectangularTrimmedSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashRectangularTrimmedSurfaceHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetSurfaceHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetSurfaceHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetSurfaceHasher::operator()(const occ::handle<Geom_OffsetSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetSurfaceHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetSurfaceHasher::operator()(const occ::handle<Geom_OffsetSurface>&,const occ::handle<Geom_OffsetSurface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetSurfaceHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetSurfaceHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetSurfaceHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_OffsetSurfaceHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_OffsetSurfaceHasher.pxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashOffsetSurfaceHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CurveHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCurveHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasher::operator()(const occ::handle<Geom_Curve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CurveHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCurveHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasher::operator()(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Curve>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CurveHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCurveHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CurveHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCurveHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_CurveHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashCurveHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasher::operator()(const occ::handle<Geom_Surface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasher::operator()(const occ::handle<Geom_Surface>&,const occ::handle<Geom_Surface>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_SurfaceHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashSurfaceHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon2DHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon2DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon2DHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon2DHasher::operator()(const occ::handle<Poly_Polygon2D>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon2DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon2DHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon2DHasher::operator()(const occ::handle<Poly_Polygon2D>&,const occ::handle<Poly_Polygon2D>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon2DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon2DHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon2DHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon2DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon2DHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon2DHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon2DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon2DHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon3DHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon3DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon3DHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon3DHasher::operator()(const occ::handle<Poly_Polygon3D>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon3DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon3DHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon3DHasher::operator()(const occ::handle<Poly_Polygon3D>&,const occ::handle<Poly_Polygon3D>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon3DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon3DHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon3DHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon3DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon3DHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_Polygon3DHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_Polygon3DHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygon3DHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PolygonOnTriHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PolygonOnTriHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygonOnTriHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PolygonOnTriHasher::operator()(const PolygonOnTriHashKey&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PolygonOnTriHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygonOnTriHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PolygonOnTriHasher::operator()(const PolygonOnTriHashKey&,const PolygonOnTriHashKey&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PolygonOnTriHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygonOnTriHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PolygonOnTriHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PolygonOnTriHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygonOnTriHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_PolygonOnTriHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PolygonOnTriHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashPolygonOnTriHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TriangulationHasher(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TriangulationHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTriangulationHasher::new",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TriangulationHasher::operator()(const occ::handle<Poly_Triangulation>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TriangulationHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTriangulationHasher::hash",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TriangulationHasher::operator()(const occ::handle<Poly_Triangulation>&,const occ::handle<Poly_Triangulation>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TriangulationHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTriangulationHasher::equal",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TriangulationHasher::CompTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TriangulationHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTriangulationHasher::comp_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "GeomHash_TriangulationHasher::HashTolerance",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_TriangulationHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::GeomHashTriangulationHasher::hash_tolerance",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "PolygonOnTriHashKey",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PolygonOnTriHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::PolygonOnTriHashKey",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "PolygonOnTriHashKey::Poly",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PolygonOnTriHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::PolygonOnTriHashKey::poly",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
+      "upstream_id": "PolygonOnTriHashKey::TriRepId",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomHash/GeomHash_PolygonOnTriHasher.hxx",
+      "rust_item": "rustycad_tkg3d::geom_hash::PolygonOnTriHashKey::tri_rep_id",
+      "status": "implemented",
+      "notes": "GeomHash hasher: operator()(key) becomes hash() and operator()(key, key) becomes equal(); the typed hashers take the object instead of a handle they dereference, the polymorphic and mesh hashers take (possibly null) handles; every hasher also implements ncollection::HashPolicy. Hash values match OCCT bit for bit (tools/oracle/tkg3d_probe_hash.cxx)."
+    },
+    {
       "upstream_id": "GeomEval_CircularHelicoidSurface(const gp_Ax3&,double)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelicoidSurface.hxx",
@@ -114176,6 +115400,1308 @@
       "rust_target": "geom_surface_eval",
       "rust_test": "Geom_SurfaceEvalTest__RevolutionSurface_EvalD1_ValidResults",
       "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Line_CopiedLines_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Line_CopiedLines_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Line_DifferentLines_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Line_DifferentLines_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Circle_CopiedCircles_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Circle_CopiedCircles_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Circle_DifferentRadius_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Circle_DifferentRadius_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Ellipse_CopiedEllipses_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Ellipse_CopiedEllipses_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Ellipse_DifferentRadii_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Ellipse_DifferentRadii_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Hyperbola_CopiedHyperbolas_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Hyperbola_CopiedHyperbolas_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Hyperbola_DifferentRadii_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Hyperbola_DifferentRadii_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Parabola_CopiedParabolas_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Parabola_CopiedParabolas_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Parabola_DifferentFocal_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Parabola_DifferentFocal_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BezierCurve_CopiedCurves_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BezierCurve_CopiedCurves_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BezierCurve_DifferentPoles_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BezierCurve_DifferentPoles_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BSplineCurve_CopiedCurves_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BSplineCurve_CopiedCurves_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.TrimmedCurve_CopiedCurves_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__TrimmedCurve_CopiedCurves_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.TrimmedCurve_DifferentBounds_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__TrimmedCurve_DifferentBounds_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.OffsetCurve_CopiedCurves_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__OffsetCurve_CopiedCurves_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.OffsetCurve_DifferentOffset_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__OffsetCurve_DifferentOffset_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.DifferentTypes_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__DifferentTypes_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.NullCurves_HandledCorrectly",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__NullCurves_HandledCorrectly",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.SameObject_Equal",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__SameObject_Equal",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BSplineCurve_Weighted_CopiedCurves_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BSplineCurve_Weighted_CopiedCurves_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BSplineCurve_DifferentWeights_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BSplineCurve_DifferentWeights_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BezierCurve_Weighted_CopiedCurves_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BezierCurve_Weighted_CopiedCurves_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Circle_DifferentAxisOrientation_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Circle_DifferentAxisOrientation_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Line_DifferentDirection_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Line_DifferentDirection_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BSplineCurve_DifferentKnots_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BSplineCurve_DifferentKnots_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BSplineCurve_QuadraticBezierEquivalent_CopiedCurves_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BSplineCurve_QuadraticBezierEquivalent_CopiedCurves_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Line_Reversed_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Line_Reversed_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BezierCurve_Reversed_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BezierCurve_Reversed_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Circle_Translated_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Circle_Translated_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Circle_Scaled_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Circle_Scaled_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BSplineCurve_HigherDegree_CopiedCurves_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BSplineCurve_HigherDegree_CopiedCurves_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BSplineCurve_DifferentDegree_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BSplineCurve_DifferentDegree_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.BSplineCurve_LinearMultipleSpans_CopiedCurves_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__BSplineCurve_LinearMultipleSpans_CopiedCurves_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Ellipse_vs_Hyperbola_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Ellipse_vs_Hyperbola_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Circle_vs_Ellipse_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Circle_vs_Ellipse_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.TrimmedCurve_vs_BaseCurve_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__TrimmedCurve_vs_BaseCurve_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Circle_VerySmallRadius_CopiedCircles_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Circle_VerySmallRadius_CopiedCircles_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Circle_VeryLargeRadius_CopiedCircles_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Circle_VeryLargeRadius_CopiedCircles_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_CurveHasherTest.Line_AtOrigin_vs_FarFromOrigin_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_CurveHasher_Test.cxx",
+      "source_sha256": "65acae5c32355cddfdcb02a3e2143d2f9394fe0bb90ea8ab7a079834be56b201",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_curve_hasher",
+      "rust_test": "GeomHash_CurveHasherTest__Line_AtOrigin_vs_FarFromOrigin_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_curve_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Plane_CopiedPlanes_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Plane_CopiedPlanes_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Plane_DifferentPlanes_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Plane_DifferentPlanes_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.CylindricalSurface_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__CylindricalSurface_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.CylindricalSurface_DifferentRadius_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__CylindricalSurface_DifferentRadius_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.ConicalSurface_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__ConicalSurface_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.ConicalSurface_DifferentAngle_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__ConicalSurface_DifferentAngle_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.SphericalSurface_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__SphericalSurface_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.SphericalSurface_DifferentRadius_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__SphericalSurface_DifferentRadius_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.ToroidalSurface_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__ToroidalSurface_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.ToroidalSurface_DifferentRadii_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__ToroidalSurface_DifferentRadii_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BezierSurface_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BezierSurface_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BezierSurface_DifferentPoles_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BezierSurface_DifferentPoles_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BSplineSurface_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BSplineSurface_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.SurfaceOfRevolution_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__SurfaceOfRevolution_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.SurfaceOfLinearExtrusion_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__SurfaceOfLinearExtrusion_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.RectangularTrimmedSurface_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__RectangularTrimmedSurface_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.RectangularTrimmedSurface_DifferentBounds_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__RectangularTrimmedSurface_DifferentBounds_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.OffsetSurface_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__OffsetSurface_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.OffsetSurface_DifferentOffset_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__OffsetSurface_DifferentOffset_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.DifferentTypes_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__DifferentTypes_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.NullSurfaces_HandledCorrectly",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__NullSurfaces_HandledCorrectly",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.SameObject_Equal",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__SameObject_Equal",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BSplineSurface_Weighted_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BSplineSurface_Weighted_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BSplineSurface_DifferentWeights_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BSplineSurface_DifferentWeights_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BezierSurface_Weighted_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BezierSurface_Weighted_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Plane_DifferentNormal_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Plane_DifferentNormal_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.CylindricalSurface_DifferentAxis_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__CylindricalSurface_DifferentAxis_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.SurfaceOfRevolution_DifferentBasisCurve_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__SurfaceOfRevolution_DifferentBasisCurve_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.SurfaceOfLinearExtrusion_DifferentDirection_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__SurfaceOfLinearExtrusion_DifferentDirection_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BSplineSurface_DifferentKnots_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BSplineSurface_DifferentKnots_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Plane_Translated_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Plane_Translated_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Sphere_Scaled_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Sphere_Scaled_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BezierSurface_UReversed_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BezierSurface_UReversed_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BezierSurface_VReversed_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BezierSurface_VReversed_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.BSplineSurface_HigherDegree_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__BSplineSurface_HigherDegree_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Cylinder_vs_Cone_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Cylinder_vs_Cone_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Sphere_vs_Torus_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Sphere_vs_Torus_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.RectangularTrimmedSurface_vs_BaseSurface_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__RectangularTrimmedSurface_vs_BaseSurface_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Sphere_VerySmallRadius_CopiedSpheres_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Sphere_VerySmallRadius_CopiedSpheres_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Sphere_VeryLargeRadius_CopiedSpheres_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Sphere_VeryLargeRadius_CopiedSpheres_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.Plane_AtOrigin_vs_FarFromOrigin_DifferentHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__Plane_AtOrigin_vs_FarFromOrigin_DifferentHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.SurfaceOfRevolution_CircleBasis_CopiedSurfaces_SameHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__SurfaceOfRevolution_CircleBasis_CopiedSurfaces_SameHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_SurfaceHasherTest.OffsetSurface_DifferentBaseSurface_DifferentComparison",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_SurfaceHasher_Test.cxx",
+      "source_sha256": "f25ed1e309970ad2f04d3b549be6cdab289d09d6c2015975f8ea7ddbe1207b20",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_surface_hasher",
+      "rust_test": "GeomHash_SurfaceHasherTest__OffsetSurface_DifferentBaseSurface_DifferentComparison",
+      "rust_source": "crates/tkg3d/tests/geom_hash_surface_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.Polygon2D_CloseDeflectionKeepsEqualHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__Polygon2D_CloseDeflectionKeepsEqualHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.Polygon3D_CloseDeflectionKeepsEqualHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__Polygon3D_CloseDeflectionKeepsEqualHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.PolygonOnTriangulation_CloseDeflectionKeepsEqualHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__PolygonOnTriangulation_CloseDeflectionKeepsEqualHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.Triangulation_CloseDeflectionKeepsEqualHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__Triangulation_CloseDeflectionKeepsEqualHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.Polygon2D_DifferentSameCountGeometryChangesHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__Polygon2D_DifferentSameCountGeometryChangesHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.Polygon3D_DifferentSameCountGeometryChangesHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__Polygon3D_DifferentSameCountGeometryChangesHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.PolygonOnTriangulation_DifferentSameCountIndicesChangesHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__PolygonOnTriangulation_DifferentSameCountIndicesChangesHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.Triangulation_DifferentSameCountGeometryChangesHash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__Triangulation_DifferentSameCountGeometryChangesHash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.NullHandlesDoNotCrash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__NullHandlesDoNotCrash",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomHash_MeshHasherTest.HashToleranceAffectsNumericFields",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomHash_MeshHasher_Test.cxx",
+      "source_sha256": "302d1bde59f7c32ac88df20ebc01c863e448c788a7ba62da9d6077a968135117",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_hash_mesh_hasher",
+      "rust_test": "GeomHash_MeshHasherTest__HashToleranceAffectsNumericFields",
+      "rust_source": "crates/tkg3d/tests/geom_hash_mesh_hasher.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

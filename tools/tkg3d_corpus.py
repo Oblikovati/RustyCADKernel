@@ -126,6 +126,7 @@ def append_tkg3d_requests(requests: list[str]) -> None:
     # GeomEval Bezier surfaces (tkg3d_corpus_eval_bezier_surfaces.py)
     __import__('tkg3d_corpus_eval_bezier_surfaces').append_eval_bezier_surface_requests(requests)
     # GeomHash (tkg3d_corpus_hash.py)
+    __import__('tkg3d_corpus_hash').append_hash_requests(requests)
     # TopAbs (tkg3d_corpus_topabs.py)
     __import__('tkg3d_corpus_topabs').append_topabs_requests(requests)
 

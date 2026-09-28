@@ -117,6 +117,13 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // GeomEval Bezier surfaces (tkg3d_probe_eval_bezier_surfaces.cxx)
  {"g3_eval_bezier_surface", g3_eval_bezier_surface_case},
  // GeomHash (tkg3d_probe_hash.cxx)
+ {"g3_hash_curves", g3_hash_curves_case},
+ {"g3_hash_surfaces", g3_hash_surfaces_case},
+ {"g3_hash_primitives", g3_hash_primitives_case},
+ {"g3_hash_poly2d", g3_hash_poly2d_case},
+ {"g3_hash_poly3d", g3_hash_poly3d_case},
+ {"g3_hash_triangulation", g3_hash_triangulation_case},
+ {"g3_hash_ontri", g3_hash_ontri_case},
  // TopAbs (tkg3d_probe_topabs.cxx)
  {"g3_topabs", g3_topabs_case},
  {"g3_topabs_parse", g3_topabs_parse_case},

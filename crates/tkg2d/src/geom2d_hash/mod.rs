@@ -20,9 +20,22 @@
 //! they decide the iteration order of the hashed containers that use them.
 
 /// Declares a hasher struct with its two public tolerances, `new` and the native
-/// default arguments (`Precision::Angular()`, `Precision::Confusion()`).
+/// default arguments (`Precision::Angular()`, `Precision::Confusion()` unless two
+/// default expressions follow the name).
+///
+/// Exported because GeomHash (TKG3d) declares its hashers the same way;
+/// `hasher_tolerances!(/// doc
+/// MyHasher, rustycad_tkernel::precision::computational(), rustycad_tkernel::precision::computational());`.
+#[macro_export]
 macro_rules! hasher_tolerances {
     ($(#[$doc:meta])* $name:ident) => {
+        $crate::hasher_tolerances!(
+            $(#[$doc])* $name,
+            ::rustycad_tkernel::precision::angular(),
+            ::rustycad_tkernel::precision::confusion()
+        );
+    };
+    ($(#[$doc:meta])* $name:ident, $comp_default:expr, $hash_default:expr) => {
         $(#[$doc])*
         #[derive(Clone, Copy, Debug, PartialEq)]
         pub struct $name {
@@ -40,16 +53,14 @@ macro_rules! hasher_tolerances {
         }
         impl Default for $name {
             fn default() -> Self {
-                Self::new(
-                    rustycad_tkernel::precision::angular(),
-                    rustycad_tkernel::precision::confusion(),
-                )
+                Self::new($comp_default, $hash_default)
             }
         }
     };
 }
 
-mod hash_key;
+pub mod class_dispatch;
+pub mod hash_key;
 
 mod placement_hashers;
 pub use placement_hashers::{
