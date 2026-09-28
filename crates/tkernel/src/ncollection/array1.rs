@@ -366,4 +366,23 @@ impl<T> Array1<'_, T> {
     pub fn update_lower_bound(&mut self, lower: i32) {
         self.lower = lower;
     }
+
+    /// Moves the origin so the last element sits at `upper`, as native
+    /// `myLowerBound = myLowerBound - Upper() + theUpper` does (32-bit wrapping);
+    /// `array.update_upper_bound(10)` on five values gives `lower() == 6`.
+    pub fn update_upper_bound(&mut self, upper: i32) {
+        self.lower = self.lower.wrapping_sub(self.upper()).wrapping_add(upper);
+    }
+
+    /// OCCT's signed element count, `static_cast<int>(mySize)`; `array.length()`.
+    pub fn length(&self) -> i32 {
+        self.len() as i32
+    }
+
+    /// Element count of inclusive bounds, as native `static_cast<size_t>(theUpper - theLower + 1)`:
+    /// the `int` difference wraps and a negative count sign-extends to a huge `usize`;
+    /// `Array1::<i32>::range_size(1, 5) == 5`.
+    pub const fn range_size(lower: i32, upper: i32) -> usize {
+        upper.wrapping_sub(lower).wrapping_add(1) as usize
+    }
 }
