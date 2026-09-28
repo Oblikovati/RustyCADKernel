@@ -30,6 +30,24 @@ impl Line3 {
     pub const fn from_axis(axis: Axis1) -> Self {
         Self { axis }
     }
+    /// Returns the located axis (gp_Lin::Position); `line.position()`.
+    pub const fn position(&self) -> Axis1 {
+        self.axis
+    }
+    /// Builds the perpendicular line through a point off this line; `line.normal(point)?`.
+    pub fn normal(&self, point: Point3) -> Result<Self, Failure> {
+        let origin = self.location();
+        let toward = Direction3::new(
+            point.x() - origin.x(),
+            point.y() - origin.y(),
+            point.z() - origin.z(),
+        )?;
+        let direction = self.direction();
+        Ok(Self::new(
+            point,
+            direction.cross_crossed(toward, direction)?,
+        ))
+    }
     /// Returns the origin; `line.location()`.
     pub const fn location(&self) -> Point3 {
         self.axis.location()

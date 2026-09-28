@@ -63,6 +63,22 @@ impl Vector3 {
         }
         Ok(Direction3::from_vector(self)?.angle(&Direction3::from_vector(other)?))
     }
+    /// Signs the direction angle by a reference vector after gp_Vec's three magnitude checks;
+    /// `vector.angle_with_ref(other,reference)?`.
+    pub fn angle_with_ref(self, other: Self, reference: Self) -> Result<f64, Failure> {
+        let resolution = f64::MIN_POSITIVE;
+        if self.magnitude() <= resolution
+            || reference.magnitude() <= resolution
+            || other.magnitude() <= resolution
+        {
+            return Err(null_magnitude());
+        }
+        let this = Direction3::from_vector(self)?;
+        Ok(this.angle_with_ref(
+            Direction3::from_vector(other)?,
+            Direction3::from_vector(reference)?,
+        ))
+    }
     /// Tests parallel or antiparallel vectors; `vector.is_parallel(other,1e-12)?`.
     pub fn is_parallel(self, other: Self, tolerance: f64) -> Result<bool, Failure> {
         let angle = self.angle(other)?;

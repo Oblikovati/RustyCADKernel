@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 85 complete source suites
-currently account for 1,585 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 86 complete source suites
+currently account for 1,597 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -91,6 +91,7 @@ currently account for 1,585 mapped declarations, with matching native and Rust p
 | MathSys_Newton4D_Test.cxx | mathsys_newton4d | 8 |
 | MathOpt_PSO_Test.cxx | mathopt_pso | 28 |
 | MathOpt_GlobOpt_Test.cxx | mathopt_global | 24 |
+| ElCLib_Test.cxx | elclib | 12 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -479,3 +480,53 @@ the offending value. The point CoefficientsPoles overloads reject pole arrays
 longer than the coefficients, which natively read uninitialized storage.
 Weighted input without an output weight array (a native null dereference) is
 an error. Native exceptions keep their types.
+
+### ElCLib, ElSLib and the gp conics and quadrics
+
+All 12 ElCLib declarations pass in both kernels. ElSLib has no upstream suite, and
+gp_Torus_Test needs Geom_ToroidalSurface from TKG3d, so it is not mapped; supplemental
+tests cover ElSLib, gp_Elips/Hypr/Parab, their 2D counterparts, gp_Ax22d and the
+quadrics. The 5,200 elementary differential requests (25,607 in the whole corpus)
+match exactly. They cover every ElCLib and ElSLib static function, the gp-object
+overloads, To3d, and all members of the new gp types, including degenerate frames,
+invalid radii, the parabola resolution boundary, negative derivative orders, centre
+and axis points, infinite periods and zero scale factors.
+
+Every static function is a free function in `elclib`/`elslib`. Overloads that differ
+by dimension take a `_2d` suffix, `To3d` overloads are `to3d_<kind>`, and the
+gp-object overloads are generic `value`/`d1`/`d2`/`d3`/`dn`/`parameter(s)` functions
+over the `ElementaryCurve` and `ElementarySurface` traits. `asinh` comes from the
+platform libm through the `rustycad-cmath` adapter crate, because Rust's `f64::asinh` uses a different formula.
+
+The port keeps these native results:
+
+- `IsOdd` is `n % 2 == 1`, so a negative odd order is neither odd nor even. For
+  such an order, `HyperbolaDN` returns a zero vector. The differential probe found
+  this, and a regression test pins it.
+- Planar D2/D3 reverse the summed vector, but 3D sums negated terms. The planar
+  parabola tangent is `u·(X/(2F)) + Y`; the 3D tangent is `(u/(2F))·X + Y`. ElSLib
+  D3 negates `A2·X - A1·Y`, but D1/D2 use `-A2·X + A1·Y`. Each pair differs in
+  rounding or in the sign of a zero, so each keeps its own form.
+- ElSLib.cxx defines `No_Exception`, so the inline gp checks it uses are compiled
+  out. Iso-circles accept a negative radius, directions never raise, and all ElSLib
+  functions are infallible. `SphereD3` returns `Vuvv` equal to `Vuuu`, and
+  `ConeDN(0,0)` omits the axial `v·cos(a)·Z` term.
+- `CircleParameter` returns 0 in 3D for the centre, but raises in 2D. There, the
+  offset becomes a `gp_Dir2d`. The 2D ellipse raises gp_VectorWithNullMagnitude.
+- `gp_Hypr2d::Asymptote1` normalizes `Y + Y·(b/a)`, so it returns Y itself.
+  `Asymptote2` builds `Y·(1 - b/a)` in a gp_Vec2d and raises for equal radii.
+  `Directrix2` offsets `Focus1` by `p/e` and does not mirror `Directrix1`. Both
+  3D asymptote errors use the "Asymptote1" message.
+- In-place `gp_Elips2d::Transform` and `gp_Torus::Scale`/`Transform` multiply by
+  `|factor|`, so zero radii stay `+0.0`. The copying variants give `-0.0`.
+- `gp_Ax3::Translate(P1,P2)` adds `gp_Vec(P1,P2)`. `gp_Ax2`, like gp_Pnt, adds the
+  destination and then subtracts the origin. `gp_Ax2`/`gp_Ax3::Mirror(gp_Ax1)` mirror
+  X/Y with the Y-for-Z gp_Dir overload. gp_Ax3 mirrors its normal with the gp_Dir
+  overload, so its frame can become non-orthogonal.
+
+gp_Ax22d constructors renormalize the quarter-turned direction through
+`gp_Dir2d::SetCoord`. The native zero-norm raise there is unreachable, because a
+stored direction is never zero. Exception messages add the offending values to the
+native text. The planar conics' `Transform` members accept every Transform2 form.
+Transform2 itself cannot yet build point-mirror or scale forms, so those branches of
+`gp_Dir2d::Transform` stay untested until gp_Trsf2d is complete.

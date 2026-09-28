@@ -15,6 +15,8 @@
 use super::{
     Axis2d, Failure, Point2, Transform2, TransformForm, Vector2, Xy, construction, oriented_angle,
 };
+use rustycad_tkernel::standard::dump::{self, DumpOutput};
+use std::io;
 /// A normalized planar direction; native mirrored/parsed states may depart from unit length; `Direction2::new(1.0,0.0)?`.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Direction2 {
@@ -47,13 +49,21 @@ impl Direction2 {
     };
     /// Normalizes using the native squared-norm fast path; `Direction2::new(3.0,4.0)?`.
     pub fn new(x: f64, y: f64) -> Result<Self, Failure> {
-        let xy = Xy::new(x, y);
+        Self::normalized_with(Xy::new(x, y), "gp_Dir2d() - input vector has zero norm")
+    }
+    /// Normalizes with the native fast path and a caller-specific zero-norm message;
+    /// `Direction2::normalized_with(xy,"gp_Dir2d::SetCoord() - result vector has zero norm")?`.
+    pub(in crate::gp) fn normalized_with(xy: Xy, message: &str) -> Result<Self, Failure> {
         let squared = xy.square_modulus();
         if squared == 1.0 {
             return Ok(Self { coordinates: xy });
         }
         if squared <= 0.0 {
-            return Err(construction("gp_Dir2d() - input vector has zero norm"));
+            return Err(construction(&format!(
+                "{message}: ({}, {})",
+                xy.x(),
+                xy.y()
+            )));
         }
         Ok(Self {
             coordinates: xy / squared.sqrt(),
@@ -118,14 +128,42 @@ impl Direction2 {
     }
     /// Mirrors about an axis using native direct component expressions; `direction.mirrored_axis(axis)`.
     pub fn mirrored_axis(self, axis: Axis2d) -> Self {
-        let normal = axis.direction();
-        let (a, b, x, y) = (normal.x(), normal.y(), self.x(), self.y());
+        self.mirrored_direction(axis.direction())
+    }
+    /// Mirrors about another direction without renormalization; `direction.mirrored_direction(other)`.
+    pub fn mirrored_direction(self, other: Self) -> Self {
+        let (a, b, x, y) = (other.x(), other.y(), self.x(), self.y());
         let mixed = 2.0 * a * b;
         Self {
             coordinates: Xy::new(
                 ((2.0 * a * a) - 1.0) * x + mixed * y,
                 mixed * x + ((2.0 * b * b) - 1.0) * y,
             ),
+        }
+    }
+    /// Reverses in place; `direction.reverse()`.
+    pub fn reverse(&mut self) {
+        *self = self.reversed();
+    }
+    /// Writes the native `gp_Dir2d` vector fragment; `direction.dump_json(&mut stream)?`.
+    pub fn dump_json(&self, output: &mut impl DumpOutput) -> io::Result<()> {
+        dump::dump_vector(output, "gp_Dir2d", self.coordinates.coordinates())
+    }
+    /// Applies gp_Dir2d::SetCoord to a quarter turn of this direction; a stored direction is
+    /// never zero, so the native zero-norm raise is unreachable; `direction.quarter_turn(true)`.
+    pub(in crate::gp) fn quarter_turn(self, counter_clockwise: bool) -> Self {
+        let xy = if counter_clockwise {
+            Xy::new(-self.y(), self.x())
+        } else {
+            Xy::new(self.y(), -self.x())
+        };
+        let squared = xy.square_modulus();
+        debug_assert!(squared.is_nan() || squared > 0.0, "zero Direction2 {xy:?}");
+        if squared == 1.0 {
+            return Self { coordinates: xy };
+        }
+        Self {
+            coordinates: xy / squared.sqrt(),
         }
     }
     /// Transforms and renormalizes, preserving the native scale sign; `direction.transformed(transform)`.

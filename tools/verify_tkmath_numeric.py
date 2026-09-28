@@ -17,6 +17,7 @@ from tkmath_system_corpus import append_system_requests
 from tkmath_poly_corpus import append_laguerre_requests
 from tkmath_cslib_corpus import append_cslib_requests
 from tkmath_plib_corpus import append_plib_requests
+from tkmath_elementary_corpus import append_elementary_requests
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
@@ -403,6 +404,7 @@ def corpus() -> str:
     append_laguerre_requests(requests)
     append_cslib_requests(requests)
     append_plib_requests(requests)
+    append_elementary_requests(requests)
     return '\n'.join(requests)+'\n'           
 
 

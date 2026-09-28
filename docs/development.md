@@ -45,8 +45,10 @@ are ported, without confusing those thresholds with API coverage.
 
 Workspace code denies unsafe Rust. The NCollection allocator adapter explicitly
 allows the allocator-api2 trait implementation, with local ownership and alignment
-proofs. Other production modules remain safe Rust. Native bindings should use
-separate adapter crates with explicitly scoped policies when introduced.
+proofs. Other production modules remain safe Rust. Native bindings use separate adapter
+crates with explicitly scoped policies. `rustycad-cmath` is the first: it declares
+the platform libm `asinh`/`acosh`/`atanh`, because OCCT calls them and Rust's own
+formulas can differ in the last bit.
 The facade depends on the TKernel workspace crate; `smallvec` 1.16.2 supplies inline storage behind the
 `LocalArray` interface. Rayon 1.12.0 supplies parallel workers behind the `osd` interface. `allocator-api2` 0.4.0 supplies allocator-aware storage behind NCollection interfaces.
 `cargo deny check` checks advisory,

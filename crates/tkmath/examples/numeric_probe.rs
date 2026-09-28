@@ -356,6 +356,15 @@ fn main() {
             "xyz" => vector_case(&values),
             "matrix" => matrix_case(&values),
             "range" => range_case(&values),
+            "elclib3" => elementary_probe::elclib3_case(&values),
+            "elclib2" => elementary_probe::elclib2_case(&values),
+            "elperiod" => elementary_probe::elperiod_case(&values),
+            "elto3d" => elementary_probe::elto3d_case(&values),
+            "elslib" => elementary_probe::elslib_case(&values),
+            "gpconic3" => elementary_probe::gpconic3_case(&values),
+            "gpconic2" => elementary_probe::gpconic2_case(&values),
+            "gpquadric" => elementary_probe::gpquadric_case(&values),
+            "gpaxis" => elementary_probe::gpaxis_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }
@@ -427,4 +436,5 @@ mod swarm_probe;
 mod global_modern_probe;
 
 mod cslib_probe;
+mod elementary_probe;
 mod plib_probe;

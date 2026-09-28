@@ -143,6 +143,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_global_modern_probe.cxx"
 #include "tkmath_cslib_probe.cxx"
 #include "tkmath_plib_probe.cxx"
+#include "tkmath_elementary_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -231,6 +232,15 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"plib_hermit", [](std::istream& in) {plib_jacobi_case(in,true);}},
  {"plib_params", plib_params_case},
  {"plib_length", plib_length_case},
+ {"elclib3", elclib3_case},
+ {"elclib2", elclib2_case},
+ {"elperiod", elperiod_case},
+ {"elto3d", elto3d_case},
+ {"elslib", elslib_case},
+ {"gpconic3", gpconic3_case},
+ {"gpconic2", gpconic2_case},
+ {"gpquadric", gpquadric_case},
+ {"gpaxis", gpaxis_case},
 };
 int main() {
  std::string line;

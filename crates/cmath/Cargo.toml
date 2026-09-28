@@ -1,0 +1,16 @@
+[package]
+name = "rustycad-cmath"
+description = "Adapter to the platform C math library for functions Rust re-implements differently"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+# This adapter is the one place allowed to declare foreign C math functions.
+[lints.rust]
+unsafe_code = "allow"
+missing_docs = "warn"
+
+[lints.clippy]
+all = "warn"

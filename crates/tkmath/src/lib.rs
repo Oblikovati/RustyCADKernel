@@ -1,6 +1,8 @@
 //! OCCT mathematical foundation types. Toolkit API and legacy-test acceptance remain in progress.
 pub mod bnd;
 pub mod cslib;
+pub mod elclib;
+pub mod elslib;
 pub mod gp;
 pub mod math;
 pub mod math_utils;

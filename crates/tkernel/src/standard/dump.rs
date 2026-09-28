@@ -53,6 +53,16 @@ pub fn dump_real(output: &mut impl DumpOutput, name: &str, value: f64) -> io::Re
     output.write_fragment(format!("\"{name}\": ").as_bytes())?;
     output.write_fragment(AsciiString::from_real(value).as_bytes())
 }
+/// Emits the `OCCT_DUMP_CLASS_BEGIN` class-name field; `dump_class_begin(&mut stream,"gp_Ax2d")?`.
+pub fn dump_class_begin(output: &mut impl DumpOutput, class_name: &str) -> io::Result<()> {
+    add_values_separator(output)?;
+    output.write_fragment(format!("\"className\": \"{class_name}\"").as_bytes())
+}
+/// Wraps an already dumped field as `"key": {field}` like `DumpKeyToClass`; `dump_key_to_class(&mut stream,"loc",text)?`.
+pub fn dump_key_to_class(output: &mut impl DumpOutput, key: &str, field: &str) -> io::Result<()> {
+    add_values_separator(output)?;
+    output.write_fragment(format!("\"{key}\": {{{field}}}").as_bytes())
+}
 /// Emits an integer without floating-point rounding; `dump_integer(&mut stream,"Flags",1)?`.
 pub fn dump_integer(output: &mut impl DumpOutput, name: &str, value: i32) -> io::Result<()> {
     add_values_separator(output)?;

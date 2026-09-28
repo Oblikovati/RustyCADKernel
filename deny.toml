@@ -11,6 +11,8 @@ confidence-threshold = 0.93
 [bans]
 multiple-versions = "warn"
 wildcards = "deny"
+# Workspace path dependencies are unpublished (publish = false), so they are not real wildcards.
+allow-wildcard-paths = true
 
 [sources]
 unknown-registry = "deny"

@@ -11,8 +11,10 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
+// Rust translation of FoundationClasses/TKMath/gp/gp_Circ.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-use super::{Axis1, Axis2, Failure, Point3, Transform3, Vector3, construction};
+use super::placement::{axis2_curve_placement, scaled_length};
+use super::{Axis2, Failure, Point3, Transform3, Vector3, construction};
 /// A located circle retaining frame orientation; `Circle3::new(frame,5.0)?`.
 #[derive(Clone, Copy, Debug)]
 pub struct Circle3 {
@@ -27,35 +29,39 @@ impl Default for Circle3 {
         }
     }
 }
+axis2_curve_placement!(Circle3);
 impl Circle3 {
     /// Rejects negative radii while accepting zero; `Circle3::new(frame,radius)?`.
     pub fn new(position: Axis2, radius: f64) -> Result<Self, Failure> {
         if radius < 0.0 {
-            return Err(construction("gp_Circ() - radius should be positive number"));
+            return Err(construction(&format!(
+                "gp_Circ() - radius should be positive number, got {radius}"
+            )));
         }
         Ok(Self { position, radius })
+    }
+    /// Builds a circle without the radius check, as ElSLib's `No_Exception` build does;
+    /// `Circle3::from_parts_unchecked(frame,-1.0)`.
+    pub(crate) const fn from_parts_unchecked(position: Axis2, radius: f64) -> Self {
+        Self { position, radius }
     }
     /// Changes radius after the native check; `circle.set_radius(2.0)?`.
     pub fn set_radius(&mut self, radius: f64) -> Result<(), Failure> {
         if radius < 0.0 {
-            return Err(construction(
-                "gp_Circ::SetRadius() - radius should be positive number",
-            ));
+            return Err(construction(&format!(
+                "gp_Circ::SetRadius() - radius should be positive number, got {radius}"
+            )));
         }
         self.radius = radius;
         Ok(())
     }
+    /// Moves the centre only; `circle.set_location(point)`.
+    pub fn set_location(&mut self, location: Point3) {
+        self.position.set_location(location);
+    }
     /// Returns the stored radius; `circle.radius()`.
     pub const fn radius(&self) -> f64 {
         self.radius
-    }
-    /// Returns the plane frame; `circle.position()`.
-    pub const fn position(&self) -> Axis2 {
-        self.position
-    }
-    /// Returns the circle center; `circle.location()`.
-    pub const fn location(&self) -> Point3 {
-        self.position.location()
     }
     /// Uses native multiplication order; `circle.area()`.
     pub fn area(&self) -> f64 {
@@ -82,37 +88,24 @@ impl Circle3 {
     pub fn contains(&self, point: Point3, tolerance: f64) -> bool {
         self.distance(point) <= tolerance
     }
-    /// Moves the frame origin without changing radius; `circle.translated(vector)`.
-    pub fn translated(mut self, vector: Vector3) -> Self {
-        self.position = self.position.translated(vector);
-        self
-    }
-    /// Rotates the complete right-handed frame; `circle.rotated(axis,angle)?`.
-    pub fn rotated(mut self, axis: Axis1, angle: f64) -> Result<Self, Failure> {
-        self.position = self.position.rotated(axis, angle)?;
-        Ok(self)
-    }
-    /// Reflects through a point without reversing the plane normal; `circle.mirrored_point(center)`.
-    pub fn mirrored_point(mut self, center: Point3) -> Self {
-        self.position = self.position.mirrored_point(center);
-        self
-    }
     /// Scales radius and frame, retaining signed zero in radius; `circle.scaled(center,-2.0)`.
     pub fn scaled(mut self, center: Point3, factor: f64) -> Self {
-        self.multiply_radius(factor);
-        self.position = self.position.scaled(center, factor);
+        self.scale(center, factor);
         self
+    }
+    /// Scales in place; `circle.scale(center,2.0)`.
+    pub fn scale(&mut self, center: Point3, factor: f64) {
+        self.radius = scaled_length(self.radius, factor);
+        self.position.scale(center, factor);
     }
     /// Applies the transform's scale to radius and rebuilds frame orientation; `circle.transformed(transform)?`.
     pub fn transformed(mut self, transform: Transform3) -> Result<Self, Failure> {
-        self.multiply_radius(transform.scale_factor());
-        self.position = self.position.transformed(transform)?;
+        self.transform(transform)?;
         Ok(self)
     }
-    fn multiply_radius(&mut self, factor: f64) {
-        self.radius *= factor;
-        if self.radius < 0.0 {
-            self.radius = -self.radius;
-        }
+    /// Transforms in place; `circle.transform(transform)?`.
+    pub fn transform(&mut self, transform: Transform3) -> Result<(), Failure> {
+        self.radius = scaled_length(self.radius, transform.scale_factor());
+        self.position.transform(transform)
     }
 }

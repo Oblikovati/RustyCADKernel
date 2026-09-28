@@ -42,6 +42,10 @@ impl Line2 {
     pub const fn location(&self) -> Point2 {
         self.axis.location()
     }
+    /// Returns the located axis (gp_Lin2d::Position); `line.position()`.
+    pub const fn position(&self) -> Axis2d {
+        self.axis
+    }
     /// Returns the oriented line direction; `line.direction()`.
     pub const fn direction(&self) -> Direction2 {
         self.axis.direction()
