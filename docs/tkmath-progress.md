@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 99 complete source suites
-currently account for 1,926 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 103 complete source suites
+currently account for 1,951 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -105,6 +105,10 @@ currently account for 1,926 mapped declarations, with matching native and Rust p
 | BVH_SpatialMedianBuilder_Test.cxx | bvh_spatial_median_builder | 15 |
 | BVH_SweepPlaneBuilder_Test.cxx | bvh_sweep_plane_builder | 10 |
 | BVH_Traverse_Test.cxx | bvh_traverse | 21 |
+| BSplCLib_Test.cxx | bsplclib | 5 |
+| BSplCLib_Cache_Test.cxx | bsplclib_cache | 7 |
+| BSplSLib_Test.cxx | bsplslib | 5 |
+| BSplSLib_Cache_Test.cxx | bsplslib_cache | 8 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -636,3 +640,104 @@ LBVH bounds and parallel distance-field slices run in order. Each task writes
 only its own nodes or voxels, so the results are the same. Upstream even races on
 lazy tree builds in parallel slices.
 
+
+### BSplCLib B-spline curve library
+
+The whole public API of BSplCLib, BSplCLib_Cache, BSplCLib_CacheParams and
+BSplCLib_EvaluatorFunction is ported (185 API rows). The 12 declarations of
+BSplCLib_Test and BSplCLib_Cache_Test pass in both kernels. Another 8,192
+differential requests match with raw bits; the numeric gate now passes 30,839
+cases. They cover knot management (Hunt, LocateParameter overloads, flat
+sequences, forms, reparametrization, reversal), the Boor, anti-Boor, derivative
+and Bohm schemes for dimensions 1 to 6, local knot and pole extraction, insertion,
+removal, degree elevation, unperiodization and trimming on flat, 2D and 3D poles
+(rational and periodic included), D0 to DN in 1D, 2D and 3D up to degree 25,
+flat-knot Eval, the basis, the banded LU and interpolation, both BuildCache forms,
+CacheD0 to CacheD3, the Bezier syntaxes, BSplCLib_Cache, MovePoint(AndTangent),
+Resolution, FunctionMultiply/Reparameterise, TangExtendToConstraint,
+MergeBSplineKnots and Intervals.
+
+The native dimension 1 to 4 specialisations of Eval, Bohm and Resolution perform
+the same per-component operations as the general loops, so one loop reproduces
+them. One exception is kept: Bohm divides by the knot difference in dimension 1
+and multiplies by its reciprocal elsewhere, which rounds differently and gives
++0.0 instead of -0.0 for coincident knots. Other preserved quirks: InsertKnots
+writes the first new pole of each scheme at `NewKnots.Lower() + (index+1)*Dimension`;
+IncreaseDegree reads its working poles from `NewPoles.Lower()`; the rational
+flat-knot Eval clears `WeightsResults[row*ArrayDimension]` and accumulates into
+`WeightsResults[row]`, so weight derivatives add to the caller's values;
+EvalBsplineBasis locates a periodic span but evaluates at the unwrapped
+parameter; MovePointAndTangent compares U with flat knots at Schoenberg indices; CacheD2
+clears the missing derivative rows after scaling, CacheD3 before; the singular
+gp_Mat2d inversion in MovePointAndTangent is unchecked, as in the release build.
+`bsplclib_behavior.rs` pins them with regression tests.
+
+Deviations are limited to undefined native behaviour. The flat-knot Eval with
+extrapolation evaluates a Taylor polynomial of `Degree` from a buffer of
+`LocalRequest+1` terms, reading uninitialized stack; the port reads zeros, the
+intended lower-degree expansion (stale pole terms read as weight terms in the
+rational variant are kept). D1 on degree 0 reads an uninitialized derivative;
+the port returns zero. FunctionMultiply/Reparameterise pass one `int` where Eval
+reads two extrapolation modes; the port uses the B-spline degree for both.
+BuildBSpMatrix rejects contact orders outside 0..Degree, whose rows natively come
+from an unwritten buffer. Raw reads and writes outside a buffer, knot array or
+view return Standard_OutOfRange naming the index: for example an evaluation hint
+equal to the last u-knot of a non-periodic curve, which LocateParameter keeps and
+BuildKnots then walks past the multiplicities, or flat knots of an unclamped curve
+whose span search runs through equal knots past the last span. A periodic Eval
+whose period cannot advance fails instead of looping forever. The corpus
+never enters these paths. `BSplCLib::DN(U, N, Poles, Weights, P, VN)` for Bezier
+poles is declared without a definition in the pinned sources and is not ported.
+
+`NCollection_Array1::from_shared` and `Array2::from_shared` add the native
+read-only buffer constructor, needed by UnitWeights: the view does not own its
+storage and detaches a private copy on the first write.
+
+### BSplSLib B-spline surface library
+
+The whole public API of BSplSLib, BSplSLib_Cache and BSplSLib_EvaluatorFunction
+is ported (48 API rows) on top of BSplCLib, PLib and math. The 13 declarations of
+BSplSLib_Test and BSplSLib_Cache_Test pass in both kernels. Another 3,840
+differential requests match with raw bits; the numeric gate now passes 34,679
+cases. They cover D0 to D3, DN and HomogeneousD0/D1 up to degree 25 (and the
+refused degree 26) with multiplicities or flat knots, index hints, periodic,
+rational, partly rational and locally polynomial patches and non-1 grid bounds;
+RationalDerivative on raw buffers; Iso, IsRational and both Reverse overloads;
+SetPoles/GetPoles in both directions; InsertKnots, RemoveKnot, IncreaseDegree and
+Unperiodize along U and V; both BuildCache forms, CacheD0 to CacheD2,
+PolesCoefficients and CoefsD0 to CoefsD2; BSplSLib_Cache with its local
+evaluations; MovePoint, Resolution, both Interpolate overloads and
+FunctionMultiply (including failing evaluations). Native argument groups become
+`SurfaceSpan`, `CacheSource`, `SurfaceCacheSpan`, `ResolutionDirection`,
+`InterpolationGrid`, `MultiplySource` and `InterpolationKnots`; output references
+become returned values.
+
+Preserved quirks: IsRational takes its default tolerance from
+`Epsilon(Weights(I1, I2))`, reading column I2; CacheD0 to CacheD2 read the cache
+from `Poles(LowerCol, LowerRow)` and `Weights(LowerCol, LowerRow)`, with swapped
+bounds that coincide for 1-based grids; the rational CacheD2 with a maximal
+degree below 2 reads the missing weight derivative rows from the evaluation
+buffer where pole rows were left; CoefsD0 to CoefsD2 pass `RowLength() - 1` as
+the U degree and `ColLength() - 1` as the V degree; the V pass of the rational
+Resolution takes the neighbour row from the U range and the column from the V
+range; PrepareEval uses an index hint whenever it lies inside the knot array,
+without locating or normalizing the parameter, and only its V-first
+non-rational pole copy wraps a start index past the last row; the second copy
+loop of Reverse starts one row or column after the wrapped `Last`; SetPoles with weights reads
+and stores the weight first; FunctionMultiply always evaluates the surface as
+rational and non-periodic, so it needs weights; BSplSLib_Cache parametrizes a
+span by its middle and half length, and its local evaluations divide by the half
+spans. `bsplslib_behavior.rs` pins the main ones with regression tests.
+
+Deviations are limited to undefined or unchecked native behaviour. Rational
+evaluations, Iso and FunctionMultiply without the weights they dereference are
+errors. Degrees above MaxDegree raise Standard_OutOfRange as natively. A
+non-periodic direction whose FirstUKnotIndex is not below its LastUKnotIndex
+(unclamped ends at a high degree) has no valid span: the native local knot walk
+leaves entries of its stack buffer unwritten, and the port reads zeros; the
+corpus draws only directions with a valid span. In the reference build the
+transposition in PolesCoefficients (fewer U than V poles) writes `CachePoles`
+without the NCollection bound check, so a `[max][min]` target is filled through
+row-major offsets; the port raises the checked Standard_OutOfRange, and the
+coefficients take the shape of the poles in the corpus. UnitWeights rejects
+counts whose product is negative.

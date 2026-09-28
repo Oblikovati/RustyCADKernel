@@ -153,6 +153,16 @@ impl<'a> DoubleTab<'a> {
     fn values(&self) -> &[f64] {
         &self.storage.slice()[..self.shape.len()]
     }
+    /// Borrows the row-major cells for native pointer-walking algorithms;
+    /// `table.cells_mut()[0] = 1.0`.
+    pub(crate) fn cells_mut(&mut self) -> &mut [f64] {
+        let length: usize = self.shape.len();
+        &mut self.storage.slice_mut()[..length]
+    }
+    /// Reads the row-major cells; `table.cells()[0]`.
+    pub(crate) fn cells(&self) -> &[f64] {
+        self.values()
+    }
 }
 impl Clone for DoubleTab<'_> {
     fn clone(&self) -> Self {

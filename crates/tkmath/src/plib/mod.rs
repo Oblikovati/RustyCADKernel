@@ -21,7 +21,7 @@
 //! Standard_OutOfRange `Failure` instead. Native exceptions keep their type.
 //! Overloads on gp_Pnt/gp_Pnt2d share one generic function over [`PolePoint`];
 //! overloads on real arrays carry a `_scalar` or `_flat` suffix.
-mod access;
+pub(crate) mod access;
 mod binomial;
 mod coefficients_poles;
 mod constraint;

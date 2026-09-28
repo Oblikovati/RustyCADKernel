@@ -28,6 +28,9 @@ pub struct Array1<'a, T> {
 enum Storage<'a, T> {
     Owned(Vec<T>),
     Borrowed(&'a mut [T]),
+    // A read-only view (the native `const_reference` buffer constructor) and the
+    // clone routine that detaches it on first mutable access.
+    Shared(&'a [T], fn(&[T]) -> Vec<T>),
 }
 
 impl<T: std::fmt::Debug> std::fmt::Debug for Array1<'_, T> {
@@ -75,6 +78,7 @@ impl<T> Array1<'_, T> {
         match &self.storage {
             Storage::Owned(values) => values,
             Storage::Borrowed(values) => values,
+            Storage::Shared(values, _) => values,
         }
     }
 }
@@ -117,6 +121,23 @@ impl<'a, T> Array1<'a, T> {
         }
     }
 
+    /// Views a read-only buffer with the given lower bound, as the native
+    /// `NCollection_Array1(const_reference, lower, upper)` constructor does.
+    ///
+    /// The view does not own its storage (`is_deletable()` is false). Native code
+    /// must not write through such a view; here the first mutable access copies
+    /// the values into owned storage instead, so the shared buffer never changes;
+    /// `Array1::from_shared(&[1.0, 1.0], 1).upper() == 2`.
+    pub fn from_shared(buffer: &'a [T], lower: i32) -> Self
+    where
+        T: Clone,
+    {
+        Self {
+            lower,
+            storage: Storage::Shared(buffer, <[T]>::to_vec),
+        }
+    }
+
     /// Tests ownership of nonempty storage; `Array1::<i32>::with_size(1).is_deletable()`.
     pub fn is_deletable(&self) -> bool {
         matches!(self.storage, Storage::Owned(_)) && !self.is_empty()
@@ -124,9 +145,14 @@ impl<'a, T> Array1<'a, T> {
 
     /// Borrows the mutable values; `Array1::<i32>::with_size(3).as_mut_slice().fill(7)`.
     pub fn as_mut_slice(&mut self) -> &mut [T] {
+        if let Storage::Shared(values, detach) = self.storage {
+            self.storage = Storage::Owned(detach(values));
+        }
         match &mut self.storage {
             Storage::Owned(values) => values,
             Storage::Borrowed(values) => values,
+            // Detached above; an empty slice keeps this arm panic-free.
+            Storage::Shared(..) => &mut [],
         }
     }
 

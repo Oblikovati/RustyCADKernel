@@ -146,6 +146,12 @@ void planar_case(std::istream& input) {
 #include "tkmath_elementary_probe.cxx"
 #include "tkmath_bvh_probe.cxx"
 #include "tkmath_bvh_query_probe.cxx"
+#include "tkmath_bspl_probe.cxx"
+#include "tkmath_bspl_curves_probe.cxx"
+#include "tkmath_bspl_eval_probe.cxx"
+#include "tkmath_bspl_misc_probe.cxx"
+#include "tkmath_bsps_probe.cxx"
+#include "tkmath_bsps_cache_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -252,6 +258,38 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"bvh_traverse", bvh_traverse_case},
  {"bvh_nearest", bvh_nearest_case},
  {"bvh_field", bvh_field_case},
+ {"bspl_knots", bspl_probe::knots_case},
+ {"bspl_locate", bspl_probe::locate_case},
+ {"bspl_scheme", bspl_probe::scheme_case},
+ {"bspl_build", bspl_probe::build_case},
+ {"bspl_insert", bspl_probe::insert_case},
+ {"bspl_remove", bspl_probe::remove_case},
+ {"bspl_degree", bspl_probe::degree_case},
+ {"bspl_unperiodize", bspl_probe::unperiodize_case},
+ {"bspl_trim", bspl_probe::trim_case},
+ {"bspl_eval", bspl_probe::eval_case},
+ {"bspl_flat_eval", bspl_probe::flat_eval_case},
+ {"bspl_basis", bspl_probe::basis_case},
+ {"bspl_interpolate", bspl_probe::interpolate_case},
+ {"bspl_cache", bspl_probe::cache_case},
+ {"bspl_bezier", bspl_probe::bezier_case},
+ {"bspl_move", bspl_probe::move_case},
+ {"bspl_resolution", bspl_probe::resolution_case},
+ {"bspl_function", bspl_probe::function_case},
+ {"bspl_tang", bspl_probe::tang_case},
+ {"bspl_merge", bspl_probe::merge_case},
+ {"bspl_intervals", bspl_probe::intervals_case},
+ {"bsps_eval", bsps_probe::eval_case},
+ {"bsps_rational", bsps_probe::rational_case},
+ {"bsps_iso", bsps_probe::iso_case},
+ {"bsps_poles", bsps_probe::poles_case},
+ {"bsps_ops", bsps_probe::ops_case},
+ {"bsps_cache", bsps_probe::cache_case},
+ {"bsps_bezier", bsps_probe::bezier_case},
+ {"bsps_move", bsps_probe::move_case},
+ {"bsps_resolution", bsps_probe::resolution_case},
+ {"bsps_interpolate", bsps_probe::interpolate_case},
+ {"bsps_function", bsps_probe::function_case},
 };
 int main() {
  std::string line;
