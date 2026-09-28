@@ -44,6 +44,7 @@
 #include "tkgeombase_probe_lprop.cxx"
 #include "tkgeombase_probe_gprop.cxx"
 #include "tkgeombase_probe_hermit.cxx"
+#include "tkgeombase_probe_geomtools.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -136,6 +137,18 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gprop_hoperator", gb_gprop_hoperator_case},
  // Hermit (tkgeombase_probe_hermit.cxx)
  {"hermit", gb_hermit_case},
+ // GeomTools (tkgeombase_probe_geomtools*.cxx)
+ {"gt_curve", gb_gt_curve_case},
+ {"gt_curve2d", gb_gt_curve2d_case},
+ {"gt_surface", gb_gt_surface_case},
+ {"gt_read", gb_gt_read_case},
+ {"gt_get_real", gb_gt_get_real_case},
+ {"gt_set", gb_gt_set_case},
+ {"gt_set_null", gb_gt_set_null_case},
+ {"gt_set_read", gb_gt_set_read_case},
+ {"gt_progress", gb_gt_progress_case},
+ {"gt_debug_dump", gb_gt_debug_dump_case},
+ {"gt_handler", gb_gt_handler_case},
 };
 int main() {
  std::string line;
