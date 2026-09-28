@@ -1,12 +1,12 @@
 # TKG2d port status
 
 **In progress; toolkit acceptance is not complete.** TKG2d is the first ModelingData
-toolkit. The `Geom2d`, `Adaptor2d`, `Geom2dAdaptor`, `Geom2dEval` and `Geom2dHash`
-packages are ported in full in `crates/tkg2d` (`rustycad-tkg2d`), and
+toolkit. The `Geom2d`, `Adaptor2d`, `Geom2dAdaptor`, `Geom2dEval`, `Geom2dGridEval` and
+`Geom2dHash` packages are ported in full in `crates/tkg2d` (`rustycad-tkg2d`), and
 `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
-`Geom2dGridEval` is not ported yet. The source inventory has 33 GoogleTest files and
-523 declaration candidates. 23 complete source suites account for 455 mapped
-declarations, with matching native and Rust passes.
+The source inventory has 33 GoogleTest files and 523 declaration candidates. 28
+complete source suites account for 506 mapped declarations, with matching native and
+Rust passes.
 
 The class mapping (traits behind `Handle<dyn Trait>`, one lock per object for
 shared mutation, `Failure` results) is described in [geom-design.md](geom-design.md).
@@ -35,9 +35,15 @@ shared mutation, `Failure` results) is described in [geom-design.md](geom-design
 | Geom2dEval_LogarithmicSpiralCurve_Test.cxx | geom2d_eval_logarithmic_spiral_curve | 13 |
 | Geom2dEval_SineWaveCurve_Test.cxx | geom2d_eval_sine_wave_curve | 12 |
 | Geom2dEval_TBezierCurve_Test.cxx | geom2d_eval_tbezier_curve | 27 |
+| Geom2dGridEval_BezierCurve_Test.cxx | geom2d_grid_eval_bezier_curve | 6 |
+| Geom2dGridEval_Curve_Test.cxx | geom2d_grid_eval_curve | 29 |
+| Geom2dGridEval_Ellipse_Test.cxx | geom2d_grid_eval_ellipse | 5 |
+| Geom2dGridEval_Hyperbola_Test.cxx | geom2d_grid_eval_hyperbola | 5 |
+| Geom2dGridEval_Parabola_Test.cxx | geom2d_grid_eval_parabola | 6 |
 | Geom2dHash_CurveHasher_Test.cxx | geom2d_hash_curve_hasher | 39 |
 
-`crates/tkg2d/tests/geom2d_supplemental.rs` and `adaptor_behavior.rs` add regression
+`crates/tkg2d/tests/geom2d_supplemental.rs`, `adaptor_behavior.rs` and
+`grid_eval_behavior.rs` add regression
 tests for the quirks listed below, and `crates/tkernel/tests/handle_interfaces.rs` covers the handle
 extension that the design needs.
 
@@ -52,8 +58,8 @@ then runs `tools/verify_tkg2d_numeric.py`. Evidence is in `target/oracle-tkg2d/`
 
 `tools/verify_tkg2d_numeric.py` builds `tools/oracle/tkg2d_probe.cxx` (a table of
 operations) and its twin `crates/tkg2d/examples/numeric_probe.rs`, runs both on the
-895 requests of `tools/tkg2d_corpus.py` and `tools/tkg2d_adaptor_corpus.py`, and uses the TKMath comparator: finite
-1163 requests of `tools/tkg2d_corpus.py` and `tools/tkg2d_eval_corpus.py`, and uses the TKMath comparator: finite
+1787 requests of `tools/tkg2d_corpus.py`, `tools/tkg2d_adaptor_corpus.py`,
+`tools/tkg2d_eval_corpus.py` and `tools/tkg2d_grid_corpus.py`, and uses the TKMath comparator: finite
 values, infinities and signed zeros need identical bits, NaNs matching
 classification. Exception types and the `DumpJson` text are compared too.
 
@@ -92,6 +98,19 @@ and a 1e-300 `HashTolerance` included), copies, near copies, every Geom2d curve 
 eval curves, null handles and aliases of one handle, and the point, direction and
 `gp_Ax22d` hashers on huge, signed-zero and rounding-boundary values. Hash values are
 printed with an `h` prefix so that the comparator never reads them as doubles.
+The Geom2dGridEval requests (`g2_grid*`, `tools/oracle/tkg2d_probe_grid.cxx`, 502 of
+them) run `EvaluateGrid`, `EvaluateGridD1` to `D3` and `EvaluateGridDN` for orders -1 to
+7 of `Geom2dGridEval_Curve` built on the curve handle and on a `Geom2dAdaptor_Curve`,
+of the specialized evaluator of the curve's own class and of the adaptor fallback.
+The curves cover every class: lines and conics on direct and indirect frames, the
+zero-focal parabola, Bezier curves up to degree 25, B-splines with simple, multiple and
+C0 knots, periodic and rational ones, trimmed curves (nested too), offsets at cusps and
+tiny tangents and of every basis kind, and eval curves bare and wrapped. Each curve
+gets dense sorted grids (the span-cache runs), sparse and shuffled grids (the direct
+calls), one parameter, parameters beyond the range and the empty grid, with lower
+bounds from -3 to 7. Other requests evaluate every adaptor kind through the
+dispatcher (the base class raises from `GetType`) and the fallback, curves that carry
+an evaluation representation, and every evaluator on null curves.
 
 ## Preserved native behaviour
 
@@ -173,6 +192,25 @@ printed with an `h` prefix so that the comparator never reads them as doubles.
   Geom2dEval curves) by type name through Standard_CStringHasher and compares them by
   object identity.
 
+- `Geom2dGridEval_Curve` strips trimmed wrappers without applying their bounds, reads
+  the curve of a `Geom2dAdaptor_Curve` without its range or its recorded evaluation
+  representation, and leaves any class other than the eight specialized ones (the
+  Geom2dEval curves, also inside a `Geom2dAdaptor_Curve` or an offset curve)
+  uninitialized: every grid is empty and `GetType` is `OtherCurve`. Only other
+  adaptors take the `Geom2dGridEval_OtherCurve` fallback, with the adaptor's `GetType`.
+- No grid evaluator uses the evaluation representation of a Bezier, B-spline or
+  offset curve, but the offset evaluator's `EvalDN(U, 4)` and `AdjustDerivative` calls
+  go through the basis curve's own members, which do.
+- `Geom2dGridEval_Parabola` rebuilds Y as `(-X.Y, X.X)`, so the grid of a parabola on
+  an indirect frame is its mirror image; it multiplies by `1 / (4F)` and `1 / (2F)`,
+  so a zero focal gives infinite and NaN coordinates where `ElCLib` returns the line.
+- The Bezier and B-spline `EvaluateGridDN` return zero vectors above the degree, also
+  for rational curves. The B-spline one locates the span in the flat knots and passes
+  that index to `BSplCLib::DN` with the knots and multiplicities; `PrepareEval` keeps an
+  index inside the knot index range, so the derivative comes from another span.
+- The offset evaluator returns an empty grid when the normal is degenerate at any
+  parameter; its D2 and D3 grids first apply `AdjustDerivative` at singular points.
+
 ## Deliberate Rust deviations
 
 - Getters that return `const&` natively return copies, because a reference cannot
@@ -208,14 +246,31 @@ printed with an `h` prefix so that the comparator never reads them as doubles.
   multiplicities but different pole counts (periodic against non-periodic) raises
   Standard_OutOfRange inside the native `noexcept` comparison, which terminates the
   process; the port reports the pair as different. The corpus avoids that pair.
+- When the flat span index of `Geom2dGridEval_BSplineCurve::EvaluateGridDN` equals the
+  last knot index of a non-periodic B-spline, the native `BSplCLib::BuildKnots` reads
+  past the knot and multiplicity arrays (undefined); the port raises
+  Standard_OutOfRange. The corpus leaves those parameters out (`dn_safe`).
+- `Geom2dGridEval::CurveD1` to `CurveD3` are aliases of the `Geom2d_Curve::ResD1` to
+  `ResD3` structs, which have the same fields. The evaluators return `Result` where a
+  native call can raise (the gp getters behind `Circ2d()`..., BSplCLib, the offset
+  utilities, an adaptor); the line evaluator returns plain arrays.
+- `Geom2dGridEval_OtherCurve` borrows the adaptor with a lifetime, as the native
+  `std::reference_wrapper`, so `Geom2dGridEvalCurve::from_adaptor` ties the evaluator
+  to the adaptor; `from_curve` has no borrow.
 
 ## Remaining coverage
 
-- `Geom2d_CurveEval_Test.cxx` (7) needs Geom2dAPI and `Geom2d_OffsetCurve_Test.cxx`
-  (5) needs GCPnts and Geom2dConvert; both wait for those toolkits.
-- The Geom2dEval, Geom2dGridEval, Geom2dHash,
-  Geom2dAPI and Geom2dGcc suites wait for their packages.
-- The Adaptor2d, Geom2dAdaptor, Geom2dGridEval, Geom2dAPI and Geom2dGcc suites wait
-  for their packages.
+Five source suites (17 declarations) stay unmapped, because they need packages of
+later toolkits:
+
+- `Geom2d_CurveEval_Test.cxx` (7): `Geom2dAPI_PointsToBSpline` (TKGeomAlgo).
+- `Geom2d_OffsetCurve_Test.cxx` (5): `GCPnts_AbscissaPoint`, `Geom2dConvert` and
+  `Geom2dConvert_ApproxCurve` (TKGeomBase).
+- `Geom2dAPI_InterCurveCurve_Test.cxx` (3): `Geom2dAPI_InterCurveCurve`,
+  `Geom2dAPI_ExtremaCurveCurve` and `IntRes2d` (TKGeomAlgo, with Extrema from TKGeomBase).
+- `Geom2dGcc_Circ2d2TanOn_Test.cxx` (1): `Geom2dGcc_Circ2d2TanOn`,
+  `Geom2dGcc_QualifiedCurve`, `GccEnt` and `Geom2dAPI_ProjectPointOnCurve` (TKGeomAlgo).
+- `Geom2dGcc_Circ2d2TanRad_Test.cxx` (1): `Geom2dGcc_Circ2d2TanRad`,
+  `Geom2dGcc_QualifiedCurve` and `GccEnt_Position` (TKGeomAlgo).
 - `DumpJson` is compared on the corpus; the `InitFromJson` counterparts do not
   exist in Geom2d.

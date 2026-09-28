@@ -132,3 +132,14 @@ raise Standard_NotImplemented), so they keep plain fields without a
 `HashTolerance` as fields; `operator()(key)` becomes `hash` and
 `operator()(key, key)` becomes `equal`, and the value and curve hashers also implement
 the NCollection `HashPolicy`, so they can drive the ported hashed containers.
+
+## 9. Grid evaluators
+
+The Geom2dGridEval evaluators are plain structs, not transient classes: each holds the
+handle it evaluates (`Handle<Geom2dCircle>`...), may hold a null one, and reads the
+curve once per call (`Circ2d()`, the pole and knot arrays), so evaluation takes the
+curve's lock only for those reads. The `std::variant` of evaluators in `Geom2dGridEval_Curve` is the
+enum `Geom2dGridEvalEvaluator`, with `Uninitialized` for `std::monostate`, and the
+adaptor fallback borrows its adaptor with a lifetime, as the native
+`std::reference_wrapper`. The result structs `Geom2dGridEval::CurveD1` to `CurveD3` are
+aliases of `Geom2dCurveD1` to `Geom2dCurveD3`, which have the same fields.
