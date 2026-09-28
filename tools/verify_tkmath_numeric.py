@@ -422,21 +422,22 @@ def compare(oracle: str, rust: str, requests: str) -> None:
     raise RuntimeError('Numeric result counts differ')
 
 
-def source_path() -> Path:
-    """Resolve the explicitly selected pinned OCCT checkout; source_path()."""
+def selected_paths() -> tuple[Path, Path]:
+    """Resolve the pinned OCCT checkout and native build; selected_paths() -> (source, build)."""
     parser = argparse.ArgumentParser()
     parser.add_argument('--source', type=Path, default=ROOT/'../OCCT')
-    return parser.parse_args().source.resolve()
+    parser.add_argument('--native-build', type=Path, default=ROOT/'target/occt-tkernel-full')
+    arguments = parser.parse_args()
+    return arguments.source.resolve(), arguments.native_build.resolve()
 
 
 def main() -> None:
     """Build probes, compare all cases, and write evidence only on success."""
-    source = source_path()
+    source, build = selected_paths()
     inventory = snapshot(source)
     output = ROOT/'target/oracle-tkmath/numeric'
     output.mkdir(parents=True, exist_ok=True)
     (output/'report.json').unlink(missing_ok=True)
-    build = ROOT/'target/occt-tkernel-full'
     libraries = [next(build.rglob('lib'+name+'.so')) for name in ['TKTopAlgo','TKGeomAlgo','TKBRep','TKGeomBase','TKG3d','TKG2d','TKMath','TKernel']]
     library = libraries[-1]
     executable = output/'native-probe'

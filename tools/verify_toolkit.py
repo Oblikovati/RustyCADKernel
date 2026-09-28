@@ -46,8 +46,15 @@ def verify_sources(source: Path, rows: list[dict]) -> list[str]:
     return paths
 
 
-def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, environment: dict) -> Path:
-    """Build the verified native geometry closure; prepare_build(source, out, inventory, 4, env)."""
+def prepare_build(source: Path, output: Path, inventory: dict, jobs: int, environment: dict, reuse: Path | None = None) -> Path:
+    """Build the verified native geometry closure; prepare_build(source, out, inventory, 4, env).
+
+    A reused build is never reconfigured or rebuilt, so parallel worktrees can share
+    one native closure without racing on it; it must already contain the libraries.
+    """
+    if reuse is not None:
+        if not (reuse/'CMakeCache.txt').is_file(): raise ValueError(f'No configured native build at {reuse}; expected a CMake build directory')
+        return reuse
     build = ROOT/'target/occt-tkernel-full'
     flags = ['-DCMAKE_BUILD_TYPE=RelWithDebInfo', '-DBUILD_GTEST=ON',
              '-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON', '-DGTEST_USE_FETCHCONTENT=ON',
@@ -93,21 +100,30 @@ def main() -> None:
     parser.add_argument('toolkit', choices=['TKMath'])
     parser.add_argument('--source',type=Path,default=ROOT/'../OCCT')
     parser.add_argument('--jobs',type=int,default=2)
+    parser.add_argument('--native-build',type=Path,help='Reuse this prebuilt native closure without rebuilding it')
+    parser.add_argument('--only',action='append',default=[],help='Development aid: verify only sources containing this text; never a full gate')
     args = parser.parse_args()
     if os.uname().sysname != 'Linux': raise ValueError('This native oracle profile requires Linux')
     source = args.source.resolve()
-    output = ROOT/'target'/('oracle-'+args.toolkit.lower()); output.mkdir(parents=True,exist_ok=True)
+    # A partial run writes elsewhere so it never deletes or overwrites full-gate evidence.
+    output = ROOT/'target'/('oracle-'+args.toolkit.lower()+('-partial' if args.only else '')); output.mkdir(parents=True,exist_ok=True)
     (output/'report.json').unlink(missing_ok=True)
     inventory = snapshot(source); rows = selected_rows(args.toolkit,inventory)
+    if args.only:
+        rows = [row for row in rows if any(text in row['source'] for text in args.only)]
+        if not rows: raise ValueError(f'--only {args.only} selects no mapped sources; expected a substring of a mapped source path')
     paths = verify_sources(source,rows); native,rust = mapped_runtime_sets(rows)
     environment = dict(os.environ,LC_ALL='C',LANG='C')
     environment['PATH'] = str(Path.home()/'.cargo/bin')+os.pathsep+environment['PATH']
-    build = prepare_build(source,output,inventory,args.jobs,environment)
+    build = prepare_build(source,output,inventory,args.jobs,environment,args.native_build)
     libraries = native_tests(source,output,build,paths,args.jobs,native,environment)
     rust_tests(output,rows,rust,environment)
     numeric = None
+    if args.only:
+        print(f'PARTIAL PASS (--only {args.only}): {len(rows)} declarations; not a toolkit gate')
+        return
     if args.toolkit == 'TKMath':
-        run([sys.executable,ROOT/'tools/verify_tkmath_numeric.py','--source',source],output/'numeric-verification.log',env=environment)
+        run([sys.executable,ROOT/'tools/verify_tkmath_numeric.py','--source',source,'--native-build',build],output/'numeric-verification.log',env=environment)
         numeric = json.loads((output/'numeric/report.json').read_text())
     record_report(output,args.toolkit,inventory,rows,native,rust,libraries,numeric)
 
