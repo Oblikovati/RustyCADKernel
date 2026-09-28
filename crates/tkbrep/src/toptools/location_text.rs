@@ -91,9 +91,14 @@ pub(super) fn write_trsf(stream: &mut IoStream, transform: &Transform3, compact:
 }
 
 /// The variables of `Read` that live across the records: `l1` and `p` are declared
-/// once, and a failed extraction leaves them unchanged.
+/// once, and a failed extraction leaves them unchanged. `typLoc` is declared,
+/// uninitialised, inside the loop; the pinned build keeps it in one stack slot, so a
+/// failed extraction at the end of the stream repeats the previous record type (a
+/// `1` then reads a null matrix and raises Standard_ConstructionError). The port keeps
+/// that observed value; the first record starts from 0.
 #[derive(Default)]
 pub(super) struct ReadState {
+    kind: i32,
     datum: i32,
     power: i32,
 }
@@ -106,9 +111,8 @@ pub(super) fn read_location(
     state: &mut ReadState,
     previous: Location,
 ) -> Result<Location, Failure> {
-    let mut kind = 0;
-    stream.extract_int(&mut kind);
-    match kind {
+    stream.extract_int(&mut state.kind);
+    match state.kind {
         1 => Ok(Location::new(read_trsf(stream)?)),
         2 => read_complex(stream, map, state),
         _ => Ok(previous),
