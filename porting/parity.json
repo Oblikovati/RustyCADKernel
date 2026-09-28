@@ -102986,6 +102986,542 @@
       "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "AppParCurves::BernsteinMatrix(int,const math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::bernstein_matrix",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves::Bernstein(int,const math_Vector&,math_Matrix&,math_Matrix&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::bernstein",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves::SecondDerivativeBernstein(double,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::second_derivative_bernstein",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves::SplineFunction(int,int,const math_Vector&,const math_Vector&,math_Matrix&,math_Matrix&,math_IntegerVector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::spline_function",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_Constraint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_Constraint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::Constraint",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::ConstraintCouple as Default>::default",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple(int,AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::new",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple::Index() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::index",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple::Constraint() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::constraint",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple::SetIndex(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::set_index",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple::SetConstraint(AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::set_constraint",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::new",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::with_nb_poles",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve(const NCollection_Array1<AppParCurves_MultiPoint>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::from_multi_points",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve(const AppParCurves_MultiCurve&,const NCollection_Array1<double>&,const NCollection_Array1<int>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::from_multi_curve",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::SetKnots(const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::set_knots",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::SetMultiplicities(const NCollection_Array1<int>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::set_multiplicities",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Knots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::knots",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Multiplicities() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::multiplicities",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Degree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::degree",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Value(int,double,gp_Pnt&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::value_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Value(int,double,gp_Pnt2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::value_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::D1(int,double,gp_Pnt&,gp_Vec&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d1_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::D1(int,double,gp_Pnt2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d1_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::D2(int,double,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d2_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::D2(int,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d2_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::dump",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::new",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::with_nb_poles",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve(const NCollection_Array1<AppParCurves_MultiPoint>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::from_multi_points",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::~AppParCurves_MultiCurve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::SetNbPoles(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::set_nb_poles",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::SetValue(int,const AppParCurves_MultiPoint&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::set_value",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::NbCurves() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::nb_curves",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::NbPoles() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::nb_poles",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Degree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::degree",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Dimension(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::dimension",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Curve(int,NCollection_Array1<gp_Pnt>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::curve_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Curve(int,NCollection_Array1<gp_Pnt2d>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::curve_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Value(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::value",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Pole(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::pole",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Pole2d(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::pole2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Transform(int,double,double,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::transform",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Transform2d(int,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::transform2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Value(int,double,gp_Pnt&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::value_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Value(int,double,gp_Pnt2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::value_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::D1(int,double,gp_Pnt&,gp_Vec&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d1_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::D1(int,double,gp_Pnt2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d1_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::D2(int,double,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d2_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::D2(int,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d2_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::dump",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::new",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::with_counts",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint(const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::from_points",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint(const NCollection_Array1<gp_Pnt2d>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::from_points2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt2d>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::from_points_and_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::~AppParCurves_MultiPoint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::SetPoint(int,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::set_point",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Point(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::point",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::SetPoint2d(int,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::set_point2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Point2d(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::point2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Dimension(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::dimension",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::nb_points",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::NbPoints2d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::nb_points2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Transform(int,double,double,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::transform",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Transform2d(int,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::transform2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::dump",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
     }
   ],
   "tests": [

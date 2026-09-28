@@ -4,7 +4,8 @@
 (`rustycad-tkgeombase`) is the port of the ModelingData toolkit TKGeomBase. It
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
-`IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit` and `FEmTool` packages are ported in full, and
+`IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `FEmTool` and `AppParCurves` packages are ported in
+full, and
 `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
@@ -103,6 +104,30 @@ shared outside the object). Output references become return values
 (FEmTool_Curve.cxx and FEmTool_ProfileMatrix.cxx compile the range checks out) become
 Standard_OutOfRange where they would leave the storage (undefined natively).
 
+AppParCurves (`app_par_curves`) ports the package functions (`bernstein_matrix`,
+`bernstein`, `second_derivative_bernstein`, `spline_function`), the containers and the
+six `.gxx` generics. `AppParCurves_MultiPoint` and `AppParCurves_MultiCurve` hold their
+points and poles in shared arrays (`Handle<HArray1<...>>`), so a copy shares them, as
+the native copies share their handles (the least-squares fit, its Bezier view and the
+function's curve are one pole array, which the Uzawa correction writes through). The
+virtual members of `AppParCurves_MultiCurve` are the `MultiCurveEval` trait, implemented
+by `MultiCurve` (Bezier evaluation) and `MultiBSpCurve`, which reaches the non-virtual
+members of its base through `Deref`; the slicing copy `(AppParCurves_MultiCurve)` is
+`MultiBSpCurve::as_multi_curve`. The `MultiLine`/`ToolLine` template parameters of the
+generics are the `LineTool` trait (implemented by the line: `ToolLine::NbP3d(SSP)` is
+`ssp.nb_p3d()`); `LeastSquare` and `ResolConstraint` read the line in their
+constructors only and are plain structs with generic constructors, `Function<L>` and
+`BSpFunction<L>` keep a copy of the line. The `Squares`, `ResolCons` and
+`*_BFGS` parameters are the ported classes themselves; the BFGS subclass the AppDef,
+GeomInt and BRepApprox instantiations generate is `GradientBfgs` (math_BFGS with the
+fit-tolerance stopping test, over the `FitFunction` trait). The optimizer callbacks
+cannot return an exception: a function keeps the first one and the gradients return it
+after BFGS, where the native exception would unwind. `AppParCurves_ResolConstraint::
+Error()` is declared natively but never defined (a link error if called) and has no
+counterpart. The protected members that the generics call from outside
+(`NbConstraints`, `NbColumns`, `Perform`) are public; `BSpGradient` takes its inputs in
+a `BSpGradientInput`.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -184,8 +209,26 @@ between and outside them, after a knot change under the span cache, lengths acro
 and outside the elements, degree changes and reductions at three tolerances; and
 assemblies of chained elements in one to three dimensions with constraint segments
 added in every order (each merge case of AddConstraint), nullified, reset and
-refused systems, a table indexed from 0 and a full dependence table. The corpus has
-7457 requests (gce, GC, IntAna2d, IntAna, LProp, GeomLProp, GProp, Hermit and FEmTool).
+refused systems, a table indexed from 0 and a full dependence table.
+
+The AppParCurves requests (`tkgeombase_corpus_appparcurves.py`) run the Bernstein and
+B-spline basis functions inside, at and outside their ranges, down to 2 poles and with
+interior multiplicities up to C0; every MultiPoint, MultiCurve and MultiBSpCurve
+constructor and member with valid and invalid indexes, the transformations, the Dump
+text and the sharing of copies; and the generics through the native AppDef
+instantiations (the Rust probe implements `LineTool` with the AppDef_MultiLine and
+AppDef_MyLineTool semantics): least-squares fits of 3D, 2D and mixed lines (smooth,
+noisy, collinear, with a repeated point) for every pair of extremity constraints each
+Perform overload accepts, too few poles, tangents against the chord and missing
+tangents or curvatures, Bezier and B-spline bases; the Uzawa correction with inner
+pass, tangency and curvature points and its derivative; the Bezier and B-spline
+parameter functions (value, gradient, curves, errors); and both optimizers at loose and
+tight tolerances with 0 to 200 BFGS iterations. The paths that are undefined natively
+are left out: curvature constraints in `Perform(Parameters)` (unassigned pole rows), a
+fit read before any Perform, the constrained B-spline function, more Householder
+unknowns than points and more Uzawa constraints than pole coordinates (both read past
+their arrays natively). The corpus has 9502 requests (gce, GC, IntAna2d, IntAna, LProp,
+GeomLProp, GProp, Hermit, FEmTool and AppParCurves).
 
 ## Preserved native behaviour
 
@@ -383,4 +426,43 @@ FEmTool:
   port). `Solve` stores IsSolved before building the Schur matrix, so after a
   Standard_OutOfRange there (a table not indexed from 1) `Solution` dereferences a
   null matrix natively.
+
+AppParCurves:
+
+- `AppParCurves_MultiPoint::Dimension(0)` is 3 (the check is `Index < 0`);
+  `AppParCurves_MultiCurve::Pole(CuIndex, Nieme)` raises only when both indexes are
+  `<= 0` (then `Point(0)` raises). `MultiCurve::Degree()` dereferences the pole array
+  (Standard_NullObject in the port for a curve without one), `NbPoles()` answers 0.
+  `AppParCurves_MultiBSpCurve::SetNbPoles` keeps the degree, which only
+  `SetMultiplicities` recomputes; `Knots()` before `SetKnots` is a null dereference
+  natively (Standard_NullObject). The package functions compile their range checks out;
+  the port raises Standard_OutOfRange where they would leave their arrays (fewer than
+  2 poles, DDA not starting at 1).
+- `AppParCurves_LeastSquare::Perform(Parameters)` does not return after the pass-point
+  solve: it falls through to the full system with the tangency unknowns, which
+  recomputes the poles (the first solve only decides `done`). `Init` fills the last
+  fixed pole when the *first* constraint is a curvature point (`LastConstraint == Pass
+  || LastConstraint == Tangency || FirstConstraint == Curvature`), and `Distance()`
+  takes the square roots in place once per Perform: after `ErrorGradient`, it returns
+  the squared distances. The matrices and lambdas start uninitialized natively (0 in
+  the port).
+- `FirstConstraint(TheConstraints, Point)` returns the constraint of the last couple
+  when none is on `Point` (the loop variable keeps it).
+- `AppParCurves_ResolConstraint` reads the 2D pass points at `tabP2d(i - nb3d)` (the
+  pass-point index, not the curve), so mixed lines raise Standard_OutOfRange; in the
+  tangency-ratio rows the 3D case `T1 ~ T1y` leaves `T1` at its previous value; `tabV` is shared by
+  the loops, so a point without tangent keeps the previous tangent.
+  `ConstraintDerivative` reads the 2D tangents at the curve index, does not advance the
+  column offset for 2D curves, and writes its tangency-ratio rows into the constraint
+  matrix (Cont), which `ConstraintMatrix()` and the function's gradient then read.
+- `AppParCurves_Function` reads its 2D line points at the curve index (mixed lines
+  with inner constraints raise Standard_OutOfRange); in the gradient DKPTC keeps the
+  last curve's sum only, DPTCO uses `DPTCO1(Pi, j + Inc)` for every k, the correction
+  term `Scal` keeps the last pole only (`=` instead of `+=`) and uses the X error for
+  Z, and the constraint of a point without couple is the previous point's. `Error()`
+  reads the squared distances of the constrained branch, so the Gradient's errors are
+  0 for a line without inner constraints.
+- `AppParCurves_BSpFunction` has an empty constrained branch: F and the errors are left
+  unassigned there. `AppParCurves_Gradient` selects the 3D-and-2D line overload
+  whenever there are 2D points (it tests `nbP != 0` with the total count).
 
