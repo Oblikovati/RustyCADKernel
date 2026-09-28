@@ -268,6 +268,16 @@ class MacroAndFriendTests(unittest.TestCase):
         header = "#define DEFINE_STANDARD_RTTIEXT(C, B) public: int Bad();\n" + TEMPLATE_HEADER
         self.assertNotIn("BVH_Transient::Bad||", members_of(header))
 
+    def test_macros_of_transitively_included_siblings_expand(self):
+        # NCollection_Vec4 reaches NCOLLECTION_VEC_COMPONENTS_2D only through NCollection_Vec3.
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "A.hxx").write_text("#define PAIR(a, b) int a##b() const;\n#include <C.hxx>\n")
+            (root / "B.hxx").write_text("#include <A.hxx>\n")
+            (root / "C.hxx").write_text("#include <B.hxx>\nclass C\n{\npublic:\n  PAIR(x, y)\n};\n")
+            members = [f"{m.prefix}|{m.params}|{m.qualifier}" for m in header_members(root / "C.hxx")]
+        self.assertIn("C::xy||const", members)
+
 
 class RowMatchingTests(unittest.TestCase):
     def test_row_ids_split_prefix_params_and_qualifier(self):

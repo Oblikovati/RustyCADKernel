@@ -505,18 +505,22 @@ def normalize_params(params: str) -> str:
     return "" if parts == ["void"] else ",".join(parts)
 
 
-def sibling_macros(path: Path) -> dict[str, tuple[list[str], str]]:
-    """Function-like macros of the same-package headers that `path` includes.
+def sibling_macros(path: Path, seen: set[Path] | None = None) -> dict[str, tuple[list[str], str]]:
+    """Function-like macros of the same-package headers that `path` includes, transitively.
 
-    NCollection_Vec3 invokes `NCOLLECTION_VEC_COMPONENTS_2D`, defined in the included
-    NCollection_Vec2.hxx; only direct includes that live beside `path` are read.
+    NCollection_Vec3 invokes `NCOLLECTION_VEC_COMPONENTS_2D` from the included
+    NCollection_Vec2.hxx, and NCollection_Vec4 invokes it through NCollection_Vec3.hxx;
+    only includes that live beside `path` are followed, each at most once.
     """
-    text = path.read_text(errors="replace")
+    seen = {path} if seen is None else seen
     macros: dict[str, tuple[list[str], str]] = {}
-    for name in re.findall(r'^\s*#\s*include\s*[<"]([\w.]+)[>"]', text, re.M):
+    for name in re.findall(r'^\s*#\s*include\s*[<"]([\w.]+)[>"]', path.read_text(errors="replace"), re.M):
         sibling = path.parent / name
-        if sibling.is_file() and sibling != path:
-            macros.update(header_macros(TOKEN_NOISE.sub(" ", sibling.read_text(errors="replace"))))
+        if not sibling.is_file() or sibling in seen:
+            continue
+        seen.add(sibling)
+        macros.update(sibling_macros(sibling, seen))
+        macros.update(header_macros(TOKEN_NOISE.sub(" ", sibling.read_text(errors="replace"))))
     return macros
 
 
