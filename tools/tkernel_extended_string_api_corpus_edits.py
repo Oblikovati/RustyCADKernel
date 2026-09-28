@@ -88,7 +88,8 @@ def edit_requests(rng: random.Random) -> list[str]:
 
 def handle_requests() -> list[str]:
     """HExtendedString constructors, members and the handle hash/equality specializations."""
-    out = ["extended_string_hnew empty", "extended_string_hnew hascii -"]
+    out = ["extended_string_hnew empty"]
+    out += [f"extended_string_hnew hascii {raw(data)}" for data in UTF8]
     out += [f"extended_string_hnew cstr {raw(data)}" for data in UTF8]
     out += [f"extended_string_hnew {kind} {u16(text)}" for text in STRINGS for kind in ("u16", "str", "hcopy")]
     out += [f"extended_string_hnew unit {c}" for c in (0, 65, 0x20AC)]

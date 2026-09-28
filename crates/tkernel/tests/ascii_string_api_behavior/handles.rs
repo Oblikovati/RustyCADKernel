@@ -27,8 +27,9 @@ fn h_constructors_mirror_ascii_string() {
     assert_eq!(h_bytes(&HAsciiString::from_string(&AsciiString::from_raw(b"\0x"))), b"\0x");
     assert_eq!(h_bytes(&HAsciiString::copied(&shared(b"q"))), b"q");
     let wide = ExtendedString::from_utf16(&[0x20AC, 0x41, 0]);
-    assert_eq!(h_bytes(&HAsciiString::from_extended(&wide, b'?')), b"?A");
-    assert_eq!(h_bytes(&HAsciiString::from_extended(&wide, 0)), "€A".as_bytes());
+    let wide = HExtendedString::from(wide);
+    assert_eq!(h_bytes(&HAsciiString::from_h_extended_string(&wide, b'?')), b"?A");
+    assert_eq!(h_bytes(&HAsciiString::from_h_extended_string(&wide, 0)), "€A".as_bytes());
 }
 
 #[test]

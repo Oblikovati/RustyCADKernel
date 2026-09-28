@@ -15,8 +15,7 @@ Inputs that are undefined behavior in OCCT are never sent:
   corrupts memory; the port raises Standard_OutOfRange), and lengths or widths large enough
   to exhaust memory;
 - aliased AssignCat/Prepend pointers outside the string, a null Token separator pointer and
-  a null handle argument (Rust slices and references are never null);
-- HAsciiString content: the HAsciiString API at this revision only builds empty objects.
+  a null handle argument (Rust slices and references are never null).
 """
 import random
 import struct

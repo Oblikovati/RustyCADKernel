@@ -2,7 +2,7 @@
 //! TCollection API, including the native quirks the differential probe confirmed.
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkernel::tcollection::{
-    AsciiString, ExtendedString, HAsciiString, next_prime_for_map,
+    AsciiString, ExtendedString, HAsciiString, HExtendedString, next_prime_for_map,
 };
 
 fn bytes(text: &AsciiString) -> &[u8] {

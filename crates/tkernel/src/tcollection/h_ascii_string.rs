@@ -22,7 +22,7 @@
 //! on both sides, legal in C++) free of deadlock. Handle parameters that OCCT dereferences
 //! without a check are `&HAsciiString` (a `&Handle` coerces to it); the three members that
 //! raise `Standard_NullObject` for a null handle take `&Handle<HAsciiString>`.
-use super::{AsciiString, ExtendedString};
+use super::{AsciiString, HExtendedString};
 use crate::standard::{Handle, StandardTransient};
 use std::sync::{PoisonError, RwLock, RwLockReadGuard, RwLockWriteGuard};
 
@@ -87,11 +87,11 @@ impl HAsciiString {
     pub fn copied(other: &HAsciiString) -> Self {
         other.snapshot().into()
     }
-    /// `TCollection_HAsciiString(const occ::handle<TCollection_HExtendedString>&, char)` given
-    /// that object's `String()`: UTF-8, or `replacement` for units above 0xFF when nonzero;
-    /// `HAsciiString::from_extended(&wide, b'?')`.
-    pub fn from_extended(text: &ExtendedString, replacement: u8) -> Self {
-        AsciiString::from_extended(text, Some(replacement)).into()
+    /// `TCollection_HAsciiString(const occ::handle<TCollection_HExtendedString>&, char)`: the
+    /// other object's `String()` as UTF-8, or `replacement` for units above 0xFF when nonzero;
+    /// `HAsciiString::from_h_extended_string(&wide, b'?')`.
+    pub fn from_h_extended_string(source: &HExtendedString, replacement: u8) -> Self {
+        AsciiString::from_extended(&source.string(), Some(replacement)).into()
     }
     /// `String`: borrows the string for as long as the guard lives; `object.string().len()`.
     pub fn string(&self) -> RwLockReadGuard<'_, AsciiString> {

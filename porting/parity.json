@@ -42799,9 +42799,9 @@
       "upstream_id": "TCollection_HAsciiString(const occ::handle<TCollection_HExtendedString>&,char)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/TCollection/TCollection_HAsciiString.hxx",
-      "rust_item": "rustycad_tkernel::tcollection::HAsciiString::from_extended",
+      "rust_item": "rustycad_tkernel::tcollection::HAsciiString::from_h_extended_string",
       "status": "implemented",
-      "notes": "TCollection_HAsciiString is a Standard_Transient (impl_transient!) whose AsciiString sits behind an RwLock so it can be edited through any handle; members take &self. A handle parameter OCCT dereferences unchecked is &HAsciiString (a &Handle coerces to it), and a string argument is read before this object is locked, so self-aliasing calls work. const char* parameters take impl AsRef<[u8]> read through the first NUL. Takes the HExtendedString's String() (&ExtendedString); a zero char converts to UTF-8, another byte replaces units above 0xFF. HExtendedString itself is ported by the ExtendedString area."
+      "notes": "TCollection_HAsciiString is a Standard_Transient (impl_transient!) whose AsciiString sits behind an RwLock so it can be edited through any handle; members take &self. A handle parameter OCCT dereferences unchecked is &HAsciiString (a &Handle coerces to it), and a string argument is read before this object is locked, so self-aliasing calls work. const char* parameters take impl AsRef<[u8]> read through the first NUL. The handle argument is &HExtendedString (OCCT dereferences it unchecked; a Rust reference is never null); its String() converts to UTF-8 for a zero char, another byte replaces units above 0xFF."
     },
     {
       "upstream_id": "TCollection_HAsciiString::AssignCat(const char* const)",

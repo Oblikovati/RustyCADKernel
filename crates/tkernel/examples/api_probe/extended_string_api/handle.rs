@@ -4,7 +4,9 @@ use crate::common::{hex, next, next_bytes};
 use rustycad_tkernel::{
     ncollection::HashPolicy,
     standard::{Failure, Handle},
-    tcollection::{ExtendedString, HAsciiString, HExtendedString, HExtendedStringHasher},
+    tcollection::{
+        AsciiString, ExtendedString, HAsciiString, HExtendedString, HExtendedStringHasher,
+    },
 };
 use std::str::SplitWhitespace;
 
@@ -45,14 +47,9 @@ const HNEW: &[(&str, SubCase)] = &[
         )
     }),
     ("hascii", |input| {
-        // The HAsciiString API at this revision only builds empty objects.
-        assert!(
-            next_bytes(input).is_empty(),
-            "HAsciiString content is not constructible"
-        );
-        describe_handle(&HExtendedString::from_h_ascii_string(
-            &HAsciiString::default(),
-        ))
+        // The native probe builds the string byte by byte, so embedded NULs stay.
+        let ascii = HAsciiString::from(AsciiString::from_raw(&next_bytes(input)));
+        describe_handle(&HExtendedString::from_h_ascii_string(&ascii))
     }),
     ("hcopy", |input| {
         let source = next_handle(input);

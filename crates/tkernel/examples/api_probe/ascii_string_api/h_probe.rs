@@ -6,7 +6,7 @@ use super::{
 };
 use crate::common::{decode, hex};
 use rustycad_tkernel::standard::{Handle, RuntimeTyped, StandardTransient, Transient};
-use rustycad_tkernel::tcollection::HAsciiString;
+use rustycad_tkernel::tcollection::{HAsciiString, HExtendedString};
 
 type HMake = fn(&mut Input<'_>) -> HAsciiString;
 type HEdit = fn(&HAsciiString, &mut Input<'_>) -> Outcome;
@@ -71,8 +71,8 @@ const H_MAKERS: &[(&str, HMake)] = &[
     ("moved_string", |i| HAsciiString::from(make(&next_text(i)))),
     ("handle", |i| HAsciiString::copied(&next_handle(i))),
     ("extended", |i| {
-        let wide = next_extended(i);
-        HAsciiString::from_extended(&wide, next_char(i))
+        let wide = HExtendedString::from(next_extended(i));
+        HAsciiString::from_h_extended_string(&wide, next_char(i))
     }),
 ];
 

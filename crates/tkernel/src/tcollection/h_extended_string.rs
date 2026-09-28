@@ -60,9 +60,7 @@ impl HExtendedString {
     /// Converts an HAsciiString's string as UTF-8 when it decodes (the handle constructor);
     /// `HExtendedString::from_h_ascii_string(&ascii)`.
     pub fn from_h_ascii_string(source: &HAsciiString) -> Self {
-        let bytes = source.as_bytes_with_nul();
-        let ascii = super::AsciiString::from_raw(&bytes[..bytes.len() - 1]);
-        Self::from(ExtendedString::from_ascii(&ascii))
+        Self::from(ExtendedString::from_ascii(&source.string()))
     }
     /// Copies another object's string into a new object (the handle constructor);
     /// `HExtendedString::from_h_extended_string(&other)`.

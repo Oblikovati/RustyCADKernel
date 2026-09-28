@@ -630,9 +630,8 @@ kernel: every constructor on a UTF-8 corpus of fixed and seeded byte strings, UT
 hashes, numeric parsing, every comparison and search overload and span core, `Token`, the set
 locators, every edit at the indices `INT_MIN`, -1, 0, 1, 2, N, N+1, N+2 and `INT_MAX`, and
 the `HExtendedString` members and handle policy. Exceptions are compared by class. The corpus
-docstring lists the undefined-behavior inputs that it never sends. At this revision,
-`HAsciiString` can only be built empty, so the `HAsciiString` constructor is probed with an
-empty object only.
+docstring lists the undefined-behavior inputs that it never sends. The `HAsciiString`
+handle constructor is probed with every UTF-8 corpus string, embedded NULs included.
 
 ### Standard scalar, character, hashing, time, GUID and atomic helpers
 
