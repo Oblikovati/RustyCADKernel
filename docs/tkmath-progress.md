@@ -1441,8 +1441,9 @@ The port keeps these native results:
   exit (for example FRPR reports math_FunctionError for a zero gradient norm and Powell
   for a failed extrapolated line search); the initial status is math_OK for BFGS and
   math_NotBracketed for the others.
-- `math_ComputeGaussPointsAndWeights(0)` is a not-done result (the empty eigenproblem
-  raises Standard_RangeError inside the constructor's try block).
+- `math_ComputeGaussPointsAndWeights(0)` is a not-done result: the empty eigenproblem
+  raises Standard_OutOfRange at `theSubdiagWork(0) = 0.0` in
+  `math_EigenValuesSearcher`, inside the constructor's try block.
 - An empty `math_PSOParticlesPool` is valid; particles with zero dimensions raise
   Standard_OutOfRange when the pool takes pointers into its empty memory block.
 - `Jacobi`'s EigenSort orders `d.Length()` entries, the last of equal maxima winning.
@@ -1582,3 +1583,62 @@ the allocator arguments of the coherent classes are not kept (`Allocator` is an 
 row). `Poly_Polygon3D::Parameters` without parameters and `TopLoc_Location::Powered(INT_MIN)`
 on a multi-item chain raise Standard_NullObject and Standard_OutOfRange where native code
 dereferences null or recurses forever. `NextLocation` of the identity is the identity itself.
+
+### Empty bounds and input-reachable panics (faithfulness fixes)
+
+`math_DoubleTab`, and so `math_Matrix`, now accept the empty range `upper = lower - 1`
+as native code does: the table is built on its 64-value stack buffer (not deletable),
+its bounds and counts are kept, and every loop over it runs zero times. This fixes an
+earlier deviation that refused the empty range with Standard_RangeError, which made
+AppCont raise where OCCT fits over empty tables. A range below the empty one still
+raises Standard_RangeError with the offending bounds: natively its negative size is
+sign-extended into a huge `size_t` over the stack buffer, and the first `Init` or read
+runs past it (AppCont at degree -2 crashes). `math_VectorBase` already accepted empty
+ranges; its refusal now names the bounds too.
+
+The native results over empty tables that the port keeps:
+
+- A 0x0 matrix has determinant 1 and an empty inverse (math_Gauss decomposes nothing
+  and is done); math_Crout, math_Jacobi, math_SVD (also with rows but no columns, as
+  `Set` has its check compiled out in math_SVD.cxx), math_GaussLeastSquare,
+  math_Householder and math_Uzawa over no unknown are done. math_Crout writes
+  `L(1, 1)` unconditionally; for an empty matrix that is the first slot of an unused
+  stack buffer, so the port skips it.
+- `Norm`, `Norm2` and the dot product take `&Array(Lower())` checked, so on an empty
+  vector they raise Standard_OutOfRange, and so do the matrix-vector `Multiply` and
+  `TMultiply` overloads, which take raw pointers to the matrix, the operand and the
+  result. The element-wise `math_Matrix::Multiplied(math_Vector)` and
+  `math_VectorBase::Multiplied(math_Matrix)` give empty or zero results instead.
+- In the solver sources that define No_Standard_OutOfRange (math_BFGS, math_FRPR,
+  math_FunctionSetRoot, math_NewtonMinimum, ...), those checks are compiled out, so an
+  empty norm or dot product is 0 there: BFGS, FRPR and Powell over no variable run
+  (Powell is not done), math_FunctionSetRoot raises Standard_DimensionError and
+  math_NewtonFunctionSetRoot is done. The port uses unchecked crate-internal
+  `norm_unchecked`/`norm2_unchecked`/`dot_unchecked` at exactly those call sites.
+- `math_EigenValuesSearcher` over an empty problem raises Standard_OutOfRange at
+  `theSubdiagWork(0) = 0.0` (checked in its source), so
+  `math_ComputeGaussPointsAndWeights(0)` is not done.
+
+Native undefined behaviour that used to panic in the port now raises a named failure
+with the offending sizes: math_Householder with more unknowns than rows reads the pivot
+`Q(i, i)` past its rows, and with no unknown but a right-hand side reads `Sol(0, j)`
+(its `Standard_DimensionError_Raise_if(n > l)` is compiled out); the port raises
+Standard_DimensionError at the first such read, so a reduction that stops earlier on a
+small pivot stays not done, as natively. math_Uzawa with no constraint row but columns
+reads `Cont(1, i)` and `Vardua(1)`, and with bounds other than 1 reads outside its
+arrays (range checks compiled out): Standard_DimensionError and Standard_OutOfRange.
+math_NewtonMinimum over no variable reads `Values()(0)` before the empty eigenvalue
+vector: Standard_OutOfRange. math_FunctionSetRoot refuses a negative equation count
+with Standard_RangeError. Library code no longer unwraps a failure on caller input in
+these paths; the `std::ops` operator overloads and the `Index` accessors still panic,
+as Rust indexing does, and each has a `Result` method (`added`, `value`, ...).
+
+Evidence: the `empty_bounds` probe (`tools/oracle/tkmath_empty_bounds_probe.cxx`,
+`crates/tkmath/examples/empty_bounds_probe`, `tools/tkmath_empty_bounds_corpus.py`)
+sends 166 differential requests: 162 `empty_bounds` requests run every math_DoubleTab,
+math_Matrix and math_VectorBase constructor and member (and Gauss, Crout, Determinant
+and Inverse) over row, column and vector sizes 0, 1 and 2 at lower bound 1 and shifted
+bounds with a regular, zero and negative scalar; 4 `empty_solvers` requests run BFGS,
+FRPR, Powell, both set roots and the decompositions over no variable with succeeding
+and failing callbacks. All match the native bits. `empty_bounds_behavior` holds the
+regression tests.
