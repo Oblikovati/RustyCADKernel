@@ -404,8 +404,8 @@ Native standard-library tie ordering on other platforms still requires oracle pr
 The compiled OCCT unit dictionary is vendored as byte-preserving data with source
 and payload hashes. All nine enabled UnitsAPI legacy tests pass, plus 3900 exact
 comparisons of token spelling, dimensions, conversion bits, shifted units, and
-MDTV local units. Configurable resource units and process-global cache edge cases
-still need API coverage; these results do not establish full Units API parity.
+MDTV local units. The full Units, UnitsAPI and UnitsMethods API is covered by the
+"Units API completion" section below.
 
 Standard_Dump has all 12 legacy tests translated. Point, direction, frame, and
 bounding-box fragments use native formatting and one-based parser cursors.
@@ -1216,6 +1216,87 @@ Standard_ArrayStreamBuffer, Standard_Dump and Plugin.hxx have 89 rows (80 implem
   verbose output as natively, glibc `dlerror` wording, success-only caching (per loader
   instead of process-wide). The probe exercises the native failure paths with a
   temporary resource file.
+
+## Units API completion
+
+`python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/<Package> --source ../OCCT`
+reports 0 public members without api rows and 0 stale rows for `Units` (217 rows: 207
+implemented, 10 excluded RTTI macros), `UnitsAPI` (34 implemented) and `UnitsMethods`
+(10 implemented).
+
+The condensed evaluator was replaced by a class-by-class port: `Dimensions`, `Token` and
+`ShiftedToken`, `Unit` and `ShiftedUnit`, `Quantity`, `Lexicon` and `UnitsLexicon`,
+`UnitsDictionary`, `Sentence`, `UnitSentence` and `MathSentence`, `Measurement`,
+`Explorer`, `UnitsSystem`, the `Units_Operators` free functions (`units::operators`) and the
+`Units_NoSuchType`/`Units_NoSuchUnit` exception classes (`UNITS_HIERARCHY`, both
+`Standard_NoSuchObject`). Transient classes are `Handle<T>` with lock-protected fields,
+because the sentence analysers edit shared tokens in place. The virtual members
+(`Creates`, `Multiplied`, `Divided`, `Dump`, `Token`) dispatch on the handle's dynamic
+type through `TokenHandle`, `UnitHandle` and `LexiconHandle`. `Units_Token::Divide`
+returns `this` for a near-zero divisor, so it is a `TokenHandle` member too.
+
+Process-wide statics become injected contexts:
+
+- `units::Units` holds the dictionary, both lexicons, the null dimensions, the
+  `ToSI`/`FromSI` last-unit cache, the `FirstQuantity` cache and the
+  `Units_Dimensions::Quantity` sequence cache. Every class that reads them natively takes
+  the context (`UnitSentence::new(&units, ...)`, `Dimensions::quantity(&units)`).
+  `std::cout` text and `Message::SendWarning`/`SendInfo` payloads go to an injected
+  `UnitsDiagnostics`; `Dump` members write into a `&mut dyn Write`.
+- `units_api::UnitsApi` holds the current/SI/MDTV resource catalogs, the local units
+  systems and the selected systems, and builds its resource managers on an injected
+  `ResourceHost`.
+- `units_methods::UnitsMethods` holds the cascade length unit in an atomic, as the native
+  static does.
+
+Preserved native behaviour:
+
+- The caches start as the zero-initialized statics: `ToSI(x, "")` before any other unit
+  returns 0 (and `FromSI` returns infinity), and `FirstQuantity("")` answers `""`.
+- `Units_Dimensions::Quantity` searches the quantity sequence captured on its first call.
+- `UnitsDictionary::Creates` keeps the native `sscanf` field widths, the `coeff`/`move`
+  locals that survive from one line to the next, and the matrix propagation that counts
+  every assignment. Recreating the dictionary re-adds every symbol to the units lexicon,
+  so each meaning becomes `UU` and the duplicate warning prints for every symbol.
+- `Units_Sentence::Evaluate` is destructive. An operator-free remainder evaluates to a null
+  token. Index errors are `Standard_OutOfRange` with the native messages
+  (`NCollection_Sequence::Value`, the `removeSeq` messages, and the empty `Exchange`
+  message that `sq.km` raises, OCC23497).
+- `Units_UnitsSystem::Remove` of the last unit of a quantity removes the quantity and then
+  raises `Units_NoSuchUnit`. `Activate` bounds its unit search by the number of
+  quantities, so it can raise `Standard_OutOfRange` or miss an existing unit.
+  `ConvertUserSystemValueToSI` of a shifted unit computes `value * (factor + move)`.
+- `UnitsAPI::Check` always answers false. `CurrentUnit` of a quantity without a current
+  unit raises `Resource_NoSuchResource`.
+- `Units_Measurement::Integer` truncates with the x86-64 `cvttsd2si` result.
+  `GetCasCadeLengthUnit(Inch)` after `SetCasCadeLengthUnit(1)` is `25.4 * (1 / 25.4)`, not 1.
+
+Deliberate Rust deviations:
+
+- A null handle that the native code dereferences unchecked is a `Standard_NullObject`
+  failure. This covers `AnyFromLS` and the dimensions overload of `AnyToLS` for an
+  invalid unit, and tokens left null by empty brackets.
+- A dictionary section whose conversion graph never connects is an error. Natively the
+  propagation loops forever, which is what recreating the dictionary triggers.
+- Unit symbols are `AsciiString` values in the shared symbol sequence. The native
+  `TCollection_HAsciiString` handles are never edited after creation.
+- The default `ConsoleDiagnostics` prints messages without the native console colours.
+
+Differential evidence: the `units_*` probe family (`tools/oracle/tkernel_units_probe.cxx`,
+`crates/tkernel/examples/oracle_probe/units/`, `tools/tkernel_units_corpus.py`) runs 1,464
+requests in one long-lived process on both sides, so the package, UnitsAPI and
+UnitsMethods state evolves identically. Captured console text (with token addresses
+masked) and messenger payloads are compared with the results. The requests cover every
+dictionary symbol as a sentence and as a `ToSI`/`FromSI` conversion, composite, prefixed,
+shifted, numeric and invalid expressions, formulas, raw lexicon sentences, every quantity
+look-up, dimension arithmetic, token operators and copies, measurements, units and
+quantities, explorer walks, a units-system session with the quirks above, 552 UnitsAPI
+calls across the SI/MDTV/DEFAULT systems with current-unit overrides, every UnitsMethods
+table entry, and the dictionary and lexicon dumps. All 1,464 are identical; with them the
+combined `verify_tkernel.py` run checks 191,495 differential cases.
+`DictionaryOfUnits(true)` is not in the corpus: natively it never returns (see above).
+Behaviour tests are in `units_classes_api_behavior`; resource I/O uses the named fake
+`InMemoryUnitsResources`.
 
 ## Message, Resource and Quantity API completion
 
