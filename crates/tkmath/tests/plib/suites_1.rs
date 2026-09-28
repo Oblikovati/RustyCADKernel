@@ -23,7 +23,7 @@ fn PLibTest__EvalPolynomial() {
         aResults.as_mut_slice(),
     )
     .unwrap();
-    assert!((aResults[1] - 1.0).abs() <= CONFUSION);
+    assert!((aResults[1] - 1.0).abs() <= precision::confusion());
 
     // Test at x = 1: f(1) = 1 + 2 + 3 = 6
     plib::eval_polynomial(
@@ -35,7 +35,7 @@ fn PLibTest__EvalPolynomial() {
         aResults.as_mut_slice(),
     )
     .unwrap();
-    assert!((aResults[1] - 6.0).abs() <= CONFUSION);
+    assert!((aResults[1] - 6.0).abs() <= precision::confusion());
 
     // Test at x = 2: f(2) = 1 + 4 + 12 = 17
     plib::eval_polynomial(
@@ -47,7 +47,7 @@ fn PLibTest__EvalPolynomial() {
         aResults.as_mut_slice(),
     )
     .unwrap();
-    assert!((aResults[1] - 17.0).abs() <= CONFUSION);
+    assert!((aResults[1] - 17.0).abs() <= precision::confusion());
 }
 
 // Tests for polynomial evaluation with derivatives
@@ -78,9 +78,9 @@ fn PLibTest__EvalPolynomialWithDerivatives() {
     )
     .unwrap();
 
-    assert!((aResults[1] - 6.0).abs() <= CONFUSION); // f(1) = 6
-    assert!((aResults[2] - 8.0).abs() <= CONFUSION); // f'(1) = 2 + 6 = 8
-    assert!((aResults[3] - 6.0).abs() <= CONFUSION); // f''(1) = 6
+    assert!((aResults[1] - 6.0).abs() <= precision::confusion()); // f(1) = 6
+    assert!((aResults[2] - 8.0).abs() <= precision::confusion()); // f'(1) = 2 + 6 = 8
+    assert!((aResults[3] - 6.0).abs() <= precision::confusion()); // f''(1) = 6
 }
 
 // Tests for constraint order conversion functions
@@ -156,11 +156,11 @@ fn PLibTest__HermiteInterpolate() {
         )
         .unwrap();
         assert!(
-            (aResults[1] - 0.0).abs() <= CONFUSION,
+            (aResults[1] - 0.0).abs() <= precision::confusion(),
             "f(0) constraint not satisfied"
         );
         assert!(
-            (aResults[2] - 1.0).abs() <= CONFUSION,
+            (aResults[2] - 1.0).abs() <= precision::confusion(),
             "f'(0) constraint not satisfied"
         );
 
@@ -175,11 +175,11 @@ fn PLibTest__HermiteInterpolate() {
         )
         .unwrap();
         assert!(
-            (aResults[1] - 1.0).abs() <= CONFUSION,
+            (aResults[1] - 1.0).abs() <= precision::confusion(),
             "f(1) constraint not satisfied"
         );
         assert!(
-            (aResults[2] - 0.0).abs() <= CONFUSION,
+            (aResults[2] - 0.0).abs() <= precision::confusion(),
             "f'(1) constraint not satisfied"
         );
     }

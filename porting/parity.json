@@ -764,6 +764,486 @@
       "notes": "Manual explicit member mapping; reference outputs of distance estimates become tuples. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "MathPoly::THE_MAX_POLY_DEGREE",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::MAX_POLY_DEGREE",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_poly::PolyResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::operator[](size_t) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "<rustycad_tkmath::math_poly::PolyResult as Index<usize>>::index",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::PolyResult::NbRealRootsWithMultiplicity() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::PolyResult::nb_real_roots_with_multiplicity",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::GeneralPolyResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::GeneralPolyResult",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Linear(double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Quadratic.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::linear",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Quadratic(double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Quadratic.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::quadratic",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Cubic(double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Cubic.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::cubic",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Quartic(double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Quartic.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::quartic",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Laguerre(const double*,int,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::laguerre",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::LaguerreN(const double*,size_t,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::laguerre_n",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Quintic(double,double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::quintic",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Sextic(double,double,double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::sextic",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Octic(const double*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::octic",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "CSLib::Normal(const gp_Vec&,const gp_Vec&,double,CSLib_DerivativeStatus&,gp_Dir&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::normal",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::Normal(const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&,const gp_Vec&,double,bool&,CSLib_NormalStatus&,gp_Dir&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::normal_from_second_derivatives",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::Normal(const gp_Vec&,const gp_Vec&,double,CSLib_NormalStatus&,gp_Dir&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::normal_with_magnitude",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::Normal(int,const NCollection_Array2<gp_Vec>&,double,double,double,double,double,double,double,CSLib_NormalStatus&,gp_Dir&,int&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::normal_at_singularity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::DNNUV(int,int,const NCollection_Array2<gp_Vec>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::dnnuv",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::DNNUV(int,int,const NCollection_Array2<gp_Vec>&,const NCollection_Array2<gp_Vec>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::dnnuv_osculating",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib::DNNormal(int,int,const NCollection_Array2<gp_Vec>&,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib.hxx",
+      "rust_item": "rustycad_tkmath::cslib::dn_normal",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_DerivativeStatus",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_DerivativeStatus.hxx",
+      "rust_item": "rustycad_tkmath::cslib::DerivativeStatus",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalStatus",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalStatus.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalStatus",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalPolyDef::CSLib_NormalPolyDef(int,const NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalPolyDef::Value(double,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalPolyDef::Derivative(double,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::derivative",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_NormalPolyDef::Values(double,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_NormalPolyDef.hxx",
+      "rust_item": "rustycad_tkmath::cslib::NormalPolyDef::values",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::Result",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2dResult",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::default",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(const NCollection_Array1<gp_Pnt2d>&,double,double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::from_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(const NCollection_Sequence<gp_Pnt2d>&,double,double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::from_sequence",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(const NCollection_DynamicArray<gp_Pnt2d>&,double,double,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::from_dynamic_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(const CSLib_Class2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::clone",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::operator=(const CSLib_Class2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::clone_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::CSLib_Class2d(CSLib_Class2d&&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::moved_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::operator=(CSLib_Class2d&&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::move_from",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::SiDans(const gp_Pnt2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::si_dans",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "CSLib_Class2d::SiDans_OnMode(const gp_Pnt2d&,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/CSLib/CSLib_Class2d.hxx",
+      "rust_item": "rustycad_tkmath::cslib::Class2d::si_dans_on_mode",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Precision::Angular()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::angular",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::Confusion()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::confusion",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::SquareConfusion()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::square_confusion",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::Computational()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::computational",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::SquareComputational()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::square_computational",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::Intersection()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::intersection",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::Approximation()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::approximation",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::Parametric(double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::parametric_with_speed",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::PConfusion(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::p_confusion_with_speed",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::SquarePConfusion()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::square_p_confusion",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::PIntersection(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::p_intersection_with_speed",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::PApproximation(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::p_approximation_with_speed",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::Parametric(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::parametric",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::PConfusion()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::p_confusion",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::PIntersection()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::p_intersection",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::PApproximation()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::p_approximation",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::IsInfinite(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::is_infinite",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::IsPositiveInfinite(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::is_positive_infinite",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::IsNegativeInfinite(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::is_negative_infinite",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
+      "upstream_id": "Precision::Infinite()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Precision/Precision.hxx",
+      "rust_item": "rustycad_tkernel::precision::infinite",
+      "status": "implemented",
+      "notes": "Complete Precision.hxx member mapping; const fn keeps the native constexpr expression bits. Overloads taking a speed use a _with_speed suffix."
+    },
+    {
       "upstream_id": "PLib::NoWeights()",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/PLib/PLib.hxx",
@@ -41014,6 +41494,1448 @@
       "rust_target": "mathopt_global",
       "rust_test": "MathOpt_GlobOptTest__GlobalMinimum_NonPSOStrategies_UnchangedWithPSOOptions",
       "rust_source": "crates/tkmath/tests/mathopt_global.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LinearTest.SimpleLinear",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_LinearTest__SimpleLinear",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LinearTest.ZeroCoefficient_InfiniteSolutions",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_LinearTest__ZeroCoefficient_InfiniteSolutions",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LinearTest.ZeroCoefficient_NoSolution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_LinearTest__ZeroCoefficient_NoSolution",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LinearTest.UnrepresentableFiniteRootIsNumericalError",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_LinearTest__UnrepresentableFiniteRootIsNumericalError",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.TwoDistinctRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__TwoDistinctRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.DoubleRoot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__DoubleRoot",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.NoRealRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__NoRealRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.NegativeRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__NegativeRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.MixedSignRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__MixedSignRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.ReducesToLinear",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__ReducesToLinear",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.LargeCoefficients",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__LargeCoefficients",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.SmallCoefficients",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__SmallCoefficients",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.RootsAreSorted",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__RootsAreSorted",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.UnequalNonIntegralRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__UnequalNonIntegralRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.GlobalCoefficientScalingDoesNotChangeRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__GlobalCoefficientScalingDoesNotChangeRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.ExtremeRootMagnitudes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__ExtremeRootMagnitudes",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.AdjacentDiscriminantsRemainDistinct",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__AdjacentDiscriminantsRemainDistinct",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuadraticTest.RejectsNonFiniteCoefficients",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuadraticTest__RejectsNonFiniteCoefficients",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.ThreeDistinctRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__ThreeDistinctRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.MixedSignFractionalRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__MixedSignFractionalRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.OneRealRoot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__OneRealRoot",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.TripleRoot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__TripleRoot",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.OneSimpleOneDouble",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__OneSimpleOneDouble",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.ReducesToQuadratic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__ReducesToQuadratic",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.NegativeRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__NegativeRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.DepressedCubic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__DepressedCubic",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.RootsAreSorted",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__RootsAreSorted",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.ClusteredRootsRemainDistinct",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__ClusteredRootsRemainDistinct",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.CloselySpacedRootsRemainDistinct",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__CloselySpacedRootsRemainDistinct",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.ThreeUnevenRealRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__ThreeUnevenRealRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.FractionalTangentialRoot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__FractionalTangentialRoot",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_CubicTest.LargeScaleIrregularEquation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_CubicTest__LargeScaleIrregularEquation",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.FourDistinctRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__FourDistinctRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.TwoRealRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__TwoRealRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.NoRealRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__NoRealRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.Biquadratic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__Biquadratic",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.ReducesToCubic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__ReducesToCubic",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.QuadrupleRoot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__QuadrupleRoot",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.TwoDoubleRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__TwoDoubleRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.RootsAreSorted",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__RootsAreSorted",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.VerifyRootsSatisfyEquation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__VerifyRootsSatisfyEquation",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.GloballyScaledRepeatedEquation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__GloballyScaledRepeatedEquation",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_QuarticTest.FourUnevenRealRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_QuarticTest__FourUnevenRealRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_ComplexRootsTest.QuarticWithRealAndComplexRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_ComplexRootsTest__QuarticWithRealAndComplexRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_BoolConversionTest.SuccessfulResultIsTrue",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_BoolConversionTest__SuccessfulResultIsTrue",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_BoolConversionTest.NoSolutionResultIsFalse",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_BoolConversionTest__NoSolutionResultIsFalse",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_IndexingTest.BracketOperator",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Test.cxx",
+      "source_sha256": "20f60fc7badbcae47258b4e0c50f479959b2672216ffbdbfed9cd5821478b495",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly",
+      "rust_test": "MathPoly_IndexingTest__BracketOperator",
+      "rust_source": "crates/tkmath/tests/mathpoly.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Quintic_FiveDistinctRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Quintic_FiveDistinctRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Sextic_SixDistinctRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Sextic_SixDistinctRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Laguerre_SexticAllRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Laguerre_SexticAllRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Quintic_SymmetricRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Quintic_SymmetricRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Sextic_SymmetricRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Sextic_SymmetricRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Octic_EightDistinctRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Octic_EightDistinctRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Quintic_SimpleRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Quintic_SimpleRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Laguerre_Quartic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Laguerre_Quartic",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Laguerre_VerifyRoots",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Laguerre_VerifyRoots",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Laguerre_Degree10",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Laguerre_Degree10",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.Performance_CompareToQuartic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__Performance_CompareToQuartic",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.RepeatedRootsReportMultiplicity",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__RepeatedRootsReportMultiplicity",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.SmallPureImaginaryRootsRemainComplex",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__SmallPureImaginaryRootsRemainComplex",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.UnitPureImaginaryRootsRemainComplex",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__UnitPureImaginaryRootsRemainComplex",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.RepeatedComplexConjugatesReportMultiplicity",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__RepeatedComplexConjugatesReportMultiplicity",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.RepeatedRealAndComplexRootsUseMatchingDeflation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__RepeatedRealAndComplexRootsUseMatchingDeflation",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.NearbyComplexPairRemainsDistinctFromRepeatedRealRoot",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__NearbyComplexPairRemainsDistinctFromRepeatedRealRoot",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.GloballyScaledEquation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__GloballyScaledEquation",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.RejectsNonFiniteInputAndTolerance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__RejectsNonFiniteInputAndTolerance",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "MathPoly_LaguerreTest.ForcedNonConvergenceIsReported",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/MathPoly_Laguerre_Test.cxx",
+      "source_sha256": "04ad2739ffc68ed6c0e1625288d3a105a728a2c33d3ceca7f9e7f78272115092",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "mathpoly_laguerre",
+      "rust_test": "MathPoly_LaguerreTest__ForcedNonConvergenceIsReported",
+      "rust_source": "crates/tkmath/tests/mathpoly_laguerre.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_OrthogonalVectors",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_OrthogonalVectors",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_ScaledVectors",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_ScaledVectors",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_ParallelVectors",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_ParallelVectors",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_D1UIsNull",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_D1UIsNull",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_D1VIsNull",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_D1VIsNull",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_FromD1U_D1V_BothNull",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_FromD1U_D1V_BothNull",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_WithMagTol_Defined",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_WithMagTol_Defined",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.Normal_WithMagTol_Singular",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__Normal_WithMagTol_Singular",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalTest.DNNUV_ZeroDerivative",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalTest__DNNUV_ZeroDerivative",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_PointInsideSquare",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_PointInsideSquare",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_PointOutsideSquare",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_PointOutsideSquare",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_PointOnBoundary",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_PointOnBoundary",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.DeepCopyPreservesClassification",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__DeepCopyPreservesClassification",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_TriangularPolygon",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_TriangularPolygon",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SequenceConstructor_PointInsideSquare",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SequenceConstructor_PointInsideSquare",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.InternalSiDans_NormalizedCoordinates",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__InternalSiDans_NormalizedCoordinates",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.LazyGridRemainsExactAwayFromBoundary",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__LazyGridRemainsExactAwayFromBoundary",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.LazyGridMatchesExactPathForConcaveDiagonalPolygon",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__LazyGridMatchesExactPathForConcaveDiagonalPolygon",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.LazyGridConcurrentActivationQueriesAreThreadSafe",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__LazyGridConcurrentActivationQueriesAreThreadSafe",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDansHandlesNegativeNonFiniteAndExtremeInputs",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDansHandlesNegativeNonFiniteAndExtremeInputs",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.LazyGridPreservesToleranceAcrossCellBoundary",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__LazyGridPreservesToleranceAcrossCellBoundary",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_OnMode_PointInside",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_OnMode_PointInside",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.SiDans_OnMode_NormalizesAndReplacesToleranceOnAnisotropicDomain",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__SiDans_OnMode_NormalizesAndReplacesToleranceOnAnisotropicDomain",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibClass2dTest.DegeneratePolygon_InvalidBounds",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibClass2dTest__DegeneratePolygon_InvalidBounds",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Value_ConstantPolynomial",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Value_ConstantPolynomial",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Value_LinearPolynomial",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Value_LinearPolynomial",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Value_AtSingularPoints",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Value_AtSingularPoints",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Derivative_AtRegularPoint",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Derivative_AtRegularPoint",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Derivative_AtSingularPoint",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Derivative_AtSingularPoint",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Values_Consistency",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Values_Consistency",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibNormalPolyDefTest.Derivative_NumericalApproximation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibNormalPolyDefTest__Derivative_NumericalApproximation",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibEnumTest.DerivativeStatus_AllValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibEnumTest__DerivativeStatus_AllValues",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibEnumTest.NormalStatus_AllValues",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibEnumTest__NormalStatus_AllValues",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibIntegrationTest.PlanarSurface_ConstantNormal",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibIntegrationTest__PlanarSurface_ConstantNormal",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibIntegrationTest.CylindricalSurface_VaryingNormal",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibIntegrationTest__CylindricalSurface_VaryingNormal",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "CSLibIntegrationTest.Class2d_ComplexPolygon",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/CSLib_Test.cxx",
+      "source_sha256": "f803ed519c86b8bd9088958a1b06bd30725747ab9dc68deb6177bec73eb7609b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "cslib",
+      "rust_test": "CSLibIntegrationTest__Class2d_ComplexPolygon",
+      "rust_source": "crates/tkmath/tests/cslib.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

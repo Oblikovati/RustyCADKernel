@@ -14,12 +14,10 @@
 //! Direct translation of PLib_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 #![allow(non_snake_case, unused_mut, clippy::assertions_on_constants)]
 use rustycad_tkernel::ncollection::{Array1, Array2};
+use rustycad_tkernel::precision;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point2, Point3};
 use rustycad_tkmath::plib;
-
-// Precision::Confusion()
-const CONFUSION: f64 = 1e-7;
 
 // Helper function for comparing points with tolerance
 fn checkPointsEqual(thePnt1: &Point3, thePnt2: &Point3, theTolerance: f64) {
@@ -79,7 +77,7 @@ fn PLibTest__SetGetPoles3D() {
 
     // Verify results
     for i in 1..=3 {
-        checkPointsEqual(&aPoles[i], &aResultPoles[i], CONFUSION);
+        checkPointsEqual(&aPoles[i], &aResultPoles[i], precision::confusion());
     }
 }
 
@@ -104,8 +102,8 @@ fn PLibTest__SetGetPoles3DWithWeights() {
 
     // Verify results
     for i in 1..=2 {
-        checkPointsEqual(&aPoles[i], &aResultPoles[i], CONFUSION);
-        assert!((aWeights[i] - aResultWeights[i]).abs() <= CONFUSION);
+        checkPointsEqual(&aPoles[i], &aResultPoles[i], precision::confusion());
+        assert!((aWeights[i] - aResultWeights[i]).abs() <= precision::confusion());
     }
 }
 
@@ -127,7 +125,7 @@ fn PLibTest__SetGetPoles2D() {
 
     // Verify results
     for i in 1..=3 {
-        checkPoint2dEqual(&aPoles[i], &aResultPoles[i], CONFUSION);
+        checkPoint2dEqual(&aPoles[i], &aResultPoles[i], precision::confusion());
     }
 }
 
@@ -152,8 +150,8 @@ fn PLibTest__SetGetPoles2DWithWeights() {
 
     // Verify results
     for i in 1..=2 {
-        checkPoint2dEqual(&aPoles[i], &aResultPoles[i], CONFUSION);
-        assert!((aWeights[i] - aResultWeights[i]).abs() <= CONFUSION);
+        checkPoint2dEqual(&aPoles[i], &aResultPoles[i], precision::confusion());
+        assert!((aWeights[i] - aResultWeights[i]).abs() <= precision::confusion());
     }
 }
 

@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. Eighty-two complete source suites
-currently account for 1,482 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 85 complete source suites
+currently account for 1,585 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -73,12 +73,15 @@ currently account for 1,482 mapped declarations, with matching native and Rust p
 | MathOpt_NDim_Comparison_Test.cxx | mathopt_ndim_comparison | 12 |
 | MathLin_Test.cxx | mathlin | 50 |
 | MathPoly_Comparison_Test.cxx | mathpoly_comparison | 18 |
+| MathPoly_Test.cxx | mathpoly | 47 |
+| MathPoly_Laguerre_Test.cxx | mathpoly_laguerre | 20 |
 | MathRoot_Trig_Test.cxx | mathroot_trig | 50 |
 | MathRoot_Multiple_Test.cxx | mathroot_multiple | 27 |
 | MathInteg_Comparison_Test.cxx | mathinteg_comparison | 21 |
 | MathInteg_New_Test.cxx | mathinteg_new | 24 |
 | MathInteg_Test.cxx | mathinteg | 60 |
 | MathSys_Comparison_Test.cxx | mathsys_comparison | 24 |
+| CSLib_Test.cxx | cslib | 36 |
 | PLib_Test.cxx | plib | 19 |
 | PLib_JacobiPolynomial_Test.cxx | plib_jacobi_polynomial | 11 |
 | PLib_HermitJacobi_Test.cxx | plib_hermit_jacobi | 9 |
@@ -306,13 +309,41 @@ system, and multiple-root headers are still outside this completed test scope.
 The 1,125-declaration gate passes 13,657 numeric cases. All 18 modern/legacy
 polynomial comparison declarations pass unchanged. Linear, quadratic, cubic,
 and quartic direct solvers preserve native scaling, compensated FMA
-arithmetic, software x87 isolation, and multiplicity classification. General
-Laguerre and the main polynomial suite remain pending; no whole-MathPoly
-completion is claimed.
+arithmetic, software x87 isolation, and multiplicity classification.
 
-`num-complex` 0.4.6 is isolated behind `math_poly::Complex`; it currently supplies
-storage. Its arithmetic is not assumed to match the native complex runtime.
-Version reference: https://docs.rs/num-complex/0.4.6/num_complex/.
+The MathPoly package is now complete for its three sources: MathPoly_Test.cxx
+(47 declarations), MathPoly_Laguerre_Test.cxx (20) and the comparison suite.
+`laguerre`, `laguerre_n`, `quintic`, `sextic` and `octic` port the checked
+Laguerre iteration, deflation, cluster consolidation and long-double Newton
+polish in native operation order. 512 native Laguerre requests (degrees up to
+20, repeated real and complex roots, clustered roots, global scaling to 1e±300,
+zero iteration limits and invalid input) match every root, multiplicity and
+status bit for bit, including partial roots kept on failure.
+
+Laguerre results depend on how the pinned GCC 13.3 / glibc 2.39 profile evaluates
+`std::complex`. The port reproduces it in software, not with `num-complex`
+arithmetic. Full complex products and quotients follow libgcc `__muldc3`/`__divdc3`
+(and the x87 `__mulxc3`/`__divxc3` in the multiplicity refinement), including the
+GCC 12+ scaled Smith division and infinity recovery. Complex-by-real operations are
+componentwise, and a real addend does not touch the imaginary part. `std::sqrt` is
+glibc `csqrt`. `std::abs` is glibc `hypot`, and `std::abs` of a long-double complex
+is glibc's ldbl-96 `hypotl` (Borges' corrected kernel, not an x87
+`fsqrt(x*x+y*y)`). `std::norm` is `x*x + y*y`, as libstdc++ 13 computes it. 512 native
+`std::complex<double>` requests cover huge, tiny, subnormal, zero, infinite and NaN
+parts. `tools/oracle/extended_complex_fixture.cxx` also records 1,024 bit-exact
+`__mulxc3`/`__divxc3`/`hypotl` results as a unit-test fixture.
+
+Deliberate deviations: `laguerre` takes a slice and returns `InvalidInput` when
+the slice is shorter than `degree + 1`, where native code reads past the array.
+`laguerre_n` uses the slice length as the native `theSize`. Default arguments
+are the constants `LAGUERRE_TOLERANCE` and `LAGUERRE_MAX_ITERATIONS`. The
+`MathPoly::Utils` helpers stay crate-internal because most of them take long
+double arguments, which have no public Rust type. Root sorting is stable, which
+matches libstdc++'s insertion sort for up to 16 roots. For 17 to 20 roots, the
+order of equal-valued roots with different zero signs is not claimed.
+
+`num-complex` 0.4.6 is isolated behind `math_poly::Complex` and supplies only
+storage. Version reference: https://docs.rs/num-complex/0.4.6/num_complex/.
 
 The 1,419-declaration gate passes 16,599 numeric cases. All 50 trigonometric
 root declarations pass in both implementations. Differential cases compare
@@ -367,7 +398,7 @@ All 30 declarations for general 2D/3D/4D Newton, symmetric 2D Newton and the
 curve/surface and surface/surface extrema adapters pass in Rust. Another 512
 native differential requests match results and callback traces exactly.
 Software x87 square root matches 2,048 native significand/exponent fixtures,
-including subnormals. The combined toolkit gate passes all 1,419 mapped declarations.
+including subnormals. The combined toolkit gate passed all 1,419 declarations mapped at that time.
 
 ### Particle swarm optimization
 
@@ -377,13 +408,46 @@ native differential requests match result fields, statistics and complete
 callback traces. They include clamp, reflect and wrap boundary policies,
 seeded and random initialization, callback failures and invalid seeds.
 
+### CSLib surface normals and 2D classification
+
+All 36 CSLib declarations pass in both kernels, including the eight-thread lazy
+grid activation test, which uses scoped `std::thread`s over one shared
+classifier. The 2,528 CSLib differential requests (19,383 in the whole corpus)
+match exactly. They cover all normal overloads and statuses, singular points up
+to degree 26, normal derivatives, `NormalPolyDef`, and `Class2d` across
+containers, extreme bounds, special tolerances, the grid, copies and moves.
+
+C++ output references become returned values. `normal` is `None` exactly when
+OCCT leaves its `gp_Dir&` untouched. Singular-point orders are always returned,
+as OCCT always writes them. The lazy grid keeps OCCT's atomic state machine. The
+cells are published through a `OnceLock` before the release store of `Ready`.
+Allocation failure uses `try_reserve` and resets to `NotBuilt`, as natively.
+
+The singular-point sign analysis keeps two native quirks. A first retained
+interval at index 0 leaves `aFirst` at 0. The next interval then restarts the
+comparison, which can hide a sign change. `NormalPolyDef` returns 0 when
+|cos X| or |sin X| <= RealSmall. A midpoint sample at 0 or ±π/2 is therefore
+0, which hides a sign change. When 0 is the final sample, OCCT picks -Vk0.
+`cslib_behavior.rs` pins both cases; for example, F = cos X gives `Defined`
+with -Vk0 at an interior point.
+
+There are two deliberate deviations. `NormalPolyDef::new` raises OCCT's
+`PLib::Bin` Standard_OutOfRange for degrees above 25 at construction, because
+the `bool` evaluation callbacks cannot carry an exception. OCCT raises it on the
+first evaluation that is not at a singular angle, so the corpus uses regular
+angles only for degree 26. Degrees below -1 fail with Standard_RangeError. OCCT
+passes them to an allocator-dependent NCollection_Array1 size. `PLib::Bin` and
+the Precision constants are small private copies (`cslib/binomial.rs`,
+`cslib/precision.rs`). They must be replaced by the PLib and Precision ports
+when those merge.
+
 ### PLib polynomial library
 
 All 39 declarations of the three PLib suites pass in both kernels. The port
 covers the complete public API of PLib, PLib_JacobiPolynomial and
 PLib_HermitJacobi, and the whole GeomAbs enumeration package. Another 2,240
 differential requests match with raw bits, including NaN payloads; the numeric
-gate now passes 19,095 cases.
+gate now passes 22,647 cases.
 
 `tools/generate_plib_jacobi_tables.py` copies every Jacobi table literal from
 the pinned `.pxx` files as text, so both compilers round the same decimal

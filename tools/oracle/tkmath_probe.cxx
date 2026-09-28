@@ -1,4 +1,5 @@
 // Exact numeric oracle for gp_XYZ and Bnd_Range.
+#include <map>
 #include <gp_XYZ.hxx>
 #include <gp_Pnt.hxx>
 #include <gp_Dir.hxx>
@@ -141,4 +142,102 @@ void planar_case(std::istream& input) {
 #include "tkmath_swarm_probe.cxx"
 #include "tkmath_global_modern_probe.cxx"
 #include "tkmath_plib_probe.cxx"
-int main() {std::string line;while(std::getline(std::cin,line)) {std::istringstream input(line);std::string op;input>>op;if(op=="plib_poly")plib_poly_case(input);else if(op=="plib_poly2")plib_poly2_case(input);else if(op=="plib_rational")plib_rational_case(input);else if(op=="plib_lagrange")plib_lagrange_case(input);else if(op=="plib_cubic")plib_cubic_case(input);else if(op=="plib_hermite_coeffs")plib_hermite_coeffs_case(input);else if(op=="plib_hermite_interp")plib_hermite_interp_case(input);else if(op=="plib_coef_poles")plib_curve_case(input,false);else if(op=="plib_trim")plib_curve_case(input,true);else if(op=="plib_grid")plib_grid_case(input);else if(op=="plib_params")plib_params_case(input);else if(op=="plib_length")plib_length_case(input);else if(op=="plib_jacobi")plib_jacobi_case(input,false);else if(op=="plib_hermit")plib_jacobi_case(input,true);else if(op=="modern_global")modern_global_case(input);else if(op=="modern_swarm")modern_swarm_case(input);else if(op=="modern_small")modern_small_case(input);else if(op=="modern_lm")modern_lm_case(input);else if(op=="modern_sys")modern_sys_case(input);else if(op=="modern_tensor")modern_tensor_case(input);else if(op=="modern_double_exp")modern_double_exp_case(input);else if(op=="modern_kronrod")modern_kronrod_case(input);else if(op=="modern_integ")modern_integ_case(input);else if(op=="modern_multiple")modern_multiple_case(input);else if(op=="modern_trig")modern_trig_case(input);else if(op=="modern_poly")modern_poly_case(input);else if(op=="modern_factors")modern_factors_case(input);else if(op=="modern_lbfgs")modern_lbfgs_case(input);else if(op=="modern_newton")modern_newton_case(input);else if(op=="modern_lu")modern_lu_case(input);else if(op=="modern_eigen")modern_eigen_case(input);else if(op=="modern_frpr")frpr_case(input);else if(op=="scalar_opt")scalar_opt_case(input);else if(op=="modern_opt")modern_opt_case(input);else if(op=="vector_functor")vector_functor_case(input);else if(op=="scalar_functor")scalar_functor_case(input);else if(op=="modern_root")modern_root_case(input);else if(op=="utils_line")utils_line_case(input);else if(op=="utils_core")utils_core_case(input);else if(op=="utils_bracket")utils_bracket_case(input);else if(op=="global")global_case(input);else if(op=="pso")pso_case(input);else if(op=="bullard")bullard_case(input);else if(op=="integration")integration_case(input);else if(op=="quadrature")quadrature_case(input);else if(op=="all_roots")all_roots_case(input);else if(op=="sampled")sampled_case(input);else if(op=="trig")trig_case(input);else if(op=="polynomial")polynomial_case(input);else if(op=="uzawa")uzawa_case(input);else if(op=="optimization")optimization_case(input);else if(op=="function_set")function_set_case(input);else if(op=="newton_set")newton_set_case(input);else if(op=="minimum")minimum_case(input);else if(op=="root")root_case(input);else if(op=="kronrod")kronrod_case(input);else if(op=="eigen")eigen_case(input);else if(op=="svd")svd_case(input);else if(op=="least_squares")least_squares_case(input);else if(op=="numeric_matrix")numeric_matrix_case(input);else if(op=="numeric_vector")numeric_vector_case(input);else if(op=="nodes")nodes_case(input);else if(op=="table")table_case(input);else if(op=="quaternion")quaternion_case(input);else if(op=="scale")scale_case(input);else if(op=="compact3")compact3_case(input);else if(op=="compact2")compact2_case(input);else if(op=="sphere")sphere_case(input);else if(op=="bounds2")bounds2_case(input);else if(op=="bounds")bounds_case(input);else if(op=="line_plane")line_plane_case(input);else if(op=="planar")planar_case(input);else if(op=="frame")frame_case(input);else if(op=="direction")direction_case(input);else if(op=="point")point_case(input);else if(op=="xyz")vector_case(input);else if(op=="matrix")matrix_case(input);else if(op=="range")range_case(input);else {std::cerr<<"Unknown probe operation: "<<op<<std::endl;return 2;}}}
+#include "tkmath_cslib_probe.cxx"
+// One line per operation keeps concurrent probe additions merge-friendly.
+using ProbeCase = void (*)(std::istream&);
+const std::map<std::string, ProbeCase> probe_cases = {
+ {"plib_poly", plib_poly_case},
+ {"plib_poly2", plib_poly2_case},
+ {"plib_rational", plib_rational_case},
+ {"plib_lagrange", plib_lagrange_case},
+ {"plib_cubic", plib_cubic_case},
+ {"plib_hermite_coeffs", plib_hermite_coeffs_case},
+ {"plib_hermite_interp", plib_hermite_interp_case},
+ {"plib_coef_poles", [](std::istream& in){plib_curve_case(in,false);}},
+ {"plib_trim", [](std::istream& in){plib_curve_case(in,true);}},
+ {"plib_grid", plib_grid_case},
+ {"plib_params", plib_params_case},
+ {"plib_length", plib_length_case},
+ {"plib_jacobi", [](std::istream& in){plib_jacobi_case(in,false);}},
+ {"plib_hermit", [](std::istream& in){plib_jacobi_case(in,true);}},
+ {"modern_global", modern_global_case},
+ {"modern_swarm", modern_swarm_case},
+ {"modern_small", modern_small_case},
+ {"modern_lm", modern_lm_case},
+ {"modern_sys", modern_sys_case},
+ {"modern_tensor", modern_tensor_case},
+ {"modern_double_exp", modern_double_exp_case},
+ {"modern_kronrod", modern_kronrod_case},
+ {"modern_integ", modern_integ_case},
+ {"modern_multiple", modern_multiple_case},
+ {"modern_trig", modern_trig_case},
+ {"modern_poly", modern_poly_case},
+ {"modern_laguerre", modern_laguerre_case},
+ {"modern_complex", modern_complex_case},
+ {"modern_factors", modern_factors_case},
+ {"modern_lbfgs", modern_lbfgs_case},
+ {"modern_newton", modern_newton_case},
+ {"modern_lu", modern_lu_case},
+ {"modern_eigen", modern_eigen_case},
+ {"modern_frpr", frpr_case},
+ {"scalar_opt", scalar_opt_case},
+ {"modern_opt", modern_opt_case},
+ {"vector_functor", vector_functor_case},
+ {"scalar_functor", scalar_functor_case},
+ {"modern_root", modern_root_case},
+ {"utils_line", utils_line_case},
+ {"utils_core", utils_core_case},
+ {"utils_bracket", utils_bracket_case},
+ {"global", global_case},
+ {"pso", pso_case},
+ {"bullard", bullard_case},
+ {"integration", integration_case},
+ {"quadrature", quadrature_case},
+ {"all_roots", all_roots_case},
+ {"sampled", sampled_case},
+ {"trig", trig_case},
+ {"polynomial", polynomial_case},
+ {"uzawa", uzawa_case},
+ {"optimization", optimization_case},
+ {"function_set", function_set_case},
+ {"newton_set", newton_set_case},
+ {"minimum", minimum_case},
+ {"root", root_case},
+ {"kronrod", kronrod_case},
+ {"eigen", eigen_case},
+ {"svd", svd_case},
+ {"least_squares", least_squares_case},
+ {"numeric_matrix", numeric_matrix_case},
+ {"numeric_vector", numeric_vector_case},
+ {"nodes", nodes_case},
+ {"table", table_case},
+ {"quaternion", quaternion_case},
+ {"scale", scale_case},
+ {"compact3", compact3_case},
+ {"compact2", compact2_case},
+ {"sphere", sphere_case},
+ {"bounds2", bounds2_case},
+ {"bounds", bounds_case},
+ {"line_plane", line_plane_case},
+ {"planar", planar_case},
+ {"frame", frame_case},
+ {"direction", direction_case},
+ {"point", point_case},
+ {"xyz", vector_case},
+ {"matrix", matrix_case},
+ {"range", range_case},
+ {"cslib_normal", cslib_normal_case},
+ {"cslib_singular", cslib_singular_case},
+ {"cslib_dn", cslib_dn_case},
+ {"cslib_poly", cslib_poly_case},
+ {"cslib_class2d", cslib_class2d_case},
+};
+int main() {
+ std::string line;
+ while(std::getline(std::cin,line)) {
+  std::istringstream input(line);std::string op;input>>op;
+  auto found=probe_cases.find(op);
+  if(found==probe_cases.end()) {std::cerr<<"Unknown probe operation: "<<op<<std::endl;return 2;}
+  found->second(input);
+ }
+}

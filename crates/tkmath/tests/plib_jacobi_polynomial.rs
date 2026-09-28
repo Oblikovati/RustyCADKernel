@@ -14,16 +14,9 @@
 //! Direct translation of PLib_JacobiPolynomial_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 #![allow(non_snake_case, unused_mut, unused_assignments)]
 use rustycad_tkernel::ncollection::{Array1, Array2};
+use rustycad_tkernel::precision;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::plib::JacobiPolynomial;
-
-// Precision::Confusion()
-const CONFUSION: f64 = 1e-7;
-
-// Precision::IsInfinite(R): |R| >= 0.5 * Precision::Infinite() (2e100)
-fn IsInfinite(R: f64) -> bool {
-    R.abs() >= 0.5 * 2e100
-}
 
 fn reals(lower: i32, upper: i32) -> Array1<'static, f64> {
     Array1::with_bounds(lower, upper).unwrap()
@@ -148,7 +141,7 @@ fn PLibJacobiPolynomialTest__GaussIntegrationWeights() {
     for i in aWeights.lower_row()..=aWeights.upper_row() {
         for j in aWeights.lower_col()..=aWeights.upper_col() {
             assert!(
-                !IsInfinite(aWeights[(i, j)]),
+                !precision::is_infinite(aWeights[(i, j)]),
                 "Weight should be finite at ({i},{j})"
             );
         }
@@ -173,7 +166,7 @@ fn PLibJacobiPolynomialTest__MaxValue() {
                 "Max value should be positive at index {i}"
             );
             assert!(
-                !IsInfinite(aTabMax[i]),
+                !precision::is_infinite(aTabMax[i]),
                 "Max value should be finite at index {i}"
             );
         }
@@ -199,7 +192,7 @@ fn PLibJacobiPolynomialTest__BasisFunctionD0() {
         // Basic sanity checks
         for i in aBasisValue.lower()..=aBasisValue.upper() {
             assert!(
-                !IsInfinite(aBasisValue[i]),
+                !precision::is_infinite(aBasisValue[i]),
                 "Basis value should be finite at index {i}, U={aU}"
             );
         }
@@ -237,19 +230,19 @@ fn PLibJacobiPolynomialTest__BasisFunctionDerivatives() {
     // Verify all values are finite
     for i in aBasisValue.lower()..=aBasisValue.upper() {
         assert!(
-            !IsInfinite(aBasisValue[i]),
+            !precision::is_infinite(aBasisValue[i]),
             "Basis value should be finite at {i}"
         );
         assert!(
-            !IsInfinite(aBasisD1[i]),
+            !precision::is_infinite(aBasisD1[i]),
             "First derivative should be finite at {i}"
         );
         assert!(
-            !IsInfinite(aBasisD2[i]),
+            !precision::is_infinite(aBasisD2[i]),
             "Second derivative should be finite at {i}"
         );
         assert!(
-            !IsInfinite(aBasisD3[i]),
+            !precision::is_infinite(aBasisD3[i]),
             "Third derivative should be finite at {i}"
         );
     }
@@ -284,7 +277,7 @@ fn PLibJacobiPolynomialTest__CoefficientConversion() {
     // Verify output is finite
     for i in aCoefficients.lower()..=aCoefficients.upper() {
         assert!(
-            !IsInfinite(aCoefficients[i]),
+            !precision::is_infinite(aCoefficients[i]),
             "Converted coefficient should be finite at index {i}"
         );
     }
@@ -320,7 +313,10 @@ fn PLibJacobiPolynomialTest__DegreeReduction() {
     );
     assert!(aNewDegree >= 0, "New degree should be non-negative");
     assert!(aMaxError >= 0.0, "Max error should be non-negative");
-    assert!(!IsInfinite(aMaxError), "Max error should be finite");
+    assert!(
+        !precision::is_infinite(aMaxError),
+        "Max error should be finite"
+    );
 }
 
 // Test error estimation
@@ -344,7 +340,10 @@ fn PLibJacobiPolynomialTest__ErrorEstimation() {
         .unwrap();
 
     assert!(aMaxErr >= 0.0, "Max error should be non-negative");
-    assert!(!IsInfinite(aMaxErr), "Max error should be finite");
+    assert!(
+        !precision::is_infinite(aMaxErr),
+        "Max error should be finite"
+    );
 
     // Test AverageError
     let aAvgErr: f64 = aJac
@@ -352,11 +351,14 @@ fn PLibJacobiPolynomialTest__ErrorEstimation() {
         .unwrap();
 
     assert!(aAvgErr >= 0.0, "Average error should be non-negative");
-    assert!(!IsInfinite(aAvgErr), "Average error should be finite");
+    assert!(
+        !precision::is_infinite(aAvgErr),
+        "Average error should be finite"
+    );
 
     // Average error should typically be <= max error
     assert!(
-        aAvgErr <= aMaxErr + CONFUSION,
+        aAvgErr <= aMaxErr + precision::confusion(),
         "Average error should not exceed max error significantly"
     );
 }
@@ -384,7 +386,10 @@ fn PLibJacobiPolynomialTest__StressTests() {
         aJacMax.d0(aU, &mut aBasisValue).unwrap();
         // Verify basis values are finite
         for i in aBasisValue.lower()..=aBasisValue.upper() {
-            assert!(!IsInfinite(aBasisValue[i]), "Basis value should be finite");
+            assert!(
+                !precision::is_infinite(aBasisValue[i]),
+                "Basis value should be finite"
+            );
         }
     }
 }

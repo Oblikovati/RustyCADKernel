@@ -7,6 +7,7 @@ pub mod fsd;
 pub mod message;
 pub mod ncollection;
 pub mod osd;
+pub mod precision;
 pub mod resource;
 pub mod standard;
 pub mod tcollection;
