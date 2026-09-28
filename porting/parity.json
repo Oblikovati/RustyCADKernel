@@ -50642,6 +50642,414 @@
       "rust_item": "rustycad_tkernel::ncollection::Shared::new",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; NCollection_Shared<T> is Shared<T>, a transient embedding T (Deref/DerefMut to it) with Standard_Transient as dynamic type, as the class declares no RTTI. The native forwarding constructors build T from their arguments; in Rust the caller builds T and passes it to Shared::new."
+    },
+    {
+      "upstream_id": "OSD_FromWhere",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FromWhere.hxx",
+      "rust_item": "rustycad_tkernel::osd::FromWhere",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_KindFile",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_KindFile.hxx",
+      "rust_item": "rustycad_tkernel::osd::KindFile",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_LoadMode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LoadMode.hxx",
+      "rust_item": "rustycad_tkernel::osd::LoadMode",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_LockType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LockType.hxx",
+      "rust_item": "rustycad_tkernel::osd::LockType",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_OEMType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OEMType.hxx",
+      "rust_item": "rustycad_tkernel::osd::OemType",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_SignalMode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SignalMode.hxx",
+      "rust_item": "rustycad_tkernel::osd::SignalMode",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_SingleProtection",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SingleProtection.hxx",
+      "rust_item": "rustycad_tkernel::osd::SingleProtection",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_SysType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SysType.hxx",
+      "rust_item": "rustycad_tkernel::osd::SysType",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_WhoAmI",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WhoAmI.hxx",
+      "rust_item": "rustycad_tkernel::osd::WhoAmI",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Exception",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_ACCESS_VIOLATION",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_ACCESS_VIOLATION.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_access_violation",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_ARRAY_BOUNDS_EXCEEDED",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_ARRAY_BOUNDS_EXCEEDED.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_array_bounds_exceeded",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_CTRL_BREAK",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_CTRL_BREAK.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_ctrl_break",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_ILLEGAL_INSTRUCTION",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_ILLEGAL_INSTRUCTION.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_illegal_instruction",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_IN_PAGE_ERROR",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_IN_PAGE_ERROR.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_in_page_error",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_INT_OVERFLOW",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_INT_OVERFLOW.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_int_overflow",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_INVALID_DISPOSITION",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_INVALID_DISPOSITION.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_invalid_disposition",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_NONCONTINUABLE_EXCEPTION",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_NONCONTINUABLE_EXCEPTION.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_noncontinuable_exception",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_PRIV_INSTRUCTION",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_PRIV_INSTRUCTION.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_priv_instruction",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_STACK_OVERFLOW",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_STACK_OVERFLOW.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_stack_overflow",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Exception_STATUS_NO_MEMORY",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Exception_STATUS_NO_MEMORY.hxx",
+      "rust_item": "rustycad_tkernel::osd::exception_status_no_memory",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Signal",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Signal.hxx",
+      "rust_item": "rustycad_tkernel::osd::signal",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_SIGBUS",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SIGBUS.hxx",
+      "rust_item": "rustycad_tkernel::osd::sigbus",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_SIGHUP",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SIGHUP.hxx",
+      "rust_item": "rustycad_tkernel::osd::sighup",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_SIGILL",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SIGILL.hxx",
+      "rust_item": "rustycad_tkernel::osd::sigill",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_SIGINT",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SIGINT.hxx",
+      "rust_item": "rustycad_tkernel::osd::sigint",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_SIGKILL",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SIGKILL.hxx",
+      "rust_item": "rustycad_tkernel::osd::sigkill",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_SIGQUIT",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SIGQUIT.hxx",
+      "rust_item": "rustycad_tkernel::osd::sigquit",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_SIGSEGV",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SIGSEGV.hxx",
+      "rust_item": "rustycad_tkernel::osd::sigsegv",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_SIGSYS",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SIGSYS.hxx",
+      "rust_item": "rustycad_tkernel::osd::sigsys",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_OSDError",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OSDError.hxx",
+      "rust_item": "rustycad_tkernel::osd::osd_osd_error",
+      "status": "implemented",
+      "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor with its native type name. Host independent: Rust code cannot raise it from a signal or SEH handler (see OSD::SetSignal), but callers use it to report the same failure category."
+    },
+    {
+      "upstream_id": "OSD_Error()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Error.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdError::new",
+      "status": "implemented",
+      "notes": "Starts with errno 0 and portable code 0 on every host."
+    },
+    {
+      "upstream_id": "OSD_Error::Perror()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Error.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdError::perror",
+      "status": "implemented",
+      "notes": "Linux/macOS: the native errno x OSD_WhoAmI switch (SUN/IRIX4/AIX arms are not compiled natively either), stores the ERR_* code and returns Err(OSD_OSDError) with the native text, keeping the 'Unknowm' spelling and the ELOOP arm that leaves ERR_SURPRISE; Ok when nothing failed. Windows: prints 'Error ( <class> )' (32-wchar truncation kept) plus the message to stderr and returns Ok. Differential probe osd_error covers every named errno from every class."
+    },
+    {
+      "upstream_id": "OSD_Error::SetValue(int,int,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Error.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdError::set_value",
+      "status": "implemented",
+      "notes": "Stores errno, the raw OSD_WhoAmI (unknown values keep the default arms) and the message; on Windows also maps the Win32 code through the file/directory/file-node table then the common table (windows_error_code, tested on every host)."
+    },
+    {
+      "upstream_id": "OSD_Error::Error() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Error.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdError::error",
+      "status": "implemented",
+      "notes": "The portable ERR_* code: Unix sets it only in Perror, Windows in SetValue."
+    },
+    {
+      "upstream_id": "OSD_Error::Failed() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Error.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdError::failed",
+      "status": "implemented",
+      "notes": "errno != 0 on every host."
+    },
+    {
+      "upstream_id": "OSD_Error::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Error.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdError::reset",
+      "status": "implemented",
+      "notes": "Clears errno and keeps the portable code, as natively."
+    },
+    {
+      "upstream_id": "OSD_Protection()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::new",
+      "status": "implemented",
+      "notes": "Unix default (R, RWD, R, R); Windows default (RWXD, RWXD, RX, RX) selected by cfg."
+    },
+    {
+      "upstream_id": "OSD_Protection(OSD_SingleProtection,OSD_SingleProtection,OSD_SingleProtection,OSD_SingleProtection)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::with_values",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::Values(OSD_SingleProtection&,OSD_SingleProtection&,OSD_SingleProtection&,OSD_SingleProtection&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::values",
+      "status": "implemented",
+      "notes": "Output references become a returned (system, user, group, world) tuple. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::SetValues(OSD_SingleProtection,OSD_SingleProtection,OSD_SingleProtection,OSD_SingleProtection)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::set_values",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::SetSystem(OSD_SingleProtection)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::set_system",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::SetUser(OSD_SingleProtection)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::set_user",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::SetGroup(OSD_SingleProtection)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::set_group",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::SetWorld(OSD_SingleProtection)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::set_world",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::System() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::system",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::User() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::user",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::Group() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::group",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::World() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::world",
+      "status": "implemented",
+      "notes": "Host independent."
+    },
+    {
+      "upstream_id": "OSD_Protection::Add(OSD_SingleProtection&,OSD_SingleProtection)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::add",
+      "status": "implemented",
+      "notes": "Unix reads the native TabProtAdd table verbatim (quirk cells WX+W=RWX and RWX+D=RWX); Windows is the read/write/execute/delete mask union. Probe osd_prot_row compares all 256 cells."
+    },
+    {
+      "upstream_id": "OSD_Protection::Sub(OSD_SingleProtection&,OSD_SingleProtection)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Protection.hxx",
+      "rust_item": "rustycad_tkernel::osd::Protection::sub",
+      "status": "implemented",
+      "notes": "Unix reads the native TabProtSub table verbatim (quirk cells X-RW=None, X-RWX=X, X-RWD=None); Windows is the mask difference. Probe osd_prot_row compares all 256 cells."
     }
   ],
   "tests": [
