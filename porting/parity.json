@@ -62148,6 +62148,1374 @@
       "notes": "GCE2d mapping: the native header is a deprecated alias of the GC class (Standard_DEPRECATED_STD), ported as a #[deprecated] type alias with the native message; GCE2d_Root re-exports the Root trait, as a trait re-export cannot carry the deprecation."
     },
     {
+      "upstream_id": "IntAna_Curve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::new",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::SetCylinderQuadValues(const gp_Cylinder&,double,double,double,double,double,double,double,double,double,double,double,double,double,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::set_cylinder_quad_values",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::SetConeQuadValues(const gp_Cone&,double,double,double,double,double,double,double,double,double,double,double,double,double,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::set_cone_quad_values",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::IsOpen() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::is_open",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::Domain(double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::domain",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::IsConstant() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::is_constant",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::IsFirstOpen() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::is_first_open",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::IsLastOpen() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::is_last_open",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::Value(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::value",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::D1u(double,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::d1u",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::FindParameter(const gp_Pnt&,NCollection_List<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::find_parameter",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::SetIsFirstOpen(bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::set_is_first_open",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::SetIsLastOpen(bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::set_is_last_open",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Curve::SetDomain(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Curve::set_domain",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::new",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Lin&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::line_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Lin&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_line_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Circ&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::circle_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Circ&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_circle_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Elips&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::ellipse_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Elips&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_ellipse_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Parab&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::parabola_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Parab&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_parabola_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Hypr&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::hyperbola_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Hypr&,const IntAna_Quadric&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_hyperbola_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Lin&,const gp_Pln&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::line_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Lin&,const gp_Pln&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_line_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Circ&,const gp_Pln&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::circle_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Circ&,const gp_Pln&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_circle_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Elips&,const gp_Pln&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::ellipse_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Elips&,const gp_Pln&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_ellipse_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Parab&,const gp_Pln&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::parabola_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Parab&,const gp_Pln&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_parabola_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad(const gp_Hypr&,const gp_Pln&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::hyperbola_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Perform(const gp_Hypr&,const gp_Pln&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::perform_hyperbola_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::is_done",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::IsInQuadric() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::is_in_quadric",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::IsParallel() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::is_parallel",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::nb_points",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::Point(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::point",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntConicQuad::ParamOnConic(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntConicQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntConicQuad::param_on_conic",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntLinTorus()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntLinTorus.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntLinTorus::new",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntLinTorus(const gp_Lin&,const gp_Torus&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntLinTorus.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntLinTorus::with",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntLinTorus::Perform(const gp_Lin&,const gp_Torus&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntLinTorus.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntLinTorus::perform",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntLinTorus::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntLinTorus.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntLinTorus::is_done",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntLinTorus::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntLinTorus.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntLinTorus::nb_points",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntLinTorus::Value(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntLinTorus.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntLinTorus::value",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntLinTorus::ParamOnLine(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntLinTorus.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntLinTorus::param_on_line",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntLinTorus::ParamOnTorus(int,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntLinTorus.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntLinTorus::param_on_torus",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::new",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad(const gp_Cylinder&,const IntAna_Quadric&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::cylinder",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad(const gp_Cone&,const IntAna_Quadric&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::Perform(const gp_Cylinder&,const IntAna_Quadric&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::perform_cylinder",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::Perform(const gp_Cone&,const IntAna_Quadric&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::perform_cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::is_done",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::IdenticalElements() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::identical_elements",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::NbCurve() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::nb_curve",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::Curve(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::curve",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::NbPnt() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::nb_pnt",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::Point(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::point",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::Parameters(int,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::parameters",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::HasNextCurve(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::has_next_curve",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::NextCurve(int,bool&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::next_curve",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::HasPreviousCurve(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::has_previous_curve",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_IntQuadQuad::PreviousCurve(int,bool&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_IntQuadQuad.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::IntQuadQuad::previous_curve",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::new",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Pln&,const gp_Pln&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::planes",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Pln&,const gp_Pln&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_planes",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Pln&,const gp_Cylinder&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::plane_cylinder",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Pln&,const gp_Cylinder&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_plane_cylinder",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Pln&,const gp_Sphere&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::plane_sphere",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Pln&,const gp_Sphere&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_plane_sphere",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Pln&,const gp_Cone&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::plane_cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Pln&,const gp_Cone&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_plane_cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Cylinder&,const gp_Cylinder&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::cylinders",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Cylinder&,const gp_Cylinder&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_cylinders",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Cylinder&,const gp_Sphere&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::cylinder_sphere",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Cylinder&,const gp_Sphere&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_cylinder_sphere",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Cylinder&,const gp_Cone&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::cylinder_cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Cylinder&,const gp_Cone&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_cylinder_cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Sphere&,const gp_Sphere&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::spheres",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Sphere&,const gp_Sphere&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_spheres",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Sphere&,const gp_Cone&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::sphere_cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Sphere&,const gp_Cone&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_sphere_cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Cone&,const gp_Cone&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::cones",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Cone&,const gp_Cone&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_cones",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Pln&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::plane_torus",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Pln&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_plane_torus",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Cylinder&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::cylinder_torus",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Cylinder&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_cylinder_torus",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Cone&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::cone_torus",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Cone&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_cone_torus",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Sphere&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::sphere_torus",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Sphere&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_sphere_torus",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo(const gp_Torus&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::tori",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Perform(const gp_Torus&,const gp_Torus&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::perform_tori",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::is_done",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::TypeInter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::type_inter",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::NbSolutions() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::nb_solutions",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Point(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::point",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Line(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::line",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Circle(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::circle",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Ellipse(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::ellipse",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Parabola(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::parabola",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::Hyperbola(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::hyperbola",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::HasCommonGen() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::has_common_gen",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_QuadQuadGeo::PChar() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_QuadQuadGeo.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::QuadQuadGeo::p_char",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::new",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric(const gp_Pln&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::from_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric(const gp_Sphere&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::from_sphere",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric(const gp_Cylinder&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::from_cylinder",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric(const gp_Cone&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::from_cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric::SetQuadric(const gp_Pln&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::set_plane",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric::SetQuadric(const gp_Sphere&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::set_sphere",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric::SetQuadric(const gp_Cone&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::set_cone",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric::SetQuadric(const gp_Cylinder&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::set_cylinder",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric::Coefficients(double&,double&,double&,double&,double&,double&,double&,double&,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::coefficients",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric::NewCoefficients(double&,double&,double&,double&,double&,double&,double&,double&,double&,double&,const gp_Ax3&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::new_coefficients",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_Quadric::SpecialPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_Quadric.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::Quadric::special_points",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna_ResultType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna/IntAna_ResultType.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana::ResultType",
+      "status": "implemented",
+      "notes": "IntAna mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::new",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection(const gp_Lin2d&,const gp_Lin2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::lines",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::Perform(const gp_Lin2d&,const gp_Lin2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::perform_lines",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection(const gp_Circ2d&,const gp_Circ2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::circles",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::Perform(const gp_Circ2d&,const gp_Circ2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::perform_circles",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection(const gp_Lin2d&,const gp_Circ2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::line_circle",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::Perform(const gp_Lin2d&,const gp_Circ2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::perform_line_circle",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection(const gp_Lin2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::line_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::Perform(const gp_Lin2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::perform_line_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection(const gp_Circ2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::circle_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::Perform(const gp_Circ2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::perform_circle_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection(const gp_Elips2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::ellipse_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::Perform(const gp_Elips2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::perform_ellipse_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection(const gp_Parab2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::parabola_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::Perform(const gp_Parab2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::perform_parabola_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection(const gp_Hypr2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::hyperbola_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::Perform(const gp_Hypr2d&,const IntAna2d_Conic&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::perform_hyperbola_conic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::is_done",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::IsEmpty() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::is_empty",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::IdenticalElements() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::identical_elements",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::ParallelElements() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::parallel_elements",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::nb_points",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_AnaIntersection::Point(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_AnaIntersection.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::AnaIntersection::point",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic(const gp_Circ2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::from_circle",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic(const gp_Lin2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::from_line",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic(const gp_Parab2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::from_parabola",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic(const gp_Hypr2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::from_hyperbola",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic(const gp_Elips2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::from_ellipse",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic::Value(double,double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::value",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic::Grad(double,double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::grad",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic::ValAndGrad(double,double,double&,gp_XY&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::val_and_grad",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic::Coefficients(double&,double&,double&,double&,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::coefficients",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Conic::NewCoefficients(double&,double&,double&,double&,double&,double&,const gp_Ax2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Conic.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::Conic::new_coefficients",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint(double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_IntPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::new",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint(double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_IntPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::implicit",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_IntPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::default",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint::SetValue(double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_IntPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::set_value",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint::SetValue(double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_IntPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::set_implicit_value",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_IntPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::value",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint::SecondIsImplicit() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_IntPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::second_is_implicit",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint::ParamOnFirst() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_IntPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::param_on_first",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_IntPoint::ParamOnSecond() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_IntPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::IntPoint::param_on_second",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "MyDirectPolynomialRoots(double,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Outils.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::MyDirectPolynomialRoots::quartic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "MyDirectPolynomialRoots(double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Outils.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::MyDirectPolynomialRoots::quadratic",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "MyDirectPolynomialRoots::NbSolutions() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Outils.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::MyDirectPolynomialRoots::nb_solutions",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "MyDirectPolynomialRoots::Value(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Outils.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::MyDirectPolynomialRoots::value",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "MyDirectPolynomialRoots::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Outils.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::MyDirectPolynomialRoots::is_done",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "MyDirectPolynomialRoots::InfiniteRoots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Outils.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::MyDirectPolynomialRoots::infinite_roots",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Outils::Points_Confondus(double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Outils.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::points_confondus",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Outils::Traitement_Points_Confondus(int&,IntAna2d_IntPoint*)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Outils.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::traitement_points_confondus",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
+      "upstream_id": "IntAna2d_Outils::Coord_Ancien_Repere(double&,double&,const gp_Ax2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/IntAna2d/IntAna2d_Outils.hxx",
+      "rust_item": "rustycad_tkgeombase::int_ana2d::coord_ancien_repere",
+      "status": "implemented",
+      "notes": "IntAna2d mapping (docs/tkgeombase-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload, returning Result when the native code can raise; accessors return Result with the native exception type."
+    },
+    {
       "upstream_id": "Adaptor3d_CurveOnSurface::DEFINE_STANDARD_RTTIEXT",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
