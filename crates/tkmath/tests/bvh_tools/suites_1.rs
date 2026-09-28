@@ -5,7 +5,7 @@ fn BVH_ToolsTest__BoxBoxSquareDistance2D() {
 
     // Distance = 2
     let mut aDist: f64 = box_box_square_distance(&aBox1, &aBox2);
-    assert_near(aDist, 4.0, CONFUSION);
+    assert_near(aDist, 4.0, precision::confusion());
 }
 
 #[test]
@@ -14,8 +14,8 @@ fn BVH_ToolsTest__PointBoxProjection2D() {
 
     // Point outside
     let mut aProj = point_box_projection(&BvhVec2d::new(2.0, 2.0), &aBox);
-    assert_near(aProj.x, 1.0, CONFUSION);
-    assert_near(aProj.y, 1.0, CONFUSION);
+    assert_near(aProj.x, 1.0, precision::confusion());
+    assert_near(aProj.y, 1.0, precision::confusion());
 }
 
 #[test]
@@ -24,7 +24,7 @@ fn BVH_ToolsTest__PointBoxSquareDistanceAtVertex() {
 
     // Point on vertex
     let mut aDist: f64 = point_box_square_distance(&BvhVec3d::new(0.0, 0.0, 0.0), &aBox);
-    assert_near(aDist, 0.0, CONFUSION);
+    assert_near(aDist, 0.0, precision::confusion());
 }
 
 #[test]
@@ -33,7 +33,7 @@ fn BVH_ToolsTest__PointBoxSquareDistanceAtEdge() {
 
     // Point on edge
     let mut aDist: f64 = point_box_square_distance(&BvhVec3d::new(0.5, 0.0, 0.0), &aBox);
-    assert_near(aDist, 0.0, CONFUSION);
+    assert_near(aDist, 0.0, precision::confusion());
 }
 
 #[test]
@@ -101,8 +101,8 @@ fn BVH_ToolsTest__RayBoxIntersectionYAxis() {
         &mut aTimeLeave,
     );
     assert!(aHit);
-    assert_near(aTimeEnter, 1.0, CONFUSION);
-    assert_near(aTimeLeave, 2.0, CONFUSION);
+    assert_near(aTimeEnter, 1.0, precision::confusion());
+    assert_near(aTimeLeave, 2.0, precision::confusion());
 }
 
 #[test]
@@ -120,8 +120,8 @@ fn BVH_ToolsTest__RayBoxIntersectionZAxis() {
         &mut aTimeLeave,
     );
     assert!(aHit);
-    assert_near(aTimeEnter, 1.0, CONFUSION);
-    assert_near(aTimeLeave, 2.0, CONFUSION);
+    assert_near(aTimeEnter, 1.0, precision::confusion());
+    assert_near(aTimeLeave, 2.0, precision::confusion());
 }
 
 #[test]
@@ -151,7 +151,7 @@ fn BVH_ToolsTest__PointBoxSquareDistanceNegativeBox() {
     // Point at origin
     let mut aDist: f64 = point_box_square_distance(&BvhVec3d::new(0.0, 0.0, 0.0), &aBox);
     // Distance = sqrt(1^2 + 1^2 + 1^2) = sqrt(3), squared = 3
-    assert_near(aDist, 3.0, CONFUSION);
+    assert_near(aDist, 3.0, precision::confusion());
 }
 
 #[test]
@@ -161,7 +161,7 @@ fn BVH_ToolsTest__BoxBoxSquareDistanceEdgeToEdge() {
 
     // Closest points are on edges, distance = sqrt(1^2 + 1^2) = sqrt(2), squared = 2
     let mut aDist: f64 = box_box_square_distance(&aBox1, &aBox2);
-    assert_near(aDist, 2.0, CONFUSION);
+    assert_near(aDist, 2.0, precision::confusion());
 }
 
 #[test]
@@ -187,11 +187,11 @@ fn BVH_ToolsTest__PointBoxSquareDistanceLargeBox() {
 
     // Point inside
     let mut aDist1: f64 = point_box_square_distance(&BvhVec3d::new(500.0, 500.0, 500.0), &aBox);
-    assert_near(aDist1, 0.0, CONFUSION);
+    assert_near(aDist1, 0.0, precision::confusion());
 
     // Point outside
     let mut aDist2: f64 = point_box_square_distance(&BvhVec3d::new(1001.0, 500.0, 500.0), &aBox);
-    assert_near(aDist2, 1.0, CONFUSION);
+    assert_near(aDist2, 1.0, precision::confusion());
 }
 
 #[test]
@@ -211,8 +211,8 @@ fn BVH_ToolsTest__RayBoxIntersectionLargeBox() {
         &mut aTimeLeave,
     );
     assert!(aHit);
-    assert_near(aTimeEnter, 100.0, CONFUSION);
-    assert_near(aTimeLeave, 1100.0, CONFUSION);
+    assert_near(aTimeEnter, 100.0, precision::confusion());
+    assert_near(aTimeLeave, 1100.0, precision::confusion());
 }
 
 #[test]
@@ -223,9 +223,9 @@ fn BVH_ToolsTest__PointTriangleProjectionCentroid() {
 
     // Point directly above centroid
     let mut aProj = PointTriangleProjection(BvhVec3d::new(1.0, 1.0, 5.0), aNode0, aNode1, aNode2);
-    assert_near(aProj.x, 1.0, CONFUSION);
-    assert_near(aProj.y, 1.0, CONFUSION);
-    assert_near(aProj.z, 0.0, CONFUSION);
+    assert_near(aProj.x, 1.0, precision::confusion());
+    assert_near(aProj.y, 1.0, precision::confusion());
+    assert_near(aProj.z, 0.0, precision::confusion());
 }
 
 #[test]
@@ -234,7 +234,7 @@ fn BVH_ToolsTest__BoxBoxSquareDistanceSameBox() {
 
     // Distance to itself should be 0
     let mut aDist: f64 = box_box_square_distance(&aBox, &aBox);
-    assert_near(aDist, 0.0, CONFUSION);
+    assert_near(aDist, 0.0, precision::confusion());
 }
 
 #[test]
@@ -243,14 +243,14 @@ fn BVH_ToolsTest__PointBoxProjectionAllCorners() {
 
     // Test projection from each octant
     let mut aProj1 = point_box_projection(&BvhVec3d::new(-1.0, -1.0, -1.0), &aBox);
-    assert_near(aProj1.x, 0.0, CONFUSION);
-    assert_near(aProj1.y, 0.0, CONFUSION);
-    assert_near(aProj1.z, 0.0, CONFUSION);
+    assert_near(aProj1.x, 0.0, precision::confusion());
+    assert_near(aProj1.y, 0.0, precision::confusion());
+    assert_near(aProj1.z, 0.0, precision::confusion());
 
     let mut aProj2 = point_box_projection(&BvhVec3d::new(2.0, 2.0, 2.0), &aBox);
-    assert_near(aProj2.x, 1.0, CONFUSION);
-    assert_near(aProj2.y, 1.0, CONFUSION);
-    assert_near(aProj2.z, 1.0, CONFUSION);
+    assert_near(aProj2.x, 1.0, precision::confusion());
+    assert_near(aProj2.y, 1.0, precision::confusion());
+    assert_near(aProj2.z, 1.0, precision::confusion());
 }
 
 // =======================================================================================
@@ -273,8 +273,8 @@ fn BVH_ToolsTest__RayBoxIntersection2D() {
         &mut aTimeLeave,
     );
     assert!(aHit1);
-    assert_near(aTimeEnter, 1.0, CONFUSION);
-    assert_near(aTimeLeave, 2.0, CONFUSION);
+    assert_near(aTimeEnter, 1.0, precision::confusion());
+    assert_near(aTimeLeave, 2.0, precision::confusion());
 
     // Ray missing the box
     let mut aHit2 = RayBoxIntersection(
@@ -305,8 +305,8 @@ fn BVH_ToolsTest__RayBoxIntersection2D() {
         &mut aTimeLeave,
     );
     assert!(aHit4);
-    assert_near(aTimeEnter, 1.0, CONFUSION);
-    assert_near(aTimeLeave, 2.0, CONFUSION);
+    assert_near(aTimeEnter, 1.0, precision::confusion());
+    assert_near(aTimeLeave, 2.0, precision::confusion());
 }
 
 #[test]

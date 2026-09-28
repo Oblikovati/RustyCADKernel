@@ -40,13 +40,17 @@ mod tree;
 mod triangulation;
 mod vector;
 
-pub use binned_builder::{BvhBin, BvhBinnedBuilder, BvhSplitPlane, main_axis, split_primitives};
+pub use binned_builder::{
+    BvhBin, BvhBinnedBuilder, BvhSplitPlane, get_sub_volumes, main_axis, split_primitives,
+};
 pub use bounding_box::{BvhBox, cwise_std_max, cwise_std_min};
 pub use build_queue::BvhBuildQueue;
 pub use build_thread::{BvhBuildThread, BvhBuildTool};
-pub use builder::{BvhBuilder, BvhBuilderTransient, update_depth};
+pub use builder::{BvhBuilder, BvhBuilder3d, BvhBuilderTransient, update_depth};
 pub use object::{BvhObject, BvhObjectTransient};
-pub use primitive_set::{BvhBuilderHandle, BvhPrimitiveSet, BvhPrimitiveSetAccess};
+pub use primitive_set::{
+    BvhBuilderHandle, BvhPrimitiveSet, BvhPrimitiveSet3d, BvhPrimitiveSetAccess,
+};
 pub use properties::{BvhProperties, BvhTransform};
 pub use queue_builder::{
     BvhChildNodes, BvhPrimitiveRange, BvhQueueBuilder, add_queued_children, queue_build,

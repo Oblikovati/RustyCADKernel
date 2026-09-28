@@ -20,22 +20,31 @@ use super::sorter::BvhSorter;
 use super::vector::BvhVector;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::stl;
+use std::marker::PhantomData;
 
 /// Centroid-based sort of an abstract set along X (0), Y (1) or Z (2).
 ///
 /// The order of equal centroids follows libstdc++'s unstable introsort, as in
-/// the GCC oracle. Example: `BvhQuickSorter::new(1).perform(&mut set)?`.
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
-pub struct BvhQuickSorter {
+/// the GCC oracle. Example: `BvhQuickSorter::<BvhVec3d>::new(1).perform(&mut set)?`.
+#[derive(Clone, Copy, Debug)]
+pub struct BvhQuickSorter<V: BvhVector> {
     axis: i32,
     is_parallel: bool,
+    vector: PhantomData<V>,
 }
-impl BvhQuickSorter {
-    /// Creates new BVH quick sorter for the given axis; `BvhQuickSorter::new(0)`.
+impl<V: BvhVector> Default for BvhQuickSorter<V> {
+    fn default() -> Self {
+        Self::new(0)
+    }
+}
+impl<V: BvhVector> BvhQuickSorter<V> {
+    /// Creates new BVH quick sorter for the given axis (0 by default upstream);
+    /// `BvhQuickSorter::<BvhVec3d>::new(0)`.
     pub const fn new(axis: i32) -> Self {
         Self {
             axis,
             is_parallel: false,
+            vector: PhantomData,
         }
     }
     /// Axis used to arrange the primitives; `sorter.axis()`.
@@ -43,7 +52,7 @@ impl BvhQuickSorter {
         self.axis
     }
 }
-impl<V: BvhVector> BvhSorter<V> for BvhQuickSorter {
+impl<V: BvhVector> BvhSorter<V> for BvhQuickSorter<V> {
     /// Sorts an index permutation by centroid, then applies it with cycle swaps.
     ///
     /// Centroids are read once before sorting; `Center` is a const query, so

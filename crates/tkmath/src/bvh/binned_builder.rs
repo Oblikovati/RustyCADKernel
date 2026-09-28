@@ -27,6 +27,7 @@ use std::marker::PhantomData;
 mod partition;
 mod split;
 pub use partition::{main_axis, split_primitives};
+pub use split::get_sub_volumes;
 
 /// Parameters of a single bin (slice of AABB), `BVH_Bin`.
 #[derive(Clone, Copy, Debug, PartialEq)]

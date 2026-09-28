@@ -74,6 +74,9 @@ pub trait BvhBuilder<V: BvhVector>: Debug + Send + Sync {
     ) -> Result<(), Failure>;
 }
 
+/// `BVH_Builder3d`: the builder interface of double-precision 3D BVHs.
+pub type BvhBuilder3d = dyn BvhBuilder<crate::bvh::BvhVec3d>;
+
 /// `BVH_Builder::updateDepth`: raises the tree depth to `level` when deeper.
 /// Example: `update_depth(&mut tree, 3)`.
 pub fn update_depth<V: BvhVector>(bvh: &mut BvhTree<V>, level: i32) {

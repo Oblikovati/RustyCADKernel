@@ -8,18 +8,18 @@ fn BVH_BoxTest__SinglePointConstructor() {
     let mut aBox = BvhBox::from_point(aPoint);
 
     assert!(aBox.is_valid());
-    assert_near(aBox.corner_min().x, 5.0, CONFUSION);
-    assert_near(aBox.corner_min().y, 10.0, CONFUSION);
-    assert_near(aBox.corner_min().z, 15.0, CONFUSION);
-    assert_near(aBox.corner_max().x, 5.0, CONFUSION);
-    assert_near(aBox.corner_max().y, 10.0, CONFUSION);
-    assert_near(aBox.corner_max().z, 15.0, CONFUSION);
+    assert_near(aBox.corner_min().x, 5.0, precision::confusion());
+    assert_near(aBox.corner_min().y, 10.0, precision::confusion());
+    assert_near(aBox.corner_min().z, 15.0, precision::confusion());
+    assert_near(aBox.corner_max().x, 5.0, precision::confusion());
+    assert_near(aBox.corner_max().y, 10.0, precision::confusion());
+    assert_near(aBox.corner_max().z, 15.0, precision::confusion());
 
     // Size should be zero
     let mut aSize = aBox.size();
-    assert_near(aSize.x, 0.0, CONFUSION);
-    assert_near(aSize.y, 0.0, CONFUSION);
-    assert_near(aSize.z, 0.0, CONFUSION);
+    assert_near(aSize.x, 0.0, precision::confusion());
+    assert_near(aSize.y, 0.0, precision::confusion());
+    assert_near(aSize.z, 0.0, precision::confusion());
 }
 
 #[test]
@@ -28,10 +28,10 @@ fn BVH_BoxTest__SinglePointConstructor2D() {
     let mut aBox = BvhBox::from_point(aPoint);
 
     assert!(aBox.is_valid());
-    assert_near(aBox.corner_min().x, 3.0, CONFUSION);
-    assert_near(aBox.corner_min().y, 7.0, CONFUSION);
-    assert_near(aBox.corner_max().x, 3.0, CONFUSION);
-    assert_near(aBox.corner_max().y, 7.0, CONFUSION);
+    assert_near(aBox.corner_min().x, 3.0, precision::confusion());
+    assert_near(aBox.corner_min().y, 7.0, precision::confusion());
+    assert_near(aBox.corner_max().x, 3.0, precision::confusion());
+    assert_near(aBox.corner_max().y, 7.0, precision::confusion());
 }
 
 #[test]
@@ -40,9 +40,9 @@ fn BVH_BoxTest__SinglePointConstructorOrigin() {
     let mut aBox = BvhBox::from_point(aOrigin);
 
     assert!(aBox.is_valid());
-    assert_near(aBox.center().x, 0.0, CONFUSION);
-    assert_near(aBox.center().y, 0.0, CONFUSION);
-    assert_near(aBox.center().z, 0.0, CONFUSION);
+    assert_near(aBox.center().x, 0.0, precision::confusion());
+    assert_near(aBox.center().y, 0.0, precision::confusion());
+    assert_near(aBox.center().z, 0.0, precision::confusion());
 }
 
 // =======================================================================================
@@ -54,17 +54,17 @@ fn BVH_BoxTest__CenterByAxis() {
     let mut aBox =
         BvhBox::from_corners(BvhVec3d::new(0.0, 0.0, 0.0), BvhVec3d::new(10.0, 20.0, 30.0));
 
-    assert_near(aBox.center_axis(0), 5.0, CONFUSION); // X axis
-    assert_near(aBox.center_axis(1), 10.0, CONFUSION); // Y axis
-    assert_near(aBox.center_axis(2), 15.0, CONFUSION); // Z axis
+    assert_near(aBox.center_axis(0), 5.0, precision::confusion()); // X axis
+    assert_near(aBox.center_axis(1), 10.0, precision::confusion()); // Y axis
+    assert_near(aBox.center_axis(2), 15.0, precision::confusion()); // Z axis
 }
 
 #[test]
 fn BVH_BoxTest__CenterByAxis2D() {
     let mut aBox = BvhBox::from_corners(BvhVec2d::new(2.0, 4.0), BvhVec2d::new(8.0, 12.0));
 
-    assert_near(aBox.center_axis(0), 5.0, CONFUSION); // X axis
-    assert_near(aBox.center_axis(1), 8.0, CONFUSION); // Y axis
+    assert_near(aBox.center_axis(0), 5.0, precision::confusion()); // X axis
+    assert_near(aBox.center_axis(1), 8.0, precision::confusion()); // Y axis
 }
 
 #[test]
@@ -74,9 +74,9 @@ fn BVH_BoxTest__CenterByAxisNegative() {
         BvhVec3d::new(10.0, 20.0, 30.0),
     );
 
-    assert_near(aBox.center_axis(0), 0.0, CONFUSION);
-    assert_near(aBox.center_axis(1), 0.0, CONFUSION);
-    assert_near(aBox.center_axis(2), 0.0, CONFUSION);
+    assert_near(aBox.center_axis(0), 0.0, precision::confusion());
+    assert_near(aBox.center_axis(1), 0.0, precision::confusion());
+    assert_near(aBox.center_axis(2), 0.0, precision::confusion());
 }
 
 #[test]
@@ -86,9 +86,9 @@ fn BVH_BoxTest__CenterByAxis4D() {
         BvhVec4d::new(4.0, 6.0, 8.0, 10.0),
     );
 
-    assert_near(aBox.center_axis(0), 2.0, CONFUSION);
-    assert_near(aBox.center_axis(1), 3.0, CONFUSION);
-    assert_near(aBox.center_axis(2), 4.0, CONFUSION);
+    assert_near(aBox.center_axis(0), 2.0, precision::confusion());
+    assert_near(aBox.center_axis(1), 3.0, precision::confusion());
+    assert_near(aBox.center_axis(2), 4.0, precision::confusion());
 }
 
 // =======================================================================================
@@ -312,8 +312,8 @@ fn BVH_BoxTest__Transform_Identity() {
 
     aBox.transform(&aIdentity);
 
-    assert_near(aBox.corner_min().x, 0.0, CONFUSION);
-    assert_near(aBox.corner_max().x, 1.0, CONFUSION);
+    assert_near(aBox.corner_min().x, 0.0, precision::confusion());
+    assert_near(aBox.corner_max().x, 1.0, precision::confusion());
 }
 
 #[test]
@@ -326,12 +326,12 @@ fn BVH_BoxTest__Transform_Translation() {
 
     aBox.transform(&aTransform);
 
-    assert_near(aBox.corner_min().x, 5.0, CONFUSION);
-    assert_near(aBox.corner_min().y, 10.0, CONFUSION);
-    assert_near(aBox.corner_min().z, 15.0, CONFUSION);
-    assert_near(aBox.corner_max().x, 6.0, CONFUSION);
-    assert_near(aBox.corner_max().y, 11.0, CONFUSION);
-    assert_near(aBox.corner_max().z, 16.0, CONFUSION);
+    assert_near(aBox.corner_min().x, 5.0, precision::confusion());
+    assert_near(aBox.corner_min().y, 10.0, precision::confusion());
+    assert_near(aBox.corner_min().z, 15.0, precision::confusion());
+    assert_near(aBox.corner_max().x, 6.0, precision::confusion());
+    assert_near(aBox.corner_max().y, 11.0, precision::confusion());
+    assert_near(aBox.corner_max().z, 16.0, precision::confusion());
 }
 
 #[test]
@@ -346,10 +346,10 @@ fn BVH_BoxTest__Transform_Scale() {
 
     aBox.transform(&aTransform);
 
-    assert_near(aBox.corner_min().x, 0.0, CONFUSION);
-    assert_near(aBox.corner_max().x, 2.0, CONFUSION);
-    assert_near(aBox.corner_max().y, 3.0, CONFUSION);
-    assert_near(aBox.corner_max().z, 4.0, CONFUSION);
+    assert_near(aBox.corner_min().x, 0.0, precision::confusion());
+    assert_near(aBox.corner_max().x, 2.0, precision::confusion());
+    assert_near(aBox.corner_max().y, 3.0, precision::confusion());
+    assert_near(aBox.corner_max().z, 4.0, precision::confusion());
 }
 
 #[test]
@@ -362,12 +362,12 @@ fn BVH_BoxTest__Transformed_Identity() {
     let mut aTransformed = aBox.transformed(&aIdentity);
 
     // Original should be unchanged
-    assert_near(aBox.corner_min().x, 0.0, CONFUSION);
-    assert_near(aBox.corner_max().x, 1.0, CONFUSION);
+    assert_near(aBox.corner_min().x, 0.0, precision::confusion());
+    assert_near(aBox.corner_max().x, 1.0, precision::confusion());
 
     // Transformed should be the same
-    assert_near(aTransformed.corner_min().x, 0.0, CONFUSION);
-    assert_near(aTransformed.corner_max().x, 1.0, CONFUSION);
+    assert_near(aTransformed.corner_min().x, 0.0, precision::confusion());
+    assert_near(aTransformed.corner_max().x, 1.0, precision::confusion());
 }
 
 #[test]
@@ -381,16 +381,16 @@ fn BVH_BoxTest__Transformed_Translation() {
     let mut aTransformed = aBox.transformed(&aTransform);
 
     // Original should be unchanged
-    assert_near(aBox.corner_min().x, 0.0, CONFUSION);
-    assert_near(aBox.corner_max().x, 1.0, CONFUSION);
+    assert_near(aBox.corner_min().x, 0.0, precision::confusion());
+    assert_near(aBox.corner_max().x, 1.0, precision::confusion());
 
     // Transformed should be translated
-    assert_near(aTransformed.corner_min().x, 10.0, CONFUSION);
-    assert_near(aTransformed.corner_min().y, 20.0, CONFUSION);
-    assert_near(aTransformed.corner_min().z, 30.0, CONFUSION);
-    assert_near(aTransformed.corner_max().x, 11.0, CONFUSION);
-    assert_near(aTransformed.corner_max().y, 21.0, CONFUSION);
-    assert_near(aTransformed.corner_max().z, 31.0, CONFUSION);
+    assert_near(aTransformed.corner_min().x, 10.0, precision::confusion());
+    assert_near(aTransformed.corner_min().y, 20.0, precision::confusion());
+    assert_near(aTransformed.corner_min().z, 30.0, precision::confusion());
+    assert_near(aTransformed.corner_max().x, 11.0, precision::confusion());
+    assert_near(aTransformed.corner_max().y, 21.0, precision::confusion());
+    assert_near(aTransformed.corner_max().z, 31.0, precision::confusion());
 }
 
 #[test]
@@ -433,10 +433,10 @@ fn BVH_BoxTest__ModifyCornerMin() {
     // Modify via non-const reference
     *aBox.corner_min_mut() = BvhVec3d::new(-5.0, -5.0, -5.0);
 
-    assert_near(aBox.corner_min().x, -5.0, CONFUSION);
-    assert_near(aBox.corner_min().y, -5.0, CONFUSION);
-    assert_near(aBox.corner_min().z, -5.0, CONFUSION);
-    assert_near(aBox.corner_max().x, 10.0, CONFUSION);
+    assert_near(aBox.corner_min().x, -5.0, precision::confusion());
+    assert_near(aBox.corner_min().y, -5.0, precision::confusion());
+    assert_near(aBox.corner_min().z, -5.0, precision::confusion());
+    assert_near(aBox.corner_max().x, 10.0, precision::confusion());
 }
 
 #[test]
@@ -447,10 +447,10 @@ fn BVH_BoxTest__ModifyCornerMax() {
     // Modify via non-const reference
     *aBox.corner_max_mut() = BvhVec3d::new(20.0, 30.0, 40.0);
 
-    assert_near(aBox.corner_max().x, 20.0, CONFUSION);
-    assert_near(aBox.corner_max().y, 30.0, CONFUSION);
-    assert_near(aBox.corner_max().z, 40.0, CONFUSION);
-    assert_near(aBox.corner_min().x, 0.0, CONFUSION);
+    assert_near(aBox.corner_max().x, 20.0, precision::confusion());
+    assert_near(aBox.corner_max().y, 30.0, precision::confusion());
+    assert_near(aBox.corner_max().z, 40.0, precision::confusion());
+    assert_near(aBox.corner_min().x, 0.0, precision::confusion());
 }
 
 #[test]
@@ -463,10 +463,10 @@ fn BVH_BoxTest__ModifyCornerComponents() {
     aBox.corner_min_mut().y = -2.0;
     aBox.corner_max_mut().z = 15.0;
 
-    assert_near(aBox.corner_min().x, -1.0, CONFUSION);
-    assert_near(aBox.corner_min().y, -2.0, CONFUSION);
-    assert_near(aBox.corner_min().z, 0.0, CONFUSION);
-    assert_near(aBox.corner_max().z, 15.0, CONFUSION);
+    assert_near(aBox.corner_min().x, -1.0, precision::confusion());
+    assert_near(aBox.corner_min().y, -2.0, precision::confusion());
+    assert_near(aBox.corner_min().z, 0.0, precision::confusion());
+    assert_near(aBox.corner_max().z, 15.0, precision::confusion());
 }
 
 // =======================================================================================
@@ -481,7 +481,7 @@ fn BVH_BoxTest__Area_DegenerateBox2D() {
     let mut anArea: f64 = aBox.area();
     // For degenerate case, returns sum of dimensions
     assert!(anArea >= 0.0);
-    assert_near(anArea, 5.0, CONFUSION); // Width + height = 5 + 0
+    assert_near(anArea, 5.0, precision::confusion()); // Width + height = 5 + 0
 }
 
 #[test]

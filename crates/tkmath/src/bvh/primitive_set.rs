@@ -30,6 +30,9 @@ use std::sync::Arc;
 /// Shared handle of a BVH builder; `None` is a null handle.
 pub type BvhBuilderHandle<V> = Option<Arc<dyn BvhBuilder<V>>>;
 
+/// `BVH_PrimitiveSet3d`: state of double-precision 3D primitive sets.
+pub type BvhPrimitiveSet3d = BvhPrimitiveSet<crate::bvh::BvhVec3d>;
+
 /// State of `BVH_PrimitiveSet`: object flags, the bottom-level tree, its
 /// builder and the cached set box. Concrete sets embed it and implement
 /// [`BvhPrimitiveSetAccess`]. Example: `BvhPrimitiveSet::<Vec3<f64>>::default()`.

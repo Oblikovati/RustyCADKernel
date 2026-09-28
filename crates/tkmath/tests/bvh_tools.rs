@@ -16,14 +16,12 @@
 //! Uninitialized `aTimeEnter`/`aTimeLeave` locals start as NaN: upstream only
 //! writes them on a hit, and NaN keeps every comparison on an unwritten value false.
 #![allow(non_snake_case, unused_mut)]
+use rustycad_tkernel::precision;
 use rustycad_tkmath::bvh::tools::{
     box_box_square_distance, point_box_projection, point_box_square_distance,
     point_triangle_projection, ray_box_intersection_by_direction,
 };
 use rustycad_tkmath::bvh::{BvhBox, BvhVec2d, BvhVec3d, BvhVec3f, BvhVector};
-
-/// `Precision::Confusion()`.
-const CONFUSION: f64 = 1e-7;
 
 fn assert_near(left: f64, right: f64, tolerance: f64) {
     assert!(
