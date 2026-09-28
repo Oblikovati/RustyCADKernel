@@ -268,6 +268,766 @@
       "notes": "Manual slice mapping; authoritative API enumeration pending."
     },
     {
+      "upstream_id": "Quantity_Color()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::default (Default)",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Yellow, as the native default."
+    },
+    {
+      "upstream_id": "Quantity_Color(Quantity_NameOfColor)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::named",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color(double,double,double,Quantity_TypeOfColor)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::new",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::from_vec3",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Name() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::name",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Nearest sRGB table entry; ties keep the earliest index (GRAY0 -> BLACK)."
+    },
+    {
+      "upstream_id": "Quantity_Color::SetValues(Quantity_NameOfColor)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::set_named",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Rgb() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::rgb / rgb_vec3",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Values(double&,double&,double&,Quantity_TypeOfColor) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::values",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::SetValues(double,double,double,Quantity_TypeOfColor)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::set_values",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). An HLS NaN hue passes validation and then terminates OCCT inside the noexcept Convert_HLS_To_LinearRGB; Rust returns the Color out failure."
+    },
+    {
+      "upstream_id": "Quantity_Color::Red() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::red",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Green() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::green",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Blue() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::blue",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Hue() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::hue",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Light() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::light",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::ChangeIntensity(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::change_intensity",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Result for the unreachable HLS conversion failure."
+    },
+    {
+      "upstream_id": "Quantity_Color::Saturation() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::saturation",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::ChangeContrast(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::change_contrast",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Result for the unreachable HLS conversion failure."
+    },
+    {
+      "upstream_id": "Quantity_Color::IsDifferent(const Quantity_Color&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::is_different",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::operator!=(const Quantity_Color&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Color as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). ne is overridden to call is_different, as the native operator does."
+    },
+    {
+      "upstream_id": "Quantity_Color::IsEqual(const Quantity_Color&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::is_equal",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::operator==(const Quantity_Color&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Color as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Distance(const Quantity_Color&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::distance",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::SquareDistance(const Quantity_Color&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::square_distance",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Delta(const Quantity_Color&,double&,double&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::delta",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns (DC, DI)."
+    },
+    {
+      "upstream_id": "Quantity_Color::DeltaE2000(const Quantity_Color&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::delta_e2000",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Name(double,double,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::nearest_name",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::StringName(Quantity_NameOfColor)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::string_name",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The native UNDEFINED answer for integers outside the enum is unreachable with the typed NamedColor (NamedColor::from_index rejects them)."
+    },
+    {
+      "upstream_id": "Quantity_Color::ColorFromName(const char* const,Quantity_NameOfColor&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::NamedColor::from_name",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Option. Quirk: the bare prefix QUANTITY_NOC_ makes the native SubString(14, 13) throw inside this noexcept member (std::terminate); Rust reports no match."
+    },
+    {
+      "upstream_id": "Quantity_Color::ColorFromName(const char* const,Quantity_Color&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::from_name",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Option; the target is untouched on failure as natively."
+    },
+    {
+      "upstream_id": "Quantity_Color::ColorFromHex(const char* const,Quantity_Color&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::from_hex",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Option."
+    },
+    {
+      "upstream_id": "Quantity_Color::ColorToHex(const Quantity_Color&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::to_hex",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_sRGB_To_HLS(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::srgb_to_hls",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_HLS_To_sRGB(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::hls_to_srgb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). A NaN hue fails like the x86-64 INT_MIN hue index (the native cast is undefined)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_LinearRGB_To_HLS(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::linear_rgb_to_hls",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_HLS_To_LinearRGB(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::hls_to_linear_rgb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Native quirk: the member is noexcept around a throwing conversion, so invalid input calls std::terminate in OCCT; Rust returns the Standard_OutOfRange failure instead."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_LinearRGB_To_Lab(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::linear_rgb_to_lab",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_Lab_To_Lch(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::lab_to_lch",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_Lab_To_LinearRGB(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::lab_to_linear_rgb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_Lch_To_Lab(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::lch_to_lab",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Color2argb(const Quantity_Color&,int&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::to_argb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns the packed integer; linear channels, no gamma, as natively."
+    },
+    {
+      "upstream_id": "Quantity_Color::Argb2color(int,Quantity_Color&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::from_argb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns the color instead of assigning through a reference."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_LinearRGB_To_sRGB(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::linear_to_srgb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_LinearRGB_To_sRGB(float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::linear_to_srgb_f32",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_sRGB_To_LinearRGB(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::srgb_to_linear",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_sRGB_To_LinearRGB(float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::srgb_to_linear_f32",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_LinearRGB_To_sRGB(const NCollection_Vec3<T>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::linear_to_srgb_vec3 / linear_to_srgb_vec3_f32",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The template's double and float instantiations."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_sRGB_To_LinearRGB(const NCollection_Vec3<T>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::srgb_to_linear_vec3 / srgb_to_linear_vec3_f32",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The template's double and float instantiations."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_LinearRGB_To_sRGB_approx22(float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::linear_to_srgb_approx22",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Native naming quirk kept: raises to 2.2."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_sRGB_To_LinearRGB_approx22(float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::srgb_to_linear_approx22",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Native naming quirk kept: raises to 1/2.2."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_LinearRGB_To_sRGB_approx22(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::linear_to_srgb_approx22_vec3",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Convert_sRGB_To_LinearRGB_approx22(const NCollection_Vec3<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::srgb_to_linear_approx22_vec3",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::HlsRgb(double,double,double,double&,double&,double&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::hls_rgb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Native quirk: the member is noexcept around a throwing conversion, so invalid input calls std::terminate in OCCT; Rust returns the Standard_OutOfRange failure instead."
+    },
+    {
+      "upstream_id": "Quantity_Color::RgbHls(double,double,double,double&,double&,double&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::rgb_hls",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::Epsilon()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::epsilon",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::SetEpsilon(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::set_epsilon",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Process-wide like the native static; stored atomically."
+    },
+    {
+      "upstream_id": "Quantity_Color::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::dump_json",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_Color::InitFromJson(const Standard_SStream&,int&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "rustycad_tkernel::quantity::Color::init_from_json",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Native quirk kept: the caller's stream position is never advanced."
+    },
+    {
+      "upstream_id": "std::hash<Quantity_Color>::operator()(const Quantity_Color&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Color.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Color as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). hashBytes over unsigned char(255 * channel)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::default (Default)",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA(const Quantity_Color&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::from_color",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA(const Quantity_Color&,float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::from_rgb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA(const NCollection_Vec4<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::from_vec4",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA(float,float,float,float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::new",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::SetValues(float,float,float,float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::set_values",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Native quirk: the member is noexcept around a throwing conversion, so invalid input calls std::terminate in OCCT; Rust returns the Standard_OutOfRange failure instead."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::GetRGB() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::rgb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::ChangeRGB()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::change_rgb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::SetRGB(const Quantity_Color&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::set_rgb",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::Alpha() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::alpha",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::SetAlpha(float)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::set_alpha",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::IsDifferent(const Quantity_ColorRGBA&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::is_different",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::operator!=(const Quantity_ColorRGBA&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::ColorRgba as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::IsEqual(const Quantity_ColorRGBA&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::is_equal",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::operator==(const Quantity_ColorRGBA&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::ColorRgba as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::ColorFromName(const char* const,Quantity_ColorRGBA&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::from_name",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Option; alpha is 1.0."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::ColorFromHex(const char* const,Quantity_ColorRGBA&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::from_hex / set_hex",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). from_hex returns Option; set_hex keeps the in-place form."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::ColorToHex(const Quantity_ColorRGBA&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::to_hex",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Alpha is not clamped: 2.0 prints as 1FE, as natively."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::Convert_LinearRGB_To_sRGB(const NCollection_Vec4<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::linear_to_srgb_vec4",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::Convert_sRGB_To_LinearRGB(const NCollection_Vec4<float>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::srgb_to_linear_vec4",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::dump_json",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py)."
+    },
+    {
+      "upstream_id": "Quantity_ColorRGBA::InitFromJson(const Standard_SStream&,int&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorRgba::init_from_json",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Native quirks kept: the caller's position is never advanced; out-of-range RGB terminates OCCT (noexcept SetValues) and is a Failure in Rust."
+    },
+    {
+      "upstream_id": "std::hash<Quantity_ColorRGBA>::operator()(const Quantity_ColorRGBA&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_ColorRGBA.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::ColorRgba as rustycad_tkernel::ncollection::HashKey>::occt_hash",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). hashBytes over {100*alpha, 255*r, 255*g, 255*b} as unsigned char; alpha outside [0; 2.55] is undefined natively (Rust saturates)."
+    },
+    {
+      "upstream_id": "Quantity_Date::operator-(const Quantity_Period&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Date as std::ops::Sub<Period>>::sub",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Subtract."
+    },
+    {
+      "upstream_id": "Quantity_Date::operator+(const Quantity_Period&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Date as std::ops::Add<Period>>::add",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Add."
+    },
+    {
+      "upstream_id": "Quantity_Date::operator==(const Quantity_Date&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Date as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived over (seconds, microseconds), equal to IsEqual."
+    },
+    {
+      "upstream_id": "Quantity_Date::operator<(const Quantity_Date&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Date as PartialOrd>::lt",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived lexicographic order equals IsEarlier."
+    },
+    {
+      "upstream_id": "Quantity_Date::operator>(const Quantity_Date&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Date.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Date as PartialOrd>::gt",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived lexicographic order equals IsLater."
+    },
+    {
+      "upstream_id": "Quantity_DateDefinitionError",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_DateDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::ErrorKind::DateDefinition",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The exception class is the Error kind whose exception_type() is Quantity_DateDefinitionError."
+    },
+    {
+      "upstream_id": "Quantity_NameOfColor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_NameOfColor.hxx",
+      "rust_item": "rustycad_tkernel::quantity::NamedColor",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). All 509 enumerators and the 12 aliases, generated from the pinned header by tools/generate_quantity_color_table.py."
+    },
+    {
+      "upstream_id": "Quantity_Period::operator-(const Quantity_Period&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Period as std::ops::Sub>::sub",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Subtract."
+    },
+    {
+      "upstream_id": "Quantity_Period::operator+(const Quantity_Period&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Period as std::ops::Add>::add",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Returns Result like Add."
+    },
+    {
+      "upstream_id": "Quantity_Period::operator==(const Quantity_Period&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Period as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived over (seconds, microseconds), equal to IsEqual."
+    },
+    {
+      "upstream_id": "Quantity_Period::operator<(const Quantity_Period&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Period as PartialOrd>::lt",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived lexicographic order equals IsShorter."
+    },
+    {
+      "upstream_id": "Quantity_Period::operator>(const Quantity_Period&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_Period.hxx",
+      "rust_item": "<rustycad_tkernel::quantity::Period as PartialOrd>::gt",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Derived lexicographic order equals IsLonger."
+    },
+    {
+      "upstream_id": "Quantity_PeriodDefinitionError",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_PeriodDefinitionError.hxx",
+      "rust_item": "rustycad_tkernel::ErrorKind::PeriodDefinition",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). The exception class is the Error kind whose exception_type() is Quantity_PeriodDefinitionError."
+    },
+    {
+      "upstream_id": "Quantity_TypeOfColor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Quantity/Quantity_TypeOfColor.hxx",
+      "rust_item": "rustycad_tkernel::quantity::ColorSpace",
+      "status": "implemented",
+      "notes": "Manual Quantity member mapping; NCollection_Vec3/Vec4<float> arguments and results are [f32; 3]/[f32; 4] arrays (Vec3/Vec4 at the constructor and conversion seams), output references become returned values, and exceptions become Failure errors. Compared bit-for-bit with OCCT by the qc_*/qrgba_* probe (tools/tkernel_quantity_corpus.py). Rgb, Srgb, Hls, Lab, Lch in native order."
+    },
+    {
       "upstream_id": "Standard_GUID::Standard_GUID()",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_GUID.hxx",
