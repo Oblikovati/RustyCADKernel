@@ -13,9 +13,9 @@
 // commercial license or contractual agreement.
 
 //! Type bindings and object registration against the current data set.
-use crate::storage::PersistentNumbers;
 use super::Schema;
 use crate::standard::{Failure, Handle, StandardPersistent};
+use crate::storage::PersistentNumbers;
 use crate::storage::{BaseDriver, CallBack, TypedCallBack};
 use crate::tcollection::AsciiString;
 use std::sync::Arc;
@@ -136,7 +136,9 @@ impl Schema {
         persistent: &Handle<StandardPersistent>,
         driver: &mut dyn BaseDriver,
     ) -> Result<(), Failure> {
-        let reference = persistent.get().map_or(0, PersistentNumbers::reference_number);
+        let reference = persistent
+            .get()
+            .map_or(0, PersistentNumbers::reference_number);
         driver.put_reference(reference)
     }
 }

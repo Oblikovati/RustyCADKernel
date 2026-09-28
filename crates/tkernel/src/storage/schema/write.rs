@@ -13,10 +13,10 @@
 // commercial license or contractual agreement.
 
 //! `Storage_Schema::Write`: every section of a data set, in native order.
-use crate::storage::PersistentNumbers;
 use super::Schema;
 use crate::ncollection::HSequence;
 use crate::standard::{Failure, Handle, StandardPersistent};
+use crate::storage::PersistentNumbers;
 use crate::storage::{
     BaseDriver, BucketIterator, CallBackTable, Data, InternalData, OpenMode, Root, StorageError,
     StreamException, TypedCallBack, version,

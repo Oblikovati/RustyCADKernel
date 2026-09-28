@@ -1,6 +1,8 @@
 //! `FSD_BinaryFile` stream overloads (the `stor_bstream` part of
 //! `tkernel_storage_schema_probe.cxx`).
-use super::common::{ascii, ascii_hex, ext, ext_hex, ext_list, hex, header_text, split, thrown, unhex};
+use super::common::{
+    ascii, ascii_hex, ext, ext_hex, ext_list, header_text, hex, split, thrown, unhex,
+};
 use super::drivers::DriverValues;
 use rustycad_tkernel::fsd::{BinaryFile, FileHeader, MemoryFileSystem};
 use rustycad_tkernel::ncollection::Sequence;
@@ -27,7 +29,10 @@ pub fn script(input: &mut SplitWhitespace<'_>) -> String {
         out += &stream_op(token, &mut stream, &mut values);
     }
     drop(stream);
-    format!("{out} F:{}", hex(&files.contents(&name).unwrap_or_default()))
+    format!(
+        "{out} F:{}",
+        hex(&files.contents(&name).unwrap_or_default())
+    )
 }
 
 fn stream_op(token: &str, stream: &mut IoStream, v: &mut DriverValues) -> String {
@@ -38,7 +43,9 @@ fn stream_op(token: &str, stream: &mut IoStream, v: &mut DriverValues) -> String
     let only_count = args.last().is_some_and(|last| last == "1");
     if op == "gi" {
         let outcome = BinaryFile::get_integer_stream(stream, &mut v.int1);
-        let prefix = outcome.err().map_or_else(|| "=".to_string(), |f| format!("{}=", thrown(&f)));
+        let prefix = outcome
+            .err()
+            .map_or_else(|| "=".to_string(), |f| format!("{}=", thrown(&f)));
         return format!(" gi{prefix}{}", v.int1);
     }
     match run(op, &args, only_count, stream, v) {
@@ -51,7 +58,12 @@ fn number(text: &str) -> i32 {
     text.parse().expect("integer argument")
 }
 
-fn write_op(op: &str, args: &[String], only_count: bool, stream: &mut IoStream) -> Result<String, Failure> {
+fn write_op(
+    op: &str,
+    args: &[String],
+    only_count: bool,
+    stream: &mut IoStream,
+) -> Result<String, Failure> {
     let size = match op {
         "pi" => BinaryFile::put_integer_stream(stream, number(&args[0]), only_count)?,
         "wh" => {
@@ -112,7 +124,10 @@ fn run(
         "rh" => {
             let mut header = FileHeader::default();
             BinaryFile::read_header_stream(stream, &mut header)?;
-            format!("{};{};{}", header.test_indian, header.begin_info, header.end_data)
+            format!(
+                "{};{};{}",
+                header.test_indian, header.begin_info, header.end_data
+            )
         }
         "rhd" => {
             BinaryFile::read_header_data(stream, &v.header)?;

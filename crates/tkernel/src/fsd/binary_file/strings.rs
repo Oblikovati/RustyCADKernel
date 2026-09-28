@@ -25,8 +25,10 @@ const READ_STEP: usize = 1 << 16;
 /// UTF-16 code units from native-order bytes.
 pub(crate) fn units_from_bytes(bytes: &[u8]) -> Vec<u16> {
     bytes
-        .chunks_exact(2)
-        .map(|pair| u16::from_ne_bytes([pair[0], pair[1]]))
+        .as_chunks::<2>()
+        .0
+        .iter()
+        .map(|pair| u16::from_ne_bytes(*pair))
         .collect()
 }
 
@@ -86,7 +88,10 @@ impl BinaryFile {
     }
 
     /// Protected `ReadExtendedString`: as `ReadString`, the text stops at its first zero unit.
-    pub(crate) fn read_extended_string(&mut self, text: &mut ExtendedString) -> Result<(), Failure> {
+    pub(crate) fn read_extended_string(
+        &mut self,
+        text: &mut ExtendedString,
+    ) -> Result<(), Failure> {
         let mut size = 0;
         self.get_integer(&mut size)?;
         if size <= 0 {

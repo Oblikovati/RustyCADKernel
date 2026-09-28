@@ -60,7 +60,11 @@ fn stream_block(stream: &mut IoStream, size: usize, member: &str) -> Result<Vec<
 
 impl BinaryFile {
     /// `PutInteger(Standard_OStream&, int, bool)`; `BinaryFile::put_integer_stream(&mut out, 1, false)?`.
-    pub fn put_integer_stream(stream: &mut IoStream, value: i32, only_count: bool) -> Result<i32, Failure> {
+    pub fn put_integer_stream(
+        stream: &mut IoStream,
+        value: i32,
+        only_count: bool,
+    ) -> Result<i32, Failure> {
         if !only_count {
             stream_write(stream, &value.to_ne_bytes(), "FSD_BinaryFile::PutInteger")?;
         }
@@ -87,7 +91,11 @@ impl BinaryFile {
 
     /// Protected static `WriteString`: the length and the bytes, `4 + length` bytes.
     /// Example: `BinaryFile::write_string_stream(&mut out, &text, false)?`.
-    pub fn write_string_stream(stream: &mut IoStream, text: &AsciiString, only_count: bool) -> Result<i32, Failure> {
+    pub fn write_string_stream(
+        stream: &mut IoStream,
+        text: &AsciiString,
+        only_count: bool,
+    ) -> Result<i32, Failure> {
         let size = Self::put_integer_stream(stream, text.length(), only_count)?;
         if !text.is_empty() && !only_count {
             stream_write(stream, text.as_bytes(), "FSD_BinaryFile::WriteString")?;
@@ -97,7 +105,10 @@ impl BinaryFile {
 
     /// `ReadString(Standard_IStream&, TCollection_AsciiString&)`; the text stops at its
     /// first NUL; `BinaryFile::read_string_stream(&mut input, &mut text)?`.
-    pub fn read_string_stream(stream: &mut IoStream, text: &mut AsciiString) -> Result<(), Failure> {
+    pub fn read_string_stream(
+        stream: &mut IoStream,
+        text: &mut AsciiString,
+    ) -> Result<(), Failure> {
         let mut size = 0;
         Self::get_integer_stream(stream, &mut size)?;
         if size <= 0 {
@@ -136,14 +147,22 @@ impl BinaryFile {
             *text = ExtendedString::default();
             return Ok(());
         }
-        let block = stream_block(stream, size as usize * 2, "FSD_BinaryFile::ReadExtendedString")?;
+        let block = stream_block(
+            stream,
+            size as usize * 2,
+            "FSD_BinaryFile::ReadExtendedString",
+        )?;
         *text = ExtendedString::from_utf16(&units_from_bytes(&block));
         Ok(())
     }
 
     /// `WriteHeader(Standard_OStream&, const FSD_FileHeader&, bool)`: 52 bytes.
     /// Example: `BinaryFile::write_header_stream(&mut out, &header, false)?`.
-    pub fn write_header_stream(stream: &mut IoStream, header: &FileHeader, only_count: bool) -> Result<i32, Failure> {
+    pub fn write_header_stream(
+        stream: &mut IoStream,
+        header: &FileHeader,
+        only_count: bool,
+    ) -> Result<i32, Failure> {
         let mut size = 0;
         for field in header.fields() {
             size += Self::put_integer_stream(stream, field, only_count)?;
@@ -153,7 +172,10 @@ impl BinaryFile {
 
     /// `ReadHeader(Standard_IStream&, FSD_FileHeader&)`; a short read stops at that field.
     /// Example: `BinaryFile::read_header_stream(&mut input, &mut header)?`.
-    pub fn read_header_stream(stream: &mut IoStream, header: &mut FileHeader) -> Result<(), Failure> {
+    pub fn read_header_stream(
+        stream: &mut IoStream,
+        header: &mut FileHeader,
+    ) -> Result<(), Failure> {
         for field in header.fields_mut() {
             Self::get_integer_stream(stream, field)?;
         }
@@ -185,7 +207,7 @@ impl BinaryFile {
         size += Self::write_extended_string_stream(stream, application_name, only_count)?;
         size += Self::write_string_stream(stream, application_version, only_count)?;
         size += Self::write_extended_string_stream(stream, data_type, only_count)?;
-        size += Self::put_integer_stream(stream, user_info.length() as i32, only_count)?;
+        size += Self::put_integer_stream(stream, user_info.length(), only_count)?;
         for line in user_info.iter() {
             size += Self::write_string_stream(stream, line, only_count)?;
         }
@@ -199,7 +221,7 @@ impl BinaryFile {
         comments: &Sequence<ExtendedString>,
         only_count: bool,
     ) -> Result<i32, Failure> {
-        let mut size = Self::put_integer_stream(stream, comments.length() as i32, only_count)?;
+        let mut size = Self::put_integer_stream(stream, comments.length(), only_count)?;
         for comment in comments.iter() {
             size += Self::write_extended_string_stream(stream, comment, only_count)?;
         }
@@ -226,7 +248,10 @@ impl BinaryFile {
 
     /// `ReadHeaderData`: reads the info section into locals, then stores them in `header`.
     /// Example: `BinaryFile::read_header_data(&mut input, &header)?`.
-    pub fn read_header_data(stream: &mut IoStream, header: &Handle<HeaderData>) -> Result<(), Failure> {
+    pub fn read_header_data(
+        stream: &mut IoStream,
+        header: &Handle<HeaderData>,
+    ) -> Result<(), Failure> {
         let mut object_count = 0;
         let mut texts: [AsciiString; 5] = Default::default();
         let mut names: [ExtendedString; 2] = Default::default();
@@ -241,7 +266,13 @@ impl BinaryFile {
         let Some(header) = header.get() else {
             return Err(null_header());
         };
-        let [version, date, schema_name, schema_version, application_version] = texts;
+        let [
+            version,
+            date,
+            schema_name,
+            schema_version,
+            application_version,
+        ] = texts;
         header.set_number_of_objects(object_count);
         header.set_storage_version(&version);
         header.set_creation_date(&date);

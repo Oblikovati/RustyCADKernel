@@ -58,7 +58,8 @@ impl RootData {
         if !self.record(status, "BeginReadRootSection") {
             return Ok(false);
         }
-        let (mut name, mut type_name, mut reference) = (AsciiString::default(), AsciiString::default(), 0);
+        let (mut name, mut type_name, mut reference) =
+            (AsciiString::default(), AsciiString::default(), 0);
         let length = driver.root_section_size()?;
         for _ in 1..=length {
             match driver.read_root(&mut name, &mut reference, &mut type_name) {

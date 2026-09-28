@@ -28,7 +28,11 @@ impl BinaryFile {
 
     /// `fread(value, N, 1)` into the current bytes of the value: a short read keeps the
     /// bytes it got, as glibc does, and is a `Storage_StreamTypeMismatchError`.
-    fn read_item<const N: usize>(&mut self, value: &mut [u8; N], member: &str) -> Result<(), Failure> {
+    fn read_item<const N: usize>(
+        &mut self,
+        value: &mut [u8; N],
+        member: &str,
+    ) -> Result<(), Failure> {
         if self.file()?.read(value, N) == 0 {
             return Err(type_mismatch(member));
         }
@@ -63,7 +67,10 @@ impl DriverPrimitives for BinaryFile {
 
     /// Booleans are written as the `int` 1 or 0.
     fn put_boolean(&mut self, value: bool) -> Result<(), Failure> {
-        self.write_item(&i32::from(value).to_ne_bytes(), "FSD_BinaryFile::PutBoolean")
+        self.write_item(
+            &i32::from(value).to_ne_bytes(),
+            "FSD_BinaryFile::PutBoolean",
+        )
     }
 
     fn put_real(&mut self, value: f64) -> Result<(), Failure> {

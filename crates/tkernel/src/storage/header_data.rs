@@ -92,7 +92,10 @@ impl HeaderData {
     }
 
     fn read_comments(&self, driver: &mut dyn BaseDriver) -> Result<bool, Failure> {
-        if !self.step(driver.begin_read_comment_section()?, "BeginReadCommentSection") {
+        if !self.step(
+            driver.begin_read_comment_section()?,
+            "BeginReadCommentSection",
+        ) {
             return Ok(false);
         }
         let comments = driver.read_comment(&mut self.change_fields().comments);
@@ -267,9 +270,4 @@ impl HeaderData {
     }
 }
 
-crate::impl_transient!(
-    HeaderData,
-    "Storage_HeaderData",
-    StandardTransient,
-    parent
-);
+crate::impl_transient!(HeaderData, "Storage_HeaderData", StandardTransient, parent);

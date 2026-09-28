@@ -6,7 +6,9 @@ use super::common::{
 use rustycad_tkernel::fsd::{BinaryFile, CmpFile, DriverFileSystem, File, MemoryFileSystem};
 use rustycad_tkernel::ncollection::Sequence;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkernel::storage::{BaseDriver, HeaderData, OpenMode, RootData, StorageError, TypeData};
+use rustycad_tkernel::storage::{
+    BaseDriver, HeaderData, OpenMode, RootData, StorageError, TypeData,
+};
 use rustycad_tkernel::tcollection::{AsciiString, ExtendedString};
 use std::rc::Rc;
 use std::str::SplitWhitespace;
@@ -75,7 +77,12 @@ fn good_file_type(input: &mut SplitWhitespace<'_>) -> String {
 }
 
 fn driver_script(input: &mut SplitWhitespace<'_>) -> String {
-    let kind = input.next().expect("kind").chars().next().expect("kind letter");
+    let kind = input
+        .next()
+        .expect("kind")
+        .chars()
+        .next()
+        .expect("kind letter");
     let bytes = input.next().expect("file");
     let files = MemoryFileSystem::default();
     if bytes != "-" {
@@ -111,7 +118,9 @@ pub fn driver_op(token: &str, driver: &mut dyn BaseDriver, values: &mut DriverVa
     };
     let reported = get_op(op, driver, values).or_else(|| read_op(op, driver, values));
     if let Some((outcome, shown)) = reported {
-        let prefix = outcome.err().map_or_else(|| "=".to_string(), |f| format!("{}=", thrown(&f)));
+        let prefix = outcome
+            .err()
+            .map_or_else(|| "=".to_string(), |f| format!("{}=", thrown(&f)));
         return format!(" {op}{prefix}{shown}");
     }
     match other_op(op, &arguments, driver, values) {
@@ -270,7 +279,11 @@ fn table_op(op: &str, args: &[String], driver: &mut dyn BaseDriver) -> Result<St
     }
 }
 
-fn put_or_frame_op(op: &str, args: &[String], driver: &mut dyn BaseDriver) -> Result<String, Failure> {
+fn put_or_frame_op(
+    op: &str,
+    args: &[String],
+    driver: &mut dyn BaseDriver,
+) -> Result<String, Failure> {
     let outcome = match op {
         "pr" => driver.put_reference(number(&args[0])),
         "pc" => driver.put_character(number(&args[0]) as u8),

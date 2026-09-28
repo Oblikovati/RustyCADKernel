@@ -27,10 +27,20 @@
 /// ```
 pub fn format_general(value: f64, precision: usize) -> String {
     if value.is_nan() {
-        return if value.is_sign_negative() { "-nan" } else { "nan" }.into();
+        return if value.is_sign_negative() {
+            "-nan"
+        } else {
+            "nan"
+        }
+        .into();
     }
     if value.is_infinite() {
-        return if value.is_sign_negative() { "-inf" } else { "inf" }.into();
+        return if value.is_sign_negative() {
+            "-inf"
+        } else {
+            "inf"
+        }
+        .into();
     }
     let significant = precision.max(1);
     let scientific = format!("{value:.*e}", significant - 1);

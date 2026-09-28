@@ -60,9 +60,8 @@ impl<D: TextDialect> TextFile<D> {
     /// `if (!(myStream >> value)) throw Storage_StreamTypeMismatchError()`.
     pub(crate) fn extract_integer(&mut self, value: &mut i32, member: &str) -> Result<(), Failure> {
         if !self.stream.extract_int(value) {
-            return Err(StreamException::TypeMismatch.raise(&format!(
-                "{member}: expected a decimal integer"
-            )));
+            return Err(StreamException::TypeMismatch
+                .raise(&format!("{member}: expected a decimal integer")));
         }
         Ok(())
     }

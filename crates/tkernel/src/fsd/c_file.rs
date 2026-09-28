@@ -67,7 +67,9 @@ impl CFile {
 
     /// `ftell`: the position, -1 when the device cannot report it.
     pub(crate) fn tell(&mut self) -> i64 {
-        self.device.stream_position().map_or(-1, |position| position as i64)
+        self.device
+            .stream_position()
+            .map_or(-1, |position| position as i64)
     }
 
     /// `fseek(file, offset, SEEK_SET)`: 0 on success, -1 for a negative offset (EINVAL).

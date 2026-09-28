@@ -35,7 +35,6 @@ pub use base_driver::{
 };
 pub use bucket::{Bucket, BucketIterator, BucketOfPersistent};
 pub(crate) use callback::CallBackTable;
-pub(crate) use numbers::PersistentNumbers;
 pub use callback::{CallBack, DefaultCallBack, TypedCallBack};
 pub use data::Data;
 pub use header_data::{HeaderData, HeaderFields};
@@ -46,15 +45,16 @@ pub use kinds::{
     stream_format_error, stream_mode_error, stream_read_error, stream_type_mismatch_error,
     stream_unknown_type_error, stream_write_error,
 };
+pub(crate) use numbers::PersistentNumbers;
 pub use root::Root;
 pub use root_data::RootData;
 pub use schema::{
-    CreationDateSource, MigrationFile, MigrationSource, NativeCreationDate,
-    NativeMigrationSource, Schema, TypeMigration,
+    CreationDateSource, MigrationFile, MigrationSource, NativeCreationDate, NativeMigrationSource,
+    Schema, TypeMigration,
 };
 pub use status::SectionStatus;
-pub use type_data::TypeData;
 pub use stream::{IoStream, StreamDevice, format_general, state};
+pub use type_data::TypeData;
 
 use crate::tcollection::AsciiString;
 

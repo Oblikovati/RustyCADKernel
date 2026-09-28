@@ -27,8 +27,14 @@ fn mismatch(member: &str) -> Failure {
 /// `OSD::CStringToReal`: `Strtod` of the whole C string; the value is stored even when
 /// characters remain, which is then a failure.
 pub(crate) fn c_string_to_real(text: &[u8], value: &mut f64) -> bool {
-    let text = &text[..text.iter().position(|byte| *byte == 0).unwrap_or(text.len())];
-    let ascii = text.iter().position(|byte| !byte.is_ascii()).unwrap_or(text.len());
+    let text = &text[..text
+        .iter()
+        .position(|byte| *byte == 0)
+        .unwrap_or(text.len())];
+    let ascii = text
+        .iter()
+        .position(|byte| !byte.is_ascii())
+        .unwrap_or(text.len());
     let prefix = std::str::from_utf8(&text[..ascii]).unwrap_or_default();
     let (parsed, end) = strtod(prefix);
     *value = parsed;

@@ -50,7 +50,10 @@ pub fn ext_hex(text: &ExtendedString) -> String {
     if text.is_empty() {
         return "-".into();
     }
-    text.as_utf16().iter().map(|unit| format!("{unit:04x}")).collect()
+    text.as_utf16()
+        .iter()
+        .map(|unit| format!("{unit:04x}"))
+        .collect()
 }
 
 /// `stor_split`: a trailing separator yields a trailing empty part.
@@ -156,7 +159,13 @@ pub fn types_text(types: &Handle<TypeData>) -> String {
     let entries: Vec<String> = names.get().expect("type list").sequence(|items| {
         items
             .iter()
-            .map(|name| format!("{}:{}", ascii_hex(name), types.type_number(name).unwrap_or(0)))
+            .map(|name| {
+                format!(
+                    "{}:{}",
+                    ascii_hex(name),
+                    types.type_number(name).unwrap_or(0)
+                )
+            })
             .collect()
     });
     format!(

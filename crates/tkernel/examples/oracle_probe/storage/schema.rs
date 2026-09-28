@@ -1,13 +1,13 @@
 //! Data, schema and binary-stream scripts (twin of `tkernel_storage_schema_probe.cxx`).
 use super::common::{
-    ascii, ascii_hex, driver, ext, file_name, header_text, hex, mode,
-    roots_text, split, thrown, types_text, unhex,
+    ascii, ascii_hex, driver, ext, file_name, header_text, hex, mode, roots_text, split, thrown,
+    types_text, unhex,
 };
 use rustycad_tkernel::fsd::{BinaryFile, MemoryFileSystem};
 use rustycad_tkernel::standard::{Failure, Handle, StandardPersistent};
 use rustycad_tkernel::storage::{
-    BucketIterator, BucketOfPersistent, Data, DefaultCallBack, DriverBase, HeaderSections, IoStream,
-    OpenMode, Schema,
+    BucketIterator, BucketOfPersistent, Data, DefaultCallBack, DriverBase, HeaderSections,
+    IoStream, OpenMode, Schema,
 };
 use rustycad_tkernel::tcollection::AsciiString;
 use std::rc::Rc;
@@ -55,8 +55,18 @@ fn configure(token: &str, set: &Data, schema: &mut Schema) {
 }
 
 fn schema_script(input: &mut SplitWhitespace<'_>) -> String {
-    let kind = input.next().expect("kind").chars().next().expect("kind letter");
-    let letter = input.next().expect("mode").chars().next().expect("mode letter");
+    let kind = input
+        .next()
+        .expect("kind")
+        .chars()
+        .next()
+        .expect("kind letter");
+    let letter = input
+        .next()
+        .expect("mode")
+        .chars()
+        .next()
+        .expect("mode letter");
     let data = Handle::new(Data::default());
     let mut schema = Schema::default();
     for token in input.by_ref() {
@@ -109,29 +119,60 @@ fn data_script(input: &mut SplitWhitespace<'_>) -> String {
 fn data_op(op: &str, args: &[String], data: &Handle<Data>) -> Result<String, Failure> {
     let set = data.get().expect("data");
     // `tn` takes a number, so the name is decoded only by the operations that use one.
-    let text = || args.first().map_or_else(AsciiString::default, |arg| ascii(arg));
+    let text = || {
+        args.first()
+            .map_or_else(AsciiString::default, |arg| ascii(arg))
+    };
     let types = set.type_data();
     let types = types.get().expect("types");
     Ok(match op {
-        "ar" => nothing(set.add_named_root(&text(), &Handle::default())),
-        "au" => nothing(set.add_root(&Handle::default())),
-        "ao" => nothing(set.add_named_root(&text(), &Handle::new(StandardPersistent::default()))),
-        "rm" => nothing(set.remove_root(&text())),
+        "ar" => {
+            set.add_named_root(&text(), &Handle::default());
+            String::new()
+        }
+        "au" => {
+            set.add_root(&Handle::default());
+            String::new()
+        }
+        "ao" => {
+            set.add_named_root(&text(), &Handle::new(StandardPersistent::default()));
+            String::new()
+        }
+        "rm" => {
+            set.remove_root(&text());
+            String::new()
+        }
         "fd" => find_text(set, &text()),
         "ir" => u8::from(set.is_root(&text())).to_string(),
         "ur" => {
             let roots = set.root_data();
             let object = Handle::new(StandardPersistent::default());
-            nothing(roots.get().expect("roots").update_root(&text(), &object)?)
+            roots.get().expect("roots").update_root(&text(), &object)?;
+            String::new()
         }
-        "at" => nothing(types.add_type(&text(), args[1].parse().expect("number"))),
+        "at" => {
+            types.add_type(&text(), args[1].parse().expect("number"));
+            String::new()
+        }
         "tn" => ascii_hex(&types.type_name(args[0].parse().expect("number"))?),
         "tt" => types.type_number(&text())?.to_string(),
         "it" => u8::from(set.is_type(&text())).to_string(),
-        "ai" => nothing(set.add_to_user_info(&text())),
-        "ac" => nothing(set.add_to_comments(&ext(&args[0]))),
-        "cl" => nothing(set.clear()),
-        "ce" => nothing(set.clear_error_status()),
+        "ai" => {
+            set.add_to_user_info(&text());
+            String::new()
+        }
+        "ac" => {
+            set.add_to_comments(&ext(&args[0]));
+            String::new()
+        }
+        "cl" => {
+            set.clear();
+            String::new()
+        }
+        "ce" => {
+            set.clear_error_status();
+            String::new()
+        }
         "st" => format!(
             "{},{}",
             set.error_status().ordinal(),
@@ -140,10 +181,6 @@ fn data_op(op: &str, args: &[String], data: &Handle<Data>) -> Result<String, Fai
         "dump" => data_text(data),
         _ => String::new(),
     })
-}
-
-fn nothing(_: ()) -> String {
-    String::new()
 }
 
 fn find_text(set: &Data, name: &AsciiString) -> String {
@@ -211,10 +248,12 @@ fn callback_script(input: &mut SplitWhitespace<'_>) -> String {
             "rm" => schema.remove_read_unknown_type_callback(&name),
             "ls" => {
                 let list = schema.installed_callback_list();
-                let names: String = list
-                    .get()
-                    .expect("list")
-                    .sequence(|items| items.iter().map(|name| format!("{};", ascii_hex(name))).collect());
+                let names: String = list.get().expect("list").sequence(|items| {
+                    items
+                        .iter()
+                        .map(|name| format!("{};", ascii_hex(name)))
+                        .collect()
+                });
                 out += &format!("={names}");
             }
             "clr" => schema.clear_callback_list(),

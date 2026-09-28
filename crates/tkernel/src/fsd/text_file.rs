@@ -107,7 +107,10 @@ impl<D: TextDialect> TextFile<D> {
 
     /// `myStream << text`, stopping at the first NUL like `ToCString()`.
     pub(crate) fn write_c_string(&mut self, text: &[u8]) {
-        let length = text.iter().position(|byte| *byte == 0).unwrap_or(text.len());
+        let length = text
+            .iter()
+            .position(|byte| *byte == 0)
+            .unwrap_or(text.len());
         self.stream.insert_bytes(&text[..length]);
     }
 

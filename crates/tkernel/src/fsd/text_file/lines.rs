@@ -29,7 +29,10 @@ const WORD_CHUNK: usize = 8192;
 
 /// A C string view of `bytes`: everything before the first NUL (`buffer += Buffer`).
 fn c_string(bytes: &[u8]) -> &[u8] {
-    let length = bytes.iter().position(|byte| *byte == 0).unwrap_or(bytes.len());
+    let length = bytes
+        .iter()
+        .position(|byte| *byte == 0)
+        .unwrap_or(bytes.len());
     &bytes[..length]
 }
 
@@ -136,7 +139,10 @@ impl<D: TextDialect> TextFile<D> {
     /// ext-character parity error. `TCollection_ExtendedString` has no `operator+=` for a
     /// `char16_t`, so each unit is appended as its decimal text (unit 0x41 reads as "65"),
     /// which is what the native reader returns.
-    pub(crate) fn fsd_read_extended_line(&mut self, text: &mut ExtendedString) -> Result<(), Failure> {
+    pub(crate) fn fsd_read_extended_line(
+        &mut self,
+        text: &mut ExtendedString,
+    ) -> Result<(), Failure> {
         *text = ExtendedString::default();
         let (mut byte, mut matched, mut finished) = (0_u8, 0_usize, false);
         while !finished && !self.stream.eof() {
@@ -165,9 +171,8 @@ fn tag_progress(byte: u8, matched: usize) -> Result<usize, Failure> {
         0
     };
     if matched >= EXTENDED_SECTION_SIZE {
-        return Err(StreamException::ExtCharParity.raise(
-            "FSD_File::ReadExtendedLine: the line runs into BEGIN_REF_SECTION",
-        ));
+        return Err(StreamException::ExtCharParity
+            .raise("FSD_File::ReadExtendedLine: the line runs into BEGIN_REF_SECTION"));
     }
     Ok(matched)
 }

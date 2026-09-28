@@ -31,19 +31,28 @@ pub trait TextDialect: Sized {
     fn read_string(file: &mut TextFile<Self>) -> AsciiString;
 
     /// Protected virtual `ReadExtendedLine`.
-    fn read_extended_line(file: &mut TextFile<Self>, text: &mut ExtendedString) -> Result<(), Failure>;
+    fn read_extended_line(
+        file: &mut TextFile<Self>,
+        text: &mut ExtendedString,
+    ) -> Result<(), Failure>;
 
     /// Protected virtual `WriteExtendedLine`.
-    fn write_extended_line(file: &mut TextFile<Self>, text: &ExtendedString) -> Result<(), Failure>;
+    fn write_extended_line(file: &mut TextFile<Self>, text: &ExtendedString)
+    -> Result<(), Failure>;
 
     /// `WritePersistentObjectHeader`.
-    fn write_object_header(file: &mut TextFile<Self>, reference: i32, type_number: i32) -> Result<(), Failure>;
+    fn write_object_header(
+        file: &mut TextFile<Self>,
+        reference: i32,
+        type_number: i32,
+    ) -> Result<(), Failure>;
 
     /// `BeginWritePersistentObjectData` and `BeginWriteObjectData` (the same text).
     fn begin_write_object(file: &mut TextFile<Self>, member: &str) -> Result<(), Failure>;
 
     /// `EndWriteObjectData` (`last` false) and `EndWritePersistentObjectData` (`last` true).
-    fn end_write_object(file: &mut TextFile<Self>, last: bool, member: &str) -> Result<(), Failure>;
+    fn end_write_object(file: &mut TextFile<Self>, last: bool, member: &str)
+    -> Result<(), Failure>;
 
     /// `ReadPersistentObjectHeader`.
     fn read_object_header(
@@ -74,16 +83,26 @@ impl TextDialect for FsdDialect {
         file.fsd_read_string()
     }
 
-    fn read_extended_line(file: &mut TextFile<Self>, text: &mut ExtendedString) -> Result<(), Failure> {
+    fn read_extended_line(
+        file: &mut TextFile<Self>,
+        text: &mut ExtendedString,
+    ) -> Result<(), Failure> {
         file.fsd_read_extended_line(text)
     }
 
-    fn write_extended_line(file: &mut TextFile<Self>, text: &ExtendedString) -> Result<(), Failure> {
+    fn write_extended_line(
+        file: &mut TextFile<Self>,
+        text: &ExtendedString,
+    ) -> Result<(), Failure> {
         file.fsd_write_extended_line(text);
         Ok(())
     }
 
-    fn write_object_header(file: &mut TextFile<Self>, reference: i32, type_number: i32) -> Result<(), Failure> {
+    fn write_object_header(
+        file: &mut TextFile<Self>,
+        reference: i32,
+        type_number: i32,
+    ) -> Result<(), Failure> {
         file.stream.insert_bytes(b"\n#");
         file.stream.insert_integer(i64::from(reference));
         file.stream.insert_bytes(b"=%");
@@ -96,7 +115,11 @@ impl TextDialect for FsdDialect {
         file.check_written(member)
     }
 
-    fn end_write_object(file: &mut TextFile<Self>, last: bool, member: &str) -> Result<(), Failure> {
+    fn end_write_object(
+        file: &mut TextFile<Self>,
+        last: bool,
+        member: &str,
+    ) -> Result<(), Failure> {
         file.stream.insert_bytes(if last { b")" } else { b") " });
         file.check_written(member)
     }
@@ -157,7 +180,10 @@ impl TextDialect for CmpDialect {
     /// is not cleared: the native loop bound is `buffer.Length()`, so an empty buffer reads
     /// no unit, and a non-empty one grows by each unit's decimal digits (`operator+=(int)`)
     /// faster than the loop advances, reading until an exception ends it.
-    fn read_extended_line(file: &mut TextFile<Self>, text: &mut ExtendedString) -> Result<(), Failure> {
+    fn read_extended_line(
+        file: &mut TextFile<Self>,
+        text: &mut ExtendedString,
+    ) -> Result<(), Failure> {
         let mut count = 0;
         file.get_integer(&mut count)?;
         let mut unit = 0_u16;
@@ -172,7 +198,10 @@ impl TextDialect for CmpDialect {
         Ok(())
     }
 
-    fn write_extended_line(file: &mut TextFile<Self>, text: &ExtendedString) -> Result<(), Failure> {
+    fn write_extended_line(
+        file: &mut TextFile<Self>,
+        text: &ExtendedString,
+    ) -> Result<(), Failure> {
         file.put_integer(text.length())?;
         for unit in text.as_utf16() {
             file.put_ext_character(*unit)?;
@@ -181,7 +210,11 @@ impl TextDialect for CmpDialect {
         Ok(())
     }
 
-    fn write_object_header(file: &mut TextFile<Self>, reference: i32, type_number: i32) -> Result<(), Failure> {
+    fn write_object_header(
+        file: &mut TextFile<Self>,
+        reference: i32,
+        type_number: i32,
+    ) -> Result<(), Failure> {
         file.stream.insert_bytes(b"\n#");
         file.stream.insert_integer(i64::from(reference));
         file.stream.insert_bytes(b"%");
@@ -194,7 +227,11 @@ impl TextDialect for CmpDialect {
         file.check_written(member)
     }
 
-    fn end_write_object(file: &mut TextFile<Self>, _last: bool, member: &str) -> Result<(), Failure> {
+    fn end_write_object(
+        file: &mut TextFile<Self>,
+        _last: bool,
+        member: &str,
+    ) -> Result<(), Failure> {
         file.check_written(member)
     }
 

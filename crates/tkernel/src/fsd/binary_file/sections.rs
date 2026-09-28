@@ -48,7 +48,10 @@ impl HeaderSections for BinaryFile {
     /// bytes 1, 2, 3, 4 read as a native `int`, the begin-info offset follows the magic.
     fn begin_write_info_section(&mut self) -> Result<StorageError, Failure> {
         self.header.test_indian = i32::from_ne_bytes([1, 2, 3, 4]);
-        self.write_item(MAGIC_NUMBER.as_bytes(), "FSD_BinaryFile::BeginWriteInfoSection")?;
+        self.write_item(
+            MAGIC_NUMBER.as_bytes(),
+            "FSD_BinaryFile::BeginWriteInfoSection",
+        )?;
         self.header.begin_info = self.position()?;
         self.write_header()?;
         Ok(StorageError::Ok)
@@ -74,7 +77,7 @@ impl HeaderSections for BinaryFile {
         self.write_extended_string(application_name)?;
         self.write_string(application_version)?;
         self.write_extended_string(data_type)?;
-        self.put_integer(user_info.length() as i32)?;
+        self.put_integer(user_info.length())?;
         for line in user_info.iter() {
             self.write_string(line)?;
         }
@@ -146,7 +149,7 @@ impl HeaderSections for BinaryFile {
     }
 
     fn write_comment(&mut self, comments: &Sequence<ExtendedString>) -> Result<(), Failure> {
-        self.put_integer(comments.length() as i32)?;
+        self.put_integer(comments.length())?;
         for comment in comments.iter() {
             self.write_extended_string(comment)?;
         }

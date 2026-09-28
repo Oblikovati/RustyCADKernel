@@ -119,7 +119,9 @@ impl MemoryFileSystem {
 
     /// Creates or replaces a file; `files.insert(&name, bytes)`.
     pub fn insert(&self, name: &AsciiString, bytes: Vec<u8>) {
-        self.files.borrow_mut().insert(name.as_bytes().to_vec(), bytes);
+        self.files
+            .borrow_mut()
+            .insert(name.as_bytes().to_vec(), bytes);
     }
 }
 
@@ -198,7 +200,10 @@ impl Seek for MemoryFile {
         self.position = position.ok_or_else(|| {
             io::Error::new(
                 io::ErrorKind::InvalidInput,
-                format!("seek {target:?} from {}; expected a non-negative offset", self.position),
+                format!(
+                    "seek {target:?} from {}; expected a non-negative offset",
+                    self.position
+                ),
             )
         })?;
         Ok(self.position)

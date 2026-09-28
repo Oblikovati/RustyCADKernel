@@ -82,7 +82,10 @@ fn stream_op(op: &str, stream: &mut IoStream, values: &mut Values) -> String {
         }
         "w" => {
             let word = stream.extract_word(100);
-            let length = word.iter().position(|byte| *byte == 0).unwrap_or(word.len());
+            let length = word
+                .iter()
+                .position(|byte| *byte == 0)
+                .unwrap_or(word.len());
             format!(" w{}", hex(&word[..length]))
         }
         "tg" => format!(" tg{}", stream.tellg()),
@@ -102,7 +105,10 @@ fn sized_stream_op(op: &str, stream: &mut IoStream) -> String {
         "l" => {
             let mut line = Vec::new();
             stream.getline(&mut line, size, b'\n');
-            let length = line.iter().position(|byte| *byte == 0).unwrap_or(line.len());
+            let length = line
+                .iter()
+                .position(|byte| *byte == 0)
+                .unwrap_or(line.len());
             format!(" l{}:{}", hex(&line[..length]), stream.gcount())
         }
         "x" => {

@@ -119,7 +119,11 @@ impl<D: TextDialect> TableSections for TextFile<D> {
         reference: i32,
         type_name: &AsciiString,
     ) -> Result<(), Failure> {
-        let fields = [Field::Number(reference), Field::Text(name), Field::Text(type_name)];
+        let fields = [
+            Field::Number(reference),
+            Field::Text(name),
+            Field::Text(type_name),
+        ];
         self.write_fields(&fields, "FSD_File::WriteRoot")
     }
 

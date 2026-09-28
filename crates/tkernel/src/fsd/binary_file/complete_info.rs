@@ -20,10 +20,10 @@
 //! The reference section creates objects with the callbacks registered by the type
 //! section, which the native code sets to null, so a non-empty reference section is a
 //! native null dereference, reported as `Standard_NullObject`.
-use crate::storage::PersistentNumbers;
 use super::{BinaryFile, FileHeader};
 use crate::ncollection::{ArrayError, HArray1, Sequence};
 use crate::standard::{Failure, Handle, StandardPersistent};
+use crate::storage::PersistentNumbers;
 use crate::storage::{CallBackTable, Data, InternalData, IoStream, Root, StreamException};
 use crate::tcollection::{AsciiString, ExtendedString};
 
@@ -161,7 +161,8 @@ fn read_types(stream: &mut IoStream, target: &mut Target<'_>) -> Result<(), Fail
 
 fn read_roots(stream: &mut IoStream, target: &Target<'_>) -> Result<(), Failure> {
     let size = BinaryFile::root_section_size_stream(stream)?;
-    let (mut name, mut type_name, mut reference) = (AsciiString::default(), AsciiString::default(), 0);
+    let (mut name, mut type_name, mut reference) =
+        (AsciiString::default(), AsciiString::default(), 0);
     let roots = target.set.root_data();
     for _ in 1..=size {
         BinaryFile::read_root_stream(stream, &mut name, &mut reference, &mut type_name)?;
@@ -221,7 +222,10 @@ fn attach_roots(target: &Target<'_>) -> Result<(), Failure> {
         let object = internal(target)?.read_array(|array| {
             let array = array.get().ok_or_else(|| null_failure("the read array"))?;
             let values = array.array1();
-            values.value(root.reference()).cloned().map_err(array_failure)
+            values
+                .value(root.reference())
+                .cloned()
+                .map_err(array_failure)
         })?;
         roots.update_root(&root.name(), &object)?;
     }

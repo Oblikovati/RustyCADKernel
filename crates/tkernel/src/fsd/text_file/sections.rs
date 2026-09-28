@@ -75,7 +75,7 @@ impl<D: TextDialect> HeaderSections for TextFile<D> {
         D::write_extended_line(self, application_name)?;
         self.write_text_line(application_version.as_bytes());
         D::write_extended_line(self, data_type)?;
-        self.write_count_line(user_info.length() as i32);
+        self.write_count_line(user_info.length());
         self.check_written("FSD_File::WriteInfo")?;
         for line in user_info.iter() {
             self.write_text_line(line.as_bytes());
@@ -128,7 +128,11 @@ impl<D: TextDialect> HeaderSections for TextFile<D> {
     }
 
     /// Does nothing in the text formats.
-    fn read_complete_info(&mut self, _: &mut IoStream, _: &mut Handle<Data>) -> Result<(), Failure> {
+    fn read_complete_info(
+        &mut self,
+        _: &mut IoStream,
+        _: &mut Handle<Data>,
+    ) -> Result<(), Failure> {
         Ok(())
     }
 
@@ -137,11 +141,14 @@ impl<D: TextDialect> HeaderSections for TextFile<D> {
     }
 
     fn begin_write_comment_section(&mut self) -> Result<StorageError, Failure> {
-        self.write_tag(b"BEGIN_COMMENT_SECTION\n", "FSD_File::BeginWriteCommentSection")
+        self.write_tag(
+            b"BEGIN_COMMENT_SECTION\n",
+            "FSD_File::BeginWriteCommentSection",
+        )
     }
 
     fn write_comment(&mut self, comments: &Sequence<ExtendedString>) -> Result<(), Failure> {
-        self.write_count_line(comments.length() as i32);
+        self.write_count_line(comments.length());
         self.check_written("FSD_File::WriteComment")?;
         for comment in comments.iter() {
             D::write_extended_line(self, comment)?;

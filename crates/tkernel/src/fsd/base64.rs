@@ -120,7 +120,7 @@ impl Base64 {
 fn encode_groups(text: &mut [u8], data: &[u8]) {
     let whole = data.len() - data.len() % 3;
     let mut output = 0;
-    for group in data[..whole].chunks_exact(3) {
+    for group in data[..whole].as_chunks::<3>().0 {
         let word = (u32::from(group[0]) << 16) | (u32::from(group[1]) << 8) | u32::from(group[2]);
         for shift in [18, 12, 6, 0] {
             text[output] = ALPHABET[(word >> shift & 0x3F) as usize];
@@ -165,7 +165,7 @@ fn at(encoded: &[u8], index: usize) -> u32 {
 /// `aNbIter` (bytes of complete groups) and `aPad` (bytes decoded from the last group).
 fn decoded_layout(encoded: &[u8]) -> (usize, usize) {
     let length = encoded.len();
-    let mut pad = usize::from(length % 4 != 0 || encoded[length - 1] == b'=');
+    let mut pad = usize::from(!length.is_multiple_of(4) || encoded[length - 1] == b'=');
     let iterations = (length.div_ceil(4) - pad) * 4;
     if length > iterations + 2 && encoded[iterations + 2] != b'=' {
         pad += 1;
@@ -180,7 +180,11 @@ fn decode_groups(output: &mut [u8], encoded: &[u8], iterations: usize, pad: usiz
             + (at(encoded, start + 1) << 12)
             + (at(encoded, start + 2) << 6)
             + at(encoded, start + 3);
-        output[written..written + 3].copy_from_slice(&[(word >> 16) as u8, (word >> 8) as u8, word as u8]);
+        output[written..written + 3].copy_from_slice(&[
+            (word >> 16) as u8,
+            (word >> 8) as u8,
+            word as u8,
+        ]);
         written += 3;
     }
     if pad == 0 {
