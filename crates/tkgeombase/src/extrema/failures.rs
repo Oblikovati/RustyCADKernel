@@ -54,7 +54,7 @@ pub(crate) fn null_object(member: &str) -> Failure {
 pub(crate) fn type_mismatch(member: &str) -> Failure {
     failure(
         "Standard_TypeMismatch",
-        &format!("{member} - No init; expected the point and the curve to be set"),
+        &format!("{member} - No init; expected the point and the curve or surface to be set"),
     )
 }
 

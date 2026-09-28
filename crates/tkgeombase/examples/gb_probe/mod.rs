@@ -8,6 +8,7 @@ pub mod common;
 pub mod extrema_cc;
 pub mod extrema_el;
 pub mod extrema_pc;
+pub mod extrema_ps;
 pub mod fem_tool;
 pub mod gc;
 pub mod gce;
