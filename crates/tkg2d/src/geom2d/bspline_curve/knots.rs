@@ -17,6 +17,7 @@
 use super::state::{BSplineState, check_curve_data};
 use crate::geom2d::arrays::{at, check_one_based, one_based, put};
 use crate::geom2d::errors;
+use crate::geom2d::spline_data::{bounded, locate_u_in};
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, real};
 use rustycad_tkmath::bsplclib;
@@ -271,44 +272,6 @@ impl BSplineState {
             &self.knots
         };
         let new_u: f64 = self.periodic_normalization(u)?;
-        let count: i32 = knots.len() as i32;
-        let (first, last) = (at(knots, 1)?, at(knots, count)?);
-        let tolerance: f64 = parametric_tolerance.abs();
-        if (new_u - first).abs() <= tolerance {
-            return Ok((1, 1));
-        }
-        if (new_u - last).abs() <= tolerance {
-            return Ok((count, count));
-        }
-        if new_u < first {
-            return Ok((0, 1));
-        }
-        if new_u > last {
-            return Ok((count, count + 1));
-        }
-        locate_inside(knots, new_u, tolerance)
+        locate_u_in(knots, new_u, parametric_tolerance)
     }
-}
-
-// The last branch of LocateU: hunt, clamp, then skip knots equal within the tolerance.
-fn locate_inside(knots: &Array1<'_, f64>, u: f64, tolerance: f64) -> Result<(i32, i32), Failure> {
-    let mut i1: i32 = 1;
-    bsplclib::hunt(knots, u, &mut i1)?;
-    i1 = i1.min(knots.upper()).max(knots.lower());
-    while i1 < knots.upper() && (at(knots, i1 + 1)? - u).abs() <= tolerance {
-        i1 += 1;
-    }
-    if (at(knots, i1)? - u).abs() <= tolerance {
-        return Ok((i1, i1));
-    }
-    Ok((i1, i1 + 1))
-}
-
-// NCollection_Array1<T>(I1, I2) with the native bound check.
-fn bounded<T: Default>(i1: i32, i2: i32) -> Result<Array1<'static, T>, Failure> {
-    Array1::with_bounds(i1, i2).map_err(|error| {
-        errors::out_of_range(&format!(
-            "NCollection_Array1({i1}, {i2}): {error}; expected I1 <= I2 + 1"
-        ))
-    })
 }

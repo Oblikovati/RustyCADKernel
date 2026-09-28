@@ -15,10 +15,11 @@
 
 //! The fields of Geom2d_BezierCurve and the native algorithms on them.
 use crate::geom2d::arrays::{
-    any_weight_step, at, check_one_based, insert_at, one_based, put, rebased, remove_at,
-    stored_or_unit_weights,
+    at, check_one_based, insert_at, one_based, put, rebased, remove_at, stored_or_unit_weights,
 };
 use crate::geom2d::errors;
+pub(super) use crate::geom2d::spline_data::bezier_rational as rational;
+use crate::geom2d::spline_data::{bezier_knot_sequence, bezier_knots, bezier_multiplicities};
 use crate::geom2d::{Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
 use crate::geom2d_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::ncollection::Array1;
@@ -36,12 +37,6 @@ pub(super) struct BezierState {
     pub(super) closed: bool,
     pub(super) max_deriv_inv: f64,
     pub(super) max_deriv_inv_ok: bool,
-}
-
-// The file-static `Rational(W)` of Geom2d_BezierCurve.cxx: it reads W(1)..W(n) with
-// one-based indices whatever the lower bound, so other bounds raise Standard_OutOfRange.
-pub(super) fn rational(weights: &Array1<'_, f64>) -> Result<bool, Failure> {
-    any_weight_step(weights, 1, weights.len() as i32)
 }
 
 impl BezierState {
@@ -105,7 +100,7 @@ impl BezierState {
             )));
         }
         let mut new_poles: Array1<'static, Point2> = one_based(degree + 1)?;
-        let (knots, mults) = (knots(), multiplicities(self.degree())?);
+        let (knots, mults) = (bezier_knots(), multiplicities(self.degree())?);
         let (mut new_knots, mut new_mults) = (one_based::<f64>(2)?, one_based::<i32>(2)?);
         let mut new_weights: Array1<'static, f64> = one_based(degree + 1)?;
         let target_weights = self.rational.then_some(&mut new_weights);
@@ -299,7 +294,7 @@ impl BezierState {
         if let Some(vector) = rep_utils::try_eval_curve_dn(&self.eval_rep, u, n)? {
             return Ok(vector);
         }
-        let (knots, mults) = (knots(), multiplicities(self.degree())?);
+        let (knots, mults) = (bezier_knots(), multiplicities(self.degree())?);
         let span = CurveSpan {
             u,
             index: 0,
@@ -312,32 +307,14 @@ impl BezierState {
     }
 }
 
-/// The knots `{0, 1}` (`Geom2d_BezierCurve::Knots`); `knots()[2] == 1.0`.
-pub(super) fn knots() -> Array1<'static, f64> {
-    static THE_DATA: [f64; 2] = [0.0, 1.0];
-    Array1::from_shared(&THE_DATA, 1)
-}
+const CLASS: &str = "Geom2d_BezierCurve";
 
 /// The multiplicities `{Degree+1, Degree+1}` (`Multiplicities`); `multiplicities(3)?[1] == 4`.
 pub(super) fn multiplicities(degree: i32) -> Result<Array1<'static, i32>, Failure> {
-    if degree < 0 {
-        return Err(errors::program(
-            "Geom2d_BezierCurve: empty poles; expected at least 2 poles",
-        ));
-    }
-    let mut mults: Array1<'static, i32> = one_based(2)?;
-    mults.init(degree + 1);
-    Ok(mults)
+    bezier_multiplicities(degree, CLASS)
 }
 
-/// The flat knots `Degree+1` zeros then `Degree+1` ones (`KnotSequence`);
-/// `knot_sequence(2)?.len() == 6`.
+/// The flat knots (`KnotSequence`); `knot_sequence(2)?.len() == 6`.
 pub(super) fn knot_sequence(degree: i32) -> Result<Array1<'static, f64>, Failure> {
-    if degree < 0 {
-        return Err(errors::program(
-            "Geom2d_BezierCurve: empty poles; expected at least 2 poles",
-        ));
-    }
-    let flat: &'static [f64] = bsplclib::flat_bezier_knots(degree)?;
-    Ok(Array1::from_shared(&flat[..2 * (degree as usize + 1)], 1))
+    bezier_knot_sequence(degree, CLASS)
 }
