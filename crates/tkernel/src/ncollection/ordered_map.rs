@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 //! Hash keys threaded in insertion order, with stable node identity.
-use super::ordered_table::{OrderedItems, OrderedTable};
+use super::ordered_table::{OrderedItems, OrderedNodeRef, OrderedTable, buckets_from_int};
 use super::{BaseAllocator, DefaultHashPolicy, HashPolicy};
 use crate::standard::Failure;
 /// An insertion-ordered set; `OrderedMap::<i32>::default().add(42)`.
@@ -33,6 +33,33 @@ impl<K, H: HashPolicy<K>> OrderedMap<K, H> {
         Self {
             table: OrderedTable::new(hasher, buckets, resource),
         }
+    }
+    /// The signed-count constructors; a negative count raises Standard_OutOfRange;
+    /// `OrderedMap::with_int_buckets(policy, 10, BaseAllocator::common())?`.
+    pub fn with_int_buckets(
+        hasher: H,
+        buckets: i32,
+        resource: BaseAllocator,
+    ) -> Result<Self, Failure> {
+        Ok(Self::with_allocator(
+            hasher,
+            buckets_from_int(buckets)?,
+            resource,
+        ))
+    }
+    /// `ReSize(int)`: a negative size raises Standard_OutOfRange; `map.resize_int(200)?`.
+    pub fn resize_int(&mut self, size: i32) -> Result<(), Failure> {
+        self.resize(buckets_from_int(size)?);
+        Ok(())
+    }
+    /// Drops keys and adopts `resource` (the common allocator for `None`), releasing bucket
+    /// storage only when the allocator changes; `map.clear_with_allocator(Some(arena))`.
+    pub fn clear_with_allocator(&mut self, resource: Option<BaseAllocator>) {
+        self.table.clear_with_allocator(resource);
+    }
+    /// The head of the insertion order as a node view, `None` when empty; `map.first_node()`.
+    pub fn first_node(&self) -> Option<OrderedNodeRef<'_, K, ()>> {
+        OrderedNodeRef::at(&self.table.slots, self.table.first)
     }
     /// Counts unique keys; `map.len()==3`.
     pub fn len(&self) -> usize {
@@ -147,9 +174,10 @@ impl<K, H: HashPolicy<K> + Clone> OrderedMap<K, H> {
         );
         std::mem::replace(source, empty)
     }
-    /// Replaces storage with a moved source; `map.move_assign(&mut source)`.
+    /// Native move assignment, which swaps rather than empties: the source receives this
+    /// map's former keys, policy and allocator; `map.move_assign(&mut source)`.
     pub fn move_assign(&mut self, source: &mut Self) {
-        *self = Self::move_from(source);
+        self.exchange(source);
     }
 }
 impl<K, H: HashPolicy<K> + Default> Default for OrderedMap<K, H> {
@@ -196,6 +224,10 @@ impl<'a, K> OrderedMapIter<'a, K> {
     /// Advances the legacy cursor; `cursor.advance()`.
     pub fn advance(&mut self) {
         self.inner.advance();
+    }
+    /// Restarts at the map's first key, or stays exhausted for a default cursor; `cursor.reset()`.
+    pub fn reset(&mut self) {
+        self.inner.restart();
     }
     /// Reinitializes a cursor on another borrowed map; `cursor.initialize(&map)`.
     pub fn initialize<H: HashPolicy<K>>(&mut self, map: &'a OrderedMap<K, H>) {

@@ -36,7 +36,7 @@ pub struct DoubleMap<A, B, H1 = DefaultHashPolicy, H2 = DefaultHashPolicy> {
 }
 /// Shared pairs in first-key bucket order; `map.items()`.
 pub struct DoubleMapItems<'a, A, B> {
-    slots: &'a Slots<A, B>,
+    slots: &'a [Option<AllocatedBox<Pair<A, B>>>],
     buckets: &'a [Vec<usize>],
     bucket: usize,
     index: usize,
@@ -59,7 +59,8 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
             first_buckets: Vec::new(),
             second_buckets: Vec::new(),
             count: 0,
-            bucket_count: buckets.max(1),
+            // The native constructors keep a zero bucket count until the first insertion resizes.
+            bucket_count: buckets,
             resource,
             first_policy,
             second_policy,
@@ -137,11 +138,6 @@ impl<A: Debug, B: Debug, H1: HashPolicy<A>, H2: HashPolicy<B>> DoubleMap<A, B, H
     /// Tests second-key membership; `map.is_bound2(&42)`.
     pub fn is_bound2(&self, key: &B) -> bool {
         self.lookup2(key).is_some()
-    }
-    /// Checks that both keys refer to the same pair; `map.are_bound(&1,&42)`.
-    pub fn are_bound(&self, first: &A, second: &B) -> bool {
-        self.lookup1(first)
-            .is_some_and(|slot| self.lookup2(second) == Some(slot))
     }
     /// Finds a second key through the first, reporting NoSuchObject if absent; `map.find1(&1)?`.
     pub fn find1(&self, key: &A) -> Result<&B, Failure> {
@@ -280,4 +276,7 @@ fn missing_pair<K: Debug>(key: &K) -> Failure {
     )
 }
 mod copying;
+mod cursor;
 mod iteration;
+mod queries;
+pub use cursor::DoubleMapIterator;

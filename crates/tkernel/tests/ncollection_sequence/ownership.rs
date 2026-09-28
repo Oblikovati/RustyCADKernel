@@ -19,7 +19,7 @@ fn NCollection_SequenceTest__CopyAndAssignment() {
     let mut third = Sequence::default();
     third.assign(&first);
     equal(&third, &[10, 20, 30]);
-    first.set_value(2, 25);
+    first.set_value(2, 25).unwrap();
     assert_eq!(first[2], 25);
     assert_eq!(second[2], 20);
     assert_eq!(third[2], 20);
@@ -41,7 +41,7 @@ fn NCollection_SequenceTest__CombiningSequences() {
     second.append(80);
     second.append(90);
     let mut fifth = seq(&[100, 110]);
-    fifth.insert_sequence_after(1, &mut second);
+    fifth.insert_sequence_after(1, &mut second).unwrap();
     equal(&fifth, &[100, 80, 90, 110]);
     assert!(second.is_empty());
 }

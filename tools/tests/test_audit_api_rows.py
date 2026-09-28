@@ -112,6 +112,11 @@ class HeaderParsingTests(unittest.TestCase):
         self.assertNotIn("nodiscard", cleaned)
         self.assertNotIn("{", cleaned)
 
+    def test_multi_literal_deprecation_messages_are_dropped(self):
+        # NCollection_Map splits its deprecation message over two adjacent literals.
+        cleaned = clean_source('Standard_DEPRECATED("Use methods from "\n  "MapAlgo.") bool IsEqual();')
+        self.assertEqual(cleaned.strip(), "bool IsEqual();")
+
     def test_brace_initializers_do_not_end_statements(self):
         heads = [head.strip() for head, _ in split_statements("A() : m{{1}, {2}} {} int b;")]
         self.assertEqual(heads, ["A() : m{{1}, {2}}", "int b"])
@@ -226,6 +231,109 @@ class ConversionAndArrayTests(unittest.TestCase):
                 "MathDemo::Utils::SafeNormN(const double(&)[N])"]]
             missing, stale = audit_header(header, "x.hxx", {"api": rows})
         self.assertEqual(([m.prefix for m in missing], stale), ([], []))
+
+
+SWIZZLE_HEADER = """
+#define VEC_COMPONENTS_2D(theX, theY) \\
+  constexpr NCollection_Vec2<Element_t> theX##theY() const noexcept \\
+  { return NCollection_Vec2<Element_t>(theX(), theY()); }
+template <typename Element_t>
+class NCollection_Vec2
+{
+public:
+  VEC_COMPONENTS_2D(x, y)
+  constexpr Element_t& x() noexcept { return v[0]; }
+  friend constexpr NCollection_Vec2 operator+(const NCollection_Vec2& theL,
+                                              const NCollection_Vec2& theR) noexcept
+  { return theL; }
+  friend class NCollection_Mat3;
+  friend bool operator==(const NCollection_Vec2& theL, const NCollection_Vec2& theR);
+private:
+  Element_t v[2];
+};
+"""
+
+
+class MacroAndFriendTests(unittest.TestCase):
+    def test_header_local_macros_expand_into_members(self):
+        self.assertIn("NCollection_Vec2::xy||const", members_of(SWIZZLE_HEADER))
+        self.assertIn("NCollection_Vec2::x||", members_of(SWIZZLE_HEADER))
+
+    def test_in_class_friend_definitions_are_public_members(self):
+        members = members_of(SWIZZLE_HEADER)
+        self.assertIn("NCollection_Vec2::operator+|const NCollection_Vec2&,const NCollection_Vec2&|", members)
+        # Friend classes and body-less friend declarations are not API of this class.
+        self.assertFalse([m for m in members if "operator==" in m or "Mat3" in m])
+
+    def test_macro_arity_mismatch_names_the_arguments(self):
+        with self.assertRaisesRegex(ValueError, r"\['x'\]; expected 2 arguments"):
+            members_of(SWIZZLE_HEADER.replace("VEC_COMPONENTS_2D(x, y)", "VEC_COMPONENTS_2D(x)"))
+
+    def test_deprecation_markers_are_not_members(self):
+        header = ('Standard_HEADER_DEPRECATED("a is deprecated. " "Use b.");\n'
+                  'template <class T>\nusing NCollection_Old = NCollection_New<T> Standard_DEPRECATED("x");\n')
+        self.assertEqual(members_of(header), [])
+        self.assertEqual(known_of(header), ["NCollection_Old|None|"])
+    def test_deprecation_with_concatenated_literals_keeps_the_member(self):
+        header = ('class gp_Demo\n{\npublic:\n  Standard_DEPRECATED("Use the "\n'
+                  '                      "algo instead.")\n  bool Unite(const gp_Demo& theOther);\n};\n')
+        self.assertEqual(members_of(header), ["gp_Demo::Unite|const gp_Demo&|"])
+
+    def test_standard_rtti_macros_are_never_expanded(self):
+        header = "#define DEFINE_STANDARD_RTTIEXT(C, B) public: int Bad();\n" + TEMPLATE_HEADER
+        self.assertNotIn("BVH_Transient::Bad||", members_of(header))
+
+    def test_macros_of_transitively_included_siblings_expand(self):
+        # NCollection_Vec4 reaches NCOLLECTION_VEC_COMPONENTS_2D only through NCollection_Vec3.
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "A.hxx").write_text("#define PAIR(a, b) int a##b() const;\n#include <C.hxx>\n")
+            (root / "B.hxx").write_text("#include <A.hxx>\n")
+            (root / "C.hxx").write_text("#include <B.hxx>\nclass C\n{\npublic:\n  PAIR(x, y)\n};\n")
+            members = [f"{m.prefix}|{m.params}|{m.qualifier}" for m in header_members(root / "C.hxx")]
+        self.assertIn("C::xy||const", members)
+
+
+TRAITS_HEADER = """
+namespace Detail
+{
+template <typename T, typename = void>
+struct HasValue : std::false_type {};
+template <typename T>
+struct HasValue<T, std::void_t<decltype(std::declval<const T&>().Value())>> : std::true_type
+{
+  static int Get(const T& theIter) { return 0; }
+};
+template <class K>
+struct KeyRef
+{
+  template <std::size_t I>
+  decltype(auto) get() const noexcept { return 0; }
+};
+}
+template <typename H>
+class Range
+{
+public:
+  explicit Range(H&& theHost) {}
+};
+template <typename T>
+Range(T&&) -> Range<std::remove_reference_t<T>>;
+"""
+
+
+class TemplateMachineryTests(unittest.TestCase):
+    def test_specialization_arguments_with_calls_open_a_scope(self):
+        members = members_of(TRAITS_HEADER)
+        self.assertIn("Detail::HasValue<T,std::void_t<decltype(std::declval<const T&>().Value())>>::Get|const T&|",
+                      members)
+        self.assertFalse([m for m in members if "decltype(std" in m.split("|")[0].split("<")[0]])
+
+    def test_decltype_return_types_are_not_names(self):
+        self.assertIn("Detail::KeyRef::get||const", members_of(TRAITS_HEADER))
+
+    def test_deduction_guides_are_not_constructors(self):
+        self.assertEqual([m for m in members_of(TRAITS_HEADER) if m.startswith("Range")], ["Range|H&&|"])
 
 
 class RowMatchingTests(unittest.TestCase):
