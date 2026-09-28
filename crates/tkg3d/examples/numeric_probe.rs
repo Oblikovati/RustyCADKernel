@@ -62,6 +62,13 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("a3_extrusion", a3::extrusion_case),
     ("a3_revolution", a3::revolution_case),
     ("a3_transformed", a3::transformed_case),
+    (
+        "a3_transformed_curve",
+        g3_probe::topology::transformed_curve_case,
+    ),
+    ("a3_hvertex", g3_probe::topology::hvertex_case),
+    ("a3_topol", g3_probe::topology::topol_case),
+    ("a3_cone_apex", g3_probe::topology::cone_apex_case),
     // GeomEval curves (eval_curves.rs)
     ("g3_eval_curve", g3_probe::eval_curves::eval_curve_case),
     // GeomEval elementary surfaces (eval_surfaces.rs)

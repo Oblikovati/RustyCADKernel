@@ -58,7 +58,7 @@ pub fn base_case(values: &[f64]) {
 }
 
 // a3_geom_curve: 0 GeomAdaptor_Curve(C) | 1 GeomAdaptor_Curve(C, u1, u2) <curve>.
-fn geom_curve(r: &mut Reader) -> Result<Handle<GeomAdaptorCurve>, Failure> {
+pub fn geom_curve(r: &mut Reader) -> Result<Handle<GeomAdaptorCurve>, Failure> {
     let kind = r.integer();
     if kind == 0 {
         return Ok(Handle::new(GeomAdaptorCurve::with_curve(&shapes::curve(

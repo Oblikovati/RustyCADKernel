@@ -103,6 +103,10 @@
 #include <GeomAdaptor_SurfaceOfLinearExtrusion.hxx>
 #include <Precision.hxx>
 #include "tkg3d_probe_adaptor3d.cxx"
+#include <Adaptor3d_HVertex.hxx>
+#include <Adaptor3d_TopolTool.hxx>
+#include <GeomAdaptor_TransformedCurve.hxx>
+#include "tkg3d_probe_topology.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_point", g3_point_case},
  {"g3_direction", g3_direction_case},
@@ -148,6 +152,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"a3_extrusion", a3_extrusion_case},
  {"a3_revolution", a3_revolution_case},
  {"a3_transformed", a3_transformed_case},
+ {"a3_transformed_curve", a3_transformed_curve_case},
+ {"a3_hvertex", a3_hvertex_case},
+ {"a3_topol", a3_topol_case},
+ {"a3_cone_apex", a3_cone_apex_case},
  // GeomEval curves (tkg3d_probe_eval_curves.cxx)
  {"g3_eval_curve", g3_eval_curve_case},
  // GeomEval elementary surfaces (tkg3d_probe_eval_surfaces.cxx)

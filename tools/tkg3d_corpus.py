@@ -131,6 +131,7 @@ def append_tkg3d_requests(requests: list[str]) -> None:
     # TopAbs (tkg3d_corpus_topabs.py)
     __import__('tkg3d_corpus_topabs').append_topabs_requests(requests)
     __import__('tkg3d_corpus_adaptor3d').append_adaptor3d_requests(requests)
+    __import__('tkg3d_corpus_topology').append_topology_requests(requests)
 
 
 __all__ = ['fmt', 'params', 'point', 'unit', 'frame', 'axis', 'trsf', 'moves', 'line', 'circle', 'ellipse',
