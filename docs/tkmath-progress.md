@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 87 complete source suites
-currently account for 1,597 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 89 complete source suites
+currently account for 1,610 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -87,6 +87,8 @@ currently account for 1,597 mapped declarations, with matching native and Rust p
 | PLib_HermitJacobi_Test.cxx | plib_hermit_jacobi | 9 |
 | BSplCLib_Test.cxx | bsplclib | 5 |
 | BSplCLib_Cache_Test.cxx | bsplclib_cache | 7 |
+| BSplSLib_Test.cxx | bsplslib | 5 |
+| BSplSLib_Cache_Test.cxx | bsplslib_cache | 8 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -527,3 +529,52 @@ poles is declared without a definition in the pinned sources and is not ported.
 `NCollection_Array1::from_shared` and `Array2::from_shared` add the native
 read-only buffer constructor, needed by UnitWeights: the view does not own its
 storage and detaches a private copy on the first write.
+
+### BSplSLib B-spline surface library
+
+The whole public API of BSplSLib, BSplSLib_Cache and BSplSLib_EvaluatorFunction
+is ported (48 API rows) on top of BSplCLib, PLib and math. The 13 declarations of
+BSplSLib_Test and BSplSLib_Cache_Test pass in both kernels. Another 3,840
+differential requests match with raw bits; the numeric gate now passes 34,679
+cases. They cover D0 to D3, DN and HomogeneousD0/D1 up to degree 25 (and the
+refused degree 26) with multiplicities or flat knots, index hints, periodic,
+rational, partly rational and locally polynomial patches and non-1 grid bounds;
+RationalDerivative on raw buffers; Iso, IsRational and both Reverse overloads;
+SetPoles/GetPoles in both directions; InsertKnots, RemoveKnot, IncreaseDegree and
+Unperiodize along U and V; both BuildCache forms, CacheD0 to CacheD2,
+PolesCoefficients and CoefsD0 to CoefsD2; BSplSLib_Cache with its local
+evaluations; MovePoint, Resolution, both Interpolate overloads and
+FunctionMultiply (including failing evaluations). Native argument groups become
+`SurfaceSpan`, `CacheSource`, `SurfaceCacheSpan`, `ResolutionDirection`,
+`InterpolationGrid`, `MultiplySource` and `InterpolationKnots`; output references
+become returned values.
+
+Preserved quirks: IsRational takes its default tolerance from
+`Epsilon(Weights(I1, I2))`, reading column I2; CacheD0 to CacheD2 read the cache
+from `Poles(LowerCol, LowerRow)` and `Weights(LowerCol, LowerRow)`, with swapped
+bounds that coincide for 1-based grids; the rational CacheD2 with a maximal
+degree below 2 reads the missing weight derivative rows from the evaluation
+buffer where pole rows were left; CoefsD0 to CoefsD2 pass `RowLength() - 1` as
+the U degree and `ColLength() - 1` as the V degree; the V pass of the rational
+Resolution takes the neighbour row from the U range and the column from the V
+range; PrepareEval uses an index hint whenever it lies inside the knot array,
+without locating or normalizing the parameter, and only its V-first
+non-rational pole copy wraps a start index past the last row; the second copy
+loop of Reverse starts one row or column after the wrapped `Last`; SetPoles with weights reads
+and stores the weight first; FunctionMultiply always evaluates the surface as
+rational and non-periodic, so it needs weights; BSplSLib_Cache parametrizes a
+span by its middle and half length, and its local evaluations divide by the half
+spans. `bsplslib_behavior.rs` pins the main ones with regression tests.
+
+Deviations are limited to undefined or unchecked native behaviour. Rational
+evaluations, Iso and FunctionMultiply without the weights they dereference are
+errors. Degrees above MaxDegree raise Standard_OutOfRange as natively. A
+non-periodic direction whose FirstUKnotIndex is not below its LastUKnotIndex
+(unclamped ends at a high degree) has no valid span: the native local knot walk
+leaves entries of its stack buffer unwritten, and the port reads zeros; the
+corpus draws only directions with a valid span. In the reference build the
+transposition in PolesCoefficients (fewer U than V poles) writes `CachePoles`
+without the NCollection bound check, so a `[max][min]` target is filled through
+row-major offsets; the port raises the checked Standard_OutOfRange, and the
+coefficients take the shape of the poles in the corpus. UnitWeights rejects
+counts whose product is negative.
