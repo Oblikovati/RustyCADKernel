@@ -65,6 +65,8 @@
 #include "tkg3d_probe_curves.cxx"
 #include "tkg3d_probe_surfaces.cxx"
 #include "tkg3d_probe_advapprox.cxx"
+#include <GeomEval_RepCurveDesc.hxx>
+#include "tkg3d_probe_bspl.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_point", g3_point_case},
  {"g3_direction", g3_direction_case},
@@ -89,6 +91,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_advapprox_static", g3_advapprox_static_case},
  {"g3_advapprox_simple", g3_advapprox_simple_case},
  {"g3_advapprox_cut", g3_advapprox_cut_case},
+ {"g3_bezier", g3_bezier_case},
+ {"g3_bspline", g3_bspline_case},
+ {"g3_evalrep", g3_evalrep_case},
+ {"g3_evalrep_edit", g3_evalrep_edit_case},
 };
 int main() {
  std::string line;

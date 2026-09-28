@@ -15,33 +15,13 @@
 
 //! Read access: local evaluation, knots, multiplicities, poles and weights.
 use super::Geom2dBSplineCurve;
-use crate::geom2d::arrays::{at, check_one_based, copy_same_length, put};
+use crate::geom2d::arrays::{at, check_one_based, copy_same_length};
 use crate::geom2d::errors;
+use crate::geom2d::spline_data::copy_inside;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::geom_abs::BSplKnotDistribution;
 use rustycad_tkmath::gp::{Point2, Vector2};
-
-// The deprecated `Knots(K)` / `KnotSequence(K)`: K's bounds must lie inside the source's.
-fn copy_inside(
-    source: &Array1<'_, f64>,
-    target: &mut Array1<'_, f64>,
-    member: &str,
-) -> Result<(), Failure> {
-    if target.lower() < source.lower() || target.upper() > source.upper() {
-        return Err(errors::domain(&format!(
-            "Geom2d_BSplineCurve::{member}: bounds [{}, {}]; expected inside [{}, {}]",
-            target.lower(),
-            target.upper(),
-            source.lower(),
-            source.upper()
-        )));
-    }
-    for index in target.lower()..=target.upper() {
-        put(target, index, at(source, index)?)?;
-    }
-    Ok(())
-}
 
 impl Geom2dBSplineCurve {
     /// Point located between knots `from_k1` and `to_k2` (`LocalValue`); `curve.local_value(0.5, 1, 2)?`.
@@ -102,7 +82,11 @@ impl Geom2dBSplineCurve {
     }
     /// Copy the knots of `target`'s bounds (deprecated `Knots(K)`); `curve.knots_into(&mut k)?`.
     pub fn knots_into(&self, target: &mut Array1<'_, f64>) -> Result<(), Failure> {
-        copy_inside(&self.state.read().knots, target, "Knots")
+        copy_inside(
+            &self.state.read().knots,
+            target,
+            "Geom2d_BSplineCurve::Knots",
+        )
     }
     /// The knots, indexed from 1 (`Knots()`); `curve.knots()`.
     pub fn knots(&self) -> Array1<'static, f64> {
@@ -111,7 +95,11 @@ impl Geom2dBSplineCurve {
     /// Copy the flat knots of `target`'s bounds (deprecated `KnotSequence(K)`);
     /// `curve.knot_sequence_into(&mut k)?`.
     pub fn knot_sequence_into(&self, target: &mut Array1<'_, f64>) -> Result<(), Failure> {
-        copy_inside(&self.state.read().flat_knots, target, "KnotSequence")
+        copy_inside(
+            &self.state.read().flat_knots,
+            target,
+            "Geom2d_BSplineCurve::KnotSequence",
+        )
     }
     /// The knots repeated by multiplicity (`KnotSequence()`); `curve.knot_sequence()`.
     pub fn knot_sequence(&self) -> Array1<'static, f64> {

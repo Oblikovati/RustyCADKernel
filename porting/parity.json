@@ -34282,6 +34282,1054 @@
       "rust_item": "rustycad_tkg3d::adv_approx::AdvApproxSimpleApprox::dump",
       "status": "implemented",
       "notes": "Manual explicit member mapping (AdvApprox module docs): the evaluator is a &mut dyn AdvApproxEvaluatorFunction borrowed for the computation (closures implement it), cutting strategies implement AdvApproxCutting (Value returns (accepted, cut)), native result handles become Option values (None where null), output references become returned values or caller tables, overloads take distinct Rust names, and exceptions or null-handle accesses become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve(const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::with_weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve(const Geom_BezierCurve&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::copy_of",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::HasEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::has_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::EvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::SetEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::set_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::ClearEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::clear_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Increase",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::increase",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::InsertPoleAfter(int,const gp_Pnt&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::insert_pole_after",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::InsertPoleAfter(int,const gp_Pnt&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::insert_pole_after_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::InsertPoleBefore(int,const gp_Pnt&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::insert_pole_before",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::InsertPoleBefore(int,const gp_Pnt&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::insert_pole_before_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::RemovePole",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::remove_pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Reverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::ReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Segment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::segment",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::SetPole(int,const gp_Pnt&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::set_pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::SetPole(int,const gp_Pnt&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::set_pole_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::SetWeight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::set_weight",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::IsClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::is_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::IsCN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::is_cn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::IsPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::IsRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::is_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::continuity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Degree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::StartPoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::start_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::EndPoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::end_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::FirstParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::LastParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::NbPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Pole",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Poles(NCollection_Array1<gp_Pnt>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::poles_into",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Poles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Weight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::weight",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Weights(NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::weights_into",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Weights() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::WeightsArray",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::weights_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::MaxDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::max_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::resolution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Knots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::Multiplicities",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::KnotSequence",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::knot_sequence",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BezierCurve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBezierCurve::static_type",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,bool)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,bool,bool)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::with_weights_checked",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve(const Geom_BSplineCurve&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::copy_of",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::HasEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::has_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::EvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::ClearEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::clear_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IncreaseDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::increase_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IncreaseMultiplicity(int,int)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::increase_multiplicity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IncreaseMultiplicity(int,int,int)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::increase_multiplicity_range",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IncrementMultiplicity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::increment_multiplicity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::InsertKnot",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::insert_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::InsertKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::insert_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::RemoveKnot",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::remove_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Reverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::ReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Segment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::segment",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetKnot(int,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetKnot(int,double,int)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_knot_with_multiplicity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::PeriodicNormalization",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::periodic_normalization",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetOrigin(int)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_origin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetOrigin(double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_origin_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetNotPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_not_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetPole(int,const gp_Pnt&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetPole(int,const gp_Pnt&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_pole_weighted",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::SetWeight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::set_weight",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::MovePoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::move_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::MovePointAndTangent",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::move_point_and_tangent",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IsCN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::is_cn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IsG1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::is_g1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IsClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::is_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IsPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IsRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::is_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::continuity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Degree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::LocalValue",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::local_value",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::LocalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::local_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::LocalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::local_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::LocalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::local_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::LocalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::local_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::LocalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::local_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::EndPoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::end_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::FirstUKnotIndex",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::first_u_knot_index",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::FirstParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Knot",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Knots(NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::knots_into",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Knots() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::KnotSequence(NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::knot_sequence_into",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::KnotSequence() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::knot_sequence",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::KnotDistribution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::knot_distribution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::LastUKnotIndex",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::last_u_knot_index",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::LastParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::LocateU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::locate_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Multiplicity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::multiplicity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Multiplicities(NCollection_Array1<int>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::multiplicities_into",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Multiplicities() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::NbKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::nb_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::NbPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Pole",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Poles(NCollection_Array1<gp_Pnt>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::poles_into",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Poles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::StartPoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::start_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Weight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::weight",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Weights(NCollection_Array1<double>&) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::weights_into",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Weights() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::WeightsArray",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::weights_array",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::MaxDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::max_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::resolution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::IsEqual",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::is_equal",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomBSplineCurve::static_type",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     }
   ],
   "tests": [
@@ -85702,6 +86750,1140 @@
       "rust_target": "geom_plane",
       "rust_test": "Geom_PlaneTest__Copy",
       "rust_source": "crates/tkg3d/tests/geom_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.CopyConstructorBasicProperties",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__CopyConstructorBasicProperties",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.CopyConstructorPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__CopyConstructorPoles",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.CopyMethodUsesOptimizedConstructor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__CopyMethodUsesOptimizedConstructor",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.RationalCurveCopyConstructor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__RationalCurveCopyConstructor",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.CopyIndependence",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__CopyIndependence",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Evaluation_D0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Evaluation_D0",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Evaluation_D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Evaluation_D1",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Evaluation_D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Evaluation_D2",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Evaluation_D3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Evaluation_D3",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Evaluation_DN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Evaluation_DN",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.StartEndPoints",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__StartEndPoints",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Properties",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Properties",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.SetPole",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__SetPole",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.SetWeight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__SetWeight",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.InsertPoleAfter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__InsertPoleAfter",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.InsertPoleBefore",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__InsertPoleBefore",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.RemovePole",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__RemovePole",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Increase",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Increase",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Segment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Segment",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Reverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Reverse",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Resolution",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__Transform",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.PolesAccess",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__PolesAccess",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.WeightsAccess_NonRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__WeightsAccess_NonRational",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.RationalCurveEvaluation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__RationalCurveEvaluation",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.MaxDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__MaxDegree",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.SetPoleWithWeight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__SetPoleWithWeight",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.InsertPoleAfterWithWeight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__InsertPoleAfterWithWeight",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.ClosedCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__ClosedCurve",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.RationalSegment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__RationalSegment",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.RationalIncrease",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__RationalIncrease",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.RationalReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__RationalReverse",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.ReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__ReversedParameter",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.LinearCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__LinearCurve",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.WeightsArray_NonRational_ReturnsUnitWeights",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__WeightsArray_NonRational_ReturnsUnitWeights",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurve_Test.WeightsArray_Rational_ReturnsOwning",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurve_Test__WeightsArray_Rational_ReturnsOwning",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurveTest.OCC2569_DegreeEqualsNbPolesMinusOne",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurveTest__OCC2569_DegreeEqualsNbPolesMinusOne",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BezierCurveTest.OCC2569_ThrowsForTooManyPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BezierCurve_Test.cxx",
+      "source_sha256": "edd6dcde139e4d72353d4bf6708b16ac0efdd6afa813b1d3935f7ae9a683cc98",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bezier_curve",
+      "rust_test": "Geom_BezierCurveTest__OCC2569_ThrowsForTooManyPoles",
+      "rust_source": "crates/tkg3d/tests/geom_bezier_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.CopyConstructorBasicProperties",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__CopyConstructorBasicProperties",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.CopyConstructorPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__CopyConstructorPoles",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.CopyConstructorKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__CopyConstructorKnots",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.CopyMethodUsesOptimizedConstructor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__CopyMethodUsesOptimizedConstructor",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.RationalCurveCopyConstructor",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__RationalCurveCopyConstructor",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Evaluation_D0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Evaluation_D0",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Evaluation_D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Evaluation_D1",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Evaluation_D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Evaluation_D2",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Evaluation_D3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Evaluation_D3",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Evaluation_DN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Evaluation_DN",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.StartEndPoints",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__StartEndPoints",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.SetPole",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__SetPole",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.SetWeight",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__SetWeight",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.IncreaseDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__IncreaseDegree",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.InsertKnot",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__InsertKnot",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.RemoveKnot",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__RemoveKnot",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Segment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Segment",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Reverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Reverse",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Resolution",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Properties",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Properties",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__Transform",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_0.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.PeriodicCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__PeriodicCurve",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.MultiKnotSpan",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__MultiKnotSpan",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.IncreaseMultiplicity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__IncreaseMultiplicity",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.KnotAccess",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__KnotAccess",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.PolesAccess",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__PolesAccess",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.WeightsAccess_NonRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__WeightsAccess_NonRational",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.WeightsAccess_Rational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__WeightsAccess_Rational",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.LocalEvaluation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__LocalEvaluation",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.SetKnot",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__SetKnot",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.CopyIndependence",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__CopyIndependence",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.MovePoint",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__MovePoint",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.LocateU",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__LocateU",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.IsEqual",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__IsEqual",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.KnotDistribution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__KnotDistribution",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.RationalCurveSegment",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__RationalCurveSegment",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.RationalCurveIncreaseDegree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__RationalCurveIncreaseDegree",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.PeriodicCurve_SetOrigin",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__PeriodicCurve_SetOrigin",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.InsertKnots_Multiple",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__InsertKnots_Multiple",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.ClosedCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__ClosedCurve",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.LocalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__LocalD1",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.WeightsArray_NonRational_ReturnsUnitWeights",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__WeightsArray_NonRational_ReturnsUnitWeights",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_BSplineCurve_Test.WeightsArray_Rational_ReturnsOwning",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_BSplineCurve_Test.cxx",
+      "source_sha256": "3ca1401dce1fb9fa032da198c13d7092f31671c8c8cb138b74783c7536129cb7",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_bspline_curve",
+      "rust_test": "Geom_BSplineCurve_Test__WeightsArray_Rational_ReturnsOwning",
+      "rust_source": "crates/tkg3d/tests/geom_bspline_curve/suites_1.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

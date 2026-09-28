@@ -114,6 +114,7 @@ def append_tkg3d_requests(requests: list[str]) -> None:
     append_curve_family_requests(rng, requests)
     __import__('tkg3d_corpus_surfaces').append_surface_family_requests(random.Random(0x5F3A), requests)
     append_advapprox_requests(requests)
+    __import__('tkg3d_corpus_bspl').append_bspl_requests(requests)
 
 
 __all__ = ['fmt', 'params', 'point', 'unit', 'frame', 'axis', 'trsf', 'moves', 'line', 'circle', 'ellipse',

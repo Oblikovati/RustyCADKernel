@@ -14,11 +14,12 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The fields of Geom2d_BSplineCurve, its data checks and `updateKnots`.
-use crate::geom2d::arrays::{any_weight_step, at, one_based, rebased};
-use crate::geom2d::errors;
+use crate::geom2d::arrays::{at, one_based, rebased};
+use crate::geom2d::spline_data::smoothness;
+pub(super) use crate::geom2d::spline_data::{bspline_rational as rational, check_curve_data};
 use crate::geom2d_eval::RepCurveDesc;
 use rustycad_tkernel::ncollection::Array1;
-use rustycad_tkernel::standard::{Failure, Handle, real};
+use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::geom_abs::{BSplKnotDistribution, Shape};
 use rustycad_tkmath::gp::Point2;
@@ -38,63 +39,6 @@ pub(super) struct BSplineState {
     pub(super) smooth: Shape,
     pub(super) max_deriv_inv: f64,
     pub(super) max_deriv_inv_ok: bool,
-}
-
-/// The file-static `CheckCurveData` of Geom2d_BSplineCurve.cxx; `check_curve_data(&p, &k, &m, 3, false)?`.
-pub(super) fn check_curve_data(
-    poles: &Array1<'_, Point2>,
-    knots: &Array1<'_, f64>,
-    mults: &Array1<'_, i32>,
-    degree: i32,
-    periodic: bool,
-) -> Result<(), Failure> {
-    if degree < 1 || degree > bsplclib::max_degree() {
-        return Err(errors::construction(&format!(
-            "BSpline curve: invalid degree {degree}; expected in [1, {}]",
-            bsplclib::max_degree()
-        )));
-    }
-    if poles.len() < 2 {
-        return Err(errors::construction(&format!(
-            "BSpline curve: {} poles; at least 2 poles required",
-            poles.len()
-        )));
-    }
-    if knots.len() != mults.len() {
-        return Err(errors::construction(&format!(
-            "BSpline curve: {} knots and {} multiplicities; expected equal sizes",
-            knots.len(),
-            mults.len()
-        )));
-    }
-    check_knot_spacing(knots)?;
-    let expected: i32 = bsplclib::nb_poles(degree, periodic, mults)?;
-    if poles.len() as i32 != expected {
-        return Err(errors::construction(&format!(
-            "BSpline curve: {} poles; # Poles and degree mismatch, expected {expected}",
-            poles.len()
-        )));
-    }
-    Ok(())
-}
-
-fn check_knot_spacing(knots: &Array1<'_, f64>) -> Result<(), Failure> {
-    for i in knots.lower()..knots.upper() {
-        let (knot, next) = (at(knots, i)?, at(knots, i + 1)?);
-        if next - knot <= real::epsilon(knot.abs()) {
-            return Err(errors::construction(&format!(
-                "BSpline curve: Knots({i}) = {knot}, Knots({}) = {next}; Knots interval values too close",
-                i + 1
-            )));
-        }
-    }
-    Ok(())
-}
-
-/// The file-static `Rational` of Geom2d_BSplineCurve.cxx (bounds of the array);
-/// `rational(&weights)?`.
-pub(super) fn rational(weights: &Array1<'_, f64>) -> Result<bool, Failure> {
-    any_weight_step(weights, weights.lower(), weights.upper())
 }
 
 impl BSplineState {
@@ -228,18 +172,5 @@ impl BSplineState {
             value += period;
         }
         Ok(value)
-    }
-}
-
-// The continuity switch of updateKnots.
-fn smoothness(degree: i32, max_knot_mult: i32) -> Shape {
-    if max_knot_mult == 0 {
-        return Shape::CN;
-    }
-    match degree - max_knot_mult {
-        0 => Shape::C0,
-        1 => Shape::C1,
-        2 => Shape::C2,
-        _ => Shape::C3,
     }
 }

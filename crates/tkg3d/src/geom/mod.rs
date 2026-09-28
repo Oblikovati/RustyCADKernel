@@ -92,3 +92,8 @@ mod surface_of_linear_extrusion;
 pub use surface_of_linear_extrusion::GeomSurfaceOfLinearExtrusion;
 mod surface_of_revolution;
 pub use surface_of_revolution::GeomSurfaceOfRevolution;
+
+mod bezier_curve;
+pub use bezier_curve::GeomBezierCurve;
+mod bspline_curve;
+pub use bspline_curve::GeomBSplineCurve;

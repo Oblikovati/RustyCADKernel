@@ -18,6 +18,7 @@ pub mod arrays;
 pub mod cell;
 pub mod errors;
 pub mod native;
+pub mod spline_data;
 
 mod geometry;
 pub use geometry::{
