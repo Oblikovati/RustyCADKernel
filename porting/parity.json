@@ -109242,6 +109242,358 @@
       "rust_item": "rustycad_tkgeombase::gcpnts::UniformDeflection::deflection",
       "status": "implemented",
       "notes": "CPnts/GCPnts mapping (docs/tkgeombase-progress.md): each 3D/2D overload pair is one Rust member (CPnts takes a PntsCurve, GCPnts is generic over TCurveTypes, the GCPnts_TCurveTypes port), overloads take distinct Rust names, default arguments are explicit, and exceptions, including those the adaptors raise, become Failure errors."
+    },
+    {
+      "upstream_id": "Geom2dConvert::SplitBSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,int,int,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::split_bspline_curve_knots",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert::SplitBSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::split_bspline_curve",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert::CurveToBSplineCurve(const occ::handle<Geom2d_Curve>&,Convert_ParameterisationType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::curve_to_bspline_curve",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert::ConcatG1(NCollection_Array1<occ::handle<Geom2d_BSplineCurve>>&,const NCollection_Array1<double>&,occ::handle<NCollection_HArray1<occ::handle<Geom2d_BSplineCurve>>>&,bool&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::concat_g1",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert::ConcatC1(NCollection_Array1<occ::handle<Geom2d_BSplineCurve>>&,const NCollection_Array1<double>&,occ::handle<NCollection_HArray1<int>>&,occ::handle<NCollection_HArray1<occ::handle<Geom2d_BSplineCurve>>>&,bool&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::concat_c1",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert::ConcatC1(NCollection_Array1<occ::handle<Geom2d_BSplineCurve>>&,const NCollection_Array1<double>&,occ::handle<NCollection_HArray1<int>>&,occ::handle<NCollection_HArray1<occ::handle<Geom2d_BSplineCurve>>>&,bool&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::concat_c1_with_angular",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert::C0BSplineToC1BSplineCurve(occ::handle<Geom2d_BSplineCurve>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::c0_bspline_to_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert::C0BSplineToArrayOfC1BSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,occ::handle<NCollection_HArray1<occ::handle<Geom2d_BSplineCurve>>>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::c0_bspline_to_array_of_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert::C0BSplineToArrayOfC1BSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,occ::handle<NCollection_HArray1<occ::handle<Geom2d_BSplineCurve>>>&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::c0_bspline_to_array_of_c1_bspline_curve_with_angular",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxArcsSegments::Status",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxArcsSegments.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxArcsStatus",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxArcsSegments(const Adaptor2d_Curve2d&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxArcsSegments.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxArcsSegments::new",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxArcsSegments::GetResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxArcsSegments.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxArcsSegments::get_result",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxCurve(const occ::handle<Geom2d_Curve>&,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxCurve::from_curve",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxCurve(const occ::handle<Adaptor2d_Curve2d>&,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxCurve::from_adaptor",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxCurve::Curve() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxCurve::curve",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxCurve::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxCurve::is_done",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxCurve::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxCurve::has_result",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxCurve::MaxError() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxCurve::max_error",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_ApproxCurve::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::ApproxCurve::dump",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveKnotSplitting(const occ::handle<Geom2d_BSplineCurve>&,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveKnotSplitting::new",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveKnotSplitting::NbSplits() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveKnotSplitting::nb_splits",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveKnotSplitting::Splitting(NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveKnotSplitting::splitting",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveKnotSplitting::SplitValue(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveKnotSplitting::split_value",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveToBezierCurve(const occ::handle<Geom2d_BSplineCurve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveToBezierCurve::new",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveToBezierCurve(const occ::handle<Geom2d_BSplineCurve>&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveToBezierCurve::with_range",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveToBezierCurve::Arc(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveToBezierCurve::arc",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveToBezierCurve::Arcs(NCollection_Array1<occ::handle<Geom2d_BezierCurve>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveToBezierCurve::arcs",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveToBezierCurve::Knots(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveToBezierCurve::knots",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_BSplineCurveToBezierCurve::NbArcs() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::BSplineCurveToBezierCurve::nb_arcs",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_CompCurveToBSplineCurve(Convert_ParameterisationType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::CompCurveToBSplineCurve::new",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_CompCurveToBSplineCurve(const occ::handle<Geom2d_BoundedCurve>&,Convert_ParameterisationType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::CompCurveToBSplineCurve::with_curve",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_CompCurveToBSplineCurve::Add(const occ::handle<Geom2d_BoundedCurve>&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::CompCurveToBSplineCurve::add",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_CompCurveToBSplineCurve::BSplineCurve() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::CompCurveToBSplineCurve::bspline_curve",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_CompCurveToBSplineCurve::Clear()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::CompCurveToBSplineCurve::clear",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::default",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint(double,const gp_XY&,const gp_XY&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::new",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint(double,const Adaptor2d_Curve2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::from_adaptor",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint::Dist(const Geom2dConvert_PPoint&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::dist",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint::Parameter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::parameter",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint::Point() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::point",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint::D1() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::d1",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint::SetD1(const gp_XY&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::set_d1",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint::operator==(const Geom2dConvert_PPoint&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::eq",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
+    },
+    {
+      "upstream_id": "Geom2dConvert_PPoint::operator!=(const Geom2dConvert_PPoint&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Geom2dConvert/Geom2dConvert_PPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::geom2d_convert::PPoint::ne",
+      "status": "implemented",
+      "notes": "Geom2dConvert mapping (docs/tkgeombase-progress.md): the static members of Geom2dConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and the output references of the concatenation members stay &mut parameters."
     }
   ],
   "tests": [
