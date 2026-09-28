@@ -36,6 +36,10 @@ Known false-positive sources and how they are handled:
   private members are never expected or known. An in-class friend *definition*
   (a hidden friend such as `friend Vec2 operator+(...) {...}`) is expected as a
   member of the enclosing class.
+- SFINAE machinery: a specialization whose argument list holds calls
+  (`HasValue<T, void_t<decltype(x.Value())>>`) still opens a scope, a
+  `decltype(...)` return type is never read as the member name, and class
+  template deduction guides (`Range(T&&) -> Range<T>;`) are not constructors.
 - Function-like macros defined in the header itself (the NCollection_Vec
   swizzle generators) are expanded before scanning; the `DEFINE_STANDARD_*`
   macros are not, since they keep their dedicated identities.
@@ -244,7 +248,7 @@ def statement_members(head: str, braced: str | None, scope: str, primary: str, e
     """Members produced by one statement of a scope; non-exposed ones are only known."""
     head = strip_template_heads(head)
     scope_match = SCOPE_HEAD.match(head)
-    if scope_match is not None and "(" not in head:
+    if scope_match is not None and "(" not in without_scope_arguments(head, scope_match):
         return nested_scope_members(head, scope_match, braced, scope, primary, exposed)
     if re.fullmatch(r"enum", head) and braced is not None:
         return enumerator_members(braced, scope)  # anonymous enum: its constants join the scope
@@ -332,10 +336,48 @@ def data_members(head: str, scope: str) -> list[Member]:
     return [Member(qualify(scope, name.group(1)), None, "", required=False)]
 
 
+def without_scope_arguments(head: str, match: re.Match[str]) -> str:
+    """A class head with its specialization argument list removed.
+
+    Specialization arguments may hold calls (`HasValue<T, void_t<decltype(x.Value())>>`);
+    they must not make the head look like a function declaration.
+
+    >>> head = 'struct H<T, decltype(f())> : B'
+    >>> without_scope_arguments(head, SCOPE_HEAD.match(head))
+    'struct H : B'
+    """
+    if match.group(3) is None:
+        return head
+    opening = match.end() - 1
+    return head[:opening] + head[matching_close(head, opening) + 1:]
+
+
+def strip_decltypes(head: str) -> str:
+    """Replace each balanced `decltype(...)` by one type token, so it is never read as a name.
+
+    >>> strip_decltypes('decltype(auto) get() const')
+    'decltype_t get() const'
+    """
+    while (match := re.search(r"\bdecltype\s*\(", head)) is not None:
+        head = head[:match.start()] + "decltype_t" + head[matching_close(head, match.end() - 1) + 1:]
+    return head
+
+
+def is_deduction_guide(head: str, name_start: int, params_close: int) -> bool:
+    """True for a class template deduction guide: `Name(T&&) -> Name<T>;`, no return type.
+
+    >>> is_deduction_guide('R(T&&) -> R<T>', 0, 5)
+    True
+    """
+    prefix = re.sub(r"\bexplicit\b", "", head[:name_start]).strip()
+    return not prefix and re.match(r"\s*->", head[params_close + 1:]) is not None
+
+
 def function_members(head: str, scope: str, primary: str) -> list[Member]:
     """The member declared by a function statement, or nothing for definitions/deletions."""
     if re.search(r"=\s*delete\s*$", head):
         return []
+    head = strip_decltypes(head)
     name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+(?:(?:const|volatile)\s+)*[A-Za-z_][\w:]*\s*[&*]*"
                            r"|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
     if name_match is None:
@@ -345,6 +387,8 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
         return []  # out-of-class definition (`X::f`, `X<T, N>::f`) of an already declared member
     params_open = name_match.end() - 1
     params_close = matching_close(head, params_open)
+    if is_deduction_guide(head, name_match.start(1), params_close):
+        return []
     params = normalize_params(head[params_open + 1:params_close])
     qualifier = "const" if re.match(r"\s*const\b", head[params_close + 1:]) else ""
     owner = scope or primary

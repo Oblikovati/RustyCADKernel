@@ -44722,6 +44722,982 @@
       "rust_item": "rustycad_tkernel::ncollection::packed_map_algo::is_equal",
       "status": "implemented",
       "notes": "Manual NCollection member mapping; the NCollection_PackedMapAlgo namespace is the packed_map_algo module. Early-return branches, smaller-map scanning and the move of the intersected copy match native (probe ncoll_flat_maps_algebra32/64). Rust borrowing makes the native self-aliased calls (theMap == theOtherMap) unrepresentable, so those branches have no counterpart."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator(const Type*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::Init(const Type*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::operator++()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::advance",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::operator++(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::post_increment",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::operator==(const NCollection_UtfIterator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::UtfIterator as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::IsValid() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::is_valid",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::operator*() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::current",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::BufferHere() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::buffer_here",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::ChangeBufferHere()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: returns a writable pointer into the buffer the iterator is reading (documented as dangerous). Rust's UtfIterator borrows the text immutably; callers take the offset from UtfIterator::buffer_here and write through their own &mut slice, then re-init the iterator."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::BufferNext() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::buffer_next",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::Index() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::AdvanceBytesUtf8() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::advance_bytes_utf8",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::AdvanceBytesUtf16() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::advance_bytes_utf16",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::AdvanceCodeUnitsUtf16() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::advance_code_units_utf16",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::AdvanceBytesUtf32() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::advance_bytes_utf32",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::GetUtf8(char*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::get_utf8",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The output pointer becomes a destination slice; the result is the count of units written and a too-short slice is a UtfBufferError (native code overruns). char and unsigned char share u8."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::GetUtf8(unsigned char*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::get_utf8",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The output pointer becomes a destination slice; the result is the count of units written and a too-short slice is a UtfBufferError (native code overruns). char and unsigned char share u8."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::GetUtf16(char16_t*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::get_utf16",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::GetUtf32(char32_t*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::get_utf32",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::AdvanceBytesUtf() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::advance_bytes_utf",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfIterator::GetUtf(TypeWrite*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfIterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfIterator::get_utf",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfIterator<Type> is UtfIterator<'a, T: UtfUnit> over u8/u16/u32 code units (CharTypeChooser becomes the UtfUnit impls; wchar_t is WideChar = u32, u16 on Windows). The NUL-terminated pointer becomes a slice whose end is the terminator and whose storage past the end reads as zeros, so the unprotected overrun of truncated UTF-8 decodes exactly as over zero-padded native memory. Buffer pointers become code-unit offsets. Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::Iterator() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::iterator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::length",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::GetChar(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::get_char",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::GetCharBuffer(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::get_char_buffer",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The pointer becomes the unit slice from the symbol through the terminator; NULL becomes None."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::operator[](int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::get_char",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. operator[] returns the symbol by value, which Rust's Index (returning a reference) cannot express; it forwards to GetChar like get_char."
+    },
+    {
+      "upstream_id": "NCollection_UtfString()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString(const NCollection_UtfString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::UtfString as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString(NCollection_UtfString&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;` / `b = a;`); ownership transfer has no callable counterpart. The native source is left with a null buffer that no member may touch."
+    },
+    {
+      "upstream_id": "NCollection_UtfString(const char*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::from_unicode_units",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The per-encoding constructors are one generic from_unicode_units::<F> over the source unit type."
+    },
+    {
+      "upstream_id": "NCollection_UtfString(const char16_t*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::from_unicode_units",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The per-encoding constructors are one generic from_unicode_units::<F> over the source unit type."
+    },
+    {
+      "upstream_id": "NCollection_UtfString(const char32_t*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::from_unicode_units",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The per-encoding constructors are one generic from_unicode_units::<F> over the source unit type."
+    },
+    {
+      "upstream_id": "NCollection_UtfString(const wchar_t*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::from_unicode_units",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The per-encoding constructors are one generic from_unicode_units::<F> over the source unit type. wchar_t is WideChar."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::FromUnicode(const TypeFrom*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::from_unicode",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::FromLocale(const char*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::from_locale",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. Implements the POSIX C locale every program starts in (Rust has no process locale): single-byte ASCII. Quirk preserved: NCollection_UtfStringTool sizes its buffer with mblen, which measures the first character only, so at most one character is converted; a leading non-ASCII byte clears."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::~NCollection_UtfString()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::IsEqual(const NCollection_UtfString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::is_equal",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::SubString(int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::sub_string",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::ToCString() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::to_c_string",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The pointer becomes the unit slice including the terminating zero."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::ToUtf8() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::to_utf8",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::ToUtf16() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::to_utf16",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::ToUtf32() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::to_utf32",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::ToUtfWide() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::to_utf_wide",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::ToLocale(char*,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::to_locale",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The buffer and its size become one byte slice. C locale as for FromLocale; quirks of wcstombs and the native `<= 0` test on its unsigned result preserved: only an empty conversion is false, a non-ASCII symbol stops the copy yet reports true, a full buffer gets no terminator. The native terminator store into a zero-sized buffer is skipped (a slice cannot be written past its end)."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::clear",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::Assign(const NCollection_UtfString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::Swap(NCollection_UtfString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::swap",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::operator=(const NCollection_UtfString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::operator=(NCollection_UtfString&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::swap",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The native move assignment is implemented as Swap, so the source observably receives the old contents; swap reproduces that."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::operator=(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::from_unicode",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. Forwards to FromUnicode with no length limit, as from_unicode(source, -1)."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::operator=(const wchar_t*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::UtfString::from_unicode",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. Forwards to FromUnicode with no length limit, as from_unicode(source, -1); wchar_t is WideChar."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::operator+=(const NCollection_UtfString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::UtfString as AddAssign<&UtfString>>::add_assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. Quirk preserved: an empty right side is skipped, so its cached length is not added."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::operator+(const NCollection_UtfString&,const NCollection_UtfString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "<&rustycad_tkernel::ncollection::UtfString as Add<&UtfString>>::add",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe. The hidden friend always sums both cached lengths."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::operator==(const NCollection_UtfString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::UtfString as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_UtfString::operator!=(const NCollection_UtfString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_UtfString.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::UtfString as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_UtfString<Type> is UtfString<T: UtfUnit> with the native NUL-terminated buffer, byte Size() and cached symbol Length(); sources are slices whose end acts as the terminator. Quirks preserved: same-unit copies keep invalid sequences verbatim, converted copies drop illegal symbols but still count them in Length(). Compared bit-for-bit with OCCT by the ncoll_utilities_utf probe."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<T,std::enable_if_t<HasValue<T>::value>>::Get(const T&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::forward_range::AccessorSet<Present<A>,C,D> as SelectAccessor<I>>::read",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<T,std::enable_if_t<!HasValue<T>::value&&HasCurrent<T>::value>>::Get(const T&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::forward_range::AccessorSet<Missing,Present<A>,D> as SelectAccessor<I>>::read",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::AccessorTraits<T,std::enable_if_t<!HasValue<T>::value&&!HasCurrent<T>::value&&HasCurrentId<T>::value>>::Get(const T&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::forward_range::AccessorSet<Missing,Missing,Present<A>> as SelectAccessor<I>>::read",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeDetail::ArrowProxy::operator->() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::arrow",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally. The arrow proxy exists to take the address of a by-value result; arrow returns the selected item, projected with Rust field access."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator(HostType*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::operator*() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::current",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::operator->() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::arrow",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::operator++()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::advance",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::PostfixProxy::operator*() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::forward_range::PostfixProxy as Deref>::deref",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::operator++(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRangeIter::post_increment",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::operator==(const NCollection_ForwardRangeIterator&,NCollection_ForwardRangeSentinel)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::forward_range::ForwardRangeIter as PartialEq<ForwardRangeSentinel>>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::operator!=(const NCollection_ForwardRangeIterator&,NCollection_ForwardRangeSentinel)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::forward_range::ForwardRangeIter as PartialEq<ForwardRangeSentinel>>::ne",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::operator==(NCollection_ForwardRangeSentinel,const NCollection_ForwardRangeIterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel as PartialEq<ForwardRangeIter>>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRangeIterator::operator!=(NCollection_ForwardRangeSentinel,const NCollection_ForwardRangeIterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::forward_range::ForwardRangeSentinel as PartialEq<ForwardRangeIter>>::ne",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange(const HostType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::from_copy",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange(HostType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange(NCollection_ForwardRange&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;` / `b = a;`); ownership transfer has no callable counterpart."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::operator=(NCollection_ForwardRange&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ move assignment. Rust moves the value itself (`let b = a;` / `b = a;`); ownership transfer has no callable counterpart."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::iter",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::end",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::iter",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally. cbegin is the same iterator as begin."
+    },
+    {
+      "upstream_id": "NCollection_ForwardRange::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ForwardRange.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::forward_range::ForwardRange::end",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the SFINAE accessor detection becomes the explicit ForwardHost::Accessors declaration (AccessorSet<Value, Current, CurrentId> with Present/Missing), resolved by SelectAccessor in the same Value > Current > CurrentId priority. Deliberate Rust deviation: advancing or dereferencing an exhausted host is guarded (no Next call, None) where the native code calls the host unconditionally. cend is the same sentinel as end."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueRef::get() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++17 structured-binding protocol (get<I>() with the std::tuple_size/tuple_element specializations). Rust ItemsView items are tuples `(&K, &V)` (KeyValueItems), destructured by patterns (`for (key, value) in view.begin()`); tuple fields have no callable counterpart."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyValueIndexRef::get() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++17 structured-binding protocol (get<I>() with the std::tuple_size/tuple_element specializations). Rust ItemsView items are tuples `(&K, &V, usize)` (KeyValueIndexItems), destructured by patterns (`for (key, value) in view.begin()`); tuple fields have no callable counterpart."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::KeyIndexRef::get() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++17 structured-binding protocol (get<I>() with the std::tuple_size/tuple_element specializations). Rust ItemsView items are tuples `(&K, usize)` (KeyIndexItems), destructured by patterns (`for (key, value) in view.begin()`); tuple fields have no callable counterpart."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next); its exhaustion (None) replaces the default-constructed end iterator."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator(MapType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::begin",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; View<MapType, RefType, Extractor, IsConst> is ItemsView (IsConst = true) / ItemsViewMut over a map implementing ItemsSource<E>/ItemsSourceMut<E>, where E is the extractor marker (KeyValueItems, KeyValueIndexItems, KeyIndexItems) and items are tuples. Implemented for DataMap, IndexedDataMap, FlatDataMap, OrderedDataMap and IndexedMap."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::operator*() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::operator++()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::operator++(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::operator==(const Iterator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::Iterator::operator!=(const Iterator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next)."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View(MapRef)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; View<MapType, RefType, Extractor, IsConst> is ItemsView (IsConst = true) / ItemsViewMut over a map implementing ItemsSource<E>/ItemsSourceMut<E>, where E is the extractor marker (KeyValueItems, KeyValueIndexItems, KeyIndexItems) and items are tuples. Implemented for DataMap, IndexedDataMap, FlatDataMap, OrderedDataMap and IndexedMap."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::begin",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; View<MapType, RefType, Extractor, IsConst> is ItemsView (IsConst = true) / ItemsViewMut over a map implementing ItemsSource<E>/ItemsSourceMut<E>, where E is the extractor marker (KeyValueItems, KeyValueIndexItems, KeyIndexItems) and items are tuples. Implemented for DataMap, IndexedDataMap, FlatDataMap, OrderedDataMap and IndexedMap."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next), whose None marks the end."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::begin",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; View<MapType, RefType, Extractor, IsConst> is ItemsView (IsConst = true) / ItemsViewMut over a map implementing ItemsSource<E>/ItemsSourceMut<E>, where E is the extractor marker (KeyValueItems, KeyValueIndexItems, KeyIndexItems) and items are tuples. Implemented for DataMap, IndexedDataMap, FlatDataMap, OrderedDataMap and IndexedMap. cbegin is begin."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by the map item iterator returned by `ItemsView::begin` / `ItemsViewMut::begin` (Iterator::next), whose None marks the end."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; View<MapType, RefType, Extractor, IsConst> is ItemsView (IsConst = true) / ItemsViewMut over a map implementing ItemsSource<E>/ItemsSourceMut<E>, where E is the extractor marker (KeyValueItems, KeyValueIndexItems, KeyIndexItems) and items are tuples. Implemented for DataMap, IndexedDataMap, FlatDataMap, OrderedDataMap and IndexedMap."
+    },
+    {
+      "upstream_id": "NCollection_ItemsView::View::empty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ItemsView.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ItemsView::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; View<MapType, RefType, Extractor, IsConst> is ItemsView (IsConst = true) / ItemsViewMut over a map implementing ItemsSource<E>/ItemsSourceMut<E>, where E is the extractor marker (KeyValueItems, KeyValueIndexItems, KeyIndexItems) and items are tuples. Implemented for DataMap, IndexedDataMap, FlatDataMap, OrderedDataMap and IndexedMap."
+    },
+    {
+      "upstream_id": "NCollection_Iterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::CollectionCursor as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. Both cursors implement Default with no items (More() is false)."
+    },
+    {
+      "upstream_id": "NCollection_Iterator(const NCollection_Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::CollectionCursor as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. CollectionCursor is Copy; the mutable cursor holds an exclusive borrow and cannot be duplicated, so copies go through CollectionCursorMut::as_const."
+    },
+    {
+      "upstream_id": "NCollection_Iterator(NCollection_Iterator&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ move constructor. Rust moves the value itself (`let b = a;` / `b = a;`); ownership transfer has no callable counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::operator=(const NCollection_Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::CollectionCursor as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::operator=(NCollection_Iterator&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ move assignment. Rust moves the value itself (`let b = a;` / `b = a;`); ownership transfer has no callable counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::~NCollection_Iterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_Iterator(const NCollection_Iterator<Container,false>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursorMut::as_const",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::operator=(const NCollection_Iterator<Container,false>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursorMut::as_const",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator(owner_type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. CollectionCursorMut::new is the mutable twin."
+    },
+    {
+      "upstream_id": "NCollection_Iterator(const Container&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. The legacy mutable cursor built from a const container (a const_cast natively) is the read-only CollectionCursor in Rust; writing through a shared borrow has no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Iterator(owner_type&,const iterator_type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::with_position",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. CollectionCursorMut::with_position is the mutable twin."
+    },
+    {
+      "upstream_id": "NCollection_Iterator(owner_type&,iterator_type&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::with_position",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. A position offset is copied, so the by-value and by-reference overloads coincide."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::Init(owner_type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. CollectionCursorMut::init is the mutable twin."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::Initialize(owner_type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. Initialize forwards to Init."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::Init(const Container&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. The legacy mutable cursor built from a const container (a const_cast natively) is the read-only CollectionCursor in Rust; writing through a shared borrow has no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::Initialize(const Container&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. The legacy mutable cursor built from a const container (a const_cast natively) is the read-only CollectionCursor in Rust; writing through a shared borrow has no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CursorPositions::more",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CursorPositions::next",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::ValueIter() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CursorPositions::value_iter",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::ChangeValueIter()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CursorPositions::change_value_iter",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::EndIter() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CursorPositions::end_iter",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::ChangeEndIter()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CursorPositions::change_end_iter",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursor::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. CollectionCursorMut::value is the mutable twin."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::ChangeValue()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::CollectionCursorMut::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::operator==(const NCollection_Iterator<Container,theOtherIsConstant>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::CollectionCursor as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. PartialEq is implemented for every const/mutable pairing; equality needs the same storage, end and current position."
+    },
+    {
+      "upstream_id": "NCollection_Iterator::operator!=(const NCollection_Iterator<Container,theOtherIsConstant>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Iterator.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::CollectionCursor as PartialEq>::ne",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Iterator<Container, IsConstant> is CollectionCursor (IsConstant = true) and CollectionCursorMut (the mutable default) over the contiguous storage of the only native owner, NCollection_Array1 (Array1::as_slice); iterator positions are slice offsets held by CursorPositions, which both cursors deref to. Value() past the end, undefined natively, is an ArrayError::Index carrying the offset. PartialEq is implemented for every const/mutable pairing."
     }
   ],
   "tests": [

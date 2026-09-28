@@ -105,3 +105,15 @@ mod allocator_object;
 pub use allocator_object::{AllocatorObject, HeapAllocatorObject, IncrementalAllocatorObject};
 mod kdtree;
 pub use kdtree::{KDTree, KdPoint};
+
+mod utf_iterator;
+pub use utf_iterator::{UtfBufferError, UtfIterator, UtfUnit, WideChar};
+mod utf_string;
+pub use utf_string::{String8, UtfString};
+mod collection_cursor;
+pub use collection_cursor::{CollectionCursor, CollectionCursorMut, CursorPositions};
+mod items_view;
+pub use items_view::{
+    ItemsSource, ItemsSourceMut, ItemsView, ItemsViewMut, KeyIndexItems, KeyValueIndexItems,
+    KeyValueItems,
+};
