@@ -109,6 +109,49 @@ class RowMatchingTests(unittest.TestCase):
         self.assertNotIn("gp_Demo(double,D)", rendered)
         self.assertEqual(stale, ["gp_Demo::Mirror", "gp_Demo::Unknown"])
 
+    def test_rtti_macros_end_their_statement(self):
+        # Regression: DEFINE_STANDARD_RTTIEXT has no semicolon, so the private members
+        # after it were once parsed as public (Geom2dEval_TBezierCurve::evalBasisDeriv).
+        text = """class G_T : public G_B
+{
+public:
+  void Visible();
+  DEFINE_STANDARD_RTTIEXT(G_T, G_B)
+private:
+  void hiddenFirst(double theT);
+  void hiddenSecond(int theN);
+};
+class G_U : public G_B
+{
+public:
+  DEFINE_STANDARD_RTTI_INLINE(G_U, G_B)
+};"""
+        self.assertEqual(members_of(text), [
+            "G_T::Visible||", "G_T::DEFINE_STANDARD_RTTIEXT|G_T,G_B|",
+            "G_U::DEFINE_STANDARD_RTTI_INLINE|G_U,G_B|"])
+
+    def test_public_field_rows_are_accepted_but_not_required(self):
+        text = """namespace Desc
+{
+class Mapped
+{
+public:
+  std::size_t MaxDerivOrder = 3;
+  std::optional<Domain1d> Domain;
+  int Kind() const;
+private:
+  double myHidden;
+};
+}"""
+        with tempfile.TemporaryDirectory() as folder:
+            header = Path(folder) / "Desc.hxx"
+            header.write_text(text)
+            rows = [{"upstream_id": upstream_id, "source": "p/Desc.hxx"} for upstream_id in [
+                "Desc::Mapped::Domain", "Desc::Mapped::Kind", "Desc::Mapped::myHidden"]]
+            missing, stale = audit_header(header, "p/Desc.hxx", {"api": rows})
+        self.assertEqual(missing, [])
+        self.assertEqual(stale, ["Desc::Mapped::myHidden"])
+
 
 if __name__ == "__main__":
     unittest.main()

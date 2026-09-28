@@ -21,7 +21,12 @@ Known false-positive sources and how they are handled:
 - Out-of-class definitions (`inline gp_Vec::gp_Vec(...)`) are recognised by
   the qualified name and ignored; only in-class declarations count.
 - `= delete` members, `friend` declarations, typedefs, `using` aliases, data
-  members and protected/private members are never expected.
+  members and protected/private members are never expected. A row that names a
+  public data member (`Geom2dEval_RepCurveDesc::Mapped::Domain`) is accepted as
+  mapping that field and is not reported stale.
+- `DEFINE_STANDARD_RTTIEXT(...)` and `DEFINE_STANDARD_RTTI_INLINE(...)` carry no
+  semicolon; the scanner ends the statement after them, so an access label that
+  follows is honoured and the macro is expected as one `Class::MACRO` row.
 - A bare `Class::Name` row does not cover an overloaded name; overloads that
   differ only in cv-qualification must carry the trailing ` const`.
 - Macros that expand to members are not expanded; an unknown macro that ends
@@ -34,7 +39,7 @@ import argparse
 import json
 import re
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,6 +57,7 @@ class Member:
     prefix: str
     params: str | None
     qualifier: str
+    is_field: bool = field(default=False, repr=False)
 
 
 def clean_source(text: str) -> str:
@@ -149,9 +155,24 @@ def statement_members(head: str, braced: str | None, scope: str, primary: str) -
     scope_match = SCOPE_HEAD.match(head)
     if scope_match is not None and "(" not in head:
         return nested_scope_members(scope_match, braced, scope, primary)
-    if not head or re.match(r"(friend|typedef|using|static_assert)\b", head) or "(" not in head:
+    if not head or re.match(r"(friend|typedef|using|static_assert)\b", head):
         return []
+    if "(" not in head:
+        return field_members(head, scope, primary)
     return function_members(head, scope, primary)
+
+
+def field_members(head: str, scope: str, primary: str) -> list[Member]:
+    """A public data member (`double Scale = 1.0`), recorded only to excuse its row.
+
+    >>> [(m.prefix, m.is_field) for m in field_members("std::optional<Domain1d> Domain", "Mapped", "X")]
+    [('Mapped::Domain', True)]
+    """
+    declaration = split_default(head).strip()
+    name = re.search(r"([A-Za-z_]\w*)\s*(?:\[[^\]]*\])?$", declaration)
+    if name is None or re.fullmatch(r"[A-Za-z_]\w*", declaration):
+        return []  # a lone word is a macro or a label remnant, not a typed field
+    return [Member(f"{scope or primary}::{name.group(1)}", None, "", True)]
 
 
 def nested_scope_members(match: re.Match[str], braced: str | None, scope: str, primary: str) -> list[Member]:
@@ -243,7 +264,8 @@ def header_members(path: Path) -> list[Member]:
     text = clean_source(path.read_text(errors="replace"))
     exception = re.compile(r"\bDEFINE_STANDARD_EXCEPTION\s*\(\s*(\w+)\s*,[^)]*\)")
     exceptions = [Member(name, None, "") for name in exception.findall(text)]
-    return exceptions + scan_scope(exception.sub(";", text), "", True, path.stem)
+    text = re.sub(r"(\bDEFINE_STANDARD_RTTI(?:EXT|_INLINE)\s*\([^)]*\))", r"\1;", exception.sub(";", text))
+    return exceptions + scan_scope(text, "", True, path.stem)
 
 
 def parse_row_id(upstream_id: str) -> Member:
@@ -301,7 +323,8 @@ def audit_header(header: Path, source: str, ledger: dict[str, list[dict[str, str
     ids = [row["upstream_id"] for row in ledger["api"] if row["source"] == source]
     rows = [parse_row_id(upstream_id) for upstream_id in ids]
     members = header_members(header)
-    missing = [m for m in members if not any(covers(row, m, members) for row in rows)]
+    expected = [m for m in members if not m.is_field]
+    missing = [m for m in expected if not any(covers(row, m, members) for row in rows)]
     stale = [i for i, row in zip(ids, rows) if not any(covers(row, m, members) for m in members)]
     return missing, stale
 
