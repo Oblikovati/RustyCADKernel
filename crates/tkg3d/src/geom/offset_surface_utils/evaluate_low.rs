@@ -21,7 +21,7 @@ use super::{
     compute_dnormal_u, compute_dnormal_v, is_infinite_coord, offset_point, put, query_osculating,
     replace_derivative, shift_point, zero_table,
 };
-use crate::geom::{GeomSurface, GeomSurfaceD1};
+use crate::geom::{BasisSurfaceEvaluator, GeomSurface, GeomSurfaceD1};
 use rustycad_tkernel::ncollection::Array2;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::cslib::{self, NormalStatus, ParametricPosition, SingularNormal};
@@ -57,10 +57,10 @@ pub(super) fn singular_normal(
 
 /// ComputeDerivatives through the osculating surface when there is one, through
 /// the basis alone otherwise (the two native call sites of every evaluator).
-pub(super) fn derivatives_with(
+pub(super) fn derivatives_with<B: BasisSurfaceEvaluator + ?Sized>(
     orders: DerivativeOrders,
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     oscillating: (&OsculatingInfo, &Handle<dyn GeomSurface>),
     tables: (&mut Array2<'_, Vector3>, &mut Array2<'_, Vector3>),
 ) -> Result<bool, Failure> {
@@ -82,32 +82,32 @@ pub(super) fn derivatives_with(
 
 /// Offset point from the basis D1 at `(u, v)` (`EvaluateD0`); `None` when no
 /// normal can be found; `evaluate_d0((u, v), &*basis, 2.0, None)?`.
-pub fn evaluate_d0(
+pub fn evaluate_d0<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
 ) -> Result<Option<Point3>, Failure> {
-    let d1: GeomSurfaceD1 = basis.eval_d1(uv.0, uv.1)?;
+    let d1: GeomSurfaceD1 = basis.basis_d1(uv.0, uv.1)?;
     evaluate_d0_from(uv, basis, offset, osc, d1)
 }
 
 /// `EvaluateD0` with the basis point and first derivatives already evaluated;
 /// `evaluate_d0_from((u, v), &*basis, 2.0, None, d1)?`.
-pub fn evaluate_d0_from(
+pub fn evaluate_d0_from<B: BasisSurfaceEvaluator + ?Sized>(
     start: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     first: GeomSurfaceD1,
 ) -> Result<Option<Point3>, Failure> {
-    let domain = BasisDomain::of(basis);
+    let domain = BasisDomain::of(basis)?;
     let mut uv: (f64, f64) = start;
     let mut current: GeomSurfaceD1 = first;
     let mut is_first_iteration: bool = true;
     loop {
         if !is_first_iteration {
-            current = basis.eval_d1(uv.0, uv.1)?;
+            current = basis.basis_d1(uv.0, uv.1)?;
         }
         is_first_iteration = false;
         let (mut value, d1u, d1v) = (current.point, current.d1u, current.d1v);
@@ -127,9 +127,9 @@ pub fn evaluate_d0_from(
 }
 
 // One singular-point attempt of EvaluateD0: the offset point, or None to shift.
-fn singular_d0(
+fn singular_d0<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     point: (Point3, Vector3, Vector3),
@@ -178,13 +178,13 @@ fn singular_d0(
 
 /// Offset point and first derivatives from the basis D2 at `(u, v)`
 /// (`EvaluateD1`); `evaluate_d1((u, v), &*basis, 2.0, None)?`.
-pub fn evaluate_d1(
+pub fn evaluate_d1<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
 ) -> Result<Option<GeomSurfaceD1>, Failure> {
-    let d2 = basis.eval_d2(uv.0, uv.1)?;
+    let d2 = basis.basis_d2(uv.0, uv.1)?;
     let first = GeomSurfaceD1 {
         point: d2.point,
         d1u: d2.d1u,
@@ -195,20 +195,20 @@ pub fn evaluate_d1(
 
 /// `EvaluateD1` with the basis derivatives up to order 2 already evaluated;
 /// `evaluate_d1_from((u, v), &*basis, 2.0, None, (d1, [d2u, d2v, d2uv]))?`.
-pub fn evaluate_d1_from(
+pub fn evaluate_d1_from<B: BasisSurfaceEvaluator + ?Sized>(
     start: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     first: (GeomSurfaceD1, [Vector3; 3]),
 ) -> Result<Option<GeomSurfaceD1>, Failure> {
-    let domain = BasisDomain::of(basis);
+    let domain = BasisDomain::of(basis)?;
     let mut uv: (f64, f64) = start;
     let (mut current, mut d2) = first;
     let mut is_first_iteration: bool = true;
     loop {
         if !is_first_iteration {
-            let r = basis.eval_d2(uv.0, uv.1)?;
+            let r = basis.basis_d2(uv.0, uv.1)?;
             current = GeomSurfaceD1 {
                 point: r.point,
                 d1u: r.d1u,
@@ -231,9 +231,9 @@ pub fn evaluate_d1_from(
 
 // One pass of the EvaluateD1 loop body: the regular formula, or the singular
 // fallback; None to shift the point.
-fn attempt_d1(
+fn attempt_d1<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset: f64,
     osc: Option<&dyn OsculatingQuery>,
     derivatives: (GeomSurfaceD1, [Vector3; 3]),
@@ -273,9 +273,9 @@ fn attempt_d1(
 }
 
 // The singular branch of EvaluateD1, with the retry after a replaced derivative.
-fn singular_d1(
+fn singular_d1<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
-    basis: &dyn GeomSurface,
+    basis: &B,
     offset_sign: (f64, f64),
     oscillating: (&OsculatingInfo, &Handle<dyn GeomSurface>),
     derivatives: (GeomSurfaceD1, [Vector3; 3]),

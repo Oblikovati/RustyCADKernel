@@ -12,8 +12,8 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! Behaviour tests for every public member of Geom_BSplineSurface. The native
-//! Geom_BSplineSurface_Test.cxx needs GeomAdaptor_Surface, so it is not mapped; the
+//! Behaviour tests for every public member of Geom_BSplineSurface, beside the
+//! translated Geom_BSplineSurface_Test.cxx (geom_bspline_surface.rs); the
 //! numeric oracle (g3_bspline_surface*, surface kind 8) compares the members bit for
 //! bit with OCCT, and these tests pin the preserved native quirks.
 #![allow(non_snake_case)]

@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod g3_probe;
 use g3_probe::{
-    advapprox, bezier_surface, bspl, bspline_surface, conics, curves, offset_surface, simple,
-    surfaces, swept,
+    adaptor3d, advapprox, bezier_surface, bspl, bspline_surface, conics, curves,
+    geom_adaptor_cases as a3, offset_surface, simple, surfaces, swept,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -52,6 +52,23 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ),
     ("g3_rect_trim", offset_surface::rect_trim_case),
     ("g3_offset_surface", offset_surface::offset_surface_case),
+    ("a3_base", a3::base_case),
+    ("a3_curve", a3::curve_case),
+    ("a3_curve_load", a3::curve_load_case),
+    ("a3_curve_evalrep", a3::curve_evalrep_case),
+    ("a3_surface", a3::surface_case),
+    ("a3_surface_load", a3::surface_load_case),
+    ("a3_surface_evalrep", a3::surface_evalrep_case),
+    ("a3_extrusion", a3::extrusion_case),
+    ("a3_revolution", a3::revolution_case),
+    ("a3_transformed", a3::transformed_case),
+    (
+        "a3_transformed_curve",
+        g3_probe::topology::transformed_curve_case,
+    ),
+    ("a3_hvertex", g3_probe::topology::hvertex_case),
+    ("a3_topol", g3_probe::topology::topol_case),
+    ("a3_cone_apex", g3_probe::topology::cone_apex_case),
     // GeomEval curves (eval_curves.rs)
     ("g3_eval_curve", g3_probe::eval_curves::eval_curve_case),
     // GeomEval elementary surfaces (eval_surfaces.rs)
@@ -78,6 +95,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // TopAbs (top_abs.rs)
     ("g3_topabs", g3_probe::top_abs::topabs_case),
     ("g3_topabs_parse", g3_probe::top_abs::topabs_parse_case),
+    ("a3_cos", adaptor3d::cos_case),
+    ("a3_cos_load", adaptor3d::cos_load_case),
+    ("a3_iso", adaptor3d::iso_case),
+    ("a3_interfunc", adaptor3d::interfunc_case),
+    ("a3_hstool", adaptor3d::hstool_case),
 ];
 
 fn main() {

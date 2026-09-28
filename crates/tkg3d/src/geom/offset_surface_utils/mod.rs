@@ -18,8 +18,8 @@
 //! normals through CSLib, derivative replacement and point shifting).
 //!
 //! The native templates take the basis surface and an optional osculating-surface
-//! query; here the basis is a `&dyn GeomSurface` and the query an
-//! [`OsculatingQuery`]. The `evaluate_*` functions return `Ok(None)` where the
+//! query; here the basis is any [`BasisSurfaceEvaluator`] (a Geom surface or a
+//! GeomAdaptor_Surface, as natively) and the query an [`OsculatingQuery`]. The `evaluate_*` functions return `Ok(None)` where the
 //! native ones return false.
 mod derivatives;
 mod evaluate_high;
@@ -30,8 +30,8 @@ pub use evaluate_high::{
 };
 pub use evaluate_low::{evaluate_d0, evaluate_d0_from, evaluate_d1, evaluate_d1_from};
 
-use crate::geom::GeomSurface;
 use crate::geom::errors;
+use crate::geom::{BasisSurfaceEvaluator, GeomSurface};
 use rustycad_tkernel::ncollection::Array2;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -248,13 +248,14 @@ pub struct BasisDomain {
     pub v_periodic: bool,
 }
 impl BasisDomain {
-    /// The domain of `basis`; `BasisDomain::of(&*surface)`.
-    pub fn of(basis: &dyn GeomSurface) -> Self {
-        Self {
-            bounds: basis.bounds(),
-            u_periodic: basis.is_u_periodic(),
-            v_periodic: basis.is_v_periodic(),
-        }
+    /// The domain of `basis` (`Bounds`, `IsUPeriodic`, `IsVPeriodic`, which an
+    /// adaptor basis can raise from); `BasisDomain::of(&*surface)?`.
+    pub fn of<B: BasisSurfaceEvaluator + ?Sized>(basis: &B) -> Result<Self, Failure> {
+        Ok(Self {
+            bounds: basis.basis_bounds()?,
+            u_periodic: basis.basis_u_periodic()?,
+            v_periodic: basis.basis_v_periodic()?,
+        })
     }
 }
 
@@ -297,12 +298,12 @@ pub fn shift_point(
 /// Replace a null first derivative by the one at a nearby parameter, when exactly
 /// one of D1U and D1V is null (`ReplaceDerivative`);
 /// `replace_derivative(uv, domain, [&mut du, &mut dv], tol2, &*basis)?`.
-pub fn replace_derivative(
+pub fn replace_derivative<B: BasisSurfaceEvaluator + ?Sized>(
     uv: (f64, f64),
     bounds: (f64, f64, f64, f64),
     derivatives: [&mut Vector3; 2],
     square_tol: f64,
-    basis: &dyn GeomSurface,
+    basis: &B,
 ) -> Result<bool, Failure> {
     let [du, dv] = derivatives;
     let replace_du: bool = du.square_magnitude() < square_tol;
@@ -339,7 +340,7 @@ pub fn replace_derivative(
                 continue;
             }
         }
-        let result = basis.eval_d1(u, v)?;
+        let result = basis.basis_d1(u, v)?;
         let mut replaced: bool = false;
         if replace_du && result.d1u.square_magnitude() > square_tol {
             *du = result.d1u;

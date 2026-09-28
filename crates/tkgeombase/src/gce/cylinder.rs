@@ -58,7 +58,7 @@ impl MakeCylinder {
     }
 
     /// gce_MakeCylinder(Axis, Radius): the cylinder of axis `axis`, its X
-    /// direction from [`perpendicular_hint`]; gce_NegativeRadius when `radius < 0`.
+    /// direction from `perpendicular_hint`; gce_NegativeRadius when `radius < 0`.
     /// `MakeCylinder::from_axis(Axis1::default(), 1.0)?`.
     pub fn from_axis(axis: Axis1, radius: f64) -> Result<Self, Failure> {
         if radius < 0.0 {
