@@ -410,7 +410,7 @@ Standard_Dump has all 12 legacy tests translated. Point, direction, frame, and
 bounding-box fragments use native formatting and one-based parser cursors.
 Additional probes check malformed fragments, partial coordinate writes, exception
 messages, cursor changes, and translation rounding. The geometry corpus has 461
-cases. The combined differential corpus contains 78413 cases.
+cases. The combined differential corpus contains 81557 cases, 3144 of them NCollection requests.
 
 OCC25545 runs the original 1000-vertex concurrent-read scenario against shared
 Rust vertex geometry and immutable location chains. Location transformations are
@@ -453,3 +453,336 @@ reference overloads are field access and `ChangeData` returns an array of compon
 references (a matrix returns its column array). `Map` copies instead of reinterpreting
 memory. `DumpJson` exists only for float and double elements, because the native macro
 reads each argument as a `double`, which is undefined for `int` elements.
+
+## NCollection API completion
+
+`python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/NCollection --source ../OCCT`
+reports 0 public members without api rows and 0 stale rows. The package has 1,961 rows:
+1,691 implemented and 270 excluded. Each excluded row names the Rust construct that covers
+it: destructors are Drop glue, move constructors and move assignment are Rust moves, STL
+`begin`/`end` boilerplate is covered by `iter`/`IntoIterator`, and internal node classes are
+covered by the owning container. The audit tool now reads hidden-friend operators,
+header-local macros (followed through same-package includes), cv-qualified conversion
+operators, multi-literal deprecation markers, specializations with call arguments and
+deduction guides; `tools/tests/test_audit_api_rows.py` covers each rule.
+
+The differential corpus of `tools/verify_tkernel.py` includes one NCollection probe family per
+container family (`tools/oracle/tkernel_ncollection_<family>_probe.cxx`, Rust twin in
+`crates/tkernel/examples/oracle_probe/ncollection/`, requests in
+`tools/tkernel_ncollection_<family>_corpus.py`): 3,144 requests, all identical to OCCT.
+
+### Vectors and matrices
+
+**NCollection vectors and matrices (Vec2/Vec3/Vec4, Mat3/Mat4, Lerp).** Every public member
+now has an exact api row; the audit reports 0 missing / 0 stale for these six headers. No Rust
+code changed: the existing implementation already covered every member, and the TKMath numeric
+probe (`ncollection_vec` 600 requests, `ncollection_mat` 400 requests) compares each operator,
+swizzle, conversion and matrix member bit-for-bit. The work re-spelled 84 rows to the header's
+own identities (`const NCollection_Vec3<Element_t>&` instead of the `Vec3` shorthand), gave the
+hidden-friend operators (`operator+/-/*//(const NCollection_VecN&, const NCollection_VecN&)`)
+their two-operand signatures, and corrected trait spellings (`<Vec3 as Sub>::sub`, scalar
+division as `Div<T>`). Four rows were dropped because the header has no such member: the three
+`operator[]` rows (C++ subscripting goes through the `operator Element_t*()` conversion, whose
+rows map to `data`/`change_data`; Rust's `Index<usize>` impl is the idiomatic counterpart) and a
+duplicate `SetValues(x,y)`. The audit tool now follows same-package includes transitively, since
+NCollection_Vec4 reaches `NCOLLECTION_VEC_COMPONENTS_2D` only through NCollection_Vec3.hxx.
+
+### Arrays
+
+The public members of `NCollection_Array1`, `Array2`, `HArray1`, `HArray2`, `LocalArray`,
+`LinearVector`, `DynamicArray`, `AliasedArray`, `SparseArray`, `SparseArrayBase` and the
+deprecated `NCollection_Vector` alias have 378 api rows. The audit reports no gaps and no
+stale rows for these headers. Destructors, STL `begin`/`end` boilerplate and the OCCT
+`More`/`Next` iterator classes are excluded. Each exclusion note names the Rust iterator
+that covers it.
+
+Newly ported members:
+
+- `HArray1<T>` and `HArray2<T>` are handle-shared transients. The array sits behind a
+  lock. The `array1()`/`change_array1()` guards expose the full array API to every handle
+  holder. Each instantiation registers one `NCollection_HArray1`/`2` descriptor whose parent
+  is `Standard_Transient`.
+- `Array1`: `update_upper_bound`, `length` and `range_size`.
+- `Array2`: `array_size`, `range_size`, `upper_for_size`, `begin_position`,
+  `last_position`, the `int`/`size_t` counts, the flat `at_offset`/`change_at_offset`
+  accessors and `first`/`last`.
+- `LinearVector`: `has_data`, `max_size` and the const `to_array1_view`.
+- `LocalArray`: `to_array1_view`.
+- `AliasedArray`: `lower`/`upper`/`is_allocated`, `first`/`last`, the untyped
+  `byte_value` accessors and `move_from`.
+- `DynamicArray`: `with_occ_allocator`.
+- `SparseArray`: `capacity` and `entries_mut`.
+
+Preserved native behaviour:
+
+- Bound arithmetic uses wrapping 32-bit `int` math (`UpdateUpperBound`, `BeginPosition`,
+  `LastPosition`, `UpperForSize`, `Length`).
+- `RangeSize` sign-extends a negative count to `usize`, as `static_cast<size_t>(int)` does.
+- An `Array2` constructed with `upper == lower - 1` is empty. This fixes an earlier Rust
+  deviation that refused the empty range. Only `Resize` refuses it.
+- The `SparseArray` block table starts at `increment` entries and doubles, so `Capacity`
+  is `increment²` after the first `SetValue`. A block whose last value is unset is freed.
+- `LinearVector::SetValue` returns the stored slot.
+
+Deliberate deviations:
+
+- Natively, `AliasedArray::Move` leaves the source as a dangling non-owning alias. In Rust
+  the source is left empty instead.
+- The const `ToArray1()` overloads return a shared view that copies itself on the first
+  write. It never writes through a const buffer.
+- `DynamicArray::set_increment` also drops the empty blocks that were allocated with the
+  old size.
+- Unchecked native accessors (`First`, `Last` and the `DynamicArray` `int` operators) are
+  checked `Result`s.
+
+A new differential probe family (`ncoll_arrays_*`, 54 cases) compares these results with
+OCCT bit for bit: bounds and layout (including `int` wrap-around and empty dimensions),
+`AliasedArray` shapes, the `LinearVector` capacity rule, `SparseArray` capacity, assign
+and exchange, and `DynamicArray` inserts and `SetValue` with the native out-of-range
+throws.
+
+### Lists and sequences
+
+All 188 public members of the seven headers have api rows (151 implemented, 37 justified
+exclusions: 3 destructors, 12 STL `begin`/`end`/`cbegin`/`cend` members covered by `iter`,
+`iter_mut` and `IntoIterator` for `&`/`&mut`, 19 internal node members of
+`NCollection_ListNode`/`TListNode`/`SeqNode`/`Sequence::Node`, `Sequence::delNode`, and the raw
+`CurrentNode`/`PreviousNode` pointers of the base sequence iterator).
+Native exception conditions are now `Result` errors instead of silent no-ops or panics:
+`List::remove_first` on an empty list and every cursor edit at an end or foreign cursor report
+`Standard_NoSuchObject`; every sequence index, range, exchange, split and insertion check reports
+`Standard_OutOfRange` naming the index and valid range. `First`/`Last` keep returning `None`
+where OCCT raises; `Sequence`'s `Index`/`IndexMut` panic with the OutOfRange message.
+
+Newly ported: `List::append_at` (`Append(item, Iterator&)`), `insert_list_after`, `last_mut`,
+`contains`, `clear_with_allocator`, `length`, `ListCursor::init`; `Sequence::at`/`change_at`,
+`first_mut`/`last_mut`, `insert_sequence_before`, `remove_cursor`, `insert_after_cursor`, and a
+bidirectional `SequenceCursor` (`new(seq, is_start)`, `init`, `previous`, equality on the current
+node only); `NCollection_HSequence` as `HSequence<T>`, a Transient whose sequence sits behind a
+lock so all handle holders share it, with one RTTI descriptor per item type named
+`NCollection_HSequence`.
+
+Preserved quirks: `Sequence::split` clears and rebinds the destination to this allocator before
+it checks the index; `InsertAfter(index, Sequence&)` returns for an empty source before checking
+the index while `InsertBefore(0, Sequence&)` raises even for an empty source;
+`List::insert_list_before` with an empty source bound to another allocator does not check the
+cursor; an end cursor makes `InsertAfter(Iterator&)`/`EmplaceAfter(Iterator&)` prepend and
+`List::InsertAfter(List&, Iterator&)` append; the list move constructor leaves the source empty
+with its own allocator. Deliberate deviations: the `int` index overloads map to the `usize`
+methods (negative indices are unrepresentable); list/sequence cursors name nodes by identity, so
+a cursor naming no node of the container reports NoSuchObject where C++ is undefined; closure
+emplacement constructs the value only after a position check; `HSequence::append_handle` reports
+`Standard_NullObject` for a null handle where C++ dereferences it.
+
+Differential evidence: 122 `ncoll_lists_*` probe scripts (fixed edge cases plus 100 seeded
+scripts whose indices straddle the valid range, and three HSequence cases) produce identical
+native and Rust output.
+
+### Hash maps
+
+Every public member of `NCollection_BaseMap`, `Map`, `DataMap`, `IndexedMap`,
+`IndexedDataMap`, `DoubleMap`, `MapAlgo`, `DefaultHasher` (all pure specializations) and
+`Primes` has an api row: 432 rows, and the audit reports 0 missing and 0 stale for these headers.
+Newly ported: the OCCT `Iterator` cursors (`DataMapIterator`/`DataMapIteratorMut`,
+`MapIterator`, `IndexedMapIterator`, `IndexedDataMapIterator`/`IndexedDataMapIteratorMut`,
+`DoubleMapIterator`), the `BaseMap` trait (`NbBuckets`, `Extent`, `Length`, `Size`, `IsEmpty`,
+`Allocator`), `DataMap::{bound, contained, contained_mut, seek, change_seek, find_into, exchange}`
+and `Index<&K>`, `IndexedMap::{try_emplace, try_emplaced, contained}`,
+`IndexedDataMap::{try_bind, contained, contained_mut, indexed_items_mut}`,
+`DoubleMap::{find1_into, find2_into}`, `clear_with_allocator` on every map, `buckets_from_int`,
+pointer-key hashing, and `map_algo::{unite, has_intersection, intersect, subtract, differ, is_equal}`.
+
+Preserved native behaviour:
+- `NextPrimeForMap` evaluates `theN + 1` in `size_t`, so `SIZE_MAX` yields 101.
+- The constructors keep a zero bucket count until the first insertion (Rust no longer clamps to 1).
+- `DoubleMap::AreBound` scans the key-2 bucket through the key-1 chain link (`Next()`, not
+  `Next2()`), so a bound pair that is not first in its key-2 bucket can report false.
+- `DoubleMap::Clear(allocator)` always releases its buckets; the other maps release only when
+  the allocator changes. `DoubleMap`'s move assignment clears the destination and leaves the
+  source empty; the other maps' move assignment swaps (mapped to `exchange`).
+- `MapAlgo::Intersect`/`Differ` rebuild the map from a fresh one-bucket map with a default hasher
+  (the native `Exchange` step), so the result keeps that hasher and the rebuilt bucket order.
+- `IndexedMap::ReSize(int)` clamps a negative size to 0 while the other maps' int overloads raise
+  `Standard_OutOfRange`.
+
+Deliberate Rust deviations: int index/bucket overloads map to the `usize` functions (negative
+values are unrepresentable; `buckets_from_int` performs the native check);
+`IndexedDataMap::RemoveKey` returns `bool` where the native function returns `void`; the
+DataMap `operator()` becomes `Index`/`IndexMut`, which panic with the Standard_NoSuchObject text.
+Exclusions: destructors, move constructors, the bucket-chain node classes, STL
+`begin`/`end`/`cbegin`/`cend`, the protected-constructible `BaseMap::Iterator`, the STL
+`IndexedIterator` and raw `Buckets()`; each note names the covering Rust construct.
+
+The `hash_maps` differential probe family compares 260 requests with OCCT bit for bit: prime-table
+boundaries, `DefaultHasher` values for every integer specialization and `double`, fixed and
+seeded scripts over all five maps (bucket-order traversals through collisions, resizes, clears,
+removals, copies and exception classes) and every `MapAlgo` function.
+
+### Flat, ordered and packed maps
+
+All 312 public members of `NCollection_FlatMap`, `NCollection_FlatDataMap`, `NCollection_OrderedMap`,
+`NCollection_OrderedDataMap`, `NCollection_PackedMap` and `NCollection_PackedMapAlgo` have api rows
+(297 implemented, 15 excluded: five destructors, and the ten ordered-map node constructors and
+`delNode`, which are allocator plumbing — the Rust map owns its nodes as allocator-backed slots).
+The 269-script differential corpus `ncoll_flat_maps_*` compares OCCT and Rust output exactly for
+Robin Hood displacement and growth, ordered bucket selection, insertion order, move semantics,
+`Reset`, node traversal, packed signed resizing and the deprecated packed set algebra on 32- and
+64-bit keys.
+
+Two defects were fixed. An ordered map built with zero buckets keeps `NbBuckets() == 0` until the
+first insertion, as in `NCollection_BaseMap`; the Rust table raised the count to one. Move
+assignment of `NCollection_OrderedMap`/`OrderedDataMap` swaps the two maps, so the moved-from map
+receives the target's former contents; the Rust `move_assign` emptied the source. It now swaps.
+`FlatMap`/`FlatDataMap`/`PackedMap` move assignment still empties the source, as upstream does.
+
+Newly ported: `FlatMap::contained` and `move_assign`, `FlatDataMap::contained`/`contained_mut`,
+default (exhausted) iterators for the flat and packed maps, the ordered maps' signed-count
+constructors (`with_int_buckets`) and `ReSize(int)` (`resize_int`; a negative count is a
+`Standard_OutOfRange` error), `Clear(allocator)` (`clear_with_allocator`), `FirstNode()`/`OrderNext()`
+as `OrderedNodeRef`/`OrderedNodeMut` views, the iterators' `Reset`/`Initialize`/`IsEqual`,
+`PackedMap(int)` (`from_int`, clamps to one bucket) and `ReSize(int)` (`resize_int`, clamps to
+zero), and the twelve deprecated `PackedMap` set members. The deprecated members keep
+`#[deprecated]` and forward to `packed_map_algo`, as upstream forwards to `NCollection_PackedMapAlgo`.
+
+Deliberate Rust spellings: the native `More()/Next()/Key()` protocol of the flat-map iterators is
+`Iterator::next` returning `Option`. The legacy `OrderedDataMap::Iterator` is the detached
+`OrderedDataCursor`, which takes the map on each access. Its `reset(&map)` restarts a bound cursor
+at the map's current head, and a default cursor stays exhausted. Native self-aliased set
+operations (`aMap.Unite(aMap)`) cannot be expressed under Rust borrowing. `FlatDataMap::Extent`
+returns the `usize` count, not a truncated `int`.
+
+### Allocators, buffer, handle and shared
+
+All 105 public members of `NCollection_Allocator`, `_BaseAllocator`, `_IncAllocator`,
+`_HeapAllocator`, `_AlignedAllocator`, `_AccAllocator`, `_OccAllocator`, `_Buffer`, `_Handle`
+and `_Shared` have api rows (93 implemented, 12 excluded: 3 destructors, 2 OccAllocator move
+members, 6 Buffer STL iterator accessors covered by `as_slice().iter()`, and
+`IncAllocator::SetThreadSafe`, because Rust allocator handles are always Mutex-guarded).
+`NCollection_DefineAlloc.hxx` declares only a macro. The virtual allocator interface is one shared
+`BaseAllocator` handle whose policy is chosen at construction; `allocate_raw`,
+`allocate_optimal_raw` and the unsafe `free_raw` mirror the native pointer API, and RAII owners
+serve safe code.
+
+The earlier incremental arena was not a port (49-byte threshold, first-fit, alignment padding, no
+growth). It is replaced by the upstream block engine. Newly ported: `NCollection_AccAllocator`,
+`NCollection_AlignedAllocator`, the separate `GlobalHeapAllocator` singleton, `NCollection_Allocator`
+(`StandardAllocator`), `NCollection_Handle` (`ObjectHandle`), `NCollection_Shared` (`Shared`),
+`Buffer::with_data`/`data_ptr`/`dump_json`, the transient descriptors of Buffer and every allocator
+class, and the raw element members of `OccAllocator`.
+
+Native quirks kept:
+- `IncAllocator::Reset(true)` (`clean()`) restores the 12 KB default block size and forgets the
+  size given to the constructor.
+- Incremental raw allocations are not aligned; the bump offset is exactly the requested size.
+- A buffer on an `NCollection_AccAllocator` cannot be built. `Allocate` and `Free` call
+  `Free(nullptr)` first, and the accumulating allocator raises `Standard_ProgramError` for it.
+  `Buffer::new/allocate/free/set_allocator` return that failure, and the buffer does not change.
+- `NCollection_AccAllocator::Free` fails for a zero-size allocation at a fresh block's end,
+  because `findBlock` cannot reach that address.
+- The `"NCollection_AccAllocator::Free: …"` message keeps the whitespace from its
+  backslash-continued literal.
+- A default `OccAllocator` holds a null handle. It compares unequal to `CommonBaseAllocator`.
+- `NCollection_HeapAllocator` rounds sizes up to 4 bytes.
+- `_mm_malloc` alignment rules apply (Linux/GCC profile). An alignment of 1 uses malloc. An
+  alignment of 2 or 4 becomes 8. An alignment of 0 or any other non-power of two gives NULL.
+- `DumpJson` pointer text is `"0xx…"`. `GetPointerInfo`'s short form prepends `0x` again after the
+  stream's own `0x`.
+
+Deliberate Rust deviations:
+- `Reset` returns `Standard_ProgramError` while RAII or collection allocations are alive,
+  because rewinding would alias them.
+- RAII byte allocations read as zero. Rust cannot expose uninitialized or reused bytes.
+- Typed (over-aligned) allocations from arenas pad to the layout alignment. Upstream never aligns.
+- A zero Acc block size is refused. Natively it divides by zero.
+- Overflowing byte counts return `None`. Natively they wrap.
+- A null-allocator `Buffer::allocate(n > 0)` returns false. Natively it dereferences null.
+- Handle accessors return `Option`.
+- Mixed-type `OccAllocator` `==` is ambiguous in native C++17. The probe calls the member
+  template explicitly.
+
+Differential evidence: 208 `ncoll_allocators_*` cases, all identical. They cover seeded
+incremental and accumulating allocate/free/reset walks, reported as block order and offsets.
+They also cover aligned-allocator alignments, Buffer on every allocator kind, and the
+OccAllocator/Allocator equality and `max_size` tables.
+
+### Trees and filters
+
+All 81 public members of the five headers have `api` rows (76 implemented, 5 excluded: the
+`Selector`, `TreeNode` and `UBTree` destructors, the abstract `Selector()` constructor that only
+clears `myStop`, and the static `TreeNode::delNode` storage helper, whose sub-branch release
+`UBTree::kill`/`clear` perform inside the node arena). Native `TreeNode*` links are arena node
+ids: `UBTree::root_id`, `BoundingNode::child_id`/`parent_id`, resolved by `UBTree::child`,
+`parent`, `change_child`, `change_parent`; `TreeNode::Gemmate` and `Kill` are `UBTree::gemmate`
+and `UBTree::kill` (Kill does not refresh ancestor bounds, as natively; EBTree removal now runs
+through it). `Clear(aNewAlloc)` is `clear_with_allocator` on both trees, and `EBTree::as_ubtree`
+exposes the inherited members. Calls that dereference null natively (`Root` of an empty tree,
+`Child` of a leaf) return `None`.
+
+`NCollection_UBTreeFiller` is newly ported as `UBTreeFiller`: a bit-exact `std::mt19937` (seed
+5489; the standard's 10000th-draw value is a unit test) drives both native orders
+(`draw % i` and `i - draw % i - 1`), the drop implementation fills pending items like the native
+destructor, and `check_tree` reproduces the `Sprintf` text, including glibc's `-nan` balance of a
+one-leaf tree (an empty tree, a native null dereference, is a Standard_NoSuchObject error).
+
+CellFilter gains the explicit-dimension constructor, the allocator arguments and both `Reset`
+overloads. Preserved quirk: `Reset(double)` writes indices `0..myDim-1` of the size array through
+the checked `operator()`, so after `Reset(Array1)` with other bounds (e.g. lower bound 1) it throws
+Standard_OutOfRange part-way, keeping the earlier writes and the stored targets; `reset` returns
+that error. `Reset(Array1)` copies bounds but leaves the iterated dimension unchanged; a cell
+index keeps one entry per size, and range operations iterate only the first `dimension` axes.
+KDTree gains the `Array1` build overloads (`build_array`, `build_radii_array`; a short radius
+array is a Standard_OutOfRange error leaving an empty tree, where the native tree is left
+half-built) and the move operations; `build_radii` now ignores surplus radii like the native
+pointer overload.
+
+Differential probe: 251 `ncoll_trees_*` cases (UBTree add/select-with-stop shapes, Gemmate, Kill,
+EBTree add/remove/contains, filler orders for 1-700 items in both modes with CheckTree text,
+CellFilter scripts with purges, ranges and both Reset quirks, KDTree Array1 builds and moves)
+match OCCT byte for byte.
+
+### UTF strings, cursors, items views and forward range
+
+`NCollection_UtfIterator` and `NCollection_UtfString` (with the `NCollection_String` alias
+`String8`) are now ported as `UtfIterator<'a, T>` and `UtfString<T>`, generic over the `UtfUnit`
+code units `u8`, `u16` and `u32`. `wchar_t` is `WideChar`, which is `u32` (`u16` on Windows). A
+NUL-terminated pointer becomes a slice. The end of the slice is the terminator, and storage past
+the end reads as zeros. So the unprotected UTF-8 overrun of a truncated sequence (undefined
+behaviour natively) decodes exactly as it does over zero-padded memory. Buffer pointers become
+code-unit offsets. These native quirks are preserved:
+
+- 5- and 6-byte and overlong UTF-8 forms are decoded without validation. An overlong NUL
+  (`C0 80`) ends the text.
+- Same-unit copies keep invalid sequences verbatim. For example, `FF 41` becomes a 6-byte
+  string that swallows the padding zeros.
+- Converted copies drop surrogates and values above U+10FFFF, but still count them in
+  `Length()`.
+- `operator+` always adds both cached lengths. `operator+=` skips an empty right side.
+- `SubString` uses `end - start` as the symbol budget, so a negative start widens the copy.
+- `FromLocale`/`ToLocale` implement the POSIX "C" locale that every program starts in. Rust has
+  no process locale, which is a deliberate deviation from locale-dependent hosts. `FromLocale`
+  converts at most one character, because `mblen` measures only the first one. `ToLocale`
+  reports true even when `wcstombs` fails on a non-ASCII symbol. It reports false only for an
+  empty conversion, and it leaves a full buffer without a terminator.
+
+`GetUtf*` write into a destination slice and return the count of code units written. A slice
+that is too short is a `UtfBufferError`; the native code overruns.
+
+`NCollection_Iterator` is `CollectionCursor`/`CollectionCursorMut` over contiguous storage (its
+only native owner is `Array1`). A dereference past the end is an `ArrayError::Index`.
+`NCollection_ItemsView::View` is `ItemsView`/`ItemsViewMut` over the `ItemsSource` extractors
+(`KeyValueItems`, `KeyValueIndexItems`, `KeyIndexItems`), which are implemented for `DataMap`,
+`IndexedDataMap`, `FlatDataMap`, `OrderedDataMap` and `IndexedMap`.
+
+`NCollection_ForwardRange` was already ported. Its rows record one deliberate deviation: Rust
+guards advancing or dereferencing an exhausted host, where the native code calls the host
+unconditionally.
+
+The utilities probe family (`ncoll_utilities_utf`, `ncoll_utilities_locale`) compares 1,980
+cases bit-for-bit with OCCT. The cases cover every UTF-8 lead byte alone and with continuation,
+ASCII and truncation tails, and overlong, surrogate and beyond-U+10FFFF encodings. They also
+cover UTF-16 lone, reversed and paired surrogates, UTF-32 boundary values and seeded random
+sequences. All 1,980 cases are identical.
+
+122 api rows: 103 implemented and 19 excluded. The excluded rows are destructors, move
+operations, STL iterator boilerplate, the structured-binding `get<I>()` protocol and
+`ChangeBufferHere`.

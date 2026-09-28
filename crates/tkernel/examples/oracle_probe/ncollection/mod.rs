@@ -12,7 +12,6 @@ mod hash_maps;
 mod lists;
 mod trees;
 mod utilities;
-mod vec_mat;
 
 /// Dispatch `op` to the family that owns it; `None` when no family does.
 pub fn evaluate(op: &str, input: &mut SplitWhitespace<'_>) -> Option<String> {
@@ -20,7 +19,6 @@ pub fn evaluate(op: &str, input: &mut SplitWhitespace<'_>) -> Option<String> {
         .or_else(|| lists::evaluate(op, input))
         .or_else(|| hash_maps::evaluate(op, input))
         .or_else(|| flat_maps::evaluate(op, input))
-        .or_else(|| vec_mat::evaluate(op, input))
         .or_else(|| allocators::evaluate(op, input))
         .or_else(|| trees::evaluate(op, input))
         .or_else(|| utilities::evaluate(op, input))

@@ -9,7 +9,6 @@
 #include "tkernel_ncollection_lists_probe.cxx"
 #include "tkernel_ncollection_hash_maps_probe.cxx"
 #include "tkernel_ncollection_flat_maps_probe.cxx"
-#include "tkernel_ncollection_vec_mat_probe.cxx"
 #include "tkernel_ncollection_allocators_probe.cxx"
 #include "tkernel_ncollection_trees_probe.cxx"
 #include "tkernel_ncollection_utilities_probe.cxx"
@@ -20,7 +19,6 @@ static bool ncollection_probe(const std::string& op, std::istream& in, std::ostr
          ncollection_lists_probe(op, in, out) ||
          ncollection_hash_maps_probe(op, in, out) ||
          ncollection_flat_maps_probe(op, in, out) ||
-         ncollection_vec_mat_probe(op, in, out) ||
          ncollection_allocators_probe(op, in, out) ||
          ncollection_trees_probe(op, in, out) ||
          ncollection_utilities_probe(op, in, out);

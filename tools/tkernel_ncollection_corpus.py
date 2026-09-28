@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import importlib
 
-FAMILIES = ["arrays", "lists", "hash_maps", "flat_maps", "vec_mat", "allocators", "trees", "utilities"]
+FAMILIES = ["arrays", "lists", "hash_maps", "flat_maps", "allocators", "trees", "utilities"]
 
 
 def cases() -> list[str]:
