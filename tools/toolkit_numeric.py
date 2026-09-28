@@ -15,6 +15,7 @@ Usage from a verifier:
 from __future__ import annotations
 import hashlib
 import json
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
@@ -31,6 +32,9 @@ class NumericOracle:
     libraries: list[str]
     rust_package: str
     corpus: Callable[[], str]
+    # Table generators (tools/generate_*.py) whose output the probes compare; each
+    # runs with `--check` first so a drifted table fails before any comparison.
+    generators: tuple[str, ...] = ()
 
     @property
     def evidence(self) -> Path:
@@ -55,6 +59,13 @@ def build_probes(oracle: NumericOracle, build: Path, output: Path) -> Path:
     return executable
 
 
+def check_generators(oracle: NumericOracle, source: Path, output: Path) -> None:
+    """Fail when a generated table differs from the OCCT sources; check_generators(oracle, source, out)."""
+    for generator in oracle.generators:
+        log = output/(Path(generator).stem+'-check.log')
+        run([sys.executable, str(ROOT/generator), '--check', '--source', str(source)], log)
+
+
 def verify_numeric(oracle: NumericOracle) -> None:
     """Build both probes, compare every request, and write evidence only on success."""
     source, build = selected_paths()
@@ -62,6 +73,7 @@ def verify_numeric(oracle: NumericOracle) -> None:
     output = oracle.evidence
     output.mkdir(parents=True, exist_ok=True)
     (output/'report.json').unlink(missing_ok=True)
+    check_generators(oracle, source, output)
     executable = build_probes(oracle, build, output)
     reject_unknown_operation(executable)
     reject_unknown_operation(oracle.rust_probe)

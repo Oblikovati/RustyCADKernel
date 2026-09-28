@@ -67,6 +67,7 @@ passes (685 declarations):
 | BndLib_Test.cxx | bnd_lib | 63 |
 | GCPnts_AbscissaPoint_Test.cxx | gcpnts_abscissa_point | 5 |
 | GCPnts_QuasiUniformDeflection_Test.cxx | gcpnts_quasi_uniform_deflection | 1 |
+| AppCont_ContMatrices_Test.cxx | app_cont_cont_matrices | 9 |
 
 `bnd_lib_behavior.rs` covers the GeomBndLib and BndLib quirks below.
 `gcpnts_behavior.rs` covers the CPnts and GCPnts quirks below.
@@ -300,6 +301,20 @@ BndLib). The native `GeomBndLib_SplineHelpers` templates `BezierCurveBox`,
 `BSplineCurveBox` and the pole-range `ReduceSplineBox` overload are declared but never
 instantiated in TKGeomBase; they are not ported, and the audit rows say so.
 
+AppCont (`app_cont`) ports `AppCont_Function`, `AppCont_LeastSquare` and the
+`AppCont_ContMatrices` namespace. The abstract `AppCont_Function` is the `Function`
+trait; its protected `myNbPnt`/`myNbPnt2d` live in a `FunctionBase` (both -1 until the
+implementation sets them) that the trait reaches through `base()`, which gives the
+non-virtual count getters. `LeastSquare::new` takes `&dyn Function`, `Error` returns
+`(F, MaxE3d, MaxE2d)` and `Value` lends the stored MultiCurve. The five
+`AppCont_ContMatrices_*.pxx` tables (126,095 doubles) are generated, not hand-copied:
+`tools/generate_appcont_tables.py` copies every literal verbatim into include!-able
+fragments under `app_cont/cont_tables/` (rustc and g++ round the same decimal strings,
+and the three IBP entries written `a - b` stay constant expressions), and its
+`--check` mode runs before the numeric comparison. `app_cont_behavior.rs` covers the
+function base, every resolution path, the singular and periodic ends and the
+exceptions with named fake functions.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -467,6 +482,20 @@ patches with negative, large and reversed V, and self-intersecting tori (R < r).
 internal helpers the upstream tests call are probed directly. The legacy `math_PSO` path of
 `GeomBndLib_OtherCurve2d::BoxOptimal` is left out for reversed ranges: native reads an
 uninitialized value there.
+
+The AppCont requests (`tkgeombase_corpus_appcont.py`, 3587 requests) read every entry
+of the five tables directly from the native static arrays, run the four square
+providers over classe -1 to 28 and VBernstein over every classe x nbpoints pair (into
+matrices with shifted bounds and too small, where the partial writes are compared), and
+fit 3D, 2D and mixed analytic functions (polynomial, trigonometric, constant) over
+forward, reversed and tiny ranges with every pair of end constraints (CurvaturePoint
+included), degrees 1 to 25, 1 to 40 Gauss points, failing derivatives, singular ends
+around the 0.1 threshold and periodic coordinates that wrap (the first-sample, sample
+and end-pole fixes). Left out: VBernstein at classe 1 (degree 0), more than 61 Gauss
+points and periodic fits with fewer than 3 samples (undefined natively), and empty
+ranges (degree < 0, no Gauss point, no coordinate), where the native `math_Matrix`
+builds empty or negative-size tables on its stack buffer (degree -2 crashes) while the
+TKMath `Matrix` refuses them with Standard_RangeError.
 
 The corpus has 29711 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
@@ -863,3 +892,29 @@ CPnts and GCPnts:
 - Every native comparison keeps its form where a NaN operand changes the branch
   (`!(a > b)` for the native `if (a > b) ... else`), and `std::min`/`std::max` keep
   their argument order.
+
+AppCont:
+
+- `AppCont_LeastSquare::IsDone()` is true only when free poles were solved for after
+  a constraint: the unconstrained fit (poles computed directly with InvMMatrix) and the
+  fits without free pole (degree 1 with two pass points, degree 3 with two tangency
+  points) report not done although their poles are set.
+- Only the first two coordinates of the last pole are moved back into the period of
+  the last sample (the loop runs `aDimIdx <= 2`, where the first pole's runs over every
+  coordinate), whatever the point counts.
+- A tangency constraint whose D1 fails becomes a pass constraint; a CurvaturePoint end
+  is neither fixed nor eliminated, so the fit solves the full `M^T M` system (inverted,
+  not read from the tables). The IBP and IBT tables cover classe up to 26, but the
+  mass matrices stop at 24, so a degree above 23 always raises Standard_DimensionError.
+- `FixSingleBorderPoint` ignores the result of `Value`, and the end pole takes the
+  limit from inside only when it is more than 0.1 from the end value (per point).
+- `VBernstein` writes at `M(1, 1)` whatever the bounds of the matrix, unlike the other
+  providers, which start at its lower corner. At classe 1 it reads before the table
+  (undefined natively); the port raises Standard_OutOfRange. The port also raises
+  Standard_OutOfRange where the fit would read past its samples (a periodic function
+  with fewer than 3 Gauss points) and Standard_DimensionError, before sampling, for more
+  than the 61 tabulated Gauss orders (natively read past the Gauss tables, then
+  rejected by VBernstein). The `int` offsets of the providers overflow natively past
+  classe 1861; the port wraps.
+- `AppCont_Function::PeriodInformation` defaults to not periodic with period 0.
+  `VBParam` is computed natively and never read; the port does not keep it.
