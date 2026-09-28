@@ -68,9 +68,7 @@ where
     /// Example: `properties.set_transform(matrix)`.
     pub fn set_transform(&mut self, transform: Mat4<T>) {
         self.transform = transform;
-        let mut determinant = T::ZERO;
-        self.transform
-            .inverted_into(&mut self.transform_inversed, &mut determinant);
+        matrix_op_inverse(&self.transform, &mut self.transform_inversed);
     }
     /// Returns inversed transformation matrix; `properties.inversed()`.
     pub fn inversed(&self) -> &Mat4<T> {
@@ -88,18 +86,36 @@ where
                         + Vec4::unit_x() * size * T::from_int(x)
                         + Vec4::unit_y() * size * T::from_int(y)
                         + Vec4::unit_z() * size * T::from_int(z);
-                    result.add(&self.project(corner));
+                    result.add(&matrix_op_multiply(&self.transform, &corner));
                 }
             }
         }
         result
     }
-    /// `BVH::MatrixOp<T, 4>::Multiply`: `M * v` scaled by `(T)(1.0 / w)`, the
-    /// reciprocal being evaluated in double precision as the literal `1.0` forces.
-    fn project(&self, corner: Vec4<T>) -> Vec4<T> {
-        let product = self.transform * corner;
-        product * T::from_double(1.0 / product.w.to_double())
-    }
+}
+
+/// `BVH::MatrixOp<T, 4>::Inverse`: `theIn.Inverted(theOut)` with the success flag
+/// discarded, so a singular matrix leaves the unscaled cofactors in `output`.
+/// Example: `bvh::matrix_op_inverse(&matrix, &mut inverse)`.
+pub fn matrix_op_inverse<T>(input: &Mat4<T>, output: &mut Mat4<T>)
+where
+    T: BvhScalar + MatrixScalar,
+{
+    // The one-argument `Inverted` overload forwards a dummy determinant.
+    let mut determinant = T::ZERO;
+    input.inverted_into(output, &mut determinant);
+}
+
+/// `BVH::MatrixOp<T, 4>::Multiply`: `M * v` scaled by `(T)(1.0 / w)`, the
+/// reciprocal being evaluated in double precision as the literal `1.0` forces.
+/// Example: `bvh::matrix_op_multiply(&matrix, &Vec4::new(1.0, 2.0, 3.0, 1.0))`.
+pub fn matrix_op_multiply<T>(matrix: &Mat4<T>, vector: &Vec4<T>) -> Vec4<T>
+where
+    T: BvhScalar + MatrixScalar,
+    Vec4<T>: BvhVector<Scalar = T>,
+{
+    let product = *matrix * *vector;
+    product * T::from_double(1.0 / product.w.to_double())
 }
 impl<T> BvhProperties for BvhTransform<T>
 where
