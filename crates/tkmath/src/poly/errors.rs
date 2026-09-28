@@ -1,17 +1,5 @@
 //! Native exception types for the Poly package, carrying the offending value.
-use rustycad_tkernel::{ncollection::ArrayError, standard::Failure};
-/// Maps an `NCollection_Array1` error to the exception the native array raises;
-/// `array_failure("Poly_Triangulation::Triangle", error)`.
-pub(crate) fn array_failure(member: &str, error: ArrayError) -> Failure {
-    let kind = match error {
-        ArrayError::Bounds { .. } => "Standard_RangeError",
-        ArrayError::Index { .. } => "Standard_OutOfRange",
-        ArrayError::ShapeMismatch { .. } | ArrayError::DimensionMismatch { .. } => {
-            "Standard_DimensionMismatch"
-        }
-    };
-    Failure::with_type(kind, &format!("{member}: {error}"), "")
-}
+use rustycad_tkernel::standard::Failure;
 /// Prefixes a failure from a nested array with the Poly member that indexed it;
 /// `in_member("Poly_Triangulation::Node", failure)`.
 pub(crate) fn in_member(member: &str, failure: Failure) -> Failure {

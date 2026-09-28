@@ -28,9 +28,9 @@ use super::swept_surface::{GeomSweptSurface, dump_swept_surface};
 use crate::geom_eval::{RepSurfaceDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Direction3, GeneralTransform2, Point3, Transform3, Vector3, Xyz};
@@ -47,7 +47,7 @@ struct ExtrusionState {
 /// `Handle::new(GeomSurfaceOfLinearExtrusion::new(&curve, dir)?)`.
 pub struct GeomSurfaceOfLinearExtrusion {
     parent: StandardTransient,
-    state: GeometryCell<ExtrusionState>,
+    state: SharedState<ExtrusionState>,
 }
 impl_transient!(
     GeomSurfaceOfLinearExtrusion,
@@ -78,7 +78,7 @@ impl GeomSurfaceOfLinearExtrusion {
         let (basis, smooth) = copied_basis(curve)?;
         Ok(Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(ExtrusionState {
+            state: SharedState::new(ExtrusionState {
                 basis,
                 direction,
                 smooth,

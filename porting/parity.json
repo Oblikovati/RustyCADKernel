@@ -54764,6 +54764,638 @@
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
+      "upstream_id": "Geom2dGridEval_Line(const occ::handle<Geom2d_Line>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalLine::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Line::Geometry",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalLine::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Line::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalLine::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Line::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalLine::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Line::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalLine::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Line::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalLine::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Line::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Line.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalLine::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Circle(const occ::handle<Geom2d_Circle>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCircle::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Circle::Geometry",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCircle::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Circle::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCircle::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Circle::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCircle::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Circle::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCircle::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Circle::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCircle::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Circle::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Circle.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCircle::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Ellipse(const occ::handle<Geom2d_Ellipse>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalEllipse::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Ellipse::Geometry",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalEllipse::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Ellipse::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalEllipse::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Ellipse::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalEllipse::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Ellipse::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalEllipse::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Ellipse::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalEllipse::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Ellipse::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Ellipse.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalEllipse::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Hyperbola(const occ::handle<Geom2d_Hyperbola>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalHyperbola::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Hyperbola::Geometry",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalHyperbola::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Hyperbola::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalHyperbola::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Hyperbola::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalHyperbola::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Hyperbola::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalHyperbola::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Hyperbola::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalHyperbola::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Hyperbola::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Hyperbola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalHyperbola::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Parabola(const occ::handle<Geom2d_Parabola>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalParabola::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Parabola::Geometry",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalParabola::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Parabola::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalParabola::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Parabola::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalParabola::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Parabola::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalParabola::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Parabola::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalParabola::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Parabola::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Parabola.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalParabola::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurve(const occ::handle<Geom2d_BezierCurve>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBezierCurve::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurve::Geometry",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBezierCurve::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurve::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBezierCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurve::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBezierCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurve::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBezierCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurve::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBezierCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurve::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BezierCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBezierCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurve(const occ::handle<Geom2d_BSplineCurve>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBSplineCurve::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurve::Geometry",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBSplineCurve::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurve::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBSplineCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurve::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBSplineCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurve::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBSplineCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurve::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBSplineCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurve::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_BSplineCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalBSplineCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OffsetCurve(const occ::handle<Geom2d_OffsetCurve>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOffsetCurve::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OffsetCurve::Geometry",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOffsetCurve::geometry",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OffsetCurve::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOffsetCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OffsetCurve::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOffsetCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OffsetCurve::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOffsetCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OffsetCurve::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOffsetCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OffsetCurve::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OffsetCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOffsetCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OtherCurve(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOtherCurve::new",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OtherCurve::Curve",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOtherCurve::curve",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OtherCurve::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOtherCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OtherCurve::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOtherCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OtherCurve::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOtherCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OtherCurve::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOtherCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_OtherCurve::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_OtherCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalOtherCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve(const Adaptor2d_Curve2d&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::from_adaptor",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::from_curve",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve::GetType",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::get_type",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve::EvaluatorVariant",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalEvaluator",
+      "status": "implemented",
+      "notes": "std::variant of the evaluators, as an enum whose Uninitialized case is std::monostate; Geom2dGridEvalCurve::evaluator() gives read access."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve::EvaluateGrid",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::evaluate_grid",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve::EvaluateGridD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::evaluate_grid_d1",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve::EvaluateGridD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::evaluate_grid_d2",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve::EvaluateGridD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::evaluate_grid_d3",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval_Curve::EvaluateGridDN",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurve::evaluate_grid_dn",
+      "status": "implemented",
+      "notes": "Batch grid evaluator (docs/geom-design.md section 9); results indexed from 1, empty for empty parameters, a null curve or N < 1; native exceptions returned as Failure; compared bit for bit with OCCT by tools/verify_tkg2d_numeric.py (g2_grid requests)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurveD1",
+      "status": "implemented",
+      "notes": "POD result struct; the port aliases the Geom2d_Curve::ResD1 struct (Geom2dCurveD1), which has the same fields (point, d1...)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurveD2",
+      "status": "implemented",
+      "notes": "POD result struct; the port aliases the Geom2d_Curve::ResD2 struct (Geom2dCurveD2), which has the same fields (point, d1...)."
+    },
+    {
+      "upstream_id": "Geom2dGridEval::CurveD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d_grid_eval::Geom2dGridEvalCurveD3",
+      "status": "implemented",
+      "notes": "POD result struct; the port aliases the Geom2d_Curve::ResD3 struct (Geom2dCurveD3), which has the same fields (point, d1...)."
+    },
+    {
+      "upstream_id": "NCollection_HArray1(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::with_bounds",
+      "status": "implemented",
+      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+    },
+    {
+      "upstream_id": "NCollection_HArray1(const Array1Type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::from_array",
+      "status": "implemented",
+      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+    },
+    {
+      "upstream_id": "NCollection_HArray1::Array1() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::array1",
+      "status": "implemented",
+      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+    },
+    {
+      "upstream_id": "NCollection_HArray1::ChangeArray1()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::change_array1",
+      "status": "implemented",
+      "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+    },
+    {
       "upstream_id": "TopAbs::Compose(TopAbs_Orientation,TopAbs_Orientation)",
       "toolkit": "TKG3d",
       "source": "src/ModelingData/TKG3d/TopAbs/TopAbs.hxx",
@@ -111888,6 +112520,720 @@
       "rust_target": "geom_surface_eval",
       "rust_test": "Geom_SurfaceEvalTest__RevolutionSurface_EvalD1_ValidResults",
       "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurveTest.BasicD0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_BezierCurve_Test.cxx",
+      "source_sha256": "e87567cbb679b2ba332490fee0a7cbd448aa394109b3241b54c18e14dfbf1459",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_bezier_curve",
+      "rust_test": "Geom2dGridEval_BezierCurveTest__BasicD0",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurveTest.D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_BezierCurve_Test.cxx",
+      "source_sha256": "e87567cbb679b2ba332490fee0a7cbd448aa394109b3241b54c18e14dfbf1459",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_bezier_curve",
+      "rust_test": "Geom2dGridEval_BezierCurveTest__D1",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurveTest.D2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_BezierCurve_Test.cxx",
+      "source_sha256": "e87567cbb679b2ba332490fee0a7cbd448aa394109b3241b54c18e14dfbf1459",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_bezier_curve",
+      "rust_test": "Geom2dGridEval_BezierCurveTest__D2",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurveTest.D3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_BezierCurve_Test.cxx",
+      "source_sha256": "e87567cbb679b2ba332490fee0a7cbd448aa394109b3241b54c18e14dfbf1459",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_bezier_curve",
+      "rust_test": "Geom2dGridEval_BezierCurveTest__D3",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurveTest.DN_BeyondDegree",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_BezierCurve_Test.cxx",
+      "source_sha256": "e87567cbb679b2ba332490fee0a7cbd448aa394109b3241b54c18e14dfbf1459",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_bezier_curve",
+      "rust_test": "Geom2dGridEval_BezierCurveTest__DN_BeyondDegree",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BezierCurveTest.RationalBezier",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_BezierCurve_Test.cxx",
+      "source_sha256": "e87567cbb679b2ba332490fee0a7cbd448aa394109b3241b54c18e14dfbf1459",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_bezier_curve",
+      "rust_test": "Geom2dGridEval_BezierCurveTest__RationalBezier",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_LineTest.BasicEvaluation",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_LineTest__BasicEvaluation",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_LineTest.NonOriginLine",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_LineTest__NonOriginLine",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_LineTest.DerivativeD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_LineTest__DerivativeD1",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_LineTest.DerivativeD2D3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_LineTest__DerivativeD2D3",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CircleTest.BasicEvaluation",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CircleTest__BasicEvaluation",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CircleTest.DerivativeD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CircleTest__DerivativeD1",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CircleTest.DerivativeD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CircleTest__DerivativeD2",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CircleTest.DerivativeD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CircleTest__DerivativeD3",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurveTest.BasicEvaluation",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_BSplineCurveTest__BasicEvaluation",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurveTest.EndpointsMatch",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_BSplineCurveTest__EndpointsMatch",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurveTest.DerivativeD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_BSplineCurveTest__DerivativeD1",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurveTest.DerivativeD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_BSplineCurveTest__DerivativeD2",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurveTest.DerivativeD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_BSplineCurveTest__DerivativeD3",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurveTest.DerivativeDN_BeyondDegree",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_BSplineCurveTest__DerivativeDN_BeyondDegree",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_BSplineCurveTest.MultiSpanBSpline",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_BSplineCurveTest__MultiSpanBSpline",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.LineDispatch",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__LineDispatch",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.CircleDispatch",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__CircleDispatch",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.EllipseDispatch",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__EllipseDispatch",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.HyperbolaDispatch",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__HyperbolaDispatch",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.ParabolaDispatch",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__ParabolaDispatch",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.BSplineDispatch",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__BSplineDispatch",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.BezierCurveDispatch",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__BezierCurveDispatch",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.OffsetCurveDispatch",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__OffsetCurveDispatch",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.DirectHandleInit",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__DirectHandleInit",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.EmptyParams",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__EmptyParams",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.UnifiedDerivativeD1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__UnifiedDerivativeD1",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.UnifiedDerivativeD2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__UnifiedDerivativeD2",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.UnifiedDerivativeD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__UnifiedDerivativeD3",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_CurveTest.OffsetCurveDerivativeD3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Curve_Test.cxx",
+      "source_sha256": "cfbe3931fffecedc99f81f7cd9f5d8326e597e7083153f2902c3916a842f60e2",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_curve",
+      "rust_test": "Geom2dGridEval_CurveTest__OffsetCurveDerivativeD3",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_EllipseTest.BasicD0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Ellipse_Test.cxx",
+      "source_sha256": "76ed51ab08acb1831bee713922d5e89c7c6d48fc04fcc633f9b65a9d86f91b7a",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_ellipse",
+      "rust_test": "Geom2dGridEval_EllipseTest__BasicD0",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_EllipseTest.CardinalPoints",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Ellipse_Test.cxx",
+      "source_sha256": "76ed51ab08acb1831bee713922d5e89c7c6d48fc04fcc633f9b65a9d86f91b7a",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_ellipse",
+      "rust_test": "Geom2dGridEval_EllipseTest__CardinalPoints",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_EllipseTest.D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Ellipse_Test.cxx",
+      "source_sha256": "76ed51ab08acb1831bee713922d5e89c7c6d48fc04fcc633f9b65a9d86f91b7a",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_ellipse",
+      "rust_test": "Geom2dGridEval_EllipseTest__D1",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_EllipseTest.D2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Ellipse_Test.cxx",
+      "source_sha256": "76ed51ab08acb1831bee713922d5e89c7c6d48fc04fcc633f9b65a9d86f91b7a",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_ellipse",
+      "rust_test": "Geom2dGridEval_EllipseTest__D2",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_EllipseTest.D3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Ellipse_Test.cxx",
+      "source_sha256": "76ed51ab08acb1831bee713922d5e89c7c6d48fc04fcc633f9b65a9d86f91b7a",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_ellipse",
+      "rust_test": "Geom2dGridEval_EllipseTest__D3",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_ellipse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_HyperbolaTest.BasicD0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Hyperbola_Test.cxx",
+      "source_sha256": "81eaa065fb8f69a85b4d1c5651b3761d09cbe2a316bacf934682f24afb894835",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_hyperbola",
+      "rust_test": "Geom2dGridEval_HyperbolaTest__BasicD0",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_HyperbolaTest.AtOrigin",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Hyperbola_Test.cxx",
+      "source_sha256": "81eaa065fb8f69a85b4d1c5651b3761d09cbe2a316bacf934682f24afb894835",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_hyperbola",
+      "rust_test": "Geom2dGridEval_HyperbolaTest__AtOrigin",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_HyperbolaTest.D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Hyperbola_Test.cxx",
+      "source_sha256": "81eaa065fb8f69a85b4d1c5651b3761d09cbe2a316bacf934682f24afb894835",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_hyperbola",
+      "rust_test": "Geom2dGridEval_HyperbolaTest__D1",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_HyperbolaTest.D2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Hyperbola_Test.cxx",
+      "source_sha256": "81eaa065fb8f69a85b4d1c5651b3761d09cbe2a316bacf934682f24afb894835",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_hyperbola",
+      "rust_test": "Geom2dGridEval_HyperbolaTest__D2",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_HyperbolaTest.D3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Hyperbola_Test.cxx",
+      "source_sha256": "81eaa065fb8f69a85b4d1c5651b3761d09cbe2a316bacf934682f24afb894835",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_hyperbola",
+      "rust_test": "Geom2dGridEval_HyperbolaTest__D3",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_hyperbola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_ParabolaTest.BasicD0",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Parabola_Test.cxx",
+      "source_sha256": "67d439b0c7f5e7018e73d39685cc0e9247497a25411765fcc05c56c690fe0b7d",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_parabola",
+      "rust_test": "Geom2dGridEval_ParabolaTest__BasicD0",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_ParabolaTest.AtOrigin",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Parabola_Test.cxx",
+      "source_sha256": "67d439b0c7f5e7018e73d39685cc0e9247497a25411765fcc05c56c690fe0b7d",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_parabola",
+      "rust_test": "Geom2dGridEval_ParabolaTest__AtOrigin",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_ParabolaTest.D1",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Parabola_Test.cxx",
+      "source_sha256": "67d439b0c7f5e7018e73d39685cc0e9247497a25411765fcc05c56c690fe0b7d",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_parabola",
+      "rust_test": "Geom2dGridEval_ParabolaTest__D1",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_ParabolaTest.D2",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Parabola_Test.cxx",
+      "source_sha256": "67d439b0c7f5e7018e73d39685cc0e9247497a25411765fcc05c56c690fe0b7d",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_parabola",
+      "rust_test": "Geom2dGridEval_ParabolaTest__D2",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_ParabolaTest.D3",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Parabola_Test.cxx",
+      "source_sha256": "67d439b0c7f5e7018e73d39685cc0e9247497a25411765fcc05c56c690fe0b7d",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_parabola",
+      "rust_test": "Geom2dGridEval_ParabolaTest__D3",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_parabola.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dGridEval_ParabolaTest.DN_HighOrder",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/GTests/Geom2dGridEval_Parabola_Test.cxx",
+      "source_sha256": "67d439b0c7f5e7018e73d39685cc0e9247497a25411765fcc05c56c690fe0b7d",
+      "rust_package": "rustycad-tkg2d",
+      "rust_target": "geom2d_grid_eval_parabola",
+      "rust_test": "Geom2dGridEval_ParabolaTest__DN_HighOrder",
+      "rust_source": "crates/tkg2d/tests/geom2d_grid_eval_parabola.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

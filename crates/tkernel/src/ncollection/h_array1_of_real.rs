@@ -1,4 +1,4 @@
-// Copyright (c) 2002-2014 OPEN CASCADE SAS
+// Copyright (c) 2002-2024 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -10,25 +10,24 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of the NCollection_HArray1<double> members that the Poly polygons use,
-// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx for
+// `double` (the deprecated alias TColStd_HArray1OfReal) at
+// 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! `NCollection_HArray1<double>` as the Poly polygons share it.
+//! `NCollection_HArray1<double>`, a bounded real array shared through handles.
 //!
-//! TKernel does not port `NCollection_HArray1` yet. The polygons hand out their parameter
-//! array as a shared handle whose edits every holder sees, so this transient keeps one
-//! `Array1` behind a lock. It belongs in TKernel once a generic HArray1 exists there.
-use super::{errors::array_failure, shared_state::SharedState};
-use rustycad_tkernel::{
-    ncollection::Array1,
-    standard::{Failure, Handle, StandardTransient},
-};
+//! OCCT hands such an array out as an `occ::handle` whose edits every holder sees (the
+//! Poly polygons share their parameters this way), so this transient keeps one
+//! [`Array1`] in a [`SharedState`] and every member takes `&self`. Only the `double`
+//! instantiation is ported: each transient needs its own runtime type descriptor.
+use super::Array1;
+use crate::standard::{Failure, Handle, SharedState, StandardTransient};
 /// A shared, bounded array of reals; `HArray1OfReal::with_bounds(1, 3)?`.
 pub struct HArray1OfReal {
     base: StandardTransient,
     values: SharedState<Array1<'static, f64>>,
 }
-rustycad_tkernel::impl_transient!(
+crate::impl_transient!(
     HArray1OfReal,
     "NCollection_HArray1<double>",
     StandardTransient,
@@ -37,8 +36,8 @@ rustycad_tkernel::impl_transient!(
 impl HArray1OfReal {
     /// Allocates zeros at `lower..=upper`; `HArray1OfReal::with_bounds(1, 3)?`.
     pub fn with_bounds(lower: i32, upper: i32) -> Result<Self, Failure> {
-        let values = Array1::with_bounds(lower, upper)
-            .map_err(|e| array_failure("NCollection_HArray1", e))?;
+        let values =
+            Array1::with_bounds(lower, upper).map_err(|e| e.into_failure("NCollection_HArray1"))?;
         Ok(Self::from_array(values))
     }
     /// Takes ownership of an array and its bounds; `HArray1OfReal::from_array(values)`.
@@ -74,14 +73,14 @@ impl HArray1OfReal {
             .read()
             .value(index)
             .copied()
-            .map_err(|e| array_failure("NCollection_HArray1::Value", e))
+            .map_err(|e| e.into_failure("NCollection_HArray1::Value"))
     }
     /// Writes one value; `array.set_value(1, 0.5)?`.
     pub fn set_value(&self, index: i32, value: f64) -> Result<(), Failure> {
         self.values
             .write()
             .set_value(index, value)
-            .map_err(|e| array_failure("NCollection_HArray1::SetValue", e))
+            .map_err(|e| e.into_failure("NCollection_HArray1::SetValue"))
     }
     /// Copy of the wrapped array, as `Array1()`; `array.array1()`.
     pub fn array1(&self) -> Array1<'static, f64> {

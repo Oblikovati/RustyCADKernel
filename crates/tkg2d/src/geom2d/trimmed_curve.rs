@@ -15,7 +15,6 @@
 
 //! `Geom2d_TrimmedCurve`: a copy of a basis curve limited to `[U1, U2]`.
 use super::bounded_curve::{Geom2dBoundedCurve, dump_bounded_curve};
-use super::cell::GeometryCell;
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
 use super::errors;
 use super::geometry::{Geom2dGeometry, dump_base, dump_class_name, dump_field};
@@ -23,7 +22,7 @@ use super::native::std_min;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point2, Transform2, Vector2};
@@ -40,7 +39,7 @@ struct TrimmedState {
 /// The basis curve is a private copy, so its lock is never this object's lock.
 pub struct Geom2dTrimmedCurve {
     parent: StandardTransient,
-    state: GeometryCell<TrimmedState>,
+    state: SharedState<TrimmedState>,
 }
 impl_transient!(
     Geom2dTrimmedCurve,
@@ -160,7 +159,7 @@ impl Geom2dTrimmedCurve {
         set_trim_state(&mut state, u1, u2, sense, adjust_periodic)?;
         Ok(Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         })
     }
     /// Change the bounds (`SetTrim`); see [`Geom2dTrimmedCurve::new`];

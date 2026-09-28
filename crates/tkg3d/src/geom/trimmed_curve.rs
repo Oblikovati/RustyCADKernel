@@ -20,9 +20,9 @@ use super::errors;
 use super::geometry::GeomGeometry;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::native::std_min;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name, dump_field};
 use rustycad_tkmath::elclib;
@@ -41,7 +41,7 @@ struct TrimmedState {
 /// The basis curve is a private copy, so its lock is never this object's lock.
 pub struct GeomTrimmedCurve {
     parent: StandardTransient,
-    state: GeometryCell<TrimmedState>,
+    state: SharedState<TrimmedState>,
 }
 impl_transient!(
     GeomTrimmedCurve,
@@ -165,7 +165,7 @@ impl GeomTrimmedCurve {
         set_trim_state(&mut state, u1, u2, sense, adjust_periodic)?;
         Ok(Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         })
     }
     /// Change the bounds (`SetTrim`); see [`GeomTrimmedCurve::new`];

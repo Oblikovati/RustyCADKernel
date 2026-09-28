@@ -15,9 +15,9 @@
 
 //! The Geom2d package: transient 2D points, vectors, axes, transformations and curves.
 pub mod arrays;
-pub mod cell;
 pub mod errors;
 pub mod native;
+pub mod protected;
 pub mod spline_data;
 
 mod geometry;

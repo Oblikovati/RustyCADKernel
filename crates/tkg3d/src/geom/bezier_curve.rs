@@ -22,10 +22,10 @@ use super::geometry::GeomGeometry;
 use crate::geom_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg2d::geom2d::arrays::{at, check_one_based, copy_same_length, put};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::spline_data::bezier_knots;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name, dump_flag};
 use rustycad_tkmath::bsplclib;
@@ -37,7 +37,7 @@ use std::io;
 /// A Bezier curve; `Handle::new(GeomBezierCurve::new(&poles)?)`.
 pub struct GeomBezierCurve {
     parent: StandardTransient,
-    state: GeometryCell<BezierState>,
+    state: SharedState<BezierState>,
 }
 impl_transient!(
     GeomBezierCurve,
@@ -87,7 +87,7 @@ impl GeomBezierCurve {
         state.max_deriv_inv_ok = false;
         Ok(Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         })
     }
     /// Non-rational curve (`Geom_BezierCurve(CurvePoles)`); 2 to MaxDegree()+1 poles;

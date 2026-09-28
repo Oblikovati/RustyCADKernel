@@ -29,9 +29,9 @@ use super::surface::{
 };
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::elslib;
 use rustycad_tkmath::geom_abs::Shape;
@@ -49,7 +49,7 @@ struct TorusState {
 /// A torus; `Handle::new(GeomToroidalSurface::new(frame, 5.0, 1.0)?)`.
 pub struct GeomToroidalSurface {
     parent: StandardTransient,
-    state: GeometryCell<TorusState>,
+    state: SharedState<TorusState>,
 }
 impl_transient!(
     GeomToroidalSurface,
@@ -68,7 +68,7 @@ impl GeomToroidalSurface {
     fn stored(state: TorusState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Torus around the main axis of `frame`; Standard_ConstructionError when a radius

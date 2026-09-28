@@ -14,14 +14,13 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_Circle.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_Circle`: a circle parameterized by angle from its X axis.
-use super::cell::GeometryCell;
 use super::conic::{Geom2dConic, dump_conic, impl_conic_position, reverse_conic_position};
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
 use super::errors;
 use super::geometry::{Geom2dGeometry, dump_base, dump_class_name};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis2d, Axis22d, Circle2, Point2, Transform2, Vector2};
@@ -37,7 +36,7 @@ struct CircleState {
 /// A circle; `Handle::new(Geom2dCircle::from_axis(axis, 2.0, true)?)`.
 pub struct Geom2dCircle {
     parent: StandardTransient,
-    state: GeometryCell<CircleState>,
+    state: SharedState<CircleState>,
 }
 impl_transient!(
     Geom2dCircle,
@@ -65,7 +64,7 @@ impl Geom2dCircle {
     fn stored(state: CircleState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Circle from a gp circle (`Geom2d_Circle(gp_Circ2d)`); `Geom2dCircle::from_circ2d(c)`.

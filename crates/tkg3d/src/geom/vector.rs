@@ -17,8 +17,8 @@
 use super::geometry::GeomGeometry;
 use super::protected::{PROTECTED, ProtectedAccess};
 use rustycad_tkernel::impl_transient_interface;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::Vector3;
 
 /// A vector with the native protected `gpVec` storage; `vector.dot(&*other)`.
@@ -28,7 +28,7 @@ use rustycad_tkmath::gp::Vector3;
 pub trait GeomVector: GeomGeometry {
     /// The protected `gpVec` cell; only Geom calls it.
     #[doc(hidden)]
-    fn vector_cell(&self, access: ProtectedAccess) -> &GeometryCell<Vector3>;
+    fn vector_cell(&self, access: ProtectedAccess) -> &SharedState<Vector3>;
     /// Length (`Magnitude`); `vector.magnitude()`.
     fn magnitude(&self) -> f64;
     /// Squared length (`SquareMagnitude`); `vector.square_magnitude()`.

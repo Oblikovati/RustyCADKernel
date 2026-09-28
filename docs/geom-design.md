@@ -53,10 +53,12 @@ In OCCT, `c->SetRadius(5)` is visible through every handle that shares the
 object. A Rust handle only gives `&T`, so each geometry object keeps its mutable
 state behind interior mutability:
 
-- Each concrete struct keeps all its fields in one `GeometryCell<State>`, a thin
-  wrapper around `std::sync::RwLock` that ignores lock poisoning (the port does
-  not panic while a lock is held). Every native member, setters included, takes
-  `&self`. Evaluators take a read lock and setters a write lock, so readers on
+- Each concrete struct keeps all its fields in one `SharedState<State>`, the
+  TKernel primitive `rustycad_tkernel::standard::SharedState` that every
+  toolkit's transients share (the TKMath Poly transients use it too).
+  It is a thin wrapper around `std::sync::RwLock` that ignores lock poisoning
+  (the port does not panic while a lock is held). Every native member, setters
+  included, takes `&self`. Evaluators take a read lock and setters a write lock, so readers on
   several threads do not block each other, and objects stay `Send + Sync`.
 - One lock per object keeps each call atomic. The algorithm of a class is
   written on its plain `State` value; the struct only takes the lock and calls
@@ -136,7 +138,18 @@ adaptor on its basis, which is a separate object with its own lock.
 The Geom2dEval curves (`Geom2dEvalSineWaveCurve`, `Geom2dEvalTBezierCurve`...) follow
 the same class mapping, but no mutator succeeds on them (`Reverse` and `Transform`
 raise Standard_NotImplemented), so they keep plain fields without a
-`GeometryCell`. The Geom2dHash structs keep their public `CompTolerance` and
+`SharedState`. The Geom2dHash structs keep their public `CompTolerance` and
 `HashTolerance` as fields; `operator()(key)` becomes `hash` and
 `operator()(key, key)` becomes `equal`, and the value and curve hashers also implement
 the NCollection `HashPolicy`, so they can drive the ported hashed containers.
+
+## 9. Grid evaluators
+
+The Geom2dGridEval evaluators are plain structs, not transient classes: each holds the
+handle it evaluates (`Handle<Geom2dCircle>`...), may hold a null one, and reads the
+curve once per call (`Circ2d()`, the pole and knot arrays), so evaluation takes the
+curve's lock only for those reads. The `std::variant` of evaluators in `Geom2dGridEval_Curve` is the
+enum `Geom2dGridEvalEvaluator`, with `Uninitialized` for `std::monostate`, and the
+adaptor fallback borrows its adaptor with a lifetime, as the native
+`std::reference_wrapper`. The result structs `Geom2dGridEval::CurveD1` to `CurveD3` are
+aliases of `Geom2dCurveD1` to `Geom2dCurveD3`, which have the same fields.

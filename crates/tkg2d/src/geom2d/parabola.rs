@@ -14,7 +14,6 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_Parabola.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_Parabola`: a parabola parameterized by its ordinate along the Y axis.
-use super::cell::GeometryCell;
 use super::conic::{Geom2dConic, dump_conic, impl_conic_position, reverse_conic_position};
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
 use super::errors;
@@ -22,7 +21,7 @@ use super::geometry::{Geom2dGeometry, dump_base, dump_class_name};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Axis2d, Axis22d, Parabola2, Point2, Transform2, Vector2, Xy};
@@ -37,7 +36,7 @@ struct ParabolaState {
 /// A parabola; `Handle::new(Geom2dParabola::from_axis(axis, 1.0, true)?)`.
 pub struct Geom2dParabola {
     parent: StandardTransient,
-    state: GeometryCell<ParabolaState>,
+    state: SharedState<ParabolaState>,
 }
 impl_transient!(
     Geom2dParabola,
@@ -65,7 +64,7 @@ impl Geom2dParabola {
     fn stored(state: ParabolaState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Parabola from a gp one (`Geom2d_Parabola(gp_Parab2d)`); `Geom2dParabola::from_parab2d(p)`.

@@ -19,7 +19,7 @@
 use super::tokens::TokenReader;
 use crate::{
     gp::{Point2, Point3},
-    poly::{Polygon2D, Polygon3D, Triangle, Triangulation, errors::array_failure},
+    poly::{Polygon2D, Polygon3D, Triangle, Triangulation},
 };
 use rustycad_tkernel::{
     ncollection::Array1,
@@ -33,7 +33,7 @@ fn header_matches<R: BufRead>(
     Ok(reader.token()?.as_deref() == Some(expected))
 }
 fn table<T: Default>(member: &str, count: i32) -> Result<Array1<'static, T>, Failure> {
-    Array1::with_bounds(1, count).map_err(|e| array_failure(member, e))
+    Array1::with_bounds(1, count).map_err(|e| e.into_failure(member))
 }
 fn read_points3<R: BufRead>(
     reader: &mut TokenReader<'_, R>,

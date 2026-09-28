@@ -1,4 +1,5 @@
 //! Errors for checked array construction, assignment and indexing.
+use crate::standard::Failure;
 use std::fmt;
 
 /// Reports a failed array operation with its supplied and expected range.
@@ -59,3 +60,19 @@ impl fmt::Display for ArrayError {
 }
 
 impl std::error::Error for ArrayError {}
+
+impl ArrayError {
+    /// The exception a native `NCollection_Array1` raises for this error, prefixed with
+    /// the member that indexed it;
+    /// `ArrayError::Bounds { lower: 2, upper: 0 }.into_failure("NCollection_HArray1")`.
+    pub fn into_failure(self, member: &str) -> Failure {
+        let kind = match self {
+            Self::Bounds { .. } => "Standard_RangeError",
+            Self::Index { .. } => "Standard_OutOfRange",
+            Self::ShapeMismatch { .. } | Self::DimensionMismatch { .. } => {
+                "Standard_DimensionMismatch"
+            }
+        };
+        Failure::with_type(kind, &format!("{member}: {self}"), "")
+    }
+}

@@ -19,9 +19,9 @@ use super::curve::{GeomCurve, GeomCurveD1, GeomCurveD2, GeomCurveD3};
 use super::errors;
 use super::geometry::GeomGeometry;
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
@@ -39,7 +39,7 @@ struct EllipseState {
 /// An ellipse; `Handle::new(GeomEllipse::new(frame, 3.0, 2.0)?)`.
 pub struct GeomEllipse {
     parent: StandardTransient,
-    state: GeometryCell<EllipseState>,
+    state: SharedState<EllipseState>,
 }
 impl_transient!(
     GeomEllipse,
@@ -58,7 +58,7 @@ impl GeomEllipse {
     fn stored(state: EllipseState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Ellipse from a gp ellipse (`Geom_Ellipse(gp_Elips)`); `GeomEllipse::from_elips(e)`.

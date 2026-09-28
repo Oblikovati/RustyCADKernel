@@ -157,7 +157,7 @@ pub fn offset_load_case(values: &[f64]) {
 }
 
 // Sets, or for a null descriptor clears, the evaluation representation (a2_set_rep).
-fn set_rep(c: &Handle<dyn Geom2dCurve>, d: &Handle<dyn RepCurveDesc>) -> Result<(), Failure> {
+pub fn set_rep(c: &Handle<dyn Geom2dCurve>, d: &Handle<dyn RepCurveDesc>) -> Result<(), Failure> {
     if let Some(b) = c.cast::<Geom2dBezierCurve>().get() {
         return update_rep(
             d,

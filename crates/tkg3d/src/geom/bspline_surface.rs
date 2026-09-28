@@ -33,9 +33,9 @@ pub use eval::LocalKnots;
 pub use poles::ModifiedPoles;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::{Array1, Array2};
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg2d::geom2d::arrays::{one_based, put, rebased};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::gp::{Point3, resolution};
 use state::{Direction, SurfaceState, cell, check_surface_data, surface_rational, unit_weights};
@@ -44,7 +44,7 @@ use state::{Direction, SurfaceState, cell, check_surface_data, surface_rational,
 /// `Handle::new(GeomBSplineSurface::new(&poles, (&uk, &um), (&vk, &vm), (3, 3), (false, false))?)`.
 pub struct GeomBSplineSurface {
     parent: StandardTransient,
-    state: GeometryCell<SurfaceState>,
+    state: SharedState<SurfaceState>,
 }
 impl_transient!(
     GeomBSplineSurface,
@@ -96,7 +96,7 @@ impl GeomBSplineSurface {
     fn from_state(state: SurfaceState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     // The shared tail of both constructors: one-based copies and `updateUKnots`/`updateVKnots`.
