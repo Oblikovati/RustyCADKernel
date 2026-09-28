@@ -1,6 +1,6 @@
-// Created on: 1993-07-12
-// Created by: Remi LEQUETTE
-// Copyright (c) 1993-1999 Matra Datavision
+// Created on: 1995-06-28
+// Created by: Modelistation
+// Copyright (c) 1995-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.

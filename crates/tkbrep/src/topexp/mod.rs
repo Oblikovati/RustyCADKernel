@@ -1,6 +1,6 @@
-// Created on: 1993-01-19
-// Created by: Remi LEQUETTE
-// Copyright (c) 1993-1999 Matra Datavision
+// Created on: 1990-12-20
+// Created by: Remi Lequette
+// Copyright (c) 1990-1999 Matra Datavision
 // Copyright (c) 1999-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
