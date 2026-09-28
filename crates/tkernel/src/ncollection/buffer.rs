@@ -15,7 +15,10 @@
 
 //! Byte buffer whose storage retains the original allocator until released.
 use super::{AllocatedBytes, BaseAllocator};
-use crate::standard::dump::{DumpOutput, add_values_separator};
+use crate::standard::{
+    Failure,
+    dump::{DumpOutput, add_values_separator},
+};
 use std::io;
 
 /// Owned buffer with explicit allocation state; `Buffer::new(Some(allocator), 16)`.
@@ -29,14 +32,16 @@ pub struct Buffer {
 impl Buffer {
     /// Creates and allocates a buffer (`NCollection_Buffer(theAlloc, theSize)`).
     ///
-    /// Example: `Buffer::new(Some(BaseAllocator::common()), 0).is_empty() == false`.
-    pub fn new(allocator: Option<BaseAllocator>, size: usize) -> Self {
+    /// Construction starts with `Allocate`, whose `Free(nullptr)` raises Standard_ProgramError
+    /// for an accumulating allocator, so upstream cannot build such a buffer either.
+    /// Example: `Buffer::new(Some(BaseAllocator::common()), 0)?.is_empty() == false`.
+    pub fn new(allocator: Option<BaseAllocator>, size: usize) -> Result<Self, Failure> {
         let mut buffer = Self {
             allocator,
             storage: None,
         };
-        buffer.allocate(size);
-        buffer
+        buffer.allocate(size)?;
+        Ok(buffer)
     }
 
     /// Adopts data allocated by `allocator` (`NCollection_Buffer(theAlloc, theSize, theData)`).
@@ -51,23 +56,31 @@ impl Buffer {
         }
     }
 
-    /// Replaces storage (`Allocate`); `false` when nothing was allocated.
+    /// Replaces storage (`Allocate`); `Ok(false)` when nothing was allocated, `Err` when the
+    /// preceding `Free` raises.
     ///
     /// Upstream skips allocation only for a zero size without allocator and dereferences the
     /// null allocator otherwise; Rust reports `false` for any size without allocator.
-    /// Example: `buffer.allocate(32)`.
-    pub fn allocate(&mut self, size: usize) -> bool {
-        self.free();
+    /// Example: `buffer.allocate(32)?`.
+    pub fn allocate(&mut self, size: usize) -> Result<bool, Failure> {
+        self.free()?;
         self.storage = self
             .allocator
             .as_ref()
             .and_then(|allocator| allocator.allocate(size));
-        self.storage.is_some()
+        Ok(self.storage.is_some())
     }
 
-    /// Releases storage while retaining allocator selection (`Free`); `buffer.free()`.
-    pub fn free(&mut self) {
+    /// Releases storage while retaining allocator selection (`Free`); `buffer.free()?`.
+    ///
+    /// As upstream, the allocator frees the data even when there is none (`Free(nullptr)`),
+    /// which the accumulating allocator refuses; on failure the buffer is unchanged.
+    pub fn free(&mut self) -> Result<(), Failure> {
+        if let Some(allocator) = &self.allocator {
+            allocator.check_free(self.data_ptr())?;
+        }
         self.storage = None;
+        Ok(())
     }
 
     /// Reports missing allocation, independently of length (`IsEmpty`); `buffer.is_empty()`.
@@ -104,10 +117,12 @@ impl Buffer {
         self.allocator.as_ref()
     }
 
-    /// Frees storage before changing allocator (`SetAllocator`); `buffer.set_allocator(None)`.
-    pub fn set_allocator(&mut self, allocator: Option<BaseAllocator>) {
-        self.free();
+    /// Frees storage before changing allocator (`SetAllocator`); `buffer.set_allocator(None)?`.
+    /// When that `Free` raises, the allocator is kept.
+    pub fn set_allocator(&mut self, allocator: Option<BaseAllocator>) -> Result<(), Failure> {
+        self.free()?;
         self.allocator = allocator;
+        Ok(())
     }
 
     /// Dumps data address, size and allocator address (`DumpJson`); `theDepth` is unused.

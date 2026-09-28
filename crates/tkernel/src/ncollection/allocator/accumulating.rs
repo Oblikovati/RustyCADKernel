@@ -229,15 +229,21 @@ impl AccEngine {
         states
     }
 
+    /// The block `Free(address)` would count down, or its `Standard_ProgramError`: no block
+    /// owns the address (a null address, or a zero-size allocation at a fresh block's end,
+    /// which `findBlock` cannot reach) or the block has no live allocation.
+    pub(super) fn freeable_block(&self, address: usize) -> Result<usize, Failure> {
+        self.find_block(address)
+            .filter(|key| self.blocks[key].alloc_count != 0)
+            .ok_or_else(|| Failure::with_type("Standard_ProgramError", INVALID_FREE, ""))
+    }
+
     /// `Free`: count the release and give an emptied block back (or shrink the last one).
     ///
     /// Releasing may free a block, so the public entry points keep the counts honest: RAII
     /// owners free exactly once, and `BaseAllocator::free_raw` is `unsafe`.
     pub(super) fn free(&mut self, address: usize) -> Result<(), Failure> {
-        let key = self
-            .find_block(address)
-            .filter(|key| self.blocks[key].alloc_count != 0)
-            .ok_or_else(|| Failure::with_type("Standard_ProgramError", INVALID_FREE, ""))?;
+        let key = self.freeable_block(address)?;
         let block = self.blocks.get_mut(&key).expect("found block is bound");
         block.alloc_count -= 1;
         if block.alloc_count != 0 {

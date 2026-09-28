@@ -34,19 +34,19 @@ fn base_allocator_identity_and_bytes() {
 fn buffer_allocation_state_and_allocator_changes() {
     use rustycad_tkernel::ncollection::Buffer;
     let allocator = BaseAllocator::incremental(128);
-    let mut buffer = Buffer::new(Some(allocator.clone()), 0);
+    let mut buffer = Buffer::new(Some(allocator.clone()), 0).unwrap();
     assert!(!buffer.is_empty());
     assert_eq!(buffer.size(), 0);
     assert_eq!(buffer.allocator(), Some(&allocator));
-    assert!(buffer.allocate(64));
+    assert!(buffer.allocate(64).unwrap());
     buffer.as_mut_slice().fill(17);
     assert_eq!(buffer.as_slice(), &[17; 64]);
-    buffer.free();
+    buffer.free().unwrap();
     assert!(buffer.is_empty());
     assert_eq!(buffer.size(), 0);
-    buffer.set_allocator(None);
+    buffer.set_allocator(None).unwrap();
     assert!(buffer.allocator().is_none());
-    assert!(!buffer.allocate(0));
+    assert!(!buffer.allocate(0).unwrap());
     assert!(buffer.is_empty());
     allocator.reset(true).unwrap();
 }

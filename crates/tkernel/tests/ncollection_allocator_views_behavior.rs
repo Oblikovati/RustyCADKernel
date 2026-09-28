@@ -31,22 +31,37 @@ fn buffer_adopts_data_and_reports_native_pointer_state() {
     assert_eq!((buffer.size(), buffer.data_ptr()), (4, address));
     buffer.as_mut_slice().copy_from_slice(&[1, 2, 3, 4]);
     assert_eq!(buffer.as_slice(), &[1, 2, 3, 4]);
-    buffer.set_allocator(None);
+    buffer.set_allocator(None).unwrap();
     assert!(buffer.data_ptr().is_null() && buffer.is_empty());
-    assert!(!buffer.allocate(8)); // upstream dereferences the null allocator here
-    assert!(Buffer::new(None, 0).is_empty());
+    assert!(!buffer.allocate(8).unwrap()); // upstream dereferences the null allocator here
+    assert!(Buffer::new(None, 0).unwrap().is_empty());
+}
+
+#[test]
+fn buffer_free_raises_like_the_accumulating_allocator() {
+    // Allocate starts with Free(nullptr), which NCollection_AccAllocator refuses.
+    let accumulating = BaseAllocator::accumulating(64).unwrap();
+    let failure = Buffer::new(Some(accumulating.clone()), 8).err().unwrap();
+    assert_eq!(failure.exception_type(), "Standard_ProgramError");
+    let mut buffer = Buffer::new(Some(BaseAllocator::common()), 8).unwrap();
+    assert!(buffer.set_allocator(Some(accumulating.clone())).is_ok()); // frees non-null data
+    assert!(buffer.set_allocator(None).is_err());
+    assert_eq!(buffer.allocator(), Some(&accumulating));
 }
 
 #[test]
 fn buffer_dump_uses_short_pointer_info() {
-    let buffer = Buffer::new(Some(BaseAllocator::common()), 16);
+    let buffer = Buffer::new(Some(BaseAllocator::common()), 16).unwrap();
     let mut stream = DumpStream::default();
     buffer.dump_json(&mut stream, -1).unwrap();
     let text = stream.text().to_owned();
     let data = format!("\"Data\": \"0xx{:x}\"", buffer.data_ptr() as usize);
     assert!(text.starts_with(&format!("{data}, \"Size\": 16, \"Allocator\": \"0xx")));
     let mut empty = DumpStream::default();
-    Buffer::new(None, 0).dump_json(&mut empty, -1).unwrap();
+    Buffer::new(None, 0)
+        .unwrap()
+        .dump_json(&mut empty, -1)
+        .unwrap();
     assert_eq!(
         empty.text(),
         "\"Data\": \"\", \"Size\": 0, \"Allocator\": \"\""

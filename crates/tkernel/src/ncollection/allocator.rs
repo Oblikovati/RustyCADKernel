@@ -171,6 +171,19 @@ impl BaseAllocator {
         }
     }
 
+    /// Whether `Free(address)` would succeed, without freeing: only the accumulating allocator
+    /// raises (`Standard_ProgramError` for an address it cannot find, including null).
+    ///
+    /// Example: `BaseAllocator::common().check_free(std::ptr::null()).is_ok()`.
+    pub fn check_free(&self, address: *const u8) -> Result<(), Failure> {
+        match &*self.inner {
+            AllocatorKind::Accumulating(engine) => {
+                locked(engine).freeable_block(address as usize).map(|_| ())
+            }
+            _ => Ok(()),
+        }
+    }
+
     /// Rewinds (`release == false`) or frees (`release == true`) an incremental allocator's
     /// blocks (`NCollection_IncAllocator::Reset`); other allocators have nothing to reset.
     ///
@@ -272,9 +285,11 @@ impl BaseAllocator {
     unsafe fn free_typed(&self, address: NonNull<u8>) {
         match &*self.inner {
             AllocatorKind::Incremental(engine) => locked(engine).release(),
-            AllocatorKind::Accumulating(engine) => locked(engine)
-                .free(address.as_ptr() as usize)
-                .expect("typed allocation belongs to this accumulating allocator"),
+            AllocatorKind::Accumulating(engine) => {
+                // Only a zero-size byte allocation at a fresh block's end can fail: upstream's
+                // Free raises there and the allocation stays counted, which Drop cannot report.
+                let _ = locked(engine).free(address.as_ptr() as usize);
+            }
             // SAFETY: forwarded from this function's contract.
             _ => unsafe { heap_free(address) },
         }
