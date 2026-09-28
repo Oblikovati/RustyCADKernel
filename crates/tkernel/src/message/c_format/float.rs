@@ -77,9 +77,17 @@ fn with_exponent(mantissa: String, exponent: i32) -> Vec<u8> {
 }
 
 /// `%g`: the style follows the exponent after rounding to `P` significant digits (C11 7.21.6.1).
+///
+/// glibc quirk kept: when the fixed-style candidate (chosen from the unrounded exponent
+/// `P - 1`) rounds up to exponent `P`, glibc switches to the exponent style but keeps the
+/// candidate's zero fraction digits, so `%#g` of 999999.875 prints `1.e+06`.
 fn general(magnitude: f64, spec: &Spec) -> Vec<u8> {
     let significant = spec.precision.unwrap_or(6).max(1);
     let (_, exponent) = scientific(magnitude, significant - 1);
+    let unrounded = if magnitude == 0.0 { 0 } else { scientific_shortest_exponent(magnitude) };
+    if spec.alternate && unrounded == significant as i32 - 1 && exponent == significant as i32 {
+        return with_exponent("1.".to_owned(), exponent);
+    }
     let use_fixed = exponent >= -4 && exponent < significant as i32;
     if use_fixed {
         let decimals = (significant as i32 - 1 - exponent) as usize;
@@ -88,6 +96,14 @@ fn general(magnitude: f64, spec: &Spec) -> Vec<u8> {
     }
     let (mantissa, exponent) = scientific(magnitude, significant - 1);
     with_exponent(trimmed(mantissa, spec.alternate), exponent)
+}
+
+/// Decimal exponent of the exact value: the shortest round-trip digits never cross a
+/// power of ten that the value itself does not reach.
+fn scientific_shortest_exponent(magnitude: f64) -> i32 {
+    let text = format!("{magnitude:e}");
+    let (_, exponent) = text.split_once('e').expect("Rust exponent form");
+    exponent.parse().expect("decimal exponent")
 }
 
 /// Drops trailing fractional zeros and a bare point; `#` keeps them and forces the point.

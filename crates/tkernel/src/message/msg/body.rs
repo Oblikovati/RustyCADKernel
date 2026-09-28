@@ -204,8 +204,14 @@ impl Msg {
     /// `UNKNOWN` again at the stale positions. Positions past the end raise
     /// `Standard_OutOfRange` from `Split`/`Remove`, returned here as an error.
     pub fn get(&mut self) -> Result<&ExtendedString, Failure> {
-        const UNKNOWN: [u16; 7] = [85, 78, 75, 78, 79, 87, 78];
         let mut units = self.body.as_utf16().to_vec();
+        let outcome = self.fill_unknown(&mut units);
+        // The native loop edits the body in place, so a failure keeps the partial edit.
+        self.body = ExtendedString::from_raw(&units);
+        outcome.map(|()| &self.body)
+    }
+    fn fill_unknown(&self, units: &mut Vec<u16>) -> Result<(), Failure> {
+        const UNKNOWN: [u16; 7] = [85, 78, 75, 78, 79, 87, 78];
         let mut increment = 0;
         for slot in (0..self.formats.len().saturating_sub(2)).step_by(3) {
             let split = self.formats[slot + 1] + increment;
@@ -218,7 +224,6 @@ impl Msg {
             units.extend_from_slice(&right);
             increment += UNKNOWN.len() as i32 - self.formats[slot + 2];
         }
-        self.body = ExtendedString::from_raw(&units);
-        Ok(&self.body)
+        Ok(())
     }
 }
