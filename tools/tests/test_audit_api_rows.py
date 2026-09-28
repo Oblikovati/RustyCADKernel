@@ -276,6 +276,14 @@ struct hash<Handle(TheTransientType)>
   size_t operator()(const Handle(TheTransientType)& theHandle) const noexcept { return 0; }
 };
 }
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+  Standard_EXPORT double Atof(const char* theStr);
+#ifdef __cplusplus
+}
+#endif
 """
 
 
@@ -292,6 +300,10 @@ class StandardPackageTests(unittest.TestCase):
         self.assertEqual(normalize_params("Standard_OStream& theOStream, int theCount, ..."),
                          "Standard_OStream&,int,...")
         self.assertIn("Standard_Dump::DumpRealValues|Standard_OStream&,int,...|", members_of(STANDARD_HEADER))
+
+    def test_extern_c_blocks_declare_members_of_the_enclosing_scope(self):
+        # Standard_CString.hxx declares Atof, Strtod and the Printf family in such a block.
+        self.assertIn("gp_Demo::Atof|const char*|", members_of(STANDARD_HEADER))
 
     def test_specializations_whose_arguments_hold_macro_calls_are_scopes(self):
         # The `Handle(T)` macro is expanded as the preprocessor does.

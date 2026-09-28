@@ -161,6 +161,10 @@ def scan_scope(body: str, scope: str, public_default: bool, primary: str, expose
 def statement_members(head: str, braced: str | None, scope: str, primary: str, exposed: bool) -> list[Member]:
     """Members produced by one statement of a scope; non-exposed ones are only known."""
     head = strip_template_heads(head)
+    if braced is not None and re.fullmatch(r'extern\s*""', head):
+        # A linkage block (`extern "C" { ... }`, its literal blanked) declares members of the
+        # enclosing scope; Standard_CString.hxx declares Atof/Strtod/Printf there.
+        return scan_scope(braced, scope, True, primary, exposed)
     scope_match = SCOPE_HEAD.match(head)
     if scope_match is not None and "(" not in without_scope_arguments(head, scope_match):
         return nested_scope_members(head, scope_match, braced, scope, primary, exposed)
