@@ -22,4 +22,6 @@
 pub mod gc;
 pub mod gce;
 pub mod gce2d;
+pub mod int_ana;
+pub mod int_ana2d;
 mod line_extrema;

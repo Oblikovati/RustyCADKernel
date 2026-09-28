@@ -3,15 +3,15 @@
 **In progress; toolkit acceptance is not complete.** `crates/tkgeombase`
 (`rustycad-tkgeombase`) is the port of the ModelingData toolkit TKGeomBase. It
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
-does. Packages are added one module at a time. The `gce`, `GC` and `GCE2d` packages
-are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0 stale api
-rows for each of them.
+does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`
+and `IntAna2d` packages are ported in full, and `tools/audit_api_rows.py` reports 0
+missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (62 declarations):
+passes (72 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -26,6 +26,7 @@ passes (62 declarations):
 | GC_MakeParabola2d_Test.cxx | gc_make_parabola2d | 3 |
 | GC_MakePlane_Test.cxx | gc_make_plane | 3 |
 | GC_MakeSegment2d_Test.cxx | gc_make_segment2d | 6 |
+| IntAna_IntQuadQuad_Test.cxx | int_ana_int_quad_quad | 10 |
 
 `gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
 StdFail_NotDone results, the conversion operators, the GCE2d aliases and the native
@@ -53,11 +54,28 @@ header is a deprecated alias of a GC class (`using GCE2d_MakeCircle = GC_MakeCir
 `gce2d` declares them as `#[deprecated]` type aliases with the native message, and
 re-exports `Root` for GCE2d_Root.
 
-`gce_MakeCirc`, `gce_MakeCirc2d`, `GC_MakeArcOfCircle(2d)` and `GC_MakeTrimmedCone` call
-`Extrema_ExtElC` on two lines, `IntAna2d_AnaIntersection` on two 2D lines and
-`Extrema_ExtPElC` on a point and a line, which are TKGeomBase packages not ported yet.
-`src/line_extrema.rs` ports exactly those cases in the native operation order; the
-Extrema and IntAna2d ports will replace it.
+`gce_MakeCirc`, `GC_MakeArcOfCircle` and `GC_MakeTrimmedCone` call `Extrema_ExtElC` on
+two lines and `Extrema_ExtPElC` on a point and a line; Extrema is not ported yet, and
+`src/line_extrema.rs` ports exactly those cases in the native operation order until the
+Extrema port replaces it. `gce_MakeCirc2d` and `GC_MakeArcOfCircle2d` call the IntAna2d
+port (`int_ana2d::AnaIntersection::lines`).
+
+IntAna and IntAna2d (`int_ana`, `int_ana2d`) are algorithm objects: each native
+constructor overload is a named constructor (`QuadQuadGeo::cones`,
+`AnaIntersection::line_circle`, `IntConicQuad::circle_plane`...) and each Perform
+overload a `perform_*` method on `&mut self`, which keeps the fields that Perform does
+not assign, as natively. A Perform or accessor that can raise returns `Result` with the
+native exception type (StdFail_NotDone, Standard_DomainError, Standard_OutOfRange,
+Standard_ConstructionError from gp). Output parameters become return values
+(`Curve::domain`, `IntLinTorus::param_on_torus`, `IntQuadQuad::next_curve` returns the
+index and the opposite flag); `Curve::d1u` keeps its two output arguments because the
+native member assigns the point even when it returns false. IntAna_Quadric and
+IntAna_Curve take the ten quadric coefficients as one `[Qxx, Qyy, Qzz, Qxy, Qxz, Qyz,
+Qx, Qy, Qz, Q1]` array, and the curve domain as a pair. The deprecated
+IntAna_ListOfCurve is the `#[deprecated]` alias `int_ana::ListOfCurve`. The cone-cone
+EstimDist needs `ProjLib::Project(gp_Pln, gp_Lin)`; ProjLib is not ported, so
+`quad_quad_geo/estim_dist.rs` holds that one line projection (ProjLib_Plane) until the
+ProjLib port replaces it.
 
 ## Verification
 
@@ -96,7 +114,18 @@ scale factors and bad cone angles at both resolution bounds. They leave out the 
 for which a GC constructor reads the status of a stack gce algorithm on one of its
 unassigned paths (three points within gp::Resolution() for `GC_MakeCircle` and
 `GC_MakeArcOfCircle`, collinear points for their 2D versions): the native status is
-indeterminate there. The corpus has 4449 requests (gce and GC).
+indeterminate there.
+
+The IntAna and IntAna2d requests intersect every pair of each package with random
+inputs and with the configurations of each branch: parallel, identical, near-parallel
+and axis-aligned 2D lines (each pivot), concentric, tangent (inside and outside),
+secant, nested and nearly coincident circles, each gp conic against each implicit
+conic, the polynomial solver on multiple, null and degenerate roots; conics in, along
+and across quadrics and planes; coaxial, parallel, perpendicular, intersecting and skew
+quadric axes, apexes on the other cone, sections beyond the ellipse and hyperbola
+limits, torus pairs through and around the tube; and the cylinder and cone
+IntAna_IntQuadQuad curves with their links, points, tangents, parameters and
+out-of-range accessors. The corpus has 5394 requests (gce, GC, IntAna2d and IntAna).
 
 ## Preserved native behaviour
 
@@ -163,3 +192,40 @@ GC and GCE2d:
 - The GC transformation makers set a new Geom transformation through its own setter:
   `GC_MakeTranslation(P1, P2)` uses `gp_Trsf::SetTranslation(P1, P2)` where
   gce_MakeTranslation builds `gp_Vec(P1, P2)` first.
+
+IntAna2d:
+
+- `Perform(gp_Parab2d, IntAna2d_Conic)` never returns early: it is always done, even
+  when the solver fails (no point) or the elements are identical.
+- `Perform(gp_Circ2d, IntAna2d_Conic)` prints "math_TrigonometricFunctionRoots ->
+  NotDone" on std::cout when its solver fails; the port does not print (the probe
+  discards std::cout around every native intersection).
+- `Traitement_Points_Confondus` shifts the remaining points with the implicit
+  `SetValue`, so they lose their second parameter (RealLast()).
+- `MyDirectPolynomialRoots::IsDone()` returns a double natively; the port returns a
+  bool. `Value(i)` reads its 16-slot array unchecked natively; the port raises
+  Standard_OutOfRange outside it.
+
+IntAna:
+
+- `IntAna_IntQuadQuad::Perform(gp_Cylinder, ...)` never links its curves
+  (InternalSetNextAndPrevious is only called by the cone Perform), so HasNextCurve and
+  HasPreviousCurve are always false there; the link loop compares each curve only with
+  the curves of lower index (`c2 < NbCurves && c2 != c1` stops at `c1`). No Perform
+  finds contact points, and `Parameters()` only prints "not yet implemented" natively
+  (the port leaves its outputs unchanged without printing).
+- `IntAna_Curve`: the derivative of the Z² coefficient squares its CosSin term where
+  the other derivatives double it; FindParameter sorts only the first four of its five
+  candidates; V is clamped to ±100000; `SetCylinderQuadValues` keeps the semi-angle of
+  a previous cone.
+- `IntAna_Quadric::SetQuadric` appends the special points (cone apex, sphere poles)
+  without clearing the earlier ones, and the plane and cylinder setters keep them.
+- `IntAna_QuadQuadGeo::Perform(gp_Cone, gp_Torus)` starts its circle count from the
+  previous NbSolutions() (0 for a new intersection); the lower slots are uninitialized
+  natively and keep default values in the port. The Perform overloads keep the fields
+  they do not assign (a reused intersection shows the previous values there).
+- `IntAna_IntConicQuad`: the constructors other than the empty one leave the flags
+  that their Perform skips uninitialized (for example IsParallel after two identical
+  planes in the circle-plane case); the port starts from the empty state.
+- The internal array overflows that are undefined natively (more than 12 IntQuadQuad
+  curves, more than 4 cone-torus circles) raise Standard_OutOfRange in the port.

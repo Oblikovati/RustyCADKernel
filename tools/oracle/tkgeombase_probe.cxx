@@ -39,6 +39,8 @@
 #include "tkgeombase_probe_common.cxx"
 #include "tkgeombase_probe_gce.cxx"
 #include "tkgeombase_probe_gc.cxx"
+#include "tkgeombase_probe_intana2d.cxx"
+#include "tkgeombase_probe_intana.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -98,6 +100,23 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gc_scale2d", gb_gc_scale2d_case},
  {"gc_translation", gb_gc_translation_case},
  {"gc_translation2d", gb_gc_translation2d_case},
+ // IntAna2d (tkgeombase_probe_intana2d.cxx)
+ {"ia2_lines", gb_ia2_lines_case},
+ {"ia2_circles", gb_ia2_circles_case},
+ {"ia2_line_circle", gb_ia2_line_circle_case},
+ {"ia2_conic", gb_ia2_conic_case},
+ {"ia2_conic_eval", gb_ia2_conic_eval_case},
+ {"ia2_roots", gb_ia2_roots_case},
+ {"ia2_outils", gb_ia2_outils_case},
+ {"ia2_int_point", gb_ia2_int_point_case},
+ // IntAna (tkgeombase_probe_intana.cxx)
+ {"ia_quadric", gb_ia_quadric_case},
+ {"ia_conic_quad", gb_ia_conic_quad_case},
+ {"ia_conic_plane", gb_ia_conic_plane_case},
+ {"ia_lin_torus", gb_ia_lin_torus_case},
+ {"ia_qqgeo", gb_ia_qqgeo_case},
+ {"ia_qq", gb_ia_qq_case},
+ {"ia_curve", gb_ia_curve_case},
 };
 int main() {
  std::string line;

@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod gb_probe;
-use gb_probe::{gc, gce};
+use gb_probe::{gc, gce, int_ana, int_ana2d};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -68,6 +68,23 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gc_scale2d", gc::scale2d_case),
     ("gc_translation", gc::translation_case),
     ("gc_translation2d", gc::translation2d_case),
+    // IntAna2d (gb_probe/int_ana2d.rs)
+    ("ia2_lines", int_ana2d::ia2_lines_case),
+    ("ia2_circles", int_ana2d::ia2_circles_case),
+    ("ia2_line_circle", int_ana2d::ia2_line_circle_case),
+    ("ia2_conic", int_ana2d::ia2_conic_case),
+    ("ia2_conic_eval", int_ana2d::ia2_conic_eval_case),
+    ("ia2_roots", int_ana2d::ia2_roots_case),
+    ("ia2_outils", int_ana2d::ia2_outils_case),
+    ("ia2_int_point", int_ana2d::ia2_int_point_case),
+    // IntAna (gb_probe/int_ana)
+    ("ia_quadric", int_ana::ia_quadric_case),
+    ("ia_conic_quad", int_ana::ia_conic_quad_case),
+    ("ia_conic_plane", int_ana::ia_conic_plane_case),
+    ("ia_lin_torus", int_ana::ia_lin_torus_case),
+    ("ia_qqgeo", int_ana::ia_qqgeo_case),
+    ("ia_qq", int_ana::ia_qq_case),
+    ("ia_curve", int_ana::ia_curve_case),
 ];
 
 fn main() {
