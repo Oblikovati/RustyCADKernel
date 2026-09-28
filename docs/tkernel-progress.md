@@ -383,8 +383,9 @@ Resource files use injected filesystem/environment interfaces. Both default file
 populate the reference map; only explicit user overrides are saved. Save rereads the
 user destination, creates parent directories, sorts keys, and preserves native
 leading-space/backslash escaping. Verbose diagnostics and Unicode resource conversion
-remain unported APIs. Legacy filesystem regressions use a named fake in Rust and
-unchanged native filesystem operations in OCCT.
+are now ported too (see "Message, Resource and Quantity API completion"). Legacy
+filesystem regressions use a named fake in Rust and unchanged native filesystem
+operations in OCCT.
 
 KDTree owns points and optional radii, builds a balanced median permutation, and
 uses 32-point leaf buckets, spatial pruning, and a distance-only max heap. Its 187
@@ -786,3 +787,62 @@ sequences. All 1,980 cases are identical.
 122 api rows: 103 implemented and 19 excluded. The excluded rows are destructors, move
 operations, STL iterator boilerplate, the structured-binding `get<I>()` protocol and
 `ChangeBufferHere`.
+
+## Message, Resource and Quantity API completion
+
+### Resource
+
+`python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/Resource --source ../OCCT`
+reports 0 public members without api rows and 0 stale rows. The package has 36 rows:
+35 implemented and 1 excluded (the `DEFINE_STANDARD_RTTIEXT` macro).
+
+`ResourceManager` (formerly `ResourceCatalog`) is the complete Resource_Manager: the
+name-based, directory-based and empty constructors, Find (both forms), Value, Integer, Real,
+ExtValue, every SetResource overload, Save, GetResourcePath and GetMap. The services the C++
+class reaches globally (OSD_File, OSD_Environment and `std::cout`) are one injected
+`ResourceHost` (`ResourceIo`, `ResourceEnvironment`, `ResourceConsole`); `ResourceHost::native()`
+selects the process filesystem, environment and standard output. `ResourceUnicode` is the
+static Resource_Unicode class: SJIS, EUC, GB2312, GBK, Big5, UTF-8, the C-locale conversions
+and the 19 single-byte code pages in both directions, plus the process-wide current format.
+
+The five conversion tables (`unisjis`/`sjisuni`, `unigb`/`gbuni`, `gbkuni`, `big5uni` and the
+code pages) are carried exactly. `tools/generate_resource_tables.py` parses the OCCT `.pxx`
+headers and writes little-endian blobs under `crates/tkernel/src/resource/tables/`: the four
+65,536-entry tables are sparse (sorted `(index, value)` pairs of the nonzero entries, about
+28 KB each), the others dense. The generated `tables.rs` embeds them with `include_bytes!` and
+records their FNV-1a-64 digests, which a unit test recomputes; `--check` (run by
+`verify_tkernel.py`) proves the blobs still equal the headers.
+
+Native quirks preserved:
+
+- Lines are read like `GetLine`: `fgets` chunks of 9 bytes cut at their first NUL, so a NUL
+  hides the rest of its chunk (even the newline, which merges lines), and a chunk that starts
+  with NUL raises Standard_OutOfRange from `aLine.Value(0)` in the constructor.
+- Both constructors load the user file into the reference map, so Save writes only explicit
+  SetResource values, and the verbose Load message always says "Reference".
+- `ResourceDebug` is a process-wide flag re-read by every name-based constructor.
+- ExtValue caches per name and a later byte-string SetResource does not refresh it.
+- SetResource with UTF-16 in a code-page format raises Standard_OutOfRange (the encoder reads
+  the source up to maxsize - 1 units); in GBK/Big5 it raises Standard_NotImplemented. Both
+  happen after the cache was updated.
+- Code-page encoding searches only the 128 upper slots: ASCII encodes as '?'.
+- ANSI encoding reports false when the text exactly fills maxsize - 1 bytes.
+- EUC/GB truncation writes the terminator over the previous byte; GB keeps the low byte of
+  unmapped characters.
+- GBK never resets its four-byte state and indexes the two-byte table with the four-byte code;
+  GBK and Big5 recoveries call `Insert(0, ...)`, which raises Standard_OutOfRange.
+- Big5 appends U+0000 for unmapped pairs, and returns false for the table's astral values:
+  the native code reads a one-element `char32_t` array as a NUL-terminated string, the read
+  runs past the array and the surrogate-pair size check fails (observed on every astral entry).
+
+Rust deviations, all for native undefined behavior: a lead byte right before the terminator
+reads the NUL as its trail and ends the text (the native loop reads past the string), and a
+store outside the buffer (maxsize 0, EUC/GB truncating before any byte, UTF-8 into a buffer
+of exactly the encoded size) raises Standard_OutOfRange instead of writing out of bounds.
+
+The Resource probe family (`tools/oracle/tkernel_resource_probe.cxx`, Rust twin
+`crates/tkernel/examples/oracle_probe/resource.rs`, requests in
+`tools/tkernel_resource_corpus.py`) covers every decoder lead/trail pair, every encoder unit,
+every code page, buffer boundaries, resource files with verbose and debug traces, both
+constructors, Save, GetResourcePath, ExtValue and ReadFormat: 4,117 requests, all identical
+to OCCT.
