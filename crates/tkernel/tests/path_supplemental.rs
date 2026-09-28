@@ -1,15 +1,30 @@
 //! Explicit parser profiles and named environment/filesystem fixtures.
 use rustycad_tkernel::osd::{
-    CadPath, DirectorySource, File, FileStatusSource, PathSyntax, Process,
+    CadPath, File, FileStatusSource, LocalTime, PathSyntax, Process, ProcessSource,
 };
-use std::{
-    io,
-    path::{Path, PathBuf},
-};
+use std::path::Path;
 struct FakeDirectorySource;
-impl DirectorySource for FakeDirectorySource {
-    fn current_directory(&self) -> io::Result<PathBuf> {
-        Ok(PathBuf::from("/workspace/project"))
+impl ProcessSource for FakeDirectorySource {
+    fn process_id(&self) -> i32 {
+        1
+    }
+    fn is_super_user(&self) -> bool {
+        false
+    }
+    fn user_name(&self) -> Result<Vec<u8>, i32> {
+        Ok(Vec::new())
+    }
+    fn local_time(&self) -> Result<LocalTime, i32> {
+        Ok(LocalTime::default())
+    }
+    fn current_directory(&self) -> Result<Vec<u8>, i32> {
+        Ok(b"/workspace/project".to_vec())
+    }
+    fn set_current_directory(&self, _path: &[u8]) -> Result<(), i32> {
+        Ok(())
+    }
+    fn executable_path(&self) -> Vec<u8> {
+        Vec::new()
     }
 }
 struct FakeFileStatus;
@@ -20,7 +35,7 @@ impl FileStatusSource for FakeFileStatus {
 }
 #[test]
 fn injected_directory_and_file_sources_keep_queries_deterministic() {
-    let mut path = Process::current_directory_with(&FakeDirectorySource).unwrap();
+    let mut path = Process::with_source(FakeDirectorySource).current_directory();
     assert_eq!(path.trek().as_bytes(), b"|workspace|project|");
     path.up_trek();
     assert_eq!(path.trek().as_bytes(), b"|workspace|");
