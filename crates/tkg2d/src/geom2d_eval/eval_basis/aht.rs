@@ -33,6 +33,13 @@ pub struct AhtView<'a, P: EvalPole> {
     pub beta: f64,
 }
 
+/// The number of basis functions (`basisDimension`): `k + 1`, plus 2 for a hyperbolic
+/// pair when alpha > 0 and 2 for a trigonometric pair when beta > 0;
+/// `basis_dimension(1, 1.0, 1.0) == 6`.
+pub fn basis_dimension(alg_degree: i32, alpha: f64, beta: f64) -> i32 {
+    alg_degree + 1 + if alpha > 0.0 { 2 } else { 0 } + if beta > 0.0 { 2 } else { 0 }
+}
+
 /// `evalPolynomialNonRational<MAX>` / `evalPolynomialRational<MAX>`: Horner's scheme on
 /// `sum P_k t^k`, with its derivatives up to MAX; `polynomial::<1>(&view, 0.5)`.
 pub fn polynomial<const MAX: usize, P: EvalPole>(

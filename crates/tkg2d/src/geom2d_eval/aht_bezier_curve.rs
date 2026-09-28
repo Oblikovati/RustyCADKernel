@@ -14,7 +14,9 @@
 
 //! `Geom2dEval_AHTBezierCurve`: an algebraic-hyperbolic-trigonometric Bezier curve
 //! over `{1, t, ..., t^k, sinh(alpha t), cosh(alpha t), sin(beta t), cos(beta t)}` on `[0, 1]`.
-use super::eval_basis::aht::{AhtView, mixed, polynomial, quotient_d1, quotient_d2, quotient_d3};
+use super::eval_basis::aht::{
+    AhtView, basis_dimension, mixed, polynomial, quotient_d1, quotient_d2, quotient_d3,
+};
 use super::eval_basis::aht_dn;
 use super::eval_basis::sums::BasisSums;
 use super::eval_math::{check_derivative_order, unsupported};
@@ -57,13 +59,6 @@ impl Clone for Geom2dEvalAHTBezierCurve {
     fn clone(&self) -> Self {
         self.copied()
     }
-}
-
-/// The number of basis functions (`basisDimension`): `k + 1`, plus 2 for a hyperbolic
-/// pair when alpha > 0 and 2 for a trigonometric pair when beta > 0;
-/// `basis_dimension(1, 1.0, 1.0) == 6`.
-pub(crate) fn basis_dimension(alg_degree: i32, alpha: f64, beta: f64) -> i32 {
-    alg_degree + 1 + if alpha > 0.0 { 2 } else { 0 } + if beta > 0.0 { 2 } else { 0 }
 }
 
 // The checks both constructors share, in native order.

@@ -32,6 +32,16 @@ mod eval_failures;
 pub mod rep_utils;
 
 // GeomEval curves.
+mod aht_bezier_curve;
+mod bezier_curve_data;
+mod curve_support;
+pub use aht_bezier_curve::GeomEvalAHTBezierCurve;
+mod circular_helix_curve;
+pub use circular_helix_curve::GeomEvalCircularHelixCurve;
+mod sine_wave_curve;
+pub use sine_wave_curve::GeomEvalSineWaveCurve;
+mod tbezier_curve;
+pub use tbezier_curve::GeomEvalTBezierCurve;
 
 // GeomEval elementary surfaces.
 

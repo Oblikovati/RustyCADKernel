@@ -54882,6 +54882,790 @@
       "rust_item": "rustycad_tkg3d::top_abs::State",
       "status": "implemented",
       "notes": "Enumeration with native declaration order as i32 discriminants."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve(const NCollection_Array1<gp_Pnt>&,int,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::new",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,int,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::with_weights",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::Poles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::poles",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::Weights() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::weights",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::AlgDegree() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::alg_degree",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::Alpha() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::alpha",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::Beta() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::beta",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::NbPoles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::IsRational() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::is_rational",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::StartPoint() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::start_point",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::EndPoint() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::end_point",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::Reverse()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::reverse",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::ReversedParameter(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::reversed_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::FirstParameter() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::LastParameter() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::IsClosed() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::is_closed",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::IsPeriodic() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::Continuity() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::continuity",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::IsCN(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::is_cn",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::EvalD0(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::EvalD1(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::EvalD2(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::EvalD3(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::EvalDN(double,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::Transform(const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::transform",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::Copy() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::copy",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::dump_json",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurve::DEFINE_STANDARD_RTTIEXT(GeomEval_AHTBezierCurve,Geom_BoundedCurve)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_AHTBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalAHTBezierCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve(const gp_Ax2&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::new",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::Position() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::position",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::Radius() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::radius",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::Pitch() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::pitch",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::Reverse()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::reverse",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::ReversedParameter(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::reversed_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::FirstParameter() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::LastParameter() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::IsClosed() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::is_closed",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::IsPeriodic() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::Continuity() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::continuity",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::IsCN(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::is_cn",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::EvalD0(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::EvalD1(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::EvalD2(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::EvalD3(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::EvalDN(double,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::Transform(const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::transform",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::Copy() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::copy",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::dump_json",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurve::DEFINE_STANDARD_RTTIEXT(GeomEval_CircularHelixCurve,Geom_Curve)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_CircularHelixCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalCircularHelixCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve(const gp_Ax2&,double,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::new",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::Position() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::position",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::Amplitude() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::amplitude",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::Omega() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::omega",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::Phase() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::phase",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::Reverse()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::reverse",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::ReversedParameter(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::reversed_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::FirstParameter() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::LastParameter() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::IsClosed() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::is_closed",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::IsPeriodic() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::Continuity() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::continuity",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::IsCN(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::is_cn",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::EvalD0(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::EvalD1(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::EvalD2(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::EvalD3(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::EvalDN(double,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::Transform(const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::transform",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::Copy() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::copy",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::dump_json",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurve::DEFINE_STANDARD_RTTIEXT(GeomEval_SineWaveCurve,Geom_Curve)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_SineWaveCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalSineWaveCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve(const NCollection_Array1<gp_Pnt>&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::new",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::with_weights",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::Poles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::poles",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::Weights() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::weights",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::Alpha() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::alpha",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::NbPoles() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::Order() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::order",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::IsRational() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::is_rational",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::StartPoint() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::start_point",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::EndPoint() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::end_point",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::Reverse()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::reverse",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::ReversedParameter(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::reversed_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::FirstParameter() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::LastParameter() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::IsClosed() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::is_closed",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::IsPeriodic() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::Continuity() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::continuity",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::IsCN(int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::is_cn",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::EvalD0(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::EvalD1(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::EvalD2(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::EvalD3(double) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::EvalDN(double,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::Transform(const gp_Trsf&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::transform",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::Copy() const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::copy",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::dump_json",
+      "status": "implemented",
+      "notes": "Eval curves have no successful mutator (Reverse, ReversedParameter and Transform raise Standard_NotImplemented), so they hold plain fields without the Geom lock; const& getters return copies with the native bounds; constructors return Failure instead of throwing; the T-Bezier and AHT-Bezier evaluators are the generic rustycad_tkg2d::geom2d_eval::eval_basis code shared with Geom2dEval."
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurve::DEFINE_STANDARD_RTTIEXT(GeomEval_TBezierCurve,Geom_BoundedCurve)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GeomEval/GeomEval_TBezierCurve.hxx",
+      "rust_item": "rustycad_tkg3d::geom_eval::GeomEvalTBezierCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     }
   ],
   "tests": [
@@ -111104,6 +111888,860 @@
       "rust_target": "geom_surface_eval",
       "rust_test": "Geom_SurfaceEvalTest__RevolutionSurface_EvalD1_ValidResults",
       "rust_source": "crates/tkg3d/tests/geom_surface_eval.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.Construction_FullBasis",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__Construction_FullBasis",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.Construction_Polynomial",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__Construction_Polynomial",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.ParameterRange",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__ParameterRange",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.EvalD0_Endpoints",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__EvalD0_Endpoints",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.EvalD1_ConsistentWithD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__EvalD1_ConsistentWithD0",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.Periodicity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__Periodicity",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.Reverse_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__Reverse_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.Construction_Rational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__Construction_Rational",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.Transform_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__Transform_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.Copy_Independent",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__Copy_Independent",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.DumpJson_NoCrash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__DumpJson_NoCrash",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.EvalD2_ConsistentWithD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__EvalD2_ConsistentWithD1",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.EvalD3_ConsistentWithD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__EvalD3_ConsistentWithD2",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.EvalDN_ConsistentWithD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__EvalDN_ConsistentWithD1",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.EvalD0_PurePolynomial_KnownValues",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__EvalD0_PurePolynomial_KnownValues",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.EvalD0_MatchesCircle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__EvalD0_MatchesCircle",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.EvalD3_MatchesCircle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__EvalD3_MatchesCircle",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_AHTBezierCurveTest.EvalD2_MatchesEllipse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_AHTBezierCurve_Test.cxx",
+      "source_sha256": "b33d086875c3cac26b70c519fe7c42bb38737b6d8bc392196f59c64daebc0298",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_aht_bezier_curve",
+      "rust_test": "GeomEval_AHTBezierCurveTest__EvalD2_MatchesEllipse",
+      "rust_source": "crates/tkg3d/tests/geom_eval_aht_bezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.Construction_ValidParams",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__Construction_ValidParams",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.Construction_InvalidParams_Throws",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__Construction_InvalidParams_Throws",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.EvalD0_Endpoints",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__EvalD0_Endpoints",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.ParameterRange",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__ParameterRange",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.EvalD1_ConsistentWithD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__EvalD1_ConsistentWithD0",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.PeriodicityAndClosure",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__PeriodicityAndClosure",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.Reverse_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__Reverse_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.Construction_Rational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__Construction_Rational",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.Transform_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__Transform_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.Copy_Independent",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__Copy_Independent",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.DumpJson_NoCrash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__DumpJson_NoCrash",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.EvalD2_ConsistentWithD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__EvalD2_ConsistentWithD1",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.EvalD3_ConsistentWithD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__EvalD3_ConsistentWithD2",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.EvalDN_ConsistentWithD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__EvalDN_ConsistentWithD1",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.EvalD0_MatchesCircle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__EvalD0_MatchesCircle",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.EvalD3_MatchesCircle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__EvalD3_MatchesCircle",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.EvalD2_MatchesEllipse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__EvalD2_MatchesEllipse",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_TBezierCurveTest.EvalD0_MultiplePoints",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_TBezierCurve_Test.cxx",
+      "source_sha256": "3af41a0d999ac10c899011f538ffe69e7d2ade9a284cc751f5cc272def2cc553",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_tbezier_curve",
+      "rust_test": "GeomEval_TBezierCurveTest__EvalD0_MultiplePoints",
+      "rust_source": "crates/tkg3d/tests/geom_eval_tbezier_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.Construction_ValidParams",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__Construction_ValidParams",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.Construction_InvalidParams_Throws",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__Construction_InvalidParams_Throws",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.EvalD0_AtKnownPoints",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__EvalD0_AtKnownPoints",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.IsPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__IsPeriodic",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.Reverse_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__Reverse_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.EvalD1_ConsistentWithD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__EvalD1_ConsistentWithD0",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.EvalD2_Analytical",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__EvalD2_Analytical",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.ComparisonWithLine_ZeroAmplitude_Like",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__ComparisonWithLine_ZeroAmplitude_Like",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.Transform_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__Transform_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.Copy_Independent",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__Copy_Independent",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_SineWaveCurveTest.DumpJson_NoCrash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_SineWaveCurve_Test.cxx",
+      "source_sha256": "77f72a6d774f7d61262e543fcb75deb41bd6fa934a7a1131b53cda606d4ab255",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_sine_wave_curve",
+      "rust_test": "GeomEval_SineWaveCurveTest__DumpJson_NoCrash",
+      "rust_source": "crates/tkg3d/tests/geom_eval_sine_wave_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.Construction_ValidParams",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__Construction_ValidParams",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.Construction_InvalidRadius_Throws",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__Construction_InvalidRadius_Throws",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.Construction_NegativePitch_NoThrow",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__Construction_NegativePitch_NoThrow",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.EvalD0_AtKnownPoints",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__EvalD0_AtKnownPoints",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.EvalD1_ConstantSpeed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__EvalD1_ConstantSpeed",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.EvalD1_ConsistentWithD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__EvalD1_ConsistentWithD0",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.D1_D2_Orthogonal",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__D1_D2_Orthogonal",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.ComparisonWithCircle_ZeroPitch",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__ComparisonWithCircle_ZeroPitch",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.EvalDN_CyclesPeriod4",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__EvalDN_CyclesPeriod4",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.Transform_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__Transform_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.Copy_Independent",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__Copy_Independent",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.Reverse_NotImplemented",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__Reverse_NotImplemented",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.Properties",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__Properties",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomEval_CircularHelixCurveTest.DumpJson_NoCrash",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/GeomEval_CircularHelixCurve_Test.cxx",
+      "source_sha256": "46c7b674aac14c8b3cf2479d4473ab2aeb592b4f59bf020724e2a72eedb876ab",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_eval_circular_helix_curve",
+      "rust_test": "GeomEval_CircularHelixCurveTest__DumpJson_NoCrash",
+      "rust_source": "crates/tkg3d/tests/geom_eval_circular_helix_curve.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
