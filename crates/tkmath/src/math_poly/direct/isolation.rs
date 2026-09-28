@@ -12,26 +12,8 @@
 // commercial license or contractual agreement.
 
 //! Critical-point isolation using software x87 long double arithmetic.
-use super::{E, exponent};
-fn derivative(c: &[E]) -> Vec<E> {
-    (1..c.len()).map(|i| E::new(i as f64) * c[i]).collect()
-}
-fn evaluated(c: &[E], x: E) -> (E, E, E) {
-    let mut value: E = *c.last().unwrap();
-    let mut derivative: E = E::ZERO;
-    let mut magnitude: E = value.abs();
-    for coefficient in c[..c.len() - 1].iter().rev() {
-        derivative = derivative * x + value;
-        value = value * x + *coefficient;
-        magnitude = magnitude * x.abs() + coefficient.abs();
-    }
-    (value, derivative, magnitude)
-}
-pub(super) fn small_residual(c: &[E], root: E, tolerance: f64) -> bool {
-    let (value, _, magnitude) = evaluated(c, root);
-    value.finite()
-        && value.abs() <= E::new(tolerance * 2.0_f64.powi(-63)) * E::new(1.0).max(magnitude)
-}
+use super::E;
+use crate::math_poly::long_poly::{derivative, evaluated, small_residual};
 fn root_bound(c: &[E]) -> E {
     let leading: E = c.last().unwrap().abs();
     let ratio: E = c[..c.len() - 1]
@@ -45,35 +27,6 @@ fn append_unique(roots: &mut Vec<E>, root: E) {
         return;
     }
     roots.push(root);
-}
-fn variable_exponent(c: &[f64]) -> i32 {
-    let degree: usize = c.len() - 1;
-    let leading: i32 = exponent(c[degree].abs());
-    let mut scale: E = E::new(-1000.0);
-    for (i, &coefficient) in c.iter().enumerate().take(degree) {
-        if coefficient == 0.0 {
-            continue;
-        }
-        let difference: i32 = exponent(coefficient.abs()) - leading;
-        scale = scale.max(E::new(difference as f64) / E::new((degree - i) as f64));
-    }
-    scale.ceil_integer().clamp(-1000, 1000)
-}
-pub(super) fn scaled_polynomial(c: &[f64]) -> (Vec<E>, i32) {
-    let power: i32 = variable_exponent(c);
-    let mut common: i32 = exponent(c[c.len() - 1].abs()) + (c.len() - 1) as i32 * power;
-    for (i, &value) in c.iter().enumerate() {
-        if value != 0.0 {
-            common = common.max(exponent(value.abs()) + i as i32 * power);
-        }
-    }
-    (
-        c.iter()
-            .enumerate()
-            .map(|(i, &value)| E::new(value).scale(i as i32 * power - common))
-            .collect(),
-        power,
-    )
 }
 fn interval_root(c: &[E], mut left: E, mut right: E, mut left_value: E) -> E {
     for _ in 0..200 {

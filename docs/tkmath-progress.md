@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. Seventy-four complete source suites
-currently account for 1,419 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. Seventy-six complete source suites
+currently account for 1,486 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -73,6 +73,8 @@ currently account for 1,419 mapped declarations, with matching native and Rust p
 | MathOpt_NDim_Comparison_Test.cxx | mathopt_ndim_comparison | 12 |
 | MathLin_Test.cxx | mathlin | 50 |
 | MathPoly_Comparison_Test.cxx | mathpoly_comparison | 18 |
+| MathPoly_Test.cxx | mathpoly | 47 |
+| MathPoly_Laguerre_Test.cxx | mathpoly_laguerre | 20 |
 | MathRoot_Trig_Test.cxx | mathroot_trig | 50 |
 | MathRoot_Multiple_Test.cxx | mathroot_multiple | 27 |
 | MathInteg_Comparison_Test.cxx | mathinteg_comparison | 21 |
@@ -303,13 +305,41 @@ system, and multiple-root headers are still outside this completed test scope.
 The 1,125-declaration gate passes 13,657 numeric cases. All 18 modern/legacy
 polynomial comparison declarations pass unchanged. Linear, quadratic, cubic,
 and quartic direct solvers preserve native scaling, compensated FMA
-arithmetic, software x87 isolation, and multiplicity classification. General
-Laguerre and the main polynomial suite remain pending; no whole-MathPoly
-completion is claimed.
+arithmetic, software x87 isolation, and multiplicity classification.
 
-`num-complex` 0.4.6 is isolated behind `math_poly::Complex`; it currently supplies
-storage. Its arithmetic is not assumed to match the native complex runtime.
-Version reference: https://docs.rs/num-complex/0.4.6/num_complex/.
+The MathPoly package is now complete for its three sources: MathPoly_Test.cxx
+(47 declarations), MathPoly_Laguerre_Test.cxx (20) and the comparison suite.
+`laguerre`, `laguerre_n`, `quintic`, `sextic` and `octic` port the checked
+Laguerre iteration, deflation, cluster consolidation and long-double Newton
+polish in native operation order. 512 native Laguerre requests (degrees up to
+20, repeated real and complex roots, clustered roots, global scaling to 1e±300,
+zero iteration limits and invalid input) match every root, multiplicity and
+status bit for bit, including partial roots kept on failure.
+
+Laguerre results depend on how the pinned GCC 13.3 / glibc 2.39 profile evaluates
+`std::complex`. The port reproduces it in software, not with `num-complex`
+arithmetic. Full complex products and quotients follow libgcc `__muldc3`/`__divdc3`
+(and the x87 `__mulxc3`/`__divxc3` in the multiplicity refinement), including the
+GCC 12+ scaled Smith division and infinity recovery. Complex-by-real operations are
+componentwise, and a real addend does not touch the imaginary part. `std::sqrt` is
+glibc `csqrt`. `std::abs` is glibc `hypot`, and `std::abs` of a long-double complex
+is glibc's ldbl-96 `hypotl` (Borges' corrected kernel, not an x87
+`fsqrt(x*x+y*y)`). `std::norm` is `x*x + y*y`, as libstdc++ 13 computes it. 512 native
+`std::complex<double>` requests cover huge, tiny, subnormal, zero, infinite and NaN
+parts. `tools/oracle/extended_complex_fixture.cxx` also records 1,024 bit-exact
+`__mulxc3`/`__divxc3`/`hypotl` results as a unit-test fixture.
+
+Deliberate deviations: `laguerre` takes a slice and returns `InvalidInput` when
+the slice is shorter than `degree + 1`, where native code reads past the array.
+`laguerre_n` uses the slice length as the native `theSize`. Default arguments
+are the constants `LAGUERRE_TOLERANCE` and `LAGUERRE_MAX_ITERATIONS`. The
+`MathPoly::Utils` helpers stay crate-internal because most of them take long
+double arguments, which have no public Rust type. Root sorting is stable, which
+matches libstdc++'s insertion sort for up to 16 roots. For 17 to 20 roots, the
+order of equal-valued roots with different zero signs is not claimed.
+
+`num-complex` 0.4.6 is isolated behind `math_poly::Complex` and supplies only
+storage. Version reference: https://docs.rs/num-complex/0.4.6/num_complex/.
 
 The 1,419-declaration gate passes 16,599 numeric cases. All 50 trigonometric
 root declarations pass in both implementations. Differential cases compare
@@ -364,7 +394,7 @@ All 30 declarations for general 2D/3D/4D Newton, symmetric 2D Newton and the
 curve/surface and surface/surface extrema adapters pass in Rust. Another 512
 native differential requests match results and callback traces exactly.
 Software x87 square root matches 2,048 native significand/exponent fixtures,
-including subnormals. The combined toolkit gate passes all 1,419 mapped declarations.
+including subnormals. The combined toolkit gate passed all 1,419 declarations mapped at that time.
 
 ### Particle swarm optimization
 

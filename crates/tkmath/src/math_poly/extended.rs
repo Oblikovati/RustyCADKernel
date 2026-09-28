@@ -17,6 +17,9 @@ use rustc_apfloat::{Float, FloatConvert, Round};
 use std::ops::{Add, Div, Mul, Neg, Sub};
 #[derive(Clone, Copy, PartialEq, PartialOrd)]
 pub(crate) struct Extended(X87DoubleExtended);
+#[cfg(test)]
+mod complex_fixture;
+mod hypot;
 mod sqrt;
 impl Extended {
     pub(crate) fn floor(self) -> Self {
@@ -63,9 +66,34 @@ impl Extended {
         if !self.finite() {
             return None;
         }
-        let double: Double = self.0.convert(&mut false).value;
-        let value: f64 = f64::from_bits(double.to_bits() as u64);
+        let value: f64 = self.narrow();
         value.is_finite().then_some(value)
+    }
+    /// Unchecked `static_cast<double>`; overflow yields an infinity, as on x87.
+    pub(crate) fn narrow(self) -> f64 {
+        let double: Double = self.0.convert(&mut false).value;
+        f64::from_bits(double.to_bits() as u64)
+    }
+    pub(crate) fn is_nan(self) -> bool {
+        self.0.is_nan()
+    }
+    pub(crate) fn is_infinite(self) -> bool {
+        self.0.is_infinite()
+    }
+    /// `copysignl`: magnitude of `self`, sign bit of `sign`.
+    pub(crate) fn copysign(self, sign: Self) -> Self {
+        Self(self.0.copy_sign(sign.0))
+    }
+    /// Largest finite x87 value, `LDBL_MAX`.
+    pub(crate) fn largest() -> Self {
+        Self(X87DoubleExtended::largest())
+    }
+    /// Smallest normal x87 value, `LDBL_MIN`.
+    pub(crate) fn smallest_normal() -> Self {
+        Self(X87DoubleExtended::smallest_normalized())
+    }
+    pub(crate) fn infinity() -> Self {
+        Self(X87DoubleExtended::INFINITY)
     }
 }
 impl Add for Extended {

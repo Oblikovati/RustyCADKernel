@@ -297,6 +297,10 @@ fn main() {
             modern_trig_probe::modern_trig_case(&values);
         } else if op == "modern_poly" {
             modern_poly_probe::modern_poly_case(&values);
+        } else if op == "modern_laguerre" {
+            modern_poly_probe::modern_laguerre_case(&values);
+        } else if op == "modern_complex" {
+            modern_poly_probe::modern_complex_case(&values);
         } else if op == "modern_factors" {
             modern_factors_probe::modern_factors_case(&values);
         } else if op == "modern_lu" {
