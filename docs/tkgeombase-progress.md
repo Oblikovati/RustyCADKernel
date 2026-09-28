@@ -4,7 +4,7 @@
 (`rustycad-tkgeombase`) is the port of the ModelingData toolkit TKGeomBase. It
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
-`IntAna2d`, `LProp`, `GeomLProp`, `GProp` and `Hermit` packages are ported in full, and
+`IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit` and `FEmTool` packages are ported in full, and
 `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
@@ -84,6 +84,25 @@ EstimDist needs `ProjLib::Project(gp_Pln, gp_Lin)`; ProjLib is not ported, so
 `quad_quad_geo/estim_dist.rs` holds that one line projection (ProjLib_Plane) until the
 ProjLib port replaces it.
 
+FEmTool (`fem_tool`) keeps the native class split. The transient classes
+(`FEmTool_Curve`, the three linear criteria and `FEmTool_ProfileMatrix`) hold their
+mutable state in a `SharedState`, as the Geom classes do, so every `Handle` to one
+object sees the same state and the non-const members take `&self`. The abstract
+`FEmTool_ElementaryCriterion` and `FEmTool_SparseMatrix` are the traits
+`ElementaryCriterion` (its protected fields are `CriterionBase`) and `SparseMatrix`,
+registered with `impl_transient_interface!`; `ChangeValue` returns an `EntryRef` that
+dereferences to the stored `f64` and keeps the matrix locked while it lives, and
+`Knots()` returns the write guard of the knot array. `FEmTool_LinearFlexion`,
+`FEmTool_LinearJerk` and `FEmTool_LinearTension` are one generic `LinearCriterion<K>`:
+the kinds `Flexion`, `Jerk` and `Tension` name the derivative order, the scale power
+and the three places where the native files differ (the negative-J clamp, the
+DependenceTable indexes and the Hessian origin). `FEmTool_Assembly` is a plain struct;
+the rows of G are vectors of coefficient segments (the native lists of handles, never
+shared outside the object). Output references become return values
+(`Curve::length`, `Curve::reduce_degree`), and the unchecked native accesses
+(FEmTool_Curve.cxx and FEmTool_ProfileMatrix.cxx compile the range checks out) become
+Standard_OutOfRange where they would leave the storage (undefined natively).
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -146,8 +165,27 @@ cache lazily and two native reads are by value. GProp prints every property of p
 sets (unit, weighted, 1D and 2D arrays, null and negative masses), point equations at
 three tolerances, every elementary framework (including null ranges, where Jacobi
 fails) and compositions at other locations; Hermit covers weight ratios up to 1e6 and
-the tolerance failures. The corpus has 6227 requests (gce, GC, IntAna2d, IntAna, LProp,
-GeomLProp, GProp and Hermit).
+the tolerance failures.
+
+The FEmTool requests (`tkgeombase_corpus_femtool.py`) build each object and run a
+list of commands on it, printing every result or exception, so the cached state is
+compared along with the values: the Hermite-Jacobi reference integrals of every
+derivative order at interior points, the ends and outside [-1, 1] (short output
+vectors, bad orders and shapes); the three criteria for every constraint order and
+WorkDegree 0 to 15 in a fixed order (the process-wide integral cache: a cached order
+past WorkDegree 14 and a new one), coefficient arrays with other lower bounds, fewer
+or more rows than the basis, a null or reversed element, Hessians and gradients in
+larger, smaller and shifted matrices; profile matrices from diagonal to full and
+block-diagonal profiles, positive definite, indefinite and huge pivots, solves before
+and after the factorization, entries outside the profile, the OutM/OutS text and the
+unimplemented iterative members; curves of every dimension, constraint order and up
+to four elements with coefficient arrays on other bounds, evaluation on the knots,
+between and outside them, after a knot change under the span cache, lengths across
+and outside the elements, degree changes and reductions at three tolerances; and
+assemblies of chained elements in one to three dimensions with constraint segments
+added in every order (each merge case of AddConstraint), nullified, reset and
+refused systems, a table indexed from 0 and a full dependence table. The corpus has
+7457 requests (gce, GC, IntAna2d, IntAna, LProp, GeomLProp, GProp, Hermit and FEmTool).
 
 ## Preserved native behaviour
 
@@ -303,3 +341,46 @@ Hermit:
   mapped onto [0, 1]) with the flat-knot `LocateParameter`, reusing the LocateU
   indices of Ux and Uy as hints; the 3D and 2D copies of the native file share one
   implementation over `HermitSpline`.
+
+FEmTool:
+
+- The linear criteria compute their reference integrals once per process and per
+  class (function-local statics keyed by the constraint order, for WorkDegree 14):
+  the `WorkDegree > 14` check (Standard_ConstructionError) only runs when the order
+  changes, so a later criterion of a cached order and WorkDegree 15 reads past the
+  120 integrals (Standard_OutOfRange). The port keeps one static cache per class.
+- `FEmTool_LinearFlexion` clamps a negative J to 0 after the whole sum,
+  `FEmTool_LinearJerk` after every row term, `FEmTool_LinearTension` never.
+  `FEmTool_LinearTension::DependenceTable` sets `(i, i)` for `i = 1..=RowLength`, so
+  coefficient columns not starting at 1 raise Standard_OutOfRange.
+  `FEmTool_LinearFlexion::Hessian` writes from index 0 whatever the bounds of H (a
+  matrix from 1 raises Standard_OutOfRange); the other two write from the lower
+  bounds of H, mirroring through `H(j0 + j, i0 + i)`, so with different row and column
+  origins the write order decides the result.
+- `FEmTool_ElementaryCriterion::Value()` and `Gradient()` dereference a null
+  coefficient handle natively; the port raises Standard_NullObject.
+  `FEmTool_ElementsOfRefMatrix` as a `math_FunctionSet` reports a short F (its
+  Standard_OutOfRange) as a failed evaluation.
+- `FEmTool_ProfileMatrix::ChangeValue` has no range check (compiled out): an entry
+  outside the profile addresses a coefficient of another row. The port keeps that
+  aliasing and raises Standard_OutOfRange only for an address outside the storage.
+  The coefficients start uninitialized natively (0 in the port). `OutM`/`OutS` pad a
+  row with `0 ` up to its first stored column.
+- `FEmTool_Curve::GetElement` rescales the columns `LowerCol..=Dimension` instead of
+  `LowerCol..LowerCol + Dimension`; `D1` and `D2` scale every entry of the output
+  array, not only the first Dimension ones. The knots and coefficients start
+  uninitialized natively (0 in the port), and `Knots()` hands out a writable array
+  from a const member; changing a knot invalidates the span cache on the next
+  evaluation, as natively.
+- `FEmTool_Assembly::AddConstraint` scans the segments of a row keeping the *last*
+  segment starting before the new range and the last one ending after it, so a range
+  can be prepended before an overlapping segment; the merge cases replace the first,
+  the last, s1 or s2 segment and the three-way merge removes the segment after s1,
+  whichever it is. Overlapping segments then write the same variable of `gi` in
+  `Solve`, the later one winning. A row with no segment (a skipped constraint index)
+  leaves its Schur FirstIndexes uninitialized natively (0 in the port), and a scan
+  that finds no segment dereferences a null handle (Standard_NullObject in the
+  port). `Solve` stores IsSolved before building the Schur matrix, so after a
+  Standard_OutOfRange there (a table not indexed from 1) `Solution` dereferences a
+  null matrix natively.
+
