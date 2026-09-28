@@ -1,13 +1,12 @@
-# BVH port design (TKMath/BVH, phase 1)
+# BVH port design (TKMath/BVH)
 
 This note maps OCCT's header-only `BVH` templates to Rust generics. Phase 1
 covers the core types: box, ray, tools, sorters, build queue and thread, trees,
 object/set/primitive-set abstractions, properties, and the builder base. It also
-covers the queue and binned builders. `BVH_PrimitiveSet`'s default constructor
-installs a binned builder, and `BVH_QuickSorter_Test` default-constructs a
-`BVH_Triangulation`. A later phase adds the linear, spatial-median and sweep-plane
-builders, traversal, and the geometry/object sets on top of these types.
-`BVH_ShapeSelect`, `BVH_PairDistance` and `BVH_DistanceField` are out of scope.
+covers the queue and binned builders. Phase 2 adds the linear, spatial-median and
+sweep-plane builders, single and pair traversal, the box sets, the object set and
+geometry, the distance tools and the distance field. The whole package is ported;
+the file table at the end accounts for every entry of `FILES.cmake`.
 
 ## Instantiations used upstream
 
@@ -127,3 +126,84 @@ pointers to the set and the tree. Safe Rust cannot share them like that, so
 process nodes one at a time. The node numbering depends on the schedule, as it
 does in OCCT. The single-thread path, which is the default and the one that the
 tests and probes compare, is deterministic and bit-identical.
+
+## Traversal (phase 2)
+
+`BVH_BaseTraverse`, `BVH_Traverse` and `BVH_PairTraverse` become the traits
+`BvhBaseTraverse<M>`, `BvhTraverse<V, M>` and `BvhPairTraverse<V, M>`. The metric
+`M` defaults to the scalar. The virtual rules keep their upstream defaults.
+`select_elements` and `select_pairs` are the `Select(handle)` bodies. They keep
+the fixed stacks (32 nodes, 3 * 32 pairs), the order of every `RejectNode`,
+`Accept` and `Stop` call, and the stable insertion sort of the child pairs.
+`Accept` returns a `Result`, because an upstream body can throw.
+
+`Select()` without arguments reads `myBVHSet->BVH()`, and `Accept` reads the
+same set. Safe Rust cannot borrow the tree of a set while the selector borrows the
+set. So `BvhSetTraverse`/`BvhPairSetTraverse` call `BvhTreeOwner::take_built_bvh`
+(`BVH()`: build when dirty), traverse the moved-out tree, and give it back with
+`restore_bvh`. Primitive sets and `BvhGeometry` own their trees. A set paired with
+itself needs two mutable borrows, so that case goes through `select_trees`.
+
+`BVH_Distance` and `BVH_PairDistance` are state structs (`BvhDistance`,
+`BvhPairDistance`) with the rule bodies. A selector embeds one and forwards to it.
+`BvhDistanceTraverse`/`BvhPairDistanceTraverse` supply `ComputeDistance`.
+
+## Sets, objects and geometry (phase 2)
+
+`BVH_BoxSet` stores elements and boxes, and `BVH_IndexedBoxSet` wraps it and
+swaps only an index array. Upstream `Center` returns `double`, so only `double`
+box sets compile there. `BVH_ObjectSet` holds `Option<Box<dyn BvhObject + Send>>`
+in an `NCollection_DynamicArray`: the set owns its objects, and `None` is a null
+handle. `BvhGeometry` embeds the object set, with its own dirty flag, tree, builder
+and cached box. `BvhObject::triangulation_mut` replaces the `dynamic_cast` of
+`SquareDistanceToObject`. A type that embeds a triangulation (a C++ subclass)
+returns it from this method.
+
+## Builders and the distance field (phase 2)
+
+`BVH_LinearBuilder` sorts with `BvhRadixSorter` and emits the hierarchy from the
+links. `BVH::UpdateBoundTask` then fills the boxes of the top three levels, and
+`BVH::UpdateBounds` fills the rest. Upstream runs the child tasks through
+`OSD_Parallel::ForEach`. The port runs them in order, because each task writes
+only its own subtree. `BVH_SpatialMedianBuilder` wraps `BvhBinnedBuilder<V, 2>`.
+`BVH_SweepPlaneBuilder` is a queue builder.
+
+`BVH_DistanceField` exists for N = 3 and 4, which the `BvhFieldVector` marker
+enforces. The `BVH::` helpers of `BVH_DistanceField.lxx` are public functions and
+selector types. The Z slices run in order, also when the field is parallel.
+Upstream slices build dirty trees lazily and concurrently.
+
+## Package files
+
+| Upstream file | Rust module |
+| --- | --- |
+| `BVH.cxx` | instantiations only; `bvh` generics (RTTI in `object`, `builder`, `tree`) |
+| `BVH_BinaryTree.hxx`, `BVH_QuadTree.hxx`, `BVH_Tree.hxx` | `tree` |
+| `BVH_BinnedBuilder.hxx` | `binned_builder` |
+| `BVH_Box.hxx` | `bounding_box` |
+| `BVH_BoxSet.hxx`, `BVH_IndexedBoxSet.hxx` | `box_set` |
+| `BVH_Builder.hxx`, `BVH_Builder3d.hxx` | `builder` |
+| `BVH_BuildQueue.hxx` | `build_queue` |
+| `BVH_BuildThread.hxx`, `BVH_BuildThread.cxx` | `build_thread` |
+| `BVH_Constants.hxx` | `constants` |
+| `BVH_Distance.hxx` | `distance` |
+| `BVH_DistanceField.hxx`, `BVH_DistanceField.lxx` | `distance_field` |
+| `BVH_Geometry.hxx` | `geometry` |
+| `BVH_LinearBuilder.hxx` | `linear_builder` |
+| `BVH_Object.hxx` | `object` |
+| `BVH_ObjectSet.hxx` | `object_set` |
+| `BVH_PairDistance.hxx` | `pair_distance` |
+| `BVH_PrimitiveSet.hxx`, `BVH_PrimitiveSet3d.hxx` | `primitive_set` |
+| `BVH_Properties.hxx`, `BVH_Properties.cxx` | `properties` |
+| `BVH_QueueBuilder.hxx` | `queue_builder` |
+| `BVH_QuickSorter.hxx` | `quick_sorter` |
+| `BVH_RadixSorter.hxx` | `radix_sorter` |
+| `BVH_Ray.hxx` | `ray` |
+| `BVH_Set.hxx` | `set` |
+| `BVH_Sorter.hxx` | `sorter` |
+| `BVH_SpatialMedianBuilder.hxx` | `spatial_median_builder` |
+| `BVH_SweepPlaneBuilder.hxx` | `sweep_plane_builder` |
+| `BVH_Tools.hxx` | `tools` |
+| `BVH_Traverse.hxx`, `BVH_Traverse.lxx` | `traverse`, `tree_owner` |
+| `BVH_Triangulation.hxx` | `triangulation` |
+| `BVH_Types.hxx` | `scalar`, `vector`, `array` |

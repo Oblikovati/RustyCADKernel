@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 93 complete source suites
-currently account for 1,835 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 99 complete source suites
+currently account for 1,926 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -99,6 +99,12 @@ currently account for 1,835 mapped declarations, with matching native and Rust p
 | BVH_QuickSorter_Test.cxx | bvh_quick_sorter | 13 |
 | BVH_BuildQueue_Test.cxx | bvh_build_queue | 17 |
 | BVH_Tree_Test.cxx | bvh_tree | 23 |
+| BVH_BinnedBuilder_Test.cxx | bvh_binned_builder | 14 |
+| BVH_Triangulation_Test.cxx | bvh_triangulation | 16 |
+| BVH_LinearBuilder_Test.cxx | bvh_linear_builder | 15 |
+| BVH_SpatialMedianBuilder_Test.cxx | bvh_spatial_median_builder | 15 |
+| BVH_SweepPlaneBuilder_Test.cxx | bvh_sweep_plane_builder | 10 |
+| BVH_Traverse_Test.cxx | bvh_traverse | 21 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -578,4 +584,55 @@ builds serialize node splits behind a mutex, and their node numbering depends on
 the schedule, as upstream. A failing build tool releases its busy slot. Upstream
 tests that check constructors with `static_assert` use `const` items, and the
 validity check runs at test time. Uninitialized ray-hit locals start as NaN.
+
+### BVH traversal, builders and distance field (phase 2)
+
+All 91 declarations of the six phase 2 suites (binned builder, triangulation,
+linear, spatial-median and sweep-plane builders, traversal) pass in both kernels.
+`BVH_ShapeSelect_Test`, `BVH_PairDistance_Test` and `BVH_DistanceField_Test` are
+not mapped, because they mesh shapes with BRepPrimAPI and BRepMesh. Their BVH
+classes are ported. The 912 phase 2 differential requests (30,090 in the whole
+corpus) match exactly. They compare whole tree layouts of every builder, the
+element order, and the logs of each `RejectNode` metric and `Accept` call of
+single and pair traversals. They also compare `BVH_Distance`, `BVH_PairDistance`
+and complete distance-field voxel grids, in float and double.
+
+The port keeps these native behaviors:
+
+- `BVH_LinearBuilder` returns before `Clear()` for an empty set, so the old tree
+  stays. It does not apply the depth limit, leaves every node level at 0 and sets
+  the depth to the tree height. The spatial-median builder is the binned builder
+  with two bins.
+- The single traversal never tests the root with `RejectNode`. When both children
+  pass, it stacks the worse child. The pair traversal tests two leaves before
+  their element pairs. It sorts the child pairs with a stable insertion by
+  `IsMetricBetter`. Stack overflow raises `Standard_ProgramError`, also in release
+  builds.
+- The sweep-plane builder sorts the node again unless the best axis is the last
+  one it tried. So the result can depend on the sort of an already sorted range.
+  It does not split a node that is at most `THE_NODE_MIN_SIZE` thick on all axes.
+- `BVH_Geometry` starts clean, with its own dirty flag: until `MarkDirty`, its box
+  is invalid and its tree empty. A distance field of such a geometry has infinite
+  corners, and every voxel is the root of the scalar maximum.
+- `BVH::DirectionToNearestPoint` accepts zero dot products on the edges (`>=`),
+  unlike `BVH_Tools`. The interior case multiplies by a reciprocal norm.
+  `SquareDistanceToObject` gives the scalar maximum for an object that is not a
+  triangulation. `BVH_BoxSet::Center` is the box center.
+- The distance field sizes are truncated through `static_cast<int>`. A NaN
+  becomes `INT_MIN` and then 16. Every margin uses the division order
+  `2 * side / (dimension - 4)`.
+
+Deliberate Rust deviations: set-based `Select()` moves the tree out of its set
+for the traversal and moves it back, because `Accept` reads the same set. So a
+set cannot be paired with itself through the set-based path. Use
+`select_trees(Some(&tree), Some(&tree))` for that. `Accept` returns a
+`Result`. Object sets own their objects (`Option<Box<dyn BvhObject>>`, with `None`
+as a null handle), and a null handle reports `Standard_NullObject` where upstream
+crashes. `BvhObject::triangulation_mut` stands in for the `dynamic_cast`. A leaf
+size below 1 that makes the LBVH middle split recurse forever fails with
+`Standard_StackOverflow`. The distance field zero-fills its voxels, rejects
+negative sizes as `std::bad_array_new_length` and checks voxel offsets. Parallel
+LBVH bounds and parallel distance-field slices run in order. Each task writes
+only its own nodes or voxels, so the results are the same. Upstream even races on
+lazy tree builds in parallel slices.
 
