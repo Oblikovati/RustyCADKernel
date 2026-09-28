@@ -37,7 +37,9 @@ fn origin() -> Point3 {
 
 // gp_Pln(gp_Pnt(0, 0, 0), gp_Dir(0, 0, 1)).
 fn xy_plane() -> Handle<GeomPlane> {
-    Handle::new(GeomPlane::from_pln(Plane3::new(origin(), dir(0.0, 0.0, 1.0)).unwrap()))
+    Handle::new(GeomPlane::from_pln(
+        Plane3::new(origin(), dir(0.0, 0.0, 1.0)).unwrap(),
+    ))
 }
 
 //=================================================================================================
@@ -75,7 +77,11 @@ fn Geom_SurfaceEvalTest__Plane_EvalD1_ConstantPartials() {
 #[test]
 fn Geom_SurfaceEvalTest__Sphere_EvalD1_PartialDerivatives() {
     let aRadius: f64 = 5.0;
-    let aSphere = Sphere3::new(Axis3::from_normal(origin(), dir(0.0, 0.0, 1.0)).unwrap(), aRadius).unwrap();
+    let aSphere = Sphere3::new(
+        Axis3::from_normal(origin(), dir(0.0, 0.0, 1.0)).unwrap(),
+        aRadius,
+    )
+    .unwrap();
     let aSurf = Handle::new(GeomSphericalSurface::from_sphere(aSphere));
 
     let aU: f64 = PI / 4.0; // longitude
@@ -98,12 +104,36 @@ fn Geom_SurfaceEvalTest__Sphere_EvalD1_PartialDerivatives() {
 
 // EXPECT_NEAR of the differences between EvalD2 and the old D2 output.
 fn expect_same_d2(aEvalResult: &GeomSurfaceD2, aOld: &GeomSurfaceD2) {
-    EXPECT_NEAR(aEvalResult.point.distance(&aOld.point), 0.0, precision::confusion());
-    EXPECT_NEAR((aEvalResult.d1u - aOld.d1u).magnitude(), 0.0, precision::confusion());
-    EXPECT_NEAR((aEvalResult.d1v - aOld.d1v).magnitude(), 0.0, precision::confusion());
-    EXPECT_NEAR((aEvalResult.d2u - aOld.d2u).magnitude(), 0.0, precision::confusion());
-    EXPECT_NEAR((aEvalResult.d2v - aOld.d2v).magnitude(), 0.0, precision::confusion());
-    EXPECT_NEAR((aEvalResult.d2uv - aOld.d2uv).magnitude(), 0.0, precision::confusion());
+    EXPECT_NEAR(
+        aEvalResult.point.distance(&aOld.point),
+        0.0,
+        precision::confusion(),
+    );
+    EXPECT_NEAR(
+        (aEvalResult.d1u - aOld.d1u).magnitude(),
+        0.0,
+        precision::confusion(),
+    );
+    EXPECT_NEAR(
+        (aEvalResult.d1v - aOld.d1v).magnitude(),
+        0.0,
+        precision::confusion(),
+    );
+    EXPECT_NEAR(
+        (aEvalResult.d2u - aOld.d2u).magnitude(),
+        0.0,
+        precision::confusion(),
+    );
+    EXPECT_NEAR(
+        (aEvalResult.d2v - aOld.d2v).magnitude(),
+        0.0,
+        precision::confusion(),
+    );
+    EXPECT_NEAR(
+        (aEvalResult.d2uv - aOld.d2uv).magnitude(),
+        0.0,
+        precision::confusion(),
+    );
 }
 
 #[test]
@@ -134,8 +164,14 @@ fn Geom_SurfaceEvalTest__BSplineSurface_EvalD2_ConsistentWithOldAPI() {
     aVMults[2] = 3;
 
     let aSurf = Handle::new(
-        GeomBSplineSurface::new(&aPoles, (&aUKnots, &aUMults), (&aVKnots, &aVMults), (2, 2), (false, false))
-            .unwrap(),
+        GeomBSplineSurface::new(
+            &aPoles,
+            (&aUKnots, &aUMults),
+            (&aVKnots, &aVMults),
+            (2, 2),
+            (false, false),
+        )
+        .unwrap(),
     );
 
     let aU: f64 = 0.5;
@@ -173,7 +209,11 @@ fn Geom_SurfaceEvalTest__OffsetSurface_EvalD0_ValidOnRegularSurface() {
 fn Geom_SurfaceEvalTest__CylindricalSurface_EvalD1_ValidResults() {
     let aRadius: f64 = 4.0;
     let aSurf = Handle::new(
-        GeomCylindricalSurface::new(Axis3::from_normal(origin(), dir(0.0, 0.0, 1.0)).unwrap(), aRadius).unwrap(),
+        GeomCylindricalSurface::new(
+            Axis3::from_normal(origin(), dir(0.0, 0.0, 1.0)).unwrap(),
+            aRadius,
+        )
+        .unwrap(),
     );
 
     let aU: f64 = PI / 4.0;
@@ -232,7 +272,8 @@ fn Geom_SurfaceEvalTest__ExtrusionSurface_EvalD0_ValidResults() {
     let aCirc = Circle3::new(Axis2::new(origin(), dir(0.0, 0.0, 1.0)).unwrap(), 3.0).unwrap();
     let aBasis = Handle::new(GeomCircle::from_circ(aCirc));
 
-    let aSurf = Handle::new(GeomSurfaceOfLinearExtrusion::new(&aBasis.cast(), dir(0.0, 0.0, 1.0)).unwrap());
+    let aSurf =
+        Handle::new(GeomSurfaceOfLinearExtrusion::new(&aBasis.cast(), dir(0.0, 0.0, 1.0)).unwrap());
 
     let aU: f64 = PI / 3.0;
     let aV: f64 = 5.0;
@@ -252,7 +293,10 @@ fn Geom_SurfaceEvalTest__ExtrusionSurface_EvalD0_ValidResults() {
 #[test]
 fn Geom_SurfaceEvalTest__RevolutionSurface_EvalD1_ValidResults() {
     // Revolve a line around Z axis to create a cone-like surface
-    let aGeneratrix = Handle::new(GeomLine::from_point(Point3::new(1.0, 0.0, 0.0), dir(0.0, 0.0, 1.0)));
+    let aGeneratrix = Handle::new(GeomLine::from_point(
+        Point3::new(1.0, 0.0, 0.0),
+        dir(0.0, 0.0, 1.0),
+    ));
 
     let anAxis = Axis1::new(origin(), dir(0.0, 0.0, 1.0));
     let aSurf = Handle::new(GeomSurfaceOfRevolution::new(&aGeneratrix.cast(), anAxis).unwrap());

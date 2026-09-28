@@ -1,8 +1,10 @@
 # Geom2d and Geom class hierarchy in Rust
 
 This note fixes how the transient geometry packages of ModelingData (`Geom2d` in
-TKG2d now, `Geom` in TKG3d next, with the same rules) map to Rust. The first
-port is `crates/tkg2d` (`rustycad-tkg2d`).
+TKG2d, `Geom` in TKG3d, with the same rules) map to Rust. The ports are
+`crates/tkg2d` (`rustycad-tkg2d`) and `crates/tkg3d` (`rustycad-tkg3d`, see
+[tkg3d-progress.md](tkg3d-progress.md)); TKG3d reuses the TKG2d lock, array,
+dump and spline-data helpers and the curve descriptor family.
 
 ## 1. Classes
 
@@ -106,4 +108,8 @@ optional `Geom2dEval_RepCurveDesc` that redirects evaluation to another curve.
 The descriptor and `Geom2dEval_RepUtils.pxx` are header-only parts of the
 `Geom2dEval` package in TKG2d that `Geom2d` includes. They are ported in
 `geom2d_eval::rep_curve_desc` with the Geom2d classes, and the remainder of
-`Geom2dEval` stays a later work item.
+`Geom2dEval` stays a later work item. `GeomEval_RepCurveDesc` is the same family
+for `Geom_Curve`: both packages expand `define_rep_curve_descriptors!`.
+`GeomEval_RepSurfaceDesc` adds the surface descriptors with a two-parameter map
+that can swap U and V; `crates/tkg3d/src/geom_eval` ports both with
+`GeomEval_RepUtils.pxx`.
