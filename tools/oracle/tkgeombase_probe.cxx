@@ -51,6 +51,7 @@
 #include "tkgeombase_probe_femtool_curve.cxx"
 #include "tkgeombase_probe_appparcurves.cxx"
 #include "tkgeombase_probe_appparcurves_fit.cxx"
+#include "tkgeombase_probe_appcont.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -186,6 +187,11 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"apc_bspfunction", gb_apc_bspfunction_case},
  {"apc_gradient", gb_apc_gradient_case},
  {"apc_bspgradient", gb_apc_bspgradient_case},
+ // AppCont (tkgeombase_probe_appcont.cxx)
+ {"acc_table", gb_acc_table_case},
+ {"acc_offsets", gb_acc_offsets_case},
+ {"acc_matrix", gb_acc_matrix_case},
+ {"acc_ls", gb_acc_ls_case},
 };
 int main() {
  std::string line;

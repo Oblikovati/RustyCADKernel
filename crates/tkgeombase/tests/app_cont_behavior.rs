@@ -24,6 +24,7 @@ use rustycad_tkgeombase::app_cont::{Function, FunctionBase, LeastSquare, Periodi
 use rustycad_tkgeombase::app_par_curves::{Constraint, MultiCurveEval};
 use rustycad_tkmath::gp::{Point2, Point3, Vector2, Vector3};
 use rustycad_tkmath::math::Matrix;
+use std::f64::consts::TAU;
 
 /// A fake user function: one 3D cubic `(u, u^2, u^3)` and one 2D point `(1 - u, 2u)`,
 /// with switches for a failing D1, a jump at `u = 0` and a first coordinate periodic
@@ -276,4 +277,48 @@ fn native_exceptions_become_failures() {
         kind(fit(&function, [FREE, FREE], -3, 4)),
         "Standard_RangeError"
     );
+}
+
+/// A fake 2D function whose first coordinate `5.9 + u` is reduced into [0, 2 pi): with
+/// 3 Gauss points on [0, 1], only the first sample lies before the wrap.
+struct WrappedLineFunction(FunctionBase);
+
+impl Function for WrappedLineFunction {
+    fn base(&self) -> &FunctionBase {
+        &self.0
+    }
+    fn first_parameter(&self) -> f64 {
+        0.0
+    }
+    fn last_parameter(&self) -> f64 {
+        1.0
+    }
+    fn value(&self, u: f64, pnt2d: &mut Array1<'_, Point2>, _: &mut Array1<'_, Point3>) -> bool {
+        let x: f64 = 5.9 + u;
+        pnt2d[1] = Point2::new(x - TAU * (x / TAU).floor(), u);
+        true
+    }
+    fn d1(&self, _: f64, vec2d: &mut Array1<'_, Vector2>, _: &mut Array1<'_, Vector3>) -> bool {
+        vec2d[1] = Vector2::new(1.0, 1.0);
+        true
+    }
+    fn period_information(&self, dim_idx: i32) -> (bool, f64) {
+        if dim_idx == 1 {
+            (true, TAU)
+        } else {
+            (false, 0.0)
+        }
+    }
+}
+
+#[test]
+fn a_first_sample_alone_before_a_wrap_is_moved_by_one_period() {
+    let mut base = FunctionBase::new();
+    base.set_number_of_points(0, 1);
+    let function = WrappedLineFunction(base);
+    let mut ls = LeastSquare::new(&function, 0.0, 1.0, FREE, FREE, 1, 3).unwrap();
+    // Unwrapped, the samples lie on one line, so the linear fit is exact.
+    assert!(ls.error().0 < 1e-24, "{:?}", ls.error());
+    let first = ls.value().unwrap().pole2d(1, 1).unwrap();
+    assert!((first.x() - (5.9 - TAU)).abs() < 1e-12, "{first:?}");
 }

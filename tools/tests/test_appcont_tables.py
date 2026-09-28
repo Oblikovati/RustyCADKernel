@@ -4,6 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from tkgeombase_corpus_appcont import append_appcont_requests
 from toolkit_numeric import NumericOracle, check_generators
 from verify_tkgeombase_numeric import ORACLE
 from generate_appcont_tables import CHUNK, PER_LINE, TABLES, chunk_order, fragments, parse_table, rust_name
@@ -57,6 +58,32 @@ class GeneratorCheckTests(unittest.TestCase):
             stale = NumericOracle('X', 'p.cxx', [], 'x', str, generators=(str(folder/'stale_gen.py'),))
             with self.assertRaises(subprocess.CalledProcessError):
                 check_generators(stale, folder, folder)
+
+
+class AppContCorpusTests(unittest.TestCase):
+    def test_corpus_is_deterministic_and_reads_every_table_entry(self):
+        first, second = [], []
+        append_appcont_requests(first)
+        append_appcont_requests(second)
+        self.assertEqual(first, second)
+        self.assertEqual({request.split()[0] for request in first}, {'acc_table', 'acc_offsets', 'acc_matrix', 'acc_ls'})
+        read = {}
+        for request in first:
+            if request.startswith('acc_table '):
+                kind, start, count = map(int, request.split()[1:])
+                read[kind] = read.get(kind, 0) + count
+        self.assertEqual(read, {kind: size for kind, (_, _, size) in enumerate(TABLES)})
+
+    def test_native_undefined_behavior_is_never_requested(self):
+        requests = []
+        append_appcont_requests(requests)
+        for request in requests:
+            fields = request.split()
+            if fields[0] == 'acc_matrix' and fields[1] == '4':
+                self.assertFalse(fields[2] == '1' and int(fields[3]) >= 1, request)
+            if fields[0] == 'acc_ls':
+                degree, nbpoints = int(fields[-2]), int(fields[-1])
+                self.assertTrue(degree >= 1 and 1 <= nbpoints <= 61, request)
 
 
 if __name__ == '__main__':
