@@ -11,6 +11,9 @@ macros, then walks namespace, class and struct scopes tracking access labels.
 Every public member function, constructor, operator and nested enum becomes an
 expected row; namespace-scope free functions (such as `operator*(double, gp_Vec)`)
 are attributed to the header's primary class, which is the ledger convention.
+Inside a named namespace (the modern `MathUtils`/`MathPoly`-style packages, which have
+no primary class) the namespace's structs, classes, `using` aliases and `constexpr`
+constants are public API too, so each becomes one bare `Namespace::Name` row.
 
 Row identities follow the ledger: `Class(params)` for constructors,
 `Class::Name` when the name is not overloaded, `Class::Name(params)[ const]`
@@ -20,8 +23,11 @@ default values, top-level `const` on by-value parameters and whitespace.
 Known false-positive sources and how they are handled:
 - Out-of-class definitions (`inline gp_Vec::gp_Vec(...)`) are recognised by
   the qualified name and ignored; only in-class declarations count.
-- `= delete` members, `friend` declarations, typedefs, `using` aliases, data
-  members and protected/private members are never expected.
+- `= delete` members, `friend` declarations, typedefs, data members (also those whose
+  default initializer calls a function, such as `= std::numeric_limits<double>::quiet_NaN()`)
+  and protected/private members are never expected; `using` aliases only in a namespace.
+- A row with status `excluded` still covers its member but must carry a `notes` reason;
+  rows that do not are reported as `excluded without notes`.
 - A bare `Class::Name` row does not cover an overloaded name; overloads that
   differ only in cv-qualification must carry the trailing ` const`.
 - Macros that expand to members are not expanded; an unknown macro that ends
@@ -132,7 +138,16 @@ def strip_access(head: str) -> tuple[str | None, str]:
     return label, head
 
 
-def scan_scope(body: str, scope: str, public_default: bool, primary: str) -> list[Member]:
+@dataclass(frozen=True)
+class Scope:
+    """Where a statement is declared: qualified name, the header's primary class, namespace-ness."""
+
+    name: str
+    primary: str
+    is_namespace: bool = False
+
+
+def scan_scope(body: str, scope: Scope, public_default: bool) -> list[Member]:
     """Collect expected members declared in one namespace or class body."""
     members: list[Member] = []
     public = public_default
@@ -140,50 +155,103 @@ def scan_scope(body: str, scope: str, public_default: bool, primary: str) -> lis
         label, head = strip_access(head)
         public = public if label is None else label == "public"
         if public:
-            members.extend(statement_members(head.strip(), braced, scope, primary))
+            members.extend(statement_members(head.strip(), braced, scope))
     return members
 
 
-def statement_members(head: str, braced: str | None, scope: str, primary: str) -> list[Member]:
+def statement_members(head: str, braced: str | None, scope: Scope) -> list[Member]:
     """Expected members produced by one statement of a scope."""
     scope_match = SCOPE_HEAD.match(head)
     if scope_match is not None and "(" not in head:
-        return nested_scope_members(scope_match, braced, scope, primary)
+        return nested_scope_members(scope_match, braced, scope)
+    if scope.is_namespace and (entity := namespace_entity(head)) is not None:
+        return [Member(f"{scope.name}::{entity}", None, "")]
     if not head or re.match(r"(friend|typedef|using|static_assert)\b", head) or "(" not in head:
         return []
-    return function_members(head, scope, primary)
+    return function_members(head, scope)
 
 
-def nested_scope_members(match: re.Match[str], braced: str | None, scope: str, primary: str) -> list[Member]:
-    """Members of a nested class/namespace, or the enum itself as one member."""
+def namespace_entity(head: str) -> str | None:
+    """Name of a namespace-scope `using X = ...` alias or `constexpr` constant, else None.
+
+    >>> namespace_entity("inline constexpr int THE_MAX = 20")
+    'THE_MAX'
+    >>> namespace_entity("using LongCoefficients = std::array<long double, 21>")
+    'LongCoefficients'
+    """
+    alias = re.match(r"using\s+(\w+)\s*=", head)
+    if alias is not None:
+        return alias.group(1)
+    constant = re.match(r"(?:(?:inline|static)\s+)*constexpr\b[^(=]*?\b(\w+)\s*=", head)
+    return None if constant is None else constant.group(1)
+
+
+def nested_scope_members(match: re.Match[str], braced: str | None, scope: Scope) -> list[Member]:
+    """Members of a nested class/namespace, or the enum itself as one member.
+
+    A struct/class defined directly in a named namespace is itself public API (there is no
+    primary class to hang it on), so it is expected as one bare type row besides its members.
+    """
     kind, name = match.group(1), re.sub(r"\s+", "", match.group(2))
-    qualified = f"{scope}::{name}" if scope else name
+    qualified = f"{scope.name}::{name}" if scope.name else name
     if braced is None:
         return []
     if kind.startswith("enum"):
         return [Member(qualified, None, "")]
     if kind == "namespace":
-        return scan_scope(braced, qualified, True, primary)
-    return scan_scope(braced, qualified, kind != "class", primary)
+        # `namespace std` only holds hash/equal_to specializations of this library's types.
+        return scan_scope(braced, Scope(qualified, scope.primary, name != "std"), True)
+    # A specialization (`VecComp<T, 2>`) refines the primary template's row, not a new type.
+    own = [Member(qualified, None, "")] if scope.is_namespace and "<" not in name else []
+    return own + scan_scope(braced, Scope(qualified, scope.primary), kind != "class")
 
 
-def function_members(head: str, scope: str, primary: str) -> list[Member]:
+def function_members(head: str, scope: Scope) -> list[Member]:
     """The member declared by a function statement, or nothing for definitions/deletions."""
     if re.search(r"=\s*delete\s*$", head):
         return []
-    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
-    if name_match is None:
+    name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+[A-Za-z_][\w:]*\s*[&*]*"
+                           r"|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
+    if name_match is None or is_data_initializer(head[:name_match.start()]):
         return []
-    name = re.sub(r"\s+", "", name_match.group(1))
+    name = conversion_spelling(name_match.group(1))
     if "::" in name and not name.startswith("operator"):
         return []  # out-of-class definition of an already declared member
     params_open = name_match.end() - 1
     params_close = matching_close(head, params_open)
     params = normalize_params(head[params_open + 1:params_close])
     qualifier = "const" if re.match(r"\s*const\b", head[params_close + 1:]) else ""
-    owner = scope or primary
+    owner = scope.name or scope.primary
     prefix = owner if name == owner.split("<")[0].split("::")[-1] else f"{owner}::{name}"
     return [Member(prefix, params, qualifier)]
+
+
+def is_data_initializer(before_name: str) -> bool:
+    """True when the call found in a statement sits in a data member's default initializer.
+
+    `double Fa = std::numeric_limits<double>::quiet_NaN();` declares data, not `quiet_NaN`.
+
+    >>> is_data_initializer("double Fa = std::numeric_limits<double>::")
+    True
+    >>> is_data_initializer("bool ")
+    False
+    """
+    if (template := re.match(r"\s*template\s*<", before_name)) is not None:
+        before_name = before_name[matching_close(before_name, template.end() - 1) + 1:]  # `<class T = double>`
+    return re.search(r"(?<![=!<>])=(?!=)", before_name) is not None
+
+
+def conversion_spelling(raw: str) -> str:
+    """Compact a member name, keeping the one space of a conversion operator (`operator bool`).
+
+    >>> conversion_spelling("operator bool")
+    'operator bool'
+    >>> conversion_spelling("operator ()")
+    'operator()'
+    """
+    match = re.fullmatch(r"operator\s+([A-Za-z_].*)", raw.strip())
+    compact = re.sub(r"\s+", "", raw)
+    return compact if match is None else "operator " + re.sub(r"\s+", "", match.group(1))
 
 
 def split_top_level(text: str) -> list[str]:
@@ -207,15 +275,47 @@ def normalize_param(param: str) -> str:
     'double'
     """
     param = split_default(param).strip()
+    if (array := array_param(param)) is not None:
+        return array
     tokens = re.findall(r"[A-Za-z_]\w*(?:\s*::\s*\w+)*(?:\s*<[^>]*>)?|[&*]+|\[[^\]]*\]", param)
     words = [token for token in tokens if re.match(r"\w", token)]
     type_words = [word for word in words if word not in {"const", "volatile", "unsigned", "signed"}]
-    if len(type_words) >= 2 and tokens[-1] == words[-1]:
+    if len(type_words) >= 2 and tokens[-1] == words[-1] and not is_builtin_pair(type_words):
         tokens = tokens[:-1]
     tokens = [TYPE_ALIASES.get(token, re.sub(r"\s+", "", token)) for token in tokens]
     if tokens and tokens[0] == "const" and not any(token[0] in "&*" for token in tokens):
         tokens = tokens[1:]
     return re.sub(r" ([&*])", r"\1", " ".join(tokens))
+
+
+def is_builtin_pair(type_words: list[str]) -> bool:
+    """True when the last two words spell one builtin type (`long double`), not `Type name`.
+
+    >>> is_builtin_pair(["long", "double"])
+    True
+    """
+    return type_words[-2] in {"long", "short"} and type_words[-1] in {"long", "int", "double"}
+
+
+def array_param(param: str) -> str | None:
+    """Canonical spelling of an array or reference-to-array parameter, else None.
+
+    Arrays keep their `const` (it is not top-level) and extents; only the name goes.
+
+    >>> array_param("const double theJ[3][3]")
+    'const double[3][3]'
+    >>> array_param("const double (&theF)[N]")
+    'const double(&)[N]'
+    """
+    match = re.fullmatch(r"(.*?)(\(\s*[&*]+\s*\w*\s*\)|\b\w+)?\s*((?:\[[^\]]*\]\s*)+)", param, re.S)
+    if match is None:
+        return None
+    base, declarator = match.group(1), match.group(2) or ""
+    if not set(base.split()) - {"const", "volatile", "unsigned", "signed"} and not declarator.startswith("("):
+        base, declarator = f"{base} {declarator}", ""  # nameless `const double[9]`: the word is the type
+    base = " ".join(TYPE_ALIASES.get(word, word) for word in base.split())
+    declarator = re.sub(r"\w+|\s+", "", declarator)
+    return base + declarator + re.sub(r"\s+", "", match.group(3))
 
 
 def split_default(param: str) -> str:
@@ -243,7 +343,7 @@ def header_members(path: Path) -> list[Member]:
     text = clean_source(path.read_text(errors="replace"))
     exception = re.compile(r"\bDEFINE_STANDARD_EXCEPTION\s*\(\s*(\w+)\s*,[^)]*\)")
     exceptions = [Member(name, None, "") for name in exception.findall(text)]
-    return exceptions + scan_scope(exception.sub(";", text), "", True, path.stem)
+    return exceptions + scan_scope(exception.sub(";", text), Scope("", path.stem), True)
 
 
 def parse_row_id(upstream_id: str) -> Member:
@@ -291,7 +391,8 @@ def covers(row: Member, member: Member, members: list[Member]) -> bool:
         return False
     same_prefix = [other for other in members if other.prefix == member.prefix]
     if row.params is None:
-        return len(same_prefix) == 1
+        # A bare row names a type/constant exactly, or a function only when it is not overloaded.
+        return member.params is None or len(same_prefix) == 1
     twins = [other for other in same_prefix if same_params(row, other)]
     return same_params(row, member) and (len(twins) == 1 or row.qualifier == member.qualifier)
 
@@ -304,6 +405,13 @@ def audit_header(header: Path, source: str, ledger: dict[str, list[dict[str, str
     missing = [m for m in members if not any(covers(row, m, members) for row in rows)]
     stale = [i for i, row in zip(ids, rows) if not any(covers(row, m, members) for m in members)]
     return missing, stale
+
+
+def excluded_without_reason(ledger: dict[str, list[dict[str, str]]], relative: str) -> list[str]:
+    """Ids of a package's `excluded` rows that carry no `notes` justification."""
+    return [row["upstream_id"] for row in ledger["api"]
+            if row["source"].startswith(f"{relative}/") and row.get("status") == "excluded"
+            and not row.get("notes", "").strip()]
 
 
 def audit_package(package: Path, ledger: dict[str, list[dict[str, str]]], relative: str) -> tuple[list[str], list[str]]:
@@ -340,9 +448,12 @@ def main() -> int:
         return 0
     ledger = json.loads(args.ledger.read_text())
     gaps, stale = audit_package(package, ledger, args.package.rstrip("/"))
-    print("\n".join(gaps + [f"stale row {row}" for row in stale]))
-    print(f"{len(gaps)} public members without api rows; {len(stale)} rows matching no member", file=sys.stderr)
-    return 1 if gaps or stale else 0
+    unjustified = excluded_without_reason(ledger, args.package.rstrip("/"))
+    print("\n".join(gaps + [f"stale row {row}" for row in stale]
+                    + [f"excluded without notes {row}" for row in unjustified]))
+    print(f"{len(gaps)} public members without api rows; {len(stale)} rows matching no member; "
+          f"{len(unjustified)} excluded rows without notes", file=sys.stderr)
+    return 1 if gaps or stale or unjustified else 0
 
 if __name__ == "__main__":
     sys.exit(main())

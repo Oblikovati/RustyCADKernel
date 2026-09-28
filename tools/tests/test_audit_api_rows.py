@@ -5,9 +5,9 @@ from pathlib import Path
 
 import time
 
-from audit_api_rows import (Member, audit_header, clean_source, header_members, is_brace_initializer,
-                            matching_close, normalize_param, normalize_params, parse_row_id,
-                            split_statements)
+from audit_api_rows import (Member, audit_header, clean_source, excluded_without_reason, header_members,
+                            is_brace_initializer, matching_close, normalize_param, normalize_params,
+                            parse_row_id, split_statements)
 
 HEADER = """
 #define X_Raise_if(C, M) \\
@@ -83,6 +83,79 @@ class HeaderParsingTests(unittest.TestCase):
     def test_unbalanced_brackets_name_the_offset(self):
         with self.assertRaisesRegex(ValueError, "offset 0"):
             matching_close("(a", 0)
+
+
+NAMESPACE_HEADER = """
+namespace MathDemo
+{
+inline constexpr int THE_MAX_DEGREE = 20;
+using LongCoefficients = std::array<long double, THE_MAX_DEGREE + 1>;
+struct Result
+{
+  double Fa = std::numeric_limits<double>::quiet_NaN();
+  explicit operator bool() const { return true; }
+  double operator[](size_t theIndex) const { return 0.0; }
+};
+template <typename F>
+struct Sum
+{
+  Sum(F theF, F theG) : myF(theF) {}
+};
+namespace Utils
+{
+inline long double ToDouble(long double theValue) { return theValue; }
+inline bool Solve3x3(const double theJ[3][3], double theDelta[3]) { return true; }
+template <size_t N>
+inline double SafeNormN(const double (&theValues)[N]) { return 0.0; }
+} // namespace Utils
+} // namespace MathDemo
+namespace std
+{
+template <>
+struct hash<MathDemo::Result>
+{
+  size_t operator()(const MathDemo::Result& theResult) const noexcept { return 0; }
+};
+} // namespace std
+"""
+
+
+class NamespaceParsingTests(unittest.TestCase):
+    def test_namespace_types_aliases_and_constants_become_bare_rows(self):
+        self.assertEqual(members_of(NAMESPACE_HEADER), [
+            "MathDemo::THE_MAX_DEGREE|None|", "MathDemo::LongCoefficients|None|", "MathDemo::Result|None|",
+            "MathDemo::Result::operator bool||const", "MathDemo::Result::operator[]|size_t|const",
+            "MathDemo::Sum|None|", "MathDemo::Sum|F,F|", "MathDemo::Utils::ToDouble|long double|",
+            "MathDemo::Utils::Solve3x3|const double[3][3],double[3]|",
+            "MathDemo::Utils::SafeNormN|const double(&)[N]|",
+            "std::hash<MathDemo::Result>::operator()|const MathDemo::Result&|const"])
+
+    def test_nameless_multiword_builtins_and_arrays_normalize_like_named_ones(self):
+        self.assertEqual(normalize_param("long double"), normalize_param("long double theValue"))
+        self.assertEqual(normalize_param("const double theJ[3][3]"), "const double[3][3]")
+        self.assertEqual(normalize_param("const double (&theF)[N]"), "const double(&)[N]")
+        self.assertEqual(normalize_param("const double[9]"), "const double[9]")
+        self.assertEqual(normalize_param("Standard_Real theP[2]"), "double[2]")
+
+    def test_bare_type_row_and_constructor_row_are_distinct(self):
+        with tempfile.TemporaryDirectory() as folder:
+            header = Path(folder) / "MathDemo_Types.hxx"
+            header.write_text(NAMESPACE_HEADER)
+            rows = [{"upstream_id": upstream_id, "source": "x.hxx"} for upstream_id in [
+                "MathDemo::Sum", "MathDemo::Result::operator bool() const", "MathDemo::Utils::ToDouble(long double)"]]
+            missing, stale = audit_header(header, "x.hxx", {"api": rows})
+        rendered = {f"{m.prefix}({m.params})" for m in missing}
+        self.assertIn("MathDemo::Sum(F,F)", rendered)
+        self.assertNotIn("MathDemo::Sum(None)", rendered)
+        self.assertNotIn("MathDemo::Utils::ToDouble(long double)", rendered)
+        self.assertEqual(stale, [])
+
+    def test_excluded_rows_need_a_reason(self):
+        ledger = {"api": [
+            {"upstream_id": "A::B", "source": "src/P/A.hxx", "status": "excluded", "notes": ""},
+            {"upstream_id": "A::C", "source": "src/P/A.hxx", "status": "excluded", "notes": "C++ only"},
+            {"upstream_id": "A::D", "source": "src/Q/A.hxx", "status": "excluded"}]}
+        self.assertEqual(excluded_without_reason(ledger, "src/P"), ["A::B"])
 
 
 class RowMatchingTests(unittest.TestCase):
