@@ -57,8 +57,7 @@ impl Default for UnitsSystem {
 
 /// `Units_NoSuchType(aquantity)`.
 pub(crate) fn no_such_type(quantity: &[u8]) -> Failure {
-    let name = String::from_utf8_lossy(c_str(quantity)).into_owned();
-    Failure::with_type("Units_NoSuchType", &name, "")
+    super::no_such_type(&String::from_utf8_lossy(c_str(quantity)))
 }
 
 impl UnitsSystem {

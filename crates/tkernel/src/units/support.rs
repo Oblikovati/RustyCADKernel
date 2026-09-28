@@ -50,11 +50,9 @@ pub(crate) fn object<'a, T: RuntimeTyped>(
     member: &str,
 ) -> Result<&'a T, Failure> {
     handle.get().ok_or_else(|| {
-        Failure::with_type(
-            "Standard_NullObject",
-            &format!("{member}: null handle; expected a constructed object"),
-            "",
-        )
+        crate::standard::exceptions::null_object(&format!(
+            "{member}: null handle; expected a constructed object"
+        ))
     })
 }
 

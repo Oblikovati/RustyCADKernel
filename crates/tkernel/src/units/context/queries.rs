@@ -94,10 +94,8 @@ impl Units {
                 return Ok(candidate.dimensions());
             }
         }
-        Err(Failure::with_type(
-            "Standard_NoSuchObject",
+        Err(crate::standard::exceptions::no_such_object(
             "Units::Dimensions",
-            "",
         ))
     }
     /// The quantity sequence `Units_Dimensions::Quantity` captured on its first call.

@@ -50,9 +50,8 @@ pub use unit::{ShiftedUnit, Unit, UnitHandle};
 pub use unit_sentence::{MathSentence, UnitSentence};
 pub use units_system::UnitsSystem;
 
-/// The exception type raised for an unknown quantity (`Units_NoSuchType`, a
-/// `Standard_NoSuchObject`).
-pub const NO_SUCH_TYPE: &str = "Units_NoSuchType";
-/// The exception type raised for an unknown unit (`Units_NoSuchUnit`, a
-/// `Standard_NoSuchObject`).
-pub const NO_SUCH_UNIT: &str = "Units_NoSuchUnit";
+crate::standard::exceptions::define_standard_exceptions! {
+    UNITS_HIERARCHY;
+    no_such_type => "Units_NoSuchType" : "Standard_NoSuchObject";
+    no_such_unit => "Units_NoSuchUnit" : "Standard_NoSuchObject";
+}

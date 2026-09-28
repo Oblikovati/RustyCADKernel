@@ -84,11 +84,7 @@ impl Sentence {
     pub fn new(lexicon: &Handle<Lexicon>, text: &[u8]) -> Result<Self, Failure> {
         let words = object(lexicon, "Units_Sentence::Units_Sentence")?.sequence();
         if words.is_null() {
-            return Err(Failure::with_type(
-                "Units_NoSuchType",
-                "BAD LEXICON descriptor",
-                "",
-            ));
+            return Err(super::no_such_type("BAD LEXICON descriptor"));
         }
         let tokens = new_sequence::<Handle<Token>>();
         let sentence = Self { tokens };

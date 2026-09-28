@@ -22,10 +22,8 @@ use crate::units::Dimensions;
 /// Dimensions the native code dereferences unchecked (a null handle crashes there).
 fn required(dimensions: &Handle<Dimensions>) -> Result<&Dimensions, Failure> {
     dimensions.get().ok_or_else(|| {
-        Failure::with_type(
-            "Standard_NullObject",
+        crate::standard::exceptions::null_object(
             "UnitsAPI: null dimensions of an invalid unit; expected an evaluable unit",
-            "",
         )
     })
 }

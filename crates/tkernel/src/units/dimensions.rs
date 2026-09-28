@@ -126,9 +126,9 @@ impl Dimensions {
     /// `dims.dump(0, &mut std::io::stdout())?`.
     pub fn dump(&self, shift: i32, out: &mut dyn Write) -> std::io::Result<()> {
         let indent = "  ".repeat(shift.max(0) as usize);
-        write!(out, "{indent} with the physical dimensions : \n")?;
+        writeln!(out, "{indent} with the physical dimensions : ")?;
         for (label, value) in LABELS.iter().zip(self.exponents) {
-            write!(out, "{indent}         {label}: {}\n", stream_real(value))?;
+            writeln!(out, "{indent}         {label}: {}", stream_real(value))?;
         }
         Ok(())
     }

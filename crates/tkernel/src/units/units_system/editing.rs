@@ -28,11 +28,7 @@ use crate::units::unit_sentence::UnitSentence;
 
 /// `Units_NoSuchUnit(aunit)`.
 fn no_such_unit(unit: &[u8]) -> Failure {
-    Failure::with_type(
-        "Units_NoSuchUnit",
-        &String::from_utf8_lossy(c_str(unit)),
-        "",
-    )
+    crate::units::no_such_unit(&String::from_utf8_lossy(c_str(unit)))
 }
 
 impl UnitsSystem {

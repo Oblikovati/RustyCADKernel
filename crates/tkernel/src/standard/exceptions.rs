@@ -73,10 +73,11 @@ pub use super::failure::out_of_memory;
 /// Direct C++ base of a TKernel exception class, or `None` for `Standard_Failure` and
 /// for names this toolkit does not declare; `exception_parent("Standard_OutOfRange")`.
 pub fn exception_parent(name: &str) -> Option<&'static str> {
-    let tables: [&[(&str, &str)]; 4] = [
+    let tables: [&[(&str, &str)]; 5] = [
         STANDARD_HIERARCHY,
         crate::std_fail::STD_FAIL_HIERARCHY,
         crate::plugin::PLUGIN_HIERARCHY,
+        crate::units::UNITS_HIERARCHY,
         std::slice::from_ref(&OUT_OF_MEMORY),
     ];
     tables

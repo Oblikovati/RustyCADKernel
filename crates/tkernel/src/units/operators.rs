@@ -135,7 +135,7 @@ mod tests {
             token_less_or_equal(&metre, b"mm").unwrap() && token_greater(&metre, b"a").unwrap()
         );
         let area = token_pow(&metre, 2.0).unwrap();
-        assert!(token_greater_token(&area, &metre).unwrap() == false);
+        assert!(!token_greater_token(&area, &metre).unwrap());
         assert!(token_greater_or_equal(&metre, &area).unwrap());
         let sum = token_add(&metre, &metre).unwrap();
         assert_eq!(sum.get().unwrap().value(), 2.0);

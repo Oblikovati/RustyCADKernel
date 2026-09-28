@@ -79,8 +79,8 @@ impl ConversionMatrix {
     fn pass(&mut self, count: usize, computed: &mut usize) -> Result<(), Failure> {
         for unit in 1..=count {
             if self.get(unit, 0)? == 0.0 {
-                self.from_earlier(unit, count, computed)?;
-                self.from_later(unit, count, computed)?;
+                self.derive_from_earlier(unit, count, computed)?;
+                self.derive_from_later(unit, count, computed)?;
             }
             if *computed == count + 1 {
                 break;
@@ -88,7 +88,7 @@ impl ConversionMatrix {
         }
         Ok(())
     }
-    fn from_earlier(
+    fn derive_from_earlier(
         &mut self,
         unit: usize,
         count: usize,
@@ -106,7 +106,7 @@ impl ConversionMatrix {
         }
         Ok(())
     }
-    fn from_later(
+    fn derive_from_later(
         &mut self,
         unit: usize,
         count: usize,

@@ -93,10 +93,10 @@ fn dump_token(token: &Token, shift: i32, level: i32, out: &mut dyn Write) -> std
     )?;
     out.write_all(token.mean().as_bytes())?;
     out.write_all(b"\n")?;
-    if level != 0 {
-        if let Some(dimensions) = token.dimensions().get() {
-            dimensions.dump(shift, out)?;
-        }
+    if level != 0
+        && let Some(dimensions) = token.dimensions().get()
+    {
+        dimensions.dump(shift, out)?;
     }
     Ok(())
 }

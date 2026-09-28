@@ -50,6 +50,8 @@ fn unary(tokens: &Tokens) -> Result<Handle<Token>, Failure> {
         let operand = object(&operand, "Units_Sentence::CalculateLocal")?;
         let word = [b"-".as_slice(), operand.word().as_bytes()].concat();
         let mean = operand.mean();
+        // Natively `Value() * (-1.0)`: unlike negation it keeps a NaN operand's sign bit.
+        #[allow(clippy::neg_multiply)]
         let value = operand.value() * (-1.0);
         let negated = Token::with_dimensions(&word, mean.as_bytes(), value, &operand.dimensions());
         edit(tokens, REMOVE_ONE, |items| items.remove(1))?;
