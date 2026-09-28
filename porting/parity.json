@@ -37946,6 +37946,878 @@
       "rust_item": "rustycad_tkernel::plugin::failure",
       "status": "implemented",
       "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
+    },
+    {
+      "upstream_id": "opencascade::handle()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as Default>::default",
+      "status": "implemented",
+      "notes": "The null handle. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle(const T*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::from_view",
+      "status": "implemented",
+      "notes": "A raw pointer to an object a handle owns is a HandleView in Rust; rustycad_tkernel::standard::Handle::from_view adds one reference (or gives null), as handle(const T*) on an owned object. A fresh object is rustycad_tkernel::standard::Handle::new; Rust cannot adopt an unowned pointer. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle(const handle&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as Clone>::clone",
+      "status": "implemented",
+      "notes": "Copy adds one reference. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle(handle&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Rust moves the handle; the moved-from value cannot be used, so there is nothing to port. The C++ move leaves the source null."
+    },
+    {
+      "upstream_id": "opencascade::handle::~handle()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as Drop>::drop",
+      "status": "implemented",
+      "notes": "Releases one reference; the last one drops the object (C++ Delete()). Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::Nullify()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::nullify",
+      "status": "implemented",
+      "notes": "Releases the object. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::IsNull() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::is_null",
+      "status": "implemented",
+      "notes": "Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::reset(T*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::reset",
+      "status": "implemented",
+      "notes": "reset(new U) owns a fresh object of T or a derived class; reset(nullptr) is nullify. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator=(const handle&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as Clone>::clone_from",
+      "status": "implemented",
+      "notes": "Assignment keeps the count when both handles already share the object, as Assign. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator=(const T*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::from_view",
+      "status": "implemented",
+      "notes": "A raw pointer to an object a handle owns is a HandleView in Rust; rustycad_tkernel::standard::Handle::from_view adds one reference (or gives null), as handle(const T*) on an owned object. A fresh object is rustycad_tkernel::standard::Handle::new; Rust cannot adopt an unowned pointer. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator=(handle&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Rust moves the handle. The C++ move assignment swaps the two handles, so the source receives the old target; std::mem::swap is the Rust counterpart when the source is kept, and the probe compares that swap."
+    },
+    {
+      "upstream_id": "opencascade::handle::get() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::get",
+      "status": "implemented",
+      "notes": "Borrows the projected object, None for null; rustycad_tkernel::standard::Handle::as_ptr gives the raw address."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator->() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as Deref>::deref",
+      "status": "implemented",
+      "notes": "Dereferencing a null handle is undefined in C++; Rust panics with a message."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator*() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as Deref>::deref",
+      "status": "implemented",
+      "notes": "Dereferencing a null handle is undefined in C++; Rust panics with a message."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator==(const handle<T2>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as PartialEq<Handle<U>>>::eq",
+      "status": "implemented",
+      "notes": "Object identity across handle types. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator==(const T2*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as PartialEq<*const T>>::eq",
+      "status": "implemented",
+      "notes": "Compares the projected address with a raw pointer; the reverse friend operator is <*const T as PartialEq<Handle<T>>>::eq. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator!=(const handle<T2>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as PartialEq<Handle<U>>>::ne",
+      "status": "implemented",
+      "notes": "Negation of ==. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator!=(const T2*) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as PartialEq<*const T>>::ne",
+      "status": "implemented",
+      "notes": "Negation of ==. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator<(const handle<T2>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as PartialOrd<Handle<U>>>::lt",
+      "status": "implemented",
+      "notes": "Orders by object address, null first; Ord is implemented too. Addresses differ between runs, so the probe does not compare it."
+    },
+    {
+      "upstream_id": "opencascade::handle::DownCast(const handle<T2>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::down_cast",
+      "status": "implemented",
+      "notes": "All DownCast overloads are one runtime check: rustycad_tkernel::standard::Handle::down_cast shares the object when it is a T and returns null otherwise, as dynamic_cast. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::DownCast(const T2*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::from_view",
+      "status": "implemented",
+      "notes": "All DownCast overloads are one runtime check: rustycad_tkernel::standard::Handle::from_view (the pointer is a view) shares the object when it is a T and returns null otherwise, as dynamic_cast."
+    },
+    {
+      "upstream_id": "opencascade::handle::DownCast(const handle<T2>&,opencascade::std::enable_if<!is_base_but_not_same<T2,T>::value,void*>::type)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::down_cast",
+      "status": "implemented",
+      "notes": "The deprecated same- or unrelated-type overload. All DownCast overloads are one runtime check: rustycad_tkernel::standard::Handle::down_cast shares the object when it is a T and returns null otherwise, as dynamic_cast. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle::DownCast(const T2*,opencascade::std::enable_if<!is_base_but_not_same<T2,T>::value,void*>::type)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::from_view",
+      "status": "implemented",
+      "notes": "The deprecated same- or unrelated-type overload on a pointer; the pointer is a view. All DownCast overloads are one runtime check: rustycad_tkernel::standard::Handle::down_cast shares the object when it is a T and returns null otherwise, as dynamic_cast."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator bool() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::is_some",
+      "status": "implemented",
+      "notes": "The explicit bool conversion (and its pre-C++11 member-pointer fallback)."
+    },
+    {
+      "upstream_id": "opencascade::handle(const handle<T2>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::cast",
+      "status": "implemented",
+      "notes": "C++ selects this converting constructor at compile time for a base T; Rust's rustycad_tkernel::standard::Handle::cast shares the object with one more reference after a runtime projection, and gives a null handle instead of the compile error for a type that is not a base. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "opencascade::handle(handle<T2>&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::into_cast",
+      "status": "implemented",
+      "notes": "rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator=(const handle<T2>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::cast",
+      "status": "implemented",
+      "notes": "Converting assignment (both compiler branches declare it): assign the result of cast. C++ selects this converting constructor at compile time for a base T; Rust's rustycad_tkernel::standard::Handle::cast shares the object with one more reference after a runtime projection, and gives a null handle instead of the compile error for a type that is not a base."
+    },
+    {
+      "upstream_id": "opencascade::handle::operator=(handle<T2>&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::into_cast",
+      "status": "implemented",
+      "notes": "Converting move assignment (both compiler branches declare it). rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference."
+    },
+    {
+      "upstream_id": "opencascade::handle(const handle<T2>&,std::enable_if<is_base_but_not_same<T,T2>::value>::type*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::cast",
+      "status": "implemented",
+      "notes": "Fallback spelling for old compilers. C++ selects this converting constructor at compile time for a base T; Rust's rustycad_tkernel::standard::Handle::cast shares the object with one more reference after a runtime projection, and gives a null handle instead of the compile error for a type that is not a base."
+    },
+    {
+      "upstream_id": "opencascade::handle(handle<T2>&&,std::enable_if<is_base_but_not_same<T,T2>::value>::type*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::into_cast",
+      "status": "implemented",
+      "notes": "Fallback spelling for old compilers. rustycad_tkernel::standard::Handle::into_cast moves the reference without touching the count, as the C++ converting move; a non-base target (a C++ compile error) gives null and releases the reference."
+    },
+    {
+      "upstream_id": "occ::down_cast(const handle<TBase>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::occ::down_cast",
+      "status": "implemented",
+      "notes": "All DownCast overloads are one runtime check: rustycad_tkernel::standard::Handle::down_cast shares the object when it is a T and returns null otherwise, as dynamic_cast. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "occ::down_cast(const TBase*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::occ::down_cast_view",
+      "status": "implemented",
+      "notes": "The pointer is a view; All DownCast overloads are one runtime check: rustycad_tkernel::standard::Handle::from_view shares the object when it is a T and returns null otherwise, as dynamic_cast."
+    },
+    {
+      "upstream_id": "std::hash<opencascade::handle<TheTransientType>>::operator()(const opencascade::handle<TheTransientType>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Handle.hxx",
+      "rust_item": "rustycad_tkernel::standard::Handle::hash_code",
+      "status": "implemented",
+      "notes": "The object address, 0 for null; <Handle as Hash>::hash feeds the same address to a Rust hasher. Addresses differ between runs, so the probe does not compare it."
+    },
+    {
+      "upstream_id": "Standard_Transient()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "<rustycad_tkernel::standard::StandardTransient as Default>::default",
+      "status": "implemented",
+      "notes": "Reference count 0. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "Standard_Transient(const Standard_Transient&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "<rustycad_tkernel::standard::StandardTransient as Clone>::clone",
+      "status": "implemented",
+      "notes": "The copy starts with reference count 0, as C++."
+    },
+    {
+      "upstream_id": "Standard_Transient::operator=(const Standard_Transient&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "<rustycad_tkernel::standard::StandardTransient as Clone>::clone_from",
+      "status": "implemented",
+      "notes": "Assignment keeps the target's reference count, as C++."
+    },
+    {
+      "upstream_id": "Standard_Transient::~Standard_Transient()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Destructor; Rust drops the object when the last handle releases it."
+    },
+    {
+      "upstream_id": "Standard_Transient::get_type_name()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeTyped::TYPE_NAME",
+      "status": "implemented",
+      "notes": "The class name, without registering the class; impl_transient! sets it for every class."
+    },
+    {
+      "upstream_id": "Standard_Transient::get_type_descriptor()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeTyped::static_type",
+      "status": "implemented",
+      "notes": "The registered descriptor of the class."
+    },
+    {
+      "upstream_id": "Standard_Transient::DynamicType() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::Transient::dynamic_type",
+      "status": "implemented",
+      "notes": "The most-derived descriptor. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+    },
+    {
+      "upstream_id": "Standard_Transient::IsInstance(const opencascade::handle<Standard_Type>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::Transient::is_instance",
+      "status": "implemented",
+      "notes": "Descriptor identity. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+    },
+    {
+      "upstream_id": "Standard_Transient::IsInstance(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::Transient::is_instance_name",
+      "status": "implemented",
+      "notes": "The name is compared as a C string, up to its first NUL. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+    },
+    {
+      "upstream_id": "Standard_Transient::IsKind(const opencascade::handle<Standard_Type>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::Transient::is_kind",
+      "status": "implemented",
+      "notes": "SubType of the dynamic type. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+    },
+    {
+      "upstream_id": "Standard_Transient::IsKind(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::Transient::is_kind_name",
+      "status": "implemented",
+      "notes": "The name is compared as a C string, up to its first NUL. Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+    },
+    {
+      "upstream_id": "Standard_Transient::This() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardTransient::this",
+      "status": "implemented",
+      "notes": "Standard_ProgramError with the OCCT message for an object no handle owns (count 0). Compared with OCCT by the runtime_object probe for four classes and every registered column type."
+    },
+    {
+      "upstream_id": "Standard_Transient::GetRefCount() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardTransient::ref_count",
+      "status": "implemented",
+      "notes": "Relaxed atomic load. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "Standard_Transient::IncrementRefCounter()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardTransient::increment_ref_counter",
+      "status": "implemented",
+      "notes": "Relaxed atomic increment. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "Standard_Transient::DecrementRefCounter()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardTransient::decrement_ref_counter",
+      "status": "implemented",
+      "notes": "Release decrement with an acquire fence at zero; returns the new count. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "Standard_Transient::Delete() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Transient.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Handle as Drop>::drop",
+      "status": "implemented",
+      "notes": "The last handle's release drops the Rust object (C++ `delete this`); a Drop impl of the class is the virtual Delete override. Reference counts, null state, identity and destructions after every step are compared with OCCT by the runtime_handle_script probe."
+    },
+    {
+      "upstream_id": "Standard_Type::SystemName() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::system_name",
+      "status": "implemented",
+      "notes": "Rust's std::any::type_name of the class; C++ reports the compiler's mangled typeid name, so the probe does not compare it."
+    },
+    {
+      "upstream_id": "Standard_Type::Name() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::name",
+      "status": "implemented",
+      "notes": "The registered class name. Compared with OCCT by the runtime_type probe for seven registered TKernel classes."
+    },
+    {
+      "upstream_id": "Standard_Type::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::size",
+      "status": "implemented",
+      "notes": "size_of the Rust type; C++ class sizes differ, so the probe does not compare it."
+    },
+    {
+      "upstream_id": "Standard_Type::Parent() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::parent",
+      "status": "implemented",
+      "notes": "None for Standard_Transient (C++ null handle). Compared with OCCT by the runtime_type probe for seven registered TKernel classes."
+    },
+    {
+      "upstream_id": "Standard_Type::SubType(const occ::handle<Standard_Type>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::is_subtype",
+      "status": "implemented",
+      "notes": "Walks the parent chain while the base is not larger than the current class, as C++; a Rust descriptor reference is never null. Compared with OCCT by the runtime_type probe for seven registered TKernel classes."
+    },
+    {
+      "upstream_id": "Standard_Type::SubType(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::is_subtype_name",
+      "status": "implemented",
+      "notes": "The name is compared as a C string, up to its first NUL; a Rust &str is never null. Compared by the runtime_subtype_name probe."
+    },
+    {
+      "upstream_id": "Standard_Type::Print(Standard_OStream&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::print",
+      "status": "implemented",
+      "notes": "Writes `0x<address> : <name>`; the probe masks the address, which differs between runs. Compared with OCCT by the runtime_type probe for seven registered TKernel classes."
+    },
+    {
+      "upstream_id": "Standard_Type::Instance()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::instance",
+      "status": "implemented",
+      "notes": "Returns T::static_type()."
+    },
+    {
+      "upstream_id": "Standard_Type::Register(const std::type_info&,const char*,size_t,const occ::handle<Standard_Type>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::RuntimeType::register",
+      "status": "implemented",
+      "notes": "Process-wide registry under a mutex, keyed by the Rust TypeId (C++ keys by the typeid name): the first registration of a class wins and later calls return it unchanged; the name is deep-copied up to its NUL. impl_transient! registers every class with its size and parent."
+    },
+    {
+      "upstream_id": "Standard_Type::~Standard_Type()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Destructor that unregisters the descriptor; Rust descriptors live until process exit, as the C++ static handles do."
+    },
+    {
+      "upstream_id": "Standard_Type::DEFINE_STANDARD_RTTIEXT(Standard_Type,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro; RuntimeType is registered as the transient class Standard_Type by impl_transient!."
+    },
+    {
+      "upstream_id": "Standard_Type::operator<<(Standard_OStream&,const occ::handle<Standard_Type>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "<rustycad_tkernel::standard::RuntimeType as Display>::fmt",
+      "status": "implemented",
+      "notes": "Same text as Print. Compared with OCCT by the runtime_type probe for seven registered TKernel classes."
+    },
+    {
+      "upstream_id": "occ::is_kind(const Standard_Transient*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::occ::is_kind",
+      "status": "implemented",
+      "notes": "The pointer is an Option<&dyn Transient>; None is nullptr and gives false. Compared by the runtime_object probe."
+    },
+    {
+      "upstream_id": "occ::is_kind(const handle<TBase>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::occ::is_kind_handle",
+      "status": "implemented",
+      "notes": "False for a null handle. Compared by the runtime_object probe."
+    },
+    {
+      "upstream_id": "occ::is_instance(const Standard_Transient*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::occ::is_instance",
+      "status": "implemented",
+      "notes": "The pointer is an Option<&dyn Transient>; None is nullptr and gives false. Compared by the runtime_object probe."
+    },
+    {
+      "upstream_id": "occ::is_instance(const handle<TBase>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::occ::is_instance_handle",
+      "status": "implemented",
+      "notes": "False for a null handle."
+    },
+    {
+      "upstream_id": "occ::type_of()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Type.hxx",
+      "rust_item": "rustycad_tkernel::standard::occ::type_of",
+      "status": "implemented",
+      "notes": "Same descriptor as STANDARD_TYPE(T)."
+    },
+    {
+      "upstream_id": "Standard_Persistent()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+      "rust_item": "<rustycad_tkernel::standard::StandardPersistent as Default>::default",
+      "status": "implemented",
+      "notes": "Type and reference numbers start at 0. Compared by the runtime_object probe."
+    },
+    {
+      "upstream_id": "Standard_Persistent::DEFINE_STANDARD_RTTIEXT(Standard_Persistent,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro; impl_transient! registers Standard_Persistent under Standard_Transient."
+    },
+    {
+      "upstream_id": "Standard_Persistent::TypeNum()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Persistent.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardPersistent::type_num",
+      "status": "implemented",
+      "notes": "The C++ int& is an &AtomicI32, which a shared handle can also write; ref_num exposes the _refnum field that C++ lends to Storage_Schema."
+    },
+    {
+      "upstream_id": "Standard_Failure()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Failure as Default>::default",
+      "status": "implemented",
+      "notes": "Empty message. Captures a stack trace through standard::stack_trace when Failure::default_stack_trace_length() is > 0 (runtime_stack_length probe). Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_Failure(const Standard_Failure&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Failure as Clone>::clone",
+      "status": "implemented",
+      "notes": "Copies share the message and stack strings (Arc), as the reference-counted StringRef. Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_Failure(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::new",
+      "status": "implemented",
+      "notes": "The message ends at its first NUL. Captures a stack trace through standard::stack_trace when Failure::default_stack_trace_length() is > 0 (runtime_stack_length probe). Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_Failure(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::with_type",
+      "status": "implemented",
+      "notes": "Explicit stack, no capture; with_type(\"Standard_Failure\", message, stack). Each DEFINE_STANDARD_EXCEPTION class's two-argument constructor is the same function with its class name. Compared by the runtime_failure_stack probe."
+    },
+    {
+      "upstream_id": "Standard_Failure::operator=(const Standard_Failure&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Failure as Clone>::clone_from",
+      "status": "implemented",
+      "notes": "Shares the other failure's strings. Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_Failure::~Standard_Failure()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Destructor; the Arc strings release themselves."
+    },
+    {
+      "upstream_id": "Standard_Failure::what() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::what",
+      "status": "implemented",
+      "notes": "Returns bytes: the message, or Standard_OutOfMemory's own buffer (the C++ virtual override). Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_Failure::GetMessageString() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::what",
+      "status": "implemented",
+      "notes": "Deprecated synonym of what(). Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_Failure::ExceptionType() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "Each exception class is a Failure carrying its class name. Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_Failure::GetStackString() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::stack_string",
+      "status": "implemented",
+      "notes": "Empty when none. Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_Failure::Print(Standard_OStream&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Failure as Display>::fmt",
+      "status": "implemented",
+      "notes": "Type, then \": \" and the base message when it is not empty, then the stack; write! it to a stream. Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_Failure::DefaultStackTraceLength()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::default_stack_trace_length",
+      "status": "implemented",
+      "notes": "Process-wide atomic, 0 by default. Compared by the runtime_stack_length probe."
+    },
+    {
+      "upstream_id": "Standard_Failure::SetDefaultStackTraceLength(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::set_default_stack_trace_length",
+      "status": "implemented",
+      "notes": "Process-wide atomic; values <= 0 disable capture. The trace buffer is clamp(length*200, 2048, 65536) bytes, with saturation where C++ int multiplication would overflow. Compared by the runtime_stack_length probe."
+    },
+    {
+      "upstream_id": "Standard_Failure::operator<<(Standard_OStream&,const Standard_Failure&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Failure.hxx",
+      "rust_item": "<rustycad_tkernel::standard::Failure as Display>::fmt",
+      "status": "implemented",
+      "notes": "Same text as Print. Compared by the runtime_failure probe."
+    },
+    {
+      "upstream_id": "Standard_OutOfMemory(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx",
+      "rust_item": "rustycad_tkernel::standard::exceptions::out_of_memory",
+      "status": "implemented",
+      "notes": "The message goes to a buffer of 1024 bytes, cut to 1023 (possibly inside a UTF-8 sequence) and at a NUL; nullptr and \"\" both give an empty buffer. The base message stays empty, so Display (operator<<) prints only \"Standard_OutOfMemory\" and any stack trace. Catches as Standard_ProgramError. Compared by the runtime_out_of_memory probe."
+    },
+    {
+      "upstream_id": "Standard_OutOfMemory::what() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::what",
+      "status": "implemented",
+      "notes": "Returns the buffer bytes. Compared by the runtime_out_of_memory probe."
+    },
+    {
+      "upstream_id": "Standard_OutOfMemory::ExceptionType() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::exception_type",
+      "status": "implemented",
+      "notes": "\"Standard_OutOfMemory\". Compared by the runtime_out_of_memory probe."
+    },
+    {
+      "upstream_id": "Standard_OutOfMemory::SetMessageString(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_OutOfMemory.hxx",
+      "rust_item": "rustycad_tkernel::standard::Failure::set_message_string",
+      "status": "implemented",
+      "notes": "Replaces the buffer with the first 1023 bytes; a failure of another class has no buffer and is refused with Standard_TypeMismatch (C++ has no such member there). Compared by the runtime_out_of_memory probe."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandler::new",
+      "status": "implemented",
+      "notes": "Links the handler on top of the thread's stack (a thread-local stack of handler frames). Compared by the runtime_handler_script probe."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::Destroy()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandler::destroy",
+      "status": "implemented",
+      "notes": "Unlinks every handler above this one, pops it, then runs its callbacks newest first; on a handler no longer linked it unlinks the whole stack, as C++. Compared by the runtime_handler_script probe."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::~Standard_ErrorHandler()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "<rustycad_tkernel::standard::ErrorHandler as Drop>::drop",
+      "status": "implemented",
+      "notes": "Calls destroy. Compared by the runtime_handler_script probe."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::Raise()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandler::raise",
+      "status": "implemented",
+      "notes": "Returns the stored failure as Err; without one it prints the OCCT \"*** Abort ***\" line to stderr and exits with status 1, as C++. Compared by the runtime_abort probe for every class of the signal variant."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::Label()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandler::catch_signals",
+      "status": "implemented",
+      "notes": "The setjmp label has no Rust counterpart: catch_signals is the OCC_CATCH_SIGNALS block, the return point that `?` reaches from abort; it raises the stored failure whatever the body returned, as the jump always lands. Compared by the runtime_abort probe for every class of the signal variant."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::Error() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandler::error",
+      "status": "implemented",
+      "notes": "The stored failure, None for the empty variant state. Compared by the runtime_abort probe for every class of the signal variant."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::IsInTryBlock()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandler::is_in_try_block",
+      "status": "implemented",
+      "notes": "Any handler linked on this thread. Compared by the runtime_handler_script probe."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::Abort(const T&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandler::abort",
+      "status": "implemented",
+      "notes": "Stores the failure in the innermost handler and returns it as Err for `?` (the longjmp); only the classes of the C++ SignalException variant are accepted (SIGNAL_EXCEPTION_TYPES; others are Standard_TypeMismatch instead of a compile error); without a handler it prints the two OCCT \"*** Abort ***\" lines and exits with status 1, as C++. Compared by the runtime_abort probe for every class of the signal variant."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::Callback::RegisterCallback()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandlerCallback::register_callback",
+      "status": "implemented",
+      "notes": "Links first in the innermost handler; a no-op without a handler or when already linked, including a link to a handler that was destroyed without unregistering it. Compared by the runtime_handler_script probe."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::Callback::UnregisterCallback()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandlerCallback::unregister_callback",
+      "status": "implemented",
+      "notes": "Unlinks from the handler's list if still there and forgets the handler. Compared by the runtime_handler_script probe."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::Callback::~Callback()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "<rustycad_tkernel::standard::ErrorHandlerCallback as Drop>::drop",
+      "status": "implemented",
+      "notes": "Unregisters. Compared by the runtime_handler_script probe."
+    },
+    {
+      "upstream_id": "Standard_ErrorHandler::Callback::DestroyCallback()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ErrorHandler.hxx",
+      "rust_item": "rustycad_tkernel::standard::ErrorHandlerCallback::destroy_callback",
+      "status": "implemented",
+      "notes": "The subclass override is the closure given to ErrorHandlerCallback::new; the handler runs it when it unlinks with the callback registered. Compared by the runtime_handler_script probe."
+    },
+    {
+      "upstream_id": "Standard_Assert::Standard_ASSERT_DO_NOTHING()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Assert.hxx",
+      "rust_item": "rustycad_tkernel::standard::assert::standard_assert_do_nothing",
+      "status": "implemented",
+      "notes": "The empty statement that completes the macros."
+    },
+    {
+      "upstream_id": "Standard_Assert::Standard_ASSERT_REPORT_(const char*,int,const char*,const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Assert.hxx",
+      "rust_item": "rustycad_tkernel::standard::assert::standard_assert_report",
+      "status": "implemented",
+      "notes": "Debug-build report (the MSVC and POSIX branches share the signature): the POSIX text is written to the given stream (C++ writes std::cerr) and true is returned. The prebuilt kernel is a release build, where the macros only run their action; standard_assert_raise builds the Standard_ASSERT_RAISE exception."
+    },
+    {
+      "upstream_id": "Standard_Static_Assert<true>::assert_ok()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Assert.hxx",
+      "rust_item": "rustycad_tkernel::standard::assert::StandardStaticAssert::assert_ok",
+      "status": "implemented",
+      "notes": "Only StandardStaticAssert<true> has assert_ok, so a false constant fails to compile, as C++."
+    },
+    {
+      "upstream_id": "TColStd_HPackedMapOfInteger(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TColStd/TColStd_HPackedMapOfInteger.hxx",
+      "rust_item": "rustycad_tkernel::tcol_std::HPackedMapOfInteger::new",
+      "status": "implemented",
+      "notes": "A bucket count below 1 means 1, as the NCollection_PackedMap(int) constructor. Compared by the runtime_hpacked probe."
+    },
+    {
+      "upstream_id": "TColStd_HPackedMapOfInteger(const TColStd_PackedMapOfInteger&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TColStd/TColStd_HPackedMapOfInteger.hxx",
+      "rust_item": "rustycad_tkernel::tcol_std::HPackedMapOfInteger::from_map_ref",
+      "status": "implemented",
+      "notes": "Copies the map. Compared by the runtime_hpacked probe."
+    },
+    {
+      "upstream_id": "TColStd_HPackedMapOfInteger(TColStd_PackedMapOfInteger&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TColStd/TColStd_HPackedMapOfInteger.hxx",
+      "rust_item": "rustycad_tkernel::tcol_std::HPackedMapOfInteger::from_map",
+      "status": "implemented",
+      "notes": "Takes the map by value. Compared by the runtime_hpacked probe."
+    },
+    {
+      "upstream_id": "TColStd_HPackedMapOfInteger::Map() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TColStd/TColStd_HPackedMapOfInteger.hxx",
+      "rust_item": "rustycad_tkernel::tcol_std::HPackedMapOfInteger::map",
+      "status": "implemented",
+      "notes": "A read guard of the shared map. Compared by the runtime_hpacked probe."
+    },
+    {
+      "upstream_id": "TColStd_HPackedMapOfInteger::ChangeMap()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TColStd/TColStd_HPackedMapOfInteger.hxx",
+      "rust_item": "rustycad_tkernel::tcol_std::HPackedMapOfInteger::change_map",
+      "status": "implemented",
+      "notes": "A write guard, so edits through one handle are seen by every holder, as C++. Compared by the runtime_hpacked probe."
+    },
+    {
+      "upstream_id": "TColStd_HPackedMapOfInteger::DEFINE_STANDARD_RTTI_INLINE(TColStd_HPackedMapOfInteger,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/TColStd/TColStd_HPackedMapOfInteger.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "RTTI macro; impl_transient! registers TColStd_HPackedMapOfInteger under Standard_Transient."
+    },
+    {
+      "upstream_id": "Standard::StackTrace(char*,int,int,void*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::stack_trace",
+      "status": "implemented",
+      "notes": "Port of the glibc branch with the same backtrace()/backtrace_symbols() calls: appends \"\\n==Backtrace==\", one `binary(symbol+0xoffset) [0xaddress]` line per frame that fits, and \"\\n=============\" when room remains, below buffer_size bytes. The frames are Rust frames, so only argument checks and the shape of traces where no frame or every frame fits are compared (runtime_stack_trace probe). theContext is ignored on this platform and has no parameter; a buffer already too long, or a skip beyond the stack depth (a native crash), returns false; other platforms return false."
     }
   ],
   "tests": [
