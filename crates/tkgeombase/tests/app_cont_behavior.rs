@@ -270,13 +270,36 @@ fn native_exceptions_become_failures() {
         "Standard_OutOfRange"
     );
     assert_eq!(
-        kind(fit(&function, [FREE, FREE], 3, 0)),
-        "Standard_RangeError"
-    );
-    assert_eq!(
         kind(fit(&function, [FREE, FREE], -3, 4)),
         "Standard_RangeError"
     );
+    assert_eq!(
+        kind(fit(&function, [FREE, FREE], 3, -1)),
+        "Standard_RangeError"
+    );
+}
+
+#[test]
+fn empty_ranges_fit_over_empty_tables_as_natively() {
+    let function = CubicPlanarFunction::new();
+    // No Gauss point: empty samples, zero poles, a zero error.
+    let mut ls = fit(&function, [FREE, FREE], 3, 0).unwrap();
+    assert!(!ls.is_done());
+    assert_eq!(ls.error(), (0.0, 0.0, 0.0));
+    assert_eq!(ls.value().unwrap().nb_poles(), 4);
+    // Degree -1: no pole row, so nothing to solve and an empty curve.
+    let mut ls = fit(&function, [FREE, Constraint::CurvaturePoint], -1, 4).unwrap();
+    assert!(!ls.is_done());
+    assert_eq!(ls.value().unwrap().nb_poles(), 0);
+}
+
+#[test]
+fn a_fixed_end_without_pole_row_is_refused_instead_of_panicking() {
+    let function = CubicPlanarFunction::new();
+    for cons in [[PASS, FREE], [FREE, PASS], [TANGENT, TANGENT]] {
+        let error = fit(&function, cons, -1, 4).err().unwrap();
+        assert_eq!(error.exception_type(), "Standard_OutOfRange");
+    }
 }
 
 /// A fake 2D function whose first coordinate `5.9 + u` is reduced into [0, 2 pi): with

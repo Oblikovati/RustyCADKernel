@@ -116,7 +116,10 @@ impl LeastSquare {
     /// points. A tangency constraint whose D1 fails becomes a pass constraint.
     ///
     /// Standard_DimensionError for `nb_points > 24` (VBernstein) or `deg > 23` (the
-    /// mass matrices); Standard_RangeError for empty point or pole ranges;
+    /// mass matrices); Standard_RangeError for negative point or pole counts (`deg < -1`
+    /// or `nb_points < 0`, which overrun the stack buffer natively), while the empty
+    /// ranges (`deg == -1`, `nb_points == 0`, no coordinate) fit over empty tables;
+    /// Standard_OutOfRange when a fixed end needs a pole row that degree -1 lacks;
     /// math_SingularMatrix if a mixed-constraint normal matrix is singular.
     /// `LeastSquare::new(&f, 0.0, 1.0, Constraint::NoConstraint, Constraint::NoConstraint, 4, 10)?`
     pub fn new(

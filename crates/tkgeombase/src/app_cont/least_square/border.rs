@@ -106,7 +106,7 @@ impl LeastSquare {
             } else {
                 value
             };
-            self.set_pole_coords(row, i2, &[pole.x(), pole.y(), pole.z()]);
+            self.set_pole_coords(row, i2, &[pole.x(), pole.y(), pole.z()])?;
             i2 += 3;
         }
         for k in 1..=self.my_nb_p2d {
@@ -116,17 +116,26 @@ impl LeastSquare {
             } else {
                 value
             };
-            self.set_pole_coords(row, i2, &[pole.x(), pole.y()]);
+            self.set_pole_coords(row, i2, &[pole.x(), pole.y()])?;
             i2 += 2;
         }
         Ok(())
     }
 
-    // `myPoles(row, first..)` = `coords`.
-    pub(super) fn set_pole_coords(&mut self, row: i32, first: i32, coords: &[f64]) {
+    // `myPoles(row, first..)` = `coords`. At degree -1 (no pole row) a constrained end
+    // writes outside the empty pole matrix; AppCont_LeastSquare.cxx compiles its range
+    // checks out, so natively the write lands in the matrix's unused stack buffer. The
+    // port raises the Standard_OutOfRange a checked build raises at that write.
+    pub(super) fn set_pole_coords(
+        &mut self,
+        row: i32,
+        first: i32,
+        coords: &[f64],
+    ) -> Result<(), Failure> {
         for (k, coordinate) in (first..).zip(coords) {
-            self.my_poles[(row, k)] = *coordinate;
+            *self.my_poles.change_value(row, k)? = *coordinate;
         }
+        Ok(())
     }
 
     // Moves end pole `row` by one period toward the sample `point_row` in each of the
