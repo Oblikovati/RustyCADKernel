@@ -106058,6 +106058,254 @@
       "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::dump",
       "status": "implemented",
       "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_Function()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::FunctionBase::new",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_Function::GetNumberOfPoints(int&,int&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::Function::get_number_of_points",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_Function::GetNbOf3dPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::Function::get_nb_of_3d_points",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_Function::GetNbOf2dPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::Function::get_nb_of_2d_points",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_Function::~AppCont_Function()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "AppCont_Function::FirstParameter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::Function::first_parameter",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_Function::LastParameter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::Function::last_parameter",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_Function::Value(double,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<gp_Pnt>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::Function::value",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_Function::D1(double,NCollection_Array1<gp_Vec2d>&,NCollection_Array1<gp_Vec>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::Function::d1",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_Function::PeriodInformation(int,bool&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_Function.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::Function::period_information",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "PeriodicityInfo",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_LeastSquare.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::PeriodicityInfo",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_LeastSquare(const AppCont_Function&,double,double,AppParCurves_Constraint,AppParCurves_Constraint,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_LeastSquare.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::LeastSquare::new",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_LeastSquare::Value()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_LeastSquare.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::LeastSquare::value",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_LeastSquare::Error(double&,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_LeastSquare.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::LeastSquare::error",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_LeastSquare::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_LeastSquare.hxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::LeastSquare::is_done",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::THE_MAX_CLASSE",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::THE_MAX_CLASSE",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::THE_MAX_MMATRIX_CLASSE",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::THE_MAX_MMATRIX_CLASSE",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::THE_MAX_NBPOINTS",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::THE_MAX_NBPOINTS",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::MMatrixOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::m_matrix_offset",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::IBPMatrixOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::ibp_matrix_offset",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::IBTMatrixOffset",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::ibt_matrix_offset",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::MMatrix",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::m_matrix",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::InvMMatrix",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::inv_m_matrix",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::IBPMatrix",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::ibp_matrix",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::IBTMatrix",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::ibt_matrix",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::VBernstein",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::v_bernstein",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::THE_BBMATRIX_DATA",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices_BB.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::THE_BBMATRIX_DATA",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::THE_INV_MMATRIX_DATA",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices_InvM.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::THE_INV_MMATRIX_DATA",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::THE_IBPMATRIX_DATA",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices_IBP.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::THE_IBPMATRIX_DATA",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::THE_IBTMATRIX_DATA",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices_IBT.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::THE_IBTMATRIX_DATA",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
+    },
+    {
+      "upstream_id": "AppCont_ContMatrices::THE_VBMATRIX_DATA",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppCont/AppCont_ContMatrices_VB.pxx",
+      "rust_item": "rustycad_tkgeombase::app_cont::cont_matrices::THE_VBMATRIX_DATA",
+      "status": "implemented",
+      "notes": "AppCont mapping (docs/tkgeombase-progress.md): AppCont_Function is the Function trait over a FunctionBase holding the protected point counts; the AppCont_ContMatrices tables are generated verbatim by tools/generate_appcont_tables.py; C++ output references become returned values and exceptions (and the reads that are undefined behavior natively) become Failure errors."
     }
   ],
   "tests": [
