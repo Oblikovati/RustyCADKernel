@@ -20,6 +20,7 @@
 //! depends on their ports. Each OCCT package is one module, added when it is
 //! ported; docs/tkgeombase-progress.md lists the ported packages.
 pub mod app_par_curves;
+pub mod bnd_lib;
 mod defl_curv_intervals;
 pub mod extrema_pc;
 pub mod extrema_pc2d;
@@ -29,6 +30,7 @@ pub mod fem_tool;
 pub mod gc;
 pub mod gce;
 pub mod gce2d;
+pub mod geom_bnd_lib;
 pub mod geom_lprop;
 pub mod geom_tools;
 pub mod gprop;

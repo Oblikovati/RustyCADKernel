@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    app_par_curves as apc, fem_tool, gc, gce, geom_tools, gprop, hermit, int_ana, int_ana2d, lprop,
-    pc2d, pc3d,
+    app_par_curves as apc, bndlib, fem_tool, gc, gce, geom_tools, gprop, hermit, int_ana,
+    int_ana2d, lprop, pc2d, pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -147,6 +147,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("apc_bspfunction", apc::bspfunction_case),
     ("apc_gradient", apc::gradient_case),
     ("apc_bspgradient", apc::bspgradient_case),
+    // GeomBndLib and BndLib (gb_probe/bndlib)
+    ("bnd_curve3d", bndlib::curve3d_case),
+    ("bnd_curve2d", bndlib::curve2d_case),
+    ("bnd_surface", bndlib::surface_case),
+    ("bnd_gp", bndlib::gp::gp_case),
+    ("bnd_helpers", bndlib::gp::helpers_case),
 ];
 
 fn main() {

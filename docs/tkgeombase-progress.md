@@ -5,14 +5,14 @@
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
 `IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC` and
-`GeomTools`, `FEmTool` and `AppParCurves` packages are ported in full, and
-`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
+`GeomTools`, `FEmTool`, `AppParCurves`, `GeomBndLib` and `BndLib` packages are ported
+in full, and `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (481 declarations):
+passes (679 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -55,7 +55,17 @@ passes (481 declarations):
 | ExtremaPC_Line_Test.cxx | extrema_pc_line | 31 |
 | ExtremaPC_OffsetCurve_Test.cxx | extrema_pc_offset_curve | 13 |
 | ExtremaPC_Parabola_Test.cxx | extrema_pc_parabola | 24 |
+| GeomBndLib_Curve_Test.cxx | geom_bnd_lib_curve | 25 |
+| GeomBndLib_Curve2d_Test.cxx | geom_bnd_lib_curve2d | 21 |
+| GeomBndLib_OffsetCurve_Test.cxx | geom_bnd_lib_offset_curve | 14 |
+| GeomBndLib_OffsetCurve2d_Test.cxx | geom_bnd_lib_offset_curve2d | 10 |
+| GeomBndLib_Surface_Test.cxx | geom_bnd_lib_surface | 24 |
+| GeomBndLib_OffsetSurface_Test.cxx | geom_bnd_lib_offset_surface | 15 |
+| GeomBndLib_SurfaceOfExtrusion_Test.cxx | geom_bnd_lib_surface_of_extrusion | 11 |
+| GeomBndLib_SurfaceOfRevolution_Test.cxx | geom_bnd_lib_surface_of_revolution | 15 |
+| BndLib_Test.cxx | bnd_lib | 63 |
 
+`bnd_lib_behavior.rs` covers the GeomBndLib and BndLib quirks below.
 `local_props_behavior.rs` covers the LProp, GeomLProp, GProp and Hermit quirks
 below. `gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
 StdFail_NotDone results, the conversion operators, the GCE2d aliases and the native
@@ -231,6 +241,26 @@ Error()` is declared natively but never defined (a link error if called) and has
 counterpart. The protected members that the generics call from outside
 (`NbConstraints`, `NbColumns`, `Perform`) are public; `BSpGradient` takes its inputs in
 a `BSpGradientInput`.
+GeomBndLib (`geom_bnd_lib`) has one struct per native evaluator class (`Line`,
+`Circle`, `Ellipse`, `Hyperbola`, `Parabola`, `BezierCurve`, `BSplineCurve`,
+`OffsetCurve`, `OtherCurve` and their `*2d` twins; `Plane`, `Cylinder`, `Cone`,
+`Sphere`, `Torus`, `BezierSurface`, `BSplineSurface`, `OffsetSurface`,
+`SurfaceOfExtrusion`, `SurfaceOfRevolution`, `OtherSurface`). The `std::variant`
+dispatchers `GeomBndLib_Curve`, `GeomBndLib_Curve2d` and `GeomBndLib_Surface` are
+structs over a private evaluator enum (holding a borrowed or an owned adaptor), with
+`from_adaptor` and `from_curve`/`from_surface` constructors; they match the
+exact dynamic type of the handle, as the native `typeid` tests do. The static helpers
+of `GeomBndLib_Line`, `_Circle`, ... (`LinBox`, `CircBox`, ...) are associated
+functions, and the internal headers are private modules (`infinite`, `sampling`,
+`optimization`, `spline`, `ranges`, `patch`, `swept`...). A null geometry handle gives
+Standard_NullObject where the native code dereferences it. The surface patch bounds
+are one `[UMin, UMax, VMin, VMax]` array. BndLib (`bnd_lib`) keeps the free functions of
+the native `BndLib` class (`add_circ_arc`, `add_torus_patch`...) and the classes
+`BndLib_Add3dCurve`, `BndLib_Add2dCurve` and `BndLib_AddSurface` as unit structs with
+associated functions; it calls GeomBndLib as natively (and GeomBndLib_Torus calls
+BndLib). The native `GeomBndLib_SplineHelpers` templates `BezierCurveBox`,
+`BSplineCurveBox` and the pole-range `ReduceSplineBox` overload are declared but never
+instantiated in TKGeomBase; they are not ported, and the audit rows say so.
 
 ## Verification
 
@@ -368,9 +398,29 @@ fit read before any Perform, the constrained B-spline function, more Householder
 unknowns than points and more Uzawa constraints than pole coordinates (both read past
 their arrays natively).
 
-The corpus has 12303 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+The GeomBndLib and BndLib requests (`tkgeombase_corpus_bndlib.py`, seed 20260928) box
+every 3D and 2D curve kind and every surface kind through each evaluator member
+(`Box`, `Box` on a range, `BoxOptimal`, the BndLib `Add*` functions and the adaptor
+classes), and print the six (or four) limits, the gap, the open flags and the finite
+part. Each evaluator is reached through the dispatchers from a Geom handle, a
+GeomAdaptor over the natural range and one over a sub-range, and through the
+`BndLib_Add*` classes on a box that already holds [-1, 1]^n. The ranges cover the
+natural bounds, sub-ranges, reversed and degenerate ranges, ranges beyond the bounds,
+infinite ends (±1e101, and exactly ±1e100 on the Precision::Infinite() boundary) and
+the doubly infinite ones that raise Standard_Failure. The curves add axis-aligned
+lines, periodic and trimmed B-splines and offsets of lines, circles (in plane and
+collapsing), ellipses and splines; the surfaces add trimmed spheres, degenerate and
+offset tori, offset planes and B-splines, extrusions and revolutions. The static gp
+overloads get axis-aligned and tilted frames, arcs across the period seam, spans
+beyond 2 Pi, cylinder and cone V ends in every infinite combination, sphere and torus
+patches with negative, large and reversed V, and self-intersecting tori (R < r). The
+internal helpers the upstream tests call are probed directly. The legacy `math_PSO` path of
+`GeomBndLib_OtherCurve2d::BoxOptimal` is left out for reversed ranges: native reads an
+uninitialized value there.
+
+The corpus has 27501 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
-FEmTool and 2045 AppParCurves.
+FEmTool, 2045 AppParCurves and 15198 GeomBndLib and BndLib.
 
 ## Preserved native behaviour
 
@@ -666,3 +716,44 @@ AppParCurves:
   unassigned there. `AppParCurves_Gradient` selects the 3D-and-2D line overload
   whenever there are 2D points (it tests `nbP != 0` with the total count).
 
+
+GeomBndLib and BndLib:
+
+- Two equal infinite range ends (both -inf or both +inf) raise Standard_Failure
+  ("bad parameter") in the line, parabola, hyperbola, cylinder and cone boxes. A doubly
+  infinite line adds its origin point and opens both sides of each axis it is not
+  perpendicular to.
+- The BndLib 3D arcs (`Add(gp_Circ, U1, U2, ...)` and `Add(gp_Elips, U1, U2, ...)`)
+  read the accumulated box back with the gap removed before they add the extrema, so
+  the content of the box given in changes the result.
+- `BndLib::Add(gp_Hypr2d, ...)` adds only the two ends and the tolerance (the parabola
+  rule), without the coordinate extrema that GeomBndLib_Hyperbola2d adds: an arc whose
+  extremum lies inside is under-bounded.
+- `GeomBndLib_Circle2d` and `GeomBndLib_Ellipse2d` box the arc `[U1, U2]` as given,
+  without the `ElCLib::AdjustPeriodic` of their 3D twins and of BndLib.
+- `GeomBndLib_BSplineCurve` (and 2D) on a sub-range clips the segmented box to the hull
+  of the poles of the original curve, not of the segment.
+- `BndLib::Add(gp_Torus, U1, U2, V1, V2, ...)` computes its section indices with
+  `static_cast<int>` of `floor(V / (Pi/4))`; a V beyond the int range gives INT_MIN
+  (x86-64 cvttsd2si), an empty section range, and a return before the final Enlarge.
+- An infinite plane that is not aligned with a coordinate plane is `SetWhole` without
+  Enlarge (the gap stays 0).
+- The generic `GeomBndLib_OffsetSurface` path enlarges the basis box by
+  `max(|offset|, tol)`, not their sum.
+- `GeomBndLib_SurfaceOfExtrusion` and `GeomBndLib_SurfaceOfRevolution` catch every
+  Standard_Failure of the sweep and fall back to GeomBndLib_OtherSurface.
+- The handle constructors of the dispatchers match the exact dynamic type
+  (`Geom_TrimmedCurve` is unwrapped to its basis evaluator on the trimmed range, so a
+  trimmed offset curve uses GeomBndLib_OffsetCurve). The adaptor constructor of
+  `GeomBndLib_Surface` builds the evaluator from the adaptor's type and down-casts the
+  surface handle: when the kinds disagree the native evaluator holds a null handle and
+  crashes on use; the port raises Standard_NullObject there, as for every null handle.
+- The sample counts wrap like the native int arithmetic (`RealToInt(du * N) + 1`, at
+  least 5 samples).
+- `GeomBndLib_OtherCurve2d::BoxOptimal` keeps the legacy `math_BrentMinimum` and
+  `math_PSO` search, while the other optimal boxes use MathOpt (`brent`, `pso`,
+  `powell`). With a reversed range the legacy PSO reads an uninitialized value natively
+  (undefined behaviour); the port starts from 0 and the corpus leaves that case out.
+- The optimizer objectives keep the first evaluation failure (which the native code
+  raises through the optimizer) and return it right after the optimizer.
+- GeomBndLib_Torus calls BndLib, and BndLib calls GeomBndLib, as natively.

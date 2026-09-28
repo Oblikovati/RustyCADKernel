@@ -2,6 +2,7 @@
 // The token printers and readers are shared by every package probe, and each package
 // uses a subset of them, so unused ones are expected in these two modules.
 pub mod app_par_curves;
+pub mod bndlib;
 #[allow(dead_code, unused_imports)]
 pub mod common;
 pub mod fem_tool;
