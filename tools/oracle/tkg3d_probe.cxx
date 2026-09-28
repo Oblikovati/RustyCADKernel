@@ -2,11 +2,19 @@
 // Each input line is `operation numbers...`; tools/verify_tkg3d_numeric.py compares the
 // output with crates/tkg3d/examples/numeric_probe.rs bit for bit.
 #include <map>
+#include <memory>
 #include <vector>
 #include <iostream>
 #include <sstream>
 #include <cstring>
 #include <cstdint>
+#include <AdvApprox_ApproxAFunction.hxx>
+#include <AdvApprox_DichoCutting.hxx>
+#include <AdvApprox_EvaluatorFunction.hxx>
+#include <AdvApprox_PrefAndRec.hxx>
+#include <AdvApprox_SimpleApprox.hxx>
+#include <PLib.hxx>
+#include <PLib_JacobiPolynomial.hxx>
 #include <gp_Ax3.hxx>
 #include <gp_Circ.hxx>
 #include <gp_Elips.hxx>
@@ -48,6 +56,7 @@
 #include "tkg3d_probe_common.cxx"
 #include "tkg3d_probe_simple.cxx"
 #include "tkg3d_probe_curves.cxx"
+#include "tkg3d_probe_advapprox.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_point", g3_point_case},
  {"g3_direction", g3_direction_case},
@@ -60,6 +69,10 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_line", g3_line_case},
  {"g3_conic", g3_conic_case},
  {"g3_conic_build", g3_conic_build_case},
+ {"g3_advapprox", g3_advapprox_case},
+ {"g3_advapprox_static", g3_advapprox_static_case},
+ {"g3_advapprox_simple", g3_advapprox_simple_case},
+ {"g3_advapprox_cut", g3_advapprox_cut_case},
 };
 int main() {
  std::string line;

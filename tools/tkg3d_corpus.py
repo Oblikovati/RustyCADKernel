@@ -108,9 +108,11 @@ def append_tkg3d_requests(requests: list[str]) -> None:
     """Append every TKG3d request family in a fixed order."""
     from tkg3d_corpus_simple import append_simple_requests
     from tkg3d_corpus_curves import append_curve_family_requests
+    from tkg3d_corpus_advapprox import append_advapprox_requests
     rng = random.Random(0x7C63D)
     append_simple_requests(rng, requests)
     append_curve_family_requests(rng, requests)
+    append_advapprox_requests(requests)
 
 
 __all__ = ['fmt', 'params', 'point', 'unit', 'frame', 'axis', 'trsf', 'moves', 'line', 'circle', 'ellipse',
