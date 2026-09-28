@@ -25,3 +25,7 @@ mod curve;
 pub use curve::{Adaptor3dCurve, Adaptor3dCurveBase, Adaptor3dD3};
 mod surface;
 pub use surface::{Adaptor3dSurface, Adaptor3dSurfaceBase};
+mod h_vertex;
+pub use h_vertex::Adaptor3dHVertex;
+mod topol_tool;
+pub use topol_tool::Adaptor3dTopolTool;
