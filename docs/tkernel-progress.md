@@ -1395,3 +1395,81 @@ supplemental tests with a named recording fake indicator.
 
 The TKMath consumers are wired: `math_Gauss` and both `LU_Decompose` overloads now honour
 their range (see docs/tkmath-progress.md).
+
+### Message
+
+The rest of the Message package is ported in `crates/tkernel/src/message/`: the enumerations
+(`Gravity`, `ConsoleColor`, `MetricType`, and `Status`/`StatusType` as integer newtypes so
+that `StatusByIndex(0)`, which is `Message_DONE - 1`, stays representable), `ExecStatus`, the
+`Printer` trait with `PrinterOStream`, `PrinterSystemLog` and `PrinterToReport`, the shared
+`Messenger` and its `MessageStream` buffer, the `Alert` and `Attribute` traits with
+`AlertExtended`, `AttributeMeter`, `AttributeObject`, `AttributeStream` and
+`CompositeAlerts`, `Report` with its `Level` stack, `Msg`, the `MsgFile` catalog, `Algorithm`
+and the `Message` namespace (default messenger and report, `FillTime`, metric names).
+`python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/Message --source ../OCCT`
+reports 0 missing and 0 stale: 296 rows, 291 implemented and 5 excluded (the four progress
+exclusions and the defaulted `Message_PrinterToReport` destructor). The RTTI macros map to
+the descriptors that `message_runtime_type!` registers; `Alert`, `Attribute` and `Printer`
+trait objects report them through `dynamic_type()`, and `define_simple_alert!` is
+`DEFINE_SIMPLE_ALERT`. The six `Resource_ConvertUnicode.c` entry points
+(`resource::convert_unicode`) are now public and have their rows too, so Resource reports
+0 missing / 0 stale with 42 rows.
+
+Design decisions:
+
+- Shared OCCT handles are `Arc`s and never null; printers, alerts and attributes are trait
+  objects with the base behavior as provided methods. Mutable state of shared objects (trace
+  level, attribute name, report alerts, printer sequence) sits behind atomics or locks.
+  Delivery iterates a snapshot of the printer sequence, so a printer may use its messenger.
+- `Msg` formats through a private C `sprintf` subset (`c_format`): flags, width, precision,
+  `h`/`hh`/`l`/`ll` and `d i o u x X f F e E g G s`, laid out as glibc does on top of Rust's
+  exact float digits.
+- File, environment and metric access are injected: `MsgFile::new(Arc<dyn MsgFileSource>)`
+  (`MsgFile::global()` is the process catalog with native I/O), `PrinterOStream::with_writer`,
+  and `Report::with_metric_sampler` / `set_metric_sampler` for the clocks and memory counters
+  `SetAlertMetrics` reads (`NativeMetricSampler` ports the `OSD_Timer`, `OSD_Chronometer` and
+  `OSD_MemInfo` platform code; `osd::MemInfoCounter` is `OSD_MemInfo::Counter`).
+- Members that raise natively return `Result`: `Msg` arguments and `Get()` (stale positions),
+  catalog loading (a lone `.` line), `Algorithm::send_status_messages`.
+
+Quirks preserved:
+
+- `Report::AddAlert` enforces the limit only when an alert was merged, and then removes the
+  first alert whenever the list is longer than the limit: with the default -1, every merge of
+  a plain alert drops the oldest one.
+- `%%` collapses to `%` and scanning continues from the next character, so `%%d` also records
+  an integer specification. Character tests use the low byte of each UTF-16 unit, so U+0125
+  reads as `%`.
+- `Get()` does not consume the pending specifications: a second call inserts `UNKNOWN` again at
+  stale positions, and one that overruns raises `Standard_OutOfRange` after the native in-place
+  truncation. `Algorithm::SendStatusMessages` sends a custom message through `Get()`, so
+  sending twice repeats the effect.
+- `%ld` of an `int` argument reads the zero-extended register (`-1` prints `4294967295`), and
+  `%#g` keeps glibc's carry quirk (`999999.875` prints `1.e+06`).
+- `AddStatus` copies all but the last string of each status (`n < Length()`).
+- `PrinterToReport` holds a stream without `": "` as the name of the next alert, ignores the
+  trace level in `SendStringStream`/`SendObject`, and `SendObject` keeps the pending name.
+- `Standard_Dump::GetPointerInfo` starts its zero scan at the `x`, so pointers print as
+  `0xx...`; `DumpJson` writes the static class name of the implementing class.
+- `FillTime` and the message file parser (tabs count 8 columns, `\r\n`, `!` comments,
+  UTF-16 byte-order marks, relative indentation of continuation lines) follow the native text
+  exactly.
+
+Deliberate deviations, all where the native code has undefined behavior or does not return:
+`CompositeAlerts::Clear(type)` never advances past a foreign alert natively and hangs, while
+Rust keeps such alerts and continues; `Level::AddAlert` with no root alert dereferences a null
+handle natively and returns false here; an odd-sized UTF-16 message file reads one unit past
+its buffer natively; `Sprintf` widths beyond the native 64/1024-byte buffers overflow them.
+
+The `msg_*` probe family (`tools/oracle/tkernel_message_probe.cxx` with its text, report and
+output parts, Rust twin `crates/tkernel/examples/oracle_probe/message/`, requests in
+`tools/tkernel_message_corpus.py` and `tools/tkernel_message_report_corpus.py`) compares
+`Msg` runs over every conversion and random mixes, `FillTime`, metric names, `ExecStatus`
+algebra, catalog loading from memory, files, directory lists and the environment, report
+scripts (merging, limits, nesting, clearing, metrics, JSON), levels of the default report
+with sampled metrics, `PrinterToReport`, algorithm status messages, messenger printer
+sequences and file printers: 2,783 requests, all identical to OCCT. Inputs stay inside
+defined C++ behavior (no truncated UTF-8 sequences, no `Clear(type)` over foreign alerts).
+`message_api_behavior` (30 tests, named fakes for files, printers and writers) and
+`message_defaults_behavior` (4 tests, serialized, with a fake metric sampler) cover every new
+member.
