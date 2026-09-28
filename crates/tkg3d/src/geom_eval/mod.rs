@@ -36,3 +36,9 @@ pub mod rep_utils;
 // GeomEval elementary surfaces.
 
 // GeomEval Bezier surfaces.
+mod aht_bezier_surface;
+pub use aht_bezier_surface::GeomEvalAHTBezierSurface;
+mod bezier_grid;
+mod bezier_results;
+mod tbezier_surface;
+pub use tbezier_surface::GeomEvalTBezierSurface;

@@ -17,6 +17,13 @@
 use super::sums::{BasisDerivatives, BasisSums};
 use super::{EvalCoord, EvalPole};
 
+/// The number of basis functions (`basisDimension` of the AHT-Bezier curves and surfaces): `k + 1`, plus 2 for a hyperbolic
+/// pair when alpha > 0 and 2 for a trigonometric pair when beta > 0;
+/// `basis_dimension(1, 1.0, 1.0) == 6`.
+pub fn basis_dimension(alg_degree: i32, alpha: f64, beta: f64) -> i32 {
+    alg_degree + 1 + if alpha > 0.0 { 2 } else { 0 } + if beta > 0.0 { 2 } else { 0 }
+}
+
 /// The poles, the optional weights and the basis parameters of one curve, as slices
 /// in storage order (the native code indexes `&Value(Lower())` pointers).
 #[derive(Clone, Copy)]
