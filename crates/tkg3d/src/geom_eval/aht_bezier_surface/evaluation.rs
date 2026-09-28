@@ -69,6 +69,13 @@ pub(super) fn evaluate(view: &AhtSurfaceView<'_>, u: f64, v: f64, max: usize) ->
         }
         return s;
     }
+    if max == 0 {
+        // EvalD0 divides by W00, while EvalD1..EvalD3 multiply by 1 / W00: the point of
+        // EvalD0 can differ from theirs in the last bit.
+        let mut s: SurfaceDerivs = [Xyz::default(); 10];
+        s[0] = sums.n[0] / sums.w[0];
+        return s;
+    }
     quotients(&sums, max)
 }
 
