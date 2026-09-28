@@ -5,6 +5,7 @@ import re
 import unittest
 from pathlib import Path
 from tkbrep_corpus import EDGE, REVERSED, VERTEX, Script, append_tkbrep_requests
+from tkbrep_brep_corpus import FORWARD, BRepScript
 from native_build import LINKED_TOOLKITS, closure_flags
 from verify_toolkit import NUMERIC_VERIFIERS
 
@@ -54,6 +55,23 @@ class CorpusTests(unittest.TestCase):
         edge = script.make(EDGE)
         script.add(edge, vertex, REVERSED, t)
         self.assertEqual(script.numbers(), [1, 0, 1.0, 2.0, 3.0, 3, 1, VERTEX, 1, EDGE, 2, edge, vertex, REVERSED, t])
+
+
+class BRepScriptTests(unittest.TestCase):
+    def test_brep_script_numbers_follow_the_probe_layout(self):
+        # Locations, then geometries (one registry per kind), then commands; graph
+        # commands are shifted by 100.
+        script = BRepScript()
+        t = script.translation(1.0, 0.0, 0.0)
+        line = script.line((0.0, 0.0, 0.0), (1.0, 0.0, 0.0))
+        plane = script.plane((0.0, 0.0, 0.0), (0.0, 0.0, 1.0))
+        edge = script.edge(line, t)
+        vertex = script.vertex((0.0, 0.0, 0.0))
+        script.add(edge, vertex, FORWARD)
+        self.assertEqual((line, plane, edge, vertex), (0, 0, 0, 1))
+        self.assertEqual(script.numbers(), [1, 0, 1.0, 0.0, 0.0, 2, 0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+                                            10, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 3, 4, line, t, 1e-7,
+                                            1, 0.0, 0.0, 0.0, 1e-7, 102, edge, vertex, FORWARD, 0])
 
 
 if __name__ == '__main__':

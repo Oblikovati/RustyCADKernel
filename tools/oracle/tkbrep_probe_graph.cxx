@@ -80,8 +80,7 @@ void br_set_flag(TopoDS_Shape& s,int bit,bool v){
 // s o l, 6 flag s bit v, 7 empty copy s, 8 Location s l raise, 9 Move s l raise,
 // 10 reversed copy s, 11 complemented copy s, 12 composed copy s o, 13 nullify s,
 // 14 null shape.
-void br_run_command(BrGraph& g,BrReader& r){
- int code=r.integer();
+void br_apply_command(BrGraph& g,BrReader& r,int code){
  try{
   switch(code){
    case 1:g.shapes.push_back(br_make(r.integer()));break;
@@ -100,6 +99,7 @@ void br_run_command(BrGraph& g,BrReader& r){
    default:g.shapes.push_back(TopoDS_Shape());break;}
   br_word("-");
  }catch(const Standard_Failure& e){br_word(e.ExceptionType());}}
+void br_run_command(BrGraph& g,BrReader& r){br_apply_command(g,r,r.integer());}
 BrGraph br_graph(BrReader& r){
  BrGraph g;int nl=r.integer();for(int i=0;i<nl;++i)br_read_location(g,r);
  int nc=r.integer();for(int i=0;i<nc;++i)br_run_command(g,r);return g;}
