@@ -14,6 +14,7 @@
 //! Static median KD tree with OCCT leaf buckets and one-based original point indices.
 use super::Array1;
 use crate::standard::Failure;
+mod array_build;
 mod build;
 mod heap;
 mod nearest;
