@@ -47,17 +47,30 @@ macro_rules! placed3 {
         ax1(c.x_axis());
         ax1(c.y_axis());
         ax2(c.mirrored_point(k.pivot).position());
-        attempt(|| Ok(ax2(c.mirrored_axis(k.axis)?.position())));
-        attempt(|| Ok(ax2(c.mirrored_plane(k.plane)?.position())));
-        attempt(|| Ok(ax2(c.rotated(k.axis, k.angle)?.position())));
+        attempt(|| {
+            ax2(c.mirrored_axis(k.axis)?.position());
+            Ok(())
+        });
+        attempt(|| {
+            ax2(c.mirrored_plane(k.plane)?.position());
+            Ok(())
+        });
+        attempt(|| {
+            ax2(c.rotated(k.axis, k.angle)?.position());
+            Ok(())
+        });
         ax2(c.translated(k.shift).position());
         ax2(c.translated_between(k.pivot, p).position());
         ax2(c.scaled(k.pivot, k.scale).position());
-        attempt(|| Ok(ax2(c.transformed(k.transform)?.position())));
+        attempt(|| {
+            ax2(c.transformed(k.transform)?.position());
+            Ok(())
+        });
         let mut moved = c;
         attempt(|| {
             moved.set_axis(k.axis)?;
-            Ok(ax2(moved.position()))
+            ax2(moved.position());
+            Ok(())
         });
     }};
 }
@@ -68,7 +81,10 @@ fn circle3(a: Axis2, r: f64, k: &Motion3, p: Point3) -> Result<(), Failure> {
     flag(c.contains(p, 1e-7));
     placed3!(c, k, p);
     real(c.scaled(k.pivot, k.scale).radius());
-    attempt(|| Ok(real(c.transformed(k.transform)?.radius())));
+    attempt(|| {
+        real(c.transformed(k.transform)?.radius());
+        Ok(())
+    });
     Ok(())
 }
 fn ellipse3(a: Axis2, big: f64, small: f64, k: &Motion3, p: Point3) -> Result<(), Failure> {
@@ -77,8 +93,14 @@ fn ellipse3(a: Axis2, big: f64, small: f64, k: &Motion3, p: Point3) -> Result<()
     pnt(e.focus1());
     pnt(e.focus2());
     real(e.parameter());
-    attempt(|| Ok(ax1(e.directrix1()?)));
-    attempt(|| Ok(ax1(e.directrix2()?)));
+    attempt(|| {
+        ax1(e.directrix1()?);
+        Ok(())
+    });
+    attempt(|| {
+        ax1(e.directrix2()?);
+        Ok(())
+    });
     placed3!(e, k, p);
     let s = e.scaled(k.pivot, k.scale);
     real(s.major_radius());
@@ -86,7 +108,8 @@ fn ellipse3(a: Axis2, big: f64, small: f64, k: &Motion3, p: Point3) -> Result<()
     attempt(|| {
         let t = e.transformed(k.transform)?;
         real(t.major_radius());
-        Ok(real(t.minor_radius()))
+        real(t.minor_radius());
+        Ok(())
     });
     Ok(())
 }
@@ -95,27 +118,44 @@ fn hyperbola3(a: Axis2, big: f64, small: f64, k: &Motion3, p: Point3) -> Result<
     real(h.focal());
     pnt(h.focus1());
     pnt(h.focus2());
-    attempt(|| Ok(real(h.eccentricity()?)));
-    attempt(|| Ok(real(h.parameter()?)));
+    attempt(|| {
+        real(h.eccentricity()?);
+        Ok(())
+    });
+    attempt(|| {
+        real(h.parameter()?);
+        Ok(())
+    });
     for axis in [
         h.asymptote1(),
         h.asymptote2(),
         h.directrix1(),
         h.directrix2(),
     ] {
-        attempt(|| Ok(ax1(axis?)));
+        attempt(|| {
+            ax1(axis?);
+            Ok(())
+        });
     }
     attempt(|| {
         let b = h.conjugate_branch1()?;
         ax2(b.position());
-        Ok(real(b.major_radius()))
+        real(b.major_radius());
+        Ok(())
     });
-    attempt(|| Ok(ax2(h.conjugate_branch2()?.position())));
-    attempt(|| Ok(ax2(h.other_branch()?.position())));
+    attempt(|| {
+        ax2(h.conjugate_branch2()?.position());
+        Ok(())
+    });
+    attempt(|| {
+        ax2(h.other_branch()?.position());
+        Ok(())
+    });
     let mut located = h;
     attempt(|| {
         located.set_location(p)?;
-        Ok(ax2(located.position()))
+        ax2(located.position());
+        Ok(())
     });
     placed3!(h, k, p);
     Ok(())
@@ -130,7 +170,8 @@ fn parabola3(a: Axis2, focal: f64, k: &Motion3, p: Point3) -> Result<(), Failure
     attempt(|| {
         let d = Parabola3::from_directrix(k.axis, p)?;
         ax2(d.position());
-        Ok(real(d.focal()))
+        real(d.focal());
+        Ok(())
     });
     Ok(())
 }

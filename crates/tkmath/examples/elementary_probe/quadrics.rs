@@ -12,13 +12,19 @@ macro_rules! placed_surface {
     ($s:expr, $k:expr, $p:expr) => {{
         let (s, k, p) = ($s, $k, $p);
         ax3(s.position());
-        attempt(|| Ok(flag(s.direct()?)));
+        attempt(|| {
+            flag(s.direct()?);
+            Ok(())
+        });
         ax1(s.x_axis());
         ax1(s.y_axis());
         ax3(s.mirrored_point(k.pivot).position());
         ax3(s.mirrored_axis(k.axis).position());
         ax3(s.mirrored_plane(k.plane).position());
-        attempt(|| Ok(ax3(s.rotated(k.axis, k.angle)?.position())));
+        attempt(|| {
+            ax3(s.rotated(k.axis, k.angle)?.position());
+            Ok(())
+        });
         ax3(s.translated(k.shift).position());
         ax3(s.translated_between(k.pivot, p).position());
         ax3(s.scaled(k.pivot, k.scale).position());
@@ -43,7 +49,8 @@ macro_rules! axis_surface {
         let mut a = s;
         attempt(|| {
             a.set_axis(k.axis)?;
-            Ok(ax3(a.position()))
+            ax3(a.position());
+            Ok(())
         });
     }};
 }
@@ -77,7 +84,8 @@ fn cone(a: Axis3, angle: f64, r: f64, k: &Motion3, p: Point3) -> Result<(), Fail
     let mut w = s;
     attempt(|| {
         w.set_semi_angle(2.0 * angle)?;
-        Ok(real(w.semi_angle()))
+        real(w.semi_angle());
+        Ok(())
     });
     Ok(())
 }
@@ -90,7 +98,10 @@ fn torus(a: Axis3, big: f64, small: f64, k: &Motion3, p: Point3) -> Result<(), F
     axis_surface!(s, k);
     ax3(s.mirrored_axis(k.axis).position());
     ax3(s.translated_between(k.pivot, p).position());
-    attempt(|| Ok(flag(s.direct()?)));
+    attempt(|| {
+        flag(s.direct()?);
+        Ok(())
+    });
     let mut values = Array1::with_bounds(3, 37).unwrap();
     s.coefficients(&mut values)?;
     reals(values.as_slice());
@@ -107,11 +118,13 @@ fn torus(a: Axis3, big: f64, small: f64, k: &Motion3, p: Point3) -> Result<(), F
     let mut e = s;
     attempt(|| {
         e.set_major_radius(small)?;
-        Ok(real(e.major_radius()))
+        real(e.major_radius());
+        Ok(())
     });
     attempt(|| {
         e.set_minor_radius(big)?;
-        Ok(real(e.minor_radius()))
+        real(e.minor_radius());
+        Ok(())
     });
     Ok(())
 }
@@ -186,7 +199,8 @@ fn axis2_setters(q: &AxisRequest) {
         let mut s = a;
         attempt(|| {
             setter(&mut s, q)?;
-            Ok(ax2(s))
+            ax2(s);
+            Ok(())
         });
     }
 }
@@ -196,18 +210,30 @@ fn axis2_members(q: &AxisRequest) {
     real(a.angle(b));
     flag(a.is_coplanar(b, q.linear, q.angular));
     flag(a.is_coplanar_axis(l, q.linear, q.angular));
-    attempt(|| Ok(ax2(a.mirrored_axis(l)?)));
-    attempt(|| Ok(ax2(a.mirrored_plane(b)?)));
+    attempt(|| {
+        ax2(a.mirrored_axis(l)?);
+        Ok(())
+    });
+    attempt(|| {
+        ax2(a.mirrored_plane(b)?);
+        Ok(())
+    });
     ax2(a.translated_between(q.origin, q.other));
     dumped(|stream| a.dump_json(stream));
 }
 fn axis3_members(q: &AxisRequest) {
     let c = Axis3::from_axis2(q.frame);
     let b = Axis3::from_axis2(q.plane);
-    attempt(|| Ok(ax2(c.ax2()?)));
+    attempt(|| {
+        ax2(c.ax2()?);
+        Ok(())
+    });
     let mut indirect = c;
     indirect.y_reverse();
-    attempt(|| Ok(ax2(indirect.ax2()?)));
+    attempt(|| {
+        ax2(indirect.ax2()?);
+        Ok(())
+    });
     real(c.angle(b));
     flag(c.is_coplanar(b, q.linear, q.angular));
     flag(c.is_coplanar_axis(q.line, q.linear, q.angular));

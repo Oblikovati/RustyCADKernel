@@ -76,8 +76,14 @@ fn ellipse2(a: Axis22d, big: f64, small: f64, k: &Motion2, p: Point2) -> Result<
     pnt2(e.focus1());
     pnt2(e.focus2());
     real(e.parameter());
-    attempt(|| Ok(ax2d(e.directrix1()?)));
-    attempt(|| Ok(ax2d(e.directrix2()?)));
+    attempt(|| {
+        ax2d(e.directrix1()?);
+        Ok(())
+    });
+    attempt(|| {
+        ax2d(e.directrix2()?);
+        Ok(())
+    });
     placed2!(e, k, p);
     axes2!(e, k);
     radii2!(e, k);
@@ -88,15 +94,24 @@ fn hyperbola2(a: Axis22d, big: f64, small: f64, k: &Motion2, p: Point2) -> Resul
     real(h.focal());
     pnt2(h.focus1());
     pnt2(h.focus2());
-    attempt(|| Ok(real(h.eccentricity()?)));
-    attempt(|| Ok(real(h.parameter()?)));
+    attempt(|| {
+        real(h.eccentricity()?);
+        Ok(())
+    });
+    attempt(|| {
+        real(h.parameter()?);
+        Ok(())
+    });
     for axis in [
         h.asymptote1(),
         h.asymptote2(),
         h.directrix1(),
         h.directrix2(),
     ] {
-        attempt(|| Ok(ax2d(axis?)));
+        attempt(|| {
+            ax2d(axis?);
+            Ok(())
+        });
     }
     ax22d(h.conjugate_branch1().axis());
     ax22d(h.conjugate_branch2().axis());
@@ -121,7 +136,8 @@ fn parabola2(a: Axis22d, focal: f64, sense: bool, k: &Motion2, p: Point2) -> Res
     attempt(|| {
         let d = Parabola2::from_directrix(k.axis, p, sense)?;
         ax22d(d.axis());
-        Ok(real(d.focal()))
+        real(d.focal());
+        Ok(())
     });
     Ok(())
 }

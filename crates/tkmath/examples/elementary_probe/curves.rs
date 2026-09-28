@@ -65,7 +65,10 @@ fn conic3(a: Axis2, s: &Shape, p: Point3) {
     pnt(q);
     vecs(&[v1, v2, v3]);
     vec(el::ellipse_dn(u, a, big, small, n));
-    attempt(|| Ok(real(el::ellipse_parameter(a, big, small, p)?)));
+    attempt(|| {
+        real(el::ellipse_parameter(a, big, small, p)?);
+        Ok(())
+    });
     pnt(el::hyperbola_value(u, a, big, small));
     let (q, v1) = el::hyperbola_d1(u, a, big, small);
     pnt(q);
@@ -98,26 +101,30 @@ fn overloads3(a: Axis2, s: &Shape, p: Point3) {
         let c = Circle3::new(a, s.r)?;
         pnt(el::value(u, &c));
         vec(el::d3(u, &c).3);
-        Ok(real(el::parameter(&c, p)?))
+        real(el::parameter(&c, p)?);
+        Ok(())
     });
     attempt(|| {
         let c = Ellipse3::new(a, s.major, s.minor)?;
         pnt(el::value(u, &c));
         vec(el::d2(u, &c).2);
-        Ok(real(el::parameter(&c, p)?))
+        real(el::parameter(&c, p)?);
+        Ok(())
     });
     attempt(|| {
         let c = Hyperbola3::new(a, s.major, s.minor)?;
         pnt(el::value(u, &c));
         vec(el::d1(u, &c).1);
-        Ok(real(el::parameter(&c, p)?))
+        real(el::parameter(&c, p)?);
+        Ok(())
     });
     attempt(|| {
         let c = Parabola3::new(a, s.focal)?;
         pnt(el::value(u, &c));
         vec(el::d2(u, &c).2);
         vec(el::dn(u, &c, n));
-        Ok(real(el::parameter(&c, p)?))
+        real(el::parameter(&c, p)?);
+        Ok(())
     });
 }
 pub fn elclib3_case(values: &[f64]) {
@@ -154,7 +161,10 @@ fn curve2(a: Axis22d, l: Axis2d, s: &Shape, p: Point2) {
     pnt2(q);
     vecs2(&[v1, v2, v3]);
     vec2(el::circle_dn_2d(u, a, s.r, n));
-    attempt(|| Ok(real(el::circle_parameter_2d(a, p)?)));
+    attempt(|| {
+        real(el::circle_parameter_2d(a, p)?);
+        Ok(())
+    });
     conic2(a, s, p);
 }
 fn conic2(a: Axis22d, s: &Shape, p: Point2) {
@@ -170,7 +180,10 @@ fn conic2(a: Axis22d, s: &Shape, p: Point2) {
     pnt2(q);
     vecs2(&[v1, v2, v3]);
     vec2(el::ellipse_dn_2d(u, a, big, small, n));
-    attempt(|| Ok(real(el::ellipse_parameter_2d(a, big, small, p)?)));
+    attempt(|| {
+        real(el::ellipse_parameter_2d(a, big, small, p)?);
+        Ok(())
+    });
     pnt2(el::hyperbola_value_2d(u, a, big, small));
     let (q, v1) = el::hyperbola_d1_2d(u, a, big, small);
     pnt2(q);
@@ -203,26 +216,30 @@ fn overloads2(a: Axis22d, l: Axis2d, s: &Shape, p: Point2) {
         let c = Circle2::new(a, s.r)?;
         pnt2(el::value(u, &c));
         vec2(el::d3(u, &c).3);
-        Ok(real(el::parameter(&c, p)?))
+        real(el::parameter(&c, p)?);
+        Ok(())
     });
     attempt(|| {
         let c = Ellipse2::new(a, s.major, s.minor)?;
         pnt2(el::value(u, &c));
         vec2(el::d2(u, &c).2);
-        Ok(real(el::parameter(&c, p)?))
+        real(el::parameter(&c, p)?);
+        Ok(())
     });
     attempt(|| {
         let c = Hyperbola2::new(a, s.major, s.minor)?;
         pnt2(el::value(u, &c));
         vec2(el::d1(u, &c).1);
-        Ok(real(el::parameter(&c, p)?))
+        real(el::parameter(&c, p)?);
+        Ok(())
     });
     attempt(|| {
         let c = Parabola2::new(a, s.focal)?;
         pnt2(el::value(u, &c));
         vec2(el::d2(u, &c).2);
         vec2(el::dn(u, &c, n));
-        Ok(real(el::parameter(&c, p)?))
+        real(el::parameter(&c, p)?);
+        Ok(())
     });
 }
 pub fn elclib2_case(values: &[f64]) {
@@ -263,32 +280,45 @@ fn embed(a: Axis2, planar: &Planar, s: &Shape) {
     let (f, l) = (planar.frame, planar.axis);
     pnt(el::to3d_point(a, planar.point));
     vec(el::to3d_vector(a, planar.vector));
-    attempt(|| Ok(dir(el::to3d_direction(a, l.direction())?)));
-    attempt(|| Ok(ax1(el::to3d_axis(a, l)?)));
-    attempt(|| Ok(ax2(el::to3d_frame(a, f)?)));
     attempt(|| {
-        Ok(lin(el::to3d_line(
-            a,
-            Line2::new(l.location(), l.direction()),
-        )?))
+        dir(el::to3d_direction(a, l.direction())?);
+        Ok(())
     });
-    attempt(|| Ok(circ(el::to3d_circle(a, Circle2::new(f, s.r)?)?)));
+    attempt(|| {
+        ax1(el::to3d_axis(a, l)?);
+        Ok(())
+    });
+    attempt(|| {
+        ax2(el::to3d_frame(a, f)?);
+        Ok(())
+    });
+    attempt(|| {
+        lin(el::to3d_line(a, Line2::new(l.location(), l.direction()))?);
+        Ok(())
+    });
+    attempt(|| {
+        circ(el::to3d_circle(a, Circle2::new(f, s.r)?)?);
+        Ok(())
+    });
     attempt(|| {
         let e = el::to3d_ellipse(a, Ellipse2::new(f, s.major, s.minor)?)?;
         ax2(e.position());
         real(e.major_radius());
-        Ok(real(e.minor_radius()))
+        real(e.minor_radius());
+        Ok(())
     });
     attempt(|| {
         let h = el::to3d_hyperbola(a, Hyperbola2::new(f, s.major, s.minor)?)?;
         ax2(h.position());
         real(h.major_radius());
-        Ok(real(h.minor_radius()))
+        real(h.minor_radius());
+        Ok(())
     });
     attempt(|| {
         let p = el::to3d_parabola(a, Parabola2::new(f, s.focal)?)?;
         ax2(p.position());
-        Ok(real(p.focal()))
+        real(p.focal());
+        Ok(())
     });
 }
 pub fn elto3d_case(values: &[f64]) {

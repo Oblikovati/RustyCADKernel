@@ -100,14 +100,21 @@ fn curved_overloads<S: CurvedSurface>(s: &S, q: &Request) {
 }
 fn overload_surfaces(q: &Request) {
     surface_overloads(&Plane3::from_position(q.frame), q);
-    attempt(|| Ok(curved_overloads(&Cylinder3::new(q.frame, q.r)?, q)));
-    attempt(|| Ok(curved_overloads(&Cone3::new(q.frame, q.a, q.r)?, q)));
-    attempt(|| Ok(curved_overloads(&Sphere3::new(q.frame, q.r)?, q)));
     attempt(|| {
-        Ok(curved_overloads(
-            &Torus3::new(q.frame, q.major, q.minor)?,
-            q,
-        ))
+        curved_overloads(&Cylinder3::new(q.frame, q.r)?, q);
+        Ok(())
+    });
+    attempt(|| {
+        curved_overloads(&Cone3::new(q.frame, q.a, q.r)?, q);
+        Ok(())
+    });
+    attempt(|| {
+        curved_overloads(&Sphere3::new(q.frame, q.r)?, q);
+        Ok(())
+    });
+    attempt(|| {
+        curved_overloads(&Torus3::new(q.frame, q.major, q.minor)?, q);
+        Ok(())
     });
 }
 pub fn elslib_case(values: &[f64]) {
