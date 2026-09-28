@@ -162,6 +162,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_convert_probe.cxx"
 #include "tkmath_gp_core_probe.cxx"
 #include "tkmath_vector_base_probe.cxx"
+#include "tkmath_empty_bounds_probe.cxx"
 #include "tkmath_recipes_probe.cxx"
 #include "tkmath_progress_probe.cxx"
 #include "tkmath_mathsys_api_probe.cxx"
@@ -388,6 +389,8 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"int_vector", vector_base_probe::int_vector_case},
  {"real_vector_extra", vector_base_probe::real_vector_extra_case},
  {"matrix_extra", vector_base_probe::matrix_extra_case},
+ {"empty_bounds", empty_bounds_probe::empty_bounds_case},
+ {"empty_solvers", empty_bounds_probe::empty_solvers_case},
  {"recipes_lu", recipes_probe::lu_case},
  {"recipes_svd", recipes_probe::svd_case},
  {"recipes_jacobi", recipes_probe::jacobi_case},

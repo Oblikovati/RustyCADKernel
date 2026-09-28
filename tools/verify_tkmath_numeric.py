@@ -32,6 +32,7 @@ from tkmath_polymesh_corpus import append_polymesh_requests
 from tkmath_toploc_corpus import append_toploc_requests
 from tkmath_gp_core_corpus import append_gp_core_requests
 from tkmath_vector_base_corpus import append_vector_base_requests
+from tkmath_empty_bounds_corpus import append_empty_bounds_requests
 from tkmath_recipes_corpus import append_recipes_requests
 from tkmath_progress_corpus import append_progress_requests
 from tkmath_solver_dump_corpus import append_solver_dump_requests
@@ -442,6 +443,7 @@ def corpus() -> str:
     append_toploc_requests(requests)
     append_gp_core_requests(requests)
     append_vector_base_requests(requests)
+    append_empty_bounds_requests(requests)
     append_recipes_requests(requests)
     append_progress_requests(requests)
     append_solver_dump_requests(requests)
