@@ -16,7 +16,7 @@
 //! polymorphic [`Geom2dHashCurveHasher`], then the trim bounds or the offset distance
 //! are rounded (hash) or compared within tolerance (equality).
 use super::curve_hasher::Geom2dHashCurveHasher;
-use super::hash_key::{combined_hash, rounded_hash};
+use super::hash_key::{leading_and_rounded, values_within};
 use crate::geom2d::{Geom2dCurve, Geom2dOffsetCurve, Geom2dTrimmedCurve};
 
 hasher_tolerances!(
@@ -32,15 +32,7 @@ hasher_tolerances!(
 
 // `[basis hash, round(value_i / HashTolerance)...]` combined.
 fn basis_and_values(curves: Geom2dHashCurveHasher, basis_hash: usize, values: &[f64]) -> usize {
-    let factor: f64 = 1.0 / curves.hash_tolerance;
-    let mut hashes: Vec<usize> = vec![basis_hash];
-    hashes.extend(values.iter().map(|&value| rounded_hash(value, factor)));
-    combined_hash(&hashes)
-}
-fn values_equal(comp_tolerance: f64, values: &[(f64, f64)]) -> bool {
-    values
-        .iter()
-        .all(|&(first, second)| (first - second).abs() <= comp_tolerance)
+    leading_and_rounded(&[basis_hash], values, curves.hash_tolerance)
 }
 
 impl Geom2dHashTrimmedCurveHasher {
@@ -57,7 +49,7 @@ impl Geom2dHashTrimmedCurveHasher {
     pub fn equal(&self, first: &Geom2dTrimmedCurve, second: &Geom2dTrimmedCurve) -> bool {
         self.curves()
             .equal(&first.basis_curve(), &second.basis_curve())
-            && values_equal(
+            && values_within(
                 self.comp_tolerance,
                 &[
                     (first.first_parameter(), second.first_parameter()),
@@ -80,6 +72,6 @@ impl Geom2dHashOffsetCurveHasher {
     pub fn equal(&self, first: &Geom2dOffsetCurve, second: &Geom2dOffsetCurve) -> bool {
         self.curves()
             .equal(&first.basis_curve(), &second.basis_curve())
-            && values_equal(self.comp_tolerance, &[(first.offset(), second.offset())])
+            && values_within(self.comp_tolerance, &[(first.offset(), second.offset())])
     }
 }

@@ -16,7 +16,7 @@
 //! radii (or focal length), and a placement comparison plus radii within tolerance.
 //!
 //! The native hashers take a handle and dereference it; these take the object.
-use super::hash_key::{combined_hash, rounded_hash};
+use super::hash_key::{combined_hash, leading_and_rounded, values_within};
 use super::placement_hashers::{
     Geom2dHashAxisPlacement, Geom2dHashDirectionHasher, Geom2dHashPointHasher,
 };
@@ -52,10 +52,7 @@ hasher_tolerances!(
 
 // `[axis hash, round(value_i / HashTolerance)...]` combined, the shape of every conic hash.
 fn placement_and_values(axes: Geom2dHashAxisPlacement, frame: Axis22d, values: &[f64]) -> usize {
-    let factor: f64 = 1.0 / axes.hash_tolerance;
-    let mut hashes: Vec<usize> = vec![axes.hash(frame)];
-    hashes.extend(values.iter().map(|&value| rounded_hash(value, factor)));
-    combined_hash(&hashes)
+    leading_and_rounded(&[axes.hash(frame)], values, axes.hash_tolerance)
 }
 // The placements equal, then each value pair within CompTolerance, in order.
 fn placement_and_values_equal(
@@ -63,10 +60,7 @@ fn placement_and_values_equal(
     frames: [Axis22d; 2],
     values: &[(f64, f64)],
 ) -> bool {
-    axes.equal(frames[0], frames[1])
-        && values
-            .iter()
-            .all(|&(first, second)| (first - second).abs() <= axes.comp_tolerance)
+    axes.equal(frames[0], frames[1]) && values_within(axes.comp_tolerance, values)
 }
 
 impl Geom2dHashLineHasher {
