@@ -18,7 +18,8 @@ ENV_SEQUENCES = [
     "OSD_PROBE_$E v w",
     "OSD_PROBE_F café x",
     "OSD_PROBE_G a café",
-    "- empty_name other",
+    # An empty name is left out: getenv("") fails and native Build records whatever errno
+    # an earlier call left, so Failed() depends on the requests before it.
     "OSD_PROBE_H=I nested value",
     "OSD_PROBE_J ~!@#%^&*()_+{}|:<>? ,./;'[]",
 ]

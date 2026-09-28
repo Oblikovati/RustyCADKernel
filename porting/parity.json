@@ -52290,6 +52290,702 @@
       "rust_item": "rustycad_tkernel::osd::MemInfo::print_info",
       "status": "implemented",
       "notes": "ToString of a freshly updated native MemInfo (see Update for the Windows gap)."
+    },
+    {
+      "upstream_id": "OSD_Parallel::ToUseOcctThreads()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
+      "rust_item": "rustycad_tkernel::osd::Parallel::to_use_occt_threads",
+      "status": "implemented",
+      "notes": "Always true: this profile builds without TBB (USE_TBB=OFF), so OCCT threads are the only backend, as in the native non-TBB build on every platform. Probe osd_nproc."
+    },
+    {
+      "upstream_id": "OSD_Parallel::SetUseOcctThreads(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
+      "rust_item": "rustycad_tkernel::osd::Parallel::set_use_occt_threads",
+      "status": "implemented",
+      "notes": "Ignored, as in the native non-TBB build on every platform. Probe osd_nproc."
+    },
+    {
+      "upstream_id": "OSD_Parallel::NbLogicalProcessors()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
+      "rust_item": "rustycad_tkernel::osd::Parallel::nb_logical_processors",
+      "status": "implemented",
+      "notes": "Computed once and cached. Linux and macOS: sysconf(_SC_NPROCESSORS_ONLN) (online processors, not the affinity mask; -1 on error, as natively; the Android cpu-mask branch is not a target). Windows: GetSystemInfo dwNumberOfProcessors (a 64-bit Rust process never takes the WOW64 GetNativeSystemInfo branch). Probe osd_nproc compares the Linux value."
+    },
+    {
+      "upstream_id": "OSD_Parallel::ForEach(InputIterator,InputIterator,const Functor&,bool,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
+      "rust_item": "rustycad_tkernel::osd::Parallel::for_each",
+      "status": "implemented",
+      "notes": "The iterator pair becomes one Rust Iterator (Send items, so iter_mut() shares mutable elements); forced or nbItems == 1 runs sequentially in the caller and lets a panic unwind unchanged; otherwise forEachOcct: a Launcher of min(nbItems, NbDefaultThreadsToLaunch) (-1: pool default) on the default pool hands items out under a mutex (OSD_Parallel_Threads Range). Pooled failures return Standard_ProgramError. Probe osd_foreach. Host independent: std::thread on every platform."
+    },
+    {
+      "upstream_id": "OSD_Parallel::For(int,int,const Functor&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Parallel.hxx",
+      "rust_item": "rustycad_tkernel::osd::Parallel::for_range",
+      "status": "implemented",
+      "notes": "Named for_range (`for` is a Rust keyword). Forced or single-index ranges run `for (it = begin; it != end; ++it)` in the caller (wrapping, as natively); otherwise a Launcher(DefaultPool, end - begin) Perform. Pooled failures return Standard_ProgramError. Probe osd_for. Host independent: std::thread on every platform."
+    },
+    {
+      "upstream_id": "OSD_Thread()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::new",
+      "status": "implemented",
+      "notes": "No function, no thread, id 0, priority 0. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Thread(const OSD_ThreadFunction&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::with_function",
+      "status": "implemented",
+      "notes": "OSD_ThreadFunction (void* (*)(void*)) is `fn(usize) -> usize`: the opaque pointer-sized argument and result travel as usize. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Thread(const OSD_Thread&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::<rustycad_tkernel::osd::OsdThread as Clone>::clone",
+      "status": "implemented",
+      "notes": "Copy constructor through Assign. Linux/macOS keep the pthread handle semantics: copies share one thread; the first Wait joins it and later Waits of any copy fail; Detach of any copy (also by dropping it) makes it unjoinable for all. Windows natively duplicates the handle per copy, so there a copy's Detach/destruction does not affect the others; the Rust port keeps the pthread sharing on every host (documented deviation for Windows)."
+    },
+    {
+      "upstream_id": "OSD_Thread::Assign(const OSD_Thread&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::assign",
+      "status": "implemented",
+      "notes": "Copies function and priority, detaches its own thread, then shares the other's thread and id. Linux/macOS keep the pthread handle semantics: copies share one thread; the first Wait joins it and later Waits of any copy fail; Detach of any copy (also by dropping it) makes it unjoinable for all. Windows natively duplicates the handle per copy, so there a copy's Detach/destruction does not affect the others; the Rust port keeps the pthread sharing on every host (documented deviation for Windows)."
+    },
+    {
+      "upstream_id": "OSD_Thread::operator=(const OSD_Thread&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::<rustycad_tkernel::osd::OsdThread as Clone>::clone_from",
+      "status": "implemented",
+      "notes": "Calls assign, as the native operator= calls Assign. Linux/macOS keep the pthread handle semantics: copies share one thread; the first Wait joins it and later Waits of any copy fail; Detach of any copy (also by dropping it) makes it unjoinable for all. Windows natively duplicates the handle per copy, so there a copy's Detach/destruction does not affect the others; the Rust port keeps the pthread sharing on every host (documented deviation for Windows)."
+    },
+    {
+      "upstream_id": "OSD_Thread::~OSD_Thread()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::<rustycad_tkernel::osd::OsdThread as Drop>::drop",
+      "status": "implemented",
+      "notes": "Detaches the thread, as the native destructor does (quirk: dropping any copy detaches the shared thread). Linux/macOS keep the pthread handle semantics: copies share one thread; the first Wait joins it and later Waits of any copy fail; Detach of any copy (also by dropping it) makes it unjoinable for all. Windows natively duplicates the handle per copy, so there a copy's Detach/destruction does not affect the others; the Rust port keeps the pthread sharing on every host (documented deviation for Windows)."
+    },
+    {
+      "upstream_id": "OSD_Thread::SetPriority(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::set_priority",
+      "status": "implemented",
+      "notes": "Linux/macOS: stores the value without effect, as the native pthread branch. Windows: SetThreadPriority on the running thread (and at Run), through windows-sys."
+    },
+    {
+      "upstream_id": "OSD_Thread::SetFunction(const OSD_ThreadFunction&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::set_function",
+      "status": "implemented",
+      "notes": "Detaches the current thread, then stores the function. Host independent."
+    },
+    {
+      "upstream_id": "OSD_Thread::Run(void* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::run",
+      "status": "implemented",
+      "notes": "False without a function or when the system refuses the thread; detaches the previous thread first; records the pthread_t (Linux/macOS) or Win32 thread id (Windows) as GetId. The stack size is honoured on Windows only (positive values), ignored by the pthread build as natively. Probe osd_thread/osd_thread_copy."
+    },
+    {
+      "upstream_id": "OSD_Thread::Detach()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::detach",
+      "status": "implemented",
+      "notes": "Drops the JoinHandle (pthread_detach) and clears the id. Linux/macOS keep the pthread handle semantics: copies share one thread; the first Wait joins it and later Waits of any copy fail; Detach of any copy (also by dropping it) makes it unjoinable for all. Windows natively duplicates the handle per copy, so there a copy's Detach/destruction does not affect the others; the Rust port keeps the pthread sharing on every host (documented deviation for Windows)."
+    },
+    {
+      "upstream_id": "OSD_Thread::Wait()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::wait",
+      "status": "implemented",
+      "notes": "Joins; false when nothing runs or the thread was already joined/detached through a copy. Probe osd_thread. Linux/macOS keep the pthread handle semantics: copies share one thread; the first Wait joins it and later Waits of any copy fail; Detach of any copy (also by dropping it) makes it unjoinable for all. Windows natively duplicates the handle per copy, so there a copy's Detach/destruction does not affect the others; the Rust port keeps the pthread sharing on every host (documented deviation for Windows)."
+    },
+    {
+      "upstream_id": "OSD_Thread::Wait(void*&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::wait_result",
+      "status": "implemented",
+      "notes": "The output pointer becomes Option<usize>: None is the native false with a null result. Rust deviation: a panicking thread function makes Wait fail (a throwing native thread terminates the process). Probe osd_thread."
+    },
+    {
+      "upstream_id": "OSD_Thread::Wait(int,void*&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::wait_for",
+      "status": "implemented",
+      "notes": "Joins if the thread ends within the timeout (negative counts as 0; natively an invalid or past timespec also fails). Linux: pthread_timedjoin_np natively, a timed condition wait here. macOS: natively no pthread_timedjoin_np, the timeout is ignored and the call joins; the port does the same. Windows: WaitForSingleObject(timeout) natively, the timed condition wait here. Probe osd_thread_timed."
+    },
+    {
+      "upstream_id": "OSD_Thread::GetId() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::id",
+      "status": "implemented",
+      "notes": "The pthread_t (Linux/macOS) or Win32 thread id (Windows) recorded by Run; 0 when nothing runs. Probe osd_thread_timed checks it equals Current() inside the thread."
+    },
+    {
+      "upstream_id": "OSD_Thread::Current()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Thread.hxx",
+      "rust_item": "rustycad_tkernel::osd::OsdThread::current",
+      "status": "implemented",
+      "notes": "pthread_self() on Linux/macOS, GetCurrentThreadId() on Windows, as usize (Standard_ThreadId)."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::DEFINE_STANDARD_RTTIEXT(OSD_ThreadPool,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust uses the static ThreadPool type; the default pool is a &'static reference instead of a handle."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::DefaultPool(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::default_pool",
+      "status": "implemented",
+      "notes": "A process-wide pool created on first use with the first caller's argument only (a function-local static, as natively); returns &'static ThreadPool instead of a handle. Probe osd_default_pool. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::new",
+      "status": "implemented",
+      "notes": "Init(n) then NbDefaultThreadsToLaunch = NbThreads(); n <= 0 means NbLogicalProcessors. Probe osd_pool. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::~OSD_ThreadPool()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::<rustycad_tkernel::osd::ThreadPool as Drop>::drop",
+      "status": "implemented",
+      "notes": "release(): wakes every worker with the shut-down flag and joins it. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::HasThreads() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::has_threads",
+      "status": "implemented",
+      "notes": "NbThreads() >= 2. Probe osd_pool. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::LowerThreadIndex() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::lower_thread_index",
+      "status": "implemented",
+      "notes": "Always 0. Probe osd_pool. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::UpperThreadIndex() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::upper_thread_index",
+      "status": "implemented",
+      "notes": "0 + worker count (NbThreads() - 1). Probe osd_pool. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::NbThreads() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::nb_threads",
+      "status": "implemented",
+      "notes": "Workers plus the calling thread. Probe osd_pool. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::NbDefaultThreadsToLaunch() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::nb_default_threads_to_launch",
+      "status": "implemented",
+      "notes": "Probe osd_pool. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::SetNbDefaultThreadsToLaunch(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::set_nb_default_threads_to_launch",
+      "status": "implemented",
+      "notes": "Stored unchecked (negative and zero values too), through an atomic so the shared default pool can be tuned by &reference. Probe osd_pool. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::IsInUse()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::is_in_use",
+      "status": "implemented",
+      "notes": "Try-locks each worker. Probes osd_pool/osd_launcher. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Init(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::ThreadPool::init",
+      "status": "implemented",
+      "notes": "Re-creates max(0, n-1) workers (n <= 0: NbLogicalProcessors), no-op for the same count; keeps NbDefaultThreadsToLaunch (native quirk); refuses with Standard_ProgramError('Error: active ThreadPool is reinitialized'), returned as Err, while a launcher holds a worker. Probe osd_pool. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Launcher(OSD_ThreadPool&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::Launcher::new",
+      "status": "implemented",
+      "notes": "Size: max > 0 caps by NbThreads, max < 0 takes max(NbDefaultThreadsToLaunch, 1), 0 means the caller alone; locks up to size-1 idle workers numbered from 0 in pool order, then the caller as the last index; a busy pool leaves the caller alone with index 0. Probe osd_launcher. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Launcher::~Launcher()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::<rustycad_tkernel::osd::Launcher as Drop>::drop",
+      "status": "implemented",
+      "notes": "Release(). Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Launcher::HasThreads() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::Launcher::has_threads",
+      "status": "implemented",
+      "notes": "NbThreads() >= 2. Probe osd_launcher. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Launcher::NbThreads() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::Launcher::nb_threads",
+      "status": "implemented",
+      "notes": "Locked workers plus the caller; 0 after Release. Probe osd_launcher. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Launcher::LowerThreadIndex() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::Launcher::lower_thread_index",
+      "status": "implemented",
+      "notes": "Always 0. Probe osd_launcher. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Launcher::UpperThreadIndex() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::Launcher::upper_thread_index",
+      "status": "implemented",
+      "notes": "NbThreads() - 1 (the caller's index). Probe osd_launcher. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Launcher::Perform(int,int,const Functor&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::Launcher::perform",
+      "status": "implemented",
+      "notes": "functor(threadIndex, index) for each index handed out by a shared atomic counter (wrapping fetch_add, `it < end`); the caller runs its share synchronously, then waits for every woken worker. A panicking functor (panic_any(Failure) keeps 'Type: message' and stack; text panics read 'panic: <text>'; other payloads 'Error: Unknown exception') stops its thread's share; one failure returns Err(Standard_ProgramError), several 'Multiple exceptions:\\n'-joined. Native quirks kept: the self-thread failure stays recorded for later Performs of the same launcher; after Release nothing runs. FPE catching in workers (OSD::ToCatchFloatingSignals) has no Rust counterpart. Launcher::perform_iter ports the OSD_Parallel_Threads UniversalLauncher item distribution. Probes osd_perform/osd_perform_fail. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_ThreadPool::Launcher::Release()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_ThreadPool.hxx",
+      "rust_item": "rustycad_tkernel::osd::Launcher::release",
+      "status": "implemented",
+      "notes": "Frees the locked workers; NbThreads becomes 0. Probe osd_launcher. Host independent: std::thread workers, native lazy start and Lock/Free protocol."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::DEFINE_STANDARD_RTTIEXT(OSD_FileSystem,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust file systems are `Arc<dyn FileSystem>` trait objects; `FileSystem: Any` gives the downcast (the default selector is reached as `Arc<dyn Any>` downcast to `FileSystemSelector`)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::~OSD_FileSystem()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases the handle through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "OSD_FileSystem()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem",
+      "status": "implemented",
+      "notes": "The abstract base maps to the FileSystem trait; implementing it is the Rust constructor. std::istream/std::ostream/std::streambuf shared pointers become the project-owned SharedIStream/SharedOStream/SharedStreamBuf (Arc<Mutex<dyn IStream/OStream/StreamBuf>>) with the libstdc++ sentry and state rules; the handle is FileSystemHandle (Arc<dyn FileSystem>) because the crate Handle<T> projects to one concrete type while file systems are an open interface. Mutating virtuals take &self and lock internally (the default file system is shared process-wide). Exceptions (Standard_ASSERT_RAISE) become Err(Standard_ProgramError) with the native message; the assert names the source basename where the native text carries the absolute build path. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::DefaultFileSystem()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::default_file_system",
+      "status": "implemented",
+      "notes": "A process-wide OnceLock FileSystemSelector holding one LocalFileSystem, created on first use; returns a clone of the same handle each call. Probe osd_fs_default. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::AddDefaultProtocol(const occ::handle<OSD_FileSystem>&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::add_default_protocol",
+      "status": "implemented",
+      "notes": "FileSystemSelector::AddProtocol on the default selector (no down_cast needed: the static keeps the concrete type). Like the native call it is meant for application startup; the Rust selector is lock-protected. Probe osd_fs_default. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::RemoveDefaultProtocol(const occ::handle<OSD_FileSystem>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::remove_default_protocol",
+      "status": "implemented",
+      "notes": "FileSystemSelector::RemoveProtocol on the default selector. Probe osd_fs_default. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::IsSupportedPath(const TCollection_AsciiString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem::is_supported_path",
+      "status": "implemented",
+      "notes": "Required trait method (pure virtual). Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::IsOpenIStream(const std::shared_ptr<std::istream>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem::is_open_istream",
+      "status": "implemented",
+      "notes": "Required trait method (pure virtual). Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::IsOpenOStream(const std::shared_ptr<std::ostream>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem::is_open_ostream",
+      "status": "implemented",
+      "notes": "Required trait method (pure virtual). Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::OpenIStream(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,const std::shared_ptr<std::istream>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem::open_istream",
+      "status": "implemented",
+      "notes": "Provided trait method; the base implementation is also the public default_open_istream so overrides can call the parent as C++ does. Reuses an old OSD_IStreamBuffer of the same URL the file system reports open (clearing its state, seeking when offset >= 0), else opens a buffer with in added and seeks when offset > 0; offset < -1 raises Standard_ProgramError. The C++ default arguments (offset 0, null old stream) are explicit. Probe osd_fs_istream/osd_fs_cached. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::OpenOStream(const TCollection_AsciiString&,std::ios_base::openmode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem::open_ostream",
+      "status": "implemented",
+      "notes": "Provided trait method (also public as default_open_ostream): an OSD_OStreamBuffer over OpenStreamBuffer(mode | out), or None. Probe osd_fs_ostream. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystem::OpenStreamBuffer(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,int64_t*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystem::open_stream_buffer",
+      "status": "implemented",
+      "notes": "Required trait method (pure virtual); the int64_t* output becomes Option<&mut i64>. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem::DEFINE_STANDARD_RTTIEXT(OSD_LocalFileSystem,OSD_FileSystem)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust file systems are `Arc<dyn FileSystem>` trait objects; `FileSystem: Any` gives the downcast (the default selector is reached as `Arc<dyn Any>` downcast to `FileSystemSelector`)."
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::new",
+      "status": "implemented",
+      "notes": "Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem::IsSupportedPath(const TCollection_AsciiString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::is_supported_path",
+      "status": "implemented",
+      "notes": "!OSD_Path::IsRemoteProtocolPath (CadPath::is_remote_protocol_path). Probe osd_fs_supported. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem::IsOpenIStream(const std::shared_ptr<std::istream>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::is_open_istream",
+      "status": "implemented",
+      "notes": "True only for an IStreamBuffer (not an IoStreamBuffer or another IStream) whose buffer is an open FileBuffer (std::filebuf). Probe osd_fs_istream. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem::IsOpenOStream(const std::shared_ptr<std::ostream>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::is_open_ostream",
+      "status": "implemented",
+      "notes": "True only for an OStreamBuffer over an open FileBuffer. Probe osd_fs_ostream. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_LocalFileSystem::OpenStreamBuffer(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,int64_t*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_LocalFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::LocalFileSystem::open_stream_buffer",
+      "status": "implemented",
+      "notes": "Opens a FileBuffer on the URL converted through TCollection_ExtendedString (UTF-8 on Linux); with a size output and in, reports the size and refuses an offset lseek rejects (size 0); otherwise seeks only for offset > 0; a negative offset raises Standard_ProgramError. Probe osd_fs_local_buffer covers all 64 openmode combinations. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::DEFINE_STANDARD_RTTIEXT(OSD_CachedFileSystem,OSD_FileSystem)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust file systems are `Arc<dyn FileSystem>` trait objects; `FileSystem: Any` gives the downcast (the default selector is reached as `Arc<dyn Any>` downcast to `FileSystemSelector`)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem(const occ::handle<OSD_FileSystem>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::new",
+      "status": "implemented",
+      "notes": "The optional handle (None = null) links DefaultFileSystem, as natively. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::LinkedFileSystem() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::linked_file_system",
+      "status": "implemented",
+      "notes": "Returns a clone of the linked handle. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::SetLinkedFileSystem(const occ::handle<OSD_FileSystem>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::set_linked_file_system",
+      "status": "implemented",
+      "notes": "Takes &self (lock-protected); the cached stream is kept, as natively. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::IsSupportedPath(const TCollection_AsciiString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::is_supported_path",
+      "status": "implemented",
+      "notes": "Delegates to the linked file system. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::IsOpenIStream(const std::shared_ptr<std::istream>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::is_open_istream",
+      "status": "implemented",
+      "notes": "Delegates to the linked file system. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::IsOpenOStream(const std::shared_ptr<std::ostream>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::is_open_ostream",
+      "status": "implemented",
+      "notes": "Delegates to the linked file system. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::OpenIStream(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,const std::shared_ptr<std::istream>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::open_istream",
+      "status": "implemented",
+      "notes": "Ignores the caller's old stream; switches the cache on a new URL, offers the cached stream to the linked OpenIStream and caches its result (a failed open clears it; a raise leaves it). Probe osd_fs_cached. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::OpenOStream(const TCollection_AsciiString&,std::ios_base::openmode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::open_ostream",
+      "status": "implemented",
+      "notes": "Delegates without caching. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_CachedFileSystem::OpenStreamBuffer(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,int64_t*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_CachedFileSystem.hxx",
+      "rust_item": "rustycad_tkernel::osd::CachedFileSystem::open_stream_buffer",
+      "status": "implemented",
+      "notes": "Modes with out pass through; others switch the cache on a new URL and cache the linked buffer. Probe osd_fs_cached. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::DEFINE_STANDARD_RTTIEXT(OSD_FileSystemSelector,OSD_FileSystem)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: DEFINE_STANDARD_RTTIEXT expands to the C++ RTTI members (get_type_name, get_type_descriptor, DynamicType). Rust file systems are `Arc<dyn FileSystem>` trait objects; `FileSystem: Any` gives the downcast (the default selector is reached as `Arc<dyn Any>` downcast to `FileSystemSelector`)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::new",
+      "status": "implemented",
+      "notes": "Empty protocol list. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::AddProtocol(const occ::handle<OSD_FileSystem>&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::add_protocol",
+      "status": "implemented",
+      "notes": "Removes the first registration of the same object (pointer identity), then prepends when preferred or appends. The protected NCollection_List becomes a lock-protected Vec, readable through FileSystemSelector::protocols. Probe osd_fs_selector. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::RemoveProtocol(const occ::handle<OSD_FileSystem>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::remove_protocol",
+      "status": "implemented",
+      "notes": "Removes the first registration of the object. Probe osd_fs_selector. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::IsSupportedPath(const TCollection_AsciiString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::is_supported_path",
+      "status": "implemented",
+      "notes": "Any protocol supporting the URL, tested lazily in order. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::IsOpenIStream(const std::shared_ptr<std::istream>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::is_open_istream",
+      "status": "implemented",
+      "notes": "Only an IStreamBuffer: the first protocol supporting its URL and reporting it open. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::IsOpenOStream(const std::shared_ptr<std::ostream>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::is_open_ostream",
+      "status": "implemented",
+      "notes": "Only an OStreamBuffer: the first protocol supporting its URL and reporting it open. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::OpenIStream(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,const std::shared_ptr<std::istream>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::open_istream",
+      "status": "implemented",
+      "notes": "The first stream a supporting protocol opens, in order. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::OpenOStream(const TCollection_AsciiString&,std::ios_base::openmode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::open_ostream",
+      "status": "implemented",
+      "notes": "The first stream a supporting protocol opens, in order. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_FileSystemSelector::OpenStreamBuffer(const TCollection_AsciiString&,std::ios_base::openmode,int64_t,int64_t*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_FileSystemSelector.hxx",
+      "rust_item": "rustycad_tkernel::osd::FileSystemSelector::open_stream_buffer",
+      "status": "implemented",
+      "notes": "The first buffer a supporting protocol opens; each attempt receives the size output. Calls iterate a snapshot so a protocol may call back into the selector. Probe osd_fs_selector compares the call log of logging fakes. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_StreamBuffer(const std::string&,const std::shared_ptr<std::streambuf>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_StreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::osd::StreamBuffer::new",
+      "status": "implemented",
+      "notes": "The template OSD_StreamBuffer<T> is StreamBuffer<D> with direction markers; IStreamBuffer, OStreamBuffer and IoStreamBuffer are the three native typedefs and, like distinct C++ instantiations, an IoStreamBuffer is not an IStreamBuffer for the file systems' checks. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_StreamBuffer::Url() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_StreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::osd::StreamBuffer::url",
+      "status": "implemented",
+      "notes": "Probe osd_fs_istream. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_OpenFile(const TCollection_ExtendedString&,const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "rust_item": "rustycad_tkernel::osd::open_file",
+      "status": "implemented",
+      "notes": "FILE* becomes Option<std::fs::File> (None for NULL). Linux converts the name to UTF-8 and parses the mode as glibc fopen does ('r'/'w'/'a' then up to six modifiers: '+' update, 'x' exclusive, others ignored; a write-only append stream starts at the end). The extern \"C\" OSD_OpenFile(const char*, const char*) is open_file_utf8. Windows: _wfopen accepts the MSVC mode letters (e.g. 't', 'ccs='); the Rust parser keeps the glibc rules on every host. Probe osd_fs_fopen (22 modes)."
+    },
+    {
+      "upstream_id": "OSD_OpenFile::OSD_FileStatCTime(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "rust_item": "rustycad_tkernel::osd::file_stat_ctime",
+      "status": "implemented",
+      "notes": "stat().st_ctime in seconds, 0 when stat fails. Linux/macOS: status-change time (MetadataExt::ctime); Windows: _wstat64 st_ctime is the creation time, read from Metadata::created. Probe osd_fs_ctime."
+    },
+    {
+      "upstream_id": "OSD_OpenFile::OSD_OpenFileDescriptor(const TCollection_ExtendedString&,std::ios_base::openmode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "rust_item": "rustycad_tkernel::osd::open_file_descriptor",
+      "status": "implemented",
+      "notes": "The descriptor becomes Option<std::fs::File> (None for -1). Native quirk kept: any mode with out is O_WRONLY|O_CREAT|O_TRUNC (+O_APPEND with app) even with in or without trunc, since O_RDONLY is 0; no out opens read-only; created files get 0600. Windows: _wsopen_s with the same flags; its text-mode translation (no binary) is not reproduced. Probe osd_fs_fd covers all 64 modes."
+    },
+    {
+      "upstream_id": "OSD_OpenFile::OSD_OpenStream(std::filebuf&,const TCollection_ExtendedString&,std::ios_base::openmode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "rust_item": "rustycad_tkernel::osd::open_stream",
+      "status": "implemented",
+      "notes": "std::filebuf is FileBuffer: the libstdc++ openmode table (binary ignored, invalid combinations refused, ate seeks to the end), glibc's end start for write-only append, unbuffered reads and the libstdc++ put area (pending small writes; pubseekoff(0, cur) adds them to the file offset). Windows/MinGW open the same modes through std. Probe osd_fs_filebuf covers all 64 modes."
+    },
+    {
+      "upstream_id": "OSD_OpenFile::OSD_OpenStream(T&,const TCollection_ExtendedString&,std::ios_base::openmode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "rust_item": "rustycad_tkernel::osd::open_file_stream",
+      "status": "implemented",
+      "notes": "The template over std::ifstream/ofstream/fstream becomes FileStream (input/output/input_output adds in/out/nothing); open failure sets failbit, success clears the state. Probe osd_fs_fstream. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_OpenFile::OSD_OpenStream(T&,const char*,std::ios_base::openmode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "rust_item": "rustycad_tkernel::osd::open_file_stream_utf8",
+      "status": "implemented",
+      "notes": "UTF-8 name overload of the FileStream open (Windows converts it to UTF-16 first, as std does). Probe osd_fs_fstream. Host independent: std::fs gives the same behavior on Linux, Windows and macOS (Unicode paths reach the native wide-character APIs on Windows)."
+    },
+    {
+      "upstream_id": "OSD_OpenMode",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenMode.hxx",
+      "rust_item": "rustycad_tkernel::osd::OpenMode",
+      "status": "implemented",
+      "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
     }
   ],
   "tests": [
