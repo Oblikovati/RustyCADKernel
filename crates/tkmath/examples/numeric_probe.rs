@@ -269,150 +269,94 @@ fn main() {
         let mut words = line.split_whitespace();
         let op = words.next().unwrap();
         let values: Vec<f64> = words.map(|w| w.parse().unwrap()).collect();
-        if op == "cslib_normal" {
-            cslib_probe::cslib_normal_case(&values);
-        } else if op == "cslib_singular" {
-            cslib_probe::cslib_singular_case(&values);
-        } else if op == "cslib_dn" {
-            cslib_probe::cslib_dn_case(&values);
-        } else if op == "cslib_poly" {
-            cslib_probe::cslib_poly_case(&values);
-        } else if op == "cslib_class2d" {
-            cslib_probe::cslib_class2d_case(&values);
-        } else if op == "modern_lbfgs" {
-            modern_opt_probe::modern_lbfgs_case(&values);
-        } else if op == "modern_newton" {
-            modern_opt_probe::modern_newton_case(&values);
-        } else if op == "modern_global" {
-            global_modern_probe::modern_global_case(&values);
-        } else if op == "modern_swarm" {
-            swarm_probe::modern_swarm_case(&values);
-        } else if op == "modern_small" {
-            small_probe::modern_small_case(&values);
-        } else if op == "modern_lm" {
-            modern_sys_probe::modern_lm_case(&values);
-        } else if op == "modern_sys" {
-            modern_sys_probe::modern_sys_case(&values);
-        } else if op == "modern_tensor" {
-            modern_tensor_probe::modern_tensor_case(&values);
-        } else if op == "modern_double_exp" {
-            modern_integ_probe::modern_double_exp_case(&values);
-        } else if op == "modern_kronrod" {
-            modern_integ_probe::modern_kronrod_case(&values);
-        } else if op == "modern_integ" {
-            modern_integ_probe::modern_integ_case(&values);
-        } else if op == "modern_multiple" {
-            modern_multiple_probe::modern_multiple_case(&values);
-        } else if op == "modern_trig" {
-            modern_trig_probe::modern_trig_case(&values);
-        } else if op == "modern_poly" {
-            modern_poly_probe::modern_poly_case(&values);
-        } else if op == "modern_laguerre" {
-            modern_poly_probe::modern_laguerre_case(&values);
-        } else if op == "modern_complex" {
-            modern_poly_probe::modern_complex_case(&values);
-        } else if op == "modern_factors" {
-            modern_factors_probe::modern_factors_case(&values);
-        } else if op == "modern_lu" {
-            modern_eigen_probe::modern_lu_case(&values);
-        } else if op == "modern_eigen" {
-            modern_eigen_probe::modern_eigen_case(&values);
-        } else if op == "modern_frpr" {
-            modern_opt_probe::frpr_case(&values);
-        } else if op == "scalar_opt" {
-            modern_root_probe::scalar_opt_case(&values);
-        } else if op == "modern_opt" {
-            modern_opt_probe::modern_opt_case(&values);
-        } else if op == "vector_functor" {
-            vector_functor_probe::vector_functor_case(&values);
-        } else if op == "scalar_functor" {
-            scalar_functor_probe::scalar_functor_case(&values);
-        } else if op == "modern_root" {
-            modern_root_probe::modern_root_case(&values);
-        } else if op == "utils_line" {
-            utils_probe::line_case(&values);
-        } else if op == "utils_core" {
-            utils_probe::core_case(&values);
-        } else if op == "utils_bracket" {
-            utils_probe::bracket_case(&values);
-        } else if op == "global" {
-            global_probe::global_case(&values);
-        } else if op == "pso" {
-            pso_probe::pso_case(&values);
-        } else if op == "bullard" {
-            pso_probe::bullard_case(&values);
-        } else if op == "integration" {
-            integration_probe::integration_case(&values);
-        } else if op == "quadrature" {
-            integration_probe::quadrature_case(&values);
-        } else if op == "all_roots" {
-            all_roots_probe::all_roots_case(&values);
-        } else if op == "sampled" {
-            sampled_probe::sampled_case(&values);
-        } else if op == "trig" {
-            trig_probe::trig_case(&values);
-        } else if op == "polynomial" {
-            polynomial_probe::polynomial_case(&values);
-        } else if op == "uzawa" {
-            uzawa_probe::uzawa_case(&values);
-        } else if op == "optimization" {
-            optimization_probe::optimization_case(&values);
-        } else if op == "function_set" {
-            newton_set_probe::function_set_case(&values);
-        } else if op == "newton_set" {
-            newton_set_probe::newton_set_case(&values);
-        } else if op == "minimum" {
-            minimum_probe::minimum_case(&values);
-        } else if op == "root" {
-            root_probe::root_case(&values);
-        } else if op == "kronrod" {
-            kronrod_probe::kronrod_case(&values);
-        } else if op == "eigen" {
-            eigen_probe::eigen_case(&values);
-        } else if op == "svd" {
-            svd_probe::svd_case(&values);
-        } else if op == "least_squares" {
-            least_squares_probe::least_squares_case(&values);
-        } else if op == "numeric_matrix" {
-            matrix_probe::numeric_matrix_case(&values);
-        } else if op == "numeric_vector" {
-            vector_probe::numeric_vector_case(&values);
-        } else if op == "nodes" {
-            nodes_probe::nodes_case(&values);
-        } else if op == "table" {
-            table_probe::table_case(&values);
-        } else if op == "quaternion" {
-            quaternion_probe::quaternion_case(&values);
-        } else if op == "scale" {
-            scale_probe::scale_case(&values);
-        } else if op == "compact3" {
-            bounds_probe::compact3_case(&values);
-        } else if op == "compact2" {
-            bounds_probe::compact2_case(&values);
-        } else if op == "sphere" {
-            bounds_probe::sphere_case(&values);
-        } else if op == "bounds2" {
-            bounds_probe::bounds2_case(&values);
-        } else if op == "bounds" {
-            bounds_probe::bounds_case(&values);
-        } else if op == "line_plane" {
-            bounds_probe::line_plane_case(&values);
-        } else if op == "planar" {
-            planar_case(&values);
-        } else if op == "frame" {
-            frame_case(&values);
-        } else if op == "direction" {
-            direction_case(&values);
-        } else if op == "point" {
-            point_case(&values);
-        } else if op == "xyz" {
-            vector_case(&values);
-        } else if op == "matrix" {
-            matrix_case(&values);
-        } else if op == "range" {
-            range_case(&values);
-        } else {
-            panic!("Unknown probe operation: {op}");
+        // One arm per operation keeps concurrent probe additions merge-friendly.
+        match op {
+            "cslib_normal" => cslib_probe::cslib_normal_case(&values),
+            "cslib_singular" => cslib_probe::cslib_singular_case(&values),
+            "cslib_dn" => cslib_probe::cslib_dn_case(&values),
+            "cslib_poly" => cslib_probe::cslib_poly_case(&values),
+            "cslib_class2d" => cslib_probe::cslib_class2d_case(&values),
+            "plib_poly" => plib_probe::poly_case(&values),
+            "plib_poly2" => plib_probe::poly2_case(&values),
+            "plib_rational" => plib_probe::rational_case(&values),
+            "plib_lagrange" => plib_probe::lagrange_case(&values),
+            "plib_cubic" => plib_probe::cubic_case(&values),
+            "plib_hermite_coeffs" => plib_probe::hermite_coeffs_case(&values),
+            "plib_hermite_interp" => plib_probe::hermite_interp_case(&values),
+            "plib_coef_poles" => plib_probe::curve_case(&values, false),
+            "plib_trim" => plib_probe::curve_case(&values, true),
+            "plib_grid" => plib_probe::grid_case(&values),
+            "plib_params" => plib_probe::params_case(&values),
+            "plib_length" => plib_probe::length_case(&values),
+            "plib_jacobi" => plib_probe::jacobi_probe_case(&values, false),
+            "plib_hermit" => plib_probe::jacobi_probe_case(&values, true),
+            "modern_lbfgs" => modern_opt_probe::modern_lbfgs_case(&values),
+            "modern_newton" => modern_opt_probe::modern_newton_case(&values),
+            "modern_global" => global_modern_probe::modern_global_case(&values),
+            "modern_swarm" => swarm_probe::modern_swarm_case(&values),
+            "modern_small" => small_probe::modern_small_case(&values),
+            "modern_lm" => modern_sys_probe::modern_lm_case(&values),
+            "modern_sys" => modern_sys_probe::modern_sys_case(&values),
+            "modern_tensor" => modern_tensor_probe::modern_tensor_case(&values),
+            "modern_double_exp" => modern_integ_probe::modern_double_exp_case(&values),
+            "modern_kronrod" => modern_integ_probe::modern_kronrod_case(&values),
+            "modern_integ" => modern_integ_probe::modern_integ_case(&values),
+            "modern_multiple" => modern_multiple_probe::modern_multiple_case(&values),
+            "modern_trig" => modern_trig_probe::modern_trig_case(&values),
+            "modern_poly" => modern_poly_probe::modern_poly_case(&values),
+            "modern_laguerre" => modern_poly_probe::modern_laguerre_case(&values),
+            "modern_complex" => modern_poly_probe::modern_complex_case(&values),
+            "modern_factors" => modern_factors_probe::modern_factors_case(&values),
+            "modern_lu" => modern_eigen_probe::modern_lu_case(&values),
+            "modern_eigen" => modern_eigen_probe::modern_eigen_case(&values),
+            "modern_frpr" => modern_opt_probe::frpr_case(&values),
+            "scalar_opt" => modern_root_probe::scalar_opt_case(&values),
+            "modern_opt" => modern_opt_probe::modern_opt_case(&values),
+            "vector_functor" => vector_functor_probe::vector_functor_case(&values),
+            "scalar_functor" => scalar_functor_probe::scalar_functor_case(&values),
+            "modern_root" => modern_root_probe::modern_root_case(&values),
+            "utils_line" => utils_probe::line_case(&values),
+            "utils_core" => utils_probe::core_case(&values),
+            "utils_bracket" => utils_probe::bracket_case(&values),
+            "global" => global_probe::global_case(&values),
+            "pso" => pso_probe::pso_case(&values),
+            "bullard" => pso_probe::bullard_case(&values),
+            "integration" => integration_probe::integration_case(&values),
+            "quadrature" => integration_probe::quadrature_case(&values),
+            "all_roots" => all_roots_probe::all_roots_case(&values),
+            "sampled" => sampled_probe::sampled_case(&values),
+            "trig" => trig_probe::trig_case(&values),
+            "polynomial" => polynomial_probe::polynomial_case(&values),
+            "uzawa" => uzawa_probe::uzawa_case(&values),
+            "optimization" => optimization_probe::optimization_case(&values),
+            "function_set" => newton_set_probe::function_set_case(&values),
+            "newton_set" => newton_set_probe::newton_set_case(&values),
+            "minimum" => minimum_probe::minimum_case(&values),
+            "root" => root_probe::root_case(&values),
+            "kronrod" => kronrod_probe::kronrod_case(&values),
+            "eigen" => eigen_probe::eigen_case(&values),
+            "svd" => svd_probe::svd_case(&values),
+            "least_squares" => least_squares_probe::least_squares_case(&values),
+            "numeric_matrix" => matrix_probe::numeric_matrix_case(&values),
+            "numeric_vector" => vector_probe::numeric_vector_case(&values),
+            "nodes" => nodes_probe::nodes_case(&values),
+            "table" => table_probe::table_case(&values),
+            "quaternion" => quaternion_probe::quaternion_case(&values),
+            "scale" => scale_probe::scale_case(&values),
+            "compact3" => bounds_probe::compact3_case(&values),
+            "compact2" => bounds_probe::compact2_case(&values),
+            "sphere" => bounds_probe::sphere_case(&values),
+            "bounds2" => bounds_probe::bounds2_case(&values),
+            "bounds" => bounds_probe::bounds_case(&values),
+            "line_plane" => bounds_probe::line_plane_case(&values),
+            "planar" => planar_case(&values),
+            "frame" => frame_case(&values),
+            "direction" => direction_case(&values),
+            "point" => point_case(&values),
+            "xyz" => vector_case(&values),
+            "matrix" => matrix_case(&values),
+            "range" => range_case(&values),
+            _ => panic!("Unknown probe operation: {op}"),
         }
     }
 }
@@ -483,3 +427,4 @@ mod swarm_probe;
 mod global_modern_probe;
 
 mod cslib_probe;
+mod plib_probe;

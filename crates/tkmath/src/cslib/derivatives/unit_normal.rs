@@ -14,8 +14,8 @@
 
 //! CSLib::DNNormal, the Leibniz recursion for derivatives of the unit normal.
 use super::derivative_at;
-use crate::cslib::binomial::plib_bin;
 use crate::gp::Vector3;
+use crate::plib::bin as plib_bin;
 use rustycad_tkernel::ncollection::Array2;
 use rustycad_tkernel::standard::Failure;
 

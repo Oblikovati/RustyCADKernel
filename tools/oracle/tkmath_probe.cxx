@@ -142,6 +142,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_swarm_probe.cxx"
 #include "tkmath_global_modern_probe.cxx"
 #include "tkmath_cslib_probe.cxx"
+#include "tkmath_plib_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -216,6 +217,20 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"cslib_dn", cslib_dn_case},
  {"cslib_poly", cslib_poly_case},
  {"cslib_class2d", cslib_class2d_case},
+ {"plib_poly", plib_poly_case},
+ {"plib_poly2", plib_poly2_case},
+ {"plib_rational", plib_rational_case},
+ {"plib_lagrange", plib_lagrange_case},
+ {"plib_cubic", plib_cubic_case},
+ {"plib_hermite_coeffs", plib_hermite_coeffs_case},
+ {"plib_hermite_interp", plib_hermite_interp_case},
+ {"plib_grid", plib_grid_case},
+ {"plib_coef_poles", [](std::istream& in) {plib_curve_case(in,false);}},
+ {"plib_trim", [](std::istream& in) {plib_curve_case(in,true);}},
+ {"plib_jacobi", [](std::istream& in) {plib_jacobi_case(in,false);}},
+ {"plib_hermit", [](std::istream& in) {plib_jacobi_case(in,true);}},
+ {"plib_params", plib_params_case},
+ {"plib_length", plib_length_case},
 };
 int main() {
  std::string line;

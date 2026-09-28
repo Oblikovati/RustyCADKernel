@@ -13,8 +13,8 @@
 // commercial license or contractual agreement.
 
 //! CSLib_NormalPolyDef, the trigonometric polynomial whose sign decides a singular normal.
-use super::binomial::plib_bin;
 use crate::math::{Function, FunctionWithDerivative};
+use crate::plib::bin as plib_bin;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 

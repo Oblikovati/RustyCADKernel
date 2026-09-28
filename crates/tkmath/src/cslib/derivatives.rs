@@ -15,8 +15,8 @@
 //! CSLib::DNNUV and CSLib::DNNormal: derivatives of the raw and unit surface normal.
 mod unit_normal;
 
-use super::binomial::plib_bin;
 use crate::gp::Vector3;
+use crate::plib::bin as plib_bin;
 use rustycad_tkernel::ncollection::Array2;
 use rustycad_tkernel::standard::Failure;
 

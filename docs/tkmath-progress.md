@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 82 complete source suites
-currently account for 1,546 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 85 complete source suites
+currently account for 1,585 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -82,6 +82,9 @@ currently account for 1,546 mapped declarations, with matching native and Rust p
 | MathInteg_Test.cxx | mathinteg | 60 |
 | MathSys_Comparison_Test.cxx | mathsys_comparison | 24 |
 | CSLib_Test.cxx | cslib | 36 |
+| PLib_Test.cxx | plib | 19 |
+| PLib_JacobiPolynomial_Test.cxx | plib_jacobi_polynomial | 11 |
+| PLib_HermitJacobi_Test.cxx | plib_hermit_jacobi | 9 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -437,3 +440,36 @@ passes them to an allocator-dependent NCollection_Array1 size. `PLib::Bin` and
 the Precision constants are small private copies (`cslib/binomial.rs`,
 `cslib/precision.rs`). They must be replaced by the PLib and Precision ports
 when those merge.
+
+### PLib polynomial library
+
+All 39 declarations of the three PLib suites pass in both kernels. The port
+covers the complete public API of PLib, PLib_JacobiPolynomial and
+PLib_HermitJacobi, and the whole GeomAbs enumeration package. Another 2,240
+differential requests match with raw bits, including NaN payloads; the numeric
+gate now passes 19,095 cases.
+
+`tools/generate_plib_jacobi_tables.py` copies every Jacobi table literal from
+the pinned `.pxx` files as text, so both compilers round the same decimal
+strings. It proves that each per-degree coefficient array is a prefix of the
+degree-30 array and then keeps only that array. `--check` detects drift.
+
+Several native behaviors are preserved. A derivative request of 0 takes the
+general Horner branch, which starts from `0 * U + c`; an infinite U therefore
+gives NaN there but not in NoDerivativeEvalPolynomial. The unrolled
+Dimension == 3 loops of RationalDerivative(s) perform the same operations as
+the general loop, so one loop reproduces both. AverageError sums only up to the
+Q degree, not WorkDegree. A singular HermiteInterpolate system raises
+StdFail_NotDone from the solve before `false` can be returned; with no
+components it still reports success. JacobiParameters writes WorkDegree before
+its MaxDegree and Code checks can raise. Weights accepts non-tabulated Gauss
+counts and reads the native table layout, and the gp_Pnt CoefficientsPoles
+overload seeds its pole temporary from the coefficients.
+
+Native `double&` buffers become slices. Where OCCT would access outside such a
+buffer or a table, or where a negative degree, dimension or derivative count
+makes its pointer arithmetic undefined, Rust returns Standard_OutOfRange with
+the offending value. The point CoefficientsPoles overloads reject pole arrays
+longer than the coefficients, which natively read uninitialized storage.
+Weighted input without an output weight array (a native null dereference) is
+an error. Native exceptions keep their types.

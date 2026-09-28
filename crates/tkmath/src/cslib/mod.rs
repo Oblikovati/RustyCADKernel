@@ -19,7 +19,6 @@
 //! [`SingularNormal`] values, and C++ exceptions become [`Failure`] errors.
 //!
 //! [`Failure`]: rustycad_tkernel::standard::Failure
-mod binomial;
 mod class2d;
 mod derivatives;
 mod normal;
