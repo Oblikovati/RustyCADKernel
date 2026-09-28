@@ -24,20 +24,15 @@ pub fn multi_start(
     if !valid(&bounds, config) || config.starts == 0 {
         return failure_result(Status::InvalidInput);
     }
-    let mut checked: Checked<'_, _> = Checked {
-        function,
-        failure: Status::Ok,
-    };
+    let mut checked: CheckedFunction<'_, _> = CheckedFunction::new(function);
     let mut rng: RandomGenerator = RandomGenerator::new(config.seed as u64);
     let local: Config =
         config.local(((config.solver.max_iterations as usize / config.starts) as u32).max(10));
     let mut result: VectorResult = VectorResult::default();
     for _ in 0..config.starts {
         let start: Vector<'static> = random_point(&bounds, &mut rng);
-        let mut bounded: BoundedCallback<'_, '_, _> = BoundedCallback {
-            function: &mut checked,
-            bounds: &bounds,
-        };
+        let mut bounded: BoundedFunction<'_, '_, _> =
+            BoundedFunction::new(&mut checked, bounds.lower, bounds.upper);
         let solved: VectorResult = powell(&mut bounded, &start, &local);
         let mut candidate: Vector<'static> = match (solved.value, solved.solution) {
             (Some(_), Some(solution)) => solution,
@@ -47,8 +42,8 @@ pub fn multi_start(
         retain(&mut checked, &mut result, candidate);
     }
     if result.value.is_none() {
-        result.status = if checked.failure != Status::Ok {
-            checked.failure
+        result.status = if checked.failure_status != Status::Ok {
+            checked.failure_status
         } else {
             Status::NumericalError
         };

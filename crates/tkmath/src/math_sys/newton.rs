@@ -44,7 +44,7 @@ pub fn newton(
     f_tolerance: f64,
     limit: u32,
 ) -> SystemResult {
-    run(f, start, tolerance, f_tolerance, limit, None)
+    newton_impl(f, start, tolerance, f_tolerance, limit, None, None)
 }
 /// Projects trial steps onto box bounds; `newton_bounded(&mut f,&start,&lower,&upper,&tol_x,1e-10,100)`.
 pub fn newton_bounded(
@@ -56,13 +56,14 @@ pub fn newton_bounded(
     f_tolerance: f64,
     limit: u32,
 ) -> SystemResult {
-    run(
+    newton_impl(
         f,
         start,
         tolerance,
         f_tolerance,
         limit,
-        Some((lower, upper)),
+        Some(lower),
+        Some(upper),
     )
 }
 /// Uniform variable-tolerance overload; `newton_uniform(&mut f,&start,1e-10,1e-10,100)`.
@@ -77,19 +78,33 @@ pub fn newton_uniform(
     tolerance.init(x_tolerance);
     newton(f, start, &tolerance, f_tolerance, limit)
 }
+/// Copy that keeps the source's lower bound, as `std::optional<math_Vector> = theSolution` does.
+pub(super) fn same_bounds(vector: &Vector<'_>) -> Vector<'static> {
+    let upper: i32 = vector.lower() + vector.length() - 1;
+    let mut result: Vector<'static> = Vector::with_bounds(vector.lower(), upper).unwrap();
+    result.initialized(vector).unwrap();
+    result
+}
 pub(super) fn owned(vector: &Vector<'_>) -> Vector<'static> {
     let mut result: Vector<'static> = Vector::with_size(vector.length() as usize);
     result.initialized(vector).unwrap();
     result
 }
-fn run(
+/// Shared Newton driver (`NewtonImpl`): validates inputs, clamps the start into the box,
+/// takes rank-aware linearized steps with a projected Armijo backtracking of at most 24
+/// halvings and finishes with [`finalize_system_result`]. Bounds apply only when both
+/// `lower` and `upper` are given, as with the native pointers;
+/// `newton_impl(&mut f, &start, &tol_x, 1e-10, 100, None, None)`.
+pub fn newton_impl(
     f: &mut impl FunctionSetWithDerivatives,
     start: &Vector<'_>,
     tolerance: &Vector<'_>,
     f_tolerance: f64,
     limit: u32,
-    bounds: Option<(&Vector<'_>, &Vector<'_>)>,
+    lower: Option<&Vector<'_>>,
+    upper: Option<&Vector<'_>>,
 ) -> SystemResult {
+    let bounds: Option<(&Vector<'_>, &Vector<'_>)> = lower.zip(upper);
     if f.variables() <= 0 || f.equations() <= 0 {
         return invalid();
     }
@@ -253,7 +268,11 @@ impl NewtonState {
         self.result
     }
 }
-pub(super) fn finalize_system_result(
+/// Re-evaluates the final point and fills the result (`FinalizeSystemResult`): solution,
+/// residual norm, squared value when finite, Jacobian, scaled rank and `is_root` against
+/// `tolerance`. Returns false with `CallbackError`/`NumericalError` set on failure;
+/// `finalize_system_result(&mut f, &x, 2, 1e-10, &mut result)`.
+pub fn finalize_system_result(
     f: &mut impl FunctionSetWithDerivatives,
     solution: &Vector<'_>,
     equations: usize,
@@ -262,7 +281,7 @@ pub(super) fn finalize_system_result(
 ) -> bool {
     let mut residual: Vector<'static> = Vector::with_size(equations);
     let mut jacobian: Matrix<'static> = zero_matrix(equations, solution.length() as usize);
-    result.solution = Some(owned(solution));
+    result.solution = Some(same_bounds(solution));
     if !f.values(solution, &mut residual, &mut jacobian) {
         result.status = Status::CallbackError;
         return false;

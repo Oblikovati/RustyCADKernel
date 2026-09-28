@@ -20,8 +20,8 @@ mod multistart;
 pub use multistart::multi_start;
 mod dispatch;
 use super::{
-    bounds::{BoundedCallback, BoxBounds},
-    utils::{Checked, valid_config},
+    bounds::BoxBounds,
+    utils::{BoundedFunction, CheckedFunction, is_valid_config},
     *,
 };
 use crate::math_utils::{RandomGenerator, clamp};
@@ -33,7 +33,7 @@ fn failure_result(status: Status) -> VectorResult {
     }
 }
 fn valid(bounds: &BoxBounds<'_>, config: &GlobalConfig) -> bool {
-    valid_config(&config.solver) && bounds.valid(bounds.lower.length())
+    is_valid_config(&config.solver) && bounds.valid(bounds.lower.length())
 }
 fn random_point(bounds: &BoxBounds<'_>, rng: &mut RandomGenerator) -> Vector<'static> {
     let mut point: Vector<'static> = Vector::with_size(bounds.lower.length() as usize);

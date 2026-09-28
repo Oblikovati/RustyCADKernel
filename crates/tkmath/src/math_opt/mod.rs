@@ -14,12 +14,11 @@
 //! Modern optimization algorithms with native status and callback semantics.
 use crate::math::{Matrix, MultipleVarFunction, MultipleVarFunctionWithGradient, Vector};
 use crate::math_utils::{
-    Config, LineSearchResult, Status, VectorResult, ZERO_TOL, armijo_backtrack, exact_line_search,
+    Config, LineSearchResult, Status, VectorResult, ZERO_TOL, exact_line_search,
 };
 mod bfgs;
 mod powell;
-mod stationary;
-mod utils;
+pub mod utils;
 pub use bfgs::{bfgs, bfgs_numerical};
 pub use powell::{powell, powell_with_directions};
 
@@ -45,3 +44,6 @@ pub use pso::*;
 
 mod global;
 pub use global::*;
+
+mod uzawa;
+pub use uzawa::{UzawaConfig, UzawaResult, uzawa, uzawa_equality};

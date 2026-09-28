@@ -97,51 +97,14 @@ impl Default for NewtonOptions {
     }
 }
 impl NewtonOptions {
-    /// Validates the fields used by the specialized solvers; `options.is_valid()`.
+    /// Validates the fields used by the specialized solvers (`IsOptionsValid`); `options.is_valid()`.
     pub fn is_valid(&self) -> bool {
-        [
-            self.solver.f_tolerance,
-            self.solver.x_tolerance,
-            self.max_step_ratio,
-        ]
-        .iter()
-        .all(|v| v.is_finite() && *v > 0.0)
-            && self.solver.max_iterations > 0
-            && self.soft_bounds_extension.is_finite()
-            && self.soft_bounds_extension >= 0.0
+        super::box_bounds::is_options_valid(self)
     }
 }
 impl<const N: usize> NewtonBoundsN<N> {
-    /// Inactive bounds ignore their coordinates, matching OCCT; `bounds.is_valid()`.
+    /// Inactive bounds ignore their coordinates, matching OCCT (`IsBoundsValid*D`); `bounds.is_valid()`.
     pub fn is_valid(&self) -> bool {
-        !self.has_bounds
-            || (0..N).all(|i| {
-                self.min[i].is_finite() && self.max[i].is_finite() && self.min[i] <= self.max[i]
-            })
-    }
-    pub(super) fn clamp(&self, x: &mut [f64; N], options: &NewtonOptions) {
-        if !self.has_bounds {
-            return;
-        }
-        for (i, value) in x.iter_mut().enumerate() {
-            let extension: f64 = if options.allow_soft_bounds {
-                (self.max[i] - self.min[i]) * options.soft_bounds_extension
-            } else {
-                0.0
-            };
-            let lower: f64 = self.min[i] - extension;
-            let upper: f64 = self.max[i] + extension;
-            // Native comparisons preserve the operand when an extended bound is NaN.
-            if *value < lower {
-                *value = lower;
-            }
-            if upper < *value {
-                *value = upper;
-            }
-        }
-    }
-    pub(super) fn max_step(&self, ratio: f64) -> Option<f64> {
-        self.has_bounds
-            .then(|| ratio * (0..N).fold(1.0_f64, |a, i| a.max(self.max[i] - self.min[i])))
+        super::box_bounds::bounds_valid(self)
     }
 }

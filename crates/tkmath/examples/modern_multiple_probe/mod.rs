@@ -3,11 +3,11 @@ use rustycad_tkmath::{
     math::{Function, FunctionWithDerivative, Vector},
     math_root::*,
 };
-struct Objective {
-    mode: i32,
-    fail: usize,
-    target: f64,
-    calls: Vec<(i32, f64)>,
+pub(super) struct Objective {
+    pub(super) mode: i32,
+    pub(super) fail: usize,
+    pub(super) target: f64,
+    pub(super) calls: Vec<(i32, f64)>,
 }
 impl Objective {
     fn formula(&self, x: f64) -> (f64, f64) {
@@ -65,13 +65,13 @@ impl FunctionWithDerivative for Objective {
         self.evaluate(1, x, value, derivative)
     }
 }
-fn trace(f: &mut Objective) {
+pub(super) fn trace(f: &mut Objective) {
     print!("{} ", f.calls.len());
     for (kind, x) in f.calls.drain(..) {
         print!("{} {} ", kind, x.to_bits());
     }
 }
-fn multiple(r: MultipleResult, f: &mut Objective) {
+pub(super) fn multiple(r: MultipleResult, f: &mut Objective) {
     print!(
         "{} {} {} {} ",
         r.status as i32,

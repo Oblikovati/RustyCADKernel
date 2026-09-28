@@ -11,6 +11,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
+use rustycad_tkernel::precision;
 /// Native solver constant; `NEWTON_FTOL_SQ`.
 pub const NEWTON_FTOL_SQ: f64 = 1.0e-32;
 /// Native solver constant; `NEWTON_STEP_TOL_FACTOR`.
@@ -77,7 +78,8 @@ impl Config {
             x_tolerance: tolerance,
             f_tolerance: tolerance,
             relative_tolerance: tolerance,
-            step_min: f64::EPSILON,
+            // Precision::Computational() is the native default StepMin.
+            step_min: precision::computational(),
         }
     }
     /// Validates every native setting; `config.is_valid()`.
@@ -107,7 +109,7 @@ pub struct BoundedConfig {
 }
 impl Default for BoundedConfig {
     fn default() -> Self {
-        Self::new(-2e100, 2e100, 1e-10, 100)
+        Self::new(-precision::infinite(), precision::infinite(), 1e-10, 100)
     }
 }
 impl BoundedConfig {

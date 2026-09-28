@@ -139,3 +139,20 @@ fn compact_boxes_test_transformed_separation_and_inclusion() {
     assert!(flat_inner.is_in_transformed_box(&flat_outer, turn));
     assert!(!flat_inner.is_out_transformed_box(&flat_outer, turn));
 }
+
+#[test]
+fn compact_array_setters_store_scalars_without_conversion() {
+    // SetCenter/SetHSize(std::array) copy storage scalars verbatim, unlike the gp_XY
+    // overloads that round each double; a negative X half size makes the box void again.
+    let mut flat = CompactBox2::<f32>::default();
+    flat.set_center_array([0.1_f32, -2.5]);
+    flat.set_half_size_array([0.25_f32, 1.0]);
+    assert_eq!(flat.center(), &[0.1_f32, -2.5]);
+    assert_eq!(flat.half_size(), &[0.25_f32, 1.0]);
+    assert!(!flat.is_void());
+    let mut solid = CompactBox3::<f64>::from_arrays([1.0, 2.0, 3.0], [0.5, 0.5, 0.5]);
+    solid.set_half_size_array([-1.0, 0.5, 0.5]);
+    assert!(solid.is_void());
+    solid.set_center_array([4.0, 5.0, 6.0]);
+    assert_eq!(solid.center(), &[4.0, 5.0, 6.0]);
+}

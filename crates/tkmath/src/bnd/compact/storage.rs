@@ -33,6 +33,16 @@ impl<T: BoxReal, const N: usize> CompactBounds<T, N> {
     pub const fn from_arrays(center: [T; N], half: [T; N]) -> Self {
         Self { center, half }
     }
+    /// Replaces the center with storage scalars, no conversion (`SetCenter(std::array)`);
+    /// `bounds.set_center_array([1.0, 2.0])`.
+    pub fn set_center_array(&mut self, center: [T; N]) {
+        self.center = center;
+    }
+    /// Replaces the half sizes with storage scalars, unvalidated like native
+    /// `SetHSize(std::array)`; `bounds.set_half_size_array([0.5, 0.5])`.
+    pub fn set_half_size_array(&mut self, half: [T; N]) {
+        self.half = half;
+    }
     /// Resets to the native ±1e30 sentinel; `bounds.clear()`.
     pub fn clear(&mut self) {
         *self = Self::default();

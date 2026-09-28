@@ -13,6 +13,7 @@
 
 //! MathRoot_Brent.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 use super::bracket::finite_value;
+use super::utils::{have_opposite_signs, midpoint};
 use crate::math::Function;
 use crate::math_utils::{Config, ScalarResult, Status};
 struct BrentState {
@@ -27,7 +28,7 @@ struct BrentState {
 }
 impl BrentState {
     fn prepare(&mut self) {
-        if self.fb.is_sign_negative() == self.fc.is_sign_negative() {
+        if !have_opposite_signs(self.fb, self.fc) {
             self.c = self.a;
             self.fc = self.fa;
             self.d = self.b - self.a;
@@ -115,7 +116,7 @@ pub fn brent(f: &mut impl Function, lower: f64, upper: f64, config: &Config) -> 
         result.iterations = iteration + 1;
         state.prepare();
         let tol: f64 = 2.0 * f64::EPSILON * state.b.abs() + 0.5 * config.x_tolerance;
-        let mid: f64 = 0.5 * state.c + 0.5 * (-state.b);
+        let mid: f64 = midpoint(state.c, -state.b);
         if mid.abs() <= tol || state.fb.abs() <= config.f_tolerance {
             result.status = Status::Ok;
             result.root = Some(state.b);

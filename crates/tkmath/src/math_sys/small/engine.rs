@@ -12,7 +12,12 @@
 // commercial license or contractual agreement.
 
 //! Port of MathSys_NewtonTypes/2D/3D/4D at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-use super::{NewtonBoundsN, NewtonOptions, NewtonResultN, merit};
+use super::box_bounds::{bounds_valid, clamp, max_step};
+use super::checks::{
+    LINE_SEARCH_MAX, is_armijo_accepted, is_finite_array, is_step_within_tolerance,
+    merit_directional_derivative, safe_distance_n, safe_norm_n,
+};
+use super::{NewtonBoundsN, NewtonOptions, NewtonResultN};
 use crate::math_poly::extended::LongDouble as E;
 use crate::math_utils::Status;
 pub(super) trait Policy<const N: usize> {
@@ -31,11 +36,16 @@ pub(super) fn solve<const N: usize, P: Policy<N>>(
         x: start,
         ..Default::default()
     };
-    if !options.is_valid() || !bounds.is_valid() || !start.iter().all(|v| v.is_finite()) {
+    if !options.is_valid() || !bounds_valid(bounds) || !is_finite_array(&start) {
         result.status = Status::InvalidInput;
         return result;
     }
-    bounds.clamp(&mut result.x, options);
+    clamp(
+        &mut result.x,
+        bounds,
+        options.allow_soft_bounds,
+        options.soft_bounds_extension,
+    );
     for iteration in 0..options.solver.max_iterations {
         result.iterations = iteration + 1;
         match advance(policy, &mut result, bounds, options) {
@@ -60,27 +70,18 @@ fn advance<const N: usize, P: Policy<N>>(
     options: &NewtonOptions,
 ) -> Result<bool, Status> {
     let (f, j): ([f64; N], [[f64; N]; N]) = policy.system(&result.x)?;
-    result.residual_norm = if P::SYMMETRIC {
-        f[0].hypot(f[1])
-    } else {
-        merit::norm(&f)
-    };
+    result.residual_norm = safe_norm_n(&f);
     if result.residual_norm <= options.solver.f_tolerance {
         return Ok(false);
     }
     let mut delta: [f64; N] = policy
         .direction(&j, &f, result.residual_norm)
         .ok_or(Status::Singular)?;
-    limit_step(&mut delta, bounds.max_step(options.max_step_ratio));
+    limit_step(&mut delta, max_step(bounds, options.max_step_ratio));
     let (next, accepted_norm): ([f64; N], Option<f64>) =
         search(policy, result, &f, &j, &delta, bounds, options)?;
-    let step: [f64; N] = std::array::from_fn(|i| next[i] - result.x[i]);
-    let within: bool = step.iter().all(|v| {
-        v.abs()
-            .partial_cmp(&options.solver.x_tolerance)
-            .is_none_or(|v| !v.is_gt())
-    });
-    result.step_norm = merit::norm(&step);
+    let within: bool = is_step_within_tolerance(&next, &result.x, options.solver.x_tolerance);
+    result.step_norm = safe_distance_n(&next, &result.x);
     result.x = next;
     if let Some(value) = accepted_norm {
         result.residual_norm = value;
@@ -91,11 +92,7 @@ fn advance<const N: usize, P: Policy<N>>(
     Ok(true)
 }
 fn limit_step<const N: usize>(delta: &mut [f64; N], limit: Option<f64>) {
-    let length: f64 = if N == 2 {
-        delta[0].hypot(delta[1])
-    } else {
-        merit::norm(delta)
-    };
+    let length: f64 = safe_norm_n(delta);
     if let Some(maximum) = limit.filter(|v| length > *v) {
         let scale: f64 = maximum / length;
         for value in delta {
@@ -111,7 +108,12 @@ fn candidate<const N: usize>(
     options: &NewtonOptions,
 ) -> [f64; N] {
     let mut next: [f64; N] = std::array::from_fn(|i| x[i] + alpha * delta[i]);
-    bounds.clamp(&mut next, options);
+    clamp(
+        &mut next,
+        bounds,
+        options.allow_soft_bounds,
+        options.soft_bounds_extension,
+    );
     next
 }
 #[allow(clippy::too_many_arguments)]
@@ -127,17 +129,17 @@ fn search<const N: usize, P: Policy<N>>(
     if !options.enable_line_search {
         return Ok((candidate(&result.x, delta, 1.0, bounds, options), None));
     }
-    for iteration in 0..8 {
+    for iteration in 0..LINE_SEARCH_MAX as i32 {
         let next: [f64; N] = candidate(&result.x, delta, 2.0_f64.powi(-iteration), bounds, options);
         let step: [f64; N] = std::array::from_fn(|i| next[i] - result.x[i]);
-        let derivative: E = merit::derivative(f, j, &step);
+        let derivative: E = merit_directional_derivative(f, j, &step);
         if P::SYMMETRIC && derivative.partial_cmp(&E::ZERO) != Some(std::cmp::Ordering::Less) {
             continue;
         }
         let Ok(norm) = policy.value_norm(&next) else {
             continue;
         };
-        if merit::armijo(result.residual_norm, norm, derivative) {
+        if is_armijo_accepted(result.residual_norm, norm, derivative) {
             return Ok((next, P::SYMMETRIC.then_some(norm)));
         }
     }

@@ -45,30 +45,3 @@ impl Default for MinBracketOptions {
         }
     }
 }
-impl MinBracketOptions {
-    pub(super) fn is_valid(&self) -> bool {
-        self.max_iterations > 0
-            && (!self.use_limits
-                || (self.left_limit.is_finite()
-                    && self.right_limit.is_finite()
-                    && self.left_limit < self.right_limit))
-            && (!self.has_fa || self.fa.is_finite())
-            && (!self.has_fb || self.fb.is_finite())
-    }
-    pub(super) fn limited(&self, value: f64) -> f64 {
-        if !self.use_limits {
-            return value;
-        }
-        // std::min/max preserve their first argument on unordered comparison.
-        let upper: f64 = if value < self.right_limit {
-            value
-        } else {
-            self.right_limit
-        };
-        if self.left_limit < upper {
-            upper
-        } else {
-            self.left_limit
-        }
-    }
-}

@@ -21,6 +21,7 @@ use crate::{
     math_utils::Status,
 };
 mod qr;
+pub use qr::solve_qr;
 /// Native rank threshold independent of variable units; `RANK_TOLERANCE`.
 pub const RANK_TOLERANCE: f64 = 64.0 * f64::EPSILON;
 /// Rank-aware linearized step; `LinearStep::default()`.
@@ -115,7 +116,7 @@ fn full_rank_step(
         };
     }
     let mut result: Vector<'static> = Vector::with_size(scaled.col_number() as usize);
-    qr::solve_scaled_qr(scaled, rhs, &mut result, tolerance).then_some(result)
+    solve_qr(scaled, rhs, &mut result, tolerance).then_some(result)
 }
 fn completed_step(solution: Vector<'static>, rank: usize) -> LinearStep {
     let status: Status = if is_finite_vector(&solution) {

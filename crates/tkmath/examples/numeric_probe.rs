@@ -267,7 +267,11 @@ mod gp_core_probe;
 mod gp_planar_probe;
 mod gp_standard_probe;
 mod gp_transform_probe;
+mod mathopt_api_probe;
 mod mathpoly_utils_probe;
+mod mathroot_api_probe;
+mod mathutils_core_api_probe;
+mod mathutils_functor_api_probe;
 mod ncollection_probe;
 mod quaternion_probe;
 mod scale_probe;
@@ -343,11 +347,28 @@ fn main() {
             "box_extra" => bnd_probe::box_extra_case(&values),
             "box2_extra" => bnd_probe::box2_extra_case(&values),
             "compact_trsf" => bnd_probe::compact_trsf_case(&values),
+            "compact_arrays" => bnd_probe::compact_arrays_case(&values),
             "modern_lbfgs" => modern_opt_probe::modern_lbfgs_case(&values),
             "modern_newton" => modern_opt_probe::modern_newton_case(&values),
             "modern_global" => global_modern_probe::modern_global_case(&values),
+            "mathopt_checks" => mathopt_api_probe::mathopt_checks_case(&values),
+            "mathopt_line" => mathopt_api_probe::mathopt_line_case(&values),
+            "mathopt_eval" => mathopt_api_probe::mathopt_eval_case(&values),
+            "mathopt_stationary" => mathopt_api_probe::mathopt_stationary_case(&values),
+            "mathopt_backtrack" => mathopt_api_probe::mathopt_backtrack_case(&values),
+            "mathopt_regularize" => mathopt_api_probe::mathopt_regularize_case(&values),
+            "mathopt_polish" => mathopt_api_probe::mathopt_polish_case(&values),
+            "mathopt_uzawa" => mathopt_api_probe::mathopt_uzawa_case(&values),
+            "integ_lin_tridiag" => integ_lin_api_probe::integ_lin_tridiag_case(&values),
+            "integ_lin_norm" => integ_lin_api_probe::integ_lin_norm_case(&values),
+            "integ_lin_spectral" => integ_lin_api_probe::integ_lin_spectral_case(&values),
+            "integ_lin_singular" => integ_lin_api_probe::integ_lin_singular_case(&values),
             "modern_swarm" => swarm_probe::modern_swarm_case(&values),
             "modern_small" => small_probe::modern_small_case(&values),
+            "mathsys_small_linear" => mathsys_api_probe::mathsys_small_linear_case(&values),
+            "mathsys_small_box" => mathsys_api_probe::mathsys_small_box_case(&values),
+            "mathsys_linear_api" => mathsys_api_probe::mathsys_linear_api_case(&values),
+            "mathsys_finish_api" => mathsys_api_probe::mathsys_finish_api_case(&values),
             "modern_lm" => modern_sys_probe::modern_lm_case(&values),
             "modern_sys" => modern_sys_probe::modern_sys_case(&values),
             "modern_tensor" => modern_tensor_probe::modern_tensor_case(&values),
@@ -355,6 +376,10 @@ fn main() {
             "modern_kronrod" => modern_integ_probe::modern_kronrod_case(&values),
             "modern_integ" => modern_integ_probe::modern_integ_case(&values),
             "modern_multiple" => modern_multiple_probe::modern_multiple_case(&values),
+            "mathroot_utils" => mathroot_api_probe::mathroot_utils_case(&values),
+            "mathroot_trig_roots" => mathroot_api_probe::mathroot_trig_roots_case(&values),
+            "mathroot_sort" => mathroot_api_probe::mathroot_sort_case(&values),
+            "mathroot_search" => mathroot_api_probe::mathroot_search_case(&values),
             "modern_trig" => modern_trig_probe::modern_trig_case(&values),
             "modern_poly" => modern_poly_probe::modern_poly_case(&values),
             "modern_laguerre" => modern_poly_probe::modern_laguerre_case(&values),
@@ -427,6 +452,7 @@ fn main() {
             "bvh_traverse" => bvh_probe::bvh_traverse_case(&values),
             "bvh_nearest" => bvh_probe::bvh_nearest_case(&values),
             "bvh_field" => bvh_probe::bvh_field_case(&values),
+            "bvh_tool_classes" => bvh_probe::bvh_tool_classes_case(&values),
             "gp2d_xy" => gp_planar_probe::xy_case(&values),
             "gp2d_mat" => gp_planar_probe::mat_case(&values),
             "gp2d_trsf" => gp_planar_probe::trsf_case(&values),
@@ -434,6 +460,21 @@ fn main() {
             "gp2d_geom" => gp_planar_probe::geom_case(&values),
             "gp_standard" => gp_standard_probe::gp_standard_case(&values),
             "mathpoly_utils_long" => mathpoly_utils_probe::mathpoly_utils_long_case(&values),
+            "mathutils_functor_poly" => {
+                mathutils_functor_api_probe::mathutils_functor_poly_case(&values)
+            }
+            "mathutils_functor_arith" => {
+                mathutils_functor_api_probe::mathutils_functor_arith_case(&values)
+            }
+            "mathutils_functor_lambda" => {
+                mathutils_functor_api_probe::mathutils_functor_lambda_case(&values)
+            }
+            "mathutils_functor_vlambda" => {
+                mathutils_functor_api_probe::mathutils_functor_vlambda_case(&values)
+            }
+            "mathutils_functor_nd" => {
+                mathutils_functor_api_probe::mathutils_functor_nd_case(&values)
+            }
             "ncollection_vec" => ncollection_probe::ncollection_vec_case(&values),
             "ncollection_mat" => ncollection_probe::ncollection_mat_case(&values),
             "gp3d_trsf" => gp_transform_probe::gp3_trsf_case(&values),
@@ -446,6 +487,21 @@ fn main() {
             "gp3d_pln" => gp_core_probe::gp3_pln_case(&values),
             "gp3d_frame" => gp_core_probe::gp3_frame_case(&values),
             "gp3d_lerp" => gp_core_probe::gp3_lerp_case(&values),
+            "mathutils_core_scalar" => {
+                mathutils_core_api_probe::mathutils_core_scalar_case(&values)
+            }
+            "mathutils_core_defaults" => {
+                mathutils_core_api_probe::mathutils_core_defaults_case(&values)
+            }
+            "mathutils_core_vector" => {
+                mathutils_core_api_probe::mathutils_core_vector_case(&values)
+            }
+            "mathutils_core_poly" => mathutils_core_api_probe::mathutils_core_poly_case(&values),
+            "mathutils_core_deriv" => mathutils_core_api_probe::mathutils_core_deriv_case(&values),
+            "mathutils_core_gauss" => mathutils_core_api_probe::mathutils_core_gauss_case(&values),
+            "mathutils_core_random" => {
+                mathutils_core_api_probe::mathutils_core_random_case(&values)
+            }
             "mathpoly_utils_complex" => mathpoly_utils_probe::mathpoly_utils_complex_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
@@ -505,6 +561,8 @@ mod modern_opt_probe;
 mod modern_eigen_probe;
 mod modern_factors_probe;
 mod modern_integ_probe;
+
+mod integ_lin_api_probe;
 mod modern_multiple_probe;
 mod modern_poly_probe;
 mod modern_sys_probe;
@@ -512,6 +570,8 @@ mod modern_tensor_probe;
 mod modern_trig_probe;
 
 mod small_probe;
+
+mod mathsys_api_probe;
 
 mod swarm_probe;
 

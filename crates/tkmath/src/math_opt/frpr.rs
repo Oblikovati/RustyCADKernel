@@ -14,7 +14,7 @@
 //! MathOpt_FRPR.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 use super::utils::*;
 use super::*;
-use crate::math_utils::{dot_product, wolfe_search};
+use crate::math_utils::{ARMIJO_C1, dot_product, wolfe_search};
 /// Native beta formula, including invalid integer values; `ConjugateGradientFormula::PolakRibiere`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum ConjugateGradientFormula {
@@ -116,7 +116,7 @@ impl FrprState {
             &self.dir,
             &self.g,
             self.fx,
-            [1.0, 1e-4, 0.1],
+            [1.0, ARMIJO_C1, FRPR_WOLFE_CURVATURE],
             20,
         );
         if result.alpha < cfg.step_min {
@@ -138,7 +138,7 @@ impl FrprState {
         }
         let last: LineSearchResult = self.line(f, cfg);
         if !last.is_valid {
-            return Err(line_failure(first.status, last.status));
+            return Err(failure_after_fallback(first.status, last.status));
         }
         self.restarts = 0;
         Ok(last)
@@ -266,7 +266,7 @@ pub fn frpr(
     start: &Vector<'_>,
     cfg: &FrprConfig,
 ) -> VectorResult {
-    if !valid_config(&cfg.base) || !finite_vector(start) {
+    if !is_valid_config(&cfg.base) || !is_finite_vector(start) {
         return VectorResult {
             status: Status::InvalidInput,
             ..Default::default()

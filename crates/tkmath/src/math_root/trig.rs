@@ -12,8 +12,11 @@
 // commercial license or contractual agreement.
 
 //! Trigonometric equations preserving pinned MathRoot_Trig.hxx branches.
+use super::utils::{add_periodic_trig_root, is_valid_bounds, map_periodic_trig_root};
+use crate::bvh::std_max;
 use crate::math_poly::{PolyResult, quartic};
 use crate::math_utils::Status;
+use rustycad_tkernel::precision::{computational, is_negative_infinite, is_positive_infinite};
 use std::f64::consts::{PI, TAU};
 mod refine;
 mod special;
@@ -41,25 +44,6 @@ impl TrigResult {
             ..Default::default()
         }
     }
-    fn insert(&mut self, root: f64, tolerance: f64) {
-        let mut position: usize = 0;
-        while position < self.nb_roots && self.roots[position] < root {
-            if (root - self.roots[position]).abs() <= tolerance {
-                return;
-            }
-            position += 1;
-        }
-        if (position < self.nb_roots && (root - self.roots[position]).abs() <= tolerance)
-            || self.nb_roots == 4
-        {
-            return;
-        }
-        for i in (position + 1..=self.nb_roots).rev() {
-            self.roots[i] = self.roots[i - 1];
-        }
-        self.roots[position] = root;
-        self.nb_roots += 1;
-    }
 }
 impl From<&TrigResult> for bool {
     fn from(result: &TrigResult) -> bool {
@@ -74,54 +58,37 @@ struct Interval {
 }
 impl Interval {
     fn new(lower: f64, upper: f64, epsilon: f64) -> Self {
-        let (lower, delta): (f64, f64) = if lower <= -1e100 && upper >= 1e100 {
-            (0.0, TAU)
-        } else if upper >= 1e100 {
-            (lower, TAU)
-        } else if lower <= -1e100 {
-            (upper - TAU, TAU)
-        } else {
-            (lower, (upper - lower).min(TAU))
-        };
+        let (lower, delta): (f64, f64) =
+            if is_negative_infinite(lower) && is_positive_infinite(upper) {
+                (0.0, TAU)
+            } else if is_positive_infinite(upper) {
+                (lower, TAU)
+            } else if is_negative_infinite(lower) {
+                (upper - TAU, TAU)
+            } else {
+                (
+                    lower,
+                    if upper - lower > TAU {
+                        TAU
+                    } else {
+                        upper - lower
+                    },
+                )
+            };
         Self {
             lower,
             upper: lower + delta,
             delta,
-            tolerance: epsilon.max(f64::EPSILON * delta.abs()),
+            tolerance: std_max(epsilon, computational() * delta.abs()),
         }
     }
-    fn mapped(&self, mut root: f64) -> Option<f64> {
-        root += ((self.lower - root) / TAU).floor() * TAU;
-        if root < self.lower - self.tolerance {
-            root += TAU;
-        }
-        if root < self.lower {
-            root = self.lower;
-        }
-        if root > self.upper + self.tolerance {
-            return None;
-        }
-        if root > self.upper {
-            root = self.upper;
-        }
-        let mut count: usize = 0;
-        if !super::utils::compute_periodic_root_count(
-            root,
-            self.upper,
-            TAU,
-            self.tolerance,
-            false,
-            &mut count,
-        ) || count == 0
-        {
-            return None;
-        }
-        Some(root)
+    fn mapped(&self, root: f64) -> Option<f64> {
+        let mut mapped: f64 = 0.0;
+        map_periodic_trig_root(root, self.lower, self.upper, self.tolerance, &mut mapped)
+            .then_some(mapped)
     }
     fn add(&self, out: &mut TrigResult, root: f64) {
-        if let Some(root) = self.mapped(root) {
-            out.insert(root, self.tolerance);
-        }
+        add_periodic_trig_root(out, root, self.lower, self.upper, self.tolerance);
     }
     fn add_all(&self, out: &mut TrigResult, roots: &[f64]) {
         for &root in roots {
@@ -131,11 +98,9 @@ impl Interval {
 }
 fn valid_input(c: &[f64; 5], lower: f64, upper: f64, epsilon: f64) -> bool {
     c.iter().all(|x| x.is_finite())
-        && lower.is_finite()
-        && upper.is_finite()
-        && lower < upper
-        && lower < 1e100
-        && upper > -1e100
+        && is_valid_bounds(lower, upper)
+        && !is_positive_infinite(lower)
+        && !is_negative_infinite(upper)
         && epsilon.is_finite()
         && epsilon > 0.0
 }

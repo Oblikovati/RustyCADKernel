@@ -17,6 +17,7 @@ mod convergence;
 mod core;
 mod domain;
 mod extended;
+mod glibc_cbrt;
 mod types;
 pub use config::*;
 pub use convergence::*;
@@ -46,7 +47,13 @@ pub mod vector;
 pub(crate) use line_search::BrentState;
 
 mod gauss;
-pub use gauss::get_gauss_points_and_weights;
+pub use gauss::{
+    get_gauss_points_and_weights, get_kronrod_points_and_weights,
+    get_ordered_gauss_points_and_weights,
+};
 
 mod random;
 pub use random::RandomGenerator;
+
+/// `MathUtils::Utils` helpers (bracketing and finite-difference building blocks).
+pub mod utils;

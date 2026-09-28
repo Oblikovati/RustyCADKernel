@@ -181,7 +181,7 @@ impl PSOConfig {
         }
     }
     pub(super) fn valid(&self) -> bool {
-        super::super::utils::valid_config(&self.solver)
+        super::super::utils::is_valid_config(&self.solver)
             && self.particles > 0
             && self.omega.is_finite()
             && self.omega_min.is_finite()

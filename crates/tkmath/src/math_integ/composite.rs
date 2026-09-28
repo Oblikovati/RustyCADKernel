@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 //! MathInteg_Gauss.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-use super::gauss::{gauss, valid_interval};
+use super::gauss::{GAUSS_MAX_ORDER, gauss, valid_interval};
 use crate::{
     math::Function,
     math_utils::{IntegResult, Status},
@@ -43,7 +43,7 @@ pub fn gauss_composite(
         result.value = result.value.map(|value| -value);
         return result;
     }
-    composite_intervals(f, lower, upper, intervals, order.min(61))
+    composite_intervals(f, lower, upper, intervals, order.min(GAUSS_MAX_ORDER))
 }
 fn composite_intervals(
     f: &mut impl Function,

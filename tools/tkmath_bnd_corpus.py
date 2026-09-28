@@ -7,7 +7,8 @@ tiny and huge clouds; mismatched tolerance bounds), the OBB queries and Add/Enla
 SetVoid/Position/DumpJson; Bnd_BoundSortBox in every initialization mode with void,
 open, degenerate and large boxes, grid resolutions 8 to 32 and box/plane Compare order;
 Bnd_Tools; the remaining Bnd_Box/Bnd_Box2d members; and the transformed IsOut/IsIn of
-Bnd_B2/Bnd_B3 (double and float) for every transform form.
+Bnd_B2/Bnd_B3 (double and float) for every transform form, plus their array constructors,
+SetCenter/SetHSize overloads, Center/HSize, Add and Clear.
 Every request stays inside the native defined domain: no empty point list, no null
 direction and no zero scale.
 """
@@ -29,6 +30,7 @@ def append_bnd_requests(requests: list[str]) -> None:
     append_sortbox_requests(rng, requests)
     append_box_extra_requests(rng, requests)
     append_compact_requests(rng, requests)
+    append_compact_array_requests(random.Random(20260928), requests)
 
 
 def rotation(rng: random.Random) -> list[list[float]]:
@@ -250,3 +252,15 @@ def append_compact_requests(rng: random.Random, requests: list[str]) -> None:
         else:
             second = [rng.uniform(-6, 6) for _ in range(3)]+[rng.uniform(0, 3) for _ in range(3)]
         requests.append(line('compact_trsf', first+second+trsf3_spec(rng)+trsf2_spec(rng)))
+
+
+def append_compact_array_requests(rng: random.Random, requests: list[str]) -> None:
+    """Bnd_B2/Bnd_B3 array constructors and setters, Center/HSize, Add and Clear: random,
+    float-inexact (0.1), zero, negative (void) and huge half sizes."""
+    specials = [[0.1, -0.3, 0.7], [0.0, 0.0, 0.0], [-1.0, 0.5, 0.5], [1e20, 1e-20, 3e38], [-1e-6, 2.0, 2.0]]
+    for case in range(200):
+        center = [rng.uniform(-5, 5) for _ in range(3)]
+        half = specials[case % len(specials)] if case < 2*len(specials) else [rng.uniform(0, 3) for _ in range(3)]
+        point = [rng.uniform(-8, 8) for _ in range(3)]
+        other = [rng.uniform(-5, 5) for _ in range(3)]+[rng.choice([0.0, rng.uniform(0, 4)]) for _ in range(3)]
+        requests.append(line('compact_arrays', center+half+point+other))

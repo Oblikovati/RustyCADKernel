@@ -4,10 +4,10 @@ use rustycad_tkmath::{
     math_integ::*,
     math_utils::{IntegConfig, IntegResult, get_gauss_points_and_weights},
 };
-struct Integrand {
-    mode: i32,
-    fail: usize,
-    calls: Vec<f64>,
+pub(super) struct Integrand {
+    pub(super) mode: i32,
+    pub(super) fail: usize,
+    pub(super) calls: Vec<f64>,
 }
 impl Function for Integrand {
     fn value(&mut self, x: f64, value: &mut f64) -> bool {
@@ -38,7 +38,7 @@ fn optional(value: Option<f64>) {
         print!("{} ", v.to_bits());
     }
 }
-fn result(r: IntegResult, f: &mut Integrand) {
+pub(super) fn result(r: IntegResult, f: &mut Integrand) {
     print!(
         "{} {} {} ",
         r.status as i32, r.iterations, r.number_of_points

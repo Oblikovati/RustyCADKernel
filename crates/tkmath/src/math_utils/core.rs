@@ -99,12 +99,13 @@ pub const fn square(value: f64) -> f64 {
 pub const fn cube(value: f64) -> f64 {
     value * value * value
 }
-/// Retains native signed cube-root dispatch; `cube_root(x)`.
+/// Retains native signed cube-root dispatch through the oracle's glibc `cbrt` (Rust's
+/// `f64::cbrt` is correctly rounded and can differ by one ulp); `cube_root(x)`.
 pub fn cube_root(value: f64) -> f64 {
     if value >= 0.0 {
-        value.cbrt()
+        super::glibc_cbrt::cbrt(value)
     } else {
-        -(-value).cbrt()
+        -super::glibc_cbrt::cbrt(-value)
     }
 }
 /// Tests finite values; `is_finite(x)`.
@@ -169,15 +170,7 @@ pub fn compute_scale_factor(coefficients: &[f64]) -> f64 {
     if maximum == 0.0 || (ZERO_TOL..=1e15).contains(&maximum) {
         return 1.0;
     }
-    power_of_two(1 - frexp_exponent(maximum))
-}
-fn frexp_exponent(value: f64) -> i32 {
-    let bits: u64 = value.to_bits();
-    let exponent: i32 = ((bits >> 52) & 0x7ff) as i32;
-    if exponent != 0 {
-        return exponent - 1022;
-    }
-    (63 - bits.leading_zeros() as i32) - 1073
+    power_of_two(1 - super::glibc_cbrt::frexp(maximum).1)
 }
 fn power_of_two(exponent: i32) -> f64 {
     if exponent > 1023 {

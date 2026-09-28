@@ -20,6 +20,7 @@ from tkmath_plib_corpus import append_plib_requests
 from tkmath_elementary_corpus import append_elementary_requests
 from tkmath_bvh_corpus import append_bvh_requests
 from tkmath_bvh_query_corpus import append_bvh_query_requests
+from tkmath_bvh_tool_classes_corpus import append_bvh_tool_classes_requests
 from tkmath_bsplclib_corpus import append_bsplclib_requests
 from tkmath_bsplslib_corpus import append_bsplslib_requests
 from tkmath_gp_planar_corpus import append_gp_planar_requests
@@ -28,6 +29,12 @@ from tkmath_ncollection_vec_corpus import append_ncollection_vec_requests
 from tkmath_gp_transform_corpus import append_gp_transform_requests
 from tkmath_convert_corpus import append_convert_requests
 from tkmath_gp_core_corpus import append_gp_core_requests
+from tkmath_mathutils_core_api_corpus import append_mathutils_core_api_requests
+from tkmath_mathutils_functor_api_corpus import append_mathutils_functor_api_requests
+from tkmath_integ_lin_api_corpus import append_integ_lin_api_requests
+from tkmath_mathopt_api_corpus import append_mathopt_api_requests
+from tkmath_mathroot_api_corpus import append_mathroot_api_requests
+from tkmath_mathsys_api_corpus import append_mathsys_api_requests
 from tkmath_bnd_corpus import append_bnd_requests
 
 
@@ -426,7 +433,14 @@ def corpus() -> str:
     append_gp_transform_requests(requests)
     append_convert_requests(requests)
     append_gp_core_requests(requests)
+    append_mathutils_core_api_requests(requests)
+    append_mathutils_functor_api_requests(requests)
+    append_integ_lin_api_requests(requests)
+    append_mathopt_api_requests(requests)
+    append_mathroot_api_requests(requests)
+    append_mathsys_api_requests(requests)
     append_bnd_requests(requests)
+    append_bvh_tool_classes_requests(requests)
     return '\n'.join(requests)+'\n'           
 
 
