@@ -61,6 +61,7 @@ pub fn surface(r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
             let basis = curve(r)?;
             Ok(Handle::new(GeomSurfaceOfRevolution::new(&basis, a)?).cast())
         }
+        8 => super::bspline_surface::spec(r),
         _ => panic!("surface kind {kind} has no Rust builder in the probe"),
     }
 }

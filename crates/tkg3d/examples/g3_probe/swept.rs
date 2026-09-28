@@ -8,7 +8,8 @@ use super::shapes;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg3d::geom::{
-    GeomSurface, GeomSurfaceOfLinearExtrusion, GeomSurfaceOfRevolution, GeomSweptSurface,
+    GeomBSplineSurface, GeomSurface, GeomSurfaceOfLinearExtrusion, GeomSurfaceOfRevolution,
+    GeomSweptSurface,
 };
 use rustycad_tkg3d::geom_eval::{
     Domain2d, Map2d, RepSurfaceDesc, RepSurfaceDescDerivBounded, RepSurfaceDescFull,
@@ -88,6 +89,9 @@ fn surface_desc(r: &mut Reader, rep: Handle<dyn GeomSurface>) -> Handle<dyn RepS
 }
 
 fn has_rep(s: &Handle<dyn GeomSurface>) -> bool {
+    if let Some(b) = s.cast::<GeomBSplineSurface>().get() {
+        return b.has_eval_representation();
+    }
     if let Some(e) = s.cast::<GeomSurfaceOfLinearExtrusion>().get() {
         return e.has_eval_representation();
     }
@@ -97,6 +101,9 @@ fn has_rep(s: &Handle<dyn GeomSurface>) -> bool {
 }
 
 fn set_rep(s: &Handle<dyn GeomSurface>, d: Handle<dyn RepSurfaceDesc>) -> Result<(), Failure> {
+    if let Some(b) = s.cast::<GeomBSplineSurface>().get() {
+        return b.set_eval_representation(d);
+    }
     if let Some(e) = s.cast::<GeomSurfaceOfLinearExtrusion>().get() {
         return e.set_eval_representation(d);
     }
@@ -107,6 +114,9 @@ fn set_rep(s: &Handle<dyn GeomSurface>, d: Handle<dyn RepSurfaceDesc>) -> Result
 }
 
 fn clear_rep(s: &Handle<dyn GeomSurface>) {
+    if let Some(b) = s.cast::<GeomBSplineSurface>().get() {
+        b.clear_eval_representation();
+    }
     if let Some(e) = s.cast::<GeomSurfaceOfLinearExtrusion>().get() {
         e.clear_eval_representation();
     }
