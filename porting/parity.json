@@ -8676,6 +8676,14 @@
       "notes": "Returns Result because a name of exactly \"()\" or \".get()\" raises Standard_OutOfRange. Native quirk kept: any name longer than one byte starting with 'a' loses it, and \"an\" loses both bytes (\"angle\" -> \"gle\"). TCollection_AsciiString arguments are impl AsRef<[u8]> (one-based positions as i32), and TCollection exceptions (SubString, Location) are reproduced with their messages. The differential probe (services_ operations) compares it with the native kernel."
     },
     {
+      "upstream_id": "Plugin::Load(const Standard_GUID&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Plugin/Plugin.hxx",
+      "rust_item": "rustycad_tkernel::plugin::PluginLoader::load",
+      "status": "implemented",
+      "notes": "Loading native C++ libraries has no meaning for the port: PluginLoader takes the resource io/environment, a PluginLibraries seam (StaticPluginLibraries registers PLUGINFACTORY factories by library file name) and a console writer. It reads <GUID>.Location from a fresh \"Plugin\" ResourceCatalog, builds lib<name>.so / lib<name>.dylib / <name>.dll, and raises Plugin_Failure with the native messages (\"could not find the resource:...\\n\", \"could not open:<name>; reason:<dlerror>\", \"could not find the factory in:<name><dlerror>\"), printing the first two to the console when verbose with the native spacing. Refusals use glibc's dlerror wording. The native cache is process-wide; here it belongs to the loader, and only successes are cached as natively. The theVerbose default (true) is passed explicitly. The product type is the factory's return type (native: handle<Standard_Transient>). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
       "upstream_id": "BVH::VectorType<T,1>::Type",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BVH/BVH_Types.hxx",

@@ -5,6 +5,7 @@ mod dump;
 mod locale;
 mod memory;
 mod mmgr;
+mod plugin;
 mod readers;
 mod sync;
 
@@ -40,4 +41,5 @@ pub const CASES: &[(&str, Case)] = &[
     ("services_dump_process", dump::process_case),
     ("services_dump_init_value", dump::init_value_case),
     ("services_dump_init_reals", dump::init_reals_case),
+    ("services_plugin", plugin::plugin_case),
 ];

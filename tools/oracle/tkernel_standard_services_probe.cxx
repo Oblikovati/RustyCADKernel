@@ -6,6 +6,7 @@
 #include "tkernel_standard_services_readers.cxx"
 #include "tkernel_standard_services_array_stream.cxx"
 #include "tkernel_standard_services_dump.cxx"
+#include "tkernel_standard_services_plugin.cxx"
 
 namespace standard_services_probe
 {
@@ -35,5 +36,6 @@ static const tkernel_probe::Table cases = {
   {"services_dump_process", dump_process},
   {"services_dump_init_value", dump_init_value},
   {"services_dump_init_reals", dump_init_reals},
+  {"services_plugin", plugin_case},
 };
 } // namespace standard_services_probe
