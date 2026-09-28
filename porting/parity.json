@@ -10362,6 +10362,918 @@
       "rust_item": "rustycad_tkernel::ncollection::Mat4::inverted",
       "status": "implemented",
       "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_LinearBuilder::BVH_LinearBuilder(int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::new",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_LinearBuilder::Build(BVH_Set*,BVH_Tree*,const BVH_Box&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::build",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_LinearBuilder::emitHierachy(BVH_Tree*,const NCollection_Array1<BVH_EncodedLink>&,int,int,int,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::emit_hierarchy",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_LinearBuilder::lowerBound(const NCollection_Array1<BVH_EncodedLink>&,int,int,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhLinearBuilder::lower_bound",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::UpdateBounds(BVH_Set*,BVH_Tree*,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::update_bounds",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::BoundData",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhUpdateBoundTask::run",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::UpdateBoundTask::UpdateBoundTask(bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhUpdateBoundTask::new",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::UpdateBoundTask::operator()(const BoundData&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_LinearBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhUpdateBoundTask::run",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilder::BVH_SpatialMedianBuilder(int,int,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_SpatialMedianBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSpatialMedianBuilder::new",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilder::BVH_SweepPlaneBuilder(int,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_SweepPlaneBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSweepPlaneBuilder::new",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilder::buildNode(BVH_Set*,BVH_Tree*,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_SweepPlaneBuilder.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSweepPlaneBuilder::build_node",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BaseTraverse::IsMetricBetter(const MetricType&,const MetricType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBaseTraverse::is_metric_better",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BaseTraverse::RejectMetric(const MetricType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBaseTraverse::reject_metric",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BaseTraverse::Stop() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBaseTraverse::stop",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Traverse::BVH_Traverse()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTraverse",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Traverse::SetBVHSet(BVHSetType*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSetTraverse::bvh_set_mut",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Traverse::AcceptMetric(const MetricType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTraverse::accept_metric",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Traverse::RejectNode(const BVH_VecNt&,const BVH_VecNt&,MetricType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTraverse::reject_node",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Traverse::Accept(int,const MetricType&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTraverse::accept",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Traverse::Select()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSetTraverse::select",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Traverse::Select(const handle<BVH_Tree>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTraverse::select_tree",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Traverse::BVH_NodeInStack",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhNodeInStack",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::BVH_PairTraverse()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairTraverse",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::SetBVHSets(BVHSetType*,BVHSetType*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairSetTraverse::bvh_sets_mut",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::RejectNode(const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,const BVH_VecNt&,MetricType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairTraverse::reject_node",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::Accept(int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairTraverse::accept",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::Select()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairSetTraverse::select",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::Select(const handle<BVH_Tree>&,const handle<BVH_Tree>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairTraverse::select_trees",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::BVH_PairNodesInStack",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairNodesInStack",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVHSetType::BVH() (Select requirement)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhTreeOwner",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Traverse::Select(const handle<BVH_Tree>&) (definition)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.lxx",
+      "rust_item": "rustycad_tkmath::bvh::select_elements",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairTraverse::Select(const handle<BVH_Tree>&,const handle<BVH_Tree>&) (definition)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Traverse.lxx",
+      "rust_item": "rustycad_tkmath::bvh::select_pairs",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::BVH_Distance()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::default",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::SetObject(const ObjectType&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::set_object",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::ComputeDistance()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceTraverse::compute_distance",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::is_done",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::Distance() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::distance",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::IsMetricBetter(const NumType&,const NumType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::is_metric_better",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::RejectMetric(const NumType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::reject_metric",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::Stop() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::stop",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::myDistance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::set_distance",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Distance::myObject",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Distance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistance::object",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::BVH_PairDistance()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::default",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::ComputeDistance()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistanceTraverse::compute_distance",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::is_done",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::Distance() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::distance",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::IsMetricBetter(const NumType&,const NumType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::is_metric_better",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::RejectNode(cmin1,cmax1,cmin2,cmax2,NumType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::reject_node",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::RejectMetric(const NumType&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::reject_metric",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::Stop() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::stop",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_PairDistance::myDistance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_PairDistance.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPairDistance::set_distance",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::BVH_BoxSet()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::default",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::BVH_BoxSet(const handle<BVH_Builder>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::new",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::SetSize(size_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::set_size",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::Add(const DataType&,const BVH_Box&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::add",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::Build()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::build",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::Clear()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::clear",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::Box(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::element_box",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::Center(int,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::center",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::Size() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::size",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::Swap(int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::swap",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_BoxSet::Element(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_BoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhBoxSet::element",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::BVH_IndexedBoxSet()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::default",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::BVH_IndexedBoxSet(const handle<BVH_Builder>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::new",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::SetSize(size_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::set_size",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::Add(const DataType&,const BVH_Box&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::add",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::Clear()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::clear",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::Box(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::element_box",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::Swap(int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::swap",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_IndexedBoxSet::Element(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_IndexedBoxSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhIndexedBoxSet::element",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::BVH_ObjectList",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectList",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::BVH_ObjectSet()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::default",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::Clear()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::clear",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::Objects()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::objects_mut",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::Objects() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::objects",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::Size() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::size",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::Box(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::element_box",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::Center(int,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::center",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ObjectSet::Swap(int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_ObjectSet.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhObjectSet::swap",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Geometry::BVH_Geometry()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::default",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Geometry::BVH_Geometry(const handle<BVH_Builder>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::new",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Geometry::IsDirty() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::is_dirty",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Geometry::MarkDirty()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::mark_dirty",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Geometry::Box() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::cached_box",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Geometry::BVH()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::bvh",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Geometry::Builder() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::builder",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Geometry::SetBuilder(const handle<BVH_Builder>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::set_builder",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_Geometry::Update()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_Geometry.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhGeometry::update",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::BVH_DistanceField(int,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::new",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::Build(BVH_Geometry&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::build",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::IsParallel() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::is_parallel",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::SetParallel(bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::set_parallel",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::PackedData() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::packed_data",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::Voxel(int,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::voxel_mut",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::Voxel(int,int,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::voxel",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::DimensionX() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::dimension_x",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::DimensionY() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::dimension_y",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::DimensionZ() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::dimension_z",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::VoxelSize() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::voxel_size",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::CornerMin() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::corner_min",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::CornerMax() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::corner_max",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_DistanceField::BuildSlices(BVH_Geometry&,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.hxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::build_slices",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::DistanceToBox(pnt,min,max)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::distance_to_box",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::DirectionToNearestPoint(pnt,a,b,c)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::direction_to_nearest_point",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::SquareDistanceToPoint",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSquareDistanceToPoint",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::SquareDistanceToPoint::IsOutside() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSquareDistanceToPoint::is_outside",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::SquareDistanceToPoint::RejectNode(const BVH_VecNt&,const BVH_VecNt&,T&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhSquareDistanceToPoint::reject_node",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::PointTriangulationSquareDistance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointTriangulationSquareDistance",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::PointTriangulationSquareDistance::Accept(int,const T&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointTriangulationSquareDistance::accept",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::SquareDistanceToObject(BVH_Object*,pnt,bool&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::square_distance_to_object",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::PointGeometrySquareDistance",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointGeometrySquareDistance",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::PointGeometrySquareDistance::Accept(int,const T&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhPointGeometrySquareDistance::accept",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH::SquareDistanceToGeomerty(BVH_Geometry&,pnt,bool&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::square_distance_to_geometry",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "BVH_ParallelDistanceFieldBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BVH/BVH_DistanceField.lxx",
+      "rust_item": "rustycad_tkmath::bvh::BvhDistanceField::build",
+      "status": "implemented",
+      "notes": "Explicit BVH mapping (docs/bvh-design.md): templates are generic over one NCollection vector type; accessors that raise Standard_OutOfRange return Failure errors. API inventory completeness remains pending."
     }
   ],
   "tests": [
@@ -55566,6 +56478,1280 @@
       "rust_target": "bvh_tree",
       "rust_test": "BVH_TreeTest__MinMaxPointBuffers",
       "rust_source": "crates/tkmath/tests/bvh_tree.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.DefaultConstructor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__DefaultConstructor",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.CustomParameters",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__CustomParameters",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.BuildEmptySet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__BuildEmptySet",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.BuildSingleElement",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__BuildSingleElement",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.BuildMultipleElements",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__BuildMultipleElements",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.SAHOptimization",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__SAHOptimization",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.LeafNodeSizeRespected",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__LeafNodeSizeRespected",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.BuildWithDifferentBinCounts",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__BuildWithDifferentBinCounts",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.Build2D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__Build2D",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.RandomDistribution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__RandomDistribution",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.CompareTreeQuality",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__CompareTreeQuality",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.MaxDepthRespected",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__MaxDepthRespected",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.OverlappingBoxes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__OverlappingBoxes",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_BinnedBuilderTest.IdenticalBoxes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_BinnedBuilder_Test.cxx",
+      "source_sha256": "d5d3d09fb63871d2fbfb9bbd24652ba0fd844ac6dbf2edbadd00ce5ce8470c30",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_binned_builder",
+      "rust_test": "BVH_BinnedBuilderTest__IdenticalBoxes",
+      "rust_source": "crates/tkmath/tests/bvh_binned_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.DefaultConstructor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__DefaultConstructor",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.AddSingleTriangle",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__AddSingleTriangle",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.AddMultipleTriangles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__AddMultipleTriangles",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.BoxForSingleTriangle",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__BoxForSingleTriangle",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.BoxForDegenerateTriangle",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__BoxForDegenerateTriangle",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.BoxForFlatTriangle",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__BoxForFlatTriangle",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.CenterComputation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__CenterComputation",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.CenterAlongXAxis",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__CenterAlongXAxis",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.CenterAlongYAxis",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__CenterAlongYAxis",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.CenterAlongZAxis",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__CenterAlongZAxis",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.SwapTwoTriangles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__SwapTwoTriangles",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.SwapPreservesVertices",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__SwapPreservesVertices",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.Triangulation2D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__Triangulation2D",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.SharedVertices",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__SharedVertices",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.FloatPrecision",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__FloatPrecision",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TriangulationTest.NegativeCoordinates",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Triangulation_Test.cxx",
+      "source_sha256": "88b68636e326eafabff2191139558ec6c927393ceda7daf97fdc08a6e9e8fafb",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_triangulation",
+      "rust_test": "BVH_TriangulationTest__NegativeCoordinates",
+      "rust_source": "crates/tkmath/tests/bvh_triangulation.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.DefaultConstructor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__DefaultConstructor",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.CustomParameters",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__CustomParameters",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.BuildEmptySet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__BuildEmptySet",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.BuildSingleElement",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__BuildSingleElement",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.BuildMultipleElements",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__BuildMultipleElements",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.MortonCodeSorting",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__MortonCodeSorting",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.LeafNodeSizeRespected",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__LeafNodeSizeRespected",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.Build2D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__Build2D",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.LargeDataSet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__LargeDataSet",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.MaxDepthParameter",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__MaxDepthParameter",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.ClusteredData",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__ClusteredData",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.OverlappingBoxes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__OverlappingBoxes",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.IdenticalBoxes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__IdenticalBoxes",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.CompareWithBinnedBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__CompareWithBinnedBuilder",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_LinearBuilderTest.NegativeCoordinates",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_LinearBuilder_Test.cxx",
+      "source_sha256": "1a1533f064cfd23469eb564c9f8dd69bad1b8a2f9c91c63b15f0fd2bfcace1aa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_linear_builder",
+      "rust_test": "BVH_LinearBuilderTest__NegativeCoordinates",
+      "rust_source": "crates/tkmath/tests/bvh_linear_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.DefaultConstructor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__DefaultConstructor",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.CustomParameters",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__CustomParameters",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.BuildEmptySet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__BuildEmptySet",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.BuildSingleTriangle",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__BuildSingleTriangle",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.BuildMultipleTriangles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__BuildMultipleTriangles",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.LeafNodeSizeRespected",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__LeafNodeSizeRespected",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.MaxDepthRespected",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__MaxDepthRespected",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.SplitsAtSpatialMedian",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__SplitsAtSpatialMedian",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.Build2D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__Build2D",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.UseMainAxisFlag",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__UseMainAxisFlag",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.CompareWithBinnedBuilder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__CompareWithBinnedBuilder",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.ClusteredData",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__ClusteredData",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.FloatPrecision",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__FloatPrecision",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.IdenticalBoxes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__IdenticalBoxes",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SpatialMedianBuilderTest.LargeDataSet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SpatialMedianBuilder_Test.cxx",
+      "source_sha256": "d4988d68e9b2cbd3c09bdadbe5a28fe78d3b35ad7391c55f998558a5b58f4f51",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_spatial_median_builder",
+      "rust_test": "BVH_SpatialMedianBuilderTest__LargeDataSet",
+      "rust_source": "crates/tkmath/tests/bvh_spatial_median_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.DefaultConstructor",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__DefaultConstructor",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.CustomParameters",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__CustomParameters",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.BuildEmptyTriangulation",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__BuildEmptyTriangulation",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.BuildSingleTriangle",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__BuildSingleTriangle",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.BuildTwoTriangles",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__BuildTwoTriangles",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.BuildMultipleTriangles_Grid",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__BuildMultipleTriangles_Grid",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.SplitAlongDifferentAxes",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__SplitAlongDifferentAxes",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.DegenerateCase_AllSamePosition",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__DegenerateCase_AllSamePosition",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.SAHQuality_VerifyBetter",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__SAHQuality_VerifyBetter",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_SweepPlaneBuilderTest.LeafSize_RespectMaxSize",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_SweepPlaneBuilder_Test.cxx",
+      "source_sha256": "0eb58d5e8c3409a60c6b88ed030c1f2e2065ae640b1e8ef900fab4b0baba756b",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_sweep_plane_builder",
+      "rust_test": "BVH_SweepPlaneBuilderTest__LeafSize_RespectMaxSize",
+      "rust_source": "crates/tkmath/tests/bvh_sweep_plane_builder.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.CountAllElements",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__CountAllElements",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.EmptyTree",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__EmptyTree",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.NullTree",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__NullTree",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.BoxSelection",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__BoxSelection",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.EmptyBoxSelection",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__EmptyBoxSelection",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.FullBoxSelection",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__FullBoxSelection",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.DistanceBasedSelection",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__DistanceBasedSelection",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.EarlyTermination",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__EarlyTermination",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.LargeDataSet",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__LargeDataSet",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_TraverseTest.MetricBasedPruning",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_TraverseTest__MetricBasedPruning",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.IsOutVerification",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__IsOutVerification",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.TriangulationBoxVerification",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__TriangulationBoxVerification",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.BVHRootBoxVerification",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__BVHRootBoxVerification",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.CountAllPairs",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__CountAllPairs",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.EmptyFirstTree",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__EmptyFirstTree",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.EmptySecondTree",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__EmptySecondTree",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.NullTrees",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__NullTrees",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.OverlapDetection_SameTrees",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__OverlapDetection_SameTrees",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.OverlapDetection_NonOverlapping",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__OverlapDetection_NonOverlapping",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.AsymmetricPairs",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__AsymmetricPairs",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BVH_PairTraverseTest.LargeDataSets",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BVH_Traverse_Test.cxx",
+      "source_sha256": "b6116a6e17914c8b0977795b673053075f378a64c408c9656383e69704797947",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bvh_traverse",
+      "rust_test": "BVH_PairTraverseTest__LargeDataSets",
+      "rust_source": "crates/tkmath/tests/bvh_traverse.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
