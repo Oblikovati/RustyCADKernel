@@ -21,7 +21,7 @@ use super::{
 use crate::ncollection::IndexedMap;
 use crate::standard::{RuntimeType, StandardTransient};
 use std::sync::atomic::{AtomicBool, AtomicI32, Ordering};
-use std::sync::{Arc, Mutex, MutexGuard};
+use std::sync::{Arc, Mutex, MutexGuard, RwLock};
 mod messenger_link;
 mod output;
 
@@ -38,7 +38,8 @@ pub struct Report {
     active_metrics: Mutex<IndexedMap<MetricType>>,
     limit: AtomicI32,
     is_active_in_messenger: AtomicBool,
-    sampler: Arc<dyn MetricSampler>,
+    // Replaceable so the process-wide default report can sample through an injected fake.
+    sampler: RwLock<Arc<dyn MetricSampler>>,
 }
 message_runtime_type!(Report, "Message_Report", StandardTransient);
 impl Default for Report {
@@ -59,7 +60,7 @@ impl Report {
             active_metrics: Mutex::new(IndexedMap::default()),
             limit: AtomicI32::new(-1),
             is_active_in_messenger: AtomicBool::new(false),
-            sampler,
+            sampler: RwLock::new(sampler),
         }
     }
     pub(crate) fn state(&self) -> MutexGuard<'_, ReportState> {
@@ -69,7 +70,17 @@ impl Report {
     }
     /// The sampler used by alert meters of this report; `report.metric_sampler()`.
     pub fn metric_sampler(&self) -> Arc<dyn MetricSampler> {
-        self.sampler.clone()
+        self.sampler
+            .read()
+            .unwrap_or_else(|poisoned| poisoned.into_inner())
+            .clone()
+    }
+    /// Replaces the sampler, e.g. of `Message::default_report`; `report.set_metric_sampler(sampler)`.
+    pub fn set_metric_sampler(&self, sampler: Arc<dyn MetricSampler>) {
+        *self
+            .sampler
+            .write()
+            .unwrap_or_else(|poisoned| poisoned.into_inner()) = sampler;
     }
     /// `compositeAlerts(isCreate)`: the top-level container, created on request.
     fn composite(&self, to_create: bool) -> Option<Arc<CompositeAlerts>> {

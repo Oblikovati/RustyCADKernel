@@ -22,7 +22,7 @@ use crate::{
 use std::sync::atomic::{AtomicBool, Ordering};
 mod cjk;
 mod code_page;
-mod convert_unicode;
+pub mod convert_unicode;
 mod format_type;
 mod host;
 mod lines;

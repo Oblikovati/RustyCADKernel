@@ -58274,6 +58274,2086 @@
       "rust_item": "rustycad_tkernel::message::LazyProgressScope::is_aborted",
       "status": "implemented",
       "notes": "Manual Message progress member mapping; the native indicator handle subclass is ProgressIndicator + boxed ProgressIndicatorHooks (show/user_break/reset), scopes and ranges borrow their parent so lifetimes enforce the native nesting contract, and Drop reproduces the destructor side effects. Compared bit-for-bit with OCCT by the msgprog probe scripts."
+    },
+    {
+      "upstream_id": "Message::DefaultMessenger()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::default_messenger",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::Send(Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::Send(const TCollection_AsciiString&,Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendFail()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_fail",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendAlarm()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_alarm",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendWarning()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_warning",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendInfo()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_info",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendTrace()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_trace",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendFail(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_fail_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendAlarm(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_alarm_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendWarning(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_warning_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendInfo(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_info_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::SendTrace(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::send_trace_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::FillTime(int,int,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::fill_time",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::DefaultReport(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::default_report",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::MetricFromString(const char* const,Message_MetricType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::metric_from_string",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::MetricToString(Message_MetricType)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::metric_to_string",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::MetricFromString(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::metric_from_string_or_none",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::ToOSDMetric(Message_MetricType,OSD_MemInfo::Counter&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::to_osd_metric",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message::ToMessageMetric(OSD_MemInfo::Counter,Message_MetricType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message.hxx",
+      "rust_item": "rustycad_tkernel::message::Message::to_message_metric",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message namespace functions are associated functions of the unit struct Message; the default messenger and report are process-wide as natively. FillTime formats through the message module's C sprintf subset (glibc layout)."
+    },
+    {
+      "upstream_id": "Message_Alert::GetMessageKey() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Alert.hxx",
+      "rust_item": "rustycad_tkernel::message::Alert::get_message_key",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Alert is the Alert trait (BaseAlert is a plain instance); DumpJson writes the static class name as get_type_name() does."
+    },
+    {
+      "upstream_id": "Message_Alert::SupportsMerge() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Alert.hxx",
+      "rust_item": "rustycad_tkernel::message::Alert::supports_merge",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Alert is the Alert trait (BaseAlert is a plain instance); DumpJson writes the static class name as get_type_name() does."
+    },
+    {
+      "upstream_id": "Message_Alert::Merge(const occ::handle<Message_Alert>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Alert.hxx",
+      "rust_item": "rustycad_tkernel::message::Alert::merge",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Alert is the Alert trait (BaseAlert is a plain instance); DumpJson writes the static class name as get_type_name() does."
+    },
+    {
+      "upstream_id": "Message_Alert::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Alert.hxx",
+      "rust_item": "rustycad_tkernel::message::Alert::dump_json",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Alert is the Alert trait (BaseAlert is a plain instance); DumpJson writes the static class name as get_type_name() does."
+    },
+    {
+      "upstream_id": "Message_Alert::DEFINE_STANDARD_RTTIEXT(Message_Alert,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Alert.hxx",
+      "rust_item": "<rustycad_tkernel::message::BaseAlert as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_AlertExtended::AddAlert(const occ::handle<Message_Report>&,const occ::handle<Message_Attribute>&,Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "rustycad_tkernel::message::AlertExtended::add_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Attribute and child container sit behind locks so members take &self through shared handles."
+    },
+    {
+      "upstream_id": "Message_AlertExtended()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "rustycad_tkernel::message::AlertExtended::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Attribute and child container sit behind locks so members take &self through shared handles."
+    },
+    {
+      "upstream_id": "Message_AlertExtended::GetMessageKey() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "<rustycad_tkernel::message::AlertExtended as Alert>::get_message_key",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Attribute and child container sit behind locks so members take &self through shared handles."
+    },
+    {
+      "upstream_id": "Message_AlertExtended::Attribute() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "rustycad_tkernel::message::AlertExtended::attribute",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Attribute and child container sit behind locks so members take &self through shared handles."
+    },
+    {
+      "upstream_id": "Message_AlertExtended::SetAttribute(const occ::handle<Message_Attribute>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "rustycad_tkernel::message::AlertExtended::set_attribute",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Attribute and child container sit behind locks so members take &self through shared handles."
+    },
+    {
+      "upstream_id": "Message_AlertExtended::CompositeAlerts(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "rustycad_tkernel::message::AlertExtended::composite_alerts",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Attribute and child container sit behind locks so members take &self through shared handles."
+    },
+    {
+      "upstream_id": "Message_AlertExtended::SupportsMerge() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "<rustycad_tkernel::message::AlertExtended as Alert>::supports_merge",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Attribute and child container sit behind locks so members take &self through shared handles."
+    },
+    {
+      "upstream_id": "Message_AlertExtended::Merge(const occ::handle<Message_Alert>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "<rustycad_tkernel::message::AlertExtended as Alert>::merge",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Attribute and child container sit behind locks so members take &self through shared handles."
+    },
+    {
+      "upstream_id": "Message_AlertExtended::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "<rustycad_tkernel::message::AlertExtended as Alert>::dump_json",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Attribute and child container sit behind locks so members take &self through shared handles."
+    },
+    {
+      "upstream_id": "Message_AlertExtended::DEFINE_STANDARD_RTTIEXT(Message_AlertExtended,Message_Alert)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AlertExtended.hxx",
+      "rust_item": "<rustycad_tkernel::message::AlertExtended as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_Algorithm()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SetStatus(const Message_Status&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::set_status",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SetStatus(const Message_Status&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::set_status_with_integer",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SetStatus(const Message_Status&,const char* const,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::set_status_with_c_str",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SetStatus(const Message_Status&,const TCollection_AsciiString&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::set_status_with_ascii",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SetStatus(const Message_Status&,const occ::handle<TCollection_HAsciiString>&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::set_status_with_h_ascii",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SetStatus(const Message_Status&,const TCollection_ExtendedString&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::set_status_with_extended",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SetStatus(const Message_Status&,const occ::handle<TCollection_HExtendedString>&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::set_status_with_h_extended",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SetStatus(const Message_Status&,const Message_Msg&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::set_status_with_msg",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::GetStatus() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::get_status",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::ChangeStatus()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::change_status",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::ClearStatus()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::clear_status",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SetMessenger(const occ::handle<Message_Messenger>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::set_messenger",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::GetMessenger() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::get_messenger",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SendStatusMessages(const Message_ExecStatus&,Message_Gravity,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::send_status_messages",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::SendMessages(Message_Gravity,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::send_messages",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::AddStatus(const occ::handle<Message_Algorithm>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::add_status",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::AddStatus(const Message_ExecStatus&,const occ::handle<Message_Algorithm>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::add_status_filtered",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::GetMessageNumbers(const Message_Status&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::get_message_numbers",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::GetMessageStrings(const Message_Status&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::get_message_strings",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::PrepareReport(const occ::handle<TColStd_HPackedMapOfInteger>&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::prepare_report_numbers",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::PrepareReport(const NCollection_Sequence<occ::handle<TCollection_HExtendedString>>&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "rustycad_tkernel::message::Algorithm::prepare_report_strings",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The dynamic type naming status messages is an explicit descriptor (with_runtime_type); strings are shared HExtendedString handles; AddStatus keeps the native off-by-one that skips the last string."
+    },
+    {
+      "upstream_id": "Message_Algorithm::DEFINE_STANDARD_RTTIEXT(Message_Algorithm,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Algorithm.hxx",
+      "rust_item": "<rustycad_tkernel::message::Algorithm as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_Attribute::DEFINE_STANDARD_RTTIEXT(Message_Attribute,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Attribute.hxx",
+      "rust_item": "<rustycad_tkernel::message::BaseAttribute as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_Attribute(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Attribute.hxx",
+      "rust_item": "rustycad_tkernel::message::BaseAttribute::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Attribute is the Attribute trait with AttributeBase holding the name; BaseAttribute is a plain instance."
+    },
+    {
+      "upstream_id": "Message_Attribute::GetMessageKey() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Attribute.hxx",
+      "rust_item": "rustycad_tkernel::message::Attribute::get_message_key",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Attribute is the Attribute trait with AttributeBase holding the name; BaseAttribute is a plain instance."
+    },
+    {
+      "upstream_id": "Message_Attribute::GetName() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Attribute.hxx",
+      "rust_item": "rustycad_tkernel::message::Attribute::get_name",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Attribute is the Attribute trait with AttributeBase holding the name; BaseAttribute is a plain instance."
+    },
+    {
+      "upstream_id": "Message_Attribute::SetName(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Attribute.hxx",
+      "rust_item": "rustycad_tkernel::message::Attribute::set_name",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Attribute is the Attribute trait with AttributeBase holding the name; BaseAttribute is a plain instance."
+    },
+    {
+      "upstream_id": "Message_Attribute::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Attribute.hxx",
+      "rust_item": "rustycad_tkernel::message::Attribute::dump_json",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Attribute is the Attribute trait with AttributeBase holding the name; BaseAttribute is a plain instance."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::UndefinedMetricValue()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::undefined_metric_value",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::HasMetric(const Message_MetricType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::has_metric",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::IsMetricValid(const Message_MetricType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::is_metric_valid",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::StartValue(const Message_MetricType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::start_value",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::SetStartValue(const Message_MetricType&,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::set_start_value",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::StopValue(const Message_MetricType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::stop_value",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::SetStopValue(const Message_MetricType&,double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::set_stop_value",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::StartAlert(const occ::handle<Message_AlertExtended>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::start_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::StopAlert(const occ::handle<Message_AlertExtended>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::stop_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::SetAlertMetrics(const occ::handle<Message_AlertExtended>&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeMeter::set_alert_metrics",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "<rustycad_tkernel::message::AttributeMeter as Attribute>::dump_json",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Metric values are sampled through the report's injected MetricSampler (native: OSD_Timer, OSD_Chronometer, OSD_MemInfo); metrics keep IndexedDataMap insertion order."
+    },
+    {
+      "upstream_id": "Message_AttributeMeter::DEFINE_STANDARD_RTTIEXT(Message_AttributeMeter,Message_Attribute)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeMeter.hxx",
+      "rust_item": "<rustycad_tkernel::message::AttributeMeter as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_AttributeObject::DEFINE_STANDARD_RTTIEXT(Message_AttributeObject,Message_Attribute)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeObject.hxx",
+      "rust_item": "<rustycad_tkernel::message::AttributeObject as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_AttributeObject(const occ::handle<Standard_Transient>&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeObject.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeObject::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_AttributeObject::Object() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeObject.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeObject::object",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_AttributeObject::SetObject(const occ::handle<Standard_Transient>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeObject.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeObject::set_object",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_AttributeObject::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeObject.hxx",
+      "rust_item": "<rustycad_tkernel::message::AttributeObject as Attribute>::dump_json",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_AttributeStream::DEFINE_STANDARD_RTTIEXT(Message_AttributeStream,Message_Attribute)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeStream.hxx",
+      "rust_item": "<rustycad_tkernel::message::AttributeStream as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_AttributeStream(const Standard_SStream&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeStream.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeStream::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_AttributeStream::Stream() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeStream.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeStream::stream",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_AttributeStream::SetStream(const Standard_SStream&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeStream.hxx",
+      "rust_item": "rustycad_tkernel::message::AttributeStream::set_stream",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_AttributeStream::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_AttributeStream.hxx",
+      "rust_item": "<rustycad_tkernel::message::AttributeStream as Attribute>::dump_json",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::DEFINE_STANDARD_RTTIEXT(Message_CompositeAlerts,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "<rustycad_tkernel::message::CompositeAlerts as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::Alerts(Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::alerts",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::AddAlert(Message_Gravity,const occ::handle<Message_Alert>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::add_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::RemoveAlert(Message_Gravity,const occ::handle<Message_Alert>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::remove_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::HasAlert(const occ::handle<Message_Alert>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::has_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::HasAlert(const occ::handle<Standard_Type>&,Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::has_alert_of_type",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::clear",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::Clear(Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::clear_gravity",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::Clear(const occ::handle<Standard_Type>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::clear_type",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_CompositeAlerts::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_CompositeAlerts.hxx",
+      "rust_item": "rustycad_tkernel::message::CompositeAlerts::dump_json",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Lists are returned as snapshots. Deliberate deviation: Clear(type) terminates where the native loop never advances past a foreign alert."
+    },
+    {
+      "upstream_id": "Message_ConsoleColor",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ConsoleColor.hxx",
+      "rust_item": "rustycad_tkernel::message::ConsoleColor",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_ExecStatus()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus(Message_Status)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::from_status",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::Set(Message_Status)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::set",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::IsSet(Message_Status) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::is_set",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::Clear(Message_Status)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::clear_status",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::IsDone() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::is_done",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::IsFail() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::is_fail",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::IsWarn() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::is_warn",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::IsAlarm() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::is_alarm",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::SetAllDone()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::set_all_done",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::SetAllWarn()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::set_all_warn",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::SetAllAlarm()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::set_all_alarm",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::SetAllFail()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::set_all_fail",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::ClearAllDone()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::clear_all_done",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::ClearAllWarn()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::clear_all_warn",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::ClearAllAlarm()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::clear_all_alarm",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::ClearAllFail()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::clear_all_fail",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::clear",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::Add(const Message_ExecStatus&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::add",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::operator|=(const Message_ExecStatus&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "<rustycad_tkernel::message::ExecStatus as std::ops::BitOrAssign<&ExecStatus>>::bitor_assign",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::And(const Message_ExecStatus&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::and",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::operator&=(const Message_ExecStatus&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "<rustycad_tkernel::message::ExecStatus as std::ops::BitAndAssign<&ExecStatus>>::bitand_assign",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::StatusRange",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::FIRST_STATUS / STATUSES_PER_TYPE / NB_STATUSES / LAST_STATUS",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::StatusIndex(Message_Status)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::status_index",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::LocalStatusIndex(Message_Status)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::local_status_index",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::TypeOfStatus(Message_Status)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::type_of_status",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_ExecStatus::StatusByIndex(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_ExecStatus.hxx",
+      "rust_item": "rustycad_tkernel::message::ExecStatus::status_by_index",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Statuses are the integer newtype Status so out-of-enum values from StatusByIndex stay representable."
+    },
+    {
+      "upstream_id": "Message_Gravity",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Gravity.hxx",
+      "rust_item": "rustycad_tkernel::message::Gravity",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_Level(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Level.hxx",
+      "rust_item": "rustycad_tkernel::message::Level::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Level is a scope guard sharing its state with the report's level stack; Drop closes the level. With no root alert AddAlert returns false where OCCT dereferences a null handle."
+    },
+    {
+      "upstream_id": "Message_Level::~Message_Level()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Level.hxx",
+      "rust_item": "<rustycad_tkernel::message::Level as Drop>::drop",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Level is a scope guard sharing its state with the report's level stack; Drop closes the level. With no root alert AddAlert returns false where OCCT dereferences a null handle."
+    },
+    {
+      "upstream_id": "Message_Level::RootAlert() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Level.hxx",
+      "rust_item": "rustycad_tkernel::message::Level::root_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Level is a scope guard sharing its state with the report's level stack; Drop closes the level. With no root alert AddAlert returns false where OCCT dereferences a null handle."
+    },
+    {
+      "upstream_id": "Message_Level::SetRootAlert(const occ::handle<Message_AlertExtended>&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Level.hxx",
+      "rust_item": "rustycad_tkernel::message::Level::set_root_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Level is a scope guard sharing its state with the report's level stack; Drop closes the level. With no root alert AddAlert returns false where OCCT dereferences a null handle."
+    },
+    {
+      "upstream_id": "Message_Level::AddAlert(Message_Gravity,const occ::handle<Message_Alert>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Level.hxx",
+      "rust_item": "rustycad_tkernel::message::Level::add_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Level is a scope guard sharing its state with the report's level stack; Drop closes the level. With no root alert AddAlert returns false where OCCT dereferences a null handle."
+    },
+    {
+      "upstream_id": "Message_Messenger::DEFINE_STANDARD_RTTIEXT(Message_Messenger,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "<rustycad_tkernel::message::Messenger as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_Messenger::StreamBuffer::~StreamBuffer()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "<rustycad_tkernel::message::MessageStream as Drop>::drop",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::StreamBuffer::Flush(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::MessageStream::flush",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::StreamBuffer(const StreamBuffer&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "<rustycad_tkernel::message::MessageStream as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::StreamBuffer::operator<<(const T&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "<rustycad_tkernel::message::MessageStream as std::fmt::Write>::write_str",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::StreamBuffer::operator<<(std::ostream&* std::ostream&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::MessageStream::flush",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::StreamBuffer::Stream()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::MessageStream::buffer_mut",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::StreamBuffer::operator Standard_OStream&()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::MessageStream::buffer_mut",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::StreamBuffer::Messenger()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::MessageStream::messenger",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger(const occ::handle<Message_Printer>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::with_printer",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::AddPrinter(const occ::handle<Message_Printer>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::add_printer",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::RemovePrinter(const occ::handle<Message_Printer>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::remove_printer",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::RemovePrinters(const occ::handle<Standard_Type>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::remove_printers",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::Printers() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::printers",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::ChangePrinters()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::printers_mut",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::Send(const char* const,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_c_str",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::Send(const Standard_SStream&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_string_stream",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::Send(const TCollection_AsciiString&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_ascii",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::Send(const TCollection_ExtendedString&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_extended",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::Send(Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::stream",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::Send(const occ::handle<Standard_Transient>&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_object",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendFail()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_fail",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendAlarm()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_alarm",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendWarning()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_warning",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendInfo()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_info",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendTrace()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_trace",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendFail(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_fail_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendAlarm(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_alarm_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendWarning(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_warning_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendInfo(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_info_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::SendTrace(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::send_trace_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_Messenger::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Messenger.hxx",
+      "rust_item": "rustycad_tkernel::message::Messenger::dump_json",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The printer sequence sits behind a lock (messengers are shared); delivery iterates a snapshot. StreamBuffer is MessageStream, written through fmt::Write."
+    },
+    {
+      "upstream_id": "Message_MetricType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_MetricType.hxx",
+      "rust_item": "rustycad_tkernel::message::MetricType",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_Msg()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg(const Message_Msg&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "<rustycad_tkernel::message::Msg as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::from_key",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::from_extended_key",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Set(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::set_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Set(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::set",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Arg(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::operator<<(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_text",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Arg(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_ascii",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::operator<<(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_ascii",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Arg(const occ::handle<TCollection_HAsciiString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_h_ascii",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::operator<<(const occ::handle<TCollection_HAsciiString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_h_ascii",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Arg(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_extended",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::operator<<(const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_extended",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Arg(const occ::handle<TCollection_HExtendedString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_h_extended",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::operator<<(const occ::handle<TCollection_HExtendedString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_h_extended",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Arg(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_integer",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::operator<<(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_integer",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Arg(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_real",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::operator<<(double)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::arg_real",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Original() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::original",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::value",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::IsEdited() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::is_edited",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::Get()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::get",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_Msg::operator const TCollection_ExtendedString&()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Msg.hxx",
+      "rust_item": "rustycad_tkernel::message::Msg::get",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Arguments return Result because stale positions after Get() raise Standard_OutOfRange natively; Get() keeps its quirk of not consuming pending specifications."
+    },
+    {
+      "upstream_id": "Message_MsgFile::Load(const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_MsgFile.hxx",
+      "rust_item": "rustycad_tkernel::message::MsgFile::load",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. MsgFile::global() is the process catalog; file and environment access go through an injected MsgFileSource. Loading returns Result for the Standard_OutOfRange a lone '.' line raises."
+    },
+    {
+      "upstream_id": "Message_MsgFile::LoadFile(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_MsgFile.hxx",
+      "rust_item": "rustycad_tkernel::message::MsgFile::load_file",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. MsgFile::global() is the process catalog; file and environment access go through an injected MsgFileSource. Loading returns Result for the Standard_OutOfRange a lone '.' line raises."
+    },
+    {
+      "upstream_id": "Message_MsgFile::LoadFromEnv(const char* const,const char* const,const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_MsgFile.hxx",
+      "rust_item": "rustycad_tkernel::message::MsgFile::load_from_env",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. MsgFile::global() is the process catalog; file and environment access go through an injected MsgFileSource. Loading returns Result for the Standard_OutOfRange a lone '.' line raises."
+    },
+    {
+      "upstream_id": "Message_MsgFile::LoadFromString(const char* const,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_MsgFile.hxx",
+      "rust_item": "rustycad_tkernel::message::MsgFile::load_from_string",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. MsgFile::global() is the process catalog; file and environment access go through an injected MsgFileSource. Loading returns Result for the Standard_OutOfRange a lone '.' line raises."
+    },
+    {
+      "upstream_id": "Message_MsgFile::AddMsg(const TCollection_AsciiString&,const TCollection_ExtendedString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_MsgFile.hxx",
+      "rust_item": "rustycad_tkernel::message::MsgFile::add_msg",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. MsgFile::global() is the process catalog; file and environment access go through an injected MsgFileSource. Loading returns Result for the Standard_OutOfRange a lone '.' line raises."
+    },
+    {
+      "upstream_id": "Message_MsgFile::HasMsg(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_MsgFile.hxx",
+      "rust_item": "rustycad_tkernel::message::MsgFile::has_msg",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. MsgFile::global() is the process catalog; file and environment access go through an injected MsgFileSource. Loading returns Result for the Standard_OutOfRange a lone '.' line raises."
+    },
+    {
+      "upstream_id": "Message_MsgFile::Msg(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_MsgFile.hxx",
+      "rust_item": "rustycad_tkernel::message::MsgFile::msg_c_str",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. MsgFile::global() is the process catalog; file and environment access go through an injected MsgFileSource. Loading returns Result for the Standard_OutOfRange a lone '.' line raises."
+    },
+    {
+      "upstream_id": "Message_MsgFile::Msg(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_MsgFile.hxx",
+      "rust_item": "rustycad_tkernel::message::MsgFile::msg",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. MsgFile::global() is the process catalog; file and environment access go through an injected MsgFileSource. Loading returns Result for the Standard_OutOfRange a lone '.' line raises."
+    },
+    {
+      "upstream_id": "Message_Printer::DEFINE_STANDARD_RTTIEXT(Message_Printer,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "<rustycad_tkernel::message::PrinterType as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_Printer::GetTraceLevel() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "rustycad_tkernel::message::Printer::trace_level",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Printer is the Printer trait: send() is the protected pure virtual, PrinterBase holds the trace level."
+    },
+    {
+      "upstream_id": "Message_Printer::SetTraceLevel(Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "rustycad_tkernel::message::Printer::set_trace_level",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Printer is the Printer trait: send() is the protected pure virtual, PrinterBase holds the trace level."
+    },
+    {
+      "upstream_id": "Message_Printer::Send(const TCollection_ExtendedString&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "rustycad_tkernel::message::Printer::send_extended",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Printer is the Printer trait: send() is the protected pure virtual, PrinterBase holds the trace level."
+    },
+    {
+      "upstream_id": "Message_Printer::Send(const char* const,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "rustycad_tkernel::message::Printer::send_c_str",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Printer is the Printer trait: send() is the protected pure virtual, PrinterBase holds the trace level."
+    },
+    {
+      "upstream_id": "Message_Printer::Send(const TCollection_AsciiString&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "rustycad_tkernel::message::Printer::send_ascii",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Printer is the Printer trait: send() is the protected pure virtual, PrinterBase holds the trace level."
+    },
+    {
+      "upstream_id": "Message_Printer::SendStringStream(const Standard_SStream&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "rustycad_tkernel::message::Printer::send_string_stream",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Printer is the Printer trait: send() is the protected pure virtual, PrinterBase holds the trace level."
+    },
+    {
+      "upstream_id": "Message_Printer::SendObject(const occ::handle<Standard_Transient>&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Printer.hxx",
+      "rust_item": "rustycad_tkernel::message::Printer::send_object",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Message_Printer is the Printer trait: send() is the protected pure virtual, PrinterBase holds the trace level."
+    },
+    {
+      "upstream_id": "Message_PrinterOStream::DEFINE_STANDARD_RTTIEXT(Message_PrinterOStream,Message_Printer)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterOStream.hxx",
+      "rust_item": "<rustycad_tkernel::message::PrinterOStream as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_PrinterOStream::SetConsoleTextColor(Standard_OStream*,Message_ConsoleColor,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterOStream.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterOStream::set_console_text_color",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The destination is an injected Write (stdout, stderr or a file); colors are ANSI escapes, or console attributes on Windows."
+    },
+    {
+      "upstream_id": "Message_PrinterOStream(Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterOStream.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterOStream::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The destination is an injected Write (stdout, stderr or a file); colors are ANSI escapes, or console attributes on Windows."
+    },
+    {
+      "upstream_id": "Message_PrinterOStream(const char* const,bool,Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterOStream.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterOStream::from_file_name",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The destination is an injected Write (stdout, stderr or a file); colors are ANSI escapes, or console attributes on Windows."
+    },
+    {
+      "upstream_id": "Message_PrinterOStream::Close()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterOStream.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterOStream::close",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The destination is an injected Write (stdout, stderr or a file); colors are ANSI escapes, or console attributes on Windows."
+    },
+    {
+      "upstream_id": "Message_PrinterOStream::~Message_PrinterOStream()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterOStream.hxx",
+      "rust_item": "<rustycad_tkernel::message::PrinterOStream as Drop>::drop",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The destination is an injected Write (stdout, stderr or a file); colors are ANSI escapes, or console attributes on Windows."
+    },
+    {
+      "upstream_id": "Message_PrinterOStream::GetStream() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterOStream.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterOStream::with_stream",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The destination is an injected Write (stdout, stderr or a file); colors are ANSI escapes, or console attributes on Windows."
+    },
+    {
+      "upstream_id": "Message_PrinterOStream::ToColorize() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterOStream.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterOStream::to_colorize",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The destination is an injected Write (stdout, stderr or a file); colors are ANSI escapes, or console attributes on Windows."
+    },
+    {
+      "upstream_id": "Message_PrinterOStream::SetToColorize(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterOStream.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterOStream::set_to_colorize",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. The destination is an injected Write (stdout, stderr or a file); colors are ANSI escapes, or console attributes on Windows."
+    },
+    {
+      "upstream_id": "Message_PrinterSystemLog::DEFINE_STANDARD_RTTIEXT(Message_PrinterSystemLog,Message_Printer)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterSystemLog.hxx",
+      "rust_item": "<rustycad_tkernel::message::PrinterSystemLog as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_PrinterSystemLog(const TCollection_AsciiString&,Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterSystemLog.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterSystemLog::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. syslog on Unix and the Event Log on Windows through a narrow FFI module."
+    },
+    {
+      "upstream_id": "Message_PrinterSystemLog::~Message_PrinterSystemLog()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterSystemLog.hxx",
+      "rust_item": "<rustycad_tkernel::message::PrinterSystemLog as Drop>::drop",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. syslog on Unix and the Event Log on Windows through a narrow FFI module."
+    },
+    {
+      "upstream_id": "Message_PrinterToReport::DEFINE_STANDARD_RTTIEXT(Message_PrinterToReport,Message_Printer)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterToReport.hxx",
+      "rust_item": "<rustycad_tkernel::message::PrinterToReport as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_PrinterToReport()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterToReport.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterToReport::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Overrides SendStringStream and SendObject without trace-level filtering, as natively."
+    },
+    {
+      "upstream_id": "Message_PrinterToReport::~Message_PrinterToReport()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterToReport.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor (defaulted). Rust releases the report handle and name through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Message_PrinterToReport::Report() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterToReport.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterToReport::report",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Overrides SendStringStream and SendObject without trace-level filtering, as natively."
+    },
+    {
+      "upstream_id": "Message_PrinterToReport::SetReport(const occ::handle<Message_Report>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterToReport.hxx",
+      "rust_item": "rustycad_tkernel::message::PrinterToReport::set_report",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Overrides SendStringStream and SendObject without trace-level filtering, as natively."
+    },
+    {
+      "upstream_id": "Message_PrinterToReport::SendStringStream(const Standard_SStream&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterToReport.hxx",
+      "rust_item": "<rustycad_tkernel::message::PrinterToReport as Printer>::send_string_stream",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Overrides SendStringStream and SendObject without trace-level filtering, as natively."
+    },
+    {
+      "upstream_id": "Message_PrinterToReport::SendObject(const occ::handle<Standard_Transient>&,Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_PrinterToReport.hxx",
+      "rust_item": "<rustycad_tkernel::message::PrinterToReport as Printer>::send_object",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Overrides SendStringStream and SendObject without trace-level filtering, as natively."
+    },
+    {
+      "upstream_id": "Message_Report()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::new",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::AddAlert(Message_Gravity,const occ::handle<Message_Alert>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::add_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::GetAlerts(Message_Gravity) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::get_alerts",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::HasAlert(const occ::handle<Standard_Type>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::has_alert",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::HasAlert(const occ::handle<Standard_Type>&,Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::has_alert_with_gravity",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::IsActiveInMessenger(const occ::handle<Message_Messenger>&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::is_active_in_messenger",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::ActivateInMessenger(bool,const occ::handle<Message_Messenger>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::activate_in_messenger",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::UpdateActiveInMessenger(const occ::handle<Message_Messenger>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::update_active_in_messenger",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::AddLevel(Message_Level*,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::add_level",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::RemoveLevel(Message_Level*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::remove_level",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::clear",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::Clear(Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::clear_gravity",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::Clear(const occ::handle<Standard_Type>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::clear_type",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::ActiveMetrics() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::active_metrics",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::SetActiveMetric(Message_MetricType,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::set_active_metric",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::ClearMetrics()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::clear_metrics",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::Limit() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::limit",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::SetLimit(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::set_limit",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::Dump(Standard_OStream&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::dump",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::Dump(Standard_OStream&,Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::dump_gravity",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::SendMessages(const occ::handle<Message_Messenger>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::send_messages",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::SendMessages(const occ::handle<Message_Messenger>&,Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::send_messages_gravity",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::Merge(const occ::handle<Message_Report>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::merge",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::Merge(const occ::handle<Message_Report>&,Message_Gravity)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::merge_gravity",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::DumpJson(Standard_OStream&,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "rustycad_tkernel::message::Report::dump_json",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family. Alerts and the level stack sit behind the report mutex, metrics behind their own lock; alert limits apply only on merge with the native quirk."
+    },
+    {
+      "upstream_id": "Message_Report::DEFINE_STANDARD_RTTIEXT(Message_Report,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Report.hxx",
+      "rust_item": "<rustycad_tkernel::message::Report as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "RTTI macro: message_runtime_type! registers the same type name and base; Alert, Attribute and Printer trait objects report it through dynamic_type()."
+    },
+    {
+      "upstream_id": "Message_Status",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_Status.hxx",
+      "rust_item": "rustycad_tkernel::message::Status",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Message_StatusType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Message/Message_StatusType.hxx",
+      "rust_item": "rustycad_tkernel::message::StatusType",
+      "status": "implemented",
+      "notes": "Manual Message member mapping; shared OCCT handles are Arc (never null), virtual classes are traits with the base behavior as provided methods, `const char*` text is a byte slice read to its first NUL, and C++ exceptions become Failure errors. Compared with OCCT by the msg_* probe family."
+    },
+    {
+      "upstream_id": "Resource_ConvertUnicode::Resource_sjis_to_unicode(unsigned int*,unsigned int*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::sjis_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_ConvertUnicode::Resource_unicode_to_sjis(unsigned int*,unsigned int*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::unicode_to_sjis",
+      "status": "implemented",
+      "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_ConvertUnicode::Resource_unicode_to_euc(unsigned int*,unsigned int*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::unicode_to_euc",
+      "status": "implemented",
+      "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_ConvertUnicode::Resource_euc_to_unicode(unsigned int*,unsigned int*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::euc_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_ConvertUnicode::Resource_gb_to_unicode(unsigned int*,unsigned int*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::gb_to_unicode",
+      "status": "implemented",
+      "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
+    },
+    {
+      "upstream_id": "Resource_ConvertUnicode::Resource_unicode_to_gb(unsigned int*,unsigned int*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Resource/Resource_ConvertUnicode.hxx",
+      "rust_item": "rustycad_tkernel::resource::convert_unicode::unicode_to_gb",
+      "status": "implemented",
+      "notes": "Manual Resource_ConvertUnicode.c mapping: the in/out `unsigned int*` byte pair becomes a BytePair argument and return value, with the native unsigned wrapping arithmetic. Exercised bit-for-bit through the ResourceUnicode conversions of the res_* probe family."
     }
   ],
   "tests": [

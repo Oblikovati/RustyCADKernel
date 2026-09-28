@@ -18,7 +18,7 @@
 use super::table_lookup;
 
 /// A native `(high, low)` byte pair held in `unsigned int`s.
-pub(super) type BytePair = (u32, u32);
+pub type BytePair = (u32, u32);
 
 pub(super) fn is_euc(c: u32) -> bool {
     (0xa1..=0xfe).contains(&c)
@@ -91,7 +91,12 @@ fn sjis_to_euc(pair: BytePair) -> BytePair {
     (ph | 0x80, pl | 0x80)
 }
 /// Native `Resource_sjis_to_unicode`.
-pub(super) fn sjis_to_unicode(pair: BytePair) -> BytePair {
+///
+/// ```
+/// use rustycad_tkernel::resource::convert_unicode::sjis_to_unicode;
+/// assert_eq!(sjis_to_unicode((0x41, 0x42)), (0x41, 0x42));
+/// ```
+pub fn sjis_to_unicode(pair: BytePair) -> BytePair {
     if above_byte(pair) {
         return (0, 0);
     }
@@ -101,7 +106,12 @@ pub(super) fn sjis_to_unicode(pair: BytePair) -> BytePair {
     split(table_lookup::sjisuni(((pair.0 << 8) | pair.1) as u16))
 }
 /// Native `Resource_unicode_to_sjis`.
-pub(super) fn unicode_to_sjis(pair: BytePair) -> BytePair {
+///
+/// ```
+/// use rustycad_tkernel::resource::convert_unicode::unicode_to_sjis;
+/// assert_eq!(unicode_to_sjis((0, 0)), (0, 0));
+/// ```
+pub fn unicode_to_sjis(pair: BytePair) -> BytePair {
     if above_byte(pair) {
         return (0, 0);
     }
@@ -111,7 +121,12 @@ pub(super) fn unicode_to_sjis(pair: BytePair) -> BytePair {
     split(table_lookup::unisjis(((pair.0 << 8) | pair.1) as u16))
 }
 /// Native `Resource_unicode_to_euc`: through Shift-JIS, keeping non-SJIS results as ANSI.
-pub(super) fn unicode_to_euc(pair: BytePair) -> BytePair {
+///
+/// ```
+/// use rustycad_tkernel::resource::convert_unicode::unicode_to_euc;
+/// assert_eq!(unicode_to_euc((0, 0)), (0, 0));
+/// ```
+pub fn unicode_to_euc(pair: BytePair) -> BytePair {
     if pair == (0, 0) {
         return pair;
     }
@@ -123,14 +138,24 @@ pub(super) fn unicode_to_euc(pair: BytePair) -> BytePair {
     }
 }
 /// Native `Resource_euc_to_unicode`: through Shift-JIS.
-pub(super) fn euc_to_unicode(pair: BytePair) -> BytePair {
+///
+/// ```
+/// use rustycad_tkernel::resource::convert_unicode::euc_to_unicode;
+/// assert_eq!(euc_to_unicode((0x41, 0x42)), (0x41, 0x42));
+/// ```
+pub fn euc_to_unicode(pair: BytePair) -> BytePair {
     if !is_euc(pair.0) || !is_euc(pair.1) || pair == (0, 0) {
         return pair;
     }
     sjis_to_unicode(euc_to_sjis(pair))
 }
 /// Native `Resource_gb_to_unicode`: the 7-bit row/cell indexes `gbuni`.
-pub(super) fn gb_to_unicode(pair: BytePair) -> BytePair {
+///
+/// ```
+/// use rustycad_tkernel::resource::convert_unicode::gb_to_unicode;
+/// assert_eq!(gb_to_unicode((0x41, 0x42)), (0x41, 0x42));
+/// ```
+pub fn gb_to_unicode(pair: BytePair) -> BytePair {
     if above_byte(pair) {
         return (0, 0);
     }
@@ -142,7 +167,12 @@ pub(super) fn gb_to_unicode(pair: BytePair) -> BytePair {
     ))
 }
 /// Native `Resource_unicode_to_gb`: unmapped characters become `(0, 0)`.
-pub(super) fn unicode_to_gb(pair: BytePair) -> BytePair {
+///
+/// ```
+/// use rustycad_tkernel::resource::convert_unicode::unicode_to_gb;
+/// assert_eq!(unicode_to_gb((0, 0)), (0, 0));
+/// ```
+pub fn unicode_to_gb(pair: BytePair) -> BytePair {
     if above_byte(pair) {
         return (0, 0);
     }
