@@ -992,6 +992,19 @@ move constructors and assignments of gp_Dir are Rust copies. The 2D conics' noex
 `Reverse` and hyperbola branches, which turn stored unit directions, use an infallible
 quarter turn.
 
+### Modern Math* namespaces (API completion)
+
+The modern packages MathUtils, MathInteg, MathLin, MathOpt, MathRoot, MathSys and MathPoly
+are C++ namespaces with no primary class. `tools/audit_api_rows.py` therefore expects,
+inside a named namespace, every struct/class, `using` alias and `constexpr` constant as one
+bare `Namespace::Name` row, besides the member functions. It reads conversion operators as
+`operator bool`, skips data members whose default initializer calls a function, keeps
+multi-word builtins such as `long double` and spells array parameters `const double[3][3]`
+and `const double(&)[N]`. For each of the seven packages the audit reports no missing
+member and no stale row. The sections below list what each package needed. The new probes
+add 10,475 requests to the numeric corpus (58,169 to 68,644 comparisons), and all of them
+give the native bits.
+
 ### MathUtils core headers (API completion)
 
 This work adds no upstream suite. It completes the public API of the MathUtils headers
@@ -1221,3 +1234,65 @@ call. `operator()` becomes the trait methods `MultipleSampleCallback::sample_at`
 `MultipleSampleLookup::value_at`, `MultipleRootValueCallback::root_value` and
 `MultipleIntervalHandler::handle_interval`, and the `mutable Status` members become `Cell`
 fields read through `status()`. C++ default arguments become explicit parameters.
+
+### MathSys namespace (API completion)
+
+This work adds no upstream suite. It completes the public API of the MathSys package:
+`SystemResult`, `LMConfig`, the generic `Newton`/`NewtonBounded`/`LevenbergMarquardt`
+drivers, the fixed-size `Solve2D`/`Solve2DSymmetric`/`Solve3D`/`Solve4D` solvers with
+their result, bound and option types, the curve/surface and surface/surface extrema
+wrappers, and every member of the `MathSys::Utils` namespace. `MathSys::Utils` is public as
+`math_sys::utils`; it re-exports each helper from the solver module that uses it
+(`linear`, `newton`, `lm`, and the small-system modules). `MathSys::Utils::IsFinite` does
+the same all-entries scan as MathLin's, so the port re-exports `math_lin::utils::is_finite_*`.
+Before this work, the fixed-size solvers had private copies of the helpers. Those copies
+(`merit.rs`, `NewtonBoundsN::clamp`/`max_step` and a private `solve2`) are deleted, and the
+solvers now call the public helpers. `tools/audit_api_rows.py` reports 0 missing and
+0 stale members for `src/FoundationClasses/TKMath/MathSys`.
+
+The supplemental tests are in `math_sys_api_behavior`. The MathSys API probe sends 1,620
+differential requests: `mathsys_small_linear` (480), `mathsys_small_box` (360),
+`mathsys_linear_api` (360) and `mathsys_finish_api` (420). All of them match the native
+bits. The inputs include NaN and infinite entries, inverted and inactive boxes,
+rank-deficient and wide matrices, and each combination of the two optional bound pointers.
+After the refactor, the 1,024 existing `modern_small`, `modern_sys` and `modern_lm`
+requests also still match.
+
+The port keeps these native results:
+
+- The libstdc++ `std::clamp` in GCC 13 is `std::min(std::max(v, lo), hi)`. Thus
+  `Clamp2D/3D/4D` return `hi` for an inverted box and keep a NaN coordinate. The port
+  does not use `f64::clamp`, because that function panics when `lo > hi`.
+- For NaN handling, the port keeps the `std::max` operand order. `std::max(a, b)` keeps a
+  NaN `a`, and `std::max({...})` keeps the first maximal element, so a NaN survives only
+  in the first position. This applies to the `MaxStep*D` nesting
+  `max(1, max(d0, max(d1, ...)))` and to the row scales of `Solve2x2`, `Solve3x3`,
+  `Solve4x4` and `SolveSymmetric2x2SVD`.
+- `Solve3x3` refuses a pivot with `!(|p| > tol)`. `Solve4x4` refuses a pivot with
+  `|p| <= tol`, so a NaN pivot gets through. The two routines also round differently:
+  3x3 stores `F/s` and negates during back substitution, and it divides for each factor.
+  4x4 stores `-F/s`, multiplies by the pivot inverse and zeroes the eliminated entry.
+- All the fixed-size solves write their outputs before the finiteness test. A failed call
+  can therefore leave non-finite values in `du`/`dv`/`delta`.
+- `SolveSymmetric2x2SVD` fails for a diagonal matrix with `j11 < j22`, because it builds
+  the eigenvector of the larger eigenvalue from the zero first column.
+- `IsStepWithinTolerance` accepts a NaN difference, because it tests
+  `|l - r| > tol` for rejection.
+- `FinalizeSystemResult` and `FinishLM` copy the caller's solution vector with its lower
+  bound. `FinishLM` keeps the gradient, the residual norm and the value when the gradient
+  is not finite, but it does not store the Jacobian or the rank.
+- The drivers apply bounds only when both bound pointers are given. The port maps each
+  pointer to an `Option<&Vector>`, so one bound alone is ignored.
+- `THE_CRITICAL_GRAD_SQ` is declared but not used upstream. It is exported unchanged.
+
+The port deviates from the native code in these ways:
+
+- The native default arguments are explicit Rust arguments: `theMaxIter = 100`,
+  `SolveSymmetric2x2SVD` `theTol = 1e-15`, the rank tolerances and the default
+  configurations.
+- The template callbacks map to traits: `SmallSystem<N>` (closures work),
+  `SymmetricFunction2D`, and `CurveEvaluatorD2`/`SurfaceEvaluatorD2`. The evaluator traits
+  return a point-and-derivatives struct instead of writing through `D2` out parameters.
+- The three identical dimension-specific helpers (`IsOptionsValid*`, `IsBoundsValid*D`,
+  `MaxStep*D`, `Clamp*D`) keep their native names as wrappers around one const-generic
+  body.

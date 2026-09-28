@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 //! Port of MathSys_NewtonTypes/2D/3D/4D at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-use super::{NewtonBoundsN, NewtonOptions, NewtonResultN, engine, linear, merit};
+use super::{NewtonBoundsN, NewtonOptions, NewtonResultN, checks, engine, linear};
 use crate::math_utils::Status;
 /// Native symmetric callback protocol; implement for `solve_2d_symmetric`.
 pub trait SymmetricFunction2D {
@@ -29,7 +29,7 @@ impl<F: SymmetricFunction2D> engine::Policy<2> for Symmetric<'_, F> {
         let mut j: [f64; 3] = [0.0; 3];
         let success: bool = self.0.value_and_jacobian(x, &mut f, &mut j);
         let matrix: [[f64; 2]; 2] = [[j[0], j[1]], [j[1], j[2]]];
-        if success && merit::finite(&f, &matrix) {
+        if success && checks::is_finite_system_n(&f, &matrix) {
             Ok((f, matrix))
         } else {
             Err(Status::NumericalError)
@@ -40,7 +40,7 @@ impl<F: SymmetricFunction2D> engine::Policy<2> for Symmetric<'_, F> {
         if !self.0.value(x, &mut f) || f.iter().any(|v| !v.is_finite()) {
             return Err(Status::NumericalError);
         }
-        Ok(f[0].hypot(f[1]))
+        Ok(checks::safe_norm_n(&f))
     }
     fn direction(&self, j: &[[f64; 2]; 2], f: &[f64; 2], residual: f64) -> Option<[f64; 2]> {
         linear::symmetric_direction(j, f, residual)

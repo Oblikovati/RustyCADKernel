@@ -357,6 +357,10 @@ fn main() {
             "integ_lin_singular" => integ_lin_api_probe::integ_lin_singular_case(&values),
             "modern_swarm" => swarm_probe::modern_swarm_case(&values),
             "modern_small" => small_probe::modern_small_case(&values),
+            "mathsys_small_linear" => mathsys_api_probe::mathsys_small_linear_case(&values),
+            "mathsys_small_box" => mathsys_api_probe::mathsys_small_box_case(&values),
+            "mathsys_linear_api" => mathsys_api_probe::mathsys_linear_api_case(&values),
+            "mathsys_finish_api" => mathsys_api_probe::mathsys_finish_api_case(&values),
             "modern_lm" => modern_sys_probe::modern_lm_case(&values),
             "modern_sys" => modern_sys_probe::modern_sys_case(&values),
             "modern_tensor" => modern_tensor_probe::modern_tensor_case(&values),
@@ -557,6 +561,8 @@ mod modern_tensor_probe;
 mod modern_trig_probe;
 
 mod small_probe;
+
+mod mathsys_api_probe;
 
 mod swarm_probe;
 

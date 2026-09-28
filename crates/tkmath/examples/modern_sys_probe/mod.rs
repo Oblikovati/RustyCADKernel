@@ -3,13 +3,13 @@ use rustycad_tkmath::{
     math::{FunctionSet, FunctionSetWithDerivatives, Matrix, Vector},
     math_sys::*,
 };
-struct System {
-    mode: i32,
-    fail: usize,
-    m: usize,
-    target: f64,
-    scale: f64,
-    calls: Vec<(i32, f64, f64)>,
+pub(crate) struct System {
+    pub(crate) mode: i32,
+    pub(crate) fail: usize,
+    pub(crate) m: usize,
+    pub(crate) target: f64,
+    pub(crate) scale: f64,
+    pub(crate) calls: Vec<(i32, f64, f64)>,
 }
 impl System {
     fn record(&mut self, kind: i32, x: &Vector<'_>) -> bool {
@@ -137,7 +137,7 @@ impl FunctionSetWithDerivatives for System {
         true
     }
 }
-fn vector(value: Option<Vector<'static>>) {
+pub(crate) fn vector(value: Option<Vector<'static>>) {
     print!("{} ", i32::from(value.is_some()));
     if let Some(v) = value {
         print!("{} {} ", v.lower(), v.length());
@@ -146,7 +146,7 @@ fn vector(value: Option<Vector<'static>>) {
         }
     }
 }
-fn result(r: SystemResult, f: &mut System) {
+pub(crate) fn result(r: SystemResult, f: &mut System) {
     print!("{} {} ", r.status as i32, r.iterations);
     vector(r.solution);
     print!("{} ", i32::from(r.value.is_some()));
