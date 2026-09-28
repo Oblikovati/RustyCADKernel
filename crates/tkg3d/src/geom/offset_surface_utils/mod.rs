@@ -20,13 +20,14 @@
 //! The native templates take the basis surface and an optional osculating-surface
 //! query; here the basis is any [`BasisSurfaceEvaluator`] (a Geom surface or a
 //! GeomAdaptor_Surface, as natively) and the query an [`OsculatingQuery`]. The `evaluate_*` functions return `Ok(None)` where the
-//! native ones return false.
+//! native ones return false; the `*_from` and `*_outcome` variants also report what the
+//! native leaves in its output arguments ([`OffsetOutcome`]).
 mod derivatives;
 mod evaluate_high;
 mod evaluate_low;
 pub use derivatives::{DerivativeOrders, compute_derivatives};
 pub use evaluate_high::{
-    evaluate_d2, evaluate_d2_from, evaluate_d3, evaluate_dn, evaluate_dn_from,
+    evaluate_d2, evaluate_d2_from, evaluate_d3, evaluate_d3_outcome, evaluate_dn, evaluate_dn_from,
 };
 pub use evaluate_low::{evaluate_d0, evaluate_d0_from, evaluate_d1, evaluate_d1_from};
 
@@ -235,6 +236,41 @@ pub fn calculate_d1(
     *d1u += n1u * (offset * sign);
     *d1v += n1v * (offset * sign);
     Ok(true)
+}
+
+/// What a native `Evaluate*` template leaves in its output arguments: the offset
+/// values when it returns true, and the basis values of the last point it tried when
+/// it returns false (a failed pass never writes the outputs). `GeomGridEval_OffsetSurface`
+/// ignores the returned flag and stores the outputs either way;
+/// `evaluate_d0_from((u, v), &*basis, 2.0, None, d1)?.into_option()`.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct OffsetOutcome<T> {
+    /// The native return value.
+    pub succeeded: bool,
+    /// The output arguments after the call.
+    pub value: T,
+}
+
+impl<T> OffsetOutcome<T> {
+    /// A successful evaluation of `value`; `OffsetOutcome::success(p).succeeded`.
+    pub fn success(value: T) -> Self {
+        Self {
+            succeeded: true,
+            value,
+        }
+    }
+    /// A failed evaluation that left `value` in the outputs; `OffsetOutcome::failure(p)`.
+    pub fn failure(value: T) -> Self {
+        Self {
+            succeeded: false,
+            value,
+        }
+    }
+    /// The value of a successful evaluation (`None` where the native returns false);
+    /// `outcome.into_option()`.
+    pub fn into_option(self) -> Option<T> {
+        self.succeeded.then_some(self.value)
+    }
 }
 
 /// The parametric rectangle and periodicity of the basis, read once per evaluation.

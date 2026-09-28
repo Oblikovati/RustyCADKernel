@@ -100,6 +100,22 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("a3_iso", adaptor3d::iso_case),
     ("a3_interfunc", adaptor3d::interfunc_case),
     ("a3_hstool", adaptor3d::hstool_case),
+    // GeomGridEval (grid.rs, grid_surfaces.rs)
+    ("g3_grid", g3_probe::grid::grid_case),
+    ("g3_grid_adaptor", g3_probe::grid::grid_adaptor_case),
+    (
+        "g3_grid_surface",
+        g3_probe::grid_surfaces::grid_surface_case,
+    ),
+    (
+        "g3_grid_surface_adaptor",
+        g3_probe::grid_surfaces::grid_surface_adaptor_case,
+    ),
+    ("g3_grid_null", g3_probe::grid_surfaces::grid_null_case),
+    (
+        "g3_grid_helpers",
+        g3_probe::grid_surfaces::grid_helpers_case,
+    ),
 ];
 
 fn main() {

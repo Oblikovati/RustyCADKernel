@@ -13,6 +13,8 @@ pub mod eval_curves;
 pub mod eval_surfaces;
 pub mod geom_adaptor;
 pub mod geom_adaptor_cases;
+pub mod grid;
+pub mod grid_surfaces;
 pub mod hash;
 pub mod offset_surface;
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]

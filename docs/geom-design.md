@@ -180,3 +180,17 @@ enum `Geom2dGridEvalEvaluator`, with `Uninitialized` for `std::monostate`, and t
 adaptor fallback borrows its adaptor with a lifetime, as the native
 `std::reference_wrapper`. The result structs `Geom2dGridEval::CurveD1` to `CurveD3` are
 aliases of `Geom2dCurveD1` to `Geom2dCurveD3`, which have the same fields.
+
+The GeomGridEval evaluators of TKG3d follow the same rules. `GeomGridEval_Curve` and
+`GeomGridEval_Surface` hold the enums `GeomGridEvalCurveEvaluator` and
+`GeomGridEvalSurfaceEvaluator`; the surface fallback `GeomGridEval_OtherSurface` holds
+`GeomGridEvalSurfaceSource`, the native `std::variant` of an adaptor pointer (a
+borrowed `&dyn Adaptor3dSurface`) and a Geom handle. `GeomGridEval::SurfD1` to
+`SurfD3` are aliases of `GeomSurfaceD1` to `GeomSurfaceD3`, surface grids are `Array2`
+values of bounds `1..NbU x 1..NbV`, and the `GeomGridEval::Evaluate*Helper` templates
+are generic functions over a closure. The native files repeat the same loops for every
+class; the port writes them once: the parameter loops and the Bezier-curve cache data
+live in TKG2d (`geom2d_grid_eval::grid_loops`, `bezier_arrays`) and serve both
+packages, the conic curves share one loop driver over a `ConicTerms` trait, and the
+cylinder, sphere, cone and torus share the U-row context (`UContext`) and a
+`QuadricTerms` driver, each keeping its own formulas in the native operation order.
