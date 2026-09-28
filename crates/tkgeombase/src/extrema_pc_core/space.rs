@@ -197,7 +197,9 @@ impl PcSpace for Space2d {
         curve.period()
     }
     fn defl_curv_intervals(curve: &Self::Curve) -> Result<Vec<f64>, Failure> {
-        crate::defl_curv_intervals::defl_curv_intervals_2d(curve)
+        <crate::extrema::Curve2dTool as crate::extrema::ExtremaCurveTool>::defl_curv_intervals(
+            curve,
+        )
     }
     fn constant_square_distance(
         curve: &Self::Curve,
@@ -249,7 +251,7 @@ impl PcSpace for Space3d {
         curve.period()
     }
     fn defl_curv_intervals(curve: &Self::Curve) -> Result<Vec<f64>, Failure> {
-        crate::defl_curv_intervals::defl_curv_intervals_3d(curve)
+        <crate::extrema::CurveTool as crate::extrema::ExtremaCurveTool>::defl_curv_intervals(curve)
     }
     fn constant_square_distance(
         curve: &Self::Curve,

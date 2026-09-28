@@ -15,7 +15,6 @@
 
 //! `Extrema_ExtPElC`: the extrema of the distance between a 3D point and a segment
 //! of an elementary curve, in closed form.
-use super::curve_tool::ExtremaCurveTool;
 use super::curve_tools::CurveTool;
 use super::elementary_point_curve::{ElementaryPointCurve, PointCurveExtrema};
 use super::pon::POnCurv;
@@ -417,9 +416,3 @@ impl ElementaryPointCurve<CurveTool> for ExtPElC {
         &self.result
     }
 }
-
-// The tool type check: the 3D tool's elementary solver is this class.
-const _: fn() = || {
-    fn solver<T: ExtremaCurveTool<ExtPElC = ExtPElC>>() {}
-    solver::<CurveTool>();
-};

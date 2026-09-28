@@ -54,6 +54,7 @@
 #include "tkgeombase_probe_bndlib.cxx"
 #include "tkgeombase_probe_gcpnts.cxx"
 #include "tkgeombase_probe_extrema_el.cxx"
+#include "tkgeombase_probe_extrema_pc_classic.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -216,6 +217,19 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ex_pels", gb_ex_pels_case},
  {"ex_elcs", gb_ex_elcs_case},
  {"ex_elss", gb_ex_elss_case},
+ // Extrema point-curve classes (tkgeombase_probe_extrema_pc_classic.cxx)
+ {"ex_pc", gb_ex_pc_case},
+ {"ex_pc2d", gb_ex_pc2d_case},
+ {"ex_locpc", gb_ex_locpc_case},
+ {"ex_locpc2d", gb_ex_locpc2d_case},
+ {"ex_genpc", gb_ex_genpc_case},
+ {"ex_genpc2d", gb_ex_genpc2d_case},
+ {"ex_pcf", gb_ex_pcf_case},
+ {"ex_pcf2d", gb_ex_pcf2d_case},
+ {"ex_cloc", gb_ex_cloc_case},
+ {"ex_cloc2d", gb_ex_cloc2d_case},
+ {"ex_ctool", gb_ex_ctool_case},
+ {"ex_ctool2d", gb_ex_ctool2d_case},
 };
 int main() {
  std::string line;

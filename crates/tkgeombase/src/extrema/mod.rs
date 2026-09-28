@@ -38,6 +38,7 @@ mod ext_p_el_s;
 mod failures;
 mod gp_space;
 mod pair_result;
+mod point_curve;
 mod pon;
 
 pub use curve_tool::{ExtremaCurveTool, SplineKnots, ToolD1, ToolD2, ToolD3};
@@ -51,6 +52,13 @@ pub use ext_p_el_c::ExtPElC;
 pub use ext_p_el_c2d::ExtPElC2d;
 pub use ext_p_el_s::ExtPElS;
 pub use gp_space::{GpPoint, GpVector};
+pub use point_curve::{
+    ELPCOfLocateExtPC, ELPCOfLocateExtPC2d, EPCOfELPCOfLocateExtPC, EPCOfELPCOfLocateExtPC2d,
+    EPCOfExtPC, EPCOfExtPC2d, ExtPC, ExtPC2d, GCurveLocator, GFuncExtPC, GGExtPC, GGenExtPC,
+    GLocateExtPC, GenLocateExtPC, LocEPCOfLocateExtPC, LocEPCOfLocateExtPC2d, LocateExtPC,
+    LocateExtPC2d, PCFOfEPCOfELPCOfLocateExtPC, PCFOfEPCOfELPCOfLocateExtPC2d, PCFOfEPCOfExtPC,
+    PCFOfEPCOfExtPC2d, PCLocFOfLocEPCOfLocateExtPC, PCLocFOfLocEPCOfLocateExtPC2d,
+};
 pub use pon::{POnCurv, POnCurv2d, POnCurve, POnSurf, POnSurfParams};
 
 /// `Extrema_ElementType`: the grid element that holds a point on surface.
