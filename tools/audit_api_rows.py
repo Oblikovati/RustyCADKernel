@@ -42,6 +42,7 @@ IGNORED_MACROS = r"\b(?:DEFINE_STANDARD_ALLOC|DEFINE_NCOLLECTION_ALLOC|Standard_
 TOKEN_NOISE = re.compile(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\'', re.S)
 ACCESS_LABEL = re.compile(r"^\s*(public|protected|private)\s*:(?!:)")
 SCOPE_HEAD = re.compile(r"^(?:template\s*<[^{]*?>\s*)?(class|struct|union|namespace|enum(?:\s+class)?)\s+([\w:]+(?:\s*<[^{]*>)?)")
+RTTI_MACRO = re.compile(r"\s*DEFINE_STANDARD_RTTI\w*\s*\([^)]*\)")
 TYPE_ALIASES = {"Standard_Real": "double", "Standard_Integer": "int", "Standard_Boolean": "bool"}
 
 
@@ -132,15 +133,39 @@ def strip_access(head: str) -> tuple[str | None, str]:
     return label, head
 
 
+def split_rtti_macro(head: str, braced: str | None) -> list[tuple[str, str | None]]:
+    """Separate a leading `DEFINE_STANDARD_RTTI*(...)` from the statement it prefixes.
+
+    The macro has no trailing semicolon, so the scanner glues it to the next
+    declaration (and to any access label in between, as in Geom_Transformation,
+    which opens its class body with the macro in the default private section).
+
+    >>> split_rtti_macro('DEFINE_STANDARD_RTTIEXT(A, B)\\npublic:\\n  A()', None)
+    [('DEFINE_STANDARD_RTTIEXT(A, B)', None), ('\\npublic:\\n  A()', None)]
+    """
+    _, bare = strip_access(head)
+    match = RTTI_MACRO.match(bare)
+    if match is None or not bare[match.end():].strip():
+        return [(head, braced)]
+    return [(head[:len(head) - len(bare) + match.end()], None), (bare[match.end():], braced)]
+
+
 def scan_scope(body: str, scope: str, public_default: bool, primary: str) -> list[Member]:
-    """Collect expected members declared in one namespace or class body."""
+    """Collect expected members declared in one namespace or class body.
+
+    An RTTI macro expands to `public:` natively, so it is a public member and the
+    declarations after it are public until the next access label.
+    """
     members: list[Member] = []
     public = public_default
-    for head, braced in split_statements(body):
-        label, head = strip_access(head)
-        public = public if label is None else label == "public"
-        if public:
-            members.extend(statement_members(head.strip(), braced, scope, primary))
+    for statement, statement_body in split_statements(body):
+        for head, braced in split_rtti_macro(statement, statement_body):
+            label, head = strip_access(head)
+            public = public if label is None else label == "public"
+            if RTTI_MACRO.match(head.strip()):
+                public = True
+            if public:
+                members.extend(statement_members(head.strip(), braced, scope, primary))
     return members
 
 

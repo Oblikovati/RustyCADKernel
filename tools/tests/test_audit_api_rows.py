@@ -61,6 +61,27 @@ class HeaderParsingTests(unittest.TestCase):
         self.assertNotIn("nodiscard", cleaned)
         self.assertNotIn("{", cleaned)
 
+    def test_rtti_macro_is_public_and_keeps_following_access_labels(self):
+        # Geom_Transformation opens its body with the macro in the default private
+        # section; BSplCLib_Cache puts `protected:` right after it.
+        header = """
+class Geom_Demo : public Standard_Transient
+{
+  DEFINE_STANDARD_RTTIEXT(Geom_Demo, Standard_Transient)
+public:
+  Geom_Demo();
+  void Set(double theX);
+  DEFINE_STANDARD_RTTIEXT(Geom_Demo, Standard_Transient)
+protected:
+  void Hidden();
+private:
+  Geom_Demo(const Geom_Demo&) = delete;
+};
+"""
+        self.assertEqual(members_of(header), [
+            "Geom_Demo::DEFINE_STANDARD_RTTIEXT|Geom_Demo,Standard_Transient|", "Geom_Demo||",
+            "Geom_Demo::Set|double|", "Geom_Demo::DEFINE_STANDARD_RTTIEXT|Geom_Demo,Standard_Transient|"])
+
     def test_brace_initializers_do_not_end_statements(self):
         heads = [head.strip() for head, _ in split_statements("A() : m{{1}, {2}} {} int b;")]
         self.assertEqual(heads, ["A() : m{{1}, {2}}", "int b"])
