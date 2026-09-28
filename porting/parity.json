@@ -51810,6 +51810,486 @@
       "rust_item": "rustycad_tkernel::osd::PerfRegistry::reset_all",
       "status": "implemented",
       "notes": "The native process singleton StopwatchStorage becomes an explicitly shared PerfRegistry (injected CPU clock; NativeCpuClock = GetThreadCPU user seconds), so each meter names its registry. Clears every watch."
+    },
+    {
+      "upstream_id": "OSD_Process::ExecutablePath()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::executable_path",
+      "status": "implemented",
+      "notes": "Linux reads the /proc/<pid>/exe link (empty when unreadable); macOS canonicalizes std::env::current_exe (native _NSGetExecutablePath + realpath); Windows uses std::env::current_exe (native GetModuleFileNameW). Static, as natively."
+    },
+    {
+      "upstream_id": "OSD_Process::ExecutableFolder()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::executable_folder",
+      "status": "implemented",
+      "notes": "Executable path up to and including the last host separator ('\\\\' on Windows, '/' elsewhere), empty without one; the split is the pure executable_folder_of. Every host."
+    },
+    {
+      "upstream_id": "OSD_Process()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::new",
+      "status": "implemented",
+      "notes": "Queries go through the injectable ProcessSource (NativeProcess reads the host). Process::with_source injects a fake. Every host."
+    },
+    {
+      "upstream_id": "OSD_Process::TerminalType(TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::terminal_type",
+      "status": "implemented",
+      "notes": "Output reference becomes the return value. Native quirk kept on Unix: reads TERM through OSD_Environment but returns the variable name \"TERM\", not its value. Windows returns \"WIN32 console\". Probe osd_process."
+    },
+    {
+      "upstream_id": "OSD_Process::SystemDate()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::system_date",
+      "status": "partial",
+      "notes": "Queries go through the injectable ProcessSource (NativeProcess reads the host). Unix: localtime of the current second, milliseconds 0; a clock failure records errno with \"GetSystem\" and the all-zero date fails with Quantity_DateDefinitionError (native throws the same). macOS as Linux. Windows GetLocalTime has no std counterpart: pending, records ERROR_CALL_NOT_IMPLEMENTED (120) and fails."
+    },
+    {
+      "upstream_id": "OSD_Process::UserName()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::user_name",
+      "status": "partial",
+      "notes": "Queries go through the injectable ProcessSource (NativeProcess reads the host). Unix: getpwuid_r(getuid()) login name, empty without an entry (no error, as natively). Windows GetUserNameW is pending: records error 120 and returns empty."
+    },
+    {
+      "upstream_id": "OSD_Process::IsSuperUser()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::is_super_user",
+      "status": "partial",
+      "notes": "Queries go through the injectable ProcessSource (NativeProcess reads the host). Unix: getuid() == 0. Windows (Administrators SID membership through the token APIs) is pending and answers false."
+    },
+    {
+      "upstream_id": "OSD_Process::ProcessId()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::process_id",
+      "status": "implemented",
+      "notes": "Queries go through the injectable ProcessSource (NativeProcess reads the host). std::process::id on every host (native getpid / GetCurrentProcessId)."
+    },
+    {
+      "upstream_id": "OSD_Process::CurrentDirectory()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::current_directory",
+      "status": "implemented",
+      "notes": "Queries go through the injectable ProcessSource (NativeProcess reads the host). Unix appends '/' to getcwd so the whole directory is the trek (\"/\" gives the \"//\" path, as natively); failure records errno with \"Where\" and returns the empty path. Windows parses the directory without appending a separator, as natively. Probe osd_chdir."
+    },
+    {
+      "upstream_id": "OSD_Process::SetCurrentDirectory(const OSD_Path&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::set_current_directory",
+      "status": "implemented",
+      "notes": "Queries go through the injectable ProcessSource (NativeProcess reads the host). chdir to the path's SystemName; failure records errno with \"Move to directory\". Windows uses std::env::set_current_dir (native SetCurrentDirectoryW). Probe osd_chdir covers success, missing and empty targets."
+    },
+    {
+      "upstream_id": "OSD_Process::Failed() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::failed",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Process::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::reset",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Process::Perror()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::perror",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Process::Error() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Process.hxx",
+      "rust_item": "rustycad_tkernel::osd::Process::error",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Host()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::new",
+      "status": "implemented",
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Host::with_source injects a fake. The Windows constructor's cache fill is pending (see the query rows)."
+    },
+    {
+      "upstream_id": "OSD_Host::SystemVersion()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::system_version",
+      "status": "partial",
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: \"sysname release\" from uname. Probe osd_host. Windows fills a process-wide cache from GetVersionExW/GetComputerNameA/GlobalMemoryStatus/Winsock, none of which the standard library offers: pending there (empty text / 0)."
+    },
+    {
+      "upstream_id": "OSD_Host::SystemId() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::system_id",
+      "status": "implemented",
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+    },
+    {
+      "upstream_id": "OSD_Host::HostName()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::host_name",
+      "status": "partial",
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: gethostname into a 64-byte buffer; failure records errno with \"Host Name\" and returns empty (native returns the uninitialized buffer). Probe osd_host. Windows fills a process-wide cache from GetVersionExW/GetComputerNameA/GlobalMemoryStatus/Winsock, none of which the standard library offers: pending there (empty text / 0)."
+    },
+    {
+      "upstream_id": "OSD_Host::AvailableMemory()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::available_memory",
+      "status": "partial",
+      "notes": "Unix returns 0, as natively (\"A faire\"). Windows dwAvailPageFile is pending and also answers 0."
+    },
+    {
+      "upstream_id": "OSD_Host::InternetAddress()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::internet_address",
+      "status": "partial",
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: first IPv4 of gethostbyname(HostName()), falling back to \"localhost\", printed %d.%d.%d.%d; when neither resolves native code dereferences null, Rust returns empty. Probe osd_host. Windows fills a process-wide cache from GetVersionExW/GetComputerNameA/GlobalMemoryStatus/Winsock, none of which the standard library offers: pending there (empty text / 0)."
+    },
+    {
+      "upstream_id": "OSD_Host::MachineType()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::machine_type",
+      "status": "implemented",
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+    },
+    {
+      "upstream_id": "OSD_Host::Failed() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::failed",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Host::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::reset",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Host::Perror()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::perror",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Host::Error() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
+      "rust_item": "rustycad_tkernel::osd::Host::error",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Environment()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::new",
+      "status": "implemented",
+      "notes": "The variable store is the injectable EnvironmentSource (NativeEnvironment: Unix getenv/putenv FFI keeping the native static definition buffer; Windows std::env). Environment::bare injects a fake. Every host."
+    },
+    {
+      "upstream_id": "OSD_Environment(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::named",
+      "status": "implemented",
+      "notes": "The variable store is the injectable EnvironmentSource (NativeEnvironment: Unix getenv/putenv FFI keeping the native static definition buffer; Windows std::env). Unix: a name that is not printable ASCII (bytes 32..=126) or holds '$' fails with Standard_ConstructionError \"OSD_Environment::OSD_Environment: bad argument\"; Windows validates nothing. named_in injects a fake. Probe osd_env_name."
+    },
+    {
+      "upstream_id": "OSD_Environment(const TCollection_AsciiString&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::with_value",
+      "status": "implemented",
+      "notes": "The variable store is the injectable EnvironmentSource (NativeEnvironment: Unix getenv/putenv FFI keeping the native static definition buffer; Windows std::env). Unix validates the name as above and the value for printable ASCII only ('$' allowed, native JPT 1992 change); Windows validates nothing. with_value_in injects a fake. Probe osd_env."
+    },
+    {
+      "upstream_id": "OSD_Environment::SetValue(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::set_value",
+      "status": "implemented",
+      "notes": "Unix refuses non-printable text or '$' with Standard_ConstructionError \"OSD_Environment::Change: bad argument\" (stricter than the constructor, as natively); Windows accepts anything. Probe osd_env."
+    },
+    {
+      "upstream_id": "OSD_Environment::Value()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::value",
+      "status": "implemented",
+      "notes": "The variable store is the injectable EnvironmentSource (NativeEnvironment: Unix getenv/putenv FFI keeping the native static definition buffer; Windows std::env). Reads the variable into the stored value; undefined reads as empty. Windows also records ERROR_ENVVAR_NOT_FOUND (203) with the system message for an undefined variable and resets the error on success. Probe osd_env."
+    },
+    {
+      "upstream_id": "OSD_Environment::SetName(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::set_name",
+      "status": "implemented",
+      "notes": "Unix resets the error, then validates like the constructor (\"OSD_Environment::SetName: bad argument\"); Windows only stores the name. Probe osd_env_name."
+    },
+    {
+      "upstream_id": "OSD_Environment::Name() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::name",
+      "status": "implemented",
+      "notes": "Every host."
+    },
+    {
+      "upstream_id": "OSD_Environment::Build()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::build",
+      "status": "implemented",
+      "notes": "The variable store is the injectable EnvironmentSource (NativeEnvironment: Unix getenv/putenv FFI keeping the native static definition buffer; Windows std::env). Unix: putenv(\"NAME=value\") from a process-wide definition buffer (an existing definition of the name is replaced and freed after installation), then getenv must see it or errno is recorded with \"Set Environment\". Names with '=' and the empty name behave as the libc does natively. Windows: std::env::set_var (native _wputenv). Writing the environment requires that no other thread uses it concurrently, as natively. Probe osd_env."
+    },
+    {
+      "upstream_id": "OSD_Environment::Remove()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::remove",
+      "status": "implemented",
+      "notes": "The variable store is the injectable EnvironmentSource (NativeEnvironment: Unix getenv/putenv FFI keeping the native static definition buffer; Windows std::env). Native quirk kept: Unix clears the stored value and builds, so the variable stays defined as empty. Windows deletes the variable (native _wputenv(\"NAME=\")) and keeps the stored value. Probe osd_env."
+    },
+    {
+      "upstream_id": "OSD_Environment::Failed() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::failed",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Environment::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::reset",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Environment::Perror()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::perror",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_Environment::Error() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Environment.hxx",
+      "rust_item": "rustycad_tkernel::osd::Environment::error",
+      "status": "implemented",
+      "notes": "Provided by the OsdErrorAccess trait over the object's OsdError (osd_error/osd_error_mut); same semantics on every host (see OsdError)."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::new",
+      "status": "implemented",
+      "notes": "No name and a null handle; opening it yields the main program (dlopen(NULL)). Every host."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::named",
+      "status": "partial",
+      "notes": "A null name is Option::None and leaves the object like the default constructor (native leaves the name uninitialized). Unix stores the name only; Windows additionally probes GetModuleHandleW. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary::SetName(const char* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::set_name",
+      "status": "partial",
+      "notes": "A null name keeps the current one, as natively on Unix (native leaks the old buffer; Rust drops it). Windows also probes GetModuleHandleW. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary::Name() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::name",
+      "status": "implemented",
+      "notes": "The stored name, None for a null name. Every host."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary::DlOpen(OSD_LoadMode)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_open",
+      "status": "partial",
+      "notes": "Unix dlopen with RTLD_LAZY or RTLD_NOW through a narrow libc FFI module; true when a handle was obtained. Probe osd_shlib covers system libraries, the main program and missing files. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary::DlSymb(const char* const) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_symb",
+      "status": "partial",
+      "notes": "OSD_Function (int(*)(...)) becomes SymbolAddress (NonNull<c_void>), None for a missing symbol; callers transmute to the real signature. Before DlOpen the null handle is RTLD_DEFAULT on glibc, as natively; after dl_close Rust answers None where native code uses a dangling handle. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary::DlClose() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_close",
+      "status": "partial",
+      "notes": "Unix dlclose; takes &mut self to remember the close. Native dlclose(NULL) and double closes are undefined; Rust ignores them. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary::DlError() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::dl_error",
+      "status": "partial",
+      "notes": "Unix dlerror text (consumed by the read), None when there is none. Probe osd_shlib compares the loader messages. Windows (LoadLibraryExW/GetProcAddress/FreeLibrary/FormatMessageW) needs loader bindings the crate does not link yet: pending, dl_open fails and dl_error says so."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary::Destroy()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": "rustycad_tkernel::osd::SharedLibrary::destroy",
+      "status": "implemented",
+      "notes": "Forgets the name and the handle without unloading the library, as natively. Every host."
+    },
+    {
+      "upstream_id": "OSD_SharedLibrary::~OSD_SharedLibrary()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_SharedLibrary.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor that calls Destroy. Rust drop glue releases the name and, like Destroy, never unloads the library."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::Counter",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemCounter",
+      "status": "implemented",
+      "notes": "Nested enum with native order (MemCounter::ALL has MemCounter_NB = 7 entries). Every host."
+    },
+    {
+      "upstream_id": "OSD_MemInfo(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::new",
+      "status": "implemented",
+      "notes": "Figures come from the injectable MemInfoSource (NativeMemInfo: glibc mallinfo2, /proc/<pid>/status, macOS task_info + malloc_zone_statistics). Activates every counter, then updates or clears. MemInfo::with_source injects a fake."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::IsActive(OSD_MemInfo::Counter) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::is_active",
+      "status": "implemented",
+      "notes": "Every host. Probe osd_meminfo."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::SetActive(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::set_active",
+      "status": "implemented",
+      "notes": "Every host. Probe osd_meminfo."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::SetActive(OSD_MemInfo::Counter,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::set_counter_active",
+      "status": "implemented",
+      "notes": "Overload takes a distinct Rust name. Every host. Probe osd_meminfo."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::clear",
+      "status": "implemented",
+      "notes": "Every counter becomes unknown (usize::MAX, native size_t(-1)). Every host."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::Update()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::update",
+      "status": "partial",
+      "notes": "Figures come from the injectable MemInfoSource (NativeMemInfo: glibc mallinfo2, /proc/<pid>/status, macOS task_info + malloc_zone_statistics). Linux: heap from mallinfo2 uordblks (0 without glibc), then VmSize/VmRSS/VmHWM and VmData+VmStk (atol kB x 1024, size_t wrap) in the native else-if order, skipped when none of those counters is active; swap counters stay unknown. macOS: virtual, resident and malloc bytes, all three stored when any is active (native quirk). Windows (GlobalMemoryStatusEx, GetProcessMemoryInfo, _heapwalk) is pending: every counter stays unknown. Probe osd_meminfo compares which counters become known."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::ToString() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::to_text",
+      "status": "implemented",
+      "notes": "Native labels, int(ValueMiB) and the peak suffixes; only active, known counters print. Named to_text (it returns AsciiString). Every host."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::Value(OSD_MemInfo::Counter) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::value",
+      "status": "implemented",
+      "notes": "usize::MAX when inactive or unknown. Every host."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::ValueMiB(OSD_MemInfo::Counter) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::value_mib",
+      "status": "implemented",
+      "notes": "Integer division by 1024*1024; usize::MAX when inactive or unknown. Every host."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::ValuePreciseMiB(OSD_MemInfo::Counter) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::value_precise_mib",
+      "status": "implemented",
+      "notes": "bytes / (1024.0*1024.0); -1.0 when inactive or unknown. Every host."
+    },
+    {
+      "upstream_id": "OSD_MemInfo::PrintInfo()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_MemInfo.hxx",
+      "rust_item": "rustycad_tkernel::osd::MemInfo::print_info",
+      "status": "implemented",
+      "notes": "ToString of a freshly updated native MemInfo (see Update for the Windows gap)."
     }
   ],
   "tests": [
