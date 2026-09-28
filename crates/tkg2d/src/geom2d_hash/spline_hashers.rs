@@ -19,7 +19,7 @@
 //! curve with the first curve's count; a B-spline pair with equal knots but different
 //! pole counts (periodic against non-periodic) would raise inside them and terminate
 //! the process. The port reports such a pair as different instead.
-use super::hash_key::{combined_hash, int_hash};
+use super::hash_key::{KnotAccess, combined_hash, int_hash, same_knots, same_poles_and_weights};
 use super::placement_hashers::Geom2dHashPointHasher;
 use crate::geom2d::{Geom2dBSplineCurve, Geom2dBezierCurve};
 use rustycad_tkernel::standard::Failure;
@@ -38,27 +38,23 @@ hasher_tolerances!(
 
 // The pole and weight walk both comparisons end with: poles 1..=count within
 // CompTolerance as points, then, for rational curves, weights within CompTolerance.
-fn same_poles_and_weights(
+fn same_curve_poles(
     points: Geom2dHashPointHasher,
     count: i32,
     rational: bool,
     pole: [&dyn Fn(i32) -> Result<Point2, Failure>; 2],
     weight: [&dyn Fn(i32) -> Result<f64, Failure>; 2],
 ) -> Result<bool, Failure> {
-    for i in 1..=count {
-        if !points.equal(pole[0](i)?, pole[1](i)?) {
-            return Ok(false);
-        }
-    }
-    if !rational {
-        return Ok(true);
-    }
-    for i in 1..=count {
-        if (weight[0](i)? - weight[1](i)?).abs() > points.comp_tolerance {
-            return Ok(false);
-        }
-    }
-    Ok(true)
+    let indices: Vec<i32> = (1..=count).collect();
+    let equal_poles = |a: Point2, b: Point2| points.equal(a, b);
+    same_poles_and_weights(
+        &indices,
+        rational,
+        points.comp_tolerance,
+        equal_poles,
+        pole,
+        weight,
+    )
 }
 
 impl Geom2dHashBezierCurveHasher {
@@ -83,7 +79,7 @@ impl Geom2dHashBezierCurveHasher {
         let weights: [&dyn Fn(i32) -> Result<f64, Failure>; 2] =
             [&|i| first.weight(i), &|i| second.weight(i)];
         let rational: bool = first.is_rational();
-        same_poles_and_weights(points, first.nb_poles(), rational, poles, weights).unwrap_or(false)
+        same_curve_poles(points, first.nb_poles(), rational, poles, weights).unwrap_or(false)
     }
 }
 
@@ -104,7 +100,11 @@ impl Geom2dHashBSplineCurveHasher {
         if first.degree() != second.degree() || first.nb_knots() != second.nb_knots() {
             return false;
         }
-        if !self.same_knots(first, second).unwrap_or(false) {
+        let knots: [KnotAccess<'_>; 2] = [
+            (&|i| first.knot(i), &|i| first.multiplicity(i)),
+            (&|i| second.knot(i), &|i| second.multiplicity(i)),
+        ];
+        if !same_knots(self.comp_tolerance, first.nb_knots(), knots).unwrap_or(false) {
             return false;
         }
         if first.is_rational() != second.is_rational() {
@@ -116,20 +116,6 @@ impl Geom2dHashBSplineCurveHasher {
         let weights: [&dyn Fn(i32) -> Result<f64, Failure>; 2] =
             [&|i| first.weight(i), &|i| second.weight(i)];
         let rational: bool = first.is_rational();
-        same_poles_and_weights(points, first.nb_poles(), rational, poles, weights).unwrap_or(false)
-    }
-    // Knot values within CompTolerance and equal multiplicities, knot by knot.
-    fn same_knots(
-        &self,
-        first: &Geom2dBSplineCurve,
-        second: &Geom2dBSplineCurve,
-    ) -> Result<bool, Failure> {
-        for i in 1..=first.nb_knots() {
-            let knot_gap: f64 = (first.knot(i)? - second.knot(i)?).abs();
-            if knot_gap > self.comp_tolerance || first.multiplicity(i)? != second.multiplicity(i)? {
-                return Ok(false);
-            }
-        }
-        Ok(true)
+        same_curve_poles(points, first.nb_poles(), rational, poles, weights).unwrap_or(false)
     }
 }

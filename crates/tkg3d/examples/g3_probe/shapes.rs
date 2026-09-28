@@ -24,6 +24,7 @@ pub fn curve(r: &mut Reader) -> Result<Handle<dyn GeomCurve>, Failure> {
         6 => bspline_curve(r),
         7 => trimmed(r),
         8 => offset(r),
+        20.. => super::eval_curves::spec(kind, r),
         _ => panic!("curve kind {kind} has no Rust builder in the probe"),
     }
 }
@@ -72,6 +73,8 @@ pub fn surface(r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
         7 => bezier_surface(r),
         8 => super::bspline_surface::spec(r),
         9..=11 => super::offset_surface::spec(kind, r),
+        20..=29 => super::eval_surfaces::spec(kind, r),
+        30.. => super::eval_bezier_surfaces::spec(kind, r),
         _ => panic!("surface kind {kind} has no Rust builder in the probe"),
     }
 }

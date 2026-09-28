@@ -6,8 +6,12 @@ pub mod bspline_surface;
 pub mod common;
 pub mod conics;
 pub mod curves;
+pub mod eval_bezier_surfaces;
+pub mod eval_curves;
+pub mod eval_surfaces;
 pub mod geom_adaptor;
 pub mod geom_adaptor_cases;
+pub mod hash;
 pub mod offset_surface;
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
@@ -15,3 +19,4 @@ pub mod shapes;
 pub mod simple;
 pub mod surfaces;
 pub mod swept;
+pub mod top_abs;

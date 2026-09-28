@@ -42,6 +42,7 @@ pub use surface::{
 mod bounded_surface;
 pub use bounded_surface::GeomBoundedSurface;
 mod elementary_surface;
+pub(crate) use elementary_surface::impl_elementary_position;
 pub use elementary_surface::{
     GeomElementarySurface, dump_elementary_surface, elementary_u_reverse, elementary_v_reverse,
 };
@@ -79,7 +80,7 @@ pub(crate) mod elementary_results;
 pub mod extrusion_utils;
 mod parametric;
 mod plane;
-mod quadric;
+pub(crate) mod quadric;
 pub mod revolution_utils;
 pub use plane::GeomPlane;
 mod cylindrical_surface;

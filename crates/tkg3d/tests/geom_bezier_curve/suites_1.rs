@@ -131,8 +131,8 @@ fn Geom_BezierCurve_Test__RationalReverse() {
 #[test]
 fn Geom_BezierCurve_Test__ReversedParameter() {
     let myOriginalCurve = SetUp();
-    EXPECT_DOUBLE_EQ(myOriginalCurve.reversed_parameter(0.3), 0.7);
-    EXPECT_DOUBLE_EQ(myOriginalCurve.reversed_parameter(0.0), 1.0);
+    EXPECT_DOUBLE_EQ(myOriginalCurve.reversed_parameter(0.3).unwrap(), 0.7);
+    EXPECT_DOUBLE_EQ(myOriginalCurve.reversed_parameter(0.0).unwrap(), 1.0);
 }
 
 #[test]

@@ -327,13 +327,13 @@ impl GeomSurface for GeomRectangularTrimmedSurface {
     fn u_reverse(&self) -> Result<(), Failure> {
         self.state.write().u_reverse()
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         self.state.read().basis.u_reversed_parameter(u)
     }
     fn v_reverse(&self) -> Result<(), Failure> {
         self.state.write().v_reverse()
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
         self.state.read().basis.v_reversed_parameter(v)
     }
     fn transform_parameters(&self, u: f64, v: f64, transform: Transform3) -> (f64, f64) {

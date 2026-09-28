@@ -6,20 +6,26 @@ evaluation descriptors and `GeomEval_RepUtils.pxx` that `Geom` includes, the
 private helpers `Geom_OffsetCurveUtils.pxx`, `Geom_OffsetSurfaceUtils.pxx`,
 `Geom_ExtrusionUtils.pxx`, `Geom_RevolutionUtils.pxx` and
 `Geom_OsculatingSurface`, and the whole `AdvApprox` package, which
-`Geom_OffsetSurface::UIso`/`VIso` need. The other TKG3d packages (`Adaptor3d`,
-`GeomAdaptor`, the `GeomEval` curves and surfaces, `GeomGridEval`, `GeomHash`,
-`TopAbs`) are not ported yet; only the `GeomAdaptor_Surface` D1 path that
-`Geom_OsculatingSurface` samples with is ported, next to that class. TKG3d depends
-on TKG2d as in OCCT: it reuses the TKernel lock (`SharedState`), the array, dump,
-spline-data and `std::min`/`max` helpers, and the curve descriptor family
-(`define_rep_curve_descriptors!`).
+`Geom_OffsetSurface::UIso`/`VIso` need. The whole `GeomEval` package (the eleven
+curves and surfaces), the whole `GeomHash` package (every public and private
+hasher, mesh hashers included) and the `TopAbs` package are ported too. The other
+TKG3d packages (`Adaptor3d`, `GeomAdaptor`, `GeomGridEval`) are not ported yet;
+only the `GeomAdaptor_Surface` D1 path that `Geom_OsculatingSurface` samples with
+is ported, next to that class. TKG3d depends on TKG2d as in OCCT: it reuses the
+TKernel lock (`SharedState`), the array, dump, spline-data and `std::min`/`max`
+helpers, the curve descriptor family (`define_rep_curve_descriptors!`), the
+generic T-Bezier and AHT-Bezier basis evaluators of
+`rustycad_tkg2d::geom2d_eval::eval_basis` (the GeomEval curves are the Geom2dEval
+algorithms on `gp_XYZ`) and the Geom2dHash rounding, combining and dispatch
+helpers.
 
 The class mapping follows [geom-design.md](geom-design.md): abstract classes are
 traits behind `Handle<dyn Trait>`, each object keeps its state behind one lock,
 and native exceptions are `Failure` results.
 
-The toolkit test inventory has 11 `Geom_*_Test.cxx` suites. 8 complete suites
-account for 165 mapped declarations, with matching native and Rust passes:
+The toolkit test inventory has 11 `Geom_*_Test.cxx`, 11 `GeomEval_*_Test.cxx` and
+3 `GeomHash_*_Test.cxx` suites (TopAbs has none). 22 complete suites account for
+438 mapped declarations, with matching native and Rust passes:
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -31,9 +37,24 @@ account for 165 mapped declarations, with matching native and Rust passes:
 | Geom_OffsetCurve_Test.cxx | geom_offset_curve | 4 |
 | Geom_Plane_Test.cxx | geom_plane | 8 |
 | Geom_SurfaceEval_Test.cxx | geom_surface_eval | 9 |
+| GeomEval_AHTBezierCurve_Test.cxx | geom_eval_aht_bezier_curve | 18 |
+| GeomEval_AHTBezierSurface_Test.cxx | geom_eval_aht_bezier_surface | 14 |
+| GeomEval_CircularHelicoidSurface_Test.cxx | geom_eval_circular_helicoid_surface | 14 |
+| GeomEval_CircularHelixCurve_Test.cxx | geom_eval_circular_helix_curve | 14 |
+| GeomEval_EllipsoidSurface_Test.cxx | geom_eval_ellipsoid_surface | 20 |
+| GeomEval_HypParaboloidSurface_Test.cxx | geom_eval_hyp_paraboloid_surface | 19 |
+| GeomEval_HyperboloidSurface_Test.cxx | geom_eval_hyperboloid_surface | 19 |
+| GeomEval_ParaboloidSurface_Test.cxx | geom_eval_paraboloid_surface | 16 |
+| GeomEval_SineWaveCurve_Test.cxx | geom_eval_sine_wave_curve | 11 |
+| GeomEval_TBezierCurve_Test.cxx | geom_eval_tbezier_curve | 18 |
+| GeomEval_TBezierSurface_Test.cxx | geom_eval_tbezier_surface | 17 |
+| GeomHash_CurveHasher_Test.cxx | geom_hash_curve_hasher | 40 |
+| GeomHash_MeshHasher_Test.cxx | geom_hash_mesh_hasher | 10 |
+| GeomHash_SurfaceHasher_Test.cxx | geom_hash_surface_hasher | 43 |
 
 Behaviour tests cover the other classes: `geom_behavior_surfaces.rs`,
-`geom_behavior_bspline_surface*.rs` and `adv_approx_behavior.rs`.
+`geom_behavior_bspline_surface*.rs`, `adv_approx_behavior.rs` and
+`top_abs_behavior.rs`.
 
 ## Verification
 
@@ -47,7 +68,7 @@ the Rust targets, checks exact runtime names, then runs
 `tools/verify_tkg3d_numeric.py` uses the shared driver `tools/toolkit_numeric.py`
 (also used by TKG2d). It builds `tools/oracle/tkg3d_probe.cxx` (a table of
 operations over `tkg3d_probe_*.cxx`) and its twin
-`crates/tkg3d/examples/numeric_probe.rs`, runs both on the 1577 requests of
+`crates/tkg3d/examples/numeric_probe.rs`, runs both on the 2395 requests of
 `tools/tkg3d_corpus.py` (one `tkg3d_corpus_*.py` module per probe file) and
 requires identical bits for finite values, infinities and signed zeros, NaN by
 classification, identical exception types and identical `DumpJson` text.
@@ -67,6 +88,16 @@ strategies; offset surfaces of every basis with both signs (equivalent surfaces,
 AdvApprox isos, osculating surfaces along collapsed B-spline and Bezier
 boundaries); and evaluation representations of all three kinds on every class
 that accepts them, mapped ones with domains and `SwapUV` included.
+
+The GeomEval curves and surfaces (kinds 20 and above of the curve and surface
+specifications) go through the same summaries, plus their accessors, their copies,
+`EvalDN` up to high orders, every constructor refusal and the refused members. The
+GeomHash requests hash and compare sets of curves, surfaces, points, directions,
+placements, polygons, polygons on triangulations and triangulations under nine
+tolerance pairs (default, zero, tiny, huge), with aliases and null handles; hashes
+are printed as integers and must match bit for bit, including the fallback on the
+class name of GeomEval geometry. The TopAbs requests cover the orientation algebra,
+every name and 68 `FromString` inputs (cases, NUL bytes, padding, non-ASCII).
 
 ## Preserved native behaviour
 
@@ -167,6 +198,77 @@ Surfaces:
   factors below 1e-5 (the PRO18577 guard); `PrefAndRec` copies its tables before it
   refuses a weight <= 1; a failed `SimpleApprox::Perform` keeps the previous tables.
 
+GeomEval:
+
+- No GeomEval curve or surface changes its parameterization: `Reverse`,
+  `UReverse`/`VReverse`, `ReversedParameter`, `U/VReversedParameter`, `UIso`/`VIso`
+  and `Transform` raise Standard_NotImplemented, so every move and `Reversed`,
+  `Transformed` fails. For this reason the Geom traits return `Result` from the
+  reversed parameters (as Geom2d does). The curves and the Bezier surfaces have no
+  successful mutator and keep plain fields; the elementary surfaces keep their
+  setters behind `SharedState`.
+- The T-Bezier and AHT-Bezier curves run the Geom2dEval evaluators on `gp_XYZ`:
+  equal weights still give a rational curve; the non-rational AHT curve stores one
+  uninitialized weight (`myWeights(1,1)`, 0.0 in the port); the rational AHT
+  `EvalD3` computes its first derivative as `(N1 - C*W1)/W0`, so it can differ in
+  the last bits from `EvalD1`/`EvalD2`; the rational `EvalDN` of orders 1 to 3
+  delegates to `EvalD1..D3`; the AHT `DumpJson` writes every pole under "Pole".
+  `EvalDN` raises Standard_RangeError below order 1.
+- `GeomEval_SineWaveCurve::EvalDN` and `GeomEval_CircularHelixCurve::EvalDN` take
+  `sin`/`cos` of the angle shifted by `N*Pi/2` instead of rotating (sin, cos) by
+  quarter turns as `EvalD1..D3` and Geom2dEval do, so `EvalDN(u, 1..3)` can differ
+  in the last bits from `EvalD1..D3`. The helix accepts a zero or negative pitch.
+- The elementary surfaces (ellipsoid, hyperboloid, paraboloid, hyperbolic
+  paraboloid, circular helicoid) inherit CN continuity; `IsVClosed` and
+  `IsVPeriodic` are false. `EvalDN` still adds a Z coefficient that is zero (the
+  ellipsoid multiplies it by 0.0, the hyperboloid uses 0.0 when Nu > 0); the
+  hyperbolic paraboloid builds its Z coefficient from 0.0 with `+=`, so a lone -0.0
+  becomes +0.0. The helicoid refuses only an exact zero pitch (a negative pitch and
+  NaN pass). The hyperboloid dumps its mode under the key `(int)myMode`.
+- The T-Bezier and AHT-Bezier surfaces add the same tensor sums row by row, but the
+  T-Bezier rounds the rational weight product as `(w * Bu) * Bv` and the AHT as
+  `w * (Bu * Bv)`. The rational AHT `EvalD0` divides by W00 while `EvalD1` to
+  `EvalD3` multiply by `1 / W00`, so the points can differ in the last bit. A purely
+  algebraic non-rational AHT surface uses nested Horner schemes in `EvalD0..D3`
+  (a special bicubic form when both degrees are 3), but not in `EvalDN`, where each
+  order multiplies the previous basis value by the quotient `(k - d) / t` (exact
+  factorials at `t == 0`). The rational T-Bezier `EvalDN` above total order 3 raises
+  Geom_UndefinedDerivative. `GeomEval_AHTBezierSurface::IsUClosed`/`IsVClosed` are
+  always false; the T-Bezier surface compares its boundary pole rows with
+  Precision::Confusion, and a NaN distance does not make it open. The non-rational
+  AHT surface stores a 1x1 uninitialized weight grid (0.0 in the port), the
+  T-Bezier an empty one. Both dump their base level as "Geom_Surface".
+
+GeomHash:
+
+- Rounding is `static_cast<int64_t>(std::round(v / HashTolerance))` with the x86-64
+  `cvttsd2si` result: NaN and out-of-range values give `INT64_MIN`, so a zero or tiny
+  HashTolerance and huge coordinates still hash deterministically.
+- `GeomHash_AxisPlacement` hashes the location, main and X directions of a `gp_Ax2`
+  but not the Y direction; the elementary surfaces hash `Position().Ax2()`, which
+  reverses the normal of a left-handed frame; the plane hash is the placement hash
+  itself. The offset-curve hash combines the basis, the rounded offset, then the
+  direction. The Bezier and B-spline surface hashes pack the rationality as
+  `IsURational | IsVRational << 1`. A class without a dedicated hasher (the GeomEval
+  geometry) hashes its type name and compares by handle identity.
+- The mesh hashers default both tolerances to Precision::Computational(), hash each
+  field into its own slot of a zero-initialized array (6, 11, 9 or 20 slots), and
+  reject with `|a - b| > CompTolerance`, so a NaN difference counts as equal (the
+  geometry hashers accept with `<=`, so NaN is different).
+  `PolygonOnTriHashKey::TriRepId` is widened to `int64_t` before hashing; a null
+  polygon marks its slot with `hash(int 1)`.
+
+TopAbs:
+
+- `TopAbs::Compose` reads its table as `[Or2][Or1]`: an INTERNAL or EXTERNAL `Or2`
+  wins, so `Compose(EXTERNAL, INTERNAL)` is INTERNAL, unlike the table in the header
+  comment.
+- `TopAbs::Print(TopAbs_State)` indexes the names "ON", "IN", "OUT", "UNKNOWN" with
+  the enumeration IN, OUT, ON, UNKNOWN, so IN prints "ON", OUT "IN" and ON "OUT".
+- `ShapeTypeFromString`/`ShapeOrientationFromString` upper-case through
+  `TCollection_AsciiString`: the name ends at the first NUL and only ASCII letters
+  change case. Their `bool (..., T&)` overloads return an `Option` in Rust.
+
 ## Deliberate Rust deviations
 
 - Getters that return `const&` natively return copies; `WeightsArray` lends the
@@ -187,12 +289,18 @@ Surfaces:
   the computation.
 - A failure of the surface inside the AdvApprox evaluator of the offset-surface isos
   stops the approximation and is returned, as the native exception would propagate.
+- The native Bezier and B-spline hash comparisons are `noexcept` but read the second
+  object with the first object's pole count; equal knots with a different pole
+  count terminate the native process, and the port returns "different". The corpus
+  never compares such pairs.
+- `GeomEval_HyperboloidSurface::SheetMode` is a Rust enum with the two sheet modes;
+  natively `SetMode` stores any integer cast to the enumeration.
 
 ## Remaining coverage
 
 - `Geom_BSplineSurface_Test.cxx` (50) and `Geom_OffsetSurface_Test.cxx` (33) use
   `GeomAdaptor_Surface` and wait for the GeomAdaptor package;
   `Geom_CurveEval_Test.cxx` (11) needs `GeomAPI_PointsToBSpline`.
-- The Adaptor3d, GeomAdaptor, GeomEval, GeomGridEval, GeomHash, GeomAPI and TopAbs
-  suites wait for their packages.
+- The Adaptor3d, GeomAdaptor, GeomGridEval and GeomAPI suites wait for their
+  packages.
 - `InitFromJson` does not exist in Geom; `DumpJson` is compared on the corpus.

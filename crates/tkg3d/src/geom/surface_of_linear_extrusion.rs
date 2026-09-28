@@ -176,7 +176,7 @@ impl GeomSurface for GeomSurfaceOfLinearExtrusion {
         state.eval_rep = Handle::default();
         state.basis.reverse()
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         self.state.read().basis.reversed_parameter(u)
     }
     fn v_reverse(&self) -> Result<(), Failure> {
@@ -185,8 +185,8 @@ impl GeomSurface for GeomSurfaceOfLinearExtrusion {
         state.direction.reverse();
         Ok(())
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
-        -v
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
+        Ok(-v)
     }
     fn transform_parameters(&self, u: f64, v: f64, transform: Transform3) -> (f64, f64) {
         let u: f64 = self.state.read().basis.transformed_parameter(u, transform);

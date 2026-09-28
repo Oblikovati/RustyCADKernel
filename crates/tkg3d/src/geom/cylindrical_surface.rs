@@ -152,15 +152,15 @@ impl GeomSurface for GeomCylindricalSurface {
         elementary_u_reverse(&mut self.state.write().pos);
         Ok(())
     }
-    fn u_reversed_parameter(&self, u: f64) -> f64 {
-        2. * PI - u
+    fn u_reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(2. * PI - u)
     }
     fn v_reverse(&self) -> Result<(), Failure> {
         elementary_v_reverse(&mut self.state.write().pos);
         Ok(())
     }
-    fn v_reversed_parameter(&self, v: f64) -> f64 {
-        -v
+    fn v_reversed_parameter(&self, v: f64) -> Result<f64, Failure> {
+        Ok(-v)
     }
     fn transform_parameters(&self, u: f64, v: f64, transform: Transform3) -> (f64, f64) {
         (u, scaled_parameter(v, transform))
