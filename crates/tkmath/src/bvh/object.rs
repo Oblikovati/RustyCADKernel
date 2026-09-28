@@ -17,6 +17,7 @@
 //! `BVH_ObjectTransient` state and the abstract `BVH_Object<T, N>`.
 use super::bounding_box::BvhBox;
 use super::properties::BvhProperties;
+use super::triangulation::BvhTriangulation;
 use super::vector::BvhVector;
 use rustycad_tkernel::standard::Failure;
 use std::sync::Arc;
@@ -58,5 +59,11 @@ pub trait BvhObject<V: BvhVector> {
     /// Marks object state as outdated (needs BVH rebuilding); `object.mark_dirty()`.
     fn mark_dirty(&mut self) {
         self.object_transient_mut().is_dirty = true;
+    }
+    /// `dynamic_cast<BVH_Triangulation<T, N>*>`: the triangulation this object is,
+    /// or derives from; `None` for other objects. A type that embeds a triangulation
+    /// (a C++ subclass) returns it. Example: `object.triangulation_mut().is_some()`.
+    fn triangulation_mut(&mut self) -> Option<&mut BvhTriangulation<V>> {
+        None
     }
 }

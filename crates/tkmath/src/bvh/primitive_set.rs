@@ -141,4 +141,37 @@ pub trait BvhPrimitiveSetAccess<V: BvhVector>: BvhSet<V> {
         self.primitive_set_mut().object.is_dirty = false;
         Ok(())
     }
+    /// `BVH()` for traversals: updates the tree while dirty, then moves it out;
+    /// the body of every primitive set's `BvhTreeOwner::take_built_bvh`.
+    /// Example: `let tree = set.take_primitive_bvh()?;`.
+    fn take_primitive_bvh(&mut self) -> Result<BvhTree<V>, Failure>
+    where
+        Self: Sized,
+    {
+        self.update()?;
+        Ok(std::mem::take(&mut self.primitive_set_mut().bvh))
+    }
+    /// Moves a tree taken by `take_primitive_bvh` back; `set.restore_primitive_bvh(tree)`.
+    fn restore_primitive_bvh(&mut self, bvh: BvhTree<V>) {
+        self.primitive_set_mut().bvh = bvh;
+    }
 }
+
+/// Implements `BvhTreeOwner` of a primitive set through its embedded state.
+macro_rules! primitive_tree_owner {
+    ($set:ident $(, $parameter:ident: $bound:path)*) => {
+        impl<V: crate::bvh::BvhVector $(, $parameter: $bound)*>
+            crate::bvh::tree_owner::BvhTreeOwner<V> for $set<V $(, $parameter)*>
+        {
+            fn take_built_bvh(
+                &mut self,
+            ) -> Result<crate::bvh::BvhTree<V>, rustycad_tkernel::standard::Failure> {
+                crate::bvh::BvhPrimitiveSetAccess::take_primitive_bvh(self)
+            }
+            fn restore_bvh(&mut self, bvh: crate::bvh::BvhTree<V>) {
+                crate::bvh::BvhPrimitiveSetAccess::restore_primitive_bvh(self, bvh);
+            }
+        }
+    };
+}
+pub(crate) use primitive_tree_owner;

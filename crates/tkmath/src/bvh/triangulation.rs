@@ -109,4 +109,8 @@ impl<V: BvhVector> BvhObject<V> for BvhTriangulation<V> {
     fn object_box(&self) -> Result<BvhBox<V>, Failure> {
         self.cached_box()
     }
+    fn triangulation_mut(&mut self) -> Option<&mut BvhTriangulation<V>> {
+        Some(self)
+    }
 }
+crate::bvh::primitive_set::primitive_tree_owner!(BvhTriangulation);
