@@ -243,6 +243,30 @@ class ConversionAndArrayTests(unittest.TestCase):
         self.assertEqual(normalize_param("const double[9]"), "const double*")
         self.assertEqual(normalize_param("Standard_Real theP[2]"), "double*")
 
+    def test_conversion_operators_to_qualified_template_types_are_members(self):
+        header = """
+class GC_MakeLine
+{
+public:
+  const occ::handle<Geom_Line>& Value() const;
+  operator const occ::handle<Geom_Line>&() const { return Value(); }
+  constexpr operator const Element_t*() const noexcept { return v; }
+};
+"""
+        self.assertEqual(members_of(header), [
+            "GC_MakeLine::Value||const", "GC_MakeLine::operator const occ::handle<Geom_Line>&||const",
+            "GC_MakeLine::operator const Element_t*||const"])
+        self.assertEqual(parse_row_id("GC_MakeLine::operator const occ::handle<Geom_Line>&() const"),
+                         Member("GC_MakeLine::operator const occ::handle<Geom_Line>&", "", "const"))
+
+    def test_deprecated_aliases_are_known_identities(self):
+        header = """
+using GCE2d_Root Standard_DEPRECATED_STD(
+  "GCE2d_Root is deprecated since OCCT 8.0.0. Use GC_Root instead.") = GC_Root;
+"""
+        self.assertEqual(known_of(header, "GCE2d_Root"), ["GCE2d_Root|None|"])
+        self.assertEqual(members_of(header), [])
+
     def test_rows_spelled_like_the_header_are_not_stale(self):
         with tempfile.TemporaryDirectory() as folder:
             header = Path(folder) / "MathDemo_Types.hxx"
