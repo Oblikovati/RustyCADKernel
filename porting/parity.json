@@ -37730,6 +37730,3030 @@
       "rust_item": "<rustycad_tkmath::math::VectorBase as Display>::fmt",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics. The hidden friend stream insertion forwards to Dump, as Display does."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Data()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::as_mut_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the raw pointer becomes the mutable slice of the stored values (a shared view detaches first)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Data() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::as_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the raw const pointer becomes a slice."
+    },
+    {
+      "upstream_id": "NCollection_Array1::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array1::iter`, `Array1::iter_mut` and `IntoIterator for &Array1` / `&mut Array1`."
+    },
+    {
+      "upstream_id": "NCollection_Array1::begin()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array1::iter`, `Array1::iter_mut` and `IntoIterator for &Array1` / `&mut Array1`."
+    },
+    {
+      "upstream_id": "NCollection_Array1::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array1::iter`, `Array1::iter_mut` and `IntoIterator for &Array1` / `&mut Array1`."
+    },
+    {
+      "upstream_id": "NCollection_Array1::end()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array1::iter`, `Array1::iter_mut` and `IntoIterator for &Array1` / `&mut Array1`."
+    },
+    {
+      "upstream_id": "NCollection_Array1::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array1::iter`, `Array1::iter_mut` and `IntoIterator for &Array1` / `&mut Array1`."
+    },
+    {
+      "upstream_id": "NCollection_Array1::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array1::iter`, `Array1::iter_mut` and `IntoIterator for &Array1` / `&mut Array1`."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::length",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Lower() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::lower",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Upper() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::upper",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::IsDeletable() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::is_deletable",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::RangeSize(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::range_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the int difference wraps and a negative count sign-extends to usize exactly as static_cast<size_t>(int)."
+    },
+    {
+      "upstream_id": "NCollection_Array1()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array1 as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::with_bounds",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; values are T::default() where native trivial types stay uninitialized; a negative extent (a native huge allocation) is an ArrayError::Bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array1(const_reference,int,int,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::from_shared",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the C-array constructor with theUseBuffer views a read-only slice (sized by the caller to upper-lower+1) and detaches a private copy on its first write instead of writing through a const buffer; with theUseBuffer false the native constructor ignores the buffer and allocates, which is Array1::with_bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array1(const_reference,size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::from_buffer",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the buffer is a mutable slice whose length is the size; use_buffer false allocates default values of that length, as natively."
+    },
+    {
+      "upstream_id": "NCollection_Array1(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::with_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1(pointer,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::from_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a non-owning zero-based view over a mutable slice (IsDeletable false)."
+    },
+    {
+      "upstream_id": "NCollection_Array1(const NCollection_Array1&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array1 as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the copy always owns its storage and keeps the lower bound, as natively."
+    },
+    {
+      "upstream_id": "NCollection_Array1(NCollection_Array1&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::move_from",
+      "status": "implemented",
+      "notes": "Native move leaves the source as the empty default (lower 1, no storage); Rust spells it `move_from`, which leaves the source as `Array1::default()` (same as `std::mem::take`)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::~NCollection_Array1()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Init(const_reference)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Assign(const NCollection_Array1&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; same-size storage is reused, otherwise reallocated; the lower bound is copied."
+    },
+    {
+      "upstream_id": "NCollection_Array1::CopyValues(const NCollection_Array1&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::copy_values",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; Standard_DimensionMismatch becomes ArrayError::DimensionMismatch; bounds are kept."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Move(NCollection_Array1&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::move_from",
+      "status": "implemented",
+      "notes": "Native move leaves the source as the empty default (lower 1, no storage); Rust spells it `move_from`, which leaves the source as `Array1::default()` (same as `std::mem::take`)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Move(NCollection_Array1&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::move_from",
+      "status": "implemented",
+      "notes": "Native move leaves the source as the empty default (lower 1, no storage); Rust spells it `move_from`, which leaves the source as `Array1::default()` (same as `std::mem::take`)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator=(const NCollection_Array1&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; copy assignment is Assign."
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator=(NCollection_Array1&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::move_from",
+      "status": "implemented",
+      "notes": "Native move leaves the source as the empty default (lower 1, no storage); Rust spells it `move_from`, which leaves the source as `Array1::default()` (same as `std::mem::take`)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::First() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access becomes a checked Result on an empty array."
+    },
+    {
+      "upstream_id": "NCollection_Array1::ChangeFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::change_first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; checked Result on an empty array."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Last() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; checked Result on an empty array."
+    },
+    {
+      "upstream_id": "NCollection_Array1::ChangeLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::change_last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; checked Result on an empty array."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Value(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; Standard_OutOfRange becomes ArrayError::Index with the index and bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator()(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array1 as Index<i32>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; out-of-range indices panic with the ArrayError text, as the native operator raises."
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator[](int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array1 as Index<i32>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; out-of-range indices panic with the ArrayError text."
+    },
+    {
+      "upstream_id": "NCollection_Array1::ChangeValue(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator()(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array1 as IndexMut<i32>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; out-of-range indices panic with the ArrayError text."
+    },
+    {
+      "upstream_id": "NCollection_Array1::operator[](int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array1 as IndexMut<i32>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; out-of-range indices panic with the ArrayError text."
+    },
+    {
+      "upstream_id": "NCollection_Array1::At(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::at",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::ChangeAt(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::change_at",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::SetValue(int,const value_type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::SetValue(int,value_type&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; Rust passes the value by move for both native overloads."
+    },
+    {
+      "upstream_id": "NCollection_Array1::EmplaceValue(int,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::emplace_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the constructor arguments become a constructing closure."
+    },
+    {
+      "upstream_id": "NCollection_Array1::UpdateLowerBound(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::update_lower_bound",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array1<T> is Array1<'a, T> (owned, borrowed or shared-view storage)."
+    },
+    {
+      "upstream_id": "NCollection_Array1::UpdateUpperBound(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::update_upper_bound",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; lower - Upper() + upper in wrapping 32-bit arithmetic, as the native int expression computes; probed."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Resize(int,int,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::resize_bounds",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; equal sizes only rebase; new slots are T::default() where native trivial types stay uninitialized."
+    },
+    {
+      "upstream_id": "NCollection_Array1::Resize(size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array1::resize",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; keeps the lower bound; new slots are T::default()."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ArraySize(size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::array_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::RangeSize(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::range_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::UpperForSize(int,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::upper_for_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; wrapping 32-bit int arithmetic as natively; probed."
+    },
+    {
+      "upstream_id": "NCollection_Array2::begin()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array2::iter`, `Array2::iter_mut` and `IntoIterator for &Array2` / `&mut Array2` (row-major storage order)."
+    },
+    {
+      "upstream_id": "NCollection_Array2::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array2::iter`, `Array2::iter_mut` and `IntoIterator for &Array2` / `&mut Array2` (row-major storage order)."
+    },
+    {
+      "upstream_id": "NCollection_Array2::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array2::iter`, `Array2::iter_mut` and `IntoIterator for &Array2` / `&mut Array2` (row-major storage order)."
+    },
+    {
+      "upstream_id": "NCollection_Array2::end()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array2::iter`, `Array2::iter_mut` and `IntoIterator for &Array2` / `&mut Array2` (row-major storage order)."
+    },
+    {
+      "upstream_id": "NCollection_Array2::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array2::iter`, `Array2::iter_mut` and `IntoIterator for &Array2` / `&mut Array2` (row-major storage order)."
+    },
+    {
+      "upstream_id": "NCollection_Array2::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Array2::iter`, `Array2::iter_mut` and `IntoIterator for &Array2` / `&mut Array2` (row-major storage order)."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Data()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::as_mut_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the raw row-major pointer becomes a mutable slice."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Data() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::as_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the raw row-major pointer becomes a slice."
+    },
+    {
+      "upstream_id": "NCollection_Array2::BeginPosition(int,int,int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::begin_position",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; ColLower + RowLower * NbCols, the flat lower bound of the underlying Array1, in wrapping int arithmetic; probed."
+    },
+    {
+      "upstream_id": "NCollection_Array2::LastPosition(int,int,int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::last_position",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the flat upper bound of the underlying Array1 in wrapping int arithmetic; probed."
+    },
+    {
+      "upstream_id": "NCollection_Array2()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array2 as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2(int,int,int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::with_bounds",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; as natively an `upper == lower - 1` dimension is empty and the underlying Array1 is rebased at BeginPosition; a negative extent (undefined natively) is ArrayError::Bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2(const NCollection_Array2&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array2 as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2(NCollection_Array2&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::move_from",
+      "status": "implemented",
+      "notes": "Native move leaves the source empty with lower row/column 1; Rust `move_from` leaves `Array2::default()`, the same state."
+    },
+    {
+      "upstream_id": "NCollection_Array2(const TheItemType&,int,int,int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::from_shared",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; views the leading rows*cols values of a read-only buffer and detaches on first write; a short buffer is ArrayError::DimensionMismatch instead of a native overread."
+    },
+    {
+      "upstream_id": "NCollection_Array2(size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::with_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2(pointer,size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::from_buffer",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a non-owning zero-based view of a mutable row-major slice whose length must equal rows*cols."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::length",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NbRows()*NbColumns() as a wrapping int product."
+    },
+    {
+      "upstream_id": "NCollection_Array2::NbRows() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::nb_rows",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; returns the count as usize (native int)."
+    },
+    {
+      "upstream_id": "NCollection_Array2::RowSize() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::row_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::NbColumns() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::nb_columns",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; returns the count as usize (native int)."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ColSize() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::col_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::RowLength() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::row_length",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ColLength() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::col_length",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ChangeArray1()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::change_array1",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Array1() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::array1",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Init(const_reference)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::First() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; checked Result on an empty array."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ChangeFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::change_first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; checked Result on an empty array."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Last() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; checked Result on an empty array."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ChangeLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::change_last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; checked Result on an empty array."
+    },
+    {
+      "upstream_id": "NCollection_Array2::IsDeletable() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::is_deletable",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::LowerRow() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::lower_row",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::UpperRow() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::upper_row",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::LowerCol() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::lower_col",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::UpperCol() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::upper_col",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::UpdateLowerRow(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::update_lower_row",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::UpdateLowerCol(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::update_lower_col",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::UpdateUpperRow(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::update_upper_row",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::UpdateUpperCol(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::update_upper_col",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Assign(const NCollection_Array2&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::CopyValues(const NCollection_Array2&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::copy_values",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; Standard_DimensionMismatch becomes ArrayError::ShapeMismatch naming both shapes."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Move(NCollection_Array2&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::move_from",
+      "status": "implemented",
+      "notes": "Native move leaves the source empty with lower row/column 1; Rust `move_from` leaves `Array2::default()`, the same state."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Move(NCollection_Array2&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::move_from",
+      "status": "implemented",
+      "notes": "Native move leaves the source empty with lower row/column 1; Rust `move_from` leaves `Array2::default()`, the same state."
+    },
+    {
+      "upstream_id": "NCollection_Array2::operator=(const NCollection_Array2&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::operator=(NCollection_Array2&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::move_from",
+      "status": "implemented",
+      "notes": "Native move leaves the source empty with lower row/column 1; Rust `move_from` leaves `Array2::default()`, the same state."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Value(int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::operator()(int,int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array2 as Index<(i32, i32)>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; out-of-range (row, col) pairs panic with the ArrayError text, as the native operator raises."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ChangeValue(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::operator()(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Array2 as IndexMut<(i32, i32)>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; out-of-range (row, col) pairs panic with the ArrayError text, as the native operator raises."
+    },
+    {
+      "upstream_id": "NCollection_Array2::SetValue(int,int,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::SetValue(int,int,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; Rust passes the value by move for both native overloads."
+    },
+    {
+      "upstream_id": "NCollection_Array2::At(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::at_offset",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the flat zero-based At(size_t) inherited from Array1."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ChangeAt(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::change_at_offset",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the flat zero-based ChangeAt(size_t) inherited from Array1."
+    },
+    {
+      "upstream_id": "NCollection_Array2::At(size_t,size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::at",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ChangeAt(size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::change_at",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::EmplaceValue(int,int,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::emplace_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the constructor arguments become a constructing closure."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Resize(int,int,int,int,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::resize_bounds",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; OCCT's packed-copy rule; `upper < lower` is ArrayError::Bounds where natively Standard_RangeError."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ResizeWithTrim(int,int,int,int,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::resize_trim_bounds",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::Resize(size_t,size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::resize",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_Array2::ResizeWithTrim(size_t,size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Array2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Array2::resize_with_trim",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Array2<T> is Array2<'a, T>, a row-major Array1 plus row/column bounds."
+    },
+    {
+      "upstream_id": "NCollection_HArray1()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::HArray1 as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards."
+    },
+    {
+      "upstream_id": "NCollection_HArray1(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::with_bounds",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards."
+    },
+    {
+      "upstream_id": "NCollection_HArray1(int,int,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::with_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards."
+    },
+    {
+      "upstream_id": "NCollection_HArray1(const TheItemType&,int,int,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::from_buffer",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. The C-array buffer is a static slice: viewed and detached on first write with theUseBuffer, ignored otherwise; a short buffer is an error instead of a native overread."
+    },
+    {
+      "upstream_id": "NCollection_HArray1(const Array1Type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::from_array",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. The copy owns its storage and keeps the lower bound."
+    },
+    {
+      "upstream_id": "NCollection_HArray1::Array1() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::array1",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. Returns a read guard."
+    },
+    {
+      "upstream_id": "NCollection_HArray1::ChangeArray1()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray1::change_array1",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. Returns a write guard seen by every handle holder."
+    },
+    {
+      "upstream_id": "NCollection_HArray1::DEFINE_STANDARD_RTTI_INLINE(NCollection_HArray1,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray1.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::HArray1 as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray1<T> is HArray1<T>, a Standard_Transient shared through Handle whose Array1 sits behind a lock: every inherited Array1 member is reached through the array1()/change_array1() guards. Every instantiation is named NCollection_HArray1 with parent Standard_Transient; one descriptor per element type is created once and cached by TypeId."
+    },
+    {
+      "upstream_id": "NCollection_HArray2(int,int,int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray2::with_bounds",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray2<T> is HArray2<T>, a Standard_Transient shared through Handle whose Array2 sits behind a lock: every inherited Array2 member is reached through the array2()/change_array2() guards."
+    },
+    {
+      "upstream_id": "NCollection_HArray2(int,int,int,int,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray2::with_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray2<T> is HArray2<T>, a Standard_Transient shared through Handle whose Array2 sits behind a lock: every inherited Array2 member is reached through the array2()/change_array2() guards."
+    },
+    {
+      "upstream_id": "NCollection_HArray2(const Array2Type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray2::from_array",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray2<T> is HArray2<T>, a Standard_Transient shared through Handle whose Array2 sits behind a lock: every inherited Array2 member is reached through the array2()/change_array2() guards. The copy owns its storage and keeps the bounds."
+    },
+    {
+      "upstream_id": "NCollection_HArray2::Array2() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray2::array2",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray2<T> is HArray2<T>, a Standard_Transient shared through Handle whose Array2 sits behind a lock: every inherited Array2 member is reached through the array2()/change_array2() guards. Returns a read guard."
+    },
+    {
+      "upstream_id": "NCollection_HArray2::ChangeArray2()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HArray2::change_array2",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray2<T> is HArray2<T>, a Standard_Transient shared through Handle whose Array2 sits behind a lock: every inherited Array2 member is reached through the array2()/change_array2() guards. Returns a write guard seen by every handle holder."
+    },
+    {
+      "upstream_id": "NCollection_HArray2::DEFINE_STANDARD_RTTI_INLINE(NCollection_HArray2,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HArray2.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::HArray2 as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HArray2<T> is HArray2<T>, a Standard_Transient shared through Handle whose Array2 sits behind a lock: every inherited Array2 member is reached through the array2()/change_array2() guards. Every instantiation is named NCollection_HArray2 with parent Standard_Transient."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LocalArray<T, MAX_ARRAY_SIZE> is LocalArray<T, N> with the same inline capacity default (1024)."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::LocalArray as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LocalArray<T, MAX_ARRAY_SIZE> is LocalArray<T, N> with the same inline capacity default (1024)."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::~NCollection_LocalArray()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::Deallocate()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::deallocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LocalArray<T, MAX_ARRAY_SIZE> is LocalArray<T, N> with the same inline capacity default (1024)."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::allocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LocalArray<T, MAX_ARRAY_SIZE> is LocalArray<T, N> with the same inline capacity default (1024)."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::Reallocate(size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::reallocate",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; shrinking keeps storage, inline growth keeps the old elements even without copy, and heap moves copy only when requested, as natively; new slots are T::default()."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LocalArray<T, MAX_ARRAY_SIZE> is LocalArray<T, N> with the same inline capacity default (1024)."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::begin()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LocalArray::iter`, `LocalArray::iter_mut` and `IntoIterator for &LocalArray` / `&mut LocalArray`."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LocalArray::iter`, `LocalArray::iter_mut` and `IntoIterator for &LocalArray` / `&mut LocalArray`."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LocalArray::iter`, `LocalArray::iter_mut` and `IntoIterator for &LocalArray` / `&mut LocalArray`."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::end()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LocalArray::iter`, `LocalArray::iter_mut` and `IntoIterator for &LocalArray` / `&mut LocalArray`."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LocalArray::iter`, `LocalArray::iter_mut` and `IntoIterator for &LocalArray` / `&mut LocalArray`."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LocalArray::iter`, `LocalArray::iter_mut` and `IntoIterator for &LocalArray` / `&mut LocalArray`."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::operator pointer()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::as_mut_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the pointer conversion becomes a mutable slice."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::operator const_pointer() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::as_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the const pointer conversion becomes a slice."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray(NCollection_LocalArray&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::move_from",
+      "status": "implemented",
+      "notes": "Native move transfers inline or heap storage and leaves the source empty; Rust `move_from` does the same (source becomes `LocalArray::default()`)."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::operator=(NCollection_LocalArray&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::move_from",
+      "status": "implemented",
+      "notes": "Native move transfers inline or heap storage and leaves the source empty; Rust `move_from` does the same (source becomes `LocalArray::default()`)."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::ToArray1()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::to_array1",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a non-owning zero-based Array1 view borrowing the buffer."
+    },
+    {
+      "upstream_id": "NCollection_LocalArray::ToArray1() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LocalArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LocalArray::to_array1_view",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the native const overload aliases the buffer through a const_cast; Rust returns a shared view that detaches a private copy on first write."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::LinearVector as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::with_capacity",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::with_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector(const NCollection_LinearVector&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::LinearVector as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the copy's capacity equals the source size, as natively."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector(NCollection_LinearVector&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::move_from",
+      "status": "implemented",
+      "notes": "Native move steals the buffer and leaves the source with no data and zero capacity; Rust `move_from` leaves `LinearVector::default()`, the same state."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::~NCollection_LinearVector()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator=(const NCollection_LinearVector&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; storage is reused when the source fits the capacity, otherwise replaced by an exact-size copy."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator=(NCollection_LinearVector&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::move_from",
+      "status": "implemented",
+      "notes": "Native move steals the buffer and leaves the source with no data and zero capacity; Rust `move_from` leaves `LinearVector::default()`, the same state."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Data()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::as_mut_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Data() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::as_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::HasData() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::has_data",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; true while storage is allocated (capacity > 0), which survives Clear(false); probed."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Empty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::MaxSize()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::max_size",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Capacity() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::capacity",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; growth follows the native nextCapacity rule (2, then doubling, at least the request); probed."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Reserve(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::reserve",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Resize(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::resize",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Resize(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::resize_with_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Value(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::ChangeValue(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator()(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::LinearVector as Index<usize>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native element access panics on an out-of-range index in Rust."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator()(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::LinearVector as IndexMut<usize>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native element access panics on an out-of-range index in Rust."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator[](size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::LinearVector as Index<usize>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native element access panics on an out-of-range index in Rust."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::operator[](size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::LinearVector as IndexMut<usize>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native element access panics on an out-of-range index in Rust."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::First() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::ChangeFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::change_first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Last() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::ChangeLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::change_last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Append(const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Append(TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; Rust passes the value by move for both native overloads."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Appended()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::appended",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::EmplaceAppend(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::emplace_append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the constructor arguments become a constructing closure."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::SetValue(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; extends with default values past the end and returns the stored slot."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::SetValue(size_t,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; Rust passes the value by move for both native overloads."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::InsertBefore(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::InsertAfter(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::InsertBefore(size_t,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::InsertAfter(size_t,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::EraseLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::erase_last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Erase(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::erase",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Erase(size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::erase_range",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::Clear(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::clear",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::ToArray1()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::to_array1",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_LinearVector<T> is LinearVector<T> over a Vec with the native capacity rule; Standard_OutOfRange becomes ArrayError::Index."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::ToArray1() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::LinearVector::to_array1_view",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the native const overload aliases the buffer through a const_cast; Rust returns a shared view that detaches on first write."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::begin()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LinearVector::iter`, `LinearVector::iter_mut` and `IntoIterator for &LinearVector` / `&mut LinearVector`."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::end()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LinearVector::iter`, `LinearVector::iter_mut` and `IntoIterator for &LinearVector` / `&mut LinearVector`."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LinearVector::iter`, `LinearVector::iter_mut` and `IntoIterator for &LinearVector` / `&mut LinearVector`."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LinearVector::iter`, `LinearVector::iter_mut` and `IntoIterator for &LinearVector` / `&mut LinearVector`."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LinearVector::iter`, `LinearVector::iter_mut` and `IntoIterator for &LinearVector` / `&mut LinearVector`."
+    },
+    {
+      "upstream_id": "NCollection_LinearVector::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_LinearVector.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `LinearVector::iter`, `LinearVector::iter_mut` and `IntoIterator for &LinearVector` / `&mut LinearVector`."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator(NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator(const NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator::ChangeValue()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator::Init(NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator::Init(const NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator::Initialize(NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Iterator::Initialize(const NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ConstIterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ConstIterator(const NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ConstIterator::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ConstIterator::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ConstIterator::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ConstIterator::Init(const NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ConstIterator::Initialize(const NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`, which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`; detached positions are `DynamicArray::begin_cursor` / `end_cursor`."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::begin()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`; detached positions are `DynamicArray::begin_cursor` / `end_cursor`."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`; detached positions are `DynamicArray::begin_cursor` / `end_cursor`."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::end()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`; detached positions are `DynamicArray::begin_cursor` / `end_cursor`."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`; detached positions are `DynamicArray::begin_cursor` / `end_cursor`."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `DynamicArray::iter` and `DynamicArray::iter_mut`; detached positions are `DynamicArray::begin_cursor` / `end_cursor`."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::length",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Lower() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::lower",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Upper() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::upper",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Allocator() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a null native handle is None."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::SetIncrement(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_increment",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; ignored unless empty and rounded up to a power of two as natively; Rust also drops the empty blocks allocated with the old size, which natively keep their stale size."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::SetIncrement(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_increment",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the int overload clamps values below 1 to 1; usize cannot be negative and 0 is clamped to 1."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_increment",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_increment",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the int overload (default 256, `Default`) clamps values below 1 to 1, as with_increment clamps 0."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray(size_t,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a null handle is None."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray(int,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the int increment is clamped to at least 1."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray(size_t,const allocator_type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_occ_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; keeps the typed allocator's resource, as natively theAllocator.Allocator()."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray(int,const allocator_type&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::with_occ_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the int increment is clamped to at least 1."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray(const NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::DynamicArray as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; copies increment, allocator and values."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray(NCollection_DynamicArray&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from",
+      "status": "implemented",
+      "notes": "Native move steals the blocks and leaves the source with no elements; Rust `move_from` leaves an empty array with the source increment and no allocator."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::~NCollection_DynamicArray()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Assign(const NCollection_DynamicArray&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; theOwnAllocator false adopts the source allocator."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Assign(NCollection_DynamicArray&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from",
+      "status": "implemented",
+      "notes": "Native move steals the blocks and leaves the source with no elements; Rust `move_from` leaves an empty array with the source increment and no allocator."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator=(const NCollection_DynamicArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; copy assignment is Assign(theOther, false): call assign(source, false)."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator=(NCollection_DynamicArray&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::move_from",
+      "status": "implemented",
+      "notes": "Native move steals the blocks and leaves the source with no elements; Rust `move_from` leaves an empty array with the source increment and no allocator."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Append(const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Append(TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::InsertAfter(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::InsertAfter(size_t,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::InsertAfter(int,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::InsertAfter(int,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::InsertBefore(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::InsertBefore(size_t,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::InsertBefore(int,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::InsertBefore(int,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an index outside [0, Size()) is ArrayError::Index (native Standard_OutOfRange); shifting is done with swaps, giving the native element order; probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::EraseLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::erase_last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Appended()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::appended",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::EmplaceAppend(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::emplace_append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the constructor arguments become a constructing closure."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::EmplaceValue(size_t,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::emplace_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; extends with default values like SetValue."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::EmplaceValue(int,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::emplace_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a negative int index is an ArrayError."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator()(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::DynamicArray as Index<usize>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; out-of-range indices panic with the ArrayError text."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator()(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator[](size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::DynamicArray as Index<usize>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; out-of-range indices panic with the ArrayError text."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator[](int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Value(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Value(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::First() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ChangeFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::change_first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Last() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ChangeLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::change_last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator()(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::DynamicArray as IndexMut<usize>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; like the unchecked native operator, a slot inside the allocated blocks but past Size() is reachable (default-filled); beyond the blocks it panics."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator()(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator[](size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::DynamicArray as IndexMut<usize>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; like the unchecked native operator, a slot inside the allocated blocks but past Size() is reachable (default-filled); beyond the blocks it panics."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::operator[](int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ChangeValue(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::ChangeValue(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the unchecked native access is a checked Result in Rust; the generic index accepts i32 or usize and a negative int is an ArrayError, as natively Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::SetValue(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; indices past the end default-fill the gap and extend Size(), as natively; a negative int is ArrayError (native Standard_OutOfRange); probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::SetValue(size_t,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; indices past the end default-fill the gap and extend Size(), as natively; a negative int is ArrayError (native Standard_OutOfRange); probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::SetValue(int,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; indices past the end default-fill the gap and extend Size(), as natively; a negative int is ArrayError (native Standard_OutOfRange); probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::SetValue(int,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; indices past the end default-fill the gap and extend Size(), as natively; a negative int is ArrayError (native Standard_OutOfRange); probed."
+    },
+    {
+      "upstream_id": "NCollection_DynamicArray::Clear(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_DynamicArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray::clear",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_DynamicArray<T> is DynamicArray<T>: power-of-two blocks whose element addresses survive appends."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray(size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a zero length or stride is Standard_RangeError; fresh bytes are zero where native bytes are indeterminate."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray(size_t,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the int length must be positive (native Standard_RangeError); pass it as usize."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray(const NCollection_AliasedArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::AliasedArray as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the copy owns its storage; an empty source copies to an empty non-owning array, as natively."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray(NCollection_AliasedArray&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::move_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the destination takes storage, stride and length. Natively the source keeps a non-owning alias of the moved bytes; Rust leaves it empty with its stride instead, since that alias would dangle once the destination frees the storage."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray(const Type_t*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::from_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the external buffer is an exclusively borrowed Pod slice (the native const_cast allows writes); an empty slice is Standard_RangeError."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray(const Type_t*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::from_slice",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the slice length replaces the int count."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Stride() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::stride",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::length",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Lower() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::lower",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Upper() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::upper",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::IsDeletable() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::is_deletable",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::IsAllocated() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::is_allocated",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::SizeBytes() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::size_bytes",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Assign(const NCollection_AliasedArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a different stride or length is Standard_DimensionMismatch."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Move(NCollection_AliasedArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::move_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the destination takes storage, stride and length. Natively the source keeps a non-owning alias of the moved bytes; Rust leaves it empty with its stride instead, since that alias would dangle once the destination frees the storage."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::operator=(const NCollection_AliasedArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; copy assignment is Assign."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::operator=(NCollection_AliasedArray&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::move_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the destination takes storage, stride and length. Natively the source keeps a non-owning alias of the moved bytes; Rust leaves it empty with its stride instead, since that alias would dangle once the destination frees the storage."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Resize(size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::resize",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_AliasedArray<16> is AliasedArray<'a> over 16-byte-aligned owned words or a borrowed byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Resize(int,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::resize",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the int length must be positive; pass it as usize."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::~NCollection_AliasedArray()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Data() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::typed_data",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::ChangeData()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_data",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::value(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::byte_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the raw element pointer becomes the element's stride-sized byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::value(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::byte_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the raw element pointer becomes a byte slice; negative ints are unrepresentable in the usize index."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::changeValue(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_byte_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the raw element pointer becomes a mutable byte slice."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::changeValue(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_byte_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; negative ints are unrepresentable in the usize index."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Init(const Type_t&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Value(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Value(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors. The int overload's negative indices (native Standard_OutOfRange) are unrepresentable in the usize index."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Value(size_t,Type_t&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors. The output-parameter overload is a copy of the returned reference."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Value(int,Type_t&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors. The int overload's negative indices (native Standard_OutOfRange) are unrepresentable in the usize index. The output-parameter overload is a copy of the returned reference."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::ChangeValue(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::ChangeValue(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors. The int overload's negative indices (native Standard_OutOfRange) are unrepresentable in the usize index."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Value2(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value2",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors. Value2 accepts any type no larger than the stride."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Value2(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value2",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors. The int overload's negative indices (native Standard_OutOfRange) are unrepresentable in the usize index."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Value2(size_t,Type_t&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value2",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors. The output-parameter overload is a copy of the returned reference."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Value2(int,Type_t&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::value2",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors. The int overload's negative indices (native Standard_OutOfRange) are unrepresentable in the usize index."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::ChangeValue2(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_value2",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::ChangeValue2(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_value2",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors. The int overload's negative indices (native Standard_OutOfRange) are unrepresentable in the usize index."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::First() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::ChangeFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::Last() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_AliasedArray::ChangeLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_AliasedArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::AliasedArray::change_last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the Type_t template argument is a bytemuck::Pod type; a size different from the stride is Standard_TypeMismatch and an index outside [0, Size()) is Standard_OutOfRange, as Failure errors."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a zero increment (a native division by zero) panics with the value."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Assign(const NCollection_SparseArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a different increment clears first; existing blocks are reused slot by slot and the block table grows with the native allocData rule; probed."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Exchange(NCollection_SparseArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::exchange",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_SparseArray<T> is SparseArray<T>: fixed-size blocks of optional slots indexed from 0."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::clear",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; frees every block and the block table (Capacity 0)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Value(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an unset index returns None where the native accessor raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::operator()(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::SparseArray as Index<usize>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an unset index panics naming it, as the native accessor raises."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ChangeValue(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an unset index returns None where the native accessor raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::operator()(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::SparseArray as IndexMut<usize>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an unset index panics naming it."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::SetValue(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; grows the block table from `increment` entries by doubling, as natively; probed."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::UnsetValue(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::unset_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; a block whose last value is unset is freed, as natively."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Extent() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::extent",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_SparseArray<T> is SparseArray<T>: fixed-size blocks of optional slots indexed from 0."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_SparseArray<T> is SparseArray<T>: fixed-size blocks of optional slots indexed from 0."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Find(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::find",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an unset index returns None where the native accessor raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ChangeFind(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::change_find",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; an unset index returns None where the native accessor raises Standard_OutOfRange."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Bind(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::bind",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_SparseArray<T> is SparseArray<T>: fixed-size blocks of optional slots indexed from 0."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::IsBound(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::is_bound",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_SparseArray<T> is SparseArray<T>: fixed-size blocks of optional slots indexed from 0."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::UnBind(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::unbind",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_SparseArray<T> is SparseArray<T>: fixed-size blocks of optional slots indexed from 0."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::begin()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::end()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order)."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator(const NCollection_SparseArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator::Init(const NCollection_SparseArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator::Restart()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator::operator()() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::ConstIterator::Key() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator(NCollection_SparseArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::Init(NCollection_SparseArray&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::Restart()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::Key() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::ChangeValue()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::operator()()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArray::Iterator::operator()() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArray.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries`, `SparseArray::entries_mut`, `SparseArray::iter` and `SparseArray::iter_mut` (ascending index order), which visit the same elements in the same order. Key() is the entry index; Restart() is a fresh `entries()` call."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the untyped NCollection_SparseArrayBase is folded into the generic SparseArray<T>."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Capacity() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::capacity",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; myNbBlocks * myBlockSize, with the block table starting at `increment` entries and doubling; probed."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::HasValue(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SparseArray::has_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the untyped NCollection_SparseArrayBase is folded into the generic SparseArray<T>."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::Restart()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries` and `SparseArray::entries_mut` (ascending index order; the index is the entry's first element), which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries` and `SparseArray::entries_mut` (ascending index order; the index is the entry's first element), which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries` and `SparseArray::entries_mut` (ascending index order; the index is the entry's first element), which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_SparseArrayBase::Iterator::Index() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_SparseArrayBase.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OCCT More/Next/Value iterator boilerplate. Rust iteration is covered by `SparseArray::entries` and `SparseArray::entries_mut` (ascending index order; the index is the entry's first element), which visit the same elements in the same order."
+    },
+    {
+      "upstream_id": "NCollection_Vector",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vector.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::DynamicArray",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; the deprecated alias NCollection_Vector<T> = NCollection_DynamicArray<T> has no Rust alias: use DynamicArray<T>."
     }
   ],
   "tests": [
