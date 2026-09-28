@@ -73,6 +73,13 @@ pub trait BvhVector:
     fn to_bnd_box(min: &Self, max: &Self) -> BoundingBox3;
 }
 
+/// `BVH::ToBndBox(const T&, const T&)`: the scalar (N = 1) overload, placing the
+/// interval on the X axis with zero Y and Z.
+/// Example: `bvh::to_bnd_box_scalar(1.0_f32, 2.0_f32)`.
+pub fn to_bnd_box_scalar<T: BvhScalar>(min: T, max: T) -> BoundingBox3 {
+    bnd_box([min.to_double(), 0.0, 0.0], [max.to_double(), 0.0, 0.0])
+}
+
 fn bnd_box(min: [f64; 3], max: [f64; 3]) -> BoundingBox3 {
     BoundingBox3::new(
         Point3::new(min[0], min[1], min[2]),

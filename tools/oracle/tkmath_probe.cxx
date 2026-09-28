@@ -146,6 +146,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_elementary_probe.cxx"
 #include "tkmath_bvh_probe.cxx"
 #include "tkmath_bvh_query_probe.cxx"
+#include "tkmath_bvh_tool_classes_probe.cxx"
 #include "tkmath_bspl_probe.cxx"
 #include "tkmath_bspl_curves_probe.cxx"
 #include "tkmath_bspl_eval_probe.cxx"
@@ -266,6 +267,7 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"bvh_traverse", bvh_traverse_case},
  {"bvh_nearest", bvh_nearest_case},
  {"bvh_field", bvh_field_case},
+ {"bvh_tool_classes", bvh_tool_classes_case},
  {"bspl_knots", bspl_probe::knots_case},
  {"bspl_locate", bspl_probe::locate_case},
  {"bspl_scheme", bspl_probe::scheme_case},

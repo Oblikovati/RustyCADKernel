@@ -20,6 +20,7 @@ from tkmath_plib_corpus import append_plib_requests
 from tkmath_elementary_corpus import append_elementary_requests
 from tkmath_bvh_corpus import append_bvh_requests
 from tkmath_bvh_query_corpus import append_bvh_query_requests
+from tkmath_bvh_tool_classes_corpus import append_bvh_tool_classes_requests
 from tkmath_bsplclib_corpus import append_bsplclib_requests
 from tkmath_bsplslib_corpus import append_bsplslib_requests
 from tkmath_gp_planar_corpus import append_gp_planar_requests
@@ -427,6 +428,7 @@ def corpus() -> str:
     append_convert_requests(requests)
     append_gp_core_requests(requests)
     append_bnd_requests(requests)
+    append_bvh_tool_classes_requests(requests)
     return '\n'.join(requests)+'\n'           
 
 
