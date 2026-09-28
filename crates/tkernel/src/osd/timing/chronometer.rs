@@ -15,7 +15,8 @@
 // commercial license or contractual agreement.
 
 //! `OSD_Chronometer`: cumulative CPU time of the process or of the calling thread.
-use super::{CpuTimes, NativeCpuTimes, c_format::format_g};
+use super::{CpuTimes, NativeCpuTimes};
+use crate::c_format::format_g;
 use crate::standard::Failure;
 use std::sync::Arc;
 

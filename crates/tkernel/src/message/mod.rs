@@ -40,7 +40,6 @@ macro_rules! message_runtime_type {
     };
 }
 
-mod c_format;
 mod json;
 
 mod gravity;

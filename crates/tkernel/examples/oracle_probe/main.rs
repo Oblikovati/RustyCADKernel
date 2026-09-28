@@ -9,9 +9,9 @@ use std::io::{self, BufRead};
 mod message;
 mod message_progress;
 mod ncollection;
+mod osd;
 mod quantity;
 mod resource;
-mod osd;
 
 fn date(input: &mut std::str::SplitWhitespace<'_>) -> Result<Date, Error> {
     let values: Vec<i32> = input

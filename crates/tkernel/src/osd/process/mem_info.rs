@@ -56,6 +56,12 @@ impl MemCounter {
         Self::HeapUsage,
     ];
 }
+// Message_AttributeMeter keys its active counters by the raw enum value.
+impl crate::ncollection::HashKey for MemCounter {
+    fn occt_hash(&self) -> usize {
+        *self as usize
+    }
+}
 
 /// The raw process figures `OSD_MemInfo::Update` reads; implement for deterministic tests.
 pub trait MemInfoSource {

@@ -19,7 +19,8 @@
 //! C++ inheritance becomes composition: the timer owns its chronometer, exposes the
 //! chronometer's read-only members through `Deref`, and re-implements the virtual
 //! members it overrides in the native call order.
-use super::{Chronometer, CpuTimes, NativeWallClock, WallClock, c_format::format_g};
+use super::{Chronometer, CpuTimes, NativeWallClock, WallClock};
+use crate::c_format::format_g;
 use crate::standard::Failure;
 use std::{ops::Deref, sync::Arc};
 

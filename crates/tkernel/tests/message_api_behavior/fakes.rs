@@ -4,7 +4,7 @@
 use rustycad_tkernel::message::{
     Gravity, MetricSampler, MsgFileSource, Printer, PrinterBase, PrinterType,
 };
-use rustycad_tkernel::osd::MemInfoCounter;
+use rustycad_tkernel::osd::MemCounter;
 use rustycad_tkernel::standard::{RuntimeType, RuntimeTyped};
 use rustycad_tkernel::tcollection::AsciiString;
 use std::collections::HashMap;
@@ -78,11 +78,11 @@ impl MetricSampler for FakeMetricSampler {
     fn thread_cpu(&self) -> (f64, f64) {
         (self.tick(), 0.0)
     }
-    fn memory_mib(&self, counters: &[MemInfoCounter]) -> Vec<f64> {
+    fn memory_mib(&self, counters: &[MemCounter]) -> Vec<f64> {
         counters
             .iter()
             .map(|counter| {
-                if *counter == MemInfoCounter::SwapUsage {
+                if *counter == MemCounter::SwapUsage {
                     -1.0
                 } else {
                     2.0

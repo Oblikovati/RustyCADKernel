@@ -1427,7 +1427,7 @@ Design decisions:
   (`MsgFile::global()` is the process catalog with native I/O), `PrinterOStream::with_writer`,
   and `Report::with_metric_sampler` / `set_metric_sampler` for the clocks and memory counters
   `SetAlertMetrics` reads (`NativeMetricSampler` ports the `OSD_Timer`, `OSD_Chronometer` and
-  `OSD_MemInfo` platform code; `osd::MemInfoCounter` is `OSD_MemInfo::Counter`).
+  `OSD_MemInfo` platform code; `osd::MemCounter` is `OSD_MemInfo::Counter`).
 - Members that raise natively return `Result`: `Msg` arguments and `Get()` (stale positions),
   catalog loading (a lone `.` line), `Algorithm::send_status_messages`.
 

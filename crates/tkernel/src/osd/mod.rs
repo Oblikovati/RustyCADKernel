@@ -42,6 +42,3 @@ pub use timing::*;
 // Threads, the thread pool and parallel loops.
 mod parallel;
 pub use parallel::*;
-
-mod mem_info_counter;
-pub use mem_info_counter::MemInfoCounter;

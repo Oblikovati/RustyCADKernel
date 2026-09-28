@@ -15,7 +15,7 @@
 
 //! `Message_Msg`: a catalog message whose `%` format specifications take arguments.
 use super::MsgFile;
-use super::c_format::{CArg, c_sprintf};
+use crate::c_format::{CArg, c_sprintf};
 use crate::standard::Failure;
 use crate::tcollection::{AsciiString, ExtendedString, HAsciiString, HExtendedString};
 mod body;

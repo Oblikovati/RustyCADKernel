@@ -15,9 +15,9 @@
 // commercial license or contractual agreement.
 
 //! The `Message` namespace: default messenger and report, time and metric helpers.
-use super::c_format::{CArg, c_sprintf};
 use super::{Gravity, MessageStream, Messenger, MetricType, Report};
-use crate::osd::MemInfoCounter;
+use crate::c_format::{CArg, c_sprintf};
+use crate::osd::MemCounter;
 use crate::tcollection::AsciiString;
 use std::sync::{Arc, Mutex, OnceLock};
 
@@ -42,17 +42,14 @@ const METRIC_NAMES: [&str; 13] = [
 ];
 
 /// Memory metrics and their `OSD_MemInfo` counters, in the native switch order.
-const MEMORY_METRICS: [(MetricType, MemInfoCounter); 7] = [
-    (MetricType::MemPrivate, MemInfoCounter::Private),
-    (MetricType::MemVirtual, MemInfoCounter::Virtual),
-    (MetricType::MemWorkingSet, MemInfoCounter::WorkingSet),
-    (
-        MetricType::MemWorkingSetPeak,
-        MemInfoCounter::WorkingSetPeak,
-    ),
-    (MetricType::MemSwapUsage, MemInfoCounter::SwapUsage),
-    (MetricType::MemSwapUsagePeak, MemInfoCounter::SwapUsagePeak),
-    (MetricType::MemHeapUsage, MemInfoCounter::HeapUsage),
+const MEMORY_METRICS: [(MetricType, MemCounter); 7] = [
+    (MetricType::MemPrivate, MemCounter::Private),
+    (MetricType::MemVirtual, MemCounter::Virtual),
+    (MetricType::MemWorkingSet, MemCounter::WorkingSet),
+    (MetricType::MemWorkingSetPeak, MemCounter::WorkingSetPeak),
+    (MetricType::MemSwapUsage, MemCounter::SwapUsage),
+    (MetricType::MemSwapUsagePeak, MemCounter::SwapUsagePeak),
+    (MetricType::MemHeapUsage, MemCounter::HeapUsage),
 ];
 
 static DEFAULT_REPORT: Mutex<Option<Arc<Report>>> = Mutex::new(None);
@@ -162,14 +159,14 @@ impl Message {
         METRIC_NAMES[metric as usize]
     }
     /// The memory counter of a memory metric; `Message::to_osd_metric(MetricType::MemVirtual)`.
-    pub fn to_osd_metric(metric: MetricType) -> Option<MemInfoCounter> {
+    pub fn to_osd_metric(metric: MetricType) -> Option<MemCounter> {
         MEMORY_METRICS
             .iter()
             .find(|(candidate, _)| *candidate == metric)
             .map(|(_, counter)| *counter)
     }
-    /// The memory metric of a counter; `Message::to_message_metric(MemInfoCounter::Virtual)`.
-    pub fn to_message_metric(counter: MemInfoCounter) -> Option<MetricType> {
+    /// The memory metric of a counter; `Message::to_message_metric(MemCounter::Virtual)`.
+    pub fn to_message_metric(counter: MemCounter) -> Option<MetricType> {
         MEMORY_METRICS
             .iter()
             .find(|(_, candidate)| *candidate == counter)

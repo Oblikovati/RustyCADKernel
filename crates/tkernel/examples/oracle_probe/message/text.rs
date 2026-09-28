@@ -2,7 +2,7 @@
 #![allow(unsafe_code)]
 use super::{ascii, bit, bytes, ext, real, rest, units};
 use rustycad_tkernel::message::{ExecStatus, Message, MetricType, Msg, MsgFile, Status};
-use rustycad_tkernel::osd::MemInfoCounter;
+use rustycad_tkernel::osd::MemCounter;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::tcollection::AsciiString;
 use std::str::SplitWhitespace;
@@ -88,13 +88,13 @@ fn metrics() -> String {
         ));
     }
     let counters = [
-        MemInfoCounter::Private,
-        MemInfoCounter::Virtual,
-        MemInfoCounter::WorkingSet,
-        MemInfoCounter::WorkingSetPeak,
-        MemInfoCounter::SwapUsage,
-        MemInfoCounter::SwapUsagePeak,
-        MemInfoCounter::HeapUsage,
+        MemCounter::Private,
+        MemCounter::Virtual,
+        MemCounter::WorkingSet,
+        MemCounter::WorkingSetPeak,
+        MemCounter::SwapUsage,
+        MemCounter::SwapUsagePeak,
+        MemCounter::HeapUsage,
     ];
     for counter in counters {
         let metric = Message::to_message_metric(counter);

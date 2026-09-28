@@ -21,7 +21,7 @@ use rustycad_tkernel::message::{
     PrinterHandle, downcast_alert, downcast_attribute,
 };
 use rustycad_tkernel::message::{Attribute, Printer};
-use rustycad_tkernel::osd::MemInfoCounter;
+use rustycad_tkernel::osd::MemCounter;
 use rustycad_tkernel::tcollection::AsciiString;
 use std::fmt::Write;
 use std::sync::{Arc, Mutex, MutexGuard};
@@ -97,11 +97,11 @@ fn time_and_metric_names() {
     assert_eq!(Message::metric_from_string_or_none("?"), MetricType::None);
     assert_eq!(
         Message::to_osd_metric(MetricType::MemVirtual),
-        Some(MemInfoCounter::Virtual)
+        Some(MemCounter::Virtual)
     );
     assert_eq!(Message::to_osd_metric(MetricType::WallClock), None);
     assert_eq!(
-        Message::to_message_metric(MemInfoCounter::HeapUsage),
+        Message::to_message_metric(MemCounter::HeapUsage),
         Some(MetricType::MemHeapUsage)
     );
 }

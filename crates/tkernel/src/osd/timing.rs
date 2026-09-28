@@ -13,7 +13,6 @@
 // commercial license or contractual agreement.
 
 //! Timing, signals and package statics: `OSD_Timer`, `OSD_Chronometer` and `OSD`.
-mod c_format;
 mod chronometer;
 mod clocks;
 mod cpu_native;

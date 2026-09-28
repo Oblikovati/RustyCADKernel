@@ -13,7 +13,7 @@
 // commercial license or contractual agreement.
 
 //! `OSD::RealToCString` and `OSD::CStringToReal`: locale-independent real text.
-use super::c_format::format_e;
+use crate::c_format::format_e;
 use crate::standard::strtod;
 
 /// `OSD::RealToCString`: `%.17e`, then an exact `e+00` exponent is dropped and trailing
