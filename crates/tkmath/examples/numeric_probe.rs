@@ -290,6 +290,27 @@ fn main() {
             "plib_length" => plib_probe::length_case(&values),
             "plib_jacobi" => plib_probe::jacobi_probe_case(&values, false),
             "plib_hermit" => plib_probe::jacobi_probe_case(&values, true),
+            "bspl_knots" => bspl_probe::knots_case(&values),
+            "bspl_locate" => bspl_probe::locate_case(&values),
+            "bspl_scheme" => bspl_probe::scheme_case(&values),
+            "bspl_build" => bspl_probe::build_case(&values),
+            "bspl_insert" => bspl_probe::insert_case(&values),
+            "bspl_remove" => bspl_probe::remove_case(&values),
+            "bspl_degree" => bspl_probe::degree_case(&values),
+            "bspl_unperiodize" => bspl_probe::unperiodize_case(&values),
+            "bspl_trim" => bspl_probe::trim_case(&values),
+            "bspl_eval" => bspl_probe::eval_case(&values),
+            "bspl_flat_eval" => bspl_probe::flat_eval_case(&values),
+            "bspl_basis" => bspl_probe::basis_case(&values),
+            "bspl_interpolate" => bspl_probe::interpolate_case(&values),
+            "bspl_cache" => bspl_probe::cache_case(&values),
+            "bspl_bezier" => bspl_probe::bezier_case(&values),
+            "bspl_move" => bspl_probe::move_case(&values),
+            "bspl_resolution" => bspl_probe::resolution_case(&values),
+            "bspl_function" => bspl_probe::function_case(&values),
+            "bspl_tang" => bspl_probe::tang_case(&values),
+            "bspl_merge" => bspl_probe::merge_case(&values),
+            "bspl_intervals" => bspl_probe::intervals_case(&values),
             "modern_lbfgs" => modern_opt_probe::modern_lbfgs_case(&values),
             "modern_newton" => modern_opt_probe::modern_newton_case(&values),
             "modern_global" => global_modern_probe::modern_global_case(&values),
@@ -426,5 +447,6 @@ mod swarm_probe;
 
 mod global_modern_probe;
 
+mod bspl_probe;
 mod cslib_probe;
 mod plib_probe;

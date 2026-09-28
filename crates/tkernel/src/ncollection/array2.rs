@@ -218,6 +218,41 @@ impl<'a, T> Array2<'a, T> {
     }
 }
 
+impl<'a, T: Clone> Array2<'a, T> {
+    /// Views the leading `rows * cols` values of a read-only buffer with inclusive
+    /// bounds, as the native `NCollection_Array2(const_reference, ...)` constructor
+    /// does. The first mutable access detaches a private copy (see
+    /// [`Array1::from_shared`]); `Array2::from_shared(&[1.0; 4], 1, 2, 1, 2)?`.
+    pub fn from_shared(
+        buffer: &'a [T],
+        rl: i32,
+        ru: i32,
+        cl: i32,
+        cu: i32,
+    ) -> Result<Self, ArrayError> {
+        let rows = dimension(rl, ru)?;
+        let cols = dimension(cl, cu)?;
+        let length = rows
+            .checked_mul(cols)
+            .expect("array dimensions overflow usize");
+        if buffer.len() < length {
+            return Err(ArrayError::DimensionMismatch {
+                expected: length,
+                actual: buffer.len(),
+            });
+        }
+        let mut array = Self {
+            elements: Array1::from_shared(&buffer[..length], 0),
+            row_lower: 0,
+            col_lower: 0,
+            rows,
+            cols,
+        };
+        array.rebase(rl, cl);
+        Ok(array)
+    }
+}
+
 impl<T: Clone> Array2<'_, T> {
     /// Fills the rectangle; `array.init(42)`.
     pub fn init(&mut self, value: T) {

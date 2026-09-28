@@ -1778,6 +1778,1486 @@
       "rust_item": "rustycad_tkmath::geom_abs::BSplKnotDistribution",
       "status": "implemented",
       "notes": "Enumeration with native declaration order as i32 discriminants. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Hunt(const NCollection_Array1<double>&,double,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::hunt",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FirstUKnotIndex(int,const NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::first_u_knot_index",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::LastUKnotIndex(int,const NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::last_u_knot_index",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FlatIndex(int,int,const NCollection_Array1<int>&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::flat_index",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::LocateParameter(int,const NCollection_Array1<double>&,const NCollection_Array1<int>&,double,bool,int,int,int&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::locate_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::LocateParameter(int,const NCollection_Array1<double>&,double,bool,int,int,int&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::locate_parameter_flat_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::LocateParameter(int,const NCollection_Array1<double>&,const NCollection_Array1<int>*,double,bool,int&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::locate_parameter_for_eval",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MaxKnotMult(const NCollection_Array1<int>&,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::max_knot_mult",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MinKnotMult(const NCollection_Array1<int>&,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::min_knot_mult",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::NbPoles(int,bool,const NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::nb_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::KnotSequenceLength(const NCollection_Array1<int>&,int,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::knot_sequence_length",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::KnotSequence(const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<double>&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::knot_sequence",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::KnotSequence(const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,bool,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::knot_sequence_with_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::KnotsLength(const NCollection_Array1<double>&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::knots_length",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Knots(const NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<int>&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::KnotForm(const NCollection_Array1<double>&,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::knot_form",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MultForm(const NCollection_Array1<int>&,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::mult_form",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::KnotAnalysis(int,bool,const NCollection_Array1<double>&,const NCollection_Array1<int>&,GeomAbs_BSplKnotDistribution&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::knot_analysis",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Reparametrize(double,double,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::reparametrize",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Reverse(NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::reverse_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Reverse(NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::reverse_mults",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Reverse(NCollection_Array1<gp_Pnt>&,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::reverse_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Reverse(NCollection_Array1<gp_Pnt2d>&,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::reverse_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Reverse(NCollection_Array1<double>&,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::reverse_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::IsRational(const NCollection_Array1<double>&,int,int,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::is_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MaxDegree()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::max_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Eval(double,int,double&,int,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::eval",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BoorScheme(double,int,double&,int,double&,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::boor_scheme",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::AntiBoorScheme(double,int,double&,int,double&,int,int,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::anti_boor_scheme",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Derivative(int,double&,int,int,int,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::derivative",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Bohm(double,int,int,double&,int,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::bohm",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::NoWeights()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::no_weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::NoMults()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::no_mults",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MaxUnitWeightsSize()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::max_unit_weights_size",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::UnitWeights(int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::unit_weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::UnitWeightsData()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::unit_weights_data",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildKnots(int,int,bool,const NCollection_Array1<double>&,const NCollection_Array1<int>*,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::PoleIndex(int,int,bool,const NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::pole_index",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildEval(int,int,const NCollection_Array1<double>&,const NCollection_Array1<double>*,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_eval_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildEval(int,int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_eval",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildEval(int,int,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_eval",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildBoor(int,int,int,const NCollection_Array1<double>&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_boor",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BoorIndex(int,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::boor_index",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::GetPole(int,int,int,int,double&,int&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::get_pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::PrepareInsertKnots(int,bool,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,int&,int&,double,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::prepare_insert_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::InsertKnots(int,bool,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<int>&,double,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::insert_knots_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::InsertKnots(int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*,NCollection_Array1<double>&,NCollection_Array1<int>&,double,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::insert_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::InsertKnots(int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array1<int>*,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*,NCollection_Array1<double>&,NCollection_Array1<int>&,double,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::insert_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::InsertKnot(int,double,int,int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::insert_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::InsertKnot(int,double,int,int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::insert_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::RaiseMultiplicity(int,int,int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::raise_multiplicity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::RaiseMultiplicity(int,int,int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::raise_multiplicity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::RemoveKnot(int,int,int,bool,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<int>&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::remove_knot_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::RemoveKnot(int,int,int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*,NCollection_Array1<double>&,NCollection_Array1<int>&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::remove_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::RemoveKnot(int,int,int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*,NCollection_Array1<double>&,NCollection_Array1<int>&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::remove_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::IncreaseDegreeCountKnots(int,int,bool,const NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::increase_degree_count_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::IncreaseDegree(int,int,bool,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::increase_degree_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::IncreaseDegree(int,int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*,NCollection_Array1<double>&,NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::increase_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::IncreaseDegree(int,int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*,NCollection_Array1<double>&,NCollection_Array1<int>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::increase_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::IncreaseDegree(int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::increase_degree_bezier",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::IncreaseDegree(int,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::increase_degree_bezier",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::PrepareUnperiodize(int,const NCollection_Array1<int>&,int&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::prepare_unperiodize",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Unperiodize(int,int,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,NCollection_Array1<int>&,NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::unperiodize_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Unperiodize(int,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,NCollection_Array1<int>&,NCollection_Array1<double>&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::unperiodize",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Unperiodize(int,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,NCollection_Array1<int>&,NCollection_Array1<double>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::unperiodize",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::PrepareTrimming(int,bool,const NCollection_Array1<double>&,const NCollection_Array1<int>&,double,double,int&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::prepare_trimming",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Trimming(int,bool,int,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<double>&,double,double,NCollection_Array1<double>&,NCollection_Array1<int>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::trimming_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Trimming(int,bool,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,double,double,NCollection_Array1<double>&,NCollection_Array1<int>&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::trimming",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Trimming(int,bool,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,double,double,NCollection_Array1<double>&,NCollection_Array1<int>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::trimming",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D0(double,int,int,bool,const NCollection_Array1<double>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d0_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D0(double,int,int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D0(double,int,int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Pnt2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D0(double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::bezier_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D0(double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::bezier_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D1(double,int,int,bool,const NCollection_Array1<double>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d1_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D1(double,int,int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D1(double,int,int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D1(double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::bezier_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D1(double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::bezier_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D2(double,int,int,bool,const NCollection_Array1<double>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,double&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d2_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D2(double,int,int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D2(double,int,int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D2(double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::bezier_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D2(double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::bezier_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D3(double,int,int,bool,const NCollection_Array1<double>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,double&,double&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d3_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D3(double,int,int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D3(double,int,int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D3(double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::bezier_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::D3(double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::bezier_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::DN(double,int,int,int,bool,const NCollection_Array1<double>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::dn_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::DN(double,int,int,int,bool,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::DN(double,int,int,int,bool,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,const NCollection_Array1<int>*,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::EvalBsplineBasis(int,int,const NCollection_Array1<double>&,double,int&,math_Matrix&,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::eval_bspline_basis",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildBSpMatrix(const NCollection_Array1<double>&,const NCollection_Array1<int>&,const NCollection_Array1<double>&,int,math_Matrix&,int&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_bsp_matrix",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FactorBandedMatrix(math_Matrix&,int,int,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::factor_banded_matrix",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::SolveBandedSystem(const math_Matrix&,int,int,int,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::solve_banded_system",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::SolveBandedSystem(const math_Matrix&,int,int,NCollection_Array1<gp_Pnt2d>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::solve_banded_system_points",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::SolveBandedSystem(const math_Matrix&,int,int,NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::solve_banded_system_points",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::SolveBandedSystem(const math_Matrix&,int,int,bool,int,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::solve_banded_system_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::SolveBandedSystem(const math_Matrix&,int,int,bool,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::solve_banded_system_points_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::SolveBandedSystem(const math_Matrix&,int,int,bool,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::solve_banded_system_points_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MergeBSplineKnots(double,double,double,int,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int&,occ::handle<NCollection_HArray1<double>>&,occ::handle<NCollection_HArray1<int>>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::merge_bspline_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FunctionReparameterise(const BSplCLib_EvaluatorFunction&,int,const NCollection_Array1<double>&,int,double&,const NCollection_Array1<double>&,int,double&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::function_reparameterise_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FunctionReparameterise(const BSplCLib_EvaluatorFunction&,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,NCollection_Array1<double>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::function_reparameterise_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FunctionReparameterise(const BSplCLib_EvaluatorFunction&,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,int,NCollection_Array1<gp_Pnt>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::function_reparameterise",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FunctionReparameterise(const BSplCLib_EvaluatorFunction&,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>&,int,NCollection_Array1<gp_Pnt2d>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::function_reparameterise",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FunctionMultiply(const BSplCLib_EvaluatorFunction&,int,const NCollection_Array1<double>&,int,double&,const NCollection_Array1<double>&,int,double&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::function_multiply_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FunctionMultiply(const BSplCLib_EvaluatorFunction&,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,int,NCollection_Array1<double>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::function_multiply_scalar",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FunctionMultiply(const BSplCLib_EvaluatorFunction&,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>&,int,NCollection_Array1<gp_Pnt2d>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::function_multiply",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FunctionMultiply(const BSplCLib_EvaluatorFunction&,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,int,NCollection_Array1<gp_Pnt>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::function_multiply",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Eval(double,bool,int,int&,int,const NCollection_Array1<double>&,int,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::eval_extrapolated",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Eval(double,bool,int,int&,int,const NCollection_Array1<double>&,int,double&,double&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::eval_extrapolated_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Eval(double,bool,bool,int&,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&,gp_Pnt&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::eval_extrapolated_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Eval(double,bool,bool,int&,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>&,gp_Pnt2d&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::eval_extrapolated_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::TangExtendToConstraint(const NCollection_Array1<double>&,double,int,double&,int,int,const NCollection_Array1<double>&,int,bool,int&,int&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::tang_extend_to_constraint",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CacheD0(double,int,double,double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::cache_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CacheD0(double,int,double,double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::cache_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CoefsD0(double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::coefs_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CoefsD0(double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::coefs_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CacheD1(double,int,double,double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::cache_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CacheD1(double,int,double,double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::cache_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CoefsD1(double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::coefs_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CoefsD1(double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::coefs_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CacheD2(double,int,double,double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::cache_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CacheD2(double,int,double,double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::cache_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CoefsD2(double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::coefs_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CoefsD2(double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::coefs_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CacheD3(double,int,double,double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::cache_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CacheD3(double,int,double,double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::cache_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CoefsD3(double,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::coefs_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::CoefsD3(double,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::coefs_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildCache(double,double,bool,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_cache",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildCache(double,double,bool,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_cache",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildCache(double,double,bool,int,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,NCollection_Array2<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_cache_matrix",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildCache(double,double,bool,int,int,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,NCollection_Array2<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_cache_matrix",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::PolesCoefficients(const NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<gp_Pnt2d>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::poles_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::PolesCoefficients(const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::poles_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::PolesCoefficients(const NCollection_Array1<gp_Pnt>&,NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::poles_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::PolesCoefficients(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::poles_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::FlatBezierKnots(int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::flat_bezier_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::BuildSchoenbergPoints(int,const NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::build_schoenberg_points",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Interpolate(int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::interpolate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Interpolate(int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt2d>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::interpolate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Interpolate(int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt>&,NCollection_Array1<double>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::interpolate_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Interpolate(int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::interpolate_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Interpolate(int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,double&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::interpolate_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Interpolate(int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,double&,double&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::interpolate_flat_rational",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MovePoint(double,const gp_Vec2d&,int,int,int,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,int&,int&,NCollection_Array1<gp_Pnt2d>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::move_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MovePoint(double,const gp_Vec&,int,int,int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,int&,int&,NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::move_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MovePointAndTangent(double,int,double&,double&,double,int,int,int,double&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,double&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::move_point_and_tangent_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MovePointAndTangent(double,const gp_Vec&,const gp_Vec&,double,int,int,int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,NCollection_Array1<gp_Pnt>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::move_point_and_tangent",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::MovePointAndTangent(double,const gp_Vec2d&,const gp_Vec2d&,double,int,int,int,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,const NCollection_Array1<double>&,NCollection_Array1<gp_Pnt2d>&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::move_point_and_tangent",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Resolution(double&,int,int,const NCollection_Array1<double>*,const NCollection_Array1<double>&,int,double,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::resolution_flat",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Resolution(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*,int,const NCollection_Array1<double>&,int,double,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::resolution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Resolution(const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*,int,const NCollection_Array1<double>&,int,double,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::resolution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib::Intervals(const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,bool,int,double,double,double,NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::intervals",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_KnotDistribution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_KnotDistribution.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::KnotDistribution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_MultDistribution",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_MultDistribution.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::MultDistribution",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_EvaluatorFunction::Evaluate(int,const double*,double,double&,int&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_EvaluatorFunction.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::EvaluatorFunction::evaluate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_EvaluatorFunction::operator()(int,const double*,double,double&,int&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_EvaluatorFunction.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::EvaluatorFunction::evaluate",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_CacheParams::BSplCLib_CacheParams(int,bool,const NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_CacheParams.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::CacheParams::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_CacheParams::PeriodicNormalization(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_CacheParams.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::CacheParams::periodic_normalization",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_CacheParams::IsCacheValid(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_CacheParams.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::CacheParams::is_cache_valid",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_CacheParams::LocateParameter(double&,const NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_CacheParams.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::CacheParams::locate_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::BSplCLib_Cache(const int&,const bool&,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::BuildCache(const double&,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt2d>&,const NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::build_cache",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D0(const double&,gp_Pnt2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D1(const double&,gp_Pnt2d&,gp_Vec2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D2(const double&,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D3(const double&,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D0Local(double,gp_Pnt2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d0_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D1Local(double,gp_Pnt2d&,gp_Vec2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d1_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D2Local(double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d2_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D3Local(double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d3_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::BSplCLib_Cache(const int&,const bool&,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::BuildCache(const double&,const NCollection_Array1<double>&,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>*)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::build_cache",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D0(const double&,gp_Pnt&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D1(const double&,gp_Pnt&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D2(const double&,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D3(const double&,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D0Local(double,gp_Pnt&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d0_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D1Local(double,gp_Pnt&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d1_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D2Local(double,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d2_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::D3Local(double,gp_Pnt&,gp_Vec&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::d3_local",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplCLib_Cache::IsCacheValid(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache::is_cache_valid",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     }
   ],
   "tests": [
@@ -43482,6 +44962,174 @@
       "rust_target": "plib_hermit_jacobi",
       "rust_test": "PLibHermitJacobiTest__PerformanceTest",
       "rust_source": "crates/tkmath/tests/plib_hermit_jacobi.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLibTest.UnitWeights_SmallSize_ReturnsNonOwning",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Test.cxx",
+      "source_sha256": "2224c4d2b41382ccab05efa21bb53e199380301ed1f313ad3df7d5f0c0473b67",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib",
+      "rust_test": "BSplCLibTest__UnitWeights_SmallSize_ReturnsNonOwning",
+      "rust_source": "crates/tkmath/tests/bsplclib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLibTest.UnitWeights_MaxSize_ReturnsNonOwning",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Test.cxx",
+      "source_sha256": "2224c4d2b41382ccab05efa21bb53e199380301ed1f313ad3df7d5f0c0473b67",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib",
+      "rust_test": "BSplCLibTest__UnitWeights_MaxSize_ReturnsNonOwning",
+      "rust_source": "crates/tkmath/tests/bsplclib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLibTest.UnitWeights_OverMaxSize_ReturnsOwning",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Test.cxx",
+      "source_sha256": "2224c4d2b41382ccab05efa21bb53e199380301ed1f313ad3df7d5f0c0473b67",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib",
+      "rust_test": "BSplCLibTest__UnitWeights_OverMaxSize_ReturnsOwning",
+      "rust_source": "crates/tkmath/tests/bsplclib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLibTest.UnitWeights_SingleElement",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Test.cxx",
+      "source_sha256": "2224c4d2b41382ccab05efa21bb53e199380301ed1f313ad3df7d5f0c0473b67",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib",
+      "rust_test": "BSplCLibTest__UnitWeights_SingleElement",
+      "rust_source": "crates/tkmath/tests/bsplclib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLibTest.MaxUnitWeightsSize_IsPositive",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Test.cxx",
+      "source_sha256": "2224c4d2b41382ccab05efa21bb53e199380301ed1f313ad3df7d5f0c0473b67",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib",
+      "rust_test": "BSplCLibTest__MaxUnitWeightsSize_IsPositive",
+      "rust_source": "crates/tkmath/tests/bsplclib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLib_CacheTest.D0_NonRationalCurve3D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Cache_Test.cxx",
+      "source_sha256": "a2602f4ec59ecc37049d51db514c9ff83971c940fd6bd3667390949587265c6f",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib_cache",
+      "rust_test": "BSplCLib_CacheTest__D0_NonRationalCurve3D",
+      "rust_source": "crates/tkmath/tests/bsplclib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLib_CacheTest.D1_NonRationalCurve3D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Cache_Test.cxx",
+      "source_sha256": "a2602f4ec59ecc37049d51db514c9ff83971c940fd6bd3667390949587265c6f",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib_cache",
+      "rust_test": "BSplCLib_CacheTest__D1_NonRationalCurve3D",
+      "rust_source": "crates/tkmath/tests/bsplclib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLib_CacheTest.D2_NonRationalCurve3D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Cache_Test.cxx",
+      "source_sha256": "a2602f4ec59ecc37049d51db514c9ff83971c940fd6bd3667390949587265c6f",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib_cache",
+      "rust_test": "BSplCLib_CacheTest__D2_NonRationalCurve3D",
+      "rust_source": "crates/tkmath/tests/bsplclib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLib_CacheTest.D0_RationalCurve3D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Cache_Test.cxx",
+      "source_sha256": "a2602f4ec59ecc37049d51db514c9ff83971c940fd6bd3667390949587265c6f",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib_cache",
+      "rust_test": "BSplCLib_CacheTest__D0_RationalCurve3D",
+      "rust_source": "crates/tkmath/tests/bsplclib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLib_CacheTest.D1_RationalCurve3D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Cache_Test.cxx",
+      "source_sha256": "a2602f4ec59ecc37049d51db514c9ff83971c940fd6bd3667390949587265c6f",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib_cache",
+      "rust_test": "BSplCLib_CacheTest__D1_RationalCurve3D",
+      "rust_source": "crates/tkmath/tests/bsplclib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLib_CacheTest.D2_RationalCurve3D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Cache_Test.cxx",
+      "source_sha256": "a2602f4ec59ecc37049d51db514c9ff83971c940fd6bd3667390949587265c6f",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib_cache",
+      "rust_test": "BSplCLib_CacheTest__D2_RationalCurve3D",
+      "rust_source": "crates/tkmath/tests/bsplclib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BSplCLib_CacheTest.D3_NonRationalCurve3D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/BSplCLib_Cache_Test.cxx",
+      "source_sha256": "a2602f4ec59ecc37049d51db514c9ff83971c940fd6bd3667390949587265c6f",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "bsplclib_cache",
+      "rust_test": "BSplCLib_CacheTest__D3_NonRationalCurve3D",
+      "rust_source": "crates/tkmath/tests/bsplclib_cache.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

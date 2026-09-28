@@ -65,6 +65,15 @@ impl Matrix<'_> {
     pub fn at(&self, row: usize, col: usize) -> Result<&f64, ArrayError> {
         self.table.at(row, col)
     }
+    /// Reads the row-major cells, as native code does through `&Matrix(LowerRow, LowerCol)`;
+    /// `matrix.cells()[0]`.
+    pub(crate) fn cells(&self) -> &[f64] {
+        self.table.cells()
+    }
+    /// Mutates the row-major cells; `matrix.cells_mut()[0] = 1.0`.
+    pub(crate) fn cells_mut(&mut self) -> &mut [f64] {
+        self.table.cells_mut()
+    }
 }
 impl std::ops::Index<(i32, i32)> for Matrix<'_> {
     type Output = f64;

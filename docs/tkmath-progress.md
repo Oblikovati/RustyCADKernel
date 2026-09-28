@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. 85 complete source suites
-currently account for 1,585 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. 87 complete source suites
+currently account for 1,597 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -85,6 +85,8 @@ currently account for 1,585 mapped declarations, with matching native and Rust p
 | PLib_Test.cxx | plib | 19 |
 | PLib_JacobiPolynomial_Test.cxx | plib_jacobi_polynomial | 11 |
 | PLib_HermitJacobi_Test.cxx | plib_hermit_jacobi | 9 |
+| BSplCLib_Test.cxx | bsplclib | 5 |
+| BSplCLib_Cache_Test.cxx | bsplclib_cache | 7 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -473,3 +475,55 @@ the offending value. The point CoefficientsPoles overloads reject pole arrays
 longer than the coefficients, which natively read uninitialized storage.
 Weighted input without an output weight array (a native null dereference) is
 an error. Native exceptions keep their types.
+
+### BSplCLib B-spline curve library
+
+The whole public API of BSplCLib, BSplCLib_Cache, BSplCLib_CacheParams and
+BSplCLib_EvaluatorFunction is ported (185 API rows). The 12 declarations of
+BSplCLib_Test and BSplCLib_Cache_Test pass in both kernels. Another 8,192
+differential requests match with raw bits; the numeric gate now passes 30,839
+cases. They cover knot management (Hunt, LocateParameter overloads, flat
+sequences, forms, reparametrization, reversal), the Boor, anti-Boor, derivative
+and Bohm schemes for dimensions 1 to 6, local knot and pole extraction, insertion,
+removal, degree elevation, unperiodization and trimming on flat, 2D and 3D poles
+(rational and periodic included), D0 to DN in 1D, 2D and 3D up to degree 25,
+flat-knot Eval, the basis, the banded LU and interpolation, both BuildCache forms,
+CacheD0 to CacheD3, the Bezier syntaxes, BSplCLib_Cache, MovePoint(AndTangent),
+Resolution, FunctionMultiply/Reparameterise, TangExtendToConstraint,
+MergeBSplineKnots and Intervals.
+
+The native dimension 1 to 4 specialisations of Eval, Bohm and Resolution perform
+the same per-component operations as the general loops, so one loop reproduces
+them. One exception is kept: Bohm divides by the knot difference in dimension 1
+and multiplies by its reciprocal elsewhere, which rounds differently and gives
++0.0 instead of -0.0 for coincident knots. Other preserved quirks: InsertKnots
+writes the first new pole of each scheme at `NewKnots.Lower() + (index+1)*Dimension`;
+IncreaseDegree reads its working poles from `NewPoles.Lower()`; the rational
+flat-knot Eval clears `WeightsResults[row*ArrayDimension]` and accumulates into
+`WeightsResults[row]`, so weight derivatives add to the caller's values;
+EvalBsplineBasis locates a periodic span but evaluates at the unwrapped
+parameter; MovePointAndTangent compares U with flat knots at Schoenberg indices; CacheD2
+clears the missing derivative rows after scaling, CacheD3 before; the singular
+gp_Mat2d inversion in MovePointAndTangent is unchecked, as in the release build.
+`bsplclib_behavior.rs` pins them with regression tests.
+
+Deviations are limited to undefined native behaviour. The flat-knot Eval with
+extrapolation evaluates a Taylor polynomial of `Degree` from a buffer of
+`LocalRequest+1` terms, reading uninitialized stack; the port reads zeros, the
+intended lower-degree expansion (stale pole terms read as weight terms in the
+rational variant are kept). D1 on degree 0 reads an uninitialized derivative;
+the port returns zero. FunctionMultiply/Reparameterise pass one `int` where Eval
+reads two extrapolation modes; the port uses the B-spline degree for both.
+BuildBSpMatrix rejects contact orders outside 0..Degree, whose rows natively come
+from an unwritten buffer. Raw reads and writes outside a buffer, knot array or
+view return Standard_OutOfRange naming the index: for example an evaluation hint
+equal to the last u-knot of a non-periodic curve, which LocateParameter keeps and
+BuildKnots then walks past the multiplicities, or flat knots of an unclamped curve
+whose span search runs through equal knots past the last span. A periodic Eval
+whose period cannot advance fails instead of looping forever. The corpus
+never enters these paths. `BSplCLib::DN(U, N, Poles, Weights, P, VN)` for Bezier
+poles is declared without a definition in the pinned sources and is not ported.
+
+`NCollection_Array1::from_shared` and `Array2::from_shared` add the native
+read-only buffer constructor, needed by UnitWeights: the view does not own its
+storage and detaches a private copy on the first write.

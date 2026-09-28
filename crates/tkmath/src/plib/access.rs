@@ -21,7 +21,7 @@ use rustycad_tkernel::ncollection::{Array1, Array2, ArrayError};
 use rustycad_tkernel::standard::Failure;
 
 /// Builds a typed native exception; `failure("Standard_ConstructionError", "bad")`.
-pub(super) fn failure(exception_type: &'static str, message: &str) -> Failure {
+pub(crate) fn failure(exception_type: &'static str, message: &str) -> Failure {
     Failure::with_type(exception_type, message, "")
 }
 
@@ -30,12 +30,12 @@ fn index_failure(error: ArrayError) -> Failure {
 }
 
 /// Reads a checked Array1 element; `array_value(&array, 1)?`.
-pub(super) fn array_value<T: Copy>(array: &Array1<'_, T>, index: i32) -> Result<T, Failure> {
+pub(crate) fn array_value<T: Copy>(array: &Array1<'_, T>, index: i32) -> Result<T, Failure> {
     array.value(index).copied().map_err(index_failure)
 }
 
 /// Borrows a checked Array1 element mutably; `*array_cell(&mut array, 1)? = 2.0`.
-pub(super) fn array_cell<'b, T>(
+pub(crate) fn array_cell<'b, T>(
     array: &'b mut Array1<'_, T>,
     index: i32,
 ) -> Result<&'b mut T, Failure> {
@@ -43,12 +43,12 @@ pub(super) fn array_cell<'b, T>(
 }
 
 /// Reads a checked Array2 element; `grid_value(&grid, 1, 1)?`.
-pub(super) fn grid_value<T: Copy>(grid: &Array2<'_, T>, row: i32, col: i32) -> Result<T, Failure> {
+pub(crate) fn grid_value<T: Copy>(grid: &Array2<'_, T>, row: i32, col: i32) -> Result<T, Failure> {
     grid.value(row, col).copied().map_err(index_failure)
 }
 
 /// Borrows a checked Array2 element mutably; `*grid_cell(&mut grid, 1, 1)? = 2.0`.
-pub(super) fn grid_cell<'b, T>(
+pub(crate) fn grid_cell<'b, T>(
     grid: &'b mut Array2<'_, T>,
     row: i32,
     col: i32,
@@ -58,14 +58,14 @@ pub(super) fn grid_cell<'b, T>(
 
 /// Rejects a negative count that would make native pointer arithmetic undefined;
 /// `non_negative("PLib::EvalPolynomial", "Degree", degree)?`.
-pub(super) fn non_negative(function: &str, name: &str, value: i32) -> Result<usize, Failure> {
+pub(crate) fn non_negative(function: &str, name: &str, value: i32) -> Result<usize, Failure> {
     usize::try_from(value)
         .map_err(|_| Failure::out_of_range(&format!("{function}: {name} = {value}; expected >= 0")))
 }
 
 /// Rejects a raw buffer shorter than the native access pattern reads or writes;
 /// `require_length("PLib::EvalPolynomial", "Results", results.len(), 3)?`.
-pub(super) fn require_length(
+pub(crate) fn require_length(
     function: &str,
     name: &str,
     length: usize,
@@ -81,7 +81,7 @@ pub(super) fn require_length(
 
 /// Reads a raw-buffer entry addressed with native signed arithmetic;
 /// `buffer_value("PLib_JacobiPolynomial::MaxError", coefficients, 7)?`.
-pub(super) fn buffer_value(function: &str, values: &[f64], index: i64) -> Result<f64, Failure> {
+pub(crate) fn buffer_value(function: &str, values: &[f64], index: i64) -> Result<f64, Failure> {
     usize::try_from(index)
         .ok()
         .and_then(|offset| values.get(offset).copied())

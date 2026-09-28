@@ -66,7 +66,7 @@ pub use trigonometric_equation::TrigonometricEquation;
 mod trigonometric_roots;
 pub use trigonometric_roots::TrigonometricRoots;
 // Standard_Real::Epsilon moves toward the finite extreme, including from infinity.
-fn real_epsilon(value: f64) -> f64 {
+pub(crate) fn real_epsilon(value: f64) -> f64 {
     let magnitude: f64 = value.abs();
     if magnitude == f64::MAX {
         return 0.0;
