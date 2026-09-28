@@ -163,7 +163,7 @@ impl File {
         match self.node.calls.open(&name, flags, protection.internal()) {
             Ok(fd) => {
                 self.channel = fd;
-                self.stream = StdioStream::attach(self.node.calls.as_ref(), fd, reads);
+                self.stream = Some(StdioStream::attach(fd, reads));
             }
             Err(errno) => {
                 self.channel = -1;
@@ -234,16 +234,12 @@ impl File {
             .unwrap_or((-1, template.to_vec()));
         self.channel = fd;
         self.node.set_path(CadPath::new(name));
-        self.stream = if fd >= 0 {
-            StdioStream::attach(self.node.calls.as_ref(), fd, true)
-        } else {
-            None
-        };
+        self.stream = (fd >= 0).then(|| StdioStream::attach(fd, true));
         self.mode = OpenMode::ReadWrite;
         Ok(())
     }
     /// `SetLock`: an `fcntl` record lock (blocking); an exclusive lock also sets the
-    /// set-group-id bit and the flag `IsLocked` reads; `file.set_lock(LockType::WriteLock)?`.
+    /// set-group-id bit, even when the lock failed; `file.set_lock(LockType::WriteLock)?`.
     pub fn set_lock(&mut self, lock: LockType) -> Result<(), Failure> {
         self.check_open("SetLock")?;
         let request: RecordLock = match lock {
@@ -261,9 +257,13 @@ impl File {
         }
         Ok(())
     }
-    /// `UnLock`: clears the set-group-id bit of an exclusive lock, then unlocks; natively
-    /// the `flock` range is uninitialized stack memory, here it is the whole file;
-    /// `file.unlock()?`.
+    /// `UnLock`: clears the set-group-id bit of an exclusive lock, then unlocks the whole
+    /// file; `file.unlock()?`.
+    ///
+    /// Deliberate deviation: the native `flock` passed to `F_SETLK` has uninitialized
+    /// `l_whence`/`l_start`/`l_len`, so the native result depends on stack contents (on the
+    /// verified Linux profile it fails with EINVAL and keeps the lock); here the unlock is
+    /// well defined.
     pub fn unlock(&mut self) -> Result<(), Failure> {
         self.check_open("UnLock")?;
         if self.imperative {
@@ -299,10 +299,10 @@ impl File {
     pub const fn lock(&self) -> LockType {
         self.lock
     }
-    /// `IsLocked`: natively returns the exclusive-lock flag only (its `myLock != NoLock`
-    /// return is dead code); `file.is_locked()`.
-    pub const fn is_locked(&self) -> bool {
-        self.imperative
+    /// `IsLocked`: a lock other than `NoLock` is held (the Unix header branch; the Win32
+    /// build returns its `LockFileEx` flag instead); `file.is_locked()`.
+    pub fn is_locked(&self) -> bool {
+        self.lock != LockType::NoLock
     }
     /// `Size`: `st_size` of the named file (0 and an error when `stat` fails);
     /// `file.size()?`. Raises `Standard_ProgramError` for an empty name.

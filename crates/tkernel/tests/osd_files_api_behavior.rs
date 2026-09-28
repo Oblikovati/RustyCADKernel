@@ -95,6 +95,12 @@ fn rewind_inside_the_buffer_resyncs_the_descriptor_to_its_end() {
     let mut line = AsciiString::default();
     assert_eq!(short.read_line(&mut line, 100).unwrap(), 3);
     short.rewind();
+    assert_eq!(
+        short.read_line(&mut line, 100).unwrap(),
+        3,
+        "the first rewind seeks: the offset was unknown"
+    );
+    short.rewind();
     let mut raw = [0u8; 3];
     assert_eq!(
         short.read_bytes(&mut raw, 3).unwrap(),
@@ -265,7 +271,7 @@ fn moments_read_the_change_time_or_the_1979_epoch() {
 }
 
 #[test]
-fn locks_follow_the_sysv_branch_and_its_is_locked_quirk() {
+fn locks_follow_the_sysv_branch() {
     let calls = fake();
     let mut target = file(&calls, "/w/lock");
     target
@@ -282,6 +288,7 @@ fn locks_follow_the_sysv_branch_and_its_is_locked_quirk() {
     assert_eq!(calls.mode("/w/lock").unwrap() & 0o2000, 0o2000);
     target.unlock().unwrap();
     assert_eq!(target.lock(), LockType::NoLock);
+    assert!(!target.is_locked());
     assert_eq!(calls.mode("/w/lock").unwrap() & 0o2000, 0);
     target.set_lock(LockType::NoLock).unwrap();
     let requested: Vec<RecordLock> = calls.locks().into_iter().map(|(_, lock)| lock).collect();

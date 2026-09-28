@@ -17,8 +17,9 @@
 //!
 //! The descriptor and the stream share one kernel offset but the stream buffers ahead, so
 //! mixing `Read`/`Seek` with `ReadLine` observes the buffer: this model keeps the glibc
-//! buffer size (`st_blksize`, at most `BUFSIZ`), its cached offset (unknown after an
-//! end-of-file or error read), sticky end-of-file and the in-buffer `rewind` shortcut.
+//! buffer size (`st_blksize`, at most `BUFSIZ`), its cached offset (unknown after
+//! `fdopen` and after an end-of-file or error read), sticky end-of-file and the
+//! in-buffer `rewind` shortcut.
 use super::calls::{CallResult, Errno, PosixFileCalls, SeekOrigin};
 
 /// glibc `BUFSIZ`: the stream buffer size when `st_blksize` is 0 or larger.
@@ -43,26 +44,21 @@ pub(super) struct StdioStream {
 pub(super) type LineRead = Option<Vec<u8>>;
 
 impl StdioStream {
-    /// `fdopen(fd, mode)`: `reads_allowed` is false for "w" and "a". The attach step reads
-    /// the descriptor offset (`lseek(fd, 0, SEEK_CUR)`); a failure other than ESPIPE makes
-    /// `fdopen` return NULL.
-    pub(super) fn attach(calls: &dyn PosixFileCalls, fd: i32, reads_allowed: bool) -> Option<Self> {
-        let offset: Option<i64> = match calls.lseek(fd, 0, SeekOrigin::Current) {
-            Ok(position) => Some(position),
-            Err(Errno(code)) if code == espipe() => None,
-            Err(_) => return None,
-        };
-        Some(Self {
+    /// `fdopen(fd, mode)`: `reads_allowed` is false for "w" and "a". glibc does not ask
+    /// the descriptor for its offset (the cache starts unknown), so the first `rewind`
+    /// always seeks.
+    pub(super) const fn attach(fd: i32, reads_allowed: bool) -> Self {
+        Self {
             fd,
             reads_allowed,
             buffer: None,
             read_ptr: 0,
             read_end: 0,
-            offset,
+            offset: None,
             eof_seen: false,
             error_seen: false,
             last_errno: 0,
-        })
+        }
     }
     /// `feof`.
     pub(super) const fn eof(&self) -> bool {
@@ -176,20 +172,12 @@ impl StdioStream {
 }
 
 #[cfg(unix)]
-const fn espipe() -> i32 {
-    libc::ESPIPE
-}
-#[cfg(unix)]
 const fn ebadf() -> i32 {
     libc::EBADF
 }
 #[cfg(unix)]
 const fn eagain() -> i32 {
     libc::EAGAIN
-}
-#[cfg(not(unix))]
-const fn espipe() -> i32 {
-    29
 }
 #[cfg(not(unix))]
 const fn ebadf() -> i32 {

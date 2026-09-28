@@ -47,6 +47,8 @@ fn status_zero(status: libc::c_int) -> CallResult<()> {
     }
 }
 
+// mode_t is u16 on macOS and the stat field widths vary by target: the casts are needed there.
+#[allow(clippy::unnecessary_cast)]
 fn node_status(raw: &libc::stat) -> NodeStatus {
     let mode: u32 = raw.st_mode as u32;
     let node_type: NodeType = match mode & (libc::S_IFMT as u32) {

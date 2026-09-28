@@ -229,10 +229,10 @@ impl PosixFileCalls for FakePosixCalls {
             }
             Some(_) => {}
         }
-        if flags.truncate {
-            if let Ok(data) = state.file_data(path) {
-                data.clear();
-            }
+        if flags.truncate
+            && let Ok(data) = state.file_data(path)
+        {
+            data.clear();
         }
         let descriptor = FakeDescriptor {
             path: path.to_vec(),
@@ -408,10 +408,11 @@ impl PosixFileCalls for FakePosixCalls {
         prefix.push(b'/');
         let mut names: Vec<Vec<u8>> = vec![b".".to_vec(), b"..".to_vec()];
         for key in state.nodes.keys() {
-            if let Some(rest) = key.strip_prefix(prefix.as_slice()) {
-                if !rest.is_empty() && !rest.contains(&b'/') {
-                    names.push(rest.to_vec());
-                }
+            if let Some(rest) = key.strip_prefix(prefix.as_slice())
+                && !rest.is_empty()
+                && !rest.contains(&b'/')
+            {
+                names.push(rest.to_vec());
             }
         }
         Ok(names)
