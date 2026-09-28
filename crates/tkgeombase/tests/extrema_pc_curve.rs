@@ -12,7 +12,8 @@
 // commercial license or contractual agreement.
 
 //! Direct translation of ExtremaPC_Curve_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-#![allow(non_snake_case, dead_code)]
+// The result tests fill default-built results field by field, in the native order.
+#![allow(non_snake_case, dead_code, clippy::field_reassign_with_default)]
 mod common;
 #[allow(unused_imports)]
 use common::*;
