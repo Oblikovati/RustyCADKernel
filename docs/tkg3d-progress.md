@@ -77,7 +77,7 @@ the Rust targets, checks exact runtime names, then runs
 `tools/verify_tkg3d_numeric.py` uses the shared driver `tools/toolkit_numeric.py`
 (also used by TKG2d). It builds `tools/oracle/tkg3d_probe.cxx` (a table of
 operations over `tkg3d_probe_*.cxx`) and its twin
-`crates/tkg3d/examples/numeric_probe.rs`, runs both on the 3986 requests of
+`crates/tkg3d/examples/numeric_probe.rs`, runs both on the 3985 requests of
 `tools/tkg3d_corpus.py` (one `tkg3d_corpus_*.py` module per probe file) and
 requires identical bits for finite values, infinities and signed zeros, NaN by
 classification, identical exception types and identical `DumpJson` text.
