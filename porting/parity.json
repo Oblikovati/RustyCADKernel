@@ -8932,20 +8932,716 @@
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
-      "upstream_id": "Standard_Dump::DumpKeyToClass",
+      "upstream_id": "Standard::AllocatorType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::AllocatorType",
+      "status": "implemented",
+      "notes": "Enum with the native discriminants NATIVE=0, OPT=1, TBB=2, JEMALLOC=3. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::GetAllocatorType()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::get_allocator_type",
+      "status": "implemented",
+      "notes": "Returns AllocatorType::Native. The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::allocate",
+      "status": "implemented",
+      "notes": "calloc semantics: zero-filled StandardMemory; a refused request raises Standard_OutOfMemory 'Standard_MMgrRaw::Allocate(): malloc failed' as Result. The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::AllocateOptimal(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::allocate_optimal",
+      "status": "implemented",
+      "notes": "malloc semantics: None where the native call returns null (no exception). The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Free(void* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::free",
+      "status": "implemented",
+      "notes": "Takes Option<StandardMemory>; None is the null pointer free() ignores. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Free(T*&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::free_and_null",
+      "status": "implemented",
+      "notes": "The template overload that nulls the caller's pointer is free_and_null(&mut Option<StandardMemory>), which leaves the slot None. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Reallocate(void* const,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::reallocate",
+      "status": "implemented",
+      "notes": "realloc semantics on a &mut Option slot (None allocates). A refused request raises Standard_OutOfMemory and keeps the old block; glibc/MSVC realloc(p, 0) frees the block and returns NULL, so the slot becomes None and Standard_OutOfMemory is raised (native quirk). The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::AllocateAligned(size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::allocate_aligned",
+      "status": "implemented",
+      "notes": "Returns AlignedMemory or None like the null pointer. Alignment rules follow the runtime the kernel calls: GCC _mm_malloc on x86 (1 = malloc, 2 and 4 widen to a pointer, otherwise posix_memalign power-of-two multiples of a pointer), _aligned_malloc on MSVC, posix_memalign elsewhere. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::FreeAligned(void* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::free_aligned",
+      "status": "implemented",
+      "notes": "Takes Option<AlignedMemory>; None is ignored like a null pointer. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::FreeAligned(T*&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::free_aligned_and_null",
+      "status": "implemented",
+      "notes": "The nulling template overload is free_aligned_and_null(&mut Option<AlignedMemory>). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Purge()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::purge",
+      "status": "implemented",
+      "notes": "The NATIVE build caches nothing and returns true (1). The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::StackTrace(char*,int,int,void*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::stack_trace",
+      "status": "implemented",
+      "notes": "Port of the glibc branch with the same backtrace()/backtrace_symbols() calls: appends \"\\n==Backtrace==\", one `binary(symbol+0xoffset) [0xaddress]` line per frame that fits, and \"\\n=============\" when room remains, below buffer_size bytes. The frames are Rust frames, so only argument checks and the shape of traces where no frame or every frame fits are compared (runtime_stack_trace probe). theContext is ignored on this platform and has no parameter; a buffer already too long, or a skip beyond the stack depth (a native crash), returns false; other platforms return false."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::~Standard_MMgrRoot()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrRoot::allocate",
+      "status": "implemented",
+      "notes": "Trait method. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::Reallocate(void*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrRoot::reallocate",
+      "status": "implemented",
+      "notes": "Trait method. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::Free(void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrRoot::free",
+      "status": "implemented",
+      "notes": "Trait method; None is ignored. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::Purge(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrRoot::purge",
+      "status": "implemented",
+      "notes": "Provided trait method returning 0, the base class implementation."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt(bool,bool,size_t,int,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::new",
+      "status": "implemented",
+      "notes": "Runs Initialize: fewer than 100 pages means 1000, the cell size is rounded up to 16, free-list max = ROUNDUP8(threshold - 1) >> 3 with wrapping, mapping needs a non-zero OS page size. Default implements the header's default arguments. The manager keeps OCCT's intrusive 8-byte headers and free-list links inside real heap regions addressed by their numeric start, so rounded sizes, pool offsets, reuse order and Purge counts match the native class. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::~Standard_MMgrOpt()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor (Purge(true) plus pool release). Rust Drop glue releases every region the manager obtained; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::allocate",
+      "status": "implemented",
+      "notes": "ROUNDUP8 with wrapping (sizes within 7 of SIZE_MAX become zero-size pool blocks); pools, medium calloc blocks and mapped large blocks as natively; mmap failures report strerror text (e.g. 'Invalid argument' for the wrapped zero length). Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them. The manager keeps OCCT's intrusive 8-byte headers and free-list links inside real heap regions addressed by their numeric start, so rounded sizes, pool offsets, reuse order and Purge counts match the native class. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::Reallocate(void*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::reallocate",
+      "status": "implemented",
+      "notes": "Keeps the block when the size fits its rounded size, otherwise allocates, copies the old rounded size, frees, then clears the tail. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::Free(void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::free",
+      "status": "implemented",
+      "notes": "Newest-first free lists by rounded size; large blocks go back to the system. Freeing an address the manager does not own (native UB) raises Standard_ProgramError. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::Purge(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::purge",
+      "status": "implemented",
+      "notes": "Frees cached medium blocks and counts them. The pool-release scan is ported, but its tally of a fully free pool is P - 8, never P, so pools are never released (native quirk). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::SetCallBackFunction(TPCallBackFunc)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::set_call_back_function",
+      "status": "implemented",
+      "notes": "Process-wide callback like the native file-static pointer; OptCallBack receives (is_alloc, storage, round_size, size). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "opencascade::make_shared(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_shared",
+      "status": "implemented",
+      "notes": "std::shared_ptr from NCollection_Allocator becomes Arc<T> on the global allocator. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "opencascade::make_oshared(const occ::handle<NCollection_BaseAllocator>&,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_oshared",
+      "status": "implemented",
+      "notes": "Arc<AllocatedBox<T>>: the value lives in the BaseAllocator, the count in the global heap. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "opencascade::make_oshared(const NCollection_OccAllocator<T>&,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_oshared_in",
+      "status": "implemented",
+      "notes": "Both NCollection_OccAllocator<T> overloads (const reference and rvalue) map to make_oshared_in: a borrowed typed allocator is enough because Rust clones or moves it the same way. The value is stored in allocator-owned storage behind a shared OcctShared<T>. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "opencascade::make_oshared(NCollection_OccAllocator<T>&&,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_oshared_in",
+      "status": "implemented",
+      "notes": "Both NCollection_OccAllocator<T> overloads (const reference and rvalue) map to make_oshared_in: a borrowed typed allocator is enough because Rust clones or moves it the same way. The value is stored in allocator-owned storage behind a shared OcctShared<T>. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "opencascade::make_unique(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_unique",
+      "status": "implemented",
+      "notes": "std::unique_ptr becomes Box<T>. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "Standard_DefineAlloc::operator new(size_t,void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: the global placement operator new that DefineAlloc declares only for SunPro <= 4.2 (WORKAROUND_SUNPRO_NEW_PLACEMENT). Rust has no placement new; values are moved into already allocated storage by ordinary assignment."
+    },
+    {
+      "upstream_id": "Standard_Mutex::Sentry(Standard_Mutex&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "rust_item": "rustycad_tkernel::standard::mutex::Sentry::new",
+      "status": "implemented",
+      "notes": "Locks at once; Drop unlocks, also while a panic unwinds, which is what the native error-handler callback registration provides. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Mutex::Sentry(Standard_Mutex*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "rust_item": "rustycad_tkernel::standard::mutex::Sentry::from_option",
+      "status": "implemented",
+      "notes": "The pointer overload takes Option<&StandardMutex>; None locks nothing. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Mutex::Sentry::~Sentry()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Drop for Sentry unlocks the mutex; there is no callable counterpart."
+    },
+    {
+      "upstream_id": "Standard_Mutex()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardMutex::new",
+      "status": "implemented",
+      "notes": "Creates an unlocked recursive mutex. The implementation creates a PTHREAD_MUTEX_RECURSIVE mutex (a critical section on Windows), unlike the header's comment, so the owner may re-lock and must unlock as often; the port keeps an owner and a depth under std::sync. Deprecated upstream; ported with its behavior."
+    },
+    {
+      "upstream_id": "Standard_Mutex::~Standard_Mutex()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_Mutex::Lock()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardMutex::lock",
+      "status": "implemented",
+      "notes": "Blocks while another thread owns it. The implementation creates a PTHREAD_MUTEX_RECURSIVE mutex (a critical section on Windows), unlike the header's comment, so the owner may re-lock and must unlock as often; the port keeps an owner and a depth under std::sync. Deprecated upstream; ported with its behavior. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Mutex::TryLock()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardMutex::try_lock",
+      "status": "implemented",
+      "notes": "False only while another thread owns it (EBUSY); the owner re-locks. The implementation creates a PTHREAD_MUTEX_RECURSIVE mutex (a critical section on Windows), unlike the header's comment, so the owner may re-lock and must unlock as often; the port keeps an owner and a depth under std::sync. Deprecated upstream; ported with its behavior. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Mutex::Unlock()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Mutex.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardMutex::unlock",
+      "status": "implemented",
+      "notes": "Releases one level; a non-owner changes nothing (pthread EPERM). The implementation creates a PTHREAD_MUTEX_RECURSIVE mutex (a critical section on Windows), unlike the header's comment, so the owner may re-lock and must unlock as often; the port keeps an owner and a depth under std::sync. Deprecated upstream; ported with its behavior. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Condition(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Condition.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardCondition::new",
+      "status": "implemented",
+      "notes": "Default implements the false default argument. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Condition::~Standard_Condition()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Condition.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_Condition::Set()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Condition.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardCondition::set",
+      "status": "implemented",
+      "notes": "Sets the flag under the lock and wakes all waiters. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Condition::Reset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Condition.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardCondition::reset",
+      "status": "implemented",
+      "notes": "Clears the flag. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Condition::Wait()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Condition.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardCondition::wait",
+      "status": "implemented",
+      "notes": "Blocks until the flag is set. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Condition::Wait(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Condition.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardCondition::wait_timeout",
+      "status": "implemented",
+      "notes": "The timed overload has a distinct Rust name; a zero or negative limit only tests the flag, as wait_for does with such durations. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Condition::Check()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Condition.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardCondition::check",
+      "status": "implemented",
+      "notes": "Reads the flag without waiting. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Condition::CheckReset()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Condition.hxx",
+      "rust_item": "rustycad_tkernel::standard::StandardCondition::check_reset",
+      "status": "implemented",
+      "notes": "Clears the flag and returns its previous state. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_CLocaleSentry()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CLocaleSentry.hxx",
+      "rust_item": "rustycad_tkernel::standard::c_locale_sentry::CLocaleSentry::new",
+      "status": "implemented",
+      "notes": "Enters the C-locale scope. Rust formatting and parsing never consult a process locale and the port's OCCT formatting routines always produce C-locale text, so the sentry has nothing to switch or restore; it is kept as a scope marker. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_CLocaleSentry::~Standard_CLocaleSentry()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CLocaleSentry.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor restoring the previous locale; Rust has no locale to restore. Rust formatting and parsing never consult a process locale and the port's OCCT formatting routines always produce C-locale text, so the sentry has nothing to switch or restore; it is kept as a scope marker."
+    },
+    {
+      "upstream_id": "Standard_CLocaleSentry::GetCLocale()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_CLocaleSentry.hxx",
+      "rust_item": "rustycad_tkernel::standard::c_locale_sentry::CLocaleSentry::get_c_locale",
+      "status": "implemented",
+      "notes": "Returns the one static CLocale (name \"C\", radix '.', empty group separator), like the native static locale_t. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer(int64_t,size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::new",
+      "status": "implemented",
+      "notes": "Returns Result because Init raises Standard_ProgramError for a chunk longer than the 4096-byte cache; a zero chunk (a native division by zero) is refused the same way. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer::Init(int64_t,size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::init",
+      "status": "implemented",
+      "notes": "Truncates the length to whole chunks with C++ % semantics (negative lengths round toward zero) unless the payload is partial; the cache is zeroed. After the exception the buffer hands out no chunk (native reads would run past the cache). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer::IsDone() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::is_done",
+      "status": "implemented",
+      "notes": "Read length equals the data length. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer::ReadChunk(Stream_T&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::read_chunk",
+      "status": "implemented",
+      "notes": "The template ReadChunk<Chunk_T> copies the chunk out as T: AnyBitPattern (it may be unaligned); a T larger than the chunk (native out-of-bounds read) raises Standard_ProgramError. The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer::ReadDataChunk(Stream_T&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::read_data_chunk",
+      "status": "implemented",
+      "notes": "Returns the chunk as a slice or None; a short or failed read ends reading for good. A partial last chunk keeps the cache's previous bytes past the data, as natively. The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::new",
+      "status": "implemented",
+      "notes": "Allocates a zeroed read buffer. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::~Standard_ReadLineBuffer()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::clear",
+      "status": "implemented",
+      "notes": "Drops buffered text and also resets the multiline mode and gap flag to their defaults. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::ReadLine(Stream_T&,size_t&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_line",
+      "status": "implemented",
+      "notes": "The line is returned as a slice whose length is the output length; the terminator is overwritten with NUL in place. Native quirks kept: a backslash that ends a read block in multiline mode makes later newlines part of the line, and an empty carry-over that never held a byte ends the stream (its Data() is NULL). The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::ReadLine(Stream_T&,size_t&,int64_t&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_line_counted",
+      "status": "implemented",
+      "notes": "The overload with theReadData has a distinct Rust name; the count is the size of the last block read during the call, not the total. The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::IsMultilineMode() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::is_multiline_mode",
+      "status": "implemented",
+      "notes": "False by default. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::ToPutGapInMultiline() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::to_put_gap_in_multiline",
+      "status": "implemented",
+      "notes": "True by default. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::SetMultilineMode(bool,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::set_multiline_mode",
+      "status": "implemented",
+      "notes": "The gap argument's default (true) is passed explicitly in Rust. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer(const char*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::new",
+      "status": "implemented",
+      "notes": "Borrows without copying. The buffer borrows a byte slice for its lifetime instead of storing a raw pointer; from_optional maps a null pointer with size 0. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::~Standard_ArrayStreamBuffer()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::Init(const char*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::init",
+      "status": "implemented",
+      "notes": "Replaces the borrowed bytes and rewinds. The buffer borrows a byte slice for its lifetime instead of storing a raw pointer; from_optional maps a null pointer with size 0. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::xsgetn(char*,std::streamsize)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::xsgetn",
+      "status": "implemented",
+      "notes": "Copies min(count, available) bytes; the count is the destination slice length, so the native negative-count undefined behavior cannot occur. Read::read delegates to it. Related quirks kept in the protected overrides: put_back (pbackfail) compares the int_type with the previous char promoted to int, so a byte of 0x80 or more never matches where char is signed; seek_occt refuses the unchecked out-of-buffer positions native seekoff would store. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_JsonKey",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::JsonKey",
+      "status": "implemented",
+      "notes": "Enum with the native discriminants 0..7. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_DumpValue()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::DumpValue::default",
+      "status": "implemented",
+      "notes": "Struct with public value/start_position fields (myValue/myStartPosition); default start 0. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_DumpValue(const TCollection_AsciiString&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::DumpValue::new",
+      "status": "implemented",
+      "notes": "Pairs a value with its start. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::Text(const Standard_SStream&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::text",
+      "status": "implemented",
+      "notes": "Builds the text from str().c_str(), so it ends at the first NUL. Standard_SStream is DumpStream; Standard_OStream is any DumpOutput (readable or opaque). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::FormatJson(const Standard_SStream&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::format_json",
+      "status": "implemented",
+      "notes": "Byte-for-byte port: commas inside [] stay inline, a comma's space is skipped only when not last, line feeds are dropped, a negative indent means none, an empty stream gives empty text, and text ending in a nested '}' never closes the added outer brace (native quirk). Standard_SStream is DumpStream; Standard_OStream is any DumpOutput (readable or opaque). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::SplitJson(const TCollection_AsciiString&,NCollection_IndexedDataMap<TCollection_AsciiString,Standard_DumpValue>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::split_json",
+      "status": "implemented",
+      "notes": "Returns Result<bool>: false where native returns false, Err for the TCollection exceptions it raises. The map is DumpValues = IndexedDataMap<AsciiString, DumpValue>. Native quirks kept: a '{' at the split level always raises Standard_OutOfRange (SubString(start + 1, start - 2)), any key is accepted as the key/value separator, a one-byte text is accepted unparsed, repeated keys become key_1, key_2, ... and object values keep their closing brace. TCollection_AsciiString arguments are impl AsRef<[u8]> (one-based positions as i32), and TCollection exceptions (SubString, Location) are reproduced with their messages. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::HierarchicalValueIndices(const NCollection_IndexedDataMap<TCollection_AsciiString,TCollection_AsciiString>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::hierarchical_value_indices",
+      "status": "implemented",
+      "notes": "The NCollection_List<int> result becomes a Vec<i32> of one-based indices in map order. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::HasChildKey(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::has_child_key",
+      "status": "implemented",
+      "notes": "True when the value contains \": \". The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::JsonKeyToString(Standard_JsonKey)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::json_key_to_string",
+      "status": "implemented",
+      "notes": "Returns &'static str. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::JsonKeyLength(Standard_JsonKey)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::json_key_length",
+      "status": "implemented",
+      "notes": "Byte length as i32. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::AddValuesSeparator(Standard_OStream&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::add_values_separator",
+      "status": "implemented",
+      "notes": "Nothing at position <= 0 or after '{' / ', ' in the NUL-terminated content; an output whose content cannot be read (DumpOutput::content() == None, the native non-stringstream case) always gets ', '. Writes at the put position, overwriting like the native stream. Standard_SStream is DumpStream; Standard_OStream is any DumpOutput (readable or opaque). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::GetPointerPrefix()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::get_pointer_prefix",
+      "status": "implemented",
+      "notes": "Returns \"0x\". The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::GetPointerInfo(const occ::handle<Standard_Transient>&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::get_handle_pointer_info",
+      "status": "implemented",
+      "notes": "The handle overload has a distinct Rust name and takes any Handle<T: RuntimeTyped>; a null handle gives an empty text. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::GetPointerInfo(const void*,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::get_pointer_info",
+      "status": "implemented",
+      "notes": "The pointer is Option<usize> (None or 0 is null, giving empty text); the text is libstdc++'s \"0x...\" (MSVC: zero-padded upper-case hex). Native quirk kept: the short form of \"0x1234\" is \"0xx1234\" because the scan stops at the 'x'. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::DumpKeyToClass(Standard_OStream&,const TCollection_AsciiString&,const TCollection_AsciiString&)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
       "rust_item": "rustycad_tkernel::standard::dump::dump_key_to_class",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "Writes \"key\": {field} after a separator. Strings are streamed as C strings, so each ends at its first NUL like operator<< of ToCString(). The differential probe (services_ operations) compares it with the native kernel."
     },
     {
-      "upstream_id": "OCCT_DUMP_CLASS_BEGIN",
+      "upstream_id": "Standard_Dump::DumpCharacterValues(Standard_OStream&,int,...)",
       "toolkit": "TKernel",
       "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
-      "rust_item": "rustycad_tkernel::standard::dump::dump_class_begin",
+      "rust_item": "rustycad_tkernel::standard::dump::dump_character_values",
       "status": "implemented",
-      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+      "notes": "The variadic char* list is a slice (the count is its length). Strings are streamed as C strings, so each ends at its first NUL like operator<< of ToCString(). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::DumpRealValues(Standard_OStream&,int,...)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::dump_real_values",
+      "status": "implemented",
+      "notes": "The variadic double list is a slice; values use the stream's default six-digit %g text. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::ProcessStreamName(const TCollection_AsciiString&,const TCollection_AsciiString&,int&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::process_stream_name",
+      "status": "implemented",
+      "notes": "Consumes an optional ', ' and the exact \"name\": key. TCollection_AsciiString arguments are impl AsRef<[u8]> (one-based positions as i32), and TCollection exceptions (SubString, Location) are reproduced with their messages. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::ProcessFieldName(const TCollection_AsciiString&,const TCollection_AsciiString&,int&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::process_field_name",
+      "status": "implemented",
+      "notes": "Like ProcessStreamName for DumpFieldToName of the name (cut at NUL, as ToCString() is passed), but without the length check, so a position past the end raises Standard_OutOfRange. TCollection_AsciiString arguments are impl AsRef<[u8]> (one-based positions as i32), and TCollection exceptions (SubString, Location) are reproduced with their messages. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::InitRealValues(const TCollection_AsciiString&,int&,int,...)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::init_real_values",
+      "status": "implemented",
+      "notes": "The variadic double* outputs are a mutable slice (the count is its length); each value is stored as parsed, so a failure leaves earlier outputs written. Location's range errors carry no message, SubString's do. TCollection_AsciiString arguments are impl AsRef<[u8]> (one-based positions as i32), and TCollection exceptions (SubString, Location) are reproduced with their messages. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::InitValue(const TCollection_AsciiString&,int&,TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::init_value",
+      "status": "implemented",
+      "notes": "The output string is the returned value (native always returns true); errors are the SubString and Location exceptions. TCollection_AsciiString arguments are impl AsRef<[u8]> (one-based positions as i32), and TCollection exceptions (SubString, Location) are reproduced with their messages. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_Dump::DumpFieldToName(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_Dump.hxx",
+      "rust_item": "rustycad_tkernel::standard::dump::dump_field_to_name",
+      "status": "implemented",
+      "notes": "Returns Result because a name of exactly \"()\" or \".get()\" raises Standard_OutOfRange. Native quirk kept: any name longer than one byte starting with 'a' loses it, and \"an\" loses both bytes (\"angle\" -> \"gle\"). TCollection_AsciiString arguments are impl AsRef<[u8]> (one-based positions as i32), and TCollection exceptions (SubString, Location) are reproduced with their messages. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Plugin::Load(const Standard_GUID&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Plugin/Plugin.hxx",
+      "rust_item": "rustycad_tkernel::plugin::PluginLoader::load",
+      "status": "implemented",
+      "notes": "Loading native C++ libraries has no meaning for the port: PluginLoader takes the resource io/environment, a PluginLibraries seam (StaticPluginLibraries registers PLUGINFACTORY factories by library file name) and a console writer. It reads <GUID>.Location from a fresh \"Plugin\" ResourceCatalog, builds lib<name>.so / lib<name>.dylib / <name>.dll, and raises Plugin_Failure with the native messages (\"could not find the resource:...\\n\", \"could not open:<name>; reason:<dlerror>\", \"could not find the factory in:<name><dlerror>\"), printing the first two to the console when verbose with the native spacing. Refusals use glibc's dlerror wording. The native cache is process-wide; here it belongs to the loader, and only successes are cached as natively. The theVerbose default (true) is passed explicitly. The product type is the factory's return type (native: handle<Standard_Transient>). The differential probe (services_ operations) compares it with the native kernel."
     },
     {
       "upstream_id": "BVH::VectorType<T,1>::Type",
@@ -39770,14 +40466,6 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "RTTI macro; impl_transient! registers TColStd_HPackedMapOfInteger under Standard_Transient."
-    },
-    {
-      "upstream_id": "Standard::StackTrace(char*,int,int,void*,int)",
-      "toolkit": "TKernel",
-      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
-      "rust_item": "rustycad_tkernel::standard::stack_trace",
-      "status": "implemented",
-      "notes": "Port of the glibc branch with the same backtrace()/backtrace_symbols() calls: appends \"\\n==Backtrace==\", one `binary(symbol+0xoffset) [0xaddress]` line per frame that fits, and \"\\n=============\" when room remains, below buffer_size bytes. The frames are Rust frames, so only argument checks and the shape of traces where no frame or every frame fits are compared (runtime_stack_trace probe). theContext is ignored on this platform and has no parameter; a buffer already too long, or a skip beyond the stack depth (a native crash), returns false; other platforms return false."
     },
     {
       "upstream_id": "TCollection_ExtendedString()",
