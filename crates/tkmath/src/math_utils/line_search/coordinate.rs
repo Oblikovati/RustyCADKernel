@@ -56,7 +56,7 @@ fn iterate(
     }
     true
 }
-/// Optimizes one coordinate using [lower,upper,tolerance]; `brent_along_coordinate(&mut f,&mut x,0,&mut fx,[-2.0,2.0,1e-6],100,&mut evaluations)`.
+/// Optimizes one coordinate using `[lower,upper,tolerance]`; `brent_along_coordinate(&mut f,&mut x,0,&mut fx,[-2.0,2.0,1e-6],100,&mut evaluations)`.
 pub fn brent_along_coordinate(
     f: &mut impl MultipleVarFunction,
     point: &mut Vector<'_>,
