@@ -33,21 +33,12 @@ use rustycad_tkmath::gp::{
     Axis1, Cone3, Cylinder3, Direction3, Plane3, Point3, Sphere3, Torus3, Vector3,
 };
 
-/// The own fields of the extrusion adaptor.
-#[derive(Clone)]
+/// The own fields of the extrusion adaptor; the direction defaults to X as gp_Dir().
+#[derive(Clone, Default)]
 pub(super) struct ExtrusionFields {
     pub(super) basis_curve: Handle<dyn Adaptor3dCurve>,
     pub(super) direction: Direction3,
     pub(super) have_dir: bool,
-}
-impl Default for ExtrusionFields {
-    fn default() -> Self {
-        Self {
-            basis_curve: Handle::default(),
-            direction: Direction3::default(),
-            have_dir: false,
-        }
-    }
 }
 impl ExtrusionFields {
     /// The extruded curve; natively a null one is dereferenced; `fields.curve()?`.

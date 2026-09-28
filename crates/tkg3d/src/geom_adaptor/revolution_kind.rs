@@ -173,7 +173,7 @@ pub(super) fn revolution_cone(revolved: &Revolved<'_>) -> Result<Cone3, Failure>
         let x_direction = Vector3::from(frame.x_direction());
         let mut t: f64 = op0.dot(x_direction);
         t /= Vector3::from(line_direction).dot(x_direction);
-        op0 = op0 + Vector3::from(line_direction) * -t;
+        op0 += Vector3::from(line_direction) * -t;
         if op0.dot(Vector3::from(frame.direction())) > 0. {
             angle = -angle;
         }
