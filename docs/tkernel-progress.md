@@ -181,8 +181,8 @@ These API mappings are manually inventoried and remain `implemented`, not global
   `AsciiString` implementation, whose full legacy suite is now translated.
 - `Failure` preserves typed messages, explicit stack strings and copy behavior.
   Automatic stack capture and the full exception hierarchy remain pending.
-- `Vec3`, `Vec4` and `Mat4` supply the operations exercised by the Vec4 suite;
-  this is not full vector/matrix API coverage.
+- NCollection_Vec2/Vec3/Vec4, NCollection_Mat3 and NCollection_Mat4 now map every
+  public member (see the NCollection vectors and matrices section below).
 - `Color`/`ColorRgba` preserve float channel storage, all 509 canonical named colors
   and 521 enum spellings, Lab/Lch conversions, gamut reduction and CIEDE2000.
   The 999 deterministic round trips and upstream reference tables are retained.
@@ -419,3 +419,37 @@ uniform scale and composition gp_Trsf forms are implemented. Mirror forms and
 the remaining topology APIs are still pending. Location operations propagate
 native transform-inversion failures through `Result`. See [TKMath progress](tkmath-progress.md). The crate dependencies reflect the genuine test dependency closure;
 this is not acceptance of TKMath, TKBRep, or TKTopAlgo.
+
+### NCollection vectors and matrices
+
+`Vec2`, `Vec3`, `Vec4`, `Mat3` and `Mat4` port every public member of
+NCollection_Vec2/Vec3/Vec4/Mat3/Mat4 for `float`, `double` and (vectors) `int` elements:
+all `NCOLLECTION_VEC_COMPONENTS_2D/3D` swizzles (`xy()` ... `wzy()`, `rgb()` ... `brg()`),
+the colour aliases, the converting constructors (`convert_from`, `from_other`), the
+Vec2/Vec3 construction overloads, `ChangeData`, `IsEqual`, every operator, `DumpJson`,
+and the matrix sums, products, scalar operations, negation, transposition, inversion,
+`Adjoint`, `Determinant`/`DeterminantMat3`, `GetMat3` and `Translate`. The two matrices
+share their common members through one macro. `porting/parity.json` maps each member.
+1,000 `ncollection_vec` and `ncollection_mat` differential requests in the TKMath
+numeric corpus match OCCT exactly; supplemental tests are in `ncollection_vec_api_behavior`
+and `ncollection_mat_api_behavior`.
+
+The port keeps these native results:
+
+- `NCollection_Mat4::Adjoint` builds its rows with `crossVec4`, whose sign convention
+  gives the negated cofactor matrix: `Adjoint(I) = -I` and the inverse is
+  `-Adjoint^T / det`. `NCollection_Mat3::Adjoint` has the usual sign.
+- `Mat4::Multiply(A, B)` starts every element at `(Element_t)0`, so a `-0` product sum
+  becomes `+0`; `Mat * Vec` starts from the first product and keeps `-0`.
+- `Mat3::Inverted(out, det)` leaves `out` untouched for a zero determinant and divides
+  the transposed adjugate by the determinant. `Mat4` leaves the unscaled cofactors in
+  `out` and multiplies by the reciprocal.
+- Integer `Modulus` computes `std::sqrt` in double and truncates the result. Out-of-range
+  and NaN float-to-int conversions use the x86-64 `cvttsd2si` result, `INT_MIN`.
+- NCollection_Mat3 has no `Rows`/`Cols` and no `Convert`; the Rust type has none either.
+
+Deliberate Rust deviations: components are public fields, so the non-const `x()`
+reference overloads are field access and `ChangeData` returns an array of component
+references (a matrix returns its column array). `Map` copies instead of reinterpreting
+memory. `DumpJson` exists only for float and double elements, because the native macro
+reads each argument as a `double`, which is undefined for `int` elements.

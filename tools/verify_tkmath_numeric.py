@@ -21,6 +21,7 @@ from tkmath_elementary_corpus import append_elementary_requests
 from tkmath_bvh_corpus import append_bvh_requests
 from tkmath_gp_planar_corpus import append_gp_planar_requests
 from tkmath_mathpoly_utils_corpus import append_mathpoly_utils_requests
+from tkmath_ncollection_vec_corpus import append_ncollection_vec_requests
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
@@ -411,6 +412,7 @@ def corpus() -> str:
     append_bvh_requests(requests)
     append_gp_planar_requests(requests)
     append_mathpoly_utils_requests(requests)
+    append_ncollection_vec_requests(requests)
     return '\n'.join(requests)+'\n'           
 
 
