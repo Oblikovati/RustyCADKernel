@@ -39,11 +39,29 @@ pub(crate) struct ExtrusionData {
     pub(crate) direction: Xyz,
     pub(crate) eval_rep: Handle<dyn RepSurfaceDesc>,
 }
+impl ExtrusionData {
+    /// The basis curve adaptor; a swept adaptor loaded without a curve has none
+    /// (natively a null dereference); `data.curve()?`.
+    pub(crate) fn curve(&self) -> Result<&dyn Adaptor3dCurve, Failure> {
+        swept_curve(&self.basis_curve)
+    }
+}
 /// Revolution data (`RevolutionData`): the basis curve adaptor and the axis.
 pub(crate) struct RevolutionData {
     pub(crate) basis_curve: Handle<dyn Adaptor3dCurve>,
     pub(crate) axis: Axis1,
     pub(crate) eval_rep: Handle<dyn RepSurfaceDesc>,
+}
+impl RevolutionData {
+    /// The basis curve adaptor, as `ExtrusionData::curve`; `data.curve()?`.
+    pub(crate) fn curve(&self) -> Result<&dyn Adaptor3dCurve, Failure> {
+        swept_curve(&self.basis_curve)
+    }
+}
+fn swept_curve(curve: &Handle<dyn Adaptor3dCurve>) -> Result<&dyn Adaptor3dCurve, Failure> {
+    curve.get().ok_or_else(|| {
+        null_object("GeomAdaptor_Surface: the swept surface has no basis curve; expected Load(C)")
+    })
 }
 /// Offset data (`OffsetData`): adaptors on the basis and on the equivalent surface
 /// (null when there is none), the offset surface for the osculating queries.
@@ -343,7 +361,13 @@ fn offset_data(
 /// `ShallowCopy` of the whole state: the surface is shared, the data shallow-copied;
 /// `shallow_state(&state)?`.
 pub(crate) fn shallow_state(state: &SurfaceState) -> Result<SurfaceState, Failure> {
-    Ok(SurfaceState {
+    Ok(with_data(state, shallow_data(&state.data)?))
+}
+
+/// The fields of `state` (surface shared) with other kind-specific data, as the
+/// ShallowCopy members copy them one by one; `with_data(&state, SurfaceData::None)`.
+pub(crate) fn with_data(state: &SurfaceState, data: SurfaceData) -> SurfaceState {
+    SurfaceState {
         surface: state.surface.clone(),
         u_first: state.u_first,
         u_last: state.u_last,
@@ -352,8 +376,8 @@ pub(crate) fn shallow_state(state: &SurfaceState) -> Result<SurfaceState, Failur
         tol_u: state.tol_u,
         tol_v: state.tol_v,
         surface_type: state.surface_type,
-        data: shallow_data(&state.data)?,
-    })
+        data,
+    }
 }
 
 /// `ShallowCopy` of the data: nested adaptors are shallow-copied, the Geom objects
@@ -361,12 +385,12 @@ pub(crate) fn shallow_state(state: &SurfaceState) -> Result<SurfaceState, Failur
 pub(crate) fn shallow_data(data: &SurfaceData) -> Result<SurfaceData, Failure> {
     Ok(match data {
         SurfaceData::Extrusion(extrusion) => SurfaceData::Extrusion(ExtrusionData {
-            basis_curve: extrusion.basis_curve.shallow_copy()?,
+            basis_curve: extrusion.curve()?.shallow_copy()?,
             direction: extrusion.direction,
             eval_rep: extrusion.eval_rep.clone(),
         }),
         SurfaceData::Revolution(revolution) => SurfaceData::Revolution(RevolutionData {
-            basis_curve: revolution.basis_curve.shallow_copy()?,
+            basis_curve: revolution.curve()?.shallow_copy()?,
             axis: revolution.axis,
             eval_rep: revolution.eval_rep.clone(),
         }),

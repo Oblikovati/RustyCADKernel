@@ -60,7 +60,7 @@ fn radius_of<T: RuntimeTyped>(
 /// `UResolution`; `u_resolution(&state, 1e-7)?`.
 pub(super) fn u_resolution(state: &SurfaceState, r3d: f64) -> Result<f64, Failure> {
     let res: f64 = match &state.data {
-        SurfaceData::Extrusion(data) => return data.basis_curve.resolution(r3d),
+        SurfaceData::Extrusion(data) => return data.curve()?.resolution(r3d),
         SurfaceData::Torus(_) => half_ratio(
             r3d,
             radius_of(state, |t: &GeomToroidalSurface| {
@@ -109,7 +109,7 @@ fn iso_radius(curve: Handle<dyn GeomCurve>) -> Result<f64, Failure> {
 /// `VResolution`; `v_resolution(&state, 1e-7)?`.
 pub(super) fn v_resolution(state: &SurfaceState, r3d: f64) -> Result<f64, Failure> {
     let res: f64 = match &state.data {
-        SurfaceData::Revolution(data) => return data.basis_curve.resolution(r3d),
+        SurfaceData::Revolution(data) => return data.curve()?.resolution(r3d),
         SurfaceData::Torus(_) => {
             half_ratio(r3d, radius_of(state, GeomToroidalSurface::minor_radius)?)
         }
@@ -176,8 +176,8 @@ pub(super) fn degree(state: &SurfaceState, direction: Direction) -> Result<i32, 
         (SurfaceData::BSpline(data), Direction::V) => Ok(data.surface.v_degree()),
         (SurfaceData::Bezier(data), Direction::U) => Ok(data.surface.u_degree()),
         (SurfaceData::Bezier(data), Direction::V) => Ok(data.surface.v_degree()),
-        (SurfaceData::Extrusion(data), Direction::U) => data.basis_curve.degree(),
-        (SurfaceData::Revolution(data), Direction::V) => data.basis_curve.degree(),
+        (SurfaceData::Extrusion(data), Direction::U) => data.curve()?.degree(),
+        (SurfaceData::Revolution(data), Direction::V) => data.curve()?.degree(),
         (_, Direction::U) => Err(not_this_kind("UDegree")),
         (_, Direction::V) => Err(not_this_kind("VDegree")),
     }
@@ -190,8 +190,8 @@ pub(super) fn nb_poles(state: &SurfaceState, direction: Direction) -> Result<i32
         (SurfaceData::BSpline(data), Direction::V) => Ok(data.surface.nb_v_poles()),
         (SurfaceData::Bezier(data), Direction::U) => Ok(data.surface.nb_u_poles()),
         (SurfaceData::Bezier(data), Direction::V) => Ok(data.surface.nb_v_poles()),
-        (SurfaceData::Extrusion(data), Direction::U) => data.basis_curve.nb_poles(),
-        (SurfaceData::Revolution(data), Direction::V) => data.basis_curve.nb_poles(),
+        (SurfaceData::Extrusion(data), Direction::U) => data.curve()?.nb_poles(),
+        (SurfaceData::Revolution(data), Direction::V) => data.curve()?.nb_poles(),
         (_, Direction::U) => Err(not_this_kind("NbUPoles")),
         (_, Direction::V) => Err(not_this_kind("NbVPoles")),
     }
@@ -203,7 +203,7 @@ pub(super) fn nb_knots(state: &SurfaceState, direction: Direction) -> Result<i32
     match (&state.data, direction) {
         (SurfaceData::BSpline(data), Direction::U) => Ok(data.surface.nb_u_knots()),
         (SurfaceData::BSpline(data), Direction::V) => Ok(data.surface.nb_v_knots()),
-        (SurfaceData::Extrusion(data), Direction::U) => data.basis_curve.nb_knots(),
+        (SurfaceData::Extrusion(data), Direction::U) => data.curve()?.nb_knots(),
         (_, Direction::U) => Err(not_this_kind("NbUKnots")),
         (_, Direction::V) => Err(not_this_kind("NbVKnots")),
     }

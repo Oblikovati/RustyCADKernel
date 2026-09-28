@@ -32,3 +32,6 @@ mod surface_span;
 mod surface_state;
 pub use surface::GeomAdaptorSurface;
 pub use surface_state::LoadRange as GeomAdaptorSurfaceRange;
+mod extrusion_kind;
+mod surface_of_linear_extrusion;
+pub use surface_of_linear_extrusion::GeomAdaptorSurfaceOfLinearExtrusion;

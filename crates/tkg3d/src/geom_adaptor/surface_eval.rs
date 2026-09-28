@@ -63,8 +63,8 @@ pub(super) fn evaluate<O: SurfaceEvalOrder>(
     match &mut state.data {
         SurfaceData::Bezier(data) => O::bezier(data, (u, v), snapped),
         SurfaceData::BSpline(data) => O::bspline(data, (u, v), snapped),
-        SurfaceData::Extrusion(data) => O::extrusion(su, sv, &*data.basis_curve, data.direction),
-        SurfaceData::Revolution(data) => O::revolution(su, sv, &*data.basis_curve, data.axis),
+        SurfaceData::Extrusion(data) => O::extrusion(su, sv, data.curve()?, data.direction),
+        SurfaceData::Revolution(data) => O::revolution(su, sv, data.curve()?, data.axis),
         SurfaceData::Offset(data) => O::offset(su, sv, data)?.ok_or_else(|| O::failure()),
         _ => O::surface(state.surface()?, su, sv),
     }
@@ -190,10 +190,10 @@ pub(super) fn dn(
     Ok(match &state.data {
         SurfaceData::BSpline(data) => return bspline_dn(&data.surface, snapped, (nu, nv)),
         SurfaceData::Extrusion(data) => {
-            extrusion_utils::dn(su, &*data.basis_curve, data.direction, nu, nv)?
+            extrusion_utils::dn(su, data.curve()?, data.direction, nu, nv)?
         }
         SurfaceData::Revolution(data) => {
-            revolution_utils::dn(su, sv, &*data.basis_curve, data.axis, (nu, nv))?
+            revolution_utils::dn(su, sv, data.curve()?, data.axis, (nu, nv))?
         }
         SurfaceData::Offset(data) => offset_dn(su, sv, data, (nu, nv))?,
         SurfaceData::Plane(plane) => elslib::dn(su, sv, plane, nu, nv),

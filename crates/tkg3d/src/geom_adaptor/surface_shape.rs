@@ -123,8 +123,8 @@ pub(super) fn continuity(state: &SurfaceState, direction: Direction) -> Result<S
     match (&state.data, direction) {
         (SurfaceData::BSpline(data), _) => bspline_continuity(&data.surface, state, direction),
         (SurfaceData::Offset(_), _) => offset_continuity(state, direction),
-        (SurfaceData::Extrusion(data), Direction::U) => data.basis_curve.continuity(),
-        (SurfaceData::Revolution(data), Direction::V) => data.basis_curve.continuity(),
+        (SurfaceData::Extrusion(data), Direction::U) => data.curve()?.continuity(),
+        (SurfaceData::Revolution(data), Direction::V) => data.curve()?.continuity(),
         (SurfaceData::None, _) => Err(no_such_object(&format!(
             "GeomAdaptor_Surface::{}Continuity",
             direction.name()
