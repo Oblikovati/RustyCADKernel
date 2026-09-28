@@ -1,8 +1,8 @@
-//! Exact Geom2d, Adaptor2d and Geom2dAdaptor (TKG2d) numeric oracle counterpart of tools/oracle/tkg2d_probe.cxx:
+//! Exact Geom2d, Adaptor2d, Geom2dAdaptor, Geom2dEval, Geom2dGridEval and Geom2dHash (TKG2d) numeric oracle counterpart of tools/oracle/tkg2d_probe.cxx:
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod g2_probe;
-use g2_probe::{adaptor_cases, bspl, curves, eval, simple};
+use g2_probe::{adaptor_cases, bspl, curves, eval, grid, simple};
 
 fn main() {
     for line in io::stdin().lock().lines() {
@@ -34,6 +34,10 @@ fn main() {
             "g2_eval" => eval::eval_case(&values),
             "g2_hash" => eval::hash_case(&values),
             "g2_hash_frame" => eval::hash_frame_case(&values),
+            "g2_grid" => grid::grid_case(&values),
+            "g2_grid_adaptor" => grid::grid_adaptor_case(&values),
+            "g2_grid_evalrep" => grid::grid_evalrep_case(&values),
+            "g2_grid_null" => grid::grid_null_case(&values),
             _ => {
                 eprintln!("Unknown probe operation: {op}");
                 std::process::exit(2);

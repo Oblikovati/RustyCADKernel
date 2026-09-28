@@ -30,8 +30,10 @@ use rustycad_tkmath::gp::{Point2, Vector2};
 /// runs through `BSplCLib::D0`..`D3` directly. `EvaluateGridDN` calls `BSplCLib::DN`
 /// with the knots and multiplicities but passes the span index found in the flat
 /// knots: `PrepareEval` keeps an index that lies in the knot index range, so for such
-/// indices the derivative is the polynomial of another span (quirk kept). The
-/// evaluation representation of the curve is ignored;
+/// indices the derivative is the polynomial of another span (quirk kept). When that
+/// index is the last knot index of a non-periodic curve, the native `BuildKnots` reads
+/// past the knot and multiplicity arrays (undefined); the port raises
+/// Standard_OutOfRange there. The evaluation representation of the curve is ignored;
 /// `Geom2dGridEvalBSplineCurve::new(bspline).evaluate_grid(&params)?`.
 pub struct Geom2dGridEvalBSplineCurve {
     geom: Handle<Geom2dBSplineCurve>,
