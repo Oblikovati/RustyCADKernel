@@ -143,3 +143,24 @@ def append_hash_requests(requests: list[str]) -> None:
     requests.append(request('g3_hash_curves', (1e-12, 1e-7), [[0, *circle(Z_FRAME, -1.0)]]))
     requests.append(request('g3_hash_surfaces', (1e-12, 1e-7), [[0, *sphere(Z_FRAME, -1.0)]]))
     append_mesh_requests(rng, requests)
+    append_fallback_requests(requests)
+
+
+def append_fallback_requests(requests: list[str]) -> None:
+    """GeomEval curves and surfaces have no dedicated hasher: the hash falls back to the
+    class name and equality to handle identity, also when they are wrapped."""
+    from tkg3d_corpus_eval_curves import aht, helix, sine, tbezier
+    from tkg3d_corpus_eval_surfaces import ellipsoid, helicoid, hyperboloid, paraboloid, saddle
+    from tkg3d_corpus_eval_bezier_surfaces import tbezier as tbezier_surface
+    poles = [[0.0, 0.0, 0.0], [1.0, 2.0, 0.5], [3.0, -1.0, 1.0]]
+    curves = [sine(Z_FRAME, 2.0, 3.0, 0.5), sine(Z_FRAME, 2.0, 3.0, 0.5), helix(Z_FRAME, 1.5, 2.0),
+              tbezier(poles, 1.0), aht(poles[:2], 1, 0.0, 0.0),
+              trimmed(0.0, 1.0, sine(Z_FRAME, 1.0, 1.0, 0.0)), offset(0.5, [0.0, 0.0, 1.0], helix(Z_FRAME, 1.0, 1.0))]
+    surfaces = [ellipsoid(Z_FRAME, 3.0, 2.0, 1.0), ellipsoid(Z_FRAME, 3.0, 2.0, 1.0), hyperboloid(Z_FRAME, 2.0, 1.0, 0),
+                paraboloid(Z_FRAME, 1.5), saddle(Z_FRAME, 1.0, 2.0), helicoid(Z_FRAME, 3.0),
+                tbezier_surface([[i, j, (i + j) % 2] for i in range(3) for j in range(3)], 3, 3, 1.0, 1.0),
+                extrusion([0.0, 0.0, 1.0], sine(Z_FRAME, 1.0, 1.0, 0.0)),
+                offset_surface(0.5, ellipsoid(Z_FRAME, 3.0, 2.0, 1.0))]
+    for tolerances in ((-1.0, 0.0), (1e-12, 1e-7)):
+        requests.append(request('g3_hash_curves', tolerances, [[0, *c] for c in curves] + [[2, 0]]))
+        requests.append(request('g3_hash_surfaces', tolerances, [[0, *s] for s in surfaces] + [[2, 0]]))
