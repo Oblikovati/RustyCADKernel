@@ -1,5 +1,7 @@
 //! Bounding-box operations split by state, accumulation, and queries.
 mod accumulation;
+mod limits;
+pub use limits::BoxLimits3;
 mod lines;
 mod queries;
 mod segment;

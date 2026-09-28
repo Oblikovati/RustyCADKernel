@@ -76,10 +76,10 @@ impl BoundingBox2 {
                 "",
             ));
         }
-        Ok(self.limits())
+        Ok(self.corner_limits())
     }
-    /// Mirrors the unchecked structured Get overload, including void-box values; `bounds.limits()`.
-    pub fn limits(&self) -> [f64; 4] {
+    /// Unchecked xmin, ymin, xmax, ymax (the `Get(x,y,X,Y)` output order), including void-box values.
+    pub(super) fn corner_limits(&self) -> [f64; 4] {
         std::array::from_fn(|index| self.bound(index % 2, index >= 2))
     }
     fn bound(&self, axis: usize, upper: bool) -> f64 {
@@ -114,6 +114,8 @@ impl BoundingBox2 {
     }
 }
 mod accumulation;
+mod limits;
+pub use limits::BoxLimits2;
 mod queries;
 mod transforms;
 

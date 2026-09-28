@@ -49,7 +49,7 @@ impl BoundingBox2 {
         if self.is_whole() || other.is_whole() {
             return false;
         }
-        let limits = other.limits();
+        let limits = other.corner_limits();
         (0..2).any(|i| {
             (!self.side_open(i, false) && limits[i + 2] < self.minimum[i] - self.gap)
                 || (!self.side_open(i, true) && limits[i] > self.maximum[i] + self.gap)
@@ -91,7 +91,7 @@ impl BoundingBox2 {
         segment_out(first.xy(), delta, center, height)
     }
     fn center_height(&self) -> (Xy, Xy) {
-        let [x, y, u, v] = self.limits();
+        let [x, y, u, v] = self.corner_limits();
         let center = Xy::new((x + u) / 2.0, (y + v) / 2.0);
         (
             center,
@@ -103,8 +103,8 @@ impl BoundingBox2 {
         if self.is_void() || other.is_void() {
             return 0.0;
         }
-        let left = self.limits();
-        let right = other.limits();
+        let left = self.corner_limits();
+        let right = other.corner_limits();
         let [x, y] =
             std::array::from_fn(|i| distance_axis(left[i], left[i + 2], right[i], right[i + 2]));
         (x + y).sqrt()
