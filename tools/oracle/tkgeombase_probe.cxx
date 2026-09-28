@@ -44,6 +44,8 @@
 #include "tkgeombase_probe_lprop.cxx"
 #include "tkgeombase_probe_gprop.cxx"
 #include "tkgeombase_probe_hermit.cxx"
+#include "tkgeombase_probe_extrema_pc2d.cxx"
+#include "tkgeombase_probe_extrema_pc.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -136,6 +138,20 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gprop_hoperator", gb_gprop_hoperator_case},
  // Hermit (tkgeombase_probe_hermit.cxx)
  {"hermit", gb_hermit_case},
+ // ExtremaPC2d, GCPnts_TangentialDeflection (tkgeombase_probe_extrema_pc2d.cxx)
+ {"pc2d_curve", gb_pc2d_curve_case},
+ {"pc2d_grid", gb_pc2d_grid_case},
+ {"pc2d_uniform", gb_pc2d_uniform_case},
+ {"pc2d_distance", gb_pc2d_distance_case},
+ {"pc2d_endpoints", gb_pc2d_endpoints_case},
+ {"gcpnts_td2d", gb_gcpnts_td2d_case},
+ // ExtremaPC (tkgeombase_probe_extrema_pc.cxx)
+ {"pc_curve", gb_pc_curve_case},
+ {"pc_grid", gb_pc_grid_case},
+ {"pc_distance", gb_pc_distance_case},
+ {"pc_endpoints", gb_pc_endpoints_case},
+ {"pc_project", gb_pc_project_case},
+ {"gcpnts_td3d", gb_gcpnts_td3d_case},
 };
 int main() {
  std::string line;

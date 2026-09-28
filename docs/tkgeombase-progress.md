@@ -4,14 +4,15 @@
 (`rustycad-tkgeombase`) is the port of the ModelingData toolkit TKGeomBase. It
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
-`IntAna2d`, `LProp`, `GeomLProp`, `GProp` and `Hermit` packages are ported in full, and
-`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
+`IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d` and `ExtremaPC`
+packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing and 0
+stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (135 declarations):
+passes (481 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -33,11 +34,42 @@ passes (135 declarations):
 | GProp_PEquation_Test.cxx | gprop_pequation | 4 |
 | GProp_PGProps_Test.cxx | gprop_pgprops | 7 |
 | Hermit_Test.cxx | hermit | 11 |
+| ExtremaPC2d_Test.cxx | extrema_pc2d | 6 |
+| ExtremaPC2d_BezierCurve_Test.cxx | extrema_pc2d_bezier_curve | 8 |
+| ExtremaPC2d_BSplineCurve_Test.cxx | extrema_pc2d_bspline_curve | 7 |
+| ExtremaPC2d_Circle_Test.cxx | extrema_pc2d_circle | 12 |
+| ExtremaPC2d_Curve_Test.cxx | extrema_pc2d_curve | 10 |
+| ExtremaPC2d_DistanceFunction_Test.cxx | extrema_pc2d_distance_function | 4 |
+| ExtremaPC2d_Ellipse_Test.cxx | extrema_pc2d_ellipse | 9 |
+| ExtremaPC2d_GridEvaluator_Test.cxx | extrema_pc2d_grid_evaluator | 7 |
+| ExtremaPC2d_Line_Test.cxx | extrema_pc2d_line | 8 |
+| ExtremaPC2d_OffsetCurve_Test.cxx | extrema_pc2d_offset_curve | 7 |
+| ExtremaPC2d_OtherCurve_Test.cxx | extrema_pc2d_other_curve | 5 |
+| ExtremaPC2d_Parabola_Test.cxx | extrema_pc2d_parabola | 10 |
+| ExtremaPC_BezierCurve_Test.cxx | extrema_pc_bezier_curve | 31 |
+| ExtremaPC_BSplineCurve_Test.cxx | extrema_pc_bspline_curve | 27 |
+| ExtremaPC_Circle_Test.cxx | extrema_pc_circle | 26 |
+| ExtremaPC_Curve_Test.cxx | extrema_pc_curve | 47 |
+| ExtremaPC_Ellipse_Test.cxx | extrema_pc_ellipse | 30 |
+| ExtremaPC_Hyperbola_Test.cxx | extrema_pc_hyperbola | 24 |
+| ExtremaPC_Line_Test.cxx | extrema_pc_line | 31 |
+| ExtremaPC_OffsetCurve_Test.cxx | extrema_pc_offset_curve | 13 |
+| ExtremaPC_Parabola_Test.cxx | extrema_pc_parabola | 24 |
 
 `local_props_behavior.rs` covers the LProp, GeomLProp, GProp and Hermit quirks
 below. `gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
 StdFail_NotDone results, the conversion operators, the GCE2d aliases and the native
 quirks below.
+
+Four upstream suites are not mapped:
+
+- `ExtremaPC2d_Hyperbola_Test.cxx` (9 declarations) is translated as
+  `extrema_pc2d_hyperbola` and passes in Rust, but `SingletonInvalidAndValueAccessor`
+  fails natively (see Preserved native behaviour), and the verifier maps whole suites
+  whose native run passes.
+- `ExtremaPC_SearchMode_Test.cxx` (30), `ExtremaPC_Comparison_Test.cxx` (17) and
+  `ExtremaPC_ExtendedGeometry_Test.cxx` (40) compare ExtremaPC with the classic
+  `Extrema_ExtPC`, which is not ported. They wait for the Extrema package.
 
 ## Class mapping
 
@@ -83,6 +115,55 @@ IntAna_ListOfCurve is the `#[deprecated]` alias `int_ana::ListOfCurve`. The cone
 EstimDist needs `ProjLib::Project(gp_Pln, gp_Lin)`; ProjLib is not ported, so
 `quad_quad_geo/estim_dist.rs` holds that one line projection (ProjLib_Plane) until the
 ProjLib port replaces it.
+
+## ExtremaPC2d and ExtremaPC
+
+The two packages are one generic implementation in `src/extrema_pc_core`, over the
+`PcSpace` trait (`Space2d`, `Space3d`): the result (`PcResult`, `PcExtremum`), the
+`Status` and `SearchMode` enumerations, the validity functions and constants, the
+distance function, the grid evaluator, the endpoint extrema and the analytic
+endpoint handling. `extrema_pc2d` and `extrema_pc` give the native names:
+`ExtremaResult` and `ExtremumResult` for `Result` and `ExtremumResult`,
+`DistanceFunction` and `GridEvaluator` for the class templates, the evaluators without
+their prefix (`extrema_pc::Circle` for ExtremaPC_Circle). The native code of the two
+packages differs in a few places, and the core keeps these differences as parameters:
+the neighbour step ratio (1e-6 in 2D, 0.01 in 3D) and the catch policy of the grid
+evaluator (the 2D evaluator catches every failure; the 3D evaluator catches only a
+failed sign evaluation, which reads 0, and lets a failed curve value propagate).
+
+API mapping:
+
+- A constructor with a domain is `with_domain`. The ExtremaPC(2d)_Curve constructors
+  are `from_adaptor`, `from_adaptor_range`, `from_geom`, `from_geom_range` and (3D)
+  `from_transformed`, `from_transformed_range`; the dispatcher keeps the chosen
+  evaluator in `EvaluatorVariant`.
+- A native exception propagates out of `Perform` as a `Failure`. The 2D analytic
+  evaluators cannot raise, so their `perform` returns `&ExtremaResult`; the 2D Bezier,
+  BSpline, offset, other-curve and dispatcher `perform` return
+  `Result<&ExtremaResult, Failure>`. In 3D every `perform` returns `Result`, because
+  the plane projections build gp and Geom2d objects whose constructors can raise, and
+  the Bezier, BSpline, offset and other-curve constructors return `Result` too.
+- The native evaluators keep a mutable result in a `const` object; the Rust `perform`
+  takes `&mut self` and lends the result.
+- Output references of the distance function become returned values; the
+  `CurveEvaluator` template parameter of `AddEndpointExtrema` is the `CurveEvaluator`
+  trait. The planar helpers keep their `gp_Pln&` and 2D-curve out-parameters as `&mut`
+  parameters; `PerformPlanar` takes the `PlanarEvaluator2d` trait for `Evaluator2d` and
+  groups its scalar arguments in `PlanarQuery`.
+- The x87 `long double` arithmetic of the rational Bezier certification and of the
+  exact pole-plane test uses `rustycad_tkmath::math_poly::LongDouble`.
+
+ExtremaPC needs parts of three TKGeomBase packages that are not ported yet. They are
+crate-private ports of exactly the code paths it uses, in the native operation order,
+and the ports of those packages will replace them:
+
+- `GCPnts_TangentialDeflection` and `GCPnts_DistFunction(2d)` (the curve-aware
+  sampling of the grid), in `src/tangential_deflection`;
+- `Extrema_CurveTool::DeflCurvIntervals` and `Extrema_Curve2dTool::DeflCurvIntervals`,
+  in `src/defl_curv_intervals.rs`;
+- the ProjLib plane projections of lines and conics, in `src/plane_projection.rs`.
+
+`probe_support` is a hidden public module that exposes them to the numeric probe.
 
 ## Verification
 
@@ -146,8 +227,26 @@ cache lazily and two native reads are by value. GProp prints every property of p
 sets (unit, weighted, 1D and 2D arrays, null and negative masses), point equations at
 three tolerances, every elementary framework (including null ranges, where Jacobi
 fails) and compositions at other locations; Hermit covers weight ratios up to 1e6 and
-the tolerance failures. The corpus has 6227 requests (gce, GC, IntAna2d, IntAna, LProp,
-GeomLProp, GProp and Hermit).
+the tolerance failures.
+
+The ExtremaPC2d requests (`tkgeombase_corpus_extrema_pc2d.py`) run every 2D curve
+kind through the four ExtremaPC2d_Curve constructors with bounded, unbounded,
+degenerate, reversed, whole-period and multi-period domains, and query each evaluator
+in the three search modes, with and without endpoints: random points, the center,
+the foci, points on the axes, the vertex, points on the curve, invalid tolerances and
+points at Precision::Infinite(). The ExtremaPC requests (`tkgeombase_corpus_extrema_pc.py`)
+do the same through the six ExtremaPC_Curve constructors, with identity, translation,
+rotation and positive and negative scaling transformations, conics in random frames
+queried above and below their plane, and planar (exact pole planes, collinear and
+coincident poles) and non-planar Bezier, BSpline and offset curves, rational and not.
+Both add direct requests for the grid evaluator, the uniform and curve-aware
+partitions, the distance function, AddEndpointExtrema, the plane projections and the
+tangential deflection sampling. Each request prints the status, the extrema in their
+order (parameter, point, square distance, minimum and maximum flags), the minimum and
+maximum indices, or the raised exception.
+
+The corpus has 8732 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+GeomLProp, GProp and Hermit, 1253 ExtremaPC2d and 1252 ExtremaPC.
 
 ## Preserved native behaviour
 
@@ -303,3 +402,16 @@ Hermit:
   mapped onto [0, 1]) with the flat-knot `LocateParameter`, reusing the LocateU
   indices of Ux and Uy as hints; the 3D and 2D copies of the native file share one
   implementation over `HermitSpline`.
+ExtremaPC2d and ExtremaPC:
+
+- `ExtremaPC2d_Hyperbola_Test.SingletonInvalidAndValueAccessor` fails natively with
+  GCC 13. The test compares `Value(-0.7)` with `gp_Hypr2d` evaluated through
+  `ElCLib`; GCC folds `sinh(-0.7)` in the test at compile time to
+  `-0x1.8465153d5bdbdp-1`, while glibc's `sinh` returns `-0x1.8465153d5bdbcp-1` at run
+  time, one ulp apart. The port calls the run-time `sinh`, as the native library does,
+  and the Rust test passes.
+- The 2D and 3D packages use different neighbour steps for the endpoint extrema
+  (`THE_NEIGHBOR_STEP_RATIO` is 1e-6 in 2D and 0.01 in 3D), and their grid evaluators
+  catch failures differently (see above).
+- `std::max` and `std::min` keep their argument order semantics with NaN
+  (`geom2d::native::std_max`, `std_min`).
