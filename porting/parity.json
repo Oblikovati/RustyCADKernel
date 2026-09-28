@@ -38338,6 +38338,110 @@
       "rust_item": "rustycad_tkernel::standard::c_locale_sentry::CLocaleSentry::get_c_locale",
       "status": "implemented",
       "notes": "Returns the one static CLocale (name \"C\", radix '.', empty group separator), like the native static locale_t. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer(int64_t,size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::new",
+      "status": "implemented",
+      "notes": "Returns Result because Init raises Standard_ProgramError for a chunk longer than the 4096-byte cache; a zero chunk (a native division by zero) is refused the same way. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer::Init(int64_t,size_t,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::init",
+      "status": "implemented",
+      "notes": "Truncates the length to whole chunks with C++ % semantics (negative lengths round toward zero) unless the payload is partial; the cache is zeroed. After the exception the buffer hands out no chunk (native reads would run past the cache). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer::IsDone() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::is_done",
+      "status": "implemented",
+      "notes": "Read length equals the data length. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer::ReadChunk(Stream_T&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::read_chunk",
+      "status": "implemented",
+      "notes": "The template ReadChunk<Chunk_T> copies the chunk out as T: AnyBitPattern (it may be unaligned); a T larger than the chunk (native out-of-bounds read) raises Standard_ProgramError. The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadBuffer::ReadDataChunk(Stream_T&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadBuffer::read_data_chunk",
+      "status": "implemented",
+      "notes": "Returns the chunk as a slice or None; a short or failed read ends reading for good. A partial last chunk keeps the cache's previous bytes past the data, as natively. The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::new",
+      "status": "implemented",
+      "notes": "Allocates a zeroed read buffer. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::~Standard_ReadLineBuffer()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::Clear()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::clear",
+      "status": "implemented",
+      "notes": "Drops buffered text and also resets the multiline mode and gap flag to their defaults. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::ReadLine(Stream_T&,size_t&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_line",
+      "status": "implemented",
+      "notes": "The line is returned as a slice whose length is the output length; the terminator is overwritten with NUL in place. Native quirks kept: a backslash that ends a read block in multiline mode makes later newlines part of the line, and an empty carry-over that never held a byte ends the stream (its Data() is NULL). The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::ReadLine(Stream_T&,size_t&,int64_t&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::read_line_counted",
+      "status": "implemented",
+      "notes": "The overload with theReadData has a distinct Rust name; the count is the size of the last block read during the call, not the total. The std::istream and FILE* overloads collapse to one generic impl Read: a block read loops like istream::read/fread, and an io::Error stands for badbit/ferror. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::IsMultilineMode() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::is_multiline_mode",
+      "status": "implemented",
+      "notes": "False by default. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::ToPutGapInMultiline() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::to_put_gap_in_multiline",
+      "status": "implemented",
+      "notes": "True by default. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ReadLineBuffer::SetMultilineMode(bool,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ReadLineBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::set_multiline_mode",
+      "status": "implemented",
+      "notes": "The gap argument's default (true) is passed explicitly in Rust. The differential probe (services_ operations) compares it with the native kernel."
     }
   ],
   "tests": [

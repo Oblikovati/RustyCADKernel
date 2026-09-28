@@ -3,6 +3,7 @@
 #include "tkernel_standard_services_memory.cxx"
 #include "tkernel_standard_services_sync.cxx"
 #include "tkernel_standard_services_locale.cxx"
+#include "tkernel_standard_services_readers.cxx"
 
 namespace standard_services_probe
 {
@@ -17,5 +18,7 @@ static const tkernel_probe::Table cases = {
   {"services_mutex", mutex_script},
   {"services_condition", condition_script},
   {"services_clocale", clocale_case},
+  {"services_read_buffer", read_buffer_case},
+  {"services_read_line", read_line_case},
 };
 } // namespace standard_services_probe

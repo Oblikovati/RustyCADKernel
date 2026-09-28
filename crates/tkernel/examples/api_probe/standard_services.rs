@@ -3,6 +3,7 @@ use super::common::Case;
 mod locale;
 mod memory;
 mod mmgr;
+mod readers;
 mod sync;
 
 /// Operation name and handler of every case this area answers.
@@ -19,4 +20,6 @@ pub const CASES: &[(&str, Case)] = &[
     ("services_mutex", sync::mutex_case),
     ("services_condition", sync::condition_case),
     ("services_clocale", locale::clocale_case),
+    ("services_read_buffer", readers::read_buffer_case),
+    ("services_read_line", readers::read_line_case),
 ];

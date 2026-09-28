@@ -8,5 +8,7 @@ mod memory;
 mod memory_utils;
 #[path = "standard_services_api_behavior/mmgr.rs"]
 mod mmgr;
+#[path = "standard_services_api_behavior/readers.rs"]
+mod readers;
 #[path = "standard_services_api_behavior/sync.rs"]
 mod sync;
