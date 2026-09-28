@@ -12668,6 +12668,14 @@
       "notes": "Manual explicit member mapping; double& buffers become slices, gp_Pnt/gp_Pnt2d overloads share one generic item over CurvePoint, flat real-array overloads carry _flat/_scalar suffixes, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "BSplCLib_Cache::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplCLib/BSplCLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplclib::Cache",
+      "status": "excluded",
+      "notes": "BSplCLib_Cache derives from Standard_Transient only so that adaptors can share it by handle; the Rust Cache is a plain value owned by its user (Geom2dAdaptorCurve keeps it in its locked state), so there is no runtime type descriptor to register."
+    },
+    {
       "upstream_id": "BSplSLib::RationalDerivative(int,int,int,int,double&,double&,bool)",
       "toolkit": "TKMath",
       "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib.hxx",
@@ -13034,6 +13042,14 @@
       "rust_item": "rustycad_tkmath::bsplslib::Cache::d2_local",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, argument groups become SurfaceSpan/CacheSource/SurfaceCacheSpan/ResolutionDirection/InterpolationGrid/MultiplySource structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BSplSLib_Cache::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/BSplSLib/BSplSLib_Cache.hxx",
+      "rust_item": "rustycad_tkmath::bsplslib::Cache",
+      "status": "excluded",
+      "notes": "BSplSLib_Cache derives from Standard_Transient only so that adaptors can share it by handle; the Rust Cache is a plain value owned by its user (Geom2dAdaptorCurve keeps it in its locked state), so there is no runtime type descriptor to register."
     },
     {
       "upstream_id": "BSplSLib_EvaluatorFunction::Evaluate(int,double,double,double&,int&) const",
@@ -24716,6 +24732,14 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom2d_BoundedCurve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_BoundedCurve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dBoundedCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
       "upstream_id": "Geom2d_CartesianPoint(const gp_Pnt2d&)",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_CartesianPoint.hxx",
@@ -25316,6 +25340,14 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom2d_Curve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Curve.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
       "upstream_id": "Geom2d_Direction(double,double)",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Direction.hxx",
@@ -25418,6 +25450,14 @@
       "rust_item": "rustycad_tkg2d::geom2d::Geom2dDirection::copy",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom2d_Direction::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Direction.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dDirection::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
       "upstream_id": "Geom2d_Ellipse(const gp_Elips2d&)",
@@ -25786,6 +25826,14 @@
       "rust_item": "rustycad_tkg2d::geom2d::Geom2dGeometry::dump_json",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom2d_Geometry::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Geometry.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dGeometry::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
       "upstream_id": "Geom2d_Hyperbola(const gp_Hypr2d&)",
@@ -26844,6 +26892,14 @@
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
     },
     {
+      "upstream_id": "Geom2d_Point::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Point.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dPoint::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
       "upstream_id": "Geom2d_Transformation()",
       "toolkit": "TKG2d",
       "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_Transformation.hxx",
@@ -27618,6 +27674,14 @@
       "rust_item": "rustycad_tkg2d::geom2d::Geom2dVectorWithMagnitude::copy",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies (WeightsArray lends its array to a closure), C++ output references become returned values, overloads and operators take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom2d_VectorWithMagnitude::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG2d",
+      "source": "src/ModelingData/TKG2d/Geom2d/Geom2d_VectorWithMagnitude.hxx",
+      "rust_item": "rustycad_tkg2d::geom2d::Geom2dVectorWithMagnitude::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     },
     {
       "upstream_id": "Geom2d_OffsetCurveUtils::CalculateD0",
