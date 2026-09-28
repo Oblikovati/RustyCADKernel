@@ -14,6 +14,7 @@ import re
 import subprocess
 from porting import ROOT, snapshot
 from tkmath_system_corpus import append_system_requests
+from tkmath_plib_corpus import append_plib_requests
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
@@ -397,6 +398,7 @@ def corpus() -> str:
         requests.append('modern_tensor '+' '.join(map(str,[rng.choice([1,2,3,4]),case%4,
             rng.choice([0,0,1,5,24]),rng.choice([-1,0,1,3])]+bounds+[rng.choice([0,1,2,7]),rng.choice([0,1,7,61,62])])))
     append_system_requests(rng, requests)
+    append_plib_requests(requests)
     return '\n'.join(requests)+'\n'           
 
 

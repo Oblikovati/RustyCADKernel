@@ -269,7 +269,35 @@ fn main() {
         let mut words = line.split_whitespace();
         let op = words.next().unwrap();
         let values: Vec<f64> = words.map(|w| w.parse().unwrap()).collect();
-        if op == "modern_lbfgs" {
+        if op == "plib_poly" {
+            plib_probe::poly_case(&values);
+        } else if op == "plib_poly2" {
+            plib_probe::poly2_case(&values);
+        } else if op == "plib_rational" {
+            plib_probe::rational_case(&values);
+        } else if op == "plib_lagrange" {
+            plib_probe::lagrange_case(&values);
+        } else if op == "plib_cubic" {
+            plib_probe::cubic_case(&values);
+        } else if op == "plib_hermite_coeffs" {
+            plib_probe::hermite_coeffs_case(&values);
+        } else if op == "plib_hermite_interp" {
+            plib_probe::hermite_interp_case(&values);
+        } else if op == "plib_coef_poles" {
+            plib_probe::curve_case(&values, false);
+        } else if op == "plib_trim" {
+            plib_probe::curve_case(&values, true);
+        } else if op == "plib_grid" {
+            plib_probe::grid_case(&values);
+        } else if op == "plib_params" {
+            plib_probe::params_case(&values);
+        } else if op == "plib_length" {
+            plib_probe::length_case(&values);
+        } else if op == "plib_jacobi" {
+            plib_probe::jacobi_probe_case(&values, false);
+        } else if op == "plib_hermit" {
+            plib_probe::jacobi_probe_case(&values, true);
+        } else if op == "modern_lbfgs" {
             modern_opt_probe::modern_lbfgs_case(&values);
         } else if op == "modern_newton" {
             modern_opt_probe::modern_newton_case(&values);
@@ -467,3 +495,5 @@ mod small_probe;
 mod swarm_probe;
 
 mod global_modern_probe;
+
+mod plib_probe;

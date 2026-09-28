@@ -27,7 +27,7 @@ mod sealed {
 
 /// A pole type PLib flattens coordinate by coordinate (`gp_Pnt` or `gp_Pnt2d`);
 /// `<Point3 as PolePoint>::DIMENSION == 3`.
-pub trait PolePoint: sealed::Sealed + Copy + Default {
+pub trait PolePoint: sealed::Sealed + Copy + Default + 'static {
     /// Number of Cartesian coordinates.
     const DIMENSION: usize;
     /// Reads the zero-based coordinate; `point.pole_coordinate(0)`.
