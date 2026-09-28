@@ -229,9 +229,10 @@ impl Geom2dBSplineCurve {
     pub fn weights(&self) -> Option<Array1<'static, f64>> {
         self.state.read().weights_view().cloned()
     }
-    /// The stored weights, unit weights for a non-rational curve (`WeightsArray`);
-    /// `curve.weights_array()`.
-    pub fn weights_array(&self) -> Array1<'static, f64> {
-        self.state.read().weights.clone()
+    /// Read the stored weights in place, unit weights (a non-owning shared view) for a
+    /// non-rational curve (`WeightsArray`, which natively returns a stable reference);
+    /// `curve.weights_array(|weights| weights.len())`.
+    pub fn weights_array<R>(&self, read: impl FnOnce(&Array1<'static, f64>) -> R) -> R {
+        read(&self.state.read().weights)
     }
 }
