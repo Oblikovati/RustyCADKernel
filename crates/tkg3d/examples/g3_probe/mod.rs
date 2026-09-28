@@ -6,6 +6,8 @@ pub mod bspline_surface;
 pub mod common;
 pub mod conics;
 pub mod curves;
+pub mod geom_adaptor;
+pub mod geom_adaptor_cases;
 pub mod offset_surface;
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;

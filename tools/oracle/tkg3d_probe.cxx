@@ -70,6 +70,15 @@
 #include "tkg3d_probe_bezier_surface.cxx"
 #include "tkg3d_probe_bspline_surface.cxx"
 #include "tkg3d_probe_offset_surface.cxx"
+#include <Adaptor3d_Curve.hxx>
+#include <Adaptor3d_Surface.hxx>
+#include <GeomAdaptor.hxx>
+#include <GeomAdaptor_Curve.hxx>
+#include <GeomAdaptor_Surface.hxx>
+#include <GeomAdaptor_SurfaceOfLinearExtrusion.hxx>
+#include <GeomAdaptor_SurfaceOfRevolution.hxx>
+#include <GeomAdaptor_TransformedSurface.hxx>
+#include "tkg3d_probe_geom_adaptor.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_point", g3_point_case},
  {"g3_direction", g3_direction_case},
@@ -105,6 +114,16 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_bspline_surface_edit", g3_bspline_surface_edit_case},
  {"g3_rect_trim", g3_rect_trim_case},
  {"g3_offset_surface", g3_offset_surface_case},
+ {"a3_base", a3_base_case},
+ {"a3_curve", a3_curve_case},
+ {"a3_curve_load", a3_curve_load_case},
+ {"a3_curve_evalrep", a3_curve_evalrep_case},
+ {"a3_surface", a3_surface_case},
+ {"a3_surface_load", a3_surface_load_case},
+ {"a3_surface_evalrep", a3_surface_evalrep_case},
+ {"a3_extrusion", a3_extrusion_case},
+ {"a3_revolution", a3_revolution_case},
+ {"a3_transformed", a3_transformed_case},
 };
 int main() {
  std::string line;
