@@ -45,6 +45,7 @@ mod point_surface;
 mod pon;
 mod singular;
 mod surface_ref;
+mod surface_surface;
 
 pub use curve_curve::{
     CCLocFOfLocECC, ECC, ECC2d, ExtCC, ExtCC2d, GFuncExtCC, GGenExtCC, GenLocateExtCC,
@@ -72,6 +73,7 @@ pub use point_curve::{
     PCFOfEPCOfExtPC2d, PCLocFOfLocEPCOfLocateExtPC, PCLocFOfLocEPCOfLocateExtPC2d,
 };
 pub use point_surface::{ExtPExtS, ExtPRevS, ExtPS, FuncPSDist, FuncPSNorm, GenExtPS, GenLocateExtPS, Sampling};
+pub use surface_surface::{ExtSS, FuncExtSS, GenExtSS};
 pub use pon::{POnCurv, POnCurv2d, POnCurve, POnSurf, POnSurfParams};
 
 /// `Extrema_ElementType`: the grid element that holds a point on surface.

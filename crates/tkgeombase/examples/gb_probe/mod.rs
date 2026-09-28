@@ -10,6 +10,7 @@ pub mod extrema_cs;
 pub mod extrema_el;
 pub mod extrema_pc;
 pub mod extrema_ps;
+pub mod extrema_ss;
 pub mod fem_tool;
 pub mod gc;
 pub mod gce;
