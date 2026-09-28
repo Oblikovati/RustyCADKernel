@@ -56,6 +56,16 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // GeomEval elementary surfaces (eval_surfaces.rs)
     // GeomEval Bezier surfaces (eval_bezier_surfaces.rs)
     // GeomHash (hash.rs)
+    ("g3_hash_curves", g3_probe::hash::hash_curves_case),
+    ("g3_hash_surfaces", g3_probe::hash::hash_surfaces_case),
+    ("g3_hash_primitives", g3_probe::hash::hash_primitives_case),
+    ("g3_hash_poly2d", g3_probe::hash::hash_poly2d_case),
+    ("g3_hash_poly3d", g3_probe::hash::hash_poly3d_case),
+    (
+        "g3_hash_triangulation",
+        g3_probe::hash::hash_triangulation_case,
+    ),
+    ("g3_hash_ontri", g3_probe::hash::hash_ontri_case),
     // TopAbs (top_abs.rs)
 ];
 
