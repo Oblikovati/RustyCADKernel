@@ -25,3 +25,7 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_extrema_pc').append_extrema_pc_requests(requests)
     # GeomTools (tkgeombase_corpus_geomtools.py)
     __import__('tkgeombase_corpus_geomtools').append_geomtools_requests(requests)
+    # FEmTool (tkgeombase_corpus_femtool.py)
+    __import__('tkgeombase_corpus_femtool').append_femtool_requests(requests)
+    # AppParCurves (tkgeombase_corpus_appparcurves.py)
+    __import__('tkgeombase_corpus_appparcurves').append_appparcurves_requests(requests)

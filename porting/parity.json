@@ -104858,6 +104858,1206 @@
       "rust_item": "rustycad_tkgeombase::geom_tools::UndefinedTypeHandler::static_type",
       "status": "implemented",
       "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly(const NCollection_Array2<int>&,const occ::handle<NCollection_HArray2<occ::handle<NCollection_HArray1<int>>>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::new",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::NullifyMatrix()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::nullify_matrix",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::AddMatrix(int,int,int,const math_Matrix&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::add_matrix",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::NullifyVector()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::nullify_vector",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::AddVector(int,int,const math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::add_vector",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::ResetConstraint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::reset_constraint",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::NullifyConstraint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::nullify_constraint",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::AddConstraint(int,int,int,const math_Vector&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::add_constraint",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::Solve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::solve",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::Solution(math_Vector&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::solution",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::NbGlobVar() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::nb_glob_var",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::AssemblyTable() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::assembly_table",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Assembly::GetAssemblyTable(occ::handle<NCollection_HArray2<occ::handle<NCollection_HArray1<int>>>>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Assembly.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Assembly::get_assembly_table",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve(int,int,const PLib_HermitJacobi&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::new",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::Knots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::knots",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::SetElement(int,const NCollection_Array2<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::set_element",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::D0(double,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::d0",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::D1(double,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::d1",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::D2(double,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::d2",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::Length(double,double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::length",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::GetElement(int,NCollection_Array2<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::get_element",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::GetPolynom(NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::get_polynom",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::NbElements() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::nb_elements",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::Dimension() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::dimension",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::Base() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::base",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::Degree(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::degree",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::SetDegree(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::set_degree",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::ReduceDegree(int,double,int&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::reduce_degree",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_Curve::DEFINE_STANDARD_RTTIEXT(FEmTool_Curve,Standard_Transient)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_Curve.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::Curve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "FEmTool_ElementaryCriterion()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementaryCriterion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::CriterionBase::new",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementaryCriterion::Set(const occ::handle<NCollection_HArray2<double>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementaryCriterion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementaryCriterion::set_coeff",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementaryCriterion::Set(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementaryCriterion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementaryCriterion::set",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementaryCriterion::DependenceTable() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementaryCriterion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementaryCriterion::dependence_table",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementaryCriterion::Value()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementaryCriterion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementaryCriterion::value",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementaryCriterion::Hessian(int,int,math_Matrix&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementaryCriterion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementaryCriterion::hessian",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementaryCriterion::Gradient(int,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementaryCriterion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementaryCriterion::gradient",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementaryCriterion::DEFINE_STANDARD_RTTIEXT(FEmTool_ElementaryCriterion,Standard_Transient)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementaryCriterion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementaryCriterion::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "FEmTool_ElementsOfRefMatrix(const PLib_HermitJacobi&,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementsOfRefMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementsOfRefMatrix::new",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementsOfRefMatrix::NbVariables() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementsOfRefMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementsOfRefMatrix::nb_variables",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementsOfRefMatrix::NbEquations() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementsOfRefMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementsOfRefMatrix::nb_equations",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ElementsOfRefMatrix::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ElementsOfRefMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ElementsOfRefMatrix::evaluate",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix(const NCollection_Array1<int>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ProfileMatrix::new",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::Init(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::init",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::ChangeValue(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::change_value",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::Decompose()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::decompose",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::Solve(const math_Vector&,math_Vector&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::solve",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::Prepare()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::prepare",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::Solve(const math_Vector&,const math_Vector&,math_Vector&,math_Vector&,double,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::solve_iterative",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::Multiplied(const math_Vector&,math_Vector&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::multiplied",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::RowNumber() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::row_number",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::ColNumber() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::col_number",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::IsInProfile(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ProfileMatrix::is_in_profile",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::OutM() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ProfileMatrix::out_m",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::OutS() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ProfileMatrix::out_s",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_ProfileMatrix::DEFINE_STANDARD_RTTIEXT(FEmTool_ProfileMatrix,FEmTool_SparseMatrix)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_ProfileMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::ProfileMatrix::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::Init(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::init",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::ChangeValue(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::change_value",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::Decompose()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::decompose",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::Solve(const math_Vector&,math_Vector&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::solve",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::Prepare()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::prepare",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::Solve(const math_Vector&,const math_Vector&,math_Vector&,math_Vector&,double,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::solve_iterative",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::Multiplied(const math_Vector&,math_Vector&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::multiplied",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::RowNumber() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::row_number",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::ColNumber() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::col_number",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_SparseMatrix::DEFINE_STANDARD_RTTIEXT(FEmTool_SparseMatrix,Standard_Transient)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_SparseMatrix.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::SparseMatrix::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "FEmTool_LinearFlexion(int,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearFlexion::new",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearFlexion::DependenceTable() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearFlexion as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::dependence_table",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearFlexion::Value()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearFlexion as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::value",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearFlexion::Hessian(int,int,math_Matrix&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearFlexion as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::hessian",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearFlexion::Gradient(int,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearFlexion as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::gradient",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearFlexion::DEFINE_STANDARD_RTTIEXT(FEmTool_LinearFlexion,FEmTool_ElementaryCriterion)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearFlexion.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearFlexion::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "FEmTool_LinearJerk(int,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearJerk::new",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearJerk::DependenceTable() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearJerk as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::dependence_table",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearJerk::Value()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearJerk as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::value",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearJerk::Hessian(int,int,math_Matrix&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearJerk as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::hessian",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearJerk::Gradient(int,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearJerk as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::gradient",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearJerk::DEFINE_STANDARD_RTTIEXT(FEmTool_LinearJerk,FEmTool_ElementaryCriterion)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearJerk.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearJerk::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension(int,GeomAbs_Shape)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension::new",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension::DependenceTable() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearTension as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::dependence_table",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension::Value()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearTension as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::value",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension::Hessian(int,int,math_Matrix&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearTension as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::hessian",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension::Gradient(int,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "<rustycad_tkgeombase::fem_tool::LinearTension as rustycad_tkgeombase::fem_tool::ElementaryCriterion>::gradient",
+      "status": "implemented",
+      "notes": "FEmTool mapping (docs/tkgeombase-progress.md): the transient classes keep their mutable state behind a lock so every handle sees it and non-const members take &self; C++ output references become returned values, overloads take distinct Rust names, and exceptions (including the unchecked native accesses that are undefined out of range) become Failure errors."
+    },
+    {
+      "upstream_id": "FEmTool_LinearTension::DEFINE_STANDARD_RTTIEXT(FEmTool_LinearTension,FEmTool_ElementaryCriterion)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/FEmTool/FEmTool_LinearTension.hxx",
+      "rust_item": "rustycad_tkgeombase::fem_tool::LinearTension::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "AppParCurves::BernsteinMatrix(int,const math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::bernstein_matrix",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves::Bernstein(int,const math_Vector&,math_Matrix&,math_Matrix&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::bernstein",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves::SecondDerivativeBernstein(double,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::second_derivative_bernstein",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves::SplineFunction(int,int,const math_Vector&,const math_Vector&,math_Matrix&,math_Matrix&,math_IntegerVector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::spline_function",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_Constraint",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_Constraint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::Constraint",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::ConstraintCouple as Default>::default",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple(int,AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::new",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple::Index() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::index",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple::Constraint() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::constraint",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple::SetIndex(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::set_index",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_ConstraintCouple::SetConstraint(AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_ConstraintCouple.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::ConstraintCouple::set_constraint",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::new",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::with_nb_poles",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve(const NCollection_Array1<AppParCurves_MultiPoint>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::from_multi_points",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve(const AppParCurves_MultiCurve&,const NCollection_Array1<double>&,const NCollection_Array1<int>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::from_multi_curve",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::SetKnots(const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::set_knots",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::SetMultiplicities(const NCollection_Array1<int>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::set_multiplicities",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Knots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::knots",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Multiplicities() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiBSpCurve::multiplicities",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Degree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::degree",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Value(int,double,gp_Pnt&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::value_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Value(int,double,gp_Pnt2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::value_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::D1(int,double,gp_Pnt&,gp_Vec&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d1_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::D1(int,double,gp_Pnt2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d1_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::D2(int,double,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d2_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::D2(int,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d2_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiBSpCurve::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiBSpCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiBSpCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::dump",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::new",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::with_nb_poles",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve(const NCollection_Array1<AppParCurves_MultiPoint>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::from_multi_points",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::~AppParCurves_MultiCurve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::SetNbPoles(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::set_nb_poles",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::SetValue(int,const AppParCurves_MultiPoint&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::set_value",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::NbCurves() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::nb_curves",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::NbPoles() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::nb_poles",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Degree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::degree",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Dimension(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::dimension",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Curve(int,NCollection_Array1<gp_Pnt>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::curve_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Curve(int,NCollection_Array1<gp_Pnt2d>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::curve_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Value(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::value",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Pole(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::pole",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Pole2d(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::pole2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Transform(int,double,double,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::transform",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Transform2d(int,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiCurve::transform2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Value(int,double,gp_Pnt&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::value_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Value(int,double,gp_Pnt2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::value_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::D1(int,double,gp_Pnt&,gp_Vec&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d1_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::D1(int,double,gp_Pnt2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d1_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::D2(int,double,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d2_3d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::D2(int,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::d2_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiCurve::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiCurve.hxx",
+      "rust_item": "<rustycad_tkgeombase::app_par_curves::MultiCurve as rustycad_tkgeombase::app_par_curves::MultiCurveEval>::dump",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::new",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::with_counts",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint(const NCollection_Array1<gp_Pnt>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::from_points",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint(const NCollection_Array1<gp_Pnt2d>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::from_points2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint(const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<gp_Pnt2d>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::from_points_and_2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::~AppParCurves_MultiPoint()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::SetPoint(int,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::set_point",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Point(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::point",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::SetPoint2d(int,const gp_Pnt2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::set_point2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Point2d(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::point2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Dimension(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::dimension",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::NbPoints() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::nb_points",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::NbPoints2d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::nb_points2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Transform(int,double,double,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::transform",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Transform2d(int,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::transform2d",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "AppParCurves_MultiPoint::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/AppParCurves/AppParCurves_MultiPoint.hxx",
+      "rust_item": "rustycad_tkgeombase::app_par_curves::MultiPoint::dump",
+      "status": "implemented",
+      "notes": "AppParCurves mapping (docs/tkgeombase-progress.md): the points and poles live in shared arrays, so copies share them as the native handles do; the virtual members of AppParCurves_MultiCurve are the MultiCurveEval trait (overridden by MultiBSpCurve, which reaches its base through Deref); C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
     }
   ],
   "tests": [

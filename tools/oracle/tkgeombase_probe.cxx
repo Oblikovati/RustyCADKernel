@@ -47,6 +47,10 @@
 #include "tkgeombase_probe_extrema_pc2d.cxx"
 #include "tkgeombase_probe_extrema_pc.cxx"
 #include "tkgeombase_probe_geomtools.cxx"
+#include "tkgeombase_probe_femtool.cxx"
+#include "tkgeombase_probe_femtool_curve.cxx"
+#include "tkgeombase_probe_appparcurves.cxx"
+#include "tkgeombase_probe_appparcurves_fit.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -165,6 +169,23 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gt_progress", gb_gt_progress_case},
  {"gt_debug_dump", gb_gt_debug_dump_case},
  {"gt_handler", gb_gt_handler_case},
+ // FEmTool (tkgeombase_probe_femtool.cxx, tkgeombase_probe_femtool_curve.cxx)
+ {"fem_elements", gb_fem_elements_case},
+ {"fem_criterion", gb_fem_criterion_case},
+ {"fem_profile", gb_fem_profile_case},
+ {"fem_curve", gb_fem_curve_case},
+ {"fem_assembly", gb_fem_assembly_case},
+ // AppParCurves (tkgeombase_probe_appparcurves.cxx, tkgeombase_probe_appparcurves_fit.cxx)
+ {"apc_bernstein", gb_apc_bernstein_case},
+ {"apc_spline", gb_apc_spline_case},
+ {"apc_multipoint", gb_apc_multipoint_case},
+ {"apc_multicurve", gb_apc_multicurve_case},
+ {"apc_ls", gb_apc_ls_case},
+ {"apc_resol", gb_apc_resol_case},
+ {"apc_function", gb_apc_function_case},
+ {"apc_bspfunction", gb_apc_bspfunction_case},
+ {"apc_gradient", gb_apc_gradient_case},
+ {"apc_bspgradient", gb_apc_bspgradient_case},
 };
 int main() {
  std::string line;
