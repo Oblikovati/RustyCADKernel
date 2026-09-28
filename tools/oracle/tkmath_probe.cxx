@@ -333,6 +333,7 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"box_extra", bnd_probe::box_extra_case},
  {"box2_extra", bnd_probe::box2_extra_case},
  {"compact_trsf", bnd_probe::compact_trsf_case},
+ {"compact_arrays", bnd_probe::compact_arrays_case},
 };
 int main() {
  std::string line;

@@ -145,4 +145,23 @@ void compact_trsf_case(std::istream& in) {
   Reader r{in};double v[12];for(double& value:v)value=r.real();gp_Trsf t3=trsf3_read(r);gp_Trsf2d t2=trsf2_read(r);
   compact_relations<double>(v,t3,t2);compact_relations<float>(v,t3,t2);std::cout<<'\n';
 }
+template<class T,size_t N,class B> void compact_array_state(const B& b) {
+  std::cout<<b.IsVoid()<<' ';for(size_t i=0;i<N;++i)std::cout<<bits(double(b.Center()[i]))<<' '<<bits(double(b.HSize()[i]))<<' ';
+  std::cout<<bits(b.SquareExtent())<<' ';
+}
+template<class T> void compact_arrays_typed(const double* v) {
+  std::array<T,3> c3{T(v[0]),T(v[1]),T(v[2])},h3{T(v[3]),T(v[4]),T(v[5])};
+  Bnd_B3<T> a(c3,h3),b,o(gp_XYZ(v[9],v[10],v[11]),gp_XYZ(v[12],v[13],v[14]));compact_array_state<T,3>(b);compact_array_state<T,3>(a);
+  b.SetCenter(c3);b.SetHSize(h3);compact_array_state<T,3>(b);b.SetCenter(gp_XYZ(v[6],v[7],v[8]));b.SetHSize(gp_XYZ(v[12],v[13],v[14]));compact_array_state<T,3>(b);
+  a.Add(gp_Pnt(v[6],v[7],v[8]));compact_array_state<T,3>(a);a.Add(o);compact_array_state<T,3>(a);a.Clear();compact_array_state<T,3>(a);
+  std::array<T,2> c2{T(v[0]),T(v[1])},h2{T(v[3]),T(v[4])};
+  Bnd_B2<T> p(c2,h2),q,r(gp_XY(v[9],v[10]),gp_XY(v[12],v[13]));compact_array_state<T,2>(q);compact_array_state<T,2>(p);
+  q.SetCenter(c2);q.SetHSize(h2);compact_array_state<T,2>(q);q.SetCenter(gp_XY(v[6],v[7]));q.SetHSize(gp_XY(v[12],v[13]));compact_array_state<T,2>(q);
+  p.Add(gp_Pnt2d(v[6],v[7]));compact_array_state<T,2>(p);p.Add(r);compact_array_state<T,2>(p);p.Clear();compact_array_state<T,2>(p);
+}
+// compact_arrays center(3) half(3) point(3) other_center(3) other_half(3)
+void compact_arrays_case(std::istream& in) {
+  Reader r{in};double v[15];for(double& value:v)value=r.real();
+  compact_arrays_typed<double>(v);compact_arrays_typed<float>(v);std::cout<<'\n';
+}
 } // namespace bnd_probe

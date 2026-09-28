@@ -343,6 +343,7 @@ fn main() {
             "box_extra" => bnd_probe::box_extra_case(&values),
             "box2_extra" => bnd_probe::box2_extra_case(&values),
             "compact_trsf" => bnd_probe::compact_trsf_case(&values),
+            "compact_arrays" => bnd_probe::compact_arrays_case(&values),
             "modern_lbfgs" => modern_opt_probe::modern_lbfgs_case(&values),
             "modern_newton" => modern_opt_probe::modern_newton_case(&values),
             "modern_global" => global_modern_probe::modern_global_case(&values),
