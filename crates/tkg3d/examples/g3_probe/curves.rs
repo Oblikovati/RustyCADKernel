@@ -5,8 +5,8 @@ use super::common::{
 };
 use super::simple::moves;
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkg3d::geom::{GeomCircle, GeomConic, GeomCurve, GeomGeometry, GeomLine};
-use rustycad_tkmath::gp::{Axis2, Circle3, Line3};
+use rustycad_tkg3d::geom::{GeomBoundedCurve, GeomCurve, GeomGeometry, GeomLine, GeomTrimmedCurve};
+use rustycad_tkmath::gp::Line3;
 use std::cell::RefCell;
 
 pub fn curve_case(values: &[f64]) {
@@ -70,84 +70,42 @@ pub fn line_case(values: &[f64]) {
     end();
 }
 
-fn conic_common(c: &dyn GeomConic) {
-    ax1(c.x_axis());
-    ax1(c.y_axis());
-    ax1(c.axis());
-    pnt(c.location());
-    ax2(c.position());
-    show(c.eccentricity(), real);
+fn trimmed_state(t: &GeomTrimmedCurve, u: &[f64]) {
+    real(t.first_parameter());
+    real(t.last_parameter());
+    show(t.start_point(), pnt);
+    show(t.end_point(), pnt);
+    name(&t.basis_curve());
+    curve_summary(t, u);
+    dump(t, -1);
 }
 
-fn conic_specific(c: &Handle<dyn GeomConic>, value: f64) {
-    let circle: Handle<GeomCircle> = c.cast();
-    if let Some(e) = circle.get() {
-        real(e.radius());
-        attempt(|| e.set_radius(value));
-        real(e.radius());
-        show(e.circ(), |g| {
-            ax2(g.position());
-            real(g.radius());
-            e.set_circ(g);
-        });
-    }
+fn copied_state(t: &GeomTrimmedCurve, u: &[f64]) {
+    show(t.copy(), |c| {
+        trimmed_state(&c.cast::<GeomTrimmedCurve>(), u)
+    });
 }
 
-pub fn conic_case(values: &[f64]) {
+pub fn trimmed_case(values: &[f64]) {
     let mut r = Reader::new(values);
-    let Some(curve) = built_curve(&mut r) else {
+    let Some(c) = built_curve(&mut r) else {
         return;
     };
     let u = r.reals();
-    let c: Handle<dyn GeomConic> = curve.cast();
-    let (value, a, p, f) = (r.real(), r.ax1(), r.pnt(), r.ax2());
-    conic_common(&*c);
-    conic_specific(&c, value);
-    curve_summary(&*c, &u);
-    c.set_location(p);
-    conic_common(&*c);
-    attempt(|| c.set_axis(a));
-    conic_common(&*c);
-    c.set_position(f);
-    conic_common(&*c);
-    c.reverse().unwrap();
-    conic_common(&*c);
-    curve_summary(&*c, &u);
-    dump(&*c, -1);
-    end();
-}
-
-/// The conic built from gp objects, one kind per request (g3_conic_build).
-fn build_conic(kind: i32, f: Axis2, a: f64) -> Option<Handle<dyn GeomConic>> {
-    match kind {
-        1 => {
-            let built = Circle3::new(f, a).map(|g| Handle::new(GeomCircle::from_circ(g)).cast());
-            report(built)
-        }
-        _ => None,
-    }
-}
-
-fn report(
-    built: Result<Handle<dyn GeomConic>, rustycad_tkernel::standard::Failure>,
-) -> Option<Handle<dyn GeomConic>> {
-    match built {
-        Ok(conic) => Some(conic),
-        Err(error) => {
-            print!("{} ", error.exception_type());
-            None
-        }
-    }
-}
-
-pub fn conic_build_case(values: &[f64]) {
-    let mut r = Reader::new(values);
-    let kind = r.integer();
-    let (f, a, _b) = (r.ax2(), r.real(), r.real());
-    let (_d, _p) = (r.ax1(), r.pnt());
-    if let Some(c) = build_conic(kind, f, a) {
-        conic_common(&*c);
-        dump(&*c, -1);
-    }
+    let t: Handle<GeomTrimmedCurve> = c.cast();
+    let (u1, u2) = (r.real(), r.real());
+    let (sense, adjust) = (r.flag(), r.flag());
+    let m = trsf(&mut r);
+    trimmed_state(&t, &u);
+    copied_state(&t, &u);
+    attempt(|| t.set_trim(u1, u2, sense, adjust));
+    trimmed_state(&t, &u);
+    copied_state(&t, &u);
+    attempt(|| t.reverse());
+    trimmed_state(&t, &u);
+    attempt(|| t.transform(m));
+    trimmed_state(&t, &u);
+    real(t.transformed_parameter(0.5, m));
+    real(t.parametric_transformation(m));
     end();
 }

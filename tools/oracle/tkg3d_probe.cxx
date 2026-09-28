@@ -60,6 +60,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_line", g3_line_case},
  {"g3_conic", g3_conic_case},
  {"g3_conic_build", g3_conic_build_case},
+ {"g3_trimmed", g3_trimmed_case},
 };
 int main() {
  std::string line;

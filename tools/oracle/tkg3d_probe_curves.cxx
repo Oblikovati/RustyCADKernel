@@ -60,3 +60,18 @@ void g3_conic_build_case(std::istream& in){
  if(!c.IsNull()){g3_conic_common(c);g3_dump(c,-1);}
  std::cout<<'\n';
 }
+void g3_trimmed_state(const occ::handle<Geom_TrimmedCurve>& t,const std::vector<double>& u){
+ g3_real(t->FirstParameter());g3_real(t->LastParameter());G3_TRY(g3_pnt(t->StartPoint()));G3_TRY(g3_pnt(t->EndPoint()));
+ g3_name(t->BasisCurve());g3_curve_summary(t,u);g3_dump(t,-1);
+}
+// Trimmed curves: state, Copy (which re-trims), SetTrim, Reverse, Transform and the
+// parameter transformations.
+void g3_trimmed_case(std::istream& in){
+ G3Reader r{in};occ::handle<Geom_Curve> c=g3_built_curve(r);if(c.IsNull())return;std::vector<double> u=r.reals();
+ occ::handle<Geom_TrimmedCurve> t=occ::down_cast<Geom_TrimmedCurve>(c);
+ double u1=r.real(),u2=r.real();bool sense=r.flag(),adjust=r.flag();gp_Trsf m=g3_trsf(r);
+ g3_trimmed_state(t,u);G3_TRY(g3_trimmed_state(occ::down_cast<Geom_TrimmedCurve>(t->Copy()),u));
+ G3_TRY(t->SetTrim(u1,u2,sense,adjust));g3_trimmed_state(t,u);G3_TRY(g3_trimmed_state(occ::down_cast<Geom_TrimmedCurve>(t->Copy()),u));
+ G3_TRY(t->Reverse());g3_trimmed_state(t,u);G3_TRY(t->Transform(m));g3_trimmed_state(t,u);
+ g3_real(t->TransformedParameter(0.5,m));g3_real(t->ParametricTransformation(m));std::cout<<'\n';
+}
