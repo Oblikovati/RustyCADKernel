@@ -50,9 +50,8 @@ impl ManualResetEvent {
                 .unwrap_or_else(|poison| poison.into_inner()),
         );
     }
-    /// Blocks at most `milliseconds` (negative waits count as 0); tells whether it is set.
-    pub(super) fn wait_for(&self, milliseconds: i32) -> bool {
-        let timeout: Duration = Duration::from_millis(u64::try_from(milliseconds).unwrap_or(0));
+    /// Blocks at most `timeout`; tells whether the event is set.
+    pub(super) fn wait_for(&self, timeout: Duration) -> bool {
         let (guard, _) = self
             .condition
             .wait_timeout_while(self.guard(), timeout, |flag| !*flag)

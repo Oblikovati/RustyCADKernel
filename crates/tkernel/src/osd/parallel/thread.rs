@@ -20,6 +20,7 @@ use super::event::ManualResetEvent;
 use std::{
     sync::{Arc, Mutex, MutexGuard},
     thread::JoinHandle,
+    time::Duration,
 };
 
 pub(super) mod native;
@@ -153,11 +154,17 @@ impl OsdThread {
         let thread: Arc<RunningThread> = self.thread.clone()?;
         self.join(&thread)
     }
-    /// `Wait(int, void*&)`: joins the thread if it ends within `milliseconds` (negative
-    /// waits count as 0); `thread.wait_for(100)`.
+    /// `Wait(int, void*&)`: joins the thread if it ends within `milliseconds`;
+    /// `thread.wait_for(100)`.
+    ///
+    /// macOS has no `pthread_timedjoin_np`, so there the native call ignores the timeout
+    /// and joins; the port does the same.
     pub fn wait_for(&mut self, milliseconds: i32) -> Option<usize> {
+        if cfg!(target_vendor = "apple") {
+            return self.wait_result();
+        }
         let thread: Arc<RunningThread> = self.thread.clone()?;
-        if !thread.finished.wait_for(milliseconds) {
+        if !thread.finished.wait_for(join_timeout(milliseconds)) {
             return None;
         }
         self.join(&thread)
@@ -179,6 +186,17 @@ impl OsdThread {
     pub fn current() -> usize {
         native::current_thread_id()
     }
+}
+
+/// The native timeout: a negative value is a past deadline for pthread_timedjoin_np,
+/// and a DWORD cast (almost 50 days) for WaitForSingleObject on Windows.
+fn join_timeout(milliseconds: i32) -> Duration {
+    let milliseconds: u64 = if cfg!(windows) {
+        u64::from(milliseconds as u32)
+    } else {
+        u64::try_from(milliseconds).unwrap_or(0)
+    };
+    Duration::from_millis(milliseconds)
 }
 
 #[cfg(windows)]

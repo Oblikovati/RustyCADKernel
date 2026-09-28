@@ -248,6 +248,8 @@ fn thread_runs_waits_and_reports_its_identifier() {
     assert_ne!(OsdThread::current(), 0);
 }
 
+// macOS natively ignores the timeout and joins, which would block on the spinning thread.
+#[cfg(not(target_vendor = "apple"))]
 #[test]
 fn timed_wait_times_out_then_joins() {
     let mut thread: OsdThread = OsdThread::with_function(spin_until_released);
