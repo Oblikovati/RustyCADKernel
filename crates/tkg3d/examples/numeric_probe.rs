@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod g3_probe;
 use g3_probe::{
-    advapprox, bezier_surface, bspl, bspline_surface, conics, curves, geom_adaptor_cases as a3,
-    offset_surface, simple, surfaces, swept,
+    adaptor3d, advapprox, bezier_surface, bspl, bspline_surface, conics, curves,
+    geom_adaptor_cases as a3, offset_surface, simple, surfaces, swept,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -88,6 +88,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // TopAbs (top_abs.rs)
     ("g3_topabs", g3_probe::top_abs::topabs_case),
     ("g3_topabs_parse", g3_probe::top_abs::topabs_parse_case),
+    ("a3_cos", adaptor3d::cos_case),
+    ("a3_cos_load", adaptor3d::cos_load_case),
+    ("a3_iso", adaptor3d::iso_case),
+    ("a3_interfunc", adaptor3d::interfunc_case),
+    ("a3_hstool", adaptor3d::hstool_case),
 ];
 
 fn main() {
