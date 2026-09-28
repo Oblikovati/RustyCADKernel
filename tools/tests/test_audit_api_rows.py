@@ -253,5 +253,52 @@ class RowMatchingTests(unittest.TestCase):
         self.assertEqual(stale, ["gp_Demo::Mirror", "gp_Demo::Unknown"])
 
 
+STANDARD_HEADER = """
+Standard_DEPRECATED("This function duplicates std::acos and will be removed in future releases. "
+                    "Use std::acos instead.")
+inline double ACos(const double theValue) { return std::acos(theValue); }
+namespace MurmurHash
+{
+template <typename T1, typename T = size_t>
+typename std::enable_if<sizeof(T) == 8, uint64_t>::type hash_combine(const T1& theValue,
+                                                                     const int theLen = sizeof(T1));
+}
+class Standard_Dump
+{
+public:
+  static void DumpRealValues(Standard_OStream& theOStream, int theCount, ...);
+};
+namespace std
+{
+template <class TheTransientType>
+struct hash<Handle(TheTransientType)>
+{
+  size_t operator()(const Handle(TheTransientType)& theHandle) const noexcept { return 0; }
+};
+}
+"""
+
+
+class StandardPackageTests(unittest.TestCase):
+    """Regressions found on TKernel/Standard, whose headers mix macros and free templates."""
+
+    def test_deprecated_messages_split_over_literals_do_not_hide_the_function(self):
+        self.assertIn("gp_Demo::ACos|double|", members_of(STANDARD_HEADER))
+
+    def test_sizeof_in_a_return_type_is_not_the_function_name(self):
+        self.assertIn("MurmurHash::hash_combine|const T1&,int|", members_of(STANDARD_HEADER))
+
+    def test_variadic_ellipsis_is_kept(self):
+        self.assertEqual(normalize_params("Standard_OStream& theOStream, int theCount, ..."),
+                         "Standard_OStream&,int,...")
+        self.assertIn("Standard_Dump::DumpRealValues|Standard_OStream&,int,...|", members_of(STANDARD_HEADER))
+
+    def test_specializations_whose_arguments_hold_macro_calls_are_scopes(self):
+        # The `Handle(T)` macro is expanded as the preprocessor does.
+        self.assertIn("std::hash<opencascade::handle<TheTransientType>>::operator()"
+                      "|const opencascade::handle<TheTransientType>&|const",
+                      members_of(STANDARD_HEADER))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -55,15 +55,16 @@ import sys
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 
+from audit_api_params import (matching_close, normalize_param, normalize_params, split_default, split_top_level,
+                              squeeze)
+
 ROOT = Path(__file__).resolve().parents[1]
 IGNORED_MACROS = r"\b(?:DEFINE_STANDARD_ALLOC|DEFINE_NCOLLECTION_ALLOC|Standard_EXPORT|Standard_NODISCARD)\b"
 TOKEN_NOISE = re.compile(r'//[^\n]*|/\*.*?\*/|"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\'', re.S)
 ACCESS_LABEL = re.compile(r"^\s*(public|protected|private)\s*:(?!:)")
 SCOPE_HEAD = re.compile(r"^(class|struct|union|namespace|enum(?:\s+class)?)\s+([\w:]+)\s*(<)?")
 RTTI_MACRO = re.compile(r"\b(DEFINE_STANDARD_RTTIEXT|DEFINE_STANDARD_RTTI_INLINE)\s*\(([^)]*)\)")
-PARAM_TOKEN = re.compile(r"[A-Za-z_]\w*|[&*]+|\[[^\]]*\]")
 HANDLE_MACRO = re.compile(r"\bDEFINE_STANDARD_HANDLE\s*\([^)]*\)")
-TYPE_ALIASES = {"Standard_Real": "double", "Standard_Integer": "int", "Standard_Boolean": "bool"}
 
 
 @dataclass(frozen=True)
@@ -85,24 +86,11 @@ def clean_source(text: str) -> str:
     text = TOKEN_NOISE.sub(lambda m: '""' if m.group(0)[0] in "\"'" else " ", text)
     text = re.sub(r"^\s*#(?:[^\n]*\\\n)*[^\n]*$", "", text, flags=re.M)
     text = re.sub(r"\[\[[^\]]*\]\]|__attribute__\s*\(\([^)]*\)\)", "", text)
-    text = re.sub(r"\bStandard_DEPRECATED\s*\(\s*\"*\s*\)", "", text)
+    # A long deprecation message is split over adjacent literals, each already blanked to `""`.
+    text = re.sub(r"\bStandard_DEPRECATED\s*\((?:\s*\"\")*\s*\)", "", text)
+    text = re.sub(r"\bHandle\s*\(\s*(\w+)\s*\)", r"opencascade::handle<\1>", text)  # Standard_Handle.hxx macro
     text = RTTI_MACRO.sub(r"public: \1(\2);", HANDLE_MACRO.sub(";", text))  # the macro opens with `public:`
     return re.sub(IGNORED_MACROS, "", text)
-
-
-def matching_close(text: str, start: int) -> int:
-    """Index of the bracket closing the one at `start` (`(`, `{`, `[` or `<`).
-
-    >>> matching_close('(a(b)c)', 0)
-    6
-    """
-    pairs = {"(": ")", "{": "}", "[": "]", "<": ">"}
-    opening, depth = text[start], 0
-    for index in range(start, len(text)):
-        depth += (text[index] == opening) - (text[index] == pairs[opening])
-        if depth == 0:
-            return index
-    raise ValueError(f"unbalanced {opening!r} at offset {start}; expected a matching {pairs[opening]!r}")
 
 
 def is_brace_initializer(head: str) -> bool:
@@ -174,7 +162,7 @@ def statement_members(head: str, braced: str | None, scope: str, primary: str, e
     """Members produced by one statement of a scope; non-exposed ones are only known."""
     head = strip_template_heads(head)
     scope_match = SCOPE_HEAD.match(head)
-    if scope_match is not None and "(" not in head:
+    if scope_match is not None and "(" not in without_scope_arguments(head, scope_match):
         return nested_scope_members(head, scope_match, braced, scope, primary, exposed)
     if re.fullmatch(r"enum", head) and braced is not None:
         return enumerator_members(braced, scope)  # anonymous enum: its constants join the scope
@@ -185,6 +173,20 @@ def statement_members(head: str, braced: str | None, scope: str, primary: str, e
     if is_data_member(head):
         return data_members(head, scope)
     return exposure(function_members(head, scope, primary), exposed)
+
+
+def without_scope_arguments(head: str, match: re.Match[str]) -> str:
+    """`head` minus a specialization's argument list, which may hold a macro call.
+
+    `struct hash<Handle(T)>` is still a scope although its arguments contain parentheses.
+
+    >>> without_scope_arguments('struct hash<Handle(T)>', SCOPE_HEAD.match('struct hash<Handle(T)>'))
+    'struct hash'
+    """
+    if match.group(3) is None:
+        return head
+    opening = match.end() - 1
+    return head[:opening] + head[matching_close(head, opening) + 1:]
 
 
 def strip_template_heads(head: str) -> str:
@@ -262,6 +264,7 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
     """The member declared by a function statement, or nothing for definitions/deletions."""
     if re.search(r"=\s*delete\s*$", head):
         return []
+    head = mask_type_expressions(head)
     name_match = re.search(r"(operator\s*(?:\(\)|\[\]|[^\s(\w]+)|operator\s+[A-Za-z_][\w:]*\s*[&*]*"
                            r"|~?[A-Za-z_]\w*(?:\s*::\s*~?\w+)*)\s*\(", head)
     if name_match is None:
@@ -276,6 +279,19 @@ def function_members(head: str, scope: str, primary: str) -> list[Member]:
     owner = scope or primary
     prefix = owner if name == class_name(owner) else f"{owner}::{name}"
     return [Member(prefix, params, qualifier)]
+
+
+def mask_type_expressions(head: str) -> str:
+    """Blank `sizeof(...)`, `alignof(...)` and `decltype(...)` so they never read as the function name.
+
+    `enable_if<sizeof(T) == 8, R>::type hash_combine(...)` declares `hash_combine`, not `sizeof`.
+
+    >>> mask_type_expressions('enable_if<sizeof(T) == 8, R>::type f(int)')
+    'enable_if<0 == 8, R>::type f(int)'
+    """
+    while (match := re.search(r"\b(?:sizeof|alignof|decltype)\s*\(", head)) is not None:
+        head = head[:match.start()] + "0" + head[matching_close(head, match.end() - 1) + 1:]
+    return head
 
 
 def conversion_spelling(raw: str) -> str:
@@ -302,133 +318,6 @@ def class_name(owner: str) -> str:
     while (stripped := re.sub(r"<[^<>]*>", "", owner)) != owner:
         owner = stripped
     return owner.split("::")[-1]
-
-
-def split_top_level(text: str) -> list[str]:
-    """Split on commas that are not nested in (), <>, {} or []."""
-    parts, depth, start = [], 0, 0
-    for index, char in enumerate(text):
-        depth += (char in "(<{[") - (char in ")>}]")
-        if char == "," and depth == 0:
-            parts.append(text[start:index])
-            start = index + 1
-    parts.append(text[start:])
-    return [part for part in parts if part.strip()]
-
-
-def normalize_param(param: str) -> str:
-    """Drop the default value, the parameter name and by-value top-level `const`.
-
-    >>> normalize_param('const gp_Vec& theV = gp_Vec()')
-    'const gp_Vec&'
-    >>> normalize_param('const double theX')
-    'double'
-    """
-    param = split_default(param).strip()
-    if (array := array_param(param)) is not None:
-        return array
-    tokens = [token for token in type_tokens(param) if token != "typename"]
-    words = [token for token in tokens if re.match(r"\w", token)]
-    type_words = [word for word in words if word not in {"const", "volatile", "unsigned", "signed"}]
-    if len(type_words) >= 2 and tokens[-1] == words[-1] and not is_builtin_pair(type_words):
-        tokens = tokens[:-1]
-    tokens = [TYPE_ALIASES.get(token, token) for token in tokens]
-    if tokens and tokens[0] == "const" and not any(token[0] in "&*" for token in tokens):
-        tokens = tokens[1:]
-    return re.sub(r" ([&*])", r"\1", " ".join(tokens))
-
-
-def is_builtin_pair(type_words: list[str]) -> bool:
-    """True when the last two words spell one builtin type (`long double`), not `Type name`.
-
-    >>> is_builtin_pair(["long", "double"])
-    True
-    """
-    return type_words[-2] in {"long", "short"} and type_words[-1] in {"long", "int", "double"}
-
-
-def array_param(param: str) -> str | None:
-    """Canonical spelling of an array or reference-to-array parameter, else None.
-
-    Arrays keep their `const` (it is not top-level); a by-value array decays to a pointer
-    as in C++, while a reference or pointer to an array keeps its extents.
-
-    >>> array_param("const double theJ[3][3]")
-    'const double(*)[3]'
-    >>> array_param("const double (&theF)[N]")
-    'const double(&)[N]'
-    >>> array_param("const double[9]")
-    'const double*'
-    """
-    match = re.fullmatch(r"(.*?)(\(\s*[&*]+\s*\w*\s*\)|\b\w+)?\s*((?:\[[^\]]*\]\s*)+)", param, re.S)
-    if match is None:
-        return None
-    base, declarator = match.group(1), match.group(2) or ""
-    if not set(base.split()) - {"const", "volatile", "unsigned", "signed"} and not declarator.startswith("("):
-        base, declarator = f"{base} {declarator}", ""  # nameless `const double[9]`: the word is the type
-    base = " ".join(TYPE_ALIASES.get(word, word) for word in base.split())
-    extents = re.findall(r"\[[^\]]*\]", match.group(3))
-    declarator = re.sub(r"\w+|\s+", "", declarator)
-    if declarator:  # a reference or pointer to an array keeps every extent
-        return base + declarator + "".join(re.sub(r"\s+", "", extent) for extent in extents)
-    # C++ adjusts an array parameter to a pointer: `T p[8]` is `T*`, `T p[2][3]` is `T(*)[3]`.
-    rest = "".join(re.sub(r"\s+", "", extent) for extent in extents[1:])
-    return base + ("(*)" + rest if rest else "*")
-
-
-def type_tokens(param: str) -> list[str]:
-    """Split a parameter into qualified names, `&`/`*` runs and array extents.
-
-    Template argument lists are balanced, so `handle<B<T, N>>` and the dependent
-    `typename B<T, N>::V` each stay one token.
-
-    >>> type_tokens('const typename BVH_Box<T, N>::BVH_VecNt& theV')
-    ['const', 'typename', 'BVH_Box<T,N>::BVH_VecNt', '&', 'theV']
-    """
-    tokens: list[str] = []
-    index = 0
-    while (match := PARAM_TOKEN.search(param, index)) is not None:
-        token, index = match.group(0), match.end()
-        if token[0] not in "&*[":
-            token, index = extend_qualified(param, token, index)
-        tokens.append(squeeze(token))
-    return tokens
-
-
-def extend_qualified(param: str, token: str, index: int) -> tuple[str, int]:
-    """Append balanced `<...>` argument lists and `::Name` parts that follow `token`."""
-    while (step := re.compile(r"\s*(<|::\s*~?[A-Za-z_]\w*)").match(param, index)) is not None:
-        if step.group(1) != "<":
-            token, index = token + step.group(1), step.end()
-            continue
-        close = matching_close(param, step.end() - 1)
-        token, index = token + param[step.end() - 1:close + 1], close + 1
-    return token, index
-
-
-def squeeze(text: str) -> str:
-    """Drop whitespace except the single space separating two words.
-
-    >>> squeeze('NCollection_Vec2 < unsigned  int >')
-    'NCollection_Vec2<unsigned int>'
-    """
-    return re.sub(r" ?([^\w ]) ?", r"\1", re.sub(r"\s+", " ", text.strip()))
-
-
-def split_default(param: str) -> str:
-    """Return the parameter text before a top-level `=` default value."""
-    depth = 0
-    for index, char in enumerate(param):
-        depth += (char in "(<{[") - (char in ")>}]")
-        if char == "=" and depth == 0:
-            return param[:index]
-    return param
-
-
-def normalize_params(params: str) -> str:
-    """Canonical comma-joined parameter list (`void` means empty)."""
-    parts = [normalize_param(part) for part in split_top_level(params)]
-    return "" if parts == ["void"] else ",".join(parts)
 
 
 def header_members(path: Path) -> list[Member]:
