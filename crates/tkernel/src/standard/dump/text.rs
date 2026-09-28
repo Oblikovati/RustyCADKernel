@@ -14,6 +14,7 @@
 
 //! One-based `TCollection_AsciiString` primitives the dump parser relies on, with the
 //! exceptions they raise, so every parser failure matches the native one.
+use super::keys::{JsonKey, json_key_to_string};
 use crate::standard::Failure;
 
 /// `Length()` of a byte string; `length(b"ab") == 2`.
@@ -69,4 +70,9 @@ pub(super) fn search(text: &[u8], what: &[u8]) -> i32 {
     text.windows(what.len())
         .position(|window| window == what)
         .map_or(-1, |index| index as i32 + 1)
+}
+
+/// `Location(JsonKeyToString(key), from, Length())`; `find_key(b"a]", JsonKey::CloseContainer, 1)? == 2`.
+pub(super) fn find_key(text: &[u8], key: JsonKey, from: i32) -> Result<i32, Failure> {
+    location(text, json_key_to_string(key).as_bytes(), from, length(text))
 }

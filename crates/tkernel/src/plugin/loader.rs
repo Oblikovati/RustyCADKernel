@@ -72,19 +72,7 @@ impl<P> PluginLoader<P> {
     }
 
     fn resolve(&mut self, id: &str, verbose: bool) -> Result<PluginFactory<P>, Failure> {
-        let resource = format!("{id}.Location");
-        let catalog =
-            ResourceCatalog::new("Plugin", Rc::clone(&self.io), Rc::clone(&self.environment));
-        let Ok(value) = catalog.value(&resource) else {
-            self.say(
-                verbose,
-                &format!("could not find the resource:{resource}\n"),
-            );
-            return Err(failure(&format!(
-                "could not find the resource:{resource}\n"
-            )));
-        };
-        let name = c_text(value.as_bytes());
+        let name = self.library_name(id, verbose)?;
         let file_name = library_file_name(&name);
         if let Err(reason) = self.libraries.open(&file_name) {
             self.say(
@@ -99,6 +87,19 @@ impl<P> PluginLoader<P> {
             .map_err(|reason| failure(&format!("could not find the factory in:{name}{reason}")))?;
         self.factories.insert(id.to_owned(), factory.clone());
         Ok(factory)
+    }
+
+    /// The `<id>.Location` value of a freshly read "Plugin" resource catalog.
+    fn library_name(&mut self, id: &str, verbose: bool) -> Result<String, Failure> {
+        let resource = format!("{id}.Location");
+        let catalog =
+            ResourceCatalog::new("Plugin", Rc::clone(&self.io), Rc::clone(&self.environment));
+        if let Ok(value) = catalog.value(&resource) {
+            return Ok(c_text(value.as_bytes()));
+        }
+        let message = format!("could not find the resource:{resource}\n");
+        self.say(verbose, &message);
+        Err(failure(&message))
     }
 
     /// Writes a diagnostic to the console; console failures are ignored, as `std::cout` is.

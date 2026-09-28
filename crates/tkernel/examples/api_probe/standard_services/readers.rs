@@ -91,10 +91,25 @@ pub fn read_line_case(input: &mut SplitWhitespace<'_>) -> String {
     let mut source = stream(fail, next_bytes(input));
     let mut buffer = ReadLineBuffer::new(max);
     buffer.set_multiline_mode(multiline, gap);
+    let pieces = read_all_lines(&mut buffer, &mut source, &clear);
+    format!(
+        "{} multi={} gap={}",
+        pieces.join(" "),
+        u8::from(buffer.is_multiline_mode()),
+        u8::from(buffer.to_put_gap_in_multiline())
+    )
+}
+
+/// Every line as "hex:readData" up to and including the first null, clearing after `clear` lines.
+fn read_all_lines(
+    buffer: &mut ReadLineBuffer,
+    source: &mut FailingStream,
+    clear: &str,
+) -> Vec<String> {
     let mut pieces = Vec::new();
     for call in 1..=2000 {
         let mut read = 0;
-        let line = buffer.read_line_counted(&mut source, &mut read).map(hex);
+        let line = buffer.read_line_counted(source, &mut read).map(hex);
         let done = line.is_none();
         pieces.push(format!("{}:{read}", line.unwrap_or_else(|| "null".into())));
         if done {
@@ -104,10 +119,5 @@ pub fn read_line_case(input: &mut SplitWhitespace<'_>) -> String {
             buffer.clear();
         }
     }
-    format!(
-        "{} multi={} gap={}",
-        pieces.join(" "),
-        u8::from(buffer.is_multiline_mode()),
-        u8::from(buffer.to_put_gap_in_multiline())
-    )
+    pieces
 }

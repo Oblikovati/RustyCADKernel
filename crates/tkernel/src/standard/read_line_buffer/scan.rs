@@ -45,17 +45,13 @@ impl ReadLineBuffer {
     /// next block; before `\n` or `\r\n` it joins the lines here. Returns the new start.
     fn continuation(&mut self, position: usize, start: usize, continued: &mut bool) -> usize {
         let last = self.last_read;
-        let buffer = &mut self.read_buffer;
-        if position + 1 == last || (position + 2 == last && buffer[position + 1] == b'\r') {
+        if position + 1 == last || (position + 2 == last && self.read_buffer[position + 1] == b'\r')
+        {
             *continued = true;
-            if self.put_gap {
-                buffer[position] = b' ';
-                if position + 1 != last {
-                    buffer[position + 1] = b' ';
-                }
-            }
+            self.gap_at_block_end(position);
             return start;
         }
+        let buffer = &self.read_buffer;
         let carriage = buffer[position + 1] == b'\r';
         if !(buffer[position + 1] == b'\n' || (carriage && buffer[position + 2] == b'\n')) {
             return start;
@@ -68,6 +64,17 @@ impl ReadLineBuffer {
         }
         self.carry(start, end);
         self.position + 1
+    }
+
+    /// With the gap option, blanks the backslash (and a following `\r`) that end the block.
+    fn gap_at_block_end(&mut self, position: usize) {
+        if !self.put_gap {
+            return;
+        }
+        self.read_buffer[position] = b' ';
+        if position + 1 != self.last_read {
+            self.read_buffer[position + 1] = b' ';
+        }
     }
 
     /// A `\n`: ends the line unless a continuation from the previous block is pending, in

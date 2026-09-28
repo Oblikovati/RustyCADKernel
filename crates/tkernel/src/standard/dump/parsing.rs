@@ -15,7 +15,7 @@
 //! Reading dump text back: stream names, field names, scalar values and real vectors.
 //! Positions are one-based, as in `TCollection_AsciiString`.
 use super::keys::{JsonKey, json_key_length, json_key_to_string};
-use super::text::{length, location, sub_string};
+use super::text::{find_key, length, sub_string};
 use super::values::dump_field_to_name;
 use crate::{standard::Failure, tcollection::AsciiString};
 
@@ -78,21 +78,26 @@ pub fn init_real_values(
     values: &mut [f64],
 ) -> Result<bool, Failure> {
     let text = text.as_ref();
-    let content = sub_string(
-        text,
-        *position + json_key_length(JsonKey::OpenContainer),
-        length(text),
-    )?;
-    let close = json_key_to_string(JsonKey::CloseContainer).as_bytes();
-    let separator = json_key_to_string(JsonKey::SeparatorValueToValue).as_bytes();
-    let close_at = location(content, close, 1, length(content))?;
+    let open = json_key_length(JsonKey::OpenContainer);
+    let content = sub_string(text, *position + open, length(text))?;
+    if !parse_reals(content, values)? {
+        return Ok(false);
+    }
+    let close = find_key(text, JsonKey::CloseContainer, *position)?;
+    *position = close + json_key_length(JsonKey::CloseContainer);
+    Ok(true)
+}
+
+/// Reads the `, `-separated values of `content`, the last one ending at the first `]`.
+fn parse_reals(content: &[u8], values: &mut [f64]) -> Result<bool, Failure> {
+    let close = find_key(content, JsonKey::CloseContainer, 1)?;
     let count = values.len();
     let mut start = 1;
     for (index, value) in values.iter_mut().enumerate() {
         let end = if index + 1 < count {
-            location(content, separator, start, length(content))?
+            find_key(content, JsonKey::SeparatorValueToValue, start)?
         } else {
-            close_at
+            close
         };
         let token = AsciiString::from_bytes(sub_string(content, start, end - 1)?);
         if !token.is_real_value(false) {
@@ -101,8 +106,6 @@ pub fn init_real_values(
         *value = token.real_value()?;
         start = end + json_key_length(JsonKey::SeparatorValueToValue);
     }
-    *position =
-        location(text, close, *position, length(text))? + json_key_length(JsonKey::CloseContainer);
     Ok(true)
 }
 
@@ -112,23 +115,7 @@ pub fn init_real_values(
 pub fn init_value(text: impl AsRef<[u8]>, position: &mut i32) -> Result<AsciiString, Failure> {
     let text = text.as_ref();
     let rest = sub_string(text, *position, length(text))?;
-    let comma = location(
-        rest,
-        json_key_to_string(JsonKey::SeparatorValueToValue).as_bytes(),
-        1,
-        length(rest),
-    )?;
-    let brace = location(
-        rest,
-        json_key_to_string(JsonKey::CloseChild).as_bytes(),
-        1,
-        length(rest),
-    )?;
-    let (end, key) = if (comma > 0 && brace > 0 && brace < comma) || comma == 0 {
-        (brace, JsonKey::CloseChild)
-    } else {
-        (comma, JsonKey::SeparatorValueToValue)
-    };
+    let (end, key) = value_end(rest)?;
     if end == 0 {
         *position = length(text);
         return Ok(AsciiString::from_bytes(rest));
@@ -136,6 +123,17 @@ pub fn init_value(text: impl AsRef<[u8]>, position: &mut i32) -> Result<AsciiStr
     let value = AsciiString::from_bytes(sub_string(rest, 1, end - 1)?);
     *position += end - 1 + json_key_length(key);
     Ok(value)
+}
+
+/// The delimiter ending a scalar: the first `, ` unless a `}` comes first (or there is no
+/// comma); 0 when neither occurs.
+fn value_end(rest: &[u8]) -> Result<(i32, JsonKey), Failure> {
+    let comma = find_key(rest, JsonKey::SeparatorValueToValue, 1)?;
+    let brace = find_key(rest, JsonKey::CloseChild, 1)?;
+    if (comma > 0 && brace > 0 && brace < comma) || comma == 0 {
+        return Ok((brace, JsonKey::CloseChild));
+    }
+    Ok((comma, JsonKey::SeparatorValueToValue))
 }
 
 /// `OCCT_INIT_VECTOR_CLASS`: a named real vector, committing the position only on success;

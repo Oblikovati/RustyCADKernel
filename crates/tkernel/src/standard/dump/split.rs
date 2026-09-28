@@ -14,7 +14,7 @@
 
 //! `Standard_Dump::SplitJson` and the key scanning it is built on.
 use super::keys::{JsonKey, json_key_length, json_key_to_string};
-use super::text::{length, location, search, sub_string};
+use super::text::{find_key, length, search, sub_string};
 use crate::ncollection::IndexedDataMap;
 use crate::standard::Failure;
 use crate::tcollection::AsciiString;
@@ -124,26 +124,23 @@ fn next_close_position(
     open: JsonKey,
     close: JsonKey,
 ) -> Result<i32, Failure> {
-    let (open, close) = (
-        json_key_to_string(open).as_bytes(),
-        json_key_to_string(close).as_bytes(),
-    );
     let (mut position, mut depth) = (start, 0);
     while position < length(text) {
-        let open_at = location(text, open, position, length(text))?;
-        let close_at = location(text, close, position, length(text))?;
+        let open_at = find_key(text, open, position)?;
+        let close_at = find_key(text, close, position)?;
         if close_at == 0 {
             break;
         }
         if open_at != 0 && open_at <= close_at {
             depth += 1;
             position = open_at + 1;
-        } else if depth == 0 {
-            return Ok(close_at);
-        } else {
-            depth -= 1;
-            position = close_at + 1;
+            continue;
         }
+        if depth == 0 {
+            return Ok(close_at);
+        }
+        depth -= 1;
+        position = close_at + 1;
     }
     Ok(length(text))
 }

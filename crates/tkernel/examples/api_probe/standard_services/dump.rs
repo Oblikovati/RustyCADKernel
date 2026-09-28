@@ -147,17 +147,7 @@ fn split_text(text: &[u8]) -> Result<String, rustycad_tkernel::standard::Failure
         let key = values.find_key(index)?;
         let value = values.find_from_index(index)?;
         texts.add(key.clone(), value.value.clone());
-        let child = if dump::has_child_key(&value.value) {
-            "c"
-        } else {
-            ""
-        };
-        result += &format!(
-            " {}={}@{}{child}",
-            hex(key.as_bytes()),
-            hex(value.value.as_bytes()),
-            value.start_position
-        );
+        result += &entry_text(key, value);
     }
     let indices: String = dump::hierarchical_value_indices(&texts)?
         .iter()
@@ -166,35 +156,52 @@ fn split_text(text: &[u8]) -> Result<String, rustycad_tkernel::standard::Failure
     Ok(format!("{result} hier={indices}"))
 }
 
+/// " key=value@start" in hex, with "c" when the value holds a child key.
+fn entry_text(key: &AsciiString, value: &DumpValue) -> String {
+    let child = if dump::has_child_key(&value.value) {
+        "c"
+    } else {
+        ""
+    };
+    let (key, text) = (hex(key.as_bytes()), hex(value.value.as_bytes()));
+    format!(" {key}={text}@{}{child}", value.start_position)
+}
+
+/// Every JSON key in discriminant order.
+const JSON_KEYS: [JsonKey; 8] = [
+    JsonKey::None,
+    JsonKey::OpenChild,
+    JsonKey::CloseChild,
+    JsonKey::OpenContainer,
+    JsonKey::CloseContainer,
+    JsonKey::Quote,
+    JsonKey::SeparatorKeyToValue,
+    JsonKey::SeparatorValueToValue,
+];
+
 /// "services_dump_keys": key texts and lengths, the pointer prefix and DumpValue.
 pub fn keys_case(_: &mut SplitWhitespace<'_>) -> String {
-    let keys = [
-        JsonKey::None,
-        JsonKey::OpenChild,
-        JsonKey::CloseChild,
-        JsonKey::OpenContainer,
-        JsonKey::CloseContainer,
-        JsonKey::Quote,
-        JsonKey::SeparatorKeyToValue,
-        JsonKey::SeparatorValueToValue,
-    ];
-    let texts: String = keys
+    let texts: String = JSON_KEYS
         .iter()
         .map(|key| {
             let text = dump::json_key_to_string(*key);
             format!("{}:{} ", hex(text.as_bytes()), dump::json_key_length(*key))
         })
         .collect();
-    let empty = DumpValue::default();
-    let value = DumpValue::new(AsciiString::new("v"), 7);
-    format!(
-        "{texts}{} {}@{} {}@{}",
-        String::from_utf8_lossy(dump::get_pointer_prefix().as_bytes()),
-        String::from_utf8_lossy(empty.value.as_bytes()),
-        empty.start_position,
-        String::from_utf8_lossy(value.value.as_bytes()),
-        value.start_position
-    )
+    let text = |value: &DumpValue| {
+        format!(
+            "{}@{}",
+            String::from_utf8_lossy(value.value.as_bytes()),
+            value.start_position
+        )
+    };
+    let prefix = dump::get_pointer_prefix();
+    let values = [
+        DumpValue::default(),
+        DumpValue::new(AsciiString::new("v"), 7),
+    ];
+    let prefix = String::from_utf8_lossy(prefix.as_bytes());
+    format!("{texts}{prefix} {} {}", text(&values[0]), text(&values[1]))
 }
 
 /// "services_dump_pointer <address> <short>": GetPointerInfo and the null-handle overload.

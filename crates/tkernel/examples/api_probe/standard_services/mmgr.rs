@@ -133,7 +133,7 @@ impl Script {
     }
 
     /// Reuse of a cached block, offset in the current pool or a fresh system block, then
-    /// the address modulo 16 and the zero check.
+    /// the address modulo 16 and the zero check; the block is then filled and recorded.
     fn relation(
         &mut self,
         manager: &mut MMgrOpt,
@@ -141,36 +141,52 @@ impl Script {
         round: usize,
         size: usize,
     ) -> Result<String, Failure> {
-        let mut relation = self.reuse(address.get());
-        if relation.is_empty() && round <= self.cell && (round >> 3) <= self.max {
-            relation = self.pool_offset(address.get(), round);
-        }
-        if relation.is_empty() {
-            relation = "new".into();
-        }
+        let mut relation = self.origin(address.get(), round);
         relation += &format!("%{}", address.get() % 16);
-        let fill = size.min(round);
-        let bytes = &mut manager.bytes_mut(address)?[..fill];
+        let zero = self.fill_and_record(manager, address, round, size.min(round))?;
         if self.clear {
-            relation += if bytes.iter().all(|byte| *byte == 0) {
-                "z1"
-            } else {
-                "z0"
-            };
+            relation += if zero { "z1" } else { "z0" };
         }
-        let index = self.blocks.len();
+        Ok(relation)
+    }
+
+    /// Reports whether the first `fill` bytes were zero, writes the block's pattern over
+    /// them and records the block.
+    fn fill_and_record(
+        &mut self,
+        manager: &mut MMgrOpt,
+        address: StorageAddress,
+        round: usize,
+        fill: usize,
+    ) -> Result<bool, Failure> {
+        let bytes = &mut manager.bytes_mut(address)?[..fill];
+        let zero = bytes.iter().all(|byte| *byte == 0);
+        let owner = self.blocks.len();
         bytes
             .iter_mut()
             .enumerate()
-            .for_each(|(i, byte)| *byte = pattern(index, i));
+            .for_each(|(i, byte)| *byte = pattern(owner, i));
+        let status = State::Live;
         self.blocks.push(Block {
             address,
             round,
             filled: fill,
-            status: State::Live,
-            owner: index,
+            status,
+            owner,
         });
-        Ok(relation)
+        Ok(zero)
+    }
+
+    /// "=j" for a cached block, "@..." inside the small-block pool, "new" otherwise.
+    fn origin(&mut self, address: usize, round: usize) -> String {
+        let reused = self.reuse(address);
+        if !reused.is_empty() {
+            return reused;
+        }
+        if round <= self.cell && (round >> 3) <= self.max {
+            return self.pool_offset(address, round);
+        }
+        "new".into()
     }
 
     fn reuse(&mut self, address: usize) -> String {

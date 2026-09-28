@@ -65,18 +65,7 @@ impl ReadBuffer {
                 "Standard_ReadBuffer::Init: chunk size 0; expected 1..=4096 bytes",
             ));
         }
-        let signed_chunk = chunk_len as i64;
-        self.data_read = 0;
-        self.data_len = if partial {
-            data_len
-        } else {
-            data_len.wrapping_sub(data_len.wrapping_rem(signed_chunk))
-        };
-        self.chunk_len = chunk_len;
-        self.buffer_len = chunk_len * (CACHE / chunk_len);
-        self.end = CACHE;
-        self.position = Some(CACHE);
-        self.cache.fill(0);
+        self.reset(truncated_length(data_len, chunk_len, partial), chunk_len);
         if chunk_len > CACHE {
             self.position = None;
             return Err(exceptions::program_error(
@@ -84,6 +73,16 @@ impl ReadBuffer {
             ));
         }
         Ok(())
+    }
+
+    fn reset(&mut self, data_len: i64, chunk_len: usize) {
+        self.data_read = 0;
+        self.data_len = data_len;
+        self.chunk_len = chunk_len;
+        self.buffer_len = chunk_len * (CACHE / chunk_len);
+        self.end = CACHE;
+        self.position = Some(CACHE);
+        self.cache.fill(0);
     }
 
     /// True once exactly the (truncated) data length has been read; `buffer.is_done()`.
@@ -124,6 +123,12 @@ impl ReadBuffer {
             return Some(advanced);
         }
         self.position = None;
+        self.refill(stream)
+    }
+
+    /// Reads as many whole chunks as the cache holds, or the data left; `None` at the end
+    /// of data or after a short read.
+    fn refill(&mut self, stream: &mut impl Read) -> Option<usize> {
         let left = self.data_len - self.data_read;
         if left <= 0 {
             return None;
@@ -142,4 +147,14 @@ impl ReadBuffer {
         self.data_read += to_read as i64;
         Some(0)
     }
+}
+
+/// The length `Init` keeps: whole chunks only (C++ `%` on `int64_t`, rounding toward zero)
+/// unless the payload is partial; `truncated_length(13, 4, false) == 12`.
+fn truncated_length(data_len: i64, chunk_len: usize, partial: bool) -> i64 {
+    if partial {
+        return data_len;
+    }
+    // int64_t(theChunkLen) wraps for sizes above i64::MAX, as the C++ conversion does.
+    data_len.wrapping_sub(data_len.wrapping_rem(chunk_len as i64))
 }

@@ -28,17 +28,14 @@ pub(super) fn split_key_to_value(
     next: &mut i32,
     values: &mut DumpValues,
 ) -> Result<bool, Failure> {
-    let close = next_close_position(text, start + 1, JsonKey::None, JsonKey::Quote)?;
-    if close == 0 {
-        return Ok(false);
-    }
-    let key = sub_string(text, start, close - 1)?;
-    // Any key is accepted between the key and the value, not only ": ".
-    let Some((_, after_separator)) = json_key(text, close + 1)? else {
+    let Some(PairParts {
+        key,
+        value_key,
+        value_start,
+    }) = pair_parts(text, start)?
+    else {
         return Ok(false);
     };
-    let (value_key, value_start) =
-        json_key(text, after_separator)?.unwrap_or((JsonKey::None, after_separator));
     let Some((value, after)) = split_value(text, value_key, value_start)? else {
         return Ok(false);
     };
@@ -49,6 +46,34 @@ pub(super) fn split_key_to_value(
         DumpValue::new(AsciiString::from_bytes(value), value_start),
     );
     Ok(true)
+}
+
+/// The key text, the key the value starts with (`None` for a plain value) and where the
+/// value starts.
+struct PairParts<'a> {
+    key: &'a [u8],
+    value_key: JsonKey,
+    value_start: i32,
+}
+
+/// Locates the parts of a pair; `None` without a closing quote or a separator after the key.
+fn pair_parts(text: &[u8], start: i32) -> Result<Option<PairParts<'_>>, Failure> {
+    let close = next_close_position(text, start + 1, JsonKey::None, JsonKey::Quote)?;
+    if close == 0 {
+        return Ok(None);
+    }
+    let key = sub_string(text, start, close - 1)?;
+    // Any key is accepted between the key and the value, not only ": ".
+    let Some((_, after_separator)) = json_key(text, close + 1)? else {
+        return Ok(None);
+    };
+    let (value_key, value_start) =
+        json_key(text, after_separator)?.unwrap_or((JsonKey::None, after_separator));
+    Ok(Some(PairParts {
+        key,
+        value_key,
+        value_start,
+    }))
 }
 
 /// The value text and the position after it, by the key the value starts with.

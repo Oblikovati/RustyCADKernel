@@ -32,6 +32,14 @@ struct Formatter {
 }
 
 impl Formatter {
+    fn new(indent: i32) -> Self {
+        Self {
+            output: Vec::new(),
+            indent: vec![b' '; indent.max(0) as usize],
+            depth: 0,
+            in_array: false,
+        }
+    }
     fn new_line(&mut self) {
         self.output.push(b'\n');
         for _ in 0..self.depth {
@@ -59,12 +67,7 @@ impl Formatter {
 pub fn format_json(stream: &DumpStream, indent: i32) -> AsciiString {
     let source = text(stream);
     let bytes = source.as_bytes();
-    let mut formatter = Formatter {
-        output: Vec::new(),
-        indent: vec![b' '; indent.max(0) as usize],
-        depth: 0,
-        in_array: false,
-    };
+    let mut formatter = Formatter::new(indent);
     let length = bytes.len();
     let mut index = 1;
     while index <= length {
