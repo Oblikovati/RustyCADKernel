@@ -72,13 +72,13 @@ fn NCollection_ListTest__STLIterators() {
 #[test]
 fn NCollection_ListTest__RemoveFirst() {
     let mut list = list(&[10, 20, 30]);
-    list.remove_first();
+    list.remove_first().unwrap();
     assert_eq!(list.len(), 2);
     assert_eq!(list.first(), Some(&20));
-    list.remove_first();
+    list.remove_first().unwrap();
     assert_eq!(list.len(), 1);
     assert_eq!(list.first(), Some(&30));
-    list.remove_first();
+    list.remove_first().unwrap();
     assert!(list.is_empty());
 }
 #[test]
@@ -86,7 +86,7 @@ fn NCollection_ListTest__Remove() {
     let mut list = list(&[10, 20, 30]);
     let mut cursor = list.cursor();
     cursor.next(&list);
-    list.remove(&mut cursor);
+    list.remove(&mut cursor).unwrap();
     assert_eq!(list.len(), 2);
     assert_eq!(list.first(), Some(&10));
     assert_eq!(list.last(), Some(&30));
@@ -115,14 +115,14 @@ fn NCollection_ListTest__InsertBefore() {
     let mut list = list(&[10, 30]);
     let mut cursor = list.cursor();
     cursor.next(&list);
-    assert_eq!(*list.insert_before(20, &cursor), 20);
+    assert_eq!(*list.insert_before(20, &cursor).unwrap(), 20);
     equal(&list, &[10, 20, 30]);
 }
 #[test]
 fn NCollection_ListTest__InsertAfter() {
     let mut list = list(&[10, 30]);
     let cursor = list.cursor();
-    assert_eq!(*list.insert_after(20, &cursor), 20);
+    assert_eq!(*list.insert_after(20, &cursor).unwrap(), 20);
     equal(&list, &[10, 20, 30]);
 }
 #[test]

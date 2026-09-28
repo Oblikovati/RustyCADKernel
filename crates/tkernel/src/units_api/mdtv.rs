@@ -1,0 +1,71 @@
+// Created on: 1994-02-24
+// Created by: Jean Claude VAUTHIER
+// Copyright (c) 1994-1999 Matra Datavision
+// Copyright (c) 1999-2014 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+//! The quantity/unit pairs `UnitsAPI::CheckLoading` specifies, in order, for the
+//! MDTV local system (ISO 8859-1 bytes for the superscripts and degree sign).
+
+pub(super) const MDTV_UNITS: &[(&[u8], &[u8])] = &[
+    (b"LENGTH", b"mm"),
+    (b"AREA", b"mm\xB2"),
+    (b"VOLUME", b"mm\xB3"),
+    (b"INERTIA", b"mm**4"),
+    (b"SPEED", b"mm/s"),
+    (b"ACCELERATION", b"mm/s\xB2"),
+    (b"VOLUMIC MASS", b"kg/mm\xB3"),
+    (b"VOLUME FLOW", b"mm\xB3/s"),
+    (b"CONSUMPTION", b"mm\xB2"),
+    (b"QUANTITY OF MOVEMENT", b"kg*mm/s"),
+    (b"KINETIC MOMENT", b"kg*mm\xB2/s"),
+    (b"MOMENT OF INERTIA", b"kg*mm\xB2"),
+    (b"FORCE", b"kg*mm/s\xB2"),
+    (b"LINEIC FORCE", b"kg/s\xB2"),
+    (b"MOMENT OF A FORCE", b"kg*mm\xB2/s\xB2"),
+    (b"PRESSURE", b"kg/(mm*s\xB2)"),
+    (b"DYNAMIC VISCOSITY", b"kg/(mm*s)"),
+    (b"KINETIC VISCOSITY", b"mm\xB2/s"),
+    (b"TENSION SUPERFICIELLE", b"mm/s\xB2"),
+    (b"ENERGY", b"kg*mm\xB2/s\xB2"),
+    (b"POWER", b"kg*mm\xB2/s\xB3"),
+    (b"LINEIC POWER", b"kg*mm/s\xB3"),
+    (b"SURFACIC POWER", b"kg/s\xB3"),
+    (b"VOLUMIC POWER", b"kg/(mm*s\xB3)"),
+    (b"THERMICAL CONDUCTIVITY", b"kg*mm/(s\xB3*\xB0K)"),
+    (b"THERMICAL CONVECTIVITY", b"kg/(s\xB3*\xB0K)"),
+    (b"THERMICAL MASSIC CAPACITY", b"mm\xB2/(s\xB2*\xB0K)"),
+    (b"ENTROPY", b"kg*mm\xB2/(s\xB2*\xB0K)"),
+    (b"ENTHALPY", b"kg*mm\xB2/s\xB2"),
+    (b"LUMINANCE", b"cd/mm\xB2"),
+    (b"LUMINOUS EFFICACITY", b"s\xB3*Lu/(kg*mm\xB2)"),
+    (b"ELECTRIC FIELD", b"V/mm"),
+    (b"ELECTRIC CAPACITANCE", b"s**4*A\xB2/(kg*mm\xB2)"),
+    (b"MAGNETIC FIELD", b"A/mm"),
+    (b"MAGNETIC FLUX", b"kg*mm\xB2/(s\xB2*A)"),
+    (b"INDUCTANCE", b"kg*mm\xB2/(s\xB2*A\xB2)"),
+    (b"RELUCTANCE", b"s\xB2*A\xB2/(kg*mm\xB2)"),
+    (b"RESISTIVITY", b"O*mm"),
+    (b"CONDUCTIVITY", b"S/mm"),
+    (b"MOLAR MASS", b"kg/mol"),
+    (b"MOLAR VOLUME", b"mm\xB3/mol"),
+    (b"CONCENTRATION", b"kg/mm\xB3"),
+    (b"MOLAR CONCENTRATION", b"mol/mm\xB3"),
+    (b"ACOUSTIC INTENSITY", b"mm/A\xB2"),
+    (b"DOSE EQUIVALENT", b"mm\xB2/s\xB2"),
+    (b"ABSORBED DOSE", b"mm\xB2/s\xB2"),
+    (b"FLUX OF MAGNETIC INDUCTION", b"kg*mm\xB2/(s\xB2*A)"),
+    (b"ROTATION ACCELERATION", b"rad/s\xB2"),
+    (b"TRANSLATION STIFFNESS", b"kg/s\xB2"),
+    (b"ROTATION STIFFNESS", b"kg*mm\xB2/(s\xB2*rad)"),
+];

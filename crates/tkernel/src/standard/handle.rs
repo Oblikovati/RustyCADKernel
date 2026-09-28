@@ -19,6 +19,7 @@
 //! interface casters of the dynamic descriptor).
 use super::{RuntimeType, RuntimeTyped, Transient};
 use std::{any::TypeId, marker::PhantomData, sync::Arc};
+mod casts;
 mod traits;
 mod view;
 pub use view::HandleView;
@@ -42,11 +43,7 @@ impl<T: RuntimeTyped> Handle<T> {
         T: Transient,
     {
         let owner: Arc<dyn Transient> = Arc::new(value);
-        owner.transient_base().increment_ref_counter();
-        Self {
-            owner: Some(owner),
-            projected: PhantomData,
-        }
+        Self::adopt(Some(&owner))
     }
     /// Observe the typed address without transferring ownership; `handle.as_ptr()`.
     pub fn as_ptr(&self) -> *const T {
@@ -54,6 +51,17 @@ impl<T: RuntimeTyped> Handle<T> {
     }
 }
 impl<T: ?Sized + RuntimeTyped> Handle<T> {
+    /// Share `owner` when it projects to `T` (one more reference), else null.
+    fn adopt(owner: Option<&Arc<dyn Transient>>) -> Self {
+        let Some(owner) = owner.filter(|owner| T::project_from(owner.as_ref()).is_some()) else {
+            return Self::default();
+        };
+        owner.transient_base().increment_ref_counter();
+        Self {
+            owner: Some(owner.clone()),
+            projected: PhantomData,
+        }
+    }
     /// Check for absent ownership; `handle.is_null()`.
     pub fn is_null(&self) -> bool {
         self.owner.is_none()
@@ -76,19 +84,7 @@ impl<T: ?Sized + RuntimeTyped> Handle<T> {
     }
     /// Cast ownership to a supported base/derived type, returning null on failure; `handle.cast::<Base>()`.
     pub fn cast<U: ?Sized + RuntimeTyped>(&self) -> Handle<U> {
-        if !self
-            .owner
-            .as_ref()
-            .is_some_and(|owner| U::project_from(owner.as_ref()).is_some())
-        {
-            return Handle::default();
-        }
-        let owner: Arc<dyn Transient> = self.owner.as_ref().unwrap().clone();
-        owner.transient_base().increment_ref_counter();
-        Handle {
-            owner: Some(owner),
-            projected: PhantomData,
-        }
+        Handle::adopt(self.owner.as_ref())
     }
     /// Borrow a projected view without incrementing the count; `handle.view::<Base>()`.
     pub fn view<U: ?Sized + RuntimeTyped>(&self) -> HandleView<'_, U> {
@@ -102,25 +98,27 @@ impl<T: ?Sized + RuntimeTyped> Handle<T> {
     pub fn rust_type_id(&self) -> Option<TypeId> {
         self.owner.as_ref().map(|owner| owner.as_ref().type_id())
     }
-    /// Check dynamic ancestry; `handle.is_kind(Base::static_type())`.
+    /// Check dynamic ancestry, false for null; `handle.is_kind(Base::static_type())`.
     pub fn is_kind(&self, base: &RuntimeType) -> bool {
-        self.dynamic_type()
-            .is_some_and(|descriptor| descriptor.is_subtype(base))
+        self.owner.as_ref().is_some_and(|owner| owner.is_kind(base))
     }
-    /// Check dynamic ancestry by name; `handle.is_kind_name("Standard_Transient")`.
+    /// Check dynamic ancestry by name, false for null; `handle.is_kind_name("Standard_Transient")`.
     pub fn is_kind_name(&self, name: &str) -> bool {
-        self.dynamic_type()
-            .is_some_and(|descriptor| descriptor.is_subtype_name(name))
+        self.owner
+            .as_ref()
+            .is_some_and(|owner| owner.is_kind_name(name))
     }
-    /// Check exact registered type; `handle.is_instance(Derived::static_type())`.
+    /// Check exact registered type, false for null; `handle.is_instance(Derived::static_type())`.
     pub fn is_instance(&self, exact: &RuntimeType) -> bool {
-        self.dynamic_type()
-            .is_some_and(|descriptor| descriptor.rust_type() == exact.rust_type())
+        self.owner
+            .as_ref()
+            .is_some_and(|owner| owner.is_instance(exact))
     }
-    /// Check exact native name; `handle.is_instance_name("Derived")`.
+    /// Check exact native name, false for null; `handle.is_instance_name("Derived")`.
     pub fn is_instance_name(&self, name: &str) -> bool {
-        self.dynamic_type()
-            .is_some_and(|descriptor| descriptor.name() == name)
+        self.owner
+            .as_ref()
+            .is_some_and(|owner| owner.is_instance_name(name))
     }
     /// Read the embedded counter; `handle.ref_count()` is zero for null handles.
     pub fn ref_count(&self) -> i32 {
@@ -132,10 +130,20 @@ impl<T: ?Sized + RuntimeTyped> Handle<T> {
     pub fn nullify(&mut self) {
         *self = Self::default();
     }
+    /// Address of the owned object, 0 for null: the identity `<` and the hash compare.
+    fn address(&self) -> usize {
+        self.object_address() as usize
+    }
 }
 impl<T: ?Sized + RuntimeTyped> Clone for Handle<T> {
     fn clone(&self) -> Self {
         self.cast::<T>()
+    }
+    /// Assignment keeps the count untouched when both handles already share the object.
+    fn clone_from(&mut self, source: &Self) {
+        if *self != *source {
+            *self = source.clone();
+        }
     }
 }
 impl<T: ?Sized + RuntimeTyped> Drop for Handle<T> {

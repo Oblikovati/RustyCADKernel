@@ -47,7 +47,8 @@ impl<K: Debug, H: HashPolicy<K>> IndexedMap<K, H> {
         Self {
             nodes: Vec::new(),
             buckets: Vec::new(),
-            bucket_count: buckets.max(1),
+            // The native constructors keep a zero bucket count until the first insertion resizes.
+            bucket_count: buckets,
             resource,
             hasher,
         }
@@ -200,5 +201,7 @@ impl<K: Debug, H: HashPolicy<K>> std::ops::Index<usize> for IndexedMap<K, H> {
             .expect("IndexedMap index must be in 1..=len")
     }
 }
+mod cursor;
 mod iteration;
 mod operations;
+pub use cursor::IndexedMapIterator;

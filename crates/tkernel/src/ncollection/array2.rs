@@ -52,9 +52,11 @@ impl<'a, T: Default> Array2<'a, T> {
     }
 
     /// Allocates inclusive bounds; `Array2::<i32>::with_bounds(1,2,1,3)?`.
+    /// As the native constructor, `upper == lower - 1` gives an empty dimension; only a
+    /// negative extent (undefined natively) is refused.
     pub fn with_bounds(rl: i32, ru: i32, cl: i32, cu: i32) -> Result<Self, ArrayError> {
-        let rows = dimension(rl, ru)?;
-        let cols = dimension(cl, cu)?;
+        let rows = extent(rl, ru)?;
+        let cols = extent(cl, cu)?;
         let mut array = Self::with_size(rows, cols);
         array.rebase(rl, cl);
         Ok(array)
@@ -230,8 +232,8 @@ impl<'a, T: Clone> Array2<'a, T> {
         cl: i32,
         cu: i32,
     ) -> Result<Self, ArrayError> {
-        let rows = dimension(rl, ru)?;
-        let cols = dimension(cl, cu)?;
+        let rows = extent(rl, ru)?;
+        let cols = extent(cl, cu)?;
         let length = rows
             .checked_mul(cols)
             .expect("array dimensions overflow usize");
@@ -283,6 +285,15 @@ fn dimension(lower: i32, upper: i32) -> Result<usize, ArrayError> {
         return Err(ArrayError::Bounds { lower, upper });
     }
     Ok((i64::from(upper) - i64::from(lower) + 1) as usize)
+}
+// Constructors accept an empty `[lower, lower - 1]` range (native RangeSize 0); only
+// Resize raises Standard_RangeError for `upper < lower`, which `dimension` mirrors.
+fn extent(lower: i32, upper: i32) -> Result<usize, ArrayError> {
+    let size = i64::from(upper) - i64::from(lower) + 1;
+    if size < 0 {
+        return Err(ArrayError::Bounds { lower, upper });
+    }
+    Ok(size as usize)
 }
 fn upper(lower: i32, size: usize) -> i32 {
     (i64::from(lower) + size as i64 - 1) as i32
@@ -337,3 +348,4 @@ impl<'b, T> IntoIterator for &'b mut Array2<'_, T> {
 }
 
 include!("array2_resize.rs");
+include!("array2_layout.rs");

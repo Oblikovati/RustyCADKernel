@@ -1,0 +1,227 @@
+// Copyright (c) 1997-1999 Matra Datavision
+// Copyright (c) 1999-2014 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+//! `Storage_CallBack`, `Storage_DefaultCallBack` and `Storage_TypedCallBack`.
+use super::{BaseDriver, Schema};
+use crate::standard::{Failure, Handle, StandardPersistent, StandardTransient};
+use crate::tcollection::AsciiString;
+use std::sync::{Arc, PoisonError, RwLock};
+
+/// `Storage_CallBack`: creates, registers, writes and reads the persistent objects of one
+/// type. Native callbacks are shared through handles; Rust shares them as `Arc<dyn CallBack>`.
+pub trait CallBack: Send + Sync {
+    /// `New`: a fresh object of the callback's type; `callback.new_persistent()`.
+    fn new_persistent(&self) -> Handle<StandardPersistent>;
+
+    /// `Add`: registers the objects `persistent` references with `schema`.
+    /// Example: `callback.add(&object, &schema)?`.
+    fn add(&self, persistent: &Handle<StandardPersistent>, schema: &Schema) -> Result<(), Failure>;
+
+    /// `Write`: writes the object's fields; `callback.write(&object, &mut driver, &schema)?`.
+    fn write(
+        &self,
+        persistent: &Handle<StandardPersistent>,
+        driver: &mut dyn BaseDriver,
+        schema: &Schema,
+    ) -> Result<(), Failure>;
+
+    /// `Read`: reads the object's fields; `callback.read(&object, &mut driver, &schema)?`.
+    fn read(
+        &self,
+        persistent: &Handle<StandardPersistent>,
+        driver: &mut dyn BaseDriver,
+        schema: &Schema,
+    ) -> Result<(), Failure>;
+}
+
+/// `Storage_DefaultCallBack`: plain `Standard_Persistent` objects whose data is skipped.
+///
+/// ```
+/// use rustycad_tkernel::storage::{CallBack, DefaultCallBack};
+/// assert!(DefaultCallBack.new_persistent().is_some());
+/// ```
+#[derive(Clone, Copy, Debug, Default)]
+pub struct DefaultCallBack;
+
+impl CallBack for DefaultCallBack {
+    fn new_persistent(&self) -> Handle<StandardPersistent> {
+        Handle::new(StandardPersistent::default())
+    }
+
+    fn add(&self, _: &Handle<StandardPersistent>, _: &Schema) -> Result<(), Failure> {
+        Ok(())
+    }
+
+    fn write(
+        &self,
+        _: &Handle<StandardPersistent>,
+        _: &mut dyn BaseDriver,
+        _: &Schema,
+    ) -> Result<(), Failure> {
+        Ok(())
+    }
+
+    /// Skips the object's data with the driver's `SkipObject`.
+    fn read(
+        &self,
+        _: &Handle<StandardPersistent>,
+        driver: &mut dyn BaseDriver,
+        _: &Schema,
+    ) -> Result<(), Failure> {
+        driver.skip_object()
+    }
+}
+
+struct TypedFields {
+    type_name: AsciiString,
+    callback: Option<Arc<dyn CallBack>>,
+    index: i32,
+}
+
+/// `Storage_TypedCallBack`: a callback bound to a type name and a type index.
+///
+/// ```
+/// use rustycad_tkernel::storage::{DefaultCallBack, TypedCallBack};
+/// use rustycad_tkernel::tcollection::AsciiString;
+/// use std::sync::Arc;
+/// let typed = TypedCallBack::new(&AsciiString::new("PDoc"), Some(Arc::new(DefaultCallBack)));
+/// typed.set_index(3);
+/// assert_eq!(typed.index(), 3);
+/// ```
+pub struct TypedCallBack {
+    parent: StandardTransient,
+    fields: RwLock<TypedFields>,
+}
+
+impl Default for TypedCallBack {
+    fn default() -> Self {
+        Self::new(&AsciiString::default(), None)
+    }
+}
+
+impl TypedCallBack {
+    /// `Storage_TypedCallBack(aTypeName, aCallBack)` with index 0; `TypedCallBack::new(&name, None)`.
+    pub fn new(type_name: &AsciiString, callback: Option<Arc<dyn CallBack>>) -> Self {
+        Self {
+            parent: StandardTransient::default(),
+            fields: RwLock::new(TypedFields {
+                type_name: type_name.clone(),
+                callback,
+                index: 0,
+            }),
+        }
+    }
+
+    fn edit<R>(&self, change: impl FnOnce(&mut TypedFields) -> R) -> R {
+        change(&mut self.fields.write().unwrap_or_else(PoisonError::into_inner))
+    }
+
+    fn view<R>(&self, read: impl FnOnce(&TypedFields) -> R) -> R {
+        read(&self.fields.read().unwrap_or_else(PoisonError::into_inner))
+    }
+
+    /// `SetType`; `typed.set_type(&name)`.
+    pub fn set_type(&self, type_name: &AsciiString) {
+        self.edit(|fields| fields.type_name = type_name.clone());
+    }
+
+    /// `Type`; `typed.type_name()`.
+    pub fn type_name(&self) -> AsciiString {
+        self.view(|fields| fields.type_name.clone())
+    }
+
+    /// `SetCallBack`; `typed.set_callback(Some(callback))`.
+    pub fn set_callback(&self, callback: Option<Arc<dyn CallBack>>) {
+        self.edit(|fields| fields.callback = callback);
+    }
+
+    /// `CallBack`: the bound callback, `None` for a null handle; `typed.callback()`.
+    pub fn callback(&self) -> Option<Arc<dyn CallBack>> {
+        self.view(|fields| fields.callback.clone())
+    }
+
+    /// `SetIndex`; `typed.set_index(1)`.
+    pub fn set_index(&self, index: i32) {
+        self.edit(|fields| fields.index = index);
+    }
+
+    /// `Index`; `typed.index()`.
+    pub fn index(&self) -> i32 {
+        self.view(|fields| fields.index)
+    }
+}
+
+crate::impl_transient!(
+    TypedCallBack,
+    "Storage_TypedCallBack",
+    StandardTransient,
+    parent
+);
+
+/// An `NCollection_HArray1<occ::handle<Storage_CallBack>>(1, len)`: the per-type callback
+/// table `Storage_Schema::Write` and `FSD_BinaryFile::ReadCompleteInfo` index by type number.
+pub(crate) struct CallBackTable(Vec<Option<Arc<dyn CallBack>>>);
+
+impl CallBackTable {
+    /// `len` null callbacks; a negative length fails like the native allocation.
+    pub(crate) fn new(length: i32) -> Result<Self, Failure> {
+        let length = usize::try_from(length).map_err(|_| {
+            Failure::with_type(
+                "Standard_OutOfMemory",
+                &format!("NCollection_Array1 bounds 1..={length}; expected a non-negative size"),
+                "",
+            )
+        })?;
+        Ok(Self(vec![None; length]))
+    }
+
+    fn slot(&self, member: &str, index: i32) -> Result<usize, Failure> {
+        let length = self.0.len();
+        usize::try_from(index)
+            .ok()
+            .filter(|index| (1..=length).contains(index))
+            .map(|index| index - 1)
+            .ok_or_else(|| {
+                Failure::with_type(
+                    "Standard_OutOfRange",
+                    &format!("NCollection_Array1::{member} index {index}; expected 1..={length}"),
+                    "",
+                )
+            })
+    }
+
+    /// `SetValue(index, callback)`, `Standard_OutOfRange` outside `1..=len`.
+    pub(crate) fn set_value(
+        &mut self,
+        index: i32,
+        callback: Option<Arc<dyn CallBack>>,
+    ) -> Result<(), Failure> {
+        let slot = self.slot("SetValue", index)?;
+        self.0[slot] = callback;
+        Ok(())
+    }
+
+    /// `Value(index)` dereferenced: out of range is `Standard_OutOfRange`, a null callback
+    /// (a native null-pointer call) is `Standard_NullObject`.
+    pub(crate) fn value(&self, index: i32, caller: &str) -> Result<Arc<dyn CallBack>, Failure> {
+        let slot = self.slot("Value", index)?;
+        self.0[slot].clone().ok_or_else(|| {
+            Failure::with_type(
+                "Standard_NullObject",
+                &format!("{caller}: type {index} has a null callback; expected a bound type"),
+                "",
+            )
+        })
+    }
+}

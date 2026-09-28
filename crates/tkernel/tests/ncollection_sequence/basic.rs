@@ -51,20 +51,20 @@ fn NCollection_SequenceTest__ModifyingOperations() {
     assert_eq!(sequence.len(), 2);
     assert_eq!(sequence.first(), Some(&200));
     assert_eq!(sequence.last(), Some(&100));
-    sequence.set_value(1, 210);
+    sequence.set_value(1, 210).unwrap();
     assert_eq!(sequence[1], 210);
-    *sequence.change_value(2) = 110;
+    *sequence.change_value(2).unwrap() = 110;
     assert_eq!(sequence[2], 110);
-    sequence.insert_before(1, 300);
+    sequence.insert_before(1, 300).unwrap();
     equal(&sequence, &[300, 210, 110]);
-    sequence.insert_after(2, 400);
+    sequence.insert_after(2, 400).unwrap();
     equal(&sequence, &[300, 210, 400, 110]);
-    sequence.remove(3);
+    sequence.remove(3).unwrap();
     equal(&sequence, &[300, 210, 110]);
     sequence.append(500);
     sequence.append(600);
     assert_eq!(sequence.len(), 5);
-    sequence.remove_range(2, 4);
+    sequence.remove_range(2, 4).unwrap();
     equal(&sequence, &[300, 600]);
 }
 #[test]
@@ -90,12 +90,12 @@ fn NCollection_SequenceTest__IteratorFunctions() {
 #[test]
 fn NCollection_SequenceTest__AdvancedOperations() {
     let mut sequence = seq(&[10, 20, 30, 40, 50]);
-    sequence.exchange(2, 4);
+    sequence.exchange(2, 4).unwrap();
     equal(&sequence, &[10, 40, 30, 20, 50]);
     sequence.reverse();
     equal(&sequence, &[50, 20, 30, 40, 10]);
     let mut second = Sequence::default();
-    sequence.split(2, &mut second);
+    sequence.split(2, &mut second).unwrap();
     equal(&sequence, &[50]);
     equal(&second, &[20, 30, 40, 10]);
     sequence.clear(None);
@@ -115,10 +115,10 @@ fn NCollection_SequenceTest__ComplexTypeSequence() {
         assert_eq!(sequence[index].0, index as i32);
         assert_eq!(sequence[index].1, name);
     }
-    *sequence.change_value(2) = TestClass(22, "Modified".into());
+    *sequence.change_value(2).unwrap() = TestClass(22, "Modified".into());
     assert_eq!(sequence[2].0, 22);
     assert_eq!(sequence[2].1, "Modified");
-    sequence.remove(1);
+    sequence.remove(1).unwrap();
     assert_eq!(sequence.len(), 2);
     assert_eq!(sequence.first().unwrap().0, 22);
 }

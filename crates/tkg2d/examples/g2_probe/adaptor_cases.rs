@@ -96,7 +96,8 @@ pub fn load_case(values: &[f64]) {
         adaptor_summary(&dynamic, &u);
         Ok(())
     });
-    a.reset();
+    // `a->Reset()`: `Handle::reset` is `a.reset(new ...)`, so dereference explicitly.
+    (*a).reset();
     empty_geom(&a);
     attempt(|| {
         a.load(&c2)?;

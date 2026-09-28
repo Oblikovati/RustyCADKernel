@@ -11,11 +11,12 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{PackedInteger, PackedMap, PackedWord};
+use super::{PackedBlock, PackedInteger, PackedMap, PackedWord};
 /// Restartable native cursor and Rust value iterator; `map.iter()`.
 #[derive(Clone)]
 pub struct PackedMapIter<'a, T: PackedInteger> {
-    map: &'a PackedMap<T>,
+    // The map's bucket chains; empty for a default-constructed native iterator.
+    buckets: &'a [Vec<PackedBlock<T::Word>>],
     bucket: usize,
     node: usize,
     remaining: u64,
@@ -24,8 +25,19 @@ pub struct PackedMapIter<'a, T: PackedInteger> {
 impl<T: PackedInteger> PackedMap<T> {
     /// Traverse buckets, chains, then ascending bits; `map.iter().collect::<Vec<_>>()`.
     pub fn iter(&self) -> PackedMapIter<'_, T> {
-        let mut iter = PackedMapIter {
-            map: self,
+        PackedMapIter::over(&self.buckets)
+    }
+}
+/// The native default `Iterator()`: bound to no map, exhausted, equal to every end.
+impl<T: PackedInteger> Default for PackedMapIter<'_, T> {
+    fn default() -> Self {
+        Self::over(&[])
+    }
+}
+impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
+    fn over(buckets: &'a [Vec<PackedBlock<T::Word>>]) -> Self {
+        let mut iter = Self {
+            buckets,
             bucket: 0,
             node: 0,
             remaining: 0,
@@ -34,8 +46,6 @@ impl<T: PackedInteger> PackedMap<T> {
         iter.advance();
         iter
     }
-}
-impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
     /// Check for a current bit; `iter.more()`.
     pub fn more(&self) -> bool {
         self.current.is_some()
@@ -47,19 +57,19 @@ impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
     /// Advance once, retaining exhausted state; `iter.advance()`.
     pub fn advance(&mut self) {
         while self.remaining == 0 {
-            if self.bucket >= self.map.buckets.len() {
+            if self.bucket >= self.buckets.len() {
                 self.current = None;
                 return;
             }
-            if self.node >= self.map.buckets[self.bucket].len() {
+            if self.node >= self.buckets[self.bucket].len() {
                 self.bucket += 1;
                 self.node = 0;
                 continue;
             }
-            self.remaining = self.map.buckets[self.bucket][self.node].bits.bits();
+            self.remaining = self.buckets[self.bucket][self.node].bits.bits();
             self.node += 1;
         }
-        let block = &self.map.buckets[self.bucket][self.node - 1];
+        let block = &self.buckets[self.bucket][self.node - 1];
         self.current = Some(T::from_bits(
             (block.index.bits() << PackedMap::<T>::SHIFT)
                 | u64::from(self.remaining.trailing_zeros()),
@@ -68,7 +78,7 @@ impl<'a, T: PackedInteger> PackedMapIter<'a, T> {
     }
     /// Restart against the same borrowed map; `iter.reset()`.
     pub fn reset(&mut self) {
-        *self = self.map.iter();
+        *self = Self::over(self.buckets);
     }
     /// Rebind to another map with the same lifetime; `iter.initialize(&other)`.
     pub fn initialize(&mut self, map: &'a PackedMap<T>) {
@@ -88,7 +98,7 @@ impl<T: PackedInteger> PartialEq for PackedMapIter<'_, T> {
         if !self.more() || !other.more() {
             return self.more() == other.more();
         }
-        std::ptr::eq(self.map, other.map)
+        std::ptr::eq(self.buckets, other.buckets)
             && (self.bucket, self.node, self.remaining, self.current)
                 == (other.bucket, other.node, other.remaining, other.current)
     }

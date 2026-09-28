@@ -77,7 +77,15 @@ pub fn sort_links(links: &mut [BvhEncodedLink], digit: i32, is_parallel: bool) {
         }
         return;
     }
-    Parallel::for_each_mut(&mut halves, |_, half| sort_links(half, digit - 1, true));
+    // `OSD_Parallel::For(0, 2, functor)` locks at most one pool worker beside the caller;
+    // nested sorts find the pool busy and run in their caller, as natively.
+    Parallel::for_each(
+        halves.iter_mut(),
+        |half| sort_links(half, digit - 1, true),
+        false,
+        2,
+    )
+    .expect("sorting disjoint link halves raises no failure");
 }
 
 /// `BVH::RadixSorter::perform`: splits on each digit from high to low and
