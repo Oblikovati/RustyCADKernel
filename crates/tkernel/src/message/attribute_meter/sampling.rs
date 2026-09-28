@@ -60,31 +60,37 @@ fn record_times(
     sampler: &dyn MetricSampler,
     is_start: bool,
 ) {
-    let has = |metric: MetricType| active.contains(&metric);
-    if has(MetricType::WallClock) {
-        record(
-            meter,
-            MetricType::WallClock,
-            sampler.wall_clock_time(),
-            is_start,
-        );
+    if active.contains(&MetricType::WallClock) {
+        let time = sampler.wall_clock_time();
+        record(meter, MetricType::WallClock, time, is_start);
     }
-    if has(MetricType::ProcessCpuUserTime) || has(MetricType::ProcessCpuSystemTime) {
-        let (user, system) = sampler.process_cpu();
-        if has(MetricType::ProcessCpuUserTime) {
-            record(meter, MetricType::ProcessCpuUserTime, user, is_start);
-        }
-        if has(MetricType::ProcessCpuSystemTime) {
-            record(meter, MetricType::ProcessCpuSystemTime, system, is_start);
-        }
+    let process = [
+        MetricType::ProcessCpuUserTime,
+        MetricType::ProcessCpuSystemTime,
+    ];
+    record_pair(meter, active, process, || sampler.process_cpu(), is_start);
+    let thread = [
+        MetricType::ThreadCpuUserTime,
+        MetricType::ThreadCpuSystemTime,
+    ];
+    record_pair(meter, active, thread, || sampler.thread_cpu(), is_start);
+}
+
+/// A `(user, system)` clock, sampled once when either of its two metrics is active.
+fn record_pair(
+    meter: &AttributeMeter,
+    active: &[MetricType],
+    metrics: [MetricType; 2],
+    sample: impl FnOnce() -> (f64, f64),
+    is_start: bool,
+) {
+    if !metrics.iter().any(|metric| active.contains(metric)) {
+        return;
     }
-    if has(MetricType::ThreadCpuUserTime) || has(MetricType::ThreadCpuSystemTime) {
-        let (user, system) = sampler.thread_cpu();
-        if has(MetricType::ThreadCpuUserTime) {
-            record(meter, MetricType::ThreadCpuUserTime, user, is_start);
-        }
-        if has(MetricType::ThreadCpuSystemTime) {
-            record(meter, MetricType::ThreadCpuSystemTime, system, is_start);
+    let (user, system) = sample();
+    for (metric, value) in metrics.into_iter().zip([user, system]) {
+        if active.contains(&metric) {
+            record(meter, metric, value, is_start);
         }
     }
 }

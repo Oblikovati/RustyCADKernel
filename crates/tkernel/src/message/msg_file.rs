@@ -133,18 +133,9 @@ impl MsgFile {
         file_name: &str,
         lang_ext: Option<&str>,
     ) -> Result<bool, Failure> {
-        let mut language = lang_ext.unwrap_or_default().to_owned();
-        if language.is_empty() {
-            language = self.source.variable("CSF_LANGUAGE").unwrap_or_default();
-        }
-        if language.is_empty() {
-            language = "us".to_owned();
-        }
+        let language = self.language(lang_ext);
         let mut path = file_name.to_owned();
-        let directory = env_name
-            .filter(|name| !name.is_empty())
-            .and_then(|name| self.source.variable(name))
-            .unwrap_or_default();
+        let directory = self.directory(env_name);
         if !directory.is_empty() {
             if !directory.ends_with('/') {
                 path.insert(0, '/');
@@ -156,6 +147,26 @@ impl MsgFile {
         }
         path.push_str(&language);
         self.load_file(Some(&path))
+    }
+    /// The language extension: the argument, else `CSF_LANGUAGE`, else `us`.
+    fn language(&self, lang_ext: Option<&str>) -> String {
+        let language = lang_ext.unwrap_or_default().to_owned();
+        if !language.is_empty() {
+            return language;
+        }
+        let language = self.source.variable("CSF_LANGUAGE").unwrap_or_default();
+        if language.is_empty() {
+            "us".to_owned()
+        } else {
+            language
+        }
+    }
+    /// The directory named by the environment variable, empty when unnamed or unset.
+    fn directory(&self, env_name: Option<&str>) -> String {
+        env_name
+            .filter(|name| !name.is_empty())
+            .and_then(|name| self.source.variable(name))
+            .unwrap_or_default()
     }
     /// Parses messages from memory; a negative length reads up to the first NUL;
     /// `catalog.load_from_string(b".key\ntext", -1)?`.
