@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    app_par_curves as apc, bndlib, fem_tool, gc, gce, gcpnts, geom_tools, gprop, hermit, int_ana,
-    int_ana2d, lprop, pc2d, pc3d,
+    app_par_curves as apc, bndlib, fem_tool, gc, gce, gcpnts, geom_tools, geom2d_convert as g2c,
+    gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -165,6 +165,17 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gcp_tdefl", gcpnts::tdefl_case),
     ("gcp_arc_step", gcpnts::arc_step_case),
     ("gcp_dist", gcpnts::dist_case),
+    // Geom2dConvert (gb_probe/geom2d_convert.rs)
+    ("g2c_to_bspline", g2c::to_bspline_case),
+    ("g2c_split", g2c::split_case),
+    ("g2c_knot_split", g2c::knot_split_case),
+    ("g2c_bezier", g2c::bezier_case),
+    ("g2c_comp", g2c::comp_case),
+    ("g2c_concat", g2c::concat_case),
+    ("g2c_c0c1", g2c::c0c1_case),
+    ("g2c_approx", g2c::approx_case),
+    ("g2c_arcs", g2c::arcs_case),
+    ("g2c_ppoint", g2c::ppoint_case),
 ];
 
 fn main() {

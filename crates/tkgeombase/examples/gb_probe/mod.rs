@@ -9,6 +9,7 @@ pub mod fem_tool;
 pub mod gc;
 pub mod gce;
 pub mod gcpnts;
+pub mod geom2d_convert;
 pub mod geom_tools;
 pub mod gprop;
 pub mod hermit;

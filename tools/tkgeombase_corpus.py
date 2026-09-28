@@ -33,3 +33,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_bndlib').append_bndlib_requests(requests)
     # CPnts and GCPnts (tkgeombase_corpus_gcpnts.py)
     __import__('tkgeombase_corpus_gcpnts').append_gcpnts_requests(requests)
+    # Geom2dConvert (tkgeombase_corpus_geom2dconvert.py)
+    __import__('tkgeombase_corpus_geom2dconvert').append_geom2dconvert_requests(requests)
