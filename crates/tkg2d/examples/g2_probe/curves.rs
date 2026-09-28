@@ -167,11 +167,11 @@ pub fn conic_case(values: &[f64]) {
     summary(&*c, &u);
     c.set_location(p);
     conic_common(&*c);
-    c.set_x_axis(a);
+    attempt(|| c.set_x_axis(a));
     conic_common(&*c);
-    c.set_y_axis(a);
+    attempt(|| c.set_y_axis(a));
     conic_common(&*c);
-    c.set_axis(Axis22d::new(p, a.direction(), true));
+    c.set_axis(Axis22d::new(p, a.direction(), true).unwrap());
     conic_common(&*c);
     c.reverse().unwrap();
     conic_common(&*c);

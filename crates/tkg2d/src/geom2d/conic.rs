@@ -33,6 +33,14 @@ pub trait Geom2dConic: Geom2dCurve {
     /// Change the protected `pos` under the object's lock; only Geom2d calls it.
     #[doc(hidden)]
     fn change_position(&self, access: ProtectedAccess, change: &mut dyn FnMut(&mut Axis22d));
+    /// Change the protected `pos` by a step that can raise, keeping what it already
+    /// changed, as the native member does; only Geom2d calls it.
+    #[doc(hidden)]
+    fn try_change_position(
+        &self,
+        access: ProtectedAccess,
+        change: &mut dyn FnMut(&mut Axis22d) -> Result<(), Failure>,
+    ) -> Result<(), Failure>;
     /// Eccentricity: 0 circle, < 1 ellipse, 1 parabola, > 1 hyperbola (`Eccentricity`);
     /// `conic.eccentricity()?`.
     fn eccentricity(&self) -> Result<f64, Failure>;
@@ -40,13 +48,13 @@ pub trait Geom2dConic: Geom2dCurve {
     fn set_axis(&self, axis: Axis22d) {
         self.change_position(PROTECTED, &mut |position| position.set_axis(axis));
     }
-    /// Set origin and X direction, keeping the handedness (`SetXAxis`); `conic.set_x_axis(axis)`.
-    fn set_x_axis(&self, axis: Axis2d) {
-        self.change_position(PROTECTED, &mut |position| position.set_x_axis(axis));
+    /// Set origin and X direction, keeping the handedness (`SetXAxis`); `conic.set_x_axis(axis)?`.
+    fn set_x_axis(&self, axis: Axis2d) -> Result<(), Failure> {
+        self.try_change_position(PROTECTED, &mut |position| position.set_x_axis(axis))
     }
-    /// Set origin and Y direction, keeping the handedness (`SetYAxis`); `conic.set_y_axis(axis)`.
-    fn set_y_axis(&self, axis: Axis2d) {
-        self.change_position(PROTECTED, &mut |position| position.set_y_axis(axis));
+    /// Set origin and Y direction, keeping the handedness (`SetYAxis`); `conic.set_y_axis(axis)?`.
+    fn set_y_axis(&self, axis: Axis2d) -> Result<(), Failure> {
+        self.try_change_position(PROTECTED, &mut |position| position.set_y_axis(axis))
     }
     /// Move the origin (`SetLocation`); `conic.set_location(Point2::new(1.0, 2.0))`.
     fn set_location(&self, point: Point2) {
@@ -70,15 +78,13 @@ pub trait Geom2dConic: Geom2dCurve {
 impl_transient_interface!(dyn Geom2dConic, "Geom2d_Conic", dyn Geom2dCurve);
 
 /// `Geom2d_Conic::Reverse`: reverse the Y direction of the local system;
-/// `reverse_conic_position(&mut position)`.
-pub fn reverse_conic_position(position: &mut Axis22d) {
+/// `reverse_conic_position(&mut position)?`.
+pub fn reverse_conic_position(position: &mut Axis22d) -> Result<(), Failure> {
     let mut temp = position.y_direction();
     temp.reverse();
-    position.set_axis(Axis22d::with_directions(
-        position.location(),
-        position.x_direction(),
-        temp,
-    ));
+    let reversed = Axis22d::with_directions(position.location(), position.x_direction(), temp)?;
+    position.set_axis(reversed);
+    Ok(())
 }
 
 /// `Geom2d_Conic::DumpJson`; `dump_conic(&mut stream, -1, position)?`.
@@ -100,6 +106,15 @@ macro_rules! impl_conic_position {
             change: &mut dyn FnMut(&mut rustycad_tkmath::gp::Axis22d),
         ) {
             change(&mut self.state.write().pos);
+        }
+        fn try_change_position(
+            &self,
+            _access: $crate::geom2d::cell::ProtectedAccess,
+            change: &mut dyn FnMut(
+                &mut rustycad_tkmath::gp::Axis22d,
+            ) -> Result<(), rustycad_tkernel::standard::Failure>,
+        ) -> Result<(), rustycad_tkernel::standard::Failure> {
+            change(&mut self.state.write().pos)
         }
     };
 }

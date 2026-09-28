@@ -211,7 +211,7 @@ pub fn curve(r: &mut Reader) -> Result<Handle<dyn Geom2dCurve>, Failure> {
         }
         9 => {
             let (p, x, y) = (r.pnt(), r.dir(), r.dir());
-            let frame = Axis22d::with_directions(p, x, y);
+            let frame = Axis22d::with_directions(p, x, y)?;
             Ok(Handle::new(Geom2dCircle::new(frame, r.real())?).cast())
         }
         10 => {

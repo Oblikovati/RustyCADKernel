@@ -79,7 +79,7 @@ impl Geom2dParabola {
     /// `Geom2dParabola::from_axis(axis, 1.0, true)?`.
     pub fn from_axis(mirror_axis: Axis2d, focal: f64, sense: bool) -> Result<Self, Failure> {
         let focal_length: f64 = checked_focal(focal)?;
-        let pos = Axis22d::from_axis(mirror_axis, sense);
+        let pos = Axis22d::from_axis(mirror_axis, sense)?;
         Ok(Self::stored(ParabolaState { pos, focal_length }))
     }
     /// Parabola in a coordinate system (`Geom2d_Parabola(gp_Ax22d, Focal)`);
@@ -155,8 +155,7 @@ impl Geom2dGeometry for Geom2dParabola {
 }
 impl Geom2dCurve for Geom2dParabola {
     fn reverse(&self) -> Result<(), Failure> {
-        reverse_conic_position(&mut self.state.write().pos);
-        Ok(())
+        reverse_conic_position(&mut self.state.write().pos)
     }
     fn reversed_parameter(&self, u: f64) -> f64 {
         -u

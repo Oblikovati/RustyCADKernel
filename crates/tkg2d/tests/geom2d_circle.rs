@@ -60,7 +60,8 @@ fn Geom2d_CircleTest__ConstructFromAx22d() {
         Point2::new(3.0, 4.0),
         Direction2::new(1.0, 0.0).unwrap(),
         Direction2::new(0.0, 1.0).unwrap(),
-    );
+    )
+    .unwrap();
     let aCircle = Handle::new(Geom2dCircle::new(anAxis, 7.0).unwrap());
 
     EXPECT_NEAR(aCircle.radius(), 7.0, precision::confusion());

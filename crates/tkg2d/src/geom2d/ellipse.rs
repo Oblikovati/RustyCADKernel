@@ -87,7 +87,7 @@ impl Geom2dEllipse {
         sense: bool,
     ) -> Result<Self, Failure> {
         check_radii(major_radius, minor_radius)?;
-        let pos = Axis22d::from_axis(major_axis, sense);
+        let pos = Axis22d::from_axis(major_axis, sense)?;
         Ok(Self::stored(EllipseState {
             pos,
             major_radius,
@@ -216,8 +216,7 @@ impl Geom2dGeometry for Geom2dEllipse {
 }
 impl Geom2dCurve for Geom2dEllipse {
     fn reverse(&self) -> Result<(), Failure> {
-        reverse_conic_position(&mut self.state.write().pos);
-        Ok(())
+        reverse_conic_position(&mut self.state.write().pos)
     }
     fn reversed_parameter(&self, u: f64) -> f64 {
         2. * PI - u
