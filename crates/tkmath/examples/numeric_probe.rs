@@ -328,6 +328,13 @@ fn main() {
             "bsps_resolution" => bsps_probe::resolution_case(&values),
             "bsps_interpolate" => bsps_probe::interpolate_case(&values),
             "bsps_function" => bsps_probe::function_case(&values),
+            "cv_conic" => convert_probe::conic_case(&values),
+            "cv_cossin" => convert_probe::cossin_case(&values),
+            "cv_polycs" => convert_probe::polycs_case(&values),
+            "cv_surface" => convert_probe::surface_case(&values),
+            "cv_bezier" => convert_probe::bezier_case(&values),
+            "cv_comppoly" => convert_probe::comppoly_case(&values),
+            "cv_grid" => convert_probe::grid_case(&values),
             "modern_lbfgs" => modern_opt_probe::modern_lbfgs_case(&values),
             "modern_newton" => modern_opt_probe::modern_newton_case(&values),
             "modern_global" => global_modern_probe::modern_global_case(&values),
@@ -497,6 +504,7 @@ mod global_modern_probe;
 
 mod bspl_probe;
 mod bsps_probe;
+mod convert_probe;
 mod cslib_probe;
 mod elementary_probe;
 mod plib_probe;

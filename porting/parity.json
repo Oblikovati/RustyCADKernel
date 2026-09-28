@@ -20370,6 +20370,846 @@
       "rust_item": "rustycad_tkmath::gp::QuaternionSLerp::interpolated",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Trsf::SetTransformation(const gp_Ax3&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Trsf.hxx",
+      "rust_item": "rustycad_tkmath::gp::Transform3::transformation_to",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Trsf2d::SetTransformation(const gp_Ax2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Trsf2d.hxx",
+      "rust_item": "rustycad_tkmath::gp::Transform2::transformation_to",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Trsf::SetTransformation(const gp_Ax3&,const gp_Ax3&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Trsf.hxx",
+      "rust_item": "rustycad_tkmath::gp::Transform3::transformation_between",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "gp_Trsf2d::SetTransformation(const gp_Ax2d&,const gp_Ax2d&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/gp/gp_Trsf2d.hxx",
+      "rust_item": "rustycad_tkmath::gp::Transform2::transformation_between",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "NCollection_Vec2::operator[]",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "NCollection_Vec2::operator/(Element_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec2.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec2::div",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "NCollection_Vec3::operator[]",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "NCollection_Vec3::operator+",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::add",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "NCollection_Vec3::operator-",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::sub",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "NCollection_Vec3::operator*(const Vec3&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::mul",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "NCollection_Vec3::operator/(Element_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec3.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec3::div",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "NCollection_Vec4::operator[]",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "NCollection_Vec4::operator/(Element_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Vec4.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Vec4::div",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping added for BVH; float/double scalar operators and native tie rules preserved. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::Degree() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::NbPoles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::NbKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::nb_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::IsPeriodic() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::Pole(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::Weight(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::weight",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::Knot(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::Multiplicity(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::multiplicity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::Poles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::Weights() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::Knots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::Multiplicities() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::BuildCosAndSin(Convert_ParameterisationType,occ::handle<NCollection_HArray1<double>>&,occ::handle<NCollection_HArray1<double>>&,occ::handle<NCollection_HArray1<double>>&,int&,occ::handle<NCollection_HArray1<double>>&,occ::handle<NCollection_HArray1<int>>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::build_cos_and_sin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConicToBSplineCurve::BuildCosAndSin(Convert_ParameterisationType,double,double,occ::handle<NCollection_HArray1<double>>&,occ::handle<NCollection_HArray1<double>>&,occ::handle<NCollection_HArray1<double>>&,int&,occ::handle<NCollection_HArray1<double>>&,occ::handle<NCollection_HArray1<int>>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConicToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::build_cos_and_sin_trimmed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CircleToBSplineCurve::Convert_CircleToBSplineCurve(const gp_Circ2d&,Convert_ParameterisationType)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CircleToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::from_circle",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CircleToBSplineCurve::Convert_CircleToBSplineCurve(const gp_Circ2d&,double,double,Convert_ParameterisationType)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CircleToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::from_circle_arc",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_EllipseToBSplineCurve::Convert_EllipseToBSplineCurve(const gp_Elips2d&,Convert_ParameterisationType)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_EllipseToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::from_ellipse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_EllipseToBSplineCurve::Convert_EllipseToBSplineCurve(const gp_Elips2d&,double,double,Convert_ParameterisationType)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_EllipseToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::from_ellipse_arc",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_HyperbolaToBSplineCurve::Convert_HyperbolaToBSplineCurve(const gp_Hypr2d&,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_HyperbolaToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::from_hyperbola",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ParabolaToBSplineCurve::Convert_ParabolaToBSplineCurve(const gp_Parab2d&,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ParabolaToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::ConicToBSplineCurve::from_parabola",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ParameterisationType",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ParameterisationType.hxx",
+      "rust_item": "rustycad_tkmath::convert::ParameterisationType",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CosAndSinEvalFunction",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CosAndSinEvalFunction.hxx",
+      "rust_item": "rustycad_tkmath::convert::CosAndSinEvalFunction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "BuildPolynomialCosAndSin(double,double,int,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_PolynomialCosAndSin.hxx",
+      "rust_item": "rustycad_tkmath::convert::build_polynomial_cos_and_sin",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::UDegree() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::VDegree() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::NbUPoles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::nb_u_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::NbVPoles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::nb_v_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::NbUKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::nb_u_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::NbVKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::nb_v_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::IsUPeriodic() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::IsVPeriodic() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::Poles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::Weights() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::weights",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::UKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::VKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::UMultiplicities() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::VMultiplicities() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::Pole(int,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::pole",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::Weight(int,int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::weight",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::UKnot(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::VKnot(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_knot",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::UMultiplicity(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::u_multiplicity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ElementarySurfaceToBSplineSurface::VMultiplicity(int) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ElementarySurfaceToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::v_multiplicity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_SphereToBSplineSurface::Convert_SphereToBSplineSurface(const gp_Sphere&,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_SphereToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_sphere_patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_SphereToBSplineSurface::Convert_SphereToBSplineSurface(const gp_Sphere&,double,double,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_SphereToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_sphere_band",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_SphereToBSplineSurface::Convert_SphereToBSplineSurface(const gp_Sphere&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_SphereToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_sphere",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface(const gp_Torus&,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_TorusToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_torus_patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface(const gp_Torus&,double,double,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_TorusToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_torus_band",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurface::Convert_TorusToBSplineSurface(const gp_Torus&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_TorusToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_torus",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CylinderToBSplineSurface::Convert_CylinderToBSplineSurface(const gp_Cylinder&,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CylinderToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_cylinder_patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CylinderToBSplineSurface::Convert_CylinderToBSplineSurface(const gp_Cylinder&,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CylinderToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_cylinder",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConeToBSplineSurface::Convert_ConeToBSplineSurface(const gp_Cone&,double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConeToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_cone_patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_ConeToBSplineSurface::Convert_ConeToBSplineSurface(const gp_Cone&,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_ConeToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkmath::convert::ElementarySurfaceToBSplineSurface::from_cone",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::Convert_CompBezierCurvesToBSplineCurveBase(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::AddCurve(const NCollection_Array1<PointType>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::add_curve",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::Perform()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::perform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::Degree() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::NbPoles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::nb_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::Poles(NCollection_Array1<PointType>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::NbKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::nb_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveBase<PointType,VecType>::KnotsAndMults(NCollection_Array1<double>&,NCollection_Array1<int>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurveBase.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurveBase::knots_and_mults",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurve::Convert_CompBezierCurvesToBSplineCurve(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurvesToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurvesToBSplineCurve::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurves2dToBSplineCurve2d::Convert_CompBezierCurves2dToBSplineCurve2d(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompBezierCurves2dToBSplineCurve2d.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompBezierCurves2dToBSplineCurve2d::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Convert_CompPolynomialToPoles(int,int,int,int,const occ::handle<NCollection_HArray1<int>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray2<double>>&,const occ::handle<NCollection_HArray1<double>>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::from_uniform_continuity",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Convert_CompPolynomialToPoles(int,int,int,const NCollection_Array1<int>&,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array2<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::from_continuities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Convert_CompPolynomialToPoles(int,int,int,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::from_single_span",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::NbPoles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::nb_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Poles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Poles(occ::handle<NCollection_HArray2<double>>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::poles_copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Degree() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::NbKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::nb_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Knots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Knots(occ::handle<NCollection_HArray1<double>>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::knots_copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Multiplicities() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::Multiplicities(occ::handle<NCollection_HArray1<int>>&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::multiplicities_copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPoles::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_CompPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::CompPolynomialToPoles::is_done",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::Convert_GridPolynomialToPoles(int,int,const NCollection_Array1<int>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::from_single_patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::Convert_GridPolynomialToPoles(int,int,const occ::handle<NCollection_HArray1<int>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::from_single_patch",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::Convert_GridPolynomialToPoles(int,int,int,int,int,int,const NCollection_Array2<int>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::from_grid",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::Convert_GridPolynomialToPoles(int,int,int,int,int,int,const occ::handle<NCollection_HArray2<int>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::from_grid",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::NbUPoles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::nb_u_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::NbVPoles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::nb_v_poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::Poles() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::poles",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::UDegree() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::u_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::VDegree() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::v_degree",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::NbUKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::nb_u_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::NbVKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::nb_v_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::UKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::u_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::VKnots() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::v_knots",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::UMultiplicities() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::u_multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::VMultiplicities() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::v_multiplicities",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPoles::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/Convert/Convert_GridPolynomialToPoles.hxx",
+      "rust_item": "rustycad_tkmath::convert::GridPolynomialToPoles::is_done",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping; subclass constructors become named constructors of ConicToBSplineCurve/ElementarySurfaceToBSplineSurface, C++ output references and handle outputs become returned values, argument groups become PolynomialSpans/PolynomialGrid structs, exceptions and undefined native accesses become Failure results. Authoritative toolkit API enumeration pending."
     }
   ],
   "tests": [
@@ -67198,6 +68038,720 @@
       "rust_target": "bsplslib_cache",
       "rust_test": "BSplSLib_CacheTest__D1_DifferentDegrees_VGreaterU",
       "rust_source": "crates/tkmath/tests/bsplslib_cache.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CircleToBSplineCurveTest.FullCircle_TgtThetaOver2",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CircleToBSplineCurve_Test.cxx",
+      "source_sha256": "ec1064df95b83c9bf1e7778f74b37710b18cc023c62bb9d708723aebf8ae4e03",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_circle_to_bspline_curve",
+      "rust_test": "Convert_CircleToBSplineCurveTest__FullCircle_TgtThetaOver2",
+      "rust_source": "crates/tkmath/tests/convert_circle_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CircleToBSplineCurveTest.FullCircle_RationalC1",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CircleToBSplineCurve_Test.cxx",
+      "source_sha256": "ec1064df95b83c9bf1e7778f74b37710b18cc023c62bb9d708723aebf8ae4e03",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_circle_to_bspline_curve",
+      "rust_test": "Convert_CircleToBSplineCurveTest__FullCircle_RationalC1",
+      "rust_source": "crates/tkmath/tests/convert_circle_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CircleToBSplineCurveTest.Arc_TgtThetaOver2",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CircleToBSplineCurve_Test.cxx",
+      "source_sha256": "ec1064df95b83c9bf1e7778f74b37710b18cc023c62bb9d708723aebf8ae4e03",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_circle_to_bspline_curve",
+      "rust_test": "Convert_CircleToBSplineCurveTest__Arc_TgtThetaOver2",
+      "rust_source": "crates/tkmath/tests/convert_circle_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CircleToBSplineCurveTest.Arc_QuasiAngular",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CircleToBSplineCurve_Test.cxx",
+      "source_sha256": "ec1064df95b83c9bf1e7778f74b37710b18cc023c62bb9d708723aebf8ae4e03",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_circle_to_bspline_curve",
+      "rust_test": "Convert_CircleToBSplineCurveTest__Arc_QuasiAngular",
+      "rust_source": "crates/tkmath/tests/convert_circle_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CircleToBSplineCurveTest.Arc_Polynomial",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CircleToBSplineCurve_Test.cxx",
+      "source_sha256": "ec1064df95b83c9bf1e7778f74b37710b18cc023c62bb9d708723aebf8ae4e03",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_circle_to_bspline_curve",
+      "rust_test": "Convert_CircleToBSplineCurveTest__Arc_Polynomial",
+      "rust_source": "crates/tkmath/tests/convert_circle_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CircleToBSplineCurveTest.WeightsArePositive",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CircleToBSplineCurve_Test.cxx",
+      "source_sha256": "ec1064df95b83c9bf1e7778f74b37710b18cc023c62bb9d708723aebf8ae4e03",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_circle_to_bspline_curve",
+      "rust_test": "Convert_CircleToBSplineCurveTest__WeightsArePositive",
+      "rust_source": "crates/tkmath/tests/convert_circle_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveTest.SingleLinearBezier",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompBezierCurvesToBSplineCurve_Test.cxx",
+      "source_sha256": "cf7fe802e19445343bd1e706c33a7515a76bfe2bad67a31b8238b2123036b280",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_bezier_curves_to_bspline_curve",
+      "rust_test": "Convert_CompBezierCurvesToBSplineCurveTest__SingleLinearBezier",
+      "rust_source": "crates/tkmath/tests/convert_comp_bezier_curves_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveTest.SingleCubicBezier",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompBezierCurvesToBSplineCurve_Test.cxx",
+      "source_sha256": "cf7fe802e19445343bd1e706c33a7515a76bfe2bad67a31b8238b2123036b280",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_bezier_curves_to_bspline_curve",
+      "rust_test": "Convert_CompBezierCurvesToBSplineCurveTest__SingleCubicBezier",
+      "rust_source": "crates/tkmath/tests/convert_comp_bezier_curves_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveTest.TwoAdjacentBeziers_C0",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompBezierCurvesToBSplineCurve_Test.cxx",
+      "source_sha256": "cf7fe802e19445343bd1e706c33a7515a76bfe2bad67a31b8238b2123036b280",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_bezier_curves_to_bspline_curve",
+      "rust_test": "Convert_CompBezierCurvesToBSplineCurveTest__TwoAdjacentBeziers_C0",
+      "rust_source": "crates/tkmath/tests/convert_comp_bezier_curves_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveTest.TwoAdjacentBeziers_C1",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompBezierCurvesToBSplineCurve_Test.cxx",
+      "source_sha256": "cf7fe802e19445343bd1e706c33a7515a76bfe2bad67a31b8238b2123036b280",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_bezier_curves_to_bspline_curve",
+      "rust_test": "Convert_CompBezierCurvesToBSplineCurveTest__TwoAdjacentBeziers_C1",
+      "rust_source": "crates/tkmath/tests/convert_comp_bezier_curves_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurvesToBSplineCurveTest.MixedDegreeBeziers",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompBezierCurvesToBSplineCurve_Test.cxx",
+      "source_sha256": "cf7fe802e19445343bd1e706c33a7515a76bfe2bad67a31b8238b2123036b280",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_bezier_curves_to_bspline_curve",
+      "rust_test": "Convert_CompBezierCurvesToBSplineCurveTest__MixedDegreeBeziers",
+      "rust_source": "crates/tkmath/tests/convert_comp_bezier_curves_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurves2dToBSplineCurve2dTest.SingleLinear2d",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompBezierCurvesToBSplineCurve_Test.cxx",
+      "source_sha256": "cf7fe802e19445343bd1e706c33a7515a76bfe2bad67a31b8238b2123036b280",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_bezier_curves_to_bspline_curve",
+      "rust_test": "Convert_CompBezierCurves2dToBSplineCurve2dTest__SingleLinear2d",
+      "rust_source": "crates/tkmath/tests/convert_comp_bezier_curves_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompBezierCurves2dToBSplineCurve2dTest.TwoAdjacent2d_C1",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompBezierCurvesToBSplineCurve_Test.cxx",
+      "source_sha256": "cf7fe802e19445343bd1e706c33a7515a76bfe2bad67a31b8238b2123036b280",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_bezier_curves_to_bspline_curve",
+      "rust_test": "Convert_CompBezierCurves2dToBSplineCurve2dTest__TwoAdjacent2d_C1",
+      "rust_source": "crates/tkmath/tests/convert_comp_bezier_curves_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPolesTest.SingleLinearPolynomial",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompPolynomialToPoles_Test.cxx",
+      "source_sha256": "e707b22db2bf324054f70bd36e15f4a8326c132c832c19286edbf2b17462f791",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_polynomial_to_poles",
+      "rust_test": "Convert_CompPolynomialToPolesTest__SingleLinearPolynomial",
+      "rust_source": "crates/tkmath/tests/convert_comp_polynomial_to_poles.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPolesTest.SingleQuadraticPolynomial",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompPolynomialToPoles_Test.cxx",
+      "source_sha256": "e707b22db2bf324054f70bd36e15f4a8326c132c832c19286edbf2b17462f791",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_polynomial_to_poles",
+      "rust_test": "Convert_CompPolynomialToPolesTest__SingleQuadraticPolynomial",
+      "rust_source": "crates/tkmath/tests/convert_comp_polynomial_to_poles.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPolesTest.TwoSpansUniformContinuity",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompPolynomialToPoles_Test.cxx",
+      "source_sha256": "e707b22db2bf324054f70bd36e15f4a8326c132c832c19286edbf2b17462f791",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_polynomial_to_poles",
+      "rust_test": "Convert_CompPolynomialToPolesTest__TwoSpansUniformContinuity",
+      "rust_source": "crates/tkmath/tests/convert_comp_polynomial_to_poles.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CompPolynomialToPolesTest.ThreeDimensional",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CompPolynomialToPoles_Test.cxx",
+      "source_sha256": "e707b22db2bf324054f70bd36e15f4a8326c132c832c19286edbf2b17462f791",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_comp_polynomial_to_poles",
+      "rust_test": "Convert_CompPolynomialToPolesTest__ThreeDimensional",
+      "rust_source": "crates/tkmath/tests/convert_comp_polynomial_to_poles.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPolesTest.SinglePlanarPatch",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_GridPolynomialToPoles_Test.cxx",
+      "source_sha256": "56f49e5d4a93e0830a97f91c2b08d79f7c8b13a1df7fe6dfc4f6072a89fe0c32",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_grid_polynomial_to_poles",
+      "rust_test": "Convert_GridPolynomialToPolesTest__SinglePlanarPatch",
+      "rust_source": "crates/tkmath/tests/convert_grid_polynomial_to_poles.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_GridPolynomialToPolesTest.QueryMethods",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_GridPolynomialToPoles_Test.cxx",
+      "source_sha256": "56f49e5d4a93e0830a97f91c2b08d79f7c8b13a1df7fe6dfc4f6072a89fe0c32",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_grid_polynomial_to_poles",
+      "rust_test": "Convert_GridPolynomialToPolesTest__QueryMethods",
+      "rust_source": "crates/tkmath/tests/convert_grid_polynomial_to_poles.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurfaceTest.FullTorus",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_TorusToBSplineSurface_Test.cxx",
+      "source_sha256": "27f739cb574546617fd8af79a6f5b2414b23dc94327b12fd782f922cae307868",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_torus_to_bspline_surface",
+      "rust_test": "Convert_TorusToBSplineSurfaceTest__FullTorus",
+      "rust_source": "crates/tkmath/tests/convert_torus_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurfaceTest.TrimmedUV",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_TorusToBSplineSurface_Test.cxx",
+      "source_sha256": "27f739cb574546617fd8af79a6f5b2414b23dc94327b12fd782f922cae307868",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_torus_to_bspline_surface",
+      "rust_test": "Convert_TorusToBSplineSurfaceTest__TrimmedUV",
+      "rust_source": "crates/tkmath/tests/convert_torus_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurfaceTest.UTrimmed",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_TorusToBSplineSurface_Test.cxx",
+      "source_sha256": "27f739cb574546617fd8af79a6f5b2414b23dc94327b12fd782f922cae307868",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_torus_to_bspline_surface",
+      "rust_test": "Convert_TorusToBSplineSurfaceTest__UTrimmed",
+      "rust_source": "crates/tkmath/tests/convert_torus_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurfaceTest.VTrimmed",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_TorusToBSplineSurface_Test.cxx",
+      "source_sha256": "27f739cb574546617fd8af79a6f5b2414b23dc94327b12fd782f922cae307868",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_torus_to_bspline_surface",
+      "rust_test": "Convert_TorusToBSplineSurfaceTest__VTrimmed",
+      "rust_source": "crates/tkmath/tests/convert_torus_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurfaceTest.WeightsArePositive",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_TorusToBSplineSurface_Test.cxx",
+      "source_sha256": "27f739cb574546617fd8af79a6f5b2414b23dc94327b12fd782f922cae307868",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_torus_to_bspline_surface",
+      "rust_test": "Convert_TorusToBSplineSurfaceTest__WeightsArePositive",
+      "rust_source": "crates/tkmath/tests/convert_torus_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurfaceTest.KnotsAreMonotonic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_TorusToBSplineSurface_Test.cxx",
+      "source_sha256": "27f739cb574546617fd8af79a6f5b2414b23dc94327b12fd782f922cae307868",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_torus_to_bspline_surface",
+      "rust_test": "Convert_TorusToBSplineSurfaceTest__KnotsAreMonotonic",
+      "rust_source": "crates/tkmath/tests/convert_torus_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_TorusToBSplineSurfaceTest.GeometricVerification",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_TorusToBSplineSurface_Test.cxx",
+      "source_sha256": "27f739cb574546617fd8af79a6f5b2414b23dc94327b12fd782f922cae307868",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_torus_to_bspline_surface",
+      "rust_test": "Convert_TorusToBSplineSurfaceTest__GeometricVerification",
+      "rust_source": "crates/tkmath/tests/convert_torus_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_SphereToBSplineSurfaceTest.FullSphere",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_SphereToBSplineSurface_Test.cxx",
+      "source_sha256": "f7b8330d16f77aa89b88039b0f5e2829afda9aca24751bf2a01cc56055bb5e74",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_sphere_to_bspline_surface",
+      "rust_test": "Convert_SphereToBSplineSurfaceTest__FullSphere",
+      "rust_source": "crates/tkmath/tests/convert_sphere_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_SphereToBSplineSurfaceTest.TrimmedUV",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_SphereToBSplineSurface_Test.cxx",
+      "source_sha256": "f7b8330d16f77aa89b88039b0f5e2829afda9aca24751bf2a01cc56055bb5e74",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_sphere_to_bspline_surface",
+      "rust_test": "Convert_SphereToBSplineSurfaceTest__TrimmedUV",
+      "rust_source": "crates/tkmath/tests/convert_sphere_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_SphereToBSplineSurfaceTest.UTrimmed",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_SphereToBSplineSurface_Test.cxx",
+      "source_sha256": "f7b8330d16f77aa89b88039b0f5e2829afda9aca24751bf2a01cc56055bb5e74",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_sphere_to_bspline_surface",
+      "rust_test": "Convert_SphereToBSplineSurfaceTest__UTrimmed",
+      "rust_source": "crates/tkmath/tests/convert_sphere_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_SphereToBSplineSurfaceTest.VTrimmed",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_SphereToBSplineSurface_Test.cxx",
+      "source_sha256": "f7b8330d16f77aa89b88039b0f5e2829afda9aca24751bf2a01cc56055bb5e74",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_sphere_to_bspline_surface",
+      "rust_test": "Convert_SphereToBSplineSurfaceTest__VTrimmed",
+      "rust_source": "crates/tkmath/tests/convert_sphere_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_SphereToBSplineSurfaceTest.KnotsAreMonotonic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_SphereToBSplineSurface_Test.cxx",
+      "source_sha256": "f7b8330d16f77aa89b88039b0f5e2829afda9aca24751bf2a01cc56055bb5e74",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_sphere_to_bspline_surface",
+      "rust_test": "Convert_SphereToBSplineSurfaceTest__KnotsAreMonotonic",
+      "rust_source": "crates/tkmath/tests/convert_sphere_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_SphereToBSplineSurfaceTest.GeometricVerification",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_SphereToBSplineSurface_Test.cxx",
+      "source_sha256": "f7b8330d16f77aa89b88039b0f5e2829afda9aca24751bf2a01cc56055bb5e74",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_sphere_to_bspline_surface",
+      "rust_test": "Convert_SphereToBSplineSurfaceTest__GeometricVerification",
+      "rust_source": "crates/tkmath/tests/convert_sphere_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CylinderToBSplineSurfaceTest.FullCylinder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CylinderToBSplineSurface_Test.cxx",
+      "source_sha256": "640541a7a95f695bac009f0911f52cb7e0428d0c7241262197b6de97aa02239c",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_cylinder_to_bspline_surface",
+      "rust_test": "Convert_CylinderToBSplineSurfaceTest__FullCylinder",
+      "rust_source": "crates/tkmath/tests/convert_cylinder_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CylinderToBSplineSurfaceTest.TrimmedCylinder",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CylinderToBSplineSurface_Test.cxx",
+      "source_sha256": "640541a7a95f695bac009f0911f52cb7e0428d0c7241262197b6de97aa02239c",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_cylinder_to_bspline_surface",
+      "rust_test": "Convert_CylinderToBSplineSurfaceTest__TrimmedCylinder",
+      "rust_source": "crates/tkmath/tests/convert_cylinder_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CylinderToBSplineSurfaceTest.WeightsArePositive",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CylinderToBSplineSurface_Test.cxx",
+      "source_sha256": "640541a7a95f695bac009f0911f52cb7e0428d0c7241262197b6de97aa02239c",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_cylinder_to_bspline_surface",
+      "rust_test": "Convert_CylinderToBSplineSurfaceTest__WeightsArePositive",
+      "rust_source": "crates/tkmath/tests/convert_cylinder_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CylinderToBSplineSurfaceTest.KnotsAreMonotonic",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CylinderToBSplineSurface_Test.cxx",
+      "source_sha256": "640541a7a95f695bac009f0911f52cb7e0428d0c7241262197b6de97aa02239c",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_cylinder_to_bspline_surface",
+      "rust_test": "Convert_CylinderToBSplineSurfaceTest__KnotsAreMonotonic",
+      "rust_source": "crates/tkmath/tests/convert_cylinder_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_CylinderToBSplineSurfaceTest.GeometricVerification",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_CylinderToBSplineSurface_Test.cxx",
+      "source_sha256": "640541a7a95f695bac009f0911f52cb7e0428d0c7241262197b6de97aa02239c",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_cylinder_to_bspline_surface",
+      "rust_test": "Convert_CylinderToBSplineSurfaceTest__GeometricVerification",
+      "rust_source": "crates/tkmath/tests/convert_cylinder_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_EllipseToBSplineCurveTest.FullEllipse_TgtThetaOver2",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_EllipseToBSplineCurve_Test.cxx",
+      "source_sha256": "158faf73c9a3e3d577d6327f3984f05929c3bc90c97350bf872e6fa290d63b73",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_ellipse_to_bspline_curve",
+      "rust_test": "Convert_EllipseToBSplineCurveTest__FullEllipse_TgtThetaOver2",
+      "rust_source": "crates/tkmath/tests/convert_ellipse_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_EllipseToBSplineCurveTest.Arc_TgtThetaOver2",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_EllipseToBSplineCurve_Test.cxx",
+      "source_sha256": "158faf73c9a3e3d577d6327f3984f05929c3bc90c97350bf872e6fa290d63b73",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_ellipse_to_bspline_curve",
+      "rust_test": "Convert_EllipseToBSplineCurveTest__Arc_TgtThetaOver2",
+      "rust_source": "crates/tkmath/tests/convert_ellipse_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_EllipseToBSplineCurveTest.FullEllipse_RationalC1",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_EllipseToBSplineCurve_Test.cxx",
+      "source_sha256": "158faf73c9a3e3d577d6327f3984f05929c3bc90c97350bf872e6fa290d63b73",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_ellipse_to_bspline_curve",
+      "rust_test": "Convert_EllipseToBSplineCurveTest__FullEllipse_RationalC1",
+      "rust_source": "crates/tkmath/tests/convert_ellipse_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_EllipseToBSplineCurveTest.WeightsArePositive",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_EllipseToBSplineCurve_Test.cxx",
+      "source_sha256": "158faf73c9a3e3d577d6327f3984f05929c3bc90c97350bf872e6fa290d63b73",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_ellipse_to_bspline_curve",
+      "rust_test": "Convert_EllipseToBSplineCurveTest__WeightsArePositive",
+      "rust_source": "crates/tkmath/tests/convert_ellipse_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_ConeToBSplineSurfaceTest.FullCone",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_ConeToBSplineSurface_Test.cxx",
+      "source_sha256": "eb1179818f2e8a53116188cb7829146ecf3e815176c521f1fbf1998239b64daa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_cone_to_bspline_surface",
+      "rust_test": "Convert_ConeToBSplineSurfaceTest__FullCone",
+      "rust_source": "crates/tkmath/tests/convert_cone_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_ConeToBSplineSurfaceTest.TrimmedCone",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_ConeToBSplineSurface_Test.cxx",
+      "source_sha256": "eb1179818f2e8a53116188cb7829146ecf3e815176c521f1fbf1998239b64daa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_cone_to_bspline_surface",
+      "rust_test": "Convert_ConeToBSplineSurfaceTest__TrimmedCone",
+      "rust_source": "crates/tkmath/tests/convert_cone_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_ConeToBSplineSurfaceTest.WeightsArePositive",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_ConeToBSplineSurface_Test.cxx",
+      "source_sha256": "eb1179818f2e8a53116188cb7829146ecf3e815176c521f1fbf1998239b64daa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_cone_to_bspline_surface",
+      "rust_test": "Convert_ConeToBSplineSurfaceTest__WeightsArePositive",
+      "rust_source": "crates/tkmath/tests/convert_cone_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_ConeToBSplineSurfaceTest.GeometricVerification",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_ConeToBSplineSurface_Test.cxx",
+      "source_sha256": "eb1179818f2e8a53116188cb7829146ecf3e815176c521f1fbf1998239b64daa",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_cone_to_bspline_surface",
+      "rust_test": "Convert_ConeToBSplineSurfaceTest__GeometricVerification",
+      "rust_source": "crates/tkmath/tests/convert_cone_to_bspline_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_ParabolaToBSplineCurveTest.BasicConversion",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_ParabolaToBSplineCurve_Test.cxx",
+      "source_sha256": "02c2f1f3a02e8272a14e8728c3b7f265dccef324225e60e0c89c4bd955bb6c7d",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_parabola_to_bspline_curve",
+      "rust_test": "Convert_ParabolaToBSplineCurveTest__BasicConversion",
+      "rust_source": "crates/tkmath/tests/convert_parabola_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_ParabolaToBSplineCurveTest.SmallRange",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_ParabolaToBSplineCurve_Test.cxx",
+      "source_sha256": "02c2f1f3a02e8272a14e8728c3b7f265dccef324225e60e0c89c4bd955bb6c7d",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_parabola_to_bspline_curve",
+      "rust_test": "Convert_ParabolaToBSplineCurveTest__SmallRange",
+      "rust_source": "crates/tkmath/tests/convert_parabola_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_ParabolaToBSplineCurveTest.AllWeightsAreOne",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_ParabolaToBSplineCurve_Test.cxx",
+      "source_sha256": "02c2f1f3a02e8272a14e8728c3b7f265dccef324225e60e0c89c4bd955bb6c7d",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_parabola_to_bspline_curve",
+      "rust_test": "Convert_ParabolaToBSplineCurveTest__AllWeightsAreOne",
+      "rust_source": "crates/tkmath/tests/convert_parabola_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_HyperbolaToBSplineCurveTest.BasicConversion",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_HyperbolaToBSplineCurve_Test.cxx",
+      "source_sha256": "1cab9a86af83e6afa3100bab8739445a9cd4fd9464705158f6c299f7c2e257f1",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_hyperbola_to_bspline_curve",
+      "rust_test": "Convert_HyperbolaToBSplineCurveTest__BasicConversion",
+      "rust_source": "crates/tkmath/tests/convert_hyperbola_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_HyperbolaToBSplineCurveTest.LargeRange",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_HyperbolaToBSplineCurve_Test.cxx",
+      "source_sha256": "1cab9a86af83e6afa3100bab8739445a9cd4fd9464705158f6c299f7c2e257f1",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_hyperbola_to_bspline_curve",
+      "rust_test": "Convert_HyperbolaToBSplineCurveTest__LargeRange",
+      "rust_source": "crates/tkmath/tests/convert_hyperbola_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Convert_HyperbolaToBSplineCurveTest.WeightsArePositive",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/GTests/Convert_HyperbolaToBSplineCurve_Test.cxx",
+      "source_sha256": "1cab9a86af83e6afa3100bab8739445a9cd4fd9464705158f6c299f7c2e257f1",
+      "rust_package": "rustycad-tkmath",
+      "rust_target": "convert_hyperbola_to_bspline_curve",
+      "rust_test": "Convert_HyperbolaToBSplineCurveTest__WeightsArePositive",
+      "rust_source": "crates/tkmath/tests/convert_hyperbola_to_bspline_curve.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
