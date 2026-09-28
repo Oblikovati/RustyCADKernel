@@ -23,35 +23,9 @@ impl ResourceManager {
     /// The destination variable is read at save time, and write errors after a successful
     /// open are ignored, as natively.
     pub fn save(&self) -> bool {
-        let variable = format!("CSF_{}UserDefaults", self.name_text());
-        let directory = self
-            .host
-            .environment
-            .directory(&variable)
-            .map(|path| paths::path_bytes(&path))
-            .unwrap_or_default();
-        if directory.is_empty() {
-            self.verbose_trace(&[
-                b"Resource Manager Warning: environment variable \"",
-                variable.as_bytes(),
-                b"\" not set.  Cannot save resources.\n",
-            ]);
+        let Some(directory) = self.save_directory() else {
             return false;
-        }
-        let directory = AsciiString::from_raw(&directory);
-        if self
-            .host
-            .io
-            .create_directories(&paths::host_path(&directory))
-            .is_err()
-        {
-            self.verbose_trace(&[
-                b"Resource Manager: Error opening or creating directory \"",
-                directory.as_bytes(),
-                b"\". Permission denied. Cannot save resources.\n",
-            ]);
-            return false;
-        }
+        };
         let file = paths::resource_file(directory.as_bytes(), &self.name_text());
         let Ok(mut output) = self.host.io.open_write(&paths::host_path(&file)) else {
             self.verbose_trace(&[
@@ -63,6 +37,34 @@ impl ResourceManager {
         };
         self.write_user_map(output.as_mut(), &file);
         true
+    }
+    /// `$CSF_<name>UserDefaults`, created when missing; `None` after the native warning.
+    fn save_directory(&self) -> Option<AsciiString> {
+        let variable = format!("CSF_{}UserDefaults", self.name_text());
+        let environment = self.host.environment.directory(&variable);
+        let directory = environment.map_or_else(Vec::new, |path| paths::path_bytes(&path));
+        if directory.is_empty() {
+            self.verbose_trace(&[
+                b"Resource Manager Warning: environment variable \"",
+                variable.as_bytes(),
+                b"\" not set.  Cannot save resources.\n",
+            ]);
+            return None;
+        }
+        let directory = AsciiString::from_raw(&directory);
+        let created = self
+            .host
+            .io
+            .create_directories(&paths::host_path(&directory));
+        if created.is_err() {
+            self.verbose_trace(&[
+                b"Resource Manager: Error opening or creating directory \"",
+                directory.as_bytes(),
+                b"\". Permission denied. Cannot save resources.\n",
+            ]);
+            return None;
+        }
+        Some(directory)
     }
     fn write_user_map(&self, output: &mut dyn Write, file: &AsciiString) {
         if self.user.is_empty() {
@@ -85,11 +87,6 @@ impl ResourceManager {
             file.as_bytes(),
             b"\n",
         ]);
-    }
-    fn verbose_trace(&self, parts: &[&[u8]]) {
-        if self.verbose {
-            self.host.console.write(&parts.concat());
-        }
     }
     fn name_text(&self) -> String {
         String::from_utf8_lossy(self.name.as_bytes()).into_owned()

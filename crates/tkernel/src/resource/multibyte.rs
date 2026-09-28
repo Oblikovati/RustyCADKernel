@@ -89,23 +89,8 @@ pub(super) fn encode_pairs(
     let max_size = to.len() as i32;
     let mut written: i32 = 0;
     for &unit in from.as_utf16() {
-        let (ph, pl) = (encoder.convert)((u32::from(unit >> 8), u32::from(unit & 0xFF)));
-        if (encoder.is_double)(ph) {
-            if written >= max_size - 3 {
-                put(to, written + encoder.truncation_offset, 0)?;
-                return Ok(false);
-            }
-            put(to, written, ph as u8)?;
-            put(to, written + 1, pl as u8)?;
-            written += 2;
-        } else {
-            let single = if encoder.single_from_source {
-                unit as u8
-            } else {
-                pl as u8
-            };
-            put(to, written, single)?;
-            written += 1;
+        if !encode_unit(unit, to, &mut written, encoder)? {
+            return Ok(false);
         }
         if written >= max_size - 1 {
             put(to, max_size - 1, 0)?;
@@ -113,6 +98,33 @@ pub(super) fn encode_pairs(
         }
     }
     put(to, written, 0)?;
+    Ok(true)
+}
+/// Stores one unit; false when a pair no longer fits (after the truncation terminator).
+fn encode_unit(
+    unit: u16,
+    to: &mut [u8],
+    written: &mut i32,
+    encoder: &PairEncoder,
+) -> Result<bool, Failure> {
+    let (ph, pl) = (encoder.convert)((u32::from(unit >> 8), u32::from(unit & 0xFF)));
+    if !(encoder.is_double)(ph) {
+        let single = if encoder.single_from_source {
+            unit as u8
+        } else {
+            pl as u8
+        };
+        put(to, *written, single)?;
+        *written += 1;
+        return Ok(true);
+    }
+    if *written >= to.len() as i32 - 3 {
+        put(to, *written + encoder.truncation_offset, 0)?;
+        return Ok(false);
+    }
+    put(to, *written, ph as u8)?;
+    put(to, *written + 1, pl as u8)?;
+    *written += 2;
     Ok(true)
 }
 /// Native ConvertUnicodeToANSI: units above 0xFF become spaces.

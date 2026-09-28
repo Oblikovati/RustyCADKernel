@@ -129,34 +129,36 @@ impl ResourceManager {
     fn load(&mut self, path: &AsciiString) -> Result<(), Failure> {
         let file_name = crate::osd::CadPath::new(path.as_bytes()).name().clone();
         let Ok(bytes) = self.host.io.read(&paths::host_path(path)) else {
-            if self.verbose {
-                self.trace(&cannot_read(&file_name));
-            }
+            self.verbose_trace(&[
+                b"Resource Manager Warning: Cannot read file \"",
+                file_name.as_bytes(),
+                b"\". File not found or permission denied.\n",
+            ]);
             return Ok(());
         };
         self.initialized = true;
+        self.read_resources(&bytes, &file_name)?;
+        // Quirk preserved: `&aMap == &myUserMap` never holds, so the label is always Reference.
+        self.verbose_trace(&[
+            b"Resource Manager: Reference file \"",
+            file_name.as_bytes(),
+            b"\" loaded\n",
+        ]);
+        Ok(())
+    }
+    /// The `WhatKindOfLine` loop of `Load`, tracing keys and values when `ResourceDebug` is set.
+    fn read_resources(&mut self, bytes: &[u8], file_name: &AsciiString) -> Result<(), Failure> {
         let (debug, console) = (DEBUG.load(Ordering::Relaxed), self.host.console.clone());
         let mut trace = |text: &[u8]| {
             if debug {
                 console.write(text);
             }
         };
-        let mut reader = lines::LineReader::new(&bytes);
+        let mut reader = lines::LineReader::new(bytes);
         let mut line_number = 1;
         while let Some(line) = reader.next_line()? {
-            self.store_line(lines::line_kind(&line, &mut trace), line_number, &file_name);
+            self.store_line(lines::line_kind(&line, &mut trace), line_number, file_name);
             line_number += 1;
-        }
-        if self.verbose {
-            // Quirk preserved: `&aMap == &myUserMap` never holds, so the label is always Reference.
-            self.trace(
-                &[
-                    b"Resource Manager: Reference file \"",
-                    file_name.as_bytes(),
-                    b"\" loaded\n",
-                ]
-                .concat(),
-            );
         }
         Ok(())
     }
@@ -176,6 +178,12 @@ impl ResourceManager {
     fn trace(&self, bytes: &[u8]) {
         self.host.console.write(bytes);
     }
+    /// Writes the concatenated parts when the manager is verbose.
+    fn verbose_trace(&self, parts: &[&[u8]]) {
+        if self.verbose {
+            self.trace(&parts.concat());
+        }
+    }
 }
 /// A `const char*` argument: the text up to its first NUL.
 fn c_string(text: &str) -> AsciiString {
@@ -190,15 +198,6 @@ fn variable_not_set(name: &str, user: bool) -> Vec<u8> {
         name.as_bytes(),
         kind.as_bytes(),
         b"\" not set.\n",
-    ]
-    .concat()
-}
-fn cannot_read(file_name: &AsciiString) -> Vec<u8> {
-    let tail = b"\". File not found or permission denied.\n";
-    [
-        b"Resource Manager Warning: Cannot read file \"".as_slice(),
-        file_name.as_bytes(),
-        tail,
     ]
     .concat()
 }

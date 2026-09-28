@@ -53,14 +53,9 @@ pub(super) fn gbk_units(bytes: &[u8], units: &mut Vec<u16>) -> Result<bool, Fail
     for &byte in bytes {
         let c = u32::from(byte);
         if gb3 != 0 {
-            if !is_digit(c) {
-                return Err(insert_at_zero());
-            }
-            let code = (gb1 - 0x81) * 12600 + (gb2 - 0x30) * 1260 + (gb3 - 0x81) * 10 + c - 0x30;
-            if code >= 23940 {
+            if !gbk_four_byte((gb1, gb2, gb3), c, units)? {
                 return Ok(false);
             }
-            push_nonzero(units, table_lookup::gbkuni(code as usize));
         } else if gb2 != 0 {
             if !(0x81..=0xFE).contains(&c) {
                 return Err(insert_at_zero());
@@ -79,6 +74,22 @@ pub(super) fn gbk_units(bytes: &[u8], units: &mut Vec<u16>) -> Result<bool, Fail
             return Ok(false);
         }
     }
+    Ok(true)
+}
+/// The fourth byte of a four-byte sequence; false for the native `return false`.
+fn gbk_four_byte(
+    (gb1, gb2, gb3): (u32, u32, u32),
+    c: u32,
+    units: &mut Vec<u16>,
+) -> Result<bool, Failure> {
+    if !is_digit(c) {
+        return Err(insert_at_zero());
+    }
+    let code = (gb1 - 0x81) * 12600 + (gb2 - 0x30) * 1260 + (gb3 - 0x81) * 10 + c - 0x30;
+    if code >= 23940 {
+        return Ok(false);
+    }
+    push_nonzero(units, table_lookup::gbkuni(code as usize));
     Ok(true)
 }
 /// The two-byte branch after a lead; false for the native `return false`.
