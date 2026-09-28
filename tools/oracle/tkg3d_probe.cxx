@@ -107,6 +107,9 @@
 #include <Adaptor3d_TopolTool.hxx>
 #include <GeomAdaptor_TransformedCurve.hxx>
 #include "tkg3d_probe_topology.cxx"
+#include <GeomGridEval_Curve.hxx>
+#include <GeomGridEval_Surface.hxx>
+#include "tkg3d_probe_grid.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_point", g3_point_case},
  {"g3_direction", g3_direction_case},
@@ -178,6 +181,13 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"a3_iso", a3_iso_case},
  {"a3_interfunc", a3_interfunc_case},
  {"a3_hstool", a3_hstool_case},
+ // GeomGridEval (tkg3d_probe_grid.cxx)
+ {"g3_grid",g3_grid_case},
+ {"g3_grid_adaptor",g3_grid_adaptor_case},
+ {"g3_grid_surface",g3_grid_surface_case},
+ {"g3_grid_surface_adaptor",g3_grid_surface_adaptor_case},
+ {"g3_grid_null",g3_grid_null_case},
+ {"g3_grid_helpers",g3_grid_helpers_case},
 };
 int main() {
  std::string line;
