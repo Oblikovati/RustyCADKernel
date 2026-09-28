@@ -55,6 +55,8 @@ passes (481 declarations):
 | ExtremaPC_Line_Test.cxx | extrema_pc_line | 31 |
 | ExtremaPC_OffsetCurve_Test.cxx | extrema_pc_offset_curve | 13 |
 | ExtremaPC_Parabola_Test.cxx | extrema_pc_parabola | 24 |
+| GCPnts_AbscissaPoint_Test.cxx | gcpnts_abscissa_point | 5 |
+| GCPnts_QuasiUniformDeflection_Test.cxx | gcpnts_quasi_uniform_deflection | 1 |
 
 `local_props_behavior.rs` covers the LProp, GeomLProp, GProp and Hermit quirks
 below. `gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
@@ -153,17 +155,51 @@ API mapping:
 - The x87 `long double` arithmetic of the rational Bezier certification and of the
   exact pole-plane test uses `rustycad_tkmath::math_poly::LongDouble`.
 
-ExtremaPC needs parts of three TKGeomBase packages that are not ported yet. They are
+ExtremaPC needs parts of two TKGeomBase packages that are not ported yet. They are
 crate-private ports of exactly the code paths it uses, in the native operation order,
 and the ports of those packages will replace them:
 
-- `GCPnts_TangentialDeflection` and `GCPnts_DistFunction(2d)` (the curve-aware
-  sampling of the grid), in `src/tangential_deflection`;
 - `Extrema_CurveTool::DeflCurvIntervals` and `Extrema_Curve2dTool::DeflCurvIntervals`,
   in `src/defl_curv_intervals.rs`;
 - the ProjLib plane projections of lines and conics, in `src/plane_projection.rs`.
 
-`probe_support` is a hidden public module that exposes them to the numeric probe.
+Its curve-aware sampling calls the public `gcpnts::TangentialDeflection`.
+`probe_support` is a hidden public module that exposes these functions and a
+tangential-deflection sampling helper to the numeric probe.
+
+## CPnts and GCPnts
+
+Every native member of the two packages has a 3D and a 2D overload with the same body;
+the port has one member for each pair.
+
+- CPnts takes the curve as `impl Into<PntsCurve>`: `PntsCurve` is the native
+  `void* myCurve` with its `my3d` flag, an enum over `&dyn Adaptor3dCurve` and
+  `&dyn Adaptor2dCurve2d` (a `&GeomAdaptorCurve` or `&Geom2dAdaptorCurve` converts
+  directly). It holds the static helpers `f3d`/`f2d` (`speed`), `order`
+  (`gauss_order`) and the `D0`/`D2` lifts of 2D results to Z = 0.
+  `CPnts_RealFunction` with its `void*` client data is one boxed closure
+  (`RealFunction`), so `MyGaussFunction::init` and `MyRootFunction::init_function`
+  take one argument for the native `(F, D)`. The objects that keep the curve
+  (`AbscissaPoint<'a>`, `UniformDeflection<'a>`) borrow it for their lifetime.
+- The GCPnts templates are generic over `TCurveTypes` (`GCPnts_TCurveTypes`),
+  implemented for `dyn Adaptor3dCurve`, `dyn Adaptor2dCurve2d`, `GeomAdaptorCurve` and
+  `Geom2dAdaptorCurve`, with the point, chord line and Bezier/B-spline types
+  (`PoleCurve`). `GCPnts_DistFunction(2d)` and their `MV` views are one generic
+  `TDistFunction`/`TDistFunctionMV` with the native names as aliases. The static
+  helpers repeated in GCPnts_UniformDeflection.cxx and GCPnts_QuasiUniformDeflection.cxx
+  (`PerformLinear`, `PerformCircular`, `GetDefType`, `PerformComposite`) exist once.
+- Overloads take distinct names (`length`, `length_with_tolerance`,
+  `length_between`, `length_between_with_tolerance`; `with_*` constructors and
+  `initialize*`). Default arguments are explicit (the -1 tolerance of
+  GCPnts_UniformAbscissa, `WithControl = true`, `GeomAbs_C1`); the five deflection
+  criteria of GCPnts_TangentialDeflection are the `TangentialCriteria` struct
+  (`TangentialCriteria::new` has the native defaults).
+- Every native exception is a `Failure`, including the ones the adaptors raise inside
+  the math callbacks (Gauss integrand, root function, chord distance): the callback
+  keeps the failure and answers false, and the caller returns it right after the
+  solver, where the native exception leaves it (`failure_capture`).
+- `CPnts_UniformDeflection` keeps the native More/Next/Value iteration; `next` and
+  `more` return `Result`.
 
 ## Verification
 
@@ -244,6 +280,18 @@ partitions, the distance function, AddEndpointExtrema, the plane projections and
 tangential deflection sampling. Each request prints the status, the extrema in their
 order (parameter, point, square distance, minimum and maximum flags), the minimum and
 maximum indices, or the raised exception.
+
+The CPnts and GCPnts requests (`tkgeombase_corpus_gcpnts.py`) build 32 adapted curves:
+every 2D and 3D kind (lines, full and partial conics in both senses, two-pole segments
+rational or not, Bezier curves with a cusp, a zero-length Bezier curve, C2, C1, C0 and
+periodic B-splines, trimmed curves, offsets of an ellipse, of a circle collapsing to a
+point and of a cusp, whose undefined derivatives raise inside the math callbacks) and
+circles of radius 1e-6 and 1e6. Each class runs every constructor and `Initialize`
+overload with full, partial, reversed, extended and empty ranges, zero, negative,
+tiny and overlong abscissas, too few points, deflections that raise, tolerances from
+0 to 1e3 and -1, and objects reused across runs; each result prints `IsDone`, the
+counts, every parameter and point (from the out-of-range index 0), or the raised
+exception. Six more requests give circles a null deflection. They are 2210 requests.
 
 The corpus has 8732 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d and 1252 ExtremaPC.
@@ -415,3 +463,59 @@ ExtremaPC2d and ExtremaPC:
   catch failures differently (see above).
 - `std::max` and `std::min` keep their argument order semantics with NaN
   (`geom2d::native::std_max`, `std_min`).
+
+CPnts and GCPnts:
+
+- `CPnts_AbscissaPoint(C, Abscissa, U0, Resolution)` initializes a 3D curve with the
+  tolerance `Resolution` ("rbv's modification") and a 2D curve without; `order` reads
+  `Degree()` and `NbPoles()` of a 3D adaptor but of `Bezier()` and `BSpline()` in 2D.
+  The root search runs on `[U1, U2]` widened by its width on each side and the
+  commented-out validity test stays out, so a parameter outside the curve bounds is
+  done; a curve shorter than Precision::Confusion() gives `U0`, done.
+- `CPnts_MyGaussFunction()` keeps a null function pointer that `Value` would call; the
+  port fails with Standard_NullObject. `CPnts_UniformDeflection::Value()`/`Point()` past
+  the three stored points read outside the native arrays; the port raises
+  Standard_OutOfRange.
+- `GCPnts_DistFunction(const GCPnts_DistFunction&)` and its 2D twin are declared but
+  never defined in TKGeomBase (a call does not link); the port's `Clone` is the
+  member-wise copy they declare.
+- GCPnts_AbscissaPoint classifies on the CN intervals, GCPnts_UniformAbscissa on the C1
+  intervals; `GetParameterLengthRatio` evaluates `DN(0.0, 1)` of a Bezier or B-spline
+  segment at the parameter 0, not at FirstParameter. `Compute` pushes past the last
+  interval forward by 0.1 on `[U0, U0 + 0.2]` whatever the sign of the abscissa, while
+  `AdvCompute` pushes in the walk direction and clamps to the bounds of a non-periodic
+  curve; `AdvCompute` has no zero-abscissa shortcut and compares the span before the
+  first interval with its tolerance, the other spans with PConfusion (Confusion in
+  `Compute`). `GCPnts_AbscissaPoint(C, Abscissa, U0)` raises Standard_ConstructionError
+  for a curve shorter than Confusion, `(Tol, C, Abscissa, U0)` starts at `U0` instead.
+- `GCPnts_UniformAbscissa` reuses its parameter array when it holds enough values, so
+  `Parameter(i)` past NbPoints returns the values of an earlier run; one failed
+  abscissa search leaves the whole result not done even when later searches succeed; a
+  negative abscissa on a length-parametrized curve ends at once; the NbPoints variant
+  sets `Abscissa()` only for a curve longer than Confusion. `(int)aSizeR` of a NaN size
+  is INT_MIN on x86-64 (undefined behaviour natively), as in the port.
+- `GCPnts_QuasiUniformAbscissa` delegates curves that are neither Bezier nor B-spline to
+  GCPnts_UniformAbscissa and reads its `NbPoints()` unconditionally, so a failed
+  distribution raises StdFail_NotDone; on the polygon path a raise keeps the previous
+  `IsDone`.
+- The circular deflection steps accumulate the parameter (the last one is not set to
+  U2), and a null deflection makes the native `(int)` of an infinite count INT_MIN, so
+  no point is stored and the result is done. The composite deflection paths walk the C2
+  intervals in both classes, though GCPnts_QuasiUniformDeflection classifies on C1.
+  `GCPnts_UniformDeflection::Value()` and `GCPnts_QuasiUniformDeflection::Value()` raise
+  StdFail_NotDone with the messages of GCPnts_UniformAbscissa and
+  GCPnts_QuasiUniformAbscissa.
+- `QuasiFleche` returns early at 2000 calls, or after 100 calls with fewer than two
+  points, without decrementing its counter, so every later call of the subdivision
+  returns at once; the C1 path takes the end tangent at `U2 - 10 Epsilon(U2)` but keeps
+  U2 as end parameter; a Bezier or B-spline curve whose parametric resolution is below
+  `Epsilon(max(|First|, |Last|))` is not done.
+- GCPnts_TangentialDeflection: the line test clamps the CN interval bounds in place
+  and the march reads the clamped bounds; a span grown once and still below the
+  coefficient 0.55 becomes the previous point without being stored; `EvaluateDu` never
+  sets its flag back, so after one success the deflection-driven steps are no longer
+  extrapolated; the linear distribution steps by `(Last - First) / MinimumOfPoints`, so
+  its last step is twice as long.
+- Every native comparison keeps its form where a NaN operand changes the branch
+  (`!(a > b)` for the native `if (a > b) ... else`), and `std::min`/`std::max` keep
+  their argument order.

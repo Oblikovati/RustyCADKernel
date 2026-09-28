@@ -71,8 +71,8 @@ fn checkOCC33828Deflection(
     theDeflection: f64,
     theExpectedNbPoints: i32,
 ) {
-    let anAlgo = GCPnts_QuasiUniformDeflection::with_curve(theCurve, theDeflection, Shape::C1)
-        .unwrap();
+    let anAlgo =
+        GCPnts_QuasiUniformDeflection::with_curve(theCurve, theDeflection, Shape::C1).unwrap();
     assert!(anAlgo.is_done());
     assert_eq!(anAlgo.nb_points().unwrap(), theExpectedNbPoints);
     EXPECT_LE(anAlgo.deflection().unwrap(), theDeflection);

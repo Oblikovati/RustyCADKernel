@@ -186,6 +186,16 @@ def udefl_requests(requests):
             *[v for run in runs for v in run])
 
 
+def null_deflection_requests(requests):
+    """A null deflection on circles: the native (int) of an infinite point count."""
+    for name, dim, spec, rng_, dom, scale in CURVES:
+        if name not in ('circle2', 'arc2_indirect', 'circle3'):
+            continue
+        head = curve_head(dim, spec, rng_)
+        add(requests, 'gcp_udefl', *head, 2, 0, 0.0, 1, 0, 0, 2, -0.0, 0, 0, 0)
+        add(requests, 'gcp_qudefl', *head, 2, 0, 0.0, 2, 0, 0, 3, 0.0, 0, *dom)
+
+
 def qudefl_requests(requests):
     for _, dim, spec, rng_, dom, scale in CURVES:
         a, b = dom
@@ -240,6 +250,7 @@ def append_gcpnts_requests(requests: list[str]) -> None:
     quabs_requests(requests)
     udefl_requests(requests)
     qudefl_requests(requests)
+    null_deflection_requests(requests)
     tdefl_requests(requests)
     dist_requests(requests)
     arc_step_requests(requests)
