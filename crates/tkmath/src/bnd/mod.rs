@@ -117,5 +117,8 @@ pub use sphere::BoundingSphere;
 mod compact;
 pub use compact::{BoxReal, CompactBox2, CompactBox3};
 
+mod obb;
+pub use obb::{ObbHalfSizes, OrientedBoundingBox};
+
 mod tools;
 pub use tools::{box2_to_bvh, box3_to_bvh};
