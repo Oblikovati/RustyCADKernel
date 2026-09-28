@@ -37946,6 +37946,246 @@
       "rust_item": "rustycad_tkernel::plugin::failure",
       "status": "implemented",
       "notes": "The DEFINE_STANDARD_EXCEPTION class maps to a Failure constructor carrying its type name; the macro's (message, stack trace) constructor is Failure::with_type. The class tree is kept as data (exception_parent), and Failure::is_kind answers what a C++ catch-by-base clause would catch; the differential probe compares the full catch matrix, ExceptionType, what() and operator<< output with the native classes."
+    },
+    {
+      "upstream_id": "Standard::AllocatorType",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::AllocatorType",
+      "status": "implemented",
+      "notes": "Enum with the native discriminants NATIVE=0, OPT=1, TBB=2, JEMALLOC=3. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::GetAllocatorType()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::get_allocator_type",
+      "status": "implemented",
+      "notes": "Returns AllocatorType::Native. The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::allocate",
+      "status": "implemented",
+      "notes": "calloc semantics: zero-filled StandardMemory; a refused request raises Standard_OutOfMemory 'Standard_MMgrRaw::Allocate(): malloc failed' as Result. The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::AllocateOptimal(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::allocate_optimal",
+      "status": "implemented",
+      "notes": "malloc semantics: None where the native call returns null (no exception). The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Free(void* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::free",
+      "status": "implemented",
+      "notes": "Takes Option<StandardMemory>; None is the null pointer free() ignores. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Free(T*&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::free_and_null",
+      "status": "implemented",
+      "notes": "The template overload that nulls the caller's pointer is free_and_null(&mut Option<StandardMemory>), which leaves the slot None. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Reallocate(void* const,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::reallocate",
+      "status": "implemented",
+      "notes": "realloc semantics on a &mut Option slot (None allocates). A refused request raises Standard_OutOfMemory and keeps the old block; glibc/MSVC realloc(p, 0) frees the block and returns NULL, so the slot becomes None and Standard_OutOfMemory is raised (native quirk). The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::AllocateAligned(size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::allocate_aligned",
+      "status": "implemented",
+      "notes": "Returns AlignedMemory or None like the null pointer. Alignment rules follow the runtime the kernel calls: GCC _mm_malloc on x86 (1 = malloc, 2 and 4 widen to a pointer, otherwise posix_memalign power-of-two multiples of a pointer), _aligned_malloc on MSVC, posix_memalign elsewhere. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::FreeAligned(void* const)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::free_aligned",
+      "status": "implemented",
+      "notes": "Takes Option<AlignedMemory>; None is ignored like a null pointer. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::FreeAligned(T*&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::free_aligned_and_null",
+      "status": "implemented",
+      "notes": "The nulling template overload is free_aligned_and_null(&mut Option<AlignedMemory>). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::Purge()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory::purge",
+      "status": "implemented",
+      "notes": "The NATIVE build caches nothing and returns true (1). The pinned kernel is built with USE_MMGR_TYPE=NATIVE (no OCCT_MMGT_OPT_* macro), so the port reproduces the C runtime calls it compiles to. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard::StackTrace(char*,int,int,void*,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard.hxx",
+      "rust_item": "rustycad_tkernel::standard::stack_trace",
+      "status": "implemented",
+      "notes": "Ported by the Standard_Failure work; see that row's area."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::~Standard_MMgrRoot()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrRoot::allocate",
+      "status": "implemented",
+      "notes": "Trait method. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::Reallocate(void*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrRoot::reallocate",
+      "status": "implemented",
+      "notes": "Trait method. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::Free(void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrRoot::free",
+      "status": "implemented",
+      "notes": "Trait method; None is ignored. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them."
+    },
+    {
+      "upstream_id": "Standard_MMgrRoot::Purge(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrRoot.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrRoot::purge",
+      "status": "implemented",
+      "notes": "Provided trait method returning 0, the base class implementation."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt(bool,bool,size_t,int,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::new",
+      "status": "implemented",
+      "notes": "Runs Initialize: fewer than 100 pages means 1000, the cell size is rounded up to 16, free-list max = ROUNDUP8(threshold - 1) >> 3 with wrapping, mapping needs a non-zero OS page size. Default implements the header's default arguments. The manager keeps OCCT's intrusive 8-byte headers and free-list links inside real heap regions addressed by their numeric start, so rounded sizes, pool offsets, reuse order and Purge counts match the native class. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::~Standard_MMgrOpt()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor (Purge(true) plus pool release). Rust Drop glue releases every region the manager obtained; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::Allocate(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::allocate",
+      "status": "implemented",
+      "notes": "ROUNDUP8 with wrapping (sizes within 7 of SIZE_MAX become zero-size pool blocks); pools, medium calloc blocks and mapped large blocks as natively; mmap failures report strerror text (e.g. 'Invalid argument' for the wrapped zero length). Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them. The manager keeps OCCT's intrusive 8-byte headers and free-list links inside real heap regions addressed by their numeric start, so rounded sizes, pool offsets, reuse order and Purge counts match the native class. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::Reallocate(void*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::reallocate",
+      "status": "implemented",
+      "notes": "Keeps the block when the size fits its rounded size, otherwise allocates, copies the old rounded size, frees, then clears the tail. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::Free(void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::free",
+      "status": "implemented",
+      "notes": "Newest-first free lists by rounded size; large blocks go back to the system. Freeing an address the manager does not own (native UB) raises Standard_ProgramError. Pointers are StorageAddress values (Option for nullable ones); bytes/bytes_mut stand for dereferencing them. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::Purge(bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::purge",
+      "status": "implemented",
+      "notes": "Frees cached medium blocks and counts them. The pool-release scan is ported, but its tally of a fully free pool is P - 8, never P, so pools are never released (native quirk). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_MMgrOpt::SetCallBackFunction(TPCallBackFunc)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MMgrOpt.hxx",
+      "rust_item": "rustycad_tkernel::standard::MMgrOpt::set_call_back_function",
+      "status": "implemented",
+      "notes": "Process-wide callback like the native file-static pointer; OptCallBack receives (is_alloc, storage, round_size, size). The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "opencascade::make_shared(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_shared",
+      "status": "implemented",
+      "notes": "std::shared_ptr from NCollection_Allocator becomes Arc<T> on the global allocator. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "opencascade::make_oshared(const occ::handle<NCollection_BaseAllocator>&,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_oshared",
+      "status": "implemented",
+      "notes": "Arc<AllocatedBox<T>>: the value lives in the BaseAllocator, the count in the global heap. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "opencascade::make_oshared(const NCollection_OccAllocator<T>&,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_oshared_in",
+      "status": "implemented",
+      "notes": "Both NCollection_OccAllocator<T> overloads (const reference and rvalue) map to make_oshared_in: a borrowed typed allocator is enough because Rust clones or moves it the same way. The value is stored in allocator-owned storage behind a shared OcctShared<T>. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "opencascade::make_oshared(NCollection_OccAllocator<T>&&,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_oshared_in",
+      "status": "implemented",
+      "notes": "Both NCollection_OccAllocator<T> overloads (const reference and rvalue) map to make_oshared_in: a borrowed typed allocator is enough because Rust clones or moves it the same way. The value is stored in allocator-owned storage behind a shared OcctShared<T>. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "opencascade::make_unique(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_MemoryUtils.hxx",
+      "rust_item": "rustycad_tkernel::standard::memory_utils::make_unique",
+      "status": "implemented",
+      "notes": "std::unique_ptr becomes Box<T>. C++ forwards constructor arguments; Rust callers construct the value and move it in."
+    },
+    {
+      "upstream_id": "Standard_DefineAlloc::operator new(size_t,void*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_DefineAlloc.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: the global placement operator new that DefineAlloc declares only for SunPro <= 4.2 (WORKAROUND_SUNPRO_NEW_PLACEMENT). Rust has no placement new; values are moved into already allocated storage by ordinary assignment."
     }
   ],
   "tests": [

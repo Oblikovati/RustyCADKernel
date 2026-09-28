@@ -1,0 +1,8 @@
+//! Behavior tests for the Standard services area: memory managers, synchronization,
+//! locale, buffered readers, dump and Plugin.
+#[path = "standard_services_api_behavior/memory.rs"]
+mod memory;
+#[path = "standard_services_api_behavior/mmgr.rs"]
+mod mmgr;
+#[path = "standard_services_api_behavior/memory_utils.rs"]
+mod memory_utils;
