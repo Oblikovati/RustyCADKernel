@@ -15,6 +15,7 @@
 
 //! N-th derivatives of elementary curves in 3D and 2D.
 use crate::gp::{Axis1, Axis2, Axis2d, Axis22d, Vector2, Vector3, Xy, Xyz};
+use rustycad_tkernel::standard::integer::{is_even, is_odd};
 
 /// Chooses the cos/sin pattern of the N-th derivative by `N mod 4` in the native branch order
 /// (`N == 1` first); wrapping arithmetic keeps `i32::MAX` defined where C++ overflow is not.
@@ -36,12 +37,16 @@ fn elliptic_coefficients(u: f64, major: f64, minor: f64, n: i32) -> (f64, f64) {
     }
     (0.0, 0.0)
 }
-/// Odd derivatives use (sinh, cosh), even ones (cosh, sinh).
+/// Odd derivatives use (sinh, cosh), even ones (cosh, sinh); a negative odd `n` is neither
+/// under Standard_Integer's `n % 2 == 1` test, so its coefficients stay zero.
 fn hyperbolic_coefficients(u: f64, major: f64, minor: f64, n: i32) -> (f64, f64) {
-    if n % 2 != 0 {
+    if is_odd(n) {
         return (major * u.sinh(), minor * u.cosh());
     }
-    (major * u.cosh(), minor * u.sinh())
+    if is_even(n) {
+        return (major * u.cosh(), minor * u.sinh());
+    }
+    (0.0, 0.0)
 }
 fn space_span(position: Axis2, (a, b): (f64, f64)) -> Vector3 {
     let (x, y) = (

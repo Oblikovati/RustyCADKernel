@@ -17,6 +17,7 @@
 //! Order sums use wrapping arithmetic so `i32` extremes stay defined (C++ overflow is not).
 use super::frame::{Frame, flush, torus_tolerance, vector};
 use crate::gp::{Axis3, Vector3, Xyz};
+use rustycad_tkernel::standard::integer::is_odd;
 
 fn zero() -> Vector3 {
     Vector3::new(0.0, 0.0, 0.0)
@@ -105,7 +106,7 @@ pub fn sphere_dn(u: f64, v: f64, position: Axis3, radius: f64, nu: i32, nv: i32)
     let frame = Frame::of(position);
     if nu == 0 {
         let height = radius * v.sin();
-        let local = if nv % 2 != 0 {
+        let local = if is_odd(nv) {
             frame.triple(-height * cos_u, -height * sin_u, ring)
         } else {
             frame.triple(-ring * cos_u, -ring * sin_u, -height)
@@ -113,7 +114,7 @@ pub fn sphere_dn(u: f64, v: f64, position: Axis3, radius: f64, nu: i32, nv: i32)
         return negated_unless(local, quarter(nv, 2) || quarter(nv, 3));
     }
     if nv == 0 {
-        let local = if nu % 2 != 0 {
+        let local = if is_odd(nu) {
             frame.pair(-ring * sin_u, ring * cos_u)
         } else {
             frame.pair(ring * cos_u, ring * sin_u)
@@ -129,12 +130,12 @@ fn sphere_mixed(
     nu: i32,
     nv: i32,
 ) -> Vector3 {
-    let (a1, a2) = if nu % 2 != 0 {
+    let (a1, a2) = if is_odd(nu) {
         (-sin_u, cos_u)
     } else {
         (-cos_u, -sin_u)
     };
-    let a3 = if nv % 2 != 0 { -height } else { -ring };
+    let a3 = if is_odd(nv) { -height } else { -ring };
     let local = frame.pair(a1, a2) * a3;
     let u_flips = quarter(nu, 2) || quarter(nu, 3);
     let v_flips = quarter(nv, 2) || quarter(nv, 3);
@@ -160,7 +161,7 @@ pub fn torus_dn(
     let frame = Frame::of(position);
     if nv == 0 {
         let ring = major + minor * v.cos();
-        let (a1, a2) = if nu % 2 != 0 {
+        let (a1, a2) = if is_odd(nu) {
             (-ring * sin_u, ring * cos_u)
         } else {
             (-ring * cos_u, -ring * sin_u)
@@ -182,7 +183,7 @@ fn torus_meridian_dn(
     tolerance: f64,
 ) -> Vector3 {
     let (cos_v, sin_v) = (minor * v.cos(), minor * v.sin());
-    let (a1, a2, a3) = if nv % 2 != 0 {
+    let (a1, a2, a3) = if is_odd(nv) {
         (-sin_v * cos_u, -sin_v * sin_u, cos_v)
     } else {
         (-cos_v * cos_u, -cos_v * sin_u, -sin_v)
@@ -202,7 +203,7 @@ fn torus_mixed(
     (nu, nv): (i32, i32),
     tolerance: f64,
 ) -> Vector3 {
-    let (odd_u, odd_v) = (nu % 2 != 0, nv % 2 != 0);
+    let (odd_u, odd_v) = (is_odd(nu), is_odd(nv));
     let (a1, a2, flips) = match (odd_u, odd_v) {
         (true, true) => {
             let sine = minor * v.sin();
