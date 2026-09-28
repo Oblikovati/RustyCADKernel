@@ -8,6 +8,7 @@ use std::io::{self, BufRead};
 
 mod message;
 mod ncollection;
+mod quantity;
 
 fn date(input: &mut std::str::SplitWhitespace<'_>) -> Result<Date, Error> {
     let values: Vec<i32> = input
@@ -103,6 +104,7 @@ fn evaluate(line: &str) -> Result<String, Box<dyn std::error::Error>> {
         }
         other => ncollection::evaluate(other, &mut input)
             .or_else(|| message::evaluate(other, &mut input))
+            .or_else(|| quantity::evaluate(other, &mut input))
             .unwrap_or_else(|| panic!("unknown operation {other}")),
     };
     assert!(input.next().is_none(), "unexpected trailing fields");
