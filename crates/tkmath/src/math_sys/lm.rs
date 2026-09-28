@@ -20,7 +20,7 @@ use super::{
 use crate::{
     math::{FunctionSetWithDerivatives, Matrix, Vector},
     math_lin::utils::{is_finite_matrix, is_finite_vector},
-    math_poly::extended::Extended as E,
+    math_poly::extended::LongDouble as E,
     math_utils::Status,
 };
 mod config;

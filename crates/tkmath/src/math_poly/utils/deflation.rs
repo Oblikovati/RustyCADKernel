@@ -11,14 +11,17 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! `Utils::DeflateReal` and `Utils::DeflateComplex`: checked synthetic division that
-//! leaves the working polynomial untouched when the remainder is not small.
-use super::Work;
-use crate::math_poly::Complex;
-/// Divides by `(x - root)`; `degree` must be at least 1.
-pub(super) fn deflate_real(c: &mut Work, degree: &mut usize, root: f64, tolerance: f64) -> bool {
-    let n: usize = *degree;
-    let mut quotient: Work = [0.0; super::WORK_SIZE];
+//! `DeflateReal` and `DeflateComplex`: checked synthetic division that leaves the
+//! polynomial untouched when the remainder is not small.
+use crate::math_poly::{Complex, MAX_POLY_DEGREE};
+type Quotient = [f64; MAX_POLY_DEGREE + 1];
+/// `DeflateReal`: divides `c[0..=degree]` by `(x - root)` when the remainder is within
+/// `32 * tolerance * max(1, sum |c_i| |root|^i)`, then decrements `degree`. The degree
+/// must be at least 1; `utils::deflate_real(&mut c, &mut degree, 1.0, 1e-12)`.
+pub fn deflate_real(coefficients: &mut [f64], degree: &mut i32, root: f64, tolerance: f64) -> bool {
+    let n: usize = *degree as usize;
+    let c: &mut [f64] = &mut coefficients[..=n];
+    let mut quotient: Quotient = [0.0; MAX_POLY_DEGREE + 1];
     quotient[n - 1] = c[n];
     for i in (0..n - 1).rev() {
         quotient[i] = c[i + 1] + root * quotient[i + 1];
@@ -32,12 +35,12 @@ pub(super) fn deflate_real(c: &mut Work, degree: &mut usize, root: f64, toleranc
         return false;
     }
     c[..n].copy_from_slice(&quotient[..n]);
-    *degree = n - 1;
+    *degree -= 1;
     true
 }
-/// Quotient of the division by `x^2 + b x + c`, returned with both remainders.
-fn quadratic_division(c: &Work, n: usize, b: f64, q: f64) -> (Work, f64, f64) {
-    let mut quotient: Work = [0.0; super::WORK_SIZE];
+/// Quotient of the division by `x^2 + b x + q`, returned with both remainders.
+fn quadratic_division(c: &[f64], n: usize, b: f64, q: f64) -> (Quotient, f64, f64) {
+    let mut quotient: Quotient = [0.0; MAX_POLY_DEGREE + 1];
     quotient[n - 2] = c[n];
     if n > 2 {
         quotient[n - 3] = c[n - 1] - b * quotient[n - 2];
@@ -50,10 +53,16 @@ fn quadratic_division(c: &Work, n: usize, b: f64, q: f64) -> (Work, f64, f64) {
     let remainder0: f64 = c[0] - q * quotient[0];
     (quotient, remainder0, remainder1)
 }
-/// Divides by the conjugate-pair factor of `root`; `degree` must be at least 2.
-pub(super) fn deflate_complex(
-    c: &mut Work,
-    degree: &mut usize,
+/// `std::max(a, b)`: returns `b` only when `a < b`.
+fn native_max(a: f64, b: f64) -> f64 {
+    if a < b { b } else { a }
+}
+/// `DeflateComplex`: divides by the conjugate-pair factor `x^2 - 2 Re(r) x + |r|^2` when
+/// both remainders are within `64 * tolerance * max(1, max |c_i|)`, then subtracts 2 from
+/// `degree`, which must be at least 2; `utils::deflate_complex(&mut c, &mut degree, root, 1e-12)`.
+pub fn deflate_complex(
+    coefficients: &mut [f64],
+    degree: &mut i32,
     root: Complex,
     tolerance: f64,
 ) -> bool {
@@ -62,16 +71,11 @@ pub(super) fn deflate_complex(
     if !b.is_finite() || !q.is_finite() {
         return false;
     }
-    let n: usize = *degree;
+    let n: usize = *degree as usize;
+    let c: &mut [f64] = &mut coefficients[..=n];
     let (quotient, remainder0, remainder1) = quadratic_division(c, n, b, q);
-    let norm: f64 = c[..=n]
-        .iter()
-        .fold(0.0_f64, |m, x| if m < x.abs() { x.abs() } else { m });
-    let remainder: f64 = if remainder0.abs() < remainder1.abs() {
-        remainder1.abs()
-    } else {
-        remainder0.abs()
-    };
+    let norm: f64 = c.iter().fold(0.0_f64, |m, x| native_max(m, x.abs()));
+    let remainder: f64 = native_max(remainder0.abs(), remainder1.abs());
     if !remainder0.is_finite()
         || !remainder1.is_finite()
         || remainder > 64.0 * tolerance * 1.0_f64.max(norm)
@@ -79,6 +83,6 @@ pub(super) fn deflate_complex(
         return false;
     }
     c[..=n - 2].copy_from_slice(&quotient[..=n - 2]);
-    *degree = n - 2;
+    *degree -= 2;
     true
 }

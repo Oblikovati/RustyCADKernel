@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 //! Periodic root counts preserving MathRoot_Utils.hxx long-double arithmetic.
-use crate::math_poly::extended::Extended as E;
+use crate::math_poly::extended::LongDouble as E;
 fn valid_periodic(first: f64, upper: f64, period: f64, tolerance: f64) -> bool {
     first.is_finite()
         && upper.is_finite()

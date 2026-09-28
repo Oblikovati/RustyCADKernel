@@ -1,6 +1,6 @@
 //! Integer rounding preserves the pinned x87 sqrtl result without a C dependency.
-use super::{Extended, Float, X87DoubleExtended};
-impl Extended {
+use super::{Float, LongDouble, X87DoubleExtended};
+impl LongDouble {
     pub(crate) fn sqrt(self) -> Self {
         if self.0.is_zero() || self.0.is_nan() {
             return self;
@@ -31,27 +31,27 @@ mod tests {
     use super::*;
     #[test]
     fn sqrt_rounds_all_extended_significand_bits() {
-        let two: Extended = Extended::new(2.0).sqrt();
+        let two: LongDouble = LongDouble::new(2.0).sqrt();
         assert_eq!(two.0.to_bits(), 0x3fff_b504f333f9de6484);
         assert_eq!(
-            Extended::new(4.0).sqrt().0.to_bits(),
-            Extended::new(2.0).0.to_bits()
+            LongDouble::new(4.0).sqrt().0.to_bits(),
+            LongDouble::new(2.0).0.to_bits()
         );
-        let tiny: Extended = Extended(X87DoubleExtended::from_bits(1));
+        let tiny: LongDouble = LongDouble(X87DoubleExtended::from_bits(1));
         assert_eq!(tiny.sqrt().0.to_bits(), 0x1fe0_b504f333f9de6484);
-        let largest: Extended = Extended(X87DoubleExtended::from_bits(0x7ffe_ffffffffffffffff));
+        let largest: LongDouble = LongDouble(X87DoubleExtended::from_bits(0x7ffe_ffffffffffffffff));
         assert_eq!(largest.sqrt().0.to_bits(), 0x5ffe_ffffffffffffffff);
     }
     #[test]
     fn sqrt_retains_special_values() {
         for value in [0.0, -0.0, f64::INFINITY] {
             assert_eq!(
-                Extended::new(value).sqrt().0.to_bits(),
-                Extended::new(value).0.to_bits()
+                LongDouble::new(value).sqrt().0.to_bits(),
+                LongDouble::new(value).0.to_bits()
             );
         }
-        assert!(Extended::new(-1.0).sqrt().0.is_nan());
-        assert!(Extended::new(f64::NAN).sqrt().0.is_nan());
+        assert!(LongDouble::new(-1.0).sqrt().0.is_nan());
+        assert!(LongDouble::new(f64::NAN).sqrt().0.is_nan());
     }
 }
 
@@ -65,7 +65,8 @@ fn matches_native_x87_significands_across_exponents() {
             .split_whitespace()
             .map(|w| u128::from_str_radix(w, 16).unwrap())
             .collect();
-        let value: Extended = Extended(X87DoubleExtended::from_bits((words[0] << 64) | words[1]));
+        let value: LongDouble =
+            LongDouble(X87DoubleExtended::from_bits((words[0] << 64) | words[1]));
         assert_eq!(
             value.sqrt().0.to_bits(),
             (words[2] << 64) | words[3],

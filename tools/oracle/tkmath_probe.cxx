@@ -147,6 +147,7 @@ void planar_case(std::istream& input) {
 #include "tkmath_bvh_probe.cxx"
 #include "tkmath_gp_planar_probe.cxx"
 #include "tkmath_gp_standard_probe.cxx"
+#include "tkmath_mathpoly_utils_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -255,6 +256,8 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"gp2d_gtrsf", gp2_gtrsf_case},
  {"gp2d_geom", gp2_geom_case},
  {"gp_standard", gp_standard_case},
+ {"mathpoly_utils_long", mathpoly_utils_long_case},
+ {"mathpoly_utils_complex", mathpoly_utils_complex_case},
 };
 int main() {
  std::string line;

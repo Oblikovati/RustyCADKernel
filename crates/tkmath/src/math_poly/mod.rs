@@ -17,9 +17,10 @@ mod complex;
 mod direct;
 pub(crate) mod extended;
 mod laguerre;
-mod long_poly;
+pub mod utils;
 pub use complex::Complex;
 pub use direct::{cubic, linear, quadratic, quartic};
+pub use extended::LongDouble;
 pub use laguerre::{
     LAGUERRE_MAX_ITERATIONS, LAGUERRE_TOLERANCE, laguerre, laguerre_n, octic, quintic, sextic,
 };

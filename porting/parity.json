@@ -769,7 +769,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
       "rust_item": "rustycad_tkmath::math_poly::MAX_POLY_DEGREE",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::PolyResult",
@@ -777,7 +777,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
       "rust_item": "rustycad_tkmath::math_poly::PolyResult",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::PolyResult::IsDone() const",
@@ -785,7 +785,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
       "rust_item": "rustycad_tkmath::math_poly::PolyResult::is_done",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::PolyResult::operator bool() const",
@@ -793,7 +793,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
       "rust_item": "<bool as From<&rustycad_tkmath::math_poly::PolyResult>>::from",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::PolyResult::operator[](size_t) const",
@@ -801,7 +801,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
       "rust_item": "<rustycad_tkmath::math_poly::PolyResult as Index<usize>>::index",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::PolyResult::NbRealRootsWithMultiplicity() const",
@@ -809,7 +809,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
       "rust_item": "rustycad_tkmath::math_poly::PolyResult::nb_real_roots_with_multiplicity",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::GeneralPolyResult",
@@ -817,7 +817,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Types.hxx",
       "rust_item": "rustycad_tkmath::math_poly::GeneralPolyResult",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::Linear(double,double)",
@@ -825,7 +825,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Quadratic.hxx",
       "rust_item": "rustycad_tkmath::math_poly::linear",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::Quadratic(double,double,double)",
@@ -833,7 +833,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Quadratic.hxx",
       "rust_item": "rustycad_tkmath::math_poly::quadratic",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::Cubic(double,double,double,double)",
@@ -841,7 +841,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Cubic.hxx",
       "rust_item": "rustycad_tkmath::math_poly::cubic",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::Quartic(double,double,double,double,double)",
@@ -849,7 +849,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Quartic.hxx",
       "rust_item": "rustycad_tkmath::math_poly::quartic",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::Laguerre(const double*,int,double,uint32_t)",
@@ -857,7 +857,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
       "rust_item": "rustycad_tkmath::math_poly::laguerre",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::LaguerreN(const double*,size_t,double,uint32_t)",
@@ -865,7 +865,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
       "rust_item": "rustycad_tkmath::math_poly::laguerre_n",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::Quintic(double,double,double,double,double,double)",
@@ -873,7 +873,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
       "rust_item": "rustycad_tkmath::math_poly::quintic",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::Sextic(double,double,double,double,double,double,double)",
@@ -881,7 +881,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
       "rust_item": "rustycad_tkmath::math_poly::sextic",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "MathPoly::Octic(const double*)",
@@ -889,7 +889,7 @@
       "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
       "rust_item": "rustycad_tkmath::math_poly::octic",
       "status": "implemented",
-      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils helpers stay crate-internal. API inventory completeness remains pending."
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     },
     {
       "upstream_id": "CSLib::Normal(const gp_Vec&,const gp_Vec&,double,CSLib_DerivativeStatus&,gp_Dir&)",
@@ -13162,6 +13162,230 @@
       "rust_item": "rustycad_tkmath::gp::oy2d",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::THE_DISTINCT_ROOT_RESIDUAL_TOLERANCE",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::distinct_root_residual_tolerance",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::THE_DISTINCT_ROOT_BISECTION_ITERATIONS",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::DISTINCT_ROOT_BISECTION_ITERATIONS",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::THE_ROOT_MULTIPLICITY_TOLERANCE",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::root_multiplicity_tolerance",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::LongCoefficients",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::LongCoefficients",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "long double (x87 80-bit, MathPoly::Utils::LongCoefficients element)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::LongDouble",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::IsFinite(const std::complex<double>&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::is_finite",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::ToDouble(long double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::to_double",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::Validate(const double*,int,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::validate",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::ScalePolynomial(const double*,int,LongCoefficients&,int&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::scale_polynomial",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::Evaluate(const LongCoefficients&,int,long double,long double&,long double&,long double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::evaluate",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::HasSmallResidual(const LongCoefficients&,int,long double,long double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::has_small_residual",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::RootBound(const LongCoefficients&,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::root_bound",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::AppendUnique(std::array<long double,4>&,size_t&,long double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::append_unique",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::SolveDistinctReal(const LongCoefficients&,int,std::array<long double,4>&,size_t&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::solve_distinct_real",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::SolveDirect(const double*,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Utils.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::solve_direct",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::THE_LAGUERRE_NB_STARTS",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::LAGUERRE_NB_STARTS",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::THE_MULTIPLICITY_REFINEMENT_MAX_ITERATIONS",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::MULTIPLICITY_REFINEMENT_MAX_ITERATIONS",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::IterationResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::IterationResult",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::EvaluateComplex(const double*,int,std::complex<double>,std::complex<double>&,std::complex<double>&,std::complex<double>&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::evaluate_complex",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::HasSmallResidual(const double*,int,const std::complex<double>&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::has_small_complex_residual",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::LaguerreIteration(const double*,int,std::complex<double>,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::laguerre_iteration",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::FindRoot(const double*,int,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::find_root",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::DeflateReal(double*,int&,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::deflate_real",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::DeflateComplex(double*,int&,const std::complex<double>&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::deflate_complex",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::HasMultiplicity(const double*,int,double&,size_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::has_multiplicity",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::ConsolidateRealRoots(PolyResult&,double,const double*,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::consolidate_real_roots",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::HasComplexMultiplicity(const double*,int,std::complex<double>&,size_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::has_complex_multiplicity",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
+    },
+    {
+      "upstream_id": "MathPoly::Utils::ConsolidateComplexRoots(PolyResult&,double,const double*,int,int)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathPoly/MathPoly_Laguerre.hxx",
+      "rust_item": "rustycad_tkmath::math_poly::utils::consolidate_complex_roots",
+      "status": "implemented",
+      "notes": "Explicit MathPoly namespace mapping; GCC 13 libgcc complex arithmetic and glibc 2.39 csqrt/hypotl are reproduced in software. MathPoly::Utils is public as math_poly::utils; x87 long double is math_poly::LongDouble, pointers become slices plus the native int degree, and native undefined behavior (short buffers, overflowing root arrays) panics on a bounds check. API inventory completeness remains pending."
     }
   ],
   "tests": [

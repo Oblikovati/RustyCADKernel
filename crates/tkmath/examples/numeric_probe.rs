@@ -264,6 +264,7 @@ mod bounds_probe;
 mod bvh_probe;
 mod gp_planar_probe;
 mod gp_standard_probe;
+mod mathpoly_utils_probe;
 mod quaternion_probe;
 mod scale_probe;
 fn main() {
@@ -379,6 +380,8 @@ fn main() {
             "gp2d_gtrsf" => gp_planar_probe::gtrsf_case(&values),
             "gp2d_geom" => gp_planar_probe::geom_case(&values),
             "gp_standard" => gp_standard_probe::gp_standard_case(&values),
+            "mathpoly_utils_long" => mathpoly_utils_probe::mathpoly_utils_long_case(&values),
+            "mathpoly_utils_complex" => mathpoly_utils_probe::mathpoly_utils_complex_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }

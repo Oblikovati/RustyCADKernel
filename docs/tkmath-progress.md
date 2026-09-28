@@ -350,11 +350,38 @@ parts. `tools/oracle/extended_complex_fixture.cxx` also records 1,024 bit-exact
 Deliberate deviations: `laguerre` takes a slice and returns `InvalidInput` when
 the slice is shorter than `degree + 1`, where native code reads past the array.
 `laguerre_n` uses the slice length as the native `theSize`. Default arguments
-are the constants `LAGUERRE_TOLERANCE` and `LAGUERRE_MAX_ITERATIONS`. The
-`MathPoly::Utils` helpers stay crate-internal because most of them take long
-double arguments, which have no public Rust type. Root sorting is stable, which
-matches libstdc++'s insertion sort for up to 16 roots. For 17 to 20 roots, the
-order of equal-valued roots with different zero signs is not claimed.
+are the constants `LAGUERRE_TOLERANCE` and `LAGUERRE_MAX_ITERATIONS`. Root sorts use
+the libstdc++ `std::sort` port in `rustycad_tkernel::stl`, so equal-valued roots with
+different zero signs also keep the native order for 17 to 20 roots.
+
+### MathPoly::Utils
+
+`MathPoly::Utils` is public as `math_poly::utils`: every helper of MathPoly_Utils.hxx
+(`Validate`, `ToDouble`, `ScalePolynomial`, `Evaluate`, `HasSmallResidual`,
+`RootBound`, `AppendUnique`, `SolveDistinctReal`, `SolveDirect` and the constants) and
+of the Utils namespace in MathPoly_Laguerre.hxx (`IterationResult`, `EvaluateComplex`,
+the complex `HasSmallResidual`, `LaguerreIteration`, `FindRoot`, `DeflateReal`,
+`DeflateComplex`, `HasMultiplicity`, `HasComplexMultiplicity` and both `Consolidate`
+helpers). The direct and Laguerre solvers call these functions; the earlier private
+copies are deleted. `long double` is the public `math_poly::LongDouble`, a software
+x87 80-bit value (see [the arithmetic profile](mathutils-numerics.md)); its
+`from_bits`/`to_bits` expose the exact pattern. 1,400 `mathpoly_utils_long` and
+`mathpoly_utils_complex` differential requests print long doubles as 80-bit patterns
+and match OCCT exactly.
+
+Mapping rules: native pointers become a slice plus the native `int` degree, output
+references become return values (`evaluate` returns the value, derivative and magnitude
+triple) or `&mut` parameters, and the `THE_*` long-double constants are functions. A
+null pointer is `None` in `validate`. A slice shorter than `degree + 1`, a fifth
+distinct root in a four-root buffer, and a negative derivative degree are undefined
+behavior natively and panic on a bounds check here. `solve_distinct_real` with a
+degree below 1 recurses forever natively; Rust returns false.
+
+The differential probe found one earlier deviation: `LaguerreIteration` records a
+candidate only when `|p(z)| <= tolerance * max(1, magnitude)`. The private port tested
+the negated `>` comparison, which accepts a NaN tolerance. This did not affect the
+solvers, because they reject NaN tolerances first. The public function now follows the
+native comparison, and a regression test pins it.
 
 `num-complex` 0.4.6 is isolated behind `math_poly::Complex` and supplies only
 storage. Version reference: https://docs.rs/num-complex/0.4.6/num_complex/.
