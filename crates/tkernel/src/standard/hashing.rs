@@ -48,3 +48,11 @@ pub(crate) fn murmur32(bytes: &[u8], seed: u32) -> u32 {
     hash = hash.wrapping_mul(MUL);
     hash ^ (hash >> 15)
 }
+/// `opencascade::hashBytes` with the width-selected Murmur seed; `hash_bytes(&42_i32.to_ne_bytes())`.
+pub fn hash_bytes(bytes: &[u8]) -> usize {
+    if cfg!(target_pointer_width = "64") {
+        murmur64(bytes, 0xA329_F1D3_A586) as usize
+    } else {
+        murmur32(bytes, 0xc70f_6907) as usize
+    }
+}

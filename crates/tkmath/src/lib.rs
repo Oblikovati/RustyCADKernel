@@ -8,6 +8,7 @@ pub mod gp;
 pub mod math;
 pub mod math_utils;
 pub mod poly;
+mod stream_format;
 pub mod toploc;
 
 pub mod math_root;

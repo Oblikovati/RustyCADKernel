@@ -108,6 +108,15 @@ where
         }
         Ok(())
     }
+    /// Takes the source's storage and precision, as `Move`. Natively the source keeps a
+    /// non-owning view of the same bytes; Rust ownership forbids that alias, so the source
+    /// is left empty with its precision; `target.move_from(&mut source)`.
+    pub fn move_from(&mut self, source: &mut Self) {
+        let mut empty = Self::default();
+        // An unallocated array accepts either precision.
+        let _ = empty.set_double_precision(source.is_double_precision());
+        *self = std::mem::replace(source, empty);
+    }
     /// Reads coordinates widened to double; `nodes.coordinates(0)?`.
     pub fn coordinates(&self, index: usize) -> Result<[f64; N], Failure> {
         if self.is_double_precision() {

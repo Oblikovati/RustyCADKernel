@@ -502,6 +502,16 @@ fn main() {
             "mathutils_core_random" => {
                 mathutils_core_api_probe::mathutils_core_random_case(&values)
             }
+            "poly_mesh" => poly_probe::mesh_case(&values),
+            "poly_pot" => poly_probe::point_on_triangle_case(&values),
+            "poly_triline" => poly_probe::tri_line_case(&values),
+            "poly_props" => poly_probe::properties_case(&values),
+            "poly_io" => poly_probe::io_case(&values),
+            "poly_connect" => poly_probe::connect_case(&values),
+            "poly_coherent" => poly_probe::coherent_case(&values),
+            "poly_merge" => poly_probe::merge_case(&values),
+            "poly_loops" => poly_probe::loops_case(&values),
+            "toploc" => toploc_probe::location_case(&values),
             "mathpoly_utils_complex" => mathpoly_utils_probe::mathpoly_utils_complex_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
@@ -511,6 +521,8 @@ fn main() {
 mod table_probe;
 
 mod nodes_probe;
+mod poly_probe;
+mod toploc_probe;
 
 mod vector_probe;
 

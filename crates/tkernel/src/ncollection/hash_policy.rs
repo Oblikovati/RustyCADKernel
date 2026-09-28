@@ -47,7 +47,8 @@ impl HashKey for crate::tcollection::AsciiString {
         self.hash_code()
     }
 }
-pub(super) fn next_map_prime(size: usize) -> usize {
+/// `NCollection_Primes::NextPrimeForMap`, the first table step above `size`; `next_map_prime(100) == 101`.
+pub fn next_map_prime(size: usize) -> usize {
     const STEPS: [usize; 24] = [
         101, 1009, 2003, 5003, 10007, 20011, 37003, 57037, 65003, 100019, 209953, 472393, 995329,
         2359297, 4478977, 9437185, 17915905, 35831809, 71663617, 150994945, 301989889, 573308929,
