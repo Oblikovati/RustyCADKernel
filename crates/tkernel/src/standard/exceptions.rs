@@ -67,6 +67,8 @@ define_standard_exceptions! {
 
 /// `Standard_OutOfMemory` is a hand-written class, not a macro one, but has the same base.
 const OUT_OF_MEMORY: (&str, &str) = ("Standard_OutOfMemory", "Standard_ProgramError");
+/// Its constructor lives beside the `Failure` fields its own message buffer needs.
+pub use super::failure::out_of_memory;
 
 /// Direct C++ base of a TKernel exception class, or `None` for `Standard_Failure` and
 /// for names this toolkit does not declare; `exception_parent("Standard_OutOfRange")`.

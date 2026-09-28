@@ -13,5 +13,6 @@ pub mod resource;
 pub mod standard;
 pub mod std_fail;
 pub mod stl;
+pub mod tcol_std;
 pub mod tcollection;
 pub mod units;
