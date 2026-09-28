@@ -92,6 +92,17 @@ pub mod prelude {
     pub use rustycad_tkernel::ncollection::Array1;
     pub use rustycad_tkernel::precision;
     pub use rustycad_tkernel::standard::Handle;
+    pub use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
+    pub use rustycad_tkg2d::geom2d::{
+        Geom2dBSplineCurve, Geom2dBezierCurve, Geom2dCircle, Geom2dCurve, Geom2dOffsetCurve,
+    };
+    pub use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
+    pub use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
+    pub use rustycad_tkg3d::geom::{
+        GeomBSplineCurve, GeomBezierCurve, GeomCircle, GeomCurve, GeomEllipse, GeomHyperbola,
+        GeomLine, GeomOffsetCurve, GeomParabola, GeomTrimmedCurve,
+    };
+    pub use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorTransformedCurve};
     pub use rustycad_tkgeombase::extrema_pc::{
         self as ExtremaPC, Domain1D, ExtremaResult, SearchMode, Status,
     };
@@ -99,7 +110,8 @@ pub mod prelude {
     pub use rustycad_tkmath::elclib;
     pub use rustycad_tkmath::gp::{
         Axis1, Axis2, Axis22d, Circle2, Circle3, Direction3, Ellipse2, Ellipse3, Hyperbola2,
-        Hyperbola3, Line2, Line3, Parabola2, Parabola3, Point2, Point3, Vector3,
+        Hyperbola3, Line2, Line3, Parabola2, Parabola3, Point2, Point3, Transform3, Vector2,
+        Vector3,
     };
     pub use std::f64::consts::{FRAC_PI_2, FRAC_PI_4, PI};
 
