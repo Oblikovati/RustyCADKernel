@@ -10,9 +10,13 @@ pub use array2::Array2;
 mod linear_vector;
 pub use linear_vector::LinearVector;
 mod vector;
-pub use vector::{Vec2, Vec3, Vec4};
+pub use vector::{ElementCast, Vec2, Vec3, Vec4};
+mod square_matrix;
+pub use square_matrix::MatrixScalar;
+mod mat3;
+pub use mat3::Mat3;
 mod mat4;
-pub use mat4::{Mat4, MatrixScalar};
+pub use mat4::Mat4;
 // The allocator trait requires unsafe implementation; ownership proofs are local.
 #[allow(unsafe_code)]
 mod allocator;

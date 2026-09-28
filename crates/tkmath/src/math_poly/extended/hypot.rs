@@ -15,7 +15,7 @@
 //!
 //! `std::abs(std::complex<long double>)` lowers to `cabsl`, which glibc forwards to this
 //! `hypotl`. The pinned oracle profile runs the C kernel, not an x87 `fsqrt(x*x+y*y)`.
-use super::Extended;
+use super::LongDouble;
 /// `SCALE = 0x8p-8257L`.
 const SCALE_EXPONENT: i32 = -8254;
 /// `TINY_VAL = 0x8p-8194L`.
@@ -23,33 +23,33 @@ const TINY_EXPONENT: i32 = -8191;
 /// `EPS = 0x8p-68L`.
 const EPS_EXPONENT: i32 = -65;
 /// `LARGE_VAL = 0xb.504f333f9de6484p+8188L`, i.e. the x87 rounding of sqrt(2)*2^8191.
-fn large_value() -> Extended {
-    Extended::new(2.0).sqrt().scale(8191)
+fn large_value() -> LongDouble {
+    LongDouble::new(2.0).sqrt().scale(8191)
 }
-fn power(exponent: i32) -> Extended {
-    Extended::new(1.0).scale(exponent)
+fn power(exponent: i32) -> LongDouble {
+    LongDouble::new(1.0).scale(exponent)
 }
 /// Requires `ax >= ay >= 0` with squares of `ax`, `ay` and `ax - ay` in range.
-fn kernel(ax: Extended, ay: Extended) -> Extended {
-    let two: Extended = Extended::new(2.0);
-    let mut h: Extended = (ax * ax + ay * ay).sqrt();
-    let (t1, t2): (Extended, Extended) = if h <= two * ay {
-        let delta: Extended = h - ay;
+fn kernel(ax: LongDouble, ay: LongDouble) -> LongDouble {
+    let two: LongDouble = LongDouble::new(2.0);
+    let mut h: LongDouble = (ax * ax + ay * ay).sqrt();
+    let (t1, t2): (LongDouble, LongDouble) = if h <= two * ay {
+        let delta: LongDouble = h - ay;
         (ax * (two * delta - ax), (delta - two * (ax - ay)) * delta)
     } else {
-        let delta: Extended = h - ax;
+        let delta: LongDouble = h - ax;
         (
             two * delta * (ax - two * ay),
-            (Extended::new(4.0) * delta - ay) * ay + delta * delta,
+            (LongDouble::new(4.0) * delta - ay) * ay + delta * delta,
         )
     };
     h = h - (t1 + t2) / (two * h);
     h
 }
-impl Extended {
-    /// Native `hypotl`; `Extended::new(3.0).hypot(Extended::new(4.0))` is 5.
+impl LongDouble {
+    /// Native `hypotl`; `LongDouble::new(3.0).hypot(LongDouble::new(4.0))` is 5.
     pub(crate) fn hypot(self, other: Self) -> Self {
-        if !self.finite() || !other.finite() {
+        if !self.is_finite() || !other.is_finite() {
             // Signalling NaNs never reach this port: arithmetic quiets them first.
             if self.is_infinite() || other.is_infinite() {
                 return Self::infinity();
@@ -70,18 +70,18 @@ impl Extended {
         kernel(ax, ay)
     }
 }
-fn scaled_down(ax: Extended, ay: Extended) -> Extended {
+fn scaled_down(ax: LongDouble, ay: LongDouble) -> LongDouble {
     if ay <= ax * power(EPS_EXPONENT) {
         return ax + ay;
     }
-    let scale: Extended = power(SCALE_EXPONENT);
+    let scale: LongDouble = power(SCALE_EXPONENT);
     kernel(ax * scale, ay * scale) / scale
 }
-fn scaled_up(ax: Extended, ay: Extended) -> Extended {
+fn scaled_up(ax: LongDouble, ay: LongDouble) -> LongDouble {
     if ax >= ay / power(EPS_EXPONENT) {
         return ax + ay;
     }
-    let scale: Extended = power(SCALE_EXPONENT);
+    let scale: LongDouble = power(SCALE_EXPONENT);
     kernel(ax / scale, ay / scale) * scale
 }
 #[cfg(test)]
@@ -94,14 +94,14 @@ mod tests {
     }
     #[test]
     fn hypot_special_values() {
-        let three: Extended = Extended::new(3.0);
-        assert_eq!(three.hypot(Extended::new(-4.0)).narrow(), 5.0);
+        let three: LongDouble = LongDouble::new(3.0);
+        assert_eq!(three.hypot(LongDouble::new(-4.0)).narrow(), 5.0);
         assert!(
-            Extended::new(f64::NAN)
-                .hypot(Extended::infinity())
+            LongDouble::new(f64::NAN)
+                .hypot(LongDouble::infinity())
                 .is_infinite()
         );
-        assert!(Extended::new(f64::NAN).hypot(three).is_nan());
-        assert_eq!(Extended::new(-2.0).hypot(Extended::ZERO).narrow(), 2.0);
+        assert!(LongDouble::new(f64::NAN).hypot(three).is_nan());
+        assert_eq!(LongDouble::new(-2.0).hypot(LongDouble::ZERO).narrow(), 2.0);
     }
 }

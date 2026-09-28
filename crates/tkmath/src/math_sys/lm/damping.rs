@@ -16,7 +16,7 @@ use super::{LMState, merit, owned};
 use crate::{
     math::{FunctionSetWithDerivatives, Matrix, Vector},
     math_lin::utils::is_finite_vector,
-    math_poly::extended::Extended as E,
+    math_poly::extended::LongDouble as E,
     math_sys::linear::{safe_norm, solve_linearized, zero_matrix},
     math_utils::Status,
 };

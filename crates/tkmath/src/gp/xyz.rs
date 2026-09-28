@@ -159,6 +159,41 @@ impl Xyz {
     pub fn set_linear_form(&mut self, a: f64, first: Self, b: f64, second: Self) {
         *self = first * a + second * b;
     }
+    /// Sets `a*first + b*second + c*third`, summed left to right;
+    /// `xyz.set_linear_form_three(1.0,a,2.0,b,3.0,c)`.
+    pub fn set_linear_form_three(&mut self, weights: [f64; 3], terms: [Self; 3]) {
+        *self = terms[0] * weights[0] + terms[1] * weights[1] + terms[2] * weights[2];
+    }
+    /// Sets `a*first + b*second + c*third + offset`;
+    /// `xyz.set_linear_form_three_offset([1.0,2.0,3.0],[a,b,c],d)`.
+    pub fn set_linear_form_three_offset(
+        &mut self,
+        weights: [f64; 3],
+        terms: [Self; 3],
+        offset: Self,
+    ) {
+        self.set_linear_form_three(weights, terms);
+        *self += offset;
+    }
+    /// Sets `a*first + b*second + offset`; `xyz.set_linear_form_offset(2.0,a,3.0,b,c)`.
+    pub fn set_linear_form_offset(
+        &mut self,
+        a: f64,
+        first: Self,
+        b: f64,
+        second: Self,
+        offset: Self,
+    ) {
+        *self = first * a + second * b + offset;
+    }
+    /// Sets `a*first + second`; `xyz.set_scaled_sum(2.0,a,b)`.
+    pub fn set_scaled_sum(&mut self, a: f64, first: Self, second: Self) {
+        *self = first * a + second;
+    }
+    /// Sets `first + second`; `xyz.set_sum(a,b)`.
+    pub fn set_sum(&mut self, first: Self, second: Self) {
+        *self = first + second;
+    }
     /// Writes a gp_XYZ fragment; `xyz.dump_json(&mut stream)?`.
     pub fn dump_json(&self, stream: &mut impl DumpOutput) -> io::Result<()> {
         dump::dump_vector(stream, "gp_XYZ", &self.coordinates)

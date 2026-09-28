@@ -1,4 +1,4 @@
-// Copyright (c) 2026 OPEN CASCADE SAS
+// Copyright (c) 2025 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -12,21 +12,15 @@
 // commercial license or contractual agreement.
 
 //! `MathPoly_Laguerre.hxx`: checked Laguerre iteration with deflation for degree <= 20.
-use super::extended::{Extended as E, scale_double};
-use super::long_poly::scaled_polynomial;
+use super::extended::{LongDouble, scale_double};
+use super::utils::{
+    self, IterationResult, LongCoefficients, consolidate_complex_roots, consolidate_real_roots,
+    deflate_complex, deflate_real, find_root, has_multiplicity, has_small_complex_residual,
+};
 use super::{Complex, GeneralPolyResult, MAX_POLY_DEGREE, PolyResult, quartic};
 use crate::math_utils::Status;
-mod consolidate;
-mod deflation;
-mod iteration;
-mod multiplicity;
+use rustycad_tkernel::precision;
 mod refine;
-use consolidate::{ScaledPolynomial, consolidate_complex_roots, consolidate_real_roots};
-use deflation::{deflate_complex, deflate_real};
-use iteration::{IterationResult, find_root, has_small_residual};
-use multiplicity::has_multiplicity;
-/// `Precision::Computational()`, i.e. `RealEpsilon()` = `DBL_EPSILON`.
-const COMPUTATIONAL: f64 = f64::EPSILON;
 const WORK_SIZE: usize = MAX_POLY_DEGREE + 1;
 /// Working coefficient storage of the scaled, progressively deflated polynomial.
 type Work = [f64; WORK_SIZE];
@@ -34,15 +28,6 @@ type Work = [f64; WORK_SIZE];
 pub const LAGUERRE_TOLERANCE: f64 = 1.0e-12;
 /// Default per-start iteration limit of `MathPoly::Laguerre`; `LAGUERRE_MAX_ITERATIONS`.
 pub const LAGUERRE_MAX_ITERATIONS: u32 = 100;
-/// `Utils::Validate`. Rust also rejects a slice shorter than `degree + 1`, where native
-/// code would read past the caller's array.
-fn is_valid(c: &[f64], degree: i32, tolerance: f64) -> bool {
-    if degree < 0 || degree > MAX_POLY_DEGREE as i32 || !tolerance.is_finite() || tolerance <= 0.0 {
-        return false;
-    }
-    let size: usize = degree as usize + 1;
-    c.len() >= size && c[..size].iter().all(|x| x.is_finite())
-}
 /// Solves a real-coefficient polynomial for all real and complex roots.
 ///
 /// Coefficients are ascending; `tolerance` is a positive relative residual tolerance and
@@ -55,46 +40,24 @@ pub fn laguerre(
     tolerance: f64,
     max_iterations: u32,
 ) -> PolyResult {
-    if !is_valid(coefficients, degree, tolerance)
+    if !utils::validate(Some(coefficients), degree, tolerance)
         || degree < 1
         || coefficients[degree as usize] == 0.0
     {
         return PolyResult::failed(Status::InvalidInput);
     }
+    let (long_scaled, exponent) =
+        utils::scale_polynomial(coefficients, degree).unwrap_or((utils::long_coefficients(), 0));
     let settings: Deflation = Deflation {
         tolerance,
         max_iterations,
-        exponent: 0,
-    };
-    solve_valid(&coefficients[..=degree as usize], settings)
-}
-/// Narrows the long-double scaled coefficients into the double working polynomial.
-fn narrowed(long_scaled: &[E]) -> Work {
-    let mut work: Work = [0.0; WORK_SIZE];
-    for (slot, value) in work.iter_mut().zip(long_scaled) {
-        *slot = value.narrow();
-    }
-    work
-}
-/// Solves a validated polynomial whose last coefficient is nonzero.
-fn solve_valid(coefficients: &[f64], mut settings: Deflation) -> PolyResult {
-    let (long_scaled, exponent) = scaled_polynomial(coefficients);
-    settings.exponent = exponent;
-    let original: Work = narrowed(&long_scaled);
-    let mut result: PolyResult = PolyResult::failed(Status::NotConverged);
-    if let Err(status) = settings.extract_roots(&mut result, original, coefficients.len() - 1) {
-        result.status = status;
-        return result;
-    }
-    let scaled: ScaledPolynomial = ScaledPolynomial {
-        coefficients: &original[..coefficients.len()],
         exponent,
     };
-    consolidate_real_roots(&mut result, settings.tolerance, &scaled);
-    consolidate_complex_roots(&mut result, settings.tolerance, &scaled);
-    refine::polish_simple_roots(&mut result, &long_scaled, exponent);
-    result.status = refine::verified_status(&result, &long_scaled, &scaled, settings.tolerance);
-    result
+    settings.solve(&long_scaled, degree)
+}
+/// Narrows the long-double scaled coefficients into the double working polynomial.
+fn narrowed(long_scaled: &LongCoefficients) -> Work {
+    long_scaled.map(LongDouble::narrow)
 }
 /// Solver settings and the variable exponent shared by the deflation branches.
 struct Deflation {
@@ -103,23 +66,56 @@ struct Deflation {
     exponent: i32,
 }
 impl Deflation {
+    /// Solves a validated scaled polynomial whose leading coefficient is nonzero.
+    fn solve(&self, long_scaled: &LongCoefficients, degree: i32) -> PolyResult {
+        let original: Work = narrowed(long_scaled);
+        let mut result: PolyResult = PolyResult::failed(Status::NotConverged);
+        if let Err(status) = self.extract_roots(&mut result, original, degree) {
+            result.status = status;
+            return result;
+        }
+        consolidate_real_roots(
+            &mut result,
+            self.tolerance,
+            &original,
+            degree,
+            self.exponent,
+        );
+        consolidate_complex_roots(
+            &mut result,
+            self.tolerance,
+            &original,
+            degree,
+            self.exponent,
+        );
+        refine::polish_simple_roots(&mut result, long_scaled, degree, self.exponent);
+        let scaled = refine::Scaled {
+            long: long_scaled,
+            original: &original,
+            degree,
+            exponent: self.exponent,
+        };
+        result.status = refine::verified_status(&result, &scaled, self.tolerance);
+        result
+    }
     /// Deflation loop; returns the failing status while keeping roots already accepted.
     fn extract_roots(
         &self,
         result: &mut PolyResult,
         mut work: Work,
-        mut degree: usize,
+        mut degree: i32,
     ) -> Result<(), Status> {
         while degree > 0 {
             let found: IterationResult =
-                find_root(&work[..=degree], self.tolerance, self.max_iterations);
-            if found.status != Status::Ok || !found.root.is_finite() {
+                find_root(&work, degree, self.tolerance, self.max_iterations);
+            if found.status != Status::Ok || !utils::is_finite(found.root) {
                 return Err(found.status);
             }
+            let error: f64 = found.root_error.unwrap_or(f64::NAN);
             let uncertainty: f64 =
-                found.root_error.unwrap() + COMPUTATIONAL * 1.0_f64.max(found.root.abs());
+                error + precision::computational() * 1.0_f64.max(found.root.abs());
             if found.root.imag().abs() <= uncertainty {
-                self.real_root(result, &mut work, &mut degree, &found)?;
+                self.real_root(result, &mut work, &mut degree, (found.root.real(), error))?;
             } else {
                 self.complex_root(result, &mut work, &mut degree, found.root)?;
             }
@@ -128,28 +124,25 @@ impl Deflation {
     }
     /// Native `ToDouble(scalbn((long double)root, exponent))`.
     fn unscaled(&self, root: f64) -> Result<f64, Status> {
-        E::new(root)
-            .scale(self.exponent)
-            .double()
-            .ok_or(Status::NumericalError)
+        utils::to_double(LongDouble::new(root).scale(self.exponent)).ok_or(Status::NumericalError)
     }
     /// Refines through a double-root check when the iteration error is large.
     fn real_root(
         &self,
         result: &mut PolyResult,
         work: &mut Work,
-        degree: &mut usize,
-        found: &IterationResult,
+        degree: &mut i32,
+        (mut root, error): (f64, f64),
     ) -> Result<(), Status> {
-        let mut root: f64 = found.root.real();
         let mut repeated: f64 = root;
-        if found.root_error.unwrap() > self.tolerance * 1.0_f64.max(root.abs())
+        if error > self.tolerance * 1.0_f64.max(root.abs())
             && *degree > 1
-            && has_multiplicity(&work[..=*degree], &mut repeated, 2)
+            && has_multiplicity(work, *degree, &mut repeated, 2)
         {
             root = repeated;
         }
-        if !has_small_residual(&work[..=*degree], Complex::new(root, 0.0), self.tolerance)
+        let real: Complex = Complex::new(root, 0.0);
+        if !has_small_complex_residual(work, *degree, real, self.tolerance)
             || !deflate_real(work, degree, root, self.tolerance)
         {
             return Err(Status::NumericalError);
@@ -162,24 +155,21 @@ impl Deflation {
         &self,
         result: &mut PolyResult,
         work: &mut Work,
-        degree: &mut usize,
+        degree: &mut i32,
         root: Complex,
     ) -> Result<(), Status> {
-        if *degree < 2 || !has_small_residual(&work[..=*degree], root, self.tolerance) {
+        if *degree < 2 || !has_small_complex_residual(work, *degree, root, self.tolerance) {
             return Err(Status::NumericalError);
         }
         let mut real_root: f64 = root.real();
         let mut repeated: f64 = real_root;
-        if has_multiplicity(&work[..=*degree], &mut repeated, 2) {
+        if has_multiplicity(work, *degree, &mut repeated, 2) {
             real_root = repeated;
         }
-        let mut real_work: Work = *work;
-        let mut real_degree: usize = *degree;
-        if has_small_residual(
-            &work[..=*degree],
-            Complex::new(real_root, 0.0),
-            self.tolerance,
-        ) && deflate_real(&mut real_work, &mut real_degree, real_root, self.tolerance)
+        let (mut real_work, mut real_degree): (Work, i32) = (*work, *degree);
+        let real: Complex = Complex::new(real_root, 0.0);
+        if has_small_complex_residual(work, *degree, real, self.tolerance)
+            && deflate_real(&mut real_work, &mut real_degree, real_root, self.tolerance)
         {
             let unscaled: f64 = self.unscaled(real_root)?;
             (*work, *degree) = (real_work, real_degree);
@@ -192,7 +182,7 @@ impl Deflation {
         &self,
         result: &mut PolyResult,
         work: &mut Work,
-        degree: &mut usize,
+        degree: &mut i32,
         root: Complex,
     ) -> Result<(), Status> {
         if !deflate_complex(work, degree, root, self.tolerance) {

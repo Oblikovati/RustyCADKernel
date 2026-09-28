@@ -68,6 +68,18 @@ macro_rules! vector_arithmetic {
             pub const fn length() -> usize {
                 $count
             }
+            /// Borrows every component writably in storage order, as `ChangeData` and the
+            /// non-const `Element_t*` conversion; `*vector.change_data()[0] = 1.0`.
+            pub fn change_data(&mut self) -> [&mut T; $count] {
+                [&mut self.$first $(, &mut self.$rest)*]
+            }
+        }
+        impl<T: PartialEq> $vector<T> {
+            /// Compares components with `==` in order, as `IsEqual` (NaN is never equal);
+            /// `a.is_equal(&b)`.
+            pub fn is_equal(&self, other: &Self) -> bool {
+                self == other
+            }
         }
         impl<T: Copy> $vector<T> {
             /// Assigns every component in storage order; `vector.set_values(1, 2, ...)`.
@@ -78,6 +90,11 @@ macro_rules! vector_arithmetic {
             /// Copies components in storage order, as `GetData`; `Vec2::new(1,2).data() == [1,2]`.
             pub const fn data(&self) -> [T; $count] {
                 [self.$first $(, self.$rest)*]
+            }
+            /// Builds a vector from components in storage order; `Vec2::from_array([1,2]).y == 2`.
+            pub const fn from_array(values: [T; $count]) -> Self {
+                let [$first $(, $rest)*] = values;
+                Self { $first $(, $rest)* }
             }
         }
         impl<T: Copy + PartialOrd> $vector<T> {

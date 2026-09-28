@@ -152,6 +152,11 @@ void planar_case(std::istream& input) {
 #include "tkmath_bspl_misc_probe.cxx"
 #include "tkmath_bsps_probe.cxx"
 #include "tkmath_bsps_cache_probe.cxx"
+#include "tkmath_gp_planar_probe.cxx"
+#include "tkmath_gp_standard_probe.cxx"
+#include "tkmath_mathpoly_utils_probe.cxx"
+#include "tkmath_ncollection_vec_probe.cxx"
+#include "tkmath_gp_transform_probe.cxx"
 // One line per operation keeps concurrent probe additions merge-friendly.
 using ProbeCase = void (*)(std::istream&);
 const std::map<std::string, ProbeCase> probe_cases = {
@@ -290,6 +295,19 @@ const std::map<std::string, ProbeCase> probe_cases = {
  {"bsps_resolution", bsps_probe::resolution_case},
  {"bsps_interpolate", bsps_probe::interpolate_case},
  {"bsps_function", bsps_probe::function_case},
+ {"gp2d_xy", gp2_xy_case},
+ {"gp2d_mat", gp2_mat_case},
+ {"gp2d_trsf", gp2_trsf_case},
+ {"gp2d_gtrsf", gp2_gtrsf_case},
+ {"gp2d_geom", gp2_geom_case},
+ {"gp_standard", gp_standard_case},
+ {"mathpoly_utils_long", mathpoly_utils_long_case},
+ {"mathpoly_utils_complex", mathpoly_utils_complex_case},
+ {"ncollection_vec", ncollection_vec_case},
+ {"ncollection_mat", ncollection_mat_case},
+ {"gp3d_trsf", gp3_trsf_case},
+ {"gp3d_gtrsf", gp3_gtrsf_case},
+ {"gp3d_quat", gp3_quat_case},
 };
 int main() {
  std::string line;

@@ -8,15 +8,17 @@ fn scale_checks_native_resolution_and_inverse_failure() {
     for factor in [0.0, -0.0, f64::MIN_POSITIVE, -f64::MIN_POSITIVE] {
         let failure = Transform3::scaling(Point3::default(), factor).unwrap_err();
         assert_eq!(failure.exception_type(), "Standard_ConstructionError");
-        assert_eq!(failure.message(), "gp_Trsf::SetScaleFactor");
+        // The native text leads; the offending scale follows it.
+        assert!(failure.message().starts_with("gp_Trsf::SetScaleFactor"));
     }
     let small = Transform3::scaling(Point3::default(), 1e-200).unwrap();
     let zero = small.multiplied(small);
     assert_eq!(zero.scale_factor(), 0.0);
     let failure = zero.inverted().unwrap_err();
-    assert_eq!(
-        failure.message(),
-        "gp_Trsf::Invert() - transformation has zero scale"
+    assert!(
+        failure
+            .message()
+            .starts_with("gp_Trsf::Invert() - transformation has zero scale")
     );
     assert!(zero.powered(-1).is_err());
     assert!(Location::new(zero).inverted().is_err());

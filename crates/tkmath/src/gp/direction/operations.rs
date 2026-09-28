@@ -173,6 +173,9 @@ impl Direction3 {
         ) {
             return self;
         }
+        if transform.form() == TransformForm::PointMirror {
+            return self.reversed();
+        }
         if transform.form() == TransformForm::Scale {
             return if transform.scale_factor() < 0.0 {
                 self.reversed()

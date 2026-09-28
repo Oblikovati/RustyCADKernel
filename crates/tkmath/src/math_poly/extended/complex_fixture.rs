@@ -12,15 +12,15 @@
 // commercial license or contractual agreement.
 
 //! Native bit comparison of `std::complex<long double>` products, quotients and `cabsl`.
-use super::{Extended, Float, X87DoubleExtended};
+use super::{Float, LongDouble, X87DoubleExtended};
 use crate::math_poly::complex::long::LongComplex;
-fn parsed(exponent: &str, significand: &str) -> Extended {
+fn parsed(exponent: &str, significand: &str) -> LongDouble {
     let bits: u128 = (u128::from_str_radix(exponent, 16).unwrap() << 64)
         | u128::from_str_radix(significand, 16).unwrap();
-    Extended(X87DoubleExtended::from_bits(bits))
+    LongDouble(X87DoubleExtended::from_bits(bits))
 }
 /// Exact bits, except that NaNs only need to agree on being NaN (x87 default NaNs differ).
-fn same(expected: Extended, actual: Extended) -> bool {
+fn same(expected: LongDouble, actual: LongDouble) -> bool {
     (expected.is_nan() && actual.is_nan()) || expected.0.to_bits() == actual.0.to_bits()
 }
 #[test]
@@ -29,10 +29,10 @@ fn matches_native_mulxc3_divxc3_and_hypotl() {
     let fixture: &str = include_str!("../../../tests/fixtures/extended_complex_x87.txt");
     for line in fixture.lines() {
         let words: Vec<&str> = line.split_whitespace().collect();
-        let v: Vec<Extended> = words.chunks(2).map(|w| parsed(w[0], w[1])).collect();
+        let v: Vec<LongDouble> = words.chunks(2).map(|w| parsed(w[0], w[1])).collect();
         let (z, w) = (LongComplex::new(v[0], v[1]), LongComplex::new(v[2], v[3]));
         let (product, quotient) = (z * w, z / w);
-        let actual: [Extended; 5] = [z.abs(), product.re, product.im, quotient.re, quotient.im];
+        let actual: [LongDouble; 5] = [z.abs(), product.re, product.im, quotient.re, quotient.im];
         for (expected, actual) in v[4..].iter().zip(actual) {
             assert!(same(*expected, actual), "{line}");
         }

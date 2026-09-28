@@ -14,7 +14,7 @@
 
 //! gp_Ax2 right-handed frame with native automatic X-axis selection.
 use super::direction::CheckedProducts;
-use super::{Axis1, Axis3, Direction3, Failure, Point3, Transform3, Vector3};
+use super::{Axis1, Axis3, Direction3, Failure, Point3, StandardDirection3, Transform3, Vector3};
 /// A right-handed coordinate frame; `Axis2::new(origin,normal)?`.
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Axis2 {
@@ -41,6 +41,28 @@ impl Axis2 {
         Self::with_x_direction(origin, normal, Direction3::new(a, b, c)?)
     }
 
+    /// gp_Ax2(gp_Pnt, gp_Dir::D, gp_Dir::D) with the unchecked table cross product for Y;
+    /// `Axis2::with_standard_frame(origin,StandardDirection3::Z,StandardDirection3::X)`.
+    pub const fn with_standard_frame(
+        origin: Point3,
+        normal: StandardDirection3,
+        x: StandardDirection3,
+    ) -> Self {
+        Self {
+            frame: Axis3::with_standard_frame(origin, normal, x),
+        }
+    }
+    /// gp_Ax2(gp_Pnt, gp_Dir::D); `Axis2::with_standard(origin,StandardDirection3::Z)`.
+    pub const fn with_standard(origin: Point3, normal: StandardDirection3) -> Self {
+        Self {
+            frame: Axis3::with_standard(origin, normal),
+        }
+    }
+    /// gp_Ax2(gp_Dir::D) at the origin, replacing gp::XOY/YOZ/ZOX;
+    /// `Axis2::from_standard(StandardDirection3::Z)`.
+    pub const fn from_standard(normal: StandardDirection3) -> Self {
+        Self::with_standard(Point3::new(0.0, 0.0, 0.0), normal)
+    }
     /// Returns the frame origin; `frame.location()`.
     pub const fn location(&self) -> Point3 {
         self.frame.location()

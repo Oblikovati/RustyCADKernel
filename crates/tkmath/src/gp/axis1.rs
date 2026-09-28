@@ -14,7 +14,7 @@
 // Rust translation of FoundationClasses/TKMath/gp/gp_Ax1.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! gp_Ax1 oriented line for rotations and axial symmetries.
-use super::{Axis2, Direction3, Failure, Point3, Transform3, Vector3, Xyz};
+use super::{Axis2, Direction3, Failure, Point3, StandardDirection3, Transform3, Vector3, Xyz};
 use rustycad_tkernel::standard::dump::{self, DumpOutput};
 use std::io;
 /// An origin and oriented unit axis; `Axis1::new(Point3::default(),Direction3::Z)`.
@@ -35,6 +35,14 @@ impl Axis1 {
             location,
             direction,
         }
+    }
+    /// gp_Ax1(gp_Pnt, gp_Dir::D); `Axis1::with_standard(origin,StandardDirection3::X)`.
+    pub const fn with_standard(location: Point3, direction: StandardDirection3) -> Self {
+        Self::new(location, Direction3::from_standard(direction))
+    }
+    /// gp_Ax1(gp_Dir::D) at the origin, replacing gp::OX/OY/OZ; `Axis1::from_standard(StandardDirection3::Z)`.
+    pub const fn from_standard(direction: StandardDirection3) -> Self {
+        Self::with_standard(Point3::new(0.0, 0.0, 0.0), direction)
     }
     /// Returns the origin; `axis.location()`.
     pub const fn location(&self) -> Point3 {

@@ -13,7 +13,7 @@
 
 //! Port of MathSys_NewtonTypes/2D/3D/4D at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 use super::{NewtonBoundsN, NewtonOptions, NewtonResultN, merit};
-use crate::math_poly::extended::Extended as E;
+use crate::math_poly::extended::LongDouble as E;
 use crate::math_utils::Status;
 pub(super) trait Policy<const N: usize> {
     const SYMMETRIC: bool = false;

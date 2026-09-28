@@ -1,4 +1,4 @@
-// Copyright (c) 2025 OPEN CASCADE SAS
+// Copyright (c) 2013-2014 OPEN CASCADE SAS
 //
 // This file is part of Open CASCADE Technology software library.
 //
@@ -11,27 +11,13 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! NCollection_Mat4::Inverted cofactor expansion in the native expression order.
+//! NCollection_Mat4::Inverted: explicit cofactor expansion in the native term order.
 use super::Mat4;
+use crate::ncollection::MatrixScalar;
 use crate::standard::Failure;
-use std::ops::{Add, Div, Mul, Sub};
 
-/// Scalar operations needed by the cofactor inversion; implemented for `f32` and `f64`.
-pub trait MatrixScalar:
-    Copy
-    + From<u8>
-    + PartialEq
-    + Add<Output = Self>
-    + Sub<Output = Self>
-    + Mul<Output = Self>
-    + Div<Output = Self>
-{
-}
-impl MatrixScalar for f32 {}
-impl MatrixScalar for f64 {}
-
-// Each cofactor is `m[a]*(m[b]*m[c]-m[d]*m[e]) - m[f]*(...) - m[k]*(...)`, the exact
-// grouping of the upstream source; the table lists [a,b,c,d,e, f,g,h,i,j, k,l,n,o,p].
+/// For output element `i`: `[p, a, b, c, d, q, e, f, g, h, s, j, k, l, m]` encodes
+/// `m[p]*(m[a]*m[b] - m[c]*m[d]) - m[q]*(m[e]*m[f] - m[g]*m[h]) - m[s]*(m[j]*m[k] - m[l]*m[m])`.
 const COFACTORS: [[usize; 15]; 16] = [
     [5, 10, 15, 11, 14, 9, 6, 15, 7, 14, 13, 7, 10, 6, 11],
     [1, 11, 14, 10, 15, 9, 3, 14, 2, 15, 13, 2, 11, 3, 10],
@@ -74,11 +60,15 @@ impl<T: MatrixScalar> Mat4<T> {
         *output = Self::from_data(inverse.map(|value| value * divisor));
         true
     }
+    /// `Inverted(out)` without the determinant; `matrix.inverted_to(&mut out)`.
+    pub fn inverted_to(&self, output: &mut Self) -> bool {
+        let mut determinant: T = T::from(0);
+        self.inverted_into(output, &mut determinant)
+    }
     /// Returns the inverse or `Standard_ConstructionError`, as `Inverted()`; `matrix.inverted()?`.
     pub fn inverted(&self) -> Result<Self, Failure> {
         let mut output = Self::default();
-        let mut determinant = T::from(0);
-        if self.inverted_into(&mut output, &mut determinant) {
+        if self.inverted_to(&mut output) {
             return Ok(output);
         }
         Err(Failure::with_type(

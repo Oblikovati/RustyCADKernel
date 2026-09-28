@@ -11,9 +11,16 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! Small vector primitives with OCCT's evaluation order.
+//! NCollection_Vec2/Vec3/Vec4: small vector primitives with OCCT's evaluation order.
+//!
+//! The native classes store an array; here the components are public fields, so the
+//! non-const `x()` reference overloads are field access and `ChangeData` returns an array
+//! of component references.
 mod arithmetic;
+mod conversion;
 mod float;
+mod swizzle;
+pub use conversion::ElementCast;
 
 /// Two scalar components; `Vec2::new(1.0_f64,2.0)`.
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
@@ -74,13 +81,14 @@ impl<T: Copy> Vec3<T> {
     pub const fn from_value(value: T) -> Self {
         Self::new(value, value, value)
     }
-    /// Extends a planar vector with Z; `Vec3::from_vec2(Vec2::new(1,2), 3).z == 3`.
+    /// Extends a planar vector with Z (the native default is 0); `Vec3::from_vec2(Vec2::new(1,2), 3).z == 3`.
     pub const fn from_vec2(planar: Vec2<T>, z: T) -> Self {
         Self::new(planar.x, planar.y, z)
     }
-    /// Copies the first two components; `Vec3::new(1,2,3).xy().y == 2`.
-    pub const fn xy(&self) -> Vec2<T> {
-        Vec2::new(self.x, self.y)
+    /// Replaces the components from a planar vector and Z, as `SetValues(Vec2, z)`;
+    /// `vector.set_values_vec2(Vec2::new(1,2), 3)`.
+    pub fn set_values_vec2(&mut self, planar: Vec2<T>, z: T) {
+        *self = Self::from_vec2(planar, z);
     }
 }
 impl<T: Copy> Vec4<T> {
@@ -88,16 +96,20 @@ impl<T: Copy> Vec4<T> {
     pub const fn from_value(value: T) -> Self {
         Self::new(value, value, value, value)
     }
-    /// Extends a spatial vector with W; `Vec4::from_vec3(Vec3::new(1,2,3), 1).w == 1`.
+    /// Extends a spatial vector with W (the native default is 0); `Vec4::from_vec3(Vec3::new(1,2,3), 1).w == 1`.
     pub const fn from_vec3(spatial: Vec3<T>, w: T) -> Self {
         Self::new(spatial.x, spatial.y, spatial.z, w)
     }
-    /// Copies the first two components; `Vec4::new(1,2,3,4).xy().y == 2`.
-    pub const fn xy(&self) -> Vec2<T> {
-        Vec2::new(self.x, self.y)
+    /// Replaces the components from a spatial vector and W, as `SetValues(Vec3, w)`;
+    /// `vector.set_values_vec3(Vec3::new(1,2,3), 4)`.
+    pub fn set_values_vec3(&mut self, spatial: Vec3<T>, w: T) {
+        *self = Self::from_vec3(spatial, w);
     }
-    /// Copies the first three components; `Vec4::new(1,2,3,4).xyz().z == 3`.
-    pub const fn xyz(&self) -> Vec3<T> {
-        Vec3::new(self.x, self.y, self.z)
+}
+impl<T: Copy + Default> Vec4<T> {
+    /// Extends a planar vector with zero Z and W, as `NCollection_Vec4(Vec2)`;
+    /// `Vec4::from_vec2(Vec2::new(1,2)).z == 0`.
+    pub fn from_vec2(planar: Vec2<T>) -> Self {
+        Self::new(planar.x, planar.y, T::default(), T::default())
     }
 }

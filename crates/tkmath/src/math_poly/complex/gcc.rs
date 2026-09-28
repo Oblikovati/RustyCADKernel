@@ -16,7 +16,7 @@
 //! GCC (`-fcx-method=2`, the C/C++ default) inlines `ac-bd, ad+bc` and calls `__muldc3`
 //! only when both parts are NaN; `__muldc3` recomputes the same products first, so the
 //! whole libgcc routine reproduces both. Full complex division always calls `__divdc3`.
-use super::super::extended::Extended;
+use super::super::extended::LongDouble;
 use std::ops::{Add, Div, Mul, Neg, Sub};
 /// Scalar operations and mode limits used by the libgcc routines.
 pub(crate) trait GccFloat:
@@ -93,9 +93,9 @@ impl GccFloat for f64 {
         f64::INFINITY
     }
 }
-impl GccFloat for Extended {
+impl GccFloat for LongDouble {
     fn literal(value: f64) -> Self {
-        Extended::new(value)
+        LongDouble::new(value)
     }
     fn magnitude(self) -> Self {
         self.abs()
@@ -110,17 +110,17 @@ impl GccFloat for Extended {
         self.copysign(sign)
     }
     fn rbig() -> Self {
-        Extended::largest() / Extended::new(2.0)
+        LongDouble::largest() / LongDouble::new(2.0)
     }
     fn rmin() -> Self {
-        Extended::smallest_normal()
+        LongDouble::smallest_normal()
     }
     fn rmin2() -> Self {
         // LDBL_EPSILON of the 64-bit x87 significand.
-        Extended::new(1.0).scale(-63)
+        LongDouble::new(1.0).scale(-63)
     }
     fn infinity() -> Self {
-        Extended::infinity()
+        LongDouble::infinity()
     }
 }
 /// `__mul?c3(a, b, c, d)` = (a + ib)(c + id).

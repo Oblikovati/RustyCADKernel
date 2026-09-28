@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 //! Port of MathSys_NewtonTypes/2D/3D/4D at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-use crate::math_poly::extended::Extended as E;
+use crate::math_poly::extended::LongDouble as E;
 pub(super) fn norm<const N: usize>(values: &[f64; N]) -> f64 {
     values.iter().fold(0.0_f64, |a, v| a.hypot(*v))
 }

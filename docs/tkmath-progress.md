@@ -360,11 +360,38 @@ parts. `tools/oracle/extended_complex_fixture.cxx` also records 1,024 bit-exact
 Deliberate deviations: `laguerre` takes a slice and returns `InvalidInput` when
 the slice is shorter than `degree + 1`, where native code reads past the array.
 `laguerre_n` uses the slice length as the native `theSize`. Default arguments
-are the constants `LAGUERRE_TOLERANCE` and `LAGUERRE_MAX_ITERATIONS`. The
-`MathPoly::Utils` helpers stay crate-internal because most of them take long
-double arguments, which have no public Rust type. Root sorting is stable, which
-matches libstdc++'s insertion sort for up to 16 roots. For 17 to 20 roots, the
-order of equal-valued roots with different zero signs is not claimed.
+are the constants `LAGUERRE_TOLERANCE` and `LAGUERRE_MAX_ITERATIONS`. Root sorts use
+the libstdc++ `std::sort` port in `rustycad_tkernel::stl`, so equal-valued roots with
+different zero signs also keep the native order for 17 to 20 roots.
+
+### MathPoly::Utils
+
+`MathPoly::Utils` is public as `math_poly::utils`: every helper of MathPoly_Utils.hxx
+(`Validate`, `ToDouble`, `ScalePolynomial`, `Evaluate`, `HasSmallResidual`,
+`RootBound`, `AppendUnique`, `SolveDistinctReal`, `SolveDirect` and the constants) and
+of the Utils namespace in MathPoly_Laguerre.hxx (`IterationResult`, `EvaluateComplex`,
+the complex `HasSmallResidual`, `LaguerreIteration`, `FindRoot`, `DeflateReal`,
+`DeflateComplex`, `HasMultiplicity`, `HasComplexMultiplicity` and both `Consolidate`
+helpers). The direct and Laguerre solvers call these functions; the earlier private
+copies are deleted. `long double` is the public `math_poly::LongDouble`, a software
+x87 80-bit value (see [the arithmetic profile](mathutils-numerics.md)); its
+`from_bits`/`to_bits` expose the exact pattern. 1,400 `mathpoly_utils_long` and
+`mathpoly_utils_complex` differential requests print long doubles as 80-bit patterns
+and match OCCT exactly.
+
+Mapping rules: native pointers become a slice plus the native `int` degree, output
+references become return values (`evaluate` returns the value, derivative and magnitude
+triple) or `&mut` parameters, and the `THE_*` long-double constants are functions. A
+null pointer is `None` in `validate`. A slice shorter than `degree + 1`, a fifth
+distinct root in a four-root buffer, and a negative derivative degree are undefined
+behavior natively and panic on a bounds check here. `solve_distinct_real` with a
+degree below 1 recurses forever natively; Rust returns false.
+
+The differential probe found one earlier deviation: `LaguerreIteration` records a
+candidate only when `|p(z)| <= tolerance * max(1, magnitude)`. The private port tested
+the negated `>` comparison, which accepts a NaN tolerance. This did not affect the
+solvers, because they reject NaN tolerances first. The public function now follows the
+native comparison, and a regression test pins it.
 
 `num-complex` 0.4.6 is isolated behind `math_poly::Complex` and supplies only
 storage. Version reference: https://docs.rs/num-complex/0.4.6/num_complex/.
@@ -545,8 +572,8 @@ gp_Ax22d constructors renormalize the quarter-turned direction through
 `gp_Dir2d::SetCoord`. The native zero-norm raise there is unreachable, because a
 stored direction is never zero. Exception messages add the offending values to the
 native text. The planar conics' `Transform` members accept every Transform2 form.
-Transform2 itself cannot yet build point-mirror or scale forms, so those branches of
-`gp_Dir2d::Transform` stay untested until gp_Trsf2d is complete.
+Transform2 now builds every gp_Trsf2d form, and the point-mirror and scale branches of
+`gp_Dir2d::Transform` are covered by the planar gp probe (see below).
 
 ### BVH core (phase 1)
 
@@ -741,3 +768,109 @@ without the NCollection bound check, so a `[max][min]` target is filled through
 row-major offsets; the port raises the checked Standard_OutOfRange, and the
 coefficients take the shape of the poles in the corpus. UnitWeights rejects
 counts whose product is negative.
+
+
+### Planar gp algebra and transformations (API completion)
+
+This work adds no upstream suite. It completes the public API of gp_XY, gp_Mat2d
+(`Matrix2`), gp_Trsf2d (`Transform2`), gp_GTrsf2d (`GeneralTransform2`), gp_Dir2d,
+gp_Vec2d, gp_Pnt2d and gp_Lin2d, and adds gp_Dir2d::D (`StandardDirection2`) with the
+gp_Ax2d constructors that use it. `porting/parity.json` maps every public member.
+Supplemental tests are in `gp_planar_behavior`, `gp_planar_primitive_behavior` and
+`gp_trsf2d_behavior`. The planar gp probe sends 4,316 differential requests
+(`gp2d_xy`, `gp2d_mat`, `gp2d_trsf`, `gp2d_gtrsf`, `gp2d_geom`), and all match the
+native bits.
+
+The port keeps these native results:
+
+- `gp_Mat2d::Multiply` stores the new `[0][1]` before it reads the operand's `[0][1]`
+  to compute `[1][1]`. `gp_Mat2d::Power`, `gp_Trsf2d::Power` and `gp_GTrsf2d::Power`
+  square a temporary with `M.Multiply(M)`, so every power of 3 or more, or of -3 or
+  less, mixes the new and the old coefficient. For example, a 0.3 rad rotation cubed
+  is not the 0.9 rad rotation. `Matrix2::square_in_place_aliased` reproduces this. A
+  Rust `multiply` receives a copy, so a user self-product has no such effect.
+- The gp_Mat2d out-of-line index and determinant checks exist only with OCCT_DEBUG.
+  A release build reads and writes column or row 2 for every index other than 1, and
+  inverts a singular matrix to infinities. `occt-debug-checks` enables the raises.
+- `gp_Trsf2d::IsNegative` tests the unscaled matrix, so a point mirror (identity
+  matrix, scale -1) is not negative. `VectorialPart` scales only the diagonal of the
+  scale and point-mirror forms. `PreMultiply` by a translation keeps the Rotation form.
+- `gp_Trsf2d(const gp_Trsf&)` copies the 3D form, including forms that have no planar
+  meaning. `SetValues` raises only for `|det| < Resolution`. If orthogonalization then
+  raises, the scale, the Compound form and the divided matrix stay assigned.
+- `gp_GTrsf2d::Power(n)` with a negative `n` and a similarity form inverts, then calls
+  `gp_Trsf2d::Power(n)`, which inverts again. The result is `T^|n|` up to rounding.
+- A gp_Dir2d built from components whose squared norm overflows is stored as a zero
+  vector. `gp_Lin2d::Normal` is `noexcept`, so natively it calls `std::terminate` for
+  such a direction. Rust returns the ConstructionError, and the corpus avoids that input.
+- `gp_Vec2d::GetNormal` multiplies X by -1 and keeps the sign of a NaN. The copying
+  `gp_Lin2d::Translated(P1,P2)` adds `P2 - P1`, but the in-place `Translate` adds `P2`
+  and then subtracts `P1`.
+
+Deliberate Rust deviations: gp_Trsf2d setters that replace the whole state are
+constructors (`mirror_point`, `scaling`, `transformation_between`, ...) plus `set_*`
+methods that call them. `gp_GTrsf2d::operator*` returns `Result`, because it raises
+for a non-orthogonal similarity pair. gp_Mat2d has no `operator*=(gp_Mat2d)`, so
+`Matrix2` has no `MulAssign<Matrix2>`.
+
+### gp_Dir::D and the gp statics
+
+gp_Dir::D is `StandardDirection3`. `Direction3::from_standard` and the gp_Ax1, gp_Ax2
+and gp_Ax3 constructors that take it (`with_standard`, `from_standard` and
+`with_standard_frame`) build exact axis-aligned frames. The gp class statics
+(`gp::Resolution`, `gp::Origin`, `gp::DX` ... `gp::OY2d`) are the free functions
+`gp::resolution()` ... `gp::oy2d()`, which return copies. 36 `gp_standard`
+differential requests cover every main/X pair and the statics.
+
+The port keeps these native results:
+
+- The two-direction constructors take Y from the `crossStandardDir` table and do not
+  check orthogonality. For a parallel or opposite pair the table returns a fixed
+  fallback (for example `Z` for `(X, X)`), so the frame is not orthogonal.
+- `gp::ZOX()` is `gp_Ax2(origin, D::Y)`, so its X direction is Z and its Y direction
+  is X.
+
+### Spatial gp transformations and quaternions (API completion)
+
+This work adds no upstream suite. It completes the public API of gp_XYZ (`Xyz`),
+gp_Mat (`Matrix3`), gp_Trsf (`Transform3`), gp_GTrsf (`GeneralTransform3`),
+gp_Quaternion, gp_QuaternionNLerp and gp_QuaternionSLerp. `porting/parity.json` maps
+every public member. Supplemental tests are in `gp_trsf3d_behavior` and
+`gp_quaternion_api_behavior`. The spatial gp probe sends 3,100 differential requests
+(`gp3d_trsf`, `gp3d_gtrsf`, `gp3d_quat`). They cover every gp_Trsf form, the
+ConstructionError and OutOfRange raises, and all match the native bits.
+
+The port keeps these native results:
+
+- `gp_Trsf::IsNegative` tests the sign of the scale factor. `gp_Trsf2d::IsNegative`
+  tests the determinant of the unscaled matrix. Thus a 3D point mirror is negative and
+  a planar point mirror is not.
+- `SetMirror(gp_Ax1)` stores the half-turn about the axis with scale 1 and form
+  Ax1Mirror. `gp_Trsf(const gp_Trsf2d&)` converts a planar axis mirror (scale -1) to
+  this form by negating the matrix, so its zero entries become -0.
+- `SetScale` writes the form, the scale and the offset before it raises for
+  `|s| <= Resolution`. `SetValues` raises only for `|det| < Resolution`; if the
+  orthogonalization then raises, the scale, the Compound form and the divided matrix
+  stay assigned.
+- `SetTranslationPart` treats a squared length below Resolution as null.
+  `SetScaleFactor` and `SetRotationPart` re-derive the form with the native switch
+  tables, for example a scale of -1 on an identity gives PntMirror.
+- `InitFromJson` applies the parsed `Location` through `SetTranslation` before it reads
+  the matrix, so a later failure leaves a translation form. Native code stores a
+  `shape` outside gp_TrsfForm as-is; Rust returns an OutOfRange error.
+- `gp_GTrsf::Power(n)` does not invert first for `n < -1`. A general (Other) form
+  returns the power of `|n|`. A similarity form calls `gp_Trsf::Power(n)`, which
+  inverts. `gp_GTrsf::Multiply` and `PreMultiply` never raise, unlike
+  `gp_GTrsf2d::Multiply`.
+- `gp_GTrsf::SetForm` divides by the signed cube root of the determinant and compares
+  `N^T N - I` with the literal 1e-12. It does not change the scale, so a scaled
+  orthogonal matrix becomes Compound with scale 1.
+- `gp_GTrsf::SetValue` folds the scale into the matrix before it writes a vectorial
+  cell and sets the form to Other; a write to column 4 keeps the form.
+- `gp_QuaternionSLerp::InitFromUnit` clamps the cosine to 0.9999, so equal ends still
+  have a finite `1 / sin(omega)`. `gp_Quaternion::Inverted` has no zero check.
+
+Deliberate Rust deviations: `gp_Trsf::DumpJson` has no depth argument (the native one
+is not used). The `const gp_Trsf&` and `const gp_GTrsf&` operands of the Rust
+`multiply` and `pre_multiply` are copies, so a self-product has no aliasing effect.
+gp_XYZ, gp_Mat and gp_Quaternion operators are the `std::ops` traits.

@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 //! `std::complex<long double>` on software x87: `__mulxc3`, `__divxc3` and `cabsl`.
-use super::super::extended::Extended as E;
+use super::super::extended::LongDouble as E;
 use super::gcc;
 use std::ops::{Add, Div, Mul, Sub};
 #[derive(Clone, Copy, PartialEq)]
@@ -31,8 +31,8 @@ impl LongComplex {
     pub(crate) fn abs(self) -> E {
         self.re.hypot(self.im)
     }
-    pub(crate) fn finite(self) -> bool {
-        self.re.finite() && self.im.finite()
+    pub(crate) fn is_finite(self) -> bool {
+        self.re.is_finite() && self.im.is_finite()
     }
     /// Adds a real, leaving the imaginary part untouched (GCC complex lowering).
     pub(crate) fn plus_real(self, value: E) -> Self {
