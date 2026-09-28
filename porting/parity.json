@@ -37730,6 +37730,1510 @@
       "rust_item": "<rustycad_tkmath::math::VectorBase as Display>::fmt",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. math_VectorBase<TheItemType> is the generic VectorBase<'a, T: VectorItem>; math_Vector and math_IntegerVector are the Vector and IntegerVector aliases, and VectorItem spells out the template's double/int expression semantics. The hidden friend stream insertion forwards to Dump, as Display does."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::ListCursor as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator(NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::cursor",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator(const NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::cursor",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator(const const_iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::ListCursor as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. One Copy cursor type serves const and mutable iteration, so the const-to-mutable conversion is a copy."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator::operator=(const const_iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::ListCursor as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. One Copy cursor type serves const and mutable iteration, so the conversion assignment is a copy."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator::Init(NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator::Init(const NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator::Initialize(NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator::Initialize(const NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Iterator::IsEqual(const Iterator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::ListCursor as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::begin()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `List::iter`, `List::iter_mut`, `IntoIterator for &List` and `IntoIterator for &mut List`, which yield the same head-to-tail sequence."
+    },
+    {
+      "upstream_id": "NCollection_List::end()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `List::iter`, `List::iter_mut`, `IntoIterator for &List` and `IntoIterator for &mut List`, which yield the same head-to-tail sequence."
+    },
+    {
+      "upstream_id": "NCollection_List::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `List::iter`, `List::iter_mut`, `IntoIterator for &List` and `IntoIterator for &mut List`, which yield the same head-to-tail sequence."
+    },
+    {
+      "upstream_id": "NCollection_List::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `List::iter`, `List::iter_mut`, `IntoIterator for &List` and `IntoIterator for &mut List`, which yield the same head-to-tail sequence."
+    },
+    {
+      "upstream_id": "NCollection_List::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `List::iter`, `List::iter_mut`, `IntoIterator for &List` and `IntoIterator for &mut List`, which yield the same head-to-tail sequence."
+    },
+    {
+      "upstream_id": "NCollection_List::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `List::iter`, `List::iter_mut`, `IntoIterator for &List` and `IntoIterator for &mut List`, which yield the same head-to-tail sequence."
+    },
+    {
+      "upstream_id": "NCollection_List()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::List as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List(const NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::List as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List(NCollection_List&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::move_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. The source keeps its allocator and is left empty, as the native move constructor leaves it."
+    },
+    {
+      "upstream_id": "NCollection_List(std::initializer_list<TheItemType>,const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::from_iter_in",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Assign(const NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::operator=(const NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::operator=(NCollection_List&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::move_assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Clear(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::clear_with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. The null-handle default is `List::clear`, which keeps the current allocator."
+    },
+    {
+      "upstream_id": "NCollection_List::First() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::First()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::first_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Last() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Last()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::last_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Append(const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Append(TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Append(const TheItemType&,Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::append_at",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Append(TheItemType&&,Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::append_at",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Append(NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::append_list",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Prepend(const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::prepend",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Prepend(TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::prepend",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Prepend(NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::prepend_list",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::RemoveFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::remove_first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Remove(Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::remove",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Remove(const TheValueType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::remove_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::InsertBefore(const TheItemType&,Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::InsertBefore(TheItemType&&,Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::InsertBefore(NCollection_List&,Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::insert_list_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Quirk preserved: an empty source bound to another allocator is copied without the iterator check, so an end cursor does not raise then."
+    },
+    {
+      "upstream_id": "NCollection_List::InsertAfter(const TheItemType&,Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::InsertAfter(TheItemType&&,Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::InsertAfter(NCollection_List&,Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::insert_list_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. An end cursor appends the source, as natively."
+    },
+    {
+      "upstream_id": "NCollection_List::EmplaceAppend(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::emplace_append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Constructor arguments are captured by a closure."
+    },
+    {
+      "upstream_id": "NCollection_List::EmplacePrepend(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::emplace_prepend",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Constructor arguments are captured by a closure."
+    },
+    {
+      "upstream_id": "NCollection_List::EmplaceBefore(Iterator&,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::emplace_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Constructor arguments are captured by a closure, which runs only for a valid position."
+    },
+    {
+      "upstream_id": "NCollection_List::EmplaceAfter(Iterator&,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::emplace_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises. Constructor arguments are captured by a closure, which runs only for a valid position."
+    },
+    {
+      "upstream_id": "NCollection_List::Reverse()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::reverse",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Exchange(NCollection_List&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::exchange",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::Contains(const TheValueType&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::contains",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_List::~NCollection_List()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_List.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Iterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::ListCursor as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Iterator(const NCollection_BaseList&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::cursor",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Iterator::Init(const NCollection_BaseList&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Iterator::Initialize(const NCollection_BaseList&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Iterator::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::ListCursor::more",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Iterator::operator==(const Iterator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::ListCursor as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Iterator::IsEqual(const Iterator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::ListCursor as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Extent() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::extent",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::length",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::Allocator() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::List::allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_List<T> is List<T> (the untyped NCollection_BaseList is folded into it) and NCollection_List::Iterator is the detached Copy ListCursor, which names a node by identity instead of holding current/previous pointers. Native Standard_NoSuchObject conditions become Result errors (end or foreign cursor, empty list); First/Last return None where OCCT raises."
+    },
+    {
+      "upstream_id": "NCollection_BaseList::~NCollection_BaseList()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseList.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_ListNode(NCollection_ListNode*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ListNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+    },
+    {
+      "upstream_id": "NCollection_ListNode::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ListNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+    },
+    {
+      "upstream_id": "NCollection_ListNode::Next() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_ListNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+    },
+    {
+      "upstream_id": "NCollection_TListNode(const TheItemType&,NCollection_ListNode*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+    },
+    {
+      "upstream_id": "NCollection_TListNode(TheItemType&&,NCollection_ListNode*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+    },
+    {
+      "upstream_id": "NCollection_TListNode(std::in_place_t,NCollection_ListNode*,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+    },
+    {
+      "upstream_id": "NCollection_TListNode::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+    },
+    {
+      "upstream_id": "NCollection_TListNode::ChangeValue()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+    },
+    {
+      "upstream_id": "NCollection_TListNode::delNode(NCollection_ListNode*,occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_TListNode.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing (the header marks the node classes internal). Rust keeps list nodes private as `Node<T>` with an owned allocator-backed `next` link; values are reached through `List::iter` and `ListCursor::value`, and nodes are freed through `AllocatedBox` Drop instead of delNode."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Node(const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Node(TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Node(std::in_place_t,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Node::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Node::ChangeValue()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::SequenceCursor as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator(NCollection_Sequence&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator(const NCollection_Sequence&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator::More() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::more",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator::Next()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::next",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator::Value() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator::ChangeValue() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator::Init(NCollection_Sequence&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator::Init(const NCollection_Sequence&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator::Initialize(NCollection_Sequence&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator::Initialize(const NCollection_Sequence&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Iterator::IsEqual(const Iterator&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::SequenceCursor as PartialEq>::eq",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::begin()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Sequence::iter`, `Sequence::iter_mut`, `IntoIterator for &Sequence` and `IntoIterator for &mut Sequence`; their DoubleEndedIterator impls cover the bidirectional `--`."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::begin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Sequence::iter`, `Sequence::iter_mut`, `IntoIterator for &Sequence` and `IntoIterator for &mut Sequence`; their DoubleEndedIterator impls cover the bidirectional `--`."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::end()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Sequence::iter`, `Sequence::iter_mut`, `IntoIterator for &Sequence` and `IntoIterator for &mut Sequence`; their DoubleEndedIterator impls cover the bidirectional `--`."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::end() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Sequence::iter`, `Sequence::iter_mut`, `IntoIterator for &Sequence` and `IntoIterator for &mut Sequence`; their DoubleEndedIterator impls cover the bidirectional `--`."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::cbegin() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Sequence::iter`, `Sequence::iter_mut`, `IntoIterator for &Sequence` and `IntoIterator for &mut Sequence`; their DoubleEndedIterator impls cover the bidirectional `--`."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::cend() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: STL iterator boilerplate. Rust iteration is covered by `Sequence::iter`, `Sequence::iter_mut`, `IntoIterator for &Sequence` and `IntoIterator for &mut Sequence`; their DoubleEndedIterator impls cover the bidirectional `--`."
+    },
+    {
+      "upstream_id": "NCollection_Sequence()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Sequence as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::with_allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence(const NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Sequence as Clone>::clone",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence(NCollection_Sequence&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::move_from",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Lower()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::lower",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Upper() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::upper",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Reverse()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::reverse",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::delNode(NCollection_SeqNode*,occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: static node deleter handed to the C++ base class. Rust frees each node through its `AllocatedBox` Drop, returning memory to the owning allocator."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Clear(const occ::handle<NCollection_BaseAllocator>&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::clear",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The nullable allocator handle is an Option."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Assign(const NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator=(const NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator=(NCollection_Sequence&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::move_assign",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Remove(Iterator&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::remove_cursor",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). An end cursor is a no-op, as natively; a cursor naming no node of this sequence (native undefined behaviour) reports NoSuchObject."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Append(const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Append(TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Append(NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::append_sequence",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Prepend(const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::prepend",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Prepend(TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::prepend",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Prepend(NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::prepend_sequence",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(Iterator&,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_after_cursor",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). An end cursor prepends, as natively."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(Iterator&,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_after_cursor",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). An end cursor prepends, as natively."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::EmplaceAppend(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::EmplacePrepend(Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_prepend",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::EmplaceAfter(Iterator&,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_after_cursor",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure; an end cursor prepends."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::First() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::first",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::ChangeFirst()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::first_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Last() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::last",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::ChangeLast()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::last_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::At(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::at",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::ChangeAt(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::change_at",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::~NCollection_Sequence()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Exchange(size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::exchange",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Exchange(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::exchange",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Remove(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::remove",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Remove(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::remove",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Remove(size_t,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::remove_range",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Remove(int,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::remove_range",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertBefore(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertBefore(int,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertBefore(size_t,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertBefore(int,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertBefore(size_t,NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Index 0 raises even for an empty source, as natively."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertBefore(int,NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Index 0 raises even for an empty source, as natively. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(size_t,NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Quirk preserved: an empty source returns before the index is checked."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(int,NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_sequence_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Quirk preserved: an empty source returns before the index is checked. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(int,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(size_t,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::InsertAfter(int,TheItemType&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::insert_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::EmplaceAfter(size_t,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure, run after the index check as natively."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::EmplaceAfter(int,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_after",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure, run after the index check as natively. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::EmplaceBefore(size_t,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure, run after the index check as natively."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::EmplaceBefore(int,Args&&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::emplace_before",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Constructor arguments are captured by a closure, run after the index check as natively. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Split(size_t,NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::split",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Quirk preserved: the destination is cleared and rebound to this allocator before the index is checked."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Split(int,NCollection_Sequence&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::split",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Quirk preserved: the destination is cleared and rebound to this allocator before the index is checked. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Value(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::Value(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::ChangeValue(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::ChangeValue(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::change_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::SetValue(size_t,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::SetValue(int,const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::set_value",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(size_t) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Sequence as Index<usize>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Index panics with the OutOfRange message where `value` returns it."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Sequence as IndexMut<usize>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). IndexMut panics with the OutOfRange message where `change_value` returns it."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Sequence as Index<usize>>::index",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). Index panics with the OutOfRange message where `value` returns it. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_Sequence::operator()(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_Sequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::Sequence as IndexMut<usize>>::index_mut",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities). IndexMut panics with the OutOfRange message where `change_value` returns it. The int overload's extra negative-index OutOfRange check has no counterpart: Rust indices are usize, so a negative index is unrepresentable."
+    },
+    {
+      "upstream_id": "NCollection_SeqNode()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_SeqNode::Next() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_SeqNode::Previous() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_SeqNode::SetNext(NCollection_SeqNode*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_SeqNode::SetPrevious(NCollection_SeqNode*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: internal node plumbing. Rust keeps sequence nodes private (`SequenceNode<T>` in allocator-backed boxes ordered by a vector) and exposes their values through `Sequence::value`, `SequenceCursor::value` and `SequenceCursor::change_value`; raw node pointers and links have no safe counterpart."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Iterator()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::SequenceCursor as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Iterator(const NCollection_BaseSequence&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::new",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Iterator::Init(const NCollection_BaseSequence&,bool)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::init",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Iterator::Previous()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::SequenceCursor::previous",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Iterator::CurrentNode() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: raw node-pointer accessor of the base iterator. Rust cursors hold node identities privately; the element is reached through `SequenceCursor::value`/`change_value` and the previous node through `SequenceCursor::previous`."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Iterator::PreviousNode() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: raw node-pointer accessor of the base iterator. Rust cursors hold node identities privately; the element is reached through `SequenceCursor::value`/`change_value` and the previous node through `SequenceCursor::previous`."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::IsEmpty() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::is_empty",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Length() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::length",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Size() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::len",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_BaseSequence::Allocator() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_BaseSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::Sequence::allocator",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_Sequence<T> is Sequence<T> (NCollection_BaseSequence is folded into it) with one-based usize indices; Standard_OutOfRange conditions become Result errors naming the index and range, and First/Last return None where OCCT raises NoSuchObject. NCollection_Sequence::Iterator is the Copy SequenceCursor (current and previous node identities)."
+    },
+    {
+      "upstream_id": "NCollection_HSequence()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::HSequence as Default>::default",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`."
+    },
+    {
+      "upstream_id": "NCollection_HSequence(const SequenceType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::from_sequence",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Sequence() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::sequence",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`. The const reference becomes a closure borrowing the sequence under the read lock."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::ChangeSequence()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::change_sequence",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`. The mutable reference becomes a closure borrowing the sequence under the write lock."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(const TheItemType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::append",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(SequenceType&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::append_sequence",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::Append(const opencascade::handle<T>&,std::enable_if<std::is_base_of<NCollection_HSequence,T>::value>::type*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "rustycad_tkernel::ncollection::HSequence::append_handle",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`. Takes Handle<HSequence<T>> (Rust has no derived HSequence types); moves the source's items, a self-append is a no-op as in Sequence::Append, and a null handle reports Standard_NullObject where C++ dereferences it."
+    },
+    {
+      "upstream_id": "NCollection_HSequence::DEFINE_STANDARD_RTTI_INLINE(NCollection_HSequence,Standard_Transient)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/NCollection/NCollection_HSequence.hxx",
+      "rust_item": "<rustycad_tkernel::ncollection::HSequence as Transient>::dynamic_type",
+      "status": "implemented",
+      "notes": "Manual NCollection member mapping; NCollection_HSequence<T> is HSequence<T>, a Transient whose Sequence<T> sits behind a lock so every Handle holder edits the same sequence; the inherited Sequence members are reached through `sequence`/`change_sequence`. RuntimeTyped/Transient are implemented with one descriptor per item type, all named NCollection_HSequence with Standard_Transient as parent, as each native template instantiation has."
     }
   ],
   "tests": [
