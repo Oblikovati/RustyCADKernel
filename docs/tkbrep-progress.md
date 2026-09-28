@@ -16,7 +16,7 @@ The toolkit test inventory maps these suites (28 declarations):
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
 | TopoDS_Builder_Test.cxx | topods_builder | 19 | pass | pass |
-| TopExp_Test.cxx | topexp | 9 | blocked (TKPrim) | pass |
+| TopExp_Test.cxx | topexp | 9 | pass | pass |
 | TopoDS_Edge_Test.cxx | topods_edge | 1 | pass | pass |
 | TopoDS_Iterator_Test.cxx | topods_iterator | 17 | pass | pass |
 | TopoDS_TShape_Test.cxx | topods_tshape | 8 | pass | pass |
