@@ -59234,6 +59234,238 @@
       "rust_item": "rustycad_tkernel::osd::OpenMode",
       "status": "implemented",
       "notes": "Enumeration with native declaration order as i32 discriminants; `ALL` lists the values and `from_raw` inverts `as i32`. Host independent."
+    },
+    {
+      "upstream_id": "OSD_OpenFile(const char*,const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_OpenFile.hxx",
+      "rust_item": "rustycad_tkernel::osd::open_file_utf8",
+      "status": "implemented",
+      "notes": "The extern \"C\" overload: fopen of a UTF-8 name; FILE* becomes Option<std::fs::File> (None for NULL), with the glibc mode parsing of open_file. Windows: native _wfopen after UTF-8 to UTF-16 conversion accepts the MSVC mode letters; the Rust parser keeps the glibc rules on every host. Probe osd_fs_fopen."
+    },
+    {
+      "upstream_id": "DIR_RESPONSE",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::AllocSD()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::FreeSD(PSECURITY_DESCRIPTOR)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::GetTokenInformationEx(HANDLE,TOKEN_INFORMATION_CLASS)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::FreeTokenInformation(LPVOID)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::GetFileSecurityEx(LPCWSTR,SECURITY_INFORMATION)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::FreeFileSecurity(PSECURITY_DESCRIPTOR)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::CreateAcl(DWORD)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::FreeAcl(PACL)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::PredefinedSid(PSID)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::NtPredefinedSid(PSID)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::AdminSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::WorldSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::InteractiveSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::NetworkSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::LocalSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::DialupSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::BatchSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::CreatorOwnerSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::NullSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::NtSid()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::AllocAccessAllowedAce(DWORD,BYTE,PSID)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::FreeAce(PVOID)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::MoveDirectory(LPCWSTR,LPCWSTR)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::CopyDirectory(LPCWSTR,LPCWSTR)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::SetMoveDirectoryProc(MOVE_DIR_PROC)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::SetCopyDirectoryProc(COPY_DIR_PROC)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
+    },
+    {
+      "upstream_id": "OSD_WNT::SetResponseDirectoryProc(RESPONSE_DIR_PROC)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_WNT.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: OSD_WNT.hxx is the Windows-only C helper layer of the _WIN32 OSD build (OSD_WNT.cxx compiles only under _WIN32, and the header includes <windows.h>). It hands out raw Win32 security objects (PSECURITY_DESCRIPTOR, PSID, PACL, ACEs) with manual Alloc/Free pairs and directory move/copy callbacks, and only the Windows branches of OSD_File, OSD_FileNode, OSD_Directory, OSD_Protection and OSD_Process call it. The Rust port reaches Windows through std/windows-sys inside those classes and does not export this raw-pointer C layer; on Linux/macOS the header does not exist in the native build either."
     }
   ],
   "tests": [
