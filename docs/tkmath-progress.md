@@ -1089,3 +1089,78 @@ Excluded rows (status `excluded`, with the reason in `notes`): the destructors, 
 `BSplCLib::DN(U, N, Poles, Weights, P, VN)`, which the pinned header declares but no
 pinned source defines (libTKMath exports only the three B-spline `DN` overloads), so a
 call cannot link.
+
+### Poly and TopLoc packages (API completion)
+
+This work adds no upstream suite: TKMath GTests hold only Poly_ArrayOfNodes and
+TopLoc_Location suites, both already mapped. `tools/audit_api_rows.py` reports 0
+missing and 0 stale rows for Poly and TopLoc (412 new rows). Every file of both
+FILES.cmake is ported: Poly_Triangulation (UV nodes, single-precision normals, the
+cached min-max range, the late-load interface), the three polygon classes,
+Poly_Triangle, Poly_TriangulationParameters, Poly_MeshPurpose, the static Poly
+functions, Poly_Connect, Poly_CoherentTriangulation with its node, link, triangle and
+triangle-ring classes, Poly_MergeNodesTool and Poly_MakeLoops (2D and 3D); TopLoc_Datum3D,
+TopLoc_ItemLocation, TopLoc_SListOfItemLocation and its node, the rest of
+TopLoc_Location (Divided, Predivided, Powered, HashCode, dumps) and the map aliases.
+
+Shared mutation follows docs/geom-design.md section 3 (written for Geom2d on a parallel
+branch; not yet on this base): each transient Poly class keeps its fields in one
+crate-private `poly::shared_state::SharedState` (an `RwLock` that ignores poisoning),
+every member takes `&self`, and a change through one `Handle` is seen through all.
+Getters that return `const&` natively return copies; `Internal*`/`Change*` lend the
+array to a closure under the write lock. `SharedState` and the local `HArray1OfReal`
+(the shared `NCollection_HArray1<double>` of the polygons) should move to TKernel next
+to the Geom2d `GeometryCell` when the branches meet. Poly_CoherentTriangulation,
+Poly_Connect, Poly_MergeNodesTool and Poly_MakeLoops are algorithm objects with `&mut`
+members. TKernel gains `standard::hash_bytes`, a public `next_map_prime`, and a
+`PackedCursor` that reads a packed map live, as the native iterator does while
+Poly_MakeLoops removes keys.
+
+Evidence: 2,280 differential requests (`tools/tkmath_polymesh_corpus.py`,
+`tools/tkmath_toploc_corpus.py`) match the native bits (the numeric gate now passes
+63,454 cases), and
+`poly_triangulation_behavior.rs`, `poly_polygon_io_behavior.rs`,
+`poly_mesh_tools_behavior.rs` and `toploc_behavior.rs` pin the behaviour below.
+
+Preserved quirks: a triangulation, `ResizeNodes` or `AddUVNodes` with zero nodes raises
+Standard_RangeError (a zero-length Poly_ArrayOfNodes), so does `MergeNodesTool::Result`
+without nodes; `Poly_Triangulation(Nodes, Triangles)` and both Poly_PolygonOnTriangulation
+array constructors keep the lower bound of their input arrays; Poly_Polygon3D reads each
+parameter at its node's index, and `Copy` allocates one parameter per node, so tables of
+another length raise Standard_DimensionMismatch; `UpdateCachedMinMax` goes through `MinMax`
+with an identity and so returns an existing cache unchanged; `ComputeNormals` sums
+unnormalized single-precision triangle normals and gives (0, 0, 1) to a node without
+area; `Poly::Intersect` writes the triangle at every improvement but the distance only on
+success; `PointOnTriangle` on collinear sides reports the unclamped parameter of the
+closer side; `Poly::Write` prints six significant digits, so a round trip rounds;
+`Poly_Connect::Triangles` lists the neighbours across (n1,n2), (n2,n3), (n3,n1) (the
+header comment says otherwise) and `Triangle(N)` is the last triangle that wrote node N.
+A coherent node without UV keeps the infinite UV (`Precision::Infinite()`), and
+`GetTriangulation` exports it because u² + v² exceeds the confusion; `ComputeLinks` without
+`ClearLinks` leaves triangles pointing at cleared link slots, which
+`NCollection_DynamicArray::Clear` keeps, so the port keeps the slots too. The merge map
+keeps the NCollection_BaseMap bucket policy, head insertion and resize order, the DJB2 hash
+of the float bytes (so -0 and +0 land in different buckets) and the cell hash of
+NCollection_CellFilter, because with a tolerance the first match wins; the tolerance and the
+angle are stored in single precision; an angle whose cosine is at most 0.01 skips the normal
+computation and compares against the previous normal; a degenerate quad is kept, and without
+an output a quad counts as one element. Poly_MakeLoops reads the node order of both the
+stored links and the helper's links. TopLoc_Location::HashCode hashes datum addresses, so
+the value is specific to one process; the probe checks the recurrence on synthetic ids and
+against the native value on real addresses.
+
+Deviations are limited to undefined or non-terminating native behaviour and ownership.
+`Poly_ArrayOfNodes::Move` leaves the source empty (natively a non-owning alias of the same
+bytes). The default Poly_CoherentNode normal is zero (natively uninitialized); an
+out-of-range coherent index raises Standard_OutOfRange (natively unchecked); removing a
+triangle from a free node returns false (natively a null dereference); a coherent
+triangulation built from a null handle has deflection 0 (natively uninitialized). When
+`RemoveDegenerated` would restart forever from a removed ring head, or `Perform` would
+repeat a step that consumes no start link (seen when a helper still lists a link that
+`ReplaceLink` swapped), the port raises Standard_ProgramError instead of looping.
+`Poly::Read*` reject a token that libstdc++ extraction refuses (natively the fields stay
+uninitialized). OSD_FileSystem is not ported, so a `DeferredTriangulation` owns its input;
+the allocator arguments of the coherent classes are not kept (`Allocator` is an excluded
+row). `Poly_Polygon3D::Parameters` without parameters and `TopLoc_Location::Powered(INT_MIN)`
+on a multi-item chain raise Standard_NullObject and Standard_OutOfRange where native code
+dereferences null or recurses forever. `NextLocation` of the identity is the identity itself.
