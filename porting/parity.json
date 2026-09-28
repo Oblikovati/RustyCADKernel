@@ -51050,6 +51050,350 @@
       "rust_item": "rustycad_tkernel::osd::Protection::sub",
       "status": "implemented",
       "notes": "Unix reads the native TabProtSub table verbatim (quirk cells X-RW=None, X-RWX=X, X-RWD=None); Windows is the mask difference. Probe osd_prot_row compares all 256 cells."
+    },
+    {
+      "upstream_id": "OSD_Path()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::empty",
+      "status": "implemented",
+      "notes": "All components empty; Default uses the host build. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path(const TCollection_AsciiString&,OSD_SysType)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::parse",
+      "status": "implemented",
+      "notes": "new/with_syntax take the host dialect and never fail; with_sys_type/parse take an explicit OSD_SysType. Unix build: UnixExtract/DosExtract/VmsExtract/MacExtract with their quirks (DOS disk removal by token length, VMS extension from the second dot token, Mac name losing its first byte and removed at its first text match), Unknown/Taligent leave all components empty, and malformed VMS names raise Standard_OutOfRange as Err. Mac names that end in a bar make the native code read past the string terminator; Rust takes an empty name there. Windows build: _splitpath then _remove_dup; any dialect but Default/WindowsNT raises Standard_ProgramError. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path(const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::from_values",
+      "status": "implemented",
+      "notes": "Stores the seven components; the Windows build prefixes a missing extension dot and normalizes the trek (SetValues). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::Values(TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::values",
+      "status": "implemented",
+      "notes": "The seven output references become a returned PathComponents; the Windows build appends '|' to a nonempty trek. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::SetValues(const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::set_values",
+      "status": "implemented",
+      "notes": "Unix build stores as given; Windows build prefixes a missing extension dot and removes duplicate separators from the trek. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::SystemName(TCollection_AsciiString&,OSD_SysType) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::system_name_as",
+      "status": "implemented",
+      "notes": "system_name() is the Default form; system_name_as(type) returns Result. Unix build: VMS, DOS (Standard_OutOfRange for a non-drive disk with an empty trek, as natively), MacOs (computes but never appends the trek) and Unix spellings. Windows build: disk + trek with '/' and '..' in a 260-byte buffer + name + extension; other dialects raise Standard_ProgramError. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::ExpandedName(TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::expanded_name",
+      "status": "implemented",
+      "notes": "Both native builds define an empty body; the argument is left unchanged. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::IsValid(const TCollection_AsciiString&,OSD_SysType)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_valid",
+      "status": "implemented",
+      "notes": "Empty names are valid; VMS rejects / @ \\, DOS/OS2 rejects / : * ? \" < > |, MacOs accepts a name with ':' and otherwise limits it to 31 bytes; other dialects accept anything. Default resolves to the host system (LinuxREDHAT on Linux, UnixBSD on macOS, WindowsNT on Windows); is_valid_on takes an explicit build. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::UpTrek()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::up_trek",
+      "status": "implemented",
+      "notes": "Unix build removes the last token where it last occurs and then one bar of the first '||'; Windows build truncates before the last bar run. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::DownTrek(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::down_trek",
+      "status": "implemented",
+      "notes": "Unix build appends the name and a '|' unless it ends with one; an empty name makes the native code read the byte before its buffer, and Rust appends '|' (deliberate deviation, kept out of the probe corpus). Windows build joins with one bar and normalizes. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::TrekLength() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::trek_length",
+      "status": "implemented",
+      "notes": "Counts '|'-separated tokens on both builds (Windows returns 0 for a lone '|'). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::RemoveATrek(int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::remove_a_trek",
+      "status": "implemented",
+      "notes": "Returns Result. Unix build raises Standard_NumericError for an empty trek or an index past the end and removes the token's text at its first occurrence (|ab|b| minus 2 is |a|b|). Windows build ignores an index past the end and raises Standard_OutOfRange for an empty trek. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::RemoveATrek(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::remove_a_trek_named",
+      "status": "implemented",
+      "notes": "Returns Result. Unix build removes the first text match (possibly inside a longer component). Windows build removes '|name|' and raises Standard_OutOfRange for an empty trek or name, leaving the trek edited up to the failure point as natively. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::TrekValue(int) const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::trek_value",
+      "status": "implemented",
+      "notes": "Returns Result. Unix build raises Standard_NumericError for a missing component; Windows build returns an empty string, and raises Standard_OutOfRange for an empty trek. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::InsertATrek(const TCollection_AsciiString&,int)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::insert_a_trek",
+      "status": "implemented",
+      "notes": "Returns Result. Unix build raises Standard_NumericError unless 1 <= where <= TrekLength and inserts before the first text match of that component. Windows build inserts after the where-th bar and ignores an out-of-range index. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::Node() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::node",
+      "status": "implemented",
+      "notes": "Returns the stored component by value. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::UserName() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::user_name",
+      "status": "implemented",
+      "notes": "Returns the stored component by value. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::Password() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::password",
+      "status": "implemented",
+      "notes": "Returns the stored component by value. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::Disk() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::disk",
+      "status": "implemented",
+      "notes": "Returns the stored component by value. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::Name() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::name",
+      "status": "implemented",
+      "notes": "Returns the stored component by value. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::Extension() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::extension",
+      "status": "implemented",
+      "notes": "Returns the stored component by value. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::Trek() const",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::trek",
+      "status": "implemented",
+      "notes": "Returns the trek; the Windows build appends '|' to a nonempty trek. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::SetNode(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::set_node",
+      "status": "implemented",
+      "notes": "Stores the component as given (up to a NUL). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::SetUserName(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::set_user_name",
+      "status": "implemented",
+      "notes": "Stores the component as given (up to a NUL). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::SetPassword(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::set_password",
+      "status": "implemented",
+      "notes": "Stores the component as given (up to a NUL). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::SetDisk(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::set_disk",
+      "status": "implemented",
+      "notes": "Stores the component as given (up to a NUL). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::SetName(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::set_name",
+      "status": "implemented",
+      "notes": "Stores the component as given (up to a NUL). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::SetExtension(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::set_extension",
+      "status": "implemented",
+      "notes": "Stores the component as given (up to a NUL). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::SetTrek(const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::set_trek",
+      "status": "implemented",
+      "notes": "Stores the trek; the Windows build removes duplicate separators. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::LocateExecFile(OSD_Path&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: the member is declared but never defined natively (OSD_Path.cxx defines an unrelated free function LocateExecFile that returns false), so any C++ call fails to link on every platform. There is no behavior to port."
+    },
+    {
+      "upstream_id": "OSD_Path::RelativePath(const TCollection_AsciiString&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::relative_path",
+      "status": "implemented",
+      "notes": "Returns Result: an empty directory raises Standard_OutOfRange as natively. Keeps the token walk quirks (a differing component before a '/' does not switch to sibling mode). relative_path_on selects the build (the Windows build keeps a leading '//' in RemoveExtraSeparator). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::AbsolutePath(const TCollection_AsciiString&,const TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::absolute_path",
+      "status": "implemented",
+      "notes": "Returns Result: an empty relative path raises Standard_OutOfRange as natively. absolute_path_on selects the build (leading '//' kept on Windows). Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::FolderAndFileFromPath(const TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::folder_and_file_from_path",
+      "status": "implemented",
+      "notes": "Output references become a returned (folder, file) pair; splits after the last '/' or '\\' on every host. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::FileNameAndExtension(const TCollection_AsciiString&,TCollection_AsciiString&,TCollection_AsciiString&)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::file_name_and_extension",
+      "status": "implemented",
+      "notes": "Output references become a returned (name, extension) pair; extensions of 1..19 bytes after a dot that is not the first byte, lowercased in the C locale. Host independent. Both native builds are ported and selected by PathSyntax (native() follows the host: the Unix build on Linux/macOS, the Windows build on Windows); the Unix build is compared with OCCT by the osd_path_* probes, the Windows build is covered by Rust tests derived from its source."
+    },
+    {
+      "upstream_id": "OSD_Path::IsDosPath(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_dos_path",
+      "status": "implemented",
+      "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
+    },
+    {
+      "upstream_id": "OSD_Path::IsNtExtendedPath(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_nt_extended_path",
+      "status": "implemented",
+      "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
+    },
+    {
+      "upstream_id": "OSD_Path::IsUncPath(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_unc_path",
+      "status": "implemented",
+      "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
+    },
+    {
+      "upstream_id": "OSD_Path::IsUncExtendedPath(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_unc_extended_path",
+      "status": "implemented",
+      "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
+    },
+    {
+      "upstream_id": "OSD_Path::IsUnixPath(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_unix_path",
+      "status": "implemented",
+      "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
+    },
+    {
+      "upstream_id": "OSD_Path::IsContentProtocolPath(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_content_protocol_path",
+      "status": "implemented",
+      "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
+    },
+    {
+      "upstream_id": "OSD_Path::IsRemoteProtocolPath(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_remote_protocol_path",
+      "status": "implemented",
+      "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
+    },
+    {
+      "upstream_id": "OSD_Path::IsRelativePath(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_relative_path",
+      "status": "implemented",
+      "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
+    },
+    {
+      "upstream_id": "OSD_Path::IsAbsolutePath(const char*)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/OSD/OSD_Path.hxx",
+      "rust_item": "rustycad_tkernel::osd::CadPath::is_absolute_path",
+      "status": "implemented",
+      "notes": "Inline syntax predicate over the bytes up to the first NUL; host independent; probe osd_path_kind."
     }
   ],
   "tests": [
