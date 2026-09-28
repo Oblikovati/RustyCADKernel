@@ -2,6 +2,8 @@
 //! locale, buffered readers, dump and Plugin.
 #[path = "standard_services_api_behavior/array_stream.rs"]
 mod array_stream;
+#[path = "standard_services_api_behavior/dump.rs"]
+mod dump;
 #[path = "standard_services_api_behavior/locale.rs"]
 mod locale;
 #[path = "standard_services_api_behavior/memory.rs"]

@@ -12,100 +12,141 @@
 // commercial license or contractual agreement.
 // Rust translation of FoundationClasses/TKernel/Standard/Standard_Dump.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
+//! Reading dump text back: stream names, field names, scalar values and real vectors.
+//! Positions are one-based, as in `TCollection_AsciiString`.
+use super::keys::{JsonKey, json_key_length, json_key_to_string};
+use super::text::{length, location, sub_string};
+use super::values::dump_field_to_name;
 use crate::{standard::Failure, tcollection::AsciiString};
-/// Consumes the exact quoted key and optional comma-space; `process_stream_name(text,"gp_Pnt",&mut position)?`.
-pub fn process_stream_name(text: &str, name: &str, position: &mut i32) -> Result<bool, Failure> {
-    if text.is_empty() || (text.len() as i64) < i64::from(*position) {
+
+/// `ProcessStreamName`: consumes an optional `, ` and the exact `"name": ` at `position`;
+/// false (position untouched unless a `, ` was consumed) when the key differs, the text is
+/// empty or `position` is past its end; `process_stream_name(text, "gp_Pnt", &mut position)?`.
+pub fn process_stream_name(
+    text: impl AsRef<[u8]>,
+    name: impl AsRef<[u8]>,
+    position: &mut i32,
+) -> Result<bool, Failure> {
+    let text = text.as_ref();
+    if text.is_empty() || length(text) < *position {
         return Ok(false);
     }
-    let mut suffix = tail(text, *position)?;
-    if suffix.starts_with(b", ") {
-        *position += 2;
-        suffix = tail(text, *position)?;
+    match_key(text, name.as_ref(), position)
+}
+
+/// `ProcessFieldName`: like [`process_stream_name`] for a C++ field expression, whose key is
+/// `DumpFieldToName` of it (up to its first NUL); unlike it, a position past the end raises
+/// Standard_OutOfRange; `process_field_name(text, "myGap", &mut position)?`.
+pub fn process_field_name(
+    text: impl AsRef<[u8]>,
+    name: impl AsRef<[u8]>,
+    position: &mut i32,
+) -> Result<bool, Failure> {
+    let text = text.as_ref();
+    if text.is_empty() {
+        return Ok(false);
     }
-    let key = format!("\"{name}\": ");
-    let matches = suffix.starts_with(key.as_bytes());
+    let name = name
+        .as_ref()
+        .split(|byte| *byte == 0)
+        .next()
+        .unwrap_or_default();
+    match_key(text, dump_field_to_name(name)?.as_bytes(), position)
+}
+
+fn match_key(text: &[u8], name: &[u8], position: &mut i32) -> Result<bool, Failure> {
+    let mut rest = sub_string(text, *position, length(text))?;
+    let separator = json_key_to_string(JsonKey::SeparatorValueToValue).as_bytes();
+    if rest.starts_with(separator) {
+        *position += json_key_length(JsonKey::SeparatorValueToValue);
+        rest = sub_string(text, *position, length(text))?;
+    }
+    let key = [b"\"", name, b"\": "].concat();
+    let matches = rest.starts_with(&key);
     if matches {
         *position += key.len() as i32;
     }
     Ok(matches)
 }
-fn tail(text: &str, position: i32) -> Result<&[u8], Failure> {
-    if position < 1 || position as usize > text.len() {
-        return Err(Failure::out_of_range(
-            "TCollection_AsciiString::SubString() out of range",
-        ));
-    }
-    Ok(&text.as_bytes()[position as usize - 1..])
-}
-/// Reads bracketed numbers, mutating each output as it is parsed; `init_real_values(text,&mut position,&mut xyz)?`.
+
+/// `InitRealValues`: parses `[v1, v2, ...]` after `position` into `values`, storing each as
+/// it is read, then moves `position` past the text's first `]` from `position` (to 1 when
+/// there is none); false at the first non-numeric value; `init_real_values(t, &mut p, &mut xyz)?`.
 pub fn init_real_values(
-    text: &str,
+    text: impl AsRef<[u8]>,
     position: &mut i32,
     values: &mut [f64],
 ) -> Result<bool, Failure> {
-    let content = tail(text, *position + 1)?;
-    let close = content.iter().position(|byte| *byte == b']');
-    let mut start = 0;
-    for index in 0..values.len() {
-        let end = if index + 1 == values.len() {
-            close.ok_or_else(substring_error)?
+    let text = text.as_ref();
+    let content = sub_string(
+        text,
+        *position + json_key_length(JsonKey::OpenContainer),
+        length(text),
+    )?;
+    let close = json_key_to_string(JsonKey::CloseContainer).as_bytes();
+    let separator = json_key_to_string(JsonKey::SeparatorValueToValue).as_bytes();
+    let close_at = location(content, close, 1, length(content))?;
+    let count = values.len();
+    let mut start = 1;
+    for (index, value) in values.iter_mut().enumerate() {
+        let end = if index + 1 < count {
+            location(content, separator, start, length(content))?
         } else {
-            find_separator(content, start)?
+            close_at
         };
-        if end <= start {
-            return Err(substring_error());
-        }
-        let token = AsciiString::from_bytes(content.get(start..end).ok_or_else(|| {
-            Failure::out_of_range("TCollection_AsciiString::SubString() out of range")
-        })?);
+        let token = AsciiString::from_bytes(sub_string(content, start, end - 1)?);
         if !token.is_real_value(false) {
             return Ok(false);
         }
-        values[index] = token.real_value()?;
-        start = end + 2;
+        *value = token.real_value()?;
+        start = end + json_key_length(JsonKey::SeparatorValueToValue);
     }
-    *position = tail(text, *position)?
-        .iter()
-        .position(|byte| *byte == b']')
-        .map_or(1, |index| *position + index as i32 + 1);
+    *position =
+        location(text, close, *position, length(text))? + json_key_length(JsonKey::CloseContainer);
     Ok(true)
 }
-fn find_separator(content: &[u8], start: usize) -> Result<usize, Failure> {
-    content
-        .get(start..)
-        .and_then(|tail| tail.windows(2).position(|bytes| bytes == b", "))
-        .map(|index| index + start)
-        .ok_or_else(|| Failure::out_of_range("TCollection_AsciiString::SubString() out of range"))
-}
-/// Reads a scalar fragment and consumes its delimiter; `init_value(text,&mut position)?`.
-pub fn init_value(text: &str, position: &mut i32) -> Result<AsciiString, Failure> {
-    let content = tail(text, *position)?;
-    let comma = content.windows(2).position(|bytes| bytes == b", ");
-    let close = content.iter().position(|byte| *byte == b'}');
-    let delimiter = match (comma, close) {
-        (Some(a), Some(b)) if b < a => Some((b, 1)),
-        (Some(a), _) => Some((a, 2)),
-        (None, Some(b)) => Some((b, 1)),
-        _ => None,
+
+/// `InitValue`: the scalar text at `position`, up to the first `, ` or an earlier `}` (the
+/// whole rest when neither follows); `position` moves past that delimiter, or to the text
+/// length; `init_value(text, &mut position)?`.
+pub fn init_value(text: impl AsRef<[u8]>, position: &mut i32) -> Result<AsciiString, Failure> {
+    let text = text.as_ref();
+    let rest = sub_string(text, *position, length(text))?;
+    let comma = location(
+        rest,
+        json_key_to_string(JsonKey::SeparatorValueToValue).as_bytes(),
+        1,
+        length(rest),
+    )?;
+    let brace = location(
+        rest,
+        json_key_to_string(JsonKey::CloseChild).as_bytes(),
+        1,
+        length(rest),
+    )?;
+    let (end, key) = if (comma > 0 && brace > 0 && brace < comma) || comma == 0 {
+        (brace, JsonKey::CloseChild)
+    } else {
+        (comma, JsonKey::SeparatorValueToValue)
     };
-    let end = delimiter.map_or(content.len(), |(index, _)| index);
     if end == 0 {
-        return Err(substring_error());
+        *position = length(text);
+        return Ok(AsciiString::from_bytes(rest));
     }
-    let value = AsciiString::from_bytes(&content[..end]);
-    *position = delimiter.map_or(text.len() as i32, |(index, length)| {
-        *position + (index + length) as i32
-    });
+    let value = AsciiString::from_bytes(sub_string(rest, 1, end - 1)?);
+    *position += end - 1 + json_key_length(key);
     Ok(value)
 }
-/// Initializes a named vector while committing the cursor only on success; `init_vector(text,"Location",&mut p,&mut xyz)?`.
+
+/// `OCCT_INIT_VECTOR_CLASS`: a named real vector, committing the position only on success;
+/// `init_vector(text, "Location", &mut position, &mut xyz)?`.
 pub fn init_vector(
-    text: &str,
+    text: impl AsRef<[u8]>,
     name: &str,
     position: &mut i32,
     values: &mut [f64],
 ) -> Result<bool, Failure> {
+    let text = text.as_ref();
     let mut local = *position;
     if !process_stream_name(text, name, &mut local)? || !init_real_values(text, &mut local, values)?
     {
@@ -114,13 +155,15 @@ pub fn init_vector(
     *position = local;
     Ok(true)
 }
-/// Initializes a named real field; `init_real_field(text,"Gap",&mut p,&mut gap)?`.
+
+/// `OCCT_INIT_FIELD_VALUE_REAL` for an already converted key; `init_real_field(t, "Gap", &mut p, &mut gap)?`.
 pub fn init_real_field(
-    text: &str,
+    text: impl AsRef<[u8]>,
     name: &str,
     position: &mut i32,
     value: &mut f64,
 ) -> Result<bool, Failure> {
+    let text = text.as_ref();
     let mut local = *position;
     if !process_stream_name(text, name, &mut local)? {
         return Ok(false);
@@ -133,13 +176,15 @@ pub fn init_real_field(
     *position = local;
     Ok(true)
 }
-/// Initializes a named integer field; `init_integer_field(text,"Flags",&mut p,&mut flags)?`.
+
+/// `OCCT_INIT_FIELD_VALUE_INTEGER` for an already converted key; `init_integer_field(t, "Flags", &mut p, &mut f)?`.
 pub fn init_integer_field(
-    text: &str,
+    text: impl AsRef<[u8]>,
     name: &str,
     position: &mut i32,
     value: &mut i32,
 ) -> Result<bool, Failure> {
+    let text = text.as_ref();
     let mut local = *position;
     if !process_stream_name(text, name, &mut local)? {
         return Ok(false);
@@ -151,8 +196,4 @@ pub fn init_integer_field(
     *value = token.integer_value()?;
     *position = local;
     Ok(true)
-}
-
-fn substring_error() -> Failure {
-    Failure::out_of_range("TCollection_AsciiString::SubString() out of range")
 }
