@@ -5,7 +5,8 @@ Usage: python3 tools/verify_tkgeombase_numeric.py --source OCCT --native-build B
 Builds tools/oracle/tkgeombase_probe.cxx against libTKGeomBase (and the toolkits it
 depends on) and the Rust twin crates/tkgeombase/examples/numeric_probe.rs, runs both on
 tools/tkgeombase_corpus.py and requires identical bits (NaN compared by classification),
-through the shared driver tools/toolkit_numeric.py.
+through the shared driver tools/toolkit_numeric.py. The AppCont tables are checked
+against the OCCT sources (tools/generate_appcont_tables.py --check) first.
 """
 from __future__ import annotations
 from tkgeombase_corpus import append_tkgeombase_requests
@@ -20,7 +21,8 @@ def corpus() -> str:
 
 
 ORACLE = NumericOracle('TKGeomBase', 'tools/oracle/tkgeombase_probe.cxx',
-                       ['TKGeomBase', 'TKG3d', 'TKG2d', 'TKMath', 'TKernel'], 'rustycad-tkgeombase', corpus)
+                       ['TKGeomBase', 'TKG3d', 'TKG2d', 'TKMath', 'TKernel'], 'rustycad-tkgeombase', corpus,
+                       generators=('tools/generate_appcont_tables.py',))
 
 
 if __name__ == '__main__':
