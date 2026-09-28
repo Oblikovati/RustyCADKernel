@@ -12,6 +12,7 @@ workspace = true
 [dependencies]
 allocator-api2 = "=0.4.0"
 bytemuck = { version = "=1.25.2", default-features = false }
+rustycad-cmath = { path = "../cmath" }
 smallvec = { version = "1.16.2", default-features = false, features = ["const_generics"] }
 
 [target.'cfg(unix)'.dependencies]

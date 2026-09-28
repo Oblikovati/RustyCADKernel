@@ -13,7 +13,7 @@
 // commercial license or contractual agreement.
 
 //! Transient base with native atomic counter ordering and safe base projections.
-use super::{Failure, RuntimeType, RuntimeTyped};
+use super::{Failure, RuntimeType, RuntimeTyped, exceptions, runtime_type::c_prefix};
 use std::{
     any::{Any, TypeId},
     sync::{
@@ -29,6 +29,24 @@ pub trait Transient: Any + Send + Sync {
     fn project(&self, requested: TypeId) -> Option<&dyn Any>;
     /// Borrow the embedded reference-count base; `object.transient_base().ref_count()`.
     fn transient_base(&self) -> &StandardTransient;
+    /// True when the dynamic type is exactly `exact` (descriptor identity, as the C++
+    /// handle comparison); `object.is_instance(StandardTransient::static_type())`.
+    fn is_instance(&self, exact: &RuntimeType) -> bool {
+        std::ptr::eq(self.dynamic_type(), exact)
+    }
+    /// True when the dynamic type's name equals `name` compared as a C string (it ends
+    /// at a NUL); `object.is_instance_name("Standard_Transient")`.
+    fn is_instance_name(&self, name: &str) -> bool {
+        self.dynamic_type().name() == c_prefix(name)
+    }
+    /// True when the dynamic type is `base` or inherits from it; `object.is_kind(base)`.
+    fn is_kind(&self, base: &RuntimeType) -> bool {
+        self.dynamic_type().is_subtype(base)
+    }
+    /// True when the dynamic type or an ancestor is named `name`; `object.is_kind_name("Standard_Transient")`.
+    fn is_kind_name(&self, name: &str) -> bool {
+        self.dynamic_type().is_subtype_name(name)
+    }
 }
 /// Root object with native atomic reference-count behavior; `StandardTransient::default()`.
 #[repr(C)]
@@ -56,13 +74,12 @@ impl StandardTransient {
         }
         remaining
     }
-    /// Reject unowned stack objects as OCCT This does; `object.this()?`.
+    /// Reject an object no handle owns, as `This()` does; the message is OCCT's own
+    /// (the offending value is the reference count 0); `object.this()?`.
     pub fn this(&self) -> Result<&Self, Failure> {
         if self.ref_count() == 0 {
-            return Err(Failure::with_type(
-                "Standard_ProgramError",
-                "Transient reference count 0; expected a constructed handle-owned object",
-                "",
+            return Err(exceptions::program_error(
+                "Attempt to create handle to object created in stack, not yet constructed, or destroyed",
             ));
         }
         Ok(self)
@@ -76,9 +93,12 @@ impl Clone for StandardTransient {
     }
 }
 impl RuntimeTyped for StandardTransient {
+    const TYPE_NAME: &'static str = "Standard_Transient";
     fn static_type() -> &'static RuntimeType {
-        static DESCRIPTOR: OnceLock<RuntimeType> = OnceLock::new();
-        DESCRIPTOR.get_or_init(|| RuntimeType::new::<Self>("Standard_Transient", None))
+        static DESCRIPTOR: OnceLock<&'static RuntimeType> = OnceLock::new();
+        DESCRIPTOR.get_or_init(|| {
+            RuntimeType::register::<Self>(Self::TYPE_NAME, std::mem::size_of::<Self>(), None)
+        })
     }
 }
 impl Transient for StandardTransient {
@@ -92,18 +112,22 @@ impl Transient for StandardTransient {
         self
     }
 }
-/// Implement safe single inheritance through an actual embedded parent field.
+/// Implement safe single inheritance through an actual embedded parent field, as
+/// `DEFINE_STANDARD_RTTIEXT` + `IMPLEMENT_STANDARD_RTTIEXT` do.
 /// Example: `impl_transient!(Derived, "Derived", Base, parent)`.
 #[macro_export]
 macro_rules! impl_transient {
     ($class:ty, $name:literal, $parent:ty, $field:ident) => {
         impl $crate::standard::RuntimeTyped for $class {
+            const TYPE_NAME: &'static str = $name;
             fn static_type() -> &'static $crate::standard::RuntimeType {
-                static DESCRIPTOR: std::sync::OnceLock<$crate::standard::RuntimeType> =
+                // One cached registry lookup per class, as the C++ function-local static handle.
+                static DESCRIPTOR: std::sync::OnceLock<&'static $crate::standard::RuntimeType> =
                     std::sync::OnceLock::new();
                 DESCRIPTOR.get_or_init(|| {
-                    $crate::standard::RuntimeType::new::<Self>(
+                    $crate::standard::RuntimeType::register::<Self>(
                         $name,
+                        std::mem::size_of::<Self>(),
                         Some(<$parent as $crate::standard::RuntimeTyped>::static_type()),
                     )
                 })

@@ -42,17 +42,6 @@ impl From<f64> for AsciiString {
         Self::from_real(value)
     }
 }
-impl<T: Into<AsciiString>> std::ops::Add<T> for &AsciiString {
-    type Output = AsciiString;
-    fn add(self, other: T) -> AsciiString {
-        self.cat(other)
-    }
-}
-impl<T: Into<AsciiString>> std::ops::AddAssign<T> for AsciiString {
-    fn add_assign(&mut self, other: T) {
-        self.assign_cat(other);
-    }
-}
 impl PartialEq<&str> for AsciiString {
     fn eq(&self, other: &&str) -> bool {
         self.is_equal(other)
@@ -71,5 +60,11 @@ impl Ord for AsciiString {
 impl From<&[u8]> for AsciiString {
     fn from(bytes: &[u8]) -> Self {
         Self::from_raw(bytes)
+    }
+}
+/// `std::hash<TCollection_AsciiString>` feeds [`AsciiString::hash_code`] to the hasher.
+impl std::hash::Hash for AsciiString {
+    fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
+        state.write_usize(self.hash_code());
     }
 }

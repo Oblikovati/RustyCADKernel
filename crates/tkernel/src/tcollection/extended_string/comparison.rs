@@ -11,78 +11,55 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
+//! Whole-string comparisons; the (pointer, length) forms live in `spans`.
 use super::ExtendedString;
 impl ExtendedString {
     /// Compares full code-unit content; `text.is_equal(&other)`.
     pub fn is_equal(&self, other: impl AsRef<[u16]>) -> bool {
         self.as_utf16() == other.as_ref()
     }
+    /// The static two-string IsEqual; `ExtendedString::is_equal_strings(&first, &second)`.
+    pub fn is_equal_strings(first: &Self, second: &Self) -> bool {
+        first.is_equal(second)
+    }
     /// Checks unequal content; `text.is_different(&other)`.
     pub fn is_different(&self, other: impl AsRef<[u16]>) -> bool {
         !self.is_equal(other)
     }
-    /// Orders by unsigned UTF-16 units; `text.is_less(&other)`.
+    /// Orders by unsigned code units, a proper prefix first; `text.is_less(&other)`.
     pub fn is_less(&self, other: impl AsRef<[u16]>) -> bool {
         self.as_utf16() < other.as_ref()
     }
-    /// Orders by unsigned UTF-16 units; `text.is_greater(&other)`.
+    /// Orders by unsigned code units, a proper prefix first; `text.is_greater(&other)`.
     pub fn is_greater(&self, other: impl AsRef<[u16]>) -> bool {
         self.as_utf16() > other.as_ref()
     }
-}
-impl ExtendedString {
-    /// Compares nullable code units with an explicit signed length; `text.is_equal_span(None,0)`.
-    pub fn is_equal_span(&self, other: Option<&[u16]>, length: i32) -> bool {
-        if length < 0 || self.len() != length as usize {
-            return false;
+    /// Tests a complete prefix; an empty prefix always matches; `text.starts_with(&prefix)`.
+    pub fn starts_with(&self, prefix: impl AsRef<[u16]>) -> bool {
+        self.as_utf16().starts_with(prefix.as_ref())
+    }
+    /// Tests a complete suffix; an empty suffix always matches; `text.ends_with(&suffix)`.
+    pub fn ends_with(&self, suffix: impl AsRef<[u16]>) -> bool {
+        self.as_utf16().ends_with(suffix.as_ref())
+    }
+    /// Compares, folding only ASCII A-Z when not case sensitive;
+    /// `text.is_same_string(&other, false)`.
+    pub fn is_same_string(&self, other: &Self, case_sensitive: bool) -> bool {
+        if case_sensitive {
+            return self.is_equal(other);
         }
-        if length == 0 {
-            return true;
-        }
-        span(other, length).is_some_and(|units| self.as_utf16() == units)
-    }
-    /// Negates nullable explicit-length equality; `text.is_different_span(None,5)`.
-    pub fn is_different_span(&self, other: Option<&[u16]>, length: i32) -> bool {
-        !self.is_equal_span(other, length)
-    }
-    /// Orders valid spans; invalid spans never compare greater than this string; `text.is_less_span(None,5)`.
-    pub fn is_less_span(&self, other: Option<&[u16]>, length: i32) -> bool {
-        span(other, length).is_some_and(|units| self.as_utf16() < units)
-    }
-    /// Orders valid spans while preserving OCCT's invalid-input behavior; `text.is_greater_span(None,-1)`.
-    pub fn is_greater_span(&self, other: Option<&[u16]>, length: i32) -> bool {
-        if length < 0 {
-            return true;
-        }
-        if other.is_none() {
-            return length != 0 || !self.is_empty();
-        }
-        span(other, length).is_none_or(|units| self.as_utf16() > units)
-    }
-    /// Tests a bounded nullable prefix; `text.starts_with_span(None,0)`.
-    pub fn starts_with_span(&self, other: Option<&[u16]>, length: i32) -> bool {
-        if length == 0 {
-            return true;
-        }
-        span(other, length).is_some_and(|units| self.as_utf16().starts_with(units))
-    }
-    /// Tests a bounded nullable suffix; `text.ends_with_span(None,0)`.
-    pub fn ends_with_span(&self, other: Option<&[u16]>, length: i32) -> bool {
-        if length == 0 {
-            return true;
-        }
-        span(other, length).is_some_and(|units| self.as_utf16().ends_with(units))
-    }
-    /// Tests a complete string prefix; `text.starts_with(&prefix)`.
-    pub fn starts_with(&self, other: &Self) -> bool {
-        self.starts_with_span(Some(other.as_utf16()), other.length())
-    }
-    /// Tests a complete string suffix; `text.ends_with(&suffix)`.
-    pub fn ends_with(&self, other: &Self) -> bool {
-        self.ends_with_span(Some(other.as_utf16()), other.length())
+        self.len() == other.len()
+            && self
+                .as_utf16()
+                .iter()
+                .zip(other.as_utf16())
+                .all(|(&first, &second)| lower_ascii(first) == lower_ascii(second))
     }
 }
-fn span(other: Option<&[u16]>, length: i32) -> Option<&[u16]> {
-    let length = usize::try_from(length).ok()?;
-    other?.get(..length)
+fn lower_ascii(unit: u16) -> u16 {
+    if (65..=90).contains(&unit) {
+        unit + 32
+    } else {
+        unit
+    }
 }
