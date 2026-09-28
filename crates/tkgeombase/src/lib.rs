@@ -23,6 +23,7 @@ pub mod app_par_curves;
 pub mod bnd_lib;
 pub mod cpnts;
 mod defl_curv_intervals;
+pub mod extrema;
 pub mod extrema_pc;
 pub mod extrema_pc2d;
 pub mod extrema_pc_core;

@@ -53,6 +53,7 @@
 #include "tkgeombase_probe_appparcurves_fit.cxx"
 #include "tkgeombase_probe_bndlib.cxx"
 #include "tkgeombase_probe_gcpnts.cxx"
+#include "tkgeombase_probe_extrema_el.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -206,6 +207,15 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gcp_tdefl", gb_gcp_tdefl_case},
  {"gcp_arc_step", gb_gcp_arc_step_case},
  {"gcp_dist", gb_gcp_dist_case},
+ // Extrema elementary closed forms (tkgeombase_probe_extrema_el.cxx)
+ {"ex_pon", gb_ex_pon_case},
+ {"ex_pelc", gb_ex_pelc_case},
+ {"ex_pelc2d", gb_ex_pelc2d_case},
+ {"ex_elc", gb_ex_elc_case},
+ {"ex_elc2d", gb_ex_elc2d_case},
+ {"ex_pels", gb_ex_pels_case},
+ {"ex_elcs", gb_ex_elcs_case},
+ {"ex_elss", gb_ex_elss_case},
 };
 int main() {
  std::string line;

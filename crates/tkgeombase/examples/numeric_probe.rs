@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    app_par_curves as apc, bndlib, fem_tool, gc, gce, gcpnts, geom_tools, gprop, hermit, int_ana,
-    int_ana2d, lprop, pc2d, pc3d,
+    app_par_curves as apc, bndlib, extrema_el, fem_tool, gc, gce, gcpnts, geom_tools, gprop,
+    hermit, int_ana, int_ana2d, lprop, pc2d, pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -165,6 +165,15 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gcp_tdefl", gcpnts::tdefl_case),
     ("gcp_arc_step", gcpnts::arc_step_case),
     ("gcp_dist", gcpnts::dist_case),
+    // Extrema elementary closed forms (gb_probe/extrema_el.rs)
+    ("ex_pon", extrema_el::pon_case),
+    ("ex_pelc", extrema_el::pelc_case),
+    ("ex_pelc2d", extrema_el::pelc2d_case),
+    ("ex_elc", extrema_el::elc_case),
+    ("ex_elc2d", extrema_el::elc2d_case),
+    ("ex_pels", extrema_el::pels_case),
+    ("ex_elcs", extrema_el::elcs_case),
+    ("ex_elss", extrema_el::elss_case),
 ];
 
 fn main() {
