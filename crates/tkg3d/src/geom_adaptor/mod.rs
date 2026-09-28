@@ -42,3 +42,5 @@ mod transformed_surface;
 pub use transformed_surface::GeomAdaptorTransformedSurface;
 mod make;
 pub use make::{make_curve, make_surface};
+mod transformed_curve;
+pub use transformed_curve::GeomAdaptorTransformedCurve;
