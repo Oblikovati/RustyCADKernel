@@ -99,3 +99,4 @@ mod bspline_curve;
 pub use bspline_curve::GeomBSplineCurve;
 mod offset_curve;
 pub use offset_curve::GeomOffsetCurve;
+pub mod offset_surface_utils;
