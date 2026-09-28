@@ -55,6 +55,18 @@ pub fn dimension(message: &str) -> Failure {
 pub fn program(message: &str) -> Failure {
     Failure::with_type("Standard_ProgramError", message, "")
 }
+/// `Standard_NotImplemented`; `not_implemented("Adaptor2d_Curve2d::Period")`.
+pub fn not_implemented(message: &str) -> Failure {
+    Failure::with_type("Standard_NotImplemented", message, "")
+}
+/// `Standard_TypeMismatch`; `type_mismatch("Adaptor2d_OffsetCurve::IntervalContinuity")`.
+pub fn type_mismatch(message: &str) -> Failure {
+    Failure::with_type("Standard_TypeMismatch", message, "")
+}
+/// `Standard_NullObject`; `null_object("Geom2dAdaptor_Curve::Load: null curve")`.
+pub fn null_object(message: &str) -> Failure {
+    Failure::with_type("Standard_NullObject", message, "")
+}
 /// Convert an `NCollection` bound failure into the native Standard_OutOfRange;
 /// `array.value(i).map_err(array_bounds)?`.
 pub fn array_bounds(error: impl std::fmt::Display) -> Failure {
