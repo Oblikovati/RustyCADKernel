@@ -18,13 +18,10 @@
 //! lends only shared references, so the array sits behind a lock: [`HArray1::array1`]
 //! and [`HArray1::change_array1`] return read and write guards that expose the complete
 //! [`Array1`] API, exactly as the native `Array1()`/`ChangeArray1()` expose the base class.
+use super::generic_transient::impl_generic_transient;
 use super::{Array1, Array2, ArrayError};
-use crate::standard::{RuntimeType, RuntimeTyped, StandardTransient, Transient};
-use std::{
-    any::{Any, TypeId},
-    collections::HashMap,
-    sync::{Mutex, OnceLock, PoisonError, RwLock, RwLockReadGuard, RwLockWriteGuard},
-};
+use crate::standard::StandardTransient;
+use std::sync::{PoisonError, RwLock, RwLockReadGuard, RwLockWriteGuard};
 
 /// A shared, bounded one-dimensional array; `Handle::new(HArray1::<f64>::with_bounds(1, 3)?)`.
 ///
@@ -190,41 +187,5 @@ fn checked_extent(lower: i32, upper: i32) -> Result<usize, ArrayError> {
     Ok(size as usize)
 }
 
-// `DEFINE_STANDARD_RTTI_INLINE(NCollection_HArray1, Standard_Transient)` names every
-// instantiation "NCollection_HArray1". A Rust generic cannot own a `static`, so each
-// instantiation's descriptor is created once, leaked, and cached by its TypeId.
-fn generic_static_type<C: 'static>(name: &'static str) -> &'static RuntimeType {
-    static REGISTRY: OnceLock<Mutex<HashMap<TypeId, &'static RuntimeType>>> = OnceLock::new();
-    let registry = REGISTRY.get_or_init(|| Mutex::new(HashMap::new()));
-    let mut types = registry.lock().unwrap_or_else(PoisonError::into_inner);
-    types.entry(TypeId::of::<C>()).or_insert_with(|| {
-        let parent = Some(<StandardTransient as RuntimeTyped>::static_type());
-        Box::leak(Box::new(RuntimeType::new::<C>(name, parent)))
-    })
-}
-
-macro_rules! impl_generic_transient {
-    ($class:ident, $name:literal) => {
-        impl<T: Send + Sync + 'static> RuntimeTyped for $class<T> {
-            fn static_type() -> &'static RuntimeType {
-                generic_static_type::<Self>($name)
-            }
-        }
-        impl<T: Send + Sync + 'static> Transient for $class<T> {
-            fn dynamic_type(&self) -> &'static RuntimeType {
-                Self::static_type()
-            }
-            fn project(&self, requested: TypeId) -> Option<&dyn Any> {
-                if requested == TypeId::of::<Self>() {
-                    return Some(self);
-                }
-                self.base.project(requested)
-            }
-            fn transient_base(&self) -> &StandardTransient {
-                &self.base
-            }
-        }
-    };
-}
 impl_generic_transient!(HArray1, "NCollection_HArray1");
 impl_generic_transient!(HArray2, "NCollection_HArray2");

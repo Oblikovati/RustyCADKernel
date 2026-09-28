@@ -17,12 +17,9 @@
 //! every handle holder edits the one sequence. Rust handles share `&` access only, so the
 //! sequence sits behind a lock and is lent to closures (`sequence`, `change_sequence`).
 use super::Sequence;
-use crate::standard::{Failure, Handle, RuntimeType, RuntimeTyped, StandardTransient, Transient};
-use std::{
-    any::{Any, TypeId},
-    collections::HashMap,
-    sync::{Mutex, OnceLock, PoisonError, RwLock},
-};
+use super::generic_transient::impl_generic_transient;
+use crate::standard::{Failure, Handle, StandardTransient};
+use std::sync::{PoisonError, RwLock};
 /// Handle-shared sequence; `let items = Handle::new(HSequence::<i32>::default()); items.get().unwrap().append(1);`.
 pub struct HSequence<T> {
     base: StandardTransient,
@@ -86,36 +83,6 @@ impl<T: Clone + Send + Sync + 'static> HSequence<T> {
         Ok(())
     }
 }
-/// One descriptor per item type, all named `NCollection_HSequence` like the C++ template's
-/// `DEFINE_STANDARD_RTTI_INLINE`; a `static` in a generic function would be shared by every
-/// instantiation, so the descriptors are interned by `TypeId`.
-impl<T: Send + Sync + 'static> RuntimeTyped for HSequence<T> {
-    fn static_type() -> &'static RuntimeType {
-        static DESCRIPTORS: OnceLock<Mutex<HashMap<TypeId, &'static RuntimeType>>> =
-            OnceLock::new();
-        let mut known = DESCRIPTORS
-            .get_or_init(Mutex::default)
-            .lock()
-            .unwrap_or_else(PoisonError::into_inner);
-        known.entry(TypeId::of::<Self>()).or_insert_with(|| {
-            Box::leak(Box::new(RuntimeType::new::<Self>(
-                "NCollection_HSequence",
-                Some(StandardTransient::static_type()),
-            )))
-        })
-    }
-}
-impl<T: Send + Sync + 'static> Transient for HSequence<T> {
-    fn dynamic_type(&self) -> &'static RuntimeType {
-        Self::static_type()
-    }
-    fn project(&self, requested: TypeId) -> Option<&dyn Any> {
-        if requested == TypeId::of::<Self>() {
-            return Some(self);
-        }
-        Transient::project(&self.base, requested)
-    }
-    fn transient_base(&self) -> &StandardTransient {
-        &self.base
-    }
-}
+// Every instantiation is named `NCollection_HSequence`, as the C++ template's
+// `DEFINE_STANDARD_RTTI_INLINE`.
+impl_generic_transient!(HSequence, "NCollection_HSequence");

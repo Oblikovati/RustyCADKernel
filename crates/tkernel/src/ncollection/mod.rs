@@ -7,6 +7,7 @@ mod local_array;
 pub use local_array::LocalArray;
 mod array2;
 pub use array2::Array2;
+mod generic_transient;
 mod harray;
 pub use harray::{HArray1, HArray2};
 mod linear_vector;
