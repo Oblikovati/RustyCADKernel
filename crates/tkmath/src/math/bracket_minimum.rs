@@ -128,3 +128,27 @@ impl BracketMinimum {
         }
     }
 }
+impl BracketMinimum {
+    /// Writes the native `Dump` text with the bracketed triplet; `bracket.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+        use crate::math::stream_real;
+        write!(stream, "math_BracketMinimum ")?;
+        if !self.done {
+            return writeln!(stream, " Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        writeln!(stream, " The bracketed triplet is: ")?;
+        let [a, b, c] = self.samples;
+        writeln!(
+            stream,
+            "{}, {}, {}",
+            stream_real(a.x),
+            stream_real(b.x),
+            stream_real(c.x)
+        )?;
+        writeln!(stream, " The corresponding function values are: ")?;
+        let values = [a.value, b.value, c.value].map(stream_real);
+        writeln!(stream, "{}, {}, {}", values[0], values[1], values[2])
+    }
+}
+display_via_dump!(BracketMinimum);

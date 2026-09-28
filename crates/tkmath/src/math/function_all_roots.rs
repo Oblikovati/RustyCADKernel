@@ -96,3 +96,24 @@ impl FunctionAllRoots {
         }
     }
 }
+impl FunctionAllRoots {
+    /// Writes the native `Dump` text with the interval and point counts; `roots.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+        write!(stream, "math_FunctionAllRoots ")?;
+        if !self.done {
+            return writeln!(stream, " Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        writeln!(
+            stream,
+            " Number of null intervals = {}",
+            self.intervals.len()
+        )?;
+        let points = self.points.len();
+        writeln!(
+            stream,
+            " Number of points where the function is null: {points}"
+        )
+    }
+}
+display_via_dump!(FunctionAllRoots);

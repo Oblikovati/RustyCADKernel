@@ -109,3 +109,23 @@ impl DirectPolynomialRoots {
         self.roots[0] = -b / a;
     }
 }
+impl DirectPolynomialRoots {
+    /// Writes the native `Dump` text; `roots.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+        write!(stream, "math_DirectPolynomialRoots ")?;
+        if !self.done {
+            return writeln!(stream, " Not Done ");
+        }
+        if self.infinite {
+            return writeln!(stream, " Status = Infinity Roots ");
+        }
+        writeln!(stream, " Status = Not Infinity Roots ")?;
+        writeln!(stream, " Number of solutions = {}", self.count)?;
+        for index in 1..=self.count {
+            let root = crate::math::stream_real(self.roots[(index - 1) as usize]);
+            writeln!(stream, " Solution number {index} = {root}")?;
+        }
+        Ok(())
+    }
+}
+display_via_dump!(DirectPolynomialRoots);

@@ -12,36 +12,40 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Frpr, MultipleVarFunctionWithGradient, Vector};
+use super::{Frpr, MultipleVarFunctionWithGradient, Status, Vector};
 impl Frpr {
-    pub(super) fn iterate(
+    pub(super) fn iterate<F: MultipleVarFunctionWithGradient>(
         &mut self,
-        function: &mut impl MultipleVarFunctionWithGradient,
-        negative: &mut Vector<'static>,
-        previous_direction: &mut Vector<'static>,
+        function: &mut F,
+        [negative, previous_direction]: [&mut Vector<'static>; 2],
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) {
         for iteration in 1..=self.result.limit {
             self.result.iterations = iteration;
-            if self.iteration(function, negative, previous_direction) {
+            if self.iteration(
+                function,
+                [&mut *negative, &mut *previous_direction],
+                criterion,
+            ) {
                 return;
             }
         }
-        self.result.done = false;
+        self.result.fail(Status::TooManyIterations);
     }
-    fn iteration(
+    fn iteration<F: MultipleVarFunctionWithGradient>(
         &mut self,
-        function: &mut impl MultipleVarFunctionWithGradient,
-        negative: &mut Vector<'static>,
-        previous_direction: &mut Vector<'static>,
+        function: &mut F,
+        [negative, previous_direction]: [&mut Vector<'static>; 2],
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> bool {
         let good: bool = self.minimize_direction(function);
-        if self.result.reached() {
-            self.result.done = true;
+        if criterion(self, function) {
+            self.result.succeed();
             self.state = function.state_number();
             return true;
         }
         if !good {
-            self.result.done = false;
+            self.result.fail(Status::DirectionSearchError);
             return true;
         }
         if !function.values(
@@ -49,11 +53,12 @@ impl Frpr {
             &mut self.result.previous,
             &mut self.result.gradient,
         ) {
-            self.result.done = false;
+            self.result.fail(Status::FunctionError);
             return true;
         }
         if !next_direction(&mut self.result.gradient, negative, previous_direction) {
-            self.result.done = false;
+            // A zero gradient norm is reported as math_FunctionError natively.
+            self.result.fail(Status::FunctionError);
             return true;
         }
         false

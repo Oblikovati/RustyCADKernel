@@ -133,3 +133,22 @@ impl NewtonFunctionRoot {
         self.iterations += 1;
     }
 }
+impl NewtonFunctionRoot {
+    /// Writes the native `Dump` text; `root.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+        use crate::math::stream_real;
+        write!(stream, "math_NewtonFunctionRoot ")?;
+        if !self.done {
+            return writeln!(stream, "Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        writeln!(stream, " Location found = {}", stream_real(self.root))?;
+        writeln!(
+            stream,
+            " function value at this minimum = {}",
+            stream_real(self.value)
+        )?;
+        writeln!(stream, " Number of iterations = {}", self.iterations)
+    }
+}
+display_via_dump!(NewtonFunctionRoot);

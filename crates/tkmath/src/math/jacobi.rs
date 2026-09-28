@@ -101,3 +101,4 @@ impl Jacobi {
         Ok(())
     }
 }
+display_via_dump!(Jacobi);

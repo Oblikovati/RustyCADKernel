@@ -92,3 +92,4 @@ impl GaussLeastSquares {
         Ok(())
     }
 }
+display_via_dump!(GaussLeastSquares);

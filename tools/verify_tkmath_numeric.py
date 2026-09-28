@@ -31,6 +31,7 @@ from tkmath_convert_corpus import append_convert_requests
 from tkmath_gp_core_corpus import append_gp_core_requests
 from tkmath_vector_base_corpus import append_vector_base_requests
 from tkmath_recipes_corpus import append_recipes_requests
+from tkmath_solver_dump_corpus import append_solver_dump_requests
 from tkmath_bnd_corpus import append_bnd_requests
 
 
@@ -431,6 +432,7 @@ def corpus() -> str:
     append_gp_core_requests(requests)
     append_vector_base_requests(requests)
     append_recipes_requests(requests)
+    append_solver_dump_requests(requests)
     append_bnd_requests(requests)
     append_bvh_tool_classes_requests(requests)
     return '\n'.join(requests)+'\n'           

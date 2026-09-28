@@ -14,6 +14,7 @@
 // commercial license or contractual agreement.
 
 //! Kronrod quadrature generated from the native Jacobi-Kronrod recurrence.
+use super::gauss_quadrature::sorted_nodes;
 use super::{EigenValuesSearcher, Vector};
 use rustycad_tkernel::{ncollection::Array1, standard::Failure};
 mod recurrence;
@@ -26,9 +27,11 @@ pub struct KronrodPointsAndWeights {
 impl KronrodPointsAndWeights {
     /// Computes 2*n+1 nodes on [-1,1]; `KronrodPointsAndWeights::new(7)?`.
     pub fn new(order: i32) -> Result<Self, Failure> {
+        // Order 0 reads b[1] and a[-1] outside the native coefficient arrays and negative
+        // orders fail the array allocation, so both are refused instead of reproducing UB.
         if order < 1 {
             return Err(Failure::out_of_range(&format!(
-                "Kronrod order {order}; expected positive order"
+                "Kronrod order {order}; expected a positive order"
             )));
         }
         let size: i32 = order
@@ -37,11 +40,14 @@ impl KronrodPointsAndWeights {
             .ok_or_else(|| Failure::out_of_range("Kronrod order overflows i32"))?;
         let (diagonal, subdiagonal): (Array1<'static, f64>, Array1<'static, f64>) =
             recurrence::coefficients(order, size);
-        let eigensolver: EigenValuesSearcher = EigenValuesSearcher::new(&diagonal, &subdiagonal)?;
         let mut result: Self = Self {
             points: Vector::with_bounds(1, size)?,
             weights: Vector::with_bounds(1, size)?,
             done: false,
+        };
+        // The native constructor catches every Standard_Failure and stays not done.
+        let Ok(eigensolver) = EigenValuesSearcher::new(&diagonal, &subdiagonal) else {
+            return Ok(result);
         };
         if eigensolver.is_done() {
             result.collect(&eigensolver)?;
@@ -49,20 +55,7 @@ impl KronrodPointsAndWeights {
         Ok(result)
     }
     fn collect(&mut self, eigensolver: &EigenValuesSearcher) -> Result<(), Failure> {
-        let mut pairs: Vec<(f64, f64)> = Vec::with_capacity(eigensolver.dimension() as usize);
-        for index in 1..=eigensolver.dimension() {
-            let first: f64 = eigensolver.eigen_vector(index)?[1];
-            pairs.push((eigensolver.eigen_value(index)?, 2.0 * first * first));
-        }
-        pairs.sort_unstable_by(|left, right| {
-            left.0
-                .partial_cmp(&right.0)
-                .unwrap_or(std::cmp::Ordering::Equal)
-        });
-        for (offset, (point, weight)) in pairs.into_iter().enumerate() {
-            self.points[offset as i32 + 1] = point;
-            self.weights[offset as i32 + 1] = weight;
-        }
+        sorted_nodes(eigensolver, &mut self.points, &mut self.weights)?;
         self.done = true;
         Ok(())
     }

@@ -456,6 +456,11 @@ fn main() {
             "recipes_jacobi" => recipes_probe::jacobi_case(&values),
             "recipes_dactcl" => recipes_probe::dactcl_case(&values),
             "linear_dump" => recipes_probe::linear_dump_case(&values),
+            "dump_minimizers" => solver_dump_probe::minimizers_case(&values),
+            "dump_scalar" => solver_dump_probe::scalar_case(&values),
+            "dump_polynomial" => solver_dump_probe::polynomial_dump_case(&values),
+            "dump_sets" => solver_dump_probe::sets_case(&values),
+            "small_types" => solver_dump_probe::small_types_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }
@@ -533,4 +538,5 @@ mod cslib_probe;
 mod elementary_probe;
 mod plib_probe;
 mod recipes_probe;
+mod solver_dump_probe;
 mod vector_base_probe;

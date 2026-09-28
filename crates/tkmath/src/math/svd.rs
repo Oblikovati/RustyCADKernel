@@ -115,3 +115,4 @@ impl Svd {
         Ok(())
     }
 }
+display_via_dump!(Svd);

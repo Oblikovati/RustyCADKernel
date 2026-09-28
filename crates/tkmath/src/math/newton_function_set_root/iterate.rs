@@ -15,11 +15,11 @@
 use super::{Failure, FunctionSetWithDerivatives, NewtonFunctionSetRoot, Vector};
 use crate::math::recipes::{STATUS_OK, lu_decompose_with_scales, lu_solve};
 impl NewtonFunctionSetRoot {
-    pub(super) fn iterate(
+    pub(super) fn iterate<F: FunctionSetWithDerivatives>(
         &mut self,
-        function: &mut impl FunctionSetWithDerivatives,
-        lower: &Vector<'_>,
-        upper: &Vector<'_>,
+        function: &mut F,
+        [lower, upper]: [&Vector<'_>; 2],
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> Result<(), Failure> {
         for iteration in 1..=self.limit {
             self.iteration = iteration;
@@ -29,7 +29,7 @@ impl NewtonFunctionSetRoot {
             if !function.values(&self.solution, &mut self.residual, &mut self.jacobian) {
                 return Ok(());
             }
-            if self.is_solution_reached() {
+            if criterion(self, function) {
                 self.state = function.state_number();
                 self.done = true;
                 return Ok(());

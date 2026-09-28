@@ -13,9 +13,12 @@
 // commercial license or contractual agreement.
 
 //! Native Gauss quadrature and uniform subdivision convergence.
-use super::{Function, Vector, gauss_points, gauss_weights};
+use super::{Function, Vector, gauss_points, gauss_weights, stream_real};
 use rustycad_tkernel::standard::Failure;
+use std::fmt;
 /// Single-variable Gauss integral; `GaussSingleIntegration::new(&mut f,0.0,1.0,10)`.
+///
+/// `Default` is the native empty constructor: not done.
 #[derive(Default)]
 pub struct GaussSingleIntegration {
     done: bool,
@@ -107,4 +110,14 @@ impl GaussSingleIntegration {
         }
         Ok(self.value)
     }
+    /// Writes the native status text; `integral.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl fmt::Write) -> fmt::Result {
+        write!(stream, "math_GaussSingleIntegration ")?;
+        if !self.done {
+            return writeln!(stream, "Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        writeln!(stream, "Integration Value = {}", stream_real(self.value))
+    }
 }
+display_via_dump!(GaussSingleIntegration);

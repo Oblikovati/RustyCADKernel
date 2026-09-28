@@ -124,9 +124,4 @@ impl Gauss {
         Ok(())
     }
 }
-/// The free `operator<<`, which forwards to `Dump`; `format!("{solver}")`.
-impl fmt::Display for Gauss {
-    fn fmt(&self, stream: &mut fmt::Formatter<'_>) -> fmt::Result {
-        self.dump(stream)
-    }
-}
+display_via_dump!(Gauss);

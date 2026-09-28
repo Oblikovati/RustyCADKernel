@@ -13,6 +13,7 @@
 // commercial license or contractual agreement.
 
 use super::{VectorBase, VectorItem};
+use crate::math::Matrix;
 use std::fmt;
 use std::ops::{
     Add, AddAssign, Div, DivAssign, Index, IndexMut, Mul, MulAssign, Neg, Sub, SubAssign,
@@ -50,6 +51,13 @@ impl<T: VectorItem> Mul<&VectorBase<'_, T>> for &VectorBase<'_, T> {
     type Output = T;
     fn mul(self, right: &VectorBase<'_, T>) -> T {
         self.dot(right).unwrap()
+    }
+}
+/// Row vector times matrix, bounded by the matrix columns; `&row * &matrix`.
+impl<'a, T: VectorItem> Mul<&Matrix<'_>> for &VectorBase<'a, T> {
+    type Output = VectorBase<'a, T>;
+    fn mul(self, right: &Matrix<'_>) -> Self::Output {
+        self.multiplied_matrix(right).unwrap()
     }
 }
 impl<'a, T: VectorItem> Div<T> for &VectorBase<'a, T> {

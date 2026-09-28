@@ -83,3 +83,22 @@ impl FunctionRoot {
         Ok(result)
     }
 }
+impl FunctionRoot {
+    /// Writes the native `Dump` text; `root.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl std::fmt::Write) -> std::fmt::Result {
+        use crate::math::stream_real;
+        write!(stream, "math_FunctionRoot ")?;
+        if !self.done {
+            return writeln!(stream, " Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        writeln!(stream, " Number of iterations = {}", self.iterations)?;
+        writeln!(stream, " The Root is: {}", stream_real(self.root))?;
+        writeln!(
+            stream,
+            "The value at the root is: {}",
+            stream_real(self.value)
+        )
+    }
+}
+display_via_dump!(FunctionRoot);

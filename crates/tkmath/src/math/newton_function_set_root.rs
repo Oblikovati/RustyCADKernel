@@ -15,6 +15,7 @@
 //! Newton iteration for square function systems with native LU and clipping.
 use super::{FunctionSetWithDerivatives, IntegerVector, Matrix, Vector};
 use rustycad_tkernel::standard::Failure;
+use std::fmt;
 mod iterate;
 mod results;
 /// Newton system solver; `NewtonFunctionSetRoot::new(&function,&tolerances,1e-6,100)?`.
@@ -84,19 +85,64 @@ impl NewtonFunctionSetRoot {
         self.perform_bounded(function, start, &lower, &upper)
     }
     /// Clips each Newton trial to the supplied declared bounds; `solver.perform_bounded(&mut function,&start,&lower,&upper)?`.
-    pub fn perform_bounded(
+    pub fn perform_bounded<F: FunctionSetWithDerivatives>(
         &mut self,
-        function: &mut impl FunctionSetWithDerivatives,
+        function: &mut F,
         start: &Vector<'_>,
         lower: &Vector<'_>,
         upper: &Vector<'_>,
+    ) -> Result<(), Failure> {
+        let mut criterion = |solver: &Self, _: &mut F| solver.is_solution_reached();
+        self.perform_with_criterion(function, start, [lower, upper], &mut criterion)
+    }
+    /// The bounded search with a replacement for the virtual `IsSolutionReached(F)`; the
+    /// criterion reads `current_step`, `current_values`, `tolerances` and
+    /// `function_tolerance`. `solver.perform_with_criterion(&mut f,&start,[&lower,&upper],&mut |s, _| s.is_solution_reached())?`.
+    pub fn perform_with_criterion<F: FunctionSetWithDerivatives>(
+        &mut self,
+        function: &mut F,
+        start: &Vector<'_>,
+        [lower, upper]: [&Vector<'_>; 2],
+        criterion: &mut impl FnMut(&Self, &mut F) -> bool,
     ) -> Result<(), Failure> {
         self.done = false;
         self.solution.initialized(start)?;
         if !function.values(&self.solution, &mut self.residual, &mut self.jacobian) {
             return Ok(());
         }
-        self.iterate(function, lower, upper)
+        self.iterate(function, [lower, upper], criterion)
+    }
+    /// Protected `DeltaX`, the last Newton step; `solver.current_step()`.
+    pub fn current_step(&self) -> &Vector<'static> {
+        &self.delta
+    }
+    /// Protected `FValues`, the residuals at `Sol`; `solver.current_values()`.
+    pub fn current_values(&self) -> &Vector<'static> {
+        &self.residual
+    }
+    /// Protected `TolX`; `solver.tolerances()`.
+    pub fn tolerances(&self) -> &Vector<'static> {
+        &self.tolerance
+    }
+    /// Protected `TolF`; `solver.function_tolerance()`.
+    pub fn function_tolerance(&self) -> f64 {
+        self.function_tolerance
+    }
+    /// Writes the native `Dump` text with the solution and residual vectors;
+    /// `solver.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl fmt::Write) -> fmt::Result {
+        write!(stream, "math_NewtonFunctionSetRoot ")?;
+        if !self.done {
+            return writeln!(stream, "Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        write!(stream, " Vector solution = ")?;
+        self.solution.dump(stream)?;
+        writeln!(stream)?;
+        writeln!(stream, " Value of the function at this solution = ")?;
+        self.residual.dump(stream)?;
+        writeln!(stream)?;
+        writeln!(stream, " Number of iterations = {}", self.iteration)
     }
     /// Applies native un-clipped step and residual tests; `solver.is_solution_reached()`.
     pub fn is_solution_reached(&self) -> bool {
@@ -110,3 +156,4 @@ impl NewtonFunctionSetRoot {
         true
     }
 }
+display_via_dump!(NewtonFunctionSetRoot);
