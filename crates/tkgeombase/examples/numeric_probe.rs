@@ -3,8 +3,9 @@
 use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
-    adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, gc, gce, gprop, hermit, int_ana,
-    int_ana2d, lprop, pc2d, pc3d,
+    adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, app_cont as acc, app_par_curves as apc,
+    bndlib, fem_tool, gc, gce, gcpnts, geom_tools, gprop, hermit, int_ana, int_ana2d, lprop, pc2d,
+    pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -118,6 +119,58 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("pc_endpoints", pc3d::endpoints_case),
     ("pc_project", pc3d::project_case),
     ("gcpnts_td3d", pc3d::td3d_case),
+    // GeomTools (gb_probe/geom_tools)
+    ("gt_curve", geom_tools::curve_case),
+    ("gt_curve2d", geom_tools::curve2d_case),
+    ("gt_surface", geom_tools::surface_case),
+    ("gt_read", geom_tools::read_case),
+    ("gt_get_real", geom_tools::get_real_case),
+    ("gt_set", geom_tools::sets::set_case_dispatch),
+    ("gt_set_null", geom_tools::sets::set_null_case),
+    ("gt_set_read", geom_tools::sets::set_read_case),
+    ("gt_progress", geom_tools::sets::progress_case),
+    ("gt_debug_dump", geom_tools::sets::debug_dump_case),
+    ("gt_handler", geom_tools::sets::handler_case),
+    // FEmTool (gb_probe/fem_tool)
+    ("fem_elements", fem_tool::elements_case),
+    ("fem_criterion", fem_tool::criterion_case),
+    ("fem_profile", fem_tool::profile_case),
+    ("fem_curve", fem_tool::curve_case),
+    ("fem_assembly", fem_tool::assembly_case),
+    // AppParCurves (gb_probe/app_par_curves)
+    ("apc_bernstein", apc::bernstein_case),
+    ("apc_spline", apc::spline_case),
+    ("apc_multipoint", apc::multipoint_case),
+    ("apc_multicurve", apc::multicurve_case),
+    ("apc_ls", apc::ls_case),
+    ("apc_resol", apc::resol_case),
+    ("apc_function", apc::function_case),
+    ("apc_bspfunction", apc::bspfunction_case),
+    ("apc_gradient", apc::gradient_case),
+    ("apc_bspgradient", apc::bspgradient_case),
+    // GeomBndLib and BndLib (gb_probe/bndlib)
+    ("bnd_curve3d", bndlib::curve3d_case),
+    ("bnd_curve2d", bndlib::curve2d_case),
+    ("bnd_surface", bndlib::surface_case),
+    ("bnd_gp", bndlib::gp::gp_case),
+    ("bnd_helpers", bndlib::gp::helpers_case),
+    // CPnts and GCPnts (gb_probe/gcpnts)
+    ("gcp_length", gcpnts::length_case),
+    ("cpnts_abscissa", gcpnts::cpnts_abscissa_case),
+    ("cpnts_udefl", gcpnts::cpnts_udefl_case),
+    ("gcp_abscissa", gcpnts::gcp_abscissa_case),
+    ("gcp_uabs", gcpnts::uabs_case),
+    ("gcp_quabs", gcpnts::quabs_case),
+    ("gcp_udefl", gcpnts::udefl_case),
+    ("gcp_qudefl", gcpnts::qudefl_case),
+    ("gcp_tdefl", gcpnts::tdefl_case),
+    ("gcp_arc_step", gcpnts::arc_step_case),
+    ("gcp_dist", gcpnts::dist_case),
+    // AppCont (gb_probe/app_cont.rs)
+    ("acc_table", acc::table_case),
+    ("acc_offsets", acc::offsets_case),
+    ("acc_matrix", acc::matrix_case),
+    ("acc_ls", acc::ls_case),
     // AdvApp2Var_MathBase (gb_probe/adv_math.rs, adv_math2.rs)
     ("aa_norms", adv_math::norms_case),
     ("aa_mmwprcs", adv_math::mmwprcs_case),

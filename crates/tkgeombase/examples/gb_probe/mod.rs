@@ -7,10 +7,16 @@ pub mod adv_f2var;
 pub mod adv_f2var2;
 pub mod adv_math;
 pub mod adv_math2;
+pub mod app_cont;
+pub mod app_par_curves;
+pub mod bndlib;
 #[allow(dead_code, unused_imports)]
 pub mod common;
+pub mod fem_tool;
 pub mod gc;
 pub mod gce;
+pub mod gcpnts;
+pub mod geom_tools;
 pub mod gprop;
 pub mod hermit;
 pub mod int_ana;

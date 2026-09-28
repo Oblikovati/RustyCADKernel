@@ -213,19 +213,38 @@ fn clamp_long(value: i64, min: i64, max: i64) -> (i64, u8) {
 
 impl IoStream {
     /// `__ostream_insert`: bytes through the output sentry, `badbit` on a short write.
+    /// A pending `width()` (`std::setw`) right-aligns the text with spaces and is then
+    /// reset to 0, as every formatted insertion does when its sentry succeeds.
     /// Example: `stream.insert_bytes(b"BEGIN_INFO_SECTION\n")`.
     pub fn insert_bytes(&mut self, bytes: &[u8]) -> &mut Self {
-        self.write(bytes)
+        if !self.output_sentry() {
+            return self;
+        }
+        let padded = self.take_padding(bytes);
+        if self.put_bytes(&padded) != padded.len() {
+            self.set_state(state::BAD);
+        }
+        self
     }
 
-    /// `operator<<(long)` in decimal, which `int`, `short` and `unsigned short` use.
-    /// Example: `stream.insert_integer(-7)`.
+    /// Consumes `width()` for one formatted insertion: the text with the fill spaces the
+    /// default (right) adjustment puts before it.
+    fn take_padding(&mut self, text: &[u8]) -> Vec<u8> {
+        let width = usize::try_from(self.set_width(0)).unwrap_or(0);
+        let mut padded = vec![b' '; width.saturating_sub(text.len())];
+        padded.extend_from_slice(text);
+        padded
+    }
+
+    /// `operator<<(long)` in decimal, which `int`, `short` and `unsigned short` use;
+    /// padded to a pending `width()`. Example: `stream.insert_integer(-7)`.
     pub fn insert_integer(&mut self, value: i64) -> &mut Self {
         self.insert_bytes(value.to_string().as_bytes())
     }
 
-    /// `operator<<(double)` with the default float field: `%.*g` at `precision()`.
-    /// A `float` is promoted to `double` first; `stream.insert_real(0.1)`.
+    /// `operator<<(double)` with the default float field: `%.*g` at `precision()`,
+    /// padded to a pending `width()`. A `float` is promoted to `double` first;
+    /// `stream.insert_real(0.1)`.
     pub fn insert_real(&mut self, value: f64) -> &mut Self {
         let precision = self.precision;
         self.insert_bytes(format_general(value, precision).as_bytes())

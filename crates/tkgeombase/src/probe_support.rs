@@ -13,13 +13,11 @@
 // commercial license or contractual agreement.
 
 //! Entry points of the crate-private ports that the numeric probe
-//! (examples/numeric_probe.rs) compares with OCCT: GCPnts_TangentialDeflection and
-//! the DeflCurvIntervals functions of Extrema_CurveTool and Extrema_Curve2dTool.
-//! They are not API: the GCPnts and Extrema ports will own these classes.
+//! (examples/numeric_probe.rs) compares with OCCT: the DeflCurvIntervals functions of
+//! Extrema_CurveTool and Extrema_Curve2dTool, which are not API (the Extrema port will
+//! own them), and a sampling helper over the public GCPnts_TangentialDeflection.
 use crate::defl_curv_intervals;
-use crate::tangential_deflection::{
-    DeflectionCriteria, DeflectionCurve, PlanarCurve, SpatialCurve, TangentialDeflection,
-};
+use crate::gcpnts::{TCurveTypes, TangentialCriteria, TangentialDeflection};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg3d::adaptor3d::Adaptor3dCurve;
@@ -35,7 +33,7 @@ pub fn tangential_deflection_2d(
     range: Option<(f64, f64)>,
     criteria: [f64; 5],
 ) -> Result<DeflectionSampling, Failure> {
-    sampling(&PlanarCurve(curve), range, criteria)
+    sampling(curve, range, criteria)
 }
 
 /// `GCPnts_TangentialDeflection::Initialize` on a 3D adaptor; see
@@ -45,23 +43,23 @@ pub fn tangential_deflection_3d(
     range: Option<(f64, f64)>,
     criteria: [f64; 5],
 ) -> Result<DeflectionSampling, Failure> {
-    sampling(&SpatialCurve(curve), range, criteria)
+    sampling(curve, range, criteria)
 }
 
-fn sampling(
-    curve: &impl DeflectionCurve,
+fn sampling<C: TCurveTypes + ?Sized>(
+    curve: &C,
     range: Option<(f64, f64)>,
     [angular, curvature, points, u_tol, min_len]: [f64; 5],
 ) -> Result<DeflectionSampling, Failure> {
-    let criteria = DeflectionCriteria {
-        angular,
-        curvature,
+    let criteria = TangentialCriteria {
+        angular_deflection: angular,
+        curvature_deflection: curvature,
         minimum_of_points: points as i32,
         u_tol,
         min_len,
     };
     let result = match range {
-        Some(range) => TangentialDeflection::with_range(curve, range, criteria)?,
+        Some((first, last)) => TangentialDeflection::with_range(curve, first, last, criteria)?,
         None => TangentialDeflection::with_curve(curve, criteria)?,
     };
     let count: i32 = result.nb_points();

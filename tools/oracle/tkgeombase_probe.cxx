@@ -46,6 +46,14 @@
 #include "tkgeombase_probe_hermit.cxx"
 #include "tkgeombase_probe_extrema_pc2d.cxx"
 #include "tkgeombase_probe_extrema_pc.cxx"
+#include "tkgeombase_probe_geomtools.cxx"
+#include "tkgeombase_probe_femtool.cxx"
+#include "tkgeombase_probe_femtool_curve.cxx"
+#include "tkgeombase_probe_appparcurves.cxx"
+#include "tkgeombase_probe_appparcurves_fit.cxx"
+#include "tkgeombase_probe_bndlib.cxx"
+#include "tkgeombase_probe_gcpnts.cxx"
+#include "tkgeombase_probe_appcont.cxx"
 #include "tkgeombase_probe_advapp2var_math.cxx"
 #include "tkgeombase_probe_advapp2var_math2.cxx"
 #include "tkgeombase_probe_advapp2var_eval.cxx"
@@ -158,6 +166,58 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"pc_endpoints", gb_pc_endpoints_case},
  {"pc_project", gb_pc_project_case},
  {"gcpnts_td3d", gb_gcpnts_td3d_case},
+ // GeomTools (tkgeombase_probe_geomtools*.cxx)
+ {"gt_curve", gb_gt_curve_case},
+ {"gt_curve2d", gb_gt_curve2d_case},
+ {"gt_surface", gb_gt_surface_case},
+ {"gt_read", gb_gt_read_case},
+ {"gt_get_real", gb_gt_get_real_case},
+ {"gt_set", gb_gt_set_case},
+ {"gt_set_null", gb_gt_set_null_case},
+ {"gt_set_read", gb_gt_set_read_case},
+ {"gt_progress", gb_gt_progress_case},
+ {"gt_debug_dump", gb_gt_debug_dump_case},
+ {"gt_handler", gb_gt_handler_case},
+ // FEmTool (tkgeombase_probe_femtool.cxx, tkgeombase_probe_femtool_curve.cxx)
+ {"fem_elements", gb_fem_elements_case},
+ {"fem_criterion", gb_fem_criterion_case},
+ {"fem_profile", gb_fem_profile_case},
+ {"fem_curve", gb_fem_curve_case},
+ {"fem_assembly", gb_fem_assembly_case},
+ // AppParCurves (tkgeombase_probe_appparcurves.cxx, tkgeombase_probe_appparcurves_fit.cxx)
+ {"apc_bernstein", gb_apc_bernstein_case},
+ {"apc_spline", gb_apc_spline_case},
+ {"apc_multipoint", gb_apc_multipoint_case},
+ {"apc_multicurve", gb_apc_multicurve_case},
+ {"apc_ls", gb_apc_ls_case},
+ {"apc_resol", gb_apc_resol_case},
+ {"apc_function", gb_apc_function_case},
+ {"apc_bspfunction", gb_apc_bspfunction_case},
+ {"apc_gradient", gb_apc_gradient_case},
+ {"apc_bspgradient", gb_apc_bspgradient_case},
+ // GeomBndLib and BndLib (tkgeombase_probe_bndlib.cxx)
+ {"bnd_curve3d", gb_bnd_curve3d_case},
+ {"bnd_curve2d", gb_bnd_curve2d_case},
+ {"bnd_surface", gb_bnd_surface_case},
+ {"bnd_gp", gb_bnd_gp_case},
+ {"bnd_helpers", gb_bnd_helpers_case},
+ // CPnts and GCPnts (tkgeombase_probe_gcpnts.cxx)
+ {"gcp_length", gb_gcp_length_case},
+ {"cpnts_abscissa", gb_cpnts_abscissa_case},
+ {"cpnts_udefl", gb_cpnts_udefl_case},
+ {"gcp_abscissa", gb_gcp_abscissa_case},
+ {"gcp_uabs", gb_gcp_uabs_case},
+ {"gcp_quabs", gb_gcp_quabs_case},
+ {"gcp_udefl", gb_gcp_udefl_case},
+ {"gcp_qudefl", gb_gcp_qudefl_case},
+ {"gcp_tdefl", gb_gcp_tdefl_case},
+ {"gcp_arc_step", gb_gcp_arc_step_case},
+ {"gcp_dist", gb_gcp_dist_case},
+ // AppCont (tkgeombase_probe_appcont.cxx)
+ {"acc_table", gb_acc_table_case},
+ {"acc_offsets", gb_acc_offsets_case},
+ {"acc_matrix", gb_acc_matrix_case},
+ {"acc_ls", gb_acc_ls_case},
  // AdvApp2Var_MathBase (tkgeombase_probe_advapp2var_math.cxx, _math2.cxx)
  {"aa_norms", gb_aa_norms_case},
  {"aa_mmwprcs", gb_aa_mmwprcs_case},
