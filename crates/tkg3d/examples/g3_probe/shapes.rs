@@ -3,8 +3,9 @@
 use super::print::Reader;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{
-    GeomCircle, GeomCurve, GeomEllipse, GeomHyperbola, GeomLine, GeomParabola, GeomSurface,
-    GeomTrimmedCurve,
+    GeomCircle, GeomConicalSurface, GeomCurve, GeomCylindricalSurface, GeomEllipse, GeomHyperbola,
+    GeomLine, GeomParabola, GeomPlane, GeomSphericalSurface, GeomSurface,
+    GeomSurfaceOfLinearExtrusion, GeomSurfaceOfRevolution, GeomToroidalSurface, GeomTrimmedCurve,
 };
 
 /// One curve specification, as g3_curve reads it.
@@ -43,5 +44,33 @@ fn trimmed(r: &mut Reader) -> Result<Handle<dyn GeomCurve>, Failure> {
 /// One surface specification, as g3_surface reads it.
 pub fn surface(r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
     let kind = r.integer();
-    panic!("surface kind {kind} has no Rust builder in the probe")
+    match kind {
+        0..=4 => elementary(kind, r),
+        5 => {
+            let d = r.dir();
+            let basis = curve(r)?;
+            Ok(Handle::new(GeomSurfaceOfLinearExtrusion::new(&basis, d)?).cast())
+        }
+        6 => {
+            let a = r.ax1();
+            let basis = curve(r)?;
+            Ok(Handle::new(GeomSurfaceOfRevolution::new(&basis, a)?).cast())
+        }
+        _ => panic!("surface kind {kind} has no Rust builder in the probe"),
+    }
+}
+
+// Kinds 0 to 4: plane F, cylinder F R, cone F angle R, sphere F R, torus F R r.
+fn elementary(kind: i32, r: &mut Reader) -> Result<Handle<dyn GeomSurface>, Failure> {
+    let frame = r.ax3();
+    if kind == 0 {
+        return Ok(Handle::new(GeomPlane::new(frame)).cast());
+    }
+    let x = r.real();
+    match kind {
+        1 => Ok(Handle::new(GeomCylindricalSurface::new(frame, x)?).cast()),
+        3 => Ok(Handle::new(GeomSphericalSurface::new(frame, x)?).cast()),
+        2 => Ok(Handle::new(GeomConicalSurface::new(frame, x, r.real())?).cast()),
+        _ => Ok(Handle::new(GeomToroidalSurface::new(frame, x, r.real())?).cast()),
+    }
 }

@@ -175,7 +175,7 @@ fn iso_frame(pc: Point3, loc: Point3, direction: Direction3, rad: f64) -> Result
         direction.xyz(),
         loc.xyz(),
     );
-    p = p - c;
+    p -= c;
     if p.modulus() > resolution() {
         let d: Direction3 = Direction3::from_xyz(p.normalized()?)?;
         return Axis2::with_x_direction(Point3::from(c), direction, d);
