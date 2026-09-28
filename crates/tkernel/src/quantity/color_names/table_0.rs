@@ -1,0 +1,75 @@
+// Copyright (c) 2025 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+const TABLE_0: [(&str, [f32; 3]); 60] = [
+    ("BLACK", [0.000000, 0.000000, 0.000000]),
+    ("MATRABLUE", [0.000000, 0.000000, 0.522522]),
+    ("MATRAGRAY", [0.318547, 0.318547, 0.318547]),
+    ("ALICEBLUE", [0.871366, 0.938686, 1.000000]),
+    ("ANTIQUEWHITE", [0.955973, 0.830771, 0.679542]),
+    ("ANTIQUEWHITE1", [1.000000, 0.863158, 0.708377]),
+    ("ANTIQUEWHITE2", [0.854992, 0.737911, 0.603827]),
+    ("ANTIQUEWHITE3", [0.610496, 0.527115, 0.434154]),
+    ("ANTIQUEWHITE4", [0.258183, 0.226965, 0.187821]),
+    ("AQUAMARINE1", [0.212231, 1.000000, 0.658376]),
+    ("AQUAMARINE2", [0.181164, 0.854992, 0.564712]),
+    ("AQUAMARINE4", [0.059511, 0.258183, 0.174647]),
+    ("AZURE", [0.871366, 1.000000, 1.000000]),
+    ("AZURE2", [0.745404, 0.854992, 0.854992]),
+    ("AZURE3", [0.533277, 0.610496, 0.610496]),
+    ("AZURE4", [0.226965, 0.258183, 0.258183]),
+    ("BEIGE", [0.913098, 0.913098, 0.715693]),
+    ("BISQUE", [1.000000, 0.775823, 0.552011]),
+    ("BISQUE2", [0.854992, 0.665387, 0.473531]),
+    ("BISQUE3", [0.610496, 0.473531, 0.341915]),
+    ("BISQUE4", [0.258183, 0.205079, 0.147027]),
+    ("BLANCHEDALMOND", [1.000000, 0.830771, 0.610496]),
+    ("BLUE", [0.000000, 0.000000, 1.000000]),
+    ("BLUE2", [0.000000, 0.000000, 0.854992]),
+    ("BLUE3", [0.000000, 0.000000, 0.610496]),
+    ("BLUE4", [0.000000, 0.000000, 0.258183]),
+    ("BLUEVIOLET", [0.254152, 0.024158, 0.760525]),
+    ("BROWN", [0.376262, 0.023153, 0.023153]),
+    ("BROWN1", [1.000000, 0.051269, 0.051269]),
+    ("BROWN2", [0.854992, 0.043735, 0.043735]),
+    ("BROWN3", [0.610496, 0.033105, 0.033105]),
+    ("BROWN4", [0.258183, 0.016807, 0.016807]),
+    ("BURLYWOOD", [0.730460, 0.479321, 0.242281]),
+    ("BURLYWOOD1", [1.000000, 0.651406, 0.327778]),
+    ("BURLYWOOD2", [0.854992, 0.558340, 0.283148]),
+    ("BURLYWOOD3", [0.610496, 0.401978, 0.205079]),
+    ("BURLYWOOD4", [0.258183, 0.171441, 0.090842]),
+    ("CADETBLUE", [0.114435, 0.341915, 0.351533]),
+    ("CADETBLUE1", [0.313988, 0.913098, 1.000000]),
+    ("CADETBLUE2", [0.270498, 0.783537, 0.854992]),
+    ("CADETBLUE3", [0.194617, 0.558340, 0.610496]),
+    ("CADETBLUE4", [0.086500, 0.238397, 0.258183]),
+    ("CHARTREUSE", [0.212231, 1.000000, 0.000000]),
+    ("CHARTREUSE2", [0.181164, 0.854992, 0.000000]),
+    ("CHARTREUSE3", [0.132868, 0.610496, 0.000000]),
+    ("CHARTREUSE4", [0.059511, 0.258183, 0.000000]),
+    ("CHOCOLATE", [0.644479, 0.141264, 0.012983]),
+    ("CHOCOLATE1", [1.000000, 0.212231, 0.017642]),
+    ("CHOCOLATE2", [0.854992, 0.181164, 0.015209]),
+    ("CHOCOLATE3", [0.610496, 0.132868, 0.012286]),
+    ("CHOCOLATE4", [0.258183, 0.059511, 0.006512]),
+    ("CORAL", [1.000000, 0.212231, 0.080220]),
+    ("CORAL1", [1.000000, 0.168270, 0.093059]),
+    ("CORAL2", [0.854992, 0.144128, 0.080220]),
+    ("CORAL3", [0.610496, 0.104617, 0.059511]),
+    ("CORAL4", [0.258183, 0.048172, 0.028426]),
+    ("CORNFLOWERBLUE", [0.127438, 0.300544, 0.846874]),
+    ("CORNSILK1", [1.000000, 0.938686, 0.715693]),
+    ("CORNSILK2", [0.854992, 0.806952, 0.610496]),
+    ("CORNSILK3", [0.610496, 0.577581, 0.439658]),
+];

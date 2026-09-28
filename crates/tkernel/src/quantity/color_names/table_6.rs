@@ -1,0 +1,75 @@
+// Copyright (c) 2025 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+const TABLE_6: [(&str, [f32; 3]); 60] = [
+    ("ORANGERED", [1.000000, 0.059511, 0.000000]),
+    ("ORANGERED2", [0.854992, 0.051269, 0.000000]),
+    ("ORANGERED3", [0.610496, 0.038204, 0.000000]),
+    ("ORANGERED4", [0.258183, 0.018500, 0.000000]),
+    ("ORCHID", [0.701102, 0.162030, 0.672444]),
+    ("ORCHID1", [1.000000, 0.226965, 0.955973]),
+    ("ORCHID2", [0.854992, 0.194617, 0.814846]),
+    ("ORCHID3", [0.610496, 0.141264, 0.584078]),
+    ("ORCHID4", [0.258183, 0.063010, 0.250158]),
+    ("PALEGOLDENROD", [0.854992, 0.806952, 0.401978]),
+    ("PALEGREEN", [0.313988, 0.964687, 0.313988]),
+    ("PALEGREEN1", [0.323144, 1.000000, 0.323144]),
+    ("PALEGREEN2", [0.278894, 0.854992, 0.278894]),
+    ("PALEGREEN3", [0.201557, 0.610496, 0.201557]),
+    ("PALEGREEN4", [0.088656, 0.258183, 0.088656]),
+    ("PALETURQUOISE", [0.428691, 0.854992, 0.854992]),
+    ("PALETURQUOISE1", [0.496933, 1.000000, 1.000000]),
+    ("PALETURQUOISE2", [0.423268, 0.854992, 0.854992]),
+    ("PALETURQUOISE3", [0.304987, 0.610496, 0.610496]),
+    ("PALETURQUOISE4", [0.132868, 0.258183, 0.258183]),
+    ("PALEVIOLETRED", [0.708377, 0.162030, 0.291771]),
+    ("PALEVIOLETRED1", [1.000000, 0.223228, 0.407240]),
+    ("PALEVIOLETRED2", [0.854992, 0.191202, 0.346704]),
+    ("PALEVIOLETRED3", [0.610496, 0.138432, 0.250158]),
+    ("PALEVIOLETRED4", [0.258183, 0.063010, 0.109462]),
+    ("PAPAYAWHIP", [1.000000, 0.863158, 0.665387]),
+    ("PEACHPUFF", [1.000000, 0.701102, 0.485150]),
+    ("PEACHPUFF2", [0.854992, 0.597201, 0.417885]),
+    ("PEACHPUFF3", [0.610496, 0.428691, 0.300544]),
+    ("PEACHPUFF4", [0.258183, 0.184475, 0.130136]),
+    ("PERU", [0.610496, 0.234551, 0.049707]),
+    ("PINK", [1.000000, 0.527115, 0.597201]),
+    ("PINK1", [1.000000, 0.462077, 0.558340]),
+    ("PINK2", [0.854992, 0.396755, 0.479321]),
+    ("PINK3", [0.610496, 0.283148, 0.341915]),
+    ("PINK4", [0.258183, 0.124772, 0.149959]),
+    ("PLUM", [0.723056, 0.351533, 0.723056]),
+    ("PLUM1", [1.000000, 0.496933, 1.000000]),
+    ("PLUM2", [0.854992, 0.423268, 0.854992]),
+    ("PLUM3", [0.610496, 0.304987, 0.610496]),
+    ("PLUM4", [0.258183, 0.132868, 0.258183]),
+    ("POWDERBLUE", [0.434154, 0.745404, 0.791299]),
+    ("PURPLE", [0.351533, 0.014444, 0.871366]),
+    ("PURPLE1", [0.327778, 0.029557, 1.000000]),
+    ("PURPLE2", [0.283148, 0.025187, 0.854992]),
+    ("PURPLE3", [0.205079, 0.019382, 0.610496]),
+    ("PURPLE4", [0.090842, 0.010330, 0.258183]),
+    ("RED", [1.000000, 0.000000, 0.000000]),
+    ("RED2", [0.854992, 0.000000, 0.000000]),
+    ("RED3", [0.610496, 0.000000, 0.000000]),
+    ("RED4", [0.258183, 0.000000, 0.000000]),
+    ("ROSYBROWN", [0.502887, 0.274677, 0.274677]),
+    ("ROSYBROWN1", [1.000000, 0.533277, 0.533277]),
+    ("ROSYBROWN2", [0.854992, 0.456411, 0.456411]),
+    ("ROSYBROWN3", [0.610496, 0.327778, 0.327778]),
+    ("ROSYBROWN4", [0.258183, 0.141264, 0.141264]),
+    ("ROYALBLUE", [0.052861, 0.141264, 0.752942]),
+    ("ROYALBLUE1", [0.064803, 0.181164, 1.000000]),
+    ("ROYALBLUE2", [0.056128, 0.155927, 0.854992]),
+    ("ROYALBLUE3", [0.042311, 0.114435, 0.610496]),
+];

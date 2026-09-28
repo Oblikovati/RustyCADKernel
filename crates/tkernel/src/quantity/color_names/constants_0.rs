@@ -1,0 +1,215 @@
+// Copyright (c) 2025 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+impl NamedColor {
+    /// OCCT named color BLACK; `NamedColor::BLACK.name()` identifies its canonical entry.
+    pub const BLACK: Self = Self(0);
+    /// OCCT named color MATRABLUE; `NamedColor::MATRABLUE.name()` identifies its canonical entry.
+    pub const MATRABLUE: Self = Self(1);
+    /// OCCT named color MATRAGRAY; `NamedColor::MATRAGRAY.name()` identifies its canonical entry.
+    pub const MATRAGRAY: Self = Self(2);
+    /// OCCT named color ALICEBLUE; `NamedColor::ALICEBLUE.name()` identifies its canonical entry.
+    pub const ALICEBLUE: Self = Self(3);
+    /// OCCT named color ANTIQUEWHITE; `NamedColor::ANTIQUEWHITE.name()` identifies its canonical entry.
+    pub const ANTIQUEWHITE: Self = Self(4);
+    /// OCCT named color ANTIQUEWHITE1; `NamedColor::ANTIQUEWHITE1.name()` identifies its canonical entry.
+    pub const ANTIQUEWHITE1: Self = Self(5);
+    /// OCCT named color ANTIQUEWHITE2; `NamedColor::ANTIQUEWHITE2.name()` identifies its canonical entry.
+    pub const ANTIQUEWHITE2: Self = Self(6);
+    /// OCCT named color ANTIQUEWHITE3; `NamedColor::ANTIQUEWHITE3.name()` identifies its canonical entry.
+    pub const ANTIQUEWHITE3: Self = Self(7);
+    /// OCCT named color ANTIQUEWHITE4; `NamedColor::ANTIQUEWHITE4.name()` identifies its canonical entry.
+    pub const ANTIQUEWHITE4: Self = Self(8);
+    /// OCCT named color AQUAMARINE1; `NamedColor::AQUAMARINE1.name()` identifies its canonical entry.
+    pub const AQUAMARINE1: Self = Self(9);
+    /// OCCT named color AQUAMARINE2; `NamedColor::AQUAMARINE2.name()` identifies its canonical entry.
+    pub const AQUAMARINE2: Self = Self(10);
+    /// OCCT named color AQUAMARINE4; `NamedColor::AQUAMARINE4.name()` identifies its canonical entry.
+    pub const AQUAMARINE4: Self = Self(11);
+    /// OCCT named color AZURE; `NamedColor::AZURE.name()` identifies its canonical entry.
+    pub const AZURE: Self = Self(12);
+    /// OCCT named color AZURE2; `NamedColor::AZURE2.name()` identifies its canonical entry.
+    pub const AZURE2: Self = Self(13);
+    /// OCCT named color AZURE3; `NamedColor::AZURE3.name()` identifies its canonical entry.
+    pub const AZURE3: Self = Self(14);
+    /// OCCT named color AZURE4; `NamedColor::AZURE4.name()` identifies its canonical entry.
+    pub const AZURE4: Self = Self(15);
+    /// OCCT named color BEIGE; `NamedColor::BEIGE.name()` identifies its canonical entry.
+    pub const BEIGE: Self = Self(16);
+    /// OCCT named color BISQUE; `NamedColor::BISQUE.name()` identifies its canonical entry.
+    pub const BISQUE: Self = Self(17);
+    /// OCCT named color BISQUE2; `NamedColor::BISQUE2.name()` identifies its canonical entry.
+    pub const BISQUE2: Self = Self(18);
+    /// OCCT named color BISQUE3; `NamedColor::BISQUE3.name()` identifies its canonical entry.
+    pub const BISQUE3: Self = Self(19);
+    /// OCCT named color BISQUE4; `NamedColor::BISQUE4.name()` identifies its canonical entry.
+    pub const BISQUE4: Self = Self(20);
+    /// OCCT named color BLANCHEDALMOND; `NamedColor::BLANCHEDALMOND.name()` identifies its canonical entry.
+    pub const BLANCHEDALMOND: Self = Self(21);
+    /// OCCT named color BLUE; `NamedColor::BLUE.name()` identifies its canonical entry.
+    pub const BLUE: Self = Self(22);
+    /// OCCT named color BLUE1; `NamedColor::BLUE1.name()` identifies its canonical entry.
+    pub const BLUE1: Self = Self(22);
+    /// OCCT named color BLUE2; `NamedColor::BLUE2.name()` identifies its canonical entry.
+    pub const BLUE2: Self = Self(23);
+    /// OCCT named color BLUE3; `NamedColor::BLUE3.name()` identifies its canonical entry.
+    pub const BLUE3: Self = Self(24);
+    /// OCCT named color BLUE4; `NamedColor::BLUE4.name()` identifies its canonical entry.
+    pub const BLUE4: Self = Self(25);
+    /// OCCT named color BLUEVIOLET; `NamedColor::BLUEVIOLET.name()` identifies its canonical entry.
+    pub const BLUEVIOLET: Self = Self(26);
+    /// OCCT named color BROWN; `NamedColor::BROWN.name()` identifies its canonical entry.
+    pub const BROWN: Self = Self(27);
+    /// OCCT named color BROWN1; `NamedColor::BROWN1.name()` identifies its canonical entry.
+    pub const BROWN1: Self = Self(28);
+    /// OCCT named color BROWN2; `NamedColor::BROWN2.name()` identifies its canonical entry.
+    pub const BROWN2: Self = Self(29);
+    /// OCCT named color BROWN3; `NamedColor::BROWN3.name()` identifies its canonical entry.
+    pub const BROWN3: Self = Self(30);
+    /// OCCT named color BROWN4; `NamedColor::BROWN4.name()` identifies its canonical entry.
+    pub const BROWN4: Self = Self(31);
+    /// OCCT named color BURLYWOOD; `NamedColor::BURLYWOOD.name()` identifies its canonical entry.
+    pub const BURLYWOOD: Self = Self(32);
+    /// OCCT named color BURLYWOOD1; `NamedColor::BURLYWOOD1.name()` identifies its canonical entry.
+    pub const BURLYWOOD1: Self = Self(33);
+    /// OCCT named color BURLYWOOD2; `NamedColor::BURLYWOOD2.name()` identifies its canonical entry.
+    pub const BURLYWOOD2: Self = Self(34);
+    /// OCCT named color BURLYWOOD3; `NamedColor::BURLYWOOD3.name()` identifies its canonical entry.
+    pub const BURLYWOOD3: Self = Self(35);
+    /// OCCT named color BURLYWOOD4; `NamedColor::BURLYWOOD4.name()` identifies its canonical entry.
+    pub const BURLYWOOD4: Self = Self(36);
+    /// OCCT named color CADETBLUE; `NamedColor::CADETBLUE.name()` identifies its canonical entry.
+    pub const CADETBLUE: Self = Self(37);
+    /// OCCT named color CADETBLUE1; `NamedColor::CADETBLUE1.name()` identifies its canonical entry.
+    pub const CADETBLUE1: Self = Self(38);
+    /// OCCT named color CADETBLUE2; `NamedColor::CADETBLUE2.name()` identifies its canonical entry.
+    pub const CADETBLUE2: Self = Self(39);
+    /// OCCT named color CADETBLUE3; `NamedColor::CADETBLUE3.name()` identifies its canonical entry.
+    pub const CADETBLUE3: Self = Self(40);
+    /// OCCT named color CADETBLUE4; `NamedColor::CADETBLUE4.name()` identifies its canonical entry.
+    pub const CADETBLUE4: Self = Self(41);
+    /// OCCT named color CHARTREUSE; `NamedColor::CHARTREUSE.name()` identifies its canonical entry.
+    pub const CHARTREUSE: Self = Self(42);
+    /// OCCT named color CHARTREUSE1; `NamedColor::CHARTREUSE1.name()` identifies its canonical entry.
+    pub const CHARTREUSE1: Self = Self(42);
+    /// OCCT named color CHARTREUSE2; `NamedColor::CHARTREUSE2.name()` identifies its canonical entry.
+    pub const CHARTREUSE2: Self = Self(43);
+    /// OCCT named color CHARTREUSE3; `NamedColor::CHARTREUSE3.name()` identifies its canonical entry.
+    pub const CHARTREUSE3: Self = Self(44);
+    /// OCCT named color CHARTREUSE4; `NamedColor::CHARTREUSE4.name()` identifies its canonical entry.
+    pub const CHARTREUSE4: Self = Self(45);
+    /// OCCT named color CHOCOLATE; `NamedColor::CHOCOLATE.name()` identifies its canonical entry.
+    pub const CHOCOLATE: Self = Self(46);
+    /// OCCT named color CHOCOLATE1; `NamedColor::CHOCOLATE1.name()` identifies its canonical entry.
+    pub const CHOCOLATE1: Self = Self(47);
+    /// OCCT named color CHOCOLATE2; `NamedColor::CHOCOLATE2.name()` identifies its canonical entry.
+    pub const CHOCOLATE2: Self = Self(48);
+    /// OCCT named color CHOCOLATE3; `NamedColor::CHOCOLATE3.name()` identifies its canonical entry.
+    pub const CHOCOLATE3: Self = Self(49);
+    /// OCCT named color CHOCOLATE4; `NamedColor::CHOCOLATE4.name()` identifies its canonical entry.
+    pub const CHOCOLATE4: Self = Self(50);
+    /// OCCT named color CORAL; `NamedColor::CORAL.name()` identifies its canonical entry.
+    pub const CORAL: Self = Self(51);
+    /// OCCT named color CORAL1; `NamedColor::CORAL1.name()` identifies its canonical entry.
+    pub const CORAL1: Self = Self(52);
+    /// OCCT named color CORAL2; `NamedColor::CORAL2.name()` identifies its canonical entry.
+    pub const CORAL2: Self = Self(53);
+    /// OCCT named color CORAL3; `NamedColor::CORAL3.name()` identifies its canonical entry.
+    pub const CORAL3: Self = Self(54);
+    /// OCCT named color CORAL4; `NamedColor::CORAL4.name()` identifies its canonical entry.
+    pub const CORAL4: Self = Self(55);
+    /// OCCT named color CORNFLOWERBLUE; `NamedColor::CORNFLOWERBLUE.name()` identifies its canonical entry.
+    pub const CORNFLOWERBLUE: Self = Self(56);
+    /// OCCT named color CORNSILK1; `NamedColor::CORNSILK1.name()` identifies its canonical entry.
+    pub const CORNSILK1: Self = Self(57);
+    /// OCCT named color CORNSILK2; `NamedColor::CORNSILK2.name()` identifies its canonical entry.
+    pub const CORNSILK2: Self = Self(58);
+    /// OCCT named color CORNSILK3; `NamedColor::CORNSILK3.name()` identifies its canonical entry.
+    pub const CORNSILK3: Self = Self(59);
+    /// OCCT named color CORNSILK4; `NamedColor::CORNSILK4.name()` identifies its canonical entry.
+    pub const CORNSILK4: Self = Self(60);
+    /// OCCT named color CYAN; `NamedColor::CYAN.name()` identifies its canonical entry.
+    pub const CYAN: Self = Self(61);
+    /// OCCT named color CYAN1; `NamedColor::CYAN1.name()` identifies its canonical entry.
+    pub const CYAN1: Self = Self(61);
+    /// OCCT named color CYAN2; `NamedColor::CYAN2.name()` identifies its canonical entry.
+    pub const CYAN2: Self = Self(62);
+    /// OCCT named color CYAN3; `NamedColor::CYAN3.name()` identifies its canonical entry.
+    pub const CYAN3: Self = Self(63);
+    /// OCCT named color CYAN4; `NamedColor::CYAN4.name()` identifies its canonical entry.
+    pub const CYAN4: Self = Self(64);
+    /// OCCT named color DARKGOLDENROD; `NamedColor::DARKGOLDENROD.name()` identifies its canonical entry.
+    pub const DARKGOLDENROD: Self = Self(65);
+    /// OCCT named color DARKGOLDENROD1; `NamedColor::DARKGOLDENROD1.name()` identifies its canonical entry.
+    pub const DARKGOLDENROD1: Self = Self(66);
+    /// OCCT named color DARKGOLDENROD2; `NamedColor::DARKGOLDENROD2.name()` identifies its canonical entry.
+    pub const DARKGOLDENROD2: Self = Self(67);
+    /// OCCT named color DARKGOLDENROD3; `NamedColor::DARKGOLDENROD3.name()` identifies its canonical entry.
+    pub const DARKGOLDENROD3: Self = Self(68);
+    /// OCCT named color DARKGOLDENROD4; `NamedColor::DARKGOLDENROD4.name()` identifies its canonical entry.
+    pub const DARKGOLDENROD4: Self = Self(69);
+    /// OCCT named color DARKGREEN; `NamedColor::DARKGREEN.name()` identifies its canonical entry.
+    pub const DARKGREEN: Self = Self(70);
+    /// OCCT named color DARKKHAKI; `NamedColor::DARKKHAKI.name()` identifies its canonical entry.
+    pub const DARKKHAKI: Self = Self(71);
+    /// OCCT named color DARKOLIVEGREEN; `NamedColor::DARKOLIVEGREEN.name()` identifies its canonical entry.
+    pub const DARKOLIVEGREEN: Self = Self(72);
+    /// OCCT named color DARKOLIVEGREEN1; `NamedColor::DARKOLIVEGREEN1.name()` identifies its canonical entry.
+    pub const DARKOLIVEGREEN1: Self = Self(73);
+    /// OCCT named color DARKOLIVEGREEN2; `NamedColor::DARKOLIVEGREEN2.name()` identifies its canonical entry.
+    pub const DARKOLIVEGREEN2: Self = Self(74);
+    /// OCCT named color DARKOLIVEGREEN3; `NamedColor::DARKOLIVEGREEN3.name()` identifies its canonical entry.
+    pub const DARKOLIVEGREEN3: Self = Self(75);
+    /// OCCT named color DARKOLIVEGREEN4; `NamedColor::DARKOLIVEGREEN4.name()` identifies its canonical entry.
+    pub const DARKOLIVEGREEN4: Self = Self(76);
+    /// OCCT named color DARKORANGE; `NamedColor::DARKORANGE.name()` identifies its canonical entry.
+    pub const DARKORANGE: Self = Self(77);
+    /// OCCT named color DARKORANGE1; `NamedColor::DARKORANGE1.name()` identifies its canonical entry.
+    pub const DARKORANGE1: Self = Self(78);
+    /// OCCT named color DARKORANGE2; `NamedColor::DARKORANGE2.name()` identifies its canonical entry.
+    pub const DARKORANGE2: Self = Self(79);
+    /// OCCT named color DARKORANGE3; `NamedColor::DARKORANGE3.name()` identifies its canonical entry.
+    pub const DARKORANGE3: Self = Self(80);
+    /// OCCT named color DARKORANGE4; `NamedColor::DARKORANGE4.name()` identifies its canonical entry.
+    pub const DARKORANGE4: Self = Self(81);
+    /// OCCT named color DARKORCHID; `NamedColor::DARKORCHID.name()` identifies its canonical entry.
+    pub const DARKORCHID: Self = Self(82);
+    /// OCCT named color DARKORCHID1; `NamedColor::DARKORCHID1.name()` identifies its canonical entry.
+    pub const DARKORCHID1: Self = Self(83);
+    /// OCCT named color DARKORCHID2; `NamedColor::DARKORCHID2.name()` identifies its canonical entry.
+    pub const DARKORCHID2: Self = Self(84);
+    /// OCCT named color DARKORCHID3; `NamedColor::DARKORCHID3.name()` identifies its canonical entry.
+    pub const DARKORCHID3: Self = Self(85);
+    /// OCCT named color DARKORCHID4; `NamedColor::DARKORCHID4.name()` identifies its canonical entry.
+    pub const DARKORCHID4: Self = Self(86);
+    /// OCCT named color DARKSALMON; `NamedColor::DARKSALMON.name()` identifies its canonical entry.
+    pub const DARKSALMON: Self = Self(87);
+    /// OCCT named color DARKSEAGREEN; `NamedColor::DARKSEAGREEN.name()` identifies its canonical entry.
+    pub const DARKSEAGREEN: Self = Self(88);
+    /// OCCT named color DARKSEAGREEN1; `NamedColor::DARKSEAGREEN1.name()` identifies its canonical entry.
+    pub const DARKSEAGREEN1: Self = Self(89);
+    /// OCCT named color DARKSEAGREEN2; `NamedColor::DARKSEAGREEN2.name()` identifies its canonical entry.
+    pub const DARKSEAGREEN2: Self = Self(90);
+    /// OCCT named color DARKSEAGREEN3; `NamedColor::DARKSEAGREEN3.name()` identifies its canonical entry.
+    pub const DARKSEAGREEN3: Self = Self(91);
+    /// OCCT named color DARKSEAGREEN4; `NamedColor::DARKSEAGREEN4.name()` identifies its canonical entry.
+    pub const DARKSEAGREEN4: Self = Self(92);
+    /// OCCT named color DARKSLATEBLUE; `NamedColor::DARKSLATEBLUE.name()` identifies its canonical entry.
+    pub const DARKSLATEBLUE: Self = Self(93);
+    /// OCCT named color DARKSLATEGRAY1; `NamedColor::DARKSLATEGRAY1.name()` identifies its canonical entry.
+    pub const DARKSLATEGRAY1: Self = Self(94);
+    /// OCCT named color DARKSLATEGRAY2; `NamedColor::DARKSLATEGRAY2.name()` identifies its canonical entry.
+    pub const DARKSLATEGRAY2: Self = Self(95);
+    /// OCCT named color DARKSLATEGRAY3; `NamedColor::DARKSLATEGRAY3.name()` identifies its canonical entry.
+    pub const DARKSLATEGRAY3: Self = Self(96);
+}

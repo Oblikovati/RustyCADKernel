@@ -1,0 +1,236 @@
+// Copyright (c) 2026 OPEN CASCADE SAS
+//
+// This file is part of Open CASCADE Technology software library.
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License version 2.1 as published
+// by the Free Software Foundation, with special exception defined in the file
+// OCCT_LGPL_EXCEPTION.txt. Consult the file LICENSE_LGPL_21.txt included in OCCT
+// distribution for complete text of the license and disclaimer of any warranty.
+//
+// Alternatively, this file may be used under the terms of Open CASCADE
+// commercial license or contractual agreement.
+
+//! Contiguous growable storage matching NCollection_LinearVector.
+use super::{Array1, ArrayError};
+
+/// A zero-based growable collection; `LinearVector::<i32>::with_capacity(10)`.
+pub struct LinearVector<T> {
+    elements: Vec<T>,
+}
+impl<T> Default for LinearVector<T> {
+    fn default() -> Self {
+        Self {
+            elements: Vec::new(),
+        }
+    }
+}
+impl<T> LinearVector<T> {
+    /// Reserves without constructing elements; `LinearVector::<i32>::with_capacity(10).len() == 0`.
+    pub fn with_capacity(capacity: usize) -> Self {
+        Self {
+            elements: Vec::with_capacity(capacity),
+        }
+    }
+    /// Counts constructed elements; `LinearVector::<i32>::default().len() == 0`.
+    pub fn len(&self) -> usize {
+        self.elements.len()
+    }
+    /// Checks whether any elements exist; `LinearVector::<i32>::default().is_empty()`.
+    pub fn is_empty(&self) -> bool {
+        self.elements.is_empty()
+    }
+    /// Returns available element slots; `LinearVector::<i32>::with_capacity(10).capacity() == 10`.
+    pub fn capacity(&self) -> usize {
+        self.elements.capacity()
+    }
+    /// Borrows the contiguous sequence; `vector.as_slice()[0]`.
+    pub fn as_slice(&self) -> &[T] {
+        &self.elements
+    }
+    /// Mutates the contiguous sequence; `vector.as_mut_slice().reverse()`.
+    pub fn as_mut_slice(&mut self) -> &mut [T] {
+        &mut self.elements
+    }
+    /// Iterates constructed values; `vector.iter().count()`.
+    pub fn iter(&self) -> std::slice::Iter<'_, T> {
+        self.elements.iter()
+    }
+    /// Mutably iterates constructed values; `vector.iter_mut().for_each(|v| *v = 1)`.
+    pub fn iter_mut(&mut self) -> std::slice::IterMut<'_, T> {
+        self.elements.iter_mut()
+    }
+    /// Ensures capacity using OCCT's doubling rule; `vector.reserve(100)`.
+    pub fn reserve(&mut self, minimum: usize) {
+        if minimum <= self.capacity() {
+            return;
+        }
+        let grown = self.capacity().saturating_mul(2).max(2).max(minimum);
+        self.elements.reserve_exact(grown - self.len());
+    }
+    /// Appends an owned value; `vector.append(42)`.
+    pub fn append(&mut self, value: T) -> &mut T {
+        self.reserve(self.len() + 1);
+        self.elements.push(value);
+        self.elements
+            .last_mut()
+            .expect("append constructed the last element")
+    }
+    /// Constructs the next value from arguments captured by a closure; `vector.emplace_append(|| 42)`.
+    pub fn emplace_append(&mut self, construct: impl FnOnce() -> T) -> &mut T {
+        self.append(construct())
+    }
+    /// Reads a checked zero-based index; `vector.value(0)?`.
+    pub fn value(&self, index: usize) -> Result<&T, ArrayError> {
+        self.elements
+            .get(index)
+            .ok_or_else(|| self.index_error(index))
+    }
+    /// Mutates a checked zero-based index; `*vector.change_value(0)? = 42`.
+    pub fn change_value(&mut self, index: usize) -> Result<&mut T, ArrayError> {
+        let error = self.index_error(index);
+        self.elements.get_mut(index).ok_or(error)
+    }
+    /// Reads the first value; `vector.first()?`.
+    pub fn first(&self) -> Result<&T, ArrayError> {
+        self.value(0)
+    }
+    /// Reads the last value; `vector.last()?`.
+    pub fn last(&self) -> Result<&T, ArrayError> {
+        self.value(self.len().saturating_sub(1))
+    }
+    /// Mutates the first value; `*vector.change_first()? = 42`.
+    pub fn change_first(&mut self) -> Result<&mut T, ArrayError> {
+        self.change_value(0)
+    }
+    /// Mutates the last value; `*vector.change_last()? = 42`.
+    pub fn change_last(&mut self) -> Result<&mut T, ArrayError> {
+        self.change_value(self.len().saturating_sub(1))
+    }
+    /// Removes the last value if present; `vector.erase_last()`.
+    pub fn erase_last(&mut self) {
+        self.elements.pop();
+    }
+    /// Removes one checked index; `vector.erase(0)?`.
+    pub fn erase(&mut self, index: usize) -> Result<(), ArrayError> {
+        self.value(index)?;
+        self.elements.remove(index);
+        Ok(())
+    }
+    /// Removes a nonempty half-open range; `vector.erase_range(1,4)?`.
+    pub fn erase_range(&mut self, from: usize, to: usize) -> Result<(), ArrayError> {
+        if from >= to || to > self.len() {
+            return Err(self.index_error(to));
+        }
+        self.elements.drain(from..to);
+        Ok(())
+    }
+    /// Inserts before an index, including the end; `vector.insert_before(0,42)?`.
+    pub fn insert_before(&mut self, index: usize, value: T) -> Result<(), ArrayError> {
+        if index > self.len() {
+            return Err(self.index_error(index));
+        }
+        self.reserve(self.len() + 1);
+        self.elements.insert(index, value);
+        Ok(())
+    }
+    /// Inserts after an existing index; `vector.insert_after(0,42)?`.
+    pub fn insert_after(&mut self, index: usize, value: T) -> Result<(), ArrayError> {
+        self.value(index)?;
+        self.insert_before(index + 1, value)
+    }
+    /// Clears values and optionally storage; `vector.clear(false)` retains capacity.
+    pub fn clear(&mut self, release: bool) {
+        if release {
+            self.elements = Vec::new();
+            return;
+        }
+        self.elements.clear();
+    }
+    /// Transfers storage and resets the source; `dest.move_from(&mut source)`.
+    pub fn move_from(&mut self, source: &mut Self) {
+        *self = std::mem::take(source);
+    }
+    /// Borrows a mutable zero-based array view; `vector.to_array1()[0] = 42`.
+    pub fn to_array1(&mut self) -> Array1<'_, T> {
+        Array1::from_slice(&mut self.elements)
+    }
+    fn index_error(&self, index: usize) -> ArrayError {
+        ArrayError::Index {
+            index: index as i64,
+            lower: 0,
+            upper: self.len() as i64 - 1,
+        }
+    }
+}
+impl<T: Default> LinearVector<T> {
+    /// Appends a default value; `*vector.appended() = 42`.
+    pub fn appended(&mut self) -> &mut T {
+        self.append(T::default())
+    }
+    /// Resizes, default-constructing new values; `vector.resize(10)`.
+    pub fn resize(&mut self, size: usize) {
+        self.reserve(size);
+        self.elements.resize_with(size, T::default);
+    }
+    /// Overwrites or extends to an index; `vector.set_value(5,42)`.
+    pub fn set_value(&mut self, index: usize, value: T) {
+        if index >= self.len() {
+            self.resize(index + 1);
+        }
+        self.elements[index] = value;
+    }
+}
+impl<T: Clone> Clone for LinearVector<T> {
+    fn clone(&self) -> Self {
+        Self {
+            elements: self.elements.clone(),
+        }
+    }
+}
+impl<T: Clone> LinearVector<T> {
+    /// Constructs repeated values; `LinearVector::with_value(3,42)`.
+    pub fn with_value(size: usize, value: T) -> Self {
+        Self {
+            elements: vec![value; size],
+        }
+    }
+    /// Reuses sufficient destination storage during assignment; `dest.assign(&source)`.
+    pub fn assign(&mut self, source: &Self) {
+        if source.len() > self.capacity() {
+            *self = source.clone();
+            return;
+        }
+        self.elements.clone_from(&source.elements);
+    }
+    /// Resizes, copying the fill value only into new slots; `vector.resize_with_value(5,-1)`.
+    pub fn resize_with_value(&mut self, size: usize, value: T) {
+        self.reserve(size);
+        self.elements.resize(size, value);
+    }
+}
+impl<T> std::ops::Index<usize> for LinearVector<T> {
+    type Output = T;
+    fn index(&self, index: usize) -> &T {
+        &self.elements[index]
+    }
+}
+impl<T> std::ops::IndexMut<usize> for LinearVector<T> {
+    fn index_mut(&mut self, index: usize) -> &mut T {
+        &mut self.elements[index]
+    }
+}
+impl<'a, T> IntoIterator for &'a LinearVector<T> {
+    type Item = &'a T;
+    type IntoIter = std::slice::Iter<'a, T>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter()
+    }
+}
+impl<'a, T> IntoIterator for &'a mut LinearVector<T> {
+    type Item = &'a mut T;
+    type IntoIter = std::slice::IterMut<'a, T>;
+    fn into_iter(self) -> Self::IntoIter {
+        self.iter_mut()
+    }
+}

@@ -1,0 +1,30 @@
+[package]
+name = "rustycad-tkernel"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license = "LGPL-2.1-only WITH OCCT-exception-1.0"
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+allocator-api2 = "=0.4.0"
+bytemuck = { version = "=1.25.2", default-features = false }
+rayon = "=1.12.0"
+smallvec = { version = "1.16.2", default-features = false, features = ["const_generics"] }
+
+[target.'cfg(all(unix, not(target_vendor = "apple")))'.dependencies]
+libc = "=0.2.189"
+
+[target.'cfg(target_vendor = "apple")'.dependencies]
+mach2 = "=0.7.0"
+
+[target."cfg(windows)".dependencies]
+windows-sys = { version = "=0.61.2", features = ["Win32_Foundation", "Win32_System_Threading"] }
+
+[dev-dependencies]
+rustycad-tkmath = { path = "../tkmath" }
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tktopalgo = { path = "../tktopalgo" }
