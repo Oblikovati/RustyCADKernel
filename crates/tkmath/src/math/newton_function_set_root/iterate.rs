@@ -12,7 +12,8 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Failure, FunctionSetWithDerivatives, Gauss, NewtonFunctionSetRoot, Vector};
+use super::{Failure, FunctionSetWithDerivatives, NewtonFunctionSetRoot, Vector};
+use crate::math::recipes::{STATUS_OK, lu_decompose_with_scales, lu_solve};
 impl NewtonFunctionSetRoot {
     pub(super) fn iterate(
         &mut self,
@@ -29,7 +30,7 @@ impl NewtonFunctionSetRoot {
                 return Ok(());
             }
             if self.is_solution_reached() {
-                self._state = function.state_number();
+                self.state = function.state_number();
                 self.done = true;
                 return Ok(());
             }
@@ -41,12 +42,20 @@ impl NewtonFunctionSetRoot {
         for index in 1..=self.delta.length() {
             self.delta[index] = -self.residual[index];
         }
-        let factor: Gauss = Gauss::with_min_pivot(&self.jacobian, 1e-30)?;
-        self.jacobian.initialized(factor.factor_matrix())?;
-        if !factor.is_done() {
+        // LU_Decompose factors the Jacobian in place, leaving a partial factorization on
+        // failure; the next F.Values call overwrites it.
+        let mut sign = 0.0;
+        let status = lu_decompose_with_scales(
+            &mut self.jacobian,
+            &mut self.pivots,
+            &mut sign,
+            &mut self.scratch,
+            1.0e-30,
+        )?;
+        if status != STATUS_OK {
             return Ok(false);
         }
-        factor.solve(&mut self.delta)?;
+        lu_solve(&self.jacobian, &self.pivots, &mut self.delta)?;
         self.clip_trial(lower, upper)?;
         Ok(true)
     }

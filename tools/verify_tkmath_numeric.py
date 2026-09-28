@@ -29,6 +29,7 @@ from tkmath_gp_transform_corpus import append_gp_transform_requests
 from tkmath_convert_corpus import append_convert_requests
 from tkmath_gp_core_corpus import append_gp_core_requests
 from tkmath_vector_base_corpus import append_vector_base_requests
+from tkmath_recipes_corpus import append_recipes_requests
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
@@ -427,6 +428,7 @@ def corpus() -> str:
     append_convert_requests(requests)
     append_gp_core_requests(requests)
     append_vector_base_requests(requests)
+    append_recipes_requests(requests)
     return '\n'.join(requests)+'\n'           
 
 

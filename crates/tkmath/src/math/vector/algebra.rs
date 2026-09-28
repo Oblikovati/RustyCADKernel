@@ -140,7 +140,7 @@ impl<T: VectorItem> VectorBase<'_, T> {
         result
     }
     /// Computes a sequential dot product with positional alignment; `left.dot(&right)?`.
-    pub fn dot(&self, right: &Self) -> Result<T, Failure> {
+    pub fn dot(&self, right: &VectorBase<'_, T>) -> Result<T, Failure> {
         self.check_length(right, "Multiplied")?;
         let mut result = T::ZERO;
         for (left, right) in self.values().iter().zip(right.values()) {
@@ -149,7 +149,7 @@ impl<T: VectorItem> VectorBase<'_, T> {
         Ok(result)
     }
     /// Adds equal-length vectors by position; `left.add(&right)?`.
-    pub fn add(&mut self, right: &Self) -> Result<(), Failure> {
+    pub fn add(&mut self, right: &VectorBase<'_, T>) -> Result<(), Failure> {
         self.check_length(right, "Add")?;
         for (left, right) in self.values_mut().iter_mut().zip(right.values()) {
             *left = left.item_add(*right);
@@ -157,7 +157,7 @@ impl<T: VectorItem> VectorBase<'_, T> {
         Ok(())
     }
     /// Subtracts equal-length vectors by position; `left.subtract(&right)?`.
-    pub fn subtract(&mut self, right: &Self) -> Result<(), Failure> {
+    pub fn subtract(&mut self, right: &VectorBase<'_, T>) -> Result<(), Failure> {
         self.check_length(right, "Subtract")?;
         for (left, right) in self.values_mut().iter_mut().zip(right.values()) {
             *left = left.item_sub(*right);
@@ -165,7 +165,7 @@ impl<T: VectorItem> VectorBase<'_, T> {
         Ok(())
     }
     /// Returns the positional sum retaining left bounds; `left.added(&right)?`.
-    pub fn added(&self, right: &Self) -> Result<Self, Failure> {
+    pub fn added(&self, right: &VectorBase<'_, T>) -> Result<Self, Failure> {
         self.check_length(right, "Added")?;
         let mut result = Self::with_bounds(self.lower(), self.upper()).unwrap();
         result.initialized(self)?;
@@ -173,7 +173,7 @@ impl<T: VectorItem> VectorBase<'_, T> {
         Ok(result)
     }
     /// Returns the positional difference retaining left bounds; `left.subtracted(&right)?`.
-    pub fn subtracted(&self, right: &Self) -> Result<Self, Failure> {
+    pub fn subtracted(&self, right: &VectorBase<'_, T>) -> Result<Self, Failure> {
         self.check_length(right, "Subtracted")?;
         let mut result = Self::with_bounds(self.lower(), self.upper()).unwrap();
         result.initialized(self)?;
@@ -181,7 +181,12 @@ impl<T: VectorItem> VectorBase<'_, T> {
         Ok(result)
     }
     /// Copies a source into a checked inclusive interval; `target.set(2,4,&source)?`.
-    pub fn set(&mut self, first: i32, last: i32, source: &Self) -> Result<(), Failure> {
+    pub fn set(
+        &mut self,
+        first: i32,
+        last: i32,
+        source: &VectorBase<'_, T>,
+    ) -> Result<(), Failure> {
         if first < self.lower()
             || last > self.upper()
             || first > last
@@ -215,7 +220,11 @@ impl<T: VectorItem> VectorBase<'_, T> {
         Ok(result)
     }
     /// Stores the positional sum of two vectors; `result.set_sum(&left,&right)?`.
-    pub fn set_sum(&mut self, left: &Self, right: &Self) -> Result<(), Failure> {
+    pub fn set_sum(
+        &mut self,
+        left: &VectorBase<'_, T>,
+        right: &VectorBase<'_, T>,
+    ) -> Result<(), Failure> {
         self.check_pair(left, right, "Add")?;
         for index in 0..self.length {
             self.values_mut()[index] = left.values()[index].item_add(right.values()[index]);
@@ -223,7 +232,11 @@ impl<T: VectorItem> VectorBase<'_, T> {
         Ok(())
     }
     /// Stores the positional difference of two vectors; `result.set_difference(&left,&right)?`.
-    pub fn set_difference(&mut self, left: &Self, right: &Self) -> Result<(), Failure> {
+    pub fn set_difference(
+        &mut self,
+        left: &VectorBase<'_, T>,
+        right: &VectorBase<'_, T>,
+    ) -> Result<(), Failure> {
         self.check_pair(left, right, "Subtract")?;
         for index in 0..self.length {
             self.values_mut()[index] = left.values()[index].item_sub(right.values()[index]);
@@ -231,14 +244,14 @@ impl<T: VectorItem> VectorBase<'_, T> {
         Ok(())
     }
     /// Uses matching declared indices, retaining the native overload's bound behavior; `result.set_scaled(2.0,&source)?`.
-    pub fn set_scaled(&mut self, scalar: T, source: &Self) -> Result<(), Failure> {
+    pub fn set_scaled(&mut self, scalar: T, source: &VectorBase<'_, T>) -> Result<(), Failure> {
         self.check_length(source, "Multiply")?;
         for index in self.lower()..=self.upper() {
             self[index] = scalar.item_mul(*source.value(index)?);
         }
         Ok(())
     }
-    fn check_length(&self, right: &Self, operation: &str) -> Result<(), Failure> {
+    fn check_length(&self, right: &VectorBase<'_, T>, operation: &str) -> Result<(), Failure> {
         if self.length != right.length {
             return Err(failure(
                 "Standard_DimensionError",
@@ -247,7 +260,12 @@ impl<T: VectorItem> VectorBase<'_, T> {
         }
         Ok(())
     }
-    fn check_pair(&self, left: &Self, right: &Self, operation: &str) -> Result<(), Failure> {
+    fn check_pair(
+        &self,
+        left: &VectorBase<'_, T>,
+        right: &VectorBase<'_, T>,
+        operation: &str,
+    ) -> Result<(), Failure> {
         if self.length != right.length || self.length != left.length {
             return Err(failure(
                 "Standard_DimensionError",

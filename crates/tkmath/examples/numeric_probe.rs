@@ -443,6 +443,11 @@ fn main() {
             "int_vector" => vector_base_probe::int_vector_case(&values),
             "real_vector_extra" => vector_base_probe::real_vector_extra_case(&values),
             "matrix_extra" => vector_base_probe::matrix_extra_case(&values),
+            "recipes_lu" => recipes_probe::lu_case(&values),
+            "recipes_svd" => recipes_probe::svd_case(&values),
+            "recipes_jacobi" => recipes_probe::jacobi_case(&values),
+            "recipes_dactcl" => recipes_probe::dactcl_case(&values),
+            "linear_dump" => recipes_probe::linear_dump_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
     }
@@ -519,4 +524,5 @@ mod convert_probe;
 mod cslib_probe;
 mod elementary_probe;
 mod plib_probe;
+mod recipes_probe;
 mod vector_base_probe;

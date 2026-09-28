@@ -13,7 +13,7 @@
 // commercial license or contractual agreement.
 
 //! Newton iteration for square function systems with native LU and clipping.
-use super::{FunctionSetWithDerivatives, Gauss, Matrix, Vector};
+use super::{FunctionSetWithDerivatives, IntegerVector, Matrix, Vector};
 use rustycad_tkernel::standard::Failure;
 mod iterate;
 mod results;
@@ -21,12 +21,14 @@ mod results;
 pub struct NewtonFunctionSetRoot {
     tolerance: Vector<'static>,
     function_tolerance: f64,
+    pivots: IntegerVector<'static>,
+    scratch: Vector<'static>,
     solution: Vector<'static>,
     delta: Vector<'static>,
     residual: Vector<'static>,
     jacobian: Matrix<'static>,
     done: bool,
-    _state: i32,
+    state: i32,
     iteration: i32,
     limit: i32,
 }
@@ -52,12 +54,14 @@ impl NewtonFunctionSetRoot {
         Ok(Self {
             tolerance: Vector::with_bounds(1, n)?,
             function_tolerance,
+            pivots: IntegerVector::with_bounds(1, n)?,
+            scratch: Vector::with_bounds(1, n)?,
             solution: Vector::with_bounds(1, n)?,
             delta: Vector::with_bounds(1, n)?,
             residual: Vector::with_bounds(1, n)?,
             jacobian: Matrix::with_bounds(1, n, 1, n).unwrap(),
             done: false,
-            _state: 0,
+            state: 0,
             iteration: 0,
             limit,
         })

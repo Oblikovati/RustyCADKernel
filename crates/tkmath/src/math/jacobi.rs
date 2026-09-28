@@ -12,17 +12,17 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! Symmetric eigenanalysis preserving OCCT's sweep and tie ordering.
+//! math_Jacobi: symmetric eigenanalysis through the `Jacobi` recipe.
+use super::recipes::{STATUS_OK, jacobi};
 use super::{Matrix, Vector};
 use rustycad_tkernel::standard::Failure;
-mod rotation;
-mod sweep;
+use std::fmt;
 /// Jacobi eigenpairs in descending order; `Jacobi::new(&matrix)?`.
 pub struct Jacobi {
     values: Vector<'static>,
     vectors: Matrix<'static>,
     done: bool,
-    rotations: u32,
+    rotations: i32,
 }
 impl Jacobi {
     /// Copies the matrix and diagonalizes its upper triangle; `Jacobi::new(&matrix)?`.
@@ -33,14 +33,30 @@ impl Jacobi {
         }
         let mut work: Matrix<'static> = Matrix::with_bounds(1, n, 1, n).unwrap();
         work.initialized(matrix)?;
-        let mut solver: Self = Self {
-            values: Vector::with_bounds(1, n)?,
-            vectors: Matrix::with_bounds(1, n, 1, n).unwrap(),
-            done: false,
-            rotations: 0,
-        };
-        solver.diagonalize(&mut work);
-        Ok(solver)
+        Self::diagonalized(&mut work)
+    }
+    fn diagonalized(work: &mut Matrix<'_>) -> Result<Self, Failure> {
+        let n = work.row_number();
+        let mut values = Vector::with_bounds(1, n)?;
+        let mut vectors = Matrix::with_bounds(1, n, 1, n).unwrap();
+        let mut rotations = 0;
+        let done = jacobi(work, &mut values, &mut vectors, &mut rotations)? == STATUS_OK;
+        Ok(Self {
+            values,
+            vectors,
+            done,
+            rotations,
+        })
+    }
+    /// Runs the recipe on a caller-owned 1-based work matrix (used by MathLin).
+    pub(crate) fn recipe(work: &mut Matrix<'_>) -> (bool, u32, Vector<'static>, Matrix<'static>) {
+        let solver = Self::diagonalized(work).unwrap();
+        (
+            solver.done,
+            solver.rotations as u32,
+            solver.values,
+            solver.vectors,
+        )
     }
     /// Reports convergence within fifty sweeps; `solver.is_done()`.
     pub fn is_done(&self) -> bool {
@@ -66,24 +82,22 @@ impl Jacobi {
         self.check_done()?;
         vector.initialized(&self.vectors.col(index)?)
     }
+    /// Writes the native status text with the eigenvalue vector's own dump;
+    /// `solver.dump(&mut text)?`.
+    pub fn dump(&self, stream: &mut impl fmt::Write) -> fmt::Result {
+        write!(stream, "math_Jacobi ")?;
+        if !self.done {
+            return writeln!(stream, "Status = not Done ");
+        }
+        writeln!(stream, " Status = Done ")?;
+        write!(stream, " The eigenvalues vector is: ")?;
+        self.values.dump(stream)?;
+        writeln!(stream)
+    }
     fn check_done(&self) -> Result<(), Failure> {
         if !self.done {
             return Err(Failure::with_type("StdFail_NotDone", " ", ""));
         }
         Ok(())
-    }
-}
-
-impl Jacobi {
-    pub(crate) fn recipe(work: &mut Matrix<'_>) -> (bool, u32, Vector<'static>, Matrix<'static>) {
-        let n: i32 = work.row_number();
-        let mut solver: Self = Self {
-            values: Vector::with_bounds(1, n).unwrap(),
-            vectors: Matrix::with_bounds(1, n, 1, n).unwrap(),
-            done: false,
-            rotations: 0,
-        };
-        solver.diagonalize(work);
-        (solver.done, solver.rotations, solver.values, solver.vectors)
     }
 }
