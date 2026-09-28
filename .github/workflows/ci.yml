@@ -63,6 +63,7 @@ jobs:
       - run: PYTHONPATH=tools python3 -m unittest discover -s tools/tests
       - run: python3 tools/verify_tkernel.py --source target/occt-source --jobs 2
       - run: python3 tools/verify_toolkit.py TKMath --source target/occt-source --jobs 2
+      - run: python3 tools/verify_toolkit.py TKG2d --source target/occt-source --jobs 2
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:

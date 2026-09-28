@@ -18,14 +18,14 @@ use super::axis_placement::GeomAxisPlacement;
 use super::geometry::GeomGeometry;
 use super::protected::ProtectedAccess;
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::{Axis1, Direction3, Point3, Transform3};
 
 /// An axis; `Handle::new(GeomAxis1Placement::new(axis))`.
 pub struct GeomAxis1Placement {
     parent: StandardTransient,
-    state: GeometryCell<Axis1>,
+    state: SharedState<Axis1>,
 }
 impl_transient!(
     GeomAxis1Placement,
@@ -44,7 +44,7 @@ impl GeomAxis1Placement {
     pub fn new(axis: Axis1) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(axis),
+            state: SharedState::new(axis),
         }
     }
     /// Placement from origin and direction (`Geom_Axis1Placement(P, V)`);

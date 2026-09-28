@@ -19,8 +19,8 @@ use super::axis_placement::GeomAxisPlacement;
 use super::geometry::GeomGeometry;
 use super::protected::ProtectedAccess;
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::{Axis1, Axis2, Direction3, Point3, Transform3};
 
 #[derive(Clone, Copy)]
@@ -33,7 +33,7 @@ struct FrameState {
 /// A coordinate frame; `Handle::new(GeomAxis2Placement::new(frame))`.
 pub struct GeomAxis2Placement {
     parent: StandardTransient,
-    state: GeometryCell<FrameState>,
+    state: SharedState<FrameState>,
 }
 impl_transient!(
     GeomAxis2Placement,
@@ -53,7 +53,7 @@ impl GeomAxis2Placement {
     fn stored(state: FrameState) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         }
     }
     /// Placement from a gp frame (`Geom_Axis2Placement(gp_Ax2)`); `GeomAxis2Placement::new(frame)`.

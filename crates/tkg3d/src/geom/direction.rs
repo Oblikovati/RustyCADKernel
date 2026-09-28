@@ -19,14 +19,14 @@ use super::geometry::GeomGeometry;
 use super::protected::ProtectedAccess;
 use super::vector::GeomVector;
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::gp::{Direction3, Transform3, Vector3, resolution};
 
 /// A unit vector; `Handle::new(GeomDirection::new(1.0, 1.0, 0.0)?)`.
 pub struct GeomDirection {
     parent: StandardTransient,
-    state: GeometryCell<Vector3>,
+    state: SharedState<Vector3>,
 }
 impl_transient!(
     GeomDirection,
@@ -51,7 +51,7 @@ impl GeomDirection {
     fn stored(vector: Vector3) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(vector),
+            state: SharedState::new(vector),
         }
     }
     /// Unit vector along `(x, y, z)` (`Geom_Direction(X, Y, Z)`);
@@ -119,7 +119,7 @@ impl GeomGeometry for GeomDirection {
     }
 }
 impl GeomVector for GeomDirection {
-    fn vector_cell(&self, _access: ProtectedAccess) -> &GeometryCell<Vector3> {
+    fn vector_cell(&self, _access: ProtectedAccess) -> &SharedState<Vector3> {
         &self.state
     }
     fn magnitude(&self) -> f64 {

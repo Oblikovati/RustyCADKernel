@@ -19,9 +19,9 @@ use super::errors;
 use super::geometry::GeomGeometry;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name, dump_field};
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::geom_abs::Shape;
@@ -31,7 +31,7 @@ use std::io;
 /// A line through a point along a direction; `Handle::new(GeomLine::new(axis))`.
 pub struct GeomLine {
     parent: StandardTransient,
-    state: GeometryCell<Axis1>,
+    state: SharedState<Axis1>,
 }
 impl_transient!(
     GeomLine,
@@ -50,7 +50,7 @@ impl GeomLine {
     pub fn new(axis: Axis1) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(axis),
+            state: SharedState::new(axis),
         }
     }
     /// Line from a gp line (`Geom_Line(gp_Lin)`); `GeomLine::from_lin(line)`.

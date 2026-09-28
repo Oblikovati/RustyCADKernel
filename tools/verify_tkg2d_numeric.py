@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare the TKG2d port (Geom2d, Adaptor2d, Geom2dAdaptor, Geom2dEval, Geom2dHash) with the pinned kernel on a deterministic corpus.
+"""Compare the TKG2d port (Geom2d, Adaptor2d, Geom2dAdaptor, Geom2dEval, Geom2dGridEval, Geom2dHash) with the pinned kernel on a deterministic corpus.
 
 Usage: python3 tools/verify_tkg2d_numeric.py --source OCCT --native-build BUILD
 Builds tools/oracle/tkg2d_probe.cxx against libTKG2d and the Rust twin
@@ -10,6 +10,7 @@ from __future__ import annotations
 from tkg2d_adaptor_corpus import append_tkg2d_adaptor_requests
 from tkg2d_corpus import append_tkg2d_requests
 from tkg2d_eval_corpus import append_tkg2d_eval_requests
+from tkg2d_grid_corpus import append_tkg2d_grid_requests
 from toolkit_numeric import NumericOracle, verify_numeric
 
 
@@ -19,6 +20,7 @@ def corpus() -> str:
     append_tkg2d_requests(requests)
     append_tkg2d_adaptor_requests(requests)
     append_tkg2d_eval_requests(requests)
+    append_tkg2d_grid_requests(requests)
     return '\n'.join(requests)+'\n'
 
 

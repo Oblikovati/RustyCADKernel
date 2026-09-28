@@ -15,14 +15,12 @@
 // commercial license or contractual agreement.
 // Rust translation of FoundationClasses/TKMath/Poly/Poly_Polygon2D.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-use super::{
-    errors::array_failure, owned::owned_array, shared_state::SharedState, triangulation::dump_size,
-};
+use super::{owned::owned_array, triangulation::dump_size};
 use crate::gp::Point2;
 use rustycad_tkernel::{
     ncollection::Array1,
     standard::{
-        Failure, Handle, StandardTransient,
+        Failure, Handle, SharedState, StandardTransient,
         dump::{self, DumpOutput},
     },
 };
@@ -41,7 +39,7 @@ impl Polygon2D {
     /// Allocates `nb_nodes` origin nodes at `1..=nb_nodes`; `Polygon2D::new(4)?`.
     pub fn new(nb_nodes: i32) -> Result<Self, Failure> {
         let nodes = Array1::with_bounds(1, nb_nodes)
-            .map_err(|e| array_failure("Poly_Polygon2D::Poly_Polygon2D", e))?;
+            .map_err(|e| e.into_failure("Poly_Polygon2D::Poly_Polygon2D"))?;
         Ok(Self::from_fields(nodes))
     }
     /// Copies nodes of any bounds to `1..=len`; `Polygon2D::from_nodes(&nodes)`.

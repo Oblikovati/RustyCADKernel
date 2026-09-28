@@ -30,8 +30,8 @@ use crate::geom_eval::{RepSurfaceDesc, RepSurfaceDescFull, RepSurfaceKind, rep_u
 use basis::{BasisResolution, resolve_basis};
 pub use equivalent::equivalent_surface;
 use rustycad_tkernel::impl_transient;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkmath::geom_abs::Shape;
 
 #[derive(Clone)]
@@ -47,7 +47,7 @@ struct OffsetSurfaceState {
 /// offset surfaces); `Handle::new(GeomOffsetSurface::new(&plane.cast(), 3.0, false)?)`.
 pub struct GeomOffsetSurface {
     parent: StandardTransient,
-    state: GeometryCell<OffsetSurfaceState>,
+    state: SharedState<OffsetSurfaceState>,
 }
 impl_transient!(
     GeomOffsetSurface,
@@ -79,7 +79,7 @@ impl GeomOffsetSurface {
     ) -> Result<Self, Failure> {
         let this = Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(OffsetSurfaceState {
+            state: SharedState::new(OffsetSurfaceState {
                 basis: Handle::default(),
                 eval_rep: Handle::default(),
                 offset_value: offset,
@@ -104,7 +104,7 @@ impl GeomOffsetSurface {
         };
         Ok(Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(state),
+            state: SharedState::new(state),
         })
     }
     /// Replace the basis, as the constructor does (`SetBasisSurface`). Like the native

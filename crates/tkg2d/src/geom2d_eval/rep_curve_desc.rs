@@ -121,7 +121,7 @@ macro_rules! define_rep_curve_descriptors {
         /// `RepCurveDesc::Full`; `Handle::new(RepCurveDescFull::new(curve))`.
         pub struct RepCurveDescFull {
             parent: ::rustycad_tkernel::standard::StandardTransient,
-            representation: $crate::geom2d::cell::GeometryCell<::rustycad_tkernel::standard::Handle<$curve>>,
+            representation: ::rustycad_tkernel::standard::SharedState<::rustycad_tkernel::standard::Handle<$curve>>,
         }
         ::rustycad_tkernel::impl_transient!(
             RepCurveDescFull,
@@ -135,7 +135,7 @@ macro_rules! define_rep_curve_descriptors {
             pub fn new(representation: ::rustycad_tkernel::standard::Handle<$curve>) -> Self {
                 Self {
                     parent: ::rustycad_tkernel::standard::StandardTransient::default(),
-                    representation: $crate::geom2d::cell::GeometryCell::new(representation),
+                    representation: ::rustycad_tkernel::standard::SharedState::new(representation),
                 }
             }
         }
@@ -161,7 +161,7 @@ macro_rules! define_rep_curve_descriptors {
         /// `Handle::new(RepCurveDescDerivBounded::new(curve, 2))`.
         pub struct RepCurveDescDerivBounded {
             parent: ::rustycad_tkernel::standard::StandardTransient,
-            state: $crate::geom2d::cell::GeometryCell<(::rustycad_tkernel::standard::Handle<$curve>, usize)>,
+            state: ::rustycad_tkernel::standard::SharedState<(::rustycad_tkernel::standard::Handle<$curve>, usize)>,
         }
         ::rustycad_tkernel::impl_transient!(
             RepCurveDescDerivBounded,
@@ -175,7 +175,7 @@ macro_rules! define_rep_curve_descriptors {
             pub fn new(representation: ::rustycad_tkernel::standard::Handle<$curve>, max_deriv_order: usize) -> Self {
                 Self {
                     parent: ::rustycad_tkernel::standard::StandardTransient::default(),
-                    state: $crate::geom2d::cell::GeometryCell::new((representation, max_deriv_order)),
+                    state: ::rustycad_tkernel::standard::SharedState::new((representation, max_deriv_order)),
                 }
             }
             /// Change the derivative limit; `desc.set_max_deriv_order(2)`.
@@ -205,7 +205,7 @@ macro_rules! define_rep_curve_descriptors {
         /// `Handle::new(RepCurveDescMapped::new(curve, 3, None, Map1d::default()))`.
         pub struct RepCurveDescMapped {
             parent: ::rustycad_tkernel::standard::StandardTransient,
-            state: $crate::geom2d::cell::GeometryCell<$crate::geom2d_eval::MappedCurveState<$curve>>,
+            state: ::rustycad_tkernel::standard::SharedState<$crate::geom2d_eval::MappedCurveState<$curve>>,
         }
         ::rustycad_tkernel::impl_transient!(
             RepCurveDescMapped,
@@ -231,7 +231,7 @@ macro_rules! define_rep_curve_descriptors {
                 };
                 Self {
                     parent: ::rustycad_tkernel::standard::StandardTransient::default(),
-                    state: $crate::geom2d::cell::GeometryCell::new(state),
+                    state: ::rustycad_tkernel::standard::SharedState::new(state),
                 }
             }
             /// Change the derivative limit; `desc.set_max_deriv_order(2)`.

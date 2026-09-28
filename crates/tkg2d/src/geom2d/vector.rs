@@ -14,17 +14,17 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_Vector.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_Vector`: vectors (unit or not) of the plane as transient geometry.
-use super::cell::{GeometryCell, PROTECTED, ProtectedAccess};
 use super::geometry::Geom2dGeometry;
+use super::protected::{PROTECTED, ProtectedAccess};
 use rustycad_tkernel::impl_transient_interface;
-use rustycad_tkernel::standard::{Failure, Handle};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState};
 use rustycad_tkmath::gp::Vector2;
 
 /// A vector with the native protected `gpVec2d` storage; `vector.dot(&*other)`.
 pub trait Geom2dVector: Geom2dGeometry {
     /// The protected `gpVec2d` cell; only Geom2d calls it.
     #[doc(hidden)]
-    fn vector_cell(&self, access: ProtectedAccess) -> &GeometryCell<Vector2>;
+    fn vector_cell(&self, access: ProtectedAccess) -> &SharedState<Vector2>;
     /// Length (`Magnitude`); `vector.magnitude()`.
     fn magnitude(&self) -> f64;
     /// Squared length (`SquareMagnitude`); `vector.square_magnitude()`.

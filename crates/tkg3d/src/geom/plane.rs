@@ -27,9 +27,9 @@ use super::surface::{
 };
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
-use rustycad_tkg2d::geom2d::cell::GeometryCell;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::elslib;
 use rustycad_tkmath::geom_abs::Shape;
@@ -46,7 +46,7 @@ struct PlaneState {
 /// A plane; `Handle::new(GeomPlane::new(frame))`.
 pub struct GeomPlane {
     parent: StandardTransient,
-    state: GeometryCell<PlaneState>,
+    state: SharedState<PlaneState>,
 }
 impl_transient!(
     GeomPlane,
@@ -71,7 +71,7 @@ impl GeomPlane {
     pub fn new(frame: Axis3) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(PlaneState { pos: frame }),
+            state: SharedState::new(PlaneState { pos: frame }),
         }
     }
     /// Plane from a gp plane (`Geom_Plane(gp_Pln)`); `GeomPlane::from_pln(plane)`.

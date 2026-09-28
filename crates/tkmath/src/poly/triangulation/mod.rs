@@ -23,9 +23,7 @@ mod bounds;
 mod deferred;
 use super::{
     ArrayOfNodes, ArrayOfUvNodes, MeshPurpose, Triangle, TriangulationParameters,
-    errors::{array_failure, in_member},
-    mesh_purpose,
-    shared_state::SharedState,
+    errors::in_member, mesh_purpose,
 };
 use crate::{
     bnd::BoundingBox3,
@@ -35,7 +33,7 @@ pub use deferred::DeferredTriangulation;
 use rustycad_tkernel::{
     ncollection::{Array1, Vec3},
     standard::{
-        Failure, Handle, StandardTransient,
+        Failure, Handle, SharedState, StandardTransient,
         dump::{self, DumpOutput},
     },
 };
@@ -102,8 +100,7 @@ impl Triangulation {
         const MEMBER: &str = "Poly_Triangulation::Poly_Triangulation";
         let mut fields = TriangulationFields {
             nodes: ArrayOfNodes::new(node_count(nb_nodes)).map_err(|e| in_member(MEMBER, e))?,
-            triangles: Array1::with_bounds(1, nb_triangles)
-                .map_err(|e| array_failure(MEMBER, e))?,
+            triangles: Array1::with_bounds(1, nb_triangles).map_err(|e| e.into_failure(MEMBER))?,
             ..TriangulationFields::default()
         };
         if has_uv_nodes {
@@ -113,7 +110,7 @@ impl Triangulation {
             fields
                 .normals
                 .resize_bounds(0, nb_nodes - 1, false)
-                .map_err(|e| array_failure(MEMBER, e))?;
+                .map_err(|e| e.into_failure(MEMBER))?;
         }
         Ok(Self::from_fields(fields))
     }

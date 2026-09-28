@@ -14,16 +14,15 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_Transformation.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2d_Transformation`: a shared gp_Trsf2d.
-use super::cell::GeometryCell;
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::gp::{Axis2d, Point2, Transform2, TransformForm, Vector2};
 
 /// A transient similarity of the plane; `Handle::new(Geom2dTransformation::default())`.
 #[derive(Default)]
 pub struct Geom2dTransformation {
     parent: StandardTransient,
-    state: GeometryCell<Transform2>,
+    state: SharedState<Transform2>,
 }
 impl_transient!(
     Geom2dTransformation,
@@ -42,7 +41,7 @@ impl Geom2dTransformation {
     pub fn new(transform: Transform2) -> Self {
         Self {
             parent: StandardTransient::default(),
-            state: GeometryCell::new(transform),
+            state: SharedState::new(transform),
         }
     }
     /// Point symmetry (`SetMirror(gp_Pnt2d)`); `t.set_mirror_point(p)`.
