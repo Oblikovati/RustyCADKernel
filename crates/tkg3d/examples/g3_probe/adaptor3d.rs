@@ -345,7 +345,7 @@ pub fn hstool_case(values: &[f64]) {
     show(tool::u_period(&s), real);
     show(tool::is_v_periodic(&s), flag);
     show(tool::v_period(&s), real);
-    for pair in uv.chunks_exact(2) {
+    for pair in uv.as_chunks::<2>().0 {
         tool_evaluations(&s, pair[0], pair[1]);
     }
     for x in [1e-7, 0.5] {
@@ -358,7 +358,7 @@ pub fn hstool_case(values: &[f64]) {
     tool_kinds(&s);
     show(tool::nb_samples_u(&s), int);
     show(tool::nb_samples_v(&s), int);
-    for pair in ranges.chunks_exact(2) {
+    for pair in ranges.as_chunks::<2>().0 {
         show(tool::nb_samples_u_range(&s, pair[0], pair[1]), int);
         show(tool::nb_samples_v_range(&s, pair[0], pair[1]), int);
     }

@@ -55394,6 +55394,998 @@
       "rust_item": "rustycad_tkernel::ncollection::HArray1OfReal::change_array1",
       "status": "implemented",
       "notes": "Ported for the double instantiation (TColStd_HArray1OfReal) as a transient whose array lives in a standard::SharedState; members take &self so an edit through one handle reaches all holders. Array1() returns a copy and ChangeArray1() lends the array to a closure under the write lock."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::default",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::with_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface(const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::with_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::shallow_copy",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Load(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::load_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Load(const occ::handle<Adaptor2d_Curve2d>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::load_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Load(const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::load",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::GetCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::get_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::GetSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::get_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::ChangeCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::change_curve",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::ChangeSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::change_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::FirstParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::first_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::LastParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::last_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::NbIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::nb_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Intervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Trim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::IsClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::is_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::IsPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::is_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Period",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::get_type",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Line",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::line",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Circle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::circle",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Ellipse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::ellipse",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Hyperbola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::hyperbola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Parabola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::parabola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Degree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::IsRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::is_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::NbPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::nb_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::NbKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::nb_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::bezier",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_CurveOnSurface::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dCurveOnSurface::bspline",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the curve and surfaces without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_cos, a3_cos_load)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::FirstUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::first_u_parameter",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::FirstVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::first_v_parameter",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::LastUParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::last_u_parameter",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::LastVParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::last_v_parameter",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::NbUIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::nb_u_intervals",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::NbVIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::nb_v_intervals",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::UIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::u_intervals",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::VIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::v_intervals",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::UTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::u_trim",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::VTrim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::v_trim",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::is_u_closed",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::is_v_closed",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::is_u_periodic",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::UPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::u_period",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::is_v_periodic",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::VPeriod",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::v_period",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::Value",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::value",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::D0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::d0",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::d1",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::d2",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::D3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::d3",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::DN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::dn",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::UResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::u_resolution",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::VResolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::v_resolution",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::get_type",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::Plane",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::plane",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::Cylinder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::cylinder",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::Cone",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::cone",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::Torus",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::torus",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::Sphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::sphere",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::bezier",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::bspline",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::AxeOfRevolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::axe_of_revolution",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::Direction",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::direction",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::BasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::basis_curve",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::BasisSurface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::basis_surface",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::OffsetValue",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::offset_value",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::IsSurfG1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::is_surf_g1",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::NbSamplesU(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::nb_samples_u",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::NbSamplesV(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::nb_samples_v",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::NbSamplesU(const occ::handle<Adaptor3d_Surface>&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::nb_samples_u_range",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_HSurfaceTool::NbSamplesV(const occ::handle<Adaptor3d_Surface>&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_HSurfaceTool.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::h_surface_tool::nb_samples_v_range",
+      "status": "implemented",
+      "notes": "Static-only class as free functions of the module h_surface_tool taking &Handle<dyn Adaptor3dSurface>; output references become returned records; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_hstool)."
+    },
+    {
+      "upstream_id": "Adaptor3d_InterFunc(const occ::handle<Adaptor2d_Curve2d>&,double,int)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_InterFunc.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dInterFunc::new",
+      "status": "implemented",
+      "notes": "math_FunctionWithDerivative as the tkmath Function/FunctionWithDerivative traits; a curve failure is kept (take_failure) and reported as false because the traits cannot carry it; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_interfunc)."
+    },
+    {
+      "upstream_id": "Adaptor3d_InterFunc::Value",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_InterFunc.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dInterFunc::value",
+      "status": "implemented",
+      "notes": "math_FunctionWithDerivative as the tkmath Function/FunctionWithDerivative traits; a curve failure is kept (take_failure) and reported as false because the traits cannot carry it; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_interfunc)."
+    },
+    {
+      "upstream_id": "Adaptor3d_InterFunc::Derivative",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_InterFunc.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dInterFunc::derivative",
+      "status": "implemented",
+      "notes": "math_FunctionWithDerivative as the tkmath Function/FunctionWithDerivative traits; a curve failure is kept (take_failure) and reported as false because the traits cannot carry it; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_interfunc)."
+    },
+    {
+      "upstream_id": "Adaptor3d_InterFunc::Values",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_InterFunc.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dInterFunc::values",
+      "status": "implemented",
+      "notes": "math_FunctionWithDerivative as the tkmath Function/FunctionWithDerivative traits; a curve failure is kept (take_failure) and reported as false because the traits cannot carry it; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_interfunc)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve()",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::default",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::with_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve(const occ::handle<Adaptor3d_Surface>&,GeomAbs_IsoType,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::with_iso",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve(const occ::handle<Adaptor3d_Surface>&,GeomAbs_IsoType,double,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::with_iso_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::ShallowCopy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::shallow_copy",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Load(const occ::handle<Adaptor3d_Surface>&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::load_surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Load(GeomAbs_IsoType,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::load_iso",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Load(GeomAbs_IsoType,double,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::load_iso_range",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Surface",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::surface",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Iso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::iso",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Parameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::FirstParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::first_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::LastParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::last_parameter",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Continuity",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::continuity",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::NbIntervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::nb_intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Intervals",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::intervals",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Trim",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::trim",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::IsClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::is_closed",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::IsPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::is_periodic",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Period",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::period",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::eval_d0",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::eval_d1",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::eval_d2",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::eval_d3",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::eval_dn",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Resolution",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::resolution",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::GetType",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::get_type",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Line",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::line",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Circle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::circle",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Ellipse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::ellipse",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Hyperbola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::hyperbola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Parabola",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::parabola",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Degree",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::degree",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::IsRational",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::is_rational",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::NbPoles",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::nb_poles",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::NbKnots",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::nb_knots",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::Bezier",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::bezier",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
+    },
+    {
+      "upstream_id": "Adaptor3d_IsoCurve::BSpline",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Adaptor3d/Adaptor3d_IsoCurve.hxx",
+      "rust_item": "rustycad_tkg3d::adaptor3d::Adaptor3dIsoCurve::bspline",
+      "status": "implemented",
+      "notes": "Concrete adaptor implementing the Adaptor3dCurve trait (docs/geom-design.md); state behind one lock, members read a snapshot and call the surface without it, native exceptions returned as Failure values; compared with OCCT by tools/verify_tkg3d_numeric.py (a3_iso)."
     }
   ],
   "tests": [
