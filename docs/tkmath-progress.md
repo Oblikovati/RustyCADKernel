@@ -1,8 +1,8 @@
 # TKMath port status
 
 **In progress; toolkit acceptance is not complete.** The source inventory contains
-120 GoogleTest files and 2023 declaration candidates. Seventy-four complete source suites
-currently account for 1,419 mapped declarations, with matching native and Rust passes.
+120 GoogleTest files and 2023 declaration candidates. Eighty complete source suites
+currently account for 1,479 mapped declarations, with matching native and Rust passes.
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -79,6 +79,7 @@ currently account for 1,419 mapped declarations, with matching native and Rust p
 | MathInteg_New_Test.cxx | mathinteg_new | 24 |
 | MathInteg_Test.cxx | mathinteg | 60 |
 | MathSys_Comparison_Test.cxx | mathsys_comparison | 24 |
+| CSLib_Test.cxx | cslib | 36 |
 
 Run `cargo test -p rustycad-tkmath --all-features` for Rust tests and
 `python3 tools/verify_toolkit.py TKMath --jobs 4` for unchanged native suites,
@@ -373,3 +374,36 @@ seed fitness re-evaluation, restart counters and budget exhaustion. The 382
 native differential requests match result fields, statistics and complete
 callback traces. They include clamp, reflect and wrap boundary policies,
 seeded and random initialization, callback failures and invalid seeds.
+
+### CSLib surface normals and 2D classification
+
+All 36 CSLib declarations pass in both kernels, including the eight-thread lazy
+grid activation test, which uses scoped `std::thread`s over one shared
+classifier. The 2,528 CSLib differential requests (19,383 in the whole corpus)
+match exactly. They cover all normal overloads and statuses, singular points up
+to degree 26, normal derivatives, `NormalPolyDef`, and `Class2d` across
+containers, extreme bounds, special tolerances, the grid, copies and moves.
+
+C++ output references become returned values. `normal` is `None` exactly when
+OCCT leaves its `gp_Dir&` untouched. Singular-point orders are always returned,
+as OCCT always writes them. The lazy grid keeps OCCT's atomic state machine. The
+cells are published through a `OnceLock` before the release store of `Ready`.
+Allocation failure uses `try_reserve` and resets to `NotBuilt`, as natively.
+
+The singular-point sign analysis keeps two native quirks. A first retained
+interval at index 0 leaves `aFirst` at 0. The next interval then restarts the
+comparison, which can hide a sign change. `NormalPolyDef` returns 0 when
+|cos X| or |sin X| <= RealSmall. A midpoint sample at 0 or ±π/2 is therefore
+0, which hides a sign change. When 0 is the final sample, OCCT picks -Vk0.
+`cslib_behavior.rs` pins both cases; for example, F = cos X gives `Defined`
+with -Vk0 at an interior point.
+
+There are two deliberate deviations. `NormalPolyDef::new` raises OCCT's
+`PLib::Bin` Standard_OutOfRange for degrees above 25 at construction, because
+the `bool` evaluation callbacks cannot carry an exception. OCCT raises it on the
+first evaluation that is not at a singular angle, so the corpus uses regular
+angles only for degree 26. Degrees below -1 fail with Standard_RangeError. OCCT
+passes them to an allocator-dependent NCollection_Array1 size. `PLib::Bin` and
+the Precision constants are small private copies (`cslib/binomial.rs`,
+`cslib/precision.rs`). They must be replaced by the PLib and Precision ports
+when those merge.
