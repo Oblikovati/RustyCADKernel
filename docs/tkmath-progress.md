@@ -666,3 +666,48 @@ The port keeps these native results:
   fallback (for example `Z` for `(X, X)`), so the frame is not orthogonal.
 - `gp::ZOX()` is `gp_Ax2(origin, D::Y)`, so its X direction is Z and its Y direction
   is X.
+
+### Spatial gp transformations and quaternions (API completion)
+
+This work adds no upstream suite. It completes the public API of gp_XYZ (`Xyz`),
+gp_Mat (`Matrix3`), gp_Trsf (`Transform3`), gp_GTrsf (`GeneralTransform3`),
+gp_Quaternion, gp_QuaternionNLerp and gp_QuaternionSLerp. `porting/parity.json` maps
+every public member. Supplemental tests are in `gp_trsf3d_behavior` and
+`gp_quaternion_api_behavior`. The spatial gp probe sends 3,100 differential requests
+(`gp3d_trsf`, `gp3d_gtrsf`, `gp3d_quat`). They cover every gp_Trsf form, the
+ConstructionError and OutOfRange raises, and all match the native bits.
+
+The port keeps these native results:
+
+- `gp_Trsf::IsNegative` tests the sign of the scale factor. `gp_Trsf2d::IsNegative`
+  tests the determinant of the unscaled matrix. Thus a 3D point mirror is negative and
+  a planar point mirror is not.
+- `SetMirror(gp_Ax1)` stores the half-turn about the axis with scale 1 and form
+  Ax1Mirror. `gp_Trsf(const gp_Trsf2d&)` converts a planar axis mirror (scale -1) to
+  this form by negating the matrix, so its zero entries become -0.
+- `SetScale` writes the form, the scale and the offset before it raises for
+  `|s| <= Resolution`. `SetValues` raises only for `|det| < Resolution`; if the
+  orthogonalization then raises, the scale, the Compound form and the divided matrix
+  stay assigned.
+- `SetTranslationPart` treats a squared length below Resolution as null.
+  `SetScaleFactor` and `SetRotationPart` re-derive the form with the native switch
+  tables, for example a scale of -1 on an identity gives PntMirror.
+- `InitFromJson` applies the parsed `Location` through `SetTranslation` before it reads
+  the matrix, so a later failure leaves a translation form. Native code stores a
+  `shape` outside gp_TrsfForm as-is; Rust returns an OutOfRange error.
+- `gp_GTrsf::Power(n)` does not invert first for `n < -1`. A general (Other) form
+  returns the power of `|n|`. A similarity form calls `gp_Trsf::Power(n)`, which
+  inverts. `gp_GTrsf::Multiply` and `PreMultiply` never raise, unlike
+  `gp_GTrsf2d::Multiply`.
+- `gp_GTrsf::SetForm` divides by the signed cube root of the determinant and compares
+  `N^T N - I` with the literal 1e-12. It does not change the scale, so a scaled
+  orthogonal matrix becomes Compound with scale 1.
+- `gp_GTrsf::SetValue` folds the scale into the matrix before it writes a vectorial
+  cell and sets the form to Other; a write to column 4 keeps the form.
+- `gp_QuaternionSLerp::InitFromUnit` clamps the cosine to 0.9999, so equal ends still
+  have a finite `1 / sin(omega)`. `gp_Quaternion::Inverted` has no zero check.
+
+Deliberate Rust deviations: `gp_Trsf::DumpJson` has no depth argument (the native one
+is not used). The `const gp_Trsf&` and `const gp_GTrsf&` operands of the Rust
+`multiply` and `pre_multiply` are copies, so a self-product has no aliasing effect.
+gp_XYZ, gp_Mat and gp_Quaternion operators are the `std::ops` traits.

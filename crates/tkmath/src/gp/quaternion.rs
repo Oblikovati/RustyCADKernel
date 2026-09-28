@@ -21,8 +21,12 @@
 use super::{Failure, Vector3};
 mod sequence;
 pub use sequence::EulerSequence;
+mod algebra;
 mod euler;
+mod interpolation;
 mod matrix;
+mod rotation;
+pub use interpolation::{QuaternionNLerp, QuaternionSLerp};
 /// Quaternion components stored as x,y,z,w; `Quaternion::new(0.0,0.0,0.0,1.0)`.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Quaternion {

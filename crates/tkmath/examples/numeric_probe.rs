@@ -264,6 +264,7 @@ mod bounds_probe;
 mod bvh_probe;
 mod gp_planar_probe;
 mod gp_standard_probe;
+mod gp_transform_probe;
 mod mathpoly_utils_probe;
 mod ncollection_probe;
 mod quaternion_probe;
@@ -384,6 +385,9 @@ fn main() {
             "mathpoly_utils_long" => mathpoly_utils_probe::mathpoly_utils_long_case(&values),
             "ncollection_vec" => ncollection_probe::ncollection_vec_case(&values),
             "ncollection_mat" => ncollection_probe::ncollection_mat_case(&values),
+            "gp3d_trsf" => gp_transform_probe::gp3_trsf_case(&values),
+            "gp3d_gtrsf" => gp_transform_probe::gp3_gtrsf_case(&values),
+            "gp3d_quat" => gp_transform_probe::gp3_quat_case(&values),
             "mathpoly_utils_complex" => mathpoly_utils_probe::mathpoly_utils_complex_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }

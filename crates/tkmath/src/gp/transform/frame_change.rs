@@ -11,25 +11,63 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of FoundationClasses/TKMath/gp/gp_Trsf.cxx SetTransformation(gp_Ax3) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of FoundationClasses/TKMath/gp/gp_Trsf.cxx SetTransformation/SetDisplacement
+// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 use super::super::{Axis3, Failure, Matrix3, Transform3, TransformForm, Xyz};
+/// The frame directions as matrix rows (`SetRows(X, Y, Z)`).
+fn frame_rows_matrix(frame: Axis3) -> Matrix3 {
+    let mut matrix = Matrix3::default();
+    matrix.set_rows(
+        Xyz::from(frame.x_direction()),
+        Xyz::from(frame.y_direction()),
+        Xyz::from(frame.direction()),
+    );
+    matrix
+}
+/// The frame directions as matrix columns (`gp_Mat(X, Y, Z)`).
+fn frame_columns_matrix(frame: Axis3) -> Matrix3 {
+    Matrix3::from_columns(
+        frame.x_direction().into(),
+        frame.y_direction().into(),
+        frame.direction().into(),
+    )
+}
 impl Transform3 {
     /// Maps global coordinates into a frame's local system (gp_Trsf::SetTransformation(gp_Ax3));
     /// `Transform3::transformation_to(frame)`.
     pub fn transformation_to(frame: Axis3) -> Self {
-        let mut matrix = Matrix3::default();
-        matrix.set_rows(
-            Xyz::from(frame.x_direction()),
-            Xyz::from(frame.y_direction()),
-            Xyz::from(frame.direction()),
-        );
+        let matrix = frame_rows_matrix(frame);
         let offset = matrix.apply(frame.location().xyz()).reversed();
         Self {
             form: TransformForm::Compound,
             matrix,
             offset,
             scale: 1.0,
+        }
+    }
+    /// Maps coordinates in `from` to coordinates in `to` (gp_Trsf::SetTransformation(A1,A2));
+    /// `Transform3::transformation_between(from,to)`.
+    pub fn transformation_between(from: Axis3, to: Axis3) -> Self {
+        let mut transform = Self::transformation_to(to);
+        let from_matrix = frame_columns_matrix(from);
+        transform.offset += transform.matrix.apply(from.location().xyz());
+        transform.matrix *= from_matrix;
+        transform
+    }
+    /// Moves the `from` frame onto the `to` frame (gp_Trsf::SetDisplacement) using native
+    /// multiplication order; `Transform3::displacement(from,to)`.
+    pub fn displacement(from: Axis3, to: Axis3) -> Self {
+        let mut matrix = frame_columns_matrix(to);
+        let inverse = frame_columns_matrix(from).transposed();
+        let from_origin = inverse.apply(from.location().xyz()).reversed();
+        let offset = to.location().xyz() + matrix.apply(from_origin);
+        matrix *= inverse;
+        Self {
+            form: TransformForm::Compound,
+            scale: 1.0,
+            matrix,
+            offset,
         }
     }
     /// Reads a scaled matrix coefficient or the translation (column 4) by one-based index;

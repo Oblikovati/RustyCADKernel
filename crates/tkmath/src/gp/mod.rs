@@ -69,7 +69,7 @@ pub use sphere::Sphere3;
 pub use torus::Torus3;
 
 mod quaternion;
-pub use quaternion::{EulerSequence, Quaternion};
+pub use quaternion::{EulerSequence, Quaternion, QuaternionNLerp, QuaternionSLerp};
 mod standard_frames;
 pub use standard_frames::{
     dx, dx2d, dy, dy2d, dz, origin, origin2d, ox, ox2d, oy, oy2d, oz, resolution, xoy, yoz, zox,

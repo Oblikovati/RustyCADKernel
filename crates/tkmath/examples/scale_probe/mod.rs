@@ -63,6 +63,8 @@ fn scale_result(v: &[f64]) -> Result<(), rustycad_tkernel::standard::Failure> {
 
 pub(super) fn scale_case(v: &[f64]) {
     if let Err(failure) = scale_result(v) {
-        println!("{} {}", failure.exception_type(), failure.message());
+        // Only the first word is compared: the Rust message adds the offending value.
+        let native = failure.message().split(' ').next().unwrap_or_default();
+        println!("{} {native}", failure.exception_type());
     }
 }
