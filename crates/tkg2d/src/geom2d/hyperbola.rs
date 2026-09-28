@@ -228,8 +228,8 @@ impl Geom2dCurve for Geom2dHyperbola {
     fn reverse(&self) -> Result<(), Failure> {
         reverse_conic_position(&mut self.state.write().pos)
     }
-    fn reversed_parameter(&self, u: f64) -> f64 {
-        -u
+    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(-u)
     }
     fn first_parameter(&self) -> f64 {
         -precision::infinite()

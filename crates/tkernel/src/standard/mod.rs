@@ -10,7 +10,7 @@ pub use strtod::strtod;
 
 pub mod character;
 
-pub(crate) mod hashing;
+pub mod hashing;
 
 mod handle;
 mod runtime_type;

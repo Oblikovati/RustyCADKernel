@@ -89,7 +89,7 @@ fn offset_properties_follow_the_basis() {
         curve.is_cn(-1).unwrap_err().exception_type(),
         "Standard_RangeError"
     );
-    assert_eq!(curve.reversed_parameter(1.0), 2.0 * PI - 1.0);
+    assert_eq!(curve.reversed_parameter(1.0).unwrap(), 2.0 * PI - 1.0);
     let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::from_point(
         Point2::new(0.0, 0.0),
         Direction2::new(1.0, 0.0).unwrap(),

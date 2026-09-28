@@ -51,13 +51,14 @@ pub fn no_such_object(message: &str) -> Failure {
 pub fn dimension(message: &str) -> Failure {
     Failure::with_type("Standard_DimensionError", message, "")
 }
+/// `Standard_NotImplemented` (a Standard_ProgramError natively);
+/// `not_implemented("Geom2dEval_SineWaveCurve::Reverse")`.
+pub fn not_implemented(message: &str) -> Failure {
+    Failure::with_type("Standard_NotImplemented", message, "")
+}
 /// `Standard_ProgramError`; `program("SetEvalRepresentation: null Representation")`.
 pub fn program(message: &str) -> Failure {
     Failure::with_type("Standard_ProgramError", message, "")
-}
-/// `Standard_NotImplemented`; `not_implemented("Adaptor2d_Curve2d::Period")`.
-pub fn not_implemented(message: &str) -> Failure {
-    Failure::with_type("Standard_NotImplemented", message, "")
 }
 /// `Standard_TypeMismatch`; `type_mismatch("Adaptor2d_OffsetCurve::IntervalContinuity")`.
 pub fn type_mismatch(message: &str) -> Failure {

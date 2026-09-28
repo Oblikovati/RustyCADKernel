@@ -10,6 +10,48 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
+// Rust translation of FoundationClasses/TKernel/Standard/Standard_HashUtils.hxx/.lxx and Standard_CStringHasher.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+
+//! `opencascade::hashBytes` and `Standard_CStringHasher`: OCCT's native-width
+//! MurmurHash/FNV hashing, whose values decide the iteration order of hashed containers.
+
+// `MurmurHash::optimalSeed()` of each native size_t width.
+const MURMUR_SEED_64: u64 = 0xA329_F1D3_A586;
+const MURMUR_SEED_32: u32 = 0xc70f_6907;
+
+/// `opencascade::hashBytes(theKey, theLen)` (and `opencascade::hash(theValue)` over the
+/// value's native bytes): MurmurHash64A on 64-bit targets, MurmurHash2A otherwise;
+/// `hash_bytes(&42_i32.to_ne_bytes())`.
+pub fn hash_bytes(bytes: &[u8]) -> usize {
+    if usize::BITS == 64 {
+        murmur64(bytes, MURMUR_SEED_64) as usize
+    } else {
+        murmur32(bytes, MURMUR_SEED_32) as usize
+    }
+}
+
+/// `Standard_CStringHasher::operator()(const char*)`: FNV-1a over signed chars below four
+/// bytes, [`hash_bytes`] otherwise; `c_string_hash(b"Geom2d_Line")`.
+pub fn c_string_hash(text: &[u8]) -> usize {
+    if text.len() < 4 {
+        return short_fnv_hash(text);
+    }
+    hash_bytes(text)
+}
+
+// FNVHash64A/FNVHash1A with the optimal seeds; `char` is signed on the pinned profile,
+// so each byte is sign-extended before the xor.
+fn short_fnv_hash(bytes: &[u8]) -> usize {
+    let (mut hash, prime) = if usize::BITS == 64 {
+        (14695981039346656037_u64, 1099511628211_u64)
+    } else {
+        (2166136261, 16777619)
+    };
+    for &byte in bytes {
+        hash = (hash ^ (byte as i8 as i64 as u64)).wrapping_mul(prime);
+    }
+    hash as usize
+}
 
 fn mix64(value: u64) -> u64 {
     value ^ (value >> 47)

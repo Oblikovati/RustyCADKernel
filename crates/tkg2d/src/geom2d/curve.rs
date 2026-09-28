@@ -61,9 +61,11 @@ pub struct Geom2dCurveD3 {
 pub trait Geom2dCurve: Geom2dGeometry {
     /// Reverse the parameterization (`Reverse`); `curve.reverse()?`.
     fn reverse(&self) -> Result<(), Failure>;
-    /// Parameter on the reversed curve of the point of parameter `u` (`ReversedParameter`);
-    /// `curve.reversed_parameter(0.25)`.
-    fn reversed_parameter(&self, u: f64) -> f64;
+    /// Parameter on the reversed curve of the point of parameter `u` (`ReversedParameter`).
+    ///
+    /// Virtual, and the Geom2dEval curves raise Standard_NotImplemented, so it returns
+    /// `Result` like the evaluators; `curve.reversed_parameter(0.25)?`.
+    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure>;
     /// Parameter on the curve transformed by `transform` (`TransformedParameter`); `u` by default;
     /// `curve.transformed_parameter(0.5, transform)`.
     fn transformed_parameter(&self, u: f64, _transform: Transform2) -> f64 {

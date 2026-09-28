@@ -84,8 +84,9 @@ native exception type (`Geom2d_UndefinedDerivative`, `Geom2d_UndefinedValue`,
 `Standard_DomainError`, `Standard_NoSuchObject`...) and a message with the
 offending value. Checks that OCCT writes with `*_Raise_if` stay active, because
 the pinned oracle build (RelWithDebInfo) does not define `No_Exception`. The
-virtual evaluators (`EvalD0`...`EvalDN`) always return `Result`, because an
-override can fail even when the base class cannot. For the same reason `Copy`
+virtual evaluators (`EvalD0`...`EvalDN`) and `ReversedParameter` always return
+`Result`, because an override can fail even when the base class cannot (the
+Geom2dEval curves raise Standard_NotImplemented from `ReversedParameter`). For the same reason `Copy`
 returns `Result`: a trimmed curve re-trims its bounds when it is copied.
 
 ## 5. Evaluation caches
@@ -105,8 +106,7 @@ is filled under the write lock.
 optional `Geom2dEval_RepCurveDesc` that redirects evaluation to another curve.
 The descriptor and `Geom2dEval_RepUtils.pxx` are header-only parts of the
 `Geom2dEval` package in TKG2d that `Geom2d` includes. They are ported in
-`geom2d_eval::rep_curve_desc` with the Geom2d classes, and the remainder of
-`Geom2dEval` stays a later work item.
+`geom2d_eval::rep_curve_desc` with the Geom2d classes.
 
 ## 7. Adaptors
 
@@ -123,3 +123,12 @@ of Bezier and B-spline curves (`CurveDataVariant`) in its locked state. The nati
 evaluators are `const` and fill the mutable cache; the port takes the write lock for
 `EvalD0` to `EvalD3` and a read lock elsewhere. An offset curve holds a nested
 adaptor on its basis, which is a separate object with its own lock.
+## 8. Eval curves and hashers
+
+The Geom2dEval curves (`Geom2dEvalSineWaveCurve`, `Geom2dEvalTBezierCurve`...) follow
+the same class mapping, but no mutator succeeds on them (`Reverse` and `Transform`
+raise Standard_NotImplemented), so they keep plain fields without a
+`GeometryCell`. The Geom2dHash structs keep their public `CompTolerance` and
+`HashTolerance` as fields; `operator()(key)` becomes `hash` and
+`operator()(key, key)` becomes `equal`, and the value and curve hashers also implement
+the NCollection `HashPolicy`, so they can drive the ported hashed containers.

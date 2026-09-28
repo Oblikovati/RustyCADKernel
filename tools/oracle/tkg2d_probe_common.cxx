@@ -40,8 +40,10 @@ gp_Trsf2d g2_trsf(G2Reader& r){
 // 0 line P D | 1 circle P XD sense R | 2 ellipse P XD sense A B | 3 hyperbola P XD sense A B |
 // 4 parabola P XD sense F | 5 bezier rational n (x y w)*n | 6 bspline rational periodic degree
 // nk (k m)*nk np (x y w)*np | 7 trimmed u1 u2 sense adjust <curve> | 8 offset d notcheck <curve> |
-// 9 circle on a gp_Ax22d P XD YD R | 10 parabola from directrix D F.
+// 9 circle on a gp_Ax22d P XD YD R | 10 parabola from directrix D F |
+// 11..16 Geom2dEval curves (tkg2d_probe_eval.cxx).
 occ::handle<Geom2d_Curve> g2_curve(G2Reader& r);
+occ::handle<Geom2d_Curve> g2_eval_curve(int kind,G2Reader& r);
 occ::handle<Geom2d_Curve> g2_bezier(G2Reader& r){
  bool rational=r.flag();int n=r.integer();NCollection_Array1<gp_Pnt2d> p(1,n);NCollection_Array1<double> w(1,n);
  for(int i=1;i<=n;++i){p(i)=r.pnt();w(i)=r.real();}
@@ -67,6 +69,7 @@ occ::handle<Geom2d_Curve> g2_curve(G2Reader& r){
  if(kind==8){double d=r.real();bool nocheck=r.flag();occ::handle<Geom2d_Curve> c=g2_curve(r);return new Geom2d_OffsetCurve(c,d,nocheck);}
  if(kind==9){gp_Pnt2d p=r.pnt();gp_Dir2d x=r.dir();gp_Dir2d y=r.dir();return new Geom2d_Circle(gp_Ax22d(p,x,y),r.real());}
  if(kind==10){gp_Ax2d d=r.ax();return new Geom2d_Parabola(d,r.pnt());}
+ if(kind>=11&&kind<=16)return g2_eval_curve(kind,r);
  throw Standard_ProgramError("unknown curve kind");
 }
 // The curve-level summary: range, closure, periodicity, continuity, then per parameter
@@ -80,6 +83,6 @@ void g2_summary(const occ::handle<Geom2d_Curve>& c,const std::vector<double>& pa
   G2_TRY(auto r=c->EvalD2(u);g2_pnt(r.Point);g2_vec(r.D1);g2_vec(r.D2));
   G2_TRY(auto r=c->EvalD3(u);g2_pnt(r.Point);g2_vec(r.D1);g2_vec(r.D2);g2_vec(r.D3));
   for(int n=0;n<=5;++n)G2_TRY(g2_vec(c->EvalDN(u,n)));
-  G2_TRY(g2_pnt(c->Value(u)));g2_real(c->ReversedParameter(u));
+  G2_TRY(g2_pnt(c->Value(u)));G2_TRY(g2_real(c->ReversedParameter(u)));
  }
 }

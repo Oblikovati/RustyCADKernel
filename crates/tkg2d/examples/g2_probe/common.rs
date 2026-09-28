@@ -218,6 +218,7 @@ pub fn curve(r: &mut Reader) -> Result<Handle<dyn Geom2dCurve>, Failure> {
             let d = r.ax();
             Ok(Handle::new(Geom2dParabola::from_directrix(d, r.pnt())?).cast())
         }
+        11..=16 => super::eval::curve(kind, r),
         _ => panic!("unknown curve kind {kind}"),
     }
 }
@@ -274,5 +275,5 @@ fn evaluations(c: &dyn Geom2dCurve, u: f64) {
         show(c.eval_dn(u, n), vec);
     }
     show(c.value(u), pnt);
-    real(c.reversed_parameter(u));
+    show(c.reversed_parameter(u), real);
 }

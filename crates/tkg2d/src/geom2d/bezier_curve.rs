@@ -284,8 +284,8 @@ impl Geom2dCurve for Geom2dBezierCurve {
         self.state.write().reverse();
         Ok(())
     }
-    fn reversed_parameter(&self, u: f64) -> f64 {
-        1. - u
+    fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
+        Ok(1. - u)
     }
     fn first_parameter(&self) -> f64 {
         0.0
