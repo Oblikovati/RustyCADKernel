@@ -49,7 +49,12 @@ fn set_up() -> Fixture {
 }
 
 fn frame(origin: Point3, main: StandardDirection3, x: StandardDirection3) -> Axis3 {
-    Axis3::new(origin, Direction3::from_standard(main), Direction3::from_standard(x)).unwrap()
+    Axis3::new(
+        origin,
+        Direction3::from_standard(main),
+        Direction3::from_standard(x),
+    )
+    .unwrap()
 }
 
 #[test]
@@ -89,12 +94,18 @@ fn IntAna_IntQuadQuad_Test__NextCurveBoundaryConditions() {
     let an_intersector = IntQuadQuad::cylinder(f.my_cylinder1, &a_sphere_quad, 1e-7).unwrap();
     assert!(an_intersector.is_done());
     assert_eq!(
-        an_intersector.has_next_curve(0).unwrap_err().exception_type(),
+        an_intersector
+            .has_next_curve(0)
+            .unwrap_err()
+            .exception_type(),
         "Standard_OutOfRange"
     );
     let past = an_intersector.nb_curve().unwrap() + 1;
     assert_eq!(
-        an_intersector.has_next_curve(past).unwrap_err().exception_type(),
+        an_intersector
+            .has_next_curve(past)
+            .unwrap_err()
+            .exception_type(),
         "Standard_OutOfRange"
     );
     for i in 1..=an_intersector.nb_curve().unwrap() {
@@ -119,7 +130,11 @@ fn IntAna_IntQuadQuad_Test__ConnectedCurvesScenario() {
     let a_sphere2_quad = Quadric::from_sphere(a_sphere2);
     let mut an_intersector = IntQuadQuad::new();
     an_intersector
-        .perform_cylinder(Cylinder3::new(an_axis1, 2.0).unwrap(), &a_sphere2_quad, 1e-7)
+        .perform_cylinder(
+            Cylinder3::new(an_axis1, 2.0).unwrap(),
+            &a_sphere2_quad,
+            1e-7,
+        )
         .unwrap();
     assert!(an_intersector.is_done());
     assert!(!an_intersector.identical_elements().unwrap());
@@ -156,7 +171,11 @@ fn IntAna_IntQuadQuad_Test__IndexingConsistencyTest() {
 #[test]
 fn IntAna_IntQuadQuad_Test__CylinderCylinderNearTangent_CollapsesToSingleLine() {
     let _f = set_up();
-    let an_axis1 = frame(Point3::new(0.0, 0.0, 0.0), StandardDirection3::Z, StandardDirection3::X);
+    let an_axis1 = frame(
+        Point3::new(0.0, 0.0, 0.0),
+        StandardDirection3::Z,
+        StandardDirection3::X,
+    );
     let an_axis2 = frame(
         Point3::new(2.0 - 1.0e-9, 0.0, 0.0),
         StandardDirection3::Z,
@@ -173,8 +192,16 @@ fn IntAna_IntQuadQuad_Test__CylinderCylinderNearTangent_CollapsesToSingleLine() 
 #[test]
 fn IntAna_IntQuadQuad_Test__CylinderCylinderNonTangent_HasTwoLines() {
     let _f = set_up();
-    let an_axis1 = frame(Point3::new(0.0, 0.0, 0.0), StandardDirection3::Z, StandardDirection3::X);
-    let an_axis2 = frame(Point3::new(1.8, 0.0, 0.0), StandardDirection3::Z, StandardDirection3::X);
+    let an_axis1 = frame(
+        Point3::new(0.0, 0.0, 0.0),
+        StandardDirection3::Z,
+        StandardDirection3::X,
+    );
+    let an_axis2 = frame(
+        Point3::new(1.8, 0.0, 0.0),
+        StandardDirection3::Z,
+        StandardDirection3::X,
+    );
     let a_cyl1 = Cylinder3::new(an_axis1, 1.0).unwrap();
     let a_cyl2 = Cylinder3::new(an_axis2, 1.0).unwrap();
     let an_inter = QuadQuadGeo::cylinders(a_cyl1, a_cyl2, 1.0e-7).unwrap();
@@ -189,8 +216,16 @@ fn IntAna_IntQuadQuad_Test__CylinderCylinderSkewExternallyTangent_HasPoint() {
     let a_r1 = 3.0;
     let a_r2 = 2.0;
     let a_dist = a_r1 + a_r2;
-    let an_axis1 = frame(Point3::new(0.0, 0.0, 0.0), StandardDirection3::Z, StandardDirection3::X);
-    let an_axis2 = frame(Point3::new(0.0, a_dist, 0.0), StandardDirection3::X, StandardDirection3::Y);
+    let an_axis1 = frame(
+        Point3::new(0.0, 0.0, 0.0),
+        StandardDirection3::Z,
+        StandardDirection3::X,
+    );
+    let an_axis2 = frame(
+        Point3::new(0.0, a_dist, 0.0),
+        StandardDirection3::X,
+        StandardDirection3::Y,
+    );
     let a_cyl1 = Cylinder3::new(an_axis1, a_r1).unwrap();
     let a_cyl2 = Cylinder3::new(an_axis2, a_r2).unwrap();
     let an_inter = QuadQuadGeo::cylinders(a_cyl1, a_cyl2, 1.0e-7).unwrap();
@@ -238,7 +273,10 @@ fn IntAna2d_AnaIntersectionTest__ModDataBug_24375_NearlyCoincidentCircleParamete
     )
     .unwrap();
     let a_circle2 = Circle2::from_x_axis(
-        Axis2d::new(Point2::new(10.00000000000001, 0.0), Direction2::new(1.0, 0.0).unwrap()),
+        Axis2d::new(
+            Point2::new(10.00000000000001, 0.0),
+            Direction2::new(1.0, 0.0).unwrap(),
+        ),
         100.0,
         true,
     )
