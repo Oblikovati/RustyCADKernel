@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 use super::gradient::perturbed_value;
-use super::{perturbations, save_finite};
+use super::{is_finite_vector, perturbed_pair, save_finite};
 use crate::math::{Matrix, MultipleVarFunction, Vector};
 fn diagonal(
     f: &mut impl MultipleVarFunction,
@@ -22,7 +22,7 @@ fn diagonal(
     step: f64,
 ) -> Option<f64> {
     let x: f64 = *point.at(index).unwrap();
-    let (minus, plus): (f64, f64) = perturbations(x, step * x.abs().max(1.0))?;
+    let (minus, plus): (f64, f64) = perturbed_pair(x, step * x.abs().max(1.0))?;
     let f_plus: f64 = perturbed_value(f, point, index, plus)?;
     let f_minus: f64 = perturbed_value(f, point, index, minus)?;
     let h_plus: f64 = plus - x;
@@ -49,8 +49,8 @@ fn mixed(
 ) -> Option<f64> {
     let xi: f64 = *point.at(indices[0]).unwrap();
     let xj: f64 = *point.at(indices[1]).unwrap();
-    let (mi, pi): (f64, f64) = perturbations(xi, step * xi.abs().max(1.0))?;
-    let (mj, pj): (f64, f64) = perturbations(xj, step * xj.abs().max(1.0))?;
+    let (mi, pi): (f64, f64) = perturbed_pair(xi, step * xi.abs().max(1.0))?;
+    let (mj, pj): (f64, f64) = perturbed_pair(xj, step * xj.abs().max(1.0))?;
     let pp: f64 = pair_sample(f, point, indices, [pi, pj])?;
     let pm: f64 = pair_sample(f, point, indices, [pi, mj])?;
     let mm: f64 = pair_sample(f, point, indices, [mi, mj])?;
@@ -103,7 +103,7 @@ pub fn numerical_hessian(
         || matrix.col_number() != point.length()
         || !step.is_finite()
         || step <= 0.0
-        || !point.values().iter().all(|v| v.is_finite())
+        || !is_finite_vector(point)
     {
         return false;
     }

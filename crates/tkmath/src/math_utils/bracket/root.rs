@@ -12,6 +12,7 @@
 // commercial license or contractual agreement.
 
 use super::{Function, Status, evaluate_finite, expansion};
+use crate::math_utils::utils::opposite_signs;
 /// Endpoint fields retain partial callback results; `BracketResult::default()`.
 #[derive(Debug, Clone)]
 pub struct BracketResult {
@@ -63,10 +64,7 @@ impl BracketResult {
         self.has_fb
     }
     fn finish(&mut self) -> bool {
-        if self.fa != 0.0
-            && self.fb != 0.0
-            && self.fa.is_sign_negative() == self.fb.is_sign_negative()
-        {
+        if !opposite_signs(self.fa, self.fb) {
             return false;
         }
         if self.a > self.b {

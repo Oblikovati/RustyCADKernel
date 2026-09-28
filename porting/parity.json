@@ -23530,6 +23530,1374 @@
       "rust_item": "rustycad_tkernel::ncollection::Lerp::interpolate",
       "status": "implemented",
       "notes": "Manual explicit member mapping; C++ output references become returned values, overloads take distinct Rust names or generic trait functions, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "MathUtils::BracketResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BracketResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Utils::EvaluateFinite(Function&,double,double&,MathUtils::Status&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::utils::evaluate_finite",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Utils::OppositeSigns(double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::utils::opposite_signs",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::BracketRoot(Function&,double,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::bracket_root",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::MinBracketOptions",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::MinBracketOptions",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Utils::Limited(double,const MinBracketOptions&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::utils::limited",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Utils::IsValid(const MinBracketOptions&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::utils::is_valid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::BracketMinimum(Function&,double,double,const MinBracketOptions&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::bracket_minimum",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::BracketMinimum(Function&,double,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Bracket.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::bracket_minimum_iterations",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON_FTOL_SQ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON_FTOL_SQ",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON_STEP_TOL_FACTOR",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON_STEP_TOL_FACTOR",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON_MAX_ITER",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON_MAX_ITER",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_SINGULAR_DET",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_SINGULAR_DET",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_CRITICAL_GRAD_SQ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_CRITICAL_GRAD_SQ",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_MAX_STEP_RATIO",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_MAX_STEP_RATIO",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_DOMAIN_EXT",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_DOMAIN_EXT",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_STAGNATION_RATIO",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_STAGNATION_RATIO",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_STAGNATION_COUNT",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_STAGNATION_COUNT",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_LINE_SEARCH_MAX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_LINE_SEARCH_MAX",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_SKIP_LINESEARCH_SQ",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_SKIP_LINESEARCH_SQ",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_STAGNATION_RELAX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_STAGNATION_RELAX",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_BACKTRACK_TRIGGER",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_BACKTRACK_TRIGGER",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_BACKTRACK_ACCEPT",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_BACKTRACK_ACCEPT",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_NEWTON2D_MAXITER_RELAX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NEWTON2D_MAXITER_RELAX",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_HESSIAN_DEGENERACY_REL",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::HESSIAN_DEGENERACY_REL",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_HESSIAN_DEGENERACY_ABS",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::HESSIAN_DEGENERACY_ABS",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_ARMIJO_C1",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::ARMIJO_C1",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Config",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Config",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Config()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "<rustycad_tkmath::math_utils::Config as Default>::default",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Config(double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Config::new",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Config::IsValid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Config::is_valid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::BoundedConfig",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BoundedConfig",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::BoundedConfig()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "<rustycad_tkmath::math_utils::BoundedConfig as Default>::default",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::BoundedConfig(double,double,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BoundedConfig::new",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::BoundedConfig::IsValid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::BoundedConfig::is_valid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::NDimConfig",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NDimConfig",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::NDimConfig()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "<rustycad_tkmath::math_utils::NDimConfig as Default>::default",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::NDimConfig(double,uint32_t,bool)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::NDimConfig::new",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IntegConfig",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegConfig",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IntegConfig()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "<rustycad_tkmath::math_utils::IntegConfig as Default>::default",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IntegConfig(double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegConfig::new",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IntegConfig::IsValid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegConfig::is_valid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinConfig",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinConfig",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinConfig()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "<rustycad_tkmath::math_utils::LinConfig as Default>::default",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinConfig::IsValid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Config.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinConfig::is_valid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsXConverged(double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_x_converged",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsFConverged(double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_f_converged",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsConverged(double,double,double,const Config&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_converged",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsMinConverged(double,double,double,double,const Config&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_min_converged",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsVectorConverged(const math_Vector&,const math_Vector&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_vector_converged",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsGradientConverged(const math_Vector&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_gradient_converged",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::InfinityNorm(const math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::infinity_norm",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::EuclideanNorm(const math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Convergence.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::euclidean_norm",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_EPSILON",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::EPSILON",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_ZERO_TOL",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::ZERO_TOL",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_PI",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::PI",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_2PI",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::TWO_PI",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_EULER_NUMBER",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::EULER_NUMBER",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_GOLDEN_RATIO",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::GOLDEN_RATIO",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_GOLDEN_SECTION",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::GOLDEN_SECTION",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Clamp(double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::clamp",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsZero(double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_zero",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsEqual(double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_equal",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsWithinTolerance(double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_within_tolerance",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::SafeDiv(double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::safe_div",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Sign(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::sign",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::SignTransfer(double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::sign_transfer",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Sqr(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::square",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Cube(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::cube",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::CubeRoot(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::cube_root",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IsFinite(double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::is_finite",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::ComputeScaleFactor(const double*,size_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::compute_scale_factor",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::DotProduct(const math_Vector&,const math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::dot_product",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::VectorNorm(const math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::vector_norm",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Norm(const math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::norm",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Norm2(const math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::norm2",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::VectorInfNorm(const math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Core.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::vector_inf_norm",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Utils::Perturbations(double,double,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Deriv.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::utils::perturbations",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Utils::IsFiniteVector(const math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Deriv.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::utils::is_finite_vector",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::CentralDifference(Function&,double,double&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Deriv.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::central_difference",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::ForwardDifference(Function&,double,double,double&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Deriv.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::forward_difference",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::NumericalGradient(Function&,math_Vector&,math_Vector&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Deriv.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::numerical_gradient",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::NumericalGradientAdaptive(Function&,math_Vector&,math_Vector&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Deriv.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::numerical_gradient_adaptive",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::NumericalJacobian(Function&,math_Vector&,math_Matrix&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Deriv.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::numerical_jacobian",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::NumericalHessian(Function&,math_Vector&,math_Matrix&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Deriv.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::numerical_hessian",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::SecondDerivative(Function&,double,double,double&,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Deriv.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::second_derivative",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "<rustycad_tkmath::math_utils::Domain1D as Default>::default",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D(double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::new",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::Length() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::length",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::IsValid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::is_valid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::Mid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::mid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::Contains(double,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::contains",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::Clamp(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::clamp",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::IsLarge(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::is_large",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::IsFullPeriod(double,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::is_full_period",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::Lerp(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::lerp",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::Normalize(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::normalize",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::IsFinite(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::is_finite",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain1D::IsEqual(const Domain1D&,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain1D::is_equal",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "<rustycad_tkmath::math_utils::Domain2D as Default>::default",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D(double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::new",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D(const Domain1D&,const Domain1D&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::from_domains",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::U() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::u",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::V() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::v",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::ULength() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::u_length",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::VLength() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::v_length",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::IsValid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::is_valid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::UMid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::u_mid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::VMid() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::v_mid",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::Contains(double,double,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::contains",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::Clamp(double&,double&) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::clamp",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::IsLarge(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::is_large",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::IsUFullPeriod(double,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::is_u_full_period",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::IsVFullPeriod(double,double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::is_v_full_period",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Domain2D::IsFinite(double) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Domain.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Domain2D::is_finite",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::GetGaussPointsAndWeights(int,math_Vector&,math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Gauss.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::get_gauss_points_and_weights",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::GetKronrodPointsAndWeights(int,math_Vector&,math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_GaussKronrodWeights.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::get_kronrod_points_and_weights",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::GetOrderedGaussPointsAndWeights(int,math_Vector&,math_Vector&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_GaussKronrodWeights.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::get_ordered_gauss_points_and_weights",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::THE_EXACT_LINE_SEARCH_ALPHA_MAX",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::EXACT_LINE_SEARCH_ALPHA_MAX",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LineSearchResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LineSearchResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::ArmijoBacktrack(Function&,const math_Vector&,const math_Vector&,const math_Vector&,double,double,double,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::armijo_backtrack",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::WolfeSearch(Function&,const math_Vector&,const math_Vector&,const math_Vector&,double,double,double,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::wolfe_search",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::ExactLineSearch(Function&,const math_Vector&,const math_Vector&,double,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::exact_line_search",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::QuadraticInterpolation(double,double,double,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::quadratic_interpolation",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::BrentAlongCoordinate(Function&,math_Vector&,size_t,double,double,double&,double,uint32_t,size_t&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_LineSearch.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::brent_along_coordinate",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::EvalPoly(const double*,int,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Poly.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::eval_poly",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::EvalPolyDeriv(const double*,int,double,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Poly.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::eval_poly_deriv",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::EvalPolyDesc(const double*,int,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Poly.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::eval_poly_desc",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::RefinePolyRoot(const double*,int,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Poly.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::refine_poly_root",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::RefinePolyRootDesc(const double*,int,double,uint32_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Poly.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::refine_poly_root_desc",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::SortRoots(double*,size_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Poly.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::sort_roots",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::RemoveDuplicateRoots(double*,size_t,double)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Poly.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::remove_duplicate_roots",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::DepressCubic(double,double,double,double&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Poly.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::depress_cubic",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::DepressQuartic(double,double,double,double,double&,double&,double&,double&)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Poly.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::depress_quartic",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::RandomGenerator",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Random.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::RandomGenerator",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::RandomGenerator(uint64_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Random.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::RandomGenerator::new",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::RandomGenerator::SetSeed(uint64_t)",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Random.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::RandomGenerator::set_seed",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::RandomGenerator::NextInt()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Random.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::RandomGenerator::next_int",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::RandomGenerator::NextReal()",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Random.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::RandomGenerator::next_real",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::Status",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::Status",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::ScalarResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::ScalarResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::ScalarResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::ScalarResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::ScalarResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::ScalarResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::PolyResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::PolyResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::PolyResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::PolyResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::PolyResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::PolyResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::PolyResult::operator[](size_t) const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<rustycad_tkmath::math_utils::PolyResult as Index<usize>>::index",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::VectorResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::VectorResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::VectorResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::VectorResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::VectorResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::VectorResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinearResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinearResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinearResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::LinearResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinearMultipleResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearMultipleResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinearMultipleResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::LinearMultipleResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::LinearMultipleResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::LinearMultipleResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::EigenResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::EigenResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::EigenResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::EigenResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::EigenResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::EigenResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::DecompResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::DecompResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::DecompResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::DecompResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::DecompResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::DecompResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IntegResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IntegResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::IntegResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::IntegResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::IntegResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::InverseResult",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::InverseResult",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::InverseResult::IsDone() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "rustycad_tkmath::math_utils::InverseResult::is_done",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
+    },
+    {
+      "upstream_id": "MathUtils::InverseResult::operator bool() const",
+      "toolkit": "TKMath",
+      "source": "src/FoundationClasses/TKMath/MathUtils/MathUtils_Types.hxx",
+      "rust_item": "<bool as From<&rustycad_tkmath::math_utils::InverseResult>>::from",
+      "status": "implemented",
+      "notes": "Explicit MathUtils namespace mapping (core headers): MathUtils::Utils is public as math_utils::utils; THE_* constants drop the prefix (THE_2PI is TWO_PI); struct fields become snake_case public fields and NbIterations/NbEvals/NbRoots/NbPoints become iterations/evaluations/number_of_roots/number_of_points; default arguments become explicit parameters; `explicit operator bool` is `From<&T> for bool`; Poly pointer+degree/count pairs become slices (length = degree+1 or count) and out-parameters become returned tuples; function templates take `impl Function`/`MultipleVarFunction`/`FunctionSet`; CubeRoot reproduces the oracle's glibc 2.39 cbrt, which is not correctly rounded."
     }
   ],
   "tests": [

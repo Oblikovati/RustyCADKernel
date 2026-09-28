@@ -267,6 +267,7 @@ mod gp_planar_probe;
 mod gp_standard_probe;
 mod gp_transform_probe;
 mod mathpoly_utils_probe;
+mod mathutils_core_api_probe;
 mod ncollection_probe;
 mod quaternion_probe;
 mod scale_probe;
@@ -439,6 +440,21 @@ fn main() {
             "gp3d_pln" => gp_core_probe::gp3_pln_case(&values),
             "gp3d_frame" => gp_core_probe::gp3_frame_case(&values),
             "gp3d_lerp" => gp_core_probe::gp3_lerp_case(&values),
+            "mathutils_core_scalar" => {
+                mathutils_core_api_probe::mathutils_core_scalar_case(&values)
+            }
+            "mathutils_core_defaults" => {
+                mathutils_core_api_probe::mathutils_core_defaults_case(&values)
+            }
+            "mathutils_core_vector" => {
+                mathutils_core_api_probe::mathutils_core_vector_case(&values)
+            }
+            "mathutils_core_poly" => mathutils_core_api_probe::mathutils_core_poly_case(&values),
+            "mathutils_core_deriv" => mathutils_core_api_probe::mathutils_core_deriv_case(&values),
+            "mathutils_core_gauss" => mathutils_core_api_probe::mathutils_core_gauss_case(&values),
+            "mathutils_core_random" => {
+                mathutils_core_api_probe::mathutils_core_random_case(&values)
+            }
             "mathpoly_utils_complex" => mathpoly_utils_probe::mathpoly_utils_complex_case(&values),
             _ => panic!("Unknown probe operation: {op}"),
         }
@@ -498,6 +514,7 @@ mod modern_opt_probe;
 mod modern_eigen_probe;
 mod modern_factors_probe;
 mod modern_integ_probe;
+
 mod modern_multiple_probe;
 mod modern_poly_probe;
 mod modern_sys_probe;

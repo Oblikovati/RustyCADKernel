@@ -13,7 +13,9 @@
 
 //! MathUtils_Gauss.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 use crate::{
-    math::{Vector, ordered_gauss_points_and_weights},
+    math::{
+        Vector, gauss_points_max, kronrod_points_and_weights, ordered_gauss_points_and_weights,
+    },
     math_lin::{TridiagonalResult, eigen_tridiagonal},
 };
 /// Native ordered Gauss nodes, with modern eigen fallback; `get_gauss_points_and_weights(65, &mut points, &mut weights)`.
@@ -25,7 +27,7 @@ pub fn get_gauss_points_and_weights(
     if order < 1 || points.length() != order || weights.length() != order {
         return false;
     }
-    if order <= 61 {
+    if order <= gauss_points_max() {
         return ordered_gauss_points_and_weights(order, points, weights);
     }
     let diagonal: Vector<'static> = Vector::with_size(order as usize);
@@ -54,10 +56,38 @@ fn copy_eigen_quadrature(
             (*values.at(i).unwrap(), 2.0 * first * first)
         })
         .collect();
-    pairs.sort_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
+    // std::sort by `Value <`; Legendre nodes are distinct, and an unordered NaN pair is kept
+    // in place instead of panicking.
+    pairs.sort_by(|a, b| a.0.partial_cmp(&b.0).unwrap_or(std::cmp::Ordering::Equal));
     for (i, (point, weight)) in pairs.into_iter().enumerate() {
         *points.change_at(i).unwrap() = point;
         *weights.change_at(i).unwrap() = weight;
     }
     true
+}
+/// Native tabulated or computed Gauss-Kronrod nodes (odd order >= 3), written only on success;
+/// `get_kronrod_points_and_weights(15, &mut points, &mut weights)`.
+pub fn get_kronrod_points_and_weights(
+    order: i32,
+    points: &mut Vector<'_>,
+    weights: &mut Vector<'_>,
+) -> bool {
+    if order < 1 || points.length() != order || weights.length() != order {
+        return false;
+    }
+    // The native copy through temporaries is unobservable: math::KronrodPointsAndWeights
+    // validates before it writes, and indexes relative to each vector's lower bound.
+    kronrod_points_and_weights(order, points, weights)
+}
+/// Validated alias of `get_gauss_points_and_weights` (ascending nodes);
+/// `get_ordered_gauss_points_and_weights(7, &mut points, &mut weights)`.
+pub fn get_ordered_gauss_points_and_weights(
+    order: i32,
+    points: &mut Vector<'_>,
+    weights: &mut Vector<'_>,
+) -> bool {
+    if order < 1 || points.length() != order || weights.length() != order {
+        return false;
+    }
+    get_gauss_points_and_weights(order, points, weights)
 }

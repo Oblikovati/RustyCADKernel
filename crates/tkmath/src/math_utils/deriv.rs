@@ -12,21 +12,13 @@
 // commercial license or contractual agreement.
 
 //! MathUtils_Deriv.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+use super::utils::{is_finite_vector, perturbations};
 use crate::math::Function;
 
-fn perturbations(x: f64, step: f64) -> Option<(f64, f64)> {
-    if !x.is_finite() || !step.is_finite() || step <= 0.0 {
-        return None;
-    }
-    let mut plus: f64 = x + step;
-    let mut minus: f64 = x - step;
-    if plus == x {
-        plus = x.next_up();
-    }
-    if minus == x {
-        minus = x.next_down();
-    }
-    (minus.is_finite() && plus.is_finite() && minus < x && x < plus).then_some((minus, plus))
+/// `Utils::Perturbations` as `(minus, plus)`; the partial outputs of a failure are unused here.
+fn perturbed_pair(x: f64, step: f64) -> Option<(f64, f64)> {
+    let (mut minus, mut plus): (f64, f64) = (0.0, 0.0);
+    perturbations(x, step, &mut minus, &mut plus).then_some((minus, plus))
 }
 fn finite_value(f: &mut impl Function, x: f64) -> Option<f64> {
     let mut value: f64 = 0.0;
@@ -42,7 +34,7 @@ fn save_finite(value: f64, output: &mut f64) -> bool {
 }
 /// Uses representable perturbations and preserves output on failure; `central_difference(&mut f, 2.0, &mut df, 1e-8)`.
 pub fn central_difference(f: &mut impl Function, x: f64, derivative: &mut f64, step: f64) -> bool {
-    let Some((minus, plus)) = perturbations(x, step) else {
+    let Some((minus, plus)) = perturbed_pair(x, step) else {
         return false;
     };
     let Some(f_plus) = finite_value(f, plus) else {
@@ -87,7 +79,7 @@ pub fn second_derivative(
     if !fx.is_finite() {
         return false;
     }
-    let Some((minus, plus)) = perturbations(x, step * x.abs().max(1.0)) else {
+    let Some((minus, plus)) = perturbed_pair(x, step * x.abs().max(1.0)) else {
         return false;
     };
     let Some(f_plus) = finite_value(f, plus) else {

@@ -11,7 +11,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! MathOpt_PSO.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+//! MathUtils_Random.hxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 /// Native xoshiro256** generator; `RandomGenerator::new(6)`.
 #[derive(Clone, Debug)]
 pub struct RandomGenerator {

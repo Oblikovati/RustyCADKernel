@@ -11,13 +11,10 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{perturbations, save_finite};
+use super::{is_finite_vector, perturbed_pair, save_finite};
 use crate::math::{MultipleVarFunction, Vector};
 fn valid_input(point: &Vector<'_>, gradient: &Vector<'_>, step: f64) -> bool {
-    point.length() == gradient.length()
-        && step.is_finite()
-        && step > 0.0
-        && point.values().iter().all(|v| v.is_finite())
+    point.length() == gradient.length() && step.is_finite() && step > 0.0 && is_finite_vector(point)
 }
 pub(super) fn perturbed_value(
     f: &mut impl MultipleVarFunction,
@@ -40,7 +37,7 @@ fn gradient_component(
     step: f64,
 ) -> bool {
     let x: f64 = *point.at(index).unwrap();
-    let Some((minus, plus)) = perturbations(x, step) else {
+    let Some((minus, plus)) = perturbed_pair(x, step) else {
         return false;
     };
     let Some(f_plus) = perturbed_value(f, point, index, plus) else {

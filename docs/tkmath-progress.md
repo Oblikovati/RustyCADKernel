@@ -991,3 +991,46 @@ Deliberate Rust deviations: gp_Pnt::ChangeCoord returns a write-back view
 move constructors and assignments of gp_Dir are Rust copies. The 2D conics' noexcept
 `Reverse` and hyperbola branches, which turn stored unit directions, use an infallible
 quarter turn.
+
+### MathUtils core headers (API completion)
+
+This work adds no upstream suite. It completes the public API of the MathUtils headers
+Bracket, Config, Convergence, Core, Deriv, Domain, Gauss, GaussKronrodWeights, LineSearch,
+Poly, Random and Types (171 api rows: namespace constants, structs, constructors, methods
+and free functions). `MathUtils::Utils` is public as `math_utils::utils`
+(`evaluate_finite`, `opposite_signs`, `limited`, `is_valid`, `perturbations`,
+`is_finite_vector`); the bracketing and finite-difference algorithms call these functions,
+so the public helpers are the implementation and not copies of it. The iteration-count
+`BracketMinimum` overload is `bracket_minimum_iterations`. `GetKronrodPointsAndWeights` and
+`GetOrderedGaussPointsAndWeights` are new. `Config::StepMin` and the `BoundedConfig` default
+bounds now read `precision::computational()` and `precision::infinite()` and do not copy the
+values. Supplemental tests are in `math_utils_core_api_behavior`. The core probe sends
+2,652 differential requests (`mathutils_core_scalar`, `mathutils_core_defaults`,
+`mathutils_core_vector`, `mathutils_core_poly`, `mathutils_core_deriv`,
+`mathutils_core_gauss`, `mathutils_core_random`). They all match the native bits. The line
+searches, `BracketRoot`/`BracketMinimum(options)`, `NumericalHessian`, `DotProduct` and the
+norms were already covered by `utils_line`, `utils_core` and `utils_bracket`. The native
+reader cannot parse `inf`/`nan`, so the requests encode them as sentinels that both probes
+decode.
+
+The port keeps these native results:
+
+- `CubeRoot` uses glibc 2.39's `cbrt` (sysdeps/ieee754/dbl-64/s_cbrt.c: a polynomial seed,
+  one Halley step and a 2^(k/3) factor), and this result is not correctly rounded.
+  `cbrt(27)` is `3.0000000000000004`, `cbrt(0.125)` is `0.49999999999999994` and `cbrt(2e100)`
+  ends in ...165. Rust's `f64::cbrt` resolves to the compiler-builtins libm (correctly
+  rounded, ...164), and so does a direct `extern "C" cbrt` from a Rust binary. The kernel is
+  therefore reproduced in `math_utils::glibc_cbrt`. Other Rust callers of `f64::cbrt`
+  outside MathUtils can have the same one-ulp difference.
+- `Utils::Limited` keeps `std::max(Left, std::min(Right, x))`. A NaN value becomes the
+  right limit, and an unordered limit is returned as written. `Utils::Perturbations` writes
+  both outputs before its final finiteness/ordering check, so a failed call leaves the
+  overflowed values in place.
+- `ComputeScaleFactor` uses the same `frexp` as `CubeRoot`. Zero, infinity and NaN return
+  exponent 0.
+
+Deliberate Rust differences: pointer+degree/count pairs of the Poly helpers are slices
+(length = degree + 1 or count), and their out-parameters are returned tuples. Default
+arguments are explicit parameters. `GetGaussPointsAndWeights` above order 61 sorts its
+eigenpairs with a total fallback (`Equal`) for an unordered NaN pair instead of the UB of
+`std::sort`. Legendre nodes are distinct, so the order does not change.
