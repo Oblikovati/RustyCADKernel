@@ -143,7 +143,7 @@ fn general_format_matches_printf_g() {
     assert_eq!(format_general(f64::NAN, 17), "nan");
     assert_eq!(format_general(-f64::INFINITY, 17), "-inf");
     assert_eq!(
-        format_general(8796093022208.03125, 17),
+        format_general(8796093022208.0 + 0.03125, 17),
         "8796093022208.0312"
     );
     assert_eq!(format_general(2.5, 0), "2");

@@ -252,39 +252,55 @@ impl BinaryFile {
         stream: &mut IoStream,
         header: &Handle<HeaderData>,
     ) -> Result<(), Failure> {
-        let mut object_count = 0;
-        let mut texts: [AsciiString; 5] = Default::default();
-        let mut names: [ExtendedString; 2] = Default::default();
-        Self::get_integer_stream(stream, &mut object_count)?;
-        for text in texts.iter_mut().take(4) {
-            Self::read_string_stream(stream, text)?;
+        let info = InfoFields::read(stream)?;
+        let header = header.get().ok_or_else(null_header)?;
+        info.store(header);
+        Ok(())
+    }
+}
+
+/// The info section as `ReadHeaderData` reads it into locals before storing it.
+#[derive(Default)]
+struct InfoFields {
+    object_count: i32,
+    texts: [AsciiString; 5],
+    names: [ExtendedString; 2],
+    user_info: Sequence<AsciiString>,
+}
+
+impl InfoFields {
+    fn read(stream: &mut IoStream) -> Result<Self, Failure> {
+        let mut info = Self::default();
+        BinaryFile::get_integer_stream(stream, &mut info.object_count)?;
+        for text in info.texts.iter_mut().take(4) {
+            BinaryFile::read_string_stream(stream, text)?;
         }
-        Self::read_extended_string_stream(stream, &mut names[0])?;
-        Self::read_string_stream(stream, &mut texts[4])?;
-        Self::read_extended_string_stream(stream, &mut names[1])?;
-        let user_info = read_user_info(stream)?;
-        let Some(header) = header.get() else {
-            return Err(null_header());
-        };
+        BinaryFile::read_extended_string_stream(stream, &mut info.names[0])?;
+        BinaryFile::read_string_stream(stream, &mut info.texts[4])?;
+        BinaryFile::read_extended_string_stream(stream, &mut info.names[1])?;
+        info.user_info = read_user_info(stream)?;
+        Ok(info)
+    }
+
+    fn store(&self, header: &HeaderData) {
         let [
             version,
             date,
             schema_name,
             schema_version,
             application_version,
-        ] = texts;
-        header.set_number_of_objects(object_count);
-        header.set_storage_version(&version);
-        header.set_creation_date(&date);
-        header.set_schema_name(&schema_name);
-        header.set_schema_version(&schema_version);
-        header.set_application_name(&names[0]);
-        header.set_application_version(&application_version);
-        header.set_data_type(&names[1]);
-        for line in user_info.iter() {
+        ] = &self.texts;
+        header.set_number_of_objects(self.object_count);
+        header.set_storage_version(version);
+        header.set_creation_date(date);
+        header.set_schema_name(schema_name);
+        header.set_schema_version(schema_version);
+        header.set_application_name(&self.names[0]);
+        header.set_application_version(application_version);
+        header.set_data_type(&self.names[1]);
+        for line in self.user_info.iter() {
             header.add_to_user_info(line);
         }
-        Ok(())
     }
 }
 

@@ -97,23 +97,33 @@ impl BinaryFile {
             internal: set.internal_data(),
             callbacks: None,
         };
-        while stream.good() && !stream.eof() {
-            let position = stream.tellg() as i32;
-            match section_at(position, &offsets) {
-                Section::End => break,
-                Section::Comment => read_comments(stream, &target)?,
-                Section::Type => read_types(stream, &mut target)?,
-                Section::Root => read_roots(stream, &target)?,
-                Section::Reference => read_references(stream, &target)?,
-                Section::Stuck(position) => return Err(stuck(position)),
-            }
-        }
+        read_sections(stream, &offsets, &mut target)?;
         attach_roots(&target)?;
         if let Some(internal) = target.internal.get() {
             internal.clear();
         }
         Ok(())
     }
+}
+
+/// The native dispatch loop on `tellg()` until the end of the data section.
+fn read_sections(
+    stream: &mut IoStream,
+    offsets: &FileHeader,
+    target: &mut Target<'_>,
+) -> Result<(), Failure> {
+    while stream.good() && !stream.eof() {
+        let position = stream.tellg() as i32;
+        match section_at(position, offsets) {
+            Section::End => break,
+            Section::Comment => read_comments(stream, target)?,
+            Section::Type => read_types(stream, target)?,
+            Section::Root => read_roots(stream, target)?,
+            Section::Reference => read_references(stream, target)?,
+            Section::Stuck(position) => return Err(stuck(position)),
+        }
+    }
+    Ok(())
 }
 
 fn stuck(position: i32) -> Failure {

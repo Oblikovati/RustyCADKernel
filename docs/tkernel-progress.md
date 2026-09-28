@@ -1554,3 +1554,84 @@ defined C++ behavior (no truncated UTF-8 sequences, no `Clear(type)` over foreig
 `message_api_behavior` (30 tests, named fakes for files, printers and writers) and
 `message_defaults_behavior` (4 tests, serialized, with a fake metric sampler) cover every new
 member.
+
+## Storage and FSD API completion
+
+`python3 tools/audit_api_rows.py src/FoundationClasses/TKernel/<Package> --source ../OCCT`
+reports 0 public members without api rows and 0 stale rows for `Storage` (261 rows: 247
+implemented, 14 excluded RTTI macros and destructors) and `FSD` (201 rows: 195 implemented,
+6 excluded). Before this work only the `FSD_BinaryFile` byte-order helpers existed.
+
+The port is class by class:
+
+- `storage`: `Data`, `HeaderData`, `RootData`, `TypeData`, `Root`, `InternalData`,
+  `TypedCallBack` are handle-shared transients with lock-protected fields, because the
+  native code mutates them through `const` handles (for example `RootData::UpdateRoot`
+  changes the root an earlier `Roots()` sequence holds). `Storage_BaseDriver` is the trait
+  `BaseDriver` over `HeaderSections`, `TableSections`, `DataSections` and
+  `DriverPrimitives`; every step returns `Result`, so the `Storage_Stream*Error`
+  exceptions (declared as real classes in `STORAGE_HIERARCHY`) propagate to the readers
+  that catch them. `Storage_CallBack` is the trait `CallBack` shared as `Arc<dyn CallBack>`.
+  `Schema::write` ports `Storage_Schema::Write` step by step, including its error
+  extensions. `Standard_Persistent` is the upstream `StandardPersistent`; the schema's
+  friend access to its counters goes through `PersistentNumbers`.
+- `fsd`: `File` and `CmpFile` are `TextFile<FsdDialect>`/`TextFile<CmpDialect>`: one
+  implementation of the shared members, with the members `FSD_CmpFile` overrides supplied
+  by the dialect, so `FSD_File`'s own members still reach the overriding line readers.
+  `BinaryFile` keeps the `FSD_FileHeader` offsets (`FileHeader`) and writes native byte
+  order. `Base64` is `FSD_Base64`.
+- I/O: `storage::IoStream` models libstdc++'s `std::basic_iostream<char>` (sentries, state
+  bits, `gcount`, `num_get` integer extraction with its clamping and `unsigned short`
+  negation, `bool` extraction, `getline`, word extraction bounded like GCC's
+  `__builtin_object_size` path, `tellg`/`tellp`, `%.*g` output at precision 17).
+  `FSD_BinaryFile` uses a glibc `FILE*` model (`fread` short reads keep partial bytes and
+  set the end-of-file flag, which only `fseek` clears). Both run over an injected
+  `DriverFileSystem` (`NativeDriverFileSystem`, or `MemoryFileSystem` and the named fakes in
+  the tests). `Storage_Schema::ICreationDate` reads an injected `CreationDateSource` and
+  `CheckTypeMigration` an injected `MigrationSource`.
+
+Native behaviour kept (all probe-compared unless noted):
+
+- `ReadExtendedLine` of `FSD_File` appends each UTF-16 unit as its decimal digits, because
+  `buffer += (char16_t)i` binds to `TCollection_ExtendedString::operator+=(int)`: "AB"
+  written with `WriteExtendedLine` reads back as "6566". `FSD_CmpFile::ReadExtendedLine`
+  loops on the output length, so it reads no unit into an empty string.
+- `ReadChar`/`ReadMagicNumber` append the previous character again when a read fails at
+  the end of the input; `FindTag` reports `SectionNotFound` when the tag line is the last
+  line without a newline.
+- `GetReal`/`GetShortReal` read at most 99 characters (the optimised native `char[100]`
+  extraction) and `CStringToReal` stores its parse before reporting trailing characters;
+  `GetCharacter` keeps an overflowing value after clearing the stream (the SGI
+  workaround); `PutCharacter` writes a byte above 127 as its sign-extended `unsigned short`.
+- `FSD_File::Tell` uses `tellp` in read mode and `tellg` in write mode.
+- `Storage_Schema::Write` never selects types (`AddTypeSelection` is commented out), so a
+  root with an object writes a reference of -1 and fails in the data section with
+  `Standard_OutOfRange`; roots are always written as `PDocStd_Document`.
+- `Storage_BucketIterator` yields one null slot on an empty collection.
+- `FSD_Base64` keeps its padding arithmetic and its decode table (`-` and `.` are 62, `,`
+  and `_` are 63).
+
+Deliberate deviations:
+
+- The current data set of `Storage_Schema` is kept per schema instead of in a process-wide
+  static; the protected bindings return `Standard_NullObject` outside a write.
+- `Storage_Data` starts with `Storage_VSOk`; natively the status is uninitialised.
+- Calls on a closed binary driver, a null callback or a null object return
+  `Standard_NullObject` instead of dereferencing null.
+- `FSD_BinaryFile::ReadCompleteInfo` returns `Storage_StreamFormatError` where the native
+  loop never ends (a stream position that matches no section, including the start of the
+  data section). A non-empty reference section calls the null callbacks the type section
+  installs natively; Rust reports `Standard_NullObject`.
+- Base64 bytes of 0x80 and above index outside the native table (undefined behaviour);
+  Rust decodes them as 0.
+- Buckets hold handles instead of raw pointers; slots never filled read as null.
+
+Differential evidence: the `stor_*` family (`tools/oracle/tkernel_storage_probe.cxx` and
+`crates/tkernel/examples/oracle_probe/storage/`) sends 6,271 requests, all identical:
+number formatting at several precisions, iostream extraction scripts, Base64 with every
+capacity edge, magic numbers, the migration table, 70 random containers written and read
+by all three drivers (including truncated files and the header/root/type `Read` members),
+scalar reads of malformed text and random binary bytes, open-mode and object-framing
+rules, `IsGoodFileType`, `Storage_Data`/bucket/callback scripts, `Storage_Schema::Write`
+through each driver and mode, `ReadCompleteInfo`, and the binary stream overloads. Written
+files are compared byte for byte.
