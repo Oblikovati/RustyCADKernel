@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod gb_probe;
-use gb_probe::{gc, gce, gprop, hermit, int_ana, int_ana2d, lprop};
+use gb_probe::{bndlib, gc, gce, gprop, hermit, int_ana, int_ana2d, lprop};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -101,6 +101,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gprop_hoperator", gprop::hoperator_case),
     // Hermit (gb_probe/hermit.rs)
     ("hermit", hermit::hermit_case),
+    // GeomBndLib and BndLib (gb_probe/bndlib)
+    ("bnd_curve3d", bndlib::curve3d_case),
+    ("bnd_curve2d", bndlib::curve2d_case),
+    ("bnd_surface", bndlib::surface_case),
+    ("bnd_gp", bndlib::gp::gp_case),
+    ("bnd_helpers", bndlib::gp::helpers_case),
 ];
 
 fn main() {

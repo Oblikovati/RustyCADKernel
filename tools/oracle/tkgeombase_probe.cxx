@@ -44,6 +44,7 @@
 #include "tkgeombase_probe_lprop.cxx"
 #include "tkgeombase_probe_gprop.cxx"
 #include "tkgeombase_probe_hermit.cxx"
+#include "tkgeombase_probe_bndlib.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -136,6 +137,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gprop_hoperator", gb_gprop_hoperator_case},
  // Hermit (tkgeombase_probe_hermit.cxx)
  {"hermit", gb_hermit_case},
+ // GeomBndLib and BndLib (tkgeombase_probe_bndlib.cxx)
+ {"bnd_curve3d", gb_bnd_curve3d_case},
+ {"bnd_curve2d", gb_bnd_curve2d_case},
+ {"bnd_surface", gb_bnd_surface_case},
+ {"bnd_gp", gb_bnd_gp_case},
+ {"bnd_helpers", gb_bnd_helpers_case},
 };
 int main() {
  std::string line;
