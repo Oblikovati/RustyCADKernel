@@ -38442,6 +38442,38 @@
       "rust_item": "rustycad_tkernel::standard::ReadLineBuffer::set_multiline_mode",
       "status": "implemented",
       "notes": "The gap argument's default (true) is passed explicitly in Rust. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer(const char*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::new",
+      "status": "implemented",
+      "notes": "Borrows without copying. The buffer borrows a byte slice for its lifetime instead of storing a raw pointer; from_optional maps a null pointer with size 0. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::~Standard_ArrayStreamBuffer()",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Excluded: C++ destructor. Rust releases owned state through Drop glue; there is no callable counterpart to map."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::Init(const char*,size_t)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::init",
+      "status": "implemented",
+      "notes": "Replaces the borrowed bytes and rewinds. The buffer borrows a byte slice for its lifetime instead of storing a raw pointer; from_optional maps a null pointer with size 0. The differential probe (services_ operations) compares it with the native kernel."
+    },
+    {
+      "upstream_id": "Standard_ArrayStreamBuffer::xsgetn(char*,std::streamsize)",
+      "toolkit": "TKernel",
+      "source": "src/FoundationClasses/TKernel/Standard/Standard_ArrayStreamBuffer.hxx",
+      "rust_item": "rustycad_tkernel::standard::ArrayStreamBuffer::xsgetn",
+      "status": "implemented",
+      "notes": "Copies min(count, available) bytes; the count is the destination slice length, so the native negative-count undefined behavior cannot occur. Read::read delegates to it. Related quirks kept in the protected overrides: put_back (pbackfail) compares the int_type with the previous char promoted to int, so a byte of 0x80 or more never matches where char is signed; seek_occt refuses the unchecked out-of-buffer positions native seekoff would store. The differential probe (services_ operations) compares it with the native kernel."
     }
   ],
   "tests": [

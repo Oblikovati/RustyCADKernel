@@ -1,5 +1,7 @@
 //! Behavior tests for the Standard services area: memory managers, synchronization,
 //! locale, buffered readers, dump and Plugin.
+#[path = "standard_services_api_behavior/array_stream.rs"]
+mod array_stream;
 #[path = "standard_services_api_behavior/locale.rs"]
 mod locale;
 #[path = "standard_services_api_behavior/memory.rs"]

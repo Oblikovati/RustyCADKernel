@@ -4,6 +4,7 @@
 #include "tkernel_standard_services_sync.cxx"
 #include "tkernel_standard_services_locale.cxx"
 #include "tkernel_standard_services_readers.cxx"
+#include "tkernel_standard_services_array_stream.cxx"
 
 namespace standard_services_probe
 {
@@ -20,5 +21,6 @@ static const tkernel_probe::Table cases = {
   {"services_clocale", clocale_case},
   {"services_read_buffer", read_buffer_case},
   {"services_read_line", read_line_case},
+  {"services_array_stream", array_stream_case},
 };
 } // namespace standard_services_probe

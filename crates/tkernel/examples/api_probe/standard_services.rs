@@ -1,5 +1,6 @@
 //! Rust side of the differential cases for Standard memory managers, synchronization, locale, buffered readers, dump and Plugin.
 use super::common::Case;
+mod array_stream;
 mod locale;
 mod memory;
 mod mmgr;
@@ -22,4 +23,5 @@ pub const CASES: &[(&str, Case)] = &[
     ("services_clocale", locale::clocale_case),
     ("services_read_buffer", readers::read_buffer_case),
     ("services_read_line", readers::read_line_case),
+    ("services_array_stream", array_stream::array_stream_case),
 ];
