@@ -1,4 +1,5 @@
 //! Regressions for native PLib quirks and the port's documented rejections.
+#![allow(clippy::excessive_precision)] // Assertions quote the native table literals verbatim.
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::Point3;

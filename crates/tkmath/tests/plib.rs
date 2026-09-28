@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 //! Direct translation of PLib_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-#![allow(non_snake_case, unused_mut)]
+#![allow(non_snake_case, unused_mut, clippy::assertions_on_constants)]
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point2, Point3};
