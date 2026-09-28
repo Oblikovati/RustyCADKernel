@@ -1,0 +1,12 @@
+[package]
+name = "rustycad-tkbrep"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license = "LGPL-2.1-only WITH OCCT-exception-1.0"
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkernel = { path = "../tkernel" }
+rustycad-tkmath = { path = "../tkmath" }

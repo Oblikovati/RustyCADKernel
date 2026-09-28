@@ -1,0 +1,12 @@
+[package]
+name = "rustycad-tktopalgo"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license = "LGPL-2.1-only WITH OCCT-exception-1.0"
+publish.workspace = true
+[lints]
+workspace = true
+[dependencies]
+rustycad-tkbrep = { path = "../tkbrep" }
+rustycad-tkmath = { path = "../tkmath" }
