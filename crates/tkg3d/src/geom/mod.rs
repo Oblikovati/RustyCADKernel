@@ -63,3 +63,8 @@ mod line;
 pub use line::GeomLine;
 mod circle;
 pub use circle::GeomCircle;
+
+mod bezier_curve;
+pub use bezier_curve::GeomBezierCurve;
+mod bspline_curve;
+pub use bspline_curve::GeomBSplineCurve;
