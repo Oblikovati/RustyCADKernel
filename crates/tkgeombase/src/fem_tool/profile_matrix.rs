@@ -23,6 +23,7 @@ mod solve;
 
 use super::sparse_matrix::{EntryRef, SparseMatrix};
 use crate::native_failure::failure;
+use crate::native_text::stream_real;
 use layout::ProfileLayout;
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
@@ -154,12 +155,6 @@ impl ProfileMatrix {
         }
         Ok(text)
     }
-}
-
-// `Standard_OStream << double` with default flags (C's `%g`).
-fn stream_real(value: f64) -> String {
-    String::from_utf8_lossy(rustycad_tkernel::tcollection::AsciiString::from_real(value).as_bytes())
-        .into_owned()
 }
 
 // The locked matrix and the address of one of its coefficients.
