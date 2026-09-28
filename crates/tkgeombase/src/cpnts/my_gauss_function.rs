@@ -15,6 +15,7 @@
 // CPnts_MyGaussFunction.hxx/.lxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `CPnts_RealFunction` and `CPnts_MyGaussFunction`: the integrand of a curve length.
+use crate::failure_capture::FailureCapture;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::math::Function;
 
@@ -34,7 +35,7 @@ pub type RealFunction<'a> = Box<dyn Fn(f64) -> Result<f64, Failure> + 'a>;
 #[derive(Default)]
 pub struct MyGaussFunction<'a> {
     my_function: Option<RealFunction<'a>>,
-    failure: Option<Failure>,
+    failure: FailureCapture,
 }
 
 impl<'a> MyGaussFunction<'a> {
@@ -49,9 +50,9 @@ impl<'a> MyGaussFunction<'a> {
     pub fn init(&mut self, function: RealFunction<'a>) {
         self.my_function = Some(function);
     }
-    /// The first failure raised by `F` since the last call, if any;
-    /// `gauss.take_failure()`.
-    pub fn take_failure(&mut self) -> Option<Failure> {
+    /// `Err` with the first failure raised by `F` since the last call;
+    /// `gauss.take_failure()?`.
+    pub fn take_failure(&mut self) -> Result<(), Failure> {
         self.failure.take()
     }
     fn evaluate(&self, x: f64) -> Result<f64, Failure> {
@@ -69,15 +70,13 @@ impl<'a> MyGaussFunction<'a> {
 impl Function for MyGaussFunction<'_> {
     /// `Value(X, F)`: `F(X)`, always true natively (false only for a raised `F`).
     fn value(&mut self, x: f64, result: &mut f64) -> bool {
-        match self.evaluate(x) {
-            Ok(value) => {
+        let value: Result<f64, Failure> = self.evaluate(x);
+        match self.failure.keep(value) {
+            Some(value) => {
                 *result = value;
                 true
             }
-            Err(failure) => {
-                self.failure.get_or_insert(failure);
-                false
-            }
+            None => false,
         }
     }
 }

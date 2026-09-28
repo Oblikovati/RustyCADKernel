@@ -124,6 +124,9 @@ impl UniformDeflection<'_> {
     }
     /// Go to the next point (`Next`); Standard_OutOfRange past the computed points;
     /// `iterator.next()?`.
+    // The native iterator protocol (More/Next/Value), not std::iter::Iterator: More
+    // computes the points and every member can raise.
+    #[allow(clippy::should_implement_trait)]
     pub fn next(&mut self) -> Result<(), Failure> {
         if self.my_i_point >= self.my_nb_points {
             return Err(Failure::with_type(

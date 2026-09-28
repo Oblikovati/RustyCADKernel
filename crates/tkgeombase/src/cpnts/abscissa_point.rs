@@ -57,9 +57,7 @@ fn integrate_length(
         Some(tol) => GaussSingleIntegration::with_tolerance(&mut fg, u1, u2, order, tol),
         None => GaussSingleIntegration::new(&mut fg, u1, u2, order),
     };
-    if let Some(failure) = fg.take_failure() {
-        return Err(failure);
-    }
+    fg.take_failure()?;
     match the_length.value() {
         Ok(value) => Ok(value.abs()),
         Err(_) => Err(Failure::with_type(
@@ -74,7 +72,12 @@ impl AbscissaPoint<'_> {
     /// The length of the curve (`Length(C)`); `AbscissaPoint::length(&adaptor)?`.
     pub fn length<'c>(curve: impl Into<PntsCurve<'c>>) -> Result<f64, Failure> {
         let curve: PntsCurve = curve.into();
-        integrate_length(curve, curve.first_parameter()?, curve.last_parameter()?, None)
+        integrate_length(
+            curve,
+            curve.first_parameter()?,
+            curve.last_parameter()?,
+            None,
+        )
     }
     /// The length of the curve with the integration tolerance `tol`
     /// (`Length(C, Tol)`); `AbscissaPoint::length_with_tolerance(&adaptor, 1e-9)?`.
@@ -267,9 +270,7 @@ impl AbscissaPoint<'_> {
         self.my_done = false;
         let (lower, upper) = (self.my_u_min, self.my_u_max);
         let solution = FunctionRoot::bounded(&mut self.my_f, ui, resolution, lower, upper, 100);
-        if let Some(failure) = self.my_f.take_failure() {
-            return Err(failure);
-        }
+        self.my_f.take_failure()?;
         let solution: FunctionRoot = solution?;
         if solution.is_done() {
             self.set_parameter(solution.root()?);

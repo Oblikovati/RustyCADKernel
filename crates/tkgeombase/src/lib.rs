@@ -28,6 +28,7 @@ mod failure_capture;
 pub mod gc;
 pub mod gce;
 pub mod gce2d;
+pub mod gcpnts;
 pub mod geom_lprop;
 pub mod gprop;
 pub mod hermit;
@@ -38,4 +39,3 @@ pub mod lprop;
 mod plane_projection;
 #[doc(hidden)]
 pub mod probe_support;
-mod tangential_deflection;

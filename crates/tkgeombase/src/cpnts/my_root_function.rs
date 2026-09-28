@@ -60,9 +60,9 @@ impl<'a> MyRootFunction<'a> {
         self.my_l = l;
         self.my_tol = tol;
     }
-    /// The first failure raised by the integrand since the last call, if any;
-    /// `root.take_failure()`.
-    pub fn take_failure(&mut self) -> Option<Failure> {
+    /// `Err` with the first failure raised by the integrand since the last call;
+    /// `root.take_failure()?`.
+    pub fn take_failure(&mut self) -> Result<(), Failure> {
         self.my_function.take_failure()
     }
     // Integral(X0, X, F) - L, or None when the integration is not done; a null or
