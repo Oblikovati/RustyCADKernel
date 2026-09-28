@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod g3_probe;
-use g3_probe::{conics, curves, simple};
+use g3_probe::{conics, curves, simple, surfaces, swept};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -22,6 +22,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("g3_conic_build", conics::conic_build_case),
     ("g3_trimmed", curves::trimmed_case),
     ("g3_offset_utils", curves::offset_utils_case),
+    ("g3_surface", surfaces::surface_case),
+    ("g3_surface_moves", surfaces::surface_moves_case),
+    ("g3_elementary", surfaces::elementary_case),
+    ("g3_elementary_build", surfaces::elementary_build_case),
+    ("g3_swept", swept::swept_case),
+    ("g3_surface_evalrep", swept::surface_evalrep_case),
 ];
 
 fn main() {

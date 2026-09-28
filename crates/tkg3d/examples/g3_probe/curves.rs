@@ -1,7 +1,7 @@
 //! Curve evaluation, curve transformations, lines and conics; the counterpart of
 //! tools/oracle/tkg3d_probe_curves.cxx.
 use super::common::{
-    Reader, attempt, ax1, ax2, built_curve, curve_summary, dump, end, name, pnt, real, show, trsf,
+    Reader, attempt, ax1, built_curve, curve_summary, dump, end, name, pnt, real, show, trsf,
 };
 use super::common::{flag, vec};
 use super::simple::moves;

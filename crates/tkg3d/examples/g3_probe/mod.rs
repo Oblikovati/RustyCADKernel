@@ -6,3 +6,5 @@ pub mod curves;
 pub mod print;
 pub mod shapes;
 pub mod simple;
+pub mod surfaces;
+pub mod swept;

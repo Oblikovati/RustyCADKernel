@@ -46,9 +46,16 @@
 #include <Geom_Transformation.hxx>
 #include <Geom_TrimmedCurve.hxx>
 #include <Geom_VectorWithMagnitude.hxx>
+#include <GeomEval_RepSurfaceDesc.hxx>
+#include <gp_Cone.hxx>
+#include <gp_Cylinder.hxx>
+#include <gp_Pln.hxx>
+#include <gp_Sphere.hxx>
+#include <gp_Torus.hxx>
 #include "tkg3d_probe_common.cxx"
 #include "tkg3d_probe_simple.cxx"
 #include "tkg3d_probe_curves.cxx"
+#include "tkg3d_probe_surfaces.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_point", g3_point_case},
  {"g3_direction", g3_direction_case},
@@ -63,6 +70,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g3_conic_build", g3_conic_build_case},
  {"g3_trimmed", g3_trimmed_case},
  {"g3_offset_utils", g3_offset_utils_case},
+ {"g3_surface", g3_surface_case},
+ {"g3_surface_moves", g3_surface_moves_case},
+ {"g3_elementary", g3_elementary_case},
+ {"g3_elementary_build", g3_elementary_build_case},
+ {"g3_swept", g3_swept_case},
+ {"g3_surface_evalrep", g3_surface_evalrep_case},
 };
 int main() {
  std::string line;

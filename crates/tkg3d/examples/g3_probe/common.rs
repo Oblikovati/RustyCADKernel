@@ -189,7 +189,7 @@ pub fn surface_summary(s: &dyn GeomSurface, uv: &[f64]) {
         show(s.is_cn_u(n), flag);
         show(s.is_cn_v(n), flag);
     }
-    for pair in uv.chunks_exact(2) {
+    for pair in uv.as_chunks::<2>().0 {
         surface_evaluations(s, pair[0], pair[1]);
     }
 }

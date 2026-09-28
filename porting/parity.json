@@ -32098,6 +32098,1838 @@
       "rust_item": "rustycad_tkg3d::geom_eval::rep_utils::validate_surface_desc",
       "status": "implemented",
       "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors. Authoritative toolkit API enumeration pending."
+    },
+    {
+      "upstream_id": "Geom_Plane(const gp_Ax3&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane(const gp_Pln&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::from_pln",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane(const gp_Pnt&,const gp_Dir&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::from_point",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane(double,double,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::from_coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::SetPln",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::set_pln",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::Pln",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::pln",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::UReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::u_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::VReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::v_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::TransformParameters",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::transform_parameters",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::ParametricTransformation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::parametric_transformation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::Coefficients",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_Plane::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_Plane.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomPlane::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface(const gp_Ax3&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface(const gp_Cylinder&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::from_cylinder",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::SetCylinder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::set_cylinder",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::SetRadius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::set_radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::Cylinder",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::cylinder",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::TransformParameters",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::transform_parameters",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::ParametricTransformation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::parametric_transformation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::Coefficients",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::Radius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_CylindricalSurface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_CylindricalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomCylindricalSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface(const gp_Ax3&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface(const gp_Cone&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::from_cone",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::SetCone",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::set_cone",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::SetRadius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::set_radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::SetSemiAngle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::set_semi_angle",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::Cone",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::cone",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::VReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::v_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::TransformParameters",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::transform_parameters",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::ParametricTransformation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::parametric_transformation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::Apex",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::apex",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::Coefficients",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::RefRadius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::ref_radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::SemiAngle",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::semi_angle",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ConicalSurface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ConicalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomConicalSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface(const gp_Ax3&,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface(const gp_Sphere&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::from_sphere",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::SetRadius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::set_radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::SetSphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::set_sphere",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::Sphere",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::sphere",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::Area",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::area",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::Coefficients",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::Radius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::Volume",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::volume",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SphericalSurface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SphericalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSphericalSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface(const gp_Ax3&,double,double)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface(const gp_Torus&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::from_torus",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::SetMajorRadius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::set_major_radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::SetMinorRadius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::set_minor_radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::SetTorus",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::set_torus",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::Torus",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::torus",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::Area",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::area",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::Coefficients",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::coefficients",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::MajorRadius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::major_radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::MinorRadius",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::minor_radius",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::Volume",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::volume",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_ToroidalSurface::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ToroidalSurface.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomToroidalSurface::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion(const occ::handle<Geom_Curve>&,const gp_Dir&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::HasEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::has_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::EvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::SetEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::set_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::ClearEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::clear_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::SetDirection",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::set_direction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::SetBasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::set_basis_curve",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::UReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::u_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::VReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::v_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::IsCNu",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::is_cn_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::IsCNv",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::is_cn_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::TransformParameters",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::transform_parameters",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::ParametricTransformation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::parametric_transformation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfLinearExtrusion::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfLinearExtrusion.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfLinearExtrusion::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution(const occ::handle<Geom_Curve>&,const gp_Ax1&)",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::new",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::HasEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::has_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::EvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::SetEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::set_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::ClearEvalRepresentation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::clear_eval_representation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::SetAxis",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::set_axis",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::SetDirection",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::set_direction",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::SetBasisCurve",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::set_basis_curve",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::SetLocation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::set_location",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::Axis",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::axis",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::Location",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::location",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::ReferencePlane",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::reference_plane",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::UReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::u_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::UReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::u_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::VReverse",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::v_reverse",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::VReversedParameter",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::v_reversed_parameter",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::TransformParameters",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::transform_parameters",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::ParametricTransformation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::parametric_transformation",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::Bounds",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::bounds",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::IsUClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::is_u_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::IsVClosed",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::is_v_closed",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::IsCNu",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::is_cn_u",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::IsCNv",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::is_cn_v",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::IsUPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::is_u_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::IsVPeriodic",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::is_v_periodic",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::u_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::v_iso",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::EvalD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::eval_d0",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::EvalD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::eval_d1",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::EvalD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::eval_d2",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::EvalD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::eval_d3",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::EvalDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::eval_dn",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::transform",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::copy",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::DumpJson",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::dump_json",
+      "status": "implemented",
+      "notes": "Manual explicit member mapping (docs/geom-design.md): abstract classes are traits reached through Handle<dyn Trait>, members take &self over one per-object lock, const& getters return copies, C++ output references become returned values, overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Geom_SurfaceOfRevolution::DEFINE_STANDARD_RTTIEXT",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_SurfaceOfRevolution.hxx",
+      "rust_item": "rustycad_tkg3d::geom::GeomSurfaceOfRevolution::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient! registers the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::CalculateD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::calculate_d0",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::CalculateD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::calculate_d1",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::CalculateD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::calculate_d2",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::CalculateD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::calculate_d3",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::CalculateDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::calculate_dn",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::D0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::d0",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::d1",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::d2",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::D3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::d3",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_ExtrusionUtils::DN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_ExtrusionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::extrusion_utils::dn",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::CalculateD0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::calculate_d0",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::CalculateD1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::calculate_d1",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::CalculateD2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::calculate_d2",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::CalculateD3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::calculate_d3",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::CalculateDN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::calculate_dn",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::D0",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::d0",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::D1",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::d1",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::D2",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::d2",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::D3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::d3",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
+    },
+    {
+      "upstream_id": "Geom_RevolutionUtils::DN",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/Geom/Geom_RevolutionUtils.pxx",
+      "rust_item": "rustycad_tkg3d::geom::revolution_utils::dn",
+      "status": "implemented",
+      "notes": "Header-only namespace function; the CurveType templates D0..DN become functions generic over GeomCurve, and the output references become returned values."
     }
   ],
   "tests": [
@@ -83406,6 +85238,118 @@
       "rust_target": "geom_circle",
       "rust_test": "Geom_CircleTest__Copy",
       "rust_source": "crates/tkg3d/tests/geom_circle.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_PlaneTest.ConstructFromAx3",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_Plane_Test.cxx",
+      "source_sha256": "e2fd924237f8faa728c02fa8c463c89b4d7cc37c4e6df7350ad7b3d938a7e5d1",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_plane",
+      "rust_test": "Geom_PlaneTest__ConstructFromAx3",
+      "rust_source": "crates/tkg3d/tests/geom_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_PlaneTest.ConstructFromPointAndDir",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_Plane_Test.cxx",
+      "source_sha256": "e2fd924237f8faa728c02fa8c463c89b4d7cc37c4e6df7350ad7b3d938a7e5d1",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_plane",
+      "rust_test": "Geom_PlaneTest__ConstructFromPointAndDir",
+      "rust_source": "crates/tkg3d/tests/geom_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_PlaneTest.D0Evaluation",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_Plane_Test.cxx",
+      "source_sha256": "e2fd924237f8faa728c02fa8c463c89b4d7cc37c4e6df7350ad7b3d938a7e5d1",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_plane",
+      "rust_test": "Geom_PlaneTest__D0Evaluation",
+      "rust_source": "crates/tkg3d/tests/geom_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_PlaneTest.Coefficients",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_Plane_Test.cxx",
+      "source_sha256": "e2fd924237f8faa728c02fa8c463c89b4d7cc37c4e6df7350ad7b3d938a7e5d1",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_plane",
+      "rust_test": "Geom_PlaneTest__Coefficients",
+      "rust_source": "crates/tkg3d/tests/geom_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_PlaneTest.UIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_Plane_Test.cxx",
+      "source_sha256": "e2fd924237f8faa728c02fa8c463c89b4d7cc37c4e6df7350ad7b3d938a7e5d1",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_plane",
+      "rust_test": "Geom_PlaneTest__UIso",
+      "rust_source": "crates/tkg3d/tests/geom_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_PlaneTest.VIso",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_Plane_Test.cxx",
+      "source_sha256": "e2fd924237f8faa728c02fa8c463c89b4d7cc37c4e6df7350ad7b3d938a7e5d1",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_plane",
+      "rust_test": "Geom_PlaneTest__VIso",
+      "rust_source": "crates/tkg3d/tests/geom_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_PlaneTest.Transform",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_Plane_Test.cxx",
+      "source_sha256": "e2fd924237f8faa728c02fa8c463c89b4d7cc37c4e6df7350ad7b3d938a7e5d1",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_plane",
+      "rust_test": "Geom_PlaneTest__Transform",
+      "rust_source": "crates/tkg3d/tests/geom_plane.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom_PlaneTest.Copy",
+      "toolkit": "TKG3d",
+      "source": "src/ModelingData/TKG3d/GTests/Geom_Plane_Test.cxx",
+      "source_sha256": "e2fd924237f8faa728c02fa8c463c89b4d7cc37c4e6df7350ad7b3d938a7e5d1",
+      "rust_package": "rustycad-tkg3d",
+      "rust_target": "geom_plane",
+      "rust_test": "Geom_PlaneTest__Copy",
+      "rust_source": "crates/tkg3d/tests/geom_plane.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
