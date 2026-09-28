@@ -36,6 +36,7 @@ pub use process::*;
 mod perf_meter;
 pub use perf_meter::*;
 mod timing;
+pub use timing::*;
 
 // Threads, the thread pool and parallel loops.
 mod parallel;
