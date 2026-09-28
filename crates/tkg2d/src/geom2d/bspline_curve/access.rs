@@ -15,21 +15,12 @@
 
 //! Read access: local evaluation, knots, multiplicities, poles and weights.
 use super::Geom2dBSplineCurve;
-use crate::geom2d::arrays::{at, put};
+use crate::geom2d::arrays::{at, check_one_based, copy_same_length, put};
 use crate::geom2d::errors;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::geom_abs::BSplKnotDistribution;
 use rustycad_tkmath::gp::{Point2, Vector2};
-
-fn check_index(index: i32, count: usize, member: &str) -> Result<(), Failure> {
-    if index < 1 || index > count as i32 {
-        return Err(errors::out_of_range(&format!(
-            "Geom2d_BSplineCurve::{member}: Index = {index}; expected in [1, {count}]"
-        )));
-    }
-    Ok(())
-}
 
 // The deprecated `Knots(K)` / `KnotSequence(K)`: K's bounds must lie inside the source's.
 fn copy_inside(
@@ -49,23 +40,6 @@ fn copy_inside(
     for index in target.lower()..=target.upper() {
         put(target, index, at(source, index)?)?;
     }
-    Ok(())
-}
-
-// The deprecated `Poles(P)` / `Multiplicities(M)`: equal lengths, values copied in order.
-fn copy_same_length<T: Copy>(
-    source: &Array1<'_, T>,
-    target: &mut Array1<'_, T>,
-    member: &str,
-) -> Result<(), Failure> {
-    if target.len() != source.len() {
-        return Err(errors::dimension(&format!(
-            "Geom2d_BSplineCurve::{member}: length {}; expected {}",
-            target.len(),
-            source.len()
-        )));
-    }
-    target.as_mut_slice().copy_from_slice(source.as_slice());
     Ok(())
 }
 
@@ -123,7 +97,7 @@ impl Geom2dBSplineCurve {
     /// Knot `index` (`Knot`); `curve.knot(1)?`.
     pub fn knot(&self, index: i32) -> Result<f64, Failure> {
         let state = self.state.read();
-        check_index(index, state.knots.len(), "Knot")?;
+        check_one_based(index, state.knots.len(), "Geom2d_BSplineCurve::Knot")?;
         at(&state.knots, index)
     }
     /// Copy the knots of `target`'s bounds (deprecated `Knots(K)`); `curve.knots_into(&mut k)?`.
@@ -162,13 +136,21 @@ impl Geom2dBSplineCurve {
     /// Multiplicity of knot `index` (`Multiplicity`); `curve.multiplicity(1)?`.
     pub fn multiplicity(&self, index: i32) -> Result<i32, Failure> {
         let state = self.state.read();
-        check_index(index, state.mults.len(), "Multiplicity")?;
+        check_one_based(
+            index,
+            state.mults.len(),
+            "Geom2d_BSplineCurve::Multiplicity",
+        )?;
         at(&state.mults, index)
     }
     /// Copy the multiplicities into `target` of equal length (deprecated `Multiplicities(M)`);
     /// `curve.multiplicities_into(&mut m)?`.
     pub fn multiplicities_into(&self, target: &mut Array1<'_, i32>) -> Result<(), Failure> {
-        copy_same_length(&self.state.read().mults, target, "Multiplicities")
+        copy_same_length(
+            &self.state.read().mults,
+            target,
+            "Geom2d_BSplineCurve::Multiplicities",
+        )
     }
     /// The multiplicities, indexed from 1 (`Multiplicities()`); `curve.multiplicities()`.
     pub fn multiplicities(&self) -> Array1<'static, i32> {
@@ -185,12 +167,16 @@ impl Geom2dBSplineCurve {
     /// Pole `index` (`Pole`); `curve.pole(1)?`.
     pub fn pole(&self, index: i32) -> Result<Point2, Failure> {
         let state = self.state.read();
-        check_index(index, state.poles.len(), "Pole")?;
+        check_one_based(index, state.poles.len(), "Geom2d_BSplineCurve::Pole")?;
         at(&state.poles, index)
     }
     /// Copy the poles into `target` of equal length (deprecated `Poles(P)`); `curve.poles_into(&mut p)?`.
     pub fn poles_into(&self, target: &mut Array1<'_, Point2>) -> Result<(), Failure> {
-        copy_same_length(&self.state.read().poles, target, "Poles")
+        copy_same_length(
+            &self.state.read().poles,
+            target,
+            "Geom2d_BSplineCurve::Poles",
+        )
     }
     /// The poles, indexed from 1 (`Poles()`); `curve.poles()`.
     pub fn poles(&self) -> Array1<'static, Point2> {
@@ -199,7 +185,7 @@ impl Geom2dBSplineCurve {
     /// Weight `index`; 1 for a non-rational curve (`Weight`); `curve.weight(1)?`.
     pub fn weight(&self, index: i32) -> Result<f64, Failure> {
         let state = self.state.read();
-        check_index(index, state.poles.len(), "Weight")?;
+        check_one_based(index, state.poles.len(), "Geom2d_BSplineCurve::Weight")?;
         if !state.rational {
             return Ok(1.);
         }

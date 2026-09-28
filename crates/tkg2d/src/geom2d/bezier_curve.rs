@@ -181,29 +181,14 @@ impl Geom2dBezierCurve {
     /// Pole at `index` (`Pole`); `curve.pole(1)?`.
     pub fn pole(&self, index: i32) -> Result<Point2, Failure> {
         let state = self.state.read();
-        if index < 1 || index > state.poles.len() as i32 {
-            return Err(errors::out_of_range(&format!(
-                "Geom2d_BezierCurve::Pole: Index = {index}; expected in [1, {}]",
-                state.poles.len()
-            )));
-        }
+        super::arrays::check_one_based(index, state.poles.len(), "Geom2d_BezierCurve::Pole")?;
         at(&state.poles, index)
     }
     /// Copy the poles into `target` of equal length (deprecated `Poles(P)`);
     /// `curve.poles_into(&mut poles)?`.
     pub fn poles_into(&self, target: &mut Array1<'_, Point2>) -> Result<(), Failure> {
         let state = self.state.read();
-        if target.len() != state.poles.len() {
-            return Err(errors::dimension(&format!(
-                "Geom2d_BezierCurve::Poles: length {}; expected {}",
-                target.len(),
-                state.poles.len()
-            )));
-        }
-        target
-            .as_mut_slice()
-            .copy_from_slice(state.poles.as_slice());
-        Ok(())
+        super::arrays::copy_same_length(&state.poles, target, "Geom2d_BezierCurve::Poles")
     }
     /// The poles, indexed from 1 (`Poles()`); `curve.poles()`.
     pub fn poles(&self) -> Array1<'static, Point2> {
@@ -212,12 +197,7 @@ impl Geom2dBezierCurve {
     /// Weight at `index`; 1 for a non-rational curve (`Weight`); `curve.weight(1)?`.
     pub fn weight(&self, index: i32) -> Result<f64, Failure> {
         let state = self.state.read();
-        if index < 1 || index > state.poles.len() as i32 {
-            return Err(errors::out_of_range(&format!(
-                "Geom2d_BezierCurve::Weight: Index = {index}; expected in [1, {}]",
-                state.poles.len()
-            )));
-        }
+        super::arrays::check_one_based(index, state.poles.len(), "Geom2d_BezierCurve::Weight")?;
         if !state.rational {
             return Ok(1.);
         }

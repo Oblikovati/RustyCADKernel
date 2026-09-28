@@ -15,7 +15,9 @@
 
 //! Pole and weight edition, point moves, reversal and transformation.
 use super::state::{BSplineState, rational};
-use crate::geom2d::arrays::{at, insert_at, one_based, put, rebased, remove_at};
+use crate::geom2d::arrays::{
+    at, check_one_based, insert_at, one_based, put, rebased, remove_at, stored_or_unit_weights,
+};
 use crate::geom2d::errors;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
@@ -60,7 +62,8 @@ impl BSplineState {
         let rational_now: bool = self.rational || (weight - 1.).abs() > resolution();
         self.weights = if rational_now {
             let mut new_weights: Array1<'static, f64> = one_based(nbpoles + 1)?;
-            let old: Array1<'static, f64> = self.weights_or_units()?;
+            let old: Array1<'static, f64> =
+                stored_or_unit_weights(self.rational, &self.weights, self.poles.len() as i32)?;
             insert_at(&old, &mut new_weights, index, weight)?;
             new_weights
         } else {
@@ -89,15 +92,12 @@ impl BSplineState {
         put(&mut mults, nbknots + 1, at(&self.mults, nbknots)?)?;
         Ok((knots, mults))
     }
-    // The stored weights of a rational curve, unit weights otherwise (`IsRational() ? W(i) : 1.`).
-    fn weights_or_units(&self) -> Result<Array1<'static, f64>, Failure> {
-        if self.rational {
-            return Ok(self.weights.clone());
-        }
-        bsplclib::unit_weights(self.poles.len() as i32)
-    }
     pub(super) fn remove_pole(&mut self, index: i32) -> Result<(), Failure> {
-        self.check_pole_index(index, "RemovePole: Index and #pole mismatch")?;
+        check_one_based(
+            index,
+            self.poles.len(),
+            "BSpline curve: RemovePole: Index and #pole mismatch",
+        )?;
         if self.poles.len() <= 2 {
             return Err(errors::construction(&format!(
                 "BSpline curve: RemovePole: {} poles; #pole is already minimum",
@@ -157,13 +157,21 @@ impl BSplineState {
         self.update_knots()
     }
     pub(super) fn set_pole(&mut self, index: i32, pole: Point2) -> Result<(), Failure> {
-        self.check_pole_index(index, "SetPole: index and #pole mismatch")?;
+        check_one_based(
+            index,
+            self.poles.len(),
+            "BSpline curve: SetPole: index and #pole mismatch",
+        )?;
         put(&mut self.poles, index, pole)?;
         self.max_deriv_inv_ok = false;
         Ok(())
     }
     pub(super) fn set_weight(&mut self, index: i32, weight: f64) -> Result<(), Failure> {
-        self.check_pole_index(index, "SetWeight: Index and #pole mismatch")?;
+        check_one_based(
+            index,
+            self.poles.len(),
+            "BSpline curve: SetWeight: Index and #pole mismatch",
+        )?;
         if weight <= resolution() {
             return Err(errors::construction(&format!(
                 "BSpline curve: SetWeight: Weight = {weight} too small; expected > gp::Resolution()"

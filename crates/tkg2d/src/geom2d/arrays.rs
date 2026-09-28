@@ -92,3 +92,46 @@ pub fn remove_at<T: Copy>(
     }
     Ok(())
 }
+
+/// The weights that InsertPoleAfter reads: the stored ones of a rational curve,
+/// unit weights otherwise (the native `IsRational() ? W(i) : 1.`);
+/// `stored_or_unit_weights(false, &weights, 4)?`.
+pub fn stored_or_unit_weights(
+    rational: bool,
+    weights: &Array1<'static, f64>,
+    count: i32,
+) -> Result<Array1<'static, f64>, Failure> {
+    if rational {
+        return Ok(weights.clone());
+    }
+    rustycad_tkmath::bsplclib::unit_weights(count)
+}
+
+/// The deprecated copying getters (`Poles(P)`, `Multiplicities(M)`): Standard_DimensionError
+/// unless the lengths match, then the values in order; `copy_same_length(&poles, &mut p, "Geom2d_BezierCurve::Poles")?`.
+pub fn copy_same_length<T: Copy>(
+    source: &Array1<'_, T>,
+    target: &mut Array1<'_, T>,
+    member: &str,
+) -> Result<(), Failure> {
+    if target.len() != source.len() {
+        return Err(errors::dimension(&format!(
+            "{member}: length {}; expected {}",
+            target.len(),
+            source.len()
+        )));
+    }
+    target.as_mut_slice().copy_from_slice(source.as_slice());
+    Ok(())
+}
+
+/// The native `Index < 1 || Index > count` Standard_OutOfRange check of `member`;
+/// `check_one_based(2, 4, "Geom2d_BezierCurve::SetPole")?`.
+pub fn check_one_based(index: i32, count: usize, member: &str) -> Result<(), Failure> {
+    if index < 1 || index > count as i32 {
+        return Err(errors::out_of_range(&format!(
+            "{member}: Index = {index}; expected in [1, {count}]"
+        )));
+    }
+    Ok(())
+}

@@ -229,16 +229,6 @@ impl BSplineState {
         }
         Ok(value)
     }
-    /// Check a one-based pole index with the native message; `state.check_pole_index(2, "SetPole")?`.
-    pub(super) fn check_pole_index(&self, index: i32, message: &str) -> Result<(), Failure> {
-        if index < 1 || index > self.poles.len() as i32 {
-            return Err(errors::out_of_range(&format!(
-                "BSpline curve: {message}: Index = {index}; expected in [1, {}]",
-                self.poles.len()
-            )));
-        }
-        Ok(())
-    }
 }
 
 // The continuity switch of updateKnots.

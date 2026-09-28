@@ -14,7 +14,10 @@
 // Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BezierCurve.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The fields of Geom2d_BezierCurve and the native algorithms on them.
-use crate::geom2d::arrays::{any_weight_step, at, insert_at, one_based, put, rebased, remove_at};
+use crate::geom2d::arrays::{
+    any_weight_step, at, check_one_based, insert_at, one_based, put, rebased, remove_at,
+    stored_or_unit_weights,
+};
 use crate::geom2d::errors;
 use crate::geom2d::{Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
 use crate::geom2d_eval::{RepCurveDesc, rep_utils};
@@ -90,15 +93,6 @@ impl BezierState {
     pub(super) fn weights_view(&self) -> Option<&Array1<'static, f64>> {
         self.rational.then_some(&self.weights)
     }
-    fn check_pole_index(&self, index: i32, member: &str) -> Result<(), Failure> {
-        if index < 1 || index > self.poles.len() as i32 {
-            return Err(errors::out_of_range(&format!(
-                "Geom2d_BezierCurve::{member}: Index = {index}; expected in [1, {}]",
-                self.poles.len()
-            )));
-        }
-        Ok(())
-    }
     pub(super) fn increase(&mut self, degree: i32) -> Result<(), Failure> {
         if degree == self.degree() {
             return Ok(());
@@ -156,16 +150,10 @@ impl BezierState {
             return self.init(&new_poles, None);
         }
         let mut new_weights: Array1<'static, f64> = one_based(nbpoles + 1)?;
-        let old_weights: Array1<'static, f64> = self.weights_or_units()?;
+        let old_weights: Array1<'static, f64> =
+            stored_or_unit_weights(self.rational, &self.weights, self.poles.len() as i32)?;
         insert_at(&old_weights, &mut new_weights, index, weight)?;
         self.init(&new_poles, Some(&new_weights))
-    }
-    // Stored weights of a rational curve, unit weights otherwise (the native `IsRational() ? W(i) : 1.`).
-    fn weights_or_units(&self) -> Result<Array1<'static, f64>, Failure> {
-        if self.rational {
-            return Ok(self.weights.clone());
-        }
-        bsplclib::unit_weights(self.poles.len() as i32)
     }
     pub(super) fn remove_pole(&mut self, index: i32) -> Result<(), Failure> {
         let nbpoles: i32 = self.poles.len() as i32;
@@ -174,7 +162,7 @@ impl BezierState {
                 "Geom2d_BezierCurve::RemovePole: NbPoles = {nbpoles}; expected > 2"
             )));
         }
-        self.check_pole_index(index, "RemovePole")?;
+        check_one_based(index, self.poles.len(), "Geom2d_BezierCurve::RemovePole")?;
         let mut new_poles: Array1<'static, Point2> = one_based(nbpoles - 1)?;
         remove_at(&self.poles, &mut new_poles, index)?;
         if !self.rational {
@@ -222,7 +210,7 @@ impl BezierState {
         Ok(())
     }
     pub(super) fn set_pole(&mut self, index: i32, pole: Point2) -> Result<(), Failure> {
-        self.check_pole_index(index, "SetPole")?;
+        check_one_based(index, self.poles.len(), "Geom2d_BezierCurve::SetPole")?;
         put(&mut self.poles, index, pole)?;
         if index == 1 || index == self.poles.len() as i32 {
             let (first, last) = (
@@ -235,7 +223,7 @@ impl BezierState {
         Ok(())
     }
     pub(super) fn set_weight(&mut self, index: i32, weight: f64) -> Result<(), Failure> {
-        self.check_pole_index(index, "SetWeight")?;
+        check_one_based(index, self.poles.len(), "Geom2d_BezierCurve::SetWeight")?;
         if weight <= resolution() {
             return Err(errors::construction(&format!(
                 "Geom2d_BezierCurve::SetWeight: Weight = {weight}; expected > gp::Resolution()"

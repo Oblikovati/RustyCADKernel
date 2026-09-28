@@ -15,7 +15,7 @@
 
 //! Degree elevation, knot insertion and removal, knot setters and `LocateU`.
 use super::state::{BSplineState, check_curve_data};
-use crate::geom2d::arrays::{at, one_based, put};
+use crate::geom2d::arrays::{at, check_one_based, one_based, put};
 use crate::geom2d::errors;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, real};
@@ -232,11 +232,7 @@ impl BSplineState {
     /// `SetKnot(Index, K)`: the knot must stay strictly between its neighbours.
     pub(super) fn set_knot(&mut self, index: i32, knot: f64) -> Result<(), Failure> {
         let nbknots: i32 = self.knots.len() as i32;
-        if index < 1 || index > nbknots {
-            return Err(errors::out_of_range(&format!(
-                "BSpline curve: SetKnot: Index = {index}; expected in [1, {nbknots}]"
-            )));
-        }
+        check_one_based(index, self.knots.len(), "BSpline curve: SetKnot")?;
         let dk: f64 = real::epsilon(knot).abs();
         let below: bool = index > 1 && knot <= at(&self.knots, index - 1)? + dk;
         let above: bool = index < nbknots && knot >= at(&self.knots, index + 1)? - dk;
