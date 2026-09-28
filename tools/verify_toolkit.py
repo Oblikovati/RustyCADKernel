@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
-Usage: python3 tools/verify_toolkit.py TKMath --jobs 4
+Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
+Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
 from __future__ import annotations
 import argparse
@@ -18,6 +19,12 @@ from porting import ROOT, snapshot
 from tkernel_mapping import mapped_runtime_sets, listed_runtime_cases
 from tkernel_native_baseline import compile_sources
 from verify_tkernel import run, unique
+
+# The numeric differential verifier of each toolkit: script, evidence directory.
+NUMERIC_VERIFIERS = {
+    'TKMath': ('tools/verify_tkmath_numeric.py', 'target/oracle-tkmath/numeric'),
+    'TKG2d': ('tools/verify_tkg2d_numeric.py', 'target/oracle-tkg2d/numeric'),
+}
 
 
 def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
@@ -97,7 +104,7 @@ def rust_tests(output: Path, rows: list[dict], expected: set, environment: dict)
 def main() -> None:
     """Verify the selected profile and persist evidence only after success."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('toolkit', choices=['TKMath'])
+    parser.add_argument('toolkit', choices=sorted(NUMERIC_VERIFIERS))
     parser.add_argument('--source',type=Path,default=ROOT/'../OCCT')
     parser.add_argument('--jobs',type=int,default=2)
     parser.add_argument('--native-build',type=Path,help='Reuse this prebuilt native closure without rebuilding it')
@@ -122,9 +129,9 @@ def main() -> None:
     if args.only:
         print(f'PARTIAL PASS (--only {args.only}): {len(rows)} declarations; not a toolkit gate')
         return
-    if args.toolkit == 'TKMath':
-        run([sys.executable,ROOT/'tools/verify_tkmath_numeric.py','--source',source,'--native-build',build],output/'numeric-verification.log',env=environment)
-        numeric = json.loads((output/'numeric/report.json').read_text())
+    script, evidence = NUMERIC_VERIFIERS[args.toolkit]
+    run([sys.executable,ROOT/script,'--source',source,'--native-build',build],output/'numeric-verification.log',env=environment)
+    numeric = json.loads((ROOT/evidence/'report.json').read_text())
     record_report(output,args.toolkit,inventory,rows,native,rust,libraries,numeric)
 
 
@@ -133,7 +140,7 @@ def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict],
     inputs = [p for p in (ROOT/'crates').rglob('*') if p.is_file()]
     inputs += list((ROOT/'tools/oracle').glob('*.cxx'))
     inputs += sorted((ROOT/'tools').rglob('*.py'))
-    inputs += [ROOT/'tools/verify_tkmath_numeric.py', ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py']
+    inputs += [ROOT/NUMERIC_VERIFIERS[toolkit][0], ROOT/'Cargo.toml',ROOT/'Cargo.lock',ROOT/'rust-toolchain.toml',ROOT/'porting/parity.json',Path(__file__),ROOT/'tools/tkernel_mapping.py',ROOT/'tools/tkernel_native_baseline.py',ROOT/'tools/verify_tkernel.py']
     report = {'revision':inventory['revision'],'profile':'linux-gcc-c-locale','toolkit':toolkit,
               'numeric_report':numeric,'declarations_mapped':len(rows),'legacy_runtime_cases_passed':len(native),
               'rust_runtime_cases_passed':len(rust),'toolkit_complete':False,
