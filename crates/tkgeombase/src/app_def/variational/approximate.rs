@@ -59,29 +59,47 @@ impl Variational {
         }
         let mut ecarts: Array1<'static, f64> =
             Array1::with_bounds(self.first_point, self.last_point).map_err(array_error)?;
+        let (mut the_curve, (mut w_quadratic, w_quality)) = self.first_smoothing(&mut ecarts)?;
+        if self.options.with_min_max && self.options.tolerance < self.results.max_error {
+            self.adjust_member_criterion(
+                (&mut w_quadratic, w_quality),
+                &mut the_curve,
+                &mut ecarts,
+            )?;
+        }
+        self.convert(&the_curve)
+    }
+
+    // TheMotor with the member criterion from its curve; returns the smoothed curve
+    // and the criterion's weights `(WQuadratic, WQuality)`.
+    fn first_smoothing(
+        &mut self,
+        ecarts: &mut Array1<'_, f64>,
+    ) -> Result<(Handle<Curve>, (f64, f64)), Failure> {
         let criterion: Handle<dyn SmoothCriterion> = self.smooth_criterion.clone();
-        let (mut w_quadratic, w_quality) = criterion_ref(&criterion)?.get_weight();
+        let (w_quadratic, w_quality) = criterion_ref(&criterion)?.get_weight();
         let mut the_curve: Handle<Curve> = criterion_ref(&criterion)?.get_curve();
         self.the_motor(
             criterion_ref(&criterion)?,
             w_quality,
             &mut the_curve,
-            &mut ecarts,
+            ecarts,
         )?;
-        if self.options.with_min_max && self.options.tolerance < self.results.max_error {
-            // Adjusting replaces the member criterion through its reference, even
-            // when a later pass raises.
-            let mut j: Handle<dyn SmoothCriterion> = self.smooth_criterion.clone();
-            let adjusted = self.adjusting(
-                &mut j,
-                (&mut w_quadratic, w_quality),
-                &mut the_curve,
-                &mut ecarts,
-            );
-            self.smooth_criterion = j;
-            adjusted?;
-        }
-        self.convert(&the_curve)
+        Ok((the_curve, (w_quadratic, w_quality)))
+    }
+
+    // Adjusting on the member criterion, which it replaces through its reference,
+    // even when a later pass raises.
+    fn adjust_member_criterion(
+        &mut self,
+        (w_quadratic, w_quality): (&mut f64, f64),
+        the_curve: &mut Handle<Curve>,
+        ecarts: &mut Array1<'_, f64>,
+    ) -> Result<(), Failure> {
+        let mut j: Handle<dyn SmoothCriterion> = self.smooth_criterion.clone();
+        let adjusted = self.adjusting(&mut j, (w_quadratic, w_quality), the_curve, ecarts);
+        self.smooth_criterion = j;
+        adjusted
     }
 
     // The Convert_CompPolynomialToPoles inputs: one span per element on [-1, 1],
