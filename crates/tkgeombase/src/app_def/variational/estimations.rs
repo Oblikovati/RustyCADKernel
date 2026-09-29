@@ -300,40 +300,46 @@ impl Variational {
         min_kind: i32,
         shift: i32,
     ) -> Result<(f64, EstVector), Failure> {
-        let mut vcnt: EstVector = vec![0.; self.dimension as usize];
+        let zero: EstVector = vec![0.; self.dimension as usize];
         let nb_constr: i32 = self.tables.nb_constr();
         if nb_constr <= 0 {
-            return Ok((0., vcnt));
+            return Ok((0., zero));
         }
         let mut id_cnt: i32 = 1;
         while self.tables.typ(2 * id_cnt - 1)? < ipnt && id_cnt <= nb_constr {
             id_cnt += 1;
         }
         if self.tables.typ(2 * id_cnt - 1)? != ipnt || self.tables.typ(2 * id_cnt)? < min_kind {
-            return Ok((0., vcnt));
+            return Ok((0., zero));
         }
+        Ok((1., self.constraint_entries(id_cnt, shift)?))
+    }
+
+    // The entries of constraint `id_cnt` from offset `shift` of its block: the
+    // first three of each six 3D entries, then the first two of each four 2D ones.
+    fn constraint_entries(&self, id_cnt: i32, shift: i32) -> Result<EstVector, Failure> {
+        let mut vcnt: EstVector = Vec::with_capacity(self.dimension as usize);
         let mut i0: i32 = 2 * self.dimension * (id_cnt - 1) + shift;
-        let mut k: usize = 0;
         for _ in 0..self.nb_p3d {
-            for _ in 0..3 {
-                i0 += 1;
-                vcnt[k] = self.tables.value(i0)?;
-                k += 1;
-            }
-            i0 += 3;
+            i0 = self.push_entries(&mut vcnt, i0, 3)?;
         }
         if shift != 0 {
             // EstSecnd steps back one entry before the 2D curvatures.
             i0 -= 1;
         }
         for _ in 0..self.nb_p2d {
-            for _ in 0..2 {
-                i0 += 1;
-                vcnt[k] = self.tables.value(i0)?;
-                k += 1;
-            }
-            i0 += 2;
+            i0 = self.push_entries(&mut vcnt, i0, 2)?;
         }
-        Ok((1., vcnt))
+        Ok(vcnt)
+    }
+
+    // The `count` table entries after `i0` appended to `vcnt`; returns the entry
+    // `count` further on (the next point of the block).
+    fn push_entries(&self, vcnt: &mut EstVector, mut i0: i32, count: i32) -> Result<i32, Failure> {
+        for _ in 0..count {
+            i0 += 1;
+            vcnt.push(self.tables.value(i0)?);
+        }
+        Ok(i0 + count)
     }
 }
