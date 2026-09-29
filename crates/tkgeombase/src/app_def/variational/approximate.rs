@@ -34,6 +34,32 @@ fn array_error(error: rustycad_tkernel::ncollection::ArrayError) -> Failure {
     array_failure(error, CONTEXT)
 }
 
+/// The Convert_CompPolynomialToPoles inputs: the span of each element, the
+/// coefficient count of each, the coefficients and the breakpoints.
+struct ConvertInputs {
+    intervals: Array2<'static, f64>,
+    nb_coeff: Array1<'static, i32>,
+    coeff: Array1<'static, f64>,
+    true_intervals: Array1<'static, f64>,
+}
+
+impl ConvertInputs {
+    // The coefficient count (degree + 1) of each element of `curve`, then the span
+    // [-1, 1] of each element.
+    fn fill_spans(&mut self, curve: &Curve) -> Result<(), Failure> {
+        for ii in 1..=curve.nb_elements() {
+            self.nb_coeff
+                .set_value(ii, curve.degree(ii)? + 1)
+                .map_err(array_error)?;
+        }
+        for ii in self.intervals.lower_row()..=self.intervals.upper_row() {
+            self.intervals.set_value(ii, 1, -1.).map_err(array_error)?;
+            self.intervals.set_value(ii, 2, 1.).map_err(array_error)?;
+        }
+        Ok(())
+    }
+}
+
 impl Variational {
     /// `Approximate()`: the smoothing with the current fields (with Adjusting when
     /// minimizing the maximum error above the tolerance), converted to a B-spline;
@@ -108,45 +134,58 @@ impl Variational {
         let curve: &Curve = the_curve
             .get()
             .ok_or_else(|| Failure::new("AppDef_Variational::Approximate: null curve"))?;
-        let nb_elem: i32 = curve.nb_elements();
-        let (max_segment, max_degree) = (self.options.max_segment, self.options.max_degree);
-        let mut intervals: Array2<'static, f64> =
-            Array2::with_bounds(1, nb_elem, 1, 2).map_err(array_error)?;
-        let mut nb_coeff: Array1<'static, i32> =
-            Array1::with_bounds(1, max_segment).map_err(array_error)?;
-        let size: i32 = max_segment * (max_degree + 1) * self.dimension;
-        let mut coeff: Array1<'static, f64> = Array1::with_bounds(1, size).map_err(array_error)?;
-        coeff.init(0.);
-        let mut true_intervals: Array1<'static, f64> =
-            Array1::with_bounds(1, nb_elem + 1).map_err(array_error)?;
-        true_intervals.assign(&curve.knots().clone());
-        curve.get_polynom(&mut coeff)?;
-        for ii in 1..=nb_elem {
-            nb_coeff
-                .set_value(ii, curve.degree(ii)? + 1)
-                .map_err(array_error)?;
-        }
-        for ii in intervals.lower_row()..=intervals.upper_row() {
-            intervals.set_value(ii, 1, -1.).map_err(array_error)?;
-            intervals.set_value(ii, 2, 1.).map_err(array_error)?;
-        }
-        let spans = PolynomialSpans {
-            num_coeff_per_curve: &nb_coeff,
-            coefficients: &coeff,
-            polynomial_intervals: &intervals,
-            true_intervals: &true_intervals,
-        };
-        let converter = CompPolynomialToPoles::from_uniform_continuity(
-            nb_elem,
-            self.niv_cont,
-            self.dimension,
-            max_degree,
-            Some(spans),
-        )?;
+        let mut inputs: ConvertInputs = self.convert_buffers(curve.nb_elements())?;
+        inputs.true_intervals.assign(&curve.knots().clone());
+        curve.get_polynom(&mut inputs.coeff)?;
+        inputs.fill_spans(curve)?;
+        let converter = self.polynomial_converter(curve.nb_elements(), &inputs)?;
         if converter.is_done() {
             self.store_result(&converter)?;
         }
         Ok(())
+    }
+
+    // Convert_CompPolynomialToPoles of the `nb_elem` element polynomials with the
+    // continuity of the smoothing and MaxDegree.
+    fn polynomial_converter(
+        &self,
+        nb_elem: i32,
+        inputs: &ConvertInputs,
+    ) -> Result<CompPolynomialToPoles, Failure> {
+        let spans = PolynomialSpans {
+            num_coeff_per_curve: &inputs.nb_coeff,
+            coefficients: &inputs.coeff,
+            polynomial_intervals: &inputs.intervals,
+            true_intervals: &inputs.true_intervals,
+        };
+        CompPolynomialToPoles::from_uniform_continuity(
+            nb_elem,
+            self.niv_cont,
+            self.dimension,
+            self.options.max_degree,
+            Some(spans),
+        )
+    }
+
+    // The conversion buffers for `nb_elem` elements, sized by MaxSegment and
+    // MaxDegree, the coefficients at 0.
+    fn convert_buffers(&self, nb_elem: i32) -> Result<ConvertInputs, Failure> {
+        let (max_segment, max_degree) = (self.options.max_segment, self.options.max_degree);
+        let intervals: Array2<'static, f64> =
+            Array2::with_bounds(1, nb_elem, 1, 2).map_err(array_error)?;
+        let nb_coeff: Array1<'static, i32> =
+            Array1::with_bounds(1, max_segment).map_err(array_error)?;
+        let size: i32 = max_segment * (max_degree + 1) * self.dimension;
+        let mut coeff: Array1<'static, f64> = Array1::with_bounds(1, size).map_err(array_error)?;
+        coeff.init(0.);
+        let true_intervals: Array1<'static, f64> =
+            Array1::with_bounds(1, nb_elem + 1).map_err(array_error)?;
+        Ok(ConvertInputs {
+            intervals,
+            nb_coeff,
+            coeff,
+            true_intervals,
+        })
     }
 
     // The poles of the converter as MultiPoints (3D points then 2D points per row).
