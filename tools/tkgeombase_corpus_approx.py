@@ -86,6 +86,66 @@ def compute_requests(rng, requests):
     compute(requests, line, (0, 0), 2, options(), cons=(PASS, NO))
 
 
+def hard_lines(rng):
+    """Lines the fits cannot follow: noisy, with repeated or collinear points, and
+    sparse samples of the loops (the cutting, interpolation and loop paths)."""
+    result = []
+    for nb3d, nb2d in [(1, 0), (0, 1), (1, 1)]:
+        for n in [6, 11, 17]:
+            result.append(explicit_line(rng, nb3d, nb2d, n, tangents=(1, n) if n == 11 else (), noise=0.3)[0])
+        result.append(explicit_line(rng, nb3d, nb2d, 10, shape=2, noise=0.0)[0])
+    result.append(explicit_line(rng, 0, 2, 9, shape=1, noise=0.0)[0])
+    for nb3d, nb2d in [(1, 0), (0, 1), (1, 1), (0, 2)]:
+        for a, b, n in [(-1.3, 1.3, 7), (-1.5, 1.2, 11), (-1.0, 1.0, 5)]:
+            result.append(source_line(nb3d, nb2d, uniform(a, b, n)))
+    return result
+
+
+def clustered_lines(rng):
+    """Samples bunched at the ends (with iso-parametric fits the polygons turn back),
+    lines with tangents at every point that the chords contradict, and 2D lines of
+    one repeated point (degenerate polygon legs)."""
+    result = []
+    for nb3d, nb2d in [(1, 0), (0, 1), (1, 1)]:
+        for ts in [[0.1, 0.11, 0.12, 0.13, 0.9, 1.0, 1.1, 1.2], [-1.3, -1.25, -1.2, 0.0, 0.05, 1.2, 1.25, 1.3, 1.31],
+                   [0.2, 0.21, 0.22, 0.23, 0.24, 0.25, 1.2]]:
+            result.append(source_line(nb3d, nb2d, ts))
+        n = 9
+        result.append(explicit_line(rng, nb3d, nb2d, n, tangents=tuple(range(1, n + 1)), noise=0.3)[0])
+    for n in [2, 4]:
+        result.append([0, 0, 1, n] + [0, 0, 1.0, 2.0] * n)
+        result.append([0, 0, 2, n] + [0, 0, 1.0, 2.0, -1.0, 0.5] * n)
+    return result
+
+
+def clustered_requests(rng, requests):
+    configs = [options(4, 8, 1e-6, 1e-6, 5, 1, ISO), options(6, 8, 1e-5, 1e-5, 0, 1, ISO, 1),
+               options(1, 3, 1e-9, 1e-9, 1, 1, CHORD), options(1, 2, 1e-12, 1e-12, 0, 1, ISO, 1)]
+    for line in clustered_lines(rng):
+        for opts in configs:
+            for rules in [(0, 0), (1, 1000), (3, 1000)]:
+                compute(requests, line, rules, 0, opts)
+
+
+def segment_requests(rng, requests):
+    """Low degree fits of short lines with tangents everywhere: the failed first fit
+    is interpolated by ComputeCurve (a straight segment for two points)."""
+    for nb3d, nb2d in [(1, 0), (0, 1), (1, 1), (2, 2)]:
+        for n in [2, 3, 4]:
+            line = explicit_line(rng, nb3d, nb2d, n, tangents=tuple(range(1, n + 1)), noise=0.2)[0]
+            for degmin, degmax, squares in [(1, 1, 0), (1, 2, 0), (1, 1, 1), (2, 2, 0), (2, 3, 0)]:
+                compute(requests, line, (0, 0), 0, options(degmin, degmax, 1e-12, 1e-12, 1, 1, ISO, squares))
+
+
+def hard_compute_requests(rng, requests):
+    configs = [options(2, 3, 1e-9, 1e-9, 0), options(1, 2, 1e-7, 1e-7, 2, 1, ISO),
+               options(3, 4, 1e-8, 1e-10, 5, 1, CENTRIPETAL, 1), options(2, 8, 1e-2, 1e-2, 5, 1, ISO, 1)]
+    for index, line in enumerate(hard_lines(rng)):
+        for rules in [(0, 0), (1, 30), (3, 25)]:
+            for k in range(2):
+                compute(requests, line, rules, 0, configs[(index + k + rules[0]) % len(configs)])
+
+
 def bspl(requests, line, rules, variant, opts, cons=(TANGENT, TANGENT), continuity=-2, periodic=0, knots=None,
          mults=None, params=(1, []), setparams=0):
     kind = 0 if knots is None else 1 if mults is None else 2
@@ -113,6 +173,9 @@ def bspl_requests(rng, requests):
         bspl(requests, line, (0, 0), 4, configs[1], params=(1, uniform(0.0, 1.0, n)), setparams=1)
     line, n = lines(rng)[4]
     bspl(requests, line, (0, 0), 2, options(3, 6), cons=(CURVATURE, CURVATURE))
+    tangent_line = source_line(1, 1, uniform(-1.2, 1.1, 12), tangents=(1, 12))
+    bspl(requests, tangent_line, (0, 0), 2, options(3, 6), cons=(CURVATURE, TANGENT))
+    bspl(requests, tangent_line, (0, 0), 2, options(3, 6, squares=1), cons=(TANGENT, CURVATURE))
     bspl(requests, line, (0, 0), 2, options(3, 3, cutting=0), knots=[0.0, 0.5, 1.0], mults=[4, 1, 4])
 
 
@@ -131,6 +194,8 @@ def fit_requests(requests):
             fit(requests, cls, nb3d, nb2d, u, 0, 1, 0.5, 1, 2, 5, 1e-4, 1e-4, 1, NO, TANGENT, 3, 0, 1)
             fit(requests, cls, nb3d, nb2d, u, 0, 0, 0.0, 1, 3, 12, 1e-9, 1e-9, 1, TANGENT, NO, 0, 1, 0)
             fit(requests, cls, nb3d, nb2d, u, 0, 0, 0.0, 1, 4, 9, 1e-8, 1e-8, 1, PASS, TANGENT, 5, 0, 0)
+            fit(requests, cls, nb3d, nb2d, u, 0, 0, 0.0, 0, 2, 3, 1e-12, 1e-12, 0, PASS, PASS, 0, 1, 1)
+            fit(requests, cls, nb3d, nb2d, u, 0, 0, 0.0, 1, 1, 2, 1e-14, 1e-14, 1, TANGENT, TANGENT, 0, 1, 1)
 
 
 def chain(rng, nb3d, nb2d, degrees, c1):
@@ -161,6 +226,8 @@ def mcurves_requests(rng, requests):
                 curves = chain(rng, nb3d, nb2d, degrees, c1)
                 for variant in [0, 1, 2]:
                     add(requests, 'ax_mcurves', len(curves), *[v for c in curves for v in c], variant)
+    empty = [2, 0, 0, 0, 0, 0, 0]
+    add(requests, 'ax_mcurves', 2, *empty, *empty, 0)
     add(requests, 'ax_mcurves', 0, 0)
     add(requests, 'ax_mcurves', 0, 1)
 
@@ -169,6 +236,9 @@ def append_approx_requests(requests: list[str]) -> None:
     """Append the Approx driver requests in a fixed order."""
     rng = random.Random(20260929)
     compute_requests(rng, requests)
+    hard_compute_requests(rng, requests)
+    clustered_requests(rng, requests)
+    segment_requests(rng, requests)
     bspl_requests(rng, requests)
     fit_requests(requests)
     mcurves_requests(rng, requests)
