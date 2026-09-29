@@ -252,28 +252,56 @@ impl Variational {
             return Err(not_done("Distance"));
         }
         let mut tabs: PointTabs = PointTabs::new([self.nb_p3d, self.nb_p2d])?;
-        let j0: i32 = mat.lower_col() - self.first_point;
-        let curve: &MultiBSpCurve = &self.results.mbsp_curve;
+        let column0: i32 = mat.lower_col() - self.first_point;
         for ipoint in self.first_point..=self.last_point {
+            let column: i32 = column0 + ipoint;
             let mut index: i32 = 1;
             if self.nb_p3d != 0 {
                 tabs.read_3d(&self.ssp, ipoint)?;
-                for jp3d in 1..=self.nb_p3d {
-                    let p3d: Point3 = tabs.p3d[jp3d];
-                    let pt3d: Point3 = curve.value_3d(index, self.parameter(ipoint)?)?;
-                    *mat.change_value(index, j0 + ipoint)? = p3d.distance(&pt3d);
-                    index += 1;
-                }
+                index = self.distances_3d(mat, &tabs, (ipoint, column))?;
             }
             if self.nb_p2d != 0 {
                 tabs.read_2d(&self.ssp, ipoint)?;
-                for jp2d in 1..=self.nb_p2d {
-                    let p2d: Point2 = tabs.p2d[jp2d];
-                    let pt2d: Point2 = curve.value_2d(index, self.parameter(ipoint)?)?;
-                    *mat.change_value(index, j0 + ipoint)? = p2d.distance(pt2d);
-                    index += 1;
-                }
+                self.distances_2d(mat, &tabs, (ipoint, column), index)?;
             }
+        }
+        Ok(())
+    }
+
+    // The distances of the 3D points of multipoint `ipoint` (read in `tabs`) into
+    // rows 1.. of `column`; returns the next row.
+    fn distances_3d(
+        &self,
+        mat: &mut Matrix<'_>,
+        tabs: &PointTabs,
+        (ipoint, column): (i32, i32),
+    ) -> Result<i32, Failure> {
+        let curve: &MultiBSpCurve = &self.results.mbsp_curve;
+        let mut index: i32 = 1;
+        for jp3d in 1..=self.nb_p3d {
+            let p3d: Point3 = tabs.p3d[jp3d];
+            let pt3d: Point3 = curve.value_3d(index, self.parameter(ipoint)?)?;
+            *mat.change_value(index, column)? = p3d.distance(&pt3d);
+            index += 1;
+        }
+        Ok(index)
+    }
+
+    // The distances of the 2D points of multipoint `ipoint` into rows `index`.. of
+    // `column`.
+    fn distances_2d(
+        &self,
+        mat: &mut Matrix<'_>,
+        tabs: &PointTabs,
+        (ipoint, column): (i32, i32),
+        mut index: i32,
+    ) -> Result<(), Failure> {
+        let curve: &MultiBSpCurve = &self.results.mbsp_curve;
+        for jp2d in 1..=self.nb_p2d {
+            let p2d: Point2 = tabs.p2d[jp2d];
+            let pt2d: Point2 = curve.value_2d(index, self.parameter(ipoint)?)?;
+            *mat.change_value(index, column)? = p2d.distance(pt2d);
+            index += 1;
         }
         Ok(())
     }
