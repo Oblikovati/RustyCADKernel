@@ -4,22 +4,20 @@
 //!
 //! TKTopAlgo and TKPrim are not ported, so these fakes replay what the native builders
 //! do with the real BRep types: `BRep_Builder` vertices with the BRepLib precision,
-//! edges on a line or a curve with the vertices and range of BRepLib_MakeEdge, and a
-//! box whose six faces lie on planes with a p-curve for each edge, sharing twelve
-//! edges and eight vertices as BRepPrim does. They are replaced by the real builders
-//! when those toolkits are ported.
+//! edges on a line or a curve with the vertices and range of BRepLib_MakeEdge, and the
+//! box of `BRepPrim_GWedge` (the `wedge_box` module), entity for entity. They are
+//! replaced by the real builders when those toolkits are ported.
 #![allow(dead_code)]
 pub mod ref_test_tools;
+mod wedge_box;
 use rustycad_tkbrep::brep::BRepBuilder;
-use rustycad_tkbrep::topods::{Edge, Face, Shell, Solid, Vertex, Wire};
+use rustycad_tkbrep::topods::{Edge, Solid, Vertex, Wire};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Handle;
-use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
-use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane, GeomSurface, GeomTrimmedCurve};
+use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomTrimmedCurve};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::elclib;
-use rustycad_tkmath::elslib;
-use rustycad_tkmath::gp::{Axis1, Axis2d, Axis3, Direction2, Direction3, Point3, Vector2, Vector3};
+use rustycad_tkmath::gp::{Axis1, Direction3, Point3, Vector3};
 
 /// `EXPECT_DOUBLE_EQ`: equal within 4 units in the last place.
 pub fn expect_double_eq(a: f64, b: f64) {
@@ -145,147 +143,14 @@ pub fn make_edge_on_whole_curve(curve: &Handle<dyn GeomCurve>) -> Edge {
     make_edge_on_curve(curve, geometry.first_parameter(), geometry.last_parameter())
 }
 
-/// `BRepPrimAPI_MakeBox(dx, dy, dz).Shape()`: a solid with one shell of six planar
-/// faces, each bounded by one wire of four edges with p-curves; the twelve line edges
-/// and the eight vertices are shared as in the native box (each edge by two faces).
+/// `BRepPrimAPI_MakeBox(dx, dy, dz).Shape()`: the solid of the wedge box
+/// ([`wedge_box`]), built as `BRepPrim_GWedge` builds it.
 pub fn make_box(dx: f64, dy: f64, dz: f64) -> Solid {
     make_box_at(Point3::new(0.0, 0.0, 0.0), dx, dy, dz)
 }
 
-/// `BRepPrimAPI_MakeBox(P, dx, dy, dz).Shape()`: the box of [`make_box`] with its low
-/// corner at `origin`.
+/// `BRepPrimAPI_MakeBox(P, dx, dy, dz).Shape()`: the box of [`make_box`] with its
+/// corner at `origin` (the low corner for positive extents).
 pub fn make_box_at(origin: Point3, dx: f64, dy: f64, dz: f64) -> Solid {
-    let corners: Vec<Point3> = (0..8)
-        .map(|i| {
-            let (x, y, z) = (i & 1, (i >> 1) & 1, (i >> 2) & 1);
-            Point3::new(
-                origin.x() + x as f64 * dx,
-                origin.y() + y as f64 * dy,
-                origin.z() + z as f64 * dz,
-            )
-        })
-        .collect();
-    let vertices: Vec<Vertex> = corners.iter().map(|p| make_vertex(*p)).collect();
-    // Edges along X (0-3), Y (4-7) and Z (8-11), each from its low to its high corner.
-    let pairs = [
-        (0, 1),
-        (2, 3),
-        (4, 5),
-        (6, 7),
-        (0, 2),
-        (1, 3),
-        (4, 6),
-        (5, 7),
-        (0, 4),
-        (1, 5),
-        (2, 6),
-        (3, 7),
-    ];
-    let edges: Vec<(Edge, usize)> = pairs
-        .iter()
-        .map(|&(a, b)| (edge_between(&vertices[a], &vertices[b]), a))
-        .collect();
-    let mut shell = Shell::default();
-    BRepBuilder::default().make_shell(&mut shell);
-    for side in box_sides(&corners) {
-        let face = face_of(&edges, &corners, &side);
-        BRepBuilder::default().add(&mut shell, &face).unwrap();
-    }
-    let mut solid = Solid::default();
-    BRepBuilder::default().make_solid(&mut solid);
-    BRepBuilder::default().add(&mut solid, &shell).unwrap();
-    solid
-}
-
-/// One face of the box: its plane (origin corner, normal, X direction) and its four
-/// edges around the boundary with their orientation.
-struct BoxSide {
-    frame: Axis3,
-    edges: [(usize, bool); 4],
-}
-
-/// The six sides: -X, +X, -Y, +Y, -Z, +Z.
-fn box_sides(corners: &[Point3]) -> [BoxSide; 6] {
-    let axis = |x: f64, y: f64, z: f64| Direction3::new(x, y, z).unwrap();
-    let side = |origin: usize, normal: Direction3, x: Direction3, edges| BoxSide {
-        frame: Axis3::new(corners[origin], normal, x).unwrap(),
-        edges,
-    };
-    [
-        side(
-            0,
-            axis(-1.0, 0.0, 0.0),
-            axis(0.0, 0.0, 1.0),
-            [(4, true), (6, true), (8, false), (10, true)],
-        ),
-        side(
-            1,
-            axis(1.0, 0.0, 0.0),
-            axis(0.0, 0.0, 1.0),
-            [(5, true), (7, true), (9, false), (11, true)],
-        ),
-        side(
-            0,
-            axis(0.0, -1.0, 0.0),
-            axis(0.0, 0.0, 1.0),
-            [(0, true), (2, true), (8, false), (9, true)],
-        ),
-        side(
-            2,
-            axis(0.0, 1.0, 0.0),
-            axis(0.0, 0.0, 1.0),
-            [(1, true), (3, true), (10, false), (11, true)],
-        ),
-        side(
-            0,
-            axis(0.0, 0.0, -1.0),
-            axis(1.0, 0.0, 0.0),
-            [(0, true), (1, true), (4, false), (5, true)],
-        ),
-        side(
-            4,
-            axis(0.0, 0.0, 1.0),
-            axis(1.0, 0.0, 0.0),
-            [(2, true), (3, true), (6, false), (7, true)],
-        ),
-    ]
-}
-
-/// A planar face with one wire of the given edges and a p-curve for each of them.
-fn face_of(edges: &[(Edge, usize)], corners: &[Point3], side: &BoxSide) -> Face {
-    let builder = BRepBuilder::default();
-    let plane: Handle<dyn GeomSurface> = Handle::new(GeomPlane::new(side.frame)).into_cast();
-    let mut face = Face::default();
-    builder
-        .make_face_on_surface(&mut face, &plane, PRECISION)
-        .unwrap();
-    let mut wire = Wire::default();
-    builder.make_wire(&mut wire);
-    for &(index, forward) in &side.edges {
-        let (edge, start) = &edges[index];
-        let pcurve = pcurve_on_plane(side.frame, corners[*start], edge);
-        builder
-            .update_edge_pcurve_on_face(edge, &pcurve, &face, PRECISION)
-            .unwrap();
-        let orientation = if forward {
-            Orientation::Forward
-        } else {
-            Orientation::Reversed
-        };
-        builder.add(&mut wire, &edge.oriented(orientation)).unwrap();
-    }
-    builder.add(&mut face, &wire).unwrap();
-    face
-}
-
-/// The 2D line of an edge in the parametric space of a plane: through the edge start
-/// with the direction of the edge, with the same parameter as the 3D line.
-fn pcurve_on_plane(frame: Axis3, start: Point3, edge: &Edge) -> Handle<dyn Geom2dCurve> {
-    let (curve, _, last) = rustycad_tkbrep::brep::BRepTool::curve(edge).unwrap();
-    let end = curve.get().unwrap().value(last).unwrap();
-    let (u0, v0) = elslib::plane_parameters(frame, start);
-    let (u1, v1) = elslib::plane_parameters(frame, end);
-    let direction = Direction2::from_vector(Vector2::new(u1 - u0, v1 - v0)).unwrap();
-    let origin = rustycad_tkmath::gp::Point2::new(u0, v0);
-    Handle::new(Geom2dLine::new(Axis2d::new(origin, direction))).into_cast()
+    wedge_box::make_wedge_box(origin, dx, dy, dz)
 }

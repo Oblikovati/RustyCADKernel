@@ -64,6 +64,11 @@ fn a_box_round_trips_byte_for_byte_from_version_2() {
 #[test]
 fn version_1_faces_come_back_checked_after_their_uv_points_are_updated() {
     let solid = make_box(1.0, 2.0, 3.0);
+    // BRepPrim completes every box face with BRepTools::Update, which checks it; clear
+    // the flag so the read-back flag can only come from the reader's own update.
+    for face in faces(&solid) {
+        face.set_checked(false).unwrap();
+    }
     let bytes = write_set(&solid, options(format_version::VERSION_1));
     let back = read_set(&bytes);
     for face in faces(&back) {
