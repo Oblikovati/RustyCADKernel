@@ -14,13 +14,14 @@
 // Rust translation of ModelingAlgorithms/TKGeomAlgo/Geom2dAPI at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! OCCT package Geom2dAPI: the 2D curve algorithms of the geometry API
-//! (extrema, projection, interpolation and approximation of points).
+//! (extrema, intersection, projection, interpolation and approximation of points).
 //!
 //! The `operator int`/`operator double`/`operator gp_Pnt2d`/`operator
 //! occ::handle<...>` conversions are the `as_int`, `as_real`, `as_point` and
 //! `as_curve` methods.
 mod extrema_curve_curve;
 mod extrema_results;
+mod inter_curve_curve;
 mod interpolate;
 mod interpolate_build;
 mod interpolate_perform;
@@ -29,6 +30,7 @@ mod points_to_bspline_y;
 mod project_point_on_curve;
 
 pub use extrema_curve_curve::ExtremaCurveCurve;
+pub use inter_curve_curve::{CurvePair, InterCurveCurve};
 pub use interpolate::Interpolate;
 pub use points_to_bspline::PointsToBSpline;
 pub use project_point_on_curve::ProjectPointOnCurve;
