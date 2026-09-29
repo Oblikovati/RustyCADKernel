@@ -219,7 +219,12 @@ fn BRepGraph_ReverseTest__WireOrder_SetCoEdgeOrderCanonicalizesOpenWirePermutati
 
     let anUnordered = [aCoEdges[2], aCoEdges[0], aCoEdges[1]];
 
-    assert!(aGraph.editor().wires().set_co_edge_order(aWire, &anUnordered));
+    assert!(
+        aGraph
+            .editor()
+            .wires()
+            .set_co_edge_order(aWire, &anUnordered)
+    );
 
     let anOrdered = &aGraph.topo().wires().relations(aWire).co_edge_ids;
     assert_eq!(anOrdered.len(), aCoEdges.len());

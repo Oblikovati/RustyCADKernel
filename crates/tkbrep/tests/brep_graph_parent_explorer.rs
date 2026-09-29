@@ -28,13 +28,18 @@ use rustycad_tkmath::toploc::Location;
 use support::make_box;
 
 fn translationLocation(theX: f64, theY: f64, theZ: f64) -> Location {
-    Location::new(Transform3::translation_vector(Vector3::new(theX, theY, theZ)))
+    Location::new(Transform3::translation_vector(Vector3::new(
+        theX, theY, theZ,
+    )))
 }
 
 fn rotationZLocation(theAngle: f64) -> Location {
     let mut aTrsf = Transform3::default();
     aTrsf
-        .set_rotation(Axis1::new(Point3::new(0.0, 0.0, 0.0), Direction3::Z), theAngle)
+        .set_rotation(
+            Axis1::new(Point3::new(0.0, 0.0, 0.0), Direction3::Z),
+            theAngle,
+        )
         .unwrap();
     Location::new(aTrsf)
 }
@@ -77,8 +82,15 @@ fn firstSolid() -> NodeId {
 
 /// `Products().Add(theRoot)` then `AppendDocumentRoot`.
 fn addRootPart(aGraph: &mut BRepGraph, theRoot: NodeId) -> ProductId {
-    let aPart = aGraph.editor().products().add(theRoot, &Location::default());
-    aGraph.editor().products().append_document_root(aPart).unwrap();
+    let aPart = aGraph
+        .editor()
+        .products()
+        .add(theRoot, &Location::default());
+    aGraph
+        .editor()
+        .products()
+        .append_document_root(aPart)
+        .unwrap();
     aPart
 }
 
@@ -102,7 +114,10 @@ fn appendOccurrence(
 ) -> OccurrenceId {
     let aDefault = OccurrenceId::default();
     let mut aProducts = aGraph.editor().products();
-    aProducts.append(theParent, theChild, theLoc, aDefault).unwrap().0
+    aProducts
+        .append(theParent, theChild, theLoc, aDefault)
+        .unwrap()
+        .0
 }
 
 /// `Compounds().Add({theChild})`.
@@ -330,7 +345,11 @@ fn BRepGraph_ParentExplorerTest__DeepProductOccurrenceChain_ComposesToTopProduct
     while anExp.more() {
         if anExp.current().def_id == NodeId::from(aTopProduct) {
             foundTop = true;
-            let aX = anExp.leaf_location().transformation().translation_part().x();
+            let aX = anExp
+                .leaf_location()
+                .transformation()
+                .translation_part()
+                .x();
             assert!((aX - anExpectedX).abs() <= precision::confusion());
         }
         anExp.next().unwrap();
@@ -350,17 +369,21 @@ fn BRepGraph_ParentExplorerTest__DeepProductOccurrenceChain_ReachesNestedOccurre
     assert!(aSubAssembly.is_valid());
     assert!(aTopAssembly.is_valid());
 
-    let aPartOccurrence =
-        appendOccurrence(&mut aGraph, aSubAssembly, aPart, &Location::default());
-    let aSubOccurrence =
-        appendOccurrence(&mut aGraph, aTopAssembly, aSubAssembly, &Location::default());
+    let aPartOccurrence = appendOccurrence(&mut aGraph, aSubAssembly, aPart, &Location::default());
+    let aSubOccurrence = appendOccurrence(
+        &mut aGraph,
+        aTopAssembly,
+        aSubAssembly,
+        &Location::default(),
+    );
     assert!(aPartOccurrence.is_valid());
     assert!(aSubOccurrence.is_valid());
 
     let mut hasPartOccurrence = false;
     let mut hasSubOccurrence = false;
     let mut aCount = 0;
-    let mut anIt = ParentExplorer::with_target(&aGraph, aPart.into(), NodeKind::OCCURRENCE).unwrap();
+    let mut anIt =
+        ParentExplorer::with_target(&aGraph, aPart.into(), NodeKind::OCCURRENCE).unwrap();
     while anIt.more() {
         hasPartOccurrence |= anIt.current().def_id == NodeId::from(aPartOccurrence);
         hasSubOccurrence |= anIt.current().def_id == NodeId::from(aSubOccurrence);
@@ -387,8 +410,7 @@ fn BRepGraph_ParentExplorerTest__DeepCompoundChain_ReachesTopCompound() {
 
     let mut aCompoundCount = 0;
     let mut foundTop = false;
-    let mut anExp =
-        ParentExplorer::with_target(&aGraph, firstSolid(), NodeKind::COMPOUND).unwrap();
+    let mut anExp = ParentExplorer::with_target(&aGraph, firstSolid(), NodeKind::COMPOUND).unwrap();
     while anExp.more() {
         aCompoundCount += 1;
         foundTop |= anExp.current().def_id == NodeId::from(aTopCompound);
@@ -436,7 +458,11 @@ fn BRepGraph_ParentExplorerTest__VertexChildOfDeepCompoundChain_ReachesTopCompou
         aCompoundCount += 1;
         if anExp.current().def_id == NodeId::from(aTopCompound) {
             foundTop = true;
-            let aX = anExp.leaf_location().transformation().translation_part().x();
+            let aX = anExp
+                .leaf_location()
+                .transformation()
+                .translation_part()
+                .x();
             assert!((aX - anExpectedX).abs() <= precision::confusion());
         }
         anExp.next().unwrap();
@@ -743,8 +769,7 @@ fn BRepGraph_ParentExplorerTest__CoEdgeChildOfCompound_ImmediateCompoundIsVisibl
     let mut hasWire = false;
     let mut hasCompound = false;
     let mut anExp =
-        ParentExplorer::with_mode(&aGraph, aCoEdgeId.into(), TraversalMode::DirectParents)
-            .unwrap();
+        ParentExplorer::with_mode(&aGraph, aCoEdgeId.into(), TraversalMode::DirectParents).unwrap();
     while anExp.more() {
         if anExp.current().def_id == NodeId::from(aWireId) {
             hasWire = true;

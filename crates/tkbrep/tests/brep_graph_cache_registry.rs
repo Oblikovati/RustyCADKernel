@@ -226,10 +226,7 @@ fn makeBoxGraph() -> BRepGraph {
 }
 
 fn ensureEntryCache(aGraph: &BRepGraph) -> Handle<EntryTestCache> {
-    aGraph
-        .cache_registry()
-        .ensure::<EntryTestCache>()
-        .unwrap()
+    aGraph.cache_registry().ensure::<EntryTestCache>().unwrap()
 }
 
 fn firstShellRef(aGraph: &BRepGraph) -> ShellRefId {
@@ -354,7 +351,11 @@ fn BRepGraph_CacheRegistryTest__ResolveActiveRefChild_RejectsInvalidAndRemovedRe
     assert_eq!(aNode.unwrap().kind, NodeKind::SHELL);
 
     let aCacheRef = aCache.get().unwrap();
-    assert!(aCacheRef.ResolveChildForTest(&aGraph, RefId::default()).is_none());
+    assert!(
+        aCacheRef
+            .ResolveChildForTest(&aGraph, RefId::default())
+            .is_none()
+    );
     let aFarRef = RefId::new(RefKind::SHELL, 999999);
     assert!(aCacheRef.ResolveChildForTest(&aGraph, aFarRef).is_none());
 
@@ -402,7 +403,13 @@ fn BRepGraph_CacheRegistryTest__NodeSubtreeEntry_MissesAfterChildGenerationChang
     aGuard.mark_dirty();
     drop(aGuard);
 
-    assert!(aCache.get().unwrap().GetNodeSubtree(&aGraph, aWire).is_none());
+    assert!(
+        aCache
+            .get()
+            .unwrap()
+            .GetNodeSubtree(&aGraph, aWire)
+            .is_none()
+    );
 }
 
 #[test]
@@ -411,7 +418,11 @@ fn BRepGraph_CacheRegistryTest__RefOwnEntry_MissesAfterRefGenerationChange() {
     let aCache = ensureEntryCache(&aGraph);
 
     let aProductId = ProductId::start();
-    let aOccRefs = &aGraph.topo().products().relations(aProductId).occurrence_ref_ids;
+    let aOccRefs = &aGraph
+        .topo()
+        .products()
+        .relations(aProductId)
+        .occurrence_ref_ids;
     assert!(!aOccRefs.is_empty());
     let anOccRef = aOccRefs[0];
     let aRef = RefId::from(anOccRef);

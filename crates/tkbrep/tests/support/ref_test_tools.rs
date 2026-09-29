@@ -19,11 +19,11 @@
 //! `OuterWireOfFace` is `BRepGraph_Tool::Face::OuterWire`, whose p-curve adaptors can
 //! raise, so it returns `Result`.
 #![allow(dead_code)]
+use rustycad_tkbrep::brep_graph::tool;
 use rustycad_tkbrep::brep_graph::{
     BRepGraph, ChildRefId, CoEdgeId, CompSolidId, CompoundId, FaceId, FaceRefId, NodeId, NodeKind,
     ShellId, ShellRefId, SolidId, SolidRefId, WireId, WireRefId,
 };
-use rustycad_tkbrep::brep_graph::tool;
 use rustycad_tkbrep::brep_graph_inc::Storage;
 use rustycad_tkernel::standard::Failure;
 

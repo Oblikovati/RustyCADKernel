@@ -180,8 +180,7 @@ impl Wedge {
     // p-curve per edge (in the order dd4, dd3, dd2, dd1) and `CompleteFace`.
     fn face(&mut self, d1: usize) -> Face {
         let plane = self.plane(d1);
-        let surface: Handle<dyn GeomSurface> =
-            Handle::new(GeomPlane::from_pln(plane)).into_cast();
+        let surface: Handle<dyn GeomSurface> = Handle::new(GeomPlane::from_pln(plane)).into_cast();
         let builder = BRepBuilder::default();
         let mut face = Face::default();
         builder
@@ -189,7 +188,7 @@ impl Wedge {
             .unwrap();
         let wire = self.wire(d1);
         builder.add(&mut face, &wire).unwrap();
-        if d1 % 2 == 0 {
+        if d1.is_multiple_of(2) {
             face.reverse();
         }
         for d2 in Self::sides(d1) {
@@ -248,12 +247,9 @@ fn low_corner(origin: Point3, dx: f64, dy: f64, dz: f64) -> Point3 {
 /// `BRepPrimAPI_MakeBox(P, dx, dy, dz).Solid()`: the wedge shell (faces XMin, XMax,
 /// YMin, YMax, ZMin, ZMax) closed and completed, in a new solid.
 pub fn make_wedge_box(origin: Point3, dx: f64, dy: f64, dz: f64) -> Solid {
-    let axes = Axis2::with_x_direction(
-        low_corner(origin, dx, dy, dz),
-        Direction3::Z,
-        Direction3::X,
-    )
-    .unwrap();
+    let axes =
+        Axis2::with_x_direction(low_corner(origin, dx, dy, dz), Direction3::Z, Direction3::X)
+            .unwrap();
     let mut wedge = Wedge {
         axes,
         max: [dx.abs(), dy.abs(), dz.abs()],

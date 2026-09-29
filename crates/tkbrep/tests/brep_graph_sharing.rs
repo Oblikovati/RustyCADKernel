@@ -18,7 +18,9 @@
 #![allow(non_snake_case)]
 mod support;
 use rustycad_tkbrep::brep::BRepBuilder;
-use rustycad_tkbrep::brep_graph::iterator::{EdgeIterator, FaceIterator, VertexIterator, WireIterator};
+use rustycad_tkbrep::brep_graph::iterator::{
+    EdgeIterator, FaceIterator, VertexIterator, WireIterator,
+};
 use rustycad_tkbrep::brep_graph::tool;
 use rustycad_tkbrep::brep_graph::validate::{self, Options, Severity};
 use rustycad_tkbrep::brep_graph::*;
@@ -313,16 +315,25 @@ fn BRepGraph_SharingTest__CompoundTwoIdenticalBoxes() {
     assert_eq!(aGraph.topo().vertices().nb(), 8);
 
     // Compound has 2 child references to the same solid.
-    let aChildRefs =
-        BRepGraph_TestTools::child_refs_of_parent(&aGraph, CompoundId::start().into());
+    let aChildRefs = BRepGraph_TestTools::child_refs_of_parent(&aGraph, CompoundId::start().into());
     assert_eq!(aChildRefs.len(), 2);
     assert_ne!(
         aChildRefs[0], aChildRefs[1],
         "Repeated child occurrences in one parent must keep separate slots"
     );
     assert_eq!(
-        aGraph.refs().children().entry(aChildRefs[0]).child_node_id.index,
-        aGraph.refs().children().entry(aChildRefs[1]).child_node_id.index
+        aGraph
+            .refs()
+            .children()
+            .entry(aChildRefs[0])
+            .child_node_id
+            .index,
+        aGraph
+            .refs()
+            .children()
+            .entry(aChildRefs[1])
+            .child_node_id
+            .index
     );
 }
 
@@ -354,8 +365,16 @@ fn BRepGraph_SharingTest__SameReferenceRepresentationAcrossDifferentParents_Uses
         "Each parent usage must have its own child-reference entry"
     );
     assert_eq!(
-        aGraph.refs().children().entry(aParentARefs[0]).child_node_id,
-        aGraph.refs().children().entry(aParentBRefs[0]).child_node_id
+        aGraph
+            .refs()
+            .children()
+            .entry(aParentARefs[0])
+            .child_node_id,
+        aGraph
+            .refs()
+            .children()
+            .entry(aParentBRefs[0])
+            .child_node_id
     );
 
     let anAuditResult = validate::perform_with_options(&aGraph, &Options::audit());

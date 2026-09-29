@@ -58,7 +58,11 @@ fn BRepGraph_ReplaceVertexTest__StartVertex_SwappedToFreshVertex_AuditClean() {
     assert!(aGraph.topo().edges().nb() > 0);
 
     let anEdgeId = EdgeId::new(0);
-    let anOldStartRefId = aGraph.topo().edges().definition(anEdgeId).start_vertex_ref_id;
+    let anOldStartRefId = aGraph
+        .topo()
+        .edges()
+        .definition(anEdgeId)
+        .start_vertex_ref_id;
     assert!(anOldStartRefId.is_valid());
 
     let aNewVertex = aGraph
@@ -73,7 +77,11 @@ fn BRepGraph_ReplaceVertexTest__StartVertex_SwappedToFreshVertex_AuditClean() {
 
     // Edge slot must now point at the new ref.
     assert_eq!(
-        aGraph.topo().edges().definition(anEdgeId).start_vertex_ref_id,
+        aGraph
+            .topo()
+            .edges()
+            .definition(anEdgeId)
+            .start_vertex_ref_id,
         aNewRefId
     );
 
@@ -124,8 +132,16 @@ fn BRepGraph_ReplaceVertexTest__SameVertex_Idempotent() {
     assert!(!aGraph.is_empty());
 
     let anEdgeId = EdgeId::new(0);
-    let anOldStartRefId = aGraph.topo().edges().definition(anEdgeId).start_vertex_ref_id;
-    let aSameVertex = aGraph.refs().vertices().entry(anOldStartRefId).child_vertex_id;
+    let anOldStartRefId = aGraph
+        .topo()
+        .edges()
+        .definition(anEdgeId)
+        .start_vertex_ref_id;
+    let aSameVertex = aGraph
+        .refs()
+        .vertices()
+        .entry(anOldStartRefId)
+        .child_vertex_id;
 
     let aResult = replaceVertex(&mut aGraph, anEdgeId, anOldStartRefId, aSameVertex);
     assert_eq!(
@@ -141,7 +157,11 @@ fn BRepGraph_ReplaceVertexTest__InactiveEdge_Rejected() {
     assert!(!aGraph.is_empty());
 
     let anEdgeId = EdgeId::new(0);
-    let anOldRefId = aGraph.topo().edges().definition(anEdgeId).start_vertex_ref_id;
+    let anOldRefId = aGraph
+        .topo()
+        .edges()
+        .definition(anEdgeId)
+        .start_vertex_ref_id;
 
     let aNewVertex = aGraph
         .editor()
@@ -194,7 +214,11 @@ fn BRepGraph_ReplaceVertexTest__Relations_Rebuilt_VertexToEdge() {
     assert!(!aGraph.is_empty());
 
     let anEdgeId = EdgeId::new(0);
-    let anOldRefId = aGraph.topo().edges().definition(anEdgeId).start_vertex_ref_id;
+    let anOldRefId = aGraph
+        .topo()
+        .edges()
+        .definition(anEdgeId)
+        .start_vertex_ref_id;
     let aOldVertexId = aGraph.refs().vertices().entry(anOldRefId).child_vertex_id;
 
     let aNewVertex = aGraph
@@ -206,7 +230,7 @@ fn BRepGraph_ReplaceVertexTest__Relations_Rebuilt_VertexToEdge() {
 
     // New vertex must now see anEdgeId in its vertex-to-edge reverse map.
     let aNewEdges = aGraph.topo().vertices().edges(aNewVertex);
-    let aFoundNew = aNewEdges.iter().any(|anE| *anE == anEdgeId);
+    let aFoundNew = aNewEdges.contains(&anEdgeId);
     assert!(
         aFoundNew,
         "Vertex->Edge relation tables must include the replacement edge"
@@ -215,7 +239,7 @@ fn BRepGraph_ReplaceVertexTest__Relations_Rebuilt_VertexToEdge() {
     // Old vertex may still be referenced by other edges of the box (shared
     // corners); but it should no longer see anEdgeId through this slot.
     let aOldEdges = aGraph.topo().vertices().edges(aOldVertexId);
-    let aFoundOld = aOldEdges.iter().any(|anE| *anE == anEdgeId);
+    let aFoundOld = aOldEdges.contains(&anEdgeId);
     assert!(
         !aFoundOld,
         "Vertex->Edge relation tables must drop the replaced edge"
