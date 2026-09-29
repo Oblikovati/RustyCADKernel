@@ -35,6 +35,44 @@ pub(super) fn at(array: &Array1<'_, f64>, index: i32) -> Result<f64, Failure> {
         .map_err(|error| array_failure(error, CONTEXT))
 }
 
+/// The element blocks of the criterion (`H` over `0..=WorkDegree` squared, `G`
+/// over `0..=WorkDegree`), reused for every element.
+struct ElementBlocks {
+    h: Matrix<'static>,
+    g: Vector<'static>,
+}
+
+impl ElementBlocks {
+    fn new(mx_deg: i32) -> Result<Self, Failure> {
+        let h: Matrix<'static> = Matrix::with_bounds(0, mx_deg, 0, mx_deg)
+            .map_err(|error| array_failure(error, CONTEXT))?;
+        let g: Vector<'static> = Vector::with_bounds(0, mx_deg)?;
+        Ok(Self { h, g })
+    }
+
+    // The Hessian block of element `el` (when `to_assemble`) on the diagonal of
+    // every dimension, then its gradient for each dimension.
+    fn assemble_element(
+        &mut self,
+        j: &dyn SmoothCriterion,
+        a: &mut Assembly,
+        (el, nb_dim): (i32, i32),
+        to_assemble: bool,
+    ) -> Result<(), Failure> {
+        if to_assemble {
+            j.hessian(el, 1, 1, &mut self.h)?;
+            for dim in 1..=nb_dim {
+                a.add_matrix(el, dim, dim, &self.h)?;
+            }
+        }
+        for dim in 1..=nb_dim {
+            j.gradient(el, dim, &mut self.g)?;
+            a.add_vector(el, dim, &self.g)?;
+        }
+        Ok(())
+    }
+}
+
 impl Variational {
     /// `Optimization(J, A, ToAssemble, EpsDeg, Curve, Parameters)`: assembles the
     /// Hessian (when `to_assemble`) and the gradient of J element by element, adds the
@@ -51,43 +89,57 @@ impl Variational {
         let c: &Curve = curve
             .get()
             .ok_or_else(|| Failure::new("AppDef_Variational::Optimization: null curve"))?;
-        let (mx_deg, nb_elm, nb_dim) = (c.base().work_degree(), c.nb_elements(), c.dimension());
-        let mut h: Matrix<'static> = Matrix::with_bounds(0, mx_deg, 0, mx_deg)
-            .map_err(|error| array_failure(error, CONTEXT))?;
-        let mut g: Vector<'static> = Vector::with_bounds(0, mx_deg)?;
+        let mut blocks: ElementBlocks = ElementBlocks::new(c.base().work_degree())?;
         let mut sol: Vector<'static> = Vector::with_bounds(1, a.nb_glob_var())?;
         let ass_table: AssemblyTable = a.assembly_table().clone();
         let cb_long: f64 = j.est_length();
         // Updating Assembly
-        if to_assemble {
-            a.nullify_matrix();
-        }
-        a.nullify_vector();
-        for el in 1..=nb_elm {
-            if to_assemble {
-                j.hessian(el, 1, 1, &mut h)?;
-                for dim in 1..=nb_dim {
-                    a.add_matrix(el, dim, dim, &h)?;
-                }
-            }
-            for dim in 1..=nb_dim {
-                j.gradient(el, dim, &mut g)?;
-                a.add_vector(el, dim, &g)?;
-            }
-        }
+        Self::assemble_criterion(j, a, (c, to_assemble), &mut blocks)?;
         // Solution of system
         if to_assemble {
-            if self.tables.nb_constr() != 0 {
-                // Treatment of constraints
-                self.assembling_constraints(c, parameters, cb_long, a)?;
-            }
-            a.solve()?;
+            self.solve_with_constraints(c, parameters, cb_long, a)?;
         }
         a.solution(&mut sol)?;
         // Updating J
         j.set_curve(curve)?;
         j.input_vector(&sol, &ass_table)?;
         self.reduce_degrees(c, eps_deg, parameters)
+    }
+
+    // The Hessian (when `to_assemble`) and the gradient of J, element by element,
+    // into a nullified assembly.
+    fn assemble_criterion(
+        j: &dyn SmoothCriterion,
+        a: &mut Assembly,
+        (c, to_assemble): (&Curve, bool),
+        blocks: &mut ElementBlocks,
+    ) -> Result<(), Failure> {
+        if to_assemble {
+            a.nullify_matrix();
+        }
+        a.nullify_vector();
+        for el in 1..=c.nb_elements() {
+            blocks.assemble_element(j, a, (el, c.dimension()), to_assemble)?;
+        }
+        Ok(())
+    }
+
+    // The constraints added to the assembly (when there are some), then the
+    // factorization.
+    fn solve_with_constraints(
+        &self,
+        c: &Curve,
+        parameters: &Array1<'_, f64>,
+        cb_long: f64,
+        a: &mut Assembly,
+    ) -> Result<(), Failure> {
+        if self.tables.nb_constr() != 0 {
+            // Treatment of constraints
+            self.assembling_constraints(c, parameters, cb_long, a)?;
+        }
+        // The native code ignores whether the factorization succeeded.
+        a.solve()?;
+        Ok(())
     }
 
     // Updating Curve and reduction of degree.
