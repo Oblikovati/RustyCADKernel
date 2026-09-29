@@ -32,7 +32,7 @@ use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCircle, GeomCurve, GeomPlane, Ge
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{self, Axis2, Axis3, Point3};
 use rustycad_tkmath::toploc::Location;
-use support::{make_box, make_edge, make_edge_on_whole_curve};
+use support::{expect_double_eq, make_box, make_edge, make_edge_on_whole_curve};
 
 fn gp_Pnt(x: f64, y: f64, z: f64) -> Point3 {
     Point3::new(x, y, z)
@@ -60,12 +60,6 @@ fn circle(radius: f64) -> Handle<dyn GeomCurve> {
 /// `new Geom_Plane(gp::XOY())`.
 fn xoy_plane() -> Handle<dyn GeomSurface> {
     Handle::new(GeomPlane::new(Axis3::from_axis2(gp::xoy()))).into_cast()
-}
-
-/// `EXPECT_DOUBLE_EQ`: equal within 4 units in the last place.
-fn expect_double_eq(a: f64, b: f64) {
-    let ulps = (a.to_bits() as i64 - b.to_bits() as i64).unsigned_abs();
-    assert!(a == b || ulps <= 4, "{a} != {b}");
 }
 
 #[test]
