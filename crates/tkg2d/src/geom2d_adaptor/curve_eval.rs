@@ -27,10 +27,9 @@ use super::curve_state::{AdaptorState, BSplineData, BezierData, CurveData};
 use crate::geom2d::errors::undefined_derivative;
 use crate::geom2d::offset_curve_utils::evaluate_dn;
 use crate::geom2d::{Geom2dBSplineCurve, Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
-use rustycad_tkernel::ncollection::Array1;
-use rustycad_tkernel::precision;
+use crate::geom2d_adaptor::span_cache::{self, BOUNDARY_LOCATE_TOLERANCE, CacheSource};
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkmath::bsplclib::{Cache, flat_bezier_knots};
+use rustycad_tkmath::bsplclib::Cache;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::gp::{Point2, Vector2};
 
@@ -89,52 +88,28 @@ fn bspline_eval<O: EvalOrder>(
     O::cached(data.cache.as_ref().expect("cache built above"), u)
 }
 
-// Half the parametric confusion: the LocateU tolerance of the boundary spans.
-const POS_TOL: f64 = precision::p_confusion() / 2.0;
-
-/// `IsBoundary`: the knot span that `u` ends when it equals an adaptor bound, widened
-/// to one span inside `1..=NbKnots`; `None` elsewhere; `boundary_span(&c, 0.0, 0.0, 1.0)?`.
+/// `IsBoundary` on the knots of `curve`; `boundary_span(&c, 0.0, 0.0, 1.0)?`.
 pub(super) fn boundary_span(
     curve: &Geom2dBSplineCurve,
     u: f64,
     first: f64,
     last: f64,
 ) -> Result<Option<(i32, i32)>, Failure> {
-    if u == first {
-        let (mut start, mut finish) = curve.locate_u(first, POS_TOL, false)?;
-        start = start.max(1);
-        if start >= finish {
-            finish = start + 1;
-        }
-        return Ok(Some((start, finish)));
-    }
-    if u == last {
-        let (mut start, mut finish) = curve.locate_u(last, POS_TOL, false)?;
-        finish = finish.min(curve.nb_knots());
-        if start >= finish {
-            start = finish - 1;
-        }
-        return Ok(Some((start, finish)));
-    }
-    Ok(None)
+    let locate = |bound: f64| curve.locate_u(bound, BOUNDARY_LOCATE_TOLERANCE, false);
+    span_cache::boundary_span(u, (first, last), || curve.nb_knots(), locate)
 }
 
 // RebuildCache for a B-spline: create the cache once, then fill it on the span of `u`.
 fn rebuild_bspline_cache(data: &mut BSplineData, u: f64) -> Result<(), Failure> {
     let curve: &Geom2dBSplineCurve = &data.curve;
     let (flat, poles, weights) = (curve.knot_sequence(), curve.poles(), curve.weights());
-    if data.cache.is_none() {
-        let periodic: bool = curve.is_periodic();
-        data.cache = Some(Cache::new(
-            curve.degree(),
-            periodic,
-            &flat,
-            &poles,
-            weights.as_ref(),
-        )?);
-    }
-    let cache: &mut Cache = data.cache.as_mut().expect("cache created above");
-    cache.build_cache(u, &flat, &poles, weights.as_ref())
+    let source = CacheSource {
+        flat: &flat,
+        poles: &poles,
+        weights: weights.as_ref(),
+    };
+    let (degree, periodic) = (|| curve.degree(), || curve.is_periodic());
+    span_cache::rebuild_cache(&mut data.cache, &source, degree, periodic, u)
 }
 
 // RebuildCache for a Bezier curve, which runs only while no cache exists: its single
@@ -142,17 +117,9 @@ fn rebuild_bspline_cache(data: &mut BSplineData, u: f64) -> Result<(), Failure> 
 fn bezier_cache(data: &mut BezierData, u: f64) -> Result<&Cache, Failure> {
     if data.cache.is_none() {
         let degree: i32 = data.curve.degree();
-        let knots: &'static [f64] = flat_bezier_knots(degree)?;
-        let flat = Array1::from_shared(&knots[..2 * (degree as usize + 1)], 1);
         let (poles, weights) = (data.curve.poles(), data.curve.weights());
-        let mut cache = Cache::new(
-            degree,
-            data.curve.is_periodic(),
-            &flat,
-            &poles,
-            weights.as_ref(),
-        )?;
-        cache.build_cache(u, &flat, &poles, weights.as_ref())?;
+        let periodic: bool = data.curve.is_periodic();
+        let cache = span_cache::bezier_span_cache(degree, periodic, &poles, weights.as_ref(), u)?;
         data.cache = Some(cache);
     }
     Ok(data.cache.as_ref().expect("cache built above"))
