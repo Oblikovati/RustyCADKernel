@@ -194,3 +194,37 @@ live in TKG2d (`geom2d_grid_eval::grid_loops`, `bezier_arrays`) and serve both
 packages, the conic curves share one loop driver over a `ConicTerms` trait, and the
 cylinder, sphere, cone and torus share the U-row context (`UContext`) and a
 `QuadricTerms` driver, each keeping its own formulas in the native operation order.
+
+## 10. Code shared between Geom2d and Geom
+
+OCCT writes many TKG3d classes as copies of their TKG2d counterparts with `gp_Pnt` in
+place of `gp_Pnt2d`. The port writes such code once in TKG2d, which TKG3d depends on,
+and keeps every operation in the native order, so both toolkits stay bit-identical to
+their oracles:
+
+- The B-spline and Bezier curve classes keep their fields in the generic
+  `geom2d::bspline_curve_core::BSplineCurveCore` and
+  `geom2d::bezier_curve_core::BezierCurveCore`. Each crate implements the kind
+  traits (`SplineCurveKind`, `BSplineCurveKind`, `BezierCurveKind`) on one marker
+  type (`Geom2dSplineKind`, `GeomSplineKind`). The traits list the members where the
+  classes differ, and each crate implements them with its own native code: the
+  evaluation representation and its RepUtils calls, the UndefinedDerivative
+  exception, when an edit clears the evaluation representation (Geom only), the
+  PeriodicNormalization algorithm (loops in Geom2d, a closed form in Geom), the
+  RemoveKnot index range, and the Bezier closure tolerance (gp::Resolution in
+  Geom2d, Precision::Confusion in Geom).
+- Shared algorithms that do not depend on the class live in plain modules:
+  `geom2d_adaptor::knot_continuity` and `span_cache` (LocalContinuity, IsBoundary,
+  the caches of the curve adaptors), `geom2d::trim_bounds` (SetTrim and Reverse of
+  the trimmed curves), and `geom2d_eval::tbezier_data` and `aht_bezier_data` (the
+  eval Bezier curves).
+- Public members that only forward to that shared state, and virtual members with
+  constant bodies, come from exported declarative macros (`bspline_curve_edits`,
+  `spline_pole_members`, `eval_representation_members`, `open_curve_range`...). The
+  macros keep the public names and signatures of each class unchanged.
+
+Code where the two packages differ in any operation, order, constant or branch stays
+separate, with a comment that names the difference: for example `TryEvalCurveDN`
+(Geom2dEval multiplies the scale N times, GeomEval uses `pow`), the offset formulas
+(perpendicular in 2D, cross product with the reference direction in 3D), the sine-wave
+evaluators, and the LocalContinuity of `GeomAdaptor_Surface`.
