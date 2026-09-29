@@ -52,7 +52,11 @@ fn a_missing_curve_is_an_edge_error_and_an_ownerless_record() {
     let issues = audit(&graph);
     let text = "Non-degenerate EdgeDef has no Curve3D representation";
     assert!(has_issue(&issues, edge.into(), text));
-    assert!(has_issue(&issues, NodeId::default(), "Active EdgeCurve3DRep has no owner"));
+    assert!(has_issue(
+        &issues,
+        NodeId::default(),
+        "Active EdgeCurve3DRep has no owner"
+    ));
     // The lightweight checks do not look at representations.
     assert!(validate::perform(&graph).is_valid());
 }
@@ -60,15 +64,27 @@ fn a_missing_curve_is_an_edge_error_and_an_ownerless_record() {
 #[test]
 fn a_shared_curve_record_has_a_mismatched_parent_and_two_owners() {
     let mut graph = box_graph();
-    let shared = graph.topo().edges().definition(EdgeId::new(0)).curve3d_rep_id;
+    let shared = graph
+        .topo()
+        .edges()
+        .definition(EdgeId::new(0))
+        .curve3d_rep_id;
     let mut guard = graph.editor().edges().mutate(EdgeId::new(1)).unwrap();
     guard.internal().curve3d_rep_id = shared;
     drop(guard);
     let issues = audit(&graph);
     let edge1 = NodeId::from(EdgeId::new(1));
-    assert!(has_issue(&issues, edge1, "EdgeCurve3DRep.ParentEdgeId mismatch"));
+    assert!(has_issue(
+        &issues,
+        edge1,
+        "EdgeCurve3DRep.ParentEdgeId mismatch"
+    ));
     let edge0 = NodeId::from(EdgeId::new(0));
-    assert!(has_issue(&issues, edge0, "Active EdgeCurve3DRep has multiple owners"));
+    assert!(has_issue(
+        &issues,
+        edge0,
+        "Active EdgeCurve3DRep has multiple owners"
+    ));
 }
 
 #[test]
@@ -94,7 +110,11 @@ fn a_vertex_reference_on_a_removed_vertex_fails_the_lightweight_mode() {
         .vertices()
         .add(rustycad_tkmath::gp::Point3::new(99.0, 0.0, 0.0), 1e-7);
     graph.editor().generic().remove_node(spare.into()).unwrap();
-    let reference = graph.topo().edges().definition(EdgeId::new(0)).end_vertex_ref_id;
+    let reference = graph
+        .topo()
+        .edges()
+        .definition(EdgeId::new(0))
+        .end_vertex_ref_id;
     let mut guard = graph.editor().vertices().mutate_ref(reference).unwrap();
     guard.internal().child_vertex_id = spare;
     drop(guard);
@@ -109,7 +129,11 @@ fn a_compound_that_contains_itself_is_a_direct_cycle() {
     let mut graph = box_graph();
     let compound = graph.editor().compounds().add(&[SolidId::new(0).into()]);
     let reference = graph.refs().children().ids_of(compound)[0];
-    let mut guard = graph.editor().generic().mutate_child_ref(reference).unwrap();
+    let mut guard = graph
+        .editor()
+        .generic()
+        .mutate_child_ref(reference)
+        .unwrap();
     guard.internal().child_node_id = compound.into();
     drop(guard);
     let issues = audit(&graph);
@@ -142,7 +166,11 @@ fn a_root_product_placed_by_an_occurrence_is_reported_in_both_modes() {
         .unwrap();
     products.append_document_root(part).unwrap();
     let text = "Document root Product is referenced by an active Occurrence";
-    assert!(has_issue(&validate::perform(&graph).issues, part.into(), text));
+    assert!(has_issue(
+        &validate::perform(&graph).issues,
+        part.into(),
+        text
+    ));
     assert!(has_issue(&audit(&graph), part.into(), text));
 }
 
