@@ -54,6 +54,7 @@ PROBE_CORPORA: tuple[ProbeCorpus, ...] = (
     ProbeCorpus('rustycad-tkg3d', 'numeric_probe', 'target/oracle-tkg3d/numeric'),
     ProbeCorpus('rustycad-tkgeombase', 'numeric_probe', 'target/oracle-tkgeombase/numeric'),
     ProbeCorpus('rustycad-tkbrep', 'numeric_probe', 'target/oracle-tkbrep/numeric'),
+    ProbeCorpus('rustycad-tkgeomalgo', 'numeric_probe', 'target/oracle-tkgeomalgo/numeric'),
 )
 
 
@@ -91,7 +92,9 @@ def build_probe(corpus: ProbeCorpus, run: Runner) -> Path:
     `cargo llvm-cov run` builds the example with the coverage flags; the empty input
     makes the run itself a no-op. build_probe(PROBE_CORPORA[1], run_command)
     """
-    run(['cargo', 'llvm-cov', 'run', '--no-report', '--no-clean', '--locked', '-p', corpus.package,
+    # --no-report already keeps the earlier artifacts and profiles; cargo-llvm-cov 0.9.1
+    # rejects it together with --no-clean.
+    run(['cargo', 'llvm-cov', 'run', '--no-report', '--locked', '-p', corpus.package,
          '--example', corpus.example], '')
     return ROOT/'target/llvm-cov-target/debug/examples'/corpus.example
 

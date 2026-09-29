@@ -57,7 +57,7 @@ class ReplayProbeTests(unittest.TestCase):
             builder = RecordingProbeRunner('')
             shards = FixedShardRunner({'op 1\n': 'OK 1\n', 'op 2\n': 'OK 2\n'})
             self.assertEqual(replay_probe(corpus, builder, shards), 2)
-            self.assertEqual(builder.commands[0][:5], ['cargo', 'llvm-cov', 'run', '--no-report', '--no-clean'])
+            self.assertEqual(builder.commands[0][:5], ['cargo', 'llvm-cov', 'run', '--no-report', '--locked'])
             self.assertTrue(all(e['LLVM_PROFILE_FILE'].endswith('-%p-%m.profraw') for e in shards.environments))
             with self.assertRaises(RuntimeError):
                 replay_probe(corpus, builder, FixedShardRunner({'op 1\n': 'OK 1\n', 'op 2\n': 'OK 3\n'}))

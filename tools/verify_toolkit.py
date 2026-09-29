@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Verify mapped toolkit suites against unchanged OCCT GoogleTest sources.
 
-Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep)
+Usage: python3 tools/verify_toolkit.py TKMath --jobs 4   (or TKG2d, TKG3d, TKGeomBase, TKBRep, TKGeomAlgo)
 The TKernel verifier additionally checks its approved native skip and differential corpora.
 Each toolkit also runs its numeric differential verifier (NUMERIC_VERIFIERS).
 """
@@ -33,6 +33,7 @@ NUMERIC_VERIFIERS = {
     'TKG3d': ('tools/verify_tkg3d_numeric.py', 'target/oracle-tkg3d/numeric'),
     'TKGeomBase': ('tools/verify_tkgeombase_numeric.py', 'target/oracle-tkgeombase/numeric'),
     'TKBRep': ('tools/verify_tkbrep_numeric.py', 'target/oracle-tkbrep/numeric'),
+    'TKGeomAlgo': ('tools/verify_tkgeomalgo_numeric.py', 'target/oracle-tkgeomalgo/numeric'),
 }
 
 
@@ -40,7 +41,9 @@ def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
     """Reject stale, partial, or unsupported mappings before building; selected_rows('TKMath', snapshot)."""
     ledger = json.loads((ROOT/'porting/parity.json').read_text())
     rows = [row for row in ledger['tests'] if row['toolkit'] == toolkit]
-    if not rows: raise ValueError(f'No mapped declarations for {toolkit}')
+    # A toolkit starts with its numeric oracle before its first suite is mapped; main()
+    # then runs the numeric verifier alone and reports 0 mapped declarations.
+    if not rows: return []
     candidates = {row['name'] for entry in inventory['toolkits'] if entry['name'] == toolkit
                   for row in entry['gtest_declaration_candidates']}
     if len({row['upstream_id'] for row in rows}) != len(rows): raise ValueError('Duplicate declaration mappings')
@@ -160,13 +163,10 @@ def main() -> None:
     if args.only:
         rows = [row for row in rows if any(text in row['source'] for text in args.only)]
         if not rows: raise ValueError(f'--only {args.only} selects no mapped sources; expected a substring of a mapped source path')
-    paths = verify_sources(source,rows); native,rust = mapped_runtime_sets(rows)
     environment = dict(os.environ,LC_ALL='C',LANG='C')
     environment['PATH'] = str(Path.home()/'.cargo/bin')+os.pathsep+environment['PATH']
     build = prepare_build(source,output,inventory,args.jobs,environment,args.native_build)
-    approved = approved_native_failures(rows)
-    libraries = native_tests(source,output,build,paths,args.jobs,native,environment,approved)
-    rust_tests(output,rows,rust,environment)
+    native,rust,approved,libraries = mapped_suites(source,output,build,rows,args.jobs,environment)
     numeric = None
     if args.only:
         print(f'PARTIAL PASS (--only {args.only}): {len(rows)} declarations; not a toolkit gate')
@@ -175,6 +175,20 @@ def main() -> None:
     run([sys.executable,ROOT/script,'--source',source,'--native-build',build],output/'numeric-verification.log',env=environment,timeout=NUMERIC_TIMEOUT_SECONDS)
     numeric = json.loads((ROOT/evidence/'report.json').read_text())
     record_report(output,args.toolkit,inventory,rows,native,rust,libraries,numeric,approved)
+
+
+def mapped_suites(source: Path, output: Path, build: Path, rows: list[dict], jobs: int, environment: dict) -> tuple[set, set, dict[str, str], list[Path]]:
+    """Run the mapped suites natively and in Rust; return the native and Rust runtime
+    cases, the approved native failures and the linked libraries. Without mapped rows
+    nothing runs and the libraries are only hashed for the report;
+    mapped_suites(source, out, build, rows, 4, env)."""
+    if not rows:
+        return set(), set(), {}, [unique(build,f'lib{name}.so') for name in LINKED_TOOLKITS]
+    paths = verify_sources(source,rows); native,rust = mapped_runtime_sets(rows)
+    approved = approved_native_failures(rows)
+    libraries = native_tests(source,output,build,paths,jobs,native,environment,approved)
+    rust_tests(output,rows,rust,environment)
+    return native,rust,approved,libraries
 
 
 def record_report(output: Path, toolkit: str, inventory: dict, rows: list[dict], native: set, rust: set, libraries: list[Path], numeric: dict | None, approved: dict[str, str]) -> None:
