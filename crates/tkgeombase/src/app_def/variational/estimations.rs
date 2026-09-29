@@ -103,17 +103,7 @@ impl Variational {
         ];
         let scnd1: EstVector = self.est_secnd(first, (&tang[0], &tang[1]), length)?;
         let scnd2: EstVector = self.est_secnd(first + 1, (&tang[0], &tang[2]), length)?;
-        // Modified by skv - Fri Apr  8 14:58:12 2005 OCC8559: Delta between the first two.
-        let mut delta: f64 = 0.5 * (self.parameter(first + 1)? - self.parameter(first)?);
-        if delta <= eps1 {
-            delta = 1.;
-        }
-        let e2: f64 = norm2(&scnd1)? * delta;
-        let e3: f64 = if delta > eps1 {
-            norm2(&subtracted(&scnd2, &scnd1))? / (4. * delta)
-        } else {
-            0.
-        };
+        let [e2, e3] = self.first_terms((&scnd1, &scnd2), eps1)?;
         let zero: EstVector = vec![0.; self.dimension as usize];
         Ok(Estimation {
             tang,
@@ -121,6 +111,27 @@ impl Variational {
             e2,
             e3,
         })
+    }
+
+    // The E2 and E3 terms of the first point from the first two second derivatives.
+    fn first_terms(
+        &self,
+        (scnd1, scnd2): (&[f64], &[f64]),
+        eps1: f64,
+    ) -> Result<[f64; 2], Failure> {
+        let first: i32 = self.first_point;
+        // Modified by skv - Fri Apr  8 14:58:12 2005 OCC8559: Delta between the first two.
+        let mut delta: f64 = 0.5 * (self.parameter(first + 1)? - self.parameter(first)?);
+        if delta <= eps1 {
+            delta = 1.;
+        }
+        let e2: f64 = norm2(scnd1)? * delta;
+        let e3: f64 = if delta > eps1 {
+            norm2(&subtracted(scnd2, scnd1))? / (4. * delta)
+        } else {
+            0.
+        };
+        Ok([e2, e3])
     }
 
     // An inner point `ipnt` (slot `curr` of the rotation): the tangent two points on
