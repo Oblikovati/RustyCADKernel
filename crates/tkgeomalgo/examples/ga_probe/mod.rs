@@ -3,6 +3,7 @@
 // uses a subset of them, so unused ones are expected in these two modules.
 #[allow(dead_code, unused_imports)]
 pub mod common;
+pub mod fair_curve;
 pub mod int_surf;
 pub mod intf;
 pub mod law;

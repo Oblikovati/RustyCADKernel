@@ -148362,6 +148362,550 @@
       "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::is_g2",
       "status": "implemented",
       "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_AnalysisCode",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_AnalysisCode.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveAnalysisCode",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten(const gp_Pnt2d&,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::new",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::~FairCurve_Batten()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "the destructor is Rust's Drop of the owned arrays; nothing to port"
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetFreeSliding(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_free_sliding",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetConstraintOrder1(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_constraint_order1",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetConstraintOrder2(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_constraint_order2",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetP1(const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_p1",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetP2(const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_p2",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetAngle1(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_angle1",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetAngle2(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_angle2",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetHeight(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_height",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetSlope(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_slope",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SetSlidingFactor(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::set_sliding_factor",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::Compute(FairCurve_AnalysisCode&,int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::compute",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::SlidingOfReference() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::sliding_of_reference",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetFreeSliding() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_free_sliding",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetConstraintOrder1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_constraint_order1",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetConstraintOrder2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_constraint_order2",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetP1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_p1",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetP2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_p2",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetAngle1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_angle1",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetAngle2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_angle2",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetHeight() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_height",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetSlope() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_slope",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::GetSlidingFactor() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::get_sliding_factor",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::Curve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::curve",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Batten::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Batten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBatten::dump",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_BattenLaw(double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_BattenLaw.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBattenLaw::new",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_BattenLaw::SetSliding(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_BattenLaw.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBattenLaw::set_sliding",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_BattenLaw::SetHeigth(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_BattenLaw.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBattenLaw::set_heigth",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_BattenLaw::SetSlope(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_BattenLaw.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBattenLaw::set_slope",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_BattenLaw::Value(double,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_BattenLaw.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveBattenLaw::height",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::NbVariables() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfEnergy::nb_variables",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::NbEquations() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfEnergy::nb_equations",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfEnergy::SetDerivativeOrder(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfEnergy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfEnergy::set_derivative_order",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfJerk(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,const FairCurve_BattenLaw&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfJerk.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfJerk::new",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfJerk::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfJerk.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfJerk::value",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfSagging(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,const FairCurve_BattenLaw&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfSagging.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfSagging::new",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfSagging::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfSagging.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfSagging::value",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfTension(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,double,const FairCurve_BattenLaw&,int,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfTension.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfTension::new",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfTension::SetLengthSliding(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfTension.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfTension::set_length_sliding",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_DistributionOfTension::Value(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_DistributionOfTension.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveDistributionOfTension::value",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::NbVariables() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel::nb_variables",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Value(const math_Vector&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel::value",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Gradient(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel::gradient",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Values(const math_Vector&,double&,math_Vector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel::values",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Values(const math_Vector&,double&,math_Vector&,math_Matrix&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel::values_hessian",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Variable(math_Vector&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel::variable",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Energy::Poles() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Energy.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyModel::poles",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfBatten(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,int,const FairCurve_BattenLaw&,double,bool,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfBatten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfBatten::new",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfBatten::LengthSliding() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfBatten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfBatten::length_sliding",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfBatten::Status() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfBatten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfBatten::status",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfBatten::Variable(math_Vector&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfBatten.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfBatten::variable",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfMVC(int,const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<gp_Pnt2d>>&,int,int,const FairCurve_BattenLaw&,double,double,bool,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfMVC.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfMvc::new",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfMVC::LengthSliding() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfMVC.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfMvc::length_sliding",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfMVC::Status() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfMVC.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfMvc::status",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_EnergyOfMVC::Variable(math_Vector&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_EnergyOfMVC.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveEnergyOfMvc::variable",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_MinimalVariation(const gp_Pnt2d&,const gp_Pnt2d&,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::new",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_MinimalVariation::SetCurvature1(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::set_curvature1",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_MinimalVariation::SetCurvature2(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::set_curvature2",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_MinimalVariation::SetPhysicalRatio(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::set_physical_ratio",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_MinimalVariation::Compute(FairCurve_AnalysisCode&,int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::compute",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_MinimalVariation::GetCurvature1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::get_curvature1",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_MinimalVariation::GetCurvature2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::get_curvature2",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_MinimalVariation::GetPhysicalRatio() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::get_physical_ratio",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_MinimalVariation::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_MinimalVariation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveMinimalVariation::dump",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Newton(const math_MultipleVarFunctionWithHessian&,double,double,int,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Newton.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveNewton::new",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "FairCurve_Newton::IsConverged() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/FairCurve/FairCurve_Newton.hxx",
+      "rust_item": "rustycad_tkgeomalgo::fair_curve::FairCurveNewton::is_converged",
+      "status": "implemented",
+      "notes": "FairCurve mapping (docs/tkgeomalgo-progress.md): exceptions become Result errors (Standard_NullValue, Standard_NegativeValue, Standard_DomainError); Compute returns Result<bool>; the private Old/New fields are grouped per constraint set; the energies expose the native virtuals through the FairCurveEnergyModel trait and implement math::MultipleVarFunctionWithHessian; densities implement math::FunctionSet and reach the base accessors through Deref; FairCurveMinimalVariation reaches the batten setters and getters through Deref; Dump writes to an io::Write."
     }
   ],
   "tests": [

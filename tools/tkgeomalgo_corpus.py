@@ -21,3 +21,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_plate').append_plate_requests(requests)
     # LocalAnalysis (tkgeomalgo_corpus_localanalysis.py)
     __import__('tkgeomalgo_corpus_localanalysis').append_localanalysis_requests(requests)
+    # FairCurve (tkgeomalgo_corpus_faircurve.py)
+    __import__('tkgeomalgo_corpus_faircurve').append_faircurve_requests(requests)

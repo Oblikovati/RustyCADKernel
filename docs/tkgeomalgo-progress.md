@@ -96,6 +96,19 @@ undefined tangents, straight pieces); `la_surface` does the same for
 `ComputeAnalysis`, on planes, cylinders, spheres and tori (tangent and broken joins,
 poles, umbilics).
 
+FairCurve: 178 requests. `fc_law` evaluates `FairCurve_BattenLaw` before and after its
+setters, with heights that turn negative. `fc_density` compares the tension, sagging
+and jerk densities with their gradients and packed Hessians (derivative orders 0 to 2,
+with and without the free-sliding value, uniform tension, a vanishing law) on a Bezier
+and a two-span B-spline of degree 9. `fc_energy` compares `Variable`, `Value`,
+`Values` and the Hessian of `FairCurve_EnergyOfBatten` and `FairCurve_EnergyOfMVC` for
+every pair of end-constraint orders, at the initial and at perturbed variables (the
+clamped and the infinite sliding), and minimizes them with `FairCurve_Newton`.
+`fc_batten` computes batten and minimal-variation curves (end angles that need several
+homotopy steps, free and imposed slidings, end curvatures, physical ratios, null
+heights, invalid heights and ratios, confused points), moves their end points and
+computes again, comparing every getter, the curve and the `Dump` text.
+
 ## Preserved native behaviour
 
 - `Intf::PlaneEquation` of a degenerate triangle (normal shorter than
@@ -201,3 +214,39 @@ poles, umbilics).
 - Every angle is folded into `[0, PI/2]` when it is measured, so the curve tests'
   second clause `|angle - PI| <= eps` never holds; it is kept, as natively. `IsG2` of a
   curve compares the fractional part of `(G2Angle + EpsG2) / PI` with `EpsG2`.
+
+### FairCurve
+
+- The densities keep copies of the batten law: the energies' own `SetSliding` reaches
+  no density, and only the tension receives the sliding length (`SetLengthSliding`), so
+  the sagging and jerk heights use the sliding of the step's law. The uniform tension
+  of the minimal-variation energy freezes the middle height at construction, whatever
+  its sign.
+- `FairCurve_EnergyOfBatten::Compute` records a failed sagging integral as
+  `Ok = false` and goes on; a later interval can set it back. The minimal-variation
+  energy returns at the first failed integral.
+- The sliding guard of both energies reports `InfiniteSliding` beyond ten times the
+  original length and clamps it below one hundredth; the clamped length is what
+  `Variable` writes back.
+- `FairCurve_Energy::Hessian1` reads the intermediate values `Vect(5)` and `Vect(6)`
+  for the start G2 term and `Vect(jj)` for the end one; the jerk Hessian omits the
+  `ProduitV` and `HNumRho` terms in its XiXj and YiYj entries and mixes the (ii, ii-1)
+  and (ii-1, ii) orders in its diagonal XiYi entry. All are kept.
+- `SlidingOfReference` tests the requested (`New`) angle of the opposite end, not its
+  argument, before halving it for an unconstrained end.
+- After a successful minimization the batten keeps the poles of the last energy
+  evaluation (not of the returned location), and reloads the variables from the energy
+  before the convergence and infinite-sliding checks. A failed minimization returns
+  false with the energy status as the code, or true with `NullHeight` when the law
+  vanishes at an end.
+- `FairCurve_MinimalVariation` does not check its physical ratio at construction; the
+  first `Compute` raises the `Standard_DomainError` of `FairCurve_EnergyOfMVC`. NaN
+  passes both checks.
+- `Dump` pads only the old value to 7 characters (`o.width(7)`), writes flags as 0/1
+  and reals as the default `std::ostream`.
+- The FairCurve sources define `No_Standard_RangeError` and `No_Standard_OutOfRange`:
+  an index out of range is undefined natively; the port panics there. The knot
+  refinement computes its native `int` products in `i64` (their overflow is undefined
+  natively and unreachable with finite angles).
+- The batten constructor passes a 2-entry weight array to a non-rational
+  `BSplCLib::IncreaseDegree`, which never writes it; the port passes none.
