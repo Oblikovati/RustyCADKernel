@@ -32,6 +32,19 @@ pub(super) struct ProjectErrors {
     pub(super) ave_err: f64,
 }
 
+impl ProjectErrors {
+    // The distance of point `ipnt`: a new maximum (and its point) when larger, and
+    // its terms of the quadratic and the average error.
+    fn add_distance(&mut self, ipnt: i32, dist: f64) {
+        if dist > self.max_err {
+            self.max_err = dist;
+            self.num_points = ipnt;
+        }
+        self.qua_err += dist * dist;
+        self.ave_err += dist;
+    }
+}
+
 fn at(array: &Array1<'_, f64>, index: i32) -> Result<f64, Failure> {
     array
         .value(index)
@@ -170,11 +183,7 @@ impl Variational {
             num_points,
             ..ProjectErrors::default()
         };
-        let mut ev = Evaluation {
-            val: self.evaluation_buffer()?,
-            first: self.evaluation_buffer()?,
-            second: self.evaluation_buffer()?,
-        };
+        let mut ev: Evaluation = self.evaluation()?;
         let d0: i32 = distance.lower() - 1;
         let mut i0: i32 = -self.dimension;
         for ipnt in 1..=proj_ti.length() {
@@ -182,16 +191,20 @@ impl Variational {
             let (t_new, dist) = self.newton(c, (at(ti, ipnt)?, i0), &mut ev, nb_iterations)?;
             put(proj_ti, ipnt, t_new)?;
             put(distance, d0 + ipnt, dist)?;
-            if dist > errors.max_err {
-                errors.max_err = dist;
-                errors.num_points = ipnt;
-            }
-            errors.qua_err += dist * dist;
-            errors.ave_err += dist;
+            errors.add_distance(ipnt, dist);
         }
         // Setting NumPoints to interval [myFirstPoint, myLastPoint]
         errors.num_points = errors.num_points + self.first_point - 1;
         Ok(errors)
+    }
+
+    // The three evaluation buffers `(1, Dimension)`.
+    fn evaluation(&self) -> Result<Evaluation, Failure> {
+        Ok(Evaluation {
+            val: self.evaluation_buffer()?,
+            first: self.evaluation_buffer()?,
+            second: self.evaluation_buffer()?,
+        })
     }
 
     fn evaluation_buffer(&self) -> Result<Array1<'static, f64>, Failure> {
