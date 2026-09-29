@@ -31,6 +31,7 @@ use rustycad_tkernel::osd::FileSystem;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::poly::{Triangulation, mesh_purpose};
+use rustycad_tkmath::toploc::Location;
 
 /// The faces of `shape`, in exploration order.
 fn faces_of(shape: &Shape) -> Result<Vec<Face>, Failure> {
@@ -57,8 +58,9 @@ pub fn triangulation(
     if !check_free_edges {
         return Ok(true);
     }
+    let mut dummy_location = Location::default();
     for edge in Explorer::new(shape, ShapeEnum::Edge, ShapeEnum::Face)? {
-        if !is_free_edge_meshed(&topods::edge(&edge)?, lin_defl)? {
+        if !is_free_edge_meshed(&topods::edge(&edge)?, lin_defl, &mut dummy_location)? {
             return Ok(false);
         }
     }
@@ -82,13 +84,24 @@ fn is_face_meshed(face: &Face, lin_defl: f64) -> Result<bool, Failure> {
     Ok(true)
 }
 
-fn is_free_edge_meshed(edge: &crate::topods::Edge, lin_defl: f64) -> Result<bool, Failure> {
-    let (polygon, _) = BRepTool::polygon3d(edge)?;
+/// A free edge is meshed by a 3D polygon of deflection at most `lin_defl`. Natively the
+/// fallback asks `BRep_Tool::PolygonOnTriangulation(E, T, L)` for the polygon on the
+/// still-null `anEdgeTri` (the lookup overload, not the one that returns the
+/// triangulation), so an edge without a 3D polygon is never meshed; the lookup is kept
+/// for its exceptions.
+fn is_free_edge_meshed(
+    edge: &crate::topods::Edge,
+    lin_defl: f64,
+    dummy_location: &mut Location,
+) -> Result<bool, Failure> {
+    let (polygon, location) = BRepTool::polygon3d(edge)?;
+    *dummy_location = location;
     if let Some(polygon) = polygon.get() {
         return Ok(polygon.deflection() <= lin_defl);
     }
-    let (polygon, mesh, _) = BRepTool::first_polygon_on_triangulation(edge)?;
-    let Some(mesh) = mesh.get() else {
+    let edge_mesh: Handle<Triangulation> = Handle::default();
+    let polygon = BRepTool::polygon_on_triangulation(edge, &edge_mesh, dummy_location)?;
+    let Some(mesh) = edge_mesh.get() else {
         return Ok(false);
     };
     Ok(!polygon.is_null() && mesh.deflection() <= lin_defl)

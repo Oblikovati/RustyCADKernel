@@ -11,6 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from tkbrep_bintools_corpus import append_tkbrep_bintools_requests
 from tkbrep_brep_corpus import append_tkbrep_brep_requests
+from tkbrep_breptools_corpus import append_tkbrep_breptools_requests
 
 COMPOUND, COMPSOLID, SOLID, SHELL, FACE, WIRE, EDGE, VERTEX, SHAPE = range(9)
 FORWARD, REVERSED, INTERNAL, EXTERNAL = range(4)
@@ -310,3 +311,4 @@ def append_tkbrep_requests(requests: list[str]) -> None:
         requests.append(f'br_setread {base} {format_nb} ' + text(encoded(data)))
     append_tkbrep_brep_requests(requests)
     append_tkbrep_bintools_requests(requests)
+    append_tkbrep_breptools_requests(requests)

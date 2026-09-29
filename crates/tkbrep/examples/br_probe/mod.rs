@@ -8,6 +8,7 @@ pub mod bintools_shape;
 pub mod brep;
 pub mod brep_commands;
 pub mod brep_report;
+pub mod brep_tools;
 #[allow(dead_code, unused_imports)]
 pub mod common;
 pub mod graph;
