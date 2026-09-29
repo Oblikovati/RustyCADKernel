@@ -43,6 +43,9 @@
 #include "tkgeomalgo_probe_faircurve.cxx"
 #include "tkgeomalgo_probe_intimp.cxx"
 #include "tkgeomalgo_probe_appblend.cxx"
+#include "tkgeomalgo_probe_hatchgen.cxx"
+#include "tkgeomalgo_probe_geom2dhatch.cxx"
+#include "tkgeomalgo_probe_geom2dhatcher.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -137,6 +140,19 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // AppBlend (tkgeomalgo_probe_appblend.cxx)
  {"ab_appsurf", ga_ab_appsurf_case},
  {"ab_context", ga_ab_context_case},
+ // HatchGen (tkgeomalgo_probe_hatchgen.cxx)
+ {"hgen_element", ga_hgen_element_case},
+ {"hgen_hatching", ga_hgen_hatching_case},
+ {"hgen_domain", ga_hgen_domain_case},
+ // Geom2dHatch (tkgeomalgo_probe_geom2dhatch*.cxx)
+ {"g2hatch_local", ga_g2hatch_local_case},
+ {"g2hatch_perform", ga_g2hatch_perform_case},
+ {"g2hatch_intersect", ga_g2hatch_intersect_case},
+ {"g2hatch_elements", ga_g2hatch_elements_case},
+ {"g2hatch_classify", ga_g2hatch_classify_case},
+ {"g2hatch_fclass", ga_g2hatch_fclass_case},
+ {"g2hatch_hatcher", ga_g2hatch_hatcher_case},
+ {"g2hatch_hatching", ga_g2hatch_hatching_case},
 };
 int main() {
  std::string line;

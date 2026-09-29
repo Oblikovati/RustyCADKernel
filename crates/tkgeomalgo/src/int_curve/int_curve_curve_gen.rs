@@ -38,14 +38,14 @@ pub struct IntCurveCurveGen<T: IntersectorTypes<Imp = IConicTool>>
 where
     T::Par: PCurveTool,
 {
-    base: Intersection,
-    param1inf: f64,
-    param1sup: f64,
-    param2inf: f64,
-    param2sup: f64,
-    intconiconi: IntConicConic,
-    intconicurv: IntConicCurveGen<T>,
-    intcurvcurv: IntPolyPolyGen<T>,
+    pub(super) base: Intersection,
+    pub(super) param1inf: f64,
+    pub(super) param1sup: f64,
+    pub(super) param2inf: f64,
+    pub(super) param2sup: f64,
+    pub(super) intconiconi: IntConicConic,
+    pub(super) intconicurv: IntConicCurveGen<T>,
+    pub(super) intcurvcurv: IntPolyPolyGen<T>,
 }
 
 impl<T: IntersectorTypes<Imp = IConicTool>> Default for IntCurveCurveGen<T>

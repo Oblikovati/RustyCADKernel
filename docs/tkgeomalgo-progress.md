@@ -22,7 +22,7 @@ A package may start when the packages it includes are ported:
 | 5 | Geom2dAPI, Geom2dGcc, Geom2dHatch |
 | 6 | IntPatch, then ApproxInt and GeomInt, then GeomFill and GeomAPI, then GeomPlate |
 
-The toolkit test inventory maps these suites (42 declarations):
+The toolkit test inventory maps these suites (48 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
@@ -37,6 +37,8 @@ The toolkit test inventory maps these suites (42 declarations):
 | IntSurf_LineOn2S_Test.cxx | int_surf_line_on2s | 3 | pass | pass |
 | IntSurf_Quadric_Test.cxx | int_surf_quadric | 1 | pass | pass |
 | Plate_Plate_Test.cxx | plate_plate | 2 | pass | pass |
+| Geom2dHatch_Elements_Test.cxx | geom2dhatch_elements | 3 | pass | pass |
+| Geom2dHatch_Intersector_Test.cxx | geom2dhatch_intersector | 3 | pass | pass |
 
 ## API mapping
 
@@ -61,6 +63,12 @@ The toolkit test inventory maps these suites (42 declarations):
   `TheSame`/point/parameter arrays of one argument. The consultation members keep the
   checks each native class writes (some skip the `WellDone` test, `Circ2d2TanOn`'s
   `ThisSolution` tests nothing), and output references become returned tuples.
+
+- HatchGen, TopClass, Geom2dHatch: see the section below; overloads take distinct names
+  (`Domain::bounded`/`semi_infinite`, `Hatcher::trim`/`trim_curve`/`trim_hatching`,
+  `compute_domains`/`compute_domains_of`, `add_element`/`add_element_curve`), and the protected
+  `Element(IndE)` and `Hatching(IndH)` of the hatcher are public as `element_mut` and
+  `hatching_mut`.
 
 ## Verification
 
@@ -193,6 +201,75 @@ Preserved native behaviour and deliberate differences:
   reads out of bounds if the current distance exceeds sqrt(RealLast); the port reads the
   first sample.
 
+## HatchGen, TopClass and Geom2dHatch
+
+HatchGen (`hatch_gen`), TopClass (`topclass`) and Geom2dHatch (`geom2d_hatch`) are ported in
+full: `tools/audit_api_rows.py` reports 0 missing and 0 stale rows for each (TopClass has no
+header; its six template functions have rows on the `.pxx` files). The abstract
+`HatchGen_IntersectionPoint` is embedded in `PointOnElement` and `PointOnHatching` and reached
+through `Deref`; its pure virtual `Dump` is the trait `IntersectionPointDump`. The TopClass
+templates are the generics `Classifier2d` and `FaceClassifier` (docs/geomalgo-design.md
+section 6); `Geom2dHatch_FClass2dOfClassifier` and `Geom2dHatch_Classifier` are their aliases.
+Curves are `Geom2dAdaptor_Curve` values that the elements and hatchings own; the Rust
+constructors take them by value, and `Elements::current_edge` returns a shallow copy (the
+native `CurrentEdge` assigns a copy). Setters that share the getter's name take a `set_`
+prefix, output references become returned tuples, and the `Dump` members write the native
+`std::cout` text to a `fmt::Write`. The GTest suites Geom2dHatch_Elements_Test and
+Geom2dHatch_Intersector_Test are translated 1:1.
+
+Preserved native behaviour:
+
+- `HatchGen_PointOnElement(IntRes2d_IntersectionPoint)` reads `IsOpposite` of the element's
+  transition when the hatching's transition is a TOUCH, which raises Standard_DomainError when
+  the element's transition is not a TOUCH; the constructor returns `Result`.
+- `HatchGen_Domain::SetPoints()`, `SetFirstPoint()` and `SetSecondPoint()` without argument clear
+  only the flags; the stored points stay (they are not observable through the accessors).
+- `HatchGen_PointOnHatching::AddPoint` drops a point on element that is identical to a stored
+  one (same fields, parameters within the confusion).
+- `Geom2dHatch_Hatcher::Trim(IndH, IndE)` handles an intersection segment only when it has both
+  ends: the treatments of the first and of the last end are inside the test of both ends, so
+  a half-bounded segment adds no point. It writes " Intersector -> Done = False " on std::cout
+  when the intersection is not done; the port does not print (the probe discards std::cout).
+- `RemElement` scans copies of the hatching points: a point is removed when all its points on
+  element belong to the removed element (or when it has none), but a point kept keeps its
+  points on that element; the domains are cleared when such a point was seen.
+- `GlobalTransition` computes the element parameter from the point position, then overwrites
+  it with the point's parameter (upstream finding #25, kept because removing it caused blend
+  regressions).
+- `ComputeDomains`: with two points, OUT-OUT becomes OUT-IN at the first point and IN-OUT at
+  the second (lbr, 1997); an IN-IN point without an opened segment and without a saved point
+  sets IncoherentParity (or marks the hatching done when a domain exists) and goes on to the
+  next point, skipping the domain and last-point steps (its `return` is commented out); a
+  hatching without intersection point is one infinite domain when its classification point
+  (at the last parameter, else the first, else 0) is IN.
+- `Geom2dHatch_Hatching::TrimFailed(false)` and `ClrPoints` keep the status; `TrimFailed(true)`
+  sets TrimFailure.
+- The copy constructor of `Geom2dHatch_Elements` copies nothing: the copy is empty, with the
+  probing at element 0 and fraction 0 (`Elements::copy_of`). Its `OtherSegment` probes each
+  FORWARD or REVERSED element at fractions 0.123 + k 0.2111 below 0.8 and rejects a probe whose
+  segment is nearly tangent to the element unless it is the element's last probe.
+- `Geom2dHatch_Hatcher::IsDone()` (without index) is declared but never defined natively; it
+  has an excluded row, as the inline destructor of `Geom2dHatch_Elements` (it only clears).
+- `Geom2dHatch_Intersector::LocalGeometry` evaluates the adaptor's Geom2d curve (the basis of
+  a trimmed curve) whatever the adaptor's bounds; an undefined tangent gives (1, 0) and a zero
+  curvature. `Perform(L, P, Tol, E)` intersects on a fresh Geom2dInt_GInter with the
+  parametric tolerances and copies its results (SetValues); `Intersect` uses the stored
+  tolerances. The copy constructor keeps the results without the done and reversed flags, the
+  assignment (`Hatcher::Intersector(I)`) copies both.
+
+Deliberate Rust deviations:
+
+- The native default constructors of `Geom2dHatch_Element` (orientation) and
+  `Geom2dHatch_Classifier` (edge position) leave a member uninitialized; the port starts them at
+  FORWARD and `IntRes2d_Head`. The classifier probe primes the classifier on a square first, so
+  that the position it reads is defined natively.
+- `Geom2dHatch_Elements` keeps its edge iterator as a rank in the map's bucket order, since a
+  Rust iterator cannot borrow the map it lives beside; a map changed during an edge iteration
+  invalidates the native iterator.
+- The implicit copy and assignment of Geom2dInt_GInter (which the hatcher uses) copy the inner
+  intersectors with their copy constructor, so their done and reversed flags are not copied;
+  every Perform sets those flags before reading them.
+
 ## Numeric comparison policy
 
 `tools/verify_tkgeomalgo_numeric.py` uses the shared driver `tools/toolkit_numeric.py`.
@@ -206,10 +283,11 @@ round-robin shards (`tools/probe_shards.py`), so every request prints exactly on
 and never relies on an earlier request. `tools/coverage_report.py` replays the saved
 corpus under coverage.
 
-The numeric corpus has 11633 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
+The numeric corpus has 13181 requests: TopTrans 981, Intf 2240, GccEnt 55, GccInt 15,
 Hatch 38, GccAna 2670, IntRes2d with IntImpParGen and IntCurve 2044, Geom2dInt and
 Geom2dAPI 962, the curve-curve classes 1077, IntSurf 334, Law 266, Plate 106,
-LocalAnalysis 406, FairCurve 178, IntImp 146 and AppBlend 115.
+LocalAnalysis 406, FairCurve 178, IntImp 146, AppBlend 115, HatchGen 432, and Geom2dHatch
+with TopClass 1116.
 
 Intf (2240 requests): `intf_triangle` compares `Intf::PlaneEquation` and `Intf::Contain`
 on 54 triangles (both orientations, coincident and collinear vertices, a normal that
@@ -366,6 +444,23 @@ with or without derivatives) and compares every query after `Perform`,
 known parameters, every parametrization and continuity, the no-tangent switch,
 invalid criterion weights and a null line; `ab_context` covers the two switches of
 `AppBlend_Debug.cxx`.
+
+HatchGen, TopClass, Geom2dHatch: `tkgeomalgo_corpus_hatchgen.py` and
+`tkgeomalgo_corpus_geom2dhatch.py` add 1548 requests (432 and 1116). `hgen_element` builds the
+point on element of every pair of hatching and element transitions (including the raising
+TOUCH-against-crossing pair), changes one field of a copy and compares both ways within zero,
+small and huge confusions; `hgen_hatching` and `hgen_domain` cover the point merges, the
+order tests, every domain setter and the dumps. `g2hatch_local`, `g2hatch_perform` and
+`g2hatch_intersect` run LocalGeometry (a degenerate B-spline included), the segment Perform
+(bounded and to RealLast) and Intersect with the copy and assignment of the intersector;
+`g2hatch_elements`, `g2hatch_classify` and `g2hatch_fclass` run the explorer, its probing
+segments, the classifier and FClass2d on polygons of both orientations, a disc, an annulus, a
+half disc, regions closed by Bezier and B-spline arcs, an open boundary, INTERNAL and EXTERNAL
+edges, an infinite line and collinear split edges, from points inside, outside, on edges, on
+vertices and near them; `g2hatch_hatcher` hatches every such region with lines crossing it,
+through its vertices, along its edges and tangent to it, with every keep-flag pair and
+operation sequences (removals, tolerance and flag changes, clears, the protected members);
+`g2hatch_hatching` runs every Hatching member.
 
 ## Preserved native behaviour
 

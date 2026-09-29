@@ -43,3 +43,7 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_intimp').append_intimp_requests(requests)
     # AppBlend (tkgeomalgo_corpus_appblend.py)
     __import__('tkgeomalgo_corpus_appblend').append_appblend_requests(requests)
+    # HatchGen (tkgeomalgo_corpus_hatchgen.py)
+    __import__('tkgeomalgo_corpus_hatchgen').append_hatchgen_requests(requests)
+    # Geom2dHatch, TopClass (tkgeomalgo_corpus_geom2dhatch.py)
+    __import__('tkgeomalgo_corpus_geom2dhatch').append_geom2dhatch_requests(requests)

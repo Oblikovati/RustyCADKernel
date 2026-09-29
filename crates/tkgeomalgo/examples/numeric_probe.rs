@@ -7,6 +7,7 @@ use ga_probe::{
     gcc_ana, gcc_ana_lines, gcc_ent, gcc_int, hatch, intf, intf_poly, intf_tool, toptrans,
 };
 use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
+use ga_probe::{geom2d_hatch, geom2d_hatcher, hatch_gen};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -107,6 +108,19 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // AppBlend (ga_probe/app_blend.rs)
     ("ab_appsurf", app_blend::appsurf_case),
     ("ab_context", app_blend::context_case),
+    // HatchGen (ga_probe/hatch_gen.rs)
+    ("hgen_element", hatch_gen::element_case),
+    ("hgen_hatching", hatch_gen::hatching_case),
+    ("hgen_domain", hatch_gen::domain_case),
+    // Geom2dHatch (ga_probe/geom2d_hatch.rs, ga_probe/geom2d_hatcher.rs)
+    ("g2hatch_local", geom2d_hatch::local_case),
+    ("g2hatch_perform", geom2d_hatch::perform_case),
+    ("g2hatch_intersect", geom2d_hatch::intersect_case),
+    ("g2hatch_elements", geom2d_hatch::elements_case),
+    ("g2hatch_classify", geom2d_hatch::classify_case),
+    ("g2hatch_fclass", geom2d_hatch::fclass_case),
+    ("g2hatch_hatcher", geom2d_hatcher::hatcher_case),
+    ("g2hatch_hatching", geom2d_hatcher::hatching_case),
 ];
 
 fn main() {

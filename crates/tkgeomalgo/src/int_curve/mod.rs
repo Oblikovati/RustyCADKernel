@@ -47,6 +47,7 @@ mod exact_intersection_point;
 mod iconic_tool;
 mod int_conic_conic;
 mod int_conic_curve_gen;
+mod int_curve_curve_copy;
 mod int_curve_curve_gen;
 mod int_poly_poly_find;
 mod int_poly_poly_gen;
