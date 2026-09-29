@@ -15,9 +15,9 @@
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The active occurrence references of a product, in relation order: what
-//! `BRepGraph_RefsOccurrenceOfProduct` yields. The phase-1 views and `Shapes()` need
-//! only this list; the iterators area ports the iterator class itself and may route
-//! these callers through it.
+//! `BRepGraph_RefsOccurrenceOfProduct` yields, collected for the phase-1 views and
+//! `Shapes()` (the filter itself is [`RefsOccurrenceOfProduct`]).
+use crate::brep_graph::refs_iterator::RefsOccurrenceOfProduct;
 use crate::brep_graph::{BRepGraph, OccurrenceRefId, ProductId};
 
 /// The references of an active product that are in range and active and whose
@@ -26,22 +26,7 @@ pub(crate) fn active_occurrence_refs(
     graph: &BRepGraph,
     product: ProductId,
 ) -> Vec<OccurrenceRefId> {
-    let storage = graph.inc_storage();
-    if !product.is_valid_for(storage.nb_products()) || product.is_removed(graph) {
-        return Vec::new();
-    }
-    let (nb_refs, nb_occurrences) = (storage.nb_occurrence_refs(), storage.nb_occurrences());
-    storage
-        .product_relations(product)
-        .occurrence_ref_ids
-        .iter()
-        .copied()
-        .filter(|ref_id| ref_id.is_valid_for(nb_refs) && !ref_id.is_removed(graph))
-        .filter(|ref_id| {
-            let occurrence = storage.occurrence_ref(*ref_id).child_occurrence_id;
-            occurrence.is_valid_for(nb_occurrences) && !occurrence.is_removed(graph)
-        })
-        .collect()
+    RefsOccurrenceOfProduct::new(graph, product).collect()
 }
 
 #[cfg(test)]
