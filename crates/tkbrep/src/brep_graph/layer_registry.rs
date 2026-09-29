@@ -271,6 +271,15 @@ impl LayerRegistry {
             detach_context(layer);
         }
     }
+
+    /// `Attach(theGraph)` with the graph the layers are already attached to (the
+    /// compaction restores its saved registry): `attachGraph` on every layer, which
+    /// detaches (`OnDetached`) and attaches (`OnAttached`) it again.
+    pub(crate) fn reattach(&self) {
+        for layer in self.slots.read().layers.iter().filter_map(Handle::get) {
+            attach_graph(layer, self.graph_token);
+        }
+    }
 }
 
 impl Drop for LayerRegistry {

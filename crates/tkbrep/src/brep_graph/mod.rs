@@ -26,6 +26,7 @@ pub mod cache_mesh;
 pub mod cache_registry;
 pub mod child_explorer;
 mod child_refs;
+pub mod compact;
 pub mod copy;
 pub mod copy_remap;
 pub mod deduplicate;
