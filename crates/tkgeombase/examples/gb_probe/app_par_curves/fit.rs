@@ -30,7 +30,8 @@ fn constraint(code: i32) -> Constraint {
     Constraint::from_code(code).expect("probe constraint")
 }
 
-fn read_constraints(r: &mut Reader<'_>) -> Constraints {
+/// `gb_apc_read_constraints`: `n` then `index constraint` couples.
+pub fn read_constraints(r: &mut Reader<'_>) -> Constraints {
     let n = r.integer();
     let mut couples = Array1::with_bounds(1, n).unwrap();
     for i in 1..=n {

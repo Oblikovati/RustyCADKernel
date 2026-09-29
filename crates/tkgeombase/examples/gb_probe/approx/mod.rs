@@ -23,7 +23,7 @@ mod sweep;
 pub use adaptors::{
     cos_case, curve2d_case, curve3d_case, curvilinear_case, curvlin_case, same_case,
 };
-pub use compute::{bspl_case, compute_case};
+pub use compute::{bspl_case, build_compute, compute_case, compute_results};
 pub use fit::{fit_case, mcurves_case};
 pub use sweep::sweep_case;
 

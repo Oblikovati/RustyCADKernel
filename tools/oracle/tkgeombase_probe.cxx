@@ -75,6 +75,8 @@
 #include "tkgeombase_probe_approx.cxx"
 #include "tkgeombase_probe_approx_adaptors.cxx"
 #include "tkgeombase_probe_approx_sweep.cxx"
+#include "tkgeombase_probe_appdef.cxx"
+#include "tkgeombase_probe_appdef_variational.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -414,6 +416,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"axa_curvilinear", gb_axa_curvilinear_case},
  {"axa_same", gb_axa_same_case},
  {"axs_sweep", gb_axs_sweep_case},
+ // AppDef (tkgeombase_probe_appdef.cxx, tkgeombase_probe_appdef_variational.cxx)
+ {"ad_mpc", gb_ad_mpc_case},
+ {"ad_line", gb_ad_line_case},
+ {"ad_compute", gb_ad_compute_case},
+ {"ad_criteria", gb_ad_criteria_case},
+ {"ad_var", gb_ad_var_case},
 };
 int main() {
  std::string line;

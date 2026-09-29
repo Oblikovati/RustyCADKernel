@@ -40,7 +40,8 @@ GbAxOptions gb_ax_read_options(GbReader& r){
  GbAxOptions o;o.degmin=r.integer();o.degmax=r.integer();o.tol3d=r.real();o.tol2d=r.real();o.iterations=r.integer();
  o.cutting=r.flag();o.par=Approx_ParametrizationType(r.integer());o.squares=r.flag();return o;
 }
-void gb_ax_compute_results(GbAxCompute& c){
+// Also used for AppDef_Compute (tkgeombase_probe_appdef.cxx).
+template<class C> void gb_ax_compute_results(C& c){
  gb_flag(c.IsAllApproximated());gb_flag(c.IsToleranceReached());gb_int(c.Parametrization());
  const int n=c.NbMultiCurves();gb_int(n);
  for(int i=1;i<=n;++i){
