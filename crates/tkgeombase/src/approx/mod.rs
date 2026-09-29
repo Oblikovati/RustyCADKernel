@@ -36,6 +36,8 @@ mod curvlin_func;
 mod mcurves_to_bsp_curve;
 mod same_parameter;
 mod status;
+mod sweep_approximation;
+mod sweep_function;
 mod tangency;
 
 pub use bspl_compute_line::BSplComputeLine;
@@ -49,3 +51,7 @@ pub use curvlin_func::CurvlinFunc;
 pub use mcurves_to_bsp_curve::MCurvesToBSpCurve;
 pub use same_parameter::SameParameter;
 pub use status::{ParametrizationType, Status};
+pub use sweep_approximation::{
+    SweepApproximation, SweepCurve2d, SweepOptions, SweepSurface, SweepSurfaceShape,
+};
+pub use sweep_function::{SweepD1, SweepD2, SweepFunction};
