@@ -105,6 +105,40 @@ impl BasisForms {
     }
 }
 
+/// The points of one dimension in the rows of one kind: the first row `n0`,
+/// `step` rows further per point, for the points `first..first + count` of
+/// `dims` coordinates.
+struct PointBlock {
+    n0: i32,
+    step: i32,
+    first: i32,
+    count: i32,
+    dims: i32,
+}
+
+impl PointBlock {
+    // The rows of the block, the coordinates `ngpc1` apart, numbering the curve
+    // coordinates on from `curdim`; returns the last coordinate numbered.
+    fn add_rows(
+        &self,
+        a: &mut Assembly,
+        (form, curel): (&Vector<'_>, i32),
+        (ngpc1, mut curdim): (i32, i32),
+        value: &dyn Fn(i32, i32) -> Result<f64, Failure>,
+    ) -> Result<i32, Failure> {
+        let mut n0: i32 = self.n0;
+        for pnt in 0..self.count {
+            for k in 1..=self.dims {
+                curdim += 1;
+                let rhs: f64 = value(self.first + pnt, k)?;
+                a.add_constraint(n0 + (k - 1) * ngpc1, curel, curdim, form, rhs)?;
+            }
+            n0 += self.step;
+        }
+        Ok(curdim)
+    }
+}
+
 impl Variational {
     // The element of `t` from `curel` on (`t <= Intervals(el + 1)`); unchanged
     // when `t` is beyond the last knot.
@@ -229,35 +263,22 @@ impl Variational {
         rows: &ConstraintRows,
         value: &dyn Fn(i32, i32) -> Result<f64, Failure>,
     ) -> Result<(), Failure> {
-        let mut curdim: i32 = 0;
-        let mut n0: i32 = rows.npass;
-        for pnt in 0..self.nb_p3d {
-            for k in 1..=3 {
-                curdim += 1;
-                a.add_constraint(
-                    n0 + (k - 1) * rows.ngpc1,
-                    curel,
-                    curdim,
-                    form,
-                    value(pnt, k)?,
-                )?;
-            }
-            n0 += rows.ng3d;
-        }
-        n0 = rows.npass + rows.nbeg2d;
-        for pnt in 0..self.nb_p2d {
-            for k in 1..=2 {
-                curdim += 1;
-                a.add_constraint(
-                    n0 + (k - 1) * rows.ngpc1,
-                    curel,
-                    curdim,
-                    form,
-                    value(self.nb_p3d + pnt, k)?,
-                )?;
-            }
-            n0 += rows.ng2d;
-        }
+        let points_3d = PointBlock {
+            n0: rows.npass,
+            step: rows.ng3d,
+            first: 0,
+            count: self.nb_p3d,
+            dims: 3,
+        };
+        let points_2d = PointBlock {
+            n0: rows.npass + rows.nbeg2d,
+            step: rows.ng2d,
+            first: self.nb_p3d,
+            count: self.nb_p2d,
+            dims: 2,
+        };
+        let curdim: i32 = points_3d.add_rows(a, (form, curel), (rows.ngpc1, 0), value)?;
+        points_2d.add_rows(a, (form, curel), (rows.ngpc1, curdim), value)?;
         Ok(())
     }
 
