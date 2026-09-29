@@ -7,14 +7,15 @@ does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna
 `IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC`,
 `GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts`,
 `GCPnts`, `AdvApp2Var`, `Geom2dConvert`, `Extrema`, `GeomConvert`, `GeomLib`, `Approx`,
-`AppDef` and `ProjLib` packages are ported in full, and `tools/audit_api_rows.py` reports
-0 missing and 0 stale api rows for each of them.
+`AppDef`, `ProjLib` and `GeomProjLib` packages are ported in full, and
+`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them. These are
+all 28 packages of TKGeomBase.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (828 declarations):
+passes (830 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -982,11 +983,11 @@ Rust deviations), and Curve2d of the zero-length segment of a line on a sphere (
 ProjLib_ComputeApprox of a zero-length range never returns on a sphere or a cylinder,
 natively and in the port).
 
-The corpus has 44476 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+The corpus has 45475 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
 FEmTool, 2045 AppParCurves, 3831 AppCont, 15198 GeomBndLib and BndLib, 2210 CPnts and
 GCPnts, 325 AdvApp2Var, 908 Geom2dConvert, 1934 Extrema, 1844 GeomConvert, 1146 GeomLib,
-1997 Approx, 555 AppDef and 2225 ProjLib.
+1997 Approx, 555 AppDef, 2313 ProjLib and 911 GeomProjLib.
 
 ## Preserved native behaviour
 
