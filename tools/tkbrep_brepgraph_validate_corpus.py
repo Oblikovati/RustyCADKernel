@@ -11,11 +11,11 @@ the graph without range checks natively.
 """
 from __future__ import annotations
 from tkbrep_brep_corpus import BRepScript, FORWARD
-from tkbrep_brepgraph_corpus import PERFORM
+from tkbrep_brepgraph_corpus import ADD, PERFORM
 from tkbrep_brepgraph_edit_corpus import (
     CHILD_REF, COMPOUND, EDGE, FACE, LOG, OCCURRENCE, PRODUCT, SOLID, VERTEX, ids, nodes, request,
     triangle_actions, triangle_geometry)
-from tkbrep_brepgraph_algo_corpus import request as balgo_request
+from tkbrep_brepgraph_algo_corpus import AUTO_PRODUCT, request as balgo_request
 from tkbrep_brepgraph_cache_corpus import meshed_solid_scene
 from tkbrep_breptools_corpus import solid_scene
 
@@ -158,14 +158,28 @@ def transform_requests(requests: list[str]) -> None:
                  [PERFORM_OTHER, *spec, SHARE, SHARE], [NODE_OTHER, FACE, 0, *spec, COPY, COPY],
                  [NODE_OTHER, PRODUCT, 0, *spec, COPY, DROP], [NODE_SELF, EDGE, 0, *spec, COPY, COPY],
                  [NODE_SELF, FACE, 1, *spec, SHARE, COPY]]
-        # A location-only TransformNode of a product or occurrence copies it with
-        # BRepGraph_Copy::CopyNode first, which crashes the pinned native build on these
-        # scenes (as the bare CopyNode of a product or occurrence does), so no request
-        # names it; the refused geometry-level case above returns before the copy.
+        # These scenes are ingested without an assembly (no product, no occurrence), so
+        # a location-only TransformNode of a product or occurrence would name an id past
+        # the store: the native CopyNode reads it unchecked and crashes. The requests of
+        # placement_transform_requests add the shape with an auto product; the refused
+        # geometry-level case above returns before the copy.
         requests.append(balgo_request(s, [*source, *other]))
     empty = [[PERFORM_OTHER, *TRANSLATION, COPY, DROP], [PERFORM_SELF, *TRANSLATION, COPY, DROP],
              [NODE_OTHER, FACE, 0, *TRANSLATION, COPY, DROP], [NODE_SELF, FACE, 0, *TRANSLATION, COPY, DROP]]
     requests.append(balgo_request(BRepScript(), empty))
+
+
+def placement_transform_requests(requests: list[str]) -> None:
+    """Location-only TransformNode (`br_balgo`) of the product and the occurrence that
+    Shapes().Add creates with an auto product, into the other graph, for every transform
+    kind: the rigid ones copy the node with CopyNode and compose the placement, a scale
+    or a mirror is refused before the copy; both graphs are then printed."""
+    for spec in TRANSFORMS:
+        s, geometry = meshed_solid_scene()
+        source = [LOG, [ADD, s.ids['compound'], AUTO_PRODUCT], [98, 0, geometry['tri']]]
+        placements = [[NODE_OTHER, PRODUCT, 0, *spec, SHARE, DROP],
+                      [NODE_OTHER, OCCURRENCE, 0, *spec, SHARE, DROP]]
+        requests.append(balgo_request(s, [*source, *placements]))
 
 
 def append_tkbrep_brepgraph_validate_requests(requests: list[str]) -> None:
@@ -177,3 +191,4 @@ def append_tkbrep_brepgraph_validate_requests(requests: list[str]) -> None:
     solid_requests(requests)
     move_ref_requests(requests)
     transform_requests(requests)
+    placement_transform_requests(requests)

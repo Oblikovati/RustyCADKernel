@@ -650,10 +650,19 @@ translation, a rotation, a scale, a point and a plane mirror and a general trans
 place under each geometry and mesh policy pair, the refused ones included, and into the
 other graph (empty, then not) for the whole graph and a face, a refused geometry-level
 product, and an edge and a face in place, plus an empty source; both graphs are then
-printed whole, their geometry, persistent meshes and mesh cache included. A
-location-only `TransformNode` of a product or occurrence is not probed: its first step,
-`BRepGraph_Copy::CopyNode` of that node, crashes the pinned native build on these scenes
-(as the bare `CopyNode` does); the transform unit tests cover the location-only step.
+printed whole, their geometry, persistent meshes and mesh cache included. Six more
+`br_balgo` requests (one per transform kind) add the meshed solid scene with an auto
+product and run the location-only `TransformNode` of its product and of its occurrence
+into the other graph (geometry shared, mesh dropped): the rigid transforms copy the node
+with `CopyNode` and compose the placement, and the scale and the mirrors are refused
+before the copy. These two actions were once left out because the native call crashed;
+that was a probe setup error, not an upstream bug. The transform scenes are ingested
+with `Perform`, which creates no product and no occurrence, so `PRODUCT 0` and
+`OCCURRENCE 0` named ids past their stores, and `ensureProduct`/`ensureOccurrence` of
+BRepGraph_Copy.cxx read `ProductRelations(theSrcId)` and `Occurrence(theSrcId)` without
+a range check (a segmentation fault, undefined behaviour at the pinned commit). With
+the product present the native and Rust answers agree; the Rust port refuses the
+out-of-range ids with Standard_OutOfRange (docs/topology-design.md, section 11.14).
 
 The corpus has 726 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
