@@ -35,10 +35,18 @@ mod comp_curve;
 mod concat;
 mod concat_support;
 mod conv_type;
+mod curve_to_ana_conic;
+mod curve_to_ana_curve;
+mod curve_to_ana_select;
 mod curve_to_bspline;
+mod func_ls_dist;
 mod knot_splitting;
 mod reparametrize;
 mod split_surface;
+mod surf_to_ana_convert;
+mod surf_to_ana_gauss;
+mod surf_to_ana_surf;
+mod surf_to_ana_try;
 mod surface_to_bspline;
 mod surface_to_bspline_trimmed;
 mod units;
@@ -56,12 +64,15 @@ pub use comp_bezier_surfaces::CompBezierSurfacesToBSplineSurface;
 pub use comp_curve::CompCurveToBSplineCurve;
 pub use concat::{ConcatOutputs, concat_c1, concat_c1_with_angular, concat_g1};
 pub use conv_type::ConvType;
+pub use curve_to_ana_curve::{AnaCurveFit, CurveToAnaCurve};
 pub use curve_to_bspline::curve_to_bspline_curve;
+pub use func_ls_dist::{FuncConeLSDist, FuncCylinderLSDist, FuncSphereLSDist, HArrayOfXyz};
 pub use knot_splitting::{BSplineCurveKnotSplitting, BSplineSurfaceKnotSplitting};
 pub use split_surface::{
     split_bspline_surface, split_bspline_surface_knots, split_bspline_surface_one_direction,
     split_bspline_surface_one_direction_knots,
 };
+pub use surf_to_ana_surf::SurfToAnaSurf;
 pub use surface_to_bspline::surface_to_bspline_surface;
 pub use units::Units;
 
