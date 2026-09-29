@@ -57,6 +57,52 @@ impl BasisForms {
         }
         Ok(form)
     }
+
+    // The basis values of kind `typ` (0 value, 1 first, 2 second derivative) at the
+    // reduced parameter `t`, the unused forms left at 0.
+    fn evaluate(base: &HermitJacobi, typ: i32, t: f64) -> Result<Self, Failure> {
+        let mx_deg: i32 = base.work_degree();
+        let new =
+            || Array1::<f64>::with_bounds(0, mx_deg).map_err(|error| array_failure(error, CONTEXT));
+        let mut forms: Self = Self {
+            g: [new()?, new()?, new()?],
+        };
+        let [g0, g1, g2] = &mut forms.g;
+        match typ {
+            0 => base.d0(t, g0)?,
+            1 => base.d1(t, g0, g1)?,
+            _ => base.d2(t, g0, g1, g2)?,
+        }
+        Ok(forms)
+    }
+
+    // The Hermite terms `k` and `k + order` (for k in 1..order) of the evaluated
+    // forms times `coeff^k`, to the element of half-length `coeff`.
+    fn scale_constraint_terms(&mut self, typ: i32, coeff: f64, order: i32) -> Result<(), Failure> {
+        let used: usize = (typ.clamp(0, 2) + 1) as usize;
+        for k in 1..order {
+            let mfact: f64 = coeff.powf(f64::from(k));
+            for g in self.g.iter_mut().take(used) {
+                scale(g, k, mfact)?;
+                scale(g, k + order, mfact)?;
+            }
+        }
+        Ok(())
+    }
+
+    // The derivatives in the element parameter: G1 over `coeff`, G2 over `coeff^2`
+    // (as `(1 / coeff) / coeff`).
+    fn scale_derivatives(&mut self, typ: i32, coeff: f64, mx_deg: i32) -> Result<(), Failure> {
+        let mfact: f64 = 1. / coeff;
+        let mfact1: f64 = mfact / coeff;
+        for k in 0..=mx_deg {
+            scale(&mut self.g[1], k, mfact)?;
+            if typ >= 2 {
+                scale(&mut self.g[2], k, mfact1)?;
+            }
+        }
+        Ok(())
+    }
 }
 
 impl Variational {
@@ -86,35 +132,10 @@ impl Variational {
         t: f64,
         coeff: f64,
     ) -> Result<BasisForms, Failure> {
-        let (mx_deg, order) = (base.work_degree(), base.niv_constr() + 1);
-        let new =
-            || Array1::<f64>::with_bounds(0, mx_deg).map_err(|error| array_failure(error, CONTEXT));
-        let mut forms = BasisForms {
-            g: [new()?, new()?, new()?],
-        };
-        let [g0, g1, g2] = &mut forms.g;
-        match typ {
-            0 => base.d0(t, g0)?,
-            1 => base.d1(t, g0, g1)?,
-            _ => base.d2(t, g0, g1, g2)?,
-        }
-        let used: usize = (typ.clamp(0, 2) + 1) as usize;
-        for k in 1..order {
-            let mfact: f64 = coeff.powf(f64::from(k));
-            for g in forms.g.iter_mut().take(used) {
-                scale(g, k, mfact)?;
-                scale(g, k + order, mfact)?;
-            }
-        }
+        let mut forms: BasisForms = BasisForms::evaluate(base, typ, t)?;
+        forms.scale_constraint_terms(typ, coeff, base.niv_constr() + 1)?;
         if typ >= 1 {
-            let mfact: f64 = 1. / coeff;
-            let mfact1: f64 = mfact / coeff;
-            for k in 0..=mx_deg {
-                scale(&mut forms.g[1], k, mfact)?;
-                if typ >= 2 {
-                    scale(&mut forms.g[2], k, mfact1)?;
-                }
-            }
+            forms.scale_derivatives(typ, coeff, base.work_degree())?;
         }
         Ok(forms)
     }
