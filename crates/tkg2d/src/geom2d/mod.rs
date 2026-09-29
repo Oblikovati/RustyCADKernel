@@ -30,6 +30,7 @@ pub use geometry::{
 };
 mod curve;
 mod curve_members;
+mod spline_pole_members;
 pub use curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3, dump_curve};
 mod bounded_curve;
 pub use bounded_curve::{Geom2dBoundedCurve, dump_bounded_curve};

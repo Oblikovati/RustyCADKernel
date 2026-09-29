@@ -151,15 +151,7 @@ impl GeomCurve for GeomParabola {
     fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         Ok(-u)
     }
-    fn transformed_parameter(&self, u: f64, transform: Transform3) -> f64 {
-        if precision::is_infinite(u) {
-            return u;
-        }
-        u * transform.scale_factor().abs()
-    }
-    fn parametric_transformation(&self, transform: Transform3) -> f64 {
-        transform.scale_factor().abs()
-    }
+    rustycad_tkg2d::scaled_parameter_members!(Transform3);
     rustycad_tkg2d::open_curve_range!(-precision::infinite(), precision::infinite());
     rustycad_tkg2d::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point3, Failure> {

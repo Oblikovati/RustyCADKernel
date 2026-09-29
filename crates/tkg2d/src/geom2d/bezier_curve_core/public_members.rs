@@ -23,6 +23,7 @@
 #[macro_export]
 macro_rules! bezier_curve_members {
     ($point:ty) => {
+        $crate::spline_pole_members!($point);
         /// Raise the degree (`Increase`); `curve.increase(5)?`.
         pub fn increase(&self, degree: i32) -> Result<(), Failure> {
             self.state.write().increase(degree)
@@ -35,68 +36,9 @@ macro_rules! bezier_curve_members {
         pub fn segment(&self, u1: f64, u2: f64) -> Result<(), Failure> {
             self.state.write().segment(u1, u2)
         }
-        /// Replace a pole (`SetPole(Index, P)`); `curve.set_pole(2, p)?`.
-        pub fn set_pole(&self, index: i32, pole: $point) -> Result<(), Failure> {
-            self.state.write().set_pole(index, pole)
-        }
-        /// Replace a pole and its weight (`SetPole(Index, P, Weight)`); `curve.set_pole_weighted(2, p, 2.0)?`.
-        pub fn set_pole_weighted(
-            &self,
-            index: i32,
-            pole: $point,
-            weight: f64,
-        ) -> Result<(), Failure> {
-            let mut state = self.state.write();
-            state.set_pole(index, pole)?;
-            state.set_weight(index, weight)
-        }
-        /// Replace a weight (`SetWeight`); `curve.set_weight(2, 2.0)?`.
-        pub fn set_weight(&self, index: i32, weight: f64) -> Result<(), Failure> {
-            self.state.write().set_weight(index, weight)
-        }
-        /// Whether the weights differ (`IsRational`); `curve.is_rational()`.
-        pub fn is_rational(&self) -> bool {
-            self.state.read().rational
-        }
         /// Number of poles minus one (`Degree`); `curve.degree()`.
         pub fn degree(&self) -> i32 {
             self.state.read().degree()
-        }
-        /// Number of poles (`NbPoles`); `curve.nb_poles()`.
-        pub fn nb_poles(&self) -> i32 {
-            self.state.read().poles.len() as i32
-        }
-        /// Pole at `index` (`Pole`); `curve.pole(1)?`.
-        pub fn pole(&self, index: i32) -> Result<$point, Failure> {
-            self.state.read().pole(index)
-        }
-        /// Copy the poles into `target` of equal length (deprecated `Poles(P)`);
-        /// `curve.poles_into(&mut poles)?`.
-        pub fn poles_into(&self, target: &mut Array1<'_, $point>) -> Result<(), Failure> {
-            self.state.read().poles_into(target)
-        }
-        /// The poles, indexed from 1 (`Poles()`); `curve.poles()`.
-        pub fn poles(&self) -> Array1<'static, $point> {
-            self.state.read().poles.clone()
-        }
-        /// Weight at `index`; 1 for a non-rational curve (`Weight`); `curve.weight(1)?`.
-        pub fn weight(&self, index: i32) -> Result<f64, Failure> {
-            self.state.read().weight(index)
-        }
-        /// Copy the weights into `target` of equal length, writing `target(1..=n)` for a
-        /// non-rational curve (deprecated `Weights(W)`); `curve.weights_into(&mut w)?`.
-        pub fn weights_into(&self, target: &mut Array1<'_, f64>) -> Result<(), Failure> {
-            self.state.read().weights_into(target)
-        }
-        /// The weights of a rational curve, `None` otherwise (`Weights()`); `curve.weights()`.
-        pub fn weights(&self) -> Option<Array1<'static, f64>> {
-            self.state.read().weights_view().cloned()
-        }
-        /// Read the stored weights in place, unit weights (a non-owning shared view) for a
-        /// non-rational curve (`WeightsArray`, which natively returns a stable reference);
-        /// `curve.weights_array(|weights| weights.len())`.
-        pub fn weights_array<R>(&self, read: impl FnOnce(&Array1<'static, f64>) -> R) -> R {
-            read(&self.state.read().weights)
         }
         /// `BSplCLib::MaxDegree()` (`MaxDegree`); `curve.max_degree() == 25` (an associated function).
         pub fn max_degree() -> i32 {

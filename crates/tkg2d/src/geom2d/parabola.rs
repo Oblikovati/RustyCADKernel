@@ -158,15 +158,7 @@ impl Geom2dCurve for Geom2dParabola {
     fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         Ok(-u)
     }
-    fn transformed_parameter(&self, u: f64, transform: Transform2) -> f64 {
-        if precision::is_infinite(u) {
-            return u;
-        }
-        u * transform.scale_factor().abs()
-    }
-    fn parametric_transformation(&self, transform: Transform2) -> f64 {
-        transform.scale_factor().abs()
-    }
+    crate::scaled_parameter_members!(Transform2);
     crate::open_curve_range!(-precision::infinite(), precision::infinite());
     crate::non_periodic_cn_curve!();
     fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {

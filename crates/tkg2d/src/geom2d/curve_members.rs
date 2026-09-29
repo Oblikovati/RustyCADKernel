@@ -42,8 +42,17 @@ macro_rules! open_curve_range {
 #[macro_export]
 macro_rules! non_periodic_cn_curve {
     () => {
+        $crate::cn_curve_continuity!(false);
+    };
+}
+
+/// `IsPeriodic` (returning `$periodic`), `Continuity` and `IsCN` of a curve that is
+/// CN everywhere; `rustycad_tkg2d::cn_curve_continuity!(true);`.
+#[macro_export]
+macro_rules! cn_curve_continuity {
+    ($periodic:literal) => {
         fn is_periodic(&self) -> bool {
-            false
+            $periodic
         }
         fn continuity(&self) -> ::rustycad_tkmath::geom_abs::Shape {
             ::rustycad_tkmath::geom_abs::Shape::CN
@@ -204,6 +213,49 @@ macro_rules! spline_geometry_members {
             $crate::geom2d::dump_class_name(stream, $class)?;
             $crate::geom2d::dump_base(stream, depth, $dump_base)?;
             state.dump_fields(stream)
+        }
+    };
+}
+
+/// The members of a closed periodic conic on `[0, 2 Pi]` (circle, ellipse):
+/// `ReversedParameter` is `2 Pi - U`, the curve is closed, periodic and CN;
+/// `rustycad_tkg2d::full_turn_curve_members!();`.
+#[macro_export]
+macro_rules! full_turn_curve_members {
+    () => {
+        fn reversed_parameter(
+            &self,
+            u: f64,
+        ) -> ::core::result::Result<f64, ::rustycad_tkernel::standard::Failure> {
+            Ok(2. * ::std::f64::consts::PI - u)
+        }
+        fn first_parameter(&self) -> f64 {
+            0.0
+        }
+        fn last_parameter(&self) -> f64 {
+            2.0 * ::std::f64::consts::PI
+        }
+        fn is_closed(&self) -> ::core::result::Result<bool, ::rustycad_tkernel::standard::Failure> {
+            Ok(true)
+        }
+        $crate::cn_curve_continuity!(true);
+    };
+}
+
+/// `TransformedParameter` and `ParametricTransformation` of a curve whose parameter
+/// scales with the transformation (line, parabola): `U * |Scale|`, an infinite `U`
+/// unchanged; `rustycad_tkg2d::scaled_parameter_members!(Transform3);`.
+#[macro_export]
+macro_rules! scaled_parameter_members {
+    ($transform:ty) => {
+        fn transformed_parameter(&self, u: f64, transform: $transform) -> f64 {
+            if ::rustycad_tkernel::precision::is_infinite(u) {
+                return u;
+            }
+            u * transform.scale_factor().abs()
+        }
+        fn parametric_transformation(&self, transform: $transform) -> f64 {
+            transform.scale_factor().abs()
         }
     };
 }
