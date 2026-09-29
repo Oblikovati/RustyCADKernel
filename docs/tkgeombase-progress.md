@@ -956,12 +956,15 @@ constructor and option) and CompProjectedCurve (every constructor, the parts, th
 evaluation and intervals, Perform with 2D and 3D results) on elementary, swept,
 trimmed, offset, Bezier and B-spline surfaces, across seams and periodic ranges,
 through poles, leaving bounded surfaces, far from them and degenerate (point and iso
-projections); 2313 requests. Every given initial curve of the polar projection runs on
+projections), and ComputeApprox of a line over the short range `[1, 1 + 1e-6]` on
+every scanned surface kind; 2317 requests. Every given initial curve of the polar projection runs on
 every curve and the ComputeApprox constructor on every curve and surface; the far
 initial curves and the 1e-7 fits dominate the debug Rust twin (about 435 s for these
 requests), inside the one-hour budget of the numeric verifier. Left out: the projection of a line with the parametrization kept by
 the default ProjectOnPlane (a direction in the plane, all values NaN), whose native
-trim never returns; the port refuses it (see the Rust deviation below).
+trim never returns, and ComputeApprox of a zero-length (or one-ulp) range on a cone,
+cylinder, sphere or torus, whose native window scan never ends; the port refuses both
+(see the Rust deviations below).
 
 The GeomProjLib requests (`tkgeombase_corpus_geomprojlib.py`, probe
 `tkgeombase_probe_geomprojlib.cxx`) run the six Curve2d overloads, Project and
@@ -980,8 +983,8 @@ projections dominate the debug Rust twin; 911 requests. Left out, as the native 
 never returns: a line along a direction in the plane with the parametrization kept, a
 trimmed line along such a direction (both reach the NaN trim the port refuses, see the
 Rust deviations), and Curve2d of the zero-length segment of a line on a sphere (the
-ProjLib_ComputeApprox of a zero-length range never returns on a sphere or a cylinder,
-natively and in the port).
+ProjLib_ComputeApprox of a zero-length range never returns natively on a cone, a
+cylinder, a sphere or a torus; the port refuses it, see the Rust deviations).
 
 The corpus has 45475 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
@@ -1757,6 +1760,19 @@ ProjLib:
   and returns a Standard_ConstructionError (the class of the commented-out constructor
   check) that names the direction, the plane normal, the line direction and the NaN
   segment. Without the kept parametrization the NaN line is returned as natively.
+- Rust deviation, `ProjLib_ComputeApprox` of a range too short to scan: on a cone,
+  cylinder, sphere or torus, `Function_SetUVBounds` samples the curve with
+  `for (par = W1 + Step; par <= W2 (+ Step / 10); par += Step)`. A zero-length range
+  (GeomProjLib::Curve2d of a line trimmed to `[1, 1]` on a sphere or a cylinder) gives
+  `Step = 0`, and a range of a few ulps gives a step that rounds back to `par` (for
+  `[1, 1 + DBL_EPSILON]` the half-ulp step rounds to even), so `par` never moves and the
+  native call never returns (the port did not either). The port refuses the first
+  increment that does not move `par` forward, which is where the endless loop starts
+  (the loop state is then unchanged, or only goes down for a negative step), with a
+  Standard_DomainError that names the curve range, the step and the parameter. A scan
+  that ends natively advances at every increment, so every other result is unchanged.
+  The request stays out of the corpus (the native probe never returns); the regression
+  tests are in `tests/proj_lib_behavior/degenerate_ranges.rs`.
 
 GeomProjLib:
 

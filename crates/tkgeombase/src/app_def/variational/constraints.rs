@@ -43,6 +43,44 @@ fn store<T>(array: &mut Array1<'_, T>, index: i32, value: T) -> Result<(), Failu
         .map_err(|error| array_failure(error, "AppDef_Variational::Init"))
 }
 
+// The unit tangent of 3D point `jp3d`, whose curvature must be normal to it within
+// Precision::Angular() (Standard_ConstructionError otherwise).
+fn normal_tangent_3d(tangent: Vector3, curvature: Vector3, jp3d: i32) -> Result<Vector3, Failure> {
+    let vt3d: Vector3 = tangent.normalized()?;
+    if !curvature
+        .normalized()?
+        .is_normal(vt3d, precision::angular())?
+    {
+        return Err(construction(&format!(
+            "3D curvature {jp3d} not normal to its tangent"
+        )));
+    }
+    Ok(vt3d)
+}
+
+// The unit tangent of 2D point `jp2d`, at PI/2 of its curvature within
+// Precision::Angular() (Standard_ConstructionError otherwise).
+fn normal_tangent_2d(tangent: Vector2, curvature: Vector2, jp2d: i32) -> Result<Vector2, Failure> {
+    let vt2d: Vector2 = tangent.normalized()?;
+    if (curvature.angle(vt2d)?.abs() - std::f64::consts::FRAC_PI_2).abs() > precision::angular() {
+        return Err(construction(&format!(
+            "2D curvature {jp2d} not normal to its tangent"
+        )));
+    }
+    Ok(vt2d)
+}
+
+// The table kind of a constraint: 0 pass, 1 tangency, 2 curvature; None for
+// NoConstraint (not tabulated).
+fn constraint_kind(constraint: Constraint) -> Option<i32> {
+    match constraint {
+        Constraint::NoConstraint => None,
+        Constraint::PassPoint => Some(0),
+        Constraint::TangencyPoint => Some(1),
+        Constraint::CurvaturePoint => Some(2),
+    }
+}
+
 /// `NotParallel(T, V)`: a V not parallel to T, from T by adding 1 to x, then y, then z.
 fn not_parallel(t: Vector3) -> Option<Vector3> {
     let mut v: Vector3 = t;
@@ -56,6 +94,34 @@ fn not_parallel(t: Vector3) -> Option<Vector3> {
     }
     v.set_z(v.z() + 1.);
     (v.cross_magnitude(t) > 1.0e-12).then_some(v)
+}
+
+// The unit normals of `t`: theta1 = (V ^ T) / |V ^ T| with V = Z in 2D and
+// NotParallel(T) in 3D, and in 3D theta2 = (T ^ theta1) / |T ^ theta1|; None when
+// every NotParallel attempt is parallel.
+fn normal_frames(ndimen: i32, t: Vector3) -> Result<Option<Vec<Vector3>>, Failure> {
+    let v: Vector3 = if ndimen == 2 {
+        Vector3::new(0., 0., 1.)
+    } else {
+        let Some(v) = not_parallel(t) else {
+            return Ok(None);
+        };
+        v
+    };
+    let theta1: Vector3 = (v ^ t).normalized()?;
+    let mut frames: Vec<Vector3> = vec![theta1];
+    if ndimen == 3 {
+        frames.push((t ^ theta1).normalized()?);
+    }
+    Ok(Some(frames))
+}
+
+// The images of the normal frames by the curvature projector of `t`.
+fn curvature_frames(ndimen: i32, t: Vector3, frames: &[Vector3]) -> Vec<Vector3> {
+    frames
+        .iter()
+        .map(|&theta| curvature_frame(ndimen, t, theta))
+        .collect()
 }
 
 // F = (|T|^2 I - T T^t) theta for the curvature frames; the 2D formula has no z
@@ -81,47 +147,46 @@ impl Variational {
     /// `Init()`: the constraint tables of the current couples, then the
     /// over-constraint test and, when it passes, the smoothing criterion.
     pub(super) fn init(&mut self) -> Result<(), Failure> {
-        let couples: Array1<'static, ConstraintCouple> = self
-            .constraints
-            .get()
-            .ok_or_else(|| {
-                failure(
-                    "Standard_NullObject",
-                    "AppDef_Variational::Init: null constraints; expected a constraint array",
-                )
-            })?
-            .array1()
-            .clone();
-        let n: i32 = couples.length();
+        let couples: Array1<'static, ConstraintCouple> = self.constraint_couples()?;
         let ntheta: i32 = 2 * self.nb_p2d + 6 * self.nb_p3d;
-        // myNbConstraints (every couple, NoConstraint included) only sizes the tables.
-        self.tables = ConstraintTables {
+        self.tables = self.empty_tables(couples.length(), ntheta)?;
+        let (mut index, mut jndex, mut cur_multy_point) = (1, 1, 1);
+        for couple in couples.iter() {
+            let Some(kind) = constraint_kind(couple.constraint()) else {
+                // A NoConstraint couple takes no frame slot (natively curMultyPoint
+                // goes down by ntheta, then up by ntheta at the end of the loop).
+                continue;
+            };
+            store(&mut self.tables.types, index, couple.index())?;
+            store(&mut self.tables.types, index + 1, kind)?;
+            index += 2;
+            self.constraint_point(couple, kind, &mut jndex, cur_multy_point)?;
+            cur_multy_point += ntheta;
+        }
+        self.finish_init()
+    }
+
+    // A copy of the constraint couples; Standard_NullObject without them.
+    fn constraint_couples(&self) -> Result<Array1<'static, ConstraintCouple>, Failure> {
+        let couples = self.constraints.get().ok_or_else(|| {
+            failure(
+                "Standard_NullObject",
+                "AppDef_Variational::Init: null constraints; expected a constraint array",
+            )
+        })?;
+        Ok(couples.array1().clone())
+    }
+
+    // The constraint tables for `n` couples. myNbConstraints (every couple,
+    // NoConstraint included) only sizes the tables.
+    fn empty_tables(&self, n: i32, ntheta: i32) -> Result<ConstraintTables, Failure> {
+        Ok(ConstraintTables {
             values: table(2 * self.dimension * n)?,
             types: table(2 * n)?,
             ttheta: table(ntheta * n)?,
             tfthet: table(ntheta * n)?,
             ..ConstraintTables::default()
-        };
-        let (mut index, mut jndex, mut cur_multy_point) = (1, 1, 1);
-        for couple in couples.iter() {
-            let kind: i32 = match couple.constraint() {
-                Constraint::NoConstraint => {
-                    cur_multy_point -= ntheta;
-                    -1
-                }
-                Constraint::PassPoint => 0,
-                Constraint::TangencyPoint => 1,
-                Constraint::CurvaturePoint => 2,
-            };
-            if kind >= 0 {
-                store(&mut self.tables.types, index, couple.index())?;
-                store(&mut self.tables.types, index + 1, kind)?;
-                index += 2;
-                self.constraint_point(couple, kind, &mut jndex, cur_multy_point)?;
-            }
-            cur_multy_point += ntheta;
-        }
-        self.finish_init()
+        })
     }
 
     // OverConstraint Detection; the flag is only ever raised here.
@@ -177,8 +242,25 @@ impl Variational {
             v3d: table(self.nb_p3d)?,
             v2d: table(self.nb_p2d)?,
         };
+        if !self.read_point_vectors(ipoint, curvature, &mut vectors)? {
+            let what: &str = if curvature { "curvatures" } else { "tangents" };
+            return Err(construction(&format!(
+                "point {ipoint} has no {what}; expected them for its constraint"
+            )));
+        }
+        Ok(vectors)
+    }
+
+    // The tangents (or curvatures) of `ipoint` read by the line overload of the
+    // dimensions it has; false when the multipoint has none.
+    fn read_point_vectors(
+        &self,
+        ipoint: i32,
+        curvature: bool,
+        vectors: &mut PointVectors,
+    ) -> Result<bool, Failure> {
         let (v3d, v2d) = (&mut vectors.v3d, &mut vectors.v2d);
-        let found: bool = match (self.nb_p3d != 0, self.nb_p2d != 0, curvature) {
+        Ok(match (self.nb_p3d != 0, self.nb_p2d != 0, curvature) {
             (false, true, false) => self.ssp.tangency_2d(ipoint, v2d)?,
             (true, false, false) => self.ssp.tangency_3d(ipoint, v3d)?,
             (true, true, false) => self.ssp.tangency(ipoint, v3d, v2d)?,
@@ -186,14 +268,7 @@ impl Variational {
             (true, false, true) => self.ssp.curvature_3d(ipoint, v3d)?,
             (true, true, true) => self.ssp.curvature(ipoint, v3d, v2d)?,
             (false, false, _) => true,
-        };
-        if !found {
-            let what: &str = if curvature { "curvatures" } else { "tangents" };
-            return Err(construction(&format!(
-                "point {ipoint} has no {what}; expected them for its constraint"
-            )));
-        }
-        Ok(vectors)
+        })
     }
 
     // Tangency: the unit tangents, 3 of 6 entries per 3D point and 2 of 4 per 2D one.
@@ -229,12 +304,8 @@ impl Variational {
         kind: Constraint,
     ) -> Result<(), Failure> {
         for jp3d in 1..=self.nb_p3d {
-            let (vt3d, vc3d) = (tangents.v3d[jp3d].normalized()?, curvatures.v3d[jp3d]);
-            if !vc3d.normalized()?.is_normal(vt3d, precision::angular())? {
-                return Err(construction(&format!(
-                    "3D curvature {jp3d} not normal to its tangent"
-                )));
-            }
+            let vc3d: Vector3 = curvatures.v3d[jp3d];
+            let vt3d: Vector3 = normal_tangent_3d(tangents.v3d[jp3d], vc3d, jp3d)?;
             self.put(
                 jndex,
                 &[vt3d.x(), vt3d.y(), vt3d.z(), vc3d.x(), vc3d.y(), vc3d.z()],
@@ -242,13 +313,8 @@ impl Variational {
             self.init_ttheta_f(3, kind, cur + (jp3d - 1) * 6, *jndex - 6)?;
         }
         for jp2d in 1..=self.nb_p2d {
-            let (vt2d, vc2d) = (tangents.v2d[jp2d].normalized()?, curvatures.v2d[jp2d]);
-            if (vc2d.angle(vt2d)?.abs() - std::f64::consts::FRAC_PI_2).abs() > precision::angular()
-            {
-                return Err(construction(&format!(
-                    "2D curvature {jp2d} not normal to its tangent"
-                )));
-            }
+            let vc2d: Vector2 = curvatures.v2d[jp2d];
+            let vt2d: Vector2 = normal_tangent_2d(tangents.v2d[jp2d], vc2d, jp2d)?;
             self.put(jndex, &[vt2d.x(), vt2d.y(), vc2d.x(), vc2d.y()])?;
             self.init_ttheta_f(2, kind, cur + (jp2d - 1) * 2 + self.nb_p3d * 6, *jndex - 4)?;
         }
@@ -284,34 +350,30 @@ impl Variational {
         ) {
             return Ok(true);
         }
+        let t: Vector3 = self.tabulated_tangent(ndimen, jndex)?;
+        let Some(frames) = normal_frames(ndimen, t)? else {
+            return Ok(false);
+        };
+        self.store_frames(ndimen, begin, &frames, false)?;
+        if typcon == Constraint::CurvaturePoint {
+            let images: Vec<Vector3> = curvature_frames(ndimen, t, &frames);
+            self.store_frames(ndimen, begin, &images, true)?;
+        }
+        Ok(true)
+    }
+
+    // The tangent at `myTabConstraints(jndex)` (z = 0 in 2D).
+    fn tabulated_tangent(&self, ndimen: i32, jndex: i32) -> Result<Vector3, Failure> {
         let z: f64 = if ndimen == 3 {
             self.tables.value(jndex + 2)?
         } else {
             0.
         };
-        let t = Vector3::new(self.tables.value(jndex)?, self.tables.value(jndex + 1)?, z);
-        let v: Vector3 = if ndimen == 2 {
-            Vector3::new(0., 0., 1.)
-        } else {
-            let Some(v) = not_parallel(t) else {
-                return Ok(false);
-            };
-            v
-        };
-        let theta1: Vector3 = (v ^ t).normalized()?;
-        let mut frames: Vec<Vector3> = vec![theta1];
-        if ndimen == 3 {
-            frames.push((t ^ theta1).normalized()?);
-        }
-        self.store_frames(ndimen, begin, &frames, false)?;
-        if typcon == Constraint::CurvaturePoint {
-            let images: Vec<Vector3> = frames
-                .iter()
-                .map(|&theta| curvature_frame(ndimen, t, theta))
-                .collect();
-            self.store_frames(ndimen, begin, &images, true)?;
-        }
-        Ok(true)
+        Ok(Vector3::new(
+            self.tables.value(jndex)?,
+            self.tables.value(jndex + 1)?,
+            z,
+        ))
     }
 
     // The frames at `begin`: x and y in 2D, x, y, z of each frame in 3D.

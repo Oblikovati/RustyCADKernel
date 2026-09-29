@@ -101,6 +101,12 @@ def approx_requests(requests):
             add(requests, 'pl_approx', 0, *option, *curve, *surface)
             add(requests, 'pl_approx', 1, *OPTIONS[0], *curve, *surface)
     add(requests, 'pl_approx', 0, *OPTIONS[1], *whole(C2), *FLAT)
+    # A range of 1e-6 still moves the window scan forward. The zero-length range (and one
+    # of an ulp) never returns natively and is refused by the port, so it is left out
+    # (docs/tkgeombase-progress.md, Rust deviations).
+    short_line = ranged(1.0, 1.0 + 1e-6, line([3.0, 0.0, 0.0], [0.6, 0.8, 0.0]))
+    for surface in [CYL, CONE, SPHERE, TORUS]:
+        add(requests, 'pl_approx', 1, *OPTIONS[0], *short_line, *surface)
 
 
 def projected_requests(requests):

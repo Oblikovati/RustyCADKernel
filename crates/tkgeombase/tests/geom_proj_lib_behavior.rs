@@ -21,7 +21,7 @@ use rustycad_tkernel::standard::{Handle, RuntimeTyped};
 use rustycad_tkg2d::geom2d::{Geom2dCircle, Geom2dCurve, Geom2dLine, Geom2dTrimmedCurve};
 use rustycad_tkg3d::geom::{
     GeomBSplineCurve, GeomCircle, GeomCurve, GeomCylindricalSurface, GeomLine, GeomPlane,
-    GeomSurface, GeomTrimmedCurve,
+    GeomSphericalSurface, GeomSurface, GeomTrimmedCurve,
 };
 use rustycad_tkgeombase::geom_proj_lib as gpl;
 use rustycad_tkmath::gp::{Axis2, Axis3, Direction3, Point3};
@@ -159,4 +159,22 @@ fn project_on_plane_refuses_a_trimmed_line_along_a_direction_in_the_plane() {
         .err()
         .unwrap();
     assert_eq!(error.exception_type(), "Standard_NullObject");
+}
+
+#[test]
+fn curve2d_refuses_the_zero_length_segment_of_a_line_on_a_sphere_or_a_cylinder() {
+    // Rust deviation (regression): the window scan of ProjLib_ComputeApprox has a zero
+    // step on `[1, 1]`, so the native call never returns.
+    let sphere: Handle<dyn GeomSurface> =
+        Handle::new(GeomSphericalSurface::new(xoy(), 2.0).unwrap()).cast();
+    let origin: Point3 = Point3::new(3.0, 0.0, 0.0);
+    let line: Handle<dyn GeomCurve> =
+        Handle::new(GeomLine::from_point(origin, dir(0.6, 0.8, 0.0))).cast();
+    for surface in [sphere, cylinder()] {
+        let error = gpl::curve2d_range(&line, (1.0, 1.0), &surface)
+            .err()
+            .unwrap();
+        assert_eq!(error.exception_type(), "Standard_DomainError");
+        assert!(error.message().contains("the curve range [1, 1]"));
+    }
 }

@@ -18,7 +18,7 @@
 //! first, since the cone parameters of the apex give a wrong U; open conics use
 //! their ends, other curves an unwrapping scan with seam protections.
 use super::function::{Projection, UvBounds, compute_step};
-use super::uv_bounds::{Samples, centred_window, widen_range};
+use super::uv_bounds::{Samples, centred_window, next_scan_parameter, widen_range};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::real::epsilon;
@@ -202,7 +202,7 @@ fn scan_window(
         }
         let (u, _) = elslib::parameters(cone, p.curve.value(par)?);
         scan.push(par, u, step, s.w2);
-        par += step;
+        par = next_scan_parameter(par, step, [s.w1, s.w2])?;
     }
     widen_range(
         &mut scan.min,

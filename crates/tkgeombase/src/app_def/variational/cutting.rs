@@ -91,23 +91,50 @@ fn getting_knots(
         }
         *nb_elm += 1;
         let (k0, k1) = (at(&old_knots, i0)?, at(&old_knots, i1)?);
-        let (ipt1, flag1) = near_index(k0, tab_par, eps)?;
-        let ipt1: i32 = if flag1 != 0 { tab_par.lower() } else { ipt1 };
-        let (ipt2, flag2) = near_index(k1, tab_par, eps)?;
-        let ipt2: i32 = if flag2 != 0 { tab_par.upper() } else { ipt2 };
-        let knot: f64 = if ipt2 - ipt1 >= 1 {
-            let ipt: i32 = (ipt1 + ipt2) / 2;
-            let t_par: f64 = if 2 * ipt == ipt1 + ipt2 {
-                2. * at(tab_par, ipt)?
-            } else {
-                at(tab_par, ipt)? + at(tab_par, ipt + 1)?
-            };
-            (k0 + k1 + t_par) / 4.
-        } else {
-            (k0 + k1) / 2.
-        };
-        put(new_knots, *nb_elm, knot)?;
+        put(new_knots, *nb_elm, element_knot(tab_par, (k0, k1), eps)?)?;
     }
+    Ok(())
+}
+
+// The new knot of the element `[k0, k1]`: a quarter of `k0 + k1` plus twice the
+// middle parameter between them (the mean of the two middle ones), or its middle
+// without a parameter inside.
+fn element_knot(tab_par: &Array1<'_, f64>, (k0, k1): (f64, f64), eps: f64) -> Result<f64, Failure> {
+    let (ipt1, flag1) = near_index(k0, tab_par, eps)?;
+    let ipt1: i32 = if flag1 != 0 { tab_par.lower() } else { ipt1 };
+    let (ipt2, flag2) = near_index(k1, tab_par, eps)?;
+    let ipt2: i32 = if flag2 != 0 { tab_par.upper() } else { ipt2 };
+    if ipt2 - ipt1 < 1 {
+        return Ok((k0 + k1) / 2.);
+    }
+    let ipt: i32 = (ipt1 + ipt2) / 2;
+    let t_par: f64 = if 2 * ipt == ipt1 + ipt2 {
+        2. * at(tab_par, ipt)?
+    } else {
+        at(tab_par, ipt)? + at(tab_par, ipt + 1)?
+    };
+    Ok((k0 + k1 + t_par) / 4.)
+}
+
+// `out_knots` as the knots of `in_curve` followed by the new knots
+// `nb_elm_old + 1..=nb_elm` of `new_knots`, sorted.
+fn merge_knots(
+    out_knots: &mut Array1<'_, f64>,
+    in_curve: &Curve,
+    new_knots: &Array1<'_, f64>,
+    (nb_elm_old, nb_elm): (i32, i32),
+) -> Result<(), Failure> {
+    let in_knots: Array1<'static, f64> = in_curve.knots().clone();
+    let i0: i32 = out_knots.lower();
+    for i in in_knots.lower()..=in_knots.upper() {
+        put(out_knots, i, at(&in_knots, i)?)?;
+    }
+    for i in nb_elm_old + 1..=nb_elm {
+        put(out_knots, i + i0, at(new_knots, i)?)?;
+    }
+    out_knots
+        .as_mut_slice()
+        .sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
     Ok(())
 }
 
@@ -125,32 +152,36 @@ impl Variational {
         if nb_elm_old >= self.options.max_segment {
             return Ok(None);
         }
-        let mut nb_elm: i32 = nb_elm_old;
+        let (new_knots, nb_elm) = self.split_knots(in_curve, ti)?;
+        if nb_elm <= nb_elm_old {
+            return Ok(None);
+        }
+        let out_curve: Curve =
+            Curve::new(in_curve.dimension(), nb_elm, in_curve.base(), curve_tol)?;
+        merge_knots(
+            &mut out_curve.knots(),
+            in_curve,
+            &new_knots,
+            (nb_elm_old, nb_elm),
+        )?;
+        Ok(Some(Handle::new(out_curve)))
+    }
+
+    // The new knots (after the current elements, up to MaxSegment) of the elements
+    // of WorkDegree, then of WorkDegree - 1, and the element count they make.
+    fn split_knots(
+        &self,
+        in_curve: &Curve,
+        ti: &Array1<'_, f64>,
+    ) -> Result<(Array1<'static, f64>, i32), Failure> {
+        let mut nb_elm: i32 = in_curve.nb_elements();
         let mut new_knots: Array1<'static, f64> =
             Array1::with_bounds(nb_elm + 1, self.options.max_segment)
                 .map_err(|error| array_failure(error, "AppDef_Variational::SplitCurve"))?;
         let work_degree: i32 = in_curve.base().work_degree();
         getting_knots(ti, in_curve, work_degree, &mut nb_elm, &mut new_knots)?;
         getting_knots(ti, in_curve, work_degree - 1, &mut nb_elm, &mut new_knots)?;
-        if nb_elm <= nb_elm_old {
-            return Ok(None);
-        }
-        let out_curve: Curve =
-            Curve::new(in_curve.dimension(), nb_elm, in_curve.base(), curve_tol)?;
-        let in_knots: Array1<'static, f64> = in_curve.knots().clone();
-        let mut out_knots = out_curve.knots();
-        let i0: i32 = out_knots.lower();
-        for i in in_knots.lower()..=in_knots.upper() {
-            put(&mut out_knots, i, at(&in_knots, i)?)?;
-        }
-        for i in nb_elm_old + 1..=nb_elm {
-            put(&mut out_knots, i + i0, at(&new_knots, i)?)?;
-        }
-        out_knots
-            .as_mut_slice()
-            .sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
-        drop(out_knots);
-        Ok(Some(Handle::new(out_curve)))
+        Ok((new_knots, nb_elm))
     }
 
     // The constraint count `|kind| + 1` of each constraint and the largest one.
@@ -175,19 +206,7 @@ impl Variational {
                 max_degree - niv_cont
             )));
         }
-        let mut n_libre: i32 = (max_degree - niv_cont - (max_degree + 1) / 4).max(niv_cont + 1);
-        let count = |n_libre: i32| {
-            if n_cont % n_libre == 0 {
-                n_cont / n_libre
-            } else {
-                n_cont / n_libre + 1
-            }
-        };
-        let mut nb_elem: i32 = count(n_libre);
-        while nb_elem > self.options.max_segment && n_libre < max_degree - niv_cont {
-            n_libre += 1;
-            nb_elem = count(n_libre);
-        }
+        let nb_elem: i32 = self.spread_constraints(n_cont);
         if nb_elem > self.options.max_segment {
             return Err(construction(&format!(
                 "InitCutting: {nb_elem} elements; expected <= MaxSegment {}",
@@ -195,6 +214,20 @@ impl Variational {
             )));
         }
         Ok((nb_elem, n_cont))
+    }
+
+    // The element count for `n_cont` constraint counts: NLibre free coefficients
+    // per element from about three quarters of the degree on, raised until the
+    // elements fit MaxSegment or NLibre reaches MaxDegree - Continuity.
+    fn spread_constraints(&self, n_cont: i32) -> i32 {
+        let (max_degree, niv_cont) = (self.options.max_degree, self.niv_cont);
+        let mut n_libre: i32 = (max_degree - niv_cont - (max_degree + 1) / 4).max(niv_cont + 1);
+        let mut nb_elem: i32 = elements_of(n_cont, n_libre);
+        while nb_elem > self.options.max_segment && n_libre < max_degree - niv_cont {
+            n_libre += 1;
+            nb_elem = elements_of(n_cont, n_libre);
+        }
+        nb_elem
     }
 
     /// `InitCutting(aBase, CurvTol, aCurve)`: a curve with an element per group of
@@ -313,6 +346,15 @@ impl Variational {
             }
         };
         put(knot, index, value)
+    }
+}
+
+// The elements of `n_libre` coefficients `n_cont` constraint counts need.
+fn elements_of(n_cont: i32, n_libre: i32) -> i32 {
+    if n_cont % n_libre == 0 {
+        n_cont / n_libre
+    } else {
+        n_cont / n_libre + 1
     }
 }
 

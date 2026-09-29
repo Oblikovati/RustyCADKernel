@@ -32,6 +32,19 @@ pub(super) struct ProjectErrors {
     pub(super) ave_err: f64,
 }
 
+impl ProjectErrors {
+    // The distance of point `ipnt`: a new maximum (and its point) when larger, and
+    // its terms of the quadratic and the average error.
+    fn add_distance(&mut self, ipnt: i32, dist: f64) {
+        if dist > self.max_err {
+            self.max_err = dist;
+            self.num_points = ipnt;
+        }
+        self.qua_err += dist * dist;
+        self.ave_err += dist;
+    }
+}
+
 fn at(array: &Array1<'_, f64>, index: i32) -> Result<f64, Failure> {
     array
         .value(index)
@@ -52,6 +65,15 @@ struct Evaluation {
     second: Array1<'static, f64>,
 }
 
+/// The running Newton projection of one point: the parameter, its distance, the
+/// count of converged steps and the iteration count.
+struct NewtonRun {
+    t: f64,
+    dist: f64,
+    n_it_cv: i32,
+    iter: i32,
+}
+
 impl Variational {
     // |C(t) - P| for the point at offset `i0` of myTabPoints.
     fn distance_at(&self, val: &Array1<'_, f64>, i0: i32) -> Result<f64, Failure> {
@@ -69,43 +91,79 @@ impl Variational {
     fn newton(
         &self,
         c: &Curve,
-        (mut t_new, i0): (f64, i32),
+        (t_new, i0): (f64, i32),
         ev: &mut Evaluation,
         nb_iterations: i32,
     ) -> Result<(f64, f64), Failure> {
-        let (seuil, eps) = (1.0e-9, 1.0e-12);
         c.d0(t_new, &mut ev.val)?;
-        let mut dist: f64 = self.distance_at(&ev.val, i0)?;
-        let (mut n_it_cv, mut iter) = (0, 0);
+        let dist: f64 = self.distance_at(&ev.val, i0)?;
+        let mut run = NewtonRun {
+            t: t_new,
+            dist,
+            n_it_cv: 0,
+            iter: 0,
+        };
         loop {
-            iter += 1;
-            let (t0, dist0) = (t_new, dist);
-            c.d2(t_new, &mut ev.second)?;
-            c.d1(t_new, &mut ev.first)?;
-            let (mut f1, mut f2) = (0., 0.);
-            for i in 1..=self.dimension {
-                let aux: f64 = at(&ev.val, i)? - self.tab_point(i0 + i)?;
-                let df: f64 = at(&ev.first, i)?;
-                f1 += aux * df;
-                f2 += df * df + aux * at(&ev.second, i)?;
-            }
-            if f2.abs() < eps {
-                return Ok((t_new, dist));
-            }
-            // Formula of Newton x(k+1) = x(k) - F(x(k))/F'(x(k))
-            t_new = clamp_unit(t_new - f1 / f2);
-            c.d0(t_new, &mut ev.val)?;
-            dist = self.distance_at(&ev.val, i0)?;
-            let ecart: f64 = dist0 - dist;
-            if ecart <= -seuil {
-                // No improvement, stop here
-                return Ok((t0, dist0));
-            }
-            n_it_cv = if ecart <= seuil { n_it_cv + 1 } else { 0 };
-            if n_it_cv >= 2 || iter >= nb_iterations {
-                return Ok((t_new, dist));
+            if let Some(result) = self.newton_iteration(c, i0, ev, (&mut run, nb_iterations))? {
+                return Ok(result);
             }
         }
+    }
+
+    // One Newton iteration from `run`: the `(t, distance)` result when it stops (a
+    // null derivative, no improvement, convergence or the last iteration).
+    fn newton_iteration(
+        &self,
+        c: &Curve,
+        i0: i32,
+        ev: &mut Evaluation,
+        (run, nb_iterations): (&mut NewtonRun, i32),
+    ) -> Result<Option<(f64, f64)>, Failure> {
+        let seuil: f64 = 1.0e-9;
+        run.iter += 1;
+        let (t0, dist0) = (run.t, run.dist);
+        let Some(t_next) = self.newton_step(c, (run.t, i0), ev)? else {
+            return Ok(Some((run.t, run.dist)));
+        };
+        run.t = t_next;
+        run.dist = self.distance_at(&ev.val, i0)?;
+        let ecart: f64 = dist0 - run.dist;
+        if ecart <= -seuil {
+            // No improvement, stop here
+            return Ok(Some((t0, dist0)));
+        }
+        run.n_it_cv = if ecart <= seuil { run.n_it_cv + 1 } else { 0 };
+        if run.n_it_cv >= 2 || run.iter >= nb_iterations {
+            return Ok(Some((run.t, run.dist)));
+        }
+        Ok(None)
+    }
+
+    // The Newton step from `t` (C evaluated there in `ev.val`), with C evaluated at
+    // the new parameter; None on a null derivative.
+    fn newton_step(
+        &self,
+        c: &Curve,
+        (t, i0): (f64, i32),
+        ev: &mut Evaluation,
+    ) -> Result<Option<f64>, Failure> {
+        let eps: f64 = 1.0e-12;
+        c.d2(t, &mut ev.second)?;
+        c.d1(t, &mut ev.first)?;
+        let (mut f1, mut f2) = (0., 0.);
+        for i in 1..=self.dimension {
+            let aux: f64 = at(&ev.val, i)? - self.tab_point(i0 + i)?;
+            let df: f64 = at(&ev.first, i)?;
+            f1 += aux * df;
+            f2 += df * df + aux * at(&ev.second, i)?;
+        }
+        if f2.abs() < eps {
+            return Ok(None);
+        }
+        // Formula of Newton x(k+1) = x(k) - F(x(k))/F'(x(k))
+        let t_new: f64 = clamp_unit(t - f1 / f2);
+        c.d0(t_new, &mut ev.val)?;
+        Ok(Some(t_new))
     }
 
     /// `Project(C, Ti, ProjTi, Distance, NumPoints, MaxErr, QuaErr, AveErr,
@@ -125,11 +183,7 @@ impl Variational {
             num_points,
             ..ProjectErrors::default()
         };
-        let mut ev = Evaluation {
-            val: self.evaluation_buffer()?,
-            first: self.evaluation_buffer()?,
-            second: self.evaluation_buffer()?,
-        };
+        let mut ev: Evaluation = self.evaluation()?;
         let d0: i32 = distance.lower() - 1;
         let mut i0: i32 = -self.dimension;
         for ipnt in 1..=proj_ti.length() {
@@ -137,16 +191,20 @@ impl Variational {
             let (t_new, dist) = self.newton(c, (at(ti, ipnt)?, i0), &mut ev, nb_iterations)?;
             put(proj_ti, ipnt, t_new)?;
             put(distance, d0 + ipnt, dist)?;
-            if dist > errors.max_err {
-                errors.max_err = dist;
-                errors.num_points = ipnt;
-            }
-            errors.qua_err += dist * dist;
-            errors.ave_err += dist;
+            errors.add_distance(ipnt, dist);
         }
         // Setting NumPoints to interval [myFirstPoint, myLastPoint]
         errors.num_points = errors.num_points + self.first_point - 1;
         Ok(errors)
+    }
+
+    // The three evaluation buffers `(1, Dimension)`.
+    fn evaluation(&self) -> Result<Evaluation, Failure> {
+        Ok(Evaluation {
+            val: self.evaluation_buffer()?,
+            first: self.evaluation_buffer()?,
+            second: self.evaluation_buffer()?,
+        })
     }
 
     fn evaluation_buffer(&self) -> Result<Array1<'static, f64>, Failure> {
@@ -170,6 +228,32 @@ struct Acr {
     i_old: i32,
     p_cnt: i32,
     i_cnt: i32,
+}
+
+impl Acr {
+    // The parameter `t` mapped linearly from the last kept parameter: `UOld + (t -
+    // TOld) * DtInv * DU`, as `ratio = (t - TOld) * DtInv` then `UOld + ratio * DU`.
+    fn remapped(&self, t: f64, (dt_inv, du): (f64, f64)) -> f64 {
+        let ratio: f64 = (t - self.t_old) * dt_inv;
+        self.u_old + ratio * du
+    }
+
+    // The element holding `t_para` from the current one on (at most the last).
+    fn advance_element(&mut self, curve: &Curve, t_para: f64) -> Result<(), Failure> {
+        let k_last: i32 = curve.knots().upper();
+        while knot(curve, self.i_elm + 1)? < t_para && self.i_elm < k_last - 1 {
+            self.i_elm += 1;
+        }
+        Ok(())
+    }
+
+    // Point `ipnt` at `t_para` is kept with the arc-length parameter `u_new`.
+    fn keep(&mut self, u_new: f64, t_para: f64, ipnt: i32) {
+        self.u_old = u_new;
+        self.i_old = self.i_elm;
+        self.t_old = t_para;
+        self.p_old = ipnt;
+    }
 }
 
 // Knots(index) of the curve (a short lock: the curve reads its knots in Length).
@@ -222,19 +306,38 @@ impl Variational {
         cb_long: f64,
         decima: i32,
     ) -> Result<(), Failure> {
-        let eps: f64 = 1.0e-8;
         let (ti_first, ti_last) = (ti.lower(), ti.upper());
-        let nb_cntr: i32 = self.tables.nb_constr();
         // (2.0) Initialisation
         let delta_t: f64 = (at(ti, ti_last)? - at(ti, ti_first)?) / f64::from(decima);
         let mut v_test: f64 = at(ti, ti_first)? + delta_t;
-        let (p_cnt, i_cnt) = if nb_cntr > 0 {
+        let mut s: Acr = self.acr_start(curve, ti)?;
+        put(ti, ti_first, 0.)?;
+        let mut ipnt: i32 = ti_first + 1;
+        while ipnt <= ti_last {
+            self.next_constrained_point(&mut s, ipnt, ti_first)?;
+            let mut t_para: f64 = at(ti, ipnt)?;
+            if t_para >= v_test || s.p_cnt == ipnt {
+                (ipnt, t_para) = snap_to_last(ti, (ipnt, t_para), delta_t)?;
+                acr_update(curve, ti, (ipnt, t_para), (cb_long, &mut s))?;
+            }
+            // --> New parametric threshold for decimation
+            v_test = next_threshold(t_para, v_test, delta_t);
+            ipnt += 1;
+        }
+        Ok(())
+    }
+
+    // The state of ACR before the first point: nothing updated yet, the first
+    // constrained point (past the last point without constraints).
+    fn acr_start(&self, curve: &Curve, ti: &Array1<'_, f64>) -> Result<Acr, Failure> {
+        let (ti_first, ti_last) = (ti.lower(), ti.upper());
+        let (p_cnt, i_cnt) = if self.tables.nb_constr() > 0 {
             (self.tables.typ(1)? - self.first_point + ti_first, 1)
         } else {
             (ti_last + 1, 0)
         };
         let k_first: i32 = curve.knots().lower();
-        let mut s = Acr {
+        Ok(Acr {
             u_old: 0.,
             t_old: at(ti, ti_first)?,
             p_old: ti_first,
@@ -242,33 +345,45 @@ impl Variational {
             i_old: k_first,
             p_cnt,
             i_cnt,
-        };
-        put(ti, ti_first, 0.)?;
-        let mut ipnt: i32 = ti_first + 1;
-        while ipnt <= ti_last {
-            while s.i_cnt <= nb_cntr && s.p_cnt < ipnt {
-                s.i_cnt += 1;
-                s.p_cnt = self.tables.typ(2 * s.i_cnt - 1)? - self.first_point + ti_first;
-            }
-            let mut t_para: f64 = at(ti, ipnt)?;
-            if t_para >= v_test || s.p_cnt == ipnt {
-                if at(ti, ti_last)? - t_para <= 1.0e-2 * delta_t {
-                    ipnt = ti_last;
-                    t_para = at(ti, ipnt)?;
-                }
-                acr_update(curve, ti, (ipnt, t_para), (cb_long, &mut s))?;
-            }
-            // --> New parametric threshold for decimation
-            if t_para >= v_test {
-                v_test += ((t_para - v_test + eps) / delta_t).ceil() * delta_t;
-                if v_test > 1. - eps {
-                    v_test = 1.;
-                }
-            }
-            ipnt += 1;
+        })
+    }
+
+    // The constrained points before `ipnt` are passed.
+    fn next_constrained_point(&self, s: &mut Acr, ipnt: i32, ti_first: i32) -> Result<(), Failure> {
+        let nb_cntr: i32 = self.tables.nb_constr();
+        while s.i_cnt <= nb_cntr && s.p_cnt < ipnt {
+            s.i_cnt += 1;
+            s.p_cnt = self.tables.typ(2 * s.i_cnt - 1)? - self.first_point + ti_first;
         }
         Ok(())
     }
+}
+
+// A kept point within a hundredth of the step of the last parameter is replaced by
+// the last point.
+fn snap_to_last(
+    ti: &Array1<'_, f64>,
+    (ipnt, t_para): (i32, f64),
+    delta_t: f64,
+) -> Result<(i32, f64), Failure> {
+    let ti_last: i32 = ti.upper();
+    if at(ti, ti_last)? - t_para <= 1.0e-2 * delta_t {
+        return Ok((ti_last, at(ti, ti_last)?));
+    }
+    Ok((ipnt, t_para))
+}
+
+// The decimation threshold past `t_para` (whole steps on, at most 1), unchanged
+// while `t_para` is below it.
+fn next_threshold(t_para: f64, mut v_test: f64, delta_t: f64) -> f64 {
+    let eps: f64 = 1.0e-8;
+    if t_para >= v_test {
+        v_test += ((t_para - v_test + eps) / delta_t).ceil() * delta_t;
+        if v_test > 1. - eps {
+            v_test = 1.;
+        }
+    }
+    v_test
 }
 
 // (2.2)-(2.5): the arc length at `t_para`, the knots of the elements crossed since the
@@ -280,28 +395,20 @@ fn acr_update(
     (cb_long, s): (f64, &mut Acr),
 ) -> Result<(), Failure> {
     let ti_first: i32 = ti.lower();
-    let k_last: i32 = curve.knots().upper();
     // (2.2), (2.3) Compute the curve length
     let u_new: f64 = curve.length(at(ti, ti_first)?, t_para)? / cb_long;
-    while knot(curve, s.i_elm + 1)? < t_para && s.i_elm < k_last - 1 {
-        s.i_elm += 1;
-    }
+    s.advance_element(curve, t_para)?;
     // (2.4) Update the splitting parameters
     let dt_inv: f64 = 1. / (t_para - s.t_old);
     let du: f64 = u_new - s.u_old;
     for ii in s.i_old + 1..=s.i_elm {
-        let ratio: f64 = (knot(curve, ii)? - s.t_old) * dt_inv;
-        set_knot(curve, ii, s.u_old + ratio * du)?;
+        set_knot(curve, ii, s.remapped(knot(curve, ii)?, (dt_inv, du)))?;
     }
     // (2.5) Update the point parameters ("very strange loop, because it never works").
     for ii in s.p_old + 1..=ipnt - 1 {
-        let ratio: f64 = (at(ti, ii)? - s.t_old) * dt_inv;
-        put(ti, ii, s.u_old + ratio * du)?;
+        put(ti, ii, s.remapped(at(ti, ii)?, (dt_inv, du)))?;
     }
     put(ti, ipnt, u_new)?;
-    s.u_old = u_new;
-    s.i_old = s.i_elm;
-    s.t_old = t_para;
-    s.p_old = ipnt;
+    s.keep(u_new, t_para, ipnt);
     Ok(())
 }

@@ -101,7 +101,7 @@ def curve2d_range_requests(requests):
             rng = ranges[(s_index + c_index) % len(ranges)]
             if rng == (1.0, 1.0) and s_index == 2:
                 # ProjLib_ComputeApprox of the zero-length segment of a line on the sphere
-                # never returns, natively and in the port.
+                # never returns natively; the port refuses it (a Rust deviation).
                 continue
             for variant in [0, 1, 2]:
                 add(requests, 'gpl_curve2d', variant, *rng, *BOUNDS[1], 1e-6, *spec, *surface)
