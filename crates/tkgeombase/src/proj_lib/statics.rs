@@ -19,7 +19,7 @@
 //! `IsAnaSurf`. A curve overload builds the elementary projector and returns its
 //! typed result, so it raises Standard_NoSuchObject when the projector does not
 //! give that kind (a line not parallel to a cylinder axis, for example).
-use super::{Cone, Cylinder, Plane, Sphere, Torus};
+use super::{Cone, Cylinder, Plane, ProjectedCurve, Sphere, Torus};
 use crate::native_failure::failure;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
@@ -129,6 +129,27 @@ pub fn project_point_on_torus(torus: &Torus3, point: Point3) -> Point2 {
 /// `ProjLib::Project(gp_Torus, gp_Circ)`; `project_circle_on_torus(&torus, &circle)?`.
 pub fn project_circle_on_torus(torus: &Torus3, circle: &Circle3) -> Result<Line2, Failure> {
     Torus::with_circle(torus, circle)?.line()
+}
+
+/// `ProjLib::MakePCurveOfType(PC, C2D)`: a new Geom2d curve of the projected kind
+/// (the B-spline handle itself for a B-spline); Standard_NotImplemented for a
+/// Bezier or another kind; `make_pcurve_of_type(&projected)?`.
+pub fn make_pcurve_of_type(projected: &ProjectedCurve) -> Result<Handle<dyn Geom2dCurve>, Failure> {
+    match projected.get_type()? {
+        CurveType::Line => Ok(Handle::new(Geom2dLine::from_lin2d(projected.line()?)).cast()),
+        CurveType::Circle => Ok(Handle::new(Geom2dCircle::from_circ2d(projected.circle()?)).cast()),
+        CurveType::Ellipse => {
+            Ok(Handle::new(Geom2dEllipse::from_elips2d(projected.ellipse()?)).cast())
+        }
+        CurveType::Parabola => {
+            Ok(Handle::new(Geom2dParabola::from_parab2d(projected.parabola()?)).cast())
+        }
+        CurveType::Hyperbola => {
+            Ok(Handle::new(Geom2dHyperbola::from_hypr2d(projected.hyperbola()?)).cast())
+        }
+        CurveType::BSplineCurve => Ok(projected.bspline()?.cast()),
+        _ => Err(failure("Standard_NotImplemented", "ProjLib::MakePCurveOfType")),
+    }
 }
 
 /// `ProjLib::IsAnaSurf(theAS)`: whether the surface is a plane, cylinder, cone,
