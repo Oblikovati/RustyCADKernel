@@ -291,41 +291,45 @@ impl Variational {
         let mut to_optim: bool = iter < self.options.nb_iterations && st.isnear;
         while to_optim {
             iter += 1;
-            self.save_state(st)?;
-            // (2.2) Optimization of ti by ACR.
-            self.arc_length_step(j, st)?;
-            // (2.3) Optimization of curves
-            self.optimize_new_curve(j, st, a)?;
-            st.c_current = st.c_new.clone();
-            // (2.4) calculation of quality criteria and improvement of estimation.
-            let quality = j.quality_values(st.j_min[0], st.j_min[1], st.j_min[2])?;
-            st.valcri = quality.criteria;
-            if quality.icdana > 0 {
-                st.lconst = true;
-            }
-            // (2.5) Optimization of ti by orthogonal projection
-            let c_current: Handle<Curve> = st.c_current.clone();
-            self.project_new_ti(&c_current, st, ecarts, 2)?;
-            // (2.6) Test de non regression
-            if self.regression(j, st) >= 2 {
-                // (2.7) restore the previous iteration
-                st.valcri = st.vocri;
-                st.errors.max_err = st.erold;
-                st.cblong = st.lnold;
-                st.c_current = st.c_old.clone();
-                let values: Array1<'static, f64> = st.old_ti.array1().clone();
-                st.current_ti.change_array1().assign(&values);
-                to_optim = false;
-            } else {
-                // Iteration is Ok.
-                st.c_current = st.c_new.clone();
-                st.current_ti = st.new_ti.clone();
-            }
+            to_optim = self.parametric_iteration(j, st, a, ecarts)?;
             if iter >= self.options.nb_iterations {
                 to_optim = false;
             }
         }
         Ok(())
+    }
+
+    // The (2.1) to (2.7) steps of one parametric iteration; false when it regressed
+    // and the previous iteration was restored (the loop stops).
+    fn parametric_iteration(
+        &self,
+        j: &dyn SmoothCriterion,
+        st: &mut MotorState,
+        a: &mut Assembly,
+        ecarts: &mut Array1<'_, f64>,
+    ) -> Result<bool, Failure> {
+        self.save_state(st)?;
+        // (2.2) Optimization of ti by ACR.
+        self.arc_length_step(j, st)?;
+        // (2.3) Optimization of curves
+        self.optimize_new_curve(j, st, a)?;
+        st.c_current = st.c_new.clone();
+        // (2.4) calculation of quality criteria and improvement of estimation.
+        let quality = j.quality_values(st.j_min[0], st.j_min[1], st.j_min[2])?;
+        st.valcri = quality.criteria;
+        if quality.icdana > 0 {
+            st.lconst = true;
+        }
+        // (2.5) Optimization of ti by orthogonal projection
+        let c_current: Handle<Curve> = st.c_current.clone();
+        self.project_new_ti(&c_current, st, ecarts, 2)?;
+        // (2.6) Test de non regression
+        if self.regression(j, st) >= 2 {
+            restore_previous_iteration(st);
+            return Ok(false);
+        }
+        accept_iteration(st);
+        Ok(true)
     }
 
     // The regression count of (2.6).
@@ -430,6 +434,23 @@ impl Variational {
         };
         Ok(())
     }
+}
+
+// (2.7) restore the previous iteration (its parameters copied back into the
+// current array).
+fn restore_previous_iteration(st: &mut MotorState) {
+    st.valcri = st.vocri;
+    st.errors.max_err = st.erold;
+    st.cblong = st.lnold;
+    st.c_current = st.c_old.clone();
+    let values: Array1<'static, f64> = st.old_ti.array1().clone();
+    st.current_ti.change_array1().assign(&values);
+}
+
+// Iteration is Ok: its curve and parameters become the current ones.
+fn accept_iteration(st: &mut MotorState) {
+    st.c_current = st.c_new.clone();
+    st.current_ti = st.new_ti.clone();
 }
 
 // (1.5): the new knots are dropped and the state before the estimation restored.
