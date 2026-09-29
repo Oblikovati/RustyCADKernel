@@ -17,8 +17,9 @@
 //!
 //! `CurveOnPlane_ProjectsShiftedPeriodicRange` and
 //! `CurveOnPlane_ProjectsPeriodicEdgeBuiltFromEqualParameters` project an edge on a
-//! plane, which needs ProjLib and GeomProjLib (not ported): they are not translated
-//! here, and the suite is not mapped in the ledger until they are
+//! plane, which needs GeomProjLib::ProjectOnPlane (GeomProjLib is being ported beside
+//! TKBRep; the ProjLib half is ported): they are not translated here, and the suite is
+//! not mapped in the ledger until they are
 //! (docs/tkbrep-progress.md, "Dependency gap").
 #![allow(non_snake_case)]
 mod support;
