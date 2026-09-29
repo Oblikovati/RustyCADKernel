@@ -238,28 +238,31 @@ impl Variational {
     /// the tangency constraint of the point; the ends need three points (weight 0
     /// with fewer), the last one read at `(LastPoint - 3) * Dimension + 1` as natively.
     fn est_tangent(&self, ipnt: i32) -> Result<EstVector, Failure> {
-        let dim: i32 = self.dimension;
-        let (mut vtang, wpnt): (EstVector, f64) =
-            if ipnt == self.first_point || ipnt == self.last_point {
-                if self.nb_points < 3 {
-                    (vec![0.; dim as usize], 0.)
-                } else if ipnt == self.first_point {
-                    (self.end_tangent(1, false)?, 1.)
-                } else {
-                    (self.end_tangent((self.last_point - 3) * dim + 1, true)?, 1.)
-                }
-            } else {
-                let adr1: i32 = (ipnt - self.first_point - 1) * dim + 1;
-                (
-                    subtracted(&self.tab_vector(adr1 + 2 * dim)?, &self.tab_vector(adr1)?),
-                    1.,
-                )
-            };
+        let (mut vtang, wpnt): (EstVector, f64) = self.points_tangent(ipnt)?;
         unit_or_zero(&mut vtang)?;
         let (wcnt, vcnt) = self.constraint_vector(ipnt, 1, 0)?;
         average(&mut vtang, [wpnt, wcnt], (wcnt, &vcnt));
         unit_or_zero(&mut vtang)?;
         Ok(vtang)
+    }
+
+    // The tangent the points suggest at `ipnt` (not yet unit) with its weight: the
+    // parabolic end tangents (weight 0 with fewer than three points), the chord of
+    // the two neighbours inside.
+    fn points_tangent(&self, ipnt: i32) -> Result<(EstVector, f64), Failure> {
+        let dim: i32 = self.dimension;
+        if ipnt != self.first_point && ipnt != self.last_point {
+            let adr1: i32 = (ipnt - self.first_point - 1) * dim + 1;
+            let chord = subtracted(&self.tab_vector(adr1 + 2 * dim)?, &self.tab_vector(adr1)?);
+            return Ok((chord, 1.));
+        }
+        if self.nb_points < 3 {
+            return Ok((vec![0.; dim as usize], 0.));
+        }
+        if ipnt == self.first_point {
+            return Ok((self.end_tangent(1, false)?, 1.));
+        }
+        Ok((self.end_tangent((self.last_point - 3) * dim + 1, true)?, 1.))
     }
 
     /// `EstSecnd(ipnt, VTang1, VTang2, Length, VScnd)`: the tangent difference over
