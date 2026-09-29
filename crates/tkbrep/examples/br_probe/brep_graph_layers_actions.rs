@@ -283,7 +283,7 @@ fn cache_action(
 }
 
 /// `bl_representations`: `count (kind role name index)...`.
-fn representations(r: &mut Reader<'_>) -> Vec<DeferredRepresentation> {
+pub fn representations(r: &mut Reader<'_>) -> Vec<DeferredRepresentation> {
     use RepresentationKind::*;
     read_list(r, |x| {
         let kind = [Unknown, Geometry, Mesh, Topology, Assembly, Parametric][x.integer() as usize];

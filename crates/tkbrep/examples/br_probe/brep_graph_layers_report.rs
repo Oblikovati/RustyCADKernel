@@ -22,7 +22,7 @@ use rustycad_tkernel::tcollection::AsciiString;
 
 use super::brep_graph_layers::ProbeCache;
 
-fn ascii(t: &AsciiString) {
+pub fn ascii(t: &AsciiString) {
     text(t.as_bytes());
 }
 
@@ -243,7 +243,7 @@ fn caches(g: &BRepGraph, st: &State) {
 }
 
 /// `bl_deferred_entry`.
-fn deferred_entry(i: ItemId, e: &DeferredEntry) {
+pub fn deferred_entry(i: ItemId, e: &DeferredEntry) {
     item(i);
     ascii(&e.provider);
     ascii(&e.source_key);
