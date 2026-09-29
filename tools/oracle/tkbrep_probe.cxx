@@ -46,6 +46,9 @@
 #include "tkbrep_probe_breptools_modif.cxx"
 #include "tkbrep_probe_breptools_reshape.cxx"
 #include "tkbrep_probe_brepadaptor.cxx"
+#include <Standard_GUID.hxx>
+#include "tkbrep_probe_brepgraph.cxx"
+#include "tkbrep_probe_brepgraph_views.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopoDS (tkbrep_probe_topods.cxx)
  {"br_topods", br_topods_case},
@@ -84,6 +87,8 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"br_tools_purge", br_tools_purge_case},
  // BRepAdaptor and BRepLProp (tkbrep_probe_brepadaptor.cxx)
  {"br_adaptor", br_adaptor_case},
+ // BRepGraph and BRepGraphInc (tkbrep_probe_brepgraph*.cxx)
+ {"br_bgraph", br_bgraph_case},
 };
 int main() {
  std::string line;

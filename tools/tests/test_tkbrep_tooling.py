@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 from tkbrep_corpus import EDGE, REVERSED, VERTEX, Script, append_tkbrep_requests
 from tkbrep_brep_corpus import FORWARD, BRepScript
+from tkbrep_brepgraph_corpus import (ADD, AUTO, PERFORM, TRACK, append_tkbrep_brepgraph_requests,
+                                     request as graph_request)
 from tkbrep_bintools_bytes_corpus import append_tkbrep_bintools_bytes_requests, shape_set
 from tkbrep_bintools_scene_corpus import NORMALS, numbers as scene_numbers
 from native_build import LINKED_TOOLKITS, closure_flags
@@ -103,6 +105,20 @@ class BinToolsCorpusTests(unittest.TestCase):
         data = shape_set(3, [b'V'], root=b'R')
         self.assertTrue(data.startswith(b'\nOpen CASCADE Topology V3 (c)\nLocations 0\nCurve2ds 0\n'))
         self.assertTrue(data.endswith(b'Triangulations 0\n\nTShapes 1\nVR'))
+
+
+class BRepGraphCorpusTests(unittest.TestCase):
+    def test_request_is_the_script_then_the_counted_actions(self):
+        script = BRepScript()
+        vertex = script.vertex((1.0, 2.0, 3.0))
+        line = graph_request(script, [[PERFORM, vertex, 0], [ADD, vertex, AUTO | TRACK]])
+        self.assertEqual(line, 'br_bgraph 0 0 1 1 1.0 2.0 3.0 1e-07 2 0 0 0 3 0 9')
+
+    def test_every_request_is_a_bgraph_request(self):
+        requests: list[str] = []
+        append_tkbrep_brepgraph_requests(requests)
+        self.assertTrue(requests)
+        self.assertTrue(all(request.startswith('br_bgraph ') for request in requests))
 
 
 if __name__ == '__main__':
