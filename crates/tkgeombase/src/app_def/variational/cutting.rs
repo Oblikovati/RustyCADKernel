@@ -91,24 +91,29 @@ fn getting_knots(
         }
         *nb_elm += 1;
         let (k0, k1) = (at(&old_knots, i0)?, at(&old_knots, i1)?);
-        let (ipt1, flag1) = near_index(k0, tab_par, eps)?;
-        let ipt1: i32 = if flag1 != 0 { tab_par.lower() } else { ipt1 };
-        let (ipt2, flag2) = near_index(k1, tab_par, eps)?;
-        let ipt2: i32 = if flag2 != 0 { tab_par.upper() } else { ipt2 };
-        let knot: f64 = if ipt2 - ipt1 >= 1 {
-            let ipt: i32 = (ipt1 + ipt2) / 2;
-            let t_par: f64 = if 2 * ipt == ipt1 + ipt2 {
-                2. * at(tab_par, ipt)?
-            } else {
-                at(tab_par, ipt)? + at(tab_par, ipt + 1)?
-            };
-            (k0 + k1 + t_par) / 4.
-        } else {
-            (k0 + k1) / 2.
-        };
-        put(new_knots, *nb_elm, knot)?;
+        put(new_knots, *nb_elm, element_knot(tab_par, (k0, k1), eps)?)?;
     }
     Ok(())
+}
+
+// The new knot of the element `[k0, k1]`: a quarter of `k0 + k1` plus twice the
+// middle parameter between them (the mean of the two middle ones), or its middle
+// without a parameter inside.
+fn element_knot(tab_par: &Array1<'_, f64>, (k0, k1): (f64, f64), eps: f64) -> Result<f64, Failure> {
+    let (ipt1, flag1) = near_index(k0, tab_par, eps)?;
+    let ipt1: i32 = if flag1 != 0 { tab_par.lower() } else { ipt1 };
+    let (ipt2, flag2) = near_index(k1, tab_par, eps)?;
+    let ipt2: i32 = if flag2 != 0 { tab_par.upper() } else { ipt2 };
+    if ipt2 - ipt1 < 1 {
+        return Ok((k0 + k1) / 2.);
+    }
+    let ipt: i32 = (ipt1 + ipt2) / 2;
+    let t_par: f64 = if 2 * ipt == ipt1 + ipt2 {
+        2. * at(tab_par, ipt)?
+    } else {
+        at(tab_par, ipt)? + at(tab_par, ipt + 1)?
+    };
+    Ok((k0 + k1 + t_par) / 4.)
 }
 
 impl Variational {
