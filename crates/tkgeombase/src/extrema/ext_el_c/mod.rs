@@ -28,7 +28,7 @@ use std::ops::Deref;
 
 /// `Extrema_ExtElC`: one constructor per curve pair; the accessors (`IsDone`,
 /// `IsParallel`, `NbExt`, `SquareDistance`, `Points`) are those of
-/// [`CurvePairExtrema`], reached through `Deref`;
+/// `CurvePairExtrema`, reached through `Deref`;
 /// `ExtElC::lines(line1, line2, 1e-10).nb_ext()? == 1`.
 #[derive(Clone, Debug)]
 pub struct ExtElC {

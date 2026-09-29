@@ -77,8 +77,8 @@ pub type ToolD3<T> = (
 );
 
 /// The `TheCurve`/`TheCurveTool`/`ThePoint`/`TheVector`/`ThePOnC`/`TheExtPElC`
-/// parameters of the Extrema templates, implemented by [`CurveTool`] (3D) and
-/// [`Curve2dTool`] (2D). Each member is the static tool member of the same name;
+/// parameters of the Extrema templates, implemented by `CurveTool` (3D) and
+/// `Curve2dTool` (2D). Each member is the static tool member of the same name;
 /// an adaptor exception is the returned `Failure`;
 /// `CurveTool::first_parameter(&adaptor)?`.
 pub trait ExtremaCurveTool: 'static {

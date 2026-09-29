@@ -28,7 +28,7 @@ use std::f64::consts::PI;
 use std::ops::Deref;
 
 /// `Extrema_ExtElC2d`: one constructor per curve pair; the accessors are those of
-/// [`CurvePairExtrema`], reached through `Deref`;
+/// `CurvePairExtrema`, reached through `Deref`;
 /// `ExtElC2d::lines(line1, line2, 1e-10).nb_ext()? == 1`.
 #[derive(Clone, Debug)]
 pub struct ExtElC2d {

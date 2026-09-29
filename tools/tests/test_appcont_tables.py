@@ -83,7 +83,10 @@ class AppContCorpusTests(unittest.TestCase):
                 self.assertFalse(fields[2] == '1' and int(fields[3]) >= 1, request)
             if fields[0] == 'acc_ls':
                 degree, nbpoints = int(fields[-2]), int(fields[-1])
-                self.assertTrue(degree >= 1 and 1 <= nbpoints <= 61, request)
+                # Degree -1 and 0 Gauss points build empty math_Matrix ranges, which OCCT
+                # accepts (the empty-bounds port); degree -2 crashes natively and more than
+                # 61 Gauss points read past the tables, so those are never requested.
+                self.assertTrue(degree >= -1 and 0 <= nbpoints <= 61, request)
 
 
 if __name__ == '__main__':

@@ -30,7 +30,7 @@ use std::f64::consts::PI;
 use std::ops::Deref;
 
 /// `Extrema_ExtPElC`. The result accessors (`IsDone`, `NbExt`, `SquareDistance`,
-/// `IsMin`, `Point`) are those of [`PointCurveExtrema`], reached through `Deref`;
+/// `IsMin`, `Point`) are those of `PointCurveExtrema`, reached through `Deref`;
 /// `ExtPElC::with_line(point, line, 1e-7, -1.0, 1.0).nb_ext()? == 1`.
 #[derive(Clone, Debug)]
 pub struct ExtPElC {

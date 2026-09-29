@@ -31,7 +31,7 @@ use rustycad_tkmath::math::{DirectPolynomialRoots, TrigonometricRoots};
 use std::f64::consts::PI;
 use std::ops::Deref;
 
-/// `Extrema_ExtPElC2d`. The result accessors are those of [`PointCurveExtrema`],
+/// `Extrema_ExtPElC2d`. The result accessors are those of `PointCurveExtrema`,
 /// reached through `Deref`;
 /// `ExtPElC2d::with_line(point, line, 1e-7, -1.0, 1.0).nb_ext()? == 1`.
 #[derive(Clone, Debug)]
