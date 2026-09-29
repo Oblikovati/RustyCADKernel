@@ -20,6 +20,7 @@
 mod accessors;
 mod adjusting;
 mod approximate;
+mod constraint_rows;
 mod constraints;
 mod cutting;
 mod dump;
