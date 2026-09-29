@@ -26,6 +26,10 @@
 #include "tkgeomalgo_probe_intf_tool.cxx"
 #include "tkgeomalgo_probe_intf_poly.cxx"
 #include "tkgeomalgo_probe_toptrans.cxx"
+#include "tkgeomalgo_probe_gccent.cxx"
+#include "tkgeomalgo_probe_gccint.cxx"
+#include "tkgeomalgo_probe_gccana.cxx"
+#include "tkgeomalgo_probe_hatch.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -41,6 +45,23 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"tt_curve", ga_tt_curve_case},
  {"tt_surface", ga_tt_surface_case},
  {"tt_states", ga_tt_states_case},
+ // GccEnt (tkgeomalgo_probe_gccent.cxx)
+ {"gccent_position", ga_gccent_position_case},
+ {"gccent_qualified", ga_gccent_qualified_case},
+ // GccInt (tkgeomalgo_probe_gccint.cxx)
+ {"gccint_bisec", ga_gccint_bisec_case},
+ // GccAna (tkgeomalgo_probe_gccana.cxx)
+ {"gccana_circ3tan", ga_gccana_circ3tan_case},
+ {"gccana_2tanrad", ga_gccana_2tanrad_case},
+ {"gccana_2tanon", ga_gccana_2tanon_case},
+ {"gccana_tanonrad", ga_gccana_tanonrad_case},
+ {"gccana_tancen", ga_gccana_tancen_case},
+ {"gccana_lin2tan", ga_gccana_lin2tan_case},
+ {"gccana_lintanobl", ga_gccana_lintanobl_case},
+ {"gccana_linbisec", ga_gccana_linbisec_case},
+ {"gccana_bisec", ga_gccana_bisec_case},
+ // Hatch (tkgeomalgo_probe_hatch.cxx)
+ {"hatch_hatcher", ga_hatch_hatcher_case},
 };
 int main() {
  std::string line;

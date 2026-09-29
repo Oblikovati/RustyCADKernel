@@ -3,6 +3,11 @@
 // uses a subset of them, so unused ones are expected in these two modules.
 #[allow(dead_code, unused_imports)]
 pub mod common;
+pub mod gcc_ana;
+pub mod gcc_ana_lines;
+pub mod gcc_ent;
+pub mod gcc_int;
+pub mod hatch;
 pub mod intf;
 pub mod intf_poly;
 pub mod intf_tool;
