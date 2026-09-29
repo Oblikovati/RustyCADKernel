@@ -206,7 +206,7 @@ fn mesh_kind(g: &mut Geometry, r: &mut Reader<'_>, kind: i32) {
 }
 
 /// `br_read_geometry`.
-fn read_geometry(g: &mut Geometry, r: &mut Reader<'_>) {
+pub fn read_geometry(g: &mut Geometry, r: &mut Reader<'_>) {
     let kind = r.integer();
     if kind < 10 {
         let made = curve_kind(g, r, kind);
