@@ -137892,6 +137892,86 @@
       "notes": "Manual BRepGraph phase-2 mapping (docs/topology-design.md section 11): the iterators and explorers borrow the graph and keep More/Next/Current with the native skip and resume rules; overloads are named constructors or functions with _ref/_usage suffixes; members that raise natively return Result. Compared with OCCT by the br_bgraph_walk probe."
     },
     {
+      "upstream_id": "BRepGraph_Copy::GeomPolicy",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Copy.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::copy::GeomPolicy",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe."
+    },
+    {
+      "upstream_id": "BRepGraph_Copy::MeshPolicy",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Copy.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::copy::MeshPolicy",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe."
+    },
+    {
+      "upstream_id": "BRepGraph_Copy::CachePolicy",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Copy.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::copy::CachePolicy",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe."
+    },
+    {
+      "upstream_id": "BRepGraph_Copy::Perform(const BRepGraph&,BRepGraph&,GeomPolicy,MeshPolicy,CachePolicy)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Copy.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::copy::perform",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe. The self Perform (an identity no-op) is copy::perform_self."
+    },
+    {
+      "upstream_id": "BRepGraph_Copy::CopyNode(const BRepGraph&,BRepGraph&,BRepGraph_NodeId,GeomPolicy,MeshPolicy,CachePolicy)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Copy.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::copy::copy_node",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe. The self CopyNode is copy::copy_node_in_place."
+    },
+    {
+      "upstream_id": "BRepGraph_Compact::Options::CachePolicy",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Compact.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::compact::CachePolicy",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe."
+    },
+    {
+      "upstream_id": "BRepGraph_Compact::Perform(BRepGraph&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Compact.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::compact::perform",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe."
+    },
+    {
+      "upstream_id": "BRepGraph_Compact::Perform(BRepGraph&,const Options&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Compact.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::compact::perform_with",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe."
+    },
+    {
+      "upstream_id": "BRepGraph_Deduplicate::Perform(BRepGraph&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Deduplicate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::deduplicate::perform",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe."
+    },
+    {
+      "upstream_id": "BRepGraph_Deduplicate::Perform(BRepGraph&,const Options&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Deduplicate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::deduplicate::perform_with",
+      "status": "implemented",
+      "notes": "Manual BRepGraph phase-2 wave-2c mapping (docs/topology-design.md section 11.12): the static-only class is a module of free functions; a self copy (same source and target graph) has its own entry point; C++ exceptions are Failure errors. Compared with OCCT byte for byte by the br_balgo probe."
+    },
+    {
       "upstream_id": "BRepGraph_DefsIterator::ShellOfSolidTraits::IsParentValid(const BRepGraph&,ParentId)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DefsIterator.hxx",
@@ -223702,6 +223782,580 @@
       "rust_target": "brep_graph_mut_guard",
       "rust_test": "BRepGraph_MutGuardTest__ClearRejectsActiveGuard",
       "rust_source": "crates/tkbrep/tests/brep_graph_mut_guard.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.NewItemsAreUnlockedByDefault",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__NewItemsAreUnlockedByDefault",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.LockLayerControlsStorageFlag",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__LockLayerControlsStorageFlag",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.LockedNodeRejectsMutableGuard",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__LockedNodeRejectsMutableGuard",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.LockedReferenceRejectsMutableGuard",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__LockedReferenceRejectsMutableGuard",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.LockedNodeRejectsRemoval",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__LockedNodeRejectsRemoval",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.LockedParentRejectsStructuralAdd",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__LockedParentRejectsStructuralAdd",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.LockedNodeRejectsDirectSetterWithoutMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__LockedNodeRejectsDirectSetterWithoutMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.LockedReferenceRejectsOrientationSetterWithoutMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__LockedReferenceRejectsOrientationSetterWithoutMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.LockedRepresentationRejectsDirectSetterWithoutMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__LockedRepresentationRejectsDirectSetterWithoutMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.LockLayerOwnerControlsLockFlag",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__LockLayerOwnerControlsLockFlag",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.RejectsDifferentOwnerWhenAncestorOwnsNode",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__RejectsDifferentOwnerWhenAncestorOwnsNode",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.ParentOwnerRejectsDifferentOwnedDescendant",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__ParentOwnerRejectsDifferentOwnedDescendant",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.ParentOwnerCollapsesSameOwnedDescendant",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__ParentOwnerCollapsesSameOwnedDescendant",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.RemovedRootOwnerCallbackClearsDescendantOwnedFlags",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__RemovedRootOwnerCallbackClearsDescendantOwnedFlags",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.DeferredLayerRegistersMultipleRepresentationsAndLocksItem",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__DeferredLayerRegistersMultipleRepresentationsAndLocksItem",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.DeferredLayerClearsOwnerOnNodeRemoved",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__DeferredLayerClearsOwnerOnNodeRemoved",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.ItemDispatchDelegatesToTypedCallbacks",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__ItemDispatchDelegatesToTypedCallbacks",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.Compact_PreservesDeferredRefEntry",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__Compact_PreservesDeferredRefEntry",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LockTest.Compact_PreservesLockOnExactGeometryRep",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_Lock_Test.cxx",
+      "source_sha256": "50babe5f6f83892403acfd2e7b09186a534473fd778ec793877262a68d958f24",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_lock_suite",
+      "rust_test": "BRepGraph_LockTest__Compact_PreservesLockOnExactGeometryRep",
+      "rust_source": "crates/tkbrep/tests/brep_graph_lock_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.AttachAndRemoveVertexSupplement",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__AttachAndRemoveVertexSupplement",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.SupplementIteratorPreservesOwnerOrderAndUidLookup",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__SupplementIteratorPreservesOwnerOrderAndUidLookup",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.OnNodeReplacedMigratesAttachments",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__OnNodeReplacedMigratesAttachments",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.RemoveNodeDropsOwnedAttachments",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__RemoveNodeDropsOwnedAttachments",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.LegacyEdgeInternalVertexWriterUsesSupplementLayer",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__LegacyEdgeInternalVertexWriterUsesSupplementLayer",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.AddAndReconstructPreservesSupplementEdgeVertices",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__AddAndReconstructPreservesSupplementEdgeVertices",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.AddAndReconstructPreservesSupplementFaceVertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__AddAndReconstructPreservesSupplementFaceVertex",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.ShellReconstructionReplaysFaceSupplementVertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__ShellReconstructionReplaysFaceSupplementVertex",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.SolidAddChild_ReconstructPreservesSupplementEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__SolidAddChild_ReconstructPreservesSupplementEdge",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.ShellOwner_IsAcceptedBySupplementLayer",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__ShellOwner_IsAcceptedBySupplementLayer",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.CompSolidOwner_IsAcceptedBySupplementLayer",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__CompSolidOwner_IsAcceptedBySupplementLayer",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.ShellAddFace_Internal_RoutedToSupplement",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__ShellAddFace_Internal_RoutedToSupplement",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.SolidAddShell_Internal_RoutedToSupplement",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__SolidAddShell_Internal_RoutedToSupplement",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.CompSolidAddSolid_Internal_RoutedToSupplement",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__CompSolidAddSolid_Internal_RoutedToSupplement",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.CompoundAddChild_MixedOrientations_CoreRefAndSupplement",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__CompoundAddChild_MixedOrientations_CoreRefAndSupplement",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.CopyToAllocatesFreshUidOnCollision",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__CopyToAllocatesFreshUidOnCollision",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.SelfCopyDoesNotMutateEntriesDuringIteration",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__SelfCopyDoesNotMutateEntriesDuringIteration",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.IncompatibleAttachmentKindIsRejected",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__IncompatibleAttachmentKindIsRejected",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.ShapesView_AddToShellRoutesInvalidChildWithoutOrphanAppend",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__ShapesView_AddToShellRoutesInvalidChildWithoutOrphanAppend",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.ShapesView_AddToSolidRoutesInvalidChildWithoutOrphanAppend",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__ShapesView_AddToSolidRoutesInvalidChildWithoutOrphanAppend",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.ShapesView_AddToFaceRejectsUnsupportedChildWithoutOrphanAppend",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__ShapesView_AddToFaceRejectsUnsupportedChildWithoutOrphanAppend",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_LayerTopoSupplementTest.ShapesView_AddNonSolidToCompSolidRoutesInvalidChildWithoutOrphanAppend",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_LayerTopoSupplement_Test.cxx",
+      "source_sha256": "894aab021306e72f8bfd00aaf8a612802c8668aaa5fb3d7e508b48cd9856ecba",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_layer_topo_supplement",
+      "rust_test": "BRepGraph_LayerTopoSupplementTest__ShapesView_AddNonSolidToCompSolidRoutesInvalidChildWithoutOrphanAppend",
+      "rust_source": "crates/tkbrep/tests/brep_graph_layer_topo_supplement.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
