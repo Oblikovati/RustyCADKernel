@@ -132,3 +132,17 @@ fn swept_evaluation_representation_rejects_itself() {
         .unwrap_err();
     assert_eq!(error.exception_type(), "Standard_ProgramError");
 }
+
+#[test]
+fn trimmed_line_refuses_nan_bounds() {
+    // Regression: natively SetTrim and Reverse call each other without end on the NaN
+    // bounds of a non-periodic basis; the port overflowed its stack. A periodic basis
+    // keeps the native NaN trim.
+    for (u1, u2) in [(f64::NAN, f64::NAN), (0.0, f64::NAN), (f64::NAN, 1.0)] {
+        let error = GeomTrimmedCurve::new(&z_line(1.0), u1, u2, true, true)
+            .err()
+            .unwrap();
+        assert_eq!(error.exception_type(), "Standard_ConstructionError");
+        assert!(error.message().contains("are NaN"));
+    }
+}

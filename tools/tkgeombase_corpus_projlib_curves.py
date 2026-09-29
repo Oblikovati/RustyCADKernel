@@ -99,10 +99,7 @@ def approx_requests(requests):
         for c_index, curve in enumerate(curves):
             option = OPTIONS[(s_index + c_index) % len(OPTIONS)]
             add(requests, 'pl_approx', 0, *option, *curve, *surface)
-            # The constructor runs the same Perform; once per surface keeps the numeric
-            # verifier inside its time budget (the fits at 1e-7 are the costly ones).
-            if c_index == 0:
-                add(requests, 'pl_approx', 1, *OPTIONS[0], *curve, *surface)
+            add(requests, 'pl_approx', 1, *OPTIONS[0], *curve, *surface)
     add(requests, 'pl_approx', 0, *OPTIONS[1], *whole(C2), *FLAT)
 
 
@@ -127,15 +124,9 @@ def polar_requests(requests):
             option = OPTIONS[(s_index + c_index) % len(OPTIONS)]
             for variant in [0, 1, 2]:
                 add(requests, 'pl_polar', variant, *option, *curve, *surface)
-            # One given-initial-curve variant per curve, rotating so every surface meets
-            # each; the far initial curves drive the costly global extrema searches.
-            given = (s_index + c_index) % 3
-            if given == 0:
-                add(requests, 'pl_polar', 3, *option, *curve, *surface, *INIT_BSPLINE)
-            elif given == 1:
-                add(requests, 'pl_polar', 5, *option, *curve, *surface, *INIT_LINE)
-            else:
-                add(requests, 'pl_polar', 4, *option, *curve, *surface, *INIT_LINE, *line2d((1.1, 0.2), (0.6, 0.8)))
+            add(requests, 'pl_polar', 3, *option, *curve, *surface, *INIT_BSPLINE)
+            add(requests, 'pl_polar', 5, *option, *curve, *surface, *INIT_LINE)
+            add(requests, 'pl_polar', 4, *option, *curve, *surface, *INIT_LINE, *line2d((1.1, 0.2), (0.6, 0.8)))
     for curve in [whole(C2), whole(BEZIER), whole(RAT_BEZIER)]:
         add(requests, 'pl_polar', 2, *OPTIONS[0], *curve, *PLANE)
         add(requests, 'pl_polar', 5, *OPTIONS[0], *curve, *PLANE, *INIT_LINE)

@@ -431,6 +431,11 @@ GeomGridEval:
   borrow their adaptor with a lifetime.
 - `GeomEval_HyperboloidSurface::SheetMode` is a Rust enum with the two sheet modes;
   natively `SetMode` stores any integer cast to the enumeration.
+- `Geom_TrimmedCurve::SetTrim` on a non-periodic basis with a NaN bound fails `U1 < U2`,
+  takes the reversed sense and calls `Reverse`, whose NaN bounds call `SetTrim` again,
+  without end (natively the program never returns; the port overflowed its stack). The
+  port raises Standard_ConstructionError naming the NaN bounds. A periodic basis keeps
+  the native NaN trim.
 
 ## Remaining coverage
 
