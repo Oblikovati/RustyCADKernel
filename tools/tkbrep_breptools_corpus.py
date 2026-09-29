@@ -190,6 +190,7 @@ def append_tkbrep_breptools_requests(requests: list[str]) -> None:
         for code in range(10):
             requests.append(f'br_tools_mutate {numbers} {code}')
         requests.append(f'br_tools_wire {numbers}')
+        requests.append(f'br_adaptor {numbers}')
     for script in (solid_scene(), cylinder_scene(), mesh_scene(), bezier_scene()):
         numbers = text(script.numbers())
         for kind, params, mutable in MODIFICATIONS:
