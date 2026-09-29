@@ -8,6 +8,9 @@ from tkbrep_corpus import EDGE, REVERSED, VERTEX, Script, append_tkbrep_requests
 from tkbrep_brep_corpus import FORWARD, BRepScript
 from tkbrep_brepgraph_corpus import (ADD, AUTO, PERFORM, TRACK, append_tkbrep_brepgraph_requests,
                                      request as graph_request)
+from tkbrep_brepgraph_walk_corpus import (ADD_EMPTY, DOCUMENT_ROOT,
+                                          append_tkbrep_brepgraph_walk_requests,
+                                          request as walk_request)
 from tkbrep_bintools_bytes_corpus import append_tkbrep_bintools_bytes_requests, shape_set
 from tkbrep_bintools_scene_corpus import NORMALS, numbers as scene_numbers
 from native_build import LINKED_TOOLKITS, closure_flags
@@ -119,6 +122,21 @@ class BRepGraphCorpusTests(unittest.TestCase):
         append_tkbrep_brepgraph_requests(requests)
         self.assertTrue(requests)
         self.assertTrue(all(request.startswith('br_bgraph ') for request in requests))
+
+
+class BRepGraphWalkCorpusTests(unittest.TestCase):
+    def test_request_is_the_script_the_actions_then_the_edits(self):
+        script = BRepScript()
+        vertex = script.vertex((1.0, 2.0, 3.0))
+        line = walk_request(script, [[PERFORM, vertex, 0]], [[ADD_EMPTY], [DOCUMENT_ROOT, 0]])
+        self.assertEqual(line, 'br_bgraph_walk 0 0 1 1 1.0 2.0 3.0 1e-07 1 0 0 0 2 1 2 0')
+
+    def test_every_request_is_a_walk_request_with_assemblies(self):
+        requests: list[str] = []
+        append_tkbrep_brepgraph_walk_requests(requests)
+        self.assertTrue(all(request.startswith('br_bgraph_walk ') for request in requests))
+        # The first requests edit products after the population.
+        self.assertTrue(requests[0].split()[-1] != '0')
 
 
 if __name__ == '__main__':
