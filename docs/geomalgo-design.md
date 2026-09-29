@@ -194,3 +194,55 @@ traits. `AppBlend_Approx` is the trait `AppBlendApprox`.
 The probe (`tools/oracle/tkgeomalgo_probe_appblend.cxx`) instantiates the `.gxx`
 itself on a probe line and generator, as the `_0.cxx` files do, so the numeric corpus
 checks the template without the GeomFill package.
+
+## 8. IntCurveSurface templates
+
+IntCurveSurface writes its algorithm as header templates (`.pxx`) that two classes
+instantiate: `IntCurveSurface_HInter` (TKGeomAlgo, on `Adaptor3d_Curve` and
+`Adaptor3d_Surface` handles) and `HLRBRep_InterCSurf` (TKHLR, on `gp_Lin` and
+`HLRBRep_Surface*`). `IntPatch_Polyhedron` and the HLRBRep polygon and polyhedron also
+call the polygon and polyhedron utilities. The port (`crates/tkgeomalgo/src/int_curve_surface`):
+
+- **Tool traits.** `InterCurveTool` (the `CurveTool` of the templates) extends the IntImp
+  `TheCurveTool` with the calls the templates add (GetType, the conics, the intervals,
+  NbSamples, SamplePars, IsPeriodic, Period, D0); `InterSurfaceTool` (the `SurfaceTool`)
+  extends `ThePSurfaceTool` with GetType, the quadrics and the torus, the sample counts,
+  the intervals, UTrim, D0, closure and periodicity, and the swept and offset members
+  (BasisSurface, OffsetValue, Direction, BasisCurve, AxeOfRevolution). The trimmed
+  surface, basis surface and basis curve are Adaptor3d handles for every instance, as
+  natively. `IntCurveSurface_TheHCurveTool` implements both curve traits; the IntImp
+  `HSurfaceTool` (Adaptor3d_HSurfaceTool) implements `InterSurfaceTool` here.
+- **Utilities.** `IntCurveSurface_InterUtils.pxx`, `_PolygonUtils.pxx`,
+  `_PolyhedronUtils.pxx` and `_QuadricCurveExactInterUtils.pxx` are modules of generic
+  functions over those traits (`inter_utils`, `polygon_utils`, `polyhedron_utils`,
+  `quad_curv_exact`), under the native names in snake case. The polyhedron utilities
+  work on slices of points, parameters and bound flags, which the native code reaches
+  through `void*` arrays.
+- **Section points.** `SectionPointToParameters` and `CollectInterferencePoints` read
+  a polyhedron and a polygon only through `Triangle`, `Point`, `Parameters` and
+  `ApproxParamOnCurve`; the traits `SectionPolyhedron` and `SectionPolygon` hold those
+  calls, so a test can pass its own polyhedron, as the upstream suite does.
+- **The polygon.** `IntCurveSurface_ThePolygonOfHInter` and its tool are the generics
+  `InterPolygon<C>` and `InterPolygonTool<C>` over an `InterCurveTool`, aliased as
+  `ThePolygonOfHInter` and `ThePolygonToolOfHInter` on `TheHCurveTool`; HLRBRep's
+  polygon, which runs the same utilities on `gp_Lin`, will be an alias too. The tool
+  implements the Intf `Polygon3dTool`.
+- **The polyhedron.** `IntCurveSurface_ThePolyhedronOfHInter` is a concrete struct on an
+  Adaptor3d surface handle (the grid evaluator and the deflection read the adaptor);
+  its tool implements the Intf `PolyhedronTool`. `TheInterferenceOfHInter` is the alias
+  `InterferencePolygonPolyhedron<ThePolygonToolOfHInter, ThePolyhedronToolOfHInter>`.
+- **The algorithm.** `IntCurveSurface_Inter.pxx` is `InterGen<T: InterTypes>`, a struct
+  that holds the `IntCurveSurface_Intersection` base (reached through `Deref`) and
+  implements the public and protected members of the instance class. `InterTypes`
+  names the curve and surface tools, the polygon and polyhedron with their Intf tools
+  (the polygon and polyhedron constructors are the traits `SamplePolygon` and
+  `SamplePolyhedron`). The CS function, the exact intersector and the quadric-curve
+  intersector are fixed by the tools, as in both native instances:
+  `IntImpZerCSParFunc<S, C>`, `IntImpIntCS<...>` and `QuadCurvExact<S, C>` (with
+  `QuadCurvFunc<C>`). `IntCurveSurface_HInter` is `InterGen<HInterTypes>`.
+- **Callbacks.** The native instance passes lambdas that call back into its own
+  members (Perform with bounds, InternalPerform, Append); the generic calls the
+  members of `InterGen` directly, which runs the same code in the same order.
+- **Exceptions.** Tool calls, the IntAna and ProjLib constructors, and indexed reads
+  can raise natively; every member that reaches one returns `Result`, and the
+  exception leaves the algorithm where the native one would unwind.
