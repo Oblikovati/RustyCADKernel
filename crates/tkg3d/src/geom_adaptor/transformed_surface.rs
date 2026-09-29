@@ -154,6 +154,20 @@ impl GeomAdaptorTransformedSurface {
     pub fn geom_surface_transformed(&self) -> Result<Handle<dyn GeomSurface>, Failure> {
         Ok(self.transformed_adaptor()?.surface())
     }
+    /// A copy with a shallow copy of the original adaptor and the transformed adaptor
+    /// shared (`ShallowCopy`, as a value, which the derived BRepAdaptor_Surface embeds);
+    /// `adaptor.shallow_adaptor()?`.
+    pub fn shallow_adaptor(&self) -> Result<Self, Failure> {
+        let surf: Handle<GeomAdaptorSurface> = Handle::new(self.surf.shallow_adaptor()?);
+        let state = {
+            let source = self.state.read();
+            TransformedState {
+                trsf: source.trsf,
+                transformed: source.transformed.clone(),
+            }
+        };
+        Ok(Self::from_parts(surf, state))
+    }
     /// The U tolerance of the original adaptor (`ToleranceU`); `adaptor.tolerance_u()`.
     pub fn tolerance_u(&self) -> f64 {
         self.surf.tolerance_u()
@@ -260,17 +274,8 @@ fn d3_transformed(mut result: GeomSurfaceD3, trsf: Transform3) -> GeomSurfaceD3 
 }
 
 impl Adaptor3dSurface for GeomAdaptorTransformedSurface {
-    // The original adaptor is shallow-copied, the transformed one shared.
     fn shallow_copy(&self) -> Result<Handle<dyn Adaptor3dSurface>, Failure> {
-        let surf: Handle<GeomAdaptorSurface> = Handle::new(self.surf.shallow_adaptor()?);
-        let state = {
-            let source = self.state.read();
-            TransformedState {
-                trsf: source.trsf,
-                transformed: source.transformed.clone(),
-            }
-        };
-        Ok(Handle::new(Self::from_parts(surf, state)).cast())
+        Ok(Handle::new(self.shallow_adaptor()?).cast())
     }
     fn first_u_parameter(&self) -> Result<f64, Failure> {
         self.surf.first_u_parameter()

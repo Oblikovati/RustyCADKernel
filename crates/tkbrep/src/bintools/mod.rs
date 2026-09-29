@@ -38,7 +38,6 @@ mod curve_read;
 mod curve_set;
 mod curve_write;
 mod errors;
-mod face_uv_update;
 pub mod format_version;
 mod geometry_in;
 mod handle_table;
