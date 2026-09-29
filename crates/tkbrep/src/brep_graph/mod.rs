@@ -35,6 +35,7 @@ mod parent_cursor;
 pub mod parent_traits;
 pub mod refs_iterator;
 pub mod refs_view;
+pub mod related_iterator;
 pub mod reverse_iterator;
 pub mod shapes_view;
 pub mod tool;
