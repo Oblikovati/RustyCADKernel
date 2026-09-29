@@ -56,7 +56,8 @@ impl<B: ?Sized + TrimBasis> TrimmedBounds<B> {
         self.basis.trim_basis_reverse()?;
         self.set_trim(u1, u2, true, false, class)
     }
-    /// `SetTrim`: Standard_ConstructionError naming `class` when `u1 == u2`; like the
+    /// `SetTrim`: Standard_ConstructionError naming `class` when `u1 == u2`, or when a
+    /// bound of a non-periodic basis is NaN (a Rust deviation, see below); like the
     /// native code, the out of range failure is raised after the new bounds are
     /// stored; `bounds.set_trim(0.0, 1.0, true, true, "Geom_TrimmedCurve")?`.
     pub fn set_trim(
@@ -77,6 +78,7 @@ impl<B: ?Sized + TrimBasis> TrimmedBounds<B> {
             self.trim_periodic([u1, u2], [udeb, ufin], adjust_periodic);
             sense
         } else {
+            refuse_nan_bounds(u1, u2, class)?;
             self.trim_bounded(u1, u2, [udeb, ufin])?;
             if u1 < u2 { sense } else { !sense }
         };
@@ -122,4 +124,21 @@ impl<B: ?Sized + TrimBasis> TrimmedBounds<B> {
         Ok(length > precision::p_confusion()
             && rustycad_cmath::remainder(length, period).abs() <= precision::p_confusion())
     }
+}
+
+// Rust deviation: on a non-periodic basis a NaN bound fails `U1 < U2`, so SetTrim
+// takes the reversed sense and calls Reverse, whose NaN bounds call SetTrim again,
+// without end: the native program never returns (the optimized recursion loops) and
+// the port overflowed its stack (for example the NaN segment of a line projected
+// along a direction parallel to the plane, ProjLib_ProjectOnPlane and
+// GeomProjLib::ProjectOnPlane). Refuse the NaN bounds with the class's
+// Standard_ConstructionError instead. A periodic basis keeps the native NaN result.
+fn refuse_nan_bounds(u1: f64, u2: f64, class: &str) -> Result<(), Failure> {
+    if !u1.is_nan() && !u2.is_nan() {
+        return Ok(());
+    }
+    Err(errors::construction(&format!(
+        "{class}::SetTrim: the parameters [{u1}, {u2}] are NaN; expected finite or \
+         infinite trim parameters"
+    )))
 }

@@ -194,3 +194,18 @@ fn bezier_and_bspline_dump_like_the_native_kernel() {
         r#""className": "Geom2d_BSplineCurve", "className": "Geom2d_BoundedCurve", "Rational": 0, "Periodic": 0, "KnotSet": 3, "Smooth": 6, "Deg": 2, "Poles.Size": 3, "FlatKnots.Size": 6, "Knots.Size": 2, "Mults.Size": 2, "MaxDerivInv": 0, "MaxDerivInvOk": 0"#
     );
 }
+
+#[test]
+fn trimmed_line_refuses_nan_bounds() {
+    // Regression: natively SetTrim and Reverse call each other without end on the NaN
+    // bounds of a non-periodic basis; the port overflowed its stack.
+    let line: Handle<dyn Geom2dCurve> = Handle::new(Geom2dLine::new(axis(0.0, 0.0))).cast();
+    let error = Geom2dTrimmedCurve::new(&line, f64::NAN, 1.0, true, true)
+        .err()
+        .unwrap();
+    assert_eq!(error.exception_type(), "Standard_ConstructionError");
+    // The periodic circle keeps the native NaN bounds.
+    let basis: Handle<dyn Geom2dCurve> = circle().cast();
+    let trimmed = Geom2dTrimmedCurve::new(&basis, f64::NAN, 1.0, true, true).unwrap();
+    assert!(trimmed.first_parameter().is_nan());
+}
