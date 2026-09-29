@@ -336,25 +336,51 @@ impl Variational {
             jt: (2 * self.nb_p2d + 6 * self.nb_p3d) * (i - 1),
             curdim: 0,
         };
+        self.curvature_rows_3d(a, (forms, curel), rows, cb_long, &mut cursor)?;
+        cursor.j -= 1;
+        self.curvature_rows_2d(a, (forms, curel), rows, cb_long, &mut cursor)?;
+        rows.ntang3d += 2;
+        rows.ntang2d += 1;
+        Ok(())
+    }
+
+    // The curvature rows of every 3D point, from row NTang3d + 1 on.
+    fn curvature_rows_3d(
+        &self,
+        a: &mut Assembly,
+        (forms, curel): (&BasisForms, i32),
+        rows: &ConstraintRows,
+        cb_long: f64,
+        cursor: &mut CurvatureCursor,
+    ) -> Result<(), Failure> {
         let mut index: i32 = rows.ntang3d + 1;
         for _ in 0..self.nb_p3d {
-            let r: [f64; 2] = self.curvature_values_3d(&cursor, cb_long)?;
-            self.add_curvature_rows_3d(a, (forms, curel), index, r, &mut cursor)?;
+            let r: [f64; 2] = self.curvature_values_3d(cursor, cb_long)?;
+            self.add_curvature_rows_3d(a, (forms, curel), index, r, cursor)?;
             index += rows.ng3d;
             cursor.j += 6;
             cursor.jt += 6;
         }
-        cursor.j -= 1;
-        index = rows.nbeg2d + rows.ntang2d + 1;
+        Ok(())
+    }
+
+    // The curvature rows of every 2D point, from row NBeg2d + NTang2d + 1 on.
+    fn curvature_rows_2d(
+        &self,
+        a: &mut Assembly,
+        (forms, curel): (&BasisForms, i32),
+        rows: &ConstraintRows,
+        cb_long: f64,
+        cursor: &mut CurvatureCursor,
+    ) -> Result<(), Failure> {
+        let mut index: i32 = rows.nbeg2d + rows.ntang2d + 1;
         for _ in 0..self.nb_p2d {
-            let r1: f64 = self.curvature_value_2d(&cursor, cb_long)?;
-            self.add_curvature_row_2d(a, (forms, curel), index, r1, &mut cursor)?;
+            let r1: f64 = self.curvature_value_2d(cursor, cb_long)?;
+            self.add_curvature_row_2d(a, (forms, curel), index, r1, cursor)?;
             index += rows.ng2d;
             cursor.j += 4;
             cursor.jt += 2;
         }
-        rows.ntang3d += 2;
-        rows.ntang2d += 1;
         Ok(())
     }
 
