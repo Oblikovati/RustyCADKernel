@@ -19,14 +19,16 @@ use super::super::common::Reader;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkgeombase::app_par_curves::LineTool;
+use rustycad_tkgeombase::approx::Status;
 use rustycad_tkmath::gp::{Point2, Point3, Vector2, Vector3};
 
+/// One AppDef_MultiPointConstraint: its points and optional tangents and curvatures.
 #[derive(Clone)]
-struct ProbePoint {
-    p3: Vec<Point3>,
-    p2: Vec<Point2>,
-    tangents: Option<(Vec<Vector3>, Vec<Vector2>)>,
-    curvatures: Option<(Vec<Vector3>, Vec<Vector2>)>,
+pub struct ProbePoint {
+    pub p3: Vec<Point3>,
+    pub p2: Vec<Point2>,
+    pub tangents: Option<(Vec<Vector3>, Vec<Vector2>)>,
+    pub curvatures: Option<(Vec<Vector3>, Vec<Vector2>)>,
 }
 
 /// AppDef_MultiLine of AppDef_MultiPointConstraint with every tangent (and curvature)
@@ -46,6 +48,21 @@ fn vectors(r: &mut Reader<'_>, nb3d: i32, nb2d: i32) -> (Vec<Vector3>, Vec<Vecto
 }
 
 impl ProbeLine {
+    /// The line of `points`, each with `nb3d` 3D and `nb2d` 2D points.
+    pub fn new(nb3d: i32, nb2d: i32, points: Vec<ProbePoint>) -> Self {
+        Self { nb3d, nb2d, points }
+    }
+
+    /// `ML.Value(Index)` for 1-based `index`.
+    pub fn multi_point(&self, index: i32) -> Result<&ProbePoint, Failure> {
+        self.point(index)
+    }
+
+    /// `ML.NbMultiPoints()`.
+    pub fn nb_multi_points(&self) -> i32 {
+        self.points.len() as i32
+    }
+
     /// `nb3d nb2d n` then per point `tangent curvature points... [tangents] [curvatures]`.
     pub fn read(r: &mut Reader<'_>) -> Self {
         let (nb3d, nb2d, n) = (r.integer(), r.integer(), r.integer());
@@ -174,5 +191,15 @@ impl LineTool for ProbeLine {
         };
         fill(curvatures, c3)?;
         fill(curvatures2d, c2).map(|()| true)
+    }
+    // AppDef_MyLineTool: the line is never cut or refined.
+    fn what_status(&self, _: i32, _: i32) -> Result<Status, Failure> {
+        Ok(Status::NoPointsAdded)
+    }
+    fn make_ml_between(&self, _: i32, _: i32, _: i32) -> Result<Self, Failure> {
+        Ok(self.clone())
+    }
+    fn make_ml_one_more_point(&self, _: i32, _: i32, _: i32) -> Result<Option<Self>, Failure> {
+        Ok(None)
     }
 }

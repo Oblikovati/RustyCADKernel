@@ -9,6 +9,7 @@ pub mod adv_math;
 pub mod adv_math2;
 pub mod app_cont;
 pub mod app_par_curves;
+pub mod approx;
 pub mod bndlib;
 #[allow(dead_code, unused_imports)]
 pub mod common;

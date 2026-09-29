@@ -18,21 +18,18 @@
 
 //! `Geom2dConvert_ApproxCurve`: the polynomial B-spline approximation of a 2D curve
 //! by AdvApprox, cut preferably at its C2, then C3, breaks.
-use crate::failure_capture::FailureCapture;
+use crate::curve_approx_eval::{Curve2dEvaluator, cut_points_2d};
 use crate::native_failure::failure;
 use crate::native_text::stream_real;
 use rustycad_tkernel::ncollection::Array1;
-use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
 use rustycad_tkg2d::geom2d::arrays::one_based;
 use rustycad_tkg2d::geom2d::{Geom2dBSplineCurve, Geom2dCurve};
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
-use rustycad_tkg3d::adv_approx::{
-    AdvApproxApproxAFunction, AdvApproxEvaluatorFunction, AdvApproxPrefAndRec,
-};
+use rustycad_tkg3d::adv_approx::{AdvApproxApproxAFunction, AdvApproxPrefAndRec};
 use rustycad_tkmath::geom_abs::Shape;
-use rustycad_tkmath::gp::{Point2, Vector2};
+use rustycad_tkmath::gp::Point2;
 use std::fmt;
 
 /// The result of one approximation: the B-spline, whether it meets the tolerance,
@@ -134,16 +131,17 @@ impl ApproxCurve {
         two_d_tol.init(tol2d);
         let (first, last): (f64, f64) = (adaptor.first_parameter()?, adaptor.last_parameter()?);
         let cut_tool = AdvApproxPrefAndRec::new(
-            &cut_points(adaptor, Shape::C2)?,
-            &cut_points(adaptor, Shape::C3)?,
+            &cut_points_2d(adaptor, Shape::C2)?,
+            &cut_points_2d(adaptor, Shape::C3)?,
             5.0,
         )?;
         self.my_max_error = 0.0;
-        let mut evaluator = CurveEvaluator {
-            fonct: curve.clone(),
-            start_end_sav: [first, last],
-            capture: FailureCapture::default(),
-        };
+        let mut evaluator = Curve2dEvaluator::new(
+            curve.clone(),
+            [first, last],
+            true,
+            "Geom2dConvert_ApproxCurve_Eval",
+        );
         let approx = AdvApproxApproxAFunction::with_cutting(
             0,
             1,
@@ -159,7 +157,7 @@ impl ApproxCurve {
             &mut evaluator,
             &cut_tool,
         );
-        evaluator.capture.take()?;
+        evaluator.take_failure()?;
         self.store(&approx?)
     }
 
@@ -191,98 +189,5 @@ impl ApproxCurve {
         )?);
         self.my_max_error = approx.max_error(2, 1)?;
         Ok(())
-    }
-}
-
-// NbIntervals(shape) + 1 break parameters, from Intervals(shape).
-fn cut_points(
-    adaptor: &dyn Adaptor2dCurve2d,
-    shape: Shape,
-) -> Result<Array1<'static, f64>, Failure> {
-    let count: i32 = adaptor.nb_intervals(shape)?;
-    let mut points: Array1<'static, f64> = one_based(count + 1)?;
-    adaptor.intervals(&mut points, shape)?;
-    Ok(points)
-}
-
-/// `Geom2dConvert_ApproxCurve_Eval`: the value, first or second derivative of the
-/// adapted curve, trimmed again whenever AdvApprox moves to another interval.
-struct CurveEvaluator {
-    fonct: Handle<dyn Adaptor2dCurve2d>,
-    start_end_sav: [f64; 2],
-    // An adaptor exception unwinds natively; it is carried to the end of AdvApprox.
-    capture: FailureCapture,
-}
-
-impl AdvApproxEvaluatorFunction for CurveEvaluator {
-    fn evaluate(
-        &mut self,
-        dimension: i32,
-        start_end: [f64; 2],
-        par: f64,
-        order: i32,
-        result: &mut [f64],
-    ) -> i32 {
-        // The dimension and parameter checks set an error code but do not stop the
-        // evaluation, as natively.
-        let mut error_code: i32 = 0;
-        if dimension != 2 {
-            error_code = 1;
-        }
-        if par < start_end[0] || par > start_end[1] {
-            error_code = 2;
-        }
-        if (start_end[0] != self.start_end_sav[0] || start_end[1] != self.start_end_sav[1])
-            && !self.retrim(start_end)
-        {
-            return 1;
-        }
-        // A failed adaptor stops AdvApprox; the captured failure is returned after it.
-        let Some(order_code) = self.derivative(par, order, result) else {
-            return 1;
-        };
-        // An order beyond 2 overwrites the earlier codes with 3.
-        if order_code != 0 {
-            return order_code;
-        }
-        error_code
-    }
-}
-
-impl CurveEvaluator {
-    // fonct = fonct->Trim(StartEnd[0], StartEnd[1], Precision::PConfusion()).
-    fn retrim(&mut self, start_end: [f64; 2]) -> bool {
-        let trimmed = match self.fonct.get() {
-            Some(fonct) => fonct.trim(start_end[0], start_end[1], precision::p_confusion()),
-            None => Err(failure(
-                "Standard_NullObject",
-                "Geom2dConvert_ApproxCurve_Eval: null adaptor",
-            )),
-        };
-        let Some(trimmed) = self.capture.keep(trimmed) else {
-            return false;
-        };
-        self.fonct = trimmed;
-        self.start_end_sav = start_end;
-        true
-    }
-
-    // Writes the derivative of `order` into `result[0..2]` and returns its error
-    // code (3 for an order beyond 2, with zeros); None after an adaptor failure.
-    fn derivative(&mut self, par: f64, order: i32, result: &mut [f64]) -> Option<i32> {
-        let fonct: &dyn Adaptor2dCurve2d = self.fonct.get()?;
-        let value: Result<[f64; 2], Failure> = match order {
-            0 => fonct.value(par).map(|p: Point2| [p.x(), p.y()]),
-            1 => fonct
-                .d1(par)
-                .map(|(_, v1): (Point2, Vector2)| [v1.x(), v1.y()]),
-            2 => fonct
-                .d2(par)
-                .map(|(_, _, v2): (Point2, Vector2, Vector2)| [v2.x(), v2.y()]),
-            _ => Ok([0.0, 0.0]),
-        };
-        let [x, y] = self.capture.keep(value)?;
-        (result[0], result[1]) = (x, y);
-        Some(if (0..=2).contains(&order) { 0 } else { 3 })
     }
 }

@@ -469,6 +469,46 @@ member; `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for bot
 - Every native `std::min` and `std::max` keeps its argument order (`std_min`,
   `std_max`), so NaN and signed zero operands give the native result.
 
+## Approx
+
+Approx (`approx`) ports every class, generic and enumeration of the package;
+`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for it. OCCT 8.1 has
+no `Approx_BSplineApproxInterp`: no header, source or reference names it, so there is
+nothing to port.
+
+- The generics are trait-based. `Approx_ComputeLine.gxx` is `ComputeLine`,
+  `Approx_BSplComputeLine.gxx` is `BSplComputeLine`; both take any
+  `app_par_curves::LineTool` (the MultiLine and its tool are one type), and the
+  instantiations of AppDef, GeomInt and BRepApprox are aliases of them. The least
+  squares, gradient and BFGS generics come from the AppParCurves port.
+  `Approx_ComputeCLine.gxx` is `ComputeCLine` over `app_cont::Function`;
+  `Approx_FitAndDivide` and `Approx_FitAndDivide2d` are its aliases.
+- `LineTool` has the Approx members `what_status`, `make_ml_between` and
+  `make_ml_one_more_point` (`None` for a native null MultiLine); the AppDef semantics
+  of AppDef_MyLineTool (NoPointsAdded, the same line, no extra point) are left to
+  AppDef.
+- The native constructor overloads are named constructors (`with_line`,
+  `with_line_and_parameters`, `from_parameters`; `CurvlinFunc::from_curve`,
+  `from_curve_on_surface`, `from_two_curves_on_surfaces`; `SameParameter::from_geometry`,
+  `from_adaptors_and_pcurve`, `from_adaptors`), and the long argument lists with
+  defaults are options structs with the native defaults (`ComputeLineOptions`,
+  `ComputeCLineOptions`, `CurveOnSurfaceOptions`, `CurvilinearOptions`,
+  `SweepOptions`).
+- `Approx_CurvlinFunc` and `Approx_SweepFunction` are transients: `CurvlinFunc` keeps
+  its state behind a lock (its const members record the previous point, as the native
+  const_cast does), and `SweepFunction` is a trait whose native-bodied members (D1, D2,
+  Resolution, BarycentreOfSurf, MaximalSection, GetMinimalWeight) raise
+  Standard_NotImplemented by default.
+- The AdvApprox evaluators of Curve3d, Curve2d, CurveOnSurface, CurvilinearParameter,
+  SameParameter and SweepApproximation keep an evaluator exception and return it after
+  the approximation, as the native exception propagates. The Curve3d and Curve2d
+  evaluators and cut points are shared with GeomConvert_ApproxCurve and
+  Geom2dConvert_ApproxCurve (`curve_approx_eval.rs`), which use the same code natively.
+- `Dump` members write into a `fmt::Write`; `Status` and `ParametrizationType` keep the
+  native values (`code`, `from_code`).
+- AppDef and ProjLib, ported after Approx, map their `AppDef_Compute`,
+  `AppDef_BSplineCompute` and ProjLib instantiations onto these generics.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -752,6 +792,26 @@ three points within gp::Resolution() for `GetCircle` (the gce status is unassign
 the empty arrays of `RemovePointsFromArray` and `DensifyArray1OfReal` (read unchecked, a
 crash), the MakeCurvefromApprox members of an absent subspace kind (a null table) and
 DenominatorMultiplier flat knot vectors other than 8 to 10 values (read out of bounds).
+
+The Approx requests come from two corpora. The drivers (`tkgeombase_corpus_approx.py`,
+probes `tkgeombase_probe_approx.cxx` and `tkgeombase_probe_approx_line.cxx`, which
+instantiates `Approx_ComputeLine.gxx` over AppDef_MultiLine with a scripted line tool)
+run ComputeLine and BSplComputeLine on 3D, 2D and mixed lines (smooth, clustered, noisy,
+collinear, looping, with and without end tangents) with every parametrization,
+constraint pair, degree range, cutting and squares mode, given parameters and knots, the
+scripted WhatStatus/MakeMLBetween/MakeMLOneMorePoint answers, ComputeCLine on AppCont
+functions with and without cutting, inverse order and hang checking, and
+MCurvesToBSpCurve on sequences of mixed degrees; 1324 requests. The adaptors
+(`tkgeombase_corpus_approx_adaptors.py`, probes `tkgeombase_probe_approx_adaptors.cxx`
+and `tkgeombase_probe_approx_sweep.cxx`) run Curve3d, Curve2d, CurveOnSurface (every
+surface kind, the iso-line paths, only3d and only2d), CurvlinFunc command scripts in its
+three cases, CurvilinearParameter, SameParameter from each constructor (already same
+parameter, reparametrized, C0 and off-surface pcurves) and SweepApproximation on
+polynomial and rational sections with and without 2D curves, with implemented and
+missing D1, D2 and Resolution; 673 requests. Left out, as the native result is undefined
+there: ComputeLine given fewer parameters than points, BSplComputeLine user
+multiplicities with several degrees and cutting after a failed first fit (uninitialized
+multiplicities, heap corruption).
 
 The corpus has 39699 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
@@ -1307,6 +1367,40 @@ Extrema:
   is read before the output overwrites it) and GetStateNumber.
 - Every native comparison keeps its form where a NaN operand changes the branch, and
   `std::min`/`std::max` keep their argument order.
+
+Approx:
+
+- `Approx_ComputeLine` never initializes `tolreached` and the current errors in its
+  constructors, and a first fit on fewer points than parameters leaves `TheParam`
+  uninitialized; the port starts from false and 0.
+- ComputeLine's CheckMultiCurve divides the first leg of a 2D curve by
+  `Epsilon(1.)` instead of its length, and records the bad indices in a three-slot
+  array that overflows past three curves (a vector in the port).
+- ComputeLine's ComputeCurve stores the interpolated piece and then halves the range,
+  so consecutive pieces overlap; the MakeMLBetween test `nbpdsotherligne` is
+  `FirstPoint - LastPoint`, which is 0 only for one point.
+- `Approx_BSplComputeLine::FindRealConstraints` queries the tangents a second time for
+  a curvature end, so a line with tangents and no curvatures keeps curvature
+  constraints; `ComputeCurve` is declared and never defined; `Parameters()` before a
+  Perform dereferences a null table (Standard_NullObject in the port); user
+  multiplicities are read past their bounds for several degrees (left out).
+- `Approx_ComputeCLine` never clears its pieces: a second Perform appends to the first.
+- `Approx_MCurvesToBSpCurve` keeps its pole counter across spans, and an empty sequence
+  raises Standard_OutOfRange.
+- `Approx_Curve2d` discards the result of its trim.
+- `Approx_CurvilinearParameter` in the one-curve-on-surface case never assigns
+  `myMaxError2d2` (the port reads 0).
+- `Approx_CurvlinFunc`: in the two-curve case Trim builds the second curve's tables
+  with the first curve's, `GetUParameter` uses the tables of the curve number whatever
+  curve it is given, and one Adaptor3d_CurveOnSurface is reloaded for both curves, so
+  its interval cache survives the Load (the port reuses one adaptor the same way).
+- `Approx_SameParameter` leaves `TolReached` unassigned when the distribution fails,
+  returns a null Curve2d when the pcurve is already same parameter and a null
+  CurveOnSurface on the early returns; the fallback CurveOnSurface uses the approximated
+  pcurve even when it is not kept; its Interpolate raises instead of returning false.
+- `Approx_SweepApproximation::Dump` writes its parts to `std::cout` (the port to the
+  given stream), and the 2D poles are appended across Performs, so `Curve2dPoles(1)`
+  keeps the first run's poles.
 
 GeomConvert:
 

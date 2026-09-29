@@ -117322,6 +117322,1166 @@
       "rust_item": "rustycad_tkgeombase::geom_lib::compute_deviation_pso",
       "status": "implemented",
       "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve2d(const occ::handle<Adaptor2d_Curve2d>&,double,double,double,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve2d::new",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve2d::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve2d::is_done",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve2d::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve2d::has_result",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve2d::Curve() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve2d::curve",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve2d::MaxError2dU() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve2d::max_error_2d_u",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve2d::MaxError2dV() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve2d::max_error_2d_v",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve3d(const occ::handle<Adaptor3d_Curve>&,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve3d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve3d::new",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve3d::Curve() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve3d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve3d::curve",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve3d::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve3d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve3d::is_done",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve3d::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve3d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve3d::has_result",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve3d::MaxError() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve3d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve3d::max_error",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Curve3d::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Curve3d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Curve3d::dump",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface(const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,GeomAbs_Shape,int,int,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::new",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface(const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::without_perform",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::is_done",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::has_result",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface::Curve3d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::curve_3d",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface::MaxError3d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::max_error_3d",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface::Curve2d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::curve_2d",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface::MaxError2dU() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::max_error_2d_u",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface::MaxError2dV() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::max_error_2d_v",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurveOnSurface::Perform(int,int,GeomAbs_Shape,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurveOnSurface::perform",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter(const occ::handle<Adaptor3d_Curve>&,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::from_curve",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter(const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::from_curve_on_surface",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter(const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::from_two_curves_on_surfaces",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::is_done",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::has_result",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter::Curve3d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::curve_3d",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter::MaxError3d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::max_error_3d",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter::Curve2d1() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::curve_2d1",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter::MaxError2d1() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::max_error_2d1",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter::Curve2d2() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::curve_2d2",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter::MaxError2d2() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::max_error_2d2",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvilinearParameter::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvilinearParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvilinearParameter::dump",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc(const occ::handle<Adaptor3d_Curve>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::from_curve",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc(const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::from_curve_on_surface",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc(const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::from_two_curves_on_surfaces",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::SetTol(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::set_tol",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::FirstParameter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::first_parameter",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::LastParameter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::last_parameter",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::nb_intervals",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::intervals",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::Trim(double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::trim",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::Length()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::length",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::Length(Adaptor3d_Curve&,double,double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::length_of",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::GetLength() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::get_length",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::GetUParameter(Adaptor3d_Curve&,double,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::get_u_parameter",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::GetSParameter(double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::get_s_parameter",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::EvalCase1(double,int,NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::eval_case1",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::EvalCase2(double,int,NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::eval_case2",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::EvalCase3(double,int,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::eval_case3",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_CurvlinFunc::DEFINE_STANDARD_RTTIEXT(Approx_CurvlinFunc,Standard_Transient)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_CurvlinFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::CurvlinFunc::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide(const AppCont_Function&,int,int,double,double,bool,AppParCurves_Constraint,AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::with_line",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide(int,int,double,double,bool,AppParCurves_Constraint,AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::new",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::Perform(const AppCont_Function&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::perform",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::SetDegrees(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_degrees",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::SetTolerances(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_tolerances",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::SetConstraints(AppParCurves_Constraint,AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_constraints",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::SetMaxSegments(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_max_segments",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::SetInvOrder(bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_inv_order",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::SetHangChecking(bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_hang_checking",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::IsAllApproximated() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::is_all_approximated",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::IsToleranceReached() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::is_tolerance_reached",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::Error(int,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::error",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::NbMultiCurves() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::nb_multi_curves",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::Value(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::value",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide::Parameters(int,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::parameters",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d(const AppCont_Function&,int,int,double,double,bool,AppParCurves_Constraint,AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::with_line",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d(int,int,double,double,bool,AppParCurves_Constraint,AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::new",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::Perform(const AppCont_Function&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::perform",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::SetDegrees(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_degrees",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::SetTolerances(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_tolerances",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::SetConstraints(AppParCurves_Constraint,AppParCurves_Constraint)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_constraints",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::SetMaxSegments(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_max_segments",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::SetInvOrder(bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_inv_order",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::SetHangChecking(bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::set_hang_checking",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::IsAllApproximated() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::is_all_approximated",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::IsToleranceReached() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::is_tolerance_reached",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::Error(int,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::error",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::NbMultiCurves() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::nb_multi_curves",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::Value(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::value",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_FitAndDivide2d::Parameters(int,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_FitAndDivide2d.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ComputeCLine::parameters",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_MCurvesToBSpCurve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_MCurvesToBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::MCurvesToBSpCurve::new",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_MCurvesToBSpCurve::Reset()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_MCurvesToBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::MCurvesToBSpCurve::reset",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_MCurvesToBSpCurve::Append(const AppParCurves_MultiCurve&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_MCurvesToBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::MCurvesToBSpCurve::append",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_MCurvesToBSpCurve::Perform()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_MCurvesToBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::MCurvesToBSpCurve::perform",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_MCurvesToBSpCurve::Perform(const NCollection_Sequence<AppParCurves_MultiCurve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_MCurvesToBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::MCurvesToBSpCurve::perform_sequence",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_MCurvesToBSpCurve::Value() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_MCurvesToBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::MCurvesToBSpCurve::value",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_MCurvesToBSpCurve::ChangeValue()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_MCurvesToBSpCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::MCurvesToBSpCurve::change_value",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_ParametrizationType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_ParametrizationType.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::ParametrizationType",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SameParameter(const occ::handle<Geom_Curve>&,const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SameParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SameParameter::from_geometry",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SameParameter(const occ::handle<Adaptor3d_Curve>&,const occ::handle<Geom2d_Curve>&,const occ::handle<Adaptor3d_Surface>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SameParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SameParameter::from_adaptors_and_pcurve",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SameParameter(const occ::handle<Adaptor3d_Curve>&,const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SameParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SameParameter::from_adaptors",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SameParameter::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SameParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SameParameter::is_done",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SameParameter::TolReached() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SameParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SameParameter::tol_reached",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SameParameter::IsSameParameter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SameParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SameParameter::is_same_parameter",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SameParameter::Curve2d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SameParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SameParameter::curve_2d",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SameParameter::Curve3d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SameParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SameParameter::curve_3d",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SameParameter::CurveOnSurface() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SameParameter.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SameParameter::curve_on_surface",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_Status",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_Status.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::Status",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation(const occ::handle<Approx_SweepFunction>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::new",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Perform(double,double,double,double,double,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::perform",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Eval(double,int,double,double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::eval",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::is_done",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::SurfShape(int&,int&,int&,int&,int&,int&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::surf_shape",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Surface(NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<int>&,NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::surface",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::UDegree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::u_degree",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::VDegree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::v_degree",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::SurfPoles() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::surf_poles",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::SurfWeights() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::surf_weights",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::SurfUKnots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::surf_u_knots",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::SurfVKnots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::surf_v_knots",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::SurfUMults() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::surf_u_mults",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::SurfVMults() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::surf_v_mults",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::MaxErrorOnSurf() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::max_error_on_surf",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::AverageErrorOnSurf() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::average_error_on_surf",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::NbCurves2d() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::nb_curves_2d",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Curves2dShape(int&,int&,int&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::curves_2d_shape",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Curve2d(int,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&,NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::curve_2d",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Curves2dDegree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::curves_2d_degree",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Curve2dPoles(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::curve_2d_poles",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Curves2dKnots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::curves_2d_knots",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Curves2dMults() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::curves_2d_mults",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Max2dError(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::max_2d_error",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Average2dError(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::average_2d_error",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::TolCurveOnSurf(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::tol_curve_on_surf",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepApproximation::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepApproximation.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepApproximation::dump",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::D0(double,double,double,NCollection_Array1<gp_Pnt>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::d0",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::D1(double,double,double,NCollection_Array1<gp_Pnt>&,NCollection_Array1<gp_Vec>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<gp_Vec2d>&,NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::d1",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::D2(double,double,double,NCollection_Array1<gp_Pnt>&,NCollection_Array1<gp_Vec>&,NCollection_Array1<gp_Vec>&,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<gp_Vec2d>&,NCollection_Array1<gp_Vec2d>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::d2",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::Nb2dCurves() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::nb_2d_curves",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::SectionShape(int&,int&,int&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::section_shape",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::Knots(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::knots",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::Mults(NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::mults",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::IsRational() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::is_rational",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::nb_intervals",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::intervals",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::SetInterval(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::set_interval",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::Resolution(int,double,double&,double&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::resolution",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::GetTolerance(double,double,double,NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::get_tolerance",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::SetTolerance(double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::set_tolerance",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::BarycentreOfSurf() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::barycentre_of_surf",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::MaximalSection() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::maximal_section",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::GetMinimalWeight(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::get_minimal_weight",
+      "status": "implemented",
+      "notes": "Approx mapping (docs/tkgeombase-progress.md): each class is a struct (Approx_FitAndDivide and FitAndDivide2d are aliases of the ComputeCLine port over AppCont_Function), constructor arguments with native defaults are option structs, overloads take distinct Rust names, output references become returned values and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "Approx_SweepFunction::DEFINE_STANDARD_RTTIEXT(Approx_SweepFunction,Standard_Transient)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/Approx/Approx_SweepFunction.hxx",
+      "rust_item": "rustycad_tkgeombase::approx::SweepFunction::static_type",
+      "status": "implemented",
+      "notes": "DEFINE_STANDARD_RTTIEXT declares get_type_name, get_type_descriptor and DynamicType; impl_transient!/impl_transient_interface! register the same descriptor chain, reached through RuntimeTyped::static_type (name(), parent()) and Transient::dynamic_type."
     }
   ],
   "tests": [

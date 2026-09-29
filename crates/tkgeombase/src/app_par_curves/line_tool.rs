@@ -15,6 +15,7 @@
 // at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! The `MultiLine`/`ToolLine` template parameters of the AppParCurves generics.
+use crate::approx::Status;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{Point2, Point3, Vector2, Vector3};
@@ -24,8 +25,10 @@ use rustycad_tkmath::gp::{Point2, Point3, Vector2, Vector3};
 /// `ssp.nb_p3d()`). A MultiLine is a sequence of multipoints `FirstPoint..=LastPoint`,
 /// each with `NbP3d` 3D and `NbP2d` 2D points, and optional tangents and curvatures.
 ///
-/// The output arrays are filled from their lower bound; the Approx-only members
-/// (`WhatStatus`, `MakeMLBetween`, `MakeMLOneMorePoint`) belong to the Approx port.
+/// The output arrays are filled from their lower bound. The Approx drivers
+/// (`Approx_ComputeLine`) also call `WhatStatus`, `MakeMLBetween` and
+/// `MakeMLOneMorePoint`, which a line that is never cut may answer as
+/// AppDef_MyLineTool does (no points added, the same line, no extra point).
 ///
 /// ```
 /// use rustycad_tkgeombase::app_par_curves::LineTool;
@@ -87,4 +90,23 @@ pub trait LineTool {
         curvatures: &mut Array1<'_, Vector3>,
         curvatures2d: &mut Array1<'_, Vector2>,
     ) -> Result<bool, Failure>;
+    /// `WhatStatus(ML, I1, I2)`: what the line can do for the points `i1..=i2` that
+    /// the approximation cannot fit.
+    fn what_status(&self, i1: i32, i2: i32) -> Result<Status, Failure>;
+    /// `MakeMLBetween(ML, I1, I2, NbPMin)`: a new line with more points (at least
+    /// `nb_p_min`) between the points `i1` and `i2`.
+    fn make_ml_between(&self, i1: i32, i2: i32, nb_p_min: i32) -> Result<Self, Failure>
+    where
+        Self: Sized;
+    /// `MakeMLOneMorePoint(ML, I1, I2, indbad, OtherLine)`: the line of the points
+    /// `i1..=i2` with one more point before `index_bad`, or None when the tool
+    /// cannot add it (the native false result).
+    fn make_ml_one_more_point(
+        &self,
+        i1: i32,
+        i2: i32,
+        index_bad: i32,
+    ) -> Result<Option<Self>, Failure>
+    where
+        Self: Sized;
 }
