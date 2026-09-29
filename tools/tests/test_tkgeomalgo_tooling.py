@@ -1,6 +1,7 @@
 """The TKGeomAlgo verifier wiring: its numeric oracle entry, the numeric-only run of a
 toolkit without mapped suites, and a deterministic corpus that reaches every probe
 operation of both twins with purely numeric requests."""
+import random
 import re
 import tempfile
 import unittest
@@ -8,7 +9,9 @@ from pathlib import Path
 from coverage_report import PROBE_CORPORA
 from native_build import LINKED_TOOLKITS
 from tkgeomalgo_corpus import append_tkgeomalgo_requests
-from tkgeomalgo_corpus_intf import triangle_request
+from tkgeomalgo_corpus_intf import identity, point_pool, spoint, triangle_request
+from tkgeomalgo_corpus_intf_poly import height_field
+from tkgeomalgo_corpus_toptrans import fan
 from verify_toolkit import NUMERIC_VERIFIERS, mapped_suites
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -65,6 +68,33 @@ class CorpusTests(unittest.TestCase):
     def test_triangle_request_is_twelve_coordinates(self):
         line = triangle_request([0, 0, 0], [1, 0, 0], [0, 1, 0], [0.25, 0.25, 0])
         self.assertEqual(line, 'intf_triangle 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 0.0 0.25 0.25 0.0')
+
+
+class IntfCorpusTests(unittest.TestCase):
+    def test_section_point_specs_have_the_probe_field_counts(self):
+        rng = random.Random(1)
+        for _ in range(50):
+            spec = spoint(rng, identity(rng))
+            self.assertEqual(len(spec), 13 if spec[0] == 0 else 10)
+
+    def test_point_pool_repeats_identities(self):
+        # Logically equal points drive the IsEqual branches of the records.
+        pool = point_pool(random.Random(2), 6)
+        self.assertEqual(pool[0], 6)
+
+    def test_height_field_triangles_index_its_points(self):
+        field = height_field(random.Random(3), 3, True)
+        points = int(field[2])
+        triangles_at = 3 + 3 * points
+        count = int(field[triangles_at])
+        indices = field[triangles_at + 1:triangles_at + 1 + 3 * count]
+        self.assertEqual((points, count), (9, 8))
+        self.assertTrue(all(1 <= i <= points for i in indices))
+
+
+class TopTransCorpusTests(unittest.TestCase):
+    def test_fan_directions_are_normal_to_the_tangent(self):
+        self.assertEqual(fan(0.0), (0.0, 1.0, 0.0))
 
 
 if __name__ == '__main__':

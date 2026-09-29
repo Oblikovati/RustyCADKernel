@@ -17,7 +17,9 @@
 
 //! The members of `EditorView::EdgeOps` that edit the boundary vertex references.
 use super::edges::EdgeOps;
-use super::helpers::{has_any_active_usage, is_active_node, node_item, ref_item, require_unlocked};
+use super::helpers::{
+    has_any_active_usage, is_active_node, ref_item, require_settable, require_unlocked,
+};
 use crate::brep_graph::mut_guard::MutGuard;
 use crate::brep_graph::{BRepGraph, EdgeId, EdgeTag, NodeId, VertexId, VertexRefId};
 use crate::brep_graph_inc::Storage;
@@ -209,11 +211,7 @@ impl EdgeOps<'_> {
         reference: VertexRefId,
         slot: Slot,
     ) -> Result<(), Failure> {
-        require_unlocked(
-            self.graph,
-            node_item(edge),
-            "BRepGraph::EditorView: locked item",
-        )?;
+        require_settable(self.graph, edge)?;
         if slot.get(self.graph.inc_storage(), edge) == reference {
             return Ok(());
         }

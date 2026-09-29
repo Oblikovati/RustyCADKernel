@@ -23,7 +23,11 @@ use crate::topods::{self, Edge, Shape};
 use crate::toptools::MapOfShape;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d::Geom2dCurve;
+use rustycad_tkgeombase::scan_step::next_scan_parameter;
 use rustycad_tkmath::gp::Point2;
+
+// The native owner named when a step search stalls.
+const OWNER: &str = "BRepTools_WireExplorer GetNextParamOnPC";
 
 /// `SelectDouble`: takes out of `list` the first edge met twice in the wire that is not
 /// `edge`, which it replaces; false when there is none.
@@ -70,6 +74,8 @@ pub(super) struct StepSearch {
 /// `GetNextParamOnPC`: walking from the first parameter (`reverse`) or the last one in
 /// steps of a thousandth of the range, the first parameter whose p-curve point leaves
 /// the UV tolerance box around `reference`; the other end of the range when none does.
+/// A step that cannot advance (a range of a few ulps) raises Standard_DomainError where
+/// the native walk never ends (`rustycad_tkgeombase::scan_step`).
 pub(super) fn next_param_on_pcurve(
     pcurve: &dyn Geom2dCurve,
     reference: Point2,
@@ -84,7 +90,7 @@ pub(super) fn next_param_on_pcurve(
     if search.reverse {
         let mut start = first;
         while start < last {
-            start += step;
+            start = next_scan_parameter(OWNER, start, step, [first, last])?;
             if !is_near(pcurve.d0(start)?) {
                 return Ok(if start > last { last } else { start });
             }
@@ -93,10 +99,54 @@ pub(super) fn next_param_on_pcurve(
     }
     let mut start = last;
     while start > first {
-        start -= step;
+        start = next_scan_parameter(OWNER, start, -step, [first, last])?;
         if !is_near(pcurve.d0(start)?) {
             return Ok(if start < first { first } else { start });
         }
     }
     Ok(first)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rustycad_tkg2d::geom2d::Geom2dLine;
+    use rustycad_tkmath::gp::Direction2;
+
+    // The X axis, and a search whose tolerance box holds every point of it near 0.
+    fn x_axis_search(reverse: bool) -> (Geom2dLine, StepSearch) {
+        let line = Geom2dLine::from_point(Point2::new(0., 0.), Direction2::new(1., 0.).unwrap());
+        let search = StepSearch {
+            tol_u: 10.,
+            tol_v: 10.,
+            reverse,
+        };
+        (line, search)
+    }
+
+    #[test]
+    fn step_search_leaves_the_tolerance_box_as_natively() {
+        let (line, mut search) = x_axis_search(true);
+        search.tol_u = 0.5;
+        let found = next_param_on_pcurve(&line, Point2::new(0., 0.), (0., 1.), &search);
+        // The 500th accumulated thousandth, rounded as natively, is the first sample out.
+        assert_eq!(found.unwrap(), 0.5000000000000003);
+    }
+
+    #[test]
+    fn step_search_over_a_one_ulp_range_returns() {
+        // Regression: a thousandth of one ulp rounds back, so the native walk
+        // `while (T < L) { T += Step; ... }` never ends; both directions must return.
+        let range: (f64, f64) = (1., 1. + f64::EPSILON);
+        for reverse in [true, false] {
+            let (line, search) = x_axis_search(reverse);
+            let failure = next_param_on_pcurve(&line, Point2::new(1., 0.), range, &search);
+            let message = failure.unwrap_err();
+            assert!(
+                message.message().contains("never ends"),
+                "{}",
+                message.message()
+            );
+        }
+    }
 }

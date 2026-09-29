@@ -16,7 +16,7 @@ void ga_gccint_accessors(const occ::handle<GccInt_Bisec>& b){
 // `kind x y dx dy a b`: 0 line, 1 circle (radius a), 2 ellipse (radii a b), 3 hyperbola
 // (radii a b), 4 parabola (focal a), built on the frame (x y, dx dy), direct sense.
 void ga_gccint_bisec_case(std::istream& input){
- GaReader r{input};int kind=r.integer();gp_Pnt2d p=r.pnt2d();gp_Dir2d d=ga_read_dir2d(r);
+ GaReader r{input};int kind=r.integer();gp_Pnt2d p=r.pnt2d();gp_Dir2d d=r.dir2d();
  double a=r.real(),b=r.real();gp_Ax22d frame(p,d,true);occ::handle<GccInt_Bisec> bisec;
  if(kind==0)bisec=new GccInt_BLine(gp_Lin2d(p,d));
  else if(kind==1)bisec=new GccInt_BCirc(gp_Circ2d(frame,a));

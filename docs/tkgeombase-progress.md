@@ -998,6 +998,47 @@ GCPnts, 325 AdvApp2Var, 908 Geom2dConvert, 1934 Extrema, 1844 GeomConvert, 1146 
 
 ## Preserved native behaviour
 
+Process-wide state (FEmTool and AdvApp2Var):
+
+- Two TKGeomBase packages keep state between calls, so an answer can depend on the
+  calls the same process made before it. Since the numeric probes run in 64
+  round-robin shards (`tools/probe_shards.py`), 82 requests answer differently from a
+  single serial run: 81 `fem_criterion` and 1 `aa_mmtrpjj`. Native and Rust agree on
+  every one of them in both layouts, because the port keeps the same state; the shard
+  layout is a fixed constant so the evidence does not depend on the machine.
+- FEmTool: the constructors of `FEmTool_LinearFlexion`, `FEmTool_LinearJerk` and
+  `FEmTool_LinearTension` hold function-local statics
+  (`static int Order = -333, WDeg = 14; static math_Vector MatrixElemts(0, 119);`).
+  The Hermite-Jacobi integrals are computed only when the constraint order differs
+  from the cached `Order`, and only then is `WorkDegree > 14` refused
+  (Standard_ConstructionError "Degree too high"). A WorkDegree 15 criterion of the
+  cached order skips that check and reads past the 120 integrals
+  (Standard_OutOfRange); so the same request raises Standard_ConstructionError in a
+  shard where it is the first of its class and order, and Standard_OutOfRange, or a
+  value computed from the other order's integrals, after an earlier request of that
+  class. The Rust counterpart is one `static Mutex<ReferenceCache>` per class
+  (`FLEXION_CACHE`, `JERK_CACHE`, `TENSION_CACHE` in `fem_tool/linear_kinds.rs`,
+  `ReferenceCache` in `fem_tool/reference_matrix.rs`) with the same initial order
+  -333, the same 120 slots and the same update rule.
+- AdvApp2Var: the precision common `MMPRCSN` is a file-static struct of
+  AdvApp2Var_MathBase.cxx, set to (1e-9, 1e-8, 1e-9, 1e-4, 8, 40) by a static
+  initializer when the library loads and replaced by the public `mmwprcs_`. `mmtrpjj_`
+  reads its `eps1` through `mmeps1_` when it drops the trailing interpolation
+  coefficients (label L400 of `mmtrpj2_`, `mmtrpj4_`, `mmtrpj6_`). The corpus sets
+  `eps1` to 1e-6, runs one `aa_mmtrpjj` (order 0, so `mmtrpj2_`) whose second
+  coefficient 5e-7 lies between the two precisions, and restores 1e-9. After the
+  `aa_mmwprcs` request the second coefficient is dropped and the curve becomes a point
+  (`NCFNEW` 1); in a shard without it `eps1` is 1e-9 and `NCFNEW` stays 2. The Rust counterpart is
+  `static MMPRCSN: RwLock<Mmprcsn>` in `adv_app2var/math_base/mod.rs`, initialized to
+  the same values (`MMPRCSN_DEFAULT`).
+- The Rust state is process-global in the same way: one value per process, shared by
+  every thread, never reset, with no per-graph or per-call copy. The locks only make
+  the concurrent access defined (the native statics are unsynchronized, a data race
+  under threads). One consequence the native build does not show: the Rust test
+  harness runs the tests of one binary as threads of one process, so the one test that
+  depends on the FEmTool caches runs alone in its own binary
+  (`tests/fem_tool_reference_cache.rs`), and no test changes `MMPRCSN`.
+
 gce:
 
 - gce_Root has no constructor, and three paths never assign the status:
@@ -1777,6 +1818,23 @@ ProjLib:
   that ends natively advances at every increment, so every other result is unchanged.
   The request stays out of the corpus (the native probe never returns); the regression
   tests are in `tests/proj_lib_behavior/degenerate_ranges.rs`.
+- Rust deviation, the other float-step scans that can stall: the guard above is the
+  crate module `scan_step` (`next_scan_parameter`, and `advanced_scan_parameter` for a
+  loop that stops instead), shared by every scan of the shape `T += Step` while
+  `T <= Last`. An increment moves `T` or leaves it unchanged (rounding is monotone), and
+  a NaN ends each of these loops at once, so the guard fires only where the native loop
+  never ends. It covers `IsoIsDeg` of `ProjLib_ProjectedCurve` (the pole check of a
+  Bezier or B-spline surface samples a bound iso in tenths of the range; a zero-width
+  or one-ulp surface range, or an infinite bound, never advances), `IsoIsDeg` of
+  `Extrema_ExtPS` (a step of PConfusion rounds back at a parameter beyond about 1e7),
+  the period shift of the polar initial curve (a parameter beyond about 1e17 is not
+  moved by one period; the port also refuses a shift that jumps over a window narrower
+  than the period, which natively then moves away forever) and the period loop of
+  `ProjLib_ProjectOnPlane::Load`. Each raises Standard_DomainError naming the owner,
+  the range, the step and the parameter. Samples of every scan that ends natively are
+  bit-identical (the numeric oracle is unchanged); the regression tests are in
+  `tests/proj_lib_behavior/degenerate_ranges.rs` and the module tests of `scan_step`
+  and `proj_lib::polar::initial`.
 
 GeomProjLib:
 

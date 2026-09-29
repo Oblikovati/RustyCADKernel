@@ -9,6 +9,9 @@ pub mod gcc_ent;
 pub mod gcc_int;
 pub mod hatch;
 pub mod intf;
+pub mod intf_poly;
+pub mod intf_tool;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]
 pub mod print;
+pub mod toptrans;

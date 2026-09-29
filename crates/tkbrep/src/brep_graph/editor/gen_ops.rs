@@ -19,7 +19,7 @@
 //! `EditorView::GenOps`: the generic operations. The removals are in `gen_remove`,
 //! `gen_subgraph` and `gen_cleanup`.
 use super::guards::mutate_ref;
-use super::helpers::{ref_item, require_item_unlocked};
+use super::helpers::require_settable;
 use crate::brep_graph::layer_history::{HistoryKind, LayerHistory};
 use crate::brep_graph::mut_guard::MutGuard;
 use crate::brep_graph::*;
@@ -51,7 +51,7 @@ impl<'g> GenOps<'g> {
         reference: ChildRefId,
         location: &Location,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         self.graph
             .inc_storage_mut()
             .change_child_ref(reference)
@@ -74,7 +74,7 @@ impl<'g> GenOps<'g> {
         reference: ChildRefId,
         orientation: ParityOrientation,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         self.graph
             .inc_storage_mut()
             .change_child_ref(reference)
@@ -98,7 +98,7 @@ impl<'g> GenOps<'g> {
         reference: ChildRefId,
         child: NodeId,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         let storage = self.graph.inc_storage_mut();
         let old = storage.child_ref(reference).child_node_id;
         if old == child {

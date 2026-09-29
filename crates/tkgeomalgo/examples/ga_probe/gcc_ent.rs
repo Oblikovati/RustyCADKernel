@@ -7,10 +7,6 @@ use rustycad_tkmath::gp::{
 };
 
 impl Reader<'_> {
-    pub fn dir2d(&mut self) -> Direction2 {
-        let x = self.real();
-        Direction2::new(x, self.real()).expect("probe direction")
-    }
     pub fn lin2d(&mut self) -> Line2 {
         let p = self.pnt2d();
         Line2::new(p, self.dir2d())

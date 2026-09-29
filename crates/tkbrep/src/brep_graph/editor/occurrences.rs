@@ -16,7 +16,7 @@
 
 //! `EditorView::OccurrenceOps`: the occurrence and occurrence reference setters.
 use super::guards::{mutate_node, mutate_ref};
-use super::helpers::{is_valid_occurrence_child_kind, node_item, ref_item, require_item_unlocked};
+use super::helpers::{is_valid_occurrence_child_kind, require_settable};
 use crate::brep_graph::mut_guard::MutGuard;
 use crate::brep_graph::*;
 use crate::brep_graph_inc::Storage;
@@ -60,7 +60,7 @@ impl<'g> OccurrenceOps<'g> {
         reference: OccurrenceRefId,
         location: &Location,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         self.graph
             .inc_storage_mut()
             .change_occurrence_ref(reference)
@@ -91,7 +91,7 @@ impl<'g> OccurrenceOps<'g> {
         if !active || !is_active_occurrence_child(self.graph, child) {
             return Ok(());
         }
-        require_item_unlocked(self.graph, node_item(occurrence))?;
+        require_settable(self.graph, occurrence)?;
         let storage = self.graph.inc_storage_mut();
         let old = storage.occurrence(occurrence).child_node_id;
         if old == child {
@@ -128,7 +128,7 @@ impl<'g> OccurrenceOps<'g> {
         reference: OccurrenceRefId,
         occurrence: OccurrenceId,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         let storage = self.graph.inc_storage_mut();
         let old = storage.occurrence_ref(reference).child_occurrence_id;
         if old == occurrence || occurrence_has_other_active_ref(storage, occurrence, reference) {

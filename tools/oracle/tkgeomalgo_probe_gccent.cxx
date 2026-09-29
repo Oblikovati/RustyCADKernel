@@ -12,10 +12,9 @@
 #include <gp_Lin2d.hxx>
 #include <gp_Parab2d.hxx>
 // Sequential 2d readers (the corpus only feeds valid directions and radii).
-gp_Dir2d ga_read_dir2d(GaReader& r){double x=r.real();return gp_Dir2d(x,r.real());}
-gp_Lin2d ga_read_lin2d(GaReader& r){gp_Pnt2d p=r.pnt2d();return gp_Lin2d(p,ga_read_dir2d(r));}
+gp_Lin2d ga_read_lin2d(GaReader& r){gp_Pnt2d p=r.pnt2d();return gp_Lin2d(p,r.dir2d());}
 // `x y dx dy radius`: the circle of X axis (x y, dx dy), direct sense.
-gp_Circ2d ga_read_circ2d(GaReader& r){gp_Pnt2d p=r.pnt2d();gp_Dir2d d=ga_read_dir2d(r);return gp_Circ2d(gp_Ax2d(p,d),r.real());}
+gp_Circ2d ga_read_circ2d(GaReader& r){gp_Pnt2d p=r.pnt2d();gp_Dir2d d=r.dir2d();return gp_Circ2d(gp_Ax2d(p,d),r.real());}
 void ga_dir2d(const gp_Dir2d& d){ga_xy(d.XY());}
 void ga_ax22d(const gp_Ax22d& a){ga_pnt2d(a.Location());ga_dir2d(a.XDirection());ga_dir2d(a.YDirection());}
 void ga_lin2d(const gp_Lin2d& l){ga_pnt2d(l.Location());ga_dir2d(l.Direction());}

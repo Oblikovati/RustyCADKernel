@@ -96,12 +96,13 @@ def run_shard(command: ProbeCommand, requests: str) -> ShardResult:
 
 
 def run_sharded(command: ProbeCommand, requests: str, workers: int | None = None,
-                runner: ShardRunner = run_shard) -> ShardResult:
+                runner: ShardRunner = run_shard, shard_count: int = SHARD_COUNT) -> ShardResult:
     """Run the probe over the whole corpus in parallel shards and join the answers in order.
 
+    A probe with process-wide side effects (fixed file names) passes shard_count=1.
     run_sharded(ProbeCommand(['probe'], env), 'op 1\\nop 2\\n').stdout == 'OK 1\\nOK 2\\n'
     """
-    shards: list[list[str]] = split_requests(requests, SHARD_COUNT)
+    shards: list[list[str]] = split_requests(requests, shard_count)
     if not shards:
         return runner(command, '')
     with ThreadPoolExecutor(max_workers=workers or default_workers()) as pool:

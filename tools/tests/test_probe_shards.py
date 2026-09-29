@@ -54,6 +54,11 @@ class RunShardedTests(unittest.TestCase):
         self.assertEqual(layouts[0], layouts[1])
         self.assertEqual(layouts[0], layouts[2])
 
+    def test_a_single_shard_runs_the_corpus_in_one_process(self):
+        runner = EchoShardRunner()
+        run_sharded(ProbeCommand(['probe'], {}), 'op 1\nop 2\n', workers=4, runner=runner, shard_count=1)
+        self.assertEqual(runner.shards, ['op 1\nop 2\n'])
+
     def test_an_empty_corpus_still_runs_the_probe_once(self):
         runner = EchoShardRunner()
         self.assertEqual(run_sharded(ProbeCommand(['probe'], {}), '', workers=2, runner=runner).stdout, '')

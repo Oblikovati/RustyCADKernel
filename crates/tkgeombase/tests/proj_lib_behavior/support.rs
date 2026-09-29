@@ -97,13 +97,19 @@ pub fn extrusion() -> Handle<dyn Adaptor3dSurface> {
 
 /// The flat Bezier patch `[0, 2] x [0, 2]` of XOY.
 pub fn flat_patch() -> Handle<dyn Adaptor3dSurface> {
+    let geom: Handle<dyn GeomSurface> = flat_bezier();
+    Handle::new(GeomAdaptorSurface::with_surface(&geom).unwrap()).cast()
+}
+
+// The Bezier surface of `flat_patch`, over the parameters `[0, 1] x [0, 1]`.
+fn flat_bezier() -> Handle<dyn GeomSurface> {
     let mut poles: Array2<'static, Point3> = Array2::with_bounds(1, 3, 1, 3).unwrap();
     for i in 1..=3 {
         for j in 1..=3 {
             poles[(i, j)] = Point3::new(f64::from(i - 1), f64::from(j - 1), 0.0);
         }
     }
-    surface(GeomBezierSurface::new(&poles).unwrap())
+    Handle::new(GeomBezierSurface::new(&poles).unwrap()).cast()
 }
 
 pub fn horizontal_circle(z: f64, radius: f64) -> GeomCircle {
@@ -127,4 +133,10 @@ pub fn vertical_parabola() -> GeomParabola {
         dir(0.0, 0.0, 1.0),
     );
     GeomParabola::new(frame, 0.5).unwrap()
+}
+
+/// The flat Bezier patch of [`flat_patch`] restricted to `bounds` `(U1, U2, V1, V2)`
+/// inside its parameter domain `[0, 1] x [0, 1]`.
+pub fn flat_patch_within(bounds: (f64, f64, f64, f64)) -> Handle<dyn Adaptor3dSurface> {
+    Handle::new(GeomAdaptorSurface::with_bounds(&flat_bezier(), bounds).unwrap()).cast()
 }

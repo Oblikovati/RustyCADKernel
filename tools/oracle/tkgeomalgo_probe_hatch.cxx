@@ -7,7 +7,7 @@
 void ga_hatch_add_line(GaReader& r,Hatch_Hatcher& h){
  int kind=r.integer();
  if(kind==0){gp_Lin2d l=ga_read_lin2d(r);h.AddLine(l,Hatch_LineForm(r.integer()));}
- else if(kind==1){gp_Dir2d d=ga_read_dir2d(r);h.AddLine(d,r.real());}
+ else if(kind==1){gp_Dir2d d=r.dir2d();h.AddLine(d,r.real());}
  else if(kind==2)h.AddXLine(r.real());
  else h.AddYLine(r.real());
 }
