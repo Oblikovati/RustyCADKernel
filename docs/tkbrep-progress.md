@@ -20,7 +20,12 @@ The toolkit test inventory maps these suites (28 declarations):
 | TopoDS_Edge_Test.cxx | topods_edge | 1 | pass | pass |
 | TopoDS_Iterator_Test.cxx | topods_iterator | 17 | pass | pass |
 | TopoDS_TShape_Test.cxx | topods_tshape | 8 | pass | pass |
-| BRep_Tool_Test.cxx | brep_tool (not mapped) | 13 | pass (13) | pass (11 translated) |
+| BRep_Tool_Test.cxx | brep_tool | 13 | pass | pass |
+| BRepTools_ReShape_Test.cxx | brep_tools_reshape | 16 | pass | pass |
+| BRepTools_TrsfModification_Test.cxx | brep_tools_trsf_modification | 4 | pass | pass |
+| BRepTools_GTrsfModification_Test.cxx | brep_tools_gtrsf_modification | 13 | pass | pass |
+| BRepAdaptor_CompCurve_Test.cxx | brep_adaptor_comp_curve | 4 | pass | pass |
+| BRepTools_Test.cxx | brep_tools (not mapped) | 11 | not built (TKBO, TKMesh) | pass (3 translated) |
 
 The suites build their inputs with BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeEdge
 (TKTopAlgo) and BRepPrimAPI_MakeBox (TKPrim). Those toolkits are not ported, so the Rust
@@ -36,14 +41,24 @@ TKPrim beside TKTopAlgo (`tools/native_build.py`), and the unchanged file runs n
 like every other suite. The TopExp behaviour is compared with the native kernel by the
 numeric oracle as well (`br_explore`, `br_maps`, `br_vertices`).
 
-`BRep_Tool_Test.cxx` is translated in `crates/tkbrep/tests/brep_tool.rs` for the 11
-declarations that do not project an edge on a plane; all 11 pass in Rust. Its
-`CurveOnPlane_ProjectsShiftedPeriodicRange` and
-`CurveOnPlane_ProjectsPeriodicEdgeBuiltFromEqualParameters` need the projection that
-ProjLib and GeomProjLib provide (see "Dependency gap"), so they are not translated, and
-the suite is not mapped in the ledger: the verifier maps whole files only. The
-unchanged file passes natively (13 of 13, checked with temporary ledger rows). The
-other TKBRep suites (BRepTools, BRepAdaptor, BRepGraph) wait for their packages.
+`BRep_Tool_Test.cxx` is translated in `crates/tkbrep/tests/brep_tool.rs`; all 13
+declarations pass natively and in Rust, the two `CurveOnPlane_Projects*` ones through
+the real `GeomProjLib::ProjectOnPlane`. The
+BRepGraph suites wait for their packages.
+
+The BRepTools and BRepAdaptor suites are translated 1:1 in
+`crates/tkbrep/tests/brep_tools_reshape.rs`, `brep_tools_trsf_modification.rs`,
+`brep_tools_gtrsf_modification.rs` (two included suite files) and
+`brep_adaptor_comp_curve.rs` (37 declarations, mapped; native and Rust pass). The
+CompCurve suite builds its edges and wires with the `support` fakes, whose MakeEdge now
+drops trimmed curves to their basis as BRepLib_MakeEdge does. `BRepTools_Test.cxx`
+calls BRepAlgoAPI (TKBO), BRepMesh (TKMesh), BRepGProp, BRepCheck, BRepBndLib and
+BRepBuilderAPI_NurbsConvert/Transform, so the native closure cannot build it and the
+suite is not mapped; `crates/tkbrep/tests/brep_tools.rs` translates its three
+declarations that need only TKBRep and the box fake (`DemoBug_25344_4`,
+`ModDataBug_20616`, `DemoBug_23130`), which pass. `tools/audit_api_rows.py` reports 0
+missing and 0 stale api rows for BRepTools (203 rows, 1 excluded: the ShapeSet
+destructor), BRepAdaptor (61) and BRepLProp (8).
 
 `topods_behavior.rs`, `topexp_behavior.rs` and `toptools_behavior.rs` cover the quirks
 below, the builder errors, the identity levels and hash, the iterator and explorer
@@ -111,6 +126,27 @@ api rows for BinTools (152 rows, 5 excluded: the four destructors and
   `format_version` constants and `BinTools_ObjectType` the byte newtype `ObjectType`.
   The file variants put the storage stream on the `std::streambuf` of the stream the
   OSD file system opens, as the native `std::iostream` sits on it.
+- BRepTools: the static `BRepTools` members are the free functions of `brep_tools`
+  (`update_face`, `uv_bounds_of_wire`, `compare_edges`, `write_with_options` with the
+  `BRepWriteOptions` of the long overload, `read_with_console`...). `BRepTools_ShapeSet`
+  is `BRepToolsShapeSet`, a `ShapeSet` over the GeomTools sets and the mesh tables.
+  `BRepTools_Modification` is the trait `BRepToolsModification`, whose `NewSurface` and
+  `NewCurve` outputs are the `NewSurface` and `NewCurve` structs; the Trsf, GTrsf, Copy
+  and NurbsConvert modifications implement it (NurbsConvert embeds its Copy parent).
+  `BRepTools_ReShape` is the trait `ReShape` (its virtual members provided over
+  `ReShapeData`) and the struct `BRepToolsReShape`; `ModeConsiderLocation()` is the
+  pair `mode_consider_location`/`set_mode_consider_location`. `BRepTools_History` is
+  `History` with the `HistoryAlgorithm` trait for the `TheAlgo` templates.
+  `BRepTools_Modifier`, `WireExplorer`, `Substitution`, `Quilt` and `PurgeLocations`
+  keep their names; `BRepTools_Debug.cxx` is `debug_write`, `debug_dump` and
+  `debug_dump_location`.
+- BRepAdaptor: `BRepAdaptorCurve`, `BRepAdaptorCurve2d` and `BRepAdaptorSurface` embed
+  the GeomAdaptor/Geom2dAdaptor class they derive from and forward the inherited
+  adaptor members; `BRepAdaptorCompCurve` implements `Adaptor3dCurve` itself, and
+  `Edge(U, E, UonE)` returns a `CompCurveEdge`.
+- BRepLProp: `BRepLProp_CLProps` and `BRepLProp_SLProps` are type aliases of the
+  GeomLProp generic structs over borrowed BRepAdaptor curves and surfaces;
+  `BRepLProp::Continuity` is `continuity` and `continuity_with_tolerances`.
 
 ## Verification
 
@@ -167,10 +203,10 @@ edge, internal vertices with points on curves, p-curves and surfaces, seams on a
 cylinder with both UV point pairs, regularities, the quirky seam polygon location,
 triangulation replacement and lists, transfers, empty copies, and the builder errors
 (locked shapes, missing p-curves, infinite parameters, bad triangulation lists).
-`br_brep_dump` compares the JSON dumps of every TShape at depths -1 to 2. A query that
-reaches the unported planar projection prints `P` on both sides: natively when it
-returns a projected curve, in Rust for its Standard_NotImplemented, so the gap is pinned
-to exactly the native projection cases (92 of them in the corpus).
+`br_brep_dump` compares the JSON dumps of every TShape at depths -1 to 2. A p-curve
+projected on a plane by `CurveOnPlane` is printed as `P`, its dynamic type, bounds and
+points at the start, middle and end of the returned range (60 projections in the
+corpus), and `Parameter(V, E, S, L)` is printed for every vertex, edge and face.
 
 The BinTools requests (`br_bin_scalars`, `br_bin_ostream`, `br_bin_istream`,
 `br_bin_geometry`, `br_bin_shape`, `br_bin_read`, `br_bin_truncate`; 281 requests in
@@ -200,23 +236,35 @@ Standard_Failure, whose nested lines keep only the type of a failure of another 
 ends where a byte is read without a check, and a truncation never ends between a table
 tag and its count.
 
+The BRepTools, BRepAdaptor and BRepLProp requests (195 requests in
+`tools/tkbrep_breptools_corpus.py` and `tools/tkbrep_breptools_edit_corpus.py`) reuse
+the BRep scene script, which gains Bezier surfaces, over closed scenes (two squares with
+p-curves in a shell, a solid and a compound, with located copies, a mesh, polygons and
+INTERNAL vertices; a cylinder with its seam; triangulation-only faces; a bilinear Bezier
+patch with Bezier edges; planar faces whose edges have no p-curves, so every p-curve
+query projects on the plane) and the BRep scenes. `br_tools_text` writes every shape in each
+format option, reads it back (console and text) and dumps it, and runs one shape set
+over a whole scene in the three versions; `br_tools_read` reads a written face and
+twelve malformed variants. `br_tools_query` prints the UV bounds and boxes, outer wire,
+closedness, `IsReallyClosed`, `OriEdgeInFace`, `Map3DEdges`, `CheckLocations`,
+`Triangulation` and `Compare`; `br_tools_mutate` runs each in-place tool on every shape
+and writes the scene. `br_tools_modif` runs `BRepTools_Modifier` with the Trsf (three
+locations, with and without mesh), GTrsf, Copy and NurbsConvert modifications, mutable
+input included, and writes each result; `br_tools_wire` explores every wire alone, on
+each face and with UV bounds; `br_tools_reshape`, `br_tools_history`,
+`br_tools_subst`, `br_tools_quilt` and `br_tools_purge` drive those classes with
+command sequences (lists whose native order follows TShape addresses are sorted).
+`br_adaptor` evaluates every curve, 2D curve, surface and composite curve adaptor at
+five parameters with their trims and copies, the curve and surface local properties
+and the junction continuity. Edge and face pairs are taken from the faces' own edges.
+
 ## Dependency gap
 
-`BRep_Tool::CurveOnPlane` projects the 3D curve of an edge on a plane with
-`GeomProjLib::ProjectOnPlane` and `ProjLib_ProjectedCurve`, and `CurveOnSurface`
-falls back to it for a plane without a stored p-curve. ProjLib and GeomProjLib are not
-ported, so the port keeps every step before the projection (the planar test, the 3D
-curve lookup, the relative location, the transformed curve and parameters, the range
-validation, the trimmed curve) and raises Standard_NotImplemented, naming the missing
-packages, at the projection itself. The api rows of `CurveOnPlane`, both
-`CurveOnSurface(E, S, L, ...)` and `CurveOnSurface(E, F, ...)`, and
-`Parameter(V, E, F)` and `Parameter(V, E, S, L)` (which call `CurveOnSurface` for an
-internal vertex) are `partial`. Two `BRep_Tool_Test.cxx` declarations wait for it.
-
-BinTools reads a version 1 file with `BRepTools::Update(Face)`, which resets the UV
-points of the edges of each face. BRepTools is not ported, so `bintools::face_uv_update`
-is a temporary private copy of `BRepTools::Update(const TopoDS_Face&)` and
-`BRepTools::UpdateFaceUVPoints`; it is deleted when BRepTools lands.
+None left in TKBRep's own packages. `BRep_Tool::CurveOnPlane` (and the planar fallback
+of `CurveOnSurface`, and `Parameter` for an internal vertex through it) projects the 3D
+curve with `GeomProjLib::ProjectOnPlane` and `ProjLib_ProjectedCurve` from the
+TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` through
+`brep_tools::update_face`; its former private copy is deleted.
 
 ## Preserved native behaviour
 
@@ -330,6 +378,34 @@ is a temporary private copy of `BRepTools::Update(const TopoDS_Face&)` and
   (`Standard_ASSERT_RETURN` in a release build); `BinTools::Write` with version 9
   writes the current version.
 
+- `BRepTools_ShapeSet` writes the UV points of a curve on surface only in version 2
+  (those of the second p-curve for a seam), the regularity of a seam right after its
+  second p-curve without a space, and the triangulation of a face as `2  index` with
+  no newline; the triangulation reader keeps its has-normals flag from one record to
+  the next before version 3.
+- `BRepTools::Triangulation` looks the polygon of a free edge up with the lookup
+  overload of `BRep_Tool::PolygonOnTriangulation` on its still-null `anEdgeTri`, so a
+  free edge without a 3D polygon is never meshed.
+- `BRepTools_CopyModification()` copies the geometry and the mesh (both default
+  arguments are true), so `BRepTools_NurbsConvertModification` keeps triangulations
+  and polygons on triangulations.
+- `BRepTools_GTrsfModification` scales tolerances and deflections by the largest
+  `gp_GTrsf::Value(i, j)`, which applies the scale factor of a similarity form.
+- `BRepTools_WireExplorer::Init` starts an open wire without a FORWARD open end from
+  the last first vertex its scan met (the native `V1` keeps its value), and `Next`
+  overwrites its edge with every candidate examined.
+- `BRepTools_NurbsConvertModification::NewCurve2d` converts both p-curves of a seam at
+  its first visit and takes the second one from its list at the second visit by the
+  edge's rank; the two lists lose alignment when a first visit returns early.
+- `BRepTools_Modifier` rebuilds through a reference into its map: the port stores the
+  result back where the native code, or a recursive call, reads the map.
+- `BRepTools_Quilt::Shells` appends the other bound shapes from a hash map, and
+  `BRepTools_History` lists merged from maps, in TShape address order, natively as in
+  Rust (the probes sort them).
+- A release build returns a null handle from `Adaptor3d_Curve::Bezier()` and
+  `BSpline()` for another curve type (`Standard_NoSuchObject_Raise_if` is compiled
+  out); the probe calls them only for their type.
+
 ## Deliberate Rust deviations
 
 - A null TShape dereference (null shape flags, `ShapeType`, a null explored shape in
@@ -351,8 +427,6 @@ is a temporary private copy of `BRepTools::Update(const TopoDS_Face&)` and
 - `BRep_TEdge::Curves()`, `BRep_TVertex::Points()` and `BRep_TFace::Triangulations()`
   return copies of the lists, and `Transfert` walks a copy of the input list, so an
   edge transferred onto itself does not iterate over the representations it adds.
-- The planar projection of `BRep_Tool::CurveOnPlane` raises Standard_NotImplemented
-  ("Dependency gap").
 - BinTools: a byte the native reader leaves uninitialised (`ReadByte` and the float
   normals of the shape reader past the end, a table count when the stream ends between
   the tag and the count) reads 0; an orientation or continuity byte outside its
@@ -361,3 +435,14 @@ is a temporary private copy of `BRepTools::Update(const TopoDS_Face&)` and
   message byte from 0x80 on (`aMsg << (uint8_t)value`) is the Latin-1 character of that
   code, since Rust messages are UTF-8. `BinTools::Write(S, theFile)` checks the opened
   stream before setting its precision (the native code dereferences it first).
+- BRepTools: a shape record or edge representation list read from a failed stream
+  stops at the failure (natively the loop never ends); the periodicity test of
+  `UVBounds` stops after its first sample when the across range is empty (natively it
+  never advances). A null curve, p-curve or surface given to `EvalAndUpdateTol`,
+  `AddUVBounds` on a face without surface, a NurbsConvert seam without 3D curve and
+  `Update` of a null shape raise Standard_NullObject instead of crashing, and the
+  shape set's unchecked TShape casts raise Standard_TypeMismatch. The load members of
+  the triangulation tools take the file system only for their signature: the TKMath
+  deferred triangulations own their input.
+- `br_tools_read` leaves out a text that ends right after the version line: the native
+  location reader then compares a `char` buffer the failed `>>` left uninitialized.

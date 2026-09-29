@@ -7,6 +7,7 @@
 #include <BRep_Builder.hxx>
 #include <BRep_Tool.hxx>
 #include <Geom_BezierCurve.hxx>
+#include <Geom_BezierSurface.hxx>
 #include <Geom_Circle.hxx>
 #include <Geom_CylindricalSurface.hxx>
 #include <Geom_Line.hxx>
@@ -37,7 +38,7 @@ gp_Dir br_direction(BrReader& r){double x=r.real(),y=r.real();return gp_Dir(x,y,
 gp_Pnt2d br_point2d(BrReader& r){double x=r.real();return gp_Pnt2d(x,r.real());}
 // Geometry kinds: 0 line P D, 1 circle P N R, 2 Bezier n P..., 3 trimmed curve i u1 u2,
 // 10 plane P N, 11 cylinder P N R, 12 rectangular trimmed surface i u1 u2 v1 v2,
-// 13 offset surface i d, 20 2D line P D, 21 2D circle C R, 30 3D polygon n P...,
+// 13 offset surface i d, 14 Bezier surface nu nv P... (U major), 20 2D line P D, 21 2D circle C R, 30 3D polygon n P...,
 // 31 2D polygon n P..., 32 triangulation n P... m (i j k)... purpose, 33 node array n i....
 void br_curve_kind(BrGeometry& g,BrReader& r,int kind){
  occ::handle<Geom_Curve> c;
@@ -55,7 +56,9 @@ void br_surface_kind(BrGeometry& g,BrReader& r,int kind){
   if(kind==10){gp_Pnt p=br_point(r);s=new Geom_Plane(gp_Ax3(p,br_direction(r)));}
   else if(kind==11){gp_Pnt p=br_point(r);gp_Dir n=br_direction(r);s=new Geom_CylindricalSurface(gp_Ax3(p,n),r.real());}
   else if(kind==12){int i=r.integer();double u1=r.real(),u2=r.real(),v1=r.real();s=new Geom_RectangularTrimmedSurface(br_at(g.surfaces,i),u1,u2,v1,r.real());}
-  else{int i=r.integer();s=new Geom_OffsetSurface(br_at(g.surfaces,i),r.real());}
+  else if(kind==13){int i=r.integer();s=new Geom_OffsetSurface(br_at(g.surfaces,i),r.real());}
+  else{int nu=r.integer(),nv=r.integer();NCollection_Array2<gp_Pnt> poles(1,nu,1,nv);
+   for(int i=1;i<=nu;++i)for(int j=1;j<=nv;++j)poles(i,j)=br_point(r);s=new Geom_BezierSurface(poles);}
   br_word("-");
  }catch(const Standard_Failure& e){br_word(e.ExceptionType());}
  g.surfaces.push_back(s);}

@@ -61,6 +61,12 @@ impl ShapeSetData {
         Self::with_console(Arc::new(StdoutConsole))
     }
 
+    /// The console that stands for the native `std::cout` of `Read`, shared with the
+    /// geometry sets of a derived set; `data.console()`.
+    pub fn console(&self) -> Arc<dyn ConsoleOutput> {
+        self.console.clone()
+    }
+
     /// Empty data whose `Read` messages go to `console`; `ShapeSetData::with_console(c)`.
     pub fn with_console(console: Arc<dyn ConsoleOutput>) -> Self {
         Self {

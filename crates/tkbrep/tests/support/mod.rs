@@ -1,5 +1,6 @@
 //! Named fakes for the TKTopAlgo and TKPrim builders that the upstream TKBRep suites
-//! call (BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeEdge, BRepPrimAPI_MakeBox).
+//! call (BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeEdge, BRepBuilderAPI_MakeWire,
+//! BRepPrimAPI_MakeBox).
 //!
 //! TKTopAlgo and TKPrim are not ported, so these fakes replay what the native builders
 //! do with the real BRep types: `BRep_Builder` vertices with the BRepLib precision,
@@ -13,11 +14,17 @@ use rustycad_tkbrep::topods::{Edge, Face, Shell, Solid, Vertex, Wire};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Handle;
 use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dLine};
-use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane, GeomSurface};
+use rustycad_tkg3d::geom::{GeomCurve, GeomLine, GeomPlane, GeomSurface, GeomTrimmedCurve};
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::elclib;
 use rustycad_tkmath::elslib;
 use rustycad_tkmath::gp::{Axis1, Axis2d, Axis3, Direction2, Direction3, Point3, Vector2, Vector3};
+
+/// `EXPECT_DOUBLE_EQ`: equal within 4 units in the last place.
+pub fn expect_double_eq(a: f64, b: f64) {
+    let ulps = (a.to_bits() as i64 - b.to_bits() as i64).unsigned_abs();
+    assert!(a == b || ulps <= 4, "{a} != {b}");
+}
 
 /// `BRepLib::Precision()`, the default construction tolerance.
 const PRECISION: f64 = precision::confusion();
@@ -80,7 +87,9 @@ fn link_vertices(edge: &mut Edge, first: &Vertex, last: &Vertex) {
 /// `BRepBuilderAPI_MakeEdge(C)` and `BRepBuilderAPI_MakeEdge(C, p1, p2)`: the core of
 /// `BRepLib_MakeEdge::Init(C, V1, V2, p1, p2)` without given vertices. A periodic
 /// range is adjusted into the period; a closed curve gets one vertex at both ends.
+/// Trimmed curves are replaced by their basis first ("kill trimmed curves").
 pub fn make_edge_on_curve(curve: &Handle<dyn GeomCurve>, first: f64, last: f64) -> Edge {
+    let curve = &untrimmed(curve.clone());
     let geometry = curve.get().unwrap();
     let (mut p1, mut p2) = (first, last);
     if geometry.is_periodic() {
@@ -105,6 +114,30 @@ pub fn make_edge_on_curve(curve: &Handle<dyn GeomCurve>, first: f64, last: f64) 
     edge
 }
 
+/// The innermost basis of nested `Geom_TrimmedCurve`s, the curve itself otherwise.
+fn untrimmed(mut curve: Handle<dyn GeomCurve>) -> Handle<dyn GeomCurve> {
+    loop {
+        let trimmed = curve.cast::<GeomTrimmedCurve>();
+        let Some(inner) = trimmed.get() else {
+            return curve;
+        };
+        curve = inner.basis_curve();
+    }
+}
+
+/// `BRepBuilderAPI_MakeWire(E).Wire()`: a wire holding the edge as given; a closed
+/// edge makes a closed wire, as BRepLib_MakeWire checks the free vertices.
+pub fn make_wire(edge: &Edge) -> Wire {
+    let builder = BRepBuilder::default();
+    let mut wire = Wire::default();
+    builder.make_wire(&mut wire);
+    builder.add(&mut wire, edge).unwrap();
+    let (first, last) = rustycad_tkbrep::topexp::vertices(edge, false);
+    wire.set_closed(!first.is_null() && first.is_same(&last))
+        .unwrap();
+    wire
+}
+
 /// `BRepBuilderAPI_MakeEdge(C)`: the edge on the whole curve.
 pub fn make_edge_on_whole_curve(curve: &Handle<dyn GeomCurve>) -> Edge {
     let geometry = curve.get().unwrap();
@@ -115,10 +148,20 @@ pub fn make_edge_on_whole_curve(curve: &Handle<dyn GeomCurve>) -> Edge {
 /// faces, each bounded by one wire of four edges with p-curves; the twelve line edges
 /// and the eight vertices are shared as in the native box (each edge by two faces).
 pub fn make_box(dx: f64, dy: f64, dz: f64) -> Solid {
+    make_box_at(Point3::new(0.0, 0.0, 0.0), dx, dy, dz)
+}
+
+/// `BRepPrimAPI_MakeBox(P, dx, dy, dz).Shape()`: the box of [`make_box`] with its low
+/// corner at `origin`.
+pub fn make_box_at(origin: Point3, dx: f64, dy: f64, dz: f64) -> Solid {
     let corners: Vec<Point3> = (0..8)
         .map(|i| {
             let (x, y, z) = (i & 1, (i >> 1) & 1, (i >> 2) & 1);
-            Point3::new(x as f64 * dx, y as f64 * dy, z as f64 * dz)
+            Point3::new(
+                origin.x() + x as f64 * dx,
+                origin.y() + y as f64 * dy,
+                origin.z() + z as f64 * dz,
+            )
         })
         .collect();
     let vertices: Vec<Vertex> = corners.iter().map(|p| make_vertex(*p)).collect();

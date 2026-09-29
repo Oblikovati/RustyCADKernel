@@ -2,7 +2,10 @@
 //! `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod br_probe;
-use br_probe::{bintools, bintools_sets, bintools_shape, brep_report, topexp, topods, toptools};
+use br_probe::{
+    bintools, bintools_sets, bintools_shape, brep_adaptor, brep_report, brep_tools,
+    brep_tools_modif, brep_tools_reshape, topexp, topods, toptools,
+};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -33,6 +36,20 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("br_bin_shape", bintools_shape::shape_case),
     ("br_bin_read", bintools_shape::read_case),
     ("br_bin_truncate", bintools_shape::truncate_case),
+    // BRepTools (br_probe/brep_tools*.rs)
+    ("br_tools_text", brep_tools::text_case),
+    ("br_tools_query", brep_tools::query_case),
+    ("br_tools_mutate", brep_tools::mutate_case),
+    ("br_tools_read", brep_tools::read_case),
+    ("br_tools_modif", brep_tools_modif::modif_case),
+    ("br_tools_wire", brep_tools_modif::wire_case),
+    ("br_tools_reshape", brep_tools_reshape::reshape_case),
+    ("br_tools_history", brep_tools_reshape::history_case),
+    ("br_tools_subst", brep_tools_reshape::subst_case),
+    ("br_tools_quilt", brep_tools_reshape::quilt_case),
+    ("br_tools_purge", brep_tools_reshape::purge_case),
+    // BRepAdaptor and BRepLProp (br_probe/brep_adaptor.rs)
+    ("br_adaptor", brep_adaptor::adaptor_case),
 ];
 
 fn main() {

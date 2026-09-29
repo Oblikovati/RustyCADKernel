@@ -17,12 +17,12 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! Reading the sections of the grouped binary format back.
-use super::face_uv_update::update_face;
 use super::format_version;
 use super::raw_enums::orientation_from_raw;
 use super::scalars::{get_bool, get_integer, stream_get};
 use super::shape_set::BinShapeSet;
 use super::shape_set_base::{BinShapeSetBase, THE_ASCII_VERSIONS};
+use crate::brep_tools::update_face;
 use crate::topods::{Face, Shape};
 use rustycad_tkernel::message::{ProgressRange, ProgressScope};
 use rustycad_tkernel::standard::Failure;

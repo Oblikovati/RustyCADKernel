@@ -96,6 +96,22 @@ impl GeomAdaptorTransformedCurve {
             },
         ))
     }
+    /// A copy with shallow copies of the 3D adaptor and of the curve on a surface
+    /// (`ShallowCopy`, as a value, which the derived BRepAdaptor_Curve embeds);
+    /// `adaptor.shallow_adaptor()?`.
+    pub fn shallow_adaptor(&self) -> Result<Self, Failure> {
+        let curve = Handle::new(self.curve.shallow_adaptor()?);
+        let source = self.state.read().clone();
+        let con_surf: Handle<Adaptor3dCurveOnSurface> = match source.con_surf.get() {
+            Some(con_surf) => con_surf.shallow_copy()?.cast(),
+            None => Handle::default(),
+        };
+        let state = TransformedCurveState {
+            con_surf,
+            trsf: source.trsf,
+        };
+        Ok(Self::from_parts(curve, state))
+    }
     /// Load `curve` into the 3D adaptor (`Load(C)`); `adaptor.load(&curve)?`.
     pub fn load(&self, curve: &Handle<dyn GeomCurve>) -> Result<(), Failure> {
         self.curve.load(curve)
@@ -186,19 +202,8 @@ impl GeomAdaptorTransformedCurve {
 }
 
 impl Adaptor3dCurve for GeomAdaptorTransformedCurve {
-    // The 3D adaptor and the curve on a surface are shallow-copied.
     fn shallow_copy(&self) -> Result<Handle<dyn Adaptor3dCurve>, Failure> {
-        let curve = Handle::new(self.curve.shallow_adaptor()?);
-        let source = self.state.read().clone();
-        let con_surf: Handle<Adaptor3dCurveOnSurface> = match source.con_surf.get() {
-            Some(con_surf) => con_surf.shallow_copy()?.cast(),
-            None => Handle::default(),
-        };
-        let state = TransformedCurveState {
-            con_surf,
-            trsf: source.trsf,
-        };
-        Ok(Handle::new(Self::from_parts(curve, state)).cast())
+        Ok(Handle::new(self.shallow_adaptor()?).cast())
     }
     fn first_parameter(&self) -> Result<f64, Failure> {
         self.source().first_parameter()

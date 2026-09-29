@@ -42,6 +42,10 @@
 #include "tkbrep_probe_bintools.cxx"
 #include "tkbrep_probe_bintools_geometry.cxx"
 #include "tkbrep_probe_bintools_shape.cxx"
+#include "tkbrep_probe_breptools.cxx"
+#include "tkbrep_probe_breptools_modif.cxx"
+#include "tkbrep_probe_breptools_reshape.cxx"
+#include "tkbrep_probe_brepadaptor.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopoDS (tkbrep_probe_topods.cxx)
  {"br_topods", br_topods_case},
@@ -66,6 +70,20 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"br_bin_shape", br_bin_shape_case},
  {"br_bin_read", br_bin_read_case},
  {"br_bin_truncate", br_bin_truncate_case},
+ // BRepTools (tkbrep_probe_breptools*.cxx)
+ {"br_tools_text", br_tools_text_case},
+ {"br_tools_query", br_tools_query_case},
+ {"br_tools_mutate", br_tools_mutate_case},
+ {"br_tools_read", br_tools_read_case},
+ {"br_tools_modif", br_tools_modif_case},
+ {"br_tools_wire", br_tools_wire_case},
+ {"br_tools_reshape", br_tools_reshape_case},
+ {"br_tools_history", br_tools_history_case},
+ {"br_tools_subst", br_tools_subst_case},
+ {"br_tools_quilt", br_tools_quilt_case},
+ {"br_tools_purge", br_tools_purge_case},
+ // BRepAdaptor and BRepLProp (tkbrep_probe_brepadaptor.cxx)
+ {"br_adaptor", br_adaptor_case},
 };
 int main() {
  std::string line;

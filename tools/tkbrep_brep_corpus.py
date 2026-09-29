@@ -5,7 +5,7 @@ tools/oracle/tkbrep_probe_brep.cxx and crates/tkbrep/examples/br_probe/brep.rs.
 `BRepScript` numbers the registries as the probes do: locations from 1 (0 is the
 identity), each geometry kind from 0, shapes from 0 in creation order. The scenarios
 build every curve and point representation, located and reversed shapes, the builder
-errors and the queries that reach the planar projection (printed `P` on both sides).
+errors and the queries that project on a plane (the projected p-curves evaluated).
 """
 from __future__ import annotations
 from dataclasses import dataclass, field
@@ -77,6 +77,11 @@ class BRepScript:
 
     def offset(self, surface: int, d: float) -> int:
         return self._geometry('surface', [13, surface, d])
+
+    def bezier_surface(self, poles) -> int:
+        """A Bezier surface from rows of poles (U major)."""
+        flat = [c for row in poles for p in row for c in p]
+        return self._geometry('surface', [14, len(poles), len(poles[0]), *flat])
 
     def line2d(self, p, d) -> int:
         return self._geometry('pcurve', [20, *p, *d])
@@ -294,7 +299,7 @@ def face_scenario() -> BRepScript:
 
 
 def plane_scenario() -> BRepScript:
-    """Edges without p-curves on planes: the rejected ranges and the projection (`P`)."""
+    """Edges without p-curves on planes: the rejected ranges and the projections."""
     s = BRepScript()
     t = s.translation(0.5, 0.0, 0.0)
     sc = s.scale(3.0)

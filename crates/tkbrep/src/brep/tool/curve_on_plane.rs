@@ -17,18 +17,23 @@
 
 //! `BRep_Tool::CurveOnPlane`: the p-curve of an edge on a plane, built by projection.
 //!
-//! The projection needs GeomProjLib and ProjLib, which are not ported: every check
-//! that runs before it is ported and returns the native results, and the projection
-//! step itself raises Standard_NotImplemented naming the missing packages
-//! (docs/tkbrep-progress.md, "Dependency gap").
+//! The trimmed 3D curve is projected along the plane normal by
+//! `GeomProjLib::ProjectOnPlane` (keeping its parametrization), then onto the plane
+//! parameters by `ProjLib_ProjectedCurve`.
 use super::BRepTool;
 use crate::topods::Edge;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::Geom2dCurve;
+use rustycad_tkg2d::geom2d::{Geom2dCurve, Geom2dTrimmedCurve};
+use rustycad_tkg2d::geom2d_adaptor;
+use rustycad_tkg3d::adaptor3d::{Adaptor3dCurve, Adaptor3dSurface};
 use rustycad_tkg3d::geom::{
-    GeomCurve, GeomPlane, GeomRectangularTrimmedSurface, GeomSurface, GeomTrimmedCurve,
+    GeomCurve, GeomElementarySurface, GeomPlane, GeomRectangularTrimmedSurface, GeomSurface,
+    GeomTrimmedCurve,
 };
+use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
+use rustycad_tkgeombase::geom_proj_lib;
+use rustycad_tkgeombase::proj_lib::ProjectedCurve;
 use rustycad_tkmath::toploc::Location;
 
 /// The plane of `surface`: the surface itself or the basis of a rectangular trimmed
@@ -109,22 +114,19 @@ fn curve_in_plane_frame(
 impl BRepTool {
     /// `CurveOnPlane(E, S, L, First, Last)`: for a plane (or a rectangular trimmed
     /// plane) and an edge with a 3D curve whose range is valid, the p-curve built by
-    /// projecting the trimmed 3D curve on the plane. A non-planar surface, an edge
-    /// without a 3D curve and an invalid range return a null curve, with the range
-    /// `0, 0` in the first two cases and the edge range in the last.
-    ///
-    /// The projection itself needs GeomProjLib::ProjectOnPlane and
-    /// ProjLib_ProjectedCurve, which are not ported: that step raises
-    /// Standard_NotImplemented. `let (pcurve, first, last) = BRepTool::curve_on_plane(&edge, &surface, &location)?;`.
+    /// projecting the trimmed 3D curve on the plane (the basis of a trimmed result). A
+    /// non-planar surface, an edge without a 3D curve and an invalid range return a null
+    /// curve, with the range `0, 0` in the first two cases and the edge range in the last.
+    /// `let (pcurve, first, last) = BRepTool::curve_on_plane(&edge, &surface, &location)?;`.
     pub fn curve_on_plane(
         edge: &Edge,
         surface: &Handle<dyn GeomSurface>,
         location: &Location,
     ) -> Result<(Handle<dyn Geom2dCurve>, f64, f64), Failure> {
         let plane = plane_of(surface);
-        if plane.is_null() {
+        let Some(plane_ref) = plane.get() else {
             return Ok((Handle::default(), 0.0, 0.0));
-        }
+        };
         let Some(framed) = curve_in_plane_frame(edge, location)? else {
             return Ok((Handle::default(), 0.0, 0.0));
         };
@@ -132,21 +134,30 @@ impl BRepTool {
         if !is_valid_trim_range(&curve, first, last) {
             return Ok((Handle::default(), reported.0, reported.1));
         }
-        // The native code trims the curve before it projects it; the trim can raise.
-        GeomTrimmedCurve::new(&curve, first, last, true, false)?;
-        Err(projection_not_ported(first, last))
+        let trimmed: Handle<dyn GeomCurve> =
+            Handle::new(GeomTrimmedCurve::new(&curve, first, last, true, false)?).cast();
+        let normal = plane_ref.position().direction();
+        let projected = geom_proj_lib::project_on_plane(&trimmed, &plane, normal, true)?;
+        let pcurve = pcurve_on_plane(&plane, &projected)?;
+        Ok((pcurve, reported.0, reported.1))
     }
 }
 
-/// Standard_NotImplemented for the projection step of `CurveOnPlane`.
-fn projection_not_ported(first: f64, last: f64) -> Failure {
-    Failure::with_type(
-        "Standard_NotImplemented",
-        &format!(
-            "BRep_Tool::CurveOnPlane: projecting the trimmed 3D curve [{first}, {last}] on the plane \
-             requires GeomProjLib::ProjectOnPlane and ProjLib_ProjectedCurve (ProjLib and GeomProjLib \
-             are not ported); expected a p-curve stored in the edge"
-        ),
-        "",
-    )
+/// The p-curve of a curve lying in the plane: `ProjLib_ProjectedCurve` on the plane
+/// adaptor made into a Geom2d curve (`Geom2dAdaptor::MakeCurve`), the basis of a trimmed
+/// result.
+fn pcurve_on_plane(
+    plane: &Handle<GeomPlane>,
+    projected: &Handle<dyn GeomCurve>,
+) -> Result<Handle<dyn Geom2dCurve>, Failure> {
+    let surface: Handle<dyn Adaptor3dSurface> =
+        Handle::new(GeomAdaptorSurface::with_surface(&plane.clone().cast())?).cast();
+    let curve: Handle<dyn Adaptor3dCurve> =
+        Handle::new(GeomAdaptorCurve::with_curve(projected)?).cast();
+    let projection = ProjectedCurve::with_curve(&surface, &curve)?;
+    let pcurve = geom2d_adaptor::make_curve(&projection)?;
+    if let Some(trimmed) = pcurve.cast::<Geom2dTrimmedCurve>().get() {
+        return Ok(trimmed.basis_curve());
+    }
+    Ok(pcurve)
 }

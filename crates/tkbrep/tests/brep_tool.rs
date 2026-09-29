@@ -14,12 +14,6 @@
 //! Direct translation of BRep_Tool_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 //! BRepPrimAPI_MakeBox and BRepBuilderAPI_MakeEdge are the BRep fakes of `support`
 //! (TKPrim and TKTopAlgo are not ported).
-//!
-//! `CurveOnPlane_ProjectsShiftedPeriodicRange` and
-//! `CurveOnPlane_ProjectsPeriodicEdgeBuiltFromEqualParameters` project an edge on a
-//! plane, which needs ProjLib and GeomProjLib (not ported): they are not translated
-//! here, and the suite is not mapped in the ledger until they are
-//! (docs/tkbrep-progress.md, "Dependency gap").
 #![allow(non_snake_case)]
 mod support;
 use rustycad_tkbrep::brep::{BRepBuilder, BRepTool};
@@ -32,7 +26,9 @@ use rustycad_tkg3d::geom::{GeomBezierCurve, GeomCircle, GeomCurve, GeomPlane, Ge
 use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{self, Axis2, Axis3, Point3};
 use rustycad_tkmath::toploc::Location;
-use support::{make_box, make_edge, make_edge_on_whole_curve};
+use support::{
+    expect_double_eq, make_box, make_edge, make_edge_on_curve, make_edge_on_whole_curve,
+};
 
 fn gp_Pnt(x: f64, y: f64, z: f64) -> Point3 {
     Point3::new(x, y, z)
@@ -60,12 +56,6 @@ fn circle(radius: f64) -> Handle<dyn GeomCurve> {
 /// `new Geom_Plane(gp::XOY())`.
 fn xoy_plane() -> Handle<dyn GeomSurface> {
     Handle::new(GeomPlane::new(Axis3::from_axis2(gp::xoy()))).into_cast()
-}
-
-/// `EXPECT_DOUBLE_EQ`: equal within 4 units in the last place.
-fn expect_double_eq(a: f64, b: f64) {
-    let ulps = (a.to_bits() as i64 - b.to_bits() as i64).unsigned_abs();
-    assert!(a == b || ulps <= 4, "{a} != {b}");
 }
 
 #[test]
@@ -201,6 +191,47 @@ fn BRep_Tool_Test__CurveOnPlane_RejectsEdgeRangeOutsideBoundedCurve() {
     assert!(!aResult.is_stored);
     expect_double_eq(aResult.first, THE_EDGE_FIRST);
     expect_double_eq(aResult.last, THE_EDGE_LAST);
+}
+
+#[test]
+fn BRep_Tool_Test__CurveOnPlane_ProjectsShiftedPeriodicRange() {
+    let aCircle = circle(1.0);
+    let anEdge = make_edge_on_whole_curve(&aCircle);
+
+    let aPeriod = aCircle.get().unwrap().period().unwrap();
+    let aRangeFirst = aPeriod;
+    let aRangeLast = 2.0 * aPeriod;
+    BRepBuilder::default()
+        .range(&anEdge, aRangeFirst, aRangeLast, true)
+        .unwrap();
+
+    let aPlane = xoy_plane();
+    let aResult = BRepTool::curve_on_plane(&anEdge, &aPlane, &Location::default());
+    assert!(aResult.is_ok(), "CurveOnPlane should not throw");
+    let (aPCurve, aFirst, aLast) = aResult.unwrap();
+
+    assert!(!aPCurve.is_null());
+    expect_double_eq(aFirst, aRangeFirst);
+    expect_double_eq(aLast, aRangeLast);
+}
+
+#[test]
+fn BRep_Tool_Test__CurveOnPlane_ProjectsPeriodicEdgeBuiltFromEqualParameters() {
+    let aCircle = circle(1.0);
+    let anEdge = make_edge_on_curve(&aCircle, 0.0, 0.0);
+
+    let (aEdgeFirst, aEdgeLast) = BRepTool::range(&anEdge).unwrap();
+    let aPeriod = aCircle.get().unwrap().period().unwrap();
+    assert!(((aEdgeLast - aEdgeFirst) - aPeriod).abs() <= precision::p_confusion());
+
+    let aPlane = xoy_plane();
+    let aResult = BRepTool::curve_on_plane(&anEdge, &aPlane, &Location::default());
+    assert!(aResult.is_ok(), "CurveOnPlane should not throw");
+    let (aPCurve, aFirst, aLast) = aResult.unwrap();
+
+    assert!(!aPCurve.is_null());
+    expect_double_eq(aFirst, aEdgeFirst);
+    expect_double_eq(aLast, aEdgeLast);
 }
 
 #[test]
