@@ -145250,6 +145250,462 @@
       "rust_item": "rustycad_tkbrep::brep_graph::transform::transform_node",
       "status": "implemented",
       "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.13): the native policy checks, then BRepGraph_Copy (copy::perform or copy::copy_node, default cache policy), then the copied-range transform; a self transform (the same source and target graph) is the separate function transform::transform_node_in_place taking the graph mutably; C++ exceptions are Failure errors. Compared with OCCT by the br_balgo transform requests."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::new",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain(const gp_Pnt2d&,double,double,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::bounded",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain(const gp_Pnt2d&,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::semi_infinite",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::SetValues(const gp_Pnt2d&,double,double,const gp_Pnt2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::set_values",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::SetValues()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::set_infinite_values",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::SetValues(const gp_Pnt2d&,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::set_semi_infinite_values",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::SetEquivalentParameters(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::set_equivalent_parameters",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::HasFirstPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::has_first_point",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::FirstParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::first_parameter",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::FirstPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::first_point",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::FirstTolerance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::first_tolerance",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::HasLastPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::has_last_point",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::LastParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::last_parameter",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::LastPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::last_point",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::LastTolerance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::last_tolerance",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::IsClosed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::is_closed",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Domain::EquivalentParameters(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Domain::equivalent_parameters",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::is_done",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::IsEmpty() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::is_empty",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::nb_points",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::point",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::NbSegments() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::nb_segments",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::Segment(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::segment",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Intersection::SetReversedParameters(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Intersection.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Intersection::set_reversed_parameters",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionPoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionPoint::default",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionPoint(const gp_Pnt2d&,double,double,const IntRes2d_Transition&,const IntRes2d_Transition&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionPoint::new",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionPoint::SetValues(const gp_Pnt2d&,double,double,const IntRes2d_Transition&,const IntRes2d_Transition&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionPoint::set_values",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionPoint::Value() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionPoint::value",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionPoint::ParamOnFirst() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionPoint::param_on_first",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionPoint::ParamOnSecond() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionPoint::param_on_second",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionPoint::TransitionOfFirst() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionPoint::transition_of_first",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionPoint::TransitionOfSecond() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionPoint::transition_of_second",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionSegment()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionSegment::new",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionSegment(const IntRes2d_IntersectionPoint&,const IntRes2d_IntersectionPoint&,bool,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionSegment::bounded",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionSegment(const IntRes2d_IntersectionPoint&,bool,bool,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionSegment::half_bounded",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionSegment(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionSegment::infinite",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionSegment::IsOpposite() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionSegment::is_opposite",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionSegment::HasFirstPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionSegment::has_first_point",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionSegment::FirstPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionSegment::first_point",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionSegment::HasLastPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionSegment::has_last_point",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_IntersectionSegment::LastPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_IntersectionSegment.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::IntersectionSegment::last_point",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Position",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Position",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Situation",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Situation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Situation",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_TypeTrans",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::TypeTrans",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::new",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition(bool,IntRes2d_Position,IntRes2d_TypeTrans)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::crossing",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition(bool,IntRes2d_Position,IntRes2d_Situation,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::touch",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition(IntRes2d_Position)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::undecided",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition::SetValue(bool,IntRes2d_Position,IntRes2d_TypeTrans)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::set_value",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition::SetValue(bool,IntRes2d_Position,IntRes2d_Situation,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::set_touch_value",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition::SetValue(IntRes2d_Position)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::set_undecided_value",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition::SetPosition(IntRes2d_Position)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::set_position",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition::PositionOnCurve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::position_on_curve",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition::TransitionType() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::transition_type",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition::IsTangent() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::is_tangent",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition::Situation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::situation",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntRes2d_Transition::IsOpposite() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntRes2d/IntRes2d_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::is_opposite",
+      "status": "implemented",
+      "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
     }
   ],
   "tests": [
