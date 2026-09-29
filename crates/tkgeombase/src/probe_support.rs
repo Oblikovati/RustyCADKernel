@@ -12,11 +12,8 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-//! Entry points of the crate-private ports that the numeric probe
-//! (examples/numeric_probe.rs) compares with OCCT: the DeflCurvIntervals functions of
-//! Extrema_CurveTool and Extrema_Curve2dTool, which are not API (the Extrema port will
-//! own them), and a sampling helper over the public GCPnts_TangentialDeflection.
-use crate::defl_curv_intervals;
+//! A sampling helper over the public GCPnts_TangentialDeflection that the numeric
+//! probe (examples/numeric_probe.rs) compares with OCCT.
 use crate::gcpnts::{TCurveTypes, TangentialCriteria, TangentialDeflection};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
@@ -70,14 +67,4 @@ fn sampling<C: TCurveTypes + ?Sized>(
         .map(|i| result.value(i))
         .collect::<Result<_, _>>()?;
     Ok((params, points))
-}
-
-/// `Extrema_Curve2dTool::DeflCurvIntervals`.
-pub fn defl_curv_intervals_2d(curve: &dyn Adaptor2dCurve2d) -> Result<Vec<f64>, Failure> {
-    defl_curv_intervals::defl_curv_intervals_2d(curve)
-}
-
-/// `Extrema_CurveTool::DeflCurvIntervals`.
-pub fn defl_curv_intervals_3d(curve: &dyn Adaptor3dCurve) -> Result<Vec<f64>, Failure> {
-    defl_curv_intervals::defl_curv_intervals_3d(curve)
 }

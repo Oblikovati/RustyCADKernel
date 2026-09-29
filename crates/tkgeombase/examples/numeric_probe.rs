@@ -4,8 +4,9 @@ use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
     adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, app_cont as acc, app_par_curves as apc,
-    bndlib, fem_tool, gc, gce, gcpnts, geom_tools, geom2d_convert as g2c, gprop, hermit, int_ana,
-    int_ana2d, lprop, pc2d, pc3d,
+    bndlib, extrema_cc, extrema_cs, extrema_el, extrema_el_surf, extrema_pc, extrema_ps,
+    extrema_ss, extrema_swept, fem_tool, gc, gce, gcpnts, geom_tools, geom2d_convert as g2c, gprop,
+    hermit, int_ana, int_ana2d, lprop, pc2d, pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -237,6 +238,56 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("g2c_approx", g2c::approx_case),
     ("g2c_arcs", g2c::arcs_case),
     ("g2c_ppoint", g2c::ppoint_case),
+    // Extrema elementary closed forms (gb_probe/extrema_el.rs)
+    ("ex_pon", extrema_el::pon_case),
+    ("ex_pelc", extrema_el::pelc_case),
+    ("ex_pelc2d", extrema_el::pelc2d_case),
+    ("ex_elc", extrema_el::elc_case),
+    ("ex_elc2d", extrema_el::elc2d_case),
+    ("ex_pels", extrema_el_surf::pels_case),
+    ("ex_elcs", extrema_el_surf::elcs_case),
+    ("ex_elss", extrema_el_surf::elss_case),
+    // Extrema point-curve classes (gb_probe/extrema_pc.rs)
+    ("ex_pc", extrema_pc::pc_case),
+    ("ex_pc2d", extrema_pc::pc2d_case),
+    ("ex_locpc", extrema_pc::locpc_case),
+    ("ex_locpc2d", extrema_pc::locpc2d_case),
+    ("ex_genpc", extrema_pc::genpc_case),
+    ("ex_genpc2d", extrema_pc::genpc2d_case),
+    ("ex_pcf", extrema_pc::pcf_case),
+    ("ex_pcf2d", extrema_pc::pcf2d_case),
+    ("ex_cloc", extrema_pc::cloc_case),
+    ("ex_cloc2d", extrema_pc::cloc2d_case),
+    ("ex_ctool", extrema_pc::ctool_case),
+    ("ex_ctool2d", extrema_pc::ctool2d_case),
+    // Extrema curve-curve classes (gb_probe/extrema_cc.rs)
+    ("ex_cc", extrema_cc::cc_case),
+    ("ex_cc2d", extrema_cc::cc2d_case),
+    ("ex_ecc", extrema_cc::ecc_case),
+    ("ex_ecc2d", extrema_cc::ecc2d_case),
+    ("ex_locecc", extrema_cc::locecc_case),
+    ("ex_fcc", extrema_cc::fcc_case),
+    ("ex_gofcc", extrema_cc::gofcc_case),
+    ("ex_gofcc2d", extrema_cc::gofcc2d_case),
+    // Extrema point-surface classes (gb_probe/extrema_ps.rs)
+    ("ex_fpsn", extrema_ps::fpsn_case),
+    ("ex_fpsd", extrema_ps::fpsd_case),
+    ("ex_glps", extrema_ps::glps_case),
+    ("ex_genps", extrema_ps::genps_case),
+    ("ex_ps", extrema_ps::ps_case),
+    ("ex_pexts", extrema_swept::pexts_case),
+    ("ex_prevs", extrema_swept::prevs_case),
+    // Extrema curve-surface classes (gb_probe/extrema_cs.rs)
+    ("ex_fecs", extrema_cs::fecs_case),
+    ("ex_gofcs", extrema_cs::gofcs_case),
+    ("ex_gofconics", extrema_cs::gofconics_case),
+    ("ex_gofcquad", extrema_cs::gofcquad_case),
+    ("ex_genecs", extrema_cs::genecs_case),
+    ("ex_cs", extrema_cs::cs_case),
+    // Extrema surface-surface classes (gb_probe/extrema_ss.rs)
+    ("ex_fess", extrema_ss::fess_case),
+    ("ex_genss", extrema_ss::genss_case),
+    ("ex_ss", extrema_ss::ss_case),
 ];
 
 fn main() {

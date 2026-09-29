@@ -6,14 +6,14 @@ depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
 `IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC`,
 `GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts`,
-`GCPnts` and `AdvApp2Var` packages are ported in full, and `tools/audit_api_rows.py`
-reports 0 missing and 0 stale api rows for each of them.
+`GCPnts`, `AdvApp2Var`, `Geom2dConvert` and `Extrema` packages are ported in full, and
+`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (702 declarations):
+passes (791 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -74,6 +74,10 @@ passes (702 declarations):
 | AdvApp2Var_Network_Test.cxx | adv_app2var_network | 2 |
 | AdvApp2Var_Node_Test.cxx | adv_app2var_node | 1 |
 | Geom2dConvert_CompCurveToBSplineCurve_Test.cxx | geom2d_convert_comp_curve_to_bspline_curve | 1 |
+| Extrema_ExtPC_Test.cxx | extrema_ext_pc | 1 |
+| ExtremaPC_SearchMode_Test.cxx | extrema_pc_search_mode | 30 |
+| ExtremaPC_Comparison_Test.cxx | extrema_pc_comparison | 17 |
+| ExtremaPC_ExtendedGeometry_Test.cxx | extrema_pc_extended_geometry | 40 |
 
 `bnd_lib_behavior.rs` covers the GeomBndLib and BndLib quirks below.
 `geom2d_convert_behavior.rs` covers the Geom2dConvert quirks below.
@@ -84,16 +88,16 @@ StdFail_NotDone results, the conversion operators, the GCE2d aliases and the nat
 quirks below. GeomTools has no upstream GoogleTest suite; `geom_tools_behavior/`
 covers its layouts, reader contract, sets, handler and quirks with named fakes for the
 console, the text streams, the progress indicator and a custom handler.
+`extrema_behavior.rs` covers the Extrema quirks below. The three ExtremaPC suites that
+compare ExtremaPC with the classic `Extrema_ExtPC` share the random points of
+`tests/fixtures/extrema_pc_random_points.txt`, which
+`tools/oracle/tkgeombase_extrema_random_points.cxx` draws with the libstdc++
+`std::mt19937` and distributions of the native fixtures.
 
-Four upstream suites are not mapped:
-
-- `ExtremaPC2d_Hyperbola_Test.cxx` (9 declarations) is translated as
-  `extrema_pc2d_hyperbola` and passes in Rust, but `SingletonInvalidAndValueAccessor`
-  fails natively (see Preserved native behaviour), and the verifier maps whole suites
-  whose native run passes.
-- `ExtremaPC_SearchMode_Test.cxx` (30), `ExtremaPC_Comparison_Test.cxx` (17) and
-  `ExtremaPC_ExtendedGeometry_Test.cxx` (40) compare ExtremaPC with the classic
-  `Extrema_ExtPC`, which is not ported. They wait for the Extrema package.
+One upstream suite is not mapped: `ExtremaPC2d_Hyperbola_Test.cxx` (9 declarations)
+is translated as `extrema_pc2d_hyperbola` and passes in Rust, but
+`SingletonInvalidAndValueAccessor` fails natively (see Preserved native behaviour), and
+the verifier maps whole suites whose native run passes.
 
 ## Class mapping
 
@@ -117,11 +121,10 @@ header is a deprecated alias of a GC class (`using GCE2d_MakeCircle = GC_MakeCir
 `gce2d` declares them as `#[deprecated]` type aliases with the native message, and
 re-exports `Root` for GCE2d_Root.
 
-`gce_MakeCirc`, `GC_MakeArcOfCircle` and `GC_MakeTrimmedCone` call `Extrema_ExtElC` on
-two lines and `Extrema_ExtPElC` on a point and a line; Extrema is not ported yet, and
-`src/line_extrema.rs` ports exactly those cases in the native operation order until the
-Extrema port replaces it. `gce_MakeCirc2d` and `GC_MakeArcOfCircle2d` call the IntAna2d
-port (`int_ana2d::AnaIntersection::lines`).
+`gce_MakeCirc`, `GC_MakeArcOfCircle` and `GC_MakeTrimmedCone` call the Extrema port:
+`extrema::ExtElC::lines` on two lines and `extrema::ExtPElC::with_line` on a point and a
+line. `gce_MakeCirc2d` and `GC_MakeArcOfCircle2d` call the IntAna2d port
+(`int_ana2d::AnaIntersection::lines`).
 
 IntAna and IntAna2d (`int_ana`, `int_ana2d`) are algorithm objects: each native
 constructor overload is a named constructor (`QuadQuadGeo::cones`,
@@ -177,16 +180,15 @@ API mapping:
 - The x87 `long double` arithmetic of the rational Bezier certification and of the
   exact pole-plane test uses `rustycad_tkmath::math_poly::LongDouble`.
 
-ExtremaPC needs parts of two TKGeomBase packages that are not ported yet. They are
-crate-private ports of exactly the code paths it uses, in the native operation order,
-and the ports of those packages will replace them:
-
-- `Extrema_CurveTool::DeflCurvIntervals` and `Extrema_Curve2dTool::DeflCurvIntervals`,
-  in `src/defl_curv_intervals.rs`;
-- the ProjLib plane projections of lines and conics, in `src/plane_projection.rs`.
+ExtremaPC samples with `Extrema_CurveTool::DeflCurvIntervals` and
+`Extrema_Curve2dTool::DeflCurvIntervals`, which it calls through the Extrema port
+(`extrema::ExtremaCurveTool::defl_curv_intervals`). It also needs the ProjLib plane
+projections of lines and conics; ProjLib is not ported yet, so `src/plane_projection.rs`
+is a crate-private port of exactly the code paths it uses, in the native operation
+order, until the ProjLib port replaces it.
 
 Its curve-aware sampling calls the public `gcpnts::TangentialDeflection`.
-`probe_support` is a hidden public module that exposes these functions and a
+`probe_support` is a hidden public module that exposes the projections and a
 tangential-deflection sampling helper to the numeric probe.
 
 ## CPnts and GCPnts
@@ -385,6 +387,49 @@ adaptor raises inside an AdvApprox or BSplCLib callback is carried to the end of
 call (`failure_capture`) and returned there, where the native exception would unwind.
 Nothing is blocked: Convert, GC, GCPnts, Hermit, AdvApprox, BSplCLib and PLib are
 ported.
+## Extrema
+
+`extrema` is the classic Extrema package. Each class drops the `Extrema_` prefix
+(`Extrema_ExtPElC` is `ExtPElC`, `Extrema_POnCurv` is `POnCurv`).
+
+- The class templates are generic over the `ExtremaCurveTool` trait, which bundles
+  their `TheCurve`, `TheCurveTool`, point, vector, conic, Bezier, B-spline and
+  point-conic parameters; `CurveTool` and `Curve2dTool` (Extrema_CurveTool and
+  Extrema_Curve2dTool) implement it, and its static members are the trait functions
+  (`defl_curv_intervals` included). One Rust type ports each template:
+  `GFuncExtPC`, `GGenExtPC`, `GenLocateExtPC`, `GGExtPC`, `GLocateExtPC`,
+  `GCurveLocator`, `GFuncExtCC`, `GGenExtCC` and `GenLocateExtCC`. The native
+  instantiations are type aliases (`ExtPC = GGExtPC<CurveTool>`, `ExtPC2d`,
+  `LocateExtPC`, `EPCOfExtPC`, `PCFOfEPCOfExtPC`, `ELPCOfLocateExtPC`, `ECC`, `ECC2d`,
+  `CCLocFOfLocECC`, `LocECC` and the others). `POnCurv` and `POnCurv2d` are
+  `POnCurve<Point3>` and `POnCurve<Point2>`; `POnSurfParams` extends `POnSurf` through
+  `Deref`.
+- Each constructor overload is a named constructor and each Perform or Initialize
+  overload a named method: `ExtPElC::with_circle`/`perform_circle`,
+  `ExtElC::lines`/`circles`/`line_ellipse`, `ExtElCS::line_plane`/`perform_line_plane`,
+  `ExtElSS::planes`, `GenExtPS::with_point`/`with_range`/`initialize_range`,
+  `GenExtCS::perform_range`, `ExtCC::initialize_ranges`/`set_curve_range`. Default
+  arguments are explicit, and the sampling of GenExtPS is the `Sampling` value.
+- Output references are returned values (`Points(N, P1, P2)` returns `(P1, P2)`,
+  `TrimmedSquareDistances` returns the distances and the points); the four-argument
+  `Values(X, F, G, H)` of the global-optimization functions is `values_hessian`.
+  `FuncExtCS::SquareDistances()`, `PointsOnCurve()` and `PointsOnSurf()` return the
+  saved sequences as `&mut Vec`.
+- Every native exception is a `Failure` (StdFail_NotDone, Standard_OutOfRange,
+  Standard_TypeMismatch, Standard_NotImplemented, StdFail_InfiniteSolutions). A native
+  null dereference (an algorithm performed before it has a curve or surface, the
+  unallocated result arrays of Extrema_ExtElCS, a conic function without its conic) is
+  Standard_NullObject. An exception raised inside a math callback is kept by the
+  function (`take_failure`) and returned when the solver stops, where the native
+  exception would unwind.
+- An object that keeps a curve or surface borrows it for its lifetime.
+  Extrema_ExtPExtS and Extrema_ExtPRevS keep the handle of their swept adaptor and
+  point their grid search to it; the port gives their GenExtPS a shared handle
+  (`SurfaceRef`). Extrema_ExtPS creates them at its first Perform and owns them as
+  `Option` values (the native handles); they are not Standard_Transient types.
+- The GenExtPS grids keep the NCollection_Array2 storage rules (a resize to the same
+  number of cells keeps the old cells), and its sphere tree is the NCollection_UBTree
+  port over `Bnd_Sphere`.
 
 ## Verification
 
@@ -586,7 +631,6 @@ results, the resulting surface (knots, multiplicities and poles) and the FNV-1a 
 (see Preserved native behaviour) and a patch discretisation after an iso without
 result, which dereferences a null handle natively.
 
-The corpus has 33623 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 The Geom2dConvert requests (`tkgeombase_corpus_geom2dconvert.py`, probe
 `tkgeombase_probe_geom2dconvert.cxx`) convert every Geom2d curve kind with each
 parameterisation: circles and ellipses on direct and indirect frames, whole and
@@ -608,11 +652,42 @@ segments and biarcs at four tolerances. Each request prints every resulting curv
 rotated input array, or the raised exception. They are 908 requests. Circle arcs of
 1e-9 are left out of the biarc requests: GC_MakeArcOfCircle2d then reads the status
 that gce_MakeCirc2d leaves unassigned (see GC and GCE2d below).
+The Extrema requests come from six corpora, one per family, each with its probe
+(`tools/oracle/tkgeombase_probe_extrema_*.cxx`, twins in `examples/gb_probe/extrema_*.rs`).
+The closed forms (`tkgeombase_corpus_extrema_el.py`) run every point-conic and
+point-elementary-surface pair and every line/circle/conic pair of ExtElC, ExtElC2d,
+ExtElCS and ExtElSS in skew, secant, tangent, parallel, antiparallel, nearly parallel
+(1e-13 rad), coplanar, axial, concentric and nested configurations, with bounded,
+reversed, single-point, periodic-offset and infinite ranges and sequences of performs
+on one object. The point-curve classes (`tkgeombase_corpus_extrema_pc_classic.py`)
+reuse the curves of the ExtremaPC corpora on whole ranges and sub-ranges from special
+and random points, and drive the EPC, PCF and LocEPC template instantiations, the
+curve locator and the curve tools directly, cusps included. The curve-curve classes
+(`tkgeombase_corpus_extrema_cc.py`) cover the analytic pairs, the trimmed parallel
+cases and the global search of conics with Bezier, B-spline and offset curves. The
+point-surface classes (`tkgeombase_corpus_extrema_ps.py`) run every surface kind
+(quadrics, B-splines with a collapsed boundary, Bezier, revolutions and extrusions of
+conics and splines, offset and trimmed surfaces), ranged or not, from general, near,
+far and centre points: the functions inside and outside the bounds, the local search
+with both criteria, GenExtPS with both algorithms, every flag, 2 to 20 samples and
+algorithm switches, ExtPS with periodic ranges beyond one period and infinite bounds,
+and the analytical and grid cases of ExtPExtS and ExtPRevS (a point on the axis, a
+curve ending on the axis, re-initialization on the same handle). The curve-surface
+classes (`tkgeombase_corpus_extrema_cs.py`) cover every closed form of ExtCS and its
+trimmed-out fallback to the curve ends, a line facing a surface box down to a single
+point, the generic search with sharp points, and the three GenExtCS searches with
+their functions. The surface-surface classes (`tkgeombase_corpus_extrema_ss.py`) pair
+the surfaces of the point-surface corpus and run parallel, secant and trimmed planes.
+Each request prints the done and parallel flags, every extremum (square distance and
+points with their parameters), the exception of the out-of-range index 0, or the raised
+exception.
+They are 1934 requests: 212 closed-form, 994 point-curve, 110 curve-curve, 345
+point-surface, 210 curve-surface and 63 surface-surface.
 
-The corpus has 29711 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+The corpus has 36709 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
-FEmTool, 2045 AppParCurves, 3587 AppCont, 15198 GeomBndLib and BndLib, 2210 CPnts
-and GCPnts, and 325 AdvApp2Var.
+FEmTool, 2045 AppParCurves, 3831 AppCont, 15198 GeomBndLib and BndLib, 2210 CPnts and
+GCPnts, 325 AdvApp2Var, 908 Geom2dConvert and 1934 Extrema.
 
 ## Preserved native behaviour
 
@@ -1107,3 +1182,58 @@ Geom2dConvert:
 - A null handle, dereferenced natively, raises Standard_NullObject; an empty curve
   array allocates `NCollection_Array1(0, -2)` natively (an allocation failure) and
   raises Standard_RangeError in the port; the corpus leaves both out.
+Extrema:
+
+- `NbExt()`-guarded accessors test `N < 1` first, so an index below 1 raises
+  Standard_OutOfRange before the StdFail_NotDone of an undone algorithm.
+- Extrema_ExtPElC2d differs from the 3D class: both extrema of a circle are minima,
+  no extremum of an ellipse, hyperbola or parabola is a minimum, and a line whose
+  projection is outside the bounds is done with no extremum (the 3D line is not done).
+  A degenerate polynomial of the hyperbola and parabola cases raises
+  StdFail_InfiniteSolutions.
+- Extrema_ExtElSS sets done, then raises Standard_NotImplemented for every sphere pair;
+  the Extrema_ExtElCS line and circle overloads with a cone or a torus raise it and
+  leave the state unchanged. The Extrema_ExtElCS result arrays are handles: a Perform
+  keeps the arrays of an earlier one, and reading them before any allocation is a null
+  dereference (Standard_NullObject in the port).
+- Extrema_GenLocateExtPC is done only when `|F|` at the root is below 1e-7;
+  Extrema_GenLocateExtCC when both components of F are below 1e-10 (signed, so a
+  negative value counts). Extrema_GGenExtCC appends the solutions of each Perform to
+  those of the earlier ones.
+- Extrema_GenExtPS: SetAlgo with a new algorithm rebuilds the grid but keeps the
+  parameters and the tree of the earlier algorithm; a grid resized to the same number
+  of cells keeps its cells; Initialize raises Standard_OutOfRange for fewer than two
+  samples. The tree algorithm raises the samples of a B-spline to degree times knots
+  (at most 300), CorrectNbSamples multiplies the V samples in both branches, and the
+  farthest-node selector starts its bound at 0, so it rejects every subtree whose
+  nearest distance is positive and usually starts from the first grid node.
+- Extrema_ExtPExtS and Extrema_ExtPRevS read `NbExt()` of their grid search in
+  Perform, which raises StdFail_NotDone when it found nothing. Extrema_ExtPRevS resets
+  its analytical flag before testing whether the handle is new, so an Initialize with
+  the same handle always takes the grid search.
+- Extrema_ExtPS replaces infinite bounds by ±1e10 and samples 300 times across a
+  degenerated boundary iso; `TrimmedSquareDistances` returns members nothing computes
+  (null in the default object, uninitialized after the performing constructors; the
+  port returns 0 and the origin).
+- Extrema_GenLocateExtPS widens the tolerances of a B-spline for large parameters and
+  then always runs the Newton pass, and raises Standard_OutOfRange when no root was
+  saved.
+- Extrema_ExtCS: the parallel case stores one distance and no point, so `Points(1)`
+  raises Standard_OutOfRange; the single-point line case adds its projections with a
+  default curve point (the origin); a line and a plane that are not parallel, and a
+  line with any surface but a sphere or a cylinder, take the facing-range search; of
+  the sharp-point projections only the nearest and the farthest remain when more than
+  two were added. Extrema_ExtSS runs its generic search on the whole surfaces and
+  filters afterwards, and keeps IsParallel from an earlier Perform in that case.
+- Extrema_GenExtCS divides a closed curve that covers more than two thirds of its
+  period and then keeps only the extrema within SquareConfusion of the minimum;
+  Extrema_GlobOptFuncCQuadric::QuadricParameters on another surface returns
+  `(Uf, Ul)`; Extrema_GlobOptFuncConicS and Extrema_GlobOptFuncCQuadric built without
+  their conic or quadric dereference an unset pointer (Standard_NullObject in the
+  port). Extrema_GlobOptFuncCS returns the half gradient and Hessian.
+- Extrema_FuncExtCS merges saved states by the curve parameter only,
+  Extrema_FuncPSNorm by `(u, v)` within PConfusion, and Extrema_FuncExtSS saves every
+  state. Extrema_GenExtSS stores its BFGS minimum through `Value(UV, UV)` (the input
+  is read before the output overwrites it) and GetStateNumber.
+- Every native comparison keeps its form where a NaN operand changes the branch, and
+  `std::min`/`std::max` keep their argument order.

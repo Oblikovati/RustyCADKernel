@@ -61,6 +61,12 @@
 #include "tkgeombase_probe_advapp2var_f2var2.cxx"
 #include "tkgeombase_probe_advapp2var_class.cxx"
 #include "tkgeombase_probe_geom2dconvert.cxx"
+#include "tkgeombase_probe_extrema_el.cxx"
+#include "tkgeombase_probe_extrema_pc_classic.cxx"
+#include "tkgeombase_probe_extrema_cc.cxx"
+#include "tkgeombase_probe_extrema_ps.cxx"
+#include "tkgeombase_probe_extrema_cs.cxx"
+#include "tkgeombase_probe_extrema_ss.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -285,6 +291,56 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g2c_approx", gb_g2c_approx_case},
  {"g2c_arcs", gb_g2c_arcs_case},
  {"g2c_ppoint", gb_g2c_ppoint_case},
+ // Extrema elementary closed forms (tkgeombase_probe_extrema_el.cxx)
+ {"ex_pon", gb_ex_pon_case},
+ {"ex_pelc", gb_ex_pelc_case},
+ {"ex_pelc2d", gb_ex_pelc2d_case},
+ {"ex_elc", gb_ex_elc_case},
+ {"ex_elc2d", gb_ex_elc2d_case},
+ {"ex_pels", gb_ex_pels_case},
+ {"ex_elcs", gb_ex_elcs_case},
+ {"ex_elss", gb_ex_elss_case},
+ // Extrema point-curve classes (tkgeombase_probe_extrema_pc_classic.cxx)
+ {"ex_pc", gb_ex_pc_case},
+ {"ex_pc2d", gb_ex_pc2d_case},
+ {"ex_locpc", gb_ex_locpc_case},
+ {"ex_locpc2d", gb_ex_locpc2d_case},
+ {"ex_genpc", gb_ex_genpc_case},
+ {"ex_genpc2d", gb_ex_genpc2d_case},
+ {"ex_pcf", gb_ex_pcf_case},
+ {"ex_pcf2d", gb_ex_pcf2d_case},
+ {"ex_cloc", gb_ex_cloc_case},
+ {"ex_cloc2d", gb_ex_cloc2d_case},
+ {"ex_ctool", gb_ex_ctool_case},
+ {"ex_ctool2d", gb_ex_ctool2d_case},
+ // Extrema curve-curve classes (tkgeombase_probe_extrema_cc.cxx)
+ {"ex_cc", gb_ex_cc_case},
+ {"ex_cc2d", gb_ex_cc2d_case},
+ {"ex_ecc", gb_ex_ecc_case},
+ {"ex_ecc2d", gb_ex_ecc2d_case},
+ {"ex_locecc", gb_ex_locecc_case},
+ {"ex_fcc", gb_ex_fcc_case},
+ {"ex_gofcc", gb_ex_gofcc_case},
+ {"ex_gofcc2d", gb_ex_gofcc2d_case},
+ // Extrema point-surface classes (tkgeombase_probe_extrema_ps.cxx)
+ {"ex_fpsn", gb_ex_fpsn_case},
+ {"ex_fpsd", gb_ex_fpsd_case},
+ {"ex_glps", gb_ex_glps_case},
+ {"ex_genps", gb_ex_genps_case},
+ {"ex_ps", gb_ex_ps_case},
+ {"ex_pexts", gb_ex_pexts_case},
+ {"ex_prevs", gb_ex_prevs_case},
+ // Extrema curve-surface classes (tkgeombase_probe_extrema_cs.cxx)
+ {"ex_fecs", gb_ex_fecs_case},
+ {"ex_gofcs", gb_ex_gofcs_case},
+ {"ex_gofconics", gb_ex_gofconics_case},
+ {"ex_gofcquad", gb_ex_gofcquad_case},
+ {"ex_genecs", gb_ex_genecs_case},
+ {"ex_cs", gb_ex_cs_case},
+ // Extrema surface-surface classes (tkgeombase_probe_extrema_ss.cxx)
+ {"ex_fess", gb_ex_fess_case},
+ {"ex_genss", gb_ex_genss_case},
+ {"ex_ss", gb_ex_ss_case},
 };
 int main() {
  std::string line;

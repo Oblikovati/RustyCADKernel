@@ -12,6 +12,14 @@ pub mod app_par_curves;
 pub mod bndlib;
 #[allow(dead_code, unused_imports)]
 pub mod common;
+pub mod extrema_cc;
+pub mod extrema_cs;
+pub mod extrema_el;
+pub mod extrema_el_surf;
+pub mod extrema_pc;
+pub mod extrema_ps;
+pub mod extrema_ss;
+pub mod extrema_swept;
 pub mod fem_tool;
 pub mod gc;
 pub mod gce;

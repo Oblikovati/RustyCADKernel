@@ -17,8 +17,8 @@
 //! GC_MakeTrimmedCone and GC_MakeTrimmedCylinder: cones and cylinders trimmed to
 //! a full turn in U and a height in V.
 use super::{MakeConicalSurface, MakeCylindricalSurface};
+use crate::extrema::ExtPElC;
 use crate::gce::{ErrorType, Root};
-use crate::line_extrema::line_projection;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{GeomRectangularTrimmedSurface, GeomSurface};
 use rustycad_tkmath::gp::{Axis1, Circle3, Direction3, Line3, Point3};
@@ -58,8 +58,10 @@ impl MakeTrimmedCone {
             return Ok(Self::failed(cone.status()));
         }
         let axis = Line3::new(p1, Direction3::from_xyz(p2.xyz() - p1.xyz())?);
-        let p5: Point3 = line_projection(p3, axis, 1.0e-7, (-2.0e100, 2.0e100))?;
-        let p6: Point3 = line_projection(p4, axis, 1.0e-7, (-2.0e100, 2.0e100))?;
+        let ext1 = ExtPElC::with_line(p3, axis, 1.0e-7, -2.0e+100, 2.0e+100);
+        let ext2 = ExtPElC::with_line(p4, axis, 1.0e-7, -2.0e+100, 2.0e+100);
+        let p5: Point3 = *ext1.point(1)?.value();
+        let p6: Point3 = *ext2.point(1)?.value();
         let surface = cone.value()?;
         let slant: f64 = p6.distance(&p5) / surface.semi_angle().cos();
         Ok(Self::built(full_turn(surface.cast(), slant)?))
