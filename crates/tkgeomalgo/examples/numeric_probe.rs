@@ -2,8 +2,8 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
+use ga_probe::{geom2d_api, geom2d_int, ginter, int_curve, int_imp_par_gen, int_res2d};
 use ga_probe::{intf, intf_poly, intf_tool, toptrans};
-use ga_probe::{geom2d_api, geom2d_int, int_curve, int_imp_par_gen, int_res2d};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -52,6 +52,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
         "g2api_points_to_bspline",
         geom2d_api::points_to_bspline_case,
     ),
+    // Geom2dInt curve-curve, Geom2dAPI_InterCurveCurve (ga_probe/ginter.rs)
+    ("g2int_polygon", ginter::polygon_case),
+    ("g2int_exact", ginter::exact_case),
+    ("g2int_polypoly", ginter::polypoly_case),
+    ("g2int_ginter", ginter::ginter_case),
+    ("g2api_intercc", ginter::intercc_case),
 ];
 
 fn main() {

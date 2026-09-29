@@ -31,6 +31,7 @@
 #include "tkgeomalgo_probe_intcurve.cxx"
 #include "tkgeomalgo_probe_geom2dint.cxx"
 #include "tkgeomalgo_probe_geom2dapi.cxx"
+#include "tkgeomalgo_probe_ginter.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -70,6 +71,12 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"g2api_project", ga_g2api_project_case},
  {"g2api_interpolate", ga_g2api_interpolate_case},
  {"g2api_points_to_bspline", ga_g2api_points_to_bspline_case},
+ // Geom2dInt curve-curve, Geom2dAPI_InterCurveCurve (tkgeomalgo_probe_ginter.cxx)
+ {"g2int_polygon", ga_g2int_polygon_case},
+ {"g2int_exact", ga_g2int_exact_case},
+ {"g2int_polypoly", ga_g2int_polypoly_case},
+ {"g2int_ginter", ga_g2int_ginter_case},
+ {"g2api_intercc", ga_g2api_intercc_case},
 };
 int main() {
  std::string line;

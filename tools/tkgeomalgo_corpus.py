@@ -19,3 +19,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_intcurve').append_intcurve_requests(requests)
     # Geom2dInt, Geom2dAPI (tkgeomalgo_corpus_geom2d.py)
     __import__('tkgeomalgo_corpus_geom2d').append_geom2d_requests(requests)
+    # Geom2dInt curve-curve, Geom2dAPI_InterCurveCurve (tkgeomalgo_corpus_ginter.py)
+    __import__('tkgeomalgo_corpus_ginter').append_ginter_family_requests(requests)
