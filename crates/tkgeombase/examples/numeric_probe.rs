@@ -6,8 +6,8 @@ use gb_probe::{
     adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, app_cont as acc, app_def as ad,
     app_par_curves as apc, approx as ax, bndlib, extrema_cc, extrema_cs, extrema_el,
     extrema_el_surf, extrema_pc, extrema_ps, extrema_ss, extrema_swept, fem_tool, gc, gce, gcpnts,
-    geom_convert as gcv, geom_lib as gl, geom_tools, geom2d_convert as g2c, gprop, hermit, int_ana,
-    int_ana2d, lprop, pc2d, pc3d, proj_lib as pl,
+    geom_convert as gcv, geom_lib as gl, geom_proj_lib as gpl, geom_tools, geom2d_convert as g2c,
+    gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d, proj_lib as pl,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -370,6 +370,10 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("pl_polar", pl::polar_case),
     ("pl_projected", pl::projected_case),
     ("pl_comp", pl::comp_case),
+    // GeomProjLib (gb_probe/geom_proj_lib.rs)
+    ("gpl_curve2d", gpl::curve2d_case),
+    ("gpl_project", gpl::project_case),
+    ("gpl_on_plane", gpl::on_plane_case),
 ];
 
 fn main() {
