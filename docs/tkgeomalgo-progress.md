@@ -119,6 +119,14 @@ the patch bounds, on tangent patches), `ii_zerimp` (`IntPatch_TheSurfFunction` o
 patches against quadrics) and `ii_intcs` (`IntCurveSurface_TheExactHInter` on lines and
 circles against planes, cylinders, spheres and tori, with and without margin).
 
+AppBlend: 115 requests. `ab_appsurf` instantiates `AppBlend_AppSurf.gxx` on a probe
+line and section generator (rational quadratic sections with 0 to 2 extra 2d curves,
+with or without derivatives) and compares every query after `Perform`,
+`Perform(SpApprox)`, `PerformSmoothing` and `Perform(NbMaxP)`, each run twice, with
+known parameters, every parametrization and continuity, the no-tangent switch,
+invalid criterion weights and a null line; `ab_context` covers the two switches of
+`AppBlend_Debug.cxx`.
+
 ## Preserved native behaviour
 
 - `Intf::PlaneEquation` of a degenerate triangle (normal shorter than
@@ -290,3 +298,19 @@ circles against planes, cylinders, spheres and tori, with and without margin).
 - `IntImp_ZerParFunc` reads its isoparametric before `ComputeParameters` sets it
   (uninitialized natively; U on the first patch here), and the second
   `IntImp_Int2S` constructor leaves `tangent` uninitialized (false here).
+
+### AppBlend
+
+- Two sections narrow the stored degrees (`dmin = 1`, and `dmax = 1` without
+  tangents): later computations of the same object keep them.
+- `Perform` without `SpApprox` computes the reached tolerances but does not store
+  them (`TolReached` keeps its earlier values), and with known parameters it raises
+  `StdFail_NotDone` from `AppDef_Compute::SplineValue`.
+- The continuity chain of the B-spline approximation turns C0 into continuity 3
+  (`if C0 ...; if C1 ... else if C2 ... else 3`).
+- `Perform(NbMaxP)` measures the pole distances of each Bezier piece on the curve of
+  the piece's own index, and `NbMaxP = 0` divides by zero (a crash natively; a
+  `Standard_DivideByZero` error here, not in the corpus). The native `scal` switch of
+  its box scaling is a constant true.
+- `Curves2dShape` returns the U pole count of the surface as the 2d pole count.
+- The `AppBlend_Debug.cxx` switches are process-wide, as the native file statics.

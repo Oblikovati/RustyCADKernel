@@ -148930,6 +148930,174 @@
       "rust_item": "rustycad_tkgeomalgo::int_imp::IntImpConstIsoparametric",
       "status": "implemented",
       "notes": "IntImp mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md section 2): ComputeTangence takes fixed-size arrays; ChoixRef raises Standard_OutOfRange as a Result error. The .gxx templates (ZerParFunc, ZerImpFunc, ZerCSParFunc, Int2S, IntCS) are the generics IntImpZerParFunc, IntImpZerImpFunc, IntImpZerCSParFunc, IntImpInt2S and IntImpIntCS over the ThePSurfaceTool, TheISurfaceTool and TheCurveTool traits."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::is_done",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::SurfShape(int&,int&,int&,int&,int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::surf_shape",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::Surface(NCollection_Array2<gp_Pnt>&,NCollection_Array2<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<int>&,NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::surface",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::UDegree() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::u_degree",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::VDegree() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::v_degree",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::SurfPoles() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::surf_poles",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::SurfWeights() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::surf_weights",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::SurfUKnots() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::surf_u_knots",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::SurfVKnots() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::surf_v_knots",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::SurfUMults() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::surf_u_mults",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::SurfVMults() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::surf_v_mults",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::NbCurves2d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::nb_curves2d",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::Curves2dShape(int&,int&,int&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::curves2d_shape",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::Curve2d(int,NCollection_Array1<gp_Pnt2d>&,NCollection_Array1<double>&,NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::curve2d",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::Curves2dDegree() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::curves2d_degree",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::Curve2dPoles(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::curve2d_poles",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::Curves2dKnots() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::curves2d_knots",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::Curves2dMults() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::curves2d_mults",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::TolReached(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::tol_reached",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::TolCurveOnSurf(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": "rustycad_tkgeomalgo::app_blend::AppBlendApprox::tol_curve_on_surf",
+      "status": "implemented",
+      "notes": "AppBlend mapping (docs/tkgeomalgo-progress.md, docs/geomalgo-design.md \"AppBlend template\"): AppBlend_Approx is the AppBlendApprox trait; the out-parameter queries return arrays and tuples, Surface and Curve2d return owned copies (the native Array assignment reallocates); errors are Results. AppBlend_AppSurf.gxx is AppBlendAppSurf, generic in its perform methods only."
+    },
+    {
+      "upstream_id": "AppBlend_Approx::~AppBlend_Approx()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/AppBlend/AppBlend_Approx.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "the virtual destructor of the abstract class; Rust drops the implementors"
     }
   ],
   "tests": [

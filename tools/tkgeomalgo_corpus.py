@@ -25,3 +25,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_faircurve').append_faircurve_requests(requests)
     # IntImp (tkgeomalgo_corpus_intimp.py)
     __import__('tkgeomalgo_corpus_intimp').append_intimp_requests(requests)
+    # AppBlend (tkgeomalgo_corpus_appblend.py)
+    __import__('tkgeomalgo_corpus_appblend').append_appblend_requests(requests)

@@ -59,3 +59,20 @@ and exactly the calls the bodies make:
 - The probe (`tools/oracle/tkgeomalgo_probe_intimp.cxx`) drives the native instances
   above and the Rust generics with the same tools, so the numeric corpus checks the
   template bodies.
+
+## 3. AppBlend template
+
+`AppBlend_AppSurf.gxx/.lxx` is instantiated as `GeomFill_AppSurf`, `GeomFill_AppSweep`
+(TKGeomAlgo) and `BRepBlend_AppSurf` (TKFillet) on a `TheLine` and a
+`TheSectionGenerator`. The class stores neither: they are only arguments of its
+`Perform` methods. The port is therefore one type, `app_blend::AppBlendAppSurf`,
+whose `perform`, `perform_smoothing` and `perform_by_pieces` are generic over the
+traits `TheLine` (`NbPoints`, `Point`) and `TheSectionGenerator` (`GetShape`,
+`Knots`, `Mults`, both `Section` overloads, `Parameter`) of `app_blend/tools.rs`; the
+sections are exchanged through `AppBlendSection`. Each native instance is an alias of
+`AppBlendAppSurf`, and the packages that own a line and a generator implement the
+traits. `AppBlend_Approx` is the trait `AppBlendApprox`.
+
+The probe (`tools/oracle/tkgeomalgo_probe_appblend.cxx`) instantiates the `.gxx`
+itself on a probe line and generator, as the `_0.cxx` files do, so the numeric corpus
+checks the template without the GeomFill package.
