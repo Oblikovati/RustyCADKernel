@@ -21,9 +21,15 @@
 #include <gp_XYZ.hxx>
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkgeomalgo_probe_intf.cxx"
+#include "tkgeomalgo_probe_intsurf.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf.cxx)
  {"intf_triangle", ga_intf_triangle_case},
+ // IntSurf (tkgeomalgo_probe_intsurf.cxx)
+ {"intsurf_quadric_point", ga_intsurf_quadric_point_case},
+ {"intsurf_quadric_uv", ga_intsurf_quadric_uv_case},
+ {"intsurf_transition", ga_intsurf_transition_case},
+ {"intsurf_same", ga_intsurf_same_case},
 };
 int main() {
  std::string line;

@@ -26,6 +26,8 @@ The toolkit test inventory maps these suites (0 declarations):
 
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
+| IntSurf_LineOn2S_Test.cxx | int_surf_line_on2s | 3 | pass | pass |
+| IntSurf_Quadric_Test.cxx | int_surf_quadric | 1 | pass | pass |
 
 ## Verification
 
@@ -56,7 +58,37 @@ triangles: both orientations, coincident and collinear vertices, a normal that
 underflows below `gp::Resolution`, huge coordinates, points on edges and vertices,
 outside and off the plane, and 40 seeded random cases.
 
+IntSurf: 334 requests. `intsurf_quadric_point` and `intsurf_quadric_uv` evaluate every
+`IntSurf_Quadric` member and `IntSurf_QuadricTool::Tolerance` for the five quadric
+kinds (including a cylinder and a cone of radius 0) and the undefined quadric, on
+direct, indirect and oblique frames, at the frame origin, on the axis, on the torus
+core circle and at seeded random points; `intsurf_transition` drives
+`IntSurf::MakeTransition` through its four branches and `intsurf_same` compares
+`IntSurf_PntOn2S::IsSame` with and without the 2d tolerance.
+
 ## Preserved native behaviour
 
 - `Intf::PlaneEquation` of a degenerate triangle (normal shorter than
   `gp::Resolution`) returns the undivided normal and a polar distance of 0.
+
+### IntSurf
+
+- `IntSurf_Transition::SetValue(Tangent, Type)` and `SetValue()` change only the type
+  (and tangent flag): the situation and opposite flag of an earlier TOUCH transition
+  stay. `IntSurf::MakeTransition` writes its results with them, so the Rust
+  `make_transition` updates two `&mut IntSurfTransition` in place instead of returning
+  fresh values.
+- `IntSurf_Quadric::Normale(U, V)` of a cone is the unnormalized `D1u ^ D1v` (null when
+  `|D1u| < 1e-7`) and ignores the frame handedness, unlike every other normal of the
+  class. The plane constructor leaves the axis line at its default (the Z axis).
+- `IntSurf_Quadric::D1`, `ValAndGrad` and `Parameters` of the undefined quadric leave
+  their output arguments unchanged; the Rust members return `None` there.
+  `Normale(P)` raises `Standard_ConstructionError` on a cylinder axis and at a sphere
+  centre (the `gp_Dir` of a null vector), and so does `Normale(U, V)` on a cylinder of
+  radius 0.
+- `IntSurf_LineOn2S::Split` gives the new line the default allocator, not the
+  allocator of the split line, and keeps the (possibly stale) boxes of the split line.
+- A default-constructed `IntSurf_PathPoint` holds a null parameter sequence that
+  `Value2d`, `AddUV`, `Multiplicity` and `Parameters` dereference natively; the port
+  returns `Standard_NullObject` there instead of crashing. A copy of a path point
+  shares the parameter sequence, as the native copy of the handle does.

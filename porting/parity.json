@@ -145250,6 +145250,910 @@
       "rust_item": "rustycad_tkbrep::brep_graph::transform::transform_node",
       "status": "implemented",
       "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.13): the native policy checks, then BRepGraph_Copy (copy::perform or copy::copy_node, default cache policy), then the copied-range transform; a self transform (the same source and target graph) is the separate function transform::transform_node_in_place taking the graph mutably; C++ exceptions are Failure errors. Compared with OCCT by the br_balgo transform requests."
+    },
+    {
+      "upstream_id": "IntSurf::MakeTransition(const gp_Vec&,const gp_Vec&,const gp_Dir&,IntSurf_Transition&,IntSurf_Transition&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::make_transition",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf::SetPeriod(const occ::handle<Adaptor3d_Surface>&,const occ::handle<Adaptor3d_Surface>&,double*)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::set_period",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Couple()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfCouple::new",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Couple(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfCouple::with_indices",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Couple::First() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfCouple::first",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Couple::Second() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Couple.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfCouple::second",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPoint::new",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPoint(const gp_Pnt&,double,double,const gp_Vec&,const gp_Vec2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPoint::with_value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPoint::SetValue(const gp_Pnt&,double,double,const gp_Vec&,const gp_Vec2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPoint::set_value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPoint::Value() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPoint::value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPoint::Parameters(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPoint::parameters",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPoint::UParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPoint::u_parameter",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPoint::VParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPoint::v_parameter",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPoint::Direction() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPoint::direction",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPoint::Direction2d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPoint::direction2d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPointTool::Value3d(const IntSurf_InteriorPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPointTool::value3d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPointTool::Value2d(const IntSurf_InteriorPoint&,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPointTool::value2d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPointTool::Direction3d(const IntSurf_InteriorPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPointTool::direction3d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_InteriorPointTool::Direction2d(const IntSurf_InteriorPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_InteriorPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfInteriorPointTool::direction2d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S(const IntSurf_Allocator&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::new",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::Add(const IntSurf_PntOn2S&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::add",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::nb_points",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::Value(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::Reverse()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::reverse",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::Split(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::split",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::Value(int,const IntSurf_PntOn2S&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::set_value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::SetPoint(int,const gp_Pnt&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::set_point",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::SetUV(int,bool,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::set_uv",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::Clear()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::clear",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::InsertBefore(int,const IntSurf_PntOn2S&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::insert_before",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::RemovePoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::remove_point",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::IsOutSurf1Box(const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::is_out_surf1_box",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::IsOutSurf2Box(const gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::is_out_surf2_box",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::IsOutBox(const gp_Pnt&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::is_out_box",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S::DEFINE_STANDARD_RTTIEXT(IntSurf_LineOn2S,Standard_Transient)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_LineOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfLineOn2S::static_type",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::new",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint(const gp_Pnt&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::with_value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::SetValue(const gp_Pnt&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::set_value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::AddUV(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::add_uv",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::SetDirections(const gp_Vec&,const gp_Dir2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::set_directions",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::SetTangency(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::set_tangency",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::SetPassing(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::set_passing",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::Value() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::Value2d(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::value2d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::IsPassingPnt() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::is_passing_pnt",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::IsTangent() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::is_tangent",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::Direction3d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::direction3d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::Direction2d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::direction2d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::Multiplicity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::multiplicity",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPoint::Parameters(int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPoint::parameters",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPointTool::Value3d(const IntSurf_PathPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPointTool::value3d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPointTool::Value2d(const IntSurf_PathPoint&,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPointTool::value2d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPointTool::IsPassingPnt(const IntSurf_PathPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPointTool::is_passing_pnt",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPointTool::IsTangent(const IntSurf_PathPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPointTool::is_tangent",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPointTool::Direction3d(const IntSurf_PathPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPointTool::direction3d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPointTool::Direction2d(const IntSurf_PathPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPointTool::direction2d",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPointTool::Multiplicity(const IntSurf_PathPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPointTool::multiplicity",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PathPointTool::Parameters(const IntSurf_PathPoint&,int,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PathPointTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPathPointTool::parameters",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::new",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::SetValue(const gp_Pnt&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::set_point",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::SetValue(const gp_Pnt&,bool,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::set_value_on",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::SetValue(const gp_Pnt&,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::set_value_all",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::SetValue(bool,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::set_parameters_on",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::SetValue(double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::set_parameters",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::Value() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::ValueOnSurface(bool) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::value_on_surface",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::ParametersOnS1(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::parameters_on_s1",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::ParametersOnS2(double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::parameters_on_s2",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::ParametersOnSurface(bool,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::parameters_on_surface",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::Parameters(double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::parameters",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_PntOn2S::IsSame(const IntSurf_PntOn2S&,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_PntOn2S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfPntOn2S::is_same",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::new",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric(const gp_Pln&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::from_plane",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric(const gp_Cylinder&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::from_cylinder",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric(const gp_Sphere&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::from_sphere",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric(const gp_Cone&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::from_cone",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric(const gp_Torus&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::from_torus",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::SetValue(const gp_Pln&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::set_plane",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::SetValue(const gp_Cylinder&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::set_cylinder",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::SetValue(const gp_Sphere&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::set_sphere",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::SetValue(const gp_Cone&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::set_cone",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::SetValue(const gp_Torus&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::set_torus",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Distance(const gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::distance",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Gradient(const gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::gradient",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::ValAndGrad(const gp_Pnt&,double&,gp_Vec&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::val_and_grad",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::TypeQuadric() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::type_quadric",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Plane() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::plane",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Sphere() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::sphere",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Cylinder() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::cylinder",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Cone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::cone",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Torus() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::torus",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Value(double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::D1(double,double,gp_Pnt&,gp_Vec&,gp_Vec&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::d1",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::DN(double,double,int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::dn",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Normale(double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::normale",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Parameters(const gp_Pnt&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::parameters",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Quadric::Normale(const gp_Pnt&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Quadric.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadric::normale_at",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_QuadricTool::Value(const IntSurf_Quadric&,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_QuadricTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadricTool::value",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_QuadricTool::Gradient(const IntSurf_Quadric&,double,double,double,gp_Vec&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_QuadricTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadricTool::gradient",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_QuadricTool::ValueAndGradient(const IntSurf_Quadric&,double,double,double,double&,gp_Vec&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_QuadricTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadricTool::value_and_gradient",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_QuadricTool::Tolerance(const IntSurf_Quadric&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_QuadricTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfQuadricTool::tolerance",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Situation",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Situation.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfSituation",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::new",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition(bool,IntSurf_TypeTrans)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::with_type",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition(bool,IntSurf_Situation,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::touch",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition::SetValue(bool,IntSurf_TypeTrans)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::set_type",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition::SetValue(bool,IntSurf_Situation,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::set_touch",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition::SetValue()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::set_undecided",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition::TransitionType() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::transition_type",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition::IsTangent() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::is_tangent",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition::Situation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::situation",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_Transition::IsOpposite() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_Transition.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTransition::is_opposite",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "IntSurf_TypeTrans",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntSurf/IntSurf_TypeTrans.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTypeTrans",
+      "status": "implemented",
+      "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
     }
   ],
   "tests": [
@@ -231507,6 +232411,62 @@
         "linux-gcc-c-locale"
       ],
       "native_expected_failure": "Fails in native OCCT itself on the pinned profile (GCC, glibc): the test inlines ElCLib::Value(-0.7, hyperbola), and GCC folds sinh(-0.7) at compile time to a value one ulp from the glibc run-time sinh that ExtremaPC2d_Hyperbola::Value calls, so the EXPECT_EQ(..., 0.0) distance is 1 ulp natively. The Rust port calls the run-time sinh on both sides, as the native library does, and passes. Approved by the maintainer on 2026-09-29."
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S_Test.EmptyLineBoxesAreNotOut",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntSurf_LineOn2S_Test.cxx",
+      "source_sha256": "f5c9a2932eb5bce6956d476214e56b3639fcfd88c9748cf9c6711ef801ca1305",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_surf_line_on2s",
+      "rust_test": "IntSurf_LineOn2S_Test__EmptyLineBoxesAreNotOut",
+      "rust_source": "crates/tkgeomalgo/tests/int_surf_line_on2s.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S_Test.PointReplacementInvalidatesCachedBoxes",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntSurf_LineOn2S_Test.cxx",
+      "source_sha256": "f5c9a2932eb5bce6956d476214e56b3639fcfd88c9748cf9c6711ef801ca1305",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_surf_line_on2s",
+      "rust_test": "IntSurf_LineOn2S_Test__PointReplacementInvalidatesCachedBoxes",
+      "rust_source": "crates/tkgeomalgo/tests/int_surf_line_on2s.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntSurf_LineOn2S_Test.Split_DividesCorrectly",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntSurf_LineOn2S_Test.cxx",
+      "source_sha256": "f5c9a2932eb5bce6956d476214e56b3639fcfd88c9748cf9c6711ef801ca1305",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_surf_line_on2s",
+      "rust_test": "IntSurf_LineOn2S_Test__Split_DividesCorrectly",
+      "rust_source": "crates/tkgeomalgo/tests/int_surf_line_on2s.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "IntSurf_Quadric_Test.ConeApexGradientRemainsFinite",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/IntSurf_Quadric_Test.cxx",
+      "source_sha256": "b08acdb196401523fc3642559dd17b66d5ad1c8a7f459bade124f5b543f93675",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "int_surf_quadric",
+      "rust_test": "IntSurf_Quadric_Test__ConeApexGradientRemainsFinite",
+      "rust_source": "crates/tkgeomalgo/tests/int_surf_quadric.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
     }
   ]
 }
