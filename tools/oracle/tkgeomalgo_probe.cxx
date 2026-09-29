@@ -30,6 +30,12 @@
 #include "tkgeomalgo_probe_gccint.cxx"
 #include "tkgeomalgo_probe_gccana.cxx"
 #include "tkgeomalgo_probe_hatch.cxx"
+#include "tkgeomalgo_probe_intres2d.cxx"
+#include "tkgeomalgo_probe_intimppargen.cxx"
+#include "tkgeomalgo_probe_intcurve.cxx"
+#include "tkgeomalgo_probe_geom2dint.cxx"
+#include "tkgeomalgo_probe_geom2dapi.cxx"
+#include "tkgeomalgo_probe_ginter.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf*.cxx)
  {"intf_triangle", ga_intf_triangle_case},
@@ -62,6 +68,36 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gccana_bisec", ga_gccana_bisec_case},
  // Hatch (tkgeomalgo_probe_hatch.cxx)
  {"hatch_hatcher", ga_hatch_hatcher_case},
+ // IntRes2d (tkgeomalgo_probe_intres2d.cxx)
+ {"intres2d_domain", ga_intres2d_domain_case},
+ {"intres2d_insert", ga_intres2d_insert_case},
+ {"intres2d_append", ga_intres2d_append_case},
+ // IntImpParGen (tkgeomalgo_probe_intimppargen.cxx)
+ {"imppar_transition", ga_imppar_transition_case},
+ {"imppar_domain", ga_imppar_domain_case},
+ // IntCurve (tkgeomalgo_probe_intcurve.cxx)
+ {"intcurve_conics", ga_intcurve_conics_case},
+ {"intcurve_imppar", ga_intcurve_imppar_case},
+ {"intcurve_itool", ga_intcurve_itool_case},
+ {"intcurve_ptool", ga_intcurve_ptool_case},
+ {"intcurve_function", ga_intcurve_function_case},
+ {"intcurve_interval", ga_intcurve_interval_case},
+ // Geom2dInt (tkgeomalgo_probe_geom2dint.cxx)
+ {"g2int_tool", ga_g2int_tool_case},
+ {"g2int_proj", ga_g2int_proj_case},
+ {"g2int_conic_curve", ga_g2int_conic_curve_case},
+ {"g2int_functions", ga_g2int_functions_case},
+ // Geom2dAPI (tkgeomalgo_probe_geom2dapi.cxx)
+ {"g2api_extrema", ga_g2api_extrema_case},
+ {"g2api_project", ga_g2api_project_case},
+ {"g2api_interpolate", ga_g2api_interpolate_case},
+ {"g2api_points_to_bspline", ga_g2api_points_to_bspline_case},
+ // Geom2dInt curve-curve, Geom2dAPI_InterCurveCurve (tkgeomalgo_probe_ginter.cxx)
+ {"g2int_polygon", ga_g2int_polygon_case},
+ {"g2int_exact", ga_g2int_exact_case},
+ {"g2int_polypoly", ga_g2int_polypoly_case},
+ {"g2int_ginter", ga_g2int_ginter_case},
+ {"g2api_intercc", ga_g2api_intercc_case},
 };
 int main() {
  std::string line;

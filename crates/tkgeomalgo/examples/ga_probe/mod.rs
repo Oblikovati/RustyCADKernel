@@ -3,11 +3,18 @@
 // uses a subset of them, so unused ones are expected in these two modules.
 #[allow(dead_code, unused_imports)]
 pub mod common;
+pub mod curve2d;
 pub mod gcc_ana;
 pub mod gcc_ana_lines;
 pub mod gcc_ent;
 pub mod gcc_int;
+pub mod geom2d_api;
+pub mod geom2d_int;
+pub mod ginter;
 pub mod hatch;
+pub mod int_curve;
+pub mod int_imp_par_gen;
+pub mod int_res2d;
 pub mod intf;
 pub mod intf_poly;
 pub mod intf_tool;
