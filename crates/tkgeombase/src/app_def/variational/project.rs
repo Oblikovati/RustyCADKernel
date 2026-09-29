@@ -280,19 +280,38 @@ impl Variational {
         cb_long: f64,
         decima: i32,
     ) -> Result<(), Failure> {
-        let eps: f64 = 1.0e-8;
         let (ti_first, ti_last) = (ti.lower(), ti.upper());
-        let nb_cntr: i32 = self.tables.nb_constr();
         // (2.0) Initialisation
         let delta_t: f64 = (at(ti, ti_last)? - at(ti, ti_first)?) / f64::from(decima);
         let mut v_test: f64 = at(ti, ti_first)? + delta_t;
-        let (p_cnt, i_cnt) = if nb_cntr > 0 {
+        let mut s: Acr = self.acr_start(curve, ti)?;
+        put(ti, ti_first, 0.)?;
+        let mut ipnt: i32 = ti_first + 1;
+        while ipnt <= ti_last {
+            self.next_constrained_point(&mut s, ipnt, ti_first)?;
+            let mut t_para: f64 = at(ti, ipnt)?;
+            if t_para >= v_test || s.p_cnt == ipnt {
+                (ipnt, t_para) = snap_to_last(ti, (ipnt, t_para), delta_t)?;
+                acr_update(curve, ti, (ipnt, t_para), (cb_long, &mut s))?;
+            }
+            // --> New parametric threshold for decimation
+            v_test = next_threshold(t_para, v_test, delta_t);
+            ipnt += 1;
+        }
+        Ok(())
+    }
+
+    // The state of ACR before the first point: nothing updated yet, the first
+    // constrained point (past the last point without constraints).
+    fn acr_start(&self, curve: &Curve, ti: &Array1<'_, f64>) -> Result<Acr, Failure> {
+        let (ti_first, ti_last) = (ti.lower(), ti.upper());
+        let (p_cnt, i_cnt) = if self.tables.nb_constr() > 0 {
             (self.tables.typ(1)? - self.first_point + ti_first, 1)
         } else {
             (ti_last + 1, 0)
         };
         let k_first: i32 = curve.knots().lower();
-        let mut s = Acr {
+        Ok(Acr {
             u_old: 0.,
             t_old: at(ti, ti_first)?,
             p_old: ti_first,
@@ -300,33 +319,45 @@ impl Variational {
             i_old: k_first,
             p_cnt,
             i_cnt,
-        };
-        put(ti, ti_first, 0.)?;
-        let mut ipnt: i32 = ti_first + 1;
-        while ipnt <= ti_last {
-            while s.i_cnt <= nb_cntr && s.p_cnt < ipnt {
-                s.i_cnt += 1;
-                s.p_cnt = self.tables.typ(2 * s.i_cnt - 1)? - self.first_point + ti_first;
-            }
-            let mut t_para: f64 = at(ti, ipnt)?;
-            if t_para >= v_test || s.p_cnt == ipnt {
-                if at(ti, ti_last)? - t_para <= 1.0e-2 * delta_t {
-                    ipnt = ti_last;
-                    t_para = at(ti, ipnt)?;
-                }
-                acr_update(curve, ti, (ipnt, t_para), (cb_long, &mut s))?;
-            }
-            // --> New parametric threshold for decimation
-            if t_para >= v_test {
-                v_test += ((t_para - v_test + eps) / delta_t).ceil() * delta_t;
-                if v_test > 1. - eps {
-                    v_test = 1.;
-                }
-            }
-            ipnt += 1;
+        })
+    }
+
+    // The constrained points before `ipnt` are passed.
+    fn next_constrained_point(&self, s: &mut Acr, ipnt: i32, ti_first: i32) -> Result<(), Failure> {
+        let nb_cntr: i32 = self.tables.nb_constr();
+        while s.i_cnt <= nb_cntr && s.p_cnt < ipnt {
+            s.i_cnt += 1;
+            s.p_cnt = self.tables.typ(2 * s.i_cnt - 1)? - self.first_point + ti_first;
         }
         Ok(())
     }
+}
+
+// A kept point within a hundredth of the step of the last parameter is replaced by
+// the last point.
+fn snap_to_last(
+    ti: &Array1<'_, f64>,
+    (ipnt, t_para): (i32, f64),
+    delta_t: f64,
+) -> Result<(i32, f64), Failure> {
+    let ti_last: i32 = ti.upper();
+    if at(ti, ti_last)? - t_para <= 1.0e-2 * delta_t {
+        return Ok((ti_last, at(ti, ti_last)?));
+    }
+    Ok((ipnt, t_para))
+}
+
+// The decimation threshold past `t_para` (whole steps on, at most 1), unchanged
+// while `t_para` is below it.
+fn next_threshold(t_para: f64, mut v_test: f64, delta_t: f64) -> f64 {
+    let eps: f64 = 1.0e-8;
+    if t_para >= v_test {
+        v_test += ((t_para - v_test + eps) / delta_t).ceil() * delta_t;
+        if v_test > 1. - eps {
+            v_test = 1.;
+        }
+    }
+    v_test
 }
 
 // (2.2)-(2.5): the arc length at `t_para`, the knots of the elements crossed since the
