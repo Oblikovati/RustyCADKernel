@@ -130,7 +130,7 @@ fn stamp(g: &BRepGraph, st: &VersionStamp) {
     flag(g.uids().is_stale(st));
     guid(st.to_guid(fixed_guid()));
 }
-fn ref_ids(s: &Scene, g: &BRepGraph) {
+pub fn ref_ids(s: &Scene, g: &BRepGraph) {
     let ops = g.refs().generic();
     for k in 0..7 {
         let kind = RefKind(k);
@@ -179,7 +179,7 @@ fn ref_id(s: &Scene, g: &BRepGraph, r: RefId, i: u32) {
     hash(path.hash_code());
     flag(path == path.clone());
 }
-fn node_ids(g: &BRepGraph) {
+pub fn node_ids(g: &BRepGraph) {
     let uids = g.uids();
     long(u64::from(uids.generation()));
     for n in nodes(g) {

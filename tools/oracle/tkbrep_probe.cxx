@@ -55,6 +55,7 @@
 #include "tkbrep_probe_brepgraph_layers.cxx"
 #include "tkbrep_probe_brepgraph_cache.cxx"
 #include "tkbrep_probe_brepgraph_edit.cxx"
+#include "tkbrep_probe_brepgraph_algo.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopoDS (tkbrep_probe_topods.cxx)
  {"br_topods", br_topods_case},
@@ -99,6 +100,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"br_blayer", br_blayer_case},
  {"br_bcache", br_bcache_case},
  {"br_bedit", br_bedit_case},
+ {"br_balgo", br_balgo_case},
 };
 int main() {
  std::string line;

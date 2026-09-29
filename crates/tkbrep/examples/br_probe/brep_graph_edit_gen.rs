@@ -319,6 +319,12 @@ fn run(
 /// `be_action`: one action, printing its result or the raised exception.
 pub fn action(g: &mut BRepGraph, s: &Scene, st: &mut State, r: &mut Reader<'_>) {
     let code = r.integer();
+    action_code(g, s, st, r, code);
+}
+
+/// `be_action_code`: one action whose code the caller already read (the `br_balgo`
+/// dispatch).
+pub fn action_code(g: &mut BRepGraph, s: &Scene, st: &mut State, r: &mut Reader<'_>, code: i32) {
     if let Err(error) = run(g, s, st, r, code) {
         failure(&error);
     }

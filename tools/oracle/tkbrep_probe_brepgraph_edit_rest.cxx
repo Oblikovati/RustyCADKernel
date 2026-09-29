@@ -126,8 +126,10 @@ bool be_supplement_action(BRepGraph& g,const BrScene& s,BrReader& r,int code){
 // Codes 0-5 ingest (`bg_run`), 60 clears the graph, 98-104 are the mesh-cache writes of
 // `br_bcache`, 120-238 the editor actions above, the rest the `br_blayer` actions and the
 // `br_bcache` lock actions (61-73).
-void be_action(BRepGraph& g,const BrScene& s,BlState& st,BrReader& r){
- int code=r.integer();
+void be_action_code(BRepGraph& g,const BrScene& s,BlState& st,BrReader& r,int code);
+void be_action(BRepGraph& g,const BrScene& s,BlState& st,BrReader& r){be_action_code(g,s,st,r,r.integer());}
+// One action whose code the caller already read (the `br_balgo` dispatch).
+void be_action_code(BRepGraph& g,const BrScene& s,BlState& st,BrReader& r,int code){
  try{
   if(code<6){bg_run(g,s,r,code);return;}
   if(code==60){g.Clear();br_word("-");return;}
