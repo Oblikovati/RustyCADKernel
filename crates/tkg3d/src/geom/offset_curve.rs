@@ -29,6 +29,7 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::dump::{self, DumpStream};
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
+use rustycad_tkg2d::geom2d::offset_curve_utils::offset_curve_continuity;
 use rustycad_tkg2d::geom2d::{dump_base, dump_class_name, dump_field};
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Direction3, Point3, Transform3, Vector3, resolution};
@@ -190,26 +191,11 @@ impl GeomOffsetCurve {
             basis_continuity: source.basis_continuity,
         }))
     }
-    /// Whether an evaluation representation is set (`HasEvalRepresentation`);
-    /// `curve.has_eval_representation()`.
-    pub fn has_eval_representation(&self) -> bool {
-        self.state.read().eval_rep.is_some()
-    }
-    /// The evaluation representation, possibly null (`EvalRepresentation`); `curve.eval_representation()`.
-    pub fn eval_representation(&self) -> Handle<dyn RepCurveDesc> {
-        self.state.read().eval_rep.clone()
-    }
-    /// Validate and set the evaluation representation (`SetEvalRepresentation`);
-    /// `curve.set_eval_representation(desc)?`.
-    pub fn set_eval_representation(&self, desc: Handle<dyn RepCurveDesc>) -> Result<(), Failure> {
-        rep_utils::validate_curve_desc(&desc, std::ptr::from_ref(self).cast())?;
-        self.state.write().eval_rep = desc;
-        Ok(())
-    }
-    /// Remove the evaluation representation (`ClearEvalRepresentation`); `curve.clear_eval_representation()`.
-    pub fn clear_eval_representation(&self) {
-        self.state.write().eval_rep = Handle::default();
-    }
+    rustycad_tkg2d::eval_representation_members!(
+        dyn RepCurveDesc,
+        rep_utils::validate_curve_desc,
+        "curve"
+    );
     /// Replace the basis curve, as the constructor does (`SetBasisCurve`). Like the
     /// native member, a failure leaves the folded offset, direction and continuity
     /// stored; `curve.set_basis_curve(&basis, false)?`.
@@ -298,18 +284,6 @@ impl GeomGeometry for GeomOffsetCurve {
     }
 }
 
-// The Continuity switch: offsetting loses one order of continuity of the basis.
-fn offset_continuity(basis: Shape) -> Shape {
-    match basis {
-        Shape::C0 | Shape::C1 => Shape::C0,
-        Shape::C2 => Shape::C1,
-        Shape::C3 => Shape::C2,
-        Shape::CN => Shape::CN,
-        Shape::G1 => Shape::G1,
-        Shape::G2 => Shape::G2,
-    }
-}
-
 fn undefined(member: &str) -> Failure {
     errors::undefined_derivative(&format!(
         "Geom_OffsetCurve::{member}: the offset normal is undefined; expected D1 ^ V not null"
@@ -327,18 +301,8 @@ impl GeomCurve for GeomOffsetCurve {
     fn reversed_parameter(&self, u: f64) -> Result<f64, Failure> {
         self.state.read().basis.reversed_parameter(u)
     }
-    fn transformed_parameter(&self, u: f64, transform: Transform3) -> f64 {
-        self.state.read().basis.transformed_parameter(u, transform)
-    }
-    fn parametric_transformation(&self, transform: Transform3) -> f64 {
-        self.state.read().basis.parametric_transformation(transform)
-    }
-    fn first_parameter(&self) -> f64 {
-        self.state.read().basis.first_parameter()
-    }
-    fn last_parameter(&self) -> f64 {
-        self.state.read().basis.last_parameter()
-    }
+    rustycad_tkg2d::basis_parameter_members!(Transform3);
+    rustycad_tkg2d::basis_range_members!();
     fn is_closed(&self) -> Result<bool, Failure> {
         let first: Point3 = self.d0(self.first_parameter())?;
         let last: Point3 = self.d0(self.last_parameter())?;
@@ -351,7 +315,7 @@ impl GeomCurve for GeomOffsetCurve {
         self.state.read().basis.period()
     }
     fn continuity(&self) -> Shape {
-        offset_continuity(self.state.read().basis_continuity)
+        offset_curve_continuity(self.state.read().basis_continuity)
     }
     fn is_cn(&self, n: i32) -> Result<bool, Failure> {
         if n < 0 {
@@ -452,20 +416,5 @@ impl GeomCurve for GeomOffsetCurve {
         }
         Ok(GeomCurveD3 { point, d1, d2, d3 })
     }
-    fn eval_dn(&self, u: f64, n: i32) -> Result<Vector3, Failure> {
-        if n < 1 {
-            return Err(errors::undefined_derivative(&format!(
-                "Geom_OffsetCurve::EvalDN: N = {n}; expected N >= 1"
-            )));
-        }
-        if let Some(vector) = rep_utils::try_eval_curve_dn(&self.state.read().eval_rep, u, n)? {
-            return Ok(vector);
-        }
-        match n {
-            1 => Ok(self.eval_d1(u)?.d1),
-            2 => Ok(self.eval_d2(u)?.d2),
-            3 => Ok(self.eval_d3(u)?.d3),
-            _ => self.state.read().basis.eval_dn(u, n),
-        }
-    }
+    rustycad_tkg2d::offset_curve_eval_dn!(Vector3, "Geom_OffsetCurve");
 }

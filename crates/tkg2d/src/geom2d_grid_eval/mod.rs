@@ -30,6 +30,7 @@ pub type Geom2dGridEvalCurveD2 = Geom2dCurveD2;
 pub type Geom2dGridEvalCurveD3 = Geom2dCurveD3;
 
 pub mod bezier_arrays;
+mod conic_grid;
 mod grid;
 pub mod grid_loops;
 

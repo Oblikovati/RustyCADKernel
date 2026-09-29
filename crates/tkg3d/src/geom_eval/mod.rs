@@ -33,7 +33,6 @@ pub mod rep_utils;
 
 // GeomEval curves.
 mod aht_bezier_curve;
-mod bezier_curve_data;
 mod curve_support;
 pub use aht_bezier_curve::GeomEvalAHTBezierCurve;
 mod circular_helix_curve;
