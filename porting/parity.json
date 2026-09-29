@@ -145066,6 +145066,94 @@
       "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::EditorView::promote_to_persistent",
       "status": "implemented",
       "notes": "An associated function taking the graph mutably: the mesh editor view only borrows the graph, and the promotion writes through the graph editor (SetPersistentTriangulation, SetPersistentPolygon3D, SetPersistentPolygon2D, SetPersistentPolygonOnTri) in native order: faces, edges, then coedges by ascending id, re-reading each fresh cache entry. A refused write (lock, active guard) stops the promotion with its Standard_ProgramError."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Severity",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Severity",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Mode",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Mode",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Result::IsValid() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::ValidationResult::is_valid",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Result::NbIssues(Severity) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::ValidationResult::nb_issues",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Options::Lightweight()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Options::lightweight",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Options::Audit()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::Options::audit",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Perform(const BRepGraph&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::perform",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Perform(const BRepGraph&,Mode)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::perform_with_mode",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Validate::Perform(const BRepGraph&,const Options&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Validate.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::validate::perform_with_options",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): BRepGraph_Validate is the module brep_graph::validate over &BRepGraph; the checks append in their native traversal order and run in the native sequence, so the issues keep the native report order; Result is ValidationResult. Compared with OCCT by the br_bedit validation requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Transform::MoveRef(BRepGraph&,BRepGraph_ChildRefId,const gp_Trsf&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Transform.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::transform::move_child_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): the MoveRef overloads are named functions of brep_graph::transform; a locked reference or a failed location composition raises, so they return Result. Compared with OCCT by the br_bedit MoveRef requests."
+    },
+    {
+      "upstream_id": "BRepGraph_Transform::MoveRef(BRepGraph&,BRepGraph_OccurrenceRefId,const gp_Trsf&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_Transform.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::transform::move_occurrence_ref",
+      "status": "implemented",
+      "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.12): the MoveRef overloads are named functions of brep_graph::transform; a locked reference or a failed location composition raises, so they return Result. Compared with OCCT by the br_bedit MoveRef requests."
     }
   ],
   "tests": [
