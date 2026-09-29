@@ -145058,6 +145058,14 @@
       "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::remove_attachment",
       "status": "implemented",
       "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::MeshView::EditorView::PromoteToPersistent()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MeshView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mesh_view::editor_view::EditorView::promote_to_persistent",
+      "status": "implemented",
+      "notes": "An associated function taking the graph mutably: the mesh editor view only borrows the graph, and the promotion writes through the graph editor (SetPersistentTriangulation, SetPersistentPolygon3D, SetPersistentPolygon2D, SetPersistentPolygonOnTri) in native order: faces, edges, then coedges by ascending id, re-reading each fresh cache entry. A refused write (lock, active guard) stops the promotion with its Standard_ProgramError."
     }
   ],
   "tests": [
@@ -227306,6 +227314,314 @@
       "rust_target": "brep_graph_layer_history_suite",
       "rust_test": "BRepGraph_LayerHistoryTest__ClearReleasesHistoryAndAllowsFreshUidRecording",
       "rust_source": "crates/tkbrep/tests/brep_graph_layer_history_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CacheStaleAfterFaceMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CacheStaleAfterFaceMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CacheStaleAfterSurfaceRepMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CacheStaleAfterSurfaceRepMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CacheSurvivesUnrelatedMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CacheSurvivesUnrelatedMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.ClearDropsLargeCacheAndAllowsSmallRegenerate",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__ClearDropsLargeCacheAndAllowsSmallRegenerate",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.FaceCache_StaleAfterEdgeMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__FaceCache_StaleAfterEdgeMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.FaceCache_StaleAfterCoEdgeMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__FaceCache_StaleAfterCoEdgeMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.FaceCache_StaleAfterVertexMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__FaceCache_StaleAfterVertexMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.EdgeCache_StaleAfterVertexMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__EdgeCache_StaleAfterVertexMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.EdgeCache_FreshAfterUnrelatedFaceMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__EdgeCache_FreshAfterUnrelatedFaceMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CoEdge_Polygon2DFreshAfterFaceMeshChange",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CoEdge_Polygon2DFreshAfterFaceMeshChange",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CoEdge_PolygonOnTriStaleAfterFaceMeshChange",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CoEdge_PolygonOnTriStaleAfterFaceMeshChange",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CoEdge_PolygonOnTriStaleAfterFaceTopologyChange",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CoEdge_PolygonOnTriStaleAfterFaceTopologyChange",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CoEdge_PolygonOnTriStaleAfterCoEdgeMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CoEdge_PolygonOnTriStaleAfterCoEdgeMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CoEdge_FreshAfterUnrelatedEdgeMutation",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CoEdge_FreshAfterUnrelatedEdgeMutation",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CoEdge_UsesCoEdgeDefFaceId",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CoEdge_UsesCoEdgeDefFaceId",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CoEdge_Polygon2DStaleAfterSlotRecipeChange",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CoEdge_Polygon2DStaleAfterSlotRecipeChange",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.CoEdge_FaceNotYetMeshed_SnapshotZero",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__CoEdge_FaceNotYetMeshed_SnapshotZero",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.Needs_DetectsChildDrivenFaceStaleness",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__Needs_DetectsChildDrivenFaceStaleness",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.Needs_DetectsStaleCoedgeOnTri",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__Needs_DetectsStaleCoedgeOnTri",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.VertexPropagation_ReachesFaces",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__VertexPropagation_ReachesFaces",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.MeshGeneration_MonotonicAcrossClear",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__MeshGeneration_MonotonicAcrossClear",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRepGraph_CacheMeshTest.FaceClear_PreservesCoEdgePolygon2D",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRepGraph_CacheMesh_Test.cxx",
+      "source_sha256": "fe56a53a9f9aa048b79682cd7cb38d18fdc4443e457f744a20e5687ee1b05ba1",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_graph_cache_mesh_suite",
+      "rust_test": "BRepGraph_CacheMeshTest__FaceClear_PreservesCoEdgePolygon2D",
+      "rust_source": "crates/tkbrep/tests/brep_graph_cache_mesh_suite.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
