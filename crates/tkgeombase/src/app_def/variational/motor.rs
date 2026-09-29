@@ -32,6 +32,7 @@ const SMALLEST_VALUE: f64 = 1.0e-9;
 
 /// The local variables of TheMotor that live across its phases. The native
 /// `VALCRI`, `ERRQUA`, `ERRMOY` and `NumPnt` start uninitialized; the port's at 0.
+#[derive(Default)]
 pub(super) struct MotorState {
     vocri: [f64; 3],
     valcri: [f64; 3],
@@ -79,6 +80,25 @@ fn stable_sort(ti: &Handle<HArray1<f64>>) {
             std::cmp::Ordering::Equal
         }
     });
+}
+
+// Like in MOTLIS: the estimations of J raised to their minima; returns the minima
+// `[J1min, J2min, J2min]`.
+fn raise_estimations(j: &dyn SmoothCriterion) -> [f64; 3] {
+    let [mut e1, mut e2, mut e3] = j.get_estimation();
+    let j1min: f64 = 1.0e-8;
+    let j2min: f64 = (e1 + 1.0e-8) * 1.0e-6;
+    if e1 < j1min {
+        e1 = j1min;
+    }
+    if e2 < j2min {
+        e2 = j2min;
+    }
+    if e3 < j2min {
+        e3 = j2min;
+    }
+    j.set_estimation(e1, e2, e3);
+    [j1min, j2min, j2min]
 }
 
 fn curve_of(curve: &Handle<Curve>) -> Result<&Curve, Failure> {
@@ -135,25 +155,13 @@ impl Variational {
         w_quality: f64,
         the_curve: &Handle<Curve>,
     ) -> Result<MotorState, Failure> {
-        let [mut e1, mut e2, mut e3] = j.get_estimation();
-        let j1min: f64 = 1.0e-8;
-        let j2min: f64 = (e1 + 1.0e-8) * 1.0e-6;
-        // Like in MOTLIS
-        if e1 < j1min {
-            e1 = j1min;
-        }
-        if e2 < j2min {
-            e2 = j2min;
-        }
-        if e3 < j2min {
-            e3 = j2min;
-        }
-        j.set_estimation(e1, e2, e3);
+        let j_min: [f64; 3] = raise_estimations(j);
         let current_ti: Handle<HArray1<f64>> = copy_of(&self.parameters)?;
         let cblong: f64 = j.est_length();
+        // The fields left to the default: VALCRI at 0, no new curve or parameters yet,
+        // and not near.
         Ok(MotorState {
             vocri: [BIG_VALUE; 3],
-            valcri: [0.; 3],
             erold: BIG_VALUE,
             errors: ProjectErrors {
                 max_err: BIG_VALUE,
@@ -163,15 +171,13 @@ impl Variational {
             lnold: cblong,
             c_current: the_curve.clone(),
             c_old: the_curve.clone(),
-            c_new: Handle::default(),
             old_ti: copy_of(&current_ti)?,
-            new_ti: Handle::default(),
             current_ti,
             eps_length: SMALL_VALUE,
-            isnear: false,
             lconst: true,
-            j_min: [j1min, j2min, j2min],
+            j_min,
             w_quality,
+            ..MotorState::default()
         })
     }
 
