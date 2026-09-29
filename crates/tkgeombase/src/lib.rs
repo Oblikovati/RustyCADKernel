@@ -38,6 +38,7 @@ pub mod gcpnts;
 pub mod geom2d_convert;
 pub mod geom_bnd_lib;
 pub mod geom_convert;
+pub mod geom_lib;
 pub mod geom_lprop;
 pub mod geom_tools;
 pub mod gprop;

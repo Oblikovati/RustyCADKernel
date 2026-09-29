@@ -44,6 +44,7 @@ mod surface_to_bspline_trimmed;
 mod units;
 
 pub use approx_curve::ApproxCurve;
+pub(crate) use approx_curve::missing_table;
 pub use approx_surface::ApproxSurface;
 pub use bspline_surface_to_bezier::BSplineSurfaceToBezierSurface;
 pub use bspline_to_bezier::BSplineCurveToBezierCurve;

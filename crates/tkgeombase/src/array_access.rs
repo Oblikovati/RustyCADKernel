@@ -20,6 +20,7 @@
 use crate::native_failure::array_failure;
 use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::Failure;
+use rustycad_tkmath::math::Matrix;
 
 /// `array(index)` of a cloneable element; `element(&curves, 0, "Curves")?`.
 pub(crate) fn element<T: Clone>(
@@ -48,6 +49,18 @@ pub(crate) fn store<T>(
 /// `NCollection_Array1<T>(0, count - 1)`; `zero_based::<f64>(3)?`.
 pub(crate) fn zero_based<T: Default>(count: i32) -> Result<Array1<'static, T>, Failure> {
     Array1::with_bounds(0, count - 1).map_err(|error| array_failure(error, "NCollection_Array1"))
+}
+
+/// `math_Matrix(RowLower, RowUpper, ColLower, ColUpper, InitialValue)`;
+/// `matrix(1, 3, 1, 3, 0.0)?`.
+pub(crate) fn matrix(
+    rl: i32,
+    ru: i32,
+    cl: i32,
+    cu: i32,
+    value: f64,
+) -> Result<Matrix<'static>, Failure> {
+    Matrix::filled(rl, ru, cl, cu, value).map_err(|error| array_failure(error, "math_Matrix"))
 }
 
 /// `NCollection_Array2<T>(1, rows, 1, cols)`; `grid::<f64>(2, 3)?`.
