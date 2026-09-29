@@ -281,7 +281,9 @@ by `MultiCurve` (Bezier evaluation) and `MultiBSpCurve`, which reaches the non-v
 members of its base through `Deref`; the slicing copy `(AppParCurves_MultiCurve)` is
 `MultiBSpCurve::as_multi_curve`. The `MultiLine`/`ToolLine` template parameters of the
 generics are the `LineTool` trait (implemented by the line: `ToolLine::NbP3d(SSP)` is
-`ssp.nb_p3d()`); `LeastSquare` and `ResolConstraint` read the line in their
+`ssp.nb_p3d()?`; `LastPoint`, `NbP2d` and `NbP3d` return a `Result`, since
+AppDef_MyLineTool reads the line's array and first multipoint, which raise on a null or
+empty line); `LeastSquare` and `ResolConstraint` read the line in their
 constructors only and are plain structs with generic constructors, `Function<L>` and
 `BSpFunction<L>` keep a copy of the line. The `Squares`, `ResolCons` and
 `*_BFGS` parameters are the ported classes themselves; the BFGS subclass the AppDef,
@@ -483,9 +485,8 @@ nothing to port.
   `Approx_ComputeCLine.gxx` is `ComputeCLine` over `app_cont::Function`;
   `Approx_FitAndDivide` and `Approx_FitAndDivide2d` are its aliases.
 - `LineTool` has the Approx members `what_status`, `make_ml_between` and
-  `make_ml_one_more_point` (`None` for a native null MultiLine); the AppDef semantics
-  of AppDef_MyLineTool (NoPointsAdded, the same line, no extra point) are left to
-  AppDef.
+  `make_ml_one_more_point` (`None` for a native null MultiLine); AppDef_MyLineTool
+  answers them as natively (NoPointsAdded, the same line, no extra point).
 - The native constructor overloads are named constructors (`with_line`,
   `with_line_and_parameters`, `from_parameters`; `CurvlinFunc::from_curve`,
   `from_curve_on_surface`, `from_two_curves_on_surfaces`; `SameParameter::from_geometry`,
@@ -505,8 +506,51 @@ nothing to port.
   Geom2dConvert_ApproxCurve (`curve_approx_eval.rs`), which use the same code natively.
 - `Dump` members write into a `fmt::Write`; `Status` and `ParametrizationType` keep the
   native values (`code`, `from_code`).
-- AppDef and ProjLib, ported after Approx, map their `AppDef_Compute`,
-  `AppDef_BSplineCompute` and ProjLib instantiations onto these generics.
+- AppDef maps `AppDef_Compute` and `AppDef_BSplineCompute` onto these generics (type
+  aliases over its MultiLine); ProjLib, ported after Approx, does the same with its
+  instantiations.
+
+## AppDef
+
+AppDef (`app_def`) ports every class of the package; `tools/audit_api_rows.py` reports 0
+missing and 0 stale api rows for it (389 implemented and 5 excluded:
+`AppDef_MultiLine::SetParameter` and the four `ResConstraintOf*::Error()` are declared
+but never defined natively).
+
+- `AppDef_MultiPointConstraint` is an `AppParCurves_MultiPoint` (reached through
+  `Deref`) with four optional shared vector arrays (`Handle<HArray1<...>>`, null until
+  a constructor or a setter allocates them). A copy shares every allocated array, as
+  the native copy shares its handles; the constructor overloads are named
+  (`with_tangents`, `with_tangents_and_curvatures`, `with_tangents_3d`, ...).
+- `AppDef_MultiLine` holds its multipoints in one shared array (a copy shares it; the
+  default line has none). `AppDef_MyLineTool` is the `LineTool` implementation of
+  `MultiLine` (`AppDef_MyLineTool::NbP3d(ML)` is `ml.nb_p3d()?`); `MultiLine::value`
+  is `AppDef_MultiLine::Value`, the three-array `AppDef_MyLineTool::Value` is
+  `LineTool::value`.
+- The instantiation classes are type aliases of the ported generics
+  (`instantiations.rs`): `Compute` = `approx::ComputeLine`, `BSplineCompute` =
+  `approx::BSplComputeLine`, `TheLeastSquares` and the four `*ParLeastSquareOf*` =
+  `LeastSquare`, `TheResol` and the `ResConstraintOf*` = `ResolConstraint`,
+  `TheFunction` and the `ParFunctionOf*` = `Function<MultiLine>`,
+  `BSpParFunctionOfMyBSplGradientOfBSplineCompute` = `BSpFunction<MultiLine>`,
+  `TheGradient` and the `MyGradient*` = `Gradient`, `MyBSplGradientOfBSplineCompute` =
+  `BSpGradient`, and the four `*_BFGSOf*` = `GradientBfgs`.
+- `AppDef_SmoothCriterion` is a transient trait (`Handle<dyn SmoothCriterion>` is the
+  native base handle) whose members take `&self`: `LinearCriteria` keeps its state
+  behind a lock, so every handle sees it. `double& EstLength()` is `est_length` /
+  `set_est_length`, `SetWeight(Array1)` is `set_point_weights`, and the output
+  references are returned values (`QualityValues`, `SmoothErrors`).
+- `AppDef_Variational` takes its defaulted constructor arguments in
+  `VariationalOptions`; `SetCriteriumWeight(Order, Percent)` is
+  `set_criterium_weight_of`. Its translation unit defines `No_Standard_OutOfRange` and
+  the other range macros after the headers that already expanded them, so every
+  NCollection and math access stays checked natively; the port checks the same
+  accesses. The engine (TheMotor, Optimization, Project, ACR, SplitCurve, Adjusting)
+  shares the parameter and curve handles as natively: the parameters the criterion
+  reads are the arrays the motor sorts and remaps in place.
+- The null dereferences of the native code (a vector array never allocated, the
+  default line, a criterion before SetCurve for InputVector, a null curve given to the
+  first SetCurve, a gradient before any basis cache) are Standard_NullObject errors.
 
 ## Verification
 
@@ -643,8 +687,8 @@ B-spline basis functions inside, at and outside their ranges, down to 2 poles an
 interior multiplicities up to C0; every MultiPoint, MultiCurve and MultiBSpCurve
 constructor and member with valid and invalid indexes, the transformations, the Dump
 text and the sharing of copies; and the generics through the native AppDef
-instantiations (the Rust probe implements `LineTool` with the AppDef_MultiLine and
-AppDef_MyLineTool semantics): least-squares fits of 3D, 2D and mixed lines (smooth,
+instantiations (both probes read an AppDef_MultiLine through AppDef_MyLineTool; the
+Rust one uses the AppDef port): least-squares fits of 3D, 2D and mixed lines (smooth,
 noisy, collinear, with a repeated point) for every pair of extremity constraints each
 Perform overload accepts, too few poles, tangents against the chord and missing
 tangents or curvatures, Bezier and B-spline bases; the Uzawa correction with inner
@@ -811,6 +855,28 @@ missing D1, D2 and Resolution; 673 requests. Left out, as the native result is u
 there: ComputeLine given fewer parameters than points, BSplComputeLine user
 multiplicities with several degrees and cutting after a failed first fit (uninitialized
 multiplicities, heap corruption).
+
+The AppDef requests (`tkgeombase_corpus_appdef.py` and
+`tkgeombase_corpus_appdef_variational.py`, probes `tkgeombase_probe_appdef.cxx` and
+`tkgeombase_probe_appdef_variational.cxx`) run every MultiPointConstraint constructor on
+3D, 2D, mixed and empty point sets with the vector setters and getters inside and
+outside their ranges, every MultiLine constructor with the AppDef_MyLineTool members
+on arrays of every size and lower bound, AppDef_Compute's four constructors,
+AppDef_LinearCriteria's members on curves of one to three elements (C0 to C2, matching
+and mismatching dimensions, every SetCurve path), and AppDef_Variational on 3D, 2D and
+mixed lines (smooth, noisy, collinear, with a repeated point, scaled) without and with
+pass, tangency and curvature constraints, every continuity, over-constrained to
+generous degrees and segment counts, size and max-error tolerances (Adjusting), every
+criterion weight, every query, Distance, Dump and setter, and the degenerate inputs
+(one, two and coincident points, FirstPoint above 1, constraints before the last point,
+missing or non-normal constraint vectors, zero tangents); 555 requests. Left out, as
+the native result reads uninitialized or unowned memory there: vector reads of a point
+without them, a default line, SetCurve of a null curve, point ranges whose allocation
+size wraps, NoConstraint couples whose uninitialized table entries a search reaches,
+InitCutting runs whose back scan compares with the knot it is about to set (the
+corpus simulates the scan), a smoothing after a SetConstraints that raised inside Init,
+negative tolerances in the max-error mode and C0 smoothings that reduce an element to
+degree 1.
 
 The corpus has 41696 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
@@ -1400,6 +1466,51 @@ Approx:
 - `Approx_SweepApproximation::Dump` writes its parts to `std::cout` (the port to the
   given stream), and the 2D poles are appended across Performs, so `Curve2dPoles(1)`
   keeps the first run's poles.
+
+AppDef:
+
+- `AppDef_MultiPointConstraint::SetTang` (and the three other setters) allocates its
+  array before the index check, so a failing call still makes the point a tangency
+  (curvature) point; `Tang` and the other getters dereference the array unchecked
+  (Standard_NullObject in the port when it was never allocated). The six-array
+  constructor copies the curvatures over the tangent count (equal after its check).
+- `AppDef_MultiLine::NbPoints`, `AppDef_MyLineTool::NbP2d` and `NbP3d` read the first
+  multipoint: Standard_OutOfRange on an empty line. `Dump` prints only the count.
+- `AppDef_LinearCriteria::Gradient` and its dimension check raise with the message of
+  ErrorValues; `SetWeight(Array1)` takes the bounds of its argument; the element cache
+  survives SetCurve (only SetParameters invalidates it), and an element without points
+  leaves the previous cache and the point range `IL..=IL - 1`.
+- `AppDef_Variational` estimates the last tangent from the points at
+  `(LastPoint - 3) * Dimension + 1` (not relative to FirstPoint), so any FirstPoint
+  above 1 reads past the points (Standard_OutOfRange); two points read past them too.
+  The constraint searches of EstTangent, EstSecnd and ACR evaluate the table entry
+  before their count test, so constraints ending before the last point raise
+  Standard_OutOfRange; with NoConstraint couples the table is longer and the entry read
+  is uninitialized natively (0 in the port).
+- `Init` counts a constraint before reading its vectors: a SetConstraints that raises
+  leaves the counters and freshly allocated (uninitialized natively, zero in the port)
+  tables behind, and `IsOverConstrained` is never cleared by a later valid Init
+  (SetConstraints then answers false although the criterion is rebuilt).
+- `SetMaxDegree` neither checks nor clamps the degree (the constructor clamps to 30),
+  `SetWithCutting(false)` tests the over-constraint with the knot count as segment
+  count, and no setter clears the done flag; `Approximate` never clears it either, so a
+  failed conversion keeps the previous result. Approximate stores its knots in a new
+  array (earlier `Knots()` handles keep the old ones) and rebases the parameters on 1.
+- `Adjusting` restores the errors and criteria of a rejected pass but keeps its
+  parameters, distances and worst point index. `Project` shifts the worst point index
+  by FirstPoint - 1 even when no distance exceeds 0 (the index is then the caller's
+  uninitialized value natively, 0 in the port).
+- `InitCutting` can compare a constrained parameter with the knot it is about to set,
+  which FEmTool_Curve leaves uninitialized natively (0 in the port).
+- `Dump` prints the flags `o.setf(std::ios::scientific)` returns before the tolerance
+  (4098 for a stream with the default flags, the port's assumption), then leaves the
+  stream in scientific mode with precision 3.
+- A C0 smoothing can reduce an element to degree 1, whose second derivative
+  FEmTool_Curve::D2 evaluates as a polynomial of degree -1, reading outside the element
+  natively; the port raises Standard_OutOfRange.
+- A point range with `LastPoint < FirstPoint - 1` wraps the allocation size of the
+  point weights; the native allocation fails and the first write crashes, the port
+  raises Standard_OutOfMemory.
 
 GeomConvert:
 
