@@ -938,9 +938,9 @@ through poles, leaving bounded surfaces, far from them and degenerate (point and
 projections); 2225 requests. The given initial curves of the polar projection rotate
 over the curves and the ComputeApprox constructor runs once per surface: the far initial
 curves and the 1e-7 fits dominate the debug Rust twin, and the numeric verifier has a
-900 s budget. Left out: the projection of a line normal to the plane by
+900 s budget. Left out: the projection of a line with the parametrization kept by
 the default ProjectOnPlane (a direction in the plane, all values NaN), whose native
-reparametrization never returns.
+trim never returns; the port refuses it (see the Rust deviation below).
 
 The corpus has 44476 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
@@ -1707,3 +1707,12 @@ ProjLib:
   commented out) and gives NaN values; the default constructor projects along X onto
   the XOY plane. `Period` returns `false` (0.0) for an approximation, which
   `IsPeriodic` makes unreachable.
+- Rust deviation, `ProjLib_ProjectOnPlane::Load` of a line with the parametrization
+  kept, along a direction parallel to the plane (the default constructor's X onto
+  XOY, for a line normal to the plane or any other line): the projected end parameters
+  are NaN, and the native `Geom_TrimmedCurve(line, NaN, NaN)` calls `Reverse`, which
+  calls `SetTrim` again, without end (the native probe never returns; the port
+  overflowed its stack). The port sets the BSplineCurve type, as natively at that point,
+  and returns a Standard_ConstructionError (the class of the commented-out constructor
+  check) that names the direction, the plane normal, the line direction and the NaN
+  segment. Without the kept parametrization the NaN line is returned as natively.

@@ -61,6 +61,26 @@ fn project_on_plane_defaults_to_x_onto_xoy() {
 }
 
 #[test]
+fn project_on_plane_refuses_a_kept_line_along_a_direction_in_the_plane() {
+    // Regression: the default projection runs along X onto XOY, a direction in the
+    // plane, so a line normal to the plane projects to NaN parameters. Natively the
+    // kept parametrization of that NaN segment never returns; the port overflowed the
+    // stack. Every line is refused alike (docs/tkgeombase-progress.md).
+    let vertical = ranged(line(Point3::new(1.0, 2.0, 3.0), dir(0.0, 0.0, 1.0)), 0.0, 3.0);
+    let in_plane = ranged(line(Point3::new(0.0, 0.0, 0.0), dir(1.0, 1.0, 0.0)), -1.0, 2.0);
+    for segment in [vertical, in_plane] {
+        let projection = ProjectOnPlane::new();
+        let error = projection.load(&segment, 1e-7, true).unwrap_err();
+        assert_eq!(error.exception_type(), "Standard_ConstructionError");
+        assert!(error.message().contains("the direction (1, 0, 0) is parallel to the plane"));
+        // Without the kept parametrization the NaN line is the native result.
+        projection.load(&segment, 1e-7, false).unwrap();
+        assert_eq!(projection.get_type().unwrap(), CurveType::Line);
+        assert!(projection.first_parameter().unwrap().is_nan());
+    }
+}
+
+#[test]
 fn compute_approx_fits_a_circle_on_a_sphere() {
     let equator = ranged(horizontal_circle(1.0, 3.0_f64.sqrt()), 0.5, 2.0);
     let approx = ComputeApprox::with_curve(&equator, &sphere(2.0), 1e-6).unwrap();
