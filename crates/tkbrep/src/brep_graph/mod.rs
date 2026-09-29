@@ -22,6 +22,7 @@
 //! section 11 fixes the mapping and names the modules the second phase of the port adds.
 pub mod cache;
 pub mod cache_derived_state;
+pub mod cache_mesh;
 pub mod cache_registry;
 pub mod child_explorer;
 mod child_refs;
@@ -43,6 +44,7 @@ pub mod layer_parametric;
 pub mod layer_registry;
 pub mod layer_topo_supplement;
 mod marks;
+pub mod mesh_view;
 pub mod parallel_policy;
 mod parent_cursor;
 pub mod parent_explorer;
