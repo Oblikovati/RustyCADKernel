@@ -4,7 +4,7 @@
 `cargo coverage` counts only `cargo test` runs. Most TKG3d and TKGeomBase code is
 exercised by the numeric probes instead, which the verifiers compare with native OCCT.
 This tool runs the tests under coverage, then each Rust probe over the corpus that its
-verifier last used, and fails unless the probe output still equals the saved native
+verifier last used (in parallel shards, one process per core), and fails unless the probe output still equals the saved native
 output (with the verifiers' own comparator). Covered probe lines are therefore always
 lines whose results were checked against OCCT. Run the verifiers first: they write the
 corpus and the native output this tool replays.
@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Callable
 
 from porting import ROOT
+from probe_shards import ProbeCommand, ShardRunner, run_shard, run_sharded
 from verify_tkmath_numeric import compare
 
 Runner = Callable[[list[str], str | None], str]
@@ -74,8 +75,29 @@ def run_command(args: list[str], stdin: str | None) -> str:
     return result.stdout
 
 
-def replay_probe(corpus: ProbeCorpus, run: Runner) -> int:
-    """Run one probe under coverage and check it against the saved native output.
+def profile_pattern() -> str:
+    """Where a probe process writes its raw profile, so `cargo llvm-cov report` merges it.
+
+    The pattern is the one `cargo llvm-cov run` (cargo-llvm-cov 0.9) gives its child:
+    `<target>/llvm-cov-target/<workspace directory>-%p-%m.profraw`; %p keeps the files
+    of parallel shards apart. profile_pattern().endswith('-%p-%m.profraw')
+    """
+    return str(ROOT/'target/llvm-cov-target'/f'{ROOT.name}-%p-%m.profraw')
+
+
+def build_probe(corpus: ProbeCorpus, run: Runner) -> Path:
+    """Build the instrumented probe of one corpus and return its path.
+
+    `cargo llvm-cov run` builds the example with the coverage flags; the empty input
+    makes the run itself a no-op. build_probe(PROBE_CORPORA[1], run_command)
+    """
+    run(['cargo', 'llvm-cov', 'run', '--no-report', '--no-clean', '--locked', '-p', corpus.package,
+         '--example', corpus.example], '')
+    return ROOT/'target/llvm-cov-target/debug/examples'/corpus.example
+
+
+def replay_probe(corpus: ProbeCorpus, run: Runner, shard_runner: ShardRunner = run_shard) -> int:
+    """Run one probe under coverage in parallel shards and check it against the saved native output.
 
     Returns the number of requests; replay_probe(PROBE_CORPORA[1], run_command).
     """
@@ -83,8 +105,9 @@ def replay_probe(corpus: ProbeCorpus, run: Runner) -> int:
         if not path.is_file():
             raise FileNotFoundError(f'{path} is missing; run the {corpus.package} verifier first')
     requests: str = corpus.inputs().read_text()
-    rust: str = run(['cargo', 'llvm-cov', 'run', '--no-report', '--locked', '-p', corpus.package,
-                     '--example', corpus.example], requests)
+    environment: dict[str, str] = dict(verifier_environment(), LLVM_PROFILE_FILE=profile_pattern())
+    command = ProbeCommand([str(build_probe(corpus, run))], environment, ROOT)
+    rust: str = run_sharded(command, requests, runner=shard_runner).stdout
     check_output(corpus, corpus.native().read_text(), rust, requests)
     return len(requests.splitlines())
 

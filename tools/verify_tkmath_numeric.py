@@ -44,16 +44,32 @@ from tkmath_mathroot_api_corpus import append_mathroot_api_requests
 from tkmath_mathsys_api_corpus import append_mathsys_api_requests
 from tkmath_bnd_corpus import append_bnd_requests
 from native_build import LINKED_TOOLKITS
+from probe_shards import ProbeCommand, run_sharded
+
+
+def probe_environment() -> dict[str, str]:
+    """The C locale and pinned cargo every probe and build runs under; probe_environment()['LANG'] == 'C'."""
+    environment = dict(os.environ, LC_ALL='C', LANG='C')
+    environment['PATH'] = str(Path.home()/'.cargo/bin')+os.pathsep+environment['PATH']
+    return environment
 
 
 def run(command: list[str], log: Path, requests: str | None = None) -> str:
     """Capture a checked probe invocation; run(command, log, input_text)."""
-    environment = dict(os.environ, LC_ALL='C', LANG='C')
-    environment['PATH'] = str(Path.home()/'.cargo/bin')+os.pathsep+environment['PATH']
     result = subprocess.run(command, input=requests, text=True, capture_output=True,
-                            cwd=ROOT, env=environment, check=False)
+                            cwd=ROOT, env=probe_environment(), check=False)
     log.write_text(result.stdout+result.stderr)
     result.check_returncode()
+    return result.stdout
+
+
+def run_probe(command: list[str], log: Path, requests: str) -> str:
+    """Run a probe over its corpus in parallel shards and log the joined output.
+
+    run_probe([str(executable)], output/'native.txt', requests)
+    """
+    result = run_sharded(ProbeCommand(command, probe_environment(), ROOT), requests)
+    log.write_text(result.stdout+result.stderr)
     return result.stdout
 
 
@@ -521,8 +537,8 @@ def verify_probes(output: Path, executable: Path, revision: str) -> None:
     reject_unknown_operation(ROOT/'target/debug/examples/numeric_probe')
     requests = corpus()
     (output/'inputs.txt').write_text(requests)
-    oracle = run([str(executable)], output/'native.txt', requests)
-    rust = run([str(ROOT/'target/debug/examples/numeric_probe')], output/'rust.txt', requests)
+    oracle = run_probe([str(executable)], output/'native.txt', requests)
+    rust = run_probe([str(ROOT/'target/debug/examples/numeric_probe')], output/'rust.txt', requests)
     compare(oracle, rust, requests)
     report = {'revision': revision, 'cases_passed': len(requests.splitlines()),
               'input_sha256': hashlib.sha256(requests.encode()).hexdigest(),

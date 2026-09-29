@@ -20,7 +20,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable
 from porting import ROOT, snapshot
-from verify_tkmath_numeric import compare, reject_unknown_operation, run, selected_paths
+from verify_tkmath_numeric import compare, reject_unknown_operation, run, run_probe, selected_paths
 
 
 @dataclass(frozen=True)
@@ -79,8 +79,8 @@ def verify_numeric(oracle: NumericOracle) -> None:
     reject_unknown_operation(oracle.rust_probe)
     requests = oracle.corpus()
     (output/'inputs.txt').write_text(requests)
-    native = run([str(executable)], output/'native.txt', requests)
-    rust = run([str(oracle.rust_probe)], output/'rust.txt', requests)
+    native = run_probe([str(executable)], output/'native.txt', requests)
+    rust = run_probe([str(oracle.rust_probe)], output/'rust.txt', requests)
     compare(native, rust, requests)
     report = {'revision': inventory['revision'], 'toolkit': oracle.toolkit,
               'cases_passed': len(requests.splitlines()),

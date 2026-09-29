@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 import coverage_report
+from probe_shards import ShardResult
 from coverage_report import ProbeCorpus, check_output, crate_totals, percent, replay_probe, verifier_environment
 
 
@@ -34,6 +35,18 @@ class CheckOutputTests(unittest.TestCase):
             check_output(corpus, 'OK a\n', 'OK b\n', 'op\n')
 
 
+class FixedShardRunner:
+    """Answer every shard with its own lines mapped through a table, recording the environment."""
+
+    def __init__(self, answers: dict[str, str]):
+        self.answers = answers
+        self.environments: list[dict[str, str]] = []
+
+    def __call__(self, command, requests):
+        self.environments.append(command.environment)
+        return ShardResult(''.join(self.answers[line] for line in requests.splitlines(keepends=True)), '')
+
+
 class ReplayProbeTests(unittest.TestCase):
     def test_replay_runs_the_probe_under_coverage_and_checks_it(self):
         with tempfile.TemporaryDirectory() as tmp, mock.patch.object(coverage_report, 'ROOT', Path(tmp)):
@@ -41,11 +54,13 @@ class ReplayProbeTests(unittest.TestCase):
             (Path(tmp)/'ev/inputs.txt').write_text('op 1\nop 2\n')
             (Path(tmp)/'ev/native.txt').write_text('OK 1\nOK 2\n')
             corpus = ProbeCorpus('rustycad-x', 'numeric_probe', 'ev')
-            runner = RecordingProbeRunner('OK 1\nOK 2\n')
-            self.assertEqual(replay_probe(corpus, runner), 2)
-            self.assertEqual(runner.commands[0][:4], ['cargo', 'llvm-cov', 'run', '--no-report'])
+            builder = RecordingProbeRunner('')
+            shards = FixedShardRunner({'op 1\n': 'OK 1\n', 'op 2\n': 'OK 2\n'})
+            self.assertEqual(replay_probe(corpus, builder, shards), 2)
+            self.assertEqual(builder.commands[0][:5], ['cargo', 'llvm-cov', 'run', '--no-report', '--no-clean'])
+            self.assertTrue(all(e['LLVM_PROFILE_FILE'].endswith('-%p-%m.profraw') for e in shards.environments))
             with self.assertRaises(RuntimeError):
-                replay_probe(corpus, RecordingProbeRunner('OK 1\nOK 3\n'))
+                replay_probe(corpus, builder, FixedShardRunner({'op 1\n': 'OK 1\n', 'op 2\n': 'OK 3\n'}))
 
     def test_missing_evidence_names_the_verifier_to_run(self):
         with tempfile.TemporaryDirectory() as tmp, mock.patch.object(coverage_report, 'ROOT', Path(tmp)):
