@@ -129306,6 +129306,70 @@
       "rust_item": "rustycad_tkgeombase::proj_lib::Torus::project_hyperbola",
       "status": "implemented",
       "notes": "ProjLib mapping (docs/tkgeombase-progress.md): the elementary projectors are structs over Projector (reached through Deref) with the virtual Project overloads in the Project trait; ProjectOnPlane, ProjectedCurve and CompProjectedCurve are Handle-shared adaptors whose state sits behind one lock; overloads take distinct Rust names, output references become returned values and native exceptions (and native null dereferences) are Failure values."
+    },
+    {
+      "upstream_id": "GeomProjLib::Curve2d(const occ::handle<Geom_Curve>&,double,double,const occ::handle<Geom_Surface>&,double,double,double,double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomProjLib/GeomProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_proj_lib::curve2d_range_bounds_tolerance",
+      "status": "implemented",
+      "notes": "GeomProjLib mapping (docs/tkgeombase-progress.md): the static overloads are free functions of `geom_proj_lib` with distinct names; the native in-out Tolerance is an input and a second returned value (`Curve2dWithTolerance`), First/Last and the four surface bounds are tuples, a failed projection returns a null handle as natively and native exceptions (and null dereferences) are Failure values."
+    },
+    {
+      "upstream_id": "GeomProjLib::Curve2d(const occ::handle<Geom_Curve>&,double,double,const occ::handle<Geom_Surface>&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomProjLib/GeomProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_proj_lib::curve2d_range_tolerance",
+      "status": "implemented",
+      "notes": "GeomProjLib mapping (docs/tkgeombase-progress.md): the static overloads are free functions of `geom_proj_lib` with distinct names; the native in-out Tolerance is an input and a second returned value (`Curve2dWithTolerance`), First/Last and the four surface bounds are tuples, a failed projection returns a null handle as natively and native exceptions (and null dereferences) are Failure values."
+    },
+    {
+      "upstream_id": "GeomProjLib::Curve2d(const occ::handle<Geom_Curve>&,double,double,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomProjLib/GeomProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_proj_lib::curve2d_range",
+      "status": "implemented",
+      "notes": "GeomProjLib mapping (docs/tkgeombase-progress.md): the static overloads are free functions of `geom_proj_lib` with distinct names; the native in-out Tolerance is an input and a second returned value (`Curve2dWithTolerance`), First/Last and the four surface bounds are tuples, a failed projection returns a null handle as natively and native exceptions (and null dereferences) are Failure values."
+    },
+    {
+      "upstream_id": "GeomProjLib::Curve2d(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomProjLib/GeomProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_proj_lib::curve2d",
+      "status": "implemented",
+      "notes": "GeomProjLib mapping (docs/tkgeombase-progress.md): the static overloads are free functions of `geom_proj_lib` with distinct names; the native in-out Tolerance is an input and a second returned value (`Curve2dWithTolerance`), First/Last and the four surface bounds are tuples, a failed projection returns a null handle as natively and native exceptions (and null dereferences) are Failure values."
+    },
+    {
+      "upstream_id": "GeomProjLib::Curve2d(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomProjLib/GeomProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_proj_lib::curve2d_bounds",
+      "status": "implemented",
+      "notes": "GeomProjLib mapping (docs/tkgeombase-progress.md): the static overloads are free functions of `geom_proj_lib` with distinct names; the native in-out Tolerance is an input and a second returned value (`Curve2dWithTolerance`), First/Last and the four surface bounds are tuples, a failed projection returns a null handle as natively and native exceptions (and null dereferences) are Failure values."
+    },
+    {
+      "upstream_id": "GeomProjLib::Curve2d(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&,double,double,double,double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomProjLib/GeomProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_proj_lib::curve2d_bounds_tolerance",
+      "status": "implemented",
+      "notes": "GeomProjLib mapping (docs/tkgeombase-progress.md): the static overloads are free functions of `geom_proj_lib` with distinct names; the native in-out Tolerance is an input and a second returned value (`Curve2dWithTolerance`), First/Last and the four surface bounds are tuples, a failed projection returns a null handle as natively and native exceptions (and null dereferences) are Failure values."
+    },
+    {
+      "upstream_id": "GeomProjLib::Project(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomProjLib/GeomProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_proj_lib::project",
+      "status": "implemented",
+      "notes": "GeomProjLib mapping (docs/tkgeombase-progress.md): the static overloads are free functions of `geom_proj_lib` with distinct names; the native in-out Tolerance is an input and a second returned value (`Curve2dWithTolerance`), First/Last and the four surface bounds are tuples, a failed projection returns a null handle as natively and native exceptions (and null dereferences) are Failure values."
+    },
+    {
+      "upstream_id": "GeomProjLib::ProjectOnPlane(const occ::handle<Geom_Curve>&,const occ::handle<Geom_Plane>&,const gp_Dir&,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomProjLib/GeomProjLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_proj_lib::project_on_plane",
+      "status": "implemented",
+      "notes": "GeomProjLib mapping (docs/tkgeombase-progress.md): the static overloads are free functions of `geom_proj_lib` with distinct names; the native in-out Tolerance is an input and a second returned value (`Curve2dWithTolerance`), First/Last and the four surface bounds are tuples, a failed projection returns a null handle as natively and native exceptions (and null dereferences) are Failure values."
     }
   ],
   "tests": [
@@ -206570,6 +206634,34 @@
       "rust_target": "proj_lib_compute_approx_on_polar_surface",
       "rust_test": "ProjLib_ComputeApproxOnPolarSurfaceTest__BuildInitialCurveAndProjectOnCylinder_Done",
       "rust_source": "crates/tkgeombase/tests/proj_lib_compute_approx_on_polar_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomProjLibTest.OCC31661_1_ProjectParabolaOnPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomProjLib_Test.cxx",
+      "source_sha256": "d4747f32abd5ba998c56e0266a540d27d06f97ffa634570438d0821bac345a0f",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_proj_lib",
+      "rust_test": "GeomProjLibTest__OCC31661_1_ProjectParabolaOnPlane",
+      "rust_source": "crates/tkgeombase/tests/geom_proj_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomProjLibTest.OCC31661_2_ProjectHyperbolaOnPlane",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomProjLib_Test.cxx",
+      "source_sha256": "d4747f32abd5ba998c56e0266a540d27d06f97ffa634570438d0821bac345a0f",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_proj_lib",
+      "rust_test": "GeomProjLibTest__OCC31661_2_ProjectHyperbolaOnPlane",
+      "rust_source": "crates/tkgeombase/tests/geom_proj_lib.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

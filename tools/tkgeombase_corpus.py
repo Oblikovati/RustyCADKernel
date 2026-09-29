@@ -63,3 +63,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_appdef').append_appdef_requests(requests)
     # ProjLib (tkgeombase_corpus_projlib.py, tkgeombase_corpus_projlib_curves.py)
     __import__('tkgeombase_corpus_projlib').append_projlib_requests(requests)
+    # GeomProjLib (tkgeombase_corpus_geomprojlib.py)
+    __import__('tkgeombase_corpus_geomprojlib').append_geomprojlib_requests(requests)

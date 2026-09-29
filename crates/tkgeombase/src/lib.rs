@@ -43,6 +43,7 @@ pub mod geom_bnd_lib;
 pub mod geom_convert;
 pub mod geom_lib;
 pub mod geom_lprop;
+pub mod geom_proj_lib;
 pub mod geom_tools;
 pub mod gprop;
 pub mod hermit;

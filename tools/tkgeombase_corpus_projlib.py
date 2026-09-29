@@ -141,8 +141,9 @@ def on_plane_requests(requests):
                 add(requests, 'pl_on_plane', variant, keep, 1e-7, *pl, *direction, *curve)
         add(requests, 'pl_on_plane', 3, 1, 1e-4, *AX3_TILTED, 0.0, 0.0, 1.0, *curve)
         # The default constructor projects along X onto the XOY plane (a direction in
-        # the plane, all values NaN); the native reparametrization of the NaN segment
-        # of a line along Z never returns, so that line is left out.
+        # the plane, all values NaN); the native trim of the NaN segment of a kept line
+        # never returns (the port refuses it), so the line along Z, the only line here
+        # run with the parametrization kept, is left out.
         if index != 1:
             add(requests, 'pl_on_plane', 0, index % 2, 1e-7, *AX3, 0.0, 0.0, 1.0, *curve)
 

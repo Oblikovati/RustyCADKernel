@@ -257,6 +257,11 @@ an evaluation representation, and every evaluator on null curves.
 - `Geom2dGridEval_OtherCurve` borrows the adaptor with a lifetime, as the native
   `std::reference_wrapper`, so `Geom2dGridEvalCurve::from_adaptor` ties the evaluator
   to the adaptor; `from_curve` has no borrow.
+- `Geom2d_TrimmedCurve::SetTrim` on a non-periodic basis with a NaN bound fails `U1 < U2`,
+  takes the reversed sense and calls `Reverse`, whose NaN bounds call `SetTrim` again,
+  without end (natively the program never returns; the port overflowed its stack). The
+  port raises Standard_ConstructionError naming the NaN bounds. A periodic basis keeps
+  the native NaN trim.
 
 ## Remaining coverage
 
