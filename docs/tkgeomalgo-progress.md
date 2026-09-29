@@ -87,6 +87,15 @@ builds the line, plane, global translation, sampled curve, GtoC (G1/G2/G3, with 
 without projection) and FreeGtoC (G1/G2/G3, incremental loads, orientations and the
 degenerate normals) constraints, compares their content and the plate that loads them.
 
+LocalAnalysis: 406 requests. `la_curve` compares every query of
+`LocalAnalysis_CurveContinuity` and its `Dump` text for the seven `GeomAbs_Shape` orders
+and two tolerance sets on joined and broken pairs of lines, circles and Bezier curves
+(tangent and reversed joins, curvature jumps, null first and second derivatives,
+undefined tangents, straight pieces); `la_surface` does the same for
+`LocalAnalysis_SurfaceContinuity` at points, on two 2d lines and through
+`ComputeAnalysis`, on planes, cylinders, spheres and tori (tangent and broken joins,
+poles, umbilics).
+
 ## Preserved native behaviour
 
 - `Intf::PlaneEquation` of a degenerate triangle (normal shorter than
@@ -176,3 +185,19 @@ degenerate normals) constraints, compares their content and the plate that loads
   `Standard_ConstructionError` (the null rotation axis). `GetPPC` and `LSC` beyond their
   fixed arrays raise `Standard_OutOfRange` (undefined natively). The G1/G2/G3 blocks,
   which the native constructors repeat verbatim, are written once in `gtoc_math.rs`.
+
+### LocalAnalysis
+
+- `StatusError` is uninitialized natively until an analysis fails, and
+  `ContinuityStatus` of a surface analysis built from tolerances only is uninitialized
+  until `ComputeAnalysis`: the port returns `None` and `Standard_NoSuchObject` there.
+  The surface analysis on two 2d curves fails without a reason when the parameter is
+  outside either curve, so its `Dump` prints only its first line.
+- The two `Dump` reports keep their native texts, including the two spaces of
+  "one of the  second derivatives is null", the blank line after the surface G1 values
+  and the reasons each report omits (TangentNotDefined for surfaces,
+  CurvatureNotDefined for curves). Reals are written as the default `std::ostream`
+  (`%g`).
+- Every angle is folded into `[0, PI/2]` when it is measured, so the curve tests'
+  second clause `|angle - PI| <= eps` never holds; it is kept, as natively. `IsG2` of a
+  curve compares the fractional part of `(G2Angle + EpsG2) / PI` with `EpsG2`.

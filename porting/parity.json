@@ -148018,6 +148018,350 @@
       "rust_item": "rustycad_tkgeomalgo::plate::PlateSampledCurveConstraint::lxyzc",
       "status": "implemented",
       "notes": "Plate mapping (docs/tkgeomalgo-progress.md): the constraint classes are values whose linear combinations share their arrays through handles as natively; Plate_Plate::Load overloads take distinct names, members that can meet a null array or an undefined native index return Failure errors, C++ output references become returned tuples, and copy constructors are Clone."
+    },
+    {
+      "upstream_id": "LocalAnalysis::Dump(const LocalAnalysis_SurfaceContinuity&,Standard_OStream&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::dump_surface",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis::Dump(const LocalAnalysis_CurveContinuity&,Standard_OStream&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::dump_curve",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity(const occ::handle<Geom_Curve>&,double,const occ::handle<Geom_Curve>&,double,GeomAbs_Shape,double,double,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::new",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::is_done",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::StatusError() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::status_error",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::ContinuityStatus() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::continuity_status",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::C0Value() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::c0_value",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::C1Angle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::c1_angle",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::C1Ratio() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::c1_ratio",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::C2Angle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::c2_angle",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::C2Ratio() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::c2_ratio",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::G1Angle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::g1_angle",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::G2Angle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::g2_angle",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::G2CurvatureVariation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::g2_curvature_variation",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::IsC0() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::is_c0",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::IsC1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::is_c1",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::IsC2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::is_c2",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::IsG1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::is_g1",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_CurveContinuity::IsG2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_CurveContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisCurveContinuity::is_g2",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_StatusErrorType",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_StatusErrorType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisStatusErrorType",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity(const occ::handle<Geom_Surface>&,double,double,const occ::handle<Geom_Surface>&,double,double,GeomAbs_Shape,double,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::new",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom2d_Curve>&,double,const occ::handle<Geom_Surface>&,const occ::handle<Geom_Surface>&,GeomAbs_Shape,double,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::on_curves",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity(double,double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::with_tolerances",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::ComputeAnalysis(GeomLProp_SLProps&,GeomLProp_SLProps&,GeomAbs_Shape)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::compute_analysis",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::is_done",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::ContinuityStatus() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::continuity_status",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::StatusError() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::status_error",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::C0Value() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::c0_value",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::C1UAngle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::c1u_angle",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::C1URatio() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::c1u_ratio",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::C1VAngle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::c1v_angle",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::C1VRatio() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::c1v_ratio",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::C2UAngle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::c2u_angle",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::C2URatio() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::c2u_ratio",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::C2VAngle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::c2v_angle",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::C2VRatio() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::c2v_ratio",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::G1Angle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::g1_angle",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::G2CurvatureGap() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::g2_curvature_gap",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::IsC0() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::is_c0",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::IsC1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::is_c1",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::IsC2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::is_c2",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::IsG1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::is_g1",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
+    },
+    {
+      "upstream_id": "LocalAnalysis_SurfaceContinuity::IsG2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/LocalAnalysis/LocalAnalysis_SurfaceContinuity.hxx",
+      "rust_item": "rustycad_tkgeomalgo::local_analysis::LocalAnalysisSurfaceContinuity::is_g2",
+      "status": "implemented",
+      "notes": "LocalAnalysis mapping (docs/tkgeomalgo-progress.md): the tolerance arguments EpsNul..Maxlen are gathered in CurveContinuityTolerances/SurfaceContinuityTolerances with the native defaults, the queries of a failed analysis return StdFail_NotDone errors, StatusError is None where the native member is uninitialized, and Dump writes to an io::Write."
     }
   ],
   "tests": [

@@ -19,3 +19,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     __import__('tkgeomalgo_corpus_law').append_law_requests(requests)
     # Plate (tkgeomalgo_corpus_plate.py)
     __import__('tkgeomalgo_corpus_plate').append_plate_requests(requests)
+    # LocalAnalysis (tkgeomalgo_corpus_localanalysis.py)
+    __import__('tkgeomalgo_corpus_localanalysis').append_localanalysis_requests(requests)
