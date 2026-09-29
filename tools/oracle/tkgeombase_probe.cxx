@@ -47,6 +47,26 @@
 #include "tkgeombase_probe_extrema_pc2d.cxx"
 #include "tkgeombase_probe_extrema_pc.cxx"
 #include "tkgeombase_probe_geomtools.cxx"
+#include "tkgeombase_probe_femtool.cxx"
+#include "tkgeombase_probe_femtool_curve.cxx"
+#include "tkgeombase_probe_appparcurves.cxx"
+#include "tkgeombase_probe_appparcurves_fit.cxx"
+#include "tkgeombase_probe_bndlib.cxx"
+#include "tkgeombase_probe_gcpnts.cxx"
+#include "tkgeombase_probe_appcont.cxx"
+#include "tkgeombase_probe_advapp2var_math.cxx"
+#include "tkgeombase_probe_advapp2var_math2.cxx"
+#include "tkgeombase_probe_advapp2var_eval.cxx"
+#include "tkgeombase_probe_advapp2var_f2var.cxx"
+#include "tkgeombase_probe_advapp2var_f2var2.cxx"
+#include "tkgeombase_probe_advapp2var_class.cxx"
+#include "tkgeombase_probe_geom2dconvert.cxx"
+#include "tkgeombase_probe_extrema_el.cxx"
+#include "tkgeombase_probe_extrema_pc_classic.cxx"
+#include "tkgeombase_probe_extrema_cc.cxx"
+#include "tkgeombase_probe_extrema_ps.cxx"
+#include "tkgeombase_probe_extrema_cs.cxx"
+#include "tkgeombase_probe_extrema_ss.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -165,6 +185,162 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gt_progress", gb_gt_progress_case},
  {"gt_debug_dump", gb_gt_debug_dump_case},
  {"gt_handler", gb_gt_handler_case},
+ // FEmTool (tkgeombase_probe_femtool.cxx, tkgeombase_probe_femtool_curve.cxx)
+ {"fem_elements", gb_fem_elements_case},
+ {"fem_criterion", gb_fem_criterion_case},
+ {"fem_profile", gb_fem_profile_case},
+ {"fem_curve", gb_fem_curve_case},
+ {"fem_assembly", gb_fem_assembly_case},
+ // AppParCurves (tkgeombase_probe_appparcurves.cxx, tkgeombase_probe_appparcurves_fit.cxx)
+ {"apc_bernstein", gb_apc_bernstein_case},
+ {"apc_spline", gb_apc_spline_case},
+ {"apc_multipoint", gb_apc_multipoint_case},
+ {"apc_multicurve", gb_apc_multicurve_case},
+ {"apc_ls", gb_apc_ls_case},
+ {"apc_resol", gb_apc_resol_case},
+ {"apc_function", gb_apc_function_case},
+ {"apc_bspfunction", gb_apc_bspfunction_case},
+ {"apc_gradient", gb_apc_gradient_case},
+ {"apc_bspgradient", gb_apc_bspgradient_case},
+ // GeomBndLib and BndLib (tkgeombase_probe_bndlib.cxx)
+ {"bnd_curve3d", gb_bnd_curve3d_case},
+ {"bnd_curve2d", gb_bnd_curve2d_case},
+ {"bnd_surface", gb_bnd_surface_case},
+ {"bnd_gp", gb_bnd_gp_case},
+ {"bnd_helpers", gb_bnd_helpers_case},
+ // CPnts and GCPnts (tkgeombase_probe_gcpnts.cxx)
+ {"gcp_length", gb_gcp_length_case},
+ {"cpnts_abscissa", gb_cpnts_abscissa_case},
+ {"cpnts_udefl", gb_cpnts_udefl_case},
+ {"gcp_abscissa", gb_gcp_abscissa_case},
+ {"gcp_uabs", gb_gcp_uabs_case},
+ {"gcp_quabs", gb_gcp_quabs_case},
+ {"gcp_udefl", gb_gcp_udefl_case},
+ {"gcp_qudefl", gb_gcp_qudefl_case},
+ {"gcp_tdefl", gb_gcp_tdefl_case},
+ {"gcp_arc_step", gb_gcp_arc_step_case},
+ {"gcp_dist", gb_gcp_dist_case},
+ // AppCont (tkgeombase_probe_appcont.cxx)
+ {"acc_table", gb_acc_table_case},
+ {"acc_offsets", gb_acc_offsets_case},
+ {"acc_matrix", gb_acc_matrix_case},
+ {"acc_ls", gb_acc_ls_case},
+ // AdvApp2Var_MathBase (tkgeombase_probe_advapp2var_math.cxx, _math2.cxx)
+ {"aa_norms", gb_aa_norms_case},
+ {"aa_mmwprcs", gb_aa_mmwprcs_case},
+ {"aa_mmapcmp", gb_aa_mmapcmp_case},
+ {"aa_mmdrc11", gb_aa_mmdrc11_case},
+ {"aa_mmfmca8", gb_aa_mmfmca8_case},
+ {"aa_mmfmca9", gb_aa_mmfmca9_case},
+ {"aa_mmfmcb5", gb_aa_mmfmcb5_case},
+ {"aa_mmfmtb1", gb_aa_mmfmtb1_case},
+ {"aa_mmfmcar", gb_aa_mmfmcar_case},
+ {"aa_mmcglc1", gb_aa_mmcglc1_case},
+ {"aa_mmbulld", gb_aa_mmbulld_case},
+ {"aa_mvsheld", gb_aa_mvsheld_case},
+ {"aa_mmcdriv", gb_aa_mmcdriv_case},
+ {"aa_mmdrvck", gb_aa_mmdrvck_case},
+ {"aa_mmcvctx", gb_aa_mmcvctx_case},
+ {"aa_mdsptpt", gb_aa_mdsptpt_case},
+ {"aa_mmaperx", gb_aa_mmaperx_case},
+ {"aa_mmtrpjj", gb_aa_mmtrpjj_case},
+ {"aa_mmgaus1", gb_aa_mmgaus1_case},
+ {"aa_mmhjcan", gb_aa_mmhjcan_case},
+ {"aa_mminltt", gb_aa_mminltt_case},
+ {"aa_mmjacan", gb_aa_mmjacan_case},
+ {"aa_mmjaccv", gb_aa_mmjaccv_case},
+ {"aa_mmpobas", gb_aa_mmpobas_case},
+ {"aa_mmpocrb", gb_aa_mmpocrb_case},
+ {"aa_mmmpocur", gb_aa_mmmpocur_case},
+ {"aa_mmposui", gb_aa_mmposui_case},
+ {"aa_mmresol", gb_aa_mmresol_case},
+ {"aa_mmrtptt", gb_aa_mmrtptt_case},
+ {"aa_mmsrre2", gb_aa_mmsrre2_case},
+ {"aa_mmunivt", gb_aa_mmunivt_case},
+ {"aa_mmvncol", gb_aa_mmvncol_case},
+ {"aa_mmarcin", gb_aa_mmarcin_case},
+ {"aa_mmcvinv", gb_aa_mmcvinv_case},
+ {"aa_mmmrslwd", gb_aa_mmmrslwd_case},
+ // AdvApp2Var_ApproxF2var (tkgeombase_probe_advapp2var_f2var.cxx, _f2var2.cxx)
+ {"aa_mma1her", gb_aa_mma1her_case},
+ {"aa_mma2roo", gb_aa_mma2roo_case},
+ {"aa_mma2jmx", gb_aa_mma2jmx_case},
+ {"aa_mmapptt", gb_aa_mmapptt_case},
+ {"aa_mma2ac1", gb_aa_mma2ac1_case},
+ {"aa_mma2ac2", gb_aa_mma2ac2_case},
+ {"aa_mma2ac3", gb_aa_mma2ac3_case},
+ {"aa_mma2can", gb_aa_mma2can_case},
+ {"aa_mma2cdi", gb_aa_mma2cdi_case},
+ {"aa_mma2ds1", gb_aa_mma2ds1_case},
+ {"aa_mma2ce1", gb_aa_mma2ce1_case},
+ {"aa_mma2fnc", gb_aa_mma2fnc_case},
+ {"aa_mma2fx6", gb_aa_mma2fx6_case},
+ // AdvApp2Var classes (tkgeombase_probe_advapp2var_class.cxx)
+ {"aa_context", gb_aa_context_case},
+ {"aa_grid", gb_aa_grid_case},
+ {"aa_patch", gb_aa_patch_case},
+ {"aa_approx", gb_aa_approx_case},
+ // Geom2dConvert (tkgeombase_probe_geom2dconvert.cxx)
+ {"g2c_to_bspline", gb_g2c_to_bspline_case},
+ {"g2c_split", gb_g2c_split_case},
+ {"g2c_knot_split", gb_g2c_knot_split_case},
+ {"g2c_bezier", gb_g2c_bezier_case},
+ {"g2c_comp", gb_g2c_comp_case},
+ {"g2c_concat", gb_g2c_concat_case},
+ {"g2c_c0c1", gb_g2c_c0c1_case},
+ {"g2c_approx", gb_g2c_approx_case},
+ {"g2c_arcs", gb_g2c_arcs_case},
+ {"g2c_ppoint", gb_g2c_ppoint_case},
+ // Extrema elementary closed forms (tkgeombase_probe_extrema_el.cxx)
+ {"ex_pon", gb_ex_pon_case},
+ {"ex_pelc", gb_ex_pelc_case},
+ {"ex_pelc2d", gb_ex_pelc2d_case},
+ {"ex_elc", gb_ex_elc_case},
+ {"ex_elc2d", gb_ex_elc2d_case},
+ {"ex_pels", gb_ex_pels_case},
+ {"ex_elcs", gb_ex_elcs_case},
+ {"ex_elss", gb_ex_elss_case},
+ // Extrema point-curve classes (tkgeombase_probe_extrema_pc_classic.cxx)
+ {"ex_pc", gb_ex_pc_case},
+ {"ex_pc2d", gb_ex_pc2d_case},
+ {"ex_locpc", gb_ex_locpc_case},
+ {"ex_locpc2d", gb_ex_locpc2d_case},
+ {"ex_genpc", gb_ex_genpc_case},
+ {"ex_genpc2d", gb_ex_genpc2d_case},
+ {"ex_pcf", gb_ex_pcf_case},
+ {"ex_pcf2d", gb_ex_pcf2d_case},
+ {"ex_cloc", gb_ex_cloc_case},
+ {"ex_cloc2d", gb_ex_cloc2d_case},
+ {"ex_ctool", gb_ex_ctool_case},
+ {"ex_ctool2d", gb_ex_ctool2d_case},
+ // Extrema curve-curve classes (tkgeombase_probe_extrema_cc.cxx)
+ {"ex_cc", gb_ex_cc_case},
+ {"ex_cc2d", gb_ex_cc2d_case},
+ {"ex_ecc", gb_ex_ecc_case},
+ {"ex_ecc2d", gb_ex_ecc2d_case},
+ {"ex_locecc", gb_ex_locecc_case},
+ {"ex_fcc", gb_ex_fcc_case},
+ {"ex_gofcc", gb_ex_gofcc_case},
+ {"ex_gofcc2d", gb_ex_gofcc2d_case},
+ // Extrema point-surface classes (tkgeombase_probe_extrema_ps.cxx)
+ {"ex_fpsn", gb_ex_fpsn_case},
+ {"ex_fpsd", gb_ex_fpsd_case},
+ {"ex_glps", gb_ex_glps_case},
+ {"ex_genps", gb_ex_genps_case},
+ {"ex_ps", gb_ex_ps_case},
+ {"ex_pexts", gb_ex_pexts_case},
+ {"ex_prevs", gb_ex_prevs_case},
+ // Extrema curve-surface classes (tkgeombase_probe_extrema_cs.cxx)
+ {"ex_fecs", gb_ex_fecs_case},
+ {"ex_gofcs", gb_ex_gofcs_case},
+ {"ex_gofconics", gb_ex_gofconics_case},
+ {"ex_gofcquad", gb_ex_gofcquad_case},
+ {"ex_genecs", gb_ex_genecs_case},
+ {"ex_cs", gb_ex_cs_case},
+ // Extrema surface-surface classes (tkgeombase_probe_extrema_ss.cxx)
+ {"ex_fess", gb_ex_fess_case},
+ {"ex_genss", gb_ex_genss_case},
+ {"ex_ss", gb_ex_ss_case},
 };
 int main() {
  std::string line;

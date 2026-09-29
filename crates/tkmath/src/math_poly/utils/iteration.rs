@@ -12,9 +12,11 @@
 // commercial license or contractual agreement.
 
 //! `EvaluateComplex`, the complex `HasSmallResidual`, `LaguerreIteration` and `FindRoot`.
+use super::preconditions::slice_degree;
 use crate::math_poly::Complex;
 use crate::math_utils::{Status, TWO_PI};
 use rustycad_tkernel::precision;
+use rustycad_tkernel::standard::Failure;
 /// `THE_LAGUERRE_NB_STARTS`: deterministic complex starts tried by `find_root`.
 pub const LAGUERRE_NB_STARTS: usize = 16;
 /// `Utils::IterationResult`; `IterationResult::default()` is `NotConverged` at the origin.
@@ -66,8 +68,23 @@ impl ComplexEvaluation {
     }
 }
 /// `EvaluateComplex`: Horner value and first two derivatives with GCC complex arithmetic;
-/// `utils::evaluate_complex(&[1.0, 0.0, 1.0], 2, Complex::new(0.0, 1.0))`.
-pub fn evaluate_complex(coefficients: &[f64], degree: i32, x: Complex) -> ComplexEvaluation {
+/// Standard_OutOfRange for a negative degree or fewer than `degree + 1` coefficients;
+/// `utils::evaluate_complex(&[1.0, 0.0, 1.0], 2, Complex::new(0.0, 1.0))?`.
+pub fn evaluate_complex(
+    coefficients: &[f64],
+    degree: i32,
+    x: Complex,
+) -> Result<ComplexEvaluation, Failure> {
+    slice_degree(
+        "MathPoly::Utils::EvaluateComplex",
+        coefficients.len(),
+        degree,
+        0,
+    )?;
+    Ok(complex_horner(coefficients, degree, x))
+}
+/// [`evaluate_complex`] on a degree the caller has validated.
+fn complex_horner(coefficients: &[f64], degree: i32, x: Complex) -> ComplexEvaluation {
     let d: usize = degree as usize;
     let mut e: ComplexEvaluation = ComplexEvaluation {
         value: Complex::new(coefficients[d], 0.0),
@@ -84,16 +101,27 @@ pub fn evaluate_complex(coefficients: &[f64], degree: i32, x: Complex) -> Comple
     }
     e
 }
-/// `HasSmallResidual(const double*, int, complex, double)`; real roots arrive as `(x, +0)`;
-/// `utils::has_small_complex_residual(&[-1.0, 1.0], 1, Complex::new(1.0, 0.0), 1e-12)`.
+/// `HasSmallResidual(const double*, int, complex, double)`; real roots arrive as `(x, +0)`.
+/// Standard_OutOfRange as for [`evaluate_complex`];
+/// `utils::has_small_complex_residual(&[-1.0, 1.0], 1, Complex::new(1.0, 0.0), 1e-12)?`.
 pub fn has_small_complex_residual(
     coefficients: &[f64],
     degree: i32,
     root: Complex,
     tolerance: f64,
-) -> bool {
-    let e: ComplexEvaluation = evaluate_complex(coefficients, degree, root);
-    e.value.is_finite() && e.value.abs() <= tolerance * 1.0_f64.max(e.magnitude)
+) -> Result<bool, Failure> {
+    slice_degree(
+        "MathPoly::Utils::HasSmallResidual",
+        coefficients.len(),
+        degree,
+        0,
+    )?;
+    Ok(small_complex_residual(
+        coefficients,
+        degree,
+        root,
+        tolerance,
+    ))
 }
 /// One Laguerre correction; `None` where native code reports a non-finite step.
 fn laguerre_step(e: &ComplexEvaluation, degree: i32, root: Complex) -> Option<(Complex, Complex)> {
@@ -147,8 +175,33 @@ fn record_candidate(
 }
 /// `LaguerreIteration`: Laguerre's method from `start`, returning the first converged
 /// candidate, else the best small-residual candidate, else `MaxIterations` at the last
-/// iterate; `utils::laguerre_iteration(&c, 3, Complex::new(0.0, 0.0), 1e-12, 100)`.
+/// iterate. Standard_OutOfRange as for [`evaluate_complex`] once an iteration runs;
+/// `utils::laguerre_iteration(&c, 3, Complex::new(0.0, 0.0), 1e-12, 100)?`.
 pub fn laguerre_iteration(
+    coefficients: &[f64],
+    degree: i32,
+    start: Complex,
+    tolerance: f64,
+    max_iterations: u32,
+) -> Result<IterationResult, Failure> {
+    if max_iterations > 0 {
+        slice_degree(
+            "MathPoly::Utils::LaguerreIteration",
+            coefficients.len(),
+            degree,
+            0,
+        )?;
+    }
+    Ok(iterated(
+        coefficients,
+        degree,
+        start,
+        tolerance,
+        max_iterations,
+    ))
+}
+/// [`laguerre_iteration`] on a degree the caller has validated.
+fn iterated(
     coefficients: &[f64],
     degree: i32,
     start: Complex,
@@ -158,7 +211,7 @@ pub fn laguerre_iteration(
     let mut best: Option<IterationResult> = None;
     let mut root: Complex = start;
     for iteration in 0..max_iterations {
-        let e: ComplexEvaluation = evaluate_complex(coefficients, degree, root);
+        let e: ComplexEvaluation = complex_horner(coefficients, degree, root);
         if !e.is_finite() {
             return best.unwrap_or(IterationResult::failed(Status::NumericalError));
         }
@@ -193,22 +246,36 @@ fn start_point(index: usize) -> Complex {
     Complex::polar(radius, angle)
 }
 /// `FindRoot`: the first start whose accepted root also passes the residual check, else
-/// `MaxIterations`; `utils::find_root(&[-6.0, 11.0, -6.0, 1.0], 3, 1e-12, 100)`.
+/// `MaxIterations`. Standard_OutOfRange as for [`evaluate_complex`] once an iteration runs;
+/// `utils::find_root(&[-6.0, 11.0, -6.0, 1.0], 3, 1e-12, 100)?`.
 pub fn find_root(
     coefficients: &[f64],
     degree: i32,
     tolerance: f64,
     max_iterations: u32,
-) -> IterationResult {
+) -> Result<IterationResult, Failure> {
+    if max_iterations > 0 {
+        slice_degree("MathPoly::Utils::FindRoot", coefficients.len(), degree, 0)?;
+    }
     for index in 0..LAGUERRE_NB_STARTS {
         let start: Complex = start_point(index);
         let result: IterationResult =
-            laguerre_iteration(coefficients, degree, start, tolerance, max_iterations);
+            iterated(coefficients, degree, start, tolerance, max_iterations);
         if result.status == Status::Ok
-            && has_small_complex_residual(coefficients, degree, result.root, tolerance)
+            && small_complex_residual(coefficients, degree, result.root, tolerance)
         {
-            return result;
+            return Ok(result);
         }
     }
-    IterationResult::failed(Status::MaxIterations)
+    Ok(IterationResult::failed(Status::MaxIterations))
+}
+/// [`has_small_complex_residual`] on a degree the caller has validated.
+pub(in crate::math_poly) fn small_complex_residual(
+    coefficients: &[f64],
+    degree: i32,
+    root: Complex,
+    tolerance: f64,
+) -> bool {
+    let e: ComplexEvaluation = complex_horner(coefficients, degree, root);
+    e.value.is_finite() && e.value.abs() <= tolerance * 1.0_f64.max(e.magnitude)
 }

@@ -96,12 +96,11 @@ impl NewtonMinimum {
         let mut next: Vector<'static> = Vector::with_bounds(1, function.variables())?;
         self.result.succeed();
         self.result.iterations = 0;
-        self.iterate(function, [&mut previous, &mut next], criterion);
-        Ok(())
+        self.iterate(function, [&mut previous, &mut next], criterion)
     }
     /// Applies the native step or relative-objective criterion; `solver.is_converged()`.
     pub fn is_converged(&self) -> bool {
-        self.step.norm().unwrap() <= self.result.tolerance
+        self.step.norm_unchecked() <= self.result.tolerance
             || (self.result.minimum - self.result.previous).abs()
                 <= self.result.tolerance * self.result.previous.abs()
     }

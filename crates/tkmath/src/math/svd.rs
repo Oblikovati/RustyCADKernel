@@ -30,9 +30,15 @@ impl Svd {
     pub fn new(matrix: &Matrix<'_>) -> Result<Self, Failure> {
         let rows: i32 = matrix.row_number();
         let cols: i32 = matrix.col_number();
-        let mut u = Matrix::filled(1, rows.max(cols), 1, cols, 0.0).unwrap();
-        u.set(1, rows, 1, cols, matrix)?;
-        let mut v = Matrix::with_bounds(1, cols, 1, cols).unwrap();
+        let mut u = Matrix::filled(1, rows.max(cols), 1, cols, 0.0)
+            .map_err(|error| error.into_failure("math_SVD"))?;
+        // math_SVD.cxx compiles Set's `I1 > I2 || J1 > J2` check out, so an empty A
+        // copies nothing instead of raising Standard_DimensionError.
+        if rows > 0 && cols > 0 {
+            u.set(1, rows, 1, cols, matrix)?;
+        }
+        let mut v = Matrix::with_bounds(1, cols, 1, cols)
+            .map_err(|error| error.into_failure("math_SVD"))?;
         let mut diagonal = Vector::with_bounds(1, cols)?;
         let done = svd_decompose(&mut u, &mut diagonal, &mut v)? == STATUS_OK;
         Ok(Self {

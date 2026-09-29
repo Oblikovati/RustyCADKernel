@@ -15,7 +15,7 @@
 
 //! gce_MakeCirc: construction of gp_Circ.
 use super::{ErrorType, gce_result};
-use crate::line_extrema::lines_extremum;
+use crate::extrema::ExtElC;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::{
     self, Axis1, Axis2, Circle3, Direction3, Line3, Plane3, Point3, StandardDirection3, Vector3,
@@ -177,14 +177,11 @@ impl MakeCirc {
         );
         let dir: Direction3 = Direction3::from_vector(vdir2.crossed(Vector3::from(dir3)))?;
         let l2 = Line3::new(Point3::from((p3.xyz() + p2.xyz()) / 2.0), dir);
-        // Extrema_ExtElC(L1, L2, Precision::PConfusion()) is always done on two lines
-        // and ignores its tolerance.
-        let extremum = lines_extremum(l1, l2);
-        if extremum.parallel {
+        let distmin = ExtElC::lines(l1, l2, rustycad_tkernel::precision::p_confusion());
+        if !distmin.is_done() || distmin.is_parallel()? || distmin.nb_ext()? == 0 {
             return Ok(Self::failed(ErrorType::IntersectionError));
         }
-        // NbExt() is 1: the loop keeps the only extremum.
-        let center: Point3 = extremum.middle();
+        let center: Point3 = nearest_extremum_middle(&distmin)?;
         Self::around_center(center, [p1, p2, p3], vdir3)
     }
 
@@ -248,4 +245,21 @@ fn normal_frame(center: Point3, normal: Direction3, abc: &[f64; 3]) -> Result<Ax
         Direction3::new(b, -a, 0.0)
     }?;
     Axis2::with_x_direction(center, normal, x)
+}
+
+/// The loop of gce_MakeCirc and GC_MakeArcOfCircle over the extrema of two lines: the
+/// middle of the points of the smallest square distance (the origin when none is
+/// below RealLast()).
+pub(crate) fn nearest_extremum_middle(distmin: &ExtElC) -> Result<Point3, Failure> {
+    let mut the_dist: f64 = f64::MAX;
+    let mut p_int: Point3 = Point3::default();
+    for i in 1..=distmin.nb_ext()? {
+        let sq_dist: f64 = distmin.square_distance(i)?;
+        if sq_dist < the_dist {
+            the_dist = sq_dist;
+            let (pon1, pon2) = distmin.points(i)?;
+            p_int = Point3::from((pon1.value().xyz() + pon2.value().xyz()) / 2.);
+        }
+    }
+    Ok(p_int)
 }

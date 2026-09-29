@@ -76,7 +76,7 @@ fn generatrices(plane: Plane3, axis: Line3, angle: f64) -> Result<[Line2; 2], Fa
 /// ProjLib::Project(gp_Pln, gp_Lin) (ProjLib_Plane::Project(gp_Lin)): the line
 /// in the plane coordinates. ProjLib is not ported yet; this is the one line case
 /// EstimDist needs, in the native operation order, until the ProjLib port
-/// replaces it (like line_extrema.rs for Extrema).
+/// replaces it.
 fn project_line(plane: Plane3, line: Line3) -> Result<Line2, Failure> {
     let (x_dir, y_dir) = (
         plane.position().x_direction(),

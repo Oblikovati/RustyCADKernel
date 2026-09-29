@@ -13,7 +13,7 @@
 // commercial license or contractual agreement.
 
 use super::direct::error_maximum;
-use super::{Matrix, Uzawa, Vector};
+use super::{Failure, Matrix, Uzawa, Vector};
 impl Uzawa {
     pub(super) fn iterate(
         &mut self,
@@ -22,7 +22,7 @@ impl Uzawa {
         equalities: i32,
         tolerances: [f64; 2],
         limit: i32,
-    ) {
+    ) -> Result<(), Failure> {
         for row in 1..=matrix.row_number() {
             self.dual[row] = if row <= equalities { 0.0 } else { 1.0 };
         }
@@ -32,12 +32,12 @@ impl Uzawa {
             let error: f64 = self.update_error(matrix);
             let dual_error: f64 = self.update_dual(matrix, equalities, rho);
             if self.iterations > 1 && error <= tolerances[0] {
-                self.finish(start, dual_error, tolerances[1]);
-                return;
+                return self.finish(start, dual_error, tolerances[1]);
             }
             self.iterations += 1;
         }
         self.done = false;
+        Ok(())
     }
     fn update_dual(&mut self, matrix: &Matrix<'_>, equalities: i32, rho: f64) -> f64 {
         let mut maximum: f64 = 0.0;
@@ -65,15 +65,15 @@ impl Uzawa {
         self.dual[row] = if 0.0 < candidate { candidate } else { 0.0 };
         (self.dual[row] - previous).abs()
     }
-    fn finish(&mut self, start: &Vector<'_>, error: f64, tolerance: f64) {
+    fn finish(&mut self, start: &Vector<'_>, error: f64, tolerance: f64) -> Result<(), Failure> {
         if error
             .partial_cmp(&tolerance)
             .is_none_or(|order| order == std::cmp::Ordering::Greater)
         {
             self.done = false;
-            return;
+            return Ok(());
         }
-        self.store_solution(start).unwrap();
+        self.store_solution(start)
     }
 }
 fn matrix_norm2(matrix: &Matrix<'_>) -> f64 {

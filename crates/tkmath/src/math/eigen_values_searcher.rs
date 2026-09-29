@@ -33,6 +33,13 @@ impl EigenValuesSearcher {
         if diagonal.len() != subdiagonal.len() {
             return Ok(solver);
         }
+        // Native shiftSubdiagonalElements ends with `theSubdiagWork(theSize) = 0.0`, a
+        // checked write that raises Standard_OutOfRange for an empty problem.
+        if n == 0 {
+            return Err(Failure::out_of_range(
+                "math_EigenValuesSearcher: subdiagonal index 0 of an empty problem; expected at least 1 element",
+            ));
+        }
         solver.initialize(diagonal, subdiagonal);
         solver.done = solver.iterate();
         if solver.done {
@@ -44,14 +51,8 @@ impl EigenValuesSearcher {
         Ok(Self {
             diagonal: Vector::with_bounds(1, n)?,
             subdiagonal: Vector::with_bounds(1, n)?,
-            // An empty problem fails the native NCollection_Array2(1, 0, 1, 0) allocation.
-            vectors: Matrix::with_bounds(1, n, 1, n).map_err(|_| {
-                Failure::with_type(
-                    "Standard_RangeError",
-                    &format!("math_EigenValuesSearcher: dimension {n}; expected at least 1"),
-                    "",
-                )
-            })?,
+            vectors: Matrix::with_bounds(1, n, 1, n)
+                .map_err(|error| error.into_failure("math_EigenValuesSearcher"))?,
             values: Vector::with_bounds(1, n)?,
             done: false,
         })

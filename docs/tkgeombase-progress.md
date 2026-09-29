@@ -4,15 +4,16 @@
 (`rustycad-tkgeombase`) is the port of the ModelingData toolkit TKGeomBase. It
 depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
-`IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC` and
-`GeomTools` packages are ported in full, and `tools/audit_api_rows.py` reports 0 missing
-and 0 stale api rows for each of them.
+`IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC`,
+`GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts`,
+`GCPnts`, `AdvApp2Var`, `Geom2dConvert` and `Extrema` packages are ported in full, and
+`tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (481 declarations):
+passes (791 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -55,23 +56,48 @@ passes (481 declarations):
 | ExtremaPC_Line_Test.cxx | extrema_pc_line | 31 |
 | ExtremaPC_OffsetCurve_Test.cxx | extrema_pc_offset_curve | 13 |
 | ExtremaPC_Parabola_Test.cxx | extrema_pc_parabola | 24 |
+| GeomBndLib_Curve_Test.cxx | geom_bnd_lib_curve | 25 |
+| GeomBndLib_Curve2d_Test.cxx | geom_bnd_lib_curve2d | 21 |
+| GeomBndLib_OffsetCurve_Test.cxx | geom_bnd_lib_offset_curve | 14 |
+| GeomBndLib_OffsetCurve2d_Test.cxx | geom_bnd_lib_offset_curve2d | 10 |
+| GeomBndLib_Surface_Test.cxx | geom_bnd_lib_surface | 24 |
+| GeomBndLib_OffsetSurface_Test.cxx | geom_bnd_lib_offset_surface | 15 |
+| GeomBndLib_SurfaceOfExtrusion_Test.cxx | geom_bnd_lib_surface_of_extrusion | 11 |
+| GeomBndLib_SurfaceOfRevolution_Test.cxx | geom_bnd_lib_surface_of_revolution | 15 |
+| BndLib_Test.cxx | bnd_lib | 63 |
+| GCPnts_AbscissaPoint_Test.cxx | gcpnts_abscissa_point | 5 |
+| GCPnts_QuasiUniformDeflection_Test.cxx | gcpnts_quasi_uniform_deflection | 1 |
+| AppCont_ContMatrices_Test.cxx | app_cont_cont_matrices | 9 |
+| AdvApp2Var_Context_Test.cxx | adv_app2var_context | 1 |
+| AdvApp2Var_Framework_Test.cxx | adv_app2var_framework | 3 |
+| AdvApp2Var_Iso_Test.cxx | adv_app2var_iso | 1 |
+| AdvApp2Var_Network_Test.cxx | adv_app2var_network | 2 |
+| AdvApp2Var_Node_Test.cxx | adv_app2var_node | 1 |
+| Geom2dConvert_CompCurveToBSplineCurve_Test.cxx | geom2d_convert_comp_curve_to_bspline_curve | 1 |
+| Extrema_ExtPC_Test.cxx | extrema_ext_pc | 1 |
+| ExtremaPC_SearchMode_Test.cxx | extrema_pc_search_mode | 30 |
+| ExtremaPC_Comparison_Test.cxx | extrema_pc_comparison | 17 |
+| ExtremaPC_ExtendedGeometry_Test.cxx | extrema_pc_extended_geometry | 40 |
 
+`bnd_lib_behavior.rs` covers the GeomBndLib and BndLib quirks below.
+`geom2d_convert_behavior.rs` covers the Geom2dConvert quirks below.
+`gcpnts_behavior.rs` covers the CPnts and GCPnts quirks below.
 `local_props_behavior.rs` covers the LProp, GeomLProp, GProp and Hermit quirks
 below. `gce_behavior.rs` and `gc_behavior.rs` cover the status enumeration, the
 StdFail_NotDone results, the conversion operators, the GCE2d aliases and the native
 quirks below. GeomTools has no upstream GoogleTest suite; `geom_tools_behavior/`
 covers its layouts, reader contract, sets, handler and quirks with named fakes for the
 console, the text streams, the progress indicator and a custom handler.
+`extrema_behavior.rs` covers the Extrema quirks below. The three ExtremaPC suites that
+compare ExtremaPC with the classic `Extrema_ExtPC` share the random points of
+`tests/fixtures/extrema_pc_random_points.txt`, which
+`tools/oracle/tkgeombase_extrema_random_points.cxx` draws with the libstdc++
+`std::mt19937` and distributions of the native fixtures.
 
-Four upstream suites are not mapped:
-
-- `ExtremaPC2d_Hyperbola_Test.cxx` (9 declarations) is translated as
-  `extrema_pc2d_hyperbola` and passes in Rust, but `SingletonInvalidAndValueAccessor`
-  fails natively (see Preserved native behaviour), and the verifier maps whole suites
-  whose native run passes.
-- `ExtremaPC_SearchMode_Test.cxx` (30), `ExtremaPC_Comparison_Test.cxx` (17) and
-  `ExtremaPC_ExtendedGeometry_Test.cxx` (40) compare ExtremaPC with the classic
-  `Extrema_ExtPC`, which is not ported. They wait for the Extrema package.
+One upstream suite is not mapped: `ExtremaPC2d_Hyperbola_Test.cxx` (9 declarations)
+is translated as `extrema_pc2d_hyperbola` and passes in Rust, but
+`SingletonInvalidAndValueAccessor` fails natively (see Preserved native behaviour), and
+the verifier maps whole suites whose native run passes.
 
 ## Class mapping
 
@@ -95,11 +121,10 @@ header is a deprecated alias of a GC class (`using GCE2d_MakeCircle = GC_MakeCir
 `gce2d` declares them as `#[deprecated]` type aliases with the native message, and
 re-exports `Root` for GCE2d_Root.
 
-`gce_MakeCirc`, `GC_MakeArcOfCircle` and `GC_MakeTrimmedCone` call `Extrema_ExtElC` on
-two lines and `Extrema_ExtPElC` on a point and a line; Extrema is not ported yet, and
-`src/line_extrema.rs` ports exactly those cases in the native operation order until the
-Extrema port replaces it. `gce_MakeCirc2d` and `GC_MakeArcOfCircle2d` call the IntAna2d
-port (`int_ana2d::AnaIntersection::lines`).
+`gce_MakeCirc`, `GC_MakeArcOfCircle` and `GC_MakeTrimmedCone` call the Extrema port:
+`extrema::ExtElC::lines` on two lines and `extrema::ExtPElC::with_line` on a point and a
+line. `gce_MakeCirc2d` and `GC_MakeArcOfCircle2d` call the IntAna2d port
+(`int_ana2d::AnaIntersection::lines`).
 
 IntAna and IntAna2d (`int_ana`, `int_ana2d`) are algorithm objects: each native
 constructor overload is a named constructor (`QuadQuadGeo::cones`,
@@ -155,17 +180,50 @@ API mapping:
 - The x87 `long double` arithmetic of the rational Bezier certification and of the
   exact pole-plane test uses `rustycad_tkmath::math_poly::LongDouble`.
 
-ExtremaPC needs parts of three TKGeomBase packages that are not ported yet. They are
-crate-private ports of exactly the code paths it uses, in the native operation order,
-and the ports of those packages will replace them:
+ExtremaPC samples with `Extrema_CurveTool::DeflCurvIntervals` and
+`Extrema_Curve2dTool::DeflCurvIntervals`, which it calls through the Extrema port
+(`extrema::ExtremaCurveTool::defl_curv_intervals`). It also needs the ProjLib plane
+projections of lines and conics; ProjLib is not ported yet, so `src/plane_projection.rs`
+is a crate-private port of exactly the code paths it uses, in the native operation
+order, until the ProjLib port replaces it.
 
-- `GCPnts_TangentialDeflection` and `GCPnts_DistFunction(2d)` (the curve-aware
-  sampling of the grid), in `src/tangential_deflection`;
-- `Extrema_CurveTool::DeflCurvIntervals` and `Extrema_Curve2dTool::DeflCurvIntervals`,
-  in `src/defl_curv_intervals.rs`;
-- the ProjLib plane projections of lines and conics, in `src/plane_projection.rs`.
+Its curve-aware sampling calls the public `gcpnts::TangentialDeflection`.
+`probe_support` is a hidden public module that exposes the projections and a
+tangential-deflection sampling helper to the numeric probe.
 
-`probe_support` is a hidden public module that exposes them to the numeric probe.
+## CPnts and GCPnts
+
+Every native member of the two packages has a 3D and a 2D overload with the same body;
+the port has one member for each pair.
+
+- CPnts takes the curve as `impl Into<PntsCurve>`: `PntsCurve` is the native
+  `void* myCurve` with its `my3d` flag, an enum over `&dyn Adaptor3dCurve` and
+  `&dyn Adaptor2dCurve2d` (a `&GeomAdaptorCurve` or `&Geom2dAdaptorCurve` converts
+  directly). It holds the static helpers `f3d`/`f2d` (`speed`), `order`
+  (`gauss_order`) and the `D0`/`D2` lifts of 2D results to Z = 0.
+  `CPnts_RealFunction` with its `void*` client data is one boxed closure
+  (`RealFunction`), so `MyGaussFunction::init` and `MyRootFunction::init_function`
+  take one argument for the native `(F, D)`. The objects that keep the curve
+  (`AbscissaPoint<'a>`, `UniformDeflection<'a>`) borrow it for their lifetime.
+- The GCPnts templates are generic over `TCurveTypes` (`GCPnts_TCurveTypes`),
+  implemented for `dyn Adaptor3dCurve`, `dyn Adaptor2dCurve2d`, `GeomAdaptorCurve` and
+  `Geom2dAdaptorCurve`, with the point, chord line and Bezier/B-spline types
+  (`PoleCurve`). `GCPnts_DistFunction(2d)` and their `MV` views are one generic
+  `TDistFunction`/`TDistFunctionMV` with the native names as aliases. The static
+  helpers repeated in GCPnts_UniformDeflection.cxx and GCPnts_QuasiUniformDeflection.cxx
+  (`PerformLinear`, `PerformCircular`, `GetDefType`, `PerformComposite`) exist once.
+- Overloads take distinct names (`length`, `length_with_tolerance`,
+  `length_between`, `length_between_with_tolerance`; `with_*` constructors and
+  `initialize*`). Default arguments are explicit (the -1 tolerance of
+  GCPnts_UniformAbscissa, `WithControl = true`, `GeomAbs_C1`); the five deflection
+  criteria of GCPnts_TangentialDeflection are the `TangentialCriteria` struct
+  (`TangentialCriteria::new` has the native defaults).
+- Every native exception is a `Failure`, including the ones the adaptors raise inside
+  the math callbacks (Gauss integrand, root function, chord distance): the callback
+  keeps the failure and answers false, and the caller returns it right after the
+  solver, where the native exception leaves it (`failure_capture`).
+- `CPnts_UniformDeflection` keeps the native More/Next/Value iteration; `next` and
+  `more` return `Result`.
 
 GeomTools (`geom_tools`) keeps the class layout: the statics of `GeomTools` are free
 functions (`GeomTools::Dump(C, OS)` for a `Geom_Curve` is `geom_tools::dump_curve`,
@@ -189,6 +247,189 @@ return the handle instead of filling an output argument and returning the stream
 active handler is process wide, as the native static is. `GeomTools_Dump` of
 GeomTools_Debug.cxx is `geom_tools_dump` for a `Standard_Transient` handle; its `void*`
 overload exists only for debuggers.
+FEmTool (`fem_tool`) keeps the native class split. The transient classes
+(`FEmTool_Curve`, the three linear criteria and `FEmTool_ProfileMatrix`) hold their
+mutable state in a `SharedState`, as the Geom classes do, so every `Handle` to one
+object sees the same state and the non-const members take `&self`. The abstract
+`FEmTool_ElementaryCriterion` and `FEmTool_SparseMatrix` are the traits
+`ElementaryCriterion` (its protected fields are `CriterionBase`) and `SparseMatrix`,
+registered with `impl_transient_interface!`; `ChangeValue` returns an `EntryRef` that
+dereferences to the stored `f64` and keeps the matrix locked while it lives, and
+`Knots()` returns the write guard of the knot array. `FEmTool_LinearFlexion`,
+`FEmTool_LinearJerk` and `FEmTool_LinearTension` are one generic `LinearCriterion<K>`:
+the kinds `Flexion`, `Jerk` and `Tension` name the derivative order, the scale power
+and the three places where the native files differ (the negative-J clamp, the
+DependenceTable indexes and the Hessian origin). `FEmTool_Assembly` is a plain struct;
+the rows of G are vectors of coefficient segments (the native lists of handles, never
+shared outside the object). Output references become return values
+(`Curve::length`, `Curve::reduce_degree`), and the unchecked native accesses
+(FEmTool_Curve.cxx and FEmTool_ProfileMatrix.cxx compile the range checks out) become
+Standard_OutOfRange where they would leave the storage (undefined natively).
+
+AppParCurves (`app_par_curves`) ports the package functions (`bernstein_matrix`,
+`bernstein`, `second_derivative_bernstein`, `spline_function`), the containers and the
+six `.gxx` generics. `AppParCurves_MultiPoint` and `AppParCurves_MultiCurve` hold their
+points and poles in shared arrays (`Handle<HArray1<...>>`), so a copy shares them, as
+the native copies share their handles (the least-squares fit, its Bezier view and the
+function's curve are one pole array, which the Uzawa correction writes through). The
+virtual members of `AppParCurves_MultiCurve` are the `MultiCurveEval` trait, implemented
+by `MultiCurve` (Bezier evaluation) and `MultiBSpCurve`, which reaches the non-virtual
+members of its base through `Deref`; the slicing copy `(AppParCurves_MultiCurve)` is
+`MultiBSpCurve::as_multi_curve`. The `MultiLine`/`ToolLine` template parameters of the
+generics are the `LineTool` trait (implemented by the line: `ToolLine::NbP3d(SSP)` is
+`ssp.nb_p3d()`); `LeastSquare` and `ResolConstraint` read the line in their
+constructors only and are plain structs with generic constructors, `Function<L>` and
+`BSpFunction<L>` keep a copy of the line. The `Squares`, `ResolCons` and
+`*_BFGS` parameters are the ported classes themselves; the BFGS subclass the AppDef,
+GeomInt and BRepApprox instantiations generate is `GradientBfgs` (math_BFGS with the
+fit-tolerance stopping test, over the `FitFunction` trait). The optimizer callbacks
+cannot return an exception: a function keeps the first one and the gradients return it
+after BFGS, where the native exception would unwind. `AppParCurves_ResolConstraint::
+Error()` is declared natively but never defined (a link error if called) and has no
+counterpart. The protected members that the generics call from outside
+(`NbConstraints`, `NbColumns`, `Perform`) are public; `BSpGradient` takes its inputs in
+a `BSpGradientInput`.
+GeomBndLib (`geom_bnd_lib`) has one struct per native evaluator class (`Line`,
+`Circle`, `Ellipse`, `Hyperbola`, `Parabola`, `BezierCurve`, `BSplineCurve`,
+`OffsetCurve`, `OtherCurve` and their `*2d` twins; `Plane`, `Cylinder`, `Cone`,
+`Sphere`, `Torus`, `BezierSurface`, `BSplineSurface`, `OffsetSurface`,
+`SurfaceOfExtrusion`, `SurfaceOfRevolution`, `OtherSurface`). The `std::variant`
+dispatchers `GeomBndLib_Curve`, `GeomBndLib_Curve2d` and `GeomBndLib_Surface` are
+structs over a private evaluator enum (holding a borrowed or an owned adaptor), with
+`from_adaptor` and `from_curve`/`from_surface` constructors; they match the
+exact dynamic type of the handle, as the native `typeid` tests do. The static helpers
+of `GeomBndLib_Line`, `_Circle`, ... (`LinBox`, `CircBox`, ...) are associated
+functions, and the internal headers are private modules (`infinite`, `sampling`,
+`optimization`, `spline`, `ranges`, `patch`, `swept`...). A null geometry handle gives
+Standard_NullObject where the native code dereferences it. The surface patch bounds
+are one `[UMin, UMax, VMin, VMax]` array. BndLib (`bnd_lib`) keeps the free functions of
+the native `BndLib` class (`add_circ_arc`, `add_torus_patch`...) and the classes
+`BndLib_Add3dCurve`, `BndLib_Add2dCurve` and `BndLib_AddSurface` as unit structs with
+associated functions; it calls GeomBndLib as natively (and GeomBndLib_Torus calls
+BndLib). The native `GeomBndLib_SplineHelpers` templates `BezierCurveBox`,
+`BSplineCurveBox` and the pole-range `ReduceSplineBox` overload are declared but never
+instantiated in TKGeomBase; they are not ported, and the audit rows say so.
+
+AppCont (`app_cont`) ports `AppCont_Function`, `AppCont_LeastSquare` and the
+`AppCont_ContMatrices` namespace. The abstract `AppCont_Function` is the `Function`
+trait; its protected `myNbPnt`/`myNbPnt2d` live in a `FunctionBase` (both -1 until the
+implementation sets them) that the trait reaches through `base()`, which gives the
+non-virtual count getters. `LeastSquare::new` takes `&dyn Function`, `Error` returns
+`(F, MaxE3d, MaxE2d)` and `Value` lends the stored MultiCurve. The five
+`AppCont_ContMatrices_*.pxx` tables (126,095 doubles) are generated, not hand-copied:
+`tools/generate_appcont_tables.py` copies every literal verbatim into include!-able
+fragments under `app_cont/cont_tables/` (rustc and g++ round the same decimal strings,
+and the three IBP entries written `a - b` stay constant expressions), and its
+`--check` mode runs before the numeric comparison. `app_cont_behavior.rs` covers the
+function base, every resolution path, the singular and periodic ends and the
+exceptions with named fake functions.
+
+AdvApp2Var (`adv_app2var`) has two layers. The f2c kernels of `AdvApp2Var_MathBase`,
+`AdvApp2Var_ApproxF2var` and `AdvApp2Var_SysBase` are free functions in `math_base`,
+`approx_f2var` and `sys_base` (files split by routine family) that keep the native
+routine names, argument order and loop structure, so every floating-point operation
+happens in the native order. A scalar the routine only reads is passed by value, a
+scalar it writes is `&mut`, and an array is the slice that starts at the native pointer;
+the `f2c` views keep the Fortran index shifts. Long argument lists are grouped in
+structs in the native order (`PatchApproxRequest`, `SquareTables`, `IsoConstraints`,
+`ProfileSystem`...). When a native call passes one array as input and output
+(`mmfmca8_`, `mmfmca9_`, `mmarc41_`, `mmfmtb1_`, `mma1noc_`), the port copies the input
+first; the probe shows the results are the same. The common blocks are explicit state
+except `MMPRCSN`: the public `mmwprcs_` changes the precisions that later `mmeps1_` and
+`mmveps3_` calls read, so it stays one process-wide value behind a lock. The Hermite
+cache `MMCMHER` is per call (`Mmcmher`), `MBLANK` is `SysBaseUnits`, and the constant
+tables of `AdvApp2Var_Data` are generated by `tools/generate_advapp2var_tables.py`. The
+allocator of `AdvApp2Var_SysBase` keeps owned zones in `AdvApp2VarSysBase`; the kernels
+use local vectors where the native code allocates. The trace routines (`mgenmsg_`,
+`mgsomsg_`, `maermsg_`) do nothing, as natively at the debug level 0, and the kernels do
+not call them.
+
+The classes keep the native names with the `AdvApp2Var` prefix (`AdvApp2VarContext`,
+`AdvApp2VarPatch`, `AdvApp2VarApproxAFunc2Var`...). Node, Iso and Patch are transient
+classes shared through `Handle`; their members take `&self` over `SharedState`, and the
+getters return copies of the native handles as `Option` values. Overloads take distinct
+names (`Iso::with_orders`/`with_domain`, `Iso::change_domain_uv`,
+`Framework::node_at`, `Patch::cut_sense_with`, `ApproxAFunc2Var::max_errors` for
+`MaxError(Dimension)` and `max_error` for `MaxError(Dimension, Index)`). The evaluator is
+the `AdvApp2VarEvaluatorFunc2Var` trait (closures implement it), the criterion the
+`AdvApp2VarCriterion` trait (an implementer returns the bound, type and repartition that
+the native base class keeps in protected fields), and the cuttings the TKG3d
+`AdvApproxCutting` trait. `AdvApp2Var_ApproxAFunc2Var` computes everything in its
+constructor; `new` and `with_criterion` return the native exceptions as `Failure`.
+`adv_app2var_behavior.rs` covers the full approximation, its getters and exceptions,
+the criterion hooks and `Dump`, which the upstream suites do not reach.
+## Geom2dConvert
+
+Geom2dConvert (`geom2d_convert`) ports every class and package member. The static
+members of the native `Geom2dConvert` class are free functions
+(`split_bspline_curve_knots` and `split_bspline_curve` for the two SplitBSplineCurve
+overloads, `curve_to_bspline_curve`, `concat_g1`, `concat_c1` and
+`concat_c1_with_angular`, `c0_bspline_to_c1_bspline_curve`,
+`c0_bspline_to_array_of_c1_bspline_curve` and its `_with_angular` twin). Default
+arguments are explicit. The native members fill their output references
+(`ArrayOfConcatenated`, `ArrayOfIndices`, `ClosedFlag`, `tabBS`, `BS`) before they can
+raise, so they stay `&mut` parameters (`HArrayOfBSplineCurves` is the shared
+`occ::handle<NCollection_HArray1<occ::handle<Geom2d_BSplineCurve>>>`), and the two
+output tables of `concat_c1_with_angular` are grouped in `ConcatOutputs`. The array
+of curves is the caller's `Array1` indexed from 0, as natively, and it is rotated in
+place. The classes are `CompCurveToBSplineCurve` (its private `Add(First, Second,
+After)` is `concat`), `BSplineCurveKnotSplitting`, `BSplineCurveToBezierCurve`,
+`ApproxCurve` (`from_curve`, `from_adaptor`; `Dump` writes to a `fmt::Write` with `%g`
+numbers), `ApproxArcsSegments` (it borrows its adaptor, as the native reference member;
+the private `Status` enumeration is `ApproxArcsStatus`) and `PPoint` (a `Copy` value;
+`operator==` and `operator!=` are `PartialEq` with both methods written out). The file
+statics of Geom2dConvert.cxx are private modules: `continuity` (Continuity,
+GeomAbsToInteger), `concat_support` (Pretreatment, NeedToBeTreated, Need2DegRepara,
+Indexmin, ReorderArrayOfG1), `reparametrize` (the law and reparameterise evaluators,
+MultNumandDenom and the degree-doubling reparametrization, which the native ConcatG1
+and ConcatC1 repeat word for word and the port writes once). An exception that an
+adaptor raises inside an AdvApprox or BSplCLib callback is carried to the end of the
+call (`failure_capture`) and returned there, where the native exception would unwind.
+Nothing is blocked: Convert, GC, GCPnts, Hermit, AdvApprox, BSplCLib and PLib are
+ported.
+## Extrema
+
+`extrema` is the classic Extrema package. Each class drops the `Extrema_` prefix
+(`Extrema_ExtPElC` is `ExtPElC`, `Extrema_POnCurv` is `POnCurv`).
+
+- The class templates are generic over the `ExtremaCurveTool` trait, which bundles
+  their `TheCurve`, `TheCurveTool`, point, vector, conic, Bezier, B-spline and
+  point-conic parameters; `CurveTool` and `Curve2dTool` (Extrema_CurveTool and
+  Extrema_Curve2dTool) implement it, and its static members are the trait functions
+  (`defl_curv_intervals` included). One Rust type ports each template:
+  `GFuncExtPC`, `GGenExtPC`, `GenLocateExtPC`, `GGExtPC`, `GLocateExtPC`,
+  `GCurveLocator`, `GFuncExtCC`, `GGenExtCC` and `GenLocateExtCC`. The native
+  instantiations are type aliases (`ExtPC = GGExtPC<CurveTool>`, `ExtPC2d`,
+  `LocateExtPC`, `EPCOfExtPC`, `PCFOfEPCOfExtPC`, `ELPCOfLocateExtPC`, `ECC`, `ECC2d`,
+  `CCLocFOfLocECC`, `LocECC` and the others). `POnCurv` and `POnCurv2d` are
+  `POnCurve<Point3>` and `POnCurve<Point2>`; `POnSurfParams` extends `POnSurf` through
+  `Deref`.
+- Each constructor overload is a named constructor and each Perform or Initialize
+  overload a named method: `ExtPElC::with_circle`/`perform_circle`,
+  `ExtElC::lines`/`circles`/`line_ellipse`, `ExtElCS::line_plane`/`perform_line_plane`,
+  `ExtElSS::planes`, `GenExtPS::with_point`/`with_range`/`initialize_range`,
+  `GenExtCS::perform_range`, `ExtCC::initialize_ranges`/`set_curve_range`. Default
+  arguments are explicit, and the sampling of GenExtPS is the `Sampling` value.
+- Output references are returned values (`Points(N, P1, P2)` returns `(P1, P2)`,
+  `TrimmedSquareDistances` returns the distances and the points); the four-argument
+  `Values(X, F, G, H)` of the global-optimization functions is `values_hessian`.
+  `FuncExtCS::SquareDistances()`, `PointsOnCurve()` and `PointsOnSurf()` return the
+  saved sequences as `&mut Vec`.
+- Every native exception is a `Failure` (StdFail_NotDone, Standard_OutOfRange,
+  Standard_TypeMismatch, Standard_NotImplemented, StdFail_InfiniteSolutions). A native
+  null dereference (an algorithm performed before it has a curve or surface, the
+  unallocated result arrays of Extrema_ExtElCS, a conic function without its conic) is
+  Standard_NullObject. An exception raised inside a math callback is kept by the
+  function (`take_failure`) and returned when the solver stops, where the native
+  exception would unwind.
+- An object that keeps a curve or surface borrows it for its lifetime.
+  Extrema_ExtPExtS and Extrema_ExtPRevS keep the handle of their swept adaptor and
+  point their grid search to it; the port gives their GenExtPS a shared handle
+  (`SurfaceRef`). Extrema_ExtPS creates them at its first Perform and owns them as
+  `Option` values (the native handles); they are not Standard_Transient types.
+- The GenExtPS grids keep the NCollection_Array2 storage rules (a resize to the same
+  number of cells keeps the old cells), and its sphere tree is the NCollection_UBTree
+  port over `Bnd_Sphere`.
 
 ## Verification
 
@@ -270,6 +511,18 @@ tangential deflection sampling. Each request prints the status, the extrema in t
 order (parameter, point, square distance, minimum and maximum flags), the minimum and
 maximum indices, or the raised exception.
 
+The CPnts and GCPnts requests (`tkgeombase_corpus_gcpnts.py`) build 32 adapted curves:
+every 2D and 3D kind (lines, full and partial conics in both senses, two-pole segments
+rational or not, Bezier curves with a cusp, a zero-length Bezier curve, C2, C1, C0 and
+periodic B-splines, trimmed curves, offsets of an ellipse, of a circle collapsing to a
+point and of a cusp, whose undefined derivatives raise inside the math callbacks) and
+circles of radius 1e-6 and 1e6. Each class runs every constructor and `Initialize`
+overload with full, partial, reversed, extended and empty ranges, zero, negative,
+tiny and overlong abscissas, too few points, deflections that raise, tolerances from
+0 to 1e3 and -1, and objects reused across runs; each result prints `IsDone`, the
+counts, every parameter and point (from the out-of-range index 0), or the raised
+exception. Six more requests give circles a null deflection. They are 2210 requests.
+
 The GeomTools requests (`tkgeombase_corpus_geomtools.py`, probes
 `tkgeombase_probe_geomtools*.cxx`) print every text as one hexadecimal token, so the
 comparison is byte exact. They build every Geom curve, Geom2d curve and Geom surface class
@@ -289,8 +542,152 @@ into a precision-3 stream, two appending Reads, Clear, wrong and overlong tags, 
 with failing records, a progress indicator that breaks after 0 to 10 steps, the debug
 dump and a custom handler that stores the eval helix, sine wave and ellipsoid.
 
-The corpus has 9028 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
-GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC and 296 GeomTools.
+The FEmTool requests (`tkgeombase_corpus_femtool.py`) build each object and run a
+list of commands on it, printing every result or exception, so the cached state is
+compared along with the values: the Hermite-Jacobi reference integrals of every
+derivative order at interior points, the ends and outside [-1, 1] (short output
+vectors, bad orders and shapes); the three criteria for every constraint order and
+WorkDegree 0 to 15 in a fixed order (the process-wide integral cache: a cached order
+past WorkDegree 14 and a new one), coefficient arrays with other lower bounds, fewer
+or more rows than the basis, a null or reversed element, Hessians and gradients in
+larger, smaller and shifted matrices; profile matrices from diagonal to full and
+block-diagonal profiles, positive definite, indefinite and huge pivots, solves before
+and after the factorization, entries outside the profile, the OutM/OutS text and the
+unimplemented iterative members; curves of every dimension, constraint order and up
+to four elements with coefficient arrays on other bounds, evaluation on the knots,
+between and outside them, after a knot change under the span cache, lengths across
+and outside the elements, degree changes and reductions at three tolerances; and
+assemblies of chained elements in one to three dimensions with constraint segments
+added in every order (each merge case of AddConstraint), nullified, reset and
+refused systems, a table indexed from 0 and a full dependence table.
+
+The AppParCurves requests (`tkgeombase_corpus_appparcurves.py`) run the Bernstein and
+B-spline basis functions inside, at and outside their ranges, down to 2 poles and with
+interior multiplicities up to C0; every MultiPoint, MultiCurve and MultiBSpCurve
+constructor and member with valid and invalid indexes, the transformations, the Dump
+text and the sharing of copies; and the generics through the native AppDef
+instantiations (the Rust probe implements `LineTool` with the AppDef_MultiLine and
+AppDef_MyLineTool semantics): least-squares fits of 3D, 2D and mixed lines (smooth,
+noisy, collinear, with a repeated point) for every pair of extremity constraints each
+Perform overload accepts, too few poles, tangents against the chord and missing
+tangents or curvatures, Bezier and B-spline bases; the Uzawa correction with inner
+pass, tangency and curvature points and its derivative; the Bezier and B-spline
+parameter functions (value, gradient, curves, errors); and both optimizers at loose and
+tight tolerances with 0 to 200 BFGS iterations. The paths that are undefined natively
+are left out: curvature constraints in `Perform(Parameters)` (unassigned pole rows), a
+fit read before any Perform, the constrained B-spline function, more Householder
+unknowns than points and more Uzawa constraints than pole coordinates (both read past
+their arrays natively).
+
+The GeomBndLib and BndLib requests (`tkgeombase_corpus_bndlib.py`, seed 20260928) box
+every 3D and 2D curve kind and every surface kind through each evaluator member
+(`Box`, `Box` on a range, `BoxOptimal`, the BndLib `Add*` functions and the adaptor
+classes), and print the six (or four) limits, the gap, the open flags and the finite
+part. Each evaluator is reached through the dispatchers from a Geom handle, a
+GeomAdaptor over the natural range and one over a sub-range, and through the
+`BndLib_Add*` classes on a box that already holds [-1, 1]^n. The ranges cover the
+natural bounds, sub-ranges, reversed and degenerate ranges, ranges beyond the bounds,
+infinite ends (±1e101, and exactly ±1e100 on the Precision::Infinite() boundary) and
+the doubly infinite ones that raise Standard_Failure. The curves add axis-aligned
+lines, periodic and trimmed B-splines and offsets of lines, circles (in plane and
+collapsing), ellipses and splines; the surfaces add trimmed spheres, degenerate and
+offset tori, offset planes and B-splines, extrusions and revolutions. The static gp
+overloads get axis-aligned and tilted frames, arcs across the period seam, spans
+beyond 2 Pi, cylinder and cone V ends in every infinite combination, sphere and torus
+patches with negative, large and reversed V, and self-intersecting tori (R < r). The
+internal helpers the upstream tests call are probed directly. The legacy `math_PSO` path of
+`GeomBndLib_OtherCurve2d::BoxOptimal` is left out for reversed ranges: native reads an
+uninitialized value there.
+
+The AppCont requests (`tkgeombase_corpus_appcont.py`, 3831 requests) read every entry
+of the five tables directly from the native static arrays, run the four square
+providers over classe -1 to 28 and VBernstein over every classe x nbpoints pair (into
+matrices with shifted bounds and too small, where the partial writes are compared), and
+fit 3D, 2D and mixed analytic functions (polynomial, trigonometric, constant) over
+forward, reversed and tiny ranges with every pair of end constraints (CurvaturePoint
+included), degrees 1 to 25, 1 to 40 Gauss points, failing derivatives, singular ends
+around the 0.1 threshold and periodic coordinates that wrap (the first-sample, sample
+and end-pole fixes), and the empty ranges (244 requests): degree -1 (no pole), no
+Gauss point and no coordinate, where every native table is empty and its loops never
+run. Left out: VBernstein at classe 1 (degree 0), more than 61 Gauss points and
+periodic fits with fewer than 3 samples (undefined natively); degree -1 with a fixed
+end, which writes pole row 1 or 0 of the empty pole table into its stack buffer, and no
+coordinate with a fixed last end, which reads `myPerInfo(1..2)` of an empty array (a
+crash); and degree -2, whose negative-size tables native builds over the stack buffer
+and overruns (a crash; the TKMath `Matrix` refuses them with Standard_RangeError).
+
+The AdvApp2Var requests (`tkgeombase_corpus_advapp2var.py`,
+`tkgeombase_corpus_advapp2var_approx.py` and `tkgeombase_corpus_advapp2var_class.py`,
+325 requests) feed every public MathBase and ApproxF2var kernel normal, boundary and
+error inputs (orders -1 to 3, point counts off the tables, bad degrees, profile systems
+with and without pivots, the precision common changed by `mmwprcs_`), and run the
+classes: contexts for every order, degree limit and precision code, cut networks and
+frameworks, the iso and patch approximations of a grid (with a failing evaluator), and
+AdvApp2Var_ApproxAFunc2Var end to end over four functions, favourite isos, continuities
+C0 to C2 (G1 and C3 raise), degrees 3 to 14, patch budgets 1 to 50, both cuttings and
+absolute and relative criteria with both repartitions. Each request prints the
+results, the resulting surface (knots, multiplicities and poles) and the FNV-1a hash of
+`Dump`. Left out: the native reads of memory that the native code leaves uninitialised
+(see Preserved native behaviour) and a patch discretisation after an iso without
+result, which dereferences a null handle natively.
+
+The Geom2dConvert requests (`tkgeombase_corpus_geom2dconvert.py`, probe
+`tkgeombase_probe_geom2dconvert.cxx`) convert every Geom2d curve kind with each
+parameterisation: circles and ellipses on direct and indirect frames, whole and
+trimmed (arcs from 1e-9 to beyond 2 Pi, across the seam, reversed), trimmed lines,
+hyperbolas and parabolas, rational and polynomial Bezier and B-spline curves
+(periodic, C0, trimmed beyond their bounds) and offset curves. They split B-splines by
+knot indices (equal, reversed, out of range) and parameters, split them at knots for
+continuity ranges from -1 to 5, cut them into Bezier arcs (ranges that snap to a knot,
+are empty or reversed), join composite curves (circle arcs in and out of order, chains
+that touch, touch reversed, close a loop or miss, mixed degrees, rational weights,
+both constructors), concatenate G1 and C1 arrays (open, closed, with corners, circle
+loops needing the Hermit law or the degree-doubling reparametrization, degree-13
+loops that clear the closed flag, separated curves, too short tolerance tables, a
+single curve), reduce C0 knots in open and closed curves, approximate offset and plain
+curves through a curve or an adaptor at every order, segment count and degree, and
+approximate lines, circles, conics, S-curves, straight parts and closed curves by
+segments and biarcs at four tolerances. Each request prints every resulting curve
+(degree, flags, poles, weights, knots, multiplicities), the output tables and the
+rotated input array, or the raised exception. They are 908 requests. Circle arcs of
+1e-9 are left out of the biarc requests: GC_MakeArcOfCircle2d then reads the status
+that gce_MakeCirc2d leaves unassigned (see GC and GCE2d below).
+The Extrema requests come from six corpora, one per family, each with its probe
+(`tools/oracle/tkgeombase_probe_extrema_*.cxx`, twins in `examples/gb_probe/extrema_*.rs`).
+The closed forms (`tkgeombase_corpus_extrema_el.py`) run every point-conic and
+point-elementary-surface pair and every line/circle/conic pair of ExtElC, ExtElC2d,
+ExtElCS and ExtElSS in skew, secant, tangent, parallel, antiparallel, nearly parallel
+(1e-13 rad), coplanar, axial, concentric and nested configurations, with bounded,
+reversed, single-point, periodic-offset and infinite ranges and sequences of performs
+on one object. The point-curve classes (`tkgeombase_corpus_extrema_pc_classic.py`)
+reuse the curves of the ExtremaPC corpora on whole ranges and sub-ranges from special
+and random points, and drive the EPC, PCF and LocEPC template instantiations, the
+curve locator and the curve tools directly, cusps included. The curve-curve classes
+(`tkgeombase_corpus_extrema_cc.py`) cover the analytic pairs, the trimmed parallel
+cases and the global search of conics with Bezier, B-spline and offset curves. The
+point-surface classes (`tkgeombase_corpus_extrema_ps.py`) run every surface kind
+(quadrics, B-splines with a collapsed boundary, Bezier, revolutions and extrusions of
+conics and splines, offset and trimmed surfaces), ranged or not, from general, near,
+far and centre points: the functions inside and outside the bounds, the local search
+with both criteria, GenExtPS with both algorithms, every flag, 2 to 20 samples and
+algorithm switches, ExtPS with periodic ranges beyond one period and infinite bounds,
+and the analytical and grid cases of ExtPExtS and ExtPRevS (a point on the axis, a
+curve ending on the axis, re-initialization on the same handle). The curve-surface
+classes (`tkgeombase_corpus_extrema_cs.py`) cover every closed form of ExtCS and its
+trimmed-out fallback to the curve ends, a line facing a surface box down to a single
+point, the generic search with sharp points, and the three GenExtCS searches with
+their functions. The surface-surface classes (`tkgeombase_corpus_extrema_ss.py`) pair
+the surfaces of the point-surface corpus and run parallel, secant and trimmed planes.
+Each request prints the done and parallel flags, every extremum (square distance and
+points with their parameters), the exception of the out-of-range index 0, or the raised
+exception.
+They are 1934 requests: 212 closed-form, 994 point-curve, 110 curve-curve, 345
+point-surface, 210 curve-surface and 63 surface-surface.
+
+The corpus has 36709 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
+FEmTool, 2045 AppParCurves, 3831 AppCont, 15198 GeomBndLib and BndLib, 2210 CPnts and
+GCPnts, 325 AdvApp2Var, 908 Geom2dConvert and 1934 Extrema.
 
 ## Preserved native behaviour
 
@@ -504,3 +901,339 @@ GeomTools:
   holds), the native value is indeterminate; the port reads 0, an unknown code, which
   gives a null record. A multiplicity read from a failed stream is 0 in the port. The
   corpus leaves these inputs out.
+
+FEmTool:
+
+- The linear criteria compute their reference integrals once per process and per
+  class (function-local statics keyed by the constraint order, for WorkDegree 14):
+  the `WorkDegree > 14` check (Standard_ConstructionError) only runs when the order
+  changes, so a later criterion of a cached order and WorkDegree 15 reads past the
+  120 integrals (Standard_OutOfRange). The port keeps one static cache per class.
+- `FEmTool_LinearFlexion` clamps a negative J to 0 after the whole sum,
+  `FEmTool_LinearJerk` after every row term, `FEmTool_LinearTension` never.
+  `FEmTool_LinearTension::DependenceTable` sets `(i, i)` for `i = 1..=RowLength`, so
+  coefficient columns not starting at 1 raise Standard_OutOfRange.
+  `FEmTool_LinearFlexion::Hessian` writes from index 0 whatever the bounds of H (a
+  matrix from 1 raises Standard_OutOfRange); the other two write from the lower
+  bounds of H, mirroring through `H(j0 + j, i0 + i)`, so with different row and column
+  origins the write order decides the result.
+- `FEmTool_ElementaryCriterion::Value()` and `Gradient()` dereference a null
+  coefficient handle natively; the port raises Standard_NullObject.
+  `FEmTool_ElementsOfRefMatrix` as a `math_FunctionSet` reports a short F (its
+  Standard_OutOfRange) as a failed evaluation.
+- `FEmTool_ProfileMatrix::ChangeValue` has no range check (compiled out): an entry
+  outside the profile addresses a coefficient of another row. The port keeps that
+  aliasing and raises Standard_OutOfRange only for an address outside the storage.
+  The coefficients start uninitialized natively (0 in the port). `OutM`/`OutS` pad a
+  row with `0 ` up to its first stored column.
+- `FEmTool_Curve::GetElement` rescales the columns `LowerCol..=Dimension` instead of
+  `LowerCol..LowerCol + Dimension`; `D1` and `D2` scale every entry of the output
+  array, not only the first Dimension ones. The knots and coefficients start
+  uninitialized natively (0 in the port), and `Knots()` hands out a writable array
+  from a const member; changing a knot invalidates the span cache on the next
+  evaluation, as natively.
+- `FEmTool_Assembly::AddConstraint` scans the segments of a row keeping the *last*
+  segment starting before the new range and the last one ending after it, so a range
+  can be prepended before an overlapping segment; the merge cases replace the first,
+  the last, s1 or s2 segment and the three-way merge removes the segment after s1,
+  whichever it is. Overlapping segments then write the same variable of `gi` in
+  `Solve`, the later one winning. A row with no segment (a skipped constraint index)
+  leaves its Schur FirstIndexes uninitialized natively (0 in the port), and a scan
+  that finds no segment dereferences a null handle (Standard_NullObject in the
+  port). `Solve` stores IsSolved before building the Schur matrix, so after a
+  Standard_OutOfRange there (a table not indexed from 1) `Solution` dereferences a
+  null matrix natively.
+
+AppParCurves:
+
+- `AppParCurves_MultiPoint::Dimension(0)` is 3 (the check is `Index < 0`);
+  `AppParCurves_MultiCurve::Pole(CuIndex, Nieme)` raises only when both indexes are
+  `<= 0` (then `Point(0)` raises). `MultiCurve::Degree()` dereferences the pole array
+  (Standard_NullObject in the port for a curve without one), `NbPoles()` answers 0.
+  `AppParCurves_MultiBSpCurve::SetNbPoles` keeps the degree, which only
+  `SetMultiplicities` recomputes; `Knots()` before `SetKnots` is a null dereference
+  natively (Standard_NullObject). The package functions compile their range checks out;
+  the port raises Standard_OutOfRange where they would leave their arrays (fewer than
+  2 poles, DDA not starting at 1).
+- `AppParCurves_LeastSquare::Perform(Parameters)` does not return after the pass-point
+  solve: it falls through to the full system with the tangency unknowns, which
+  recomputes the poles (the first solve only decides `done`). `Init` fills the last
+  fixed pole when the *first* constraint is a curvature point (`LastConstraint == Pass
+  || LastConstraint == Tangency || FirstConstraint == Curvature`), and `Distance()`
+  takes the square roots in place once per Perform: after `ErrorGradient`, it returns
+  the squared distances. The matrices and lambdas start uninitialized natively (0 in
+  the port).
+- `FirstConstraint(TheConstraints, Point)` returns the constraint of the last couple
+  when none is on `Point` (the loop variable keeps it).
+- `AppParCurves_ResolConstraint` reads the 2D pass points at `tabP2d(i - nb3d)` (the
+  pass-point index, not the curve), so mixed lines raise Standard_OutOfRange; in the
+  tangency-ratio rows the 3D case `T1 ~ T1y` leaves `T1` at its previous value; `tabV` is shared by
+  the loops, so a point without tangent keeps the previous tangent.
+  `ConstraintDerivative` reads the 2D tangents at the curve index, does not advance the
+  column offset for 2D curves, and writes its tangency-ratio rows into the constraint
+  matrix (Cont), which `ConstraintMatrix()` and the function's gradient then read.
+- `AppParCurves_Function` reads its 2D line points at the curve index (mixed lines
+  with inner constraints raise Standard_OutOfRange); in the gradient DKPTC keeps the
+  last curve's sum only, DPTCO uses `DPTCO1(Pi, j + Inc)` for every k, the correction
+  term `Scal` keeps the last pole only (`=` instead of `+=`) and uses the X error for
+  Z, and the constraint of a point without couple is the previous point's. `Error()`
+  reads the squared distances of the constrained branch, so the Gradient's errors are
+  0 for a line without inner constraints.
+- `AppParCurves_BSpFunction` has an empty constrained branch: F and the errors are left
+  unassigned there. `AppParCurves_Gradient` selects the 3D-and-2D line overload
+  whenever there are 2D points (it tests `nbP != 0` with the total count).
+
+
+GeomBndLib and BndLib:
+
+- Two equal infinite range ends (both -inf or both +inf) raise Standard_Failure
+  ("bad parameter") in the line, parabola, hyperbola, cylinder and cone boxes. A doubly
+  infinite line adds its origin point and opens both sides of each axis it is not
+  perpendicular to.
+- The BndLib 3D arcs (`Add(gp_Circ, U1, U2, ...)` and `Add(gp_Elips, U1, U2, ...)`)
+  read the accumulated box back with the gap removed before they add the extrema, so
+  the content of the box given in changes the result.
+- `BndLib::Add(gp_Hypr2d, ...)` adds only the two ends and the tolerance (the parabola
+  rule), without the coordinate extrema that GeomBndLib_Hyperbola2d adds: an arc whose
+  extremum lies inside is under-bounded.
+- `GeomBndLib_Circle2d` and `GeomBndLib_Ellipse2d` box the arc `[U1, U2]` as given,
+  without the `ElCLib::AdjustPeriodic` of their 3D twins and of BndLib.
+- `GeomBndLib_BSplineCurve` (and 2D) on a sub-range clips the segmented box to the hull
+  of the poles of the original curve, not of the segment.
+- `BndLib::Add(gp_Torus, U1, U2, V1, V2, ...)` computes its section indices with
+  `static_cast<int>` of `floor(V / (Pi/4))`; a V beyond the int range gives INT_MIN
+  (x86-64 cvttsd2si), an empty section range, and a return before the final Enlarge.
+- An infinite plane that is not aligned with a coordinate plane is `SetWhole` without
+  Enlarge (the gap stays 0).
+- The generic `GeomBndLib_OffsetSurface` path enlarges the basis box by
+  `max(|offset|, tol)`, not their sum.
+- `GeomBndLib_SurfaceOfExtrusion` and `GeomBndLib_SurfaceOfRevolution` catch every
+  Standard_Failure of the sweep and fall back to GeomBndLib_OtherSurface.
+- The handle constructors of the dispatchers match the exact dynamic type
+  (`Geom_TrimmedCurve` is unwrapped to its basis evaluator on the trimmed range, so a
+  trimmed offset curve uses GeomBndLib_OffsetCurve). The adaptor constructor of
+  `GeomBndLib_Surface` builds the evaluator from the adaptor's type and down-casts the
+  surface handle: when the kinds disagree the native evaluator holds a null handle and
+  crashes on use; the port raises Standard_NullObject there, as for every null handle.
+- The sample counts wrap like the native int arithmetic (`RealToInt(du * N) + 1`, at
+  least 5 samples).
+- `GeomBndLib_OtherCurve2d::BoxOptimal` keeps the legacy `math_BrentMinimum` and
+  `math_PSO` search, while the other optimal boxes use MathOpt (`brent`, `pso`,
+  `powell`). With a reversed range the legacy PSO reads an uninitialized value natively
+  (undefined behaviour); the port starts from 0 and the corpus leaves that case out.
+- The optimizer objectives keep the first evaluation failure (which the native code
+  raises through the optimizer) and return it right after the optimizer.
+- GeomBndLib_Torus calls BndLib, and BndLib calls GeomBndLib, as natively.
+
+CPnts and GCPnts:
+
+- `CPnts_AbscissaPoint(C, Abscissa, U0, Resolution)` initializes a 3D curve with the
+  tolerance `Resolution` ("rbv's modification") and a 2D curve without; `order` reads
+  `Degree()` and `NbPoles()` of a 3D adaptor but of `Bezier()` and `BSpline()` in 2D.
+  The root search runs on `[U1, U2]` widened by its width on each side and the
+  commented-out validity test stays out, so a parameter outside the curve bounds is
+  done; a curve shorter than Precision::Confusion() gives `U0`, done.
+- `CPnts_MyGaussFunction()` keeps a null function pointer that `Value` would call; the
+  port fails with Standard_NullObject. `CPnts_UniformDeflection::Value()`/`Point()` past
+  the three stored points read outside the native arrays; the port raises
+  Standard_OutOfRange.
+- `GCPnts_DistFunction(const GCPnts_DistFunction&)` and its 2D twin are declared but
+  never defined in TKGeomBase (a call does not link); the port's `Clone` is the
+  member-wise copy they declare.
+- GCPnts_AbscissaPoint classifies on the CN intervals, GCPnts_UniformAbscissa on the C1
+  intervals; `GetParameterLengthRatio` evaluates `DN(0.0, 1)` of a Bezier or B-spline
+  segment at the parameter 0, not at FirstParameter. `Compute` pushes past the last
+  interval forward by 0.1 on `[U0, U0 + 0.2]` whatever the sign of the abscissa, while
+  `AdvCompute` pushes in the walk direction and clamps to the bounds of a non-periodic
+  curve; `AdvCompute` has no zero-abscissa shortcut and compares the span before the
+  first interval with its tolerance, the other spans with PConfusion (Confusion in
+  `Compute`). `GCPnts_AbscissaPoint(C, Abscissa, U0)` raises Standard_ConstructionError
+  for a curve shorter than Confusion, `(Tol, C, Abscissa, U0)` starts at `U0` instead.
+- `GCPnts_UniformAbscissa` reuses its parameter array when it holds enough values, so
+  `Parameter(i)` past NbPoints returns the values of an earlier run; one failed
+  abscissa search leaves the whole result not done even when later searches succeed; a
+  negative abscissa on a length-parametrized curve ends at once; the NbPoints variant
+  sets `Abscissa()` only for a curve longer than Confusion. `(int)aSizeR` of a NaN size
+  is INT_MIN on x86-64 (undefined behaviour natively), as in the port.
+- `GCPnts_QuasiUniformAbscissa` delegates curves that are neither Bezier nor B-spline to
+  GCPnts_UniformAbscissa and reads its `NbPoints()` unconditionally, so a failed
+  distribution raises StdFail_NotDone; on the polygon path a raise keeps the previous
+  `IsDone`.
+- The circular deflection steps accumulate the parameter (the last one is not set to
+  U2), and a null deflection makes the native `(int)` of an infinite count INT_MIN, so
+  no point is stored and the result is done. The composite deflection paths walk the C2
+  intervals in both classes, though GCPnts_QuasiUniformDeflection classifies on C1.
+  `GCPnts_UniformDeflection::Value()` and `GCPnts_QuasiUniformDeflection::Value()` raise
+  StdFail_NotDone with the messages of GCPnts_UniformAbscissa and
+  GCPnts_QuasiUniformAbscissa.
+- `QuasiFleche` returns early at 2000 calls, or after 100 calls with fewer than two
+  points, without decrementing its counter, so every later call of the subdivision
+  returns at once; the C1 path takes the end tangent at `U2 - 10 Epsilon(U2)` but keeps
+  U2 as end parameter; a Bezier or B-spline curve whose parametric resolution is below
+  `Epsilon(max(|First|, |Last|))` is not done.
+- GCPnts_TangentialDeflection: the line test clamps the CN interval bounds in place
+  and the march reads the clamped bounds; a span grown once and still below the
+  coefficient 0.55 becomes the previous point without being stored; `EvaluateDu` never
+  sets its flag back, so after one success the deflection-driven steps are no longer
+  extrapolated; the linear distribution steps by `(Last - First) / MinimumOfPoints`, so
+  its last step is twice as long.
+- Every native comparison keeps its form where a NaN operand changes the branch
+  (`!(a > b)` for the native `if (a > b) ... else`), and `std::min`/`std::max` keep
+  their argument order.
+
+AppCont:
+
+- `AppCont_LeastSquare::IsDone()` is true only when free poles were solved for after
+  a constraint: the unconstrained fit (poles computed directly with InvMMatrix) and the
+  fits without free pole (degree 1 with two pass points, degree 3 with two tangency
+  points) report not done although their poles are set.
+- Only the first two coordinates of the last pole are moved back into the period of
+  the last sample (the loop runs `aDimIdx <= 2`, where the first pole's runs over every
+  coordinate), whatever the point counts.
+- A tangency constraint whose D1 fails becomes a pass constraint; a CurvaturePoint end
+  is neither fixed nor eliminated, so the fit solves the full `M^T M` system (inverted,
+  not read from the tables). The IBP and IBT tables cover classe up to 26, but the
+  mass matrices stop at 24, so a degree above 23 always raises Standard_DimensionError.
+- `FixSingleBorderPoint` ignores the result of `Value`, and the end pole takes the
+  limit from inside only when it is more than 0.1 from the end value (per point).
+- `VBernstein` writes at `M(1, 1)` whatever the bounds of the matrix, unlike the other
+  providers, which start at its lower corner. At classe 1 it reads before the table
+  (undefined natively); the port raises Standard_OutOfRange. The port also raises
+  Standard_OutOfRange where the fit would read past its samples (a periodic function
+  with fewer than 3 Gauss points) and Standard_DimensionError, before sampling, for more
+  than the 61 tabulated Gauss orders (natively read past the Gauss tables, then
+  rejected by VBernstein). At degree -1 a fixed end (pass or tangency) writes pole row
+  1 or 0 of the empty pole matrix; AppCont_LeastSquare.cxx compiles its range checks
+  out, so natively the write lands in the matrix's unused stack buffer. The port raises
+  Standard_OutOfRange at that write. The empty ranges themselves (degree -1, no Gauss
+  point, no coordinate) fit over empty tables as natively. The `int` offsets of the providers overflow natively past
+  classe 1861; the port wraps.
+- `AppCont_Function::PeriodInformation` defaults to not periodic with period 0.
+  `VBParam` is computed natively and never read; the port does not keep it.
+
+AdvApp2Var:
+
+- Several native tables are only partly written, and the port zeroes the rest where the
+  native memory is uninitialised: the zero-root row of an even Gauss table
+  (`mmapptt_`), the last two root slots of a Context with an order above -1, the scratch
+  tail of `Patch::Coefficients` beyond `NCFLMU*NCFLMV*NDIMEN`, the `mmfmtb1_` scratch
+  that it copies when the table is smaller than its capacity, and the iso tolerances of
+  a position outside 0..4. `mdsptpt_` and `mmresol_` dereference a null work pointer for
+  100 values or fewer natively; the port uses owned vectors.
+- `mma2jmx_` reads past its table of maxima for a Jacobi degree beyond it (a Context
+  with a large limit and precision code); the port leaves those entries unwritten.
+  Only a Context whose degree `mmapptt_` then refuses (code 31) reaches it, so the
+  result is the same Standard_ConstructionError.
+- `mma2cd2_` writes the diditb correction at `(jj, 0)`, not `(0, jj)`, and the odd-root
+  middle correction of `mma1cdi_` reads only the last order.
+- `mma2ds2_` adds 100 to the evaluator code and `mma2ds1_` adds 100 again; for the
+  favourite iso 1, `mmfmtb1_` then clears the code, so the evaluator failure is lost.
+  `Patch::Discretise` also loses an `mma2cdi_` failure, because `mma2ds1_` clears the
+  code first.
+- `mmgaus1_` with an invalid Gauss rule index `k` sets the code to -1 before the first
+  callback, and stops only after a callback that does not clear it.
+- `Framework::IsoU`/`IsoV` search a strip up to the strip count of the other direction,
+  so a strip's last iso is returned when no constant matches. The isos that
+  `UpdateInU`/`UpdateInV` insert get the position 0.
+- `Patch::AddErrors` uses one subspace (`NBSESP = 1`), and Iso and Patch assume a 3D
+  function (`NDIMSE = 3`), whatever the context.
+- `Patch::AddConstraints` and `Discretise` copy the iso tables by `operator=`, which
+  takes the length of the source table; the scaling loops then index the copy.
+- The `lesparam` point counts skip 15, 25 and 61 (the "Bug Uneven number" comments), and
+  the `mdnombr` value of pi/2 is the literal of the common, not `FRAC_PI_2`.
+- `AdvApp2Var_ApproxAFunc2Var::ComputePatches` with a criterion keeps a maximum `m1`
+  of the criterion values that is never read; the port does not keep it.
+Geom2dConvert:
+
+- `SplitBSplineCurve(C, FromU1, ToU2, ParametricTolerance, ...)` ignores the tolerance
+  and checks no bound (the B-spline `Segment` raises); the knot overload raises
+  Standard_DomainError and Standard_OutOfRange without a message.
+- `CurveToBSplineCurve` clamps the bounds of a trimmed curve to a non-periodic basis,
+  but a trimmed line keeps the trimmed curve's own bounds as knots; offset curves are
+  approximated from the trimmed curve, not its basis; an untrimmed line, hyperbola or
+  parabola raises Standard_DomainError. With RationalC1, arcs of 6 radians or more are
+  joined from two halves by CompCurveToBSplineCurve at Precision::PConfusion().
+- `ConcatG1` tests G1 junctions with Precision::Confusion() and Precision::Angular(),
+  not with `ArrayOfToler`, while `ConcatC1` uses them; both call the junction test
+  twice (the first `< GeomAbs_C0` test cannot hold; the port calls it once, as it has
+  no side effect), and raise Standard_Failure ("Courbes non jointives") for separated
+  ends. The open-array loop merges with the input tolerances even after a closed array
+  was rotated (the rotated copy is used only by the closed single-group branch).
+- Pretreatment divides the weights of the caller's own curves in place when their two
+  first and two last weights are equal; ConcatC1 multiplies other rational curves by
+  their Hermit law. A closed single group whose closing curve has a degree above
+  `MaxDegree() / 2` clears `ClosedFlag` instead of doubling the degree.
+- `C0BSplineToArrayOfC1BSplineCurve` counts the first knot among the C0 knots and
+  compares the square distance of the ends with the tolerance itself, while
+  `C0BSplineToC1BSplineCurve` starts after the first knot, squares the tolerance and
+  uses a fixed angular tolerance of 1e-7.
+- `CompCurveToBSplineCurve::Add` raises the degree of the stored curve in place, so a
+  handle returned by an earlier `BSplineCurve()` sees it.
+- The AdvApprox evaluator of ApproxCurve sets error code 1 (dimension) or 2
+  (parameter outside the interval) and still evaluates; an order beyond 2 sets 3.
+- `ApproxArcsSegments`: when a chord shorter than Precision::Confusion() cannot be a
+  checked segment, `makeApproximation` still appends the null segment and fails, so
+  `GetResult()` can end with a null curve; the line test of `getLinearParts` compares
+  the chord's square length with Precision::Confusion(); `makeLine` takes
+  `std::max(AngleTol, 0.01)`; `calculateLines` is declared and defined but never
+  called (a unit test reaches it).
+- `PPoint::operator!=` is its own test (`> PConfusion()`), so `==` and `!=` are both
+  false for a NaN parameter.
+- A null handle, dereferenced natively, raises Standard_NullObject; an empty curve
+  array allocates `NCollection_Array1(0, -2)` natively (an allocation failure) and
+  raises Standard_RangeError in the port; the corpus leaves both out.
+Extrema:
+
+- `NbExt()`-guarded accessors test `N < 1` first, so an index below 1 raises
+  Standard_OutOfRange before the StdFail_NotDone of an undone algorithm.
+- Extrema_ExtPElC2d differs from the 3D class: both extrema of a circle are minima,
+  no extremum of an ellipse, hyperbola or parabola is a minimum, and a line whose
+  projection is outside the bounds is done with no extremum (the 3D line is not done).
+  A degenerate polynomial of the hyperbola and parabola cases raises
+  StdFail_InfiniteSolutions.
+- Extrema_ExtElSS sets done, then raises Standard_NotImplemented for every sphere pair;
+  the Extrema_ExtElCS line and circle overloads with a cone or a torus raise it and
+  leave the state unchanged. The Extrema_ExtElCS result arrays are handles: a Perform
+  keeps the arrays of an earlier one, and reading them before any allocation is a null
+  dereference (Standard_NullObject in the port).
+- Extrema_GenLocateExtPC is done only when `|F|` at the root is below 1e-7;
+  Extrema_GenLocateExtCC when both components of F are below 1e-10 (signed, so a
+  negative value counts). Extrema_GGenExtCC appends the solutions of each Perform to
+  those of the earlier ones.
+- Extrema_GenExtPS: SetAlgo with a new algorithm rebuilds the grid but keeps the
+  parameters and the tree of the earlier algorithm; a grid resized to the same number
+  of cells keeps its cells; Initialize raises Standard_OutOfRange for fewer than two
+  samples. The tree algorithm raises the samples of a B-spline to degree times knots
+  (at most 300), CorrectNbSamples multiplies the V samples in both branches, and the
+  farthest-node selector starts its bound at 0, so it rejects every subtree whose
+  nearest distance is positive and usually starts from the first grid node.
+- Extrema_ExtPExtS and Extrema_ExtPRevS read `NbExt()` of their grid search in
+  Perform, which raises StdFail_NotDone when it found nothing. Extrema_ExtPRevS resets
+  its analytical flag before testing whether the handle is new, so an Initialize with
+  the same handle always takes the grid search.
+- Extrema_ExtPS replaces infinite bounds by ±1e10 and samples 300 times across a
+  degenerated boundary iso; `TrimmedSquareDistances` returns members nothing computes
+  (null in the default object, uninitialized after the performing constructors; the
+  port returns 0 and the origin).
+- Extrema_GenLocateExtPS widens the tolerances of a B-spline for large parameters and
+  then always runs the Newton pass, and raises Standard_OutOfRange when no root was
+  saved.
+- Extrema_ExtCS: the parallel case stores one distance and no point, so `Points(1)`
+  raises Standard_OutOfRange; the single-point line case adds its projections with a
+  default curve point (the origin); a line and a plane that are not parallel, and a
+  line with any surface but a sphere or a cylinder, take the facing-range search; of
+  the sharp-point projections only the nearest and the farthest remain when more than
+  two were added. Extrema_ExtSS runs its generic search on the whole surfaces and
+  filters afterwards, and keeps IsParallel from an earlier Perform in that case.
+- Extrema_GenExtCS divides a closed curve that covers more than two thirds of its
+  period and then keeps only the extrema within SquareConfusion of the minimum;
+  Extrema_GlobOptFuncCQuadric::QuadricParameters on another surface returns
+  `(Uf, Ul)`; Extrema_GlobOptFuncConicS and Extrema_GlobOptFuncCQuadric built without
+  their conic or quadric dereference an unset pointer (Standard_NullObject in the
+  port). Extrema_GlobOptFuncCS returns the half gradient and Hessian.
+- Extrema_FuncExtCS merges saved states by the curve parameter only,
+  Extrema_FuncPSNorm by `(u, v)` within PConfusion, and Extrema_FuncExtSS saves every
+  state. Extrema_GenExtSS stores its BFGS minimum through `Value(UV, UV)` (the input
+  is read before the output overwrites it) and GetStateNumber.
+- Every native comparison keeps its form where a NaN operand changes the branch, and
+  `std::min`/`std::max` keep their argument order.

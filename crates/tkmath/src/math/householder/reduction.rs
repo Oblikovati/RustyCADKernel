@@ -12,7 +12,7 @@
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
 
-use super::{Householder, Matrix};
+use super::{Failure, Householder, Matrix};
 struct Reflection {
     column: i32,
     g: f64,
@@ -20,11 +20,12 @@ struct Reflection {
     alpha: f64,
 }
 impl Householder {
-    pub(super) fn reduce(&mut self, rhs: &mut Matrix<'_>, epsilon: f64) {
+    pub(super) fn reduce(&mut self, rhs: &mut Matrix<'_>, epsilon: f64) -> Result<(), Failure> {
         for column in 1..=self.q.col_number() {
+            self.check_pivot_row(column, rhs.col_number())?;
             let reflection = self.reflection(column);
             if reflection.g.abs() <= epsilon {
-                return;
+                return Ok(());
             }
             for next in column + 1..=self.q.col_number() {
                 self.reflect_column(next, &reflection);
@@ -34,8 +35,33 @@ impl Householder {
             }
             self.q[(column, column)] = reflection.g;
         }
+        self.check_pivot_row(0, rhs.col_number())?;
         self.back_substitute(rhs);
         self.done = true;
+        Ok(())
+    }
+    // Native `Standard_DimensionError_Raise_if(l != B.RowNumber() || n > l, " ")` is
+    // compiled out (math_Householder.cxx defines No_Standard_DimensionError). Without it
+    // the reduction reads the pivot Q(i, i) past the `l` rows once `i > l` (more unknowns
+    // than rows), and the back substitution reads Sol(0, j) when there is no unknown but
+    // a right-hand side: undefined behaviour both. The port raises that check's
+    // exception at the first such read, so a fit that stops earlier on a small pivot
+    // stays not done, as natively. Column 0 stands for the back substitution.
+    fn check_pivot_row(&self, column: i32, rhs_columns: i32) -> Result<(), Failure> {
+        let (rows, unknowns): (i32, i32) = (self.q.row_number(), self.q.col_number());
+        let past_rows: bool = column > rows;
+        let no_unknown: bool = column == 0 && unknowns == 0 && rhs_columns > 0;
+        if !past_rows && !no_unknown {
+            return Ok(());
+        }
+        Err(Failure::with_type(
+            "Standard_DimensionError",
+            &format!(
+                "math_Householder: {unknowns} unknowns, {rows} rows, {rhs_columns} right-hand \
+                 sides; expected 1 <= unknowns <= rows (0 unknowns only without right-hand side)"
+            ),
+            "",
+        ))
     }
     fn reflection(&self, column: i32) -> Reflection {
         let mut h = 0.0;
