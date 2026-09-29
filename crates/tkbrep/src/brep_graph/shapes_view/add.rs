@@ -143,8 +143,14 @@ impl ShapesViewMut<'_> {
         placement: &Location,
     ) -> Result<(), Failure> {
         let mut editor = self.graph.editor();
-        result.product = editor.products().add(result.topology_root, placement);
-        editor.products().append_document_root(result.product)?;
+        result.product = editor
+            .reborrow()
+            .products()
+            .add(result.topology_root, placement);
+        editor
+            .reborrow()
+            .products()
+            .append_document_root(result.product)?;
         if !result.product.is_valid() {
             return Ok(());
         }
@@ -240,13 +246,14 @@ impl ShapesViewMut<'_> {
         let mut editor = self.graph.editor();
         let inserted: RefId = match parent.kind {
             NodeKind::COMPOUND => {
-                let reference = editor.compounds().append(
+                let reference = editor.reborrow().compounds().append(
                     CompoundId::from_node_id(parent),
                     root,
                     orientation()?,
                 )?;
                 if reference.is_valid() {
                     editor
+                        .reborrow()
                         .generic()
                         .set_child_ref_local_location(reference, shape.location())?;
                 }
@@ -254,11 +261,19 @@ impl ShapesViewMut<'_> {
             }
             NodeKind::SHELL => {
                 let (shell, face) = (ShellId::from_node_id(parent), FaceId::from_node_id(root));
-                editor.shells().append(shell, face, orientation()?)?.into()
+                editor
+                    .reborrow()
+                    .shells()
+                    .append(shell, face, orientation()?)?
+                    .into()
             }
             NodeKind::SOLID if root.kind == NodeKind::SHELL => {
                 let (solid, shell) = (SolidId::from_node_id(parent), ShellId::from_node_id(root));
-                editor.solids().append(solid, shell, orientation()?)?.into()
+                editor
+                    .reborrow()
+                    .solids()
+                    .append(solid, shell, orientation()?)?
+                    .into()
             }
             NodeKind::COMP_SOLID if root.kind == NodeKind::SOLID => {
                 let (comp_solid, solid) = (
@@ -266,6 +281,7 @@ impl ShapesViewMut<'_> {
                     SolidId::from_node_id(root),
                 );
                 editor
+                    .reborrow()
                     .comp_solids()
                     .append(comp_solid, solid, orientation()?)?
                     .into()
@@ -289,15 +305,18 @@ impl ShapesViewMut<'_> {
     ) -> Result<(), Failure> {
         let mut editor = self.graph.editor();
         let child = editor
+            .reborrow()
             .products()
             .add(result.topology_root, &Location::default());
         if !child.is_valid() {
             return Ok(());
         }
-        let (occurrence, reference) =
-            editor
-                .products()
-                .append(parent, child, shape.location(), OccurrenceId::default())?;
+        let (occurrence, reference) = editor.reborrow().products().append(
+            parent,
+            child,
+            shape.location(),
+            OccurrenceId::default(),
+        )?;
         if !occurrence.is_valid() {
             return Ok(());
         }
@@ -320,5 +339,17 @@ impl ShapesViewMut<'_> {
         }
         let child = self.graph.refs().generic().child_node(reference);
         self.clear_cached(child);
+    }
+
+    /// `RemoveShape(theShape)`: `Editor().Gen().RemoveNode` of the active node bound to
+    /// a construction-time shape; false when no active node is bound to it. A locked or
+    /// guarded node raises Standard_ProgramError.
+    pub fn remove_shape(&mut self, shape: &Shape) -> Result<bool, Failure> {
+        let node = self.graph.shapes().find_node(shape);
+        if !node.is_valid() {
+            return Ok(false);
+        }
+        self.graph.editor().generic().remove_node(node)?;
+        Ok(true)
     }
 }

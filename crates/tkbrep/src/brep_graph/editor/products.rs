@@ -10,13 +10,18 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of EditorView::ProductOps::Add, AppendDocumentRoot and Append of
-// ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.cxx
-// at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of EditorView::ProductOps::Add, AppendDocumentRoot, Append (one and
+// many) and Mut of ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.cxx and
+// BRepGraph_EditorView_Mut.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! The product operations of the editor used by shape ingestion.
-use super::{is_active_node, is_active_topology_node, require_mutable};
-use crate::brep_graph::{BRepGraph, NodeId, OccurrenceId, OccurrenceRefId, ProductId};
+//! `EditorView::ProductOps`: product creation and assembly links. The removals are
+//! in `product_removal`.
+use super::guards::mutate_node;
+use super::helpers::{
+    is_active_node, is_active_topology_node, node_item, remove_from_root_products, require_mutable,
+};
+use crate::brep_graph::mut_guard::MutGuard;
+use crate::brep_graph::{BRepGraph, NodeId, OccurrenceId, OccurrenceRefId, ProductId, ProductTag};
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::toploc::Location;
 
@@ -26,7 +31,7 @@ pub struct ProductOps<'g> {
     pub(super) graph: &'g mut BRepGraph,
 }
 
-impl ProductOps<'_> {
+impl<'g> ProductOps<'g> {
     /// `Add(theShapeRoot, thePlacement)`: a part product with one occurrence of the
     /// active topology root, placed by `placement`; invalid for another root.
     ///
@@ -75,7 +80,7 @@ impl ProductOps<'_> {
         }
         require_mutable(
             self.graph,
-            product.into(),
+            node_item(product),
             "BRepGraph::EditorView::AppendDocumentRoot(): locked product",
             "BRepGraph::EditorView::AppendDocumentRoot(): guard active on product",
         )?;
@@ -114,14 +119,52 @@ impl ProductOps<'_> {
         let storage = self.graph.inc_storage_mut();
         let occurrence_ref = storage.attach_occurrence_to_product(parent, occurrence, placement);
         self.graph.allocate_ref_uid(occurrence_ref.into());
-        self.graph
-            .inc_storage_mut()
-            .change_root_product_ids()
-            .retain(|root| *root != referenced);
+        remove_from_root_products(self.graph, referenced);
         self.graph.mark_modified(occurrence.into());
         self.graph.mark_ref_modified(occurrence_ref.into());
         self.graph.mark_modified(referenced.into());
         Ok((occurrence, occurrence_ref))
+    }
+
+    /// `Append(theParentProduct, theChildProducts, thePlacements)`: one occurrence per
+    /// child product (checked first: active and not the parent); empty when the
+    /// placement count differs, a check fails, or an occurrence is refused midway (the
+    /// earlier occurrences stay, as natively). A locked or guarded parent raises
+    /// Standard_ProgramError.
+    pub fn append_many(
+        &mut self,
+        parent: ProductId,
+        children: &[ProductId],
+        placements: &[Location],
+    ) -> Result<Vec<OccurrenceRefId>, Failure> {
+        if placements.len() != children.len() || !is_active_node(self.graph, parent) {
+            return Ok(Vec::new());
+        }
+        require_mutable(
+            self.graph,
+            node_item(parent),
+            "BRepGraph::EditorView::Append(): locked product",
+            "BRepGraph::EditorView::Append(): guard active on product",
+        )?;
+        let usable = |child: &ProductId| is_active_node(self.graph, *child) && *child != parent;
+        if !children.iter().all(usable) {
+            return Ok(Vec::new());
+        }
+        let mut references = Vec::with_capacity(children.len());
+        for (child, placement) in children.iter().zip(placements) {
+            let (occurrence, reference) =
+                self.append(parent, *child, placement, OccurrenceId::default())?;
+            if !occurrence.is_valid() {
+                return Ok(Vec::new());
+            }
+            references.push(reference);
+        }
+        Ok(references)
+    }
+
+    /// `Mut(theProduct)`: the scoped guard of a product definition.
+    pub fn mutate(self, product: ProductId) -> Result<MutGuard<'g, ProductTag>, Failure> {
+        mutate_node(self.graph, product)
     }
 
     // The validity checks of `Append` before the lock checks.
@@ -132,7 +175,7 @@ impl ProductOps<'_> {
         occurrence: OccurrenceId,
     ) -> bool {
         let graph = &*self.graph;
-        if !is_active_node(graph, parent.into()) || !is_active_node(graph, referenced.into()) {
+        if !is_active_node(graph, parent) || !is_active_node(graph, referenced) {
             return false;
         }
         if parent == referenced {
@@ -141,7 +184,7 @@ impl ProductOps<'_> {
         if !occurrence.is_valid() {
             return true;
         }
-        is_active_node(graph, occurrence.into())
+        is_active_node(graph, occurrence)
             && graph.inc_storage().occurrence(occurrence).child_node_id == NodeId::from(parent)
     }
 
@@ -152,7 +195,7 @@ impl ProductOps<'_> {
     ) -> Result<(), Failure> {
         require_mutable(
             self.graph,
-            parent.into(),
+            node_item(parent),
             "BRepGraph::EditorView::Append(): locked parent product",
             "BRepGraph::EditorView::Append(): guard active on parent product",
         )?;
@@ -161,7 +204,7 @@ impl ProductOps<'_> {
         }
         require_mutable(
             self.graph,
-            occurrence.into(),
+            node_item(occurrence),
             "BRepGraph::EditorView::Append(): locked parent occurrence",
             "BRepGraph::EditorView::Append(): guard active on parent occurrence",
         )

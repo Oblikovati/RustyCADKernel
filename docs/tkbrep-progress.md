@@ -33,41 +33,53 @@ The toolkit test inventory maps these suites (139 declarations):
 | BRepGraph_ItemId_Test.cxx | brep_graph_item_id | 4 | pass | pass |
 | BRepGraph_NodeId_Test.cxx | brep_graph_node_id | 15 | pass | pass |
 | BRepGraph_TypedIdDispatch_Test.cxx | brep_graph_typed_id_dispatch | 2 | pass | pass |
-| BRepGraph_Iterator_Test.cxx | not mapped (phase 2) | 14 | not run | waits for EditorView Gen().RemoveNode |
-| BRepGraph_DefsIterator_Test.cxx | not mapped (phase 2) | 11 | not run | waits for EditorView Vertices/Compounds/Solids/CompSolids().Add, Gen().MutChildRef, RemoveNode, RemoveRef |
-| BRepGraph_RefsIterator_Test.cxx | not mapped (phase 2) | 8 | not run | waits for EditorView Vertices/Compounds().Add, Gen().MutChildRef, RemoveNode, RemoveRef |
-| BRepGraph_ReverseIterator_Test.cxx | not mapped (phase 2) | 20 | not run | waits for EditorView Add of every kind, Gen().RemoveNode |
-| BRepGraph_RelatedIterator_Test.cxx | not mapped (phase 2) | 15 | not run | waits for EditorView Gen().RemoveNode, BRepPrimAPI_MakeCylinder (TKPrim) |
-| BRepGraph_ChildExplorer_Test.cxx | not mapped (phase 2) | 37 | not run | waits for EditorView Gen().RemoveRef, Occurrences().MutRef/SetRefLocalLocation (MutGuard) |
-| BRepGraph_ParentExplorer_Test.cxx | not mapped (phase 2) | 23 | not run | waits for EditorView Vertices/Compounds().Add, Occurrences().SetRefChildOccurrenceId, BRepGraph_Validate |
-| BRepGraph_Tool_Test.cxx | not mapped (phase 2) | 16 | not run | waits for EditorView Faces().SetPersistentTriangulation and CoEdges().SetPersistentPolygonOnTri, BRepPrimAPI_MakeCylinder (TKPrim) |
-| BRepGraph_RefId_Test.cxx | not mapped (phase 2) | 19 | not run | waits for EditorView (Vertices/Edges().Add, Faces().MutRef/SetRefOrientation, Gen().RemoveRef) |
-| BRepGraph_VersionStamp_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView setters and Gen().RemoveNode |
-| BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for EditorView (Vertices().Add, Mut), BRepGProp, TKPrim cylinder and sphere |
-| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepBndLib, BRepBuilderAPI_MakeFace, Compact, EditorView Gen().RemoveSubgraph |
-| BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for LayerHistory, EditorView, TKPrim cylinder and sphere, BRepBuilderAPI_Copy |
-| BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for Validate, LayerRegistry, TKPrim solids, BRepBuilderAPI_MakeFace/MakeWire |
-| BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for Compact, Deduplicate, Validate, BRepGProp |
-| BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for caches, layers, Compact, Deduplicate |
-| BRepGraph_Test.cxx | not mapped (phase 2) | 95 | not run | waits for EditorView, LayerHistory, Validate, CacheRegistry |
+| BRepGraph_Iterator_Test.cxx | brep_graph_iterator | 14 | pass | pass |
+| BRepGraph_DefsIterator_Test.cxx | brep_graph_defs_iterator | 11 | pass | pass |
+| BRepGraph_RefsIterator_Test.cxx | brep_graph_refs_iterator | 8 | pass | pass |
+| BRepGraph_ReverseIterator_Test.cxx | brep_graph_reverse_iterator | 20 | pass | pass |
+| BRepGraph_RelatedIterator_Test.cxx | brep_graph_related_iterator | 15 | pass | pass |
+| BRepGraph_ChildExplorer_Test.cxx | brep_graph_child_explorer | 37 | pass | pass |
+| BRepGraph_ParentExplorer_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepGraph_Validate (wave 2c) |
+| BRepGraph_Tool_Test.cxx | not mapped (phase 2) | 16 | not run | waits for BRepPrimAPI_MakeCylinder (TKPrim) |
+| BRepGraph_RefId_Test.cxx | brep_graph_ref_id | 19 | pass | pass |
+| BRepGraph_VersionStamp_Test.cxx | brep_graph_version_stamp | 22 | pass | pass |
+| BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for BRepGProp, BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
+| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepGraph_Compact (wave 2c) |
+| BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for BRepBuilderAPI_Copy (TKTopAlgo) |
+| BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for BRepGraph_Validate (wave 2c), TKPrim sphere, cylinder, cone, torus and wedge, BRepBuilderAPI_MakeFace |
+| BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for BRepGraph_Compact, Deduplicate and Validate (wave 2c), BRepGProp, TKPrim cylinder and sphere, BRepBuilderAPI_MakeFace and Transform |
+| BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for BRepGraph_Compact, Deduplicate and Validate (wave 2c), TKPrim sphere, BRepBuilderAPI_Copy |
+| BRepGraph_Test.cxx | not mapped (phase 2) | 95 | not run | waits for BRepGraph_Validate (wave 2c) |
 | BRepGraph_LayerIterator_Test.cxx | brep_graph_layer_iterator | 4 | pass | pass |
-| BRepGraph_CacheMesh_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView (Faces/Edges/Vertices/CoEdges Mut and MutGuard, SetTolerance, SetOrientation, Faces().ClearSurface and SetPersistentTriangulation) |
+| BRepGraph_CacheMesh_Test.cxx | brep_graph_cache_mesh_suite | 22 | pass | pass |
 | BRepGraph_Polygon_Test.cxx | not mapped (phase 2) | 7 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepPrimAPI_MakeCylinder (TKPrim) |
-| BRepGraph_Geometry_Test.cxx | not mapped (phase 2) | 44 | not run | waits for EditorView curve, p-curve, surface and persistent mesh setters and Faces().Add, BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
-| BRepGraph_Lock_Test.cxx | not mapped (phase 2) | 19 | not run | waits for EditorView (Gen().RemoveNode, Vertices().Mut/MutRef/SetPoint/SetRefOrientation), BRepGraph_Compact |
-| BRepGraph_LayerHistory_Test.cxx | not mapped (phase 2) | 39 | not run | waits for EditorView (ApplyModification, RemoveNode), ReverseIterator, Tool, BRepBuilderAPI_MakeVertex |
-| BRepGraph_LayerTopoSupplement_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView, SupplementEditor, RefsIterator, Copy, Compact |
-| BRepGraph_CacheRegistry_Test.cxx | not mapped (phase 2) | 14 | not run | waits for EditorView, MutGuard, Transform |
+| BRepGraph_Geometry_Test.cxx | not mapped (phase 2) | 44 | not run | waits for BRepPrimAPI_MakeCylinder and MakeSphere (TKPrim) |
+| BRepGraph_Lock_Test.cxx | not mapped (phase 2) | 19 | not run | waits for BRepGraph_Compact (wave 2c) |
+| BRepGraph_LayerHistory_Test.cxx | brep_graph_layer_history_suite | 39 | pass | pass |
+| BRepGraph_LayerTopoSupplement_Test.cxx | not mapped (phase 2) | 22 | not run | waits for BRepGraph_Copy (wave 2c) |
+| BRepGraph_CacheRegistry_Test.cxx | not mapped (phase 2) | 14 | not run | waits for BRepGraph_Transform (wave 2c) |
 | BRepGraph_NodeId_Test.cxx | not mapped (phase 2) | 15 | not run | waits for RelatedIterator, MakeBox |
-| BRepGraph_RefId_Test.cxx | not mapped (phase 2) | 19 | not run | waits for EditorView, iterators, MakeBox |
-| BRepGraph_VersionStamp_Test.cxx | not mapped (phase 2) | 22 | not run | waits for EditorView, Tool, MakeBox |
-| BRepGraph_Reconstruct_Test.cxx | not mapped (phase 2) | 24 | not run | waits for EditorView, Tool, Iterator, BRepGProp |
-| BRepGraphInc_PopulateRegression_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepMesh_IncrementalMesh (TKMesh), BRepBndLib, BRepBuilderAPI_MakeFace, Compact, EditorView Gen().RemoveSubgraph |
-| BRepGraph_ShapesViewImport_Test.cxx | not mapped (phase 2) | 44 | not run | waits for EditorView, explorers, iterators, Tool, TKPrim solids |
-| BRepGraph_Build_Test.cxx | not mapped (phase 2) | 59 | not run | waits for Validate, Tool, iterators, TKPrim solids |
-| BRepGraphInc_Test.cxx | not mapped (phase 2) | 80 | not run | waits for Compact, Deduplicate, Validate, BRepGProp |
-| BRepGraph_Views_Test.cxx | not mapped (phase 2) | 81 | not run | waits for iterators, Tool, Compact, Deduplicate, Validate |
-| BRepGraph_Test.cxx | not mapped (phase 2) | 95 | not run | waits for EditorView, explorers, iterators, Tool, Validate |
+| BRepGraph_MutGuard_Test.cxx | brep_graph_mut_guard | 11 | pass | pass |
+| BRepGraph_MutationGen_Test.cxx | brep_graph_mutation_gen | 14 | pass | pass |
+| BRepGraph_DeferredInvalidation_Test.cxx | brep_graph_deferred_invalidation | 16 | pass | pass |
+| BRepGraph_BatchOps_Test.cxx | brep_graph_batch_ops | 17 | pass | pass |
+| BRepGraph_EventBus_Test.cxx | brep_graph_event_bus | 26 | pass | pass |
+| BRepGraph_Assembly_Test.cxx | not mapped (phase 2) | 45 | not run | waits for BRepPrimAPI_MakeSphere (TKPrim) |
+| BRepGraph_EdgeCases_Test.cxx | not mapped (phase 2) | 12 | not run | waits for BRepPrimAPI_MakeSphere (TKPrim) |
+| BRepGraph_Convenience_Test.cxx | not mapped (phase 2) | 17 | not run | waits for BRepPrimAPI_MakeCylinder (TKPrim) |
+| BRepGraph_PermissionUpdate_Test.cxx | not mapped (phase 2) | 15 | not run | waits for BRepGraph_Copy and Transform (wave 2c) |
+| BRepGraph_ReplaceVertex_Test.cxx | not mapped (phase 2) | 6 | not run | waits for BRepGraph_Validate (wave 2c) |
+| BRepGraph_Reverse_Test.cxx | not mapped (phase 2) | 16 | not run | waits for BRepGraph_Validate (wave 2c) |
+| BRepGraph_Sharing_Test.cxx | not mapped (phase 2) | 17 | not run | waits for BRepGraph_Validate (wave 2c) |
+| BRepGraph_Compact_Test.cxx | not mapped (phase 2) | 26 | not run | waits for BRepGraph_Compact, Deduplicate and Validate (wave 2c), BRepBuilderAPI_Copy, BRepCheck_Analyzer, BRepAlgoAPI_Cut (TKBO), TKPrim cylinder |
+| BRepGraph_Copy_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepGraph_Copy (wave 2c), BRepGProp, TKPrim cylinder, BRepBuilderAPI_Copy, BRepAlgoAPI_Fuse (TKBO) |
+| BRepGraph_Deduplicate_Test.cxx | not mapped (phase 2) | 82 | not run | waits for BRepGraph_Deduplicate, Compact and Validate (wave 2c), BRepBuilderAPI_Copy and MakeFace, BRepCheck_Analyzer, TKPrim cylinder, sphere and cone |
+| BRepGraph_Transform_Test.cxx | not mapped (phase 2) | 19 | not run | waits for BRepGraph_Transform and Copy (wave 2c), BRepGProp |
+| BRepGraph_Validate_Test.cxx | not mapped (phase 2) | 23 | not run | waits for BRepGraph_Validate and Deduplicate (wave 2c), BRepBuilderAPI_Copy |
+| BRepGraph_SparseModel_Test.cxx | not mapped (phase 2) | 28 | not run | waits for BRepGraph_Compact, Deduplicate and Validate (wave 2c) |
+| BRepGraph_ScenarioMatrix_Test.cxx | not mapped (phase 2) | 18 | not run | waits for BRepGraph_Validate (wave 2c), BRepGProp, TKPrim cylinder and sphere |
+| BRepGraph_SeamRedesign_Test.cxx | not mapped (phase 2) | 9 | not run | waits for BRepGraph_Validate (wave 2c), TKPrim cylinder and sphere |
+| BRepGraph_Fuzz_Test.cxx | not mapped (phase 2) | 2 | not run | waits for BRepGraph_Validate (wave 2c), BRepPrimAPI_MakeCylinder (TKPrim); its two TEST_P declarations are instantiated per seed |
 
 The suites build their inputs with BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeEdge
 (TKTopAlgo) and BRepPrimAPI_MakeBox (TKPrim). Those toolkits are not ported, so the Rust
@@ -174,6 +186,30 @@ the graph editor's `SetPersistent*` setters and waits for them. The BRepGraph mi
 count falls from 379 to 199 (the editor, MutGuard, DeferredScope, SupplementEditor, the
 algorithms, `Editor() const`, `Shapes().RemoveShape` and `PromoteToPersistent`), with 0
 stale rows.
+
+Phase 2, wave 2b, editor area ports the mutation classes whole
+(docs/topology-design.md section 11.4): BRepGraph::EditorView with all twelve operation
+groups (the EditorView_Mut guards and the EditorView_Setters setters, direct and
+guarded), BRepGraph_MutGuard, BRepGraph_DeferredScope, BRepGraph_SupplementEditor, the
+private `invalidateSubgraphImpl`, `Shapes().RemoveShape`, `BRepGraph::Editor() const`
+and `MeshView::EditorView::PromoteToPersistent`, which writes through the editor's
+`SetPersistent*` setters. Layer notifications (history records, deferred and supplement
+updates) and cache invalidation fire in the native order. Fifteen upstream suites now
+build and are translated 1:1 (Iterator, DefsIterator, RefsIterator, ReverseIterator,
+RelatedIterator, ChildExplorer, RefId, VersionStamp, CacheMesh, LayerHistory, MutGuard,
+MutationGen, DeferredInvalidation, BatchOps, EventBus: 291 declarations, native and Rust
+pass); the LayerHistory and CacheMesh suites map to `brep_graph_layer_history_suite` and
+`brep_graph_cache_mesh_suite`, since the area-B and wave-2b behaviour files own the plain
+names. Every other BRepGraph suite still calls a wave-2c algorithm (Copy, Compact,
+Deduplicate, Transform, Validate) or a toolkit that is not ported (TKPrim solids other
+than the box, BRepGProp, BRepMesh, BRepBuilderAPI_Copy/MakeFace/Transform, BRepCheck,
+BRepAlgoAPI), as the table lists. `crates/tkbrep/tests/brep_graph_editor_setters.rs`,
+`brep_graph_editor_structure.rs` and `brep_graph_mesh_promote.rs` cover the editor
+members that no suite calls, and the `br_bedit` requests compare every operation group
+with OCCT byte for byte. `tools/audit_api_rows.py` gives these classes 176 new rows (the
+destructors map to the `Drop` impls, the guard move constructor and assignment to
+`move_from` and `move_assign`); the BRepGraph missing count falls from 199 to 23, the
+public members of Copy, Compact, Deduplicate, Transform and Validate, with 0 stale rows.
 
 The BRepTools and BRepAdaptor suites are translated 1:1 in
 `crates/tkbrep/tests/brep_tools_reshape.rs`, `brep_tools_trsf_modification.rs`,
@@ -498,6 +534,25 @@ the deferred entries, every derived answer, the slot states and every face, edge
 coedge entry of three slots with `Needs` of every face and compound, and every
 persistent, cache and effective mesh-view query; then the drivers' Fill logs.
 
+The BRepGraph editor requests (`br_bedit`; 18 requests in
+`tools/tkbrep_brepgraph_edit_corpus.py`, probes `tools/oracle/tkbrep_probe_brepgraph_edit*.cxx`
+and `crates/tkbrep/examples/br_probe/brep_graph_edit*.rs`) build a triangle face, its
+shell, solid, compound, compsolid, products and occurrences from scratch, and edit the
+ingested solid scene: every setter of every operation group, splits, vertex replacement
+and removal, edge and wire reversal, edge replacement, coedge removal and reordering,
+node, subgraph and reference removal with cleanup, node replacement, the container
+removals, `RemoveShape`, the node and reference guards (dirty, clean, marked, refused),
+`ApplyModification` with a nested action, deferred invalidation and a nested
+`DeferredScope`, lock owners refusing each group's writes, the supplement editor for
+every owner kind, and `PromoteToPersistent` over fresh, stale and locked mesh-cache
+entries. The requests mix in the `br_blayer` logging layers, history and caches and the
+`br_bcache` lock owners and mesh-cache writes. The probes print the graph (every
+definition, reference and relation), the editor state and mutation boundary, the layer
+registry with every logging layer's events, the history records and queries, the
+supplement, the caches, the mesh cache and view and every node's shapes. A setter whose
+target id is out of range, and a child rebound out of range, are not probed: the release
+build writes or reads out of bounds there.
+
 The corpus has 649 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
 caches 22, the BRepGraph navigation 13 and the BRepGraph lock and caches 14.
@@ -715,6 +770,23 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   and call the layer or cache without it, so a callback may use the registry; the
   registration callbacks (`OnAttached`, `OnDetached`) run under the lock, as natively.
 
+- The editor keeps the release behaviour of its assertions: `Standard_ASSERT_RETURN`
+  checks return their value (`RemoveVertex`, `RemoveWire` and `RemoveRef` with ids out of
+  range return false; `SetRefChildOccurrenceId` with an occurrence another reference
+  owns leaves the reference unchanged; a new vertex reference that is owned or removed
+  is ignored by `SetStartVertexRefId`/`SetEndVertexRefId`), and `Standard_ASSERT_VOID`
+  is compiled out, so `CommitMutation` has no effect.
+- `Edges().Reverse` and `Wires().Reverse` do not check the lock layer: they rewrite a
+  locked edge or wire, while every setter and `Mut` refuses it with
+  Standard_ProgramError. `Edges().Split` and `ReplaceVertex` with an inactive input
+  return the invalid ids without raising.
+- `ApplyModification` runs the modifier before it records anything; a modifier that
+  raises leaves no history record. `DeferredScope` commits only when it opened the
+  deferred mode, so a nested scope leaves the outer one deferred.
+- `PromoteToPersistent` re-reads each cache entry after the earlier writes: a face's
+  promoted triangulation notifies the face, so the coedge polygons on that face's
+  triangulation turn stale and are not promoted; a refused write stops the promotion.
+
 ## Deliberate Rust deviations
 
 - A null TShape dereference (null shape flags, `ShapeType`, a null explored shape in
@@ -815,9 +887,13 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   Standard_OutOfRange (natively an unchecked vector read). Parallel face extraction
   returns the error of the failing face with the lowest queue index, so a parallel and
   a sequential population fail the same way.
-- Phase 2 still has to port these members of the phase-1 classes: `BRepGraph::Editor()
-  const` and `Shapes().RemoveShape` (the editor's `RemoveNode`). The editor is partly
-  ported: only the members that phase 1 calls have api rows.
+- The editor holds the graph's one mutable borrow (docs/topology-design.md section
+  11.4): a guarded setter is an associated `*_guarded` function taking the guard, a
+  second guard is taken through the first one's `graph_mut()`, the guard move members
+  are `move_from`/`move_assign`, `Editor() const` is `editor_state()`, and
+  `PromoteToPersistent` is an associated function taking the graph mutably. The
+  `ApplyModification` modifier returns `Result`. A setter or guard on an id out of its
+  kind's range panics in the storage (natively an unchecked write).
 - The BRepGraph iterators and explorers keep the native `More`/`Next`/`Current`
   protocol and implement `Iterator` for the range form. The child and parent explorers
   and the related iterator compose locations or build p-curve adaptors while they

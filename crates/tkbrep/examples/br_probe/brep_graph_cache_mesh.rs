@@ -79,7 +79,12 @@ fn driver_action(
 }
 
 /// 98-104: the mesh editor (`bc_mesh_editor_action`).
-fn editor_action(g: &BRepGraph, s: &Scene, r: &mut Reader<'_>, code: i32) -> Result<bool, Failure> {
+pub fn editor_action(
+    g: &BRepGraph,
+    s: &Scene,
+    r: &mut Reader<'_>,
+    code: i32,
+) -> Result<bool, Failure> {
     let geometry = &s.geometry;
     let editor = g.mesh().editor();
     match code {

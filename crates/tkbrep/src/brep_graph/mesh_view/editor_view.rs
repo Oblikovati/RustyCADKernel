@@ -15,7 +15,8 @@
 // 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `MeshView::EditorView`: writes to the default slot of the mesh cache. Persistent
-//! representations are written by the graph editor, not here.
+//! representations are written by the graph editor; `promote_to_persistent` copies the
+//! fresh cache entries into them through it.
 use super::cache_mesh_of;
 use crate::brep_graph::cache_mesh::DEFAULT_DISPLAY_SLOT;
 use crate::brep_graph::{BRepGraph, CoEdgeId, EdgeId, FaceId};

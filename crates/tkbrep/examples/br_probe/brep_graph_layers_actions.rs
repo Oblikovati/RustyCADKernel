@@ -27,7 +27,7 @@ fn history_kind(r: &mut Reader<'_>) -> HistoryKind {
     ][r.integer() as usize]
 }
 
-fn attachment_kind(code: i32) -> AttachmentKind {
+pub fn attachment_kind(code: i32) -> AttachmentKind {
     use AttachmentKind::*;
     [
         VertexSupplementShape,
@@ -46,7 +46,7 @@ fn history(g: &BRepGraph) -> Result<Handle<LayerHistory>, Failure> {
 }
 
 /// 10-20: the history layer (`bl_history_action`).
-fn history_action(g: &BRepGraph, r: &mut Reader<'_>, code: i32) -> Result<bool, Failure> {
+pub fn history_action(g: &BRepGraph, r: &mut Reader<'_>, code: i32) -> Result<bool, Failure> {
     if !(10..=20).contains(&code) {
         return Ok(false);
     }
@@ -112,7 +112,7 @@ fn uid_history_action(h: &LayerHistory, r: &mut Reader<'_>, code: i32) -> Result
 }
 
 /// 21-30: the registry (`bl_registry_action`).
-fn registry_action(
+pub fn registry_action(
     g: &BRepGraph,
     st: &mut State,
     r: &mut Reader<'_>,
@@ -154,7 +154,7 @@ fn registry_action(
 }
 
 /// 31-34: the supplement layer (`bl_supplement_action`).
-fn supplement_action(
+pub fn supplement_action(
     g: &BRepGraph,
     s: &Scene,
     r: &mut Reader<'_>,
@@ -242,7 +242,7 @@ fn import_action(
 }
 
 /// 40-45: the probe cache (`bl_cache_action`).
-fn cache_action(
+pub fn cache_action(
     g: &BRepGraph,
     st: &mut State,
     r: &mut Reader<'_>,

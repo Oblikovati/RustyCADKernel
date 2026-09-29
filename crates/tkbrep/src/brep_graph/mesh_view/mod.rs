@@ -31,6 +31,7 @@ pub mod editor_view;
 pub mod effective_view;
 pub mod persistent_view;
 pub mod poly;
+mod promote;
 
 use cache_view::CacheView;
 use editor_view::EditorView;

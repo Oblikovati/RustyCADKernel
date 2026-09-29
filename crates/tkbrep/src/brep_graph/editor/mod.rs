@@ -10,25 +10,60 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of the EditorView members that BRepGraph::ShapesView::Add calls,
-// from ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx, BRepGraph_EditorView.cxx
-// and BRepGraph_EditorView_Setters.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx,
+// BRepGraph_EditorView.cxx, BRepGraph_EditorView_Mut.cxx and
+// BRepGraph_EditorView_Setters.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BRepGraph::EditorView`: the single mutation entry point of a graph.
 //!
-//! The view holds the graph's mutable borrow, and its operation groups reborrow it
-//! (docs/topology-design.md section 11.4). Phase 1 ports the product, container-append
-//! and child-location members that shape ingestion needs, with the lock and guard
-//! checks; the editor area of phase 2 adds the rest of `EditorView` and `MutGuard`
-//! here.
-mod appends;
+//! The view holds the graph's mutable borrow, and each operation group takes it over
+//! (docs/topology-design.md section 11.4): `graph.editor().edges().add(...)`. A group
+//! consumes the view so that the scoped guard of `mutate` (`Mut`) can outlive the
+//! temporaries of the call chain; [`EditorView::reborrow`] keeps a view for several
+//! groups. The members that can raise natively (lock and guard checks, `Mut` on an
+//! invalid id) return `Result`; an out-of-range id that the native code indexes
+//! without a check (undefined behaviour) panics with the index.
+mod boundary;
+mod co_edges;
+mod compounds;
+mod containers;
+mod deferred;
+mod edge_split;
+mod edge_vertices;
+mod edges;
+mod faces;
+mod gen_cleanup;
+mod gen_ops;
+mod gen_refs;
+mod gen_remove;
+mod gen_replace;
+mod gen_subgraph;
+mod guards;
+mod helpers;
+mod occurrences;
+mod product_removal;
 mod products;
+mod ref_container;
+mod removals;
+mod vertices;
+mod wire_checks;
+mod wire_edits;
+mod wires;
 
-pub use appends::{CompSolidOps, CompoundOps, GenOps, ShellOps, SolidOps};
+pub use boundary::BoundaryIssue;
+pub use co_edges::CoEdgeOps;
+pub use compounds::{CompSolidOps, CompoundOps};
+pub use containers::{ShellOps, SolidOps};
+pub use edges::EdgeOps;
+pub use faces::FaceOps;
+pub use gen_ops::GenOps;
+pub use occurrences::OccurrenceOps;
 pub use products::ProductOps;
+pub use vertices::VertexOps;
+pub use wires::{CoEdgeOrderStatus, ReplaceEdgeStatus, WireOps};
 
-use crate::brep_graph::{BRepGraph, ItemDomain, ItemId, NodeId, NodeKind};
-use rustycad_tkernel::standard::Failure;
+use super::supplement_editor::SupplementEditor;
+use crate::brep_graph::BRepGraph;
 
 /// `BRepGraph::EditorView`: obtained by [`BRepGraph::editor`].
 ///
@@ -43,111 +78,100 @@ pub struct EditorView<'g> {
     graph: &'g mut BRepGraph,
 }
 
+/// `const BRepGraph::EditorView`: the editor state queries of a shared graph
+/// (`BRepGraph::Editor() const`), obtained by [`BRepGraph::editor_state`].
+///
+/// ```
+/// use rustycad_tkbrep::brep_graph::BRepGraph;
+/// let graph = BRepGraph::new();
+/// assert!(!graph.editor_state().is_deferred_mode());
+/// assert!(graph.editor_state().validate_mutation_boundary(None));
+/// ```
+#[derive(Clone, Copy, Debug)]
+pub struct EditorState<'g> {
+    graph: &'g BRepGraph,
+}
+
 impl BRepGraph {
     /// `Editor()`: the mutation view.
     pub fn editor(&mut self) -> EditorView<'_> {
         EditorView { graph: self }
     }
+
+    /// `Editor() const`: the state queries (`IsDeferredMode`,
+    /// `ValidateMutationBoundary`) that the native `const` editor exposes.
+    pub fn editor_state(&self) -> EditorState<'_> {
+        EditorState { graph: self }
+    }
 }
 
-impl EditorView<'_> {
-    /// `Products()`: the product operations.
-    pub fn products(&mut self) -> ProductOps<'_> {
-        ProductOps { graph: self.graph }
-    }
+macro_rules! ops_accessors {
+    ($($(#[$doc:meta])* $name:ident => $ops:ident;)*) => {
+        impl<'g> EditorView<'g> {
+            $(
+                $(#[$doc])*
+                pub fn $name(self) -> $ops<'g> {
+                    $ops { graph: self.graph }
+                }
+            )*
+        }
+    };
+}
 
-    /// `Compounds()`: the compound operations.
-    pub fn compounds(&mut self) -> CompoundOps<'_> {
-        CompoundOps { graph: self.graph }
-    }
-
+ops_accessors! {
+    /// `Vertices()`: the vertex operations.
+    vertices => VertexOps;
+    /// `Edges()`: the edge operations.
+    edges => EdgeOps;
+    /// `CoEdges()`: the coedge and p-curve operations.
+    co_edges => CoEdgeOps;
+    /// `Wires()`: the wire operations.
+    wires => WireOps;
+    /// `Faces()`: the face operations.
+    faces => FaceOps;
     /// `Shells()`: the shell operations.
-    pub fn shells(&mut self) -> ShellOps<'_> {
-        ShellOps { graph: self.graph }
-    }
-
+    shells => ShellOps;
     /// `Solids()`: the solid operations.
-    pub fn solids(&mut self) -> SolidOps<'_> {
-        SolidOps { graph: self.graph }
-    }
-
+    solids => SolidOps;
+    /// `Compounds()`: the compound operations.
+    compounds => CompoundOps;
     /// `CompSolids()`: the compsolid operations.
-    pub fn comp_solids(&mut self) -> CompSolidOps<'_> {
-        CompSolidOps { graph: self.graph }
+    comp_solids => CompSolidOps;
+    /// `Products()`: the product operations.
+    products => ProductOps;
+    /// `Occurrences()`: the occurrence operations.
+    occurrences => OccurrenceOps;
+    /// `Gen()`: the generic node, reference and representation operations.
+    generic => GenOps;
+}
+
+impl<'g> EditorView<'g> {
+    /// A shorter-lived view over the same graph, so that one binding can reach several
+    /// operation groups in turn.
+    pub fn reborrow(&mut self) -> EditorView<'_> {
+        EditorView { graph: self.graph }
     }
 
-    /// `Gen()`: the generic operations.
-    pub fn generic(&mut self) -> GenOps<'_> {
-        GenOps { graph: self.graph }
+    /// `Supplement()`: the runtime supplement attachment operations.
+    pub fn supplement(self) -> SupplementEditor<'g> {
+        SupplementEditor::new(self.graph)
+    }
+
+    /// The state queries of the edited graph.
+    pub fn state(&self) -> EditorState<'_> {
+        EditorState { graph: self.graph }
+    }
+
+    /// `IsDeferredMode()`.
+    pub fn is_deferred_mode(&self) -> bool {
+        self.state().is_deferred_mode()
     }
 }
 
-/// `isOwned(theItem)` (private natively): the item is in range and owned.
-pub(crate) fn is_owned(graph: &BRepGraph, item: ItemId) -> bool {
-    match item.item_domain() {
-        ItemDomain::Node => item.node_id().is_owned(graph),
-        ItemDomain::Reference => item.ref_id().is_owned(graph),
-        ItemDomain::None => false,
+impl EditorState<'_> {
+    /// `IsDeferredMode()`: deferred invalidation is active. A state flag only: it does
+    /// not imply mutation ownership.
+    pub fn is_deferred_mode(self) -> bool {
+        self.graph.inc_storage().deferred_mode()
     }
-}
-
-/// `requireUnlocked(theItem, theOperation)` (private natively): an owned item raises
-/// Standard_ProgramError with the operation text.
-pub(crate) fn require_unlocked(
-    graph: &BRepGraph,
-    item: ItemId,
-    operation: &str,
-) -> Result<(), Failure> {
-    if is_owned(graph, item) {
-        return Err(program_error(operation, item));
-    }
-    Ok(())
-}
-
-/// `requireNoActiveGuard(theItem, theOperation)` (private natively): a guarded item
-/// raises Standard_ProgramError with the operation text.
-pub(crate) fn require_no_active_guard(
-    graph: &BRepGraph,
-    item: ItemId,
-    operation: &str,
-) -> Result<(), Failure> {
-    if graph.inc_storage().is_item_guarded(item) {
-        return Err(program_error(operation, item));
-    }
-    Ok(())
-}
-
-/// Both checks of an editor member on one node, in native order, with the native
-/// `locked` and `guard active` texts.
-pub(crate) fn require_mutable(
-    graph: &BRepGraph,
-    node: NodeId,
-    locked: &str,
-    guarded: &str,
-) -> Result<(), Failure> {
-    require_unlocked(graph, node.into(), locked)?;
-    require_no_active_guard(graph, node.into(), guarded)
-}
-
-fn program_error(operation: &str, item: ItemId) -> Failure {
-    Failure::with_type(
-        "Standard_ProgramError",
-        &format!(
-            "{operation} (item domain {:?}, kind {}, index {})",
-            item.item_domain(),
-            item.raw_kind(),
-            item.index()
-        ),
-        "",
-    )
-}
-
-/// `isActiveNode` (private natively): in range and not removed.
-pub(crate) fn is_active_node(graph: &BRepGraph, node: NodeId) -> bool {
-    graph.topo().generic().is_active(node)
-}
-
-/// `isActiveTopologyNode` (private natively): an active node of a topology kind.
-pub(crate) fn is_active_topology_node(graph: &BRepGraph, node: NodeId) -> bool {
-    node.is_valid() && NodeKind::is_topology_kind(node.kind) && is_active_node(graph, node)
 }

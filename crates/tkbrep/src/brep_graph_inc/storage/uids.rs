@@ -204,6 +204,17 @@ impl Storage {
         self.ref_uid_to_ref_id_dirty.store(false, Ordering::Release);
     }
 
+    /// `myUIDToNodeId.UnBind(theUID)` under the index lock: the editor forgets the UID of
+    /// a removed node (the index is a friend-accessed member natively).
+    pub(crate) fn unbind_node_uid(&mut self, uid: &Uid) {
+        self.uid_index().remove(uid);
+    }
+
+    /// `myRefUIDToRefId.UnBind(theUID)`: the reference counterpart.
+    pub(crate) fn unbind_ref_uid(&mut self, uid: &RefUid) {
+        self.ref_uid_index().remove(uid);
+    }
+
     fn uid_index(&mut self) -> &mut HashMap<Uid, NodeId> {
         self.uid_to_node_id.get_mut().expect("UID index lock")
     }

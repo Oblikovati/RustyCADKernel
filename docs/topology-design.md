@@ -371,20 +371,52 @@ do.
 
 ### 11.4 Mutation without `unsafe`: the editor and MutGuard
 
-`EditorView` is a view that holds `&mut BRepGraph` (`graph.editor()`); its nested
-operation groups (`products()`, `compounds()`...) reborrow it. `BRepGraph_MutGuard<T>`
-becomes `MutGuard<'g, T>` holding the editor's mutable borrow and the typed id: `Deref`
-and `DerefMut` reach the definition or reference entry through the storage, and `Drop`
-clears the guard plane and calls `mark_modified`/`mark_ref_modified`. Because the guard
-holds the only mutable borrow, a second guard cannot exist while one is alive; the guard
-plane is still set and cleared, so that `IsGuarded` and the editor's
-`requireNoActiveGuard` checks behave as natively. No raw pointer, cell or `unsafe` is
-needed: the only shared mutable state is behind the storage locks of section 11.2.
+**The view.** `EditorView<'g>` holds `&'g mut BRepGraph` (`graph.editor()`). Each
+operation-group accessor (`vertices()`, `edges()`, ... `generic()` for `Gen()`) consumes
+the view and returns the group, which holds the same borrow, so one call reads
+`graph.editor().edges().add(...)`; `reborrow()` hands out a shorter-lived view when one
+view serves several groups. `BRepGraph::Editor() const` is `graph.editor_state()`, an
+`EditorState<'_>` over `&BRepGraph` with the `const` members (`IsDeferredMode`,
+`ValidateMutationBoundary`); the same members exist on the mutable view.
 
-Phase 1 already ports the editor operations that `Shapes().Add` calls (section 11.7):
-`Products().Add`, `Products().AppendDocumentRoot`, `Products().Append`, the
-`Compounds/Shells/Solids/CompSolids().Append` and `Gen().SetChildRefLocalLocation`,
-with the lock and guard checks `requireUnlocked` and `requireNoActiveGuard`.
+**MutGuard.** `BRepGraph_MutGuard<T>` is `MutGuard<'g, T: GuardTag>`, holding
+`Option<&'g mut BRepGraph>`, the typed id and the dirty flag. `Deref` reads the record
+through the storage by id (and panics on an inert guard); `try_get` is the checked
+`operator->`/`operator*`, raising Standard_ProgramError on an inert guard; `internal()`
+marks the guard dirty and lends the record mutably; `Drop` clears the guard plane, then
+calls `markModified`/`markRefModified` when dirty. The C++ move constructor is
+`MutGuard::move_from(&mut source)`, which takes the borrow and leaves the source inert
+(`is_active()` false), and move assignment is `move_assign`, which releases the target
+first. A guarded setter (`SetTolerance(theMut, ...)`) is the associated function
+`EdgeOps::set_tolerance_guarded(&mut guard, ...)`, since the group and the guard cannot
+both hold the borrow. Because the guard holds the only mutable borrow, a second guard is
+taken through `guard.graph_mut()`; the guard plane is still set and cleared, so
+`IsGuarded` and `requireNoActiveGuard` answer as natively.
+
+**Deferred invalidation and scopes.** `BeginDeferredInvalidation` and
+`EndDeferredInvalidation` are members of the view; `BRepGraph_DeferredScope` is
+`DeferredScope<'g>`, which holds the graph, derefs to it, and ends the deferred mode and
+commits in `Drop` when it opened the mode. `BRepGraph_SupplementEditor` is
+`SupplementEditor<'g>` (`graph.editor().supplement()`); its `AttachTo*` defaults are an
+`Option<AttachmentKind>`.
+
+**Failures and assertions.** A C++ exception is a `Failure` with the native type and
+message. The oracle is the release build: `Standard_ASSERT_RETURN` evaluates its
+condition and returns (the port keeps that return), `Standard_ASSERT_VOID` is compiled
+out (so `CommitMutation` has no effect) and the `*_Raise_if` checks stay active. The
+template `ApplyModification` takes a modifier `FnOnce(&mut BRepGraph, NodeId) ->
+Result<R, Failure>` with `R: IntoIterator<Item = NodeId>`: a failing modifier returns
+its error before any history record, as the native exception does.
+
+**Mesh promotion.** `MeshView::EditorView::PromoteToPersistent` writes through the
+editor's `SetPersistent*` setters, so it is the associated function
+`mesh_view::editor_view::EditorView::promote_to_persistent(&mut BRepGraph)`: the mesh
+editor view itself only borrows the graph shared.
+
+**Test translation.** A native test that keeps two guards alive takes the second
+through the first guard's `graph_mut()`; one that reads the graph while a guard is alive
+reads through `guard.graph()`; a move assignment of a guard that is still borrowed
+becomes a drop, then `move_from`; a throwing modifier returns a `Failure`.
 
 ### 11.5 Population and reconstruction
 
