@@ -16,7 +16,7 @@
 mod containers;
 mod fit;
 mod line;
-pub use line::{ProbeLine, ProbePoint};
+pub use line::{multi_point, read_line};
 
 pub use containers::{bernstein_case, multicurve_case, multipoint_case, read_points, spline_case};
 pub use fit::{

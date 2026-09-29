@@ -95,14 +95,14 @@ impl ResolConstraint {
             tan += i32::from(code >= 2);
             curv += i32::from(code == 3);
         }
-        let ccol: i32 = ssp.nb_p3d() * 3 + ssp.nb_p2d() * 2;
+        let ccol: i32 = ssp.nb_p3d()? * 3 + ssp.nb_p2d()? * 2;
         Ok(ccol * pass + tan * (ccol - 1) + 3 * curv)
     }
 
     /// `NbColumns(SSP, Deg)` (protected natively): `CCol * (Deg + 1)`;
-    /// `ResolConstraint::nb_columns(&line, 3)`.
-    pub fn nb_columns(ssp: &impl LineTool, deg: i32) -> i32 {
-        (ssp.nb_p3d() * 3 + ssp.nb_p2d() * 2) * (deg + 1)
+    /// `ResolConstraint::nb_columns(&line, 3)?`.
+    pub fn nb_columns(ssp: &impl LineTool, deg: i32) -> Result<i32, Failure> {
+        Ok((ssp.nb_p3d()? * 3 + ssp.nb_p2d()? * 2) * (deg + 1))
     }
 
     /// The native constructor (`Tolerance` defaults to 1e-10 natively): builds the
@@ -122,7 +122,7 @@ impl ResolConstraint {
     ) -> Result<Self, Failure> {
         let (rows, columns) = (
             Self::nb_constraints(ssp, constraints)?,
-            Self::nb_columns(ssp, scurv.nb_poles() - 1),
+            Self::nb_columns(ssp, scurv.nb_poles() - 1)?,
         );
         let mut resol: Self = Self {
             done: false,
@@ -228,7 +228,7 @@ impl ResolConstraint {
         npol: i32,
         i: i32,
     ) -> Result<MultiPoint, Failure> {
-        let (nb3d, nb2d) = (ssp.nb_p3d(), ssp.nb_p2d());
+        let (nb3d, nb2d) = (ssp.nb_p3d()?, ssp.nb_p2d()?);
         let point: MultiPoint = MultiPoint::with_counts(nb3d, nb2d)?;
         let mut inc_col: i32 = 0;
         for k in 1..=nb3d + nb2d {

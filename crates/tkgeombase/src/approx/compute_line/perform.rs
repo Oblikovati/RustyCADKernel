@@ -69,7 +69,7 @@ impl ComputeLine {
         } else {
             self.is_clear = false;
         }
-        let (the_first, the_last) = (line.first_point(), line.last_point());
+        let (the_first, the_last) = (line.first_point(), line.last_point()?);
         self.set_couples(the_first, the_last);
         let the_param: Vector<'static> = Vector::with_bounds(the_first, the_last)?;
         if !self.options.cutting {
@@ -96,7 +96,7 @@ impl ComputeLine {
         line: &L,
         mut the_param: Vector<'static>,
     ) -> Result<(), Failure> {
-        let (first, last) = (line.first_point(), line.last_point());
+        let (first, last) = (line.first_point(), line.last_point()?);
         match &self.first_param {
             None => self.compute_parameters(line, first, last, &mut the_param)?,
             Some(params) => {
@@ -254,7 +254,7 @@ impl ComputeLine {
         if state.status == Status::PointsAdded {
             state.go_up = true;
             let other: L = line.make_ml_between(state.first, state.last, nbp - 1)?;
-            let nb_other: i32 = other.first_point() - other.last_point();
+            let nb_other: i32 = other.first_point() - other.last_point()?;
             if nb_other == 0 || self.multi_line_nb >= MAX_MULTI_LINES {
                 let flow: Flow = self.fit_as_is(line, state)?;
                 if !matches!(flow, Flow::Continue) {

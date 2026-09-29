@@ -78,7 +78,7 @@ impl<L: LineTool + Clone> BSpFunction<L> {
         mults: &Array1<'_, i32>,
         nb_pol: i32,
     ) -> Result<Self, Failure> {
-        let (rows, curves) = ([first_point, last_point], ssp.nb_p3d() + ssp.nb_p2d());
+        let (rows, curves) = ([first_point, last_point], ssp.nb_p3d()? + ssp.nb_p2d()?);
         let least_square: LeastSquare = LeastSquare::with_knots_without_parameters(
             ssp,
             knots,

@@ -198,7 +198,7 @@ impl BSpGradient {
         f: &BSpFunction<L>,
     ) -> Result<(), Failure> {
         let ssp: &L = input.ssp;
-        let (nb3d, nb2d) = (ssp.nb_p3d(), ssp.nb_p2d());
+        let (nb3d, nb2d) = (ssp.nb_p3d()?, ssp.nb_p2d()?);
         let poles3d: Vec<Array1<'static, Point3>> = (1..=nb3d)
             .map(|k| self.curve_poles_3d(k, nbpoles))
             .collect::<Result<_, _>>()?;
@@ -267,7 +267,7 @@ impl BSpGradient {
         }
         self.scu = f.curve_value()?;
         let [first_point, last_point] = input.points;
-        let nb_p: i32 = input.ssp.nb_p3d() + input.ssp.nb_p2d();
+        let nb_p: i32 = input.ssp.nb_p3d()? + input.ssp.nb_p2d()?;
         self.av_error = 0.;
         for j in first_point..=last_point {
             *parameters.change_value(j)? = *f.new_parameters().value(j)?;

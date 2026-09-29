@@ -98,7 +98,7 @@ impl<L: LineTool + Clone> Function<L> {
         parameters: &Vector<'_>,
         deg: i32,
     ) -> Result<Self, Failure> {
-        let (rows, curves) = ([first_point, last_point], ssp.nb_p3d() + ssp.nb_p2d());
+        let (rows, curves) = ([first_point, last_point], ssp.nb_p3d()? + ssp.nb_p2d()?);
         let least_square = LeastSquare::without_parameters(
             ssp,
             first_point,

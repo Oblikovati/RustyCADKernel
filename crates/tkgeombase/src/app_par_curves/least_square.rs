@@ -114,9 +114,9 @@ pub fn the_last_point(last_cons: Constraint, last_point: i32) -> i32 {
 }
 
 /// `NbBColumns(SSP)`: `3 NbP3d + 2 NbP2d`, the columns of the right-hand side;
-/// `nb_b_columns(&line)`.
-pub fn nb_b_columns(ssp: &impl LineTool) -> i32 {
-    ssp.nb_p3d() * 3 + ssp.nb_p2d() * 2
+/// `nb_b_columns(&line)?`.
+pub fn nb_b_columns(ssp: &impl LineTool) -> Result<i32, Failure> {
+    Ok(ssp.nb_p3d()? * 3 + ssp.nb_p2d()? * 2)
 }
 
 impl LeastSquare {
@@ -128,7 +128,7 @@ impl LeastSquare {
         nb_pol: i32,
         flat_length: i32,
     ) -> Result<Self, Failure> {
-        let columns: i32 = nb_b_columns(ssp);
+        let columns: i32 = nb_b_columns(ssp)?;
         let first_row: i32 = the_first_point(first_cons, first_point);
         let b2_rows: [i32; 2] = [
             first_row,
@@ -152,7 +152,7 @@ impl LeastSquare {
             vec2c: Vector::filled(1, columns, 0.)?,
             the_error: matrix(
                 [first_point, last_point],
-                [1, ssp.nb_p3d() + ssp.nb_p2d()],
+                [1, ssp.nb_p3d()? + ssp.nb_p2d()?],
                 0.,
             )?,
             myindex: IntegerVector::filled(first_point, last_point, 0)?,

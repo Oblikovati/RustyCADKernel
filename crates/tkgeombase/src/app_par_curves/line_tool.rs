@@ -30,21 +30,31 @@ use rustycad_tkmath::gp::{Point2, Point3, Vector2, Vector3};
 /// `MakeMLOneMorePoint`, which a line that is never cut may answer as
 /// AppDef_MyLineTool does (no points added, the same line, no extra point).
 ///
+/// `LastPoint`, `NbP2d` and `NbP3d` are fallible: AppDef_MyLineTool reads the line's
+/// array (a null one natively crashes) and its first multipoint (Standard_OutOfRange
+/// on an empty line), and the generics propagate that exception.
+///
 /// ```
+/// use rustycad_tkgeombase::app_def::MultiLine;
 /// use rustycad_tkgeombase::app_par_curves::LineTool;
-/// fn points(line: &impl LineTool) -> i32 {
-///     line.last_point() - line.first_point() + 1
+/// use rustycad_tkernel::ncollection::Array1;
+/// use rustycad_tkmath::gp::Point3;
+/// fn points(line: &impl LineTool) -> Result<i32, rustycad_tkernel::standard::Failure> {
+///     Ok(line.last_point()? - line.first_point() + 1)
 /// }
+/// let p = [Point3::new(0.0, 0.0, 0.0), Point3::new(1.0, 0.0, 0.0)];
+/// assert_eq!(points(&MultiLine::from_points(&Array1::from_shared(&p, 1)))?, 2);
+/// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 pub trait LineTool {
     /// `FirstPoint(ML)`: the index of the first multipoint.
     fn first_point(&self) -> i32;
     /// `LastPoint(ML)`: the index of the last multipoint.
-    fn last_point(&self) -> i32;
+    fn last_point(&self) -> Result<i32, Failure>;
     /// `NbP2d(ML)`: the number of 2D points of a multipoint.
-    fn nb_p2d(&self) -> i32;
+    fn nb_p2d(&self) -> Result<i32, Failure>;
     /// `NbP3d(ML)`: the number of 3D points of a multipoint.
-    fn nb_p3d(&self) -> i32;
+    fn nb_p3d(&self) -> Result<i32, Failure>;
     /// `Value(ML, MPointIndex, tabPt)`: the 3D points of a multipoint.
     fn value_3d(&self, index: i32, points: &mut Array1<'_, Point3>) -> Result<(), Failure>;
     /// `Value(ML, MPointIndex, tabPt2d)`: the 2D points of a multipoint.

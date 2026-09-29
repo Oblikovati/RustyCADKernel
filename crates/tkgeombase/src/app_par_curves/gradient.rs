@@ -92,12 +92,12 @@ fn projection_terms(
     coef: &CurveCoefficients,
 ) -> Result<(f64, f64), Failure> {
     let (mut points, mut points2d) = (
-        scratch::<Point3>(ssp.nb_p3d())?,
-        scratch::<Point2>(ssp.nb_p2d())?,
+        scratch::<Point3>(ssp.nb_p3d()?)?,
+        scratch::<Point2>(ssp.nb_p2d()?)?,
     );
     // The native test reads `nbP != 0 && nbP2d != 0` with nbP the total count: any
     // 2D point selects the 3D and 2D overload.
-    if ssp.nb_p2d() != 0 {
+    if ssp.nb_p2d()? != 0 {
         ssp.value(j, &mut points, &mut points2d)?;
     } else {
         ssp.value_3d(j, &mut points)?;
@@ -157,7 +157,7 @@ impl Gradient {
             return Ok(gradient);
         }
         gradient.scu = f.curve_value()?.clone();
-        let coef: CurveCoefficients = coefficients(&gradient.scu, [ssp.nb_p3d(), ssp.nb_p2d()])?;
+        let coef: CurveCoefficients = coefficients(&gradient.scu, [ssp.nb_p3d()?, ssp.nb_p2d()?])?;
         for j in first_point + 1..=last_point - 1 {
             let u: f64 = *parameters.value(j)?;
             *parameters.change_value(j)? = projected(u, projection_terms(ssp, j, u, &coef)?);
@@ -170,7 +170,7 @@ impl Gradient {
         gradient.errors(
             &f,
             [first_point, last_point],
-            ssp.nb_p3d() + ssp.nb_p2d(),
+            ssp.nb_p3d()? + ssp.nb_p2d()?,
             [tol3d, tol2d],
         )?;
         Ok(gradient)

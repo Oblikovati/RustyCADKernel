@@ -73,7 +73,7 @@ impl ResolConstraint {
         bern: &Matrix<'_>,
         derivative_bern: &Matrix<'_>,
     ) -> Result<Vector<'static>, Failure> {
-        let (nb3d, nb2d) = (ssp.nb_p3d(), ssp.nb_p2d());
+        let (nb3d, nb2d) = (ssp.nb_p3d()?, ssp.nb_p2d()?);
         let npol: i32 = scurv.nb_poles();
         let ccol: i32 = nb3d * 3 + nb2d * 2;
         self.pass_rows(bern, ccol, npol)?;
@@ -186,7 +186,7 @@ impl ResolConstraint {
         three: bool,
         inc_sec: &mut i32,
     ) -> Result<(), Failure> {
-        let (nb3d, nb2d, pass) = (ssp.nb_p3d(), ssp.nb_p2d(), self.inc_pass);
+        let (nb3d, nb2d, pass) = (ssp.nb_p3d()?, ssp.nb_p2d()?, self.inc_pass);
         let (mut tab_p, mut tab_p2d) = (scratch::<Point3>(nb3d)?, scratch::<Point2>(nb2d)?);
         for i in 1..=pass {
             let npt: i32 = self.i_pas[(i - 1) as usize];
