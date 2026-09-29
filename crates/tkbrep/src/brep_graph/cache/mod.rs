@@ -14,6 +14,7 @@
 // BRepGraph_Cache.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `BRepGraph_Cache`: the owner-bound base of the transient graph cache services.
+use crate::brep_graph::copy_remap::CopyRemap;
 use crate::brep_graph::layer::AttachedGraph;
 use crate::brep_graph::marks::ref_parent_node;
 use crate::brep_graph::{
@@ -184,8 +185,7 @@ fn vertex_ref_parent(graph: &BRepGraph, reference: VertexRefId) -> Option<NodeId
 
 /// `BRepGraph_Cache`: a typed, recomputable, graph-local cache service. The registry
 /// binds it to its graph; the service owns its data and validates it lazily against
-/// the generation counters (`NodeEntry`, `RefEntry`, `ItemEntry`). `CopyFreshTo` waits
-/// for `BRepGraph_CopyRemap` (docs/topology-design.md 11.9).
+/// the generation counters (`NodeEntry`, `RefEntry`, `ItemEntry`).
 pub trait BRepGraphCache: Transient {
     /// The embedded `BRepGraph_Cache` state.
     fn cache_base(&self) -> &CacheBase;
@@ -198,6 +198,12 @@ pub trait BRepGraphCache: Transient {
 
     /// `Clear()`: drop every transient value (the base keeps nothing).
     fn clear(&self) {}
+
+    /// `CopyFreshTo(theCopy)`: copy the fresh, remappable entries into the copy's
+    /// target graph; the base copies nothing.
+    fn copy_fresh_to(&self, _copy: &CopyRemap<'_>) -> Result<(), Failure> {
+        Ok(())
+    }
 
     /// `OnAttached()`: called after the registry attached this cache.
     fn on_attached(&self) {}

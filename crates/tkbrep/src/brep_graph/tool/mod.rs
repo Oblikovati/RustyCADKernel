@@ -31,7 +31,7 @@
 //! module computes the value on each call with the cache's answer for an inactive
 //! entity; the result is the same as long as no mutation leaves an OwnGen unchanged.
 pub mod co_edge;
-mod derived_state;
+pub(crate) mod derived_state;
 pub mod edge;
 mod edge_adaptors;
 pub mod face;
