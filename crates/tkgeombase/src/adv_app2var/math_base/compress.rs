@@ -137,7 +137,7 @@ pub fn mmfmca9_(
     0
 }
 
-/// Restricts a canonical patch `(ndimen, ncofmx, ncoefv)` on [0,1]x[0,1] to
+/// Restricts a canonical patch `(ndimen, ncofmx, ncoefv)` on `[0,1]x[0,1]` to
 /// `[upara1, upara2] x [vpara1, vpara2]` (`mmfmcar_`). `iercod` is 10 for invalid
 /// coefficient counts and the `mmarc41_` code otherwise; returns 0.
 /// `mmfmcar_(3, 4, 4, 3, &patold, 0.0, 0.5, 0.0, 1.0, &mut patnew, &mut iercod)`.

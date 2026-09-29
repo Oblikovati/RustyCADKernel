@@ -18,7 +18,7 @@
 //! Natively each `Get<block>()` returns a reference to a function-local static that
 //! the kernels only read. The blocks are therefore constant tables here, not shared
 //! mutable state: each accessor flattens the generated fragments of
-//! [`tables`](self::tables) once and hands out read-only slices with the native member
+//! `tables` once and hands out read-only slices with the native member
 //! names and lengths.
 mod tables;
 
