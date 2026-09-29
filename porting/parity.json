@@ -142218,6 +142218,1406 @@
       "rust_item": null,
       "status": "excluded",
       "notes": "Excluded: STL range boilerplate; Rust iteration is `impl Iterator for SupplementIterator`."
+    },
+    {
+      "upstream_id": "BRepGraph::Editor() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::BRepGraph::editor_state",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_DeferredScope(BRepGraph&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DeferredScope.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::deferred_scope::DeferredScope::new",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_DeferredScope::~BRepGraph_DeferredScope()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_DeferredScope.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::deferred_scope::DeferredScope",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes. The destructor is the Drop impl of DeferredScope (EndDeferredInvalidation then CommitMutation when it owns the scope)."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::Add(const gp_Pnt&,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::add",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::Mut(BRepGraph_VertexId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::MutRef(BRepGraph_VertexRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::mutate_ref",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::SetPoint(BRepGraph_VertexId,const gp_Pnt&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::set_point",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::SetPoint(BRepGraph_MutGuard<BRepGraphInc::VertexDef>&,const gp_Pnt&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::set_point_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::SetTolerance(BRepGraph_VertexId,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::set_tolerance",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::SetTolerance(BRepGraph_MutGuard<BRepGraphInc::VertexDef>&,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::set_tolerance_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::SetRefOrientation(BRepGraph_VertexRefId,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::set_ref_orientation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::SetRefOrientation(BRepGraph_MutGuard<BRepGraphInc::VertexRef>&,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::set_ref_orientation_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::SetRefChildVertexId(BRepGraph_VertexRefId,BRepGraph_VertexId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::set_ref_child_vertex_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::VertexOps::SetRefChildVertexId(BRepGraph_MutGuard<BRepGraphInc::VertexRef>&,BRepGraph_VertexId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::VertexOps::set_ref_child_vertex_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::Add(BRepGraph_VertexId,BRepGraph_VertexId,const occ::handle<Geom_Curve>&,double,double,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::add",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::Split(BRepGraph_EdgeId,BRepGraph_VertexId,double,BRepGraph_EdgeId&,BRepGraph_EdgeId&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::split",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::RemoveVertex(BRepGraph_EdgeId,BRepGraph_VertexRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::remove_vertex",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::ReplaceVertex(BRepGraph_EdgeId,BRepGraph_VertexRefId,BRepGraph_VertexId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::replace_vertex",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::Mut(BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::Reverse(BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::reverse",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetTolerance(BRepGraph_EdgeId,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_tolerance",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetTolerance(BRepGraph_MutGuard<BRepGraphInc::EdgeDef>&,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_tolerance_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetParamRange(BRepGraph_EdgeId,double,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_param_range",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetParamRange(BRepGraph_MutGuard<BRepGraphInc::EdgeDef>&,double,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_param_range_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetCurve(BRepGraph_EdgeId,const occ::handle<Geom_Curve>&,double,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_curve",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::ClearCurve(BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::clear_curve",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetPersistentPolygon3D(BRepGraph_EdgeId,const occ::handle<Poly_Polygon3D>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_persistent_polygon3d",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::ClearPersistentPolygon3D(BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::clear_persistent_polygon3d",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetStartVertexRefId(BRepGraph_EdgeId,BRepGraph_VertexRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_start_vertex_ref_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetStartVertexRefId(BRepGraph_MutGuard<BRepGraphInc::EdgeDef>&,BRepGraph_VertexRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_start_vertex_ref_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetEndVertexRefId(BRepGraph_EdgeId,BRepGraph_VertexRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_end_vertex_ref_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EdgeOps::SetEndVertexRefId(BRepGraph_MutGuard<BRepGraphInc::EdgeDef>&,BRepGraph_VertexRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EdgeOps::set_end_vertex_ref_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetPCurve(BRepGraph_CoEdgeId,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_pcurve_keep_range",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::Add(BRepGraph_EdgeId,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::add",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::Add(BRepGraph_EdgeId,BRepGraph_FaceId,const occ::handle<Geom2d_Curve>&,double,double,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::add_with_pcurve",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::Mut(BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetParamRange(BRepGraph_CoEdgeId,double,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_param_range",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetParamRange(BRepGraph_MutGuard<BRepGraphInc::CoEdgeDef>&,double,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_param_range_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetOrientation(BRepGraph_CoEdgeId,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_orientation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetOrientation(BRepGraph_MutGuard<BRepGraphInc::CoEdgeDef>&,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_orientation_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetPCurve(BRepGraph_CoEdgeId,const occ::handle<Geom2d_Curve>&,double,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_pcurve",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::ClearPCurve(BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::clear_pcurve",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetPersistentPolygon2D(BRepGraph_CoEdgeId,const occ::handle<Poly_Polygon2D>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_persistent_polygon2d",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetPersistentPolygonOnTri(BRepGraph_CoEdgeId,const occ::handle<Poly_PolygonOnTriangulation>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_persistent_polygon_on_tri",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::ResetPCurveBinding(BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::reset_pcurve_binding",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::ResetPCurveBinding(BRepGraph_MutGuard<BRepGraphInc::CoEdgeDef>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::reset_pcurve_binding_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetChildEdgeId(BRepGraph_CoEdgeId,BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_child_edge_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetChildEdgeId(BRepGraph_MutGuard<BRepGraphInc::CoEdgeDef>&,BRepGraph_EdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_child_edge_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetFaceId(BRepGraph_CoEdgeId,BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_face_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdgeOps::SetFaceId(BRepGraph_MutGuard<BRepGraphInc::CoEdgeDef>&,BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOps::set_face_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::CoEdgeOrderStatus",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CoEdgeOrderStatus",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::ReplaceEdgeStatus",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ReplaceEdgeStatus",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::CheckCoEdgeOrder(const NCollection_Array1<BRepGraph_CoEdgeId>&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::check_co_edge_order",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::CheckCoEdgeOrder(BRepGraph_WireId,const NCollection_Array1<BRepGraph_CoEdgeId>&) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::check_wire_co_edge_order",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::CheckAppendCoEdge(BRepGraph_WireId,BRepGraph_CoEdgeId) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::check_append_co_edge",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::CheckReplaceEdge(BRepGraph_WireId,BRepGraph_EdgeId,BRepGraph_EdgeId,bool) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::check_replace_edge",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::Add(const NCollection_Array1<BRepGraph_CoEdgeId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::add",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::ReplaceEdge(BRepGraph_WireId,BRepGraph_EdgeId,BRepGraph_EdgeId,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::replace_edge",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::RemoveCoEdge(BRepGraph_WireId,BRepGraph_CoEdgeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::remove_co_edge",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::Reverse(BRepGraph_WireId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::reverse",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::SetCoEdgeOrder(BRepGraph_WireId,const NCollection_Array1<BRepGraph_CoEdgeId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::set_co_edge_order",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::Mut(BRepGraph_WireId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::MutRef(BRepGraph_WireRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::mutate_ref",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::SetRefOrientation(BRepGraph_WireRefId,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::set_ref_orientation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::SetRefOrientation(BRepGraph_MutGuard<BRepGraphInc::WireRef>&,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::set_ref_orientation_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::SetRefChildWireId(BRepGraph_WireRefId,BRepGraph_WireId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::set_ref_child_wire_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::WireOps::SetRefChildWireId(BRepGraph_MutGuard<BRepGraphInc::WireRef>&,BRepGraph_WireId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::WireOps::set_ref_child_wire_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::Add(const occ::handle<Geom_Surface>&,BRepGraph_WireId,const NCollection_Array1<BRepGraph_WireId>&,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::add",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::Append(BRepGraph_FaceId,BRepGraph_WireId,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::append",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::RemoveWire(BRepGraph_FaceId,BRepGraph_WireRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::remove_wire",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::Mut(BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::MutRef(BRepGraph_FaceRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::mutate_ref",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::SetTolerance(BRepGraph_FaceId,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::set_tolerance",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::SetTolerance(BRepGraph_MutGuard<BRepGraphInc::FaceDef>&,double)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::set_tolerance_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::SetSurface(BRepGraph_FaceId,const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::set_surface",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::ClearSurface(BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::clear_surface",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::SetPersistentTriangulation(BRepGraph_FaceId,const occ::handle<Poly_Triangulation>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::set_persistent_triangulation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::ClearPersistentTriangulation(BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::clear_persistent_triangulation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::SetRefOrientation(BRepGraph_FaceRefId,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::set_ref_orientation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::SetRefOrientation(BRepGraph_MutGuard<BRepGraphInc::FaceRef>&,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::set_ref_orientation_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::SetRefFaceId(BRepGraph_FaceRefId,BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::set_ref_face_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::FaceOps::SetRefFaceId(BRepGraph_MutGuard<BRepGraphInc::FaceRef>&,BRepGraph_FaceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::FaceOps::set_ref_face_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::Add()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::add",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::Append(BRepGraph_ShellId,const NCollection_Array1<BRepGraph_FaceId>&,const NCollection_Array1<BRepGraphInc::ParityOrientation>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::append_many",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::RemoveFace(BRepGraph_ShellId,BRepGraph_FaceRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::remove_face",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::RemoveFaces(BRepGraph_ShellId,const NCollection_Array1<BRepGraph_FaceRefId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::remove_faces",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::Mut(BRepGraph_ShellId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::MutRef(BRepGraph_ShellRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::mutate_ref",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::SetRefOrientation(BRepGraph_ShellRefId,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::set_ref_orientation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::SetRefOrientation(BRepGraph_MutGuard<BRepGraphInc::ShellRef>&,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::set_ref_orientation_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::SetRefChildShellId(BRepGraph_ShellRefId,BRepGraph_ShellId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::set_ref_child_shell_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ShellOps::SetRefChildShellId(BRepGraph_MutGuard<BRepGraphInc::ShellRef>&,BRepGraph_ShellId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ShellOps::set_ref_child_shell_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::Add()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::add",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::Append(BRepGraph_SolidId,const NCollection_Array1<BRepGraph_ShellId>&,const NCollection_Array1<BRepGraphInc::ParityOrientation>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::append_many",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::RemoveShell(BRepGraph_SolidId,BRepGraph_ShellRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::remove_shell",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::RemoveShells(BRepGraph_SolidId,const NCollection_Array1<BRepGraph_ShellRefId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::remove_shells",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::Mut(BRepGraph_SolidId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::MutRef(BRepGraph_SolidRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::mutate_ref",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::SetRefOrientation(BRepGraph_SolidRefId,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::set_ref_orientation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::SetRefOrientation(BRepGraph_MutGuard<BRepGraphInc::SolidRef>&,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::set_ref_orientation_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::SetRefChildSolidId(BRepGraph_SolidRefId,BRepGraph_SolidId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::set_ref_child_solid_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::SolidOps::SetRefChildSolidId(BRepGraph_MutGuard<BRepGraphInc::SolidRef>&,BRepGraph_SolidId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::SolidOps::set_ref_child_solid_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompoundOps::Add(const NCollection_Array1<BRepGraph_NodeId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompoundOps::add",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompoundOps::Append(BRepGraph_CompoundId,const NCollection_Array1<BRepGraph_NodeId>&,const NCollection_Array1<BRepGraphInc::ParityOrientation>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompoundOps::append_many",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompoundOps::RemoveChild(BRepGraph_CompoundId,BRepGraph_ChildRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompoundOps::remove_child",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompoundOps::RemoveChildren(BRepGraph_CompoundId,const NCollection_Array1<BRepGraph_ChildRefId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompoundOps::remove_children",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompoundOps::Mut(BRepGraph_CompoundId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompoundOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompoundOps::ReplaceChild(BRepGraph_ChildRefId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompoundOps::replace_child",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompSolidOps::Add(const NCollection_Array1<BRepGraph_SolidId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompSolidOps::add",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompSolidOps::Append(BRepGraph_CompSolidId,const NCollection_Array1<BRepGraph_SolidId>&,const NCollection_Array1<BRepGraphInc::ParityOrientation>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompSolidOps::append_many",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompSolidOps::RemoveSolid(BRepGraph_CompSolidId,BRepGraph_SolidRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompSolidOps::remove_solid",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompSolidOps::RemoveSolids(BRepGraph_CompSolidId,const NCollection_Array1<BRepGraph_SolidRefId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompSolidOps::remove_solids",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompSolidOps::Mut(BRepGraph_CompSolidId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompSolidOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CompSolidOps::ReplaceSolid(BRepGraph_SolidRefId,BRepGraph_SolidId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::CompSolidOps::replace_solid",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ProductOps::Append(BRepGraph_ProductId,const NCollection_Array1<BRepGraph_ProductId>&,const NCollection_Array1<TopLoc_Location>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ProductOps::append_many",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ProductOps::RemoveOccurrence(BRepGraph_ProductId,BRepGraph_OccurrenceRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ProductOps::remove_occurrence",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ProductOps::RemoveOccurrences(BRepGraph_ProductId,const NCollection_Array1<BRepGraph_OccurrenceRefId>&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ProductOps::remove_occurrences",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ProductOps::RemoveShapeRoot(BRepGraph_ProductId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ProductOps::remove_shape_root",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ProductOps::Mut(BRepGraph_ProductId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::ProductOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::OccurrenceOps::Mut(BRepGraph_OccurrenceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::OccurrenceOps::mutate",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::OccurrenceOps::MutRef(BRepGraph_OccurrenceRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::OccurrenceOps::mutate_ref",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::OccurrenceOps::SetRefLocalLocation(BRepGraph_OccurrenceRefId,const TopLoc_Location&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::OccurrenceOps::set_ref_local_location",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::OccurrenceOps::SetRefLocalLocation(BRepGraph_MutGuard<BRepGraphInc::OccurrenceRef>&,const TopLoc_Location&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::OccurrenceOps::set_ref_local_location_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::OccurrenceOps::SetChildNodeId(BRepGraph_OccurrenceId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::OccurrenceOps::set_child_node_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::OccurrenceOps::SetChildNodeId(BRepGraph_MutGuard<BRepGraphInc::OccurrenceDef>&,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::OccurrenceOps::set_child_node_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::OccurrenceOps::SetRefChildOccurrenceId(BRepGraph_OccurrenceRefId,BRepGraph_OccurrenceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::OccurrenceOps::set_ref_child_occurrence_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::OccurrenceOps::SetRefChildOccurrenceId(BRepGraph_MutGuard<BRepGraphInc::OccurrenceRef>&,BRepGraph_OccurrenceId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::OccurrenceOps::set_ref_child_occurrence_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::RemoveNode(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::remove_node",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::ReplaceNode(BRepGraph_NodeId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::replace_node",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::RemoveSubgraph(BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::remove_subgraph",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::RemoveRef(BRepGraph_RefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::remove_ref",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::RemoveRef(BRepGraph_NodeId,BRepGraph_RefId,bool)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::remove_ref_of_parent",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::MutChildRef(BRepGraph_ChildRefId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::mutate_child_ref",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::SetChildRefOrientation(BRepGraph_ChildRefId,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::set_child_ref_orientation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::SetChildRefOrientation(BRepGraph_MutGuard<BRepGraphInc::ChildRef>&,BRepGraphInc::ParityOrientation)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::set_child_ref_orientation_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::SetChildRefChildNodeId(BRepGraph_ChildRefId,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::set_child_ref_child_node_id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::SetChildRefChildNodeId(BRepGraph_MutGuard<BRepGraphInc::ChildRef>&,BRepGraph_NodeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::set_child_ref_child_node_id_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::SetChildRefLocalLocation(BRepGraph_MutGuard<BRepGraphInc::ChildRef>&,const TopLoc_Location&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::set_child_ref_local_location_guarded",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::ApplyModification(BRepGraph_NodeId,ModifierT&&,const TCollection_AsciiString&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::apply_modification",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::GenOps::CleanupRemovedReferences()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::GenOps::cleanup_removed_references",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::Vertices()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::vertices",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::Edges()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::edges",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CoEdges()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::co_edges",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::Wires()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::wires",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::Faces()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::faces",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::Occurrences()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::occurrences",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::Supplement()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::supplement",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::BeginDeferredInvalidation()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::begin_deferred_invalidation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::EndDeferredInvalidation()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::end_deferred_invalidation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::IsDeferredMode() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorState::is_deferred_mode",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::CommitMutation()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorView::commit_mutation",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes. Natively only a debug assertion on ValidateMutationBoundary, compiled out of the release oracle: no effect."
+    },
+    {
+      "upstream_id": "BRepGraph::EditorView::ValidateMutationBoundary(NCollection_LinearVector<BoundaryIssue>* const) const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_EditorView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::editor::EditorState::validate_mutation_boundary",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard(BRepGraph&,BRepGraphInc_Storage&,T*,TypeId)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::new",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::~BRepGraph_MutGuard()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes. The destructor is the Drop impl of MutGuard (clears the guard plane, then one notification when dirty)."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard(BRepGraph_MutGuard&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::move_from",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::operator=(BRepGraph_MutGuard&&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::move_assign",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::operator bool() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::is_active",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::operator->() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::try_get",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes. try_get is the checked operator-> (Standard_ProgramError on an inert guard); Deref is the unchecked form."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::operator*() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::try_get",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes. try_get is the checked operator* (Standard_ProgramError on an inert guard); Deref is the unchecked form."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::Id() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::id",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::Graph() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::graph",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes. graph() reads, graph_mut() reaches the editor inside the scope (a second guard is taken through it)."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::MarkDirty()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::mark_dirty",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::IsDirty() const",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::is_dirty",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_MutGuard::Internal()",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_MutGuard.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::mut_guard::MutGuard::internal",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph::ShapesView::RemoveShape(const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_ShapesView.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::shapes_view::ShapesViewMut::remove_shape",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor(BRepGraph&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::new",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor::Attach(BRepGraph_NodeId,BRepGraph_LayerTopoSupplement::AttachmentKind,const TopoDS_Shape&)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::attach",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor::AttachToVertex(BRepGraph_VertexId,const TopoDS_Shape&,BRepGraph_LayerTopoSupplement::AttachmentKind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::attach_to_vertex",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor::AttachToEdge(BRepGraph_EdgeId,const TopoDS_Shape&,BRepGraph_LayerTopoSupplement::AttachmentKind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::attach_to_edge",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor::AttachToFace(BRepGraph_FaceId,const TopoDS_Shape&,BRepGraph_LayerTopoSupplement::AttachmentKind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::attach_to_face",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor::AttachToSolid(BRepGraph_SolidId,const TopoDS_Shape&,BRepGraph_LayerTopoSupplement::AttachmentKind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::attach_to_solid",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor::AttachToCompSolid(BRepGraph_CompSolidId,const TopoDS_Shape&,BRepGraph_LayerTopoSupplement::AttachmentKind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::attach_to_comp_solid",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor::AttachToShell(BRepGraph_ShellId,const TopoDS_Shape&,BRepGraph_LayerTopoSupplement::AttachmentKind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::attach_to_shell",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor::AttachToCompound(BRepGraph_CompoundId,const TopoDS_Shape&,BRepGraph_LayerTopoSupplement::AttachmentKind)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::attach_to_compound",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
+    },
+    {
+      "upstream_id": "BRepGraph_SupplementEditor::RemoveAttachment(uint64_t)",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/BRepGraph/BRepGraph_SupplementEditor.hxx",
+      "rust_item": "rustycad_tkbrep::brep_graph::supplement_editor::SupplementEditor::remove_attachment",
+      "status": "implemented",
+      "notes": "Editor area of BRepGraph phase 2 (docs/topology-design.md section 11.4): the editor view and each operation group hold the graph's mutable borrow; a guarded setter is the *_guarded associated function taking the MutGuard; C++ exceptions become Failure errors and release-build assertions keep their release behaviour. Compared with OCCT by the br_bgraph_edit probes."
     }
   ],
   "tests": [
