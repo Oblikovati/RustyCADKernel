@@ -20,29 +20,17 @@ use crate::geom::{
     dump_bounded_curve,
 };
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::dump::DumpStream;
-use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point3, Transform3, Vector3};
-use std::io;
 
 impl GeomGeometry for GeomBSplineCurve {
-    fn transform(&self, transform: Transform3) -> Result<(), Failure> {
-        self.state
-            .write()
-            .transform_poles(|pole| pole.transform(transform));
-        Ok(())
-    }
-    fn copy(&self) -> Result<Handle<dyn GeomGeometry>, Failure> {
-        Ok(Handle::new(Self::copy_of(self)?).cast())
-    }
-    fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
-        let state = self.state.read();
-        dump_class_name(stream, "Geom_BSplineCurve")?;
-        dump_base(stream, depth, dump_bounded_curve)?;
-        state.dump_fields(stream)
-    }
+    rustycad_tkg2d::spline_geometry_members!(
+        Transform3,
+        dyn GeomGeometry,
+        "Geom_BSplineCurve",
+        dump_bounded_curve
+    );
 }
 impl GeomCurve for GeomBSplineCurve {
     fn reverse(&self) -> Result<(), Failure> {
@@ -71,24 +59,13 @@ impl GeomCurve for GeomBSplineCurve {
     fn is_cn(&self, n: i32) -> Result<bool, Failure> {
         self.state.read().is_cn(n)
     }
-    fn eval_d0(&self, u: f64) -> Result<Point3, Failure> {
-        self.state.read().eval_d0(u)
-    }
-    fn eval_d1(&self, u: f64) -> Result<GeomCurveD1, Failure> {
-        let (point, d1) = self.state.read().eval_d1(u)?;
-        Ok(GeomCurveD1 { point, d1 })
-    }
-    fn eval_d2(&self, u: f64) -> Result<GeomCurveD2, Failure> {
-        let (point, d1, d2) = self.state.read().eval_d2(u)?;
-        Ok(GeomCurveD2 { point, d1, d2 })
-    }
-    fn eval_d3(&self, u: f64) -> Result<GeomCurveD3, Failure> {
-        let (point, d1, d2, d3) = self.state.read().eval_d3(u)?;
-        Ok(GeomCurveD3 { point, d1, d2, d3 })
-    }
-    fn eval_dn(&self, u: f64, n: i32) -> Result<Vector3, Failure> {
-        self.state.read().eval_dn(u, n)
-    }
+    rustycad_tkg2d::spline_state_evaluators!(
+        Point3,
+        Vector3,
+        GeomCurveD1,
+        GeomCurveD2,
+        GeomCurveD3
+    );
 }
 impl GeomBoundedCurve for GeomBSplineCurve {
     fn end_point(&self) -> Result<Point3, Failure> {

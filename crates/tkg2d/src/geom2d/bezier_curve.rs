@@ -17,16 +17,14 @@
 use super::arrays::at;
 use super::bounded_curve::{Geom2dBoundedCurve, dump_bounded_curve};
 use super::curve::{Geom2dCurve, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3};
-use super::geometry::{Geom2dGeometry, dump_base, dump_class_name};
+use super::geometry::Geom2dGeometry;
 use super::spline_kind::BezierState;
 use crate::geom2d_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
-use rustycad_tkernel::standard::dump::DumpStream;
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{Failure, SharedState, StandardTransient};
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::gp::{Point2, Transform2, Vector2};
-use std::io;
 
 /// A Bezier curve; `Handle::new(Geom2dBezierCurve::new(&poles)?)`.
 pub struct Geom2dBezierCurve {
@@ -85,21 +83,12 @@ impl Geom2dBezierCurve {
     }
 }
 impl Geom2dGeometry for Geom2dBezierCurve {
-    fn transform(&self, transform: Transform2) -> Result<(), Failure> {
-        self.state
-            .write()
-            .transform_poles(|pole| pole.transform(transform));
-        Ok(())
-    }
-    fn copy(&self) -> Result<Handle<dyn Geom2dGeometry>, Failure> {
-        Ok(Handle::new(Self::copy_of(self)?).cast())
-    }
-    fn dump_json(&self, stream: &mut DumpStream, depth: i32) -> io::Result<()> {
-        let state = self.state.read();
-        dump_class_name(stream, "Geom2d_BezierCurve")?;
-        dump_base(stream, depth, dump_bounded_curve)?;
-        state.dump_fields(stream)
-    }
+    crate::spline_geometry_members!(
+        Transform2,
+        dyn Geom2dGeometry,
+        "Geom2d_BezierCurve",
+        dump_bounded_curve
+    );
 }
 impl Geom2dCurve for Geom2dBezierCurve {
     fn reverse(&self) -> Result<(), Failure> {
@@ -119,24 +108,7 @@ impl Geom2dCurve for Geom2dBezierCurve {
         Ok(self.state.read().closed)
     }
     crate::non_periodic_cn_curve!();
-    fn eval_d0(&self, u: f64) -> Result<Point2, Failure> {
-        self.state.read().eval_d0(u)
-    }
-    fn eval_d1(&self, u: f64) -> Result<Geom2dCurveD1, Failure> {
-        let (point, d1) = self.state.read().eval_d1(u)?;
-        Ok(Geom2dCurveD1 { point, d1 })
-    }
-    fn eval_d2(&self, u: f64) -> Result<Geom2dCurveD2, Failure> {
-        let (point, d1, d2) = self.state.read().eval_d2(u)?;
-        Ok(Geom2dCurveD2 { point, d1, d2 })
-    }
-    fn eval_d3(&self, u: f64) -> Result<Geom2dCurveD3, Failure> {
-        let (point, d1, d2, d3) = self.state.read().eval_d3(u)?;
-        Ok(Geom2dCurveD3 { point, d1, d2, d3 })
-    }
-    fn eval_dn(&self, u: f64, n: i32) -> Result<Vector2, Failure> {
-        self.state.read().eval_dn(u, n)
-    }
+    crate::spline_state_evaluators!(Point2, Vector2, Geom2dCurveD1, Geom2dCurveD2, Geom2dCurveD3);
 }
 impl Geom2dBoundedCurve for Geom2dBezierCurve {
     fn end_point(&self) -> Result<Point2, Failure> {

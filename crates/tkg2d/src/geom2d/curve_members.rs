@@ -127,3 +127,83 @@ macro_rules! eval_representation_members {
         }
     };
 }
+
+/// `EvalD0`..`EvalDN` of a spline curve class that forward to its locked shared
+/// state, whose evaluators return tuples; `$d1`..`$d3` are the package result
+/// structs; `rustycad_tkg2d::spline_state_evaluators!(Point3, Vector3, GeomCurveD1, GeomCurveD2, GeomCurveD3);`.
+#[macro_export]
+macro_rules! spline_state_evaluators {
+    ($point:ty, $vector:ty, $d1:ident, $d2:ident, $d3:ident) => {
+        fn eval_d0(
+            &self,
+            u: f64,
+        ) -> ::core::result::Result<$point, ::rustycad_tkernel::standard::Failure> {
+            self.state.read().eval_d0(u)
+        }
+        fn eval_d1(
+            &self,
+            u: f64,
+        ) -> ::core::result::Result<$d1, ::rustycad_tkernel::standard::Failure> {
+            let (point, d1) = self.state.read().eval_d1(u)?;
+            Ok($d1 { point, d1 })
+        }
+        fn eval_d2(
+            &self,
+            u: f64,
+        ) -> ::core::result::Result<$d2, ::rustycad_tkernel::standard::Failure> {
+            let (point, d1, d2) = self.state.read().eval_d2(u)?;
+            Ok($d2 { point, d1, d2 })
+        }
+        fn eval_d3(
+            &self,
+            u: f64,
+        ) -> ::core::result::Result<$d3, ::rustycad_tkernel::standard::Failure> {
+            let (point, d1, d2, d3) = self.state.read().eval_d3(u)?;
+            Ok($d3 { point, d1, d2, d3 })
+        }
+        fn eval_dn(
+            &self,
+            u: f64,
+            n: i32,
+        ) -> ::core::result::Result<$vector, ::rustycad_tkernel::standard::Failure> {
+            self.state.read().eval_dn(u, n)
+        }
+    };
+}
+
+/// The `Geometry` members of a spline curve class: `Transform` moves every pole,
+/// `Copy` runs the copy constructor `copy_of`, and `DumpJson` writes the class name,
+/// the bounded-curve base (`$dump_base`) and the state fields;
+/// `rustycad_tkg2d::spline_geometry_members!(Transform3, dyn GeomGeometry, "Geom_BezierCurve", dump_bounded_curve);`.
+#[macro_export]
+macro_rules! spline_geometry_members {
+    ($transform:ty, $geometry:ty, $class:literal, $dump_base:path) => {
+        fn transform(
+            &self,
+            transform: $transform,
+        ) -> ::core::result::Result<(), ::rustycad_tkernel::standard::Failure> {
+            self.state
+                .write()
+                .transform_poles(|pole| pole.transform(transform));
+            Ok(())
+        }
+        fn copy(
+            &self,
+        ) -> ::core::result::Result<
+            ::rustycad_tkernel::standard::Handle<$geometry>,
+            ::rustycad_tkernel::standard::Failure,
+        > {
+            Ok(::rustycad_tkernel::standard::Handle::new(Self::copy_of(self)?).cast())
+        }
+        fn dump_json(
+            &self,
+            stream: &mut ::rustycad_tkernel::standard::dump::DumpStream,
+            depth: i32,
+        ) -> ::std::io::Result<()> {
+            let state = self.state.read();
+            $crate::geom2d::dump_class_name(stream, $class)?;
+            $crate::geom2d::dump_base(stream, depth, $dump_base)?;
+            state.dump_fields(stream)
+        }
+    };
+}
