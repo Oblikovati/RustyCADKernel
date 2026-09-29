@@ -71,6 +71,8 @@
 #include "tkgeombase_probe_geomconvert_ana.cxx"
 #include "tkgeombase_probe_geomlib.cxx"
 #include "tkgeombase_probe_geomlib_classes.cxx"
+#include "tkgeombase_probe_approx_line.cxx"
+#include "tkgeombase_probe_approx.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -397,6 +399,11 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"gl_tool", gb_gl_tool_case},
  {"gl_deviation", gb_gl_deviation_case},
  {"gl_make_curve", gb_gl_make_curve_case},
+ // Approx drivers (tkgeombase_probe_approx_line.cxx, tkgeombase_probe_approx.cxx)
+ {"ax_compute", gb_ax_compute_case},
+ {"ax_bspl", gb_ax_bspl_case},
+ {"ax_fit", gb_ax_fit_case},
+ {"ax_mcurves", gb_ax_mcurves_case},
 };
 int main() {
  std::string line;

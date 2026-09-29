@@ -4,9 +4,10 @@ use std::io::{self, BufRead};
 mod gb_probe;
 use gb_probe::{
     adv_class, adv_f2var, adv_f2var2, adv_math, adv_math2, app_cont as acc, app_par_curves as apc,
-    bndlib, extrema_cc, extrema_cs, extrema_el, extrema_el_surf, extrema_pc, extrema_ps,
-    extrema_ss, extrema_swept, fem_tool, gc, gce, gcpnts, geom_convert as gcv, geom_lib as gl,
-    geom_tools, geom2d_convert as g2c, gprop, hermit, int_ana, int_ana2d, lprop, pc2d, pc3d,
+    approx as ax, bndlib, extrema_cc, extrema_cs, extrema_el, extrema_el_surf, extrema_pc,
+    extrema_ps, extrema_ss, extrema_swept, fem_tool, gc, gce, gcpnts, geom_convert as gcv,
+    geom_lib as gl, geom_tools, geom2d_convert as g2c, gprop, hermit, int_ana, int_ana2d, lprop,
+    pc2d, pc3d,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -340,6 +341,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("gl_tool", gl::tool_case),
     ("gl_deviation", gl::deviation_case),
     ("gl_make_curve", gl::make_curve_case),
+    // Approx drivers (gb_probe/approx)
+    ("ax_compute", ax::compute_case),
+    ("ax_bspl", ax::bspl_case),
+    ("ax_fit", ax::fit_case),
+    ("ax_mcurves", ax::mcurves_case),
 ];
 
 fn main() {

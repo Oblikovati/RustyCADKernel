@@ -55,3 +55,5 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_geomconvert').append_geomconvert_requests(requests)
     # GeomLib (tkgeombase_corpus_geomlib.py)
     __import__('tkgeombase_corpus_geomlib').append_geomlib_requests(requests)
+    # Approx drivers (tkgeombase_corpus_approx.py)
+    __import__('tkgeombase_corpus_approx').append_approx_requests(requests)
