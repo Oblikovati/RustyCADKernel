@@ -38,7 +38,7 @@ use rustycad_tkmath::toploc::Location;
 impl BinShapeSet {
     /// `ReadShape(T, IS, S)`: makes `shape` of the type `kind` (the raw byte of the
     /// record) and reads its geometry. A value outside `VERTEX..=COMPOUND` raises
-    /// "Unexpected topology type = <value>", and every failure is wrapped in "EXCEPTION
+    /// `"Unexpected topology type = <value>"`, and every failure is wrapped in "EXCEPTION
     /// in BinTools_ShapeSet::ReadGeometry(S,OS)";
     /// `set.read_shape_geometry(kind, &mut stream, &mut shape)?`.
     pub fn read_shape_geometry(
