@@ -25,6 +25,7 @@ mod accessors;
 mod attach;
 mod bindings;
 mod detach;
+mod identity_copy;
 mod prepare;
 mod rebind;
 mod rebuild;
