@@ -40,8 +40,18 @@ impl Variational {
     /// StdFail_NotDone unless created. The done flag is never cleared: a failed
     /// conversion keeps the previous result.
     ///
-    /// ```ignore
+    /// ```
+    /// use rustycad_tkgeombase::app_def::{MultiLine, Variational, VariationalOptions};
+    /// use rustycad_tkernel::ncollection::{Array1, HArray1};
+    /// use rustycad_tkernel::standard::Handle;
+    /// use rustycad_tkmath::gp::Point2;
+    /// let points: Vec<Point2> = (0..10).map(|i| Point2::new(f64::from(i), f64::from(i % 3))).collect();
+    /// let line = MultiLine::from_points2d(&Array1::from_shared(&points, 1));
+    /// let none = Handle::new(HArray1::from_array(&Array1::from_shared(&[], 1)));
+    /// let mut smoothing = Variational::new(&line, 1, 10, &none, VariationalOptions::default())?;
     /// smoothing.approximate()?;
+    /// assert!(smoothing.is_done() && smoothing.max_error()? > 0.0);
+    /// # Ok::<(), rustycad_tkernel::standard::Failure>(())
     /// ```
     pub fn approximate(&mut self) -> Result<(), Failure> {
         if !self.is_created {

@@ -19,6 +19,7 @@
 //! clears the done flag.
 use super::{Variational, construction, domain, niv_cont_of};
 use crate::app_par_curves::Constraints;
+use crate::native_failure::failure;
 use rustycad_tkernel::ncollection::{Array1, HArray1};
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkmath::geom_abs::Shape;
@@ -37,7 +38,7 @@ impl Variational {
     pub fn set_parameters(&mut self, param: &Handle<HArray1<f64>>) -> Result<(), Failure> {
         let values: Array1<'static, f64> = param
             .get()
-            .ok_or_else(|| construction("SetParameters: null parameters"))?
+            .ok_or_else(|| null_array("SetParameters"))?
             .array1()
             .clone();
         self.parameters.change_array1().assign(&values);
@@ -49,7 +50,7 @@ impl Variational {
     pub fn set_knots(&mut self, knots: &Handle<HArray1<f64>>) -> Result<bool, Failure> {
         let values: Array1<'static, f64> = knots
             .get()
-            .ok_or_else(|| construction("SetKnots: null knots"))?
+            .ok_or_else(|| null_array("SetKnots"))?
             .array1()
             .clone();
         self.knots.change_array1().assign(&values);
@@ -168,4 +169,12 @@ impl Variational {
     pub fn set_nb_iterations(&mut self, iter: i32) {
         self.options.nb_iterations = iter;
     }
+}
+
+// A null array argument, which the native setters dereference (a crash).
+fn null_array(member: &str) -> Failure {
+    failure(
+        "Standard_NullObject",
+        &format!("AppDef_Variational::{member}: null array; expected an allocated HArray1"),
+    )
 }

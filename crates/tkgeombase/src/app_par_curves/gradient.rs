@@ -38,9 +38,29 @@ const BFGS_EPS: f64 = 1.0e-07;
 /// default is 200). Error() reads the constrained branch of the function, so it is 0
 /// for a line without inner constraints, as natively.
 ///
-/// ```ignore
-/// let gradient = Gradient::new(&line, 1, 10, &constraints, &mut u, 3, 1e-3, 1e-6, 200)?;
-/// let curve = gradient.value();
+/// ```
+/// use rustycad_tkgeombase::app_def::MultiLine;
+/// use rustycad_tkgeombase::app_par_curves::{Gradient, MultiCurveEval};
+/// # use rustycad_tkgeombase::app_par_curves::{Constraint, ConstraintCouple};
+/// # use rustycad_tkernel::ncollection::{Array1, HArray1};
+/// # use rustycad_tkernel::standard::Handle;
+/// # use rustycad_tkmath::gp::Point3;
+/// # use rustycad_tkmath::math::Vector;
+/// // Six points of the parabola y = x^2, AppDef_MultiLine read by AppDef_MyLineTool.
+/// let points: Vec<Point3> = (0..6).map(|i| {
+///     let t = f64::from(i) / 5.0;
+///     Point3::new(t, t * t, 0.0)
+/// }).collect();
+/// let line = MultiLine::from_points(&Array1::from_shared(&points, 1));
+/// # let ends = [ConstraintCouple::new(1, Constraint::PassPoint), ConstraintCouple::new(6, Constraint::PassPoint)];
+/// # let constraints = Handle::new(HArray1::from_array(&Array1::from_shared(&ends, 1)));
+/// # let mut u = Vector::with_bounds(1, 6)?;
+/// # (1..=6).for_each(|i| u[i] = f64::from(i - 1) / 5.0);
+/// let gradient = Gradient::new(&line, 1, 6, &constraints, &mut u, 3, 1e-3, 1e-6, 200)?;
+/// assert!(gradient.is_done());
+/// assert_eq!(gradient.value().nb_poles(), 4);
+/// assert!(gradient.max_error_3d() < 1e-3);
+/// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 pub struct Gradient {
     scu: MultiCurve,

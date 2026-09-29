@@ -148,7 +148,9 @@ struct VariationalResults {
 /// let line = MultiLine::from_points(&Array1::from_shared(&points, 1));
 /// let ends = [ConstraintCouple::new(1, Constraint::PassPoint), ConstraintCouple::new(8, Constraint::PassPoint)];
 /// let constraints = Handle::new(HArray1::from_array(&Array1::from_shared(&ends, 1)));
-/// let mut smoothing = Variational::new(&line, 1, 8, &constraints, VariationalOptions::default())?;
+/// // A size-error tolerance of 1e-6 weights the distance to the points heavily.
+/// let options = VariationalOptions { tolerance: 1e-6, ..VariationalOptions::default() };
+/// let mut smoothing = Variational::new(&line, 1, 8, &constraints, options)?;
 /// smoothing.approximate()?;
 /// assert!(smoothing.is_done());
 /// assert!(smoothing.max_error()? < 1e-3);
