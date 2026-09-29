@@ -38,6 +38,7 @@ mod curve_read;
 mod curve_set;
 mod curve_write;
 mod errors;
+mod face_uv_update;
 pub mod format_version;
 mod geometry_in;
 mod handle_table;
@@ -45,7 +46,20 @@ mod istream;
 mod location_set;
 mod object_type;
 mod ostream;
+mod raw_enums;
 mod scalars;
+mod shape_io;
+mod shape_set;
+mod shape_set_add;
+mod shape_set_base;
+mod shape_set_mesh_read;
+mod shape_set_mesh_write;
+mod shape_set_read;
+mod shape_set_read_edge;
+mod shape_set_read_shape;
+mod shape_set_write;
+mod shape_set_write_shape;
+mod stream_buffer_device;
 mod surface_read;
 mod surface_set;
 mod surface_write;
@@ -61,4 +75,10 @@ pub use scalars::{
     get_bool, get_ext_char, get_integer, get_real, get_short_real, put_bool, put_ext_char,
     put_integer, put_real, put_short_real,
 };
+pub use shape_io::{
+    WriteOptions, read, read_file, read_file_on, read_with_console, write, write_file,
+    write_file_on,
+};
+pub use shape_set::BinShapeSet;
+pub use shape_set_base::{BinShapeSetBase, ShapeSetBaseData, THE_ASCII_VERSIONS, put_point};
 pub use surface_set::BinSurfaceSet;
