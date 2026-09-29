@@ -16,8 +16,8 @@
 
 //! `EditorView::CoEdgeOps`: coedge creation and the coedge and p-curve setters.
 use super::guards::mutate_node;
-use super::helpers::require_item_unlocked;
-use super::helpers::{clear_co_edge_face_scoped_representations, is_active_node, node_item};
+use super::helpers::require_settable;
+use super::helpers::{clear_co_edge_face_scoped_representations, is_active_node};
 use crate::brep_graph::mut_guard::MutGuard;
 use crate::brep_graph::*;
 use crate::brep_graph_inc::{ParityOrientation, Storage, append_unique};
@@ -110,7 +110,7 @@ impl<'g> CoEdgeOps<'g> {
         first: f64,
         last: f64,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(co_edge))?;
+        require_settable(self.graph, co_edge)?;
         set_pcurve_range(self.graph.inc_storage_mut(), co_edge, first, last);
         self.graph.mark_modified(co_edge.into());
         Ok(())
@@ -130,7 +130,7 @@ impl<'g> CoEdgeOps<'g> {
         co_edge: CoEdgeId,
         orientation: ParityOrientation,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(co_edge))?;
+        require_settable(self.graph, co_edge)?;
         self.graph
             .inc_storage_mut()
             .change_co_edge(co_edge)
@@ -174,7 +174,7 @@ impl<'g> CoEdgeOps<'g> {
         first: f64,
         last: f64,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(co_edge))?;
+        require_settable(self.graph, co_edge)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.co_edge(co_edge).curve2d_rep_id;
         if curve.is_null() {
@@ -193,7 +193,7 @@ impl<'g> CoEdgeOps<'g> {
 
     /// `ClearPCurve(theCoEdge)`: removes the p-curve record (the id stays).
     pub fn clear_pcurve(&mut self, co_edge: CoEdgeId) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(co_edge))?;
+        require_settable(self.graph, co_edge)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.co_edge(co_edge).curve2d_rep_id;
         storage.mark_rep_removed(rep.into());
@@ -207,7 +207,7 @@ impl<'g> CoEdgeOps<'g> {
         co_edge: CoEdgeId,
         polygon: &Handle<Polygon2D>,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(co_edge))?;
+        require_settable(self.graph, co_edge)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.co_edge(co_edge).polygon2d_rep_id;
         if polygon.is_null() {
@@ -234,7 +234,7 @@ impl<'g> CoEdgeOps<'g> {
         co_edge: CoEdgeId,
         polygon: &Handle<PolygonOnTriangulation>,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(co_edge))?;
+        require_settable(self.graph, co_edge)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.co_edge(co_edge).polygon_on_tri_rep_id;
         if polygon.is_null() {
@@ -258,7 +258,7 @@ impl<'g> CoEdgeOps<'g> {
     /// `ResetPCurveBinding(theCoEdge)`: unbinds the p-curve record and zeroes its range
     /// (the record stays active).
     pub fn reset_pcurve_binding(&mut self, co_edge: CoEdgeId) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(co_edge))?;
+        require_settable(self.graph, co_edge)?;
         reset_binding(self.graph.inc_storage_mut(), co_edge);
         self.graph.mark_modified(co_edge.into());
         Ok(())
@@ -274,7 +274,7 @@ impl<'g> CoEdgeOps<'g> {
     /// `SetChildEdgeId(theCoEdge, theEdge)`: retargets the coedge and rebinds the
     /// edge-to-coedge relation.
     pub fn set_child_edge_id(&mut self, co_edge: CoEdgeId, edge: EdgeId) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(co_edge))?;
+        require_settable(self.graph, co_edge)?;
         let storage = self.graph.inc_storage_mut();
         let old = storage.co_edge(co_edge).child_edge_id;
         if old == edge {
@@ -303,7 +303,7 @@ impl<'g> CoEdgeOps<'g> {
     /// `SetFaceId(theCoEdge, theFace)`: rebinds the owning face and drops the
     /// face-scoped representations.
     pub fn set_face_id(&mut self, co_edge: CoEdgeId, face: FaceId) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(co_edge))?;
+        require_settable(self.graph, co_edge)?;
         let storage = self.graph.inc_storage_mut();
         if storage.co_edge(co_edge).face_id == face {
             return Ok(());

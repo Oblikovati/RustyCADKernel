@@ -175,6 +175,6 @@ fn curve2d_refuses_the_zero_length_segment_of_a_line_on_a_sphere_or_a_cylinder()
             .err()
             .unwrap();
         assert_eq!(error.exception_type(), "Standard_DomainError");
-        assert!(error.message().contains("the curve range [1, 1]"));
+        assert!(error.message().contains("the scan of the range [1, 1]"));
     }
 }

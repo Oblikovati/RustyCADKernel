@@ -17,15 +17,18 @@
 //! The typed record accessors (`Vertex`, `ChangeVertex`, `AppendVertex`, `NbVertices`,
 //! `NbActiveVertices`...) and the relation-table accessors.
 //!
-//! The record accessors index the store without a check natively; an index out of range
-//! panics here with the index.
+//! The record accessors index the store without a check natively (undefined behaviour
+//! past the store); the fast forms here panic with the index, and the checked forms of
+//! `checked.rs` and the `try_*_relations` below return Standard_OutOfRange instead.
 use super::Storage;
+use super::checked::check_typed_index;
 use super::tags::{NodeTag, RefTag, RepTag, StoredTag};
 use crate::brep_graph::*;
 use crate::brep_graph_inc::definition::*;
 use crate::brep_graph_inc::reference::*;
 use crate::brep_graph_inc::relations::*;
 use crate::brep_graph_inc::representation::*;
+use rustycad_tkernel::standard::Failure;
 
 impl Storage {
     /// The definition of any node kind (the generic body of `Vertex()`, `Edge()`...).
@@ -243,11 +246,17 @@ rep_accessors! {
 }
 
 macro_rules! relation_accessors {
-    ($($id:ty, $relations:ty, $table:ident, $get:ident, $change:ident;)*) => {
+    ($($id:ty, $relations:ty, $table:ident, $get:ident, $try_get:ident, $change:ident;)*) => {
         impl Storage {$(
             #[doc = "The relation record of the typed id (an index past the table panics)."]
             pub fn $get(&self, id: $id) -> &$relations {
                 &self.$table[id.index as usize]
+            }
+            #[doc = concat!("The checked [`", stringify!($get), "`](Self::", stringify!($get),
+                "): Standard_OutOfRange past the table.")]
+            pub fn $try_get(&self, id: $id) -> Result<&$relations, Failure> {
+                let slot = check_typed_index(id, self.$table.len() as u32)?;
+                Ok(&self.$table[slot])
             }
             #[doc = "The mutable relation record (`Change...RelationsInternal`)."]
             pub(crate) fn $change(&mut self, id: $id) -> &mut $relations {
@@ -258,20 +267,20 @@ macro_rules! relation_accessors {
 }
 
 relation_accessors! {
-    FaceId, FaceRelations, face_relations, face_relations, change_face_relations_internal;
-    WireId, WireRelations, wire_relations, wire_relations, change_wire_relations_internal;
-    EdgeId, EdgeRelations, edge_relations, edge_relations, change_edge_relations_internal;
-    ShellId, ShellRelations, shell_relations, shell_relations, change_shell_relations_internal;
-    SolidId, SolidRelations, solid_relations, solid_relations, change_solid_relations_internal;
-    CompoundId, CompoundRelations, compound_relations, compound_relations,
+    FaceId, FaceRelations, face_relations, face_relations, try_face_relations, change_face_relations_internal;
+    WireId, WireRelations, wire_relations, wire_relations, try_wire_relations, change_wire_relations_internal;
+    EdgeId, EdgeRelations, edge_relations, edge_relations, try_edge_relations, change_edge_relations_internal;
+    ShellId, ShellRelations, shell_relations, shell_relations, try_shell_relations, change_shell_relations_internal;
+    SolidId, SolidRelations, solid_relations, solid_relations, try_solid_relations, change_solid_relations_internal;
+    CompoundId, CompoundRelations, compound_relations, compound_relations, try_compound_relations,
         change_compound_relations_internal;
-    CompSolidId, CompSolidRelations, comp_solid_relations, comp_solid_relations,
+    CompSolidId, CompSolidRelations, comp_solid_relations, comp_solid_relations, try_comp_solid_relations,
         change_comp_solid_relations_internal;
-    VertexId, VertexRelations, vertex_relations, vertex_relations,
+    VertexId, VertexRelations, vertex_relations, vertex_relations, try_vertex_relations,
         change_vertex_relations_internal;
-    ProductId, ProductRelations, product_relations, product_relations,
+    ProductId, ProductRelations, product_relations, product_relations, try_product_relations,
         change_product_relations_internal;
-    OccurrenceId, OccurrenceRelations, occurrence_relations, occurrence_relations,
+    OccurrenceId, OccurrenceRelations, occurrence_relations, occurrence_relations, try_occurrence_relations,
         change_occurrence_relations_internal;
 }
 
@@ -301,5 +310,16 @@ mod tests {
         assert_eq!(storage.edge_curve3d_rep(curve).param_last, 3.0);
         assert_eq!(storage.nb::<EdgeCurve3DTag>(), 1);
         assert_eq!(storage.nb_active_edge_curves3d(), 1);
+    }
+
+    #[test]
+    fn checked_relations_refuse_ids_past_the_table() {
+        let mut storage = Storage::new();
+        let vertex = storage.append_vertex();
+        assert!(storage.try_vertex_relations(vertex).is_ok());
+        let failure = storage.try_vertex_relations(VertexId::new(1)).unwrap_err();
+        assert_eq!(failure.exception_type(), "Standard_OutOfRange");
+        assert!(failure.message().contains("BRepGraph_VertexId index 1"));
+        assert!(storage.try_product_relations(ProductId::new(0)).is_err());
     }
 }

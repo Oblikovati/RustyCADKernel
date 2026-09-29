@@ -650,10 +650,19 @@ translation, a rotation, a scale, a point and a plane mirror and a general trans
 place under each geometry and mesh policy pair, the refused ones included, and into the
 other graph (empty, then not) for the whole graph and a face, a refused geometry-level
 product, and an edge and a face in place, plus an empty source; both graphs are then
-printed whole, their geometry, persistent meshes and mesh cache included. A
-location-only `TransformNode` of a product or occurrence is not probed: its first step,
-`BRepGraph_Copy::CopyNode` of that node, crashes the pinned native build on these scenes
-(as the bare `CopyNode` does); the transform unit tests cover the location-only step.
+printed whole, their geometry, persistent meshes and mesh cache included. Six more
+`br_balgo` requests (one per transform kind) add the meshed solid scene with an auto
+product and run the location-only `TransformNode` of its product and of its occurrence
+into the other graph (geometry shared, mesh dropped): the rigid transforms copy the node
+with `CopyNode` and compose the placement, and the scale and the mirrors are refused
+before the copy. These two actions were once left out because the native call crashed;
+that was a probe setup error, not an upstream bug. The transform scenes are ingested
+with `Perform`, which creates no product and no occurrence, so `PRODUCT 0` and
+`OCCURRENCE 0` named ids past their stores, and `ensureProduct`/`ensureOccurrence` of
+BRepGraph_Copy.cxx read `ProductRelations(theSrcId)` and `Occurrence(theSrcId)` without
+a range check (a segmentation fault, undefined behaviour at the pinned commit). With
+the product present the native and Rust answers agree; the Rust port refuses the
+out-of-range ids with Standard_OutOfRange (docs/topology-design.md, section 11.14).
 
 The corpus has 726 requests: TopoDS, TopExp and TopTools 84, BRep 8, BinTools 281,
 BRepTools, BRepAdaptor and BRepLProp 195, the BRepGraph core 32, the BRepGraph layers and
@@ -959,8 +968,14 @@ TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` 
   stream before setting its precision (the native code dereferences it first).
 - BRepTools: a shape record or edge representation list read from a failed stream
   stops at the failure (natively the loop never ends); the periodicity test of
-  `UVBounds` stops after its first sample when the across range is empty (natively it
-  never advances). A null curve, p-curve or surface given to `EvalAndUpdateTol`,
+  `UVBounds` stops at the sample whose increment does not move the across parameter (an
+  empty or few-ulp range, or an infinite bound; natively it never advances). The
+  sampled estimate of `EvalAndUpdateTol` (steps of at least Confusion, which round back
+  at a parameter beyond about 1e9) and the step search of `BRepTools_WireExplorer`
+  (`GetNextParamOnPC`, a thousandth of a range of a few ulps) raise
+  Standard_DomainError where the native scan stalls, through the TKGeomBase
+  `scan_step` guard (docs/tkgeombase-progress.md); every scan that ends natively takes
+  the same samples. A null curve, p-curve or surface given to `EvalAndUpdateTol`,
   `AddUVBounds` on a face without surface, a NurbsConvert seam without 3D curve and
   `Update` of a null shape raise Standard_NullObject instead of crashing, and the
   shape set's unchecked TShape casts raise Standard_TypeMismatch. The load members of

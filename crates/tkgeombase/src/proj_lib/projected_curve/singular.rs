@@ -20,6 +20,7 @@
 use crate::geom_lib::same_range;
 use crate::geom2d_convert::CompCurveToBSplineCurve;
 use crate::native_failure::failure;
+use crate::scan_step::next_scan_parameter;
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::geom2d::{
@@ -33,7 +34,8 @@ use rustycad_tkmath::gp::{Direction2, Line2, Point2, Point3, Vector2};
 
 /// `IsoIsDeg(S, Param, IT, TolMin, TolMax)`: whether the iso line of the surface at
 /// `param` is degenerated (the largest first derivative along it, sampled in ten
-/// steps, within `[tol_min, tol_max]`).
+/// steps, within `[tol_min, tol_max]`). A range the steps cannot advance over raises
+/// Standard_DomainError where the native loop never ends (`crate::scan_step`).
 pub(super) fn iso_is_deg(
     s: &dyn Adaptor3dSurface,
     param: f64,
@@ -58,7 +60,9 @@ pub(super) fn iso_is_deg(
             s.d1(param, t)?.d1v.magnitude()
         };
         d1_norm_max = d1_norm_max.max(magnitude);
-        t += step;
+        // Natively `T += Step` never moves `T` on a zero-length or few-ulp range (or at
+        // an infinite bound), and the loop never ends.
+        t = next_scan_parameter("ProjLib_ProjectedCurve IsoIsDeg", t, step, [first, last])?;
     }
     Ok(!(d1_norm_max > tol_max || d1_norm_max < tol_min))
 }

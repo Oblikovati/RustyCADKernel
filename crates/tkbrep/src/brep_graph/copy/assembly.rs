@@ -63,7 +63,9 @@ pub(crate) fn ensure_occurrence(
     if let Some(existing) = context.existing(source) {
         return Ok(existing);
     }
-    let child = context.src_storage().occurrence(source).child_node_id;
+    // A caller-given id past the store is undefined behaviour natively; refuse it
+    // before the copy appends anything.
+    let child = context.src_storage().try_def(source)?.child_node_id;
     let copied = context.dst_storage().append_occurrence();
     context.bind_node(source, copied);
     context.copy_removed(source, copied);
@@ -88,6 +90,8 @@ pub(crate) fn ensure_product(
     if let Some(existing) = context.existing(source) {
         return Ok(existing);
     }
+    // As in `ensure_occurrence`: the relations read below are unchecked natively.
+    context.src_storage().check_id(source)?;
     let copied = context.dst_storage().append_product();
     context.copy_removed(source, copied);
     context.bind_node(source, copied);

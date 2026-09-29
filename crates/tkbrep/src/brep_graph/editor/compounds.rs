@@ -123,7 +123,7 @@ impl<'g> CompoundOps<'g> {
         let parent = self
             .graph
             .inc_storage()
-            .child_ref(reference)
+            .try_entry(reference)?
             .parent_compound_id;
         require_mutable(
             self.graph,
@@ -209,7 +209,7 @@ impl<'g> CompSolidOps<'g> {
         let parent = self
             .graph
             .inc_storage()
-            .solid_ref(reference)
+            .try_entry(reference)?
             .parent_comp_solid_id;
         require_mutable(
             self.graph,

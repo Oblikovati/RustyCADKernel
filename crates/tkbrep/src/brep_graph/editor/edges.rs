@@ -17,7 +17,7 @@
 //! `EditorView::EdgeOps`: edge creation, reversal and the edge setters. The vertex
 //! reference members are in `edge_vertices` and `Split` in `edge_split`.
 use super::guards::mutate_node;
-use super::helpers::{is_active_node, node_item, require_item_unlocked};
+use super::helpers::{is_active_node, require_settable};
 use crate::brep_graph::mut_guard::MutGuard;
 use crate::brep_graph::{BRepGraph, EdgeId, EdgeTag, VertexId, VertexRefId};
 use crate::brep_graph_inc::{ParityOrientation, Storage};
@@ -123,7 +123,7 @@ impl<'g> EdgeOps<'g> {
 
     /// `SetTolerance(theEdge, theTolerance)`.
     pub fn set_tolerance(&mut self, edge: EdgeId, tolerance: f64) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(edge))?;
+        require_settable(self.graph, edge)?;
         self.graph.inc_storage_mut().change_edge(edge).tolerance = tolerance;
         self.graph.mark_modified(edge.into());
         Ok(())
@@ -137,7 +137,7 @@ impl<'g> EdgeOps<'g> {
     /// `SetParamRange(theEdge, theFirst, theLast)`: the range of the 3D curve record
     /// in range (the edge is marked modified even without one).
     pub fn set_param_range(&mut self, edge: EdgeId, first: f64, last: f64) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(edge))?;
+        require_settable(self.graph, edge)?;
         set_curve_range(self.graph.inc_storage_mut(), edge, first, last);
         self.graph.mark_modified(edge.into());
         Ok(())
@@ -161,7 +161,7 @@ impl<'g> EdgeOps<'g> {
         first: f64,
         last: f64,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(edge))?;
+        require_settable(self.graph, edge)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.edge(edge).curve3d_rep_id;
         if curve.is_null() {
@@ -178,7 +178,7 @@ impl<'g> EdgeOps<'g> {
 
     /// `ClearCurve(theEdge)`: removes the curve record (the id stays on the edge).
     pub fn clear_curve(&mut self, edge: EdgeId) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(edge))?;
+        require_settable(self.graph, edge)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.edge(edge).curve3d_rep_id;
         storage.mark_rep_removed(rep.into());
@@ -193,7 +193,7 @@ impl<'g> EdgeOps<'g> {
         edge: EdgeId,
         polygon: &Handle<Polygon3D>,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(edge))?;
+        require_settable(self.graph, edge)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.edge(edge).polygon3d_rep_id;
         if polygon.is_null() {
@@ -216,7 +216,7 @@ impl<'g> EdgeOps<'g> {
 
     /// `ClearPersistentPolygon3D(theEdge)`.
     pub fn clear_persistent_polygon3d(&mut self, edge: EdgeId) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(edge))?;
+        require_settable(self.graph, edge)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.edge(edge).polygon3d_rep_id;
         storage.mark_rep_removed(rep.into());

@@ -49,6 +49,9 @@ impl GenOps<'_> {
         if reference.is_removed(self.graph) {
             return Ok(false);
         }
+        // Natively `detachRefRelations` reads the entry unchecked (undefined behaviour
+        // past the store); the port refuses the id before any write.
+        self.graph.refs().generic().check_in_range(reference)?;
         let storage = self.graph.inc_storage_mut();
         detach_ref_relations(storage, reference);
         if !storage.mark_removed_ref(reference) {

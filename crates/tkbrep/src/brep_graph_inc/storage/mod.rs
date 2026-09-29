@@ -24,6 +24,7 @@
 mod accessors;
 mod attach;
 mod bindings;
+mod checked;
 mod detach;
 mod identity_copy;
 mod prepare;
@@ -38,6 +39,7 @@ mod validate;
 mod wire_order;
 
 pub use bindings::{CachedShape, ShapeBindings};
+pub use checked::{check_index, check_typed_index, check_untyped_index};
 pub use stores::{EntityStore, FlagPlane, OwnershipPlanes, RemovalPlanes, RepStore};
 pub use tags::{NodeTag, RefTag, RepTag, StoredTag};
 pub use validate::WireCoEdgeOrderStatus;

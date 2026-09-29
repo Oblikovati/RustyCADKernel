@@ -94,7 +94,9 @@ pub fn perform_self(_graph: &mut BRepGraph) -> bool {
 /// `CopyNode(theSourceGraph, theTargetGraph, theNodeId, ...)`: copies one node of any
 /// kind with everything it references into another graph (entities the copy already
 /// made are reused); the mapped root, or the invalid id for an empty source or an
-/// unsupported node.
+/// unsupported node. A product or occurrence id past its store raises
+/// Standard_OutOfRange before anything is copied (an unchecked read natively,
+/// docs/topology-design.md section 11.14); other kinds give the invalid id, as natively.
 ///
 /// ```
 /// use rustycad_tkbrep::brep_graph::{BRepGraph, NodeId};

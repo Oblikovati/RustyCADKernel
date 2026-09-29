@@ -16,7 +16,8 @@
 
 //! The generic node queries and the representation counts of the topology view.
 use crate::brep_graph::{BRepGraph, ChildRefId, NodeId, NodeKind, OccurrenceRefId};
-use crate::brep_graph_inc::BaseDef;
+use crate::brep_graph_inc::{BaseDef, check_untyped_index};
+use rustycad_tkernel::standard::Failure;
 
 /// `TopoView::GenOps`: generic topology and assembly queries.
 #[derive(Clone, Copy, Debug)]
@@ -88,6 +89,24 @@ impl<'g> GenOps<'g> {
     /// `IsValid(theNode)`: a valid id inside its kind's range.
     pub fn is_valid(self, node: NodeId) -> bool {
         node.is_valid() && node.index < self.nb(node.kind)
+    }
+
+    /// The checked form of [`is_valid`](Self::is_valid): the node's slot, else
+    /// Standard_OutOfRange naming the kind, the index and the valid range (an
+    /// unsupported kind has the empty range).
+    ///
+    /// ```
+    /// use rustycad_tkbrep::brep_graph::{BRepGraph, FaceId, NodeId};
+    /// let graph = BRepGraph::new();
+    /// assert!(graph.topo().generic().check_in_range(NodeId::from(FaceId::new(0))).is_err());
+    /// ```
+    pub fn check_in_range(self, node: NodeId) -> Result<usize, Failure> {
+        check_untyped_index(
+            "BRepGraph_NodeId",
+            node.kind.0,
+            node.index,
+            self.nb(node.kind),
+        )
     }
 
     /// `IsActive(theNode)`: valid and not soft-removed.

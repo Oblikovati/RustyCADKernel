@@ -16,7 +16,7 @@
 
 //! `EditorView::ShellOps` and `EditorView::SolidOps`.
 use super::guards::{mutate_node, mutate_ref};
-use super::helpers::{ref_item, require_item_unlocked};
+use super::helpers::require_settable;
 use super::ref_container::{
     ShellFaces, SolidShells, append_many, append_one, remove_many, remove_one,
 };
@@ -105,7 +105,7 @@ impl<'g> ShellOps<'g> {
         reference: ShellRefId,
         orientation: ParityOrientation,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         self.graph
             .inc_storage_mut()
             .change_shell_ref(reference)
@@ -129,7 +129,7 @@ impl<'g> ShellOps<'g> {
         reference: ShellRefId,
         shell: ShellId,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         let storage = self.graph.inc_storage_mut();
         let old = storage.shell_ref(reference).child_shell_id;
         if old == shell {
@@ -215,7 +215,7 @@ impl<'g> SolidOps<'g> {
         reference: SolidRefId,
         orientation: ParityOrientation,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         self.graph
             .inc_storage_mut()
             .change_solid_ref(reference)
@@ -239,7 +239,7 @@ impl<'g> SolidOps<'g> {
         reference: SolidRefId,
         solid: SolidId,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         let storage = self.graph.inc_storage_mut();
         let old = storage.solid_ref(reference).child_solid_id;
         if old == solid {

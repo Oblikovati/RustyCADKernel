@@ -23,6 +23,7 @@ use super::function::{compute_periodicity, surface_bounds};
 use crate::gcpnts::QuasiUniformAbscissa;
 use crate::native_failure::failure;
 use crate::proj_lib::new_array;
+use crate::scan_step::next_scan_parameter;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg2d::adaptor2d::Adaptor2dCurve2d;
@@ -129,8 +130,8 @@ impl ComputeApproxOnPolarSurface {
         let mid: Point2 =
             spline.value(0.5 * (spline.first_parameter() + spline.last_parameter()))?;
         let [uinf, usup, vinf, vsup] = s.bounds;
-        let test_u: f64 = into_range(mid.x(), uinf - s.tol_u, usup + s.tol_u, s.uperiod);
-        let test_v: f64 = into_range(mid.y(), vinf - s.tol_v, vsup + s.tol_v, s.vperiod);
+        let test_u: f64 = into_range(mid.x(), uinf - s.tol_u, usup + s.tol_u, s.uperiod)?;
+        let test_v: f64 = into_range(mid.y(), vinf - s.tol_v, vsup + s.tol_v, s.vperiod)?;
         let offset: Vector2 = Vector2::new(test_u - mid.x(), test_v - mid.y());
         if offset.x().abs() > gp::resolution() || offset.y().abs() > gp::resolution() {
             spline.translate(offset)?;
@@ -143,20 +144,46 @@ impl ComputeApproxOnPolarSurface {
 }
 
 // `x` moved by whole periods into `[low, high]`; unchanged when not periodic.
-fn into_range(mut x: f64, low: f64, high: f64, period: f64) -> f64 {
+//
+// Rust deviation: the native `while (TestU < Uinf - TolU || TestU > Usup + TolU)
+// TestU += sense * uperiod;` never ends when the period does not move `x` (a huge or
+// infinite `x`) or when `x` jumps over a window narrower than the period (a trimmed
+// periodic surface); both raise Standard_DomainError here.
+fn into_range(x: f64, low: f64, high: f64, period: f64) -> Result<f64, Failure> {
     if period == 0. {
-        return x;
+        return Ok(x);
     }
-    let mut sense: f64 = 0.;
-    if x < low {
-        sense = 1.;
+    let sense: f64 = if x < low {
+        1.
     } else if x > high {
-        sense = -1.;
-    }
+        -1.
+    } else {
+        0.
+    };
+    let mut x: f64 = x;
     while x < low || x > high {
-        x += sense * period;
+        x = next_scan_parameter(POLAR_OWNER, x, sense * period, [low, high])?;
+        refuse_jump_over(x, sense, [low, high], period)?;
     }
-    x
+    Ok(x)
+}
+
+const POLAR_OWNER: &str = "ProjLib_ComputeApproxOnPolarSurface";
+
+// A step past the far side of the window: the native loop then moves `x` away forever.
+fn refuse_jump_over(x: f64, sense: f64, [low, high]: [f64; 2], period: f64) -> Result<(), Failure> {
+    let jumped: bool = (sense > 0. && x > high) || (sense < 0. && x < low);
+    if !jumped {
+        return Ok(());
+    }
+    Err(failure(
+        "Standard_DomainError",
+        &format!(
+            "{POLAR_OWNER}: the period {period} moves the parameter to {x}, past the window \
+             [{low}, {high}], so the native shift loop never ends; expected a window at \
+             least one period wide"
+        ),
+    ))
 }
 
 /// The unwrapped ElSLib parameters on a cylinder, cone, sphere or torus;
@@ -258,4 +285,33 @@ fn unwrap_sphere(uv: &[(f64, f64)], bounds: [f64; 4]) -> Vec<Point2> {
         points.push(Point2::new(u, v));
     }
     points
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn into_range_shifts_by_whole_periods() {
+        let period: f64 = 2. * PI;
+        assert_eq!(into_range(7.0, 0., period, period).unwrap(), 7.0 - period);
+        assert_eq!(into_range(-1.0, 0., period, period).unwrap(), -1.0 + period);
+        assert_eq!(into_range(1.0, 0., period, 0.).unwrap(), 1.0);
+    }
+
+    #[test]
+    fn into_range_refuses_the_shifts_that_never_end() {
+        // A period below the half ulp of the parameter never moves it.
+        let stalled = into_range(1e20, 0., 2. * PI, 2. * PI).unwrap_err();
+        assert!(
+            stalled.message().contains("never ends"),
+            "{}",
+            stalled.message()
+        );
+        // A window narrower than the period is jumped over, then left behind.
+        let jumped = into_range(3.0, 0., 1., 2. * PI).unwrap_err();
+        assert_eq!(jumped.exception_type(), "Standard_DomainError");
+        let message: &str = jumped.message();
+        assert!(message.contains("past the window [0, 1]"), "{message}");
+    }
 }
