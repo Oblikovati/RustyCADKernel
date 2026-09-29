@@ -986,11 +986,11 @@ Rust deviations), and Curve2d of the zero-length segment of a line on a sphere (
 ProjLib_ComputeApprox of a zero-length range never returns natively on a cone, a
 cylinder, a sphere or a torus; the port refuses it, see the Rust deviations).
 
-The corpus has 45475 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+The corpus has 45479 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
 FEmTool, 2045 AppParCurves, 3831 AppCont, 15198 GeomBndLib and BndLib, 2210 CPnts and
 GCPnts, 325 AdvApp2Var, 908 Geom2dConvert, 1934 Extrema, 1844 GeomConvert, 1146 GeomLib,
-1997 Approx, 555 AppDef, 2313 ProjLib and 911 GeomProjLib.
+1997 Approx, 555 AppDef, 2317 ProjLib and 911 GeomProjLib.
 
 ## Preserved native behaviour
 
