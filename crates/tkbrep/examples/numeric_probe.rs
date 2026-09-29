@@ -3,8 +3,8 @@
 use std::io::{self, BufRead};
 mod br_probe;
 use br_probe::{
-    bintools, bintools_sets, bintools_shape, brep_report, brep_tools, brep_tools_modif, topexp,
-    topods, toptools,
+    bintools, bintools_sets, bintools_shape, brep_report, brep_tools, brep_tools_modif,
+    brep_tools_reshape, topexp, topods, toptools,
 };
 
 /// One probe operation over the numeric fields of a request.
@@ -42,6 +42,11 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("br_tools_mutate", brep_tools::mutate_case),
     ("br_tools_modif", brep_tools_modif::modif_case),
     ("br_tools_wire", brep_tools_modif::wire_case),
+    ("br_tools_reshape", brep_tools_reshape::reshape_case),
+    ("br_tools_history", brep_tools_reshape::history_case),
+    ("br_tools_subst", brep_tools_reshape::subst_case),
+    ("br_tools_quilt", brep_tools_reshape::quilt_case),
+    ("br_tools_purge", brep_tools_reshape::purge_case),
 ];
 
 fn main() {

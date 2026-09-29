@@ -10,6 +10,7 @@ scenes of the BRep corpus add the degenerate and error states.
 """
 from __future__ import annotations
 import math
+from tkbrep_breptools_edit_corpus import append_tkbrep_breptools_edit_requests
 from tkbrep_brep_corpus import (BRepScript, FORWARD, REVERSED, INTERNAL, edge_scenario,
                                 face_scenario, plane_scenario, text)
 
@@ -33,9 +34,10 @@ def square_edge(s: BRepScript, face: int, v1: int, v2: int, a, b, uv_a, uv_b) ->
 
 
 def square_face(s: BRepScript, size: float, z: float,
-                internal: bool = False) -> tuple[int, list[int], int]:
+                internal: bool = False) -> tuple[int, list[int], int, list[int]]:
     """A planar face on z with one wire of four line edges and shared vertices; with
-    `internal`, the third edge holds an INTERNAL vertex at its middle."""
+    `internal`, the third edge holds an INTERNAL vertex at its middle. Returns the face,
+    edges, wire and corner vertices."""
     plane = s.plane((0.0, 0.0, z), (0.0, 0.0, 1.0))
     face = s.face(plane, 0, 1e-7)
     corners = [(0.0, 0.0), (size, 0.0), (size, size), (0.0, size)]
@@ -52,7 +54,7 @@ def square_face(s: BRepScript, size: float, z: float,
             s.do(34, middle, size / 2, edges[-1], 1e-7)
         s.add(wire, edges[-1], FORWARD)
     s.add(face, wire, FORWARD)
-    return face, edges, wire
+    return face, edges, wire, vertices
 
 
 def cylinder_face(s: BRepScript) -> tuple[int, int, int]:
@@ -87,8 +89,8 @@ def solid_scene() -> BRepScript:
     t = s.translation(0.0, 0.0, 2.0)
     r = s.rotation(0.0, 0.0, 1.0, 0.5)
     s.scale(2.0)
-    low, low_edges, _ = square_face(s, 1.0, 0.0, internal=True)
-    high, _, _ = square_face(s, 2.0, 1.0)
+    low, low_edges, _, low_vertices = square_face(s, 1.0, 0.0, internal=True)
+    high, high_edges, _, _ = square_face(s, 2.0, 1.0)
     # INTERNAL sub-shapes, added before the faces are frozen by their parents.
     s.add(low, s.vertex((0.5, 0.5, 0.0)), INTERNAL)
     shell = s.make(SHELL)
@@ -105,6 +107,9 @@ def solid_scene() -> BRepScript:
     s.do(40, low, tri, 1)
     s.do(15, low_edges[0], s.polygon3d([(0.0, 0.0, 0.0), (0.5, 0.0, 0.0), (1.0, 0.0, 0.0)]), 0)
     s.do(16, low_edges[1], s.nodes([2, 3]), tri, 0)
+    s.ids = dict(low=low, high=high, shell=shell, solid=solid, compound=compound,
+                 low_edges=low_edges, high_edges=high_edges, low_vertices=low_vertices,
+                 moved=s.shapes - 1)
     return s
 
 
@@ -189,3 +194,4 @@ def append_tkbrep_breptools_requests(requests: list[str]) -> None:
         numbers = text(script.numbers())
         for kind, params, mutable in MODIFICATIONS:
             requests.append(f'br_tools_modif {numbers} {kind} {text(params)} {mutable}'.replace('  ', ' '))
+    append_tkbrep_breptools_edit_requests(requests, solid_scene, [cylinder_scene(), bezier_scene()])

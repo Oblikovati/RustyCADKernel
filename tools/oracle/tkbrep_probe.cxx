@@ -44,6 +44,7 @@
 #include "tkbrep_probe_bintools_shape.cxx"
 #include "tkbrep_probe_breptools.cxx"
 #include "tkbrep_probe_breptools_modif.cxx"
+#include "tkbrep_probe_breptools_reshape.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopoDS (tkbrep_probe_topods.cxx)
  {"br_topods", br_topods_case},
@@ -74,6 +75,11 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"br_tools_mutate", br_tools_mutate_case},
  {"br_tools_modif", br_tools_modif_case},
  {"br_tools_wire", br_tools_wire_case},
+ {"br_tools_reshape", br_tools_reshape_case},
+ {"br_tools_history", br_tools_history_case},
+ {"br_tools_subst", br_tools_subst_case},
+ {"br_tools_quilt", br_tools_quilt_case},
+ {"br_tools_purge", br_tools_purge_case},
 };
 int main() {
  std::string line;
