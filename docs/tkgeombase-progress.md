@@ -82,6 +82,8 @@ passes (824 declarations):
 | GeomConvert_CompCurveToBSplineCurve_Test.cxx | geom_convert_comp_curve_to_bspline_curve | 8 |
 | GeomLib_Test.cxx | geom_lib | 15 |
 | GeomLib_CheckCurveOnSurface_Test.cxx | geom_lib_check_curve_on_surface | 7 |
+| ProjLib_Cone_Test.cxx | proj_lib_cone | 3 |
+| ProjLib_ComputeApproxOnPolarSurface_Test.cxx | proj_lib_compute_approx_on_polar_surface | 1 |
 
 `bnd_lib_behavior.rs` covers the GeomBndLib and BndLib quirks below.
 `geom2d_convert_behavior.rs` covers the Geom2dConvert quirks below.
@@ -92,7 +94,8 @@ StdFail_NotDone results, the conversion operators, the GCE2d aliases and the nat
 quirks below. GeomTools has no upstream GoogleTest suite; `geom_tools_behavior/`
 covers its layouts, reader contract, sets, handler and quirks with named fakes for the
 console, the text streams, the progress indicator and a custom handler.
-`extrema_behavior.rs` covers the Extrema quirks below. The three ExtremaPC suites that
+`extrema_behavior.rs` covers the Extrema quirks below. `proj_lib_behavior.rs` covers the
+ProjLib quirks below. The three ExtremaPC suites that
 compare ExtremaPC with the classic `Extrema_ExtPC` share the random points of
 `tests/fixtures/extrema_pc_random_points.txt`, which
 `tools/oracle/tkgeombase_extrema_random_points.cxx` draws with the libstdc++
@@ -552,6 +555,43 @@ but never defined natively).
   default line, a criterion before SetCurve for InputVector, a null curve given to the
   first SetCurve, a gradient before any basis cache) are Standard_NullObject errors.
 
+## ProjLib
+
+ProjLib (`proj_lib`) ports every class of the package; `tools/audit_api_rows.py`
+reports 0 missing and 0 stale api rows for it (253 implemented, and the destructor of
+ProjLib_Projector excluded). OCCT 8.1 has no `ProjLib_ProjectOnSurface` and no
+`ProjLib_HSequenceOfHSequenceOfPnt`: CompProjectedCurve spells its sequence type inline
+(`SequenceOfSequenceOfPnt` in the port), and `ProjLib_HCompProjectedCurve` is a
+typedef (`HCompProjectedCurve`).
+
+- The static `ProjLib::Project` overloads are free functions named after the element
+  and the surface (`project_line_on_plane`, `project_circle_on_torus`, ...); they build
+  the elementary projector and return its typed result, as natively.
+  `MakePCurveOfType` returns the curve, `IsAnaSurf` takes the adaptor handle.
+- `ProjLib_Projector` is a struct holding the protected result. The elementary
+  projectors (`Plane`, `Cylinder`, `Cone`, `Sphere`, `Torus`) embed it and reach it
+  through `Deref`/`DerefMut`; the virtual `Project` overloads are the `Project` trait
+  (`project_line` ... `project_hyperbola`), implemented by `Projector` itself with the
+  native base behaviour. The native slicing `myResult = P` is `Projector::from(p)`.
+- `PrjFunc` and `PrjResolve` borrow the adaptors (the native raw pointers);
+  `PrjResolve::perform` takes the `Tol`, `Inf` and `Sup` points in a `PrjResolveBox`.
+  PrjFunc keeps an adaptor failure raised inside a math callback and PrjResolve
+  returns it after the solver, as the native exception unwinds.
+- `ProjectOnPlane` (an `Adaptor3d_Curve`), `ProjectedCurve` and `CompProjectedCurve`
+  (`Adaptor2d_Curve2d`) are `Handle`-shared adaptors whose fields sit behind one lock.
+  `Load`, `Perform` and `Init` compute on a copy of the fields and store it back, also
+  when they fail part way, so the observable state matches the native partial update.
+  Their `ShallowCopy` is also available as a concrete value (`shallow_projection`), so
+  GeomProjLib and `BRep_Tool::CurveOnPlane` can keep the concrete type.
+- `ComputeApprox` and `ComputeApproxOnPolarSurface` are plain structs. Their
+  `AppCont_Function` implementations keep the first adaptor failure and return it after
+  `Approx_FitAndDivide2d`, as the native exception propagates. The approximations reuse
+  the Approx, AppParCurves, Extrema, GCPnts, Geom2dConvert, GeomConvert, GeomLib and
+  LProp ports.
+- ExtremaPC and the EstimDist of IntAna_QuadQuadGeo call these functions; the private
+  copies they carried before (`plane_projection.rs` and a `ProjLib::Project(gp_Pln,
+  gp_Lin)` copy) are deleted, and their suites and probes stay bit-exact.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -877,6 +917,26 @@ InitCutting runs whose back scan compares with the knot it is about to set (the
 corpus simulates the scan), a smoothing after a SetConstraints that raised inside Init,
 negative tolerances in the max-error mode and C0 smoothings that reduce an element to
 degree 1.
+
+The ProjLib requests (`tkgeombase_corpus_projlib.py` and
+`tkgeombase_corpus_projlib_curves.py`, probes `tkgeombase_probe_projlib.cxx` and
+`tkgeombase_probe_projlib_curves.cxx`) run the elementary projectors on every line and
+conic kind over planes, cylinders, cones, spheres and tori in direct, tilted and
+indirect frames (generatrices, lines through the cone apex, parallels, meridians,
+circles through the poles, torus iso circles, rejected and off-surface curves,
+default-constructed projectors, SetInBounds, UFrame and VFrame), the static Project
+overloads on points at axes, apexes and poles, PrjFunc and PrjResolve with every fixed
+variable, invalid ones and bounded searches, ProjectOnPlane on every curve kind along
+normal, oblique and in-plane directions with and without the parametrization kept, and
+ComputeApprox, ComputeApproxOnPolarSurface (every constructor, BuildInitialCurve2d,
+initial and seam curves, C0 B-splines split into C1 spans), ProjectedCurve (every
+constructor and option) and CompProjectedCurve (every constructor, the parts, their
+evaluation and intervals, Perform with 2D and 3D results) on elementary, swept,
+trimmed, offset, Bezier and B-spline surfaces, across seams and periodic ranges,
+through poles, leaving bounded surfaces, far from them and degenerate (point and iso
+projections); 2313 requests. Left out: the projection of a line normal to the plane by
+the default ProjectOnPlane (a direction in the plane, all values NaN), whose native
+reparametrization never returns.
 
 The corpus has 42251 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
@@ -1582,3 +1642,64 @@ GeomLib:
   input unchecked (Standard_OutOfRange in the port); the MakeCurvefromApprox members of
   a subspace kind the approximation does not have pass their index check at 0 and
   dereference a null pole table.
+
+ProjLib:
+
+- `ProjLib_Projector()` sets the BSplineCurve type, not the OtherCurve its comment
+  announces, with null curves. `ProjLib_ProjectedCurve` keeps that result when a
+  Bezier or B-spline surface gives no polar projection or another surface gives no
+  CompProjectedCurve part; `Degree`, `IsRational`, `NbPoles` and `NbKnots` then
+  dereference the null B-spline natively (Standard_NullObject in the port). These two
+  branches never reset the result, so a second `Perform` keeps the previous one.
+- `ProjLib_Cone::Project(gp_Circ)` sets the Line type before its axis test, so a
+  circle not normal to the axis leaves a Line type over the previous line, and
+  `ProjLib::Project(gp_Cone, gp_Circ)` returns that line instead of raising.
+- `ProjLib_Cylinder::Project(gp_Elips)` does nothing (the ellipse is left to the
+  approximation, for periodicity reasons). `ProjLib_Sphere::Project(gp_Circ)` of a
+  circle that is neither a meridian nor a parallel keeps its type and stores the
+  default `gp_Lin2d`. `ProjLib_Torus` does not check that the circle lies on the torus;
+  a U iso whose centre is on the axis raises gp_VectorWithNullMagnitude from the
+  angle of a null reference vector.
+- `ProjLib_Sphere::SetInBounds` mirrors across a pole with a 1e-7 tolerance (OCC13116)
+  and raises StdFail_NotDone before a successful projection.
+- `ProjLib_ProjectedCurve` does not override the point evaluators, so `Value`, `D0` to
+  `DN` raise the Standard_NotImplemented of `Adaptor2d_Curve2d`; `Continuity`,
+  `NbIntervals`, `Intervals`, `Trim`, `IsClosed`, `Period` and `Resolution` raise it
+  too. Its `GetCurve` is the curve after the pole trims.
+- `ProjLib_ComputeApprox`: a B-spline or Bezier curve on a plane projects the poles of
+  the adaptor's whole curve (its trimmed range is ignored) and keeps the tolerance.
+  `Function_SetUVBounds` evaluates the cylinder at `(U1, U2)` for a closed ellipse, and
+  tests `S > U1 || S < U2` (almost always true) before the sphere U period; the
+  "return curve home" step moves U by whole multiples of PI, not 2 PI. The smoothing
+  loops of ComputeApprox and ComputeApproxOnPolarSurface run over the knot count taken
+  before the removals, the one of ProjectedCurve reads it at each step; all stop at the
+  first refused removal.
+- `ProjLib_ComputeApproxOnPolarSurface`: `BuildInitialCurve2d` stores the initial curve
+  as the B-spline result and raises Standard_NoSuchObject for a plane or a swept
+  surface, so `Perform` without an initial curve raises there. The bilinear-patch pole
+  case compares the static `MaxDegree()` of the surface class (25) with 1, so it never
+  applies; its Bezier loop would clear the done flag after each pole and its distance
+  test truncates the squared distance to an int. The iso-line test of the projection
+  evaluates the surface at `(U, t)` and `(t, V)` with the curve parameter `t`, and the
+  sphere V period test compares with `Vsup + (Vsup - Vinf)`. The C1-span split raises
+  the degree of the span projections in place and joins them without their weights.
+  The seam constructor keeps the B-spline of `BuildInitialCurve2d` when the projection
+  is not done.
+- `ProjLib_CompProjectedCurve`: `Init` appends to the existing parts (a second `Init`
+  adds them again). The extrema curve-surface start the parts only when MaxDist is
+  positive and the surface is not an extrusion. The default constructor has a null
+  sequence and leaves the approximation options uninitialized (the port gives them the
+  values of the other constructors); `ShallowCopy` copies neither those options nor
+  the results. `Perform` clears the 2D approximation for every part after an iso part
+  (those parts then store the previous part's curve) and widens the non-periodic
+  surface bounds by ten tolerances again at each non-iso part. `BuildIntervals` passes
+  `(Tol, TolV)` for both surface directions and raises Standard_OutOfRange for G1 and
+  G2; `EvalDN` raises Standard_NotImplemented above order 2.
+- `ProjLib_ProjectOnPlane`: a parabola that projects on a line (its X direction along
+  the projection) trims the null parabola handle, which it dereferences
+  (Standard_NullObject in the port), and a failed B-spline approximation dereferences the null
+  curve the same way. A projected end `GeomLib_Tool::Parameter` does not find keeps the
+  previous bound. A direction parallel to the plane is not refused (the check is
+  commented out) and gives NaN values; the default constructor projects along X onto
+  the XOY plane. `Period` returns `false` (0.0) for an approximation, which
+  `IsPeriodic` makes unreachable.
