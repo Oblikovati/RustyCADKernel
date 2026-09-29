@@ -215,6 +215,8 @@ impl ComputeApproxOnPolarSurface {
         self.proj_is_done
     }
     /// `Tolerance()`: the reached tolerance, -1 before a fit; `polar.tolerance()`.
+    // Native Tolerance() returns myTolReached, not the requested myTolerance.
+    #[allow(clippy::misnamed_getters)]
     pub fn tolerance(&self) -> f64 {
         self.tol_reached
     }

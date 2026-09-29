@@ -206,7 +206,8 @@ fn projected_results(x: &ProjectedCurve) -> Result<(), Failure> {
     let curve = x.get_curve();
     p::flag(curve.is_null());
     if let Some(c) = curve.get() {
-        (p::real(c.first_parameter()?), p::real(c.last_parameter()?));
+        p::real(c.first_parameter()?);
+        p::real(c.last_parameter()?);
     }
     attempt(|| {
         p::int(x.shallow_copy()?.get_type()? as i32);

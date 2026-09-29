@@ -28,8 +28,8 @@ use rustycad_tkmath::gp::{
 ///
 /// ```
 /// use rustycad_tkgeombase::proj_lib::Plane;
-/// use rustycad_tkmath::gp::{Line3, Plane3};
-/// let projection = Plane::with_line(&Plane3::default(), &Line3::default()).unwrap();
+/// use rustycad_tkmath::gp::{Circle3, Plane3};
+/// let projection = Plane::with_circle(&Plane3::default(), &Circle3::default()).unwrap();
 /// assert!(projection.is_done());
 /// ```
 #[derive(Clone, Default)]

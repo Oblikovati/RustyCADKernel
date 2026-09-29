@@ -119,10 +119,9 @@ impl Walk<'_> {
             }
         } else if (u - upp.x()).abs() < s.u_resolution(precision::p_confusion())?
             && s.is_u_periodic()?
+            && self.direction(u, v)?.x() > 0.
         {
-            if self.direction(u, v)?.x() > 0. {
-                u = low.x();
-            }
+            u = low.x();
         }
         let v_res: f64 = s.v_resolution(precision::p_confusion())?;
         if (v - low.y()).abs() < v_res && s.is_v_periodic()? {
@@ -131,10 +130,9 @@ impl Walk<'_> {
             }
         } else if (v - upp.y()).abs() <= s.v_resolution(precision::p_confusion())?
             && s.is_v_periodic()?
+            && self.direction(u, v)?.y() > 0.
         {
-            if self.direction(u, v)?.y() > 0. {
-                v = low.y();
-            }
+            v = low.y();
         }
         Ok((u, v))
     }

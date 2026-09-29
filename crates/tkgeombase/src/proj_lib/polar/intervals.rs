@@ -107,10 +107,10 @@ impl ComputeApproxOnPolarSurface {
             g2dtc: Handle::default(),
             c2d_is_to_compute: init.is_null(),
         };
-        if let Some(adaptor) = init.get() {
-            if !same_breaks(adaptor, &spans.inter)? {
-                spans.c2d_is_to_compute = true;
-            }
+        if let Some(adaptor) = init.get()
+            && !same_breaks(adaptor, &spans.inter)?
+        {
+            spans.c2d_is_to_compute = true;
         }
         let pieces = self.project_spans(&mut spans, init, c, surface)?;
         let Some(pieces) = pieces else {

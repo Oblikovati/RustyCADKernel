@@ -149,15 +149,15 @@ impl FuncData<'_> {
         let [uinf, usup, vinf, vsup] = surface_bounds(self.surf)?;
         let pconf: f64 = precision::p_confusion();
         // A curve close to a co-parametrized iso line of the surface.
-        if (p2d.x() - uinf).abs() < pconf || (p2d.x() - usup).abs() < pconf {
-            if self.surf.d0(p2d.x(), u)?.square_distance(&p) < surf_pnt_dist {
-                p2d.set_y(u);
-            }
+        if ((p2d.x() - uinf).abs() < pconf || (p2d.x() - usup).abs() < pconf)
+            && self.surf.d0(p2d.x(), u)?.square_distance(&p) < surf_pnt_dist
+        {
+            p2d.set_y(u);
         }
-        if (p2d.y() - vinf).abs() < pconf || (p2d.y() - vsup).abs() < pconf {
-            if self.surf.d0(u, p2d.y())?.square_distance(&p) < surf_pnt_dist {
-                p2d.set_x(u);
-            }
+        if ((p2d.y() - vinf).abs() < pconf || (p2d.y() - vsup).abs() < pconf)
+            && self.surf.d0(u, p2d.y())?.square_distance(&p) < surf_pnt_dist
+        {
+            p2d.set_x(u);
         }
         let kind: SurfaceType = self.surf.get_type()?;
         if !matches!(

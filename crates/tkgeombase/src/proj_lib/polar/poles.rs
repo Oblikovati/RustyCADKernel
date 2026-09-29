@@ -212,6 +212,9 @@ pub(super) fn poles_on_bilinear(
 // distance is truncated to an int before the comparison, as natively. The B-spline
 // loop leaves the done flag of the last pole; the Bezier loop clears it after each
 // success, so a Bezier never returns here.
+// The negated comparisons keep the native positive tests, so a NaN takes the native
+// branch.
+#[allow(clippy::neg_cmp_op_on_partial_ord)]
 fn locate_poles(
     polar: &mut ComputeApproxOnPolarSurface,
     surf: &dyn Adaptor3dSurface,

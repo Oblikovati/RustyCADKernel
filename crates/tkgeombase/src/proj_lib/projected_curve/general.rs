@@ -177,7 +177,7 @@ impl ProjectedState {
         let basis: Handle<dyn Adaptor3dCurve> = live_surface(self)?.basis_curve()?;
         let extrema = ExtPC::with_curve(p, live_curve(&basis)?, self.tolerance)?;
         if !extrema.is_done() {
-            return Ok(elclib::parameter(lin, p)?);
+            return elclib::parameter(lin, p);
         }
         let (mut min_dist, mut value): (f64, f64) = (f64::MAX, 0.0);
         for idx in 1..=extrema.nb_ext()? {

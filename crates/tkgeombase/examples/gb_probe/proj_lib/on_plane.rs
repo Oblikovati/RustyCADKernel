@@ -29,17 +29,23 @@ pub fn eval(c: &dyn Adaptor3dCurve, u: f64) {
     p::show(c.value(u), p::pnt);
     attempt(|| {
         let (q, v1) = c.d1(u)?;
-        (p::pnt(q), p::vec(v1));
+        p::pnt(q);
+        p::vec(v1);
         Ok(())
     });
     attempt(|| {
         let (q, v1, v2) = c.d2(u)?;
-        (p::pnt(q), p::vec(v1), p::vec(v2));
+        p::pnt(q);
+        p::vec(v1);
+        p::vec(v2);
         Ok(())
     });
     attempt(|| {
         let (q, v1, v2, v3) = c.d3(u)?;
-        (p::pnt(q), p::vec(v1), p::vec(v2), p::vec(v3));
+        p::pnt(q);
+        p::vec(v1);
+        p::vec(v2);
+        p::vec(v3);
         Ok(())
     });
     p::show(c.dn(u, 2), p::vec);
@@ -70,13 +76,15 @@ fn intervals(x: &ProjectOnPlane) -> Result<(), Failure> {
 
 fn samples(x: &ProjectOnPlane) -> Result<(), Failure> {
     let (f, l) = (x.first_parameter()?, x.last_parameter()?);
-    (p::real(f), p::real(l));
+    p::real(f);
+    p::real(l);
     for i in 0..=4 {
         eval(x, f + (l - f) * f64::from(i) / 4.);
     }
     attempt(|| {
         let t = x.trim(f + (l - f) / 8., l - (l - f) / 8., 1.0e-7)?;
-        (p::real(t.first_parameter()?), p::real(t.last_parameter()?));
+        p::real(t.first_parameter()?);
+        p::real(t.last_parameter()?);
         p::pnt(t.value(0.5 * (f + l))?);
         Ok(())
     });

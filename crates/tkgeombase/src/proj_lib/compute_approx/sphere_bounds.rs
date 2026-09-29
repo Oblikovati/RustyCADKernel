@@ -59,6 +59,9 @@ pub(super) fn sphere_bounds(
 
 /// The number of intersections of the circle (in the sphere frame) with the seam
 /// half-plane `y = 0, x > 0`, from its plane `A x + B y + C z + D = 0`.
+// The negated comparisons keep the native positive tests, so a NaN takes the native
+// branch.
+#[allow(clippy::neg_cmp_op_on_partial_ord)]
 fn seam_crossings(a: f64, c: f64, d: f64, r: f64) -> i32 {
     if c.abs() < TOL {
         if !(a.abs() > TOL) || !((d / a) < 0.) {

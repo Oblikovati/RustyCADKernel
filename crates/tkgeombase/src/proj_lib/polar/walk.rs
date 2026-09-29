@@ -99,6 +99,9 @@ fn walk_step(w: &mut Walk, s: &mut Sampling<'_>, i: i32) -> Result<bool, Failure
 
 // The local search from the previous point; when its extremum is too far, the
 // global search, which also detects a period jump.
+// The negated comparisons keep the native positive tests, so a NaN takes the native
+// branch.
+#[allow(clippy::neg_cmp_op_on_partial_ord)]
 fn local_then_global(
     w: &mut Walk,
     s: &mut Sampling<'_>,
@@ -155,9 +158,9 @@ fn refine_first_point(s: &mut Sampling<'_>) {
     let size_u: usize = if is_equal(s.uperiod, 0.0) { 1 } else { 3 };
     let size_v: usize = if is_equal(s.vperiod, 0.0) { 1 } else { 3 };
     let (mut best_u, mut best_v, mut sq_min): (usize, usize, f64) = (1, 1, f64::MAX);
-    for u_ind in 0..size_u {
-        for v_ind in 0..size_v {
-            let sq: f64 = p.square_distance(Point2::new(upar[u_ind], vpar[v_ind]));
+    for (u_ind, u) in upar.iter().enumerate().take(size_u) {
+        for (v_ind, v) in vpar.iter().enumerate().take(size_v) {
+            let sq: f64 = p.square_distance(Point2::new(*u, *v));
             if sq < sq_min {
                 (sq_min, best_u, best_v) = (sq, u_ind, v_ind);
             }
@@ -178,6 +181,9 @@ fn mirror(x0: f64, inf: f64, sup: f64, period: f64) -> (f64, i32) {
 
 // A local search from the mirrored start in U, V or both (`dirs`). The single
 // direction cases read the bounds again from the surface, as natively.
+// The negated comparisons keep the native positive tests, so a NaN takes the native
+// branch.
+#[allow(clippy::neg_cmp_op_on_partial_ord)]
 fn mirrored_search(
     w: &mut Walk,
     s: &mut Sampling<'_>,
@@ -221,6 +227,9 @@ fn mirrored_search(
 
 // The last resort: the nearest global extremum, with the period counts updated by
 // the jump (two thirds of a period in U, half a period in V).
+// The negated comparisons keep the native positive tests, so a NaN takes the native
+// branch.
+#[allow(clippy::neg_cmp_op_on_partial_ord)]
 fn last_global(w: &mut Walk, s: &mut Sampling<'_>, i: i32, point: Point3) -> Result<bool, Failure> {
     let ext = ExtPS::with_surface(point, s.surf, s.tol_u, s.tol_v, ExtFlag::Min, ExtAlgo::Grad)?;
     if !ext.is_done() {

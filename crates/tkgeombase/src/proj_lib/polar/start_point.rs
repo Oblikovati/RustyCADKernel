@@ -76,6 +76,9 @@ impl NativeMin for f64 {
 
 // The distinct exact solutions (within 1e-9) and the nearest extremum within the
 // distance tolerance.
+// The negated comparisons keep the native positive tests, so a NaN takes the native
+// branch.
+#[allow(clippy::neg_cmp_op_on_partial_ord)]
 fn collect(ext: &ExtPS<'_>, dist_tol3d2: f64) -> Result<FirstProjection, Failure> {
     let mut first = FirstProjection {
         sols: Vec::new(),

@@ -92,10 +92,10 @@ fn discontinuities(
                     found.push(left.x());
                 } else if (r - cut).abs() <= tol {
                     found.push(right.x());
-                } else if (l < *cut && *cut < r) || (r < *cut && *cut < l) {
-                    if let Some(t) = crossing(state, pair, (left, right), *cut, dir)? {
-                        found.push(t);
-                    }
+                } else if ((l < *cut && *cut < r) || (r < *cut && *cut < l))
+                    && let Some(t) = crossing(state, pair, (left, right), *cut, dir)?
+                {
+                    found.push(t);
                 }
             }
         }

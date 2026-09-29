@@ -75,18 +75,17 @@ impl ComputeApproxOnPolarSurface {
         let (c, s) = (super::live_curve(curve)?, super::live_surface(surface)?);
         let tols: Tolerances = self.tolerances(s)?;
         let (s_type, c_type) = (s.get_type()?, c.get_type()?);
-        if s_type == SurfaceType::Plane {
-            if let Some(spline) = super::poles::poles_on_plane(self, c, &s.plane()?, c_type)? {
-                return Ok(spline);
-            }
+        if s_type == SurfaceType::Plane
+            && let Some(spline) = super::poles::poles_on_plane(self, c, &s.plane()?, c_type)?
+        {
+            return Ok(spline);
         }
         if matches!(
             s_type,
             SurfaceType::BSplineSurface | SurfaceType::BezierSurface
-        ) {
-            if let Some(spline) = super::poles::poles_on_bilinear(self, c, s, s_type, &tols)? {
-                return Ok(spline);
-            }
+        ) && let Some(spline) = super::poles::poles_on_bilinear(self, c, s, s_type, &tols)?
+        {
+            return Ok(spline);
         }
         let init: &dyn Adaptor2dCurve2d = init_curve2d.get().ok_or_else(|| {
             failure(

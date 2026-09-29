@@ -28,13 +28,17 @@ fn parts(x: &CompProjectedCurve) -> Result<(), Failure> {
     let sequence = x.get_sequence();
     for i in 1..=x.nb_curves() {
         let (f, l) = x.bounds(i)?;
-        (p::real(f), p::real(l));
+        p::real(f);
+        p::real(l);
         let (single, pt) = x.is_single_pnt(i)?;
-        (p::flag(single), p::pnt2d(pt));
+        p::flag(single);
+        p::pnt2d(pt);
         let (u_iso, u) = x.is_u_iso(i)?;
-        (p::flag(u_iso), p::real(u));
+        p::flag(u_iso);
+        p::real(u);
         let (v_iso, v) = x.is_v_iso(i)?;
-        (p::flag(v_iso), p::real(v));
+        p::flag(v_iso);
+        p::real(v);
         p::real(x.max_distance(i)?);
         let part = sequence
             .get()
@@ -60,12 +64,15 @@ fn eval(x: &CompProjectedCurve) -> Result<(), Failure> {
         p::show(x.value(u), p::pnt2d);
         attempt(|| {
             let (q, v) = x.d1(u)?;
-            (p::pnt2d(q), p::vec2d(v));
+            p::pnt2d(q);
+            p::vec2d(v);
             Ok(())
         });
         attempt(|| {
             let (q, v1, v2) = x.d2(u)?;
-            (p::pnt2d(q), p::vec2d(v1), p::vec2d(v2));
+            p::pnt2d(q);
+            p::vec2d(v1);
+            p::vec2d(v2);
             Ok(())
         });
         p::show(x.dn(u, 1), p::vec2d);
@@ -90,12 +97,10 @@ fn adaptor(x: &CompProjectedCurve) {
     p::show(x.continuity(), |s| p::int(s as i32));
     p::int(x.get_type().expect("probe type") as i32);
     let (tu, tv) = x.get_tolerance();
-    (
-        p::real(tu),
-        p::real(tv),
-        p::flag(x.get_proj2d()),
-        p::flag(x.get_proj3d()),
-    );
+    p::real(tu);
+    p::real(tv);
+    p::flag(x.get_proj2d());
+    p::flag(x.get_proj3d());
     for s in 0..=6 {
         attempt(|| intervals(x, s));
     }
@@ -108,7 +113,8 @@ fn adaptor(x: &CompProjectedCurve) {
     attempt(|| {
         let (f, l) = x.bounds(1)?;
         let t = x.trim(f, 0.5 * (f + l), 1.0e-7)?;
-        (p::real(t.first_parameter()?), p::real(t.last_parameter()?));
+        p::real(t.first_parameter()?);
+        p::real(t.last_parameter()?);
         Ok(())
     });
     attempt(|| x.line().map(|_| ()));

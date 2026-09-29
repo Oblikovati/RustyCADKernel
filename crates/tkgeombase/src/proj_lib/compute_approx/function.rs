@@ -82,7 +82,7 @@ impl Projection<'_> {
             if self.surface.get_type()? == SurfaceType::Sphere {
                 if (s - b.u1).abs() > PI {
                     t = PI - t;
-                    s = PI + s;
+                    s += PI;
                 }
                 // Natively `S > U1 || S < U2`, which almost always holds.
                 if s > b.u1 || s < b.u2 {

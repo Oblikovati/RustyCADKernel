@@ -272,14 +272,16 @@ pub fn prjfunc_case(values: &[f64]) {
         let mut m: Matrix<'static> = Matrix::with_bounds(1, 2, 1, 2).unwrap();
         (x[1], x[2]) = (x1, x2);
         p::flag(f.value(&x, &mut v)?);
-        (p::real(v[1]), p::real(v[2]));
+        p::real(v[1]);
+        p::real(v[2]);
         p::pnt2d(f.solution());
         x[1] = x1 + 0.125;
         p::flag(f.derivatives(&x, &mut m)?);
         matrix(&m);
         x[2] = x2 - 0.25;
         p::flag(f.values(&x, &mut v, &mut m)?);
-        (p::real(v[1]), p::real(v[2]));
+        p::real(v[1]);
+        p::real(v[2]);
         matrix(&m);
         p::pnt2d(f.solution());
         Ok(())
