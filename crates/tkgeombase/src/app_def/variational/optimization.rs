@@ -151,20 +151,13 @@ impl Variational {
     ) -> Result<(), Failure> {
         let nb_constr: i32 = self.tables.nb_constr();
         if nb_constr == 0 {
-            for el in 1..=c.nb_elements() {
-                c.reduce_degree(el, eps_deg)?;
-            }
-            return Ok(());
+            return reduce_every_degree(c, eps_deg);
         }
         let tab_int: Array1<'static, f64> = c.knots().clone();
         let (mut icnt, p0) = (1, parameters.lower() - self.first_point);
         let mx_deg: i32 = c.base().work_degree();
         for el in 1..=c.nb_elements() {
-            while icnt < nb_constr
-                && at(parameters, p0 + self.tables.typ(2 * icnt - 1)?)? <= at(&tab_int, el)?
-            {
-                icnt += 1;
-            }
+            icnt = self.constraint_from(parameters, (&tab_int, el), (icnt, p0))?;
             let point: i32 = p0 + self.tables.typ(2 * icnt - 1)?;
             let t: f64 = at(parameters, point)?;
             if t <= at(&tab_int, el)? || t >= at(&tab_int, el + 1)? {
@@ -175,4 +168,29 @@ impl Variational {
         }
         Ok(())
     }
+
+    // From constraint `icnt` on, the first one whose parameter is past the start of
+    // element `el` (or the last constraint).
+    fn constraint_from(
+        &self,
+        parameters: &Array1<'_, f64>,
+        (tab_int, el): (&Array1<'_, f64>, i32),
+        (mut icnt, p0): (i32, i32),
+    ) -> Result<i32, Failure> {
+        let nb_constr: i32 = self.tables.nb_constr();
+        while icnt < nb_constr
+            && at(parameters, p0 + self.tables.typ(2 * icnt - 1)?)? <= at(tab_int, el)?
+        {
+            icnt += 1;
+        }
+        Ok(icnt)
+    }
+}
+
+// Without constraints, the degree of every element is reduced.
+fn reduce_every_degree(c: &Curve, eps_deg: f64) -> Result<(), Failure> {
+    for el in 1..=c.nb_elements() {
+        c.reduce_degree(el, eps_deg)?;
+    }
+    Ok(())
 }
