@@ -18,7 +18,7 @@
 //! half-plane (0 or 2: a closed pcurve centred on the circle centre; 1: an open one
 //! starting at its first point); other curves use the unwrapping scan.
 use super::function::{Projection, UvBounds, compute_step};
-use super::uv_bounds::{AngleTrack, Samples, natural_or_centred};
+use super::uv_bounds::{AngleTrack, Samples, natural_or_centred, next_scan_parameter};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkernel::standard::real::epsilon;
@@ -49,7 +49,7 @@ pub(super) fn sphere_bounds(
     while par <= plim {
         let (u, _) = elslib::parameters(&sphere, p.curve.value(par)?);
         track.push(par, u);
-        par += step;
+        par = next_scan_parameter(par, step, [s.w1, s.w2])?;
     }
     track.widen(s.w1, s.w2);
     (b.u1, b.u2, b.u_couture) = natural_or_centred(&track);
