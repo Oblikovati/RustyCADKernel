@@ -3,12 +3,12 @@
 use super::common::{Reader, failure, word};
 use super::graph::{self, Graph};
 use rustycad_tkbrep::topods::{self, Edge, Face, Shape, Vertex};
-use rustycad_tkernel::ncollection::Array1;
+use rustycad_tkernel::ncollection::{Array1, Array2};
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped};
 use rustycad_tkg2d::geom2d::{Geom2dCircle, Geom2dCurve, Geom2dLine};
 use rustycad_tkg3d::geom::{
-    GeomBezierCurve, GeomCircle, GeomCurve, GeomCylindricalSurface, GeomLine, GeomOffsetSurface,
-    GeomPlane, GeomRectangularTrimmedSurface, GeomSurface, GeomTrimmedCurve,
+    GeomBezierCurve, GeomBezierSurface, GeomCircle, GeomCurve, GeomCylindricalSurface, GeomLine,
+    GeomOffsetSurface, GeomPlane, GeomRectangularTrimmedSurface, GeomSurface, GeomTrimmedCurve,
 };
 use rustycad_tkmath::gp::{Axis1, Axis2, Axis2d, Axis3, Direction2, Direction3, Point2, Point3};
 use rustycad_tkmath::poly::{
@@ -124,7 +124,7 @@ fn surface_kind(
             )?;
             Handle::new(s).into_cast()
         }
-        _ => {
+        13 => {
             let i = r.integer();
             Handle::new(GeomOffsetSurface::new(
                 &at(&g.surfaces, i),
@@ -133,7 +133,20 @@ fn surface_kind(
             )?)
             .into_cast()
         }
+        _ => bezier_surface(r)?,
     })
+}
+
+/// Kind 14: `nu nv P...`, the poles U major.
+fn bezier_surface(r: &mut Reader<'_>) -> Result<Handle<dyn GeomSurface>, Failure> {
+    let (nu, nv) = (r.integer(), r.integer());
+    let mut poles: Array2<'static, Point3> = Array2::with_bounds(1, nu, 1, nv).unwrap();
+    for i in 1..=nu {
+        for j in 1..=nv {
+            poles.set_value(i, j, point(r)).unwrap();
+        }
+    }
+    Ok(Handle::new(GeomBezierSurface::new(&poles)?).into_cast())
 }
 
 fn pcurve_kind(r: &mut Reader<'_>, kind: i32) -> Result<Handle<dyn Geom2dCurve>, Failure> {

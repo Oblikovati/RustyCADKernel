@@ -63,7 +63,9 @@ fn RoundTripShape(theShape: &Shape, theWithTriangles: bool, theVersion: i32) -> 
 }
 
 fn NbSubShapes(theShape: &Shape, theType: ShapeEnum) -> usize {
-    Explorer::new(theShape, theType, ShapeEnum::Shape).unwrap().count()
+    Explorer::new(theShape, theType, ShapeEnum::Shape)
+        .unwrap()
+        .count()
 }
 
 fn MakeEmptyShape(theType: ShapeEnum) -> Shape {
@@ -126,7 +128,10 @@ fn BRepTools_Test__DemoBug_25344_4_SaveRestoreShapeType() {
     let aSource = make_box(1.0, 1.0, 1.0).into_shape();
     let aRestored = RoundTripShape(&aSource, true, format_version::VERSION_2);
     assert!(!aRestored.is_null());
-    assert_eq!(aRestored.shape_type().unwrap(), aSource.shape_type().unwrap());
+    assert_eq!(
+        aRestored.shape_type().unwrap(),
+        aSource.shape_type().unwrap()
+    );
     assert_eq!(NbSubShapes(&aRestored, ShapeEnum::Solid), 1);
     assert_eq!(NbSubShapes(&aRestored, ShapeEnum::Face), 6);
 }
@@ -157,8 +162,13 @@ fn BRepTools_Test__ModDataBug_20616_EmptyShapeSaveRestore() {
         aStream.seekg(0);
         let mut aRestored = Shape::default();
         let aBuilder = BRepBuilder::default();
-        brep_tools::read(&mut aRestored, &mut aStream, &aBuilder, &ProgressRange::default())
-            .unwrap();
+        brep_tools::read(
+            &mut aRestored,
+            &mut aStream,
+            &aBuilder,
+            &ProgressRange::default(),
+        )
+        .unwrap();
         assert!(!aRestored.is_null());
         assert_eq!(aRestored.shape_type().unwrap(), aType);
     }

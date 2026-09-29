@@ -86,6 +86,7 @@ def solid_scene() -> BRepScript:
     s = BRepScript()
     t = s.translation(0.0, 0.0, 2.0)
     r = s.rotation(0.0, 0.0, 1.0, 0.5)
+    s.scale(2.0)
     low, low_edges, _ = square_face(s, 1.0, 0.0, internal=True)
     high, _, _ = square_face(s, 2.0, 1.0)
     # INTERNAL sub-shapes, added before the faces are frozen by their parents.
@@ -132,10 +133,47 @@ def mesh_scene() -> BRepScript:
     return s
 
 
+def bezier_scene() -> BRepScript:
+    """A bilinear Bezier patch bounded by four Bezier edges in a shell, and a free cubic."""
+    s = BRepScript()
+    t = s.translation(1.0, -2.0, 0.5)
+    s.rotation(1.0, 1.0, 0.0, 0.75)
+    s.scale(0.5)
+    corners = {(0, 0): (0.0, 0.0, 0.0), (1, 0): (2.0, 0.0, 0.5), (0, 1): (0.0, 1.0, 0.0),
+                (1, 1): (2.0, 1.5, 1.0)}
+    patch = s.bezier_surface([[corners[(0, 0)], corners[(0, 1)]], [corners[(1, 0)], corners[(1, 1)]]])
+    face = s.face(patch, 0, 1e-7)
+    vertices = {uv: s.vertex(p) for uv, p in corners.items()}
+    wire = s.make(WIRE)
+    for a, b in (((0, 0), (1, 0)), ((1, 0), (1, 1)), ((1, 1), (0, 1)), ((0, 1), (0, 0))):
+        e = s.edge(s.bezier([corners[a], corners[b]]))
+        s.add(e, vertices[a], FORWARD)
+        s.add(e, vertices[b], REVERSED)
+        s.do(28, e, 0.0, 1.0, 0)
+        s.do(13, e, s.line2d(a, (b[0] - a[0], b[1] - a[1])), face, 1e-7)
+        s.add(wire, e, FORWARD)
+    s.add(face, wire, FORWARD)
+    shell = s.make(SHELL)
+    s.add(shell, face, FORWARD, t)
+    free = s.edge(s.bezier([(0.0, 0.0, 0.0), (1.0, 2.0, 0.0), (3.0, 1.0, 1.0), (4.0, 0.0, 0.0)]))
+    s.do(28, free, 0.2, 0.8, 0)
+    return s
+
+
+# The modifications of `br_tools_modif`: kind, parameters, mutable input.
+MODIFICATIONS = [
+    (0, [1, 0], 0), (0, [2, 1], 0), (0, [3, 1], 0), (0, [1, 0], 1),
+    (1, [2.0, 0.5, 0.0, 0.0, 3.0, 0.25, 0.0, 0.0, 4.0, 7.0, 8.0, 9.0], 0),
+    (1, [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0], 0),
+    (2, [1, 1], 0), (2, [0, 0], 0), (2, [1, 0], 0),
+    (3, [], 0), (3, [], 1),
+]
+
+
 def scenes() -> list[BRepScript]:
     """Every scene of the BRepTools requests."""
     return [solid_scene(), cylinder_scene(), mesh_scene(), edge_scenario(), face_scenario(),
-            plane_scenario()]
+            plane_scenario(), bezier_scene()]
 
 
 def append_tkbrep_breptools_requests(requests: list[str]) -> None:
@@ -146,3 +184,8 @@ def append_tkbrep_breptools_requests(requests: list[str]) -> None:
         requests.append(f'br_tools_query {numbers}')
         for code in range(10):
             requests.append(f'br_tools_mutate {numbers} {code}')
+        requests.append(f'br_tools_wire {numbers}')
+    for script in (solid_scene(), cylinder_scene(), mesh_scene(), bezier_scene()):
+        numbers = text(script.numbers())
+        for kind, params, mutable in MODIFICATIONS:
+            requests.append(f'br_tools_modif {numbers} {kind} {text(params)} {mutable}'.replace('  ', ' '))

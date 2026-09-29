@@ -95,7 +95,11 @@ fn whole_set(s: &Scene, version: i32) {
 }
 
 /// The set text, then the reference of each scene shape.
-fn write_whole_set(s: &Scene, set: &mut BRepToolsShapeSet, o: &mut IoStream) -> Result<(), Failure> {
+fn write_whole_set(
+    s: &Scene,
+    set: &mut BRepToolsShapeSet,
+    o: &mut IoStream,
+) -> Result<(), Failure> {
     set.write(o, &ProgressRange::default())?;
     for sh in &s.graph.shapes {
         set.write_shape(sh, o)?;
@@ -106,7 +110,8 @@ fn write_whole_set(s: &Scene, set: &mut BRepToolsShapeSet, o: &mut IoStream) -> 
 /// The reading half of `bt_whole_set`.
 fn read_whole_set(s: &Scene, bytes: &[u8]) {
     let console = CapturedConsole::shared();
-    let mut set = BRepToolsShapeSet::with_console(BRepBuilder::default(), true, false, console.clone());
+    let mut set =
+        BRepToolsShapeSet::with_console(BRepBuilder::default(), true, false, console.clone());
     let mut i = IoStream::from_bytes(bytes.to_vec());
     let (mut nb, mut nulls) = (-1, Vec::new());
     let result = (|| -> Result<(), Failure> {
@@ -251,7 +256,9 @@ fn eval_tolerances(sh: &Shape) -> Result<(), Failure> {
             if c3.is_null() || c2.is_null() {
                 continue;
             }
-            attempt(|| brep_tools::eval_and_update_tol(&edge, &c3, &c2, &sf, first, last).map(real));
+            attempt(|| {
+                brep_tools::eval_and_update_tol(&edge, &c3, &c2, &sf, first, last).map(real)
+            });
         }
     }
     Ok(())

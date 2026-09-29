@@ -48,9 +48,10 @@ impl_transient!(
 );
 
 impl Default for CopyModification {
-    /// `BRepTools_CopyModification()`: copy the geometry, not the mesh.
+    /// `BRepTools_CopyModification()`: copy the geometry and the mesh (both default
+    /// arguments are true).
     fn default() -> Self {
-        Self::new(true, false)
+        Self::new(true, true)
     }
 }
 

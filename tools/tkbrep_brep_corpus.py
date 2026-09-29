@@ -78,6 +78,11 @@ class BRepScript:
     def offset(self, surface: int, d: float) -> int:
         return self._geometry('surface', [13, surface, d])
 
+    def bezier_surface(self, poles) -> int:
+        """A Bezier surface from rows of poles (U major)."""
+        flat = [c for row in poles for p in row for c in p]
+        return self._geometry('surface', [14, len(poles), len(poles[0]), *flat])
+
     def line2d(self, p, d) -> int:
         return self._geometry('pcurve', [20, *p, *d])
 
