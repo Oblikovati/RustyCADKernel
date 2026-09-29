@@ -48,10 +48,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("g2api_extrema", geom2d_api::extrema_case),
     ("g2api_project", geom2d_api::project_case),
     ("g2api_interpolate", geom2d_api::interpolate_case),
-    (
-        "g2api_points_to_bspline",
-        geom2d_api::points_to_bspline_case,
-    ),
+    ("g2api_points_to_bspline", geom2d_api::bspline_fit_case),
     // Geom2dInt curve-curve, Geom2dAPI_InterCurveCurve (ga_probe/ginter.rs)
     ("g2int_polygon", ginter::polygon_case),
     ("g2int_exact", ginter::exact_case),

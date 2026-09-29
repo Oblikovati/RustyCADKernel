@@ -194,7 +194,7 @@ fn par_type(p: i32) -> ParametrizationType {
 }
 
 /// `mode n values [params] args`: PointsToBSpline.
-pub fn points_to_bspline_case(values: &[f64]) {
+pub fn bspline_fit_case(values: &[f64]) {
     let mut r = Reader::new(values);
     let (mode, n) = (r.integer(), r.integer());
     let mut pts: Array1<'static, Point2> = Array1::with_bounds(1, n).unwrap();

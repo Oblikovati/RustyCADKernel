@@ -319,7 +319,7 @@ impl IntConicConic {
 
     /// `Perform(gp_Lin2d, DL, gp_Elips2d, DE, TolConf, Tol)`: intersection points
     /// only (arcs reduced to points), with the native slips of the second bound of an
-    /// arc kept (see [`LineConicContext`]).
+    /// arc kept (see the private `LineConicContext`).
     /// `inter.perform_line_ellipse(l, &dl, e, &de, 1e-9, 1e-9)?`.
     pub fn perform_line_ellipse(
         &mut self,
