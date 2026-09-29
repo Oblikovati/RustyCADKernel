@@ -20,16 +20,18 @@ use crate::geom::{
     dump_bounded_curve,
 };
 use rustycad_tkernel::precision;
-use rustycad_tkernel::standard::dump::{self, DumpStream};
+use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle};
-use rustycad_tkg2d::geom2d::{dump_base, dump_class_name, dump_flag};
+use rustycad_tkg2d::geom2d::{dump_base, dump_class_name};
 use rustycad_tkmath::geom_abs::Shape;
 use rustycad_tkmath::gp::{Point3, Transform3, Vector3};
 use std::io;
 
 impl GeomGeometry for GeomBSplineCurve {
     fn transform(&self, transform: Transform3) -> Result<(), Failure> {
-        self.state.write().transform(transform);
+        self.state
+            .write()
+            .transform_poles(|pole| pole.transform(transform));
         Ok(())
     }
     fn copy(&self) -> Result<Handle<dyn GeomGeometry>, Failure> {
@@ -39,30 +41,7 @@ impl GeomGeometry for GeomBSplineCurve {
         let state = self.state.read();
         dump_class_name(stream, "Geom_BSplineCurve")?;
         dump_base(stream, depth, dump_bounded_curve)?;
-        dump_flag(stream, "Rational", state.rational)?;
-        dump_flag(stream, "Periodic", state.periodic)?;
-        dump::dump_integer(stream, "KnotSet", state.knot_set as i32)?;
-        dump::dump_integer(stream, "Smooth", state.smooth as i32)?;
-        dump::dump_integer(stream, "Deg", state.deg)?;
-        // Array sizes are dumped when non-zero; the weights only for a rational curve.
-        let sizes = [
-            ("Poles.Size", state.poles.len(), !state.poles.is_empty()),
-            ("Weights.Size", state.weights.len(), state.rational),
-            (
-                "FlatKnots.Size",
-                state.flat_knots.len(),
-                !state.flat_knots.is_empty(),
-            ),
-            ("Knots.Size", state.knots.len(), !state.knots.is_empty()),
-            ("Mults.Size", state.mults.len(), !state.mults.is_empty()),
-        ];
-        for (name, size, shown) in sizes {
-            if shown {
-                dump::dump_integer(stream, name, size as i32)?;
-            }
-        }
-        dump::dump_real(stream, "MaxDerivInv", state.max_deriv_inv)?;
-        dump_flag(stream, "MaxDerivInvOk", state.max_deriv_inv_ok)
+        state.dump_fields(stream)
     }
 }
 impl GeomCurve for GeomBSplineCurve {
@@ -96,13 +75,16 @@ impl GeomCurve for GeomBSplineCurve {
         self.state.read().eval_d0(u)
     }
     fn eval_d1(&self, u: f64) -> Result<GeomCurveD1, Failure> {
-        self.state.read().eval_d1(u)
+        let (point, d1) = self.state.read().eval_d1(u)?;
+        Ok(GeomCurveD1 { point, d1 })
     }
     fn eval_d2(&self, u: f64) -> Result<GeomCurveD2, Failure> {
-        self.state.read().eval_d2(u)
+        let (point, d1, d2) = self.state.read().eval_d2(u)?;
+        Ok(GeomCurveD2 { point, d1, d2 })
     }
     fn eval_d3(&self, u: f64) -> Result<GeomCurveD3, Failure> {
-        self.state.read().eval_d3(u)
+        let (point, d1, d2, d3) = self.state.read().eval_d3(u)?;
+        Ok(GeomCurveD3 { point, d1, d2, d3 })
     }
     fn eval_dn(&self, u: f64, n: i32) -> Result<Vector3, Failure> {
         self.state.read().eval_dn(u, n)

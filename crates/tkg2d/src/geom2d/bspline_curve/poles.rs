@@ -11,19 +11,20 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.cxx, Geom2d_BSplineCurve_1.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve.cxx (InsertPoleAfter, RemovePole) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! Pole and weight edition, point moves, reversal and transformation.
-use super::state::{BSplineState, rational};
+//! The pole insertion and removal that only Geom2d_BSplineCurve declares.
+use super::state::BSplineState;
 use crate::geom2d::arrays::{
-    at, check_one_based, insert_at, one_based, put, rebased, remove_at, stored_or_unit_weights,
+    at, check_one_based, insert_at, one_based, put, remove_at, stored_or_unit_weights,
 };
 use crate::geom2d::errors;
+use crate::geom2d::spline_data::bspline_rational as rational;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::geom_abs::BSplKnotDistribution;
-use rustycad_tkmath::gp::{Point2, Transform2, Vector2, resolution};
+use rustycad_tkmath::gp::{Point2, resolution};
 
 impl BSplineState {
     fn check_knot_set(&self, member: &str) -> Result<(), Failure> {
@@ -141,137 +142,5 @@ impl BSplineState {
         let last_mult: i32 = at(&self.mults, self.mults.upper())?;
         put(&mut mults, mults_upper, last_mult)?;
         Ok((knots, mults))
-    }
-    pub(super) fn reverse(&mut self) -> Result<(), Failure> {
-        bsplclib::reverse_knots(&mut self.knots)?;
-        bsplclib::reverse_mults(&mut self.mults);
-        let last: i32 = if self.periodic {
-            self.flat_knots.upper() - self.deg - 1
-        } else {
-            self.poles.upper()
-        };
-        bsplclib::reverse_poles(&mut self.poles, last)?;
-        if self.rational {
-            bsplclib::reverse_poles(&mut self.weights, last)?;
-        }
-        self.update_knots()
-    }
-    pub(super) fn set_pole(&mut self, index: i32, pole: Point2) -> Result<(), Failure> {
-        check_one_based(
-            index,
-            self.poles.len(),
-            "BSpline curve: SetPole: index and #pole mismatch",
-        )?;
-        put(&mut self.poles, index, pole)?;
-        self.max_deriv_inv_ok = false;
-        Ok(())
-    }
-    pub(super) fn set_weight(&mut self, index: i32, weight: f64) -> Result<(), Failure> {
-        check_one_based(
-            index,
-            self.poles.len(),
-            "BSpline curve: SetWeight: Index and #pole mismatch",
-        )?;
-        if weight <= resolution() {
-            return Err(errors::construction(&format!(
-                "BSpline curve: SetWeight: Weight = {weight} too small; expected > gp::Resolution()"
-            )));
-        }
-        let mut rational_now: bool = self.rational || (weight - 1.).abs() > resolution();
-        if rational_now {
-            if !self.rational {
-                // Detach the shared unit weights before writing, like the native copy.
-                self.weights = rebased(&self.weights)?;
-            }
-            put(&mut self.weights, index, weight)?;
-            if self.rational {
-                rational_now = rational(&self.weights)?;
-                if !rational_now {
-                    self.reset_unit_weights()?;
-                }
-            }
-            self.rational = rational_now;
-        }
-        self.max_deriv_inv_ok = false;
-        Ok(())
-    }
-    /// `MovePoint`: returns `(FirstModifiedPole, LastModifiedPole)`, both 0 when nothing moved.
-    pub(super) fn move_point(
-        &mut self,
-        u: f64,
-        point: Point2,
-        index1: i32,
-        index2: i32,
-    ) -> Result<(i32, i32), Failure> {
-        let nbpoles: i32 = self.poles.len() as i32;
-        if index1 < 1 || index1 > nbpoles || index2 < 1 || index2 > nbpoles || index1 > index2 {
-            return Err(errors::out_of_range(&format!(
-                "BSpline curve: MovePoint: Index1 = {index1}, Index2 = {index2}; \
-                 expected 1 <= Index1 <= Index2 <= {nbpoles}"
-            )));
-        }
-        let mut new_poles: Array1<'static, Point2> = one_based(nbpoles)?;
-        let current: Point2 = self.eval_d0(u)?;
-        let displacement = Vector2::between(current, point);
-        let moved: (i32, i32) = bsplclib::move_point(
-            u,
-            displacement,
-            index1,
-            index2,
-            self.deg,
-            &self.poles,
-            self.weights_view(),
-            &self.flat_knots,
-            &mut new_poles,
-        )?;
-        if moved.0 != 0 {
-            self.poles = new_poles;
-            self.max_deriv_inv_ok = false;
-        }
-        Ok(moved)
-    }
-    /// `MovePointAndTangent`: returns `ErrorStatus`, 0 on success.
-    pub(super) fn move_point_and_tangent(
-        &mut self,
-        u: f64,
-        point: Point2,
-        tangent: Vector2,
-        tolerance: f64,
-        conditions: (i32, i32),
-    ) -> Result<i32, Failure> {
-        if self.periodic {
-            self.set_not_periodic()?;
-        }
-        let mut new_poles: Array1<'static, Point2> = one_based(self.poles.len() as i32)?;
-        let current = self.eval_d1(u)?;
-        let delta = Vector2::between(current.point, point);
-        let delta_derivative =
-            Vector2::new(tangent.x() - current.d1.x(), tangent.y() - current.d1.y());
-        let mut error_status: i32 = 0;
-        bsplclib::move_point_and_tangent(
-            u,
-            delta,
-            delta_derivative,
-            tolerance,
-            self.deg,
-            conditions.0,
-            conditions.1,
-            &self.poles,
-            self.weights_view(),
-            &self.flat_knots,
-            &mut new_poles,
-            &mut error_status,
-        )?;
-        if error_status == 0 {
-            self.poles = new_poles;
-            self.max_deriv_inv_ok = false;
-        }
-        Ok(error_status)
-    }
-    pub(super) fn transform(&mut self, transform: Transform2) {
-        for pole in self.poles.as_mut_slice() {
-            pole.transform(transform);
-        }
-        self.max_deriv_inv_ok = false;
     }
 }

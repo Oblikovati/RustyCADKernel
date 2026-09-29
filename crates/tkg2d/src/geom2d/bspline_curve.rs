@@ -15,25 +15,23 @@
 
 //! `Geom2d_BSplineCurve`: rational or non-rational, periodic or not, B-spline curves.
 mod access;
-mod eval;
-mod knots;
-mod periodic;
 mod poles;
-mod segment;
 mod state;
 mod traits;
 use super::arrays::at;
 use super::bounded_curve::Geom2dBoundedCurve;
+use super::bspline_curve_core::GivenWeights;
 use super::curve::Geom2dCurve;
 use super::errors;
 use super::geometry::Geom2dGeometry;
+use super::spline_data::check_curve_data;
 use crate::geom2d_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
 use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::gp::{Point2, Vector2, resolution};
-use state::{BSplineState, check_curve_data};
+use state::BSplineState;
 
 /// A B-spline curve; `Handle::new(Geom2dBSplineCurve::new(&poles, &knots, &mults, 3, false)?)`.
 pub struct Geom2dBSplineCurve {
@@ -101,8 +99,11 @@ impl Geom2dBSplineCurve {
     ) -> Result<Self, Failure> {
         check_curve_data(poles, knots, mults, degree, periodic)?;
         check_weights(weights, poles.len())?;
-        let state =
-            BSplineState::from_arrays(poles, Some(weights), knots, mults, degree, periodic)?;
+        let given = GivenWeights {
+            weights,
+            check_rational: true,
+        };
+        let state = BSplineState::from_arrays(poles, Some(given), knots, mults, degree, periodic)?;
         Ok(Self::from_state(state))
     }
     /// The native copy constructor: the evaluation representation is deep-copied, the

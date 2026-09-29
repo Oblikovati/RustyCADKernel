@@ -11,20 +11,17 @@
 //
 // Alternatively, this file may be used under the terms of Open CASCADE
 // commercial license or contractual agreement.
-// Rust translation of ModelingData/TKG3d/Geom/Geom_BSplineCurve_1.cxx (evaluation, continuity, end points) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
+// Rust translation of ModelingData/TKG2d/Geom2d/Geom2d_BSplineCurve_1.cxx and ModelingData/TKG3d/Geom/Geom_BSplineCurve_1.cxx (evaluation, continuity, end points) at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
-//! Evaluation (global and between given knots), continuity and end points.
-use super::state::BSplineState;
-use crate::geom::errors;
-use crate::geom::{GeomCurveD1, GeomCurveD2, GeomCurveD3};
-use crate::geom_eval::rep_utils;
+//! Evaluation, local evaluation, continuity and end points.
+use super::{BSplineCurveCore, BSplineCurveKind, KindD1, KindD2, KindD3, KindVector};
+use crate::geom2d::arrays::at;
+use crate::geom2d::errors;
+use crate::geom2d::spline_data::spline_is_cn;
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkg2d::geom2d::arrays::at;
-use rustycad_tkg2d::geom2d::spline_data::spline_is_cn;
 use rustycad_tkmath::bsplclib::{self, CurveSpan};
-use rustycad_tkmath::gp::{Point3, Vector3, resolution};
 
-impl BSplineState {
+impl<K: BSplineCurveKind> BSplineCurveCore<K> {
     // The span location of EvalD0..D3. Quirk kept from the native code: the normalized
     // parameter is computed, then overwritten, because LocateParameter receives the
     // raw `U` and wraps it itself.
@@ -55,41 +52,45 @@ impl BSplineState {
             mults: if flat { None } else { Some(&self.mults) },
         }
     }
-    pub(super) fn eval_d0(&self, u: f64) -> Result<Point3, Failure> {
-        if let Some(point) = rep_utils::try_eval_curve_d0(&self.eval_rep, u)? {
+    /// `EvalD0`, through the evaluation representation when it answers;
+    /// `core.eval_d0(0.5)?`.
+    pub fn eval_d0(&self, u: f64) -> Result<K::Point, Failure> {
+        if let Some(point) = K::rep_d0(&self.eval_rep, u)? {
             return Ok(point);
         }
         bsplclib::d0(&self.eval_span(u)?, &self.poles, self.weights_view())
     }
-    pub(super) fn eval_d1(&self, u: f64) -> Result<GeomCurveD1, Failure> {
-        if let Some(result) = rep_utils::try_eval_curve_d1(&self.eval_rep, u)? {
+    /// `EvalD1`: the point and first derivative; `core.eval_d1(0.5)?`.
+    pub fn eval_d1(&self, u: f64) -> Result<KindD1<K>, Failure> {
+        if let Some(result) = K::rep_d1(&self.eval_rep, u)? {
             return Ok(result);
         }
-        let (point, d1) = bsplclib::d1(&self.eval_span(u)?, &self.poles, self.weights_view())?;
-        Ok(GeomCurveD1 { point, d1 })
+        bsplclib::d1(&self.eval_span(u)?, &self.poles, self.weights_view())
     }
-    pub(super) fn eval_d2(&self, u: f64) -> Result<GeomCurveD2, Failure> {
-        if let Some(result) = rep_utils::try_eval_curve_d2(&self.eval_rep, u)? {
+    /// `EvalD2`: the point and two derivatives; `core.eval_d2(0.5)?`.
+    pub fn eval_d2(&self, u: f64) -> Result<KindD2<K>, Failure> {
+        if let Some(result) = K::rep_d2(&self.eval_rep, u)? {
             return Ok(result);
         }
-        let (point, d1, d2) = bsplclib::d2(&self.eval_span(u)?, &self.poles, self.weights_view())?;
-        Ok(GeomCurveD2 { point, d1, d2 })
+        bsplclib::d2(&self.eval_span(u)?, &self.poles, self.weights_view())
     }
-    pub(super) fn eval_d3(&self, u: f64) -> Result<GeomCurveD3, Failure> {
-        if let Some(result) = rep_utils::try_eval_curve_d3(&self.eval_rep, u)? {
+    /// `EvalD3`: the point and three derivatives; `core.eval_d3(0.5)?`.
+    pub fn eval_d3(&self, u: f64) -> Result<KindD3<K>, Failure> {
+        if let Some(result) = K::rep_d3(&self.eval_rep, u)? {
             return Ok(result);
         }
         let span: CurveSpan<'_, 'static> = self.eval_span(u)?;
-        let (point, d1, d2, d3) = bsplclib::d3(&span, &self.poles, self.weights_view())?;
-        Ok(GeomCurveD3 { point, d1, d2, d3 })
+        bsplclib::d3(&span, &self.poles, self.weights_view())
     }
-    pub(super) fn eval_dn(&self, u: f64, n: i32) -> Result<Vector3, Failure> {
+    /// `EvalDN`: the derivative of order `n >= 1`; `core.eval_dn(0.5, 4)?`.
+    pub fn eval_dn(&self, u: f64, n: i32) -> Result<KindVector<K>, Failure> {
         if n < 1 {
-            return Err(errors::undefined_derivative(&format!(
-                "Geom_BSplineCurve::EvalDN: N = {n}; expected N >= 1"
+            return Err(K::undefined_derivative(&format!(
+                "{}::EvalDN: N = {n}; expected N >= 1",
+                K::CLASS
             )));
         }
-        if let Some(vector) = rep_utils::try_eval_curve_dn(&self.eval_rep, u, n)? {
+        if let Some(vector) = K::rep_dn(&self.eval_rep, u, n)? {
             return Ok(vector);
         }
         bsplclib::dn(&self.span(u, 0, true), n, &self.poles, self.weights_view())
@@ -104,7 +105,8 @@ impl BSplineState {
     ) -> Result<CurveSpan<'_, 'static>, Failure> {
         if from_k1 == to_k2 {
             return Err(errors::domain(&format!(
-                "Geom_BSplineCurve::{member}: FromK1 = ToK2 = {from_k1}; expected distinct knots"
+                "{}::{member}: FromK1 = ToK2 = {from_k1}; expected distinct knots",
+                K::CLASS
             )));
         }
         let (mut local_u, mut index): (f64, i32) = (u, 0);
@@ -121,71 +123,68 @@ impl BSplineState {
         let flat_index: i32 = bsplclib::flat_index(self.deg, index, &self.mults, self.periodic)?;
         Ok(self.span(local_u, flat_index, true))
     }
-    pub(super) fn local_d0(&self, u: f64, from_k1: i32, to_k2: i32) -> Result<Point3, Failure> {
+    /// `LocalD0`: evaluation on the knot span `[FromK1, ToK2]`; `core.local_d0(0.5, 1, 2)?`.
+    pub fn local_d0(&self, u: f64, from_k1: i32, to_k2: i32) -> Result<K::Point, Failure> {
         let span = self.local_span(u, from_k1, to_k2, "LocalValue")?;
         bsplclib::d0(&span, &self.poles, self.weights_view())
     }
-    pub(super) fn local_d1(
-        &self,
-        u: f64,
-        from_k1: i32,
-        to_k2: i32,
-    ) -> Result<(Point3, Vector3), Failure> {
+    /// `LocalD1`; `core.local_d1(0.5, 1, 2)?`.
+    pub fn local_d1(&self, u: f64, from_k1: i32, to_k2: i32) -> Result<KindD1<K>, Failure> {
         let span = self.local_span(u, from_k1, to_k2, "LocalD1")?;
         bsplclib::d1(&span, &self.poles, self.weights_view())
     }
-    pub(super) fn local_d2(
-        &self,
-        u: f64,
-        from_k1: i32,
-        to_k2: i32,
-    ) -> Result<(Point3, Vector3, Vector3), Failure> {
+    /// `LocalD2`; `core.local_d2(0.5, 1, 2)?`.
+    pub fn local_d2(&self, u: f64, from_k1: i32, to_k2: i32) -> Result<KindD2<K>, Failure> {
         let span = self.local_span(u, from_k1, to_k2, "LocalD2")?;
         bsplclib::d2(&span, &self.poles, self.weights_view())
     }
-    pub(super) fn local_d3(
-        &self,
-        u: f64,
-        from_k1: i32,
-        to_k2: i32,
-    ) -> Result<(Point3, Vector3, Vector3, Vector3), Failure> {
+    /// `LocalD3`; `core.local_d3(0.5, 1, 2)?`.
+    pub fn local_d3(&self, u: f64, from_k1: i32, to_k2: i32) -> Result<KindD3<K>, Failure> {
         let span = self.local_span(u, from_k1, to_k2, "LocalD3")?;
         bsplclib::d3(&span, &self.poles, self.weights_view())
     }
-    pub(super) fn local_dn(
+    /// `LocalDN`; `core.local_dn(0.5, 1, 2, 4)?`.
+    pub fn local_dn(
         &self,
         u: f64,
         from_k1: i32,
         to_k2: i32,
         n: i32,
-    ) -> Result<Vector3, Failure> {
+    ) -> Result<KindVector<K>, Failure> {
         // The native message names LocalD3 here too.
         let span = self.local_span(u, from_k1, to_k2, "LocalD3")?;
         bsplclib::dn(&span, n, &self.poles, self.weights_view())
     }
-    pub(super) fn is_cn(&self, n: i32) -> Result<bool, Failure> {
+    /// `IsCN`; Standard_RangeError for `n < 0`; `core.is_cn(2)?`.
+    pub fn is_cn(&self, n: i32) -> Result<bool, Failure> {
         if n < 0 {
             return Err(errors::range(&format!(
-                "Geom_BSplineCurve::IsCN: N = {n}; expected N >= 0"
+                "{}::IsCN: N = {n}; expected N >= 0",
+                K::CLASS
             )));
         }
         spline_is_cn(self.smooth, n, self.deg, &self.mults)
     }
-    pub(super) fn start_point(&self) -> Result<Point3, Failure> {
+    /// `StartPoint`: the first pole when the first knot is fully multiple;
+    /// `core.start_point()?`.
+    pub fn start_point(&self) -> Result<K::Point, Failure> {
         if at(&self.mults, 1)? == self.deg + 1 {
             return at(&self.poles, 1);
         }
         self.eval_d0(self.first_parameter())
     }
-    pub(super) fn end_point(&self) -> Result<Point3, Failure> {
+    /// `EndPoint`: the last pole when the last knot is fully multiple;
+    /// `core.end_point()?`.
+    pub fn end_point(&self) -> Result<K::Point, Failure> {
         if at(&self.mults, self.knots.upper())? == self.deg + 1 {
             return at(&self.poles, self.poles.upper());
         }
         self.eval_d0(self.last_parameter())
     }
     /// `IsG1`: tangent directions agree within `ang_tol` at every interior knot of
-    /// multiplicity >= Degree in `[tf, tl]`, and across the seam of a periodic curve.
-    pub(super) fn is_g1(&self, tf: f64, tl: f64, ang_tol: f64) -> Result<bool, Failure> {
+    /// multiplicity >= Degree in `[tf, tl]`, and across the seam of a periodic curve;
+    /// `core.is_g1(0.0, 1.0, 1e-12)?`.
+    pub fn is_g1(&self, tf: f64, tl: f64, ang_tol: f64) -> Result<bool, Failure> {
         if self.is_cn(1)? {
             return Ok(true);
         }
@@ -206,7 +205,7 @@ impl BSplineState {
             }
             let (_, v1) = self.local_d1(t, knot_index - 1, knot_index)?;
             let (_, v2) = self.local_d1(t, knot_index, knot_index + 1)?;
-            if !tangents_agree(v1, v2, ang_tol)? {
+            if !K::tangents_agree(v1, v2, ang_tol)? {
                 return Ok(false);
             }
         }
@@ -220,20 +219,8 @@ impl BSplineState {
         if ((first - tf) * (tl - first) < 0.0) && ((last - tf) * (tl - last) < 0.0) {
             return Ok(true);
         }
-        let v1: Vector3 = self
-            .eval_d1(at(&self.knots, self.first_u_knot_index()?)?)?
-            .d1;
-        let v2: Vector3 = self
-            .eval_d1(at(&self.knots, self.last_u_knot_index()?)?)?
-            .d1;
-        tangents_agree(v1, v2, ang_tol)
+        let (_, v1) = self.eval_d1(at(&self.knots, self.first_u_knot_index()?)?)?;
+        let (_, v2) = self.eval_d1(at(&self.knots, self.last_u_knot_index()?)?)?;
+        K::tangents_agree(v1, v2, ang_tol)
     }
-}
-
-// Both tangents non-null and within `ang_tol` of each other.
-fn tangents_agree(v1: Vector3, v2: Vector3, ang_tol: f64) -> Result<bool, Failure> {
-    if v1.square_magnitude() <= resolution() || v2.square_magnitude() <= resolution() {
-        return Ok(false);
-    }
-    Ok(v1.angle(v2)?.abs() <= ang_tol)
 }

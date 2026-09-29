@@ -15,11 +15,7 @@
 
 //! `Geom_BSplineCurve`: rational or non-rational, periodic or not, B-spline curves.
 mod access;
-mod eval;
-mod knots;
 mod periodic;
-mod poles;
-mod segment;
 mod state;
 mod traits;
 use super::bounded_curve::GeomBoundedCurve;
@@ -33,9 +29,11 @@ use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::SharedState;
 use rustycad_tkernel::standard::{Failure, Handle, StandardTransient, real};
 use rustycad_tkg2d::geom2d::arrays::{at, one_based, put};
+use rustycad_tkg2d::geom2d::bspline_curve_core::GivenWeights;
+use rustycad_tkg2d::geom2d::spline_data::check_curve_data;
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::gp::{Point3, Vector3, resolution};
-use state::{BSplineState, GivenWeights, check_curve_data};
+use state::BSplineState;
 
 /// A B-spline curve; `Handle::new(GeomBSplineCurve::new(&poles, &knots, &mults, 3, false)?)`.
 pub struct GeomBSplineCurve {
@@ -155,7 +153,7 @@ impl GeomBSplineCurve {
     }
     /// Remove the evaluation representation (`ClearEvalRepresentation`); `curve.clear_eval_representation()`.
     pub fn clear_eval_representation(&self) {
-        self.state.write().clear_eval_rep();
+        self.state.write().eval_rep = Handle::default();
     }
     /// Raise the degree (`IncreaseDegree`); `curve.increase_degree(5)?`.
     pub fn increase_degree(&self, degree: i32) -> Result<(), Failure> {
@@ -251,7 +249,7 @@ impl GeomBSplineCurve {
     /// Make parameter `u` the origin of a periodic curve, inserting a knot when none is
     /// within `tol` (`SetOrigin(U, Tol)`); `curve.set_origin_parameter(0.3, 1e-9)?`.
     pub fn set_origin_parameter(&self, u: f64, tol: f64) -> Result<(), Failure> {
-        self.state.write().set_origin_parameter(u, tol)
+        periodic::set_origin_parameter(&mut self.state.write(), u, tol)
     }
     /// Make the curve non-periodic (`SetNotPeriodic`); `curve.set_not_periodic()?`.
     pub fn set_not_periodic(&self) -> Result<(), Failure> {

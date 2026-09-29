@@ -15,6 +15,7 @@
 
 //! The Geom2d package: transient 2D points, vectors, axes, transformations and curves.
 pub mod arrays;
+pub mod bspline_curve_core;
 pub mod errors;
 pub mod native;
 pub mod protected;
