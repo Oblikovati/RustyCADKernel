@@ -4,7 +4,7 @@
 use super::brep::Scene;
 use super::brep_graph::{node, reference};
 use super::brep_graph_walk::nodes;
-use super::common::{end, failure, flag, int, word};
+use super::common::{failure, flag, int, word};
 use super::graph::chain;
 use rustycad_tkbrep::brep_graph::child_explorer::{self, ChildExplorer};
 use rustycad_tkbrep::brep_graph::parent_explorer::{self, ParentExplorer};
@@ -189,5 +189,5 @@ pub fn explore(s: &Scene, g: &BRepGraph) {
         let past = NodeId::new(NodeKind(k), g.topo().generic().nb(NodeKind(k)));
         child_configs(s, g, past, &l);
     }
-    end();
+    word("#");
 }

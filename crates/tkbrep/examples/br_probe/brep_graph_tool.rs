@@ -6,7 +6,7 @@ use super::brep_graph::{action, curve, index, pcurve, surface};
 use super::brep_graph_explore::explore;
 use super::brep_graph_walk::{children, dense, edit, related, reverse};
 use super::brep_report::{pnt, pnt2d};
-use super::common::{Reader, attempt, end, flag, int, real, show};
+use super::common::{Reader, attempt, end, flag, int, real, show, word};
 use rustycad_tkbrep::brep_graph::tool::{self, CoEdgeUsage, FaceUsage, VertexUsage};
 use rustycad_tkbrep::brep_graph::*;
 use rustycad_tkernel::standard::{Failure, Handle};
@@ -100,7 +100,7 @@ fn vertices(g: &BRepGraph, l: &Location) {
         pnt(t::pnt_ref(g, r));
         real(t::tolerance_ref(g, r));
     }
-    end();
+    word("#");
 }
 
 fn edge_lookups(g: &BRepGraph, e: EdgeId) {
@@ -143,7 +143,7 @@ fn edges(s: &Scene, g: &BRepGraph) {
         flag(t::is_boundary(g, e));
         edge_lookups(g, e);
     }
-    end();
+    word("#");
 }
 
 fn co_edge_usage(s: &Scene, g: &BRepGraph, c: CoEdgeId, l: &Location) {
@@ -188,7 +188,7 @@ fn co_edges(s: &Scene, g: &BRepGraph, l: &Location) {
         attempt(|| pcurve_adaptor(t::pcurve_adaptor(g, c)?));
         co_edge_usage(s, g, c, l);
     }
-    end();
+    word("#");
 }
 
 fn face(s: &Scene, g: &BRepGraph, f: FaceId, l: &Location) {
@@ -231,7 +231,7 @@ fn faces(s: &Scene, g: &BRepGraph, l: &Location) {
         int(t::nb_wires_ref(g, r) as i32);
         bounds(t::bounds_ref(g, r));
     }
-    end();
+    word("#");
 }
 
 fn wires_shells(g: &BRepGraph) {
@@ -270,7 +270,7 @@ fn wires_shells(g: &BRepGraph) {
         flag(shell::is_closed_ref(g, r));
         int(shell::nb_faces_ref(g, r) as i32);
     }
-    end();
+    word("#");
 }
 
 /// `bt_tool`: usages are placed at the scene's last location.
@@ -294,11 +294,12 @@ pub fn bgraph_walk_case(values: &[f64]) {
     for _ in 0..r.integer() {
         edit(&s, &mut g, &mut r);
     }
-    end();
+    word("#");
     dense(&g);
     children(&g);
     reverse(&g);
     related(&g);
     explore(&s, &g);
     tool_report(&s, &g);
+    end();
 }

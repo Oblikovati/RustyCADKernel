@@ -23,7 +23,7 @@ void bt_vertices(const BRepGraph& g,const TopLoc_Location& l){
   br_pnt(T::Pnt(g,v));br_real(T::Tolerance(g,v));br_int(T::NbEdges(g,v));br_pnt(T::Pnt(g,BRepGraph_Tool::VertexUsage{v,l,TopAbs_FORWARD}));}
  for(uint32_t i=0;i<=g.Refs().Vertices().Nb();++i){BRepGraph_VertexRefId r(i);BRepGraph_Tool::VertexUsage u=T::Usage(g,r);
   br_flag(u.IsValid());br_int(u.DefId.Index);br_int(u.Orientation);br_pnt(T::Pnt(g,r));br_real(T::Tolerance(g,r));}
- br_end();}
+ br_word("#");}
 void bt_edge_lookups(const BRepGraph& g,BRepGraph_EdgeId e){
  using T=BRepGraph_Tool::Edge;
  BRepGraph_VertexId v0=BRepGraph_Tool::Vertex::Usage(g,T::StartVertexId(g,e)).DefId,v1=BRepGraph_Tool::Vertex::Usage(g,T::EndVertexId(g,e)).DefId;
@@ -39,7 +39,7 @@ void bt_edges(const BrScene& s,const BRepGraph& g){
   br_real(T::Tolerance(g,e));br_flag(T::Degenerated(g,e));br_flag(T::IsClosed(g,e));std::pair<double,double> r=T::Range(g,e);br_real(r.first);br_real(r.second);
   br_int(T::StartVertexId(g,e).Index);br_int(T::EndVertexId(g,e).Index);br_flag(T::HasCurve(g,e));bg_curve(s,T::Curve(g,e));
   BR_TRY(bt_curve_adaptor(T::CurveAdaptor(g,e)));br_int(T::NbFaces(g,e));br_flag(T::IsManifold(g,e));br_flag(T::IsBoundary(g,e));bt_edge_lookups(g,e);}
- br_end();}
+ br_word("#");}
 void bt_co_edge_usage(const BrScene& s,const BRepGraph& g,BRepGraph_CoEdgeId c,const TopLoc_Location& l){
  using T=BRepGraph_Tool::Edge;const BRepGraph_Tool::CoEdgeUsage u{c,l,TopAbs_REVERSED};
  BR_TRY(bg_curve(s,T::Curve(g,u)));BR_TRY(bt_curve_adaptor(T::CurveAdaptor(g,u)));
@@ -54,7 +54,7 @@ void bt_co_edges(const BrScene& s,const BRepGraph& g,const TopLoc_Location& l){
   br_flag(T::SameRange(g,c));bg_pcurve(s,T::PCurve(g,c));std::pair<double,double> r=T::Range(g,c);br_real(r.first);br_real(r.second);
   BR_TRY(std::pair<gp_Pnt2d,gp_Pnt2d> uv=T::UVPoints(g,c);br_pnt2d(uv.first);br_pnt2d(uv.second));
   BR_TRY(bt_pcurve_adaptor(T::PCurveAdaptor(g,c)));bt_co_edge_usage(s,g,c,l);}
- br_end();}
+ br_word("#");}
 void bt_face(const BrScene& s,const BRepGraph& g,BRepGraph_FaceId f,const TopLoc_Location& l){
  using T=BRepGraph_Tool::Face;const BRepGraph_Tool::FaceUsage u{f,l,TopAbs_FORWARD};
  br_real(T::Tolerance(g,f));br_flag(T::HasSurface(g,f));BR_TRY(br_int(T::OuterWire(g,f).Index));bg_surface(s,T::Surface(g,f));
@@ -69,7 +69,7 @@ void bt_faces(const BrScene& s,const BRepGraph& g,const TopLoc_Location& l){
   BR_TRY(br_int(T::OuterWire(g,r).Index));bg_surface(s,T::Surface(g,r));BR_TRY(bt_surface_adaptor(T::SurfaceAdaptor(g,r)));
   BR_TRY(bt_surface_adaptor(T::SurfaceAdaptor(g,r,0.0,1.0,-1.0,2.0)));br_int(T::NbWires(g,r));
   double b[4]={-1,-1,-1,-1};T::Bounds(g,r,b[0],b[1],b[2],b[3]);bt_bounds(b[0],b[1],b[2],b[3]);}
- br_end();}
+ br_word("#");}
 void bt_wires_shells(const BRepGraph& g){
  using W=BRepGraph_Tool::Wire;using S=BRepGraph_Tool::Shell;
  for(uint32_t i=0;i<g.Topo().Wires().Nb();++i){BRepGraph_WireId w(i);
@@ -80,7 +80,7 @@ void bt_wires_shells(const BRepGraph& g){
  for(uint32_t i=0;i<g.Topo().Shells().Nb();++i){BRepGraph_ShellId x(i);br_flag(S::IsClosed(g,x));br_int(S::NbFaces(g,x));}
  for(uint32_t i=0;i<=g.Refs().Shells().Nb();++i){BRepGraph_ShellRefId r(i);BRepGraph_Tool::ShellUsage u=S::Usage(g,r);
   br_flag(u.IsValid());br_int(u.DefId.Index);br_int(u.Orientation);br_flag(S::IsClosed(g,r));br_int(S::NbFaces(g,r));}
- br_end();}
+ br_word("#");}
 void bt_tool(const BrScene& s,const BRepGraph& g){
  const TopLoc_Location& l=s.graph.loc(int(s.graph.locs.size())-1);
  bt_vertices(g,l);bt_edges(s,g);bt_co_edges(s,g,l);bt_faces(s,g,l);bt_wires_shells(g);}
@@ -89,5 +89,5 @@ void bt_tool(const BrScene& s,const BRepGraph& g){
 void br_bgraph_walk_case(std::istream& in){
  BrReader r{in};BrScene s=br_scene(r);BRepGraph g;
  int n=r.integer();for(int i=0;i<n;++i)bg_action(g,s,r);
- n=r.integer();for(int i=0;i<n;++i)bw_edit(s,g,r);br_end();
- bw_dense(g);bw_children(g);bw_reverse(g);bw_related(g);bx_explore(s,g);bt_tool(s,g);}
+ n=r.integer();for(int i=0;i<n;++i)bw_edit(s,g,r);br_word("#");
+ bw_dense(g);bw_children(g);bw_reverse(g);bw_related(g);bx_explore(s,g);bt_tool(s,g);br_end();}

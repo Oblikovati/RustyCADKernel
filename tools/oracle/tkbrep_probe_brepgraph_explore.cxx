@@ -52,4 +52,4 @@ void bx_explore(const BrScene& s,const BRepGraph& g){
  // Past each kind's end only the child explorer (the parent explorer reads the
  // relations of its start node unchecked natively).
  for(int k=0;k<12;++k)bx_child_configs(s,g,BRepGraph_NodeId(BRepGraph_NodeId::Kind(k),g.Topo().Gen().Nb(BRepGraph_NodeId::Kind(k))),l);
- br_end();}
+ br_word("#");}

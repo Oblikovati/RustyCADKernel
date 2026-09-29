@@ -3,7 +3,7 @@
 //! defs, refs, reverse and related iterators.
 use super::brep::Scene;
 use super::brep_graph::{index, node};
-use super::common::{Reader, end, failure, flag, int, long, word};
+use super::common::{Reader, failure, flag, int, long, word};
 use rustycad_tkbrep::brep_graph::defs_iterator::{DefsOfParent, DefsVertexOfEdge};
 use rustycad_tkbrep::brep_graph::iterator::{DefIterator, RootProductIterator};
 use rustycad_tkbrep::brep_graph::parent_traits::{self as traits, ParentTraits};
@@ -144,7 +144,7 @@ pub fn dense(g: &BRepGraph) {
     dense_ref_iter::<ChildRefTag>(g);
     dense_ref_iter::<OccurrenceRefTag>(g);
     RootProductIterator::new(g).for_each(index);
-    end();
+    word("#");
 }
 
 // `bw_parent` and `bw_parent_refs` of one trait over the parents 0..=Nb.
@@ -221,7 +221,7 @@ pub fn children(g: &BRepGraph) {
         }
         word("|");
     }
-    end();
+    word("#");
 }
 
 /// The reverse iterators `bw_ids` prints: the current id and the index.
@@ -384,7 +384,7 @@ pub fn reverse(g: &BRepGraph) {
             t.generic().occurrence_ref_ids(n),
         ));
     }
-    end();
+    word("#");
 }
 
 /// `bw_related`: every node, then the first index past each kind's end.
@@ -407,5 +407,5 @@ pub fn related(g: &BRepGraph) {
         }
         word("|");
     }
-    end();
+    word("#");
 }

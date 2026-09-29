@@ -50,7 +50,7 @@ void bw_dense(const BRepGraph& g){
  bw_ref_iter<BRepGraphInc::ShellRef>(g);bw_ref_iter<BRepGraphInc::FaceRef>(g);bw_ref_iter<BRepGraphInc::WireRef>(g);
  bw_ref_iter<BRepGraphInc::VertexRef>(g);bw_ref_iter<BRepGraphInc::SolidRef>(g);bw_ref_iter<BRepGraphInc::ChildRef>(g);
  bw_ref_iter<BRepGraphInc::OccurrenceRef>(g);
- for(BRepGraph_RootProductIterator it(g);it.More();it.Next())br_int(it.Current().Index);br_end();}
+ for(BRepGraph_RootProductIterator it(g);it.More();it.Next())br_int(it.Current().Index);br_word("#");}
 // One parent's defs and refs walks: `count (child ref index)...` then `count (ref index)...`.
 template<class Traits> void bw_parent(const BRepGraph& g,typename Traits::ParentId p){
  int n=0;for(BRepGraph_DefsIterator::DefsOfParent<Traits> it(g,p);it.More();it.Next())++n;br_int(n);
@@ -71,7 +71,7 @@ void bw_children(const BRepGraph& g){
  for(uint32_t i=0;i<=t.Edges().Nb();++i){
   for(BRepGraph_DefsVertexOfEdge it(g,BRepGraph_EdgeId(i));it.More();it.Next()){br_int(it.CurrentId().Index);br_int(it.CurrentRefId().Index);br_int(it.Index());}
   for(BRepGraph_RefsVertexOfEdge it(g,BRepGraph_EdgeId(i));it.More();it.Next()){br_int(it.CurrentId().Index);br_int(it.Index());}br_word("|");}
- br_end();}
+ br_word("#");}
 // The reverse walks: ids with their index (and references for the ref-based ones).
 template<class It> void bw_ids(It it){int n=0;for(;it.More();it.Next()){br_int(it.CurrentId().Index);br_int(it.Index());++n;}br_int(n);}
 template<class It> void bw_ref_ids(It it){for(;it.More();it.Next()){br_int(it.CurrentParentId().Index);br_int(it.CurrentRefId().Index);br_int(it.Index());}br_word("|");}
@@ -96,7 +96,7 @@ void bw_reverse(const BRepGraph& g){
  for(uint32_t i=0;i<t.Occurrences().Nb();++i)bw_ref_ids(BRepGraph_RefsProductsOfOccurrence(g,t.Occurrences().Relations(BRepGraph_OccurrenceId(i)).ParentOccurrenceRefIds));
  for(const BRepGraph_NodeId& n:bw_nodes(g)){
   bw_ref_ids(BRepGraph_RefsCompoundsOfChild(g,t.Gen().CompoundRefIds(n)));bw_ids(BRepGraph_OccurrencesOfChild(g,t.Gen().OccurrenceRefIds(n)));}
- br_end();}
+ br_word("#");}
 // The related nodes of every node, and of the first index past each kind's end.
 void bw_related(const BRepGraph& g){
  std::vector<BRepGraph_NodeId> nodes=bw_nodes(g);
@@ -105,4 +105,4 @@ void bw_related(const BRepGraph& g){
   try{for(BRepGraph_RelatedIterator it(g,n);it.More();it.Next()){bg_node(it.Current());br_int(int(it.CurrentRelation()));}}
   catch(const Standard_Failure& e){br_word(e.ExceptionType());}
   br_word("|");}
- br_end();}
+ br_word("#");}
