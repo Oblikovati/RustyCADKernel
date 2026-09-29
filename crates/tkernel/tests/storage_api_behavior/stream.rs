@@ -177,3 +177,41 @@ fn a_failed_insertion_keeps_the_pending_width() {
     stream.insert_integer(1);
     assert_eq!(stream.width(), 3, "the sentry failed before width(0)");
 }
+
+#[test]
+fn seekg_clears_eof_and_moves_the_input_position() {
+    let mut stream = IoStream::from_bytes(b"abc".to_vec());
+    let mut bytes = [0_u8; 4];
+    stream.read(&mut bytes);
+    assert_eq!(stream.rdstate(), state::EOF | state::FAIL);
+    stream.seekg(1);
+    assert_eq!(stream.rdstate(), state::FAIL, "failbit stays: the sentry refuses");
+    stream.clear(state::EOF);
+    stream.seekg(1);
+    assert!(stream.good(), "eofbit alone is cleared before the sentry");
+    let mut byte = 0;
+    stream.get(&mut byte);
+    assert_eq!(byte, b'b');
+    assert_eq!(stream.tellg(), 2);
+}
+
+#[test]
+fn seekg_refuses_a_negative_position_with_failbit() {
+    let mut stream = IoStream::from_bytes(b"abc".to_vec());
+    stream.seekg(-3);
+    assert_eq!(stream.rdstate(), state::FAIL);
+    let mut closed = IoStream::default();
+    closed.seekg(0);
+    assert!(closed.fail(), "a closed buffer refuses every position");
+}
+
+#[test]
+fn char_extraction_skips_spaces_and_fails_at_the_end() {
+    let mut stream = IoStream::from_bytes(b" \n\x01 ".to_vec());
+    let mut byte = 9;
+    assert!(stream.extract_char(&mut byte));
+    assert_eq!(byte, 1);
+    assert!(!stream.extract_char(&mut byte));
+    assert_eq!(byte, 1, "the value is kept when nothing is extracted");
+    assert_eq!(stream.rdstate(), state::EOF | state::FAIL);
+}

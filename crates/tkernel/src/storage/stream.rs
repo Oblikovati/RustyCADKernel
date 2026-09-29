@@ -389,6 +389,33 @@ impl IoStream {
         self.logical_position()
     }
 
+    /// `seekg(pos)`: clears `eofbit` first (N3168), then moves the input position unless
+    /// the sentry or the stream fails; a refused position (negative, as `basic_filebuf`
+    /// and `basic_stringbuf` refuse it, or a closed buffer) sets `failbit`. `gcount()`
+    /// is kept (DR 60); `stream.seekg(0)`.
+    pub fn seekg(&mut self, position: i64) -> &mut Self {
+        self.state &= !state::EOF;
+        if !self.input_sentry(true) || self.fail() {
+            return self;
+        }
+        if !self.seek_device(position) {
+            self.set_state(state::FAIL);
+        }
+        self
+    }
+
+    /// `pubseekpos(pos, in)`: true when the device accepted the absolute position.
+    fn seek_device(&mut self, position: i64) -> bool {
+        let Some(mut device) = self.device.take() else {
+            return false;
+        };
+        self.sync_device(&mut *device);
+        let moved = u64::try_from(position)
+            .is_ok_and(|offset| device.seek(SeekFrom::Start(offset)).is_ok());
+        self.device = Some(device);
+        moved
+    }
+
     /// `tellp()`: the output position, or -1 when `fail()`; end of file does not matter.
     /// Example: `stream.tellp()`.
     pub fn tellp(&mut self) -> i64 {

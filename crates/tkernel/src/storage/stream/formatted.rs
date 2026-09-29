@@ -154,6 +154,20 @@ impl IoStream {
         }
     }
 
+    /// `operator>>(char&)`: skips C-locale spaces, then takes one byte; end of input sets
+    /// `eofbit|failbit` and leaves `value` unchanged. Returns `!fail()`;
+    /// `stream.extract_char(&mut byte)`.
+    pub fn extract_char(&mut self, value: &mut u8) -> bool {
+        if !self.input_sentry(false) {
+            return false;
+        }
+        match self.bump_byte() {
+            Some(byte) => *value = byte,
+            None => self.set_state(state::EOF | state::FAIL),
+        }
+        !self.fail()
+    }
+
     /// `operator>>(char*)` into a buffer of `capacity` bytes whose size GCC knows
     /// (`__builtin_object_size` under optimisation): at most `capacity - 1` bytes, or
     /// `width() - 1` when smaller; a buffer filled exactly to the end of input gains
