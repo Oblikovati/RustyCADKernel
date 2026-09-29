@@ -84,22 +84,7 @@ impl Variational {
         let mut est: Estimation = self.first_estimation(length, eps1)?;
         let mut curr: usize = 1;
         for ipnt in self.first_point + 1..self.last_point {
-            let delta: f64 = 0.5 * (self.parameter(ipnt + 1)? - self.parameter(ipnt - 1)?);
-            let [k, next, prev] = rotation(curr);
-            if ipnt + 1 != self.last_point {
-                est.tang[prev] = self.est_tangent(ipnt + 2)?;
-                est.scnd[next] =
-                    self.est_secnd(ipnt + 1, (&est.tang[k], &est.tang[prev]), length)?;
-            } else {
-                est.scnd[next] =
-                    self.est_secnd(ipnt + 1, (&est.tang[k], &est.tang[next]), length)?;
-            }
-            est.e2 += norm2(&est.scnd[k])? * delta;
-            est.e3 += if delta > eps1 {
-                norm2(&subtracted(&est.scnd[next], &est.scnd[prev]))? / (4. * delta)
-            } else {
-                0.
-            };
+            self.inner_estimation(&mut est, (ipnt, curr), (length, eps1))?;
             curr = (curr + 1) % 3;
         }
         self.last_estimation(&mut est, curr, eps1)?;
@@ -136,6 +121,31 @@ impl Variational {
             e2,
             e3,
         })
+    }
+
+    // An inner point `ipnt` (slot `curr` of the rotation): the tangent two points on
+    // and the second derivative one point on, then its terms of E2 and E3.
+    fn inner_estimation(
+        &self,
+        est: &mut Estimation,
+        (ipnt, curr): (i32, usize),
+        (length, eps1): (f64, f64),
+    ) -> Result<(), Failure> {
+        let delta: f64 = 0.5 * (self.parameter(ipnt + 1)? - self.parameter(ipnt - 1)?);
+        let [k, next, prev] = rotation(curr);
+        if ipnt + 1 != self.last_point {
+            est.tang[prev] = self.est_tangent(ipnt + 2)?;
+            est.scnd[next] = self.est_secnd(ipnt + 1, (&est.tang[k], &est.tang[prev]), length)?;
+        } else {
+            est.scnd[next] = self.est_secnd(ipnt + 1, (&est.tang[k], &est.tang[next]), length)?;
+        }
+        est.e2 += norm2(&est.scnd[k])? * delta;
+        est.e3 += if delta > eps1 {
+            norm2(&subtracted(&est.scnd[next], &est.scnd[prev]))? / (4. * delta)
+        } else {
+            0.
+        };
+        Ok(())
     }
 
     // Treatment of last point.
