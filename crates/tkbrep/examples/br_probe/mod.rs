@@ -22,6 +22,7 @@ pub mod brep_graph_layers;
 pub mod brep_graph_layers_actions;
 pub mod brep_graph_layers_report;
 pub mod brep_graph_tool;
+pub mod brep_graph_validate_transform;
 pub mod brep_graph_views;
 pub mod brep_graph_walk;
 pub mod brep_report;

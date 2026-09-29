@@ -611,7 +611,55 @@ editor writes only the cache, so it borrows the graph shared. `PromoteToPersiste
 writes the persistent representations through the graph editor's `SetPersistent*`
 setters and is added with them.
 
-### 11.12 Validate and Transform (phase 2, wave 2c, area C2)
+### 11.12 Copy, Compact and Deduplicate (phase 2, wave 2c, area C1)
+
+**Static classes are modules.** `BRepGraph_Copy`, `BRepGraph_Compact` and
+`BRepGraph_Deduplicate` have static members only, so each is a module of free functions:
+`copy::{perform, copy_node}`, `compact::{perform, perform_with}` and
+`deduplicate::{perform, perform_with}`. The nested types keep their names inside the
+module (`copy::GeomPolicy`, `copy::MeshPolicy`, `copy::CachePolicy`, `compact::Options`,
+`compact::CachePolicy`, `deduplicate::Options`); the `Result` structs are
+`compact::CompactResult` and `deduplicate::DeduplicateResult`, since `Result` is the Rust
+error type. The default arguments are the `Default` of each policy and option set.
+
+**Self copies.** A native call may pass one graph as both source and target. That
+cannot be written with a `&BRepGraph` and a `&mut BRepGraph`, so the self copies have
+their own entry points: `copy::perform_self` (the identity no-op) and
+`copy::copy_node_in_place` (the sub-graph duplicated with new ids). The copy context
+holds `CopyGraphs::Distinct { source, target }` or `CopyGraphs::Same(graph)`, and every
+`ensure*` reads what it needs from the source before it writes the result. That order is
+the native one in effect: the native references into the source stores stay valid across
+the result's appends (`NCollection_DynamicArray` never relocates), and a copy never
+writes a source record, so an early read sees what the native late read sees.
+
+**Map order.** The native copy keeps one `NCollection_DataMap` per node kind, only
+searched and bound, so one Rust map keyed by the untyped node id holds them. The maps
+whose iteration order reaches a result are the TKernel map ports with the native id
+hashes and sizes: the per-kind old-to-new maps of the compaction and its node remap
+(the order of the `Compact:Remap` history batch), and the rewrite and canonical maps of
+the deduplication (the order of its history records and merges). The deduplication
+sorts with libstdc++'s `std::sort` (`stl::sort_by`), so vertices of equal tolerance
+keep the native tie order. Its edge and face groups hash the curve and surface handle
+addresses, as `std::hash` of a handle does: the group order depends on the process
+natively too, and reaches the result only through collisions of the candidate ids in
+the canonical map.
+
+**Compaction in place.** Natively the compaction moves the source graph's registries
+out, moves the rebuilt graph into the source object, then moves the saved registries
+back and re-attaches them. A Rust graph keeps its registries and swaps its storage with
+the rebuilt graph's, replaying the registry callbacks of the native moves: under
+`CopyFresh` the fresh caches copied into the rebuilt graph are adopted
+(`CacheRegistry::adopt`, `OnAttached` through `rebindGraph`); the rebuilt graph's own
+layers and caches are detached when it is dropped; the saved layers are re-attached
+(`LayerRegistry::reattach`, `OnDetached` then `OnAttached`), the kept caches are cleared
+under `Drop`, and the layers migrate through `copy_layers_in_place` in compact mode.
+The validation step calls `validate::perform` (area C2).
+
+**Failures.** A C++ exception is a `Failure`. The native algorithms restore the
+history's enabled state with a plain statement on their return paths, so after a raise
+the history keeps the `HistoryMode` the run set, in Rust too.
+
+### 11.13 Validate and Transform (phase 2, wave 2c, area C2)
 
 **Validate.** `BRepGraph_Validate` is the read-only module `brep_graph::validate`
 (`perform`, `perform_with_mode`, `perform_with_options`, with `Severity`, `Mode`,
@@ -635,9 +683,10 @@ into the target, with the native `GraphCounts` as `CopiedRange` (the default ran
 the whole graph, so the whole-graph and copied-range variants of each native loop are
 one function). The loops collect the live ids before they write, since the editor
 borrows the graph mutably; no step adds or removes a node, so the native lazy
-iteration visits the same ids. `Perform(source, target, ...)` and `TransformNode`
-take the `BRepGraph_Copy` policies and call `BRepGraph_Copy::Perform`/`CopyNode`; they
-are added with BRepGraph_Copy (area C1), as thin compositions of the copy and these
-steps. A self transform in Rust cannot pass one graph as `&BRepGraph` and
-`&mut BRepGraph` at once, so the self branch will be its own entry point taking the
-graph mutably.
+iteration visits the same ids. `Perform(source, target, ...)` and `TransformNode` are
+`perform` and `transform_node`: the native policy checks, then `copy::perform` or
+`copy::copy_node` (section 11.12, default cache policy), then `transform_copied_range`.
+A self transform cannot pass one graph as `&BRepGraph` and `&mut BRepGraph` at once, so
+the self overloads are `perform_in_place` (no copy; `transform_whole_graph`) and
+`transform_node_in_place` (`copy::copy_node_in_place`, then the copied range), as
+section 11.12 does for the self copies.

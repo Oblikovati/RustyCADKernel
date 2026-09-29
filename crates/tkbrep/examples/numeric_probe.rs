@@ -3,7 +3,7 @@
 use std::io::{self, BufRead};
 mod br_probe;
 use br_probe::{
-    bintools, bintools_sets, bintools_shape, brep_adaptor, brep_graph_cache_view,
+    bintools, bintools_sets, bintools_shape, brep_adaptor, brep_graph_algo, brep_graph_cache_view,
     brep_graph_edit_gen, brep_graph_layers_report, brep_graph_tool, brep_graph_views, brep_report,
     brep_tools, brep_tools_modif, brep_tools_reshape, topexp, topods, toptools,
 };
@@ -57,6 +57,7 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("br_blayer", brep_graph_layers_report::blayer_case),
     ("br_bcache", brep_graph_cache_view::bcache_case),
     ("br_bedit", brep_graph_edit_gen::bedit_case),
+    ("br_balgo", brep_graph_algo::balgo_case),
 ];
 
 fn main() {

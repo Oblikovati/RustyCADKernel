@@ -3,7 +3,6 @@
 //! tools/oracle/tkbrep_probe_brepgraph_edit_rest.cxx.
 use super::brep::{Scene, point, scene};
 use super::brep_graph::{list, node, run_action, topo_report};
-use super::brep_graph_algo::algo_action;
 use super::brep_graph_cache::lock_action;
 use super::brep_graph_cache_mesh::editor_action as mesh_editor_action;
 use super::brep_graph_cache_report::mesh_report;
@@ -18,6 +17,7 @@ use super::brep_graph_layers_actions::{
     supplement_action as layer_supplement_action,
 };
 use super::brep_graph_layers_report::{ascii, caches, history, registry, supplement};
+use super::brep_graph_validate_transform::validate_action;
 use super::brep_graph_views::{ref_entries, ref_groups, shapes};
 use super::common::{Reader, end, failure, flag, long, word};
 use rustycad_tkbrep::brep_graph::deferred_scope::DeferredScope;
@@ -284,7 +284,7 @@ fn editor_actions(
         || deferred_action(g, s, st, r, code)?
         || guard_action(g, s, r, code)?
         || supplement_action(g, s, r, code)?
-        || algo_action(g, r, code)?)
+        || validate_action(g, r, code)?)
 }
 
 fn run(
@@ -321,6 +321,12 @@ fn run(
 /// `be_action`: one action, printing its result or the raised exception.
 pub fn action(g: &mut BRepGraph, s: &Scene, st: &mut State, r: &mut Reader<'_>) {
     let code = r.integer();
+    action_code(g, s, st, r, code);
+}
+
+/// `be_action_code`: one action whose code the caller already read (the `br_balgo`
+/// dispatch).
+pub fn action_code(g: &mut BRepGraph, s: &Scene, st: &mut State, r: &mut Reader<'_>, code: i32) {
     if let Err(error) = run(g, s, st, r, code) {
         failure(&error);
     }

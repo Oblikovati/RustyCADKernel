@@ -22,23 +22,16 @@
 //! root products' occurrence references. The mesh is dropped after a geometry-level
 //! transform, or copied (and transformed with the geometry) on request.
 //!
-//! [`move_child_ref`] and [`move_occurrence_ref`] are the two `MoveRef` overloads. The
-//! in-graph steps of `Perform` and `TransformNode` are the crate functions
-//! `transform_whole_graph` (the self-transform branch) and `transform_copied_range`
-//! (the steps after a copy into the target); the two public members take the
-//! `BRepGraph_Copy` policies and copy into the target first, so they are added with
-//! `BRepGraph_Copy` (docs/topology-design.md section 11.12).
-// Until `Perform` and `TransformNode` land with BRepGraph_Copy (area C1), only the
-// unit tests call the in-graph steps.
-#![cfg_attr(
-    not(test),
-    allow(
-        dead_code,
-        reason = "Perform and TransformNode arrive with BRepGraph_Copy"
-    )
-)]
+//! [`perform`] and [`transform_node`] copy into another graph (through
+//! `BRepGraph_Copy`) and then transform the copied range; [`perform_in_place`] and
+//! [`transform_node_in_place`] are the self-transform overloads (`theSourceGraph ==
+//! theTargetGraph`), since Rust cannot pass one graph as source and target.
+//! [`move_child_ref`] and [`move_occurrence_ref`] are the two `MoveRef` overloads.
+//! The in-graph steps are `transform_whole_graph` (the self branch of `Perform`) and
+//! `transform_copied_range` (docs/topology-design.md section 11.13).
 mod geometry;
 mod mesh;
+mod perform;
 #[cfg(test)]
 mod tests;
 
@@ -49,6 +42,8 @@ use crate::brep_graph_inc::NodeTag;
 use rustycad_tkernel::standard::Failure;
 use rustycad_tkmath::gp::Transform3;
 use rustycad_tkmath::toploc::Location;
+
+pub use perform::{perform, perform_in_place, transform_node, transform_node_in_place};
 
 use geometry::transform_geometry;
 use mesh::{copy_mesh, transform_existing_mesh};

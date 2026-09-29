@@ -1,141 +1,172 @@
-"""Deterministic BRepGraph algorithm requests for the TKBRep oracle (`br_bedit`).
+"""Deterministic BRepGraph algorithm request corpus for the TKBRep oracle (`br_balgo`).
 
-The requests reuse the editor request format of tools/tkbrep_brepgraph_edit_corpus.py
-with the action codes of tools/oracle/tkbrep_probe_brepgraph_algo.cxx and
-crates/tkbrep/examples/br_probe/brep_graph_algo.rs: 244-249 write raw definition and
-reference fields through a mutation guard (so the graph can be broken on purpose), 250
-runs BRepGraph_Validate through each `Perform` overload and prints every issue in
-report order, and 251/252 are the two BRepGraph_Transform::MoveRef overloads. A field
-written out of range is restored before the request ends, since the final reports read
-the graph without range checks natively.
+A request is `br_balgo script nactions (action)...`: the script is a `BRepScript` of
+tools/tkbrep_brep_corpus.py; the actions are the `br_bedit` actions (run on the current
+of two graphs) and the algorithm actions of tools/oracle/tkbrep_probe_brepgraph_algo.cxx
+and crates/tkbrep/examples/br_probe/brep_graph_algo.rs: 240 Copy::Perform into the other
+graph, 241 CopyNode into the other graph, 242 CopyNode inside the current graph, 243
+Compact::Perform, 244 Deduplicate::Perform, 245 switch the current graph and 246 the
+self Copy::Perform. The probes then print both graphs: definitions, references, UIDs,
+layers with the history records, caches and shapes.
 """
 from __future__ import annotations
-from tkbrep_brep_corpus import BRepScript, FORWARD
-from tkbrep_brepgraph_corpus import PERFORM
-from tkbrep_brepgraph_edit_corpus import (
-    CHILD_REF, COMPOUND, EDGE, FACE, LOG, OCCURRENCE, PRODUCT, SOLID, VERTEX, ids, nodes, request,
-    triangle_actions, triangle_geometry)
+from tkbrep_brep_corpus import BRepScript, FORWARD, REVERSED, text
+from tkbrep_brepgraph_corpus import ADD, PERFORM
+from tkbrep_brepgraph_cache_corpus import meshed_solid_scene
+from tkbrep_brepgraph_edit_corpus import HISTORY_ON, LOG, triangle_actions, triangle_geometry
 from tkbrep_breptools_corpus import solid_scene
 
-AUDIT, LIGHT = [250, 4], [250, 0]
-ALL_MODES = [[250, how] for how in range(5)]
-FAR = 999
-# `ba_trsf` specs: translation, rotation, scale, point, axis and plane mirrors, values.
-TRANSLATION = [0, 1.0, 2.0, 3.0]
-ROTATION = [1, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.5]
-SCALE = [2, 0.0, 0.0, 0.0, 2.0]
-POINT_MIRROR = [3, 1.0, 1.0, 1.0]
-AXIS_MIRROR = [4, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0]
-PLANE_MIRROR = [5, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0]
-GENERAL = [6, 0.0, -1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 2.0, 0.0, 0.0, 1.0, 3.0]
-SINGULAR = [6, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 3.0]
+SOLID, SHELL, FACE, WIRE, EDGE, VERTEX, COMPOUND, COMPSOLID, COEDGE = range(9)
+PRODUCT, OCCURRENCE = 10, 11
+COPY, SHARE, DROP = range(3)
+CACHE_DROP, CACHE_FRESH = range(2)
+PERFORM_COPY, COPY_NODE, COPY_SELF, COMPACT, DEDUP, SWITCH, PERFORM_SELF = range(240, 247)
+REMOVE, ADD_VERTEX, SET_OWNER, CACHE_WRITE = 208, 120, 62, 98
+# Shapes().Add option bits of `bg_options`: 1 CreateAutoProduct.
+AUTO_PRODUCT = 1
+ANGULAR, CONFUSION = 1e-12, 1e-7
 
 
-def triangle_graph() -> tuple[BRepScript, list[list[float]]]:
-    """A triangle face built from scratch (vertices 0-2, edges 0-2, coedges 0-2 with
-    p-curves, wire 0, face 0) inside a shell and a solid."""
+def request(script: BRepScript, actions: list[list[float]]) -> str:
+    numbers = [*script.numbers(), len(actions), *[v for action in actions for v in action]]
+    return f'br_balgo {text(numbers)}'
+
+
+def policies(geom: int, mesh: int, cache: int) -> list[int]:
+    return [geom, mesh, cache]
+
+
+def dedup(analyze: bool, history: bool, merge: bool, comp: float = ANGULAR,
+          hashing: float = CONFUSION) -> list[float]:
+    return [DEDUP, int(analyze), int(history), int(merge), comp, hashing]
+
+
+def full_copy_requests(requests: list[str]) -> None:
+    """Identity copies of the meshed solid scene under every policy combination, the
+    source carrying a logging layer, history, a lock owner and cache meshes."""
+    s, geometry = meshed_solid_scene()
+    compound = s.ids['compound']
+    source = [LOG, HISTORY_ON, [PERFORM, compound, 0], [SET_OWNER, 0, FACE, 0, 1],
+              [CACHE_WRITE, 0, geometry['tri']], [REMOVE, EDGE, 3]]
+    for geom in (COPY, SHARE, DROP):
+        for mesh in (COPY, SHARE, DROP):
+            cache = CACHE_FRESH if geom == mesh else CACHE_DROP
+            requests.append(request(s, [*source, [PERFORM_COPY, *policies(geom, mesh, cache)]]))
+    # The self copy, an empty source and a copy back into the (now non-empty) source.
+    requests.append(request(s, [[PERFORM_COPY, *policies(COPY, COPY, CACHE_DROP)], [PERFORM_SELF],
+                                *source, [PERFORM_SELF], [PERFORM_COPY, *policies(SHARE, SHARE, CACHE_DROP)],
+                                [SWITCH], [PERFORM_COPY, *policies(COPY, COPY, CACHE_FRESH)]]))
+
+
+def appended_copy_requests(requests: list[str]) -> None:
+    """Copies into a non-empty target: node copies first, then the whole graph, with
+    removed nodes and references and an assembly."""
+    s, geometry = meshed_solid_scene()
+    ids = s.ids
+    source = [LOG, HISTORY_ON, [ADD, ids['compound'], AUTO_PRODUCT], [REMOVE, FACE, 1],
+              [SET_OWNER, 0, VERTEX, 2, 1]]
+    nodes = [(FACE, 0), (FACE, 1), (SOLID, 0), (SHELL, 0), (WIRE, 0), (EDGE, 0), (VERTEX, 0),
+             (COMPOUND, 0), (PRODUCT, 0), (OCCURRENCE, 0), (COEDGE, 0), (9, 0), (FACE, 99)]
+    for geom, mesh in ((COPY, COPY), (SHARE, DROP), (DROP, SHARE)):
+        actions = [*source]
+        actions += [[COPY_NODE, kind, index, *policies(geom, mesh, CACHE_FRESH)] for kind, index in nodes]
+        actions += [[PERFORM_COPY, *policies(geom, mesh, CACHE_FRESH)]]
+        requests.append(request(s, actions))
+    # Into a target that holds its own scene first.
+    requests.append(request(s, [[SWITCH], [PERFORM, ids['solid'], 0], [SWITCH], *source,
+                                [PERFORM_COPY, *policies(COPY, COPY, CACHE_DROP)]]))
+
+
+def self_copy_requests(requests: list[str]) -> None:
+    """Sub-graphs duplicated inside their own graph, with the layers copied in place."""
+    s, _ = meshed_solid_scene()
+    ids = s.ids
+    source = [LOG, HISTORY_ON, [ADD, ids['compound'], AUTO_PRODUCT], [SET_OWNER, 0, EDGE, 1, 1]]
+    nodes = [(FACE, 0), (SOLID, 0), (COMPOUND, 0), (PRODUCT, 0), (EDGE, 2), (VERTEX, 3), (FACE, 50)]
+    actions = [*source]
+    actions += [[COPY_SELF, kind, index, *policies(COPY, SHARE, CACHE_FRESH)] for kind, index in nodes]
+    requests.append(request(s, actions))
+    requests.append(request(s, [*source, [REMOVE, FACE, 0], [COPY_SELF, SOLID, 0, *policies(SHARE, COPY, CACHE_DROP)],
+                                [COPY_SELF, COMPOUND, 0, *policies(DROP, DROP, CACHE_DROP)]]))
+
+
+def compact_requests(requests: list[str]) -> None:
+    """Compaction after removals, with and without history, root products and the two
+    cache policies; a vertex added afterwards shows the restarted UID counter."""
+    s, geometry = meshed_solid_scene()
+    ids = s.ids
+    cache = [[CACHE_WRITE, 0, geometry['tri']], [CACHE_WRITE, 1, geometry['tri2']]]
+    removals = [[REMOVE, FACE, 0], [REMOVE, EDGE, 5], [REMOVE, VERTEX, 7]]
+    for history in (1, 0):
+        for mode in (CACHE_DROP, CACHE_FRESH):
+            requests.append(request(s, [LOG, HISTORY_ON, [PERFORM, ids['compound'], 0], [SET_OWNER, 0, FACE, 1, 1],
+                                        *cache, *removals, [COMPACT, history, mode],
+                                        [ADD_VERTEX, 0.0, 0.0, 9.0, 1e-7], [COMPACT, history, mode]]))
+    # Root products: only the reachable definitions survive.
+    requests.append(request(s, [LOG, HISTORY_ON, [ADD, ids['compound'], AUTO_PRODUCT], [ADD, ids['high'], AUTO_PRODUCT],
+                                [REMOVE, FACE, 0], [COMPACT, 1, CACHE_FRESH], [SWITCH],
+                                [ADD, ids['solid'], 0], [REMOVE, SHELL, 0], [COMPACT, 1, CACHE_DROP]]))
+    # Nothing removed, an empty graph, and a removed solid with its subgraph.
+    requests.append(request(s, [[COMPACT, 1, CACHE_DROP], [PERFORM, ids['compound'], 0], [COMPACT, 1, CACHE_DROP],
+                                [210, SOLID, 0], [COMPACT, 1, CACHE_DROP]]))
+
+
+def duplicate_scene() -> tuple[BRepScript, list[list[float]]]:
+    """A triangle built twice from scratch (vertices, edges, wires, faces) on equal
+    but distinct lines and planes, the second one sharing the first face's plane
+    handle for one face, in a shell."""
     s = BRepScript()
     g = triangle_geometry(s)
-    actions = [LOG, *triangle_actions(g), [126], [136, 0, 0, FORWARD], [127], [138, 0, 0, FORWARD]]
+    twin = triangle_geometry(s)
+    actions = [*triangle_actions(g)]
+    second = triangle_actions(twin)
+    # Renumber the second triangle's vertices, edges, coedges and wires.
+    for action in second:
+        code = action[0]
+        if code == 121:
+            action = [121, action[1] + 3, action[2] + 3, *action[3:]]
+        elif code == 122:
+            action = [122, action[1] + 3, action[2]]
+        elif code in (124, 182) and len(action) > 2:
+            action = [code, action[1], *[v + 3 for v in action[2:]]]
+        elif code == 181:
+            action = [181, action[1] + 3, 1]
+        elif code == 175:
+            action = [175, action[1] + 3, *action[2:]]
+        elif code == 125:
+            action = [125, action[1], 1, *action[3:]]
+        actions.append(action)
+    actions += [[126], [136, 0, 0, FORWARD], [136, 0, 1, REVERSED]]
     return s, actions
 
 
-def definition_corruptions() -> list[list[float]]:
-    """Edge, coedge and face fields broken then restored, each checked by an audit."""
-    broken_restored = [
-        ([244, 0, 2, -1], [244, 0, 2, 0]),      # edge without a 3D curve record
-        ([244, 1, 2, 2], [244, 1, 2, 1]),       # two edges on one curve record
-        ([244, 2, 3, FAR], [244, 2, 3, -1]),    # 3D polygon out of range
-        ([245, 0, 1, FAR], [245, 0, 1, 0]),     # coedge face out of range
-        ([245, 1, 0, FAR], [245, 1, 0, 1]),     # coedge edge out of range
-        ([245, 2, 2, FAR], [245, 2, 2, 2]),     # p-curve out of range
-        ([245, 0, 2, -1], [245, 0, 2, 0]),      # coedge without its p-curve
-        ([245, 0, 5, -1], [245, 0, 5, 0]),      # coedge without a live wire
-        ([246, 0, 0, FAR], [246, 0, 0, 0]),     # surface out of range
-        ([246, 0, 1, FAR], [246, 0, 1, -1]),    # triangulation out of range
-        ([245, 1, 1, -1], [245, 1, 1, 0]),      # coedge off the face
-    ]
-    actions: list[list[float]] = []
-    for broken, restored in broken_restored:
-        actions += [broken, AUDIT, restored]
-    return actions + [AUDIT]
-
-
-def triangle_requests(requests: list[str]) -> None:
-    """Every Perform overload on a valid graph, then broken definitions, vertex
-    references and seam pairs, and the lightweight versus audit difference."""
-    s, base = triangle_graph()
-    requests.append(request(s, [*base, *ALL_MODES]))
-    requests.append(request(s, [*base, *definition_corruptions()]))
-    # A vertex reference moved onto another vertex breaks the wire chain (a warning)
-    # and the edge-vertex relations; one moved onto a removed vertex breaks isolation.
-    vertex_refs = [[248, 0, 2], AUDIT, LIGHT, [248, 0, 0],
-                   [120, 5.0, 5.0, 5.0, 1e-7], [208, VERTEX, 3], [248, 1, 3], LIGHT, AUDIT, [248, 1, 1], AUDIT]
-    requests.append(request(s, [*base, *vertex_refs]))
-    # A coedge moved onto the edge of another coedge of the same face: a seam pair of
-    # equal orientations, then three coedges on one (edge, face) pair.
-    seams = [[245, 1, 0, 0], AUDIT, [245, 2, 0, 0], AUDIT, [245, 1, 0, 1], [245, 2, 0, 2], AUDIT]
-    requests.append(request(s, [*base, *seams]))
-    # A surfaced face that lost its only wire: the warning of an unbounded face.
-    requests.append(request(s, [*base, [144, 0, 0], AUDIT, LIGHT]))
-
-
-def assembly_requests(requests: list[str]) -> None:
-    """Products and occurrences: document roots, broken occurrence children and an
-    assembly cycle."""
-    s, base = triangle_graph()
-    products = [[130, SOLID, 0, 0], [131], [132, 1, 0, 0, -1], [134, 1], AUDIT, [134, 0], AUDIT, LIGHT]
-    children = [[247, 0, OCCURRENCE, 0], AUDIT, [247, 0, 9, 0], AUDIT, [247, 0, PRODUCT, FAR], AUDIT,
-                [247, 0, SOLID, 0], AUDIT]
-    cycle = [[131], [132, 2, 1, 0, -1], [247, 2, PRODUCT, 2], AUDIT, [247, 1, PRODUCT, 2], AUDIT,
-             [247, 1, PRODUCT, 0], [247, 2, PRODUCT, 1], AUDIT]
-    requests.append(request(s, [*base, *products, *children, *cycle]))
-    # A removed product with a surviving occurrence and a removed occurrence.
-    requests.append(request(s, [*base, [130, SOLID, 0, 0], [131], [132, 1, 0, 0, -1], [208, PRODUCT, 0], AUDIT,
-                                [208, OCCURRENCE, 1], AUDIT, LIGHT]))
-
-
-def container_requests(requests: list[str]) -> None:
-    """Compound cycles, shared child references, cross-container solids and the
-    ownership of references."""
-    s, base = triangle_graph()
-    compounds = [[128, *nodes((FACE, 0))], [128, *nodes((COMPOUND, 0))], AUDIT,
-                 [249, 0, COMPOUND, 1], AUDIT, [249, 0, COMPOUND, 0], AUDIT, [249, 0, FACE, 0],
-                 [128, *nodes((SOLID, 0))], [129, *ids(0)], AUDIT, [216], AUDIT]
-    requests.append(request(s, [*base, *compounds]))
-
-
-def solid_requests(requests: list[str]) -> None:
-    """The ingested solid scene: every overload, then removals and cleanup."""
-    s = solid_scene()
-    compound = s.ids['compound']
-    ingest = [LOG, [PERFORM, compound, 0]]
-    requests.append(request(s, [*ingest, *ALL_MODES]))
-    requests.append(request(s, [*ingest, [208, FACE, 0], LIGHT, AUDIT, [216], AUDIT]))
-    requests.append(request(s, [*ingest, [210, SOLID, 0], LIGHT, AUDIT, [208, EDGE, 0], AUDIT]))
-
-
-def move_ref_requests(requests: list[str]) -> None:
-    """Both MoveRef overloads with every transform kind, refused scales, removed and
-    out-of-range references, a singular transform and a lock owner."""
-    s = solid_scene()
-    compound = s.ids['compound']
-    ingest = [LOG, [PERFORM, compound, 0]]
-    child = [[251, 0, *spec] for spec in (TRANSLATION, ROTATION, SCALE, POINT_MIRROR, AXIS_MIRROR,
-                                          PLANE_MIRROR, GENERAL)]
-    occurrence = [[252, 0, *TRANSLATION], [252, 0, *ROTATION], [252, 0, *SCALE], [252, 0, *PLANE_MIRROR],
-                  [252, FAR, *TRANSLATION], [252, -1, *TRANSLATION]]
-    refused = [[251, FAR, *TRANSLATION], [251, 1, *SINGULAR], [211, CHILD_REF, 1], [251, 1, *TRANSLATION]]
-    requests.append(request(s, [*ingest, *child, *occurrence, *refused, AUDIT]))
-    locked = [[62, 1, CHILD_REF, 0, 1], [251, 0, *TRANSLATION], [63, 1, CHILD_REF, 0], [251, 0, *TRANSLATION]]
-    requests.append(request(s, [*ingest, *locked, AUDIT]))
+def dedup_requests(requests: list[str]) -> None:
+    """Geometry canonicalization and entity merging, analyzed and applied."""
+    s, build = duplicate_scene()
+    for analyze in (True, False):
+        for merge in (False, True):
+            requests.append(request(s, [LOG, HISTORY_ON, *build, dedup(analyze, True, merge)]))
+    requests.append(request(s, [LOG, *build, dedup(False, False, True, 1e-9, 1e-6), dedup(False, True, True)]))
+    # A removed edge with coincident vertices: the vertex redirect takes each edge's
+    # guard before its removed check, so the merge raises Standard_ProgramError.
+    requests.append(request(s, [LOG, HISTORY_ON, *build, [REMOVE, EDGE, 5], dedup(False, True, True)]))
+    # The ingested scenes: a merge pass over shared topology, and a removed edge
+    # without coincident vertices (no redirect runs).
+    m, _ = meshed_solid_scene()
+    requests.append(request(m, [LOG, HISTORY_ON, [ADD, m.ids['compound'], AUTO_PRODUCT], dedup(False, True, True)]))
+    requests.append(request(m, [LOG, HISTORY_ON, [PERFORM, m.ids['compound'], 0], [REMOVE, EDGE, 1],
+                                dedup(False, True, True), dedup(False, True, False)]))
+    # Deduplicate then compact the merged scene.
+    requests.append(request(s, [LOG, HISTORY_ON, *build, dedup(False, True, True), [COMPACT, 1, CACHE_DROP]]))
 
 
 def append_tkbrep_brepgraph_algo_requests(requests: list[str]) -> None:
-    """Append the BRepGraph validation and transform requests."""
-    requests.append(request(BRepScript(), [*ALL_MODES, [251, 0, *TRANSLATION], [252, 0, *TRANSLATION]]))
-    triangle_requests(requests)
-    assembly_requests(requests)
-    container_requests(requests)
-    solid_requests(requests)
-    move_ref_requests(requests)
+    """Append the BRepGraph algorithm requests."""
+    requests.append(request(BRepScript(), [[PERFORM_COPY, *policies(COPY, COPY, CACHE_DROP)],
+                                           [COPY_NODE, FACE, 0, *policies(COPY, COPY, CACHE_DROP)],
+                                           [COMPACT, 1, CACHE_DROP], dedup(False, True, True), [PERFORM_SELF]]))
+    full_copy_requests(requests)
+    appended_copy_requests(requests)
+    self_copy_requests(requests)
+    compact_requests(requests)
+    dedup_requests(requests)

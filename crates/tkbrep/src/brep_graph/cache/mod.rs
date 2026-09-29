@@ -236,6 +236,20 @@ pub(crate) fn attach_graph(cache: &dyn BRepGraphCache, token: u64) {
     }
 }
 
+/// `rebindGraph(theGraph)` (friend of the registry, the registry's `Attach`): no-op for
+/// the same graph, else store the token (without detaching the previous graph) and
+/// `OnAttached` for a graph.
+pub(crate) fn rebind_graph(cache: &dyn BRepGraphCache, token: u64) {
+    let base = cache.cache_base();
+    if base.graph_token() == token {
+        return;
+    }
+    base.set_graph_token(token);
+    if token != 0 {
+        cache.on_attached();
+    }
+}
+
 /// `detachGraph()` (friend of the registry): `Clear`, `OnDetached`, forget the graph.
 pub(crate) fn detach_graph(cache: &dyn BRepGraphCache) {
     if !cache.cache_base().is_attached() {

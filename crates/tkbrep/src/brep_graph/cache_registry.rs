@@ -15,7 +15,9 @@
 
 //! `BRepGraph_CacheRegistry`: the GUID-keyed registry of a graph's cache services.
 use crate::brep_graph::BRepGraph;
-use crate::brep_graph::cache::{BRepGraphCache, CacheType, attach_graph, detach_graph};
+use crate::brep_graph::cache::{
+    BRepGraphCache, CacheType, attach_graph, detach_graph, rebind_graph,
+};
 use crate::brep_graph::copy_remap::{CopyRemap, ItemMap, MappingKind, Mode};
 use crate::brep_graph::registry_iterator::CacheIterator;
 use rustycad_tkernel::standard::{Failure, Guid, Handle, SharedState};
@@ -304,6 +306,22 @@ impl CacheRegistry {
         }
         slots.caches.clear();
         slots.guid_to_slot.clear();
+    }
+
+    /// The move assignment of another graph's registry into this graph's, then
+    /// `Attach(this graph)` (the compaction installs the rebuilt graph's services): the
+    /// current services are detached, the other registry's slots move over and each
+    /// service is rebound (`rebindGraph`, `OnAttached` for a new graph).
+    pub(crate) fn adopt(&self, other: &CacheRegistry) {
+        let taken = std::mem::take(&mut *other.slots.write());
+        let mut slots = self.slots.write();
+        for cache in slots.caches.iter().filter_map(Handle::get) {
+            detach_graph(cache);
+        }
+        *slots = taken;
+        for cache in slots.caches.iter().filter_map(Handle::get) {
+            rebind_graph(cache, self.graph_token);
+        }
     }
 }
 

@@ -1,189 +1,217 @@
 //! BRepGraph algorithms oracle, the Rust twin of
-//! tools/oracle/tkbrep_probe_brepgraph_algo.cxx: the `br_bedit` actions of
-//! BRepGraph_Validate and BRepGraph_Transform and the raw field corruptions written
-//! through a mutation guard's `Internal()`. Every action reads its arguments in the
-//! native order, so a raised exception leaves the reader where the native probe does.
-use super::brep::{direction, point};
-use super::brep_graph::node;
-use super::brep_graph_edit::id;
-use super::brep_graph_layers::read_node;
-use super::brep_graph_layers_report::ascii;
-use super::common::{Reader, flag, int, word};
-use rustycad_tkbrep::brep_graph::transform;
-use rustycad_tkbrep::brep_graph::validate::{self, Mode, Options, Severity, ValidationResult};
-use rustycad_tkbrep::brep_graph::*;
+//! tools/oracle/tkbrep_probe_brepgraph_algo.cxx: the `br_bedit` actions on one of two
+//! graphs, BRepGraph_Copy (full, node and self copies), BRepGraph_Compact and
+//! BRepGraph_Deduplicate, then both graphs' reports.
+use super::brep::{Scene, scene};
+use super::brep_graph::{list, node, topo_report};
+use super::brep_graph_cache_report::mesh_report;
+use super::brep_graph_cache_view::view_report;
+use super::brep_graph_edit_gen::action_code;
+use super::brep_graph_layers::{State, read_node};
+use super::brep_graph_layers_report::{caches, history, registry, supplement};
+use super::brep_graph_validate_transform::read_transform;
+use super::brep_graph_views::{node_ids, ref_entries, ref_groups, ref_ids, shapes};
+use super::common::{Reader, end, failure, flag, long, word};
+use rustycad_tkbrep::brep_graph::BRepGraph;
+use rustycad_tkbrep::brep_graph::compact::{self, CompactResult};
+use rustycad_tkbrep::brep_graph::copy::{self, CachePolicy, GeomPolicy, MeshPolicy};
+use rustycad_tkbrep::brep_graph::deduplicate::{self, DeduplicateResult};
 use rustycad_tkernel::standard::Failure;
-use rustycad_tkmath::gp::{Axis1, Axis2, Transform3, Vector3};
 
-/// `ba_trsf`: 0 translation, 1 rotation, 2 scale, 3 point mirror, 4 axis mirror, 5 plane
-/// mirror, 6 `SetValues`.
-pub fn trsf(r: &mut Reader<'_>) -> Result<Transform3, Failure> {
-    let mut t = Transform3::default();
-    match r.integer() {
-        0 => t.set_translation(Vector3::from(point(r).xyz())),
-        1 => {
-            let p = point(r);
-            let d = direction(r)?;
-            t.set_rotation(Axis1::new(p, d), r.real())?;
-        }
-        2 => {
-            let p = point(r);
-            t.set_scale(p, r.real())?;
-        }
-        3 => t.set_mirror_point(point(r)),
-        4 => {
-            let p = point(r);
-            t.set_mirror_axis(Axis1::new(p, direction(r)?));
-        }
-        5 => {
-            let (p, n) = (point(r), direction(r)?);
-            t.set_mirror_plane(Axis2::with_x_direction(p, n, direction(r)?)?);
-        }
-        _ => set_values(&mut t, r)?,
-    }
-    Ok(t)
+/// `BaGraphs`: the graphs of a request; the actions run on the current one and copy
+/// into the other.
+#[derive(Default)]
+struct Graphs {
+    g: BRepGraph,
+    t: BRepGraph,
+    on_target: bool,
 }
 
-fn set_values(t: &mut Transform3, r: &mut Reader<'_>) -> Result<(), Failure> {
-    let mut rows = [[0.0; 4]; 3];
-    for row in &mut rows {
-        for value in row.iter_mut() {
-            *value = r.real();
+impl Graphs {
+    fn cur(&mut self) -> &mut BRepGraph {
+        if self.on_target {
+            &mut self.t
+        } else {
+            &mut self.g
         }
     }
-    t.set_values(rows)
-}
 
-/// `ba_report`: IsValid, the warning and error counts, then each issue.
-fn report(v: &ValidationResult) {
-    flag(v.is_valid());
-    int(v.nb_issues(Severity::Warning));
-    int(v.nb_issues(Severity::Error));
-    int(v.issues.len() as i32);
-    for issue in &v.issues {
-        int(issue.sev as i32);
-        node(issue.node_id);
-        ascii(&issue.description);
+    // The current graph (shared) and the other one (mutable).
+    fn cur_and_other(&mut self) -> (&BRepGraph, &mut BRepGraph) {
+        if self.on_target {
+            (&self.t, &mut self.g)
+        } else {
+            (&self.g, &mut self.t)
+        }
     }
 }
 
-/// `ba_validate`: the five `Perform` overloads.
-fn run_validate(g: &BRepGraph, how: i32) -> ValidationResult {
-    match how {
-        0 => validate::perform(g),
-        1 => validate::perform_with_mode(g, Mode::Lightweight),
-        2 => validate::perform_with_mode(g, Mode::Audit),
-        3 => validate::perform_with_options(g, &Options::lightweight()),
-        _ => validate::perform_with_options(g, &Options::audit()),
+/// `ba_policies`: geometry and mesh 0 Copy 1 Share 2 Drop, cache 0 Drop 1 CopyFresh.
+fn policies(r: &mut Reader<'_>) -> (GeomPolicy, MeshPolicy, CachePolicy) {
+    let geom = [GeomPolicy::Copy, GeomPolicy::Share, GeomPolicy::Drop][r.integer() as usize];
+    let mesh = [MeshPolicy::Copy, MeshPolicy::Share, MeshPolicy::Drop][r.integer() as usize];
+    let cache = [CachePolicy::Drop, CachePolicy::CopyFresh][r.integer() as usize];
+    (geom, mesh, cache)
+}
+
+fn compact_result(x: &CompactResult) {
+    for v in [
+        x.nb_removed_vertices,
+        x.nb_removed_edges,
+        x.nb_removed_wires,
+        x.nb_removed_faces,
+        x.nb_removed_shells,
+        x.nb_removed_solids,
+        x.nb_removed_compounds,
+        x.nb_removed_comp_solids,
+        x.nb_removed_surfaces,
+        x.nb_removed_curves,
+        x.nb_nodes_before,
+        x.nb_nodes_after,
+        x.nb_unmapped_active_defs,
+    ] {
+        long(u64::from(v));
     }
 }
 
-// `ba_edge_field`.
-fn edge_field(g: &mut BRepGraph, r: &mut Reader<'_>) -> Result<(), Failure> {
-    let e: EdgeId = id(r);
-    let (field, value) = (r.integer(), r.integer() as u32);
-    let mut m = g.editor().edges().mutate(e)?;
-    let d = m.internal();
-    match field {
-        0 => d.start_vertex_ref_id = VertexRefId::new(value),
-        1 => d.end_vertex_ref_id = VertexRefId::new(value),
-        2 => d.curve3d_rep_id = EdgeCurve3DRepId::new(value),
-        _ => d.polygon3d_rep_id = EdgePolygon3DRepId::new(value),
-    }
-    Ok(())
+fn dedup_result(x: &DeduplicateResult) {
+    let counters = [
+        x.nb_canonical_surfaces,
+        x.nb_canonical_curves,
+        x.nb_surface_rewrites,
+        x.nb_curve_rewrites,
+        x.nb_nullified_surfaces,
+        x.nb_nullified_curves,
+        x.nb_history_records,
+    ];
+    counters.into_iter().for_each(|v| long(u64::from(v)));
+    flag(x.is_entity_merge_applied);
+    let merges = [
+        x.nb_merged_vertices,
+        x.nb_merged_edges,
+        x.nb_merged_wires,
+        x.nb_merged_faces,
+        x.nb_reordered_wires,
+        x.nb_tolerance_ordered_wires,
+        x.nb_partial_ordered_wires,
+    ];
+    merges.into_iter().for_each(|v| long(u64::from(v)));
+    list(&x.affected_faces);
+    list(&x.affected_edges);
 }
 
-// `ba_co_edge_field`.
-fn co_edge_field(g: &mut BRepGraph, r: &mut Reader<'_>) -> Result<(), Failure> {
-    let c: CoEdgeId = id(r);
-    let (field, value) = (r.integer(), r.integer() as u32);
-    let mut m = g.editor().co_edges().mutate(c)?;
-    let d = m.internal();
-    match field {
-        0 => d.child_edge_id = EdgeId::new(value),
-        1 => d.face_id = FaceId::new(value),
-        2 => d.curve2d_rep_id = CoEdgeCurve2DRepId::new(value),
-        3 => d.polygon2d_rep_id = CoEdgePolygon2DRepId::new(value),
-        4 => d.polygon_on_tri_rep_id = CoEdgePolygonOnTriRepId::new(value),
-        _ => d.parent_wire_id = WireId::new(value),
+// 240-242: the copies.
+fn copy_action(gs: &mut Graphs, r: &mut Reader<'_>, code: i32) -> Result<(), Failure> {
+    if code == 240 {
+        let (geom, mesh, cache) = policies(r);
+        let (cur, other) = gs.cur_and_other();
+        flag(copy::perform(cur, other, geom, mesh, cache)?);
+        return Ok(());
     }
-    Ok(())
-}
-
-// `ba_face_field`.
-fn face_field(g: &mut BRepGraph, r: &mut Reader<'_>) -> Result<(), Failure> {
-    let x: FaceId = id(r);
-    let (field, value) = (r.integer(), r.integer() as u32);
-    let mut m = g.editor().faces().mutate(x)?;
-    let d = m.internal();
-    if field == 0 {
-        d.surface_rep_id = FaceSurfaceRepId::new(value);
+    let n = read_node(r);
+    let (geom, mesh, cache) = policies(r);
+    if code == 241 {
+        let (cur, other) = gs.cur_and_other();
+        node(copy::copy_node(cur, other, n, geom, mesh, cache)?);
     } else {
-        d.triangulation_rep_id = FaceTriangulationRepId::new(value);
+        node(copy::copy_node_in_place(gs.cur(), n, geom, mesh, cache)?);
     }
     Ok(())
 }
 
-// 247-249: the occurrence, vertex reference and child reference retargets.
-fn child_field(g: &mut BRepGraph, r: &mut Reader<'_>, code: i32) -> Result<(), Failure> {
-    match code {
-        247 => {
-            let o: OccurrenceId = id(r);
-            let n = read_node(r);
-            g.editor().occurrences().mutate(o)?.internal().child_node_id = n;
-        }
-        248 => {
-            let (x, v): (VertexRefId, VertexId) = (id(r), id(r));
-            g.editor()
-                .vertices()
-                .mutate_ref(x)?
-                .internal()
-                .child_vertex_id = v;
-        }
-        _ => {
-            let x: ChildRefId = id(r);
-            let n = read_node(r);
-            g.editor()
-                .generic()
-                .mutate_child_ref(x)?
-                .internal()
-                .child_node_id = n;
-        }
+// 243-244: compaction and deduplication.
+fn rebuild_action(gs: &mut Graphs, r: &mut Reader<'_>, code: i32) -> Result<(), Failure> {
+    if code == 243 {
+        let history_mode = r.flag();
+        let cache_mode =
+            [compact::CachePolicy::Drop, compact::CachePolicy::CopyFresh][r.integer() as usize];
+        let options = compact::Options {
+            history_mode,
+            cache_mode,
+        };
+        compact_result(&compact::perform_with(gs.cur(), &options)?);
+        return Ok(());
     }
+    let options = deduplicate::Options {
+        analyze_only: r.flag(),
+        history_mode: r.flag(),
+        merge_entities_when_safe: r.flag(),
+        comp_tolerance: r.real(),
+        hash_tolerance: r.real(),
+    };
+    dedup_result(&deduplicate::perform_with(gs.cur(), &options)?);
     Ok(())
 }
 
-/// 244-249: raw writes through `Internal()` (`ba_corrupt_action`).
-fn corrupt_action(g: &mut BRepGraph, r: &mut Reader<'_>, code: i32) -> Result<bool, Failure> {
+// 270-273: the Transform actions (`bv_transform_action`).
+fn transform_action(gs: &mut Graphs, r: &mut Reader<'_>, code: i32) -> Result<(), Failure> {
+    let Some(request) = read_transform(r, code)? else {
+        return Ok(());
+    };
+    if request.is_self() {
+        return request.run_self(gs.cur());
+    }
+    let (cur, other) = gs.cur_and_other();
+    request.run_pair(cur, other)
+}
+
+/// `ba_action`: 240-246 and the Transform actions 270-273; false for any other code.
+fn algo_action(gs: &mut Graphs, r: &mut Reader<'_>, code: i32) -> Result<bool, Failure> {
     match code {
-        244 => edge_field(g, r)?,
-        245 => co_edge_field(g, r)?,
-        246 => face_field(g, r)?,
-        247..=249 => child_field(g, r, code)?,
+        240..=242 => copy_action(gs, r, code)?,
+        243 | 244 => rebuild_action(gs, r, code)?,
+        245 => {
+            gs.on_target = !gs.on_target;
+            word("-");
+        }
+        246 => flag(copy::perform_self(gs.cur())),
+        270..=273 => transform_action(gs, r, code)?,
         _ => return Ok(false),
     }
-    word("-");
     Ok(true)
 }
 
-/// 244-252 (`ba_algo_action`): the corruptions, 250 Validate, 251 and 252 MoveRef.
-pub fn algo_action(g: &mut BRepGraph, r: &mut Reader<'_>, code: i32) -> Result<bool, Failure> {
-    if corrupt_action(g, r, code)? {
-        return Ok(true);
-    }
-    match code {
-        250 => report(&run_validate(g, r.integer())),
-        251 => {
-            let x: ChildRefId = id(r);
-            let t = trsf(r)?;
-            flag(transform::move_child_ref(g, x, &t)?);
+/// `ba_report`: the `br_bedit` reports with the node and reference UIDs.
+fn report(s: &Scene, g: &BRepGraph, st: &State) {
+    flag(g.is_empty());
+    flag(g.validate_relations());
+    list(g.root_product_ids());
+    topo_report(s, g);
+    ref_entries(s, g);
+    ref_groups(g);
+    node_ids(g);
+    ref_ids(s, g);
+    flag(g.editor_state().is_deferred_mode());
+    registry(g, st);
+    history(g);
+    supplement(s, g);
+    caches(g, st);
+    mesh_report(s, g);
+    view_report(s, g);
+    shapes(s, g);
+}
+
+/// `br_balgo script nactions (action)...`: the actions, then both graphs' reports and,
+/// after the graphs are gone, every logging layer's event count.
+pub fn balgo_case(values: &[f64]) {
+    let mut r = Reader::new(values);
+    let s = scene(&mut r);
+    let mut st = State::default();
+    {
+        let mut gs = Graphs::default();
+        for _ in 0..r.integer() {
+            let code = r.integer();
+            match algo_action(&mut gs, &mut r, code) {
+                Ok(true) => continue,
+                Ok(false) => action_code(gs.cur(), &s, &mut st, &mut r, code),
+                Err(error) => failure(&error),
+            }
         }
-        252 => {
-            let x: OccurrenceRefId = id(r);
-            let t = trsf(r)?;
-            flag(transform::move_occurrence_ref(g, x, &t)?);
-        }
-        _ => return Ok(false),
+        report(&s, &gs.g, &st);
+        report(&s, &gs.t, &st);
     }
-    Ok(true)
+    for layer in &st.events {
+        long(layer.get().unwrap().events.lock().unwrap().len() as u64);
+    }
+    end();
 }

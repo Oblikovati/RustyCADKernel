@@ -1,87 +1,64 @@
-// BRepGraph algorithms (phase 2, wave 2c, area C2): the `br_bedit` actions of
-// BRepGraph_Validate and BRepGraph_Transform, and raw field corruptions written through
-// a mutation guard's Internal() so the validator sees broken graphs. Included by
-// tkbrep_probe_brepgraph_edit_rest.cxx before the action dispatch. The Rust twin is
-// crates/tkbrep/examples/br_probe/brep_graph_algo.rs.
-#include <BRepGraph_Transform.hxx>
-#include <BRepGraph_Validate.hxx>
-// `ba_trsf`: 0 translation (vector), 1 rotation (point, direction, angle), 2 scale
-// (point, factor), 3 point mirror, 4 axis mirror (point, direction), 5 plane mirror
-// (point, normal, X direction), 6 SetValues (the 12 coefficients row by row).
-gp_Trsf ba_trsf(BrReader& r){
- gp_Trsf t;int k=r.integer();
- switch(k){
-  case 0:{gp_Pnt v=br_point(r);t.SetTranslation(gp_Vec(v.XYZ()));break;}
-  case 1:{gp_Pnt p=br_point(r);gp_Dir d=br_direction(r);t.SetRotation(gp_Ax1(p,d),r.real());break;}
-  case 2:{gp_Pnt p=br_point(r);t.SetScale(p,r.real());break;}
-  case 3:t.SetMirror(br_point(r));break;
-  case 4:{gp_Pnt p=br_point(r);t.SetMirror(gp_Ax1(p,br_direction(r)));break;}
-  case 5:{gp_Pnt p=br_point(r);gp_Dir n=br_direction(r);t.SetMirror(gp_Ax2(p,n,br_direction(r)));break;}
-  default:{double v[12];for(double& x:v)x=r.real();
-   t.SetValues(v[0],v[1],v[2],v[3],v[4],v[5],v[6],v[7],v[8],v[9],v[10],v[11]);break;}}
- return t;}
-// A validation report: IsValid, the warning and error counts, then each issue
-// (severity, node, description) in report order.
-void ba_report(const BRepGraph_Validate::Result& v){
- br_flag(v.IsValid());br_int(v.NbIssues(BRepGraph_Validate::Severity::Warning));
- br_int(v.NbIssues(BRepGraph_Validate::Severity::Error));br_int(int(v.Issues.Size()));
- for(const auto& i:v.Issues){br_int(int(i.Sev));bg_node(i.NodeId);bl_text(i.Description);}}
-BRepGraph_Validate::Result ba_validate(const BRepGraph& g,int how){
- using V=BRepGraph_Validate;
- switch(how){
-  case 0:return V::Perform(g);
-  case 1:return V::Perform(g,V::Mode::Lightweight);
-  case 2:return V::Perform(g,V::Mode::Audit);
-  case 3:return V::Perform(g,V::Options::Lightweight());
-  default:return V::Perform(g,V::Options::Audit());}}
-// 244-249: raw writes through Internal(). 244 edge (e, field, value): 0 StartVertexRefId,
-// 1 EndVertexRefId, 2 Curve3DRepId, 3 Polygon3DRepId; 245 coedge (c, field, value): 0
-// ChildEdgeId, 1 FaceId, 2 Curve2DRepId, 3 Polygon2DRepId, 4 PolygonOnTriRepId, 5
-// ParentWireId; 246 face (f, field, value): 0 SurfaceRepId, 1 TriangulationRepId; 247
-// occurrence ChildNodeId (o, node); 248 vertex reference ChildVertexId (vref, v); 249
-// child reference ChildNodeId (cref, node). Every argument is read before the guard.
-void ba_edge_field(BRepGraph& g,BrReader& r){
- auto e=be_id<BRepGraph_EdgeId>(r);int f=r.integer();uint32_t v=uint32_t(r.integer());
- auto m=g.Editor().Edges().Mut(e);BRepGraphInc::EdgeDef& d=m.Internal();
- switch(f){
-  case 0:d.StartVertexRefId=BRepGraph_VertexRefId(v);break;
-  case 1:d.EndVertexRefId=BRepGraph_VertexRefId(v);break;
-  case 2:d.Curve3DRepId=BRepGraph_EdgeCurve3DRepId(v);break;
-  default:d.Polygon3DRepId=BRepGraph_EdgePolygon3DRepId(v);break;}}
-void ba_co_edge_field(BRepGraph& g,BrReader& r){
- auto c=be_id<BRepGraph_CoEdgeId>(r);int f=r.integer();uint32_t v=uint32_t(r.integer());
- auto m=g.Editor().CoEdges().Mut(c);BRepGraphInc::CoEdgeDef& d=m.Internal();
- switch(f){
-  case 0:d.ChildEdgeId=BRepGraph_EdgeId(v);break;
-  case 1:d.FaceId=BRepGraph_FaceId(v);break;
-  case 2:d.Curve2DRepId=BRepGraph_CoEdgeCurve2DRepId(v);break;
-  case 3:d.Polygon2DRepId=BRepGraph_CoEdgePolygon2DRepId(v);break;
-  case 4:d.PolygonOnTriRepId=BRepGraph_CoEdgePolygonOnTriRepId(v);break;
-  default:d.ParentWireId=BRepGraph_WireId(v);break;}}
-void ba_face_field(BRepGraph& g,BrReader& r){
- auto x=be_id<BRepGraph_FaceId>(r);int f=r.integer();uint32_t v=uint32_t(r.integer());
- auto m=g.Editor().Faces().Mut(x);BRepGraphInc::FaceDef& d=m.Internal();
- if(f==0)d.SurfaceRepId=BRepGraph_FaceSurfaceRepId(v);else d.TriangulationRepId=BRepGraph_FaceTriangulationRepId(v);}
-bool ba_corrupt_action(BRepGraph& g,BrReader& r,int code){
+// BRepGraph algorithms (phase 2, wave 2c, area C1): a graph script drives the
+// `br_bedit` actions on one of two graphs and runs BRepGraph_Copy (full, node and
+// self copies), BRepGraph_Compact and BRepGraph_Deduplicate, then reports both graphs:
+// the definitions, references, UIDs, layers with the history records, the caches and
+// the shapes. The Rust twin is crates/tkbrep/examples/br_probe/brep_graph_algo.rs.
+#include <BRepGraph_Compact.hxx>
+#include <BRepGraph_Copy.hxx>
+#include <BRepGraph_Deduplicate.hxx>
+// The graphs of a request; the actions run on the current one and copy into the other.
+struct BaGraphs{BRepGraph g;BRepGraph t;bool onTarget=false;
+ BRepGraph& cur(){return onTarget?t:g;}BRepGraph& other(){return onTarget?g:t;}};
+// The copy policies as integers: geometry and mesh 0 Copy 1 Share 2 Drop, cache 0
+// Drop 1 CopyFresh.
+struct BaPolicies{BRepGraph_Copy::GeomPolicy geom;BRepGraph_Copy::MeshPolicy mesh;BRepGraph_Copy::CachePolicy cache;};
+BaPolicies ba_policies(BrReader& r){
+ BaPolicies p;p.geom=BRepGraph_Copy::GeomPolicy(r.integer());p.mesh=BRepGraph_Copy::MeshPolicy(r.integer());
+ p.cache=BRepGraph_Copy::CachePolicy(r.integer());return p;}
+void ba_compact_result(const BRepGraph_Compact::Result& x){
+ for(uint32_t v:{x.NbRemovedVertices,x.NbRemovedEdges,x.NbRemovedWires,x.NbRemovedFaces,x.NbRemovedShells,
+   x.NbRemovedSolids,x.NbRemovedCompounds,x.NbRemovedCompSolids,x.NbRemovedSurfaces,x.NbRemovedCurves,
+   x.NbNodesBefore,x.NbNodesAfter,x.NbUnmappedActiveDefs})br_int(v);}
+void ba_dedup_result(const BRepGraph_Deduplicate::Result& x){
+ for(uint32_t v:{x.NbCanonicalSurfaces,x.NbCanonicalCurves,x.NbSurfaceRewrites,x.NbCurveRewrites,
+   x.NbNullifiedSurfaces,x.NbNullifiedCurves,x.NbHistoryRecords})br_int(v);
+ br_flag(x.IsEntityMergeApplied);
+ for(uint32_t v:{x.NbMergedVertices,x.NbMergedEdges,x.NbMergedWires,x.NbMergedFaces,x.NbReorderedWires,
+   x.NbToleranceOrderedWires,x.NbPartialOrderedWires})br_int(v);
+ bg_list(x.AffectedFaces);bg_list(x.AffectedEdges);}
+// 240-246: 240 Copy::Perform(current, other, policies), 241 CopyNode(current, other,
+// node, policies), 242 CopyNode(current, current, node, policies), 243
+// Compact::Perform(current, history, cache mode), 244 Deduplicate::Perform(current,
+// analyze, history, merge, comp tolerance, hash tolerance), 245 switch the current
+// graph, 246 Copy::Perform(current, current).
+bool ba_action(BaGraphs& gs,BrReader& r,int code){
  switch(code){
-  case 244:ba_edge_field(g,r);break;
-  case 245:ba_co_edge_field(g,r);break;
-  case 246:ba_face_field(g,r);break;
-  case 247:{auto o=be_id<BRepGraph_OccurrenceId>(r);BRepGraph_NodeId n=bl_node(r);
-   auto m=g.Editor().Occurrences().Mut(o);m.Internal().ChildNodeId=n;break;}
-  case 248:{auto x=be_id<BRepGraph_VertexRefId>(r);auto v=be_id<BRepGraph_VertexId>(r);
-   auto m=g.Editor().Vertices().MutRef(x);m.Internal().ChildVertexId=v;break;}
-  case 249:{auto x=be_id<BRepGraph_ChildRefId>(r);BRepGraph_NodeId n=bl_node(r);
-   auto m=g.Editor().Gen().MutChildRef(x);m.Internal().ChildNodeId=n;break;}
-  default:return false;}
- br_word("-");return true;}
-// 250 Validate (how: 0 Perform(g), 1 Mode::Lightweight, 2 Mode::Audit, 3
-// Options::Lightweight(), 4 Options::Audit()); 251 MoveRef(child reference, trsf); 252
-// MoveRef(occurrence reference, trsf).
-bool ba_algo_action(BRepGraph& g,BrReader& r,int code){
- if(ba_corrupt_action(g,r,code))return true;
- switch(code){
-  case 250:ba_report(ba_validate(g,r.integer()));return true;
-  case 251:{auto x=be_id<BRepGraph_ChildRefId>(r);gp_Trsf t=ba_trsf(r);br_flag(BRepGraph_Transform::MoveRef(g,x,t));return true;}
-  case 252:{auto x=be_id<BRepGraph_OccurrenceRefId>(r);gp_Trsf t=ba_trsf(r);br_flag(BRepGraph_Transform::MoveRef(g,x,t));return true;}
+  case 240:{BaPolicies p=ba_policies(r);br_flag(BRepGraph_Copy::Perform(gs.cur(),gs.other(),p.geom,p.mesh,p.cache));return true;}
+  case 241:{BRepGraph_NodeId n=bl_node(r);BaPolicies p=ba_policies(r);bg_node(BRepGraph_Copy::CopyNode(gs.cur(),gs.other(),n,p.geom,p.mesh,p.cache));return true;}
+  case 242:{BRepGraph_NodeId n=bl_node(r);BaPolicies p=ba_policies(r);bg_node(BRepGraph_Copy::CopyNode(gs.cur(),gs.cur(),n,p.geom,p.mesh,p.cache));return true;}
+  case 243:{BRepGraph_Compact::Options o;o.HistoryMode=r.flag();o.CacheMode=BRepGraph_Compact::Options::CachePolicy(r.integer());
+   ba_compact_result(BRepGraph_Compact::Perform(gs.cur(),o));return true;}
+  case 244:{BRepGraph_Deduplicate::Options o;o.AnalyzeOnly=r.flag();o.HistoryMode=r.flag();o.MergeEntitiesWhenSafe=r.flag();
+   o.CompTolerance=r.real();o.HashTolerance=r.real();ba_dedup_result(BRepGraph_Deduplicate::Perform(gs.cur(),o));return true;}
+  case 245:gs.onTarget=!gs.onTarget;br_word("-");return true;
+  case 246:br_flag(BRepGraph_Copy::Perform(gs.cur(),gs.cur()));return true;
   default:return false;}}
+// One graph's report: the `br_bedit` reports with the node and reference UIDs.
+void ba_report(const BrScene& s,BRepGraph& g,const BlState& st){
+ br_flag(g.IsEmpty());br_flag(g.ValidateRelations());bg_list(g.RootProductIds());
+ bg_topo_report(s,g);bg_ref_entries(s,g);bg_ref_groups(g);bg_node_ids(g);bg_ref_ids(s,g);
+ br_flag(g.Editor().IsDeferredMode());
+ bl_registry(g,st);bl_history_report(g);bl_supplement_report(s,g);bl_cache_report(g,st);
+ bc_mesh_report(s,g);bc_view_report(s,g);bg_shapes(s,g);}
+// `br_balgo script nactions (action)...`: the actions, then both graphs' reports and,
+// after the graphs are gone, every logging layer's event count.
+void br_balgo_case(std::istream& in){
+ BrReader r{in};BrScene s=br_scene(r);BlState st;
+ {BaGraphs gs;int n=r.integer();
+  for(int i=0;i<n;++i){int code=r.integer();
+   try{if(ba_action(gs,r,code)||bv_transform_action(gs.cur(),gs.other(),r,code))continue;}
+   catch(const Standard_Failure& e){br_word(e.ExceptionType());continue;}
+   be_action_code(gs.cur(),s,st,r,code);}
+  ba_report(s,gs.g,st);ba_report(s,gs.t,st);}
+ for(const auto& l:st.events){br_int(int(l->Events.size()));}
+ br_end();}
