@@ -49,6 +49,7 @@
 #include <Standard_GUID.hxx>
 #include "tkbrep_probe_brepgraph.cxx"
 #include "tkbrep_probe_brepgraph_views.cxx"
+#include "tkbrep_probe_brepgraph_layers.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopoDS (tkbrep_probe_topods.cxx)
  {"br_topods", br_topods_case},
@@ -89,6 +90,7 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"br_adaptor", br_adaptor_case},
  // BRepGraph and BRepGraphInc (tkbrep_probe_brepgraph*.cxx)
  {"br_bgraph", br_bgraph_case},
+ {"br_blayer", br_blayer_case},
 };
 int main() {
  std::string line;

@@ -115,7 +115,7 @@ fn ref_groups(g: &BRepGraph) {
 fn fixed_guid() -> Guid {
     Guid::from_ascii(b"12345678-9abc-def0-1234-56789abcdef0").unwrap()
 }
-fn guid(value: Guid) {
+pub fn guid(value: Guid) {
     text(&value.to_c_string()[..36]);
 }
 fn stamp(g: &BRepGraph, st: &VersionStamp) {
@@ -266,7 +266,7 @@ fn tree_or_failure(s: &Scene, sh: Result<Shape, Failure>) -> Shape {
         }
     }
 }
-fn shapes(s: &Scene, g: &BRepGraph) {
+pub fn shapes(s: &Scene, g: &BRepGraph) {
     for sh in &s.graph.shapes {
         node(g.shapes().find_node(sh));
         flag(g.shapes().has_node(sh));
