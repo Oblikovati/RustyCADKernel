@@ -150314,6 +150314,1382 @@
       "rust_item": "rustycad_tkgeomalgo::geom2d_api::InterCurveCurve::intersector",
       "status": "implemented",
       "notes": "Geom2dAPI mapping (docs/tkgeomalgo-progress.md): one named Rust constructor or init_* method per native overload, native exceptions returned as Result; covered by crates/tkgeomalgo/tests/geom2dapi_inter_curve_curve.rs and compared with OCCT by tools/verify_tkgeomalgo_numeric.py (g2api_intercc)."
+    },
+    {
+      "upstream_id": "HatchGen_Domain()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::new",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain(const HatchGen_PointOnHatching&,const HatchGen_PointOnHatching&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::bounded",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain(const HatchGen_PointOnHatching&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::semi_infinite",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::SetPoints(const HatchGen_PointOnHatching&,const HatchGen_PointOnHatching&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::set_points",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::SetPoints()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::set_infinite_points",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::SetFirstPoint(const HatchGen_PointOnHatching&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::set_first_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::SetFirstPoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::set_first_infinite",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::SetSecondPoint(const HatchGen_PointOnHatching&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::set_second_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::SetSecondPoint()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::set_second_infinite",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::HasFirstPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::has_first_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::FirstPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::first_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::HasSecondPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::has_second_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::SecondPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::second_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_Domain::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_Domain.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::Domain::dump",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_ErrorStatus",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_ErrorStatus.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::ErrorStatus",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionType",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionType",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::SetIndex(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::set_index",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::Index() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::index",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::SetParameter(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::set_parameter",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::Parameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::parameter",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::SetPosition(TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::set_position",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::Position() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::position",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::SetStateBefore(TopAbs_State)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::set_state_before",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::StateBefore() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::state_before",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::SetStateAfter(TopAbs_State)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::set_state_after",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::StateAfter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::state_after",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::SetSegmentBeginning(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::set_segment_beginning",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::SegmentBeginning() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::segment_beginning",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::SetSegmentEnd(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::set_segment_end",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::SegmentEnd() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPoint::segment_end",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_IntersectionPoint::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_IntersectionPoint.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::IntersectionPointDump::dump",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnElement()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnElement.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnElement::new",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnElement(const IntRes2d_IntersectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnElement.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnElement::from_intersection_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnElement::SetIntersectionType(HatchGen_IntersectionType)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnElement.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnElement::set_intersection_type",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnElement::IntersectionType() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnElement.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnElement::intersection_type",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnElement::IsIdentical(const HatchGen_PointOnElement&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnElement.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnElement::is_identical",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnElement::IsDifferent(const HatchGen_PointOnElement&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnElement.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnElement::is_different",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnElement::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnElement.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnElement::dump",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::new",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching(const IntRes2d_IntersectionPoint&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::from_intersection_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching::AddPoint(const HatchGen_PointOnElement&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::add_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::nb_points",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching::RemPoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::rem_point",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching::ClrPoints()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::clr_points",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching::IsLower(const HatchGen_PointOnHatching&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::is_lower",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching::IsEqual(const HatchGen_PointOnHatching&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::is_equal",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching::IsGreater(const HatchGen_PointOnHatching&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::is_greater",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "HatchGen_PointOnHatching::Dump(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/HatchGen/HatchGen_PointOnHatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch_gen::PointOnHatching::dump",
+      "status": "implemented",
+      "notes": "HatchGen mapping (docs/tkgeomalgo-progress.md): the abstract HatchGen_IntersectionPoint is embedded in PointOnElement and PointOnHatching and reached through Deref, its pure virtual Dump is the trait IntersectionPointDump, overloads take distinct names (bounded/semi_infinite, set_infinite_points, set_first_infinite, set_second_infinite), the Dump members write the native std::cout text to a fmt::Write, and the sequence and domain accessors return the native Standard_OutOfRange and Standard_DomainError."
+    },
+    {
+      "upstream_id": "TopClass_Classifier2d::Reset",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_Classifier2d.pxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::reset",
+      "status": "implemented",
+      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
+    },
+    {
+      "upstream_id": "TopClass_Classifier2d::Compare",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_Classifier2d.pxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::compare",
+      "status": "implemented",
+      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
+    },
+    {
+      "upstream_id": "TopClass_FaceClassifier::Perform",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_FaceClassifier.pxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::perform",
+      "status": "implemented",
+      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
+    },
+    {
+      "upstream_id": "TopClass_FaceClassifier::State",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_FaceClassifier.pxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::state",
+      "status": "implemented",
+      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
+    },
+    {
+      "upstream_id": "TopClass_FaceClassifier::Edge",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_FaceClassifier.pxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::edge",
+      "status": "implemented",
+      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
+    },
+    {
+      "upstream_id": "TopClass_FaceClassifier::EdgeParameter",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/TopClass/TopClass_FaceClassifier.pxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::edge_parameter",
+      "status": "implemented",
+      "notes": "TopClass template (docs/geomalgo-design.md section 6): the namespace function over the fields of the instantiating class is a method of the generic that holds those fields (Classifier2d over a Classifier2dIntersector, FaceClassifier over a FaceExplorer); Geom2dHatch instantiates both."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::new",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier(Geom2dHatch_Elements&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::with_point",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::Perform(Geom2dHatch_Elements&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::perform",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::State() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::state",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::Rejected() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::rejected",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::NoWires() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::no_wires",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::Edge() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::edge",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::EdgeParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::edge_parameter",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Classifier::Position() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Classifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::FaceClassifier::position",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_FClass2dOfClassifier()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_FClass2dOfClassifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::new",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_FClass2dOfClassifier::Reset(const gp_Lin2d&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_FClass2dOfClassifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::reset",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_FClass2dOfClassifier::Compare(const Geom2dAdaptor_Curve&,TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_FClass2dOfClassifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::compare",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_FClass2dOfClassifier::Parameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_FClass2dOfClassifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::parameter",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_FClass2dOfClassifier::Intersector()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_FClass2dOfClassifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::intersector",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_FClass2dOfClassifier::ClosestIntersection() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_FClass2dOfClassifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::closest_intersection",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_FClass2dOfClassifier::State() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_FClass2dOfClassifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::state",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_FClass2dOfClassifier::IsHeadOrEnd() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_FClass2dOfClassifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::topclass::Classifier2d::is_head_or_end",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Element()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Element.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Element::default",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Element(const Geom2dAdaptor_Curve&,TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Element.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Element::new",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Element::Curve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Element.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Element::curve",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Element::ChangeCurve()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Element.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Element::change_curve",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Element::Orientation(TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Element.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Element::set_orientation",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Element::Orientation() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Element.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Element::orientation",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::new",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements(const Geom2dHatch_Elements&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::copy_of",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::Clear()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::clear",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::~Geom2dHatch_Elements()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::clear",
+      "status": "excluded",
+      "notes": "The inline destructor only calls Clear(); the Rust map frees its elements when the value is dropped."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::Bind(int,const Geom2dHatch_Element&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::bind",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::IsBound(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::is_bound",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::UnBind(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::unbind",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::Find(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::find",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::operator()(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::find",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::ChangeFind(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::change_find",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::operator()(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::change_find",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::CheckPoint(gp_Pnt2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::check_point",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::Reject(const gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::reject",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::Segment(const gp_Pnt2d&,gp_Lin2d&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::segment",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::OtherSegment(const gp_Pnt2d&,gp_Lin2d&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::other_segment",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::InitWires()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::init_wires",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::MoreWires() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::more_wires",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::NextWire()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::next_wire",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::RejectWire(const gp_Lin2d&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::reject_wire",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::InitEdges()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::init_edges",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::MoreEdges() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::more_edges",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::NextEdge()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::next_edge",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::RejectEdge(const gp_Lin2d&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::reject_edge",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements::CurrentEdge(Geom2dAdaptor_Curve&,TopAbs_Orientation&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Elements.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Elements::current_edge",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Intersector.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Intersector::new",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Intersector.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Intersector::default",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector::ConfusionTolerance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Intersector.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Intersector::confusion_tolerance",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector::SetConfusionTolerance(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Intersector.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Intersector::set_confusion_tolerance",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector::TangencyTolerance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Intersector.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Intersector::tangency_tolerance",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector::SetTangencyTolerance(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Intersector.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Intersector::set_tangency_tolerance",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector::Intersect(const Geom2dAdaptor_Curve&,const Geom2dAdaptor_Curve&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Intersector.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Intersector::intersect",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector::Perform(const gp_Lin2d&,double,double,const Geom2dAdaptor_Curve&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Intersector.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Intersector::perform",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector::LocalGeometry(const Geom2dAdaptor_Curve&,double,gp_Dir2d&,gp_Dir2d&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Intersector.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Intersector::local_geometry",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::default",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching(const Geom2dAdaptor_Curve&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::new",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::Curve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::curve",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::ChangeCurve()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::change_curve",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::TrimDone(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::set_trim_done",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::TrimDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::trim_done",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::TrimFailed(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::set_trim_failed",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::TrimFailed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::trim_failed",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::IsDone(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::set_is_done",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::is_done",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::Status(HatchGen_ErrorStatus)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::set_status",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::Status() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::status",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::AddPoint(const HatchGen_PointOnHatching&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::add_point",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::NbPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::nb_points",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::Point(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::point",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::ChangePoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::change_point",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::RemPoint(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::rem_point",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::ClrPoints()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::clr_points",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::AddDomain(const HatchGen_Domain&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::add_domain",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::NbDomains() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::nb_domains",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::Domain(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::domain",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::RemDomain(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::rem_domain",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::ClrDomains()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::clr_domains",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatching::ClassificationPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatching.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatching::classification_point",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher(const Geom2dHatch_Intersector&,double,double,bool,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::new",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Intersector(const Geom2dHatch_Intersector&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::set_intersector",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Intersector()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::intersector",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::ChangeIntersector()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::change_intersector",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Confusion2d(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::set_confusion2d",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Confusion2d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::confusion2d",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Confusion3d(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::set_confusion3d",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Confusion3d() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::confusion3d",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::KeepPoints(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::set_keep_points",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::KeepPoints() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::keep_points",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::KeepSegments(bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::set_keep_segments",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::KeepSegments() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::keep_segments",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Clear()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::clear",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::ElementCurve(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::element_curve",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::AddElement(const Geom2dAdaptor_Curve&,TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::add_element",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::AddElement(const occ::handle<Geom2d_Curve>&,TopAbs_Orientation)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::add_element_curve",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::RemElement(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::rem_element",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::ClrElements()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::clr_elements",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::HatchingCurve(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::hatching_curve",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::AddHatching(const Geom2dAdaptor_Curve&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::add_hatching",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::RemHatching(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::rem_hatching",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::ClrHatchings()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::clr_hatchings",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::NbPoints(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::nb_points",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Point(int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::point",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Trim()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::trim",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Trim(const Geom2dAdaptor_Curve&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::trim_curve",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Trim(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::trim_hatching",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::ComputeDomains()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::compute_domains",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::ComputeDomains(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::compute_domains_of",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::TrimDone(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::trim_done",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::TrimFailed(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::trim_failed",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::is_done",
+      "status": "excluded",
+      "notes": "Declared in Geom2dHatch_Hatcher.hxx but never defined natively (no body in the .lxx or .cxx, so a call would not link); there is nothing to port."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::IsDone(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::is_done",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Status(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::status",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::NbDomains(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::nb_domains",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Domain(int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::domain",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
+    },
+    {
+      "upstream_id": "Geom2dHatch_Hatcher::Dump() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Geom2dHatch/Geom2dHatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::geom2d_hatch::Hatcher::dump",
+      "status": "implemented",
+      "notes": "Geom2dHatch mapping (docs/tkgeomalgo-progress.md): curves are Geom2dAdaptor_Curve values owned by the elements and hatchings (constructors take them by value), setters and getters sharing a name take set_ prefixes, overloads take distinct names (add_element_curve, trim_curve, trim_hatching, compute_domains_of), output references become returned tuples, map and sequence lookups return the native Standard_NoSuchObject and Standard_OutOfRange, and Geom2dHatch_Classifier and Geom2dHatch_FClass2dOfClassifier are aliases of the TopClass generics."
     }
   ],
   "tests": [
@@ -237071,6 +238447,90 @@
       "rust_target": "geom2dapi_inter_curve_curve",
       "rust_test": "Geom2dAPI_InterCurveCurve_Test__OCC29162_TrimmedEllipseLineIntersection",
       "rust_source": "crates/tkgeomalgo/tests/geom2dapi_inter_curve_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements.CurrentEdge_ReturnsValidData",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dHatch_Elements_Test.cxx",
+      "source_sha256": "a788cb893824c1fa26fdaeb7e07a1c61176890adcddcf63b1c771ef0373e915c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dhatch_elements",
+      "rust_test": "Geom2dHatch_Elements__CurrentEdge_ReturnsValidData",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dhatch_elements.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements.BindAndFind",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dHatch_Elements_Test.cxx",
+      "source_sha256": "a788cb893824c1fa26fdaeb7e07a1c61176890adcddcf63b1c771ef0373e915c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dhatch_elements",
+      "rust_test": "Geom2dHatch_Elements__BindAndFind",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dhatch_elements.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dHatch_Elements.Clear_RemovesAll",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dHatch_Elements_Test.cxx",
+      "source_sha256": "a788cb893824c1fa26fdaeb7e07a1c61176890adcddcf63b1c771ef0373e915c",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dhatch_elements",
+      "rust_test": "Geom2dHatch_Elements__Clear_RemovesAll",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dhatch_elements.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector.LocalGeometry_Circle_ValidOutputs",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dHatch_Intersector_Test.cxx",
+      "source_sha256": "802540443b463a478368d825127a7c249fbc1f8f9e13bce889017c195fe38453",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dhatch_intersector",
+      "rust_test": "Geom2dHatch_Intersector__LocalGeometry_Circle_ValidOutputs",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dhatch_intersector.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector.LocalGeometry_Line_ZeroCurvature",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dHatch_Intersector_Test.cxx",
+      "source_sha256": "802540443b463a478368d825127a7c249fbc1f8f9e13bce889017c195fe38453",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dhatch_intersector",
+      "rust_test": "Geom2dHatch_Intersector__LocalGeometry_Line_ZeroCurvature",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dhatch_intersector.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "Geom2dHatch_Intersector.LocalGeometry_DegenerateCurve_InitializedOutputs",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GTests/Geom2dHatch_Intersector_Test.cxx",
+      "source_sha256": "802540443b463a478368d825127a7c249fbc1f8f9e13bce889017c195fe38453",
+      "rust_package": "rustycad-tkgeomalgo",
+      "rust_target": "geom2dhatch_intersector",
+      "rust_test": "Geom2dHatch_Intersector__LocalGeometry_DegenerateCurve_InitializedOutputs",
+      "rust_source": "crates/tkgeomalgo/tests/geom2dhatch_intersector.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"
