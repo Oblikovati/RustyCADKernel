@@ -43,6 +43,17 @@ fn store<T>(array: &mut Array1<'_, T>, index: i32, value: T) -> Result<(), Failu
         .map_err(|error| array_failure(error, "AppDef_Variational::Init"))
 }
 
+// The table kind of a constraint: 0 pass, 1 tangency, 2 curvature; None for
+// NoConstraint (not tabulated).
+fn constraint_kind(constraint: Constraint) -> Option<i32> {
+    match constraint {
+        Constraint::NoConstraint => None,
+        Constraint::PassPoint => Some(0),
+        Constraint::TangencyPoint => Some(1),
+        Constraint::CurvaturePoint => Some(2),
+    }
+}
+
 /// `NotParallel(T, V)`: a V not parallel to T, from T by adding 1 to x, then y, then z.
 fn not_parallel(t: Vector3) -> Option<Vector3> {
     let mut v: Vector3 = t;
@@ -81,47 +92,46 @@ impl Variational {
     /// `Init()`: the constraint tables of the current couples, then the
     /// over-constraint test and, when it passes, the smoothing criterion.
     pub(super) fn init(&mut self) -> Result<(), Failure> {
-        let couples: Array1<'static, ConstraintCouple> = self
-            .constraints
-            .get()
-            .ok_or_else(|| {
-                failure(
-                    "Standard_NullObject",
-                    "AppDef_Variational::Init: null constraints; expected a constraint array",
-                )
-            })?
-            .array1()
-            .clone();
-        let n: i32 = couples.length();
+        let couples: Array1<'static, ConstraintCouple> = self.constraint_couples()?;
         let ntheta: i32 = 2 * self.nb_p2d + 6 * self.nb_p3d;
-        // myNbConstraints (every couple, NoConstraint included) only sizes the tables.
-        self.tables = ConstraintTables {
+        self.tables = self.empty_tables(couples.length(), ntheta)?;
+        let (mut index, mut jndex, mut cur_multy_point) = (1, 1, 1);
+        for couple in couples.iter() {
+            let Some(kind) = constraint_kind(couple.constraint()) else {
+                // A NoConstraint couple takes no frame slot (natively curMultyPoint
+                // goes down by ntheta, then up by ntheta at the end of the loop).
+                continue;
+            };
+            store(&mut self.tables.types, index, couple.index())?;
+            store(&mut self.tables.types, index + 1, kind)?;
+            index += 2;
+            self.constraint_point(couple, kind, &mut jndex, cur_multy_point)?;
+            cur_multy_point += ntheta;
+        }
+        self.finish_init()
+    }
+
+    // A copy of the constraint couples; Standard_NullObject without them.
+    fn constraint_couples(&self) -> Result<Array1<'static, ConstraintCouple>, Failure> {
+        let couples = self.constraints.get().ok_or_else(|| {
+            failure(
+                "Standard_NullObject",
+                "AppDef_Variational::Init: null constraints; expected a constraint array",
+            )
+        })?;
+        Ok(couples.array1().clone())
+    }
+
+    // The constraint tables for `n` couples. myNbConstraints (every couple,
+    // NoConstraint included) only sizes the tables.
+    fn empty_tables(&self, n: i32, ntheta: i32) -> Result<ConstraintTables, Failure> {
+        Ok(ConstraintTables {
             values: table(2 * self.dimension * n)?,
             types: table(2 * n)?,
             ttheta: table(ntheta * n)?,
             tfthet: table(ntheta * n)?,
             ..ConstraintTables::default()
-        };
-        let (mut index, mut jndex, mut cur_multy_point) = (1, 1, 1);
-        for couple in couples.iter() {
-            let kind: i32 = match couple.constraint() {
-                Constraint::NoConstraint => {
-                    cur_multy_point -= ntheta;
-                    -1
-                }
-                Constraint::PassPoint => 0,
-                Constraint::TangencyPoint => 1,
-                Constraint::CurvaturePoint => 2,
-            };
-            if kind >= 0 {
-                store(&mut self.tables.types, index, couple.index())?;
-                store(&mut self.tables.types, index + 1, kind)?;
-                index += 2;
-                self.constraint_point(couple, kind, &mut jndex, cur_multy_point)?;
-            }
-            cur_multy_point += ntheta;
-        }
-        self.finish_init()
+        })
     }
 
     // OverConstraint Detection; the flag is only ever raised here.
