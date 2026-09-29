@@ -14,7 +14,6 @@
 // Rust translation of Geom2dHatch_Element.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2dHatch_Element`: an oriented boundary curve of the hatcher.
-use rustycad_tkernel::standard::Failure;
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
 use rustycad_tkg3d::top_abs::Orientation;
 
@@ -49,15 +48,6 @@ impl Element {
             my_curve: curve,
             my_orientation: orientation,
         }
-    }
-
-    /// The copy constructor: the curve is copied by value (a shallow adaptor copy
-    /// that shares the Geom2d curve); `element.copy()?`.
-    pub fn copy(&self) -> Result<Self, Failure> {
-        Ok(Self::new(
-            self.my_curve.shallow_adaptor()?,
-            self.my_orientation,
-        ))
     }
 
     /// Curve(): the curve of the element; `element.curve()`.
