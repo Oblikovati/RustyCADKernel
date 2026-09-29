@@ -27,6 +27,21 @@ The toolkit test inventory maps these suites (0 declarations):
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
 
+## API mapping
+
+- GccEnt: the static members of the `GccEnt` class are free functions of
+  `gcc_ent`; overloads take distinct names (`unqualified_lin`/`unqualified_circ`,
+  `enclosed_lin`/`enclosed_circ`, `outside_lin`/`outside_circ`), the `bool` overload of
+  `PositionFromString` returns `Option`, and `GccEnt_BadQualifier` is a `Failure` of
+  that type (`gcc_ent::bad_qualifier`).
+- GccInt: the abstract `GccInt_Bisec` is the trait `Bisec`, reached through
+  `Handle<dyn Bisec>` (docs/geom-design.md); the five bisectors are structs with plain
+  fields, since none has a mutator.
+- Hatch: overloads take distinct names (`add_line_at_distance`, `trim_range`,
+  `trim_segment`, `nb_intervals_on`, `set_tolerance`), output references become returned
+  tuples, and the friend-only data of `Hatch_Parameter` and `Hatch_Line` stays private
+  to the `hatch` module.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomAlgo --jobs 16 --source OCCT --native-build BUILD`
@@ -56,7 +71,36 @@ triangles: both orientations, coincident and collinear vertices, a normal that
 underflows below `gp::Resolution`, huge coordinates, points on edges and vertices,
 outside and off the plane, and 40 seeded random cases.
 
+GccEnt: `gccent_position` feeds the five positions to `GccEnt::PositionToString` and
+`GccEnt::Print` with eight names for both `PositionFromString` overloads (case variants,
+the empty string, an unknown name, a trailing blank); `gccent_qualified` builds qualified
+circles and lines with every position and the seven GccEnt makers (55 requests).
+
+GccInt: `gccint_bisec` builds the five bisector kinds on three frames and calls all six
+accessors, the RTTI name and `IsKind` (15 requests).
+
+Hatch: `hatch_hatcher` adds lines of the four kinds, trims them with whole lines, parameter
+ranges and oriented segments, and queries every line and interval including the
+out-of-range indices around them: a closed square in both modes and orientations, open
+and infinite intervals, polygon vertices on hatching lines, two intersections closer than
+the tolerance, parallel and identical trimming lines, degenerate segments, segments near
+and beyond RealLast, a negative tolerance, and 24 seeded random polygons (38 requests).
+
 ## Preserved native behaviour
 
 - `Intf::PlaneEquation` of a degenerate triangle (normal shorter than
   `gp::Resolution`) returns the undivided normal and a polar distance of 0.
+- `GccEnt_QualifiedCirc::Qualifier` and `GccEnt_QualifiedLin::Qualifier` return the stored
+  `GccEnt_unqualified` for an unqualified argument, although the header documents
+  `GccEnt_noqualifier`.
+- `GccInt_Bisec` accessors raise `Standard_NotImplemented`, not the `Standard_DomainError`
+  that the header documents.
+- `Hatch_Line::AddIntersection` removes an existing intersection closer than the tolerance
+  and drops the new one (akm OCC109), so two close crossings cancel each other.
+- `Hatch_Hatcher::StartIndex` and `EndIndex` accept J = 1 on a line without intersections
+  in unoriented mode (they return 0, 0), where `Start` and `End` raise
+  `Standard_OutOfRange`. Every line and intersection index outside its sequence raises
+  `Standard_OutOfRange`, as the native `NCollection_Sequence` bounds check does.
+- `Hatch_Hatcher::Trim(P1, P2)` scales a segment vector whose X (else Y) exceeds
+  0.9 RealLast by the inverse of that component; a vector that overflowed to infinity
+  becomes NaN and the segment is ignored.

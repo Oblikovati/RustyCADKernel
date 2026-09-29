@@ -3,6 +3,9 @@
 // uses a subset of them, so unused ones are expected in these two modules.
 #[allow(dead_code, unused_imports)]
 pub mod common;
+pub mod gcc_ent;
+pub mod gcc_int;
+pub mod hatch;
 pub mod intf;
 #[allow(dead_code)]
 #[path = "../../../tkg2d/examples/g2_probe/print.rs"]

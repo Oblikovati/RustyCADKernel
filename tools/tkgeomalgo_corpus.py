@@ -13,3 +13,9 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     """Append every TKGeomAlgo request family in a fixed order."""
     # Intf (tkgeomalgo_corpus_intf.py)
     __import__('tkgeomalgo_corpus_intf').append_intf_requests(requests)
+    # GccEnt (tkgeomalgo_corpus_gccent.py)
+    __import__('tkgeomalgo_corpus_gccent').append_gccent_requests(requests)
+    # GccInt (tkgeomalgo_corpus_gccint.py)
+    __import__('tkgeomalgo_corpus_gccint').append_gccint_requests(requests)
+    # Hatch (tkgeomalgo_corpus_hatch.py)
+    __import__('tkgeomalgo_corpus_hatch').append_hatch_requests(requests)

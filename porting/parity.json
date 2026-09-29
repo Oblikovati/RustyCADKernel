@@ -91825,7 +91825,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::system_id",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) — Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (exact names, prefixes Linux/IRIX/OSF; system_id_of) \u2014 Linux gives OSD_LinuxREDHAT, Darwin OSD_MacOs. Windows returns OSD_WindowsNT. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::HostName()",
@@ -91857,7 +91857,7 @@
       "source": "src/FoundationClasses/TKernel/OSD/OSD_Host.hxx",
       "rust_item": "rustycad_tkernel::osd::Host::machine_type",
       "status": "implemented",
-      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) — Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
+      "notes": "Queries go through the injectable HostSource (NativeHost: uname/gethostname/gethostbyname FFI). Unix: the native uname sysname table (machine_type_of) \u2014 Linux and FreeBSD give OSD_LIN, Darwin OSD_MAC. Windows returns OSD_PC. Probe osd_host."
     },
     {
       "upstream_id": "OSD_Host::Failed() const",
@@ -145250,6 +145250,670 @@
       "rust_item": "rustycad_tkbrep::brep_graph::transform::transform_node",
       "status": "implemented",
       "notes": "Manual BRepGraph wave-2c mapping (docs/topology-design.md section 11.13): the native policy checks, then BRepGraph_Copy (copy::perform or copy::copy_node, default cache policy), then the copied-range transform; a self transform (the same source and target graph) is the separate function transform::transform_node_in_place taking the graph mutably; C++ exceptions are Failure errors. Compared with OCCT by the br_balgo transform requests."
+    },
+    {
+      "upstream_id": "GccEnt::Print(GccEnt_Position,Standard_OStream&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::print",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::PositionToString(GccEnt_Position)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::position_to_string",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::PositionFromString(const char*)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::position_from_string",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::PositionFromString(const char*,GccEnt_Position&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::try_position_from_string",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::Unqualified(const gp_Lin2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::unqualified_lin",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::Unqualified(const gp_Circ2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::unqualified_circ",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::Enclosing(const gp_Circ2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::enclosing",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::Enclosed(const gp_Lin2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::enclosed_lin",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::Enclosed(const gp_Circ2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::enclosed_circ",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::Outside(const gp_Lin2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::outside_lin",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt::Outside(const gp_Circ2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::outside_circ",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_BadQualifier",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_BadQualifier.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::bad_qualifier",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_Position",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_Position.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::Position",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedCirc(const gp_Circ2d&,GccEnt_Position)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedCirc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedCirc::new",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedCirc::Qualified() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedCirc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedCirc::qualified",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedCirc::Qualifier() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedCirc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedCirc::qualifier",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedCirc::IsUnqualified() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedCirc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedCirc::is_unqualified",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedCirc::IsEnclosing() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedCirc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedCirc::is_enclosing",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedCirc::IsEnclosed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedCirc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedCirc::is_enclosed",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedCirc::IsOutside() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedCirc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedCirc::is_outside",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedLin(const gp_Lin2d&,GccEnt_Position)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedLin.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedLin::new",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedLin::Qualified() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedLin.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedLin::qualified",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedLin::Qualifier() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedLin.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedLin::qualifier",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedLin::IsUnqualified() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedLin.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedLin::is_unqualified",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedLin::IsEnclosed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedLin.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedLin::is_enclosed",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccEnt_QualifiedLin::IsOutside() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccEnt/GccEnt_QualifiedLin.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_ent::QualifiedLin::is_outside",
+      "status": "implemented",
+      "notes": "GccEnt mapping (docs/tkgeomalgo-progress.md): the static members of the GccEnt class are free functions of rustycad_tkgeomalgo::gcc_ent, overloads take distinct names (unqualified_lin/unqualified_circ, enclosed_lin/enclosed_circ, outside_lin/outside_circ), the bool overload of PositionFromString with an output reference returns Option, Print writes to std::io::Write, and GccEnt_BadQualifier is a Failure of that exception type."
+    },
+    {
+      "upstream_id": "GccInt_BCirc(const gp_Circ2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BCirc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::BCirc::new",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BCirc::Circle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BCirc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BCirc as rustycad_tkgeomalgo::gcc_int::Bisec>::circle",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BCirc::ArcType() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BCirc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BCirc as rustycad_tkgeomalgo::gcc_int::Bisec>::arc_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BCirc::DEFINE_STANDARD_RTTIEXT(GccInt_BCirc,GccInt_Bisec)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BCirc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BCirc as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BElips(const gp_Elips2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BElips.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::BElips::new",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BElips::Ellipse() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BElips.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BElips as rustycad_tkgeomalgo::gcc_int::Bisec>::ellipse",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BElips::ArcType() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BElips.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BElips as rustycad_tkgeomalgo::gcc_int::Bisec>::arc_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BElips::DEFINE_STANDARD_RTTIEXT(GccInt_BElips,GccInt_Bisec)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BElips.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BElips as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BHyper(const gp_Hypr2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BHyper.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::BHyper::new",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BHyper::Hyperbola() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BHyper.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BHyper as rustycad_tkgeomalgo::gcc_int::Bisec>::hyperbola",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BHyper::ArcType() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BHyper.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BHyper as rustycad_tkgeomalgo::gcc_int::Bisec>::arc_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BHyper::DEFINE_STANDARD_RTTIEXT(GccInt_BHyper,GccInt_Bisec)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BHyper.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BHyper as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BLine(const gp_Lin2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BLine.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::BLine::new",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BLine::Line() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BLine.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BLine as rustycad_tkgeomalgo::gcc_int::Bisec>::line",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BLine::ArcType() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BLine.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BLine as rustycad_tkgeomalgo::gcc_int::Bisec>::arc_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BLine::DEFINE_STANDARD_RTTIEXT(GccInt_BLine,GccInt_Bisec)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BLine.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BLine as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BParab(const gp_Parab2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BParab.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::BParab::new",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BParab::Parabola() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BParab.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BParab as rustycad_tkgeomalgo::gcc_int::Bisec>::parabola",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BParab::ArcType() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BParab.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BParab as rustycad_tkgeomalgo::gcc_int::Bisec>::arc_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_BParab::DEFINE_STANDARD_RTTIEXT(GccInt_BParab,GccInt_Bisec)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_BParab.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::gcc_int::BParab as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_Bisec::ArcType() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_Bisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::Bisec::arc_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_Bisec::Point() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_Bisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::Bisec::point",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_Bisec::Line() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_Bisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::Bisec::line",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_Bisec::Circle() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_Bisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::Bisec::circle",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_Bisec::Hyperbola() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_Bisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::Bisec::hyperbola",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_Bisec::Parabola() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_Bisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::Bisec::parabola",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_Bisec::Ellipse() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_Bisec.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::Bisec::ellipse",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_Bisec::DEFINE_STANDARD_RTTIEXT(GccInt_Bisec,Standard_Transient)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_Bisec.hxx",
+      "rust_item": "<dyn rustycad_tkgeomalgo::gcc_int::Bisec as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "GccInt_IType",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/GccInt/GccInt_IType.hxx",
+      "rust_item": "rustycad_tkgeomalgo::gcc_int::IType",
+      "status": "implemented",
+      "notes": "GccInt mapping (docs/geom-design.md, docs/tkgeomalgo-progress.md): the abstract GccInt_Bisec is the trait Bisec reached through Handle<dyn Bisec>; each concrete bisector is a struct with a plain field (no mutators) that overrides arc_type and its one accessor; the base accessors return the native Standard_NotImplemented as a Failure; DEFINE_STANDARD_RTTIEXT maps to the registered runtime type."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher(double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::new",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::Tolerance(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::set_tolerance",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::Tolerance() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::tolerance",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::AddLine(const gp_Lin2d&,Hatch_LineForm)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::add_line",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::AddLine(const gp_Dir2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::add_line_at_distance",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::AddXLine(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::add_x_line",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::AddYLine(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::add_y_line",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::Trim(const gp_Lin2d&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::trim",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::Trim(const gp_Lin2d&,double,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::trim_range",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::Trim(const gp_Pnt2d&,const gp_Pnt2d&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::trim_segment",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::NbIntervals() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::nb_intervals",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::NbLines() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::nb_lines",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::Line(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::line",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::LineForm(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::line_form",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::IsXLine(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::is_x_line",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::IsYLine(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::is_y_line",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::Coordinate(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::coordinate",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::NbIntervals(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::nb_intervals_on",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::Start(int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::start",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::StartIndex(int,int,int&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::start_index",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::End(int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::end",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Hatcher::EndIndex(int,int,int&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Hatcher.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Hatcher::end_index",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Line()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Line.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::hatch::Line as Default>::default",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Line(const gp_Lin2d&,Hatch_LineForm)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Line.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Line::new",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Line::AddIntersection(double,bool,int,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Line.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Line::add_intersection",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_LineForm",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_LineForm.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::LineForm",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Parameter()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Parameter.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::hatch::Parameter as Default>::default",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
+    },
+    {
+      "upstream_id": "Hatch_Parameter(double,bool,int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Hatch/Hatch_Parameter.hxx",
+      "rust_item": "rustycad_tkgeomalgo::hatch::Parameter::new",
+      "status": "implemented",
+      "notes": "Hatch mapping (docs/tkgeomalgo-progress.md): overloads take distinct names (add_line/add_line_at_distance, trim/trim_range/trim_segment, nb_intervals/nb_intervals_on, tolerance/set_tolerance), default constructors are Default, output references become returned tuples, and the Standard_OutOfRange of the native sequence bounds and of Coordinate become Failure results; the friend-only data of Hatch_Parameter and Hatch_Line stays private to the hatch module."
     }
   ],
   "tests": [

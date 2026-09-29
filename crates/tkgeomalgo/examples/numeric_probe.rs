@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
-use ga_probe::intf;
+use ga_probe::{gcc_ent, gcc_int, hatch, intf};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -12,6 +12,13 @@ type ProbeCase = fn(&[f64]);
 const PROBE_CASES: &[(&str, ProbeCase)] = &[
     // Intf (ga_probe/intf.rs)
     ("intf_triangle", intf::triangle_case),
+    // GccEnt (ga_probe/gcc_ent.rs)
+    ("gccent_position", gcc_ent::position_case),
+    ("gccent_qualified", gcc_ent::qualified_case),
+    // GccInt (ga_probe/gcc_int.rs)
+    ("gccint_bisec", gcc_int::bisec_case),
+    // Hatch (ga_probe/hatch.rs)
+    ("hatch_hatcher", hatch::hatcher_case),
 ];
 
 fn main() {

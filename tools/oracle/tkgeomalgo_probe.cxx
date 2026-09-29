@@ -21,9 +21,19 @@
 #include <gp_XYZ.hxx>
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkgeomalgo_probe_intf.cxx"
+#include "tkgeomalgo_probe_gccent.cxx"
+#include "tkgeomalgo_probe_gccint.cxx"
+#include "tkgeomalgo_probe_hatch.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf.cxx)
  {"intf_triangle", ga_intf_triangle_case},
+ // GccEnt (tkgeomalgo_probe_gccent.cxx)
+ {"gccent_position", ga_gccent_position_case},
+ {"gccent_qualified", ga_gccent_qualified_case},
+ // GccInt (tkgeomalgo_probe_gccint.cxx)
+ {"gccint_bisec", ga_gccint_bisec_case},
+ // Hatch (tkgeomalgo_probe_hatch.cxx)
+ {"hatch_hatcher", ga_hatch_hatcher_case},
 };
 int main() {
  std::string line;
