@@ -187,8 +187,25 @@ impl Variational {
             v3d: table(self.nb_p3d)?,
             v2d: table(self.nb_p2d)?,
         };
+        if !self.read_point_vectors(ipoint, curvature, &mut vectors)? {
+            let what: &str = if curvature { "curvatures" } else { "tangents" };
+            return Err(construction(&format!(
+                "point {ipoint} has no {what}; expected them for its constraint"
+            )));
+        }
+        Ok(vectors)
+    }
+
+    // The tangents (or curvatures) of `ipoint` read by the line overload of the
+    // dimensions it has; false when the multipoint has none.
+    fn read_point_vectors(
+        &self,
+        ipoint: i32,
+        curvature: bool,
+        vectors: &mut PointVectors,
+    ) -> Result<bool, Failure> {
         let (v3d, v2d) = (&mut vectors.v3d, &mut vectors.v2d);
-        let found: bool = match (self.nb_p3d != 0, self.nb_p2d != 0, curvature) {
+        Ok(match (self.nb_p3d != 0, self.nb_p2d != 0, curvature) {
             (false, true, false) => self.ssp.tangency_2d(ipoint, v2d)?,
             (true, false, false) => self.ssp.tangency_3d(ipoint, v3d)?,
             (true, true, false) => self.ssp.tangency(ipoint, v3d, v2d)?,
@@ -196,14 +213,7 @@ impl Variational {
             (true, false, true) => self.ssp.curvature_3d(ipoint, v3d)?,
             (true, true, true) => self.ssp.curvature(ipoint, v3d, v2d)?,
             (false, false, _) => true,
-        };
-        if !found {
-            let what: &str = if curvature { "curvatures" } else { "tangents" };
-            return Err(construction(&format!(
-                "point {ipoint} has no {what}; expected them for its constraint"
-            )));
-        }
-        Ok(vectors)
+        })
     }
 
     // Tangency: the unit tangents, 3 of 6 entries per 3D point and 2 of 4 per 2D one.
