@@ -82,6 +82,21 @@ fn raise_quadratic_weight(w_quadratic: &mut f64, j1cibl: f64, w_quality: f64) {
     }
 }
 
+// `new_knots` as `knots` with `tpara` inserted after knot `numint`.
+fn insert_knot(
+    new_knots: &mut Array1<'_, f64>,
+    knots: &Array1<'_, f64>,
+    (numint, tpara): (i32, f64),
+) -> Result<(), Failure> {
+    for i in 1..=numint {
+        put(new_knots, i, at(knots, i)?)?;
+    }
+    for i in numint + 1..=knots.length() {
+        put(new_knots, i + 1, at(knots, i)?)?;
+    }
+    put(new_knots, numint + 1, tpara)
+}
+
 // The curve of `handle`, refused when null.
 fn curve_of(handle: &Handle<Curve>) -> Result<&Curve, Failure> {
     handle
@@ -238,15 +253,7 @@ impl Variational {
             curve.base(),
             curv_tol,
         )?;
-        let mut new_knots = c_new.knots();
-        for i in 1..=numint {
-            put(&mut new_knots, i, at(&knots, i)?)?;
-        }
-        for i in numint + 1..=knots.length() {
-            put(&mut new_knots, i + 1, at(&knots, i)?)?;
-        }
-        put(&mut new_knots, numint + 1, tpara)?;
-        drop(new_knots);
+        insert_knot(&mut c_new.knots(), &knots, (numint, tpara))?;
         Ok(Handle::new(c_new))
     }
 
