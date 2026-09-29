@@ -22,6 +22,7 @@
 pub mod adv_app2var;
 pub mod app_cont;
 pub mod app_par_curves;
+mod array_access;
 pub mod bnd_lib;
 pub mod cpnts;
 pub mod extrema;
@@ -36,6 +37,8 @@ pub mod gce2d;
 pub mod gcpnts;
 pub mod geom2d_convert;
 pub mod geom_bnd_lib;
+pub mod geom_convert;
+pub mod geom_lib;
 pub mod geom_lprop;
 pub mod geom_tools;
 pub mod gprop;

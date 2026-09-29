@@ -111,8 +111,9 @@ impl BSplineCurveKnotSplitting {
 }
 
 // The native Split table: the first knot, each inner knot below the continuity, then
-// the last knot.
-fn split_knots(
+// the last knot. GeomConvert's curve and surface knot splittings compute the same
+// table word for word, so they share this function.
+pub(crate) fn split_knots(
     mults: &Array1<'static, i32>,
     [first_index, last_index]: [i32; 2],
     degree: i32,

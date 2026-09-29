@@ -121378,6 +121378,1590 @@
       "rust_item": "rustycad_tkgeombase::extrema::POnSurfParams::get_indices",
       "status": "implemented",
       "notes": "Extrema mapping (docs/tkgeombase-progress.md): each class drops the Extrema_ prefix; the class templates are generic Rust types over the ExtremaCurveTool trait (CurveTool, Curve2dTool) and the native aliases are type aliases; constructors and overloads take distinct Rust names (new, with_*, perform_*, initialize_*), default arguments are explicit, output references are returned values, Values(X, F, G, H) is values_hessian, objects that keep a curve or surface borrow it, and every native exception (including a null dereference, reported as Standard_NullObject) becomes a Failure error."
+    },
+    {
+      "upstream_id": "GeomConvert::SplitBSplineCurve(const occ::handle<Geom_BSplineCurve>&,int,int,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::split_bspline_curve_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::SplitBSplineCurve(const occ::handle<Geom_BSplineCurve>&,double,double,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::split_bspline_curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::SplitBSplineSurface(const occ::handle<Geom_BSplineSurface>&,int,int,int,int,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::split_bspline_surface_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::SplitBSplineSurface(const occ::handle<Geom_BSplineSurface>&,int,int,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::split_bspline_surface_one_direction_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::SplitBSplineSurface(const occ::handle<Geom_BSplineSurface>&,double,double,double,double,double,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::split_bspline_surface",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::SplitBSplineSurface(const occ::handle<Geom_BSplineSurface>&,double,double,bool,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::split_bspline_surface_one_direction",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::CurveToBSplineCurve(const occ::handle<Geom_Curve>&,Convert_ParameterisationType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::curve_to_bspline_curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::SurfaceToBSplineSurface(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::surface_to_bspline_surface",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::ConcatG1(NCollection_Array1<occ::handle<Geom_BSplineCurve>>&,const NCollection_Array1<double>&,occ::handle<NCollection_HArray1<occ::handle<Geom_BSplineCurve>>>&,bool&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::concat_g1",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::ConcatC1(NCollection_Array1<occ::handle<Geom_BSplineCurve>>&,const NCollection_Array1<double>&,occ::handle<NCollection_HArray1<int>>&,occ::handle<NCollection_HArray1<occ::handle<Geom_BSplineCurve>>>&,bool&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::concat_c1",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::ConcatC1(NCollection_Array1<occ::handle<Geom_BSplineCurve>>&,const NCollection_Array1<double>&,occ::handle<NCollection_HArray1<int>>&,occ::handle<NCollection_HArray1<occ::handle<Geom_BSplineCurve>>>&,bool&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::concat_c1_with_angular",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::C0BSplineToC1BSplineCurve(occ::handle<Geom_BSplineCurve>&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::c0_bspline_to_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::C0BSplineToArrayOfC1BSplineCurve(const occ::handle<Geom_BSplineCurve>&,occ::handle<NCollection_HArray1<occ::handle<Geom_BSplineCurve>>>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::c0_bspline_to_array_of_c1_bspline_curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert::C0BSplineToArrayOfC1BSplineCurve(const occ::handle<Geom_BSplineCurve>&,occ::handle<NCollection_HArray1<occ::handle<Geom_BSplineCurve>>>&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::c0_bspline_to_array_of_c1_bspline_curve_with_angular",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxCurve(const occ::handle<Geom_Curve>&,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxCurve::from_curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxCurve(const occ::handle<Adaptor3d_Curve>&,double,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxCurve::from_adaptor",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxCurve::Curve() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxCurve::curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxCurve::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxCurve::is_done",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxCurve::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxCurve::has_result",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxCurve::MaxError() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxCurve::max_error",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxCurve::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxCurve::dump",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxSurface(const occ::handle<Geom_Surface>&,double,GeomAbs_Shape,GeomAbs_Shape,int,int,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxSurface::from_surface",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxSurface(const occ::handle<Adaptor3d_Surface>&,double,GeomAbs_Shape,GeomAbs_Shape,int,int,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxSurface::from_adaptor",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxSurface::Surface() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxSurface::surface",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxSurface::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxSurface::is_done",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxSurface::HasResult() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxSurface::has_result",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxSurface::MaxError() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxSurface::max_error",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ApproxSurface::Dump(Standard_OStream&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ApproxSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ApproxSurface::dump",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveKnotSplitting(const occ::handle<Geom_BSplineCurve>&,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveKnotSplitting::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveKnotSplitting::NbSplits() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveKnotSplitting::nb_splits",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveKnotSplitting::Splitting(NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveKnotSplitting::splitting",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveKnotSplitting::SplitValue(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveKnotSplitting::split_value",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveToBezierCurve(const occ::handle<Geom_BSplineCurve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveToBezierCurve::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveToBezierCurve(const occ::handle<Geom_BSplineCurve>&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveToBezierCurve::with_range",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveToBezierCurve::Arc(int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveToBezierCurve::arc",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveToBezierCurve::Arcs(NCollection_Array1<occ::handle<Geom_BezierCurve>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveToBezierCurve::arcs",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveToBezierCurve::Knots(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveToBezierCurve::knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineCurveToBezierCurve::NbArcs() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineCurveToBezierCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineCurveToBezierCurve::nb_arcs",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceKnotSplitting(const occ::handle<Geom_BSplineSurface>&,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceKnotSplitting::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceKnotSplitting::NbUSplits() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceKnotSplitting::nb_u_splits",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceKnotSplitting::NbVSplits() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceKnotSplitting::nb_v_splits",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceKnotSplitting::Splitting(NCollection_Array1<int>&,NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceKnotSplitting::splitting",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceKnotSplitting::USplitValue(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceKnotSplitting::u_split_value",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceKnotSplitting::VSplitValue(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceKnotSplitting::v_split_value",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceToBezierSurface(const occ::handle<Geom_BSplineSurface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceToBezierSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceToBezierSurface::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceToBezierSurface(const occ::handle<Geom_BSplineSurface>&,double,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceToBezierSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceToBezierSurface::with_range",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceToBezierSurface::Patch(int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceToBezierSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceToBezierSurface::patch",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceToBezierSurface::Patches(NCollection_Array2<occ::handle<Geom_BezierSurface>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceToBezierSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceToBezierSurface::patches",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceToBezierSurface::UKnots(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceToBezierSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceToBezierSurface::u_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceToBezierSurface::VKnots(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceToBezierSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceToBezierSurface::v_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceToBezierSurface::NbUPatches() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceToBezierSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceToBezierSurface::nb_u_patches",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_BSplineSurfaceToBezierSurface::NbVPatches() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_BSplineSurfaceToBezierSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::BSplineSurfaceToBezierSurface::nb_v_patches",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface(const NCollection_Array2<occ::handle<Geom_BezierSurface>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface(const NCollection_Array2<occ::handle<Geom_BezierSurface>>&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::with_tolerance",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface(const NCollection_Array2<occ::handle<Geom_BezierSurface>>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,GeomAbs_Shape,GeomAbs_Shape,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::with_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::NbUKnots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::nb_u_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::NbUPoles() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::nb_u_poles",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::NbVKnots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::nb_v_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::NbVPoles() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::nb_v_poles",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::Poles() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::poles",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::UKnots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::u_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::UDegree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::u_degree",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::VKnots() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::v_knots",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::VDegree() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::v_degree",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::UMultiplicities() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::u_multiplicities",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::VMultiplicities() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::v_multiplicities",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompBezierSurfacesToBSplineSurface::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompBezierSurfacesToBSplineSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompBezierSurfacesToBSplineSurface::is_done",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurve(Convert_ParameterisationType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompCurveToBSplineCurve::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurve(const occ::handle<Geom_BoundedCurve>&,Convert_ParameterisationType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompCurveToBSplineCurve::with_curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurve::Add(const occ::handle<Geom_BoundedCurve>&,double,bool,bool,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompCurveToBSplineCurve::add",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurve::BSplineCurve() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompCurveToBSplineCurve::bspline_curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurve::Clear()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CompCurveToBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CompCurveToBSplineCurve::clear",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_ConvType",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_ConvType.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::ConvType",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::with_curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::Init(const occ::handle<Geom_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::init",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::ConvertToAnalytical(double,occ::handle<Geom_Curve>&,double,double,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::convert_to_analytical",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::ComputeCurve(const occ::handle<Geom_Curve>&,double,double,double,double&,double&,double&,GeomConvert_ConvType,GeomAbs_CurveType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::compute_curve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::ComputeCircle(const occ::handle<Geom_Curve>&,double,double,double,double&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::compute_circle",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::ComputeEllipse(const occ::handle<Geom_Curve>&,double,double,double,double&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::compute_ellipse",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::ComputeLine(const occ::handle<Geom_Curve>&,double,double,double,double&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::compute_line",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::IsLinear(const NCollection_Array1<gp_Pnt>&,double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::is_linear",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::GetLine(const gp_Pnt&,const gp_Pnt&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::get_line",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::GetCircle(gp_Circ&,const gp_Pnt&,const gp_Pnt&,const gp_Pnt&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::get_circle",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::Gap() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::gap",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::GetConvType() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::get_conv_type",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::SetConvType(GeomConvert_ConvType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::set_conv_type",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::GetTarget() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::get_target",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_CurveToAnaCurve::SetTarget(GeomAbs_CurveType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_CurveToAnaCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::CurveToAnaCurve::set_target",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncConeLSDist()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncConeLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncConeLSDist::default",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncConeLSDist(const occ::handle<NCollection_HArray1<gp_XYZ>>&,const gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncConeLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncConeLSDist::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncConeLSDist::SetPoints(const occ::handle<NCollection_HArray1<gp_XYZ>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncConeLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncConeLSDist::set_points",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncConeLSDist::SetDir(const gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncConeLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncConeLSDist::set_dir",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncConeLSDist::NbVariables() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncConeLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncConeLSDist::variables",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncConeLSDist::Value(const math_Vector&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncConeLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncConeLSDist::value",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncCylinderLSDist()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncCylinderLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::default",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncCylinderLSDist(const occ::handle<NCollection_HArray1<gp_XYZ>>&,const gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncCylinderLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncCylinderLSDist::SetPoints(const occ::handle<NCollection_HArray1<gp_XYZ>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncCylinderLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::set_points",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncCylinderLSDist::SetDir(const gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncCylinderLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::set_dir",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncCylinderLSDist::NbVariables() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncCylinderLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::variables",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncCylinderLSDist::Value(const math_Vector&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncCylinderLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::value",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncCylinderLSDist::Gradient(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncCylinderLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::gradient",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncCylinderLSDist::Values(const math_Vector&,double&,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncCylinderLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncCylinderLSDist::values",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncSphereLSDist()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncSphereLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncSphereLSDist::default",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncSphereLSDist(const occ::handle<NCollection_HArray1<gp_XYZ>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncSphereLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncSphereLSDist::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncSphereLSDist::SetPoints(const occ::handle<NCollection_HArray1<gp_XYZ>>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncSphereLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncSphereLSDist::set_points",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncSphereLSDist::NbVariables() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncSphereLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncSphereLSDist::variables",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncSphereLSDist::Value(const math_Vector&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncSphereLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncSphereLSDist::value",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncSphereLSDist::Gradient(const math_Vector&,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncSphereLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncSphereLSDist::gradient",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_FuncSphereLSDist::Values(const math_Vector&,double&,math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_FuncSphereLSDist.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::FuncSphereLSDist::values",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::new",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::with_surface",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf::Init(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::init",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf::SetConvType(GeomConvert_ConvType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::set_conv_type",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf::SetTarget(GeomAbs_SurfaceType)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::set_target",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf::Gap() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::gap",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf::ConvertToAnalytical(double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::convert_to_analytical",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf::ConvertToAnalytical(double,double,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::convert_to_analytical_in",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf::IsSame(const occ::handle<Geom_Surface>&,const occ::handle<Geom_Surface>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::is_same",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_SurfToAnaSurf::IsCanonical(const occ::handle<Geom_Surface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_SurfToAnaSurf.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::SurfToAnaSurf::is_canonical",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_Units::RadianToDegree(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_Units.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::Units::radian_to_degree",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_Units::DegreeToRadian(const occ::handle<Geom2d_Curve>&,const occ::handle<Geom_Surface>&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_Units.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::Units::degree_to_radian",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomConvert_Units::MirrorPCurve(const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomConvert/GeomConvert_Units.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_convert::Units::mirror_pcurve",
+      "status": "implemented",
+      "notes": "GeomConvert mapping (docs/tkgeombase-progress.md): the static members of GeomConvert are free functions, each class is a struct, overloads take distinct Rust names, default arguments are explicit, native exceptions are Failure values and in-out references stay &mut parameters."
+    },
+    {
+      "upstream_id": "GeomLib::To3d(const gp_Ax2&,const occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::to_3d",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::GTransform(const occ::handle<Geom2d_Curve>&,const gp_GTrsf2d&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::gtransform",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::SameRange(double,const occ::handle<Geom2d_Curve>&,double,double,double,double,occ::handle<Geom2d_Curve>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::same_range",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::BuildCurve3d(double,Adaptor3d_CurveOnSurface&,double,double,occ::handle<Geom_Curve>&,double&,double&,GeomAbs_Shape,int,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::build_curve3d",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::AdjustExtremity(occ::handle<Geom_BoundedCurve>&,const gp_Pnt&,const gp_Pnt&,const gp_Vec&,const gp_Vec&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::adjust_extremity",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::ExtendCurveToPoint(occ::handle<Geom_BoundedCurve>&,const gp_Pnt&,int,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::extend_curve_to_point",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::ExtendSurfByLength(occ::handle<Geom_BoundedSurface>&,double,int,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::extend_surf_by_length",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::AxeOfInertia(const NCollection_Array1<gp_Pnt>&,gp_Ax2&,bool&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::axe_of_inertia",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::Inertia(const NCollection_Array1<gp_Pnt>&,gp_Pnt&,gp_Dir&,gp_Dir&,double&,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::inertia",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::RemovePointsFromArray(int,const NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::remove_points_from_array",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::DensifyArray1OfReal(int,const NCollection_Array1<double>&,NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::densify_array1_of_real",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::FuseIntervals(const NCollection_Array1<double>&,const NCollection_Array1<double>&,NCollection_LinearVector<double>&,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::fuse_intervals",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::EvalMaxParametricDistance(const Adaptor3d_Curve&,const Adaptor3d_Curve&,double,const NCollection_Array1<double>&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::eval_max_parametric_distance",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::EvalMaxDistanceAlongParameter(const Adaptor3d_Curve&,const Adaptor3d_Curve&,double,const NCollection_Array1<double>&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::eval_max_distance_along_parameter",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::CancelDenominatorDerivative(occ::handle<Geom_BSplineSurface>&,bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::cancel_denominator_derivative",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::NormEstim(const occ::handle<Geom_Surface>&,const gp_Pnt2d&,double,gp_Dir&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::norm_estim",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::IsClosed(const occ::handle<Geom_Surface>&,double,bool&,bool&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::is_closed",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::IsBSplUClosed(const occ::handle<Geom_BSplineSurface>&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::is_bspl_u_closed",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::IsBSplVClosed(const occ::handle<Geom_BSplineSurface>&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::is_bspl_v_closed",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::IsBzUClosed(const occ::handle<Geom_BezierSurface>&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::is_bz_u_closed",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::IsBzVClosed(const occ::handle<Geom_BezierSurface>&,double,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::is_bz_v_closed",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::isIsoLine(const occ::handle<Adaptor2d_Curve2d>&,bool&,double&,bool&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::is_iso_line",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib::buildC3dOnIsoLine(const occ::handle<Adaptor2d_Curve2d>&,const occ::handle<Adaptor3d_Surface>&,double,double,double,bool,double,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::build_c3d_on_iso_line",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Check2dBSplineCurve(const occ::handle<Geom2d_BSplineCurve>&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Check2dBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Check2dBSplineCurve::new",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Check2dBSplineCurve::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Check2dBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Check2dBSplineCurve::is_done",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Check2dBSplineCurve::NeedTangentFix(bool&,bool&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Check2dBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Check2dBSplineCurve::need_tangent_fix",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Check2dBSplineCurve::FixTangent(bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Check2dBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Check2dBSplineCurve::fix_tangent",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Check2dBSplineCurve::FixedTangent(bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Check2dBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Check2dBSplineCurve::fixed_tangent",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckBSplineCurve(const occ::handle<Geom_BSplineCurve>&,double,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckBSplineCurve::new",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckBSplineCurve::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckBSplineCurve::is_done",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckBSplineCurve::NeedTangentFix(bool&,bool&) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckBSplineCurve::need_tangent_fix",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckBSplineCurve::FixTangent(bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckBSplineCurve::fix_tangent",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckBSplineCurve::FixedTangent(bool,bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckBSplineCurve.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckBSplineCurve::fixed_tangent",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::new",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface(const occ::handle<Adaptor3d_Curve>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::with_curve",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface::Init(const occ::handle<Adaptor3d_Curve>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::init",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface::Init()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::init_empty",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface::Perform(const occ::handle<Adaptor3d_CurveOnSurface>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::perform",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface::SetParallel(bool)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::set_parallel",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface::IsParallel()",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::is_parallel",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::is_done",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface::ErrorStatus() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::error_status",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface::MaxDistance() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::max_distance",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurface::MaxParameter() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_CheckCurveOnSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::CheckCurveOnSurface::max_parameter",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_DenominatorMultiplier(const occ::handle<Geom_BSplineSurface>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_DenominatorMultiplier.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::DenominatorMultiplier::new",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_DenominatorMultiplier::Value(double,double) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_DenominatorMultiplier.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::DenominatorMultiplier::value",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Interpolate(int,int,const NCollection_Array1<gp_Pnt>&,const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Interpolate::new",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Interpolate::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Interpolate::is_done",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Interpolate::Error() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Interpolate::error",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Interpolate::Curve() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Interpolate::curve",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_InterpolationErrors",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_InterpolationErrors.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::InterpolationErrors",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_IsPlanarSurface(const occ::handle<Geom_Surface>&,double)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_IsPlanarSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::IsPlanarSurface::new",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_IsPlanarSurface::IsPlanar() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_IsPlanarSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::IsPlanarSurface::is_planar",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_IsPlanarSurface::Plan() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_IsPlanarSurface.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::IsPlanarSurface::plan",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_LogSample(double,double,int)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_LogSample.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::LogSample::new",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_LogSample::GetParameter(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_LogSample.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::LogSample::get_parameter",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox(const AdvApprox_ApproxAFunction&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::new",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox::IsDone() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::is_done",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox::Nb1DSpaces() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::nb_1d_spaces",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox::Nb2DSpaces() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::nb_2d_spaces",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox::Nb3DSpaces() const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::nb_3d_spaces",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox::Curve2d(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::curve2d",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox::Curve2dFromTwo1d(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::curve2d_from_two_1d",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox::Curve2d(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::curve2d_weighted",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox::Curve(int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::curve",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_MakeCurvefromApprox::Curve(int,int) const",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_MakeCurvefromApprox.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::MakeCurvefromApprox::curve_weighted",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_PolyFunc(const math_Vector&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_PolyFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::PolyFunc::new",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_PolyFunc::Value(double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_PolyFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::PolyFunc::value",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_PolyFunc::Derivative(double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_PolyFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::PolyFunc::derivative",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_PolyFunc::Values(double,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_PolyFunc.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::PolyFunc::values",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Tool::Parameter(const occ::handle<Geom_Curve>&,const gp_Pnt&,double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Tool.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Tool::parameter",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Tool::Parameters(const occ::handle<Geom_Surface>&,const gp_Pnt&,double,double&,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Tool.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Tool::parameters",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Tool::Parameter(const occ::handle<Geom2d_Curve>&,const gp_Pnt2d&,double,double&)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Tool.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::Tool::parameter_2d",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Tool::ComputeDeviation(const Geom2dAdaptor_Curve&,double,double,double,int,double* const,gp_Pnt2d* const,gp_Vec2d* const,gp_Lin2d* const)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Tool.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::compute_deviation",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
+    },
+    {
+      "upstream_id": "GeomLib_Tool::ComputeDeviation(const Geom2dAdaptor_Curve&,double,double,int,int,double* const)",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GeomLib/GeomLib_Tool.hxx",
+      "rust_item": "rustycad_tkgeombase::geom_lib::compute_deviation_pso",
+      "status": "implemented",
+      "notes": "GeomLib mapping (docs/tkgeombase-progress.md): the static members of GeomLib are free functions, each class is a struct, output references written unconditionally are returned values, in-out handles stay &mut parameters and native exceptions are Failure values."
     }
   ],
   "tests": [
@@ -198124,6 +199708,468 @@
       "rust_target": "extrema_pc_extended_geometry",
       "rust_test": "ExtremaPC_ExtendedGeometryTest__Random_Parabola_100Points",
       "rust_source": "crates/tkgeombase/tests/extrema_pc_extended_geometry.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvertTest.CircleToBSpline",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_Test.cxx",
+      "source_sha256": "fe25b0e1be138b89f794f7e90495bf45660b5e31010b8c74f122667d166a3815",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert",
+      "rust_test": "GeomConvertTest__CircleToBSpline",
+      "rust_source": "crates/tkgeombase/tests/geom_convert.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvertTest.LineToBSpline",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_Test.cxx",
+      "source_sha256": "fe25b0e1be138b89f794f7e90495bf45660b5e31010b8c74f122667d166a3815",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert",
+      "rust_test": "GeomConvertTest__LineToBSpline",
+      "rust_source": "crates/tkgeombase/tests/geom_convert.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvertTest.PlaneToBSplineSurface",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_Test.cxx",
+      "source_sha256": "fe25b0e1be138b89f794f7e90495bf45660b5e31010b8c74f122667d166a3815",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert",
+      "rust_test": "GeomConvertTest__PlaneToBSplineSurface",
+      "rust_source": "crates/tkgeombase/tests/geom_convert.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurveTest.ConcatenateClampedBSplines",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_CompCurveToBSplineCurve_Test.cxx",
+      "source_sha256": "3757449b702ed6864e6a144cc996b0edc4da73a6490ddd26d450b2fdb88f7058",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert_comp_curve_to_bspline_curve",
+      "rust_test": "GeomConvert_CompCurveToBSplineCurveTest__ConcatenateClampedBSplines",
+      "rust_source": "crates/tkgeombase/tests/geom_convert_comp_curve_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurveTest.ConcatenateTrimmedCircleArcs",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_CompCurveToBSplineCurve_Test.cxx",
+      "source_sha256": "3757449b702ed6864e6a144cc996b0edc4da73a6490ddd26d450b2fdb88f7058",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert_comp_curve_to_bspline_curve",
+      "rust_test": "GeomConvert_CompCurveToBSplineCurveTest__ConcatenateTrimmedCircleArcs",
+      "rust_source": "crates/tkgeombase/tests/geom_convert_comp_curve_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurveTest.ConcatenateWithReversal",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_CompCurveToBSplineCurve_Test.cxx",
+      "source_sha256": "3757449b702ed6864e6a144cc996b0edc4da73a6490ddd26d450b2fdb88f7058",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert_comp_curve_to_bspline_curve",
+      "rust_test": "GeomConvert_CompCurveToBSplineCurveTest__ConcatenateWithReversal",
+      "rust_source": "crates/tkgeombase/tests/geom_convert_comp_curve_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurveTest.FailsForDisjointCurves",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_CompCurveToBSplineCurve_Test.cxx",
+      "source_sha256": "3757449b702ed6864e6a144cc996b0edc4da73a6490ddd26d450b2fdb88f7058",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert_comp_curve_to_bspline_curve",
+      "rust_test": "GeomConvert_CompCurveToBSplineCurveTest__FailsForDisjointCurves",
+      "rust_source": "crates/tkgeombase/tests/geom_convert_comp_curve_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurveTest.ConcatenateNonClampedBSpline_Bug30007",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_CompCurveToBSplineCurve_Test.cxx",
+      "source_sha256": "3757449b702ed6864e6a144cc996b0edc4da73a6490ddd26d450b2fdb88f7058",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert_comp_curve_to_bspline_curve",
+      "rust_test": "GeomConvert_CompCurveToBSplineCurveTest__ConcatenateNonClampedBSpline_Bug30007",
+      "rust_source": "crates/tkgeombase/tests/geom_convert_comp_curve_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurveTest.PrependCurve",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_CompCurveToBSplineCurve_Test.cxx",
+      "source_sha256": "3757449b702ed6864e6a144cc996b0edc4da73a6490ddd26d450b2fdb88f7058",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert_comp_curve_to_bspline_curve",
+      "rust_test": "GeomConvert_CompCurveToBSplineCurveTest__PrependCurve",
+      "rust_source": "crates/tkgeombase/tests/geom_convert_comp_curve_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurveTest.EmptyInitialCurve",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_CompCurveToBSplineCurve_Test.cxx",
+      "source_sha256": "3757449b702ed6864e6a144cc996b0edc4da73a6490ddd26d450b2fdb88f7058",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert_comp_curve_to_bspline_curve",
+      "rust_test": "GeomConvert_CompCurveToBSplineCurveTest__EmptyInitialCurve",
+      "rust_source": "crates/tkgeombase/tests/geom_convert_comp_curve_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomConvert_CompCurveToBSplineCurveTest.ClearAndReuse",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomConvert_CompCurveToBSplineCurve_Test.cxx",
+      "source_sha256": "3757449b702ed6864e6a144cc996b0edc4da73a6490ddd26d450b2fdb88f7058",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_convert_comp_curve_to_bspline_curve",
+      "rust_test": "GeomConvert_CompCurveToBSplineCurveTest__ClearAndReuse",
+      "rust_source": "crates/tkgeombase/tests/geom_convert_comp_curve_to_bspline_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.ExtendSurfByLength_CoversAllDirectionsAndRationality",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__ExtendSurfByLength_CoversAllDirectionsAndRationality",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.CancelDenominatorDerivative_PreservesSurfaceGeometry",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__CancelDenominatorDerivative_PreservesSurfaceGeometry",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.CancelDenominatorDerivative_IdempotentCallPreservesParameterRange",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__CancelDenominatorDerivative_IdempotentCallPreservesParameterRange",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.ExtendCurveToPoint_ReachesTargetAndPreservesInitialEnd",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__ExtendCurveToPoint_ReachesTargetAndPreservesInitialEnd",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.AdjustExtremity_ReachesEndpointsAndTangentDirections",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__AdjustExtremity_ReachesEndpointsAndTangentDirections",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.ParameterArrays_SupportArbitraryLowerBounds",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__ParameterArrays_SupportArbitraryLowerBounds",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.DensifyArray_ConstantRangeInitializesEveryValue",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__DensifyArray_ConstantRangeInitializesEveryValue",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.FuseIntervals_SupportsArbitraryLowerBounds",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__FuseIntervals_SupportsArbitraryLowerBounds",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.FuseIntervals_AdjustsMatchesToFirstInput",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__FuseIntervals_AdjustsMatchesToFirstInput",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.GTransformLine_UsesExactVectorialDirection",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__GTransformLine_UsesExactVectorialDirection",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.To3d_PreservesRationalBezierGeometry",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__To3d_PreservesRationalBezierGeometry",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.IsIsoLine_AcceptsShortNonDegenerateLinearBezier",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__IsIsoLine_AcceptsShortNonDegenerateLinearBezier",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.RationalBSplineClosedness_UsesCompleteHomogeneousPoles",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__RationalBSplineClosedness_UsesCompleteHomogeneousPoles",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.RationalBezierClosedness_AccountsForWeights",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__RationalBezierClosedness_AccountsForWeights",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLibTest.NormEstim_HandlesRegularAndPoleParameters",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_Test.cxx",
+      "source_sha256": "2566f1ecf294dc23934e1db399fda55e8c4579f20b694883ef763c10de8d2cde",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib",
+      "rust_test": "GeomLibTest__NormEstim_HandlesRegularAndPoleParameters",
+      "rust_source": "crates/tkgeombase/tests/geom_lib.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurfaceTest.AnalyticCoincident_ReportsZeroDeviation",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_CheckCurveOnSurface_Test.cxx",
+      "source_sha256": "1c5364aaf5b87dad3a9e6c961253acd880c81c841f2f382f4ba90e9c47f70c73",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib_check_curve_on_surface",
+      "rust_test": "GeomLib_CheckCurveOnSurfaceTest__AnalyticCoincident_ReportsZeroDeviation",
+      "rust_source": "crates/tkgeombase/tests/geom_lib_check_curve_on_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurfaceTest.AnalyticDeviating_ReportsActualDeviation",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_CheckCurveOnSurface_Test.cxx",
+      "source_sha256": "1c5364aaf5b87dad3a9e6c961253acd880c81c841f2f382f4ba90e9c47f70c73",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib_check_curve_on_surface",
+      "rust_test": "GeomLib_CheckCurveOnSurfaceTest__AnalyticDeviating_ReportsActualDeviation",
+      "rust_source": "crates/tkgeombase/tests/geom_lib_check_curve_on_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurfaceTest.LineOnPlane_ReportsZeroDeviation",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_CheckCurveOnSurface_Test.cxx",
+      "source_sha256": "1c5364aaf5b87dad3a9e6c961253acd880c81c841f2f382f4ba90e9c47f70c73",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib_check_curve_on_surface",
+      "rust_test": "GeomLib_CheckCurveOnSurfaceTest__LineOnPlane_ReportsZeroDeviation",
+      "rust_source": "crates/tkgeombase/tests/geom_lib_check_curve_on_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurfaceTest.DeviatingLines_ReportsEndpointMaximum",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_CheckCurveOnSurface_Test.cxx",
+      "source_sha256": "1c5364aaf5b87dad3a9e6c961253acd880c81c841f2f382f4ba90e9c47f70c73",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib_check_curve_on_surface",
+      "rust_test": "GeomLib_CheckCurveOnSurfaceTest__DeviatingLines_ReportsEndpointMaximum",
+      "rust_source": "crates/tkgeombase/tests/geom_lib_check_curve_on_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurfaceTest.CircleAndEllipse_ReportsAnalyticMaximum",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_CheckCurveOnSurface_Test.cxx",
+      "source_sha256": "1c5364aaf5b87dad3a9e6c961253acd880c81c841f2f382f4ba90e9c47f70c73",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib_check_curve_on_surface",
+      "rust_test": "GeomLib_CheckCurveOnSurfaceTest__CircleAndEllipse_ReportsAnalyticMaximum",
+      "rust_source": "crates/tkgeombase/tests/geom_lib_check_curve_on_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurfaceTest.NegativeTrim_ReportsInteriorMaximum",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_CheckCurveOnSurface_Test.cxx",
+      "source_sha256": "1c5364aaf5b87dad3a9e6c961253acd880c81c841f2f382f4ba90e9c47f70c73",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib_check_curve_on_surface",
+      "rust_test": "GeomLib_CheckCurveOnSurfaceTest__NegativeTrim_ReportsInteriorMaximum",
+      "rust_source": "crates/tkgeombase/tests/geom_lib_check_curve_on_surface.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "GeomLib_CheckCurveOnSurfaceTest.AnalyticAliasing_ReportsActualDeviation",
+      "toolkit": "TKGeomBase",
+      "source": "src/ModelingData/TKGeomBase/GTests/GeomLib_CheckCurveOnSurface_Test.cxx",
+      "source_sha256": "1c5364aaf5b87dad3a9e6c961253acd880c81c841f2f382f4ba90e9c47f70c73",
+      "rust_package": "rustycad-tkgeombase",
+      "rust_target": "geom_lib_check_curve_on_surface",
+      "rust_test": "GeomLib_CheckCurveOnSurfaceTest__AnalyticAliasing_ReportsActualDeviation",
+      "rust_source": "crates/tkgeombase/tests/geom_lib_check_curve_on_surface.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

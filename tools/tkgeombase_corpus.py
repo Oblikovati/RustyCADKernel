@@ -51,3 +51,7 @@ def append_tkgeombase_requests(requests: list[str]) -> None:
     __import__('tkgeombase_corpus_extrema_cs').append_extrema_cs_requests(requests)
     # Extrema surface-surface classes (tkgeombase_corpus_extrema_ss.py)
     __import__('tkgeombase_corpus_extrema_ss').append_extrema_ss_requests(requests)
+    # GeomConvert (tkgeombase_corpus_geomconvert.py, tkgeombase_corpus_geomconvert_ana.py)
+    __import__('tkgeombase_corpus_geomconvert').append_geomconvert_requests(requests)
+    # GeomLib (tkgeombase_corpus_geomlib.py)
+    __import__('tkgeombase_corpus_geomlib').append_geomlib_requests(requests)

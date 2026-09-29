@@ -47,7 +47,9 @@ pub use comp_curve::CompCurveToBSplineCurve;
 pub use concat::{ConcatOutputs, concat_c1, concat_c1_with_angular, concat_g1};
 pub use curve_to_bspline::curve_to_bspline_curve;
 pub use knot_splitting::BSplineCurveKnotSplitting;
+pub(crate) use knot_splitting::split_knots;
 pub use ppoint::PPoint;
+pub(crate) use reparametrize::{LawEvaluator, QuadraticLaw, ReparameteriseEvaluator};
 
 use crate::native_failure::failure;
 use rustycad_tkernel::ncollection::HArray1;

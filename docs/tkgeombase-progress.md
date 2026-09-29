@@ -6,14 +6,15 @@ depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
 `IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC`,
 `GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts`,
-`GCPnts`, `AdvApp2Var`, `Geom2dConvert` and `Extrema` packages are ported in full, and
+`GCPnts`, `AdvApp2Var`, `Geom2dConvert`, `Extrema`, `GeomConvert` and `GeomLib` packages
+are ported in full, and
 `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (791 declarations):
+passes (824 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -78,6 +79,10 @@ passes (791 declarations):
 | ExtremaPC_SearchMode_Test.cxx | extrema_pc_search_mode | 30 |
 | ExtremaPC_Comparison_Test.cxx | extrema_pc_comparison | 17 |
 | ExtremaPC_ExtendedGeometry_Test.cxx | extrema_pc_extended_geometry | 40 |
+| GeomConvert_Test.cxx | geom_convert | 3 |
+| GeomConvert_CompCurveToBSplineCurve_Test.cxx | geom_convert_comp_curve_to_bspline_curve | 8 |
+| GeomLib_Test.cxx | geom_lib | 15 |
+| GeomLib_CheckCurveOnSurface_Test.cxx | geom_lib_check_curve_on_surface | 7 |
 
 `bnd_lib_behavior.rs` covers the GeomBndLib and BndLib quirks below.
 `geom2d_convert_behavior.rs` covers the Geom2dConvert quirks below.
@@ -431,6 +436,39 @@ ported.
   number of cells keeps the old cells), and its sphere tree is the NCollection_UBTree
   port over `Bnd_Sphere`.
 
+## GeomConvert and GeomLib
+
+GeomConvert (`geom_convert`) and GeomLib (`geom_lib`) port every class and package
+member; `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for both.
+
+- The static members of the native `GeomConvert` and `GeomLib` classes are free
+  functions; overloads take distinct names (`split_bspline_surface_knots`,
+  `split_bspline_surface_one_direction`, `concat_c1_with_angular`, `Tool::parameter_2d`,
+  `compute_deviation_pso`). Default arguments are explicit.
+- Output references that the native member writes unconditionally are returned values
+  (`inertia` returns `InertiaAxes`, `axe_of_inertia` returns `AxeOfInertia`,
+  `is_closed` a pair, `build_curve3d` the two deviations, `eval_max_*` the distance).
+  An output the member may leave untouched stays `&mut` (`same_range`,
+  `build_curve3d`, the in-out handles of `adjust_extremity`, `extend_curve_to_point`,
+  `extend_surf_by_length`, `cancel_denominator_derivative` and `norm_estim`), or is an
+  `Option` when the native `false` leaves it unwritten (`is_iso_line`, `Tool`,
+  `CurveToAnaCurve::is_linear`). The `cf`, `cl` and `Deviation` outputs of the
+  CurveToAnaCurve recognizers are the in-out `AnaCurveFit`, whose fields keep their
+  value where the native member does not write.
+- The classes are structs: `CompCurveToBSplineCurve`, the knot splitting and Bezier
+  cutting classes, `CompBezierSurfacesToBSplineSurface`, `ApproxCurve`,
+  `ApproxSurface`, `CurveToAnaCurve`, `SurfToAnaSurf`, the least-squares functions
+  `FuncConeLSDist`, `FuncCylinderLSDist` and `FuncSphereLSDist` (math function traits;
+  a native exception inside a callback is kept and returned by `take_failure`), `Units`;
+  `CheckBSplineCurve`, `Check2dBSplineCurve`, `CheckCurveOnSurface`,
+  `DenominatorMultiplier`, `Interpolate`, `IsPlanarSurface`, `LogSample`,
+  `MakeCurvefromApprox` (it borrows the approximation, which the native class copies),
+  `PolyFunc` (math function traits, `take_failure` as above) and `Tool`.
+- BuildCurve3d and MakeCurvefromApprox need only AdvApprox (TKG3d), not the Approx
+  package: nothing in either package waits on an unported package.
+- Every native `std::min` and `std::max` keeps its argument order (`std_min`,
+  `std_max`), so NaN and signed zero operands give the native result.
+
 ## Verification
 
 `python3 tools/verify_toolkit.py TKGeomBase --jobs 8 --source OCCT --native-build BUILD`
@@ -684,10 +722,42 @@ exception.
 They are 1934 requests: 212 closed-form, 994 point-curve, 110 curve-curve, 345
 point-surface, 210 curve-surface and 63 surface-surface.
 
-The corpus has 36709 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+The GeomConvert and GeomLib requests (`tkgeombase_corpus_geomconvert.py`,
+`tkgeombase_corpus_geomconvert_ana.py` and `tkgeombase_corpus_geomlib.py`, over the
+GeomTools builder specs of `tkgeombase_corpus_geomspecs.py`; probes
+`tkgeombase_probe_geomconvert*.cxx` and `tkgeombase_probe_geomlib*.cxx`) cover every Geom
+and Geom2d curve and surface kind: conics on direct, tilted and indirect frames (whole,
+trimmed, across the seam, reversed), lines, rational and polynomial Bezier and B-spline
+curves and surfaces (periodic, C0, the exact rational quarter circle, cylinder and
+sphere), trimmed and offset curves and surfaces, surfaces of revolution and extrusion
+that are cylinders, cones, spheres and tori, and the elementary surfaces. They convert
+curves and surfaces to B-splines with each parameterisation, split them by knots and
+parameters (in order, reversed, equal, out of range, one direction), cut them by
+continuity and into Bezier arcs and patches, compose curves and Bezier patch grids,
+concatenate G1 and C1 chains and loops, raise C0 knots, approximate at several orders,
+degrees and segment counts, recognize lines, circles, ellipses, planes, cylinders,
+cones, spheres and tori with every conversion type and target (exact, perturbed, short,
+closed and non-canonical inputs, ranges inside and beyond the bounds), evaluate the
+least-squares functions on exact and noisy clouds with short variable vectors, and
+convert pcurve units. The GeomLib requests reach every static member and class: 2D
+curves placed in 3D and transformed by affinities, same-range reparametrizations,
+3D curves of pcurves, curve and surface extensions at each continuity and end,
+inertia of planar, collinear, coincident and spread clouds, parameter arrays, curve
+distances, denominator cancellation, normal estimation at regular and singular points,
+closedness, isolines, tangent fixes, curve-on-surface checks, interpolation errors,
+planarity, logarithmic samples, polynomials, point projections, chord deviations and
+the curves of AdvApprox approximations of every space kind. They are 2990 requests
+(1844 GeomConvert, 1146 GeomLib). Left out, as the native result is undefined there:
+three points within gp::Resolution() for `GetCircle` (the gce status is unassigned),
+the empty arrays of `RemovePointsFromArray` and `DensifyArray1OfReal` (read unchecked, a
+crash), the MakeCurvefromApprox members of an absent subspace kind (a null table) and
+DenominatorMultiplier flat knot vectors other than 8 to 10 values (read out of bounds).
+
+The corpus has 39699 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
 FEmTool, 2045 AppParCurves, 3831 AppCont, 15198 GeomBndLib and BndLib, 2210 CPnts and
-GCPnts, 325 AdvApp2Var, 908 Geom2dConvert and 1934 Extrema.
+GCPnts, 325 AdvApp2Var, 908 Geom2dConvert, 1934 Extrema, 1844 GeomConvert and 1146
+GeomLib.
 
 ## Preserved native behaviour
 
@@ -1237,3 +1307,74 @@ Extrema:
   is read before the output overwrites it) and GetStateNumber.
 - Every native comparison keeps its form where a NaN operand changes the branch, and
   `std::min`/`std::max` keep their argument order.
+
+GeomConvert:
+
+- The 3D `SplitBSplineCurve` raises Standard_DomainError for both of its index
+  checks, where Geom2dConvert raises Standard_DomainError and Standard_OutOfRange.
+- `SplitBSplineSurface(S, FromParam1, ToParam2, USplit, ...)` still orients the result
+  in U for a V split (it tests IsUPeriodic and calls UReverse).
+- `GeomConvert_BSplineSurfaceKnotSplitting`: when the surface is already C
+  `VContinuityRange` in V, the V bounds overwrite the U table and the V table stays
+  null, so every V accessor dereferences a null handle (Standard_NullObject in the
+  port).
+- `CompBezierSurfacesToBSplineSurface` raises the degrees of the caller's patches in
+  place, and its V knot reduction tests the last U multiplicity (`multU`); natively
+  the loop can run on when V removals keep succeeding.
+- The ApproxSurface evaluator writes nothing for the orders it does not handle (order
+  3 with UOrder 0 or 3, orders above 4), so the AdvApp2Var result keeps its values.
+- The concatenation members merge knots within Precision::PConfusion() or a fifth of
+  the range when that is smaller; the closed single-group test compares the degree
+  with `Geom2d_BSplineCurve::MaxDegree()` in the 3D code (both are 25).
+- `CurveToAnaCurve::ComputeCurve`: GeomConvert_Target with a target other than a line,
+  circle or ellipse falls through to GeomConvert_MinGap; Target copies the range of a
+  recognizer that returned early (0, 0 when the line or circle test stops before
+  writing it). In MinGap, a curve
+  whose ends and middle are within 2 x tolerance takes the circle unless it is null or
+  the line deviates less, so the null line can be returned with a gap of RealLast. The
+  converter's gap is `Precision::Infinite()` until a conversion, and `Init` resets it.
+- `GetCircle` writes the circle as soon as gce_MakeCirc is done, also when it then
+  returns false for a radius below gp::Resolution(); gce_MakeCirc leaves its status
+  unassigned for three points within gp::Resolution() (see gce).
+- `SurfToAnaSurf::ConvertToAnalytical` limits the tolerance to a thousandth of the
+  distance from (U1, V1) to (U1 + U2, (V1 + V2) / 2) (U not halved); the sphere and
+  torus search reads the isolines of the input surface, not of the segmented copy; a
+  non-circular end isoline of the cylinder and cone search contributes radius 0 and its
+  point at (Last - First) / 2; the Gauss-field cylinder sizes its point array NbU x NbU
+  and keeps `aSign = -1` once a sample swapped its curvatures; a Target of another type
+  returns null with gap RealLast, and Target plane on a non-planar surface returns null
+  with gap RealLast. `ConvertToAnalytical(tol)` on a converter without a surface
+  dereferences it natively (Standard_NullObject in the port).
+- `FuncCylinderLSDist::Gradient` scales G(6) of its 4-variable gradient, which raises
+  Standard_OutOfRange once G is doubled; `Values` scales G(4). The functions read the
+  variables with bound checks, so a short variable vector raises before F is reset.
+- `GeomConvert_Units`: in the plane case a circle or ellipse pcurve is scaled; any
+  other pcurve continues with both factors set to the length factor.
+
+GeomLib:
+
+- `SameRange` treats a null range whose `RequestedLast + RequestedFirst` sum (not
+  difference) is null as nothing to do, and leaves `NewCurve2dPtr` unchanged.
+- `GTransform` returns a null handle for parabolas, hyperbolas and offset curves (whole
+  or trimmed) under a non-similarity.
+- `GeomLib_CheckBSplineCurve::FixTangent` and its 2D twin move the poles of the
+  caller's curve (the class keeps its handle); `ExtendSurfByLength` modifies a B-spline
+  input in place (degree raised, periodicity removed) before replacing the handle.
+- `GeomLib_Interpolate` does not assign `myError` on success (the port reads NoError).
+- `GeomLib_DenominatorMultiplier::Value` fills its basis table only for 8, 9 or 10
+  flat knots, and in the 10-knot case only for the span indices 1 to 3; the table is
+  uninitialized natively in the other cases, where the port reads zeros. A vector
+  shorter than the cubic basis needs is read out of bounds natively
+  (Standard_OutOfRange in the port).
+- `GeomLib_CheckCurveOnSurface` stores the parallel flag, but its sub-interval results
+  do not depend on the order, so the port computes them in sequence in both modes.
+- `GeomLib_LogSample::GetParameter` returns the bounds at 1 and N and raises
+  Standard_OutOfRange outside `1..=N`; the port's math_FunctionSample hook, which
+  math_FunctionAllRoots calls only inside, gives NaN there instead.
+- `GeomLib_PolyFunc` of a constant polynomial (one coefficient) is built with an empty
+  derivative table, and its callbacks raise Standard_OutOfRange (kept by
+  `take_failure` in the port).
+- `RemovePointsFromArray` and `DensifyArray1OfReal` read the first value of an empty
+  input unchecked (Standard_OutOfRange in the port); the MakeCurvefromApprox members of
+  a subspace kind the approximation does not have pass their index check at 0 and
+  dereference a null pole table.
