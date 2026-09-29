@@ -25,6 +25,7 @@ mod cutting;
 mod dump;
 mod estimations;
 mod motor;
+mod motor_state;
 mod motor_support;
 mod optimization;
 mod project;
