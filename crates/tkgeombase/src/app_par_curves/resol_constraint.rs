@@ -39,9 +39,32 @@ use rustycad_tkmath::math::{Matrix, Uzawa, Vector};
 /// called); the port has no counterpart. Without pass points the constructor stops
 /// with IsDone true and leaves CTCinv and Vardua uninitialized natively (0 here).
 ///
-/// ```ignore
-/// let resol = ResolConstraint::new(&line, &mut curve, 1, 10, &constraints, &a, &da, 1e-10)?;
+/// ```
+/// use rustycad_tkgeombase::app_def::MultiLine;
+/// use rustycad_tkgeombase::app_par_curves::{LeastSquare, ResolConstraint};
+/// # use rustycad_tkgeombase::app_par_curves::{Constraint, ConstraintCouple};
+/// # use rustycad_tkernel::ncollection::{Array1, HArray1};
+/// # use rustycad_tkernel::standard::Handle;
+/// # use rustycad_tkmath::gp::Point3;
+/// # use rustycad_tkmath::math::Vector;
+/// // Six points of the parabola y = x^2, AppDef_MultiLine read by AppDef_MyLineTool.
+/// let points: Vec<Point3> = (0..6).map(|i| {
+///     let t = f64::from(i) / 5.0;
+///     Point3::new(t, t * t, 0.0)
+/// }).collect();
+/// let line = MultiLine::from_points(&Array1::from_shared(&points, 1));
+/// # let ends = [ConstraintCouple::new(1, Constraint::PassPoint), ConstraintCouple::new(6, Constraint::PassPoint)];
+/// # let constraints = Handle::new(HArray1::from_array(&Array1::from_shared(&ends, 1)));
+/// # let mut u = Vector::with_bounds(1, 6)?;
+/// # (1..=6).for_each(|i| u[i] = f64::from(i - 1) / 5.0);
+/// let mut fit = LeastSquare::new(&line, 1, 6, Constraint::PassPoint, Constraint::PassPoint, &u, 4)?;
+/// let mut curve = fit.bezier_value()?;
+/// let (a, da) = (fit.function_matrix()?.clone(), fit.derivative_function_matrix()?.clone());
+/// let resol = ResolConstraint::new(&line, &mut curve, 1, 6, &constraints, &a, &da, 1e-10)?;
 /// assert!(resol.is_done());
+/// // Two pass points of one 3D curve: three rows each.
+/// assert_eq!(resol.constraint_matrix().row_number(), 6);
+/// # Ok::<(), rustycad_tkernel::standard::Failure>(())
 /// ```
 pub struct ResolConstraint {
     done: bool,
@@ -95,14 +118,14 @@ impl ResolConstraint {
             tan += i32::from(code >= 2);
             curv += i32::from(code == 3);
         }
-        let ccol: i32 = ssp.nb_p3d() * 3 + ssp.nb_p2d() * 2;
+        let ccol: i32 = ssp.nb_p3d()? * 3 + ssp.nb_p2d()? * 2;
         Ok(ccol * pass + tan * (ccol - 1) + 3 * curv)
     }
 
     /// `NbColumns(SSP, Deg)` (protected natively): `CCol * (Deg + 1)`;
-    /// `ResolConstraint::nb_columns(&line, 3)`.
-    pub fn nb_columns(ssp: &impl LineTool, deg: i32) -> i32 {
-        (ssp.nb_p3d() * 3 + ssp.nb_p2d() * 2) * (deg + 1)
+    /// `ResolConstraint::nb_columns(&line, 3)?`.
+    pub fn nb_columns(ssp: &impl LineTool, deg: i32) -> Result<i32, Failure> {
+        Ok((ssp.nb_p3d()? * 3 + ssp.nb_p2d()? * 2) * (deg + 1))
     }
 
     /// The native constructor (`Tolerance` defaults to 1e-10 natively): builds the
@@ -122,7 +145,7 @@ impl ResolConstraint {
     ) -> Result<Self, Failure> {
         let (rows, columns) = (
             Self::nb_constraints(ssp, constraints)?,
-            Self::nb_columns(ssp, scurv.nb_poles() - 1),
+            Self::nb_columns(ssp, scurv.nb_poles() - 1)?,
         );
         let mut resol: Self = Self {
             done: false,
@@ -228,7 +251,7 @@ impl ResolConstraint {
         npol: i32,
         i: i32,
     ) -> Result<MultiPoint, Failure> {
-        let (nb3d, nb2d) = (ssp.nb_p3d(), ssp.nb_p2d());
+        let (nb3d, nb2d) = (ssp.nb_p3d()?, ssp.nb_p2d()?);
         let point: MultiPoint = MultiPoint::with_counts(nb3d, nb2d)?;
         let mut inc_col: i32 = 0;
         for k in 1..=nb3d + nb2d {

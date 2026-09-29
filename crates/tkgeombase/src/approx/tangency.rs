@@ -46,7 +46,7 @@ pub(crate) fn line_tangency<L: LineTool>(
     tangents: &mut Array1<'_, Vector3>,
     tangents2d: &mut Array1<'_, Vector2>,
 ) -> Result<bool, Failure> {
-    let (nb3d, nb2d) = (line.nb_p3d(), line.nb_p2d());
+    let (nb3d, nb2d) = (line.nb_p3d()?, line.nb_p2d()?);
     if nb3d != 0 && nb2d != 0 {
         return line.tangency(index, tangents, tangents2d);
     }
@@ -70,7 +70,7 @@ pub(crate) fn tangency_vector<L: LineTool>(
     v: &mut Vector<'_>,
     parameters: ParametersOf<'_, L>,
 ) -> Result<(), Failure> {
-    let (nb3d, nb2d) = (line.nb_p3d(), line.nb_p2d());
+    let (nb3d, nb2d) = (line.nb_p3d()?, line.nb_p2d()?);
     let mut tab_v: Array1<'static, Vector3> = scratch(nb3d)?;
     let mut tab_v2d: Array1<'static, Vector2> = scratch(nb2d)?;
     if line_tangency(line, index, &mut tab_v, &mut tab_v2d)? {
@@ -122,7 +122,7 @@ pub(crate) fn curve_tangents<L: LineTool>(
     u: f64,
     v: &mut Vector<'_>,
 ) -> Result<(), Failure> {
-    let (nb3d, nb2d) = (line.nb_p3d(), line.nb_p2d());
+    let (nb3d, nb2d) = (line.nb_p3d()?, line.nb_p2d()?);
     let mut j: i32 = 1;
     for i in 1..=nb3d {
         let (_, d): (Point3, Vector3) = c.d1_3d(i, u)?;
@@ -150,7 +150,7 @@ pub(crate) fn search_lambda<L: LineTool>(
     v: &Vector<'_>,
     [i1, i2]: [i32; 2],
 ) -> Result<f64, Failure> {
-    let (nb3d, nb2d) = (line.nb_p3d(), line.nb_p2d());
+    let (nb3d, nb2d) = (line.nb_p3d()?, line.nb_p2d()?);
     let (mut tab_p1, mut tab_p2) = (scratch::<Point3>(nb3d)?, scratch::<Point3>(nb3d)?);
     let (mut tab_p12d, mut tab_p22d) = (scratch::<Point2>(nb2d)?, scratch::<Point2>(nb2d)?);
     line_points(line, i1, &mut tab_p1, &mut tab_p12d)?;
@@ -181,7 +181,7 @@ pub(crate) fn cumulated_chords<L: LineTool>(
     centripetal: bool,
     parameters: &mut Vector<'_>,
 ) -> Result<(), Failure> {
-    let (nb3d, nb2d) = (line.nb_p3d(), line.nb_p2d());
+    let (nb3d, nb2d) = (line.nb_p3d()?, line.nb_p2d()?);
     let (mut tab_p, mut tab_pp) = (scratch::<Point3>(nb3d)?, scratch::<Point3>(nb3d)?);
     let (mut tab_p2d, mut tab_pp2d) = (scratch::<Point2>(nb2d)?, scratch::<Point2>(nb2d)?);
     for i in first_p + 1..=last_p {

@@ -44,7 +44,7 @@ impl BSplComputeLine {
     /// continuity to 2; `compute.interpol(&line)?`.
     pub fn interpol<L: LineTool + Clone>(&mut self, line: &L) -> Result<(), Failure> {
         self.continuity = 2;
-        let (first, last) = (line.first_point(), line.last_point());
+        let (first, last) = (line.first_point(), line.last_point()?);
         let the_param: Vector<'static> = self.initial_parameters(line, first, last)?;
         if last - first + 1 == 2 {
             self.interpolate_segment(line, [first, last], &the_param)?;
@@ -121,7 +121,7 @@ impl BSplComputeLine {
         the_param: &Vector<'static>,
         knots: &Array1<'static, f64>,
     ) -> Result<EndTangents, Failure> {
-        let size: i32 = 3 * line.nb_p3d() + 2 * line.nb_p2d();
+        let size: i32 = 3 * line.nb_p3d()? + 2 * line.nb_p2d()?;
         let (mut v1, mut v2) = (Vector::with_bounds(1, size)?, Vector::with_bounds(1, size)?);
         let params =
             |l: &L, f: i32, t: i32, p: &mut Vector<'static>| self.compute_parameters(l, f, t, p);
@@ -171,7 +171,7 @@ fn fitted_end_tangents<L: LineTool>(
     the_param: &Vector<'static>,
     knots: &Array1<'static, f64>,
 ) -> Result<EndTangents, Failure> {
-    let size: i32 = 3 * line.nb_p3d() + 2 * line.nb_p2d();
+    let size: i32 = 3 * line.nb_p3d()? + 2 * line.nb_p2d()?;
     let (mut v1, mut v2) = (Vector::with_bounds(1, size)?, Vector::with_bounds(1, size)?);
     let nnp: i32 = (last - first + 1).min(TANGENT_FIT_POINTS);
     let lastp: i32 = last.min(first + nnp - 1);

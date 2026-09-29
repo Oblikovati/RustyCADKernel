@@ -37,3 +37,17 @@ pub(crate) fn array_failure(error: ArrayError, context: &str) -> Failure {
     };
     failure(kind, &format!("{context}: {error}"))
 }
+
+/// The exception of a native `NCollection_Array1(Lower, Upper)` allocation: bounds
+/// with `Upper < Lower - 1` wrap the size to a huge value whose allocation fails
+/// (natively a null buffer, then a crash on the first write); the port raises
+/// Standard_OutOfMemory (AppDef_LinearCriteria, AppDef_Variational);
+/// `allocation_failure(error, "AppDef_Variational")`.
+pub(crate) fn allocation_failure(error: ArrayError, context: &str) -> Failure {
+    match error {
+        ArrayError::Bounds { .. } => {
+            failure("Standard_OutOfMemory", &format!("{context}: {error}"))
+        }
+        other => array_failure(other, context),
+    }
+}

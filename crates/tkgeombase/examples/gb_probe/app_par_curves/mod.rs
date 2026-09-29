@@ -16,11 +16,12 @@
 mod containers;
 mod fit;
 mod line;
-pub use line::{ProbeLine, ProbePoint};
+pub use line::{multi_point, read_line};
 
 pub use containers::{bernstein_case, multicurve_case, multipoint_case, read_points, spline_case};
 pub use fit::{
-    bspfunction_case, bspgradient_case, function_case, gradient_case, ls_case, resol_case,
+    bspfunction_case, bspgradient_case, function_case, gradient_case, ls_case, read_constraints,
+    resol_case,
 };
 
 use super::common as p;

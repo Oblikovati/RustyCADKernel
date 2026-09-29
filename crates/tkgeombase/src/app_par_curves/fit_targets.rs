@@ -46,7 +46,7 @@ impl FitTargets {
         constraints: &Constraints,
         context: &str,
     ) -> Result<Self, Failure> {
-        let curves: i32 = ssp.nb_p3d() + ssp.nb_p2d();
+        let curves: i32 = ssp.nb_p3d()? + ssp.nb_p2d()?;
         let new = || {
             Matrix::filled(first_p, last_p, 1, curves, 0.)
                 .map_err(|error| array_failure(error, context))
@@ -80,12 +80,12 @@ impl FitTargets {
         [first_p, last_p]: [i32; 2],
         context: &str,
     ) -> Result<(), Failure> {
-        let nb3d: i32 = ssp.nb_p3d();
+        let nb3d: i32 = ssp.nb_p3d()?;
         for (j, dimension) in self.tabdim.iter_mut().enumerate() {
             *dimension = if (j as i32) < nb3d { 3 } else { 2 };
         }
         let (mut points, mut points2d) =
-            (scratch::<Point3>(nb3d)?, scratch::<Point2>(ssp.nb_p2d())?);
+            (scratch::<Point3>(nb3d)?, scratch::<Point2>(ssp.nb_p2d()?)?);
         for i in first_p..=last_p {
             line_points(ssp, i, &mut points, &mut points2d)?;
             for j in 1..=self.tabdim.len() as i32 {
