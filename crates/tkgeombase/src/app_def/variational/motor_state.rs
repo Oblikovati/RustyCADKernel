@@ -79,6 +79,16 @@ impl MotorState {
     }
 }
 
+// (3.1): the criteria, the error, the curve and the parameters saved before the
+// cutting (the length is not).
+pub(super) fn save_before_cutting(st: &mut MotorState) {
+    st.vocri = st.valcri;
+    st.erold = st.errors.max_err;
+    st.c_old = st.c_current.clone();
+    let values: Array1<'static, f64> = st.current_ti.array1().clone();
+    st.old_ti.change_array1().assign(&values);
+}
+
 // (2.7) restore the previous iteration (its parameters copied back into the
 // current array).
 pub(super) fn restore_previous_iteration(st: &mut MotorState) {

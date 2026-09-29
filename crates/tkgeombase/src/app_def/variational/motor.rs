@@ -21,7 +21,7 @@ use super::super::smooth_criterion::SmoothCriterion;
 use super::Variational;
 use super::motor_state::{
     MotorState, SMALL_VALUE, accept_estimation, accept_iteration, invalidate_new_knots,
-    progression, restore_previous_iteration,
+    progression, restore_previous_iteration, save_before_cutting,
 };
 use super::motor_support::{at, copy_of, curve_of, fresh, put, raise_estimations, stable_sort};
 use crate::fem_tool::{Assembly, Curve};
@@ -310,15 +310,21 @@ impl Variational {
             return Ok(false);
         }
         // (3.1) Sauvgarde de l'etat precedent
-        st.vocri = st.valcri;
-        st.erold = st.errors.max_err;
-        st.c_old = st.c_current.clone();
-        let values: Array1<'static, f64> = st.current_ti.array1().clone();
-        st.old_ti.change_array1().assign(&values);
+        save_before_cutting(st);
         // (3.2) Arrange the ti: Sort + rescale to (0,1)
         stable_sort(&st.current_ti);
         self.rescale_ti(&st.current_ti)?;
-        // (3.3) Insert new Knots
+        self.insert_new_knots(j, st, a, dependence)
+    }
+
+    // (3.3) Insert new Knots; true when the curve was cut (its new assembly built).
+    fn insert_new_knots(
+        &self,
+        j: &dyn SmoothCriterion,
+        st: &mut MotorState,
+        a: &mut Assembly,
+        dependence: &Array2<'_, i32>,
+    ) -> Result<bool, Failure> {
         let ti: Array1<'static, f64> = st.current_ti.array1().clone();
         let Some(c_new) = self.split_curve(curve_of(&st.c_current)?, &ti, st.eps_length)? else {
             return Ok(false);
