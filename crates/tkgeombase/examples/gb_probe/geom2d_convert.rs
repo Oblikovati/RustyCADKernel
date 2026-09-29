@@ -21,7 +21,7 @@ use rustycad_tkgeombase::geom2d_convert::{
 use rustycad_tkmath::convert::ParameterisationType;
 use rustycad_tkmath::geom_abs::Shape;
 
-const PARAMETERISATIONS: [ParameterisationType; 8] = [
+pub const PARAMETERISATIONS: [ParameterisationType; 8] = [
     ParameterisationType::TgtThetaOver2,
     ParameterisationType::TgtThetaOver2_1,
     ParameterisationType::TgtThetaOver2_2,
@@ -31,7 +31,7 @@ const PARAMETERISATIONS: [ParameterisationType; 8] = [
     ParameterisationType::RationalC1,
     ParameterisationType::Polynomial,
 ];
-const SHAPES: [Shape; 7] = [
+pub const SHAPES: [Shape; 7] = [
     Shape::C0,
     Shape::G1,
     Shape::C1,
@@ -46,7 +46,7 @@ fn parameterisation(r: &mut Reader<'_>) -> ParameterisationType {
 }
 
 /// gb_g2c_bspline.
-fn bspline(c: &Handle<Geom2dBSplineCurve>) {
+pub fn bspline(c: &Handle<Geom2dBSplineCurve>) {
     let Some(c) = c.get() else {
         return int(-1);
     };
@@ -66,7 +66,7 @@ fn bspline(c: &Handle<Geom2dBSplineCurve>) {
 }
 
 /// gb_g2c_bezier.
-fn bezier(c: &Handle<Geom2dBezierCurve>) {
+pub fn bezier(c: &Handle<Geom2dBezierCurve>) {
     let Some(c) = c.get() else {
         return int(-1);
     };

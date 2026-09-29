@@ -67,6 +67,10 @@
 #include "tkgeombase_probe_extrema_ps.cxx"
 #include "tkgeombase_probe_extrema_cs.cxx"
 #include "tkgeombase_probe_extrema_ss.cxx"
+#include "tkgeombase_probe_geomconvert.cxx"
+#include "tkgeombase_probe_geomconvert_ana.cxx"
+#include "tkgeombase_probe_geomlib.cxx"
+#include "tkgeombase_probe_geomlib_classes.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // gce (tkgeombase_probe_gce.cxx)
  {"gce_circ", gb_gce_circ_case},
@@ -341,6 +345,58 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"ex_fess", gb_ex_fess_case},
  {"ex_genss", gb_ex_genss_case},
  {"ex_ss", gb_ex_ss_case},
+ // GeomConvert conversions (tkgeombase_probe_geomconvert.cxx)
+ {"gcv_to_bspline", gb_gcv_to_bspline_case},
+ {"gcv_surf_to_bspline", gb_gcv_surf_to_bspline_case},
+ {"gcv_split", gb_gcv_split_case},
+ {"gcv_split_surface", gb_gcv_split_surface_case},
+ {"gcv_knot_split", gb_gcv_knot_split_case},
+ {"gcv_knot_split_surface", gb_gcv_knot_split_surface_case},
+ {"gcv_bezier", gb_gcv_bezier_case},
+ {"gcv_bezier_surface", gb_gcv_bezier_surface_case},
+ {"gcv_comp", gb_gcv_comp_case},
+ {"gcv_comp_bezier", gb_gcv_comp_bezier_case},
+ {"gcv_concat", gb_gcv_concat_case},
+ {"gcv_c0c1", gb_gcv_c0c1_case},
+ {"gcv_approx_curve", gb_gcv_approx_curve_case},
+ {"gcv_approx_surface", gb_gcv_approx_surface_case},
+ // GeomConvert recognizers and units (tkgeombase_probe_geomconvert_ana.cxx)
+ {"gcv_ana_curve", gb_gcv_ana_curve_case},
+ {"gcv_ana_empty", gb_gcv_ana_empty_case},
+ {"gcv_is_linear", gb_gcv_is_linear_case},
+ {"gcv_get_line", gb_gcv_get_line_case},
+ {"gcv_get_circle", gb_gcv_get_circle_case},
+ {"gcv_ana_surf", gb_gcv_ana_surf_case},
+ {"gcv_ana_surf_empty", gb_gcv_ana_surf_empty_case},
+ {"gcv_same_surf", gb_gcv_same_surf_case},
+ {"gcv_ls_dist", gb_gcv_ls_dist_case},
+ {"gcv_units", gb_gcv_units_case},
+ // GeomLib static members (tkgeombase_probe_geomlib.cxx)
+ {"gl_to3d", gb_gl_to3d_case},
+ {"gl_gtransform", gb_gl_gtransform_case},
+ {"gl_same_range", gb_gl_same_range_case},
+ {"gl_build_curve3d", gb_gl_build_curve3d_case},
+ {"gl_adjust", gb_gl_adjust_case},
+ {"gl_extend_curve", gb_gl_extend_curve_case},
+ {"gl_extend_surf", gb_gl_extend_surf_case},
+ {"gl_inertia", gb_gl_inertia_case},
+ {"gl_arrays", gb_gl_arrays_case},
+ {"gl_eval_max", gb_gl_eval_max_case},
+ {"gl_cancel_denom", gb_gl_cancel_denom_case},
+ {"gl_norm_estim", gb_gl_norm_estim_case},
+ {"gl_is_closed", gb_gl_is_closed_case},
+ {"gl_iso_line", gb_gl_iso_line_case},
+ // GeomLib classes (tkgeombase_probe_geomlib_classes.cxx)
+ {"gl_check_bspline", gb_gl_check_bspline_case},
+ {"gl_cos", gb_gl_cos_case},
+ {"gl_denom", gb_gl_denom_case},
+ {"gl_interpolate", gb_gl_interpolate_case},
+ {"gl_is_planar", gb_gl_is_planar_case},
+ {"gl_log_sample", gb_gl_log_sample_case},
+ {"gl_poly_func", gb_gl_poly_func_case},
+ {"gl_tool", gb_gl_tool_case},
+ {"gl_deviation", gb_gl_deviation_case},
+ {"gl_make_curve", gb_gl_make_curve_case},
 };
 int main() {
  std::string line;
