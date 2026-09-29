@@ -934,7 +934,10 @@ constructor and option) and CompProjectedCurve (every constructor, the parts, th
 evaluation and intervals, Perform with 2D and 3D results) on elementary, swept,
 trimmed, offset, Bezier and B-spline surfaces, across seams and periodic ranges,
 through poles, leaving bounded surfaces, far from them and degenerate (point and iso
-projections); 2313 requests. Left out: the projection of a line normal to the plane by
+projections); 2225 requests. The given initial curves of the polar projection rotate
+over the curves and the ComputeApprox constructor runs once per surface: the far initial
+curves and the 1e-7 fits dominate the debug Rust twin, and the numeric verifier has a
+900 s budget. Left out: the projection of a line normal to the plane by
 the default ProjectOnPlane (a direction in the plane, all values NaN), whose native
 reparametrization never returns.
 
