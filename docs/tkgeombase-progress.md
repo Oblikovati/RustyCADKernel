@@ -6,14 +6,15 @@ depends on the TKernel, TKMath, TKG2d and TKG3d ports, as the native toolkit
 does. Packages are added one module at a time. The `gce`, `GC`, `GCE2d`, `IntAna`,
 `IntAna2d`, `LProp`, `GeomLProp`, `GProp`, `Hermit`, `ExtremaPC2d`, `ExtremaPC`,
 `GeomTools`, `FEmTool`, `AppParCurves`, `AppCont`, `GeomBndLib`, `BndLib`, `CPnts`,
-`GCPnts`, `AdvApp2Var`, `Geom2dConvert` and `Extrema` packages are ported in full, and
+`GCPnts`, `AdvApp2Var`, `Geom2dConvert`, `Extrema`, `GeomConvert` and `GeomLib` packages
+are ported in full, and
 `tools/audit_api_rows.py` reports 0 missing and 0 stale api rows for each of them.
 
 The Geom and Geom2d objects that TKGeomBase builds follow the class mapping of
 [geom-design.md](geom-design.md).
 
 The toolkit test inventory maps these complete suites, with matching native and Rust
-passes (791 declarations):
+passes (824 declarations):
 
 | Source | Rust target | Declarations |
 | --- | --- | ---: |
@@ -752,10 +753,11 @@ the empty arrays of `RemovePointsFromArray` and `DensifyArray1OfReal` (read unch
 crash), the MakeCurvefromApprox members of an absent subspace kind (a null table) and
 DenominatorMultiplier flat knot vectors other than 8 to 10 values (read out of bounds).
 
-The corpus has 36709 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
+The corpus has 39699 requests: 4449 gce and GC, 945 IntAna2d and IntAna, 833 LProp,
 GeomLProp, GProp and Hermit, 1253 ExtremaPC2d, 1252 ExtremaPC, 296 GeomTools, 1230
 FEmTool, 2045 AppParCurves, 3831 AppCont, 15198 GeomBndLib and BndLib, 2210 CPnts and
-GCPnts, 325 AdvApp2Var, 908 Geom2dConvert and 1934 Extrema.
+GCPnts, 325 AdvApp2Var, 908 Geom2dConvert, 1934 Extrema, 1844 GeomConvert and 1146
+GeomLib.
 
 ## Preserved native behaviour
 
