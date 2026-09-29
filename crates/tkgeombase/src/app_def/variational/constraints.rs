@@ -43,6 +43,33 @@ fn store<T>(array: &mut Array1<'_, T>, index: i32, value: T) -> Result<(), Failu
         .map_err(|error| array_failure(error, "AppDef_Variational::Init"))
 }
 
+// The unit tangent of 3D point `jp3d`, whose curvature must be normal to it within
+// Precision::Angular() (Standard_ConstructionError otherwise).
+fn normal_tangent_3d(tangent: Vector3, curvature: Vector3, jp3d: i32) -> Result<Vector3, Failure> {
+    let vt3d: Vector3 = tangent.normalized()?;
+    if !curvature
+        .normalized()?
+        .is_normal(vt3d, precision::angular())?
+    {
+        return Err(construction(&format!(
+            "3D curvature {jp3d} not normal to its tangent"
+        )));
+    }
+    Ok(vt3d)
+}
+
+// The unit tangent of 2D point `jp2d`, at PI/2 of its curvature within
+// Precision::Angular() (Standard_ConstructionError otherwise).
+fn normal_tangent_2d(tangent: Vector2, curvature: Vector2, jp2d: i32) -> Result<Vector2, Failure> {
+    let vt2d: Vector2 = tangent.normalized()?;
+    if (curvature.angle(vt2d)?.abs() - std::f64::consts::FRAC_PI_2).abs() > precision::angular() {
+        return Err(construction(&format!(
+            "2D curvature {jp2d} not normal to its tangent"
+        )));
+    }
+    Ok(vt2d)
+}
+
 // The table kind of a constraint: 0 pass, 1 tangency, 2 curvature; None for
 // NoConstraint (not tabulated).
 fn constraint_kind(constraint: Constraint) -> Option<i32> {
@@ -249,12 +276,8 @@ impl Variational {
         kind: Constraint,
     ) -> Result<(), Failure> {
         for jp3d in 1..=self.nb_p3d {
-            let (vt3d, vc3d) = (tangents.v3d[jp3d].normalized()?, curvatures.v3d[jp3d]);
-            if !vc3d.normalized()?.is_normal(vt3d, precision::angular())? {
-                return Err(construction(&format!(
-                    "3D curvature {jp3d} not normal to its tangent"
-                )));
-            }
+            let vc3d: Vector3 = curvatures.v3d[jp3d];
+            let vt3d: Vector3 = normal_tangent_3d(tangents.v3d[jp3d], vc3d, jp3d)?;
             self.put(
                 jndex,
                 &[vt3d.x(), vt3d.y(), vt3d.z(), vc3d.x(), vc3d.y(), vc3d.z()],
@@ -262,13 +285,8 @@ impl Variational {
             self.init_ttheta_f(3, kind, cur + (jp3d - 1) * 6, *jndex - 6)?;
         }
         for jp2d in 1..=self.nb_p2d {
-            let (vt2d, vc2d) = (tangents.v2d[jp2d].normalized()?, curvatures.v2d[jp2d]);
-            if (vc2d.angle(vt2d)?.abs() - std::f64::consts::FRAC_PI_2).abs() > precision::angular()
-            {
-                return Err(construction(&format!(
-                    "2D curvature {jp2d} not normal to its tangent"
-                )));
-            }
+            let vc2d: Vector2 = curvatures.v2d[jp2d];
+            let vt2d: Vector2 = normal_tangent_2d(tangents.v2d[jp2d], vc2d, jp2d)?;
             self.put(jndex, &[vt2d.x(), vt2d.y(), vc2d.x(), vc2d.y()])?;
             self.init_ttheta_f(2, kind, cur + (jp2d - 1) * 2 + self.nb_p3d * 6, *jndex - 4)?;
         }
