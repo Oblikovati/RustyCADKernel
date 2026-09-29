@@ -49,12 +49,19 @@ def selected_rows(toolkit: str, inventory: dict) -> list[dict]:
     return rows
 
 
+def declared_names(text: str) -> set[str]:
+    """The `Suite.Case` of every TEST, TEST_F and TYPED_TEST, whatever the spacing (a
+    declaration may wrap after the comma); declared_names('TEST(A, b)') == {'A.b'}."""
+    pattern = r'(?:TEST(?:_F)?|TYPED_TEST)\(\s*(\w+)\s*,\s*(\w+)\s*\)'
+    return {f'{suite}.{case}' for suite, case in re.findall(pattern, text)}
+
+
 def verify_sources(source: Path, rows: list[dict]) -> list[str]:
     """Require every declaration in each selected source; verify_sources(source, rows)."""
     paths = sorted({row['source'] for row in rows})
     for path in paths:
         content = (source/path).read_bytes()
-        names = {f'{suite}.{case}' for suite,case in re.findall(r'(?:TEST(?:_F)?|TYPED_TEST)\((\w+), (\w+)\)', content.decode())}
+        names = declared_names(content.decode())
         selected = [row for row in rows if row['source'] == path]
         if names != {row['upstream_id'] for row in selected}: raise ValueError(f'Incomplete source-suite mapping: {path}')
         if any(row['source_sha256'] != hashlib.sha256(content).hexdigest() for row in selected):

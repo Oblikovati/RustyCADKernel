@@ -2,7 +2,7 @@
 import inspect
 import unittest
 from verify_tkernel import run
-from verify_toolkit import NUMERIC_TIMEOUT_SECONDS, NUMERIC_VERIFIERS
+from verify_toolkit import NUMERIC_TIMEOUT_SECONDS, NUMERIC_VERIFIERS, declared_names
 
 
 class NumericTimeoutTests(unittest.TestCase):
@@ -13,6 +13,13 @@ class NumericTimeoutTests(unittest.TestCase):
 
     def test_every_toolkit_has_a_numeric_verifier(self):
         self.assertTrue({'TKMath', 'TKG2d', 'TKG3d', 'TKGeomBase'} <= set(NUMERIC_VERIFIERS))
+
+
+class DeclaredNameTests(unittest.TestCase):
+    def test_declarations_wrapped_after_the_comma_are_found(self):
+        # BRepGraph_DeferredInvalidation_Test.cxx wraps one TEST_F after its suite name.
+        text = 'TEST_F(Suite,\n       LongCase)\n{}\nTEST(Other, Short)\nTYPED_TEST( T , c )'
+        self.assertEqual(declared_names(text), {'Suite.LongCase', 'Other.Short', 'T.c'})
 
 
 if __name__ == '__main__':
