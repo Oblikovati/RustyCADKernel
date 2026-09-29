@@ -13,6 +13,7 @@
 // Rust translation of ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Circle.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2dGridEval_Circle`: `P(u) = C + R * (cos(u) * X + sin(u) * Y)` on a grid.
+use super::conic_grid::{ConicTerms, conic_grid, conic_grid_d1, conic_grid_d2, conic_grid_d3};
 use super::grid::{GridFrame, cyclic_coefficients, empty, map_grid};
 use super::{Geom2dGridEvalCurveD1, Geom2dGridEvalCurveD2, Geom2dGridEvalCurveD3};
 use crate::geom2d::Geom2dCircle;
@@ -40,6 +41,12 @@ impl CircleCoords {
     fn vector(&self, a: f64, b: f64) -> Vector2 {
         let v: Vector2 = self.frame.combined(a, b);
         Vector2::new(self.radius * v.x(), self.radius * v.y())
+    }
+}
+
+impl ConicTerms for CircleCoords {
+    fn pair(u: f64) -> (f64, f64) {
+        (u.cos(), u.sin())
     }
     fn point(&self, cos_u: f64, sin_u: f64) -> Point2 {
         self.frame.translated(self.vector(cos_u, sin_u))
@@ -87,7 +94,7 @@ impl Geom2dGridEvalCircle {
         let Some(c) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| c.point(u.cos(), u.sin())))
+        Ok(conic_grid(&c, params))
     }
     /// Points and D1 (`EvaluateGridD1`); `evaluator.evaluate_grid_d1(&params)?`.
     pub fn evaluate_grid_d1(
@@ -97,13 +104,7 @@ impl Geom2dGridEvalCircle {
         let Some(c) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| {
-            let (cos_u, sin_u) = (u.cos(), u.sin());
-            Geom2dGridEvalCurveD1 {
-                point: c.point(cos_u, sin_u),
-                d1: c.d1(cos_u, sin_u),
-            }
-        }))
+        Ok(conic_grid_d1(&c, params))
     }
     /// Points, D1 and D2 (`EvaluateGridD2`); `evaluator.evaluate_grid_d2(&params)?`.
     pub fn evaluate_grid_d2(
@@ -113,14 +114,7 @@ impl Geom2dGridEvalCircle {
         let Some(c) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| {
-            let (cos_u, sin_u) = (u.cos(), u.sin());
-            Geom2dGridEvalCurveD2 {
-                point: c.point(cos_u, sin_u),
-                d1: c.d1(cos_u, sin_u),
-                d2: c.d2(cos_u, sin_u),
-            }
-        }))
+        Ok(conic_grid_d2(&c, params))
     }
     /// Points, D1, D2 and D3 (`EvaluateGridD3`); `evaluator.evaluate_grid_d3(&params)?`.
     pub fn evaluate_grid_d3(
@@ -130,15 +124,7 @@ impl Geom2dGridEvalCircle {
         let Some(c) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| {
-            let (cos_u, sin_u) = (u.cos(), u.sin());
-            Geom2dGridEvalCurveD3 {
-                point: c.point(cos_u, sin_u),
-                d1: c.d1(cos_u, sin_u),
-                d2: c.d2(cos_u, sin_u),
-                d3: c.d3(cos_u, sin_u),
-            }
-        }))
+        Ok(conic_grid_d3(&c, params))
     }
     /// Derivative of order `n >= 1`, cyclic with period 4; empty for `n < 1`
     /// (`EvaluateGridDN`); `evaluator.evaluate_grid_dn(&params, 5)?`.

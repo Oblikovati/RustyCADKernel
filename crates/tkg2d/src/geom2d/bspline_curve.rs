@@ -28,7 +28,7 @@ use super::spline_kind::BSplineState;
 use crate::geom2d_eval::{RepCurveDesc, rep_utils};
 use rustycad_tkernel::impl_transient;
 use rustycad_tkernel::ncollection::Array1;
-use rustycad_tkernel::standard::{Failure, Handle, SharedState, StandardTransient};
+use rustycad_tkernel::standard::{Failure, SharedState, StandardTransient};
 use rustycad_tkmath::bsplclib;
 use rustycad_tkmath::gp::{Point2, Vector2, resolution};
 
@@ -117,26 +117,7 @@ impl Geom2dBSplineCurve {
         copy.max_deriv_inv_ok = false;
         Ok(Self::from_state(copy))
     }
-    /// Whether an evaluation representation is set (`HasEvalRepresentation`);
-    /// `curve.has_eval_representation()`.
-    pub fn has_eval_representation(&self) -> bool {
-        self.state.read().eval_rep.is_some()
-    }
-    /// The evaluation representation, possibly null (`EvalRepresentation`); `curve.eval_representation()`.
-    pub fn eval_representation(&self) -> Handle<dyn RepCurveDesc> {
-        self.state.read().eval_rep.clone()
-    }
-    /// Validate and set the evaluation representation (`SetEvalRepresentation`);
-    /// `curve.set_eval_representation(desc)?`.
-    pub fn set_eval_representation(&self, desc: Handle<dyn RepCurveDesc>) -> Result<(), Failure> {
-        rep_utils::validate_curve_desc(&desc, std::ptr::from_ref(self).cast())?;
-        self.state.write().eval_rep = desc;
-        Ok(())
-    }
-    /// Remove the evaluation representation (`ClearEvalRepresentation`); `curve.clear_eval_representation()`.
-    pub fn clear_eval_representation(&self) {
-        self.state.write().eval_rep = Handle::default();
-    }
+    crate::eval_representation_members!(dyn RepCurveDesc, rep_utils::validate_curve_desc, "curve");
     /// Raise the degree (`IncreaseDegree`); `curve.increase_degree(5)?`.
     pub fn increase_degree(&self, degree: i32) -> Result<(), Failure> {
         self.state.write().increase_degree(degree)

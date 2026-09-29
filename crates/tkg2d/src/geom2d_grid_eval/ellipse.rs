@@ -13,6 +13,7 @@
 // Rust translation of ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Ellipse.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2dGridEval_Ellipse`: `P(u) = C + MajR * cos(u) * X + MinR * sin(u) * Y` on a grid.
+use super::conic_grid::{ConicTerms, conic_grid, conic_grid_d1, conic_grid_d2, conic_grid_d3};
 use super::grid::{GridFrame, RadiiFrame, cyclic_coefficients, empty, map_grid};
 use super::{Geom2dGridEvalCurveD1, Geom2dGridEvalCurveD2, Geom2dGridEvalCurveD3};
 use crate::geom2d::Geom2dEllipse;
@@ -29,17 +30,23 @@ pub struct Geom2dGridEvalEllipse {
 }
 
 // The trigonometric terms of one parameter.
-fn point(e: &RadiiFrame, cos_u: f64, sin_u: f64) -> Point2 {
-    e.point(cos_u, sin_u)
-}
-fn d1(e: &RadiiFrame, cos_u: f64, sin_u: f64) -> Vector2 {
-    e.vector(-sin_u, cos_u)
-}
-fn d2(e: &RadiiFrame, cos_u: f64, sin_u: f64) -> Vector2 {
-    e.vector(-cos_u, -sin_u)
-}
-fn d3(e: &RadiiFrame, cos_u: f64, sin_u: f64) -> Vector2 {
-    e.vector(sin_u, -cos_u)
+struct EllipseTerms(RadiiFrame);
+impl ConicTerms for EllipseTerms {
+    fn pair(u: f64) -> (f64, f64) {
+        (u.cos(), u.sin())
+    }
+    fn point(&self, cos_u: f64, sin_u: f64) -> Point2 {
+        self.0.point(cos_u, sin_u)
+    }
+    fn d1(&self, cos_u: f64, sin_u: f64) -> Vector2 {
+        self.0.vector(-sin_u, cos_u)
+    }
+    fn d2(&self, cos_u: f64, sin_u: f64) -> Vector2 {
+        self.0.vector(-cos_u, -sin_u)
+    }
+    fn d3(&self, cos_u: f64, sin_u: f64) -> Vector2 {
+        self.0.vector(sin_u, -cos_u)
+    }
 }
 
 impl Geom2dGridEvalEllipse {
@@ -52,7 +59,7 @@ impl Geom2dGridEvalEllipse {
     pub fn geometry(&self) -> &Handle<Geom2dEllipse> {
         &self.geom
     }
-    fn coords(&self, params: &Array1<'_, f64>) -> Result<Option<RadiiFrame>, Failure> {
+    fn coords(&self, params: &Array1<'_, f64>) -> Result<Option<EllipseTerms>, Failure> {
         let Some(ellipse) = self.geom.get() else {
             return Ok(None);
         };
@@ -61,11 +68,11 @@ impl Geom2dGridEvalEllipse {
         }
         let elips: Ellipse2 = ellipse.elips2d()?;
         let (x_dir, y_dir) = (elips.x_axis().direction(), elips.y_axis().direction());
-        Ok(Some(RadiiFrame {
+        Ok(Some(EllipseTerms(RadiiFrame {
             frame: GridFrame::new(elips.location(), x_dir, y_dir),
             major: elips.major_radius(),
             minor: elips.minor_radius(),
-        }))
+        })))
     }
     /// Points at every parameter (`EvaluateGrid`); `evaluator.evaluate_grid(&params)?`.
     pub fn evaluate_grid(
@@ -75,7 +82,7 @@ impl Geom2dGridEvalEllipse {
         let Some(e) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| point(&e, u.cos(), u.sin())))
+        Ok(conic_grid(&e, params))
     }
     /// Points and D1 (`EvaluateGridD1`); `evaluator.evaluate_grid_d1(&params)?`.
     pub fn evaluate_grid_d1(
@@ -85,13 +92,7 @@ impl Geom2dGridEvalEllipse {
         let Some(e) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| {
-            let (c, s) = (u.cos(), u.sin());
-            Geom2dGridEvalCurveD1 {
-                point: point(&e, c, s),
-                d1: d1(&e, c, s),
-            }
-        }))
+        Ok(conic_grid_d1(&e, params))
     }
     /// Points, D1 and D2 (`EvaluateGridD2`); `evaluator.evaluate_grid_d2(&params)?`.
     pub fn evaluate_grid_d2(
@@ -101,14 +102,7 @@ impl Geom2dGridEvalEllipse {
         let Some(e) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| {
-            let (c, s) = (u.cos(), u.sin());
-            Geom2dGridEvalCurveD2 {
-                point: point(&e, c, s),
-                d1: d1(&e, c, s),
-                d2: d2(&e, c, s),
-            }
-        }))
+        Ok(conic_grid_d2(&e, params))
     }
     /// Points, D1, D2 and D3 (`EvaluateGridD3`); `evaluator.evaluate_grid_d3(&params)?`.
     pub fn evaluate_grid_d3(
@@ -118,15 +112,7 @@ impl Geom2dGridEvalEllipse {
         let Some(e) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| {
-            let (c, s) = (u.cos(), u.sin());
-            Geom2dGridEvalCurveD3 {
-                point: point(&e, c, s),
-                d1: d1(&e, c, s),
-                d2: d2(&e, c, s),
-                d3: d3(&e, c, s),
-            }
-        }))
+        Ok(conic_grid_d3(&e, params))
     }
     /// Derivative of order `n >= 1`, cyclic with period 4; empty for `n < 1`
     /// (`EvaluateGridDN`); `evaluator.evaluate_grid_dn(&params, 6)?`.
@@ -143,7 +129,7 @@ impl Geom2dGridEvalEllipse {
         };
         Ok(map_grid(params, |u| {
             let (a, b) = cyclic_coefficients(n, u.cos(), u.sin());
-            e.vector(a, b)
+            e.0.vector(a, b)
         }))
     }
 }

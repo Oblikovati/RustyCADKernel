@@ -79,3 +79,51 @@ macro_rules! unsupported_curve_reversal {
         }
     };
 }
+
+/// The `HasEvalRepresentation`, `EvalRepresentation`, `SetEvalRepresentation` and
+/// `ClearEvalRepresentation` members that every class with an evaluation
+/// representation writes identically over its locked `state.eval_rep`; `$validate`
+/// is the package RepUtils check (`ValidateCurveDesc` or `ValidateSurfaceDesc`);
+/// `rustycad_tkg2d::eval_representation_members!(dyn RepCurveDesc, rep_utils::validate_curve_desc, "curve");`.
+#[macro_export]
+macro_rules! eval_representation_members {
+    ($desc:ty, $validate:path, $object:literal) => {
+        #[doc = concat!(
+                    "Whether an evaluation representation is set (`HasEvalRepresentation`);\n`",
+                    $object,
+                    ".has_eval_representation()`."
+                )]
+        pub fn has_eval_representation(&self) -> bool {
+            self.state.read().eval_rep.is_some()
+        }
+        #[doc = concat!(
+                    "The evaluation representation, possibly null (`EvalRepresentation`); `",
+                    $object,
+                    ".eval_representation()`."
+                )]
+        pub fn eval_representation(&self) -> ::rustycad_tkernel::standard::Handle<$desc> {
+            self.state.read().eval_rep.clone()
+        }
+        #[doc = concat!(
+                    "Validate and set the evaluation representation (`SetEvalRepresentation`);\n`",
+                    $object,
+                    ".set_eval_representation(desc)?`."
+                )]
+        pub fn set_eval_representation(
+            &self,
+            desc: ::rustycad_tkernel::standard::Handle<$desc>,
+        ) -> ::core::result::Result<(), ::rustycad_tkernel::standard::Failure> {
+            $validate(&desc, std::ptr::from_ref(self).cast())?;
+            self.state.write().eval_rep = desc;
+            Ok(())
+        }
+        #[doc = concat!(
+                    "Remove the evaluation representation (`ClearEvalRepresentation`); `",
+                    $object,
+                    ".clear_eval_representation()`."
+                )]
+        pub fn clear_eval_representation(&self) {
+            self.state.write().eval_rep = ::rustycad_tkernel::standard::Handle::default();
+        }
+    };
+}

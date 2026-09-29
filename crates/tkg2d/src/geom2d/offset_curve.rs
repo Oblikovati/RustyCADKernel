@@ -167,26 +167,7 @@ impl Geom2dOffsetCurve {
             state: SharedState::new(state),
         })
     }
-    /// Whether an evaluation representation is set (`HasEvalRepresentation`);
-    /// `curve.has_eval_representation()`.
-    pub fn has_eval_representation(&self) -> bool {
-        self.state.read().eval_rep.is_some()
-    }
-    /// The evaluation representation, possibly null (`EvalRepresentation`); `curve.eval_representation()`.
-    pub fn eval_representation(&self) -> Handle<dyn RepCurveDesc> {
-        self.state.read().eval_rep.clone()
-    }
-    /// Validate and set the evaluation representation (`SetEvalRepresentation`);
-    /// `curve.set_eval_representation(desc)?`.
-    pub fn set_eval_representation(&self, desc: Handle<dyn RepCurveDesc>) -> Result<(), Failure> {
-        rep_utils::validate_curve_desc(&desc, std::ptr::from_ref(self).cast())?;
-        self.state.write().eval_rep = desc;
-        Ok(())
-    }
-    /// Remove the evaluation representation (`ClearEvalRepresentation`); `curve.clear_eval_representation()`.
-    pub fn clear_eval_representation(&self) {
-        self.state.write().eval_rep = Handle::default();
-    }
+    crate::eval_representation_members!(dyn RepCurveDesc, rep_utils::validate_curve_desc, "curve");
     /// Replace the basis curve, as the constructor does (`SetBasisCurve`). Like the native
     /// code, a rejected basis leaves the accumulated offset and continuity stored;
     /// `curve.set_basis_curve(&basis, false)?`.

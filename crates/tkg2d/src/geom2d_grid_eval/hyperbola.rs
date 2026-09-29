@@ -13,6 +13,7 @@
 // Rust translation of ModelingData/TKG2d/Geom2dGridEval/Geom2dGridEval_Hyperbola.hxx/.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
 
 //! `Geom2dGridEval_Hyperbola`: `P(u) = C + MajR * cosh(u) * X + MinR * sinh(u) * Y` on a grid.
+use super::conic_grid::{ConicTerms, conic_grid, conic_grid_d1, conic_grid_d2, conic_grid_d3};
 use super::grid::{GridFrame, RadiiFrame, empty, map_grid};
 use super::{Geom2dGridEvalCurveD1, Geom2dGridEvalCurveD2, Geom2dGridEvalCurveD3};
 use crate::geom2d::Geom2dHyperbola;
@@ -30,8 +31,23 @@ pub struct Geom2dGridEvalHyperbola {
 
 // The hyperbolic terms of one parameter: the derivatives alternate between the
 // (sinh, cosh) and (cosh, sinh) combinations.
-fn point(h: &RadiiFrame, cosh_u: f64, sinh_u: f64) -> Point2 {
-    h.point(cosh_u, sinh_u)
+struct HyperbolaTerms(RadiiFrame);
+impl ConicTerms for HyperbolaTerms {
+    fn pair(u: f64) -> (f64, f64) {
+        (u.cosh(), u.sinh())
+    }
+    fn point(&self, cosh_u: f64, sinh_u: f64) -> Point2 {
+        self.0.point(cosh_u, sinh_u)
+    }
+    fn d1(&self, cosh_u: f64, sinh_u: f64) -> Vector2 {
+        odd(&self.0, cosh_u, sinh_u)
+    }
+    fn d2(&self, cosh_u: f64, sinh_u: f64) -> Vector2 {
+        even(&self.0, cosh_u, sinh_u)
+    }
+    fn d3(&self, cosh_u: f64, sinh_u: f64) -> Vector2 {
+        odd(&self.0, cosh_u, sinh_u)
+    }
 }
 fn odd(h: &RadiiFrame, cosh_u: f64, sinh_u: f64) -> Vector2 {
     h.vector(sinh_u, cosh_u)
@@ -50,7 +66,7 @@ impl Geom2dGridEvalHyperbola {
     pub fn geometry(&self) -> &Handle<Geom2dHyperbola> {
         &self.geom
     }
-    fn coords(&self, params: &Array1<'_, f64>) -> Result<Option<RadiiFrame>, Failure> {
+    fn coords(&self, params: &Array1<'_, f64>) -> Result<Option<HyperbolaTerms>, Failure> {
         let Some(hyperbola) = self.geom.get() else {
             return Ok(None);
         };
@@ -59,11 +75,11 @@ impl Geom2dGridEvalHyperbola {
         }
         let hypr: Hyperbola2 = hyperbola.hypr2d()?;
         let (x_dir, y_dir) = (hypr.x_axis().direction(), hypr.y_axis().direction());
-        Ok(Some(RadiiFrame {
+        Ok(Some(HyperbolaTerms(RadiiFrame {
             frame: GridFrame::new(hypr.location(), x_dir, y_dir),
             major: hypr.major_radius(),
             minor: hypr.minor_radius(),
-        }))
+        })))
     }
     /// Points at every parameter (`EvaluateGrid`); `evaluator.evaluate_grid(&params)?`.
     pub fn evaluate_grid(
@@ -73,7 +89,7 @@ impl Geom2dGridEvalHyperbola {
         let Some(e) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| point(&e, u.cosh(), u.sinh())))
+        Ok(conic_grid(&e, params))
     }
     /// Points and D1 (`EvaluateGridD1`); `evaluator.evaluate_grid_d1(&params)?`.
     pub fn evaluate_grid_d1(
@@ -83,13 +99,7 @@ impl Geom2dGridEvalHyperbola {
         let Some(e) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| {
-            let (c, s) = (u.cosh(), u.sinh());
-            Geom2dGridEvalCurveD1 {
-                point: point(&e, c, s),
-                d1: odd(&e, c, s),
-            }
-        }))
+        Ok(conic_grid_d1(&e, params))
     }
     /// Points, D1 and D2 (`EvaluateGridD2`); `evaluator.evaluate_grid_d2(&params)?`.
     pub fn evaluate_grid_d2(
@@ -99,14 +109,7 @@ impl Geom2dGridEvalHyperbola {
         let Some(e) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| {
-            let (c, s) = (u.cosh(), u.sinh());
-            Geom2dGridEvalCurveD2 {
-                point: point(&e, c, s),
-                d1: odd(&e, c, s),
-                d2: even(&e, c, s),
-            }
-        }))
+        Ok(conic_grid_d2(&e, params))
     }
     /// Points, D1, D2 and D3 (`EvaluateGridD3`); `evaluator.evaluate_grid_d3(&params)?`.
     pub fn evaluate_grid_d3(
@@ -116,15 +119,7 @@ impl Geom2dGridEvalHyperbola {
         let Some(e) = self.coords(params)? else {
             return Ok(empty());
         };
-        Ok(map_grid(params, |u| {
-            let (c, s) = (u.cosh(), u.sinh());
-            Geom2dGridEvalCurveD3 {
-                point: point(&e, c, s),
-                d1: odd(&e, c, s),
-                d2: even(&e, c, s),
-                d3: odd(&e, c, s),
-            }
-        }))
+        Ok(conic_grid_d3(&e, params))
     }
     /// Derivative of order `n >= 1`: `(sinh, cosh)` terms for odd `n`, `(cosh, sinh)`
     /// for even `n`; empty for `n < 1` (`EvaluateGridDN`); `evaluator.evaluate_grid_dn(&params, 3)?`.
@@ -143,9 +138,9 @@ impl Geom2dGridEvalHyperbola {
         Ok(map_grid(params, |u| {
             let (c, s) = (u.cosh(), u.sinh());
             if is_odd {
-                odd(&e, c, s)
+                odd(&e.0, c, s)
             } else {
-                even(&e, c, s)
+                even(&e.0, c, s)
             }
         }))
     }
