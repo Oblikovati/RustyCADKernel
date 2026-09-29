@@ -230,6 +230,32 @@ struct Acr {
     i_cnt: i32,
 }
 
+impl Acr {
+    // The parameter `t` mapped linearly from the last kept parameter: `UOld + (t -
+    // TOld) * DtInv * DU`, as `ratio = (t - TOld) * DtInv` then `UOld + ratio * DU`.
+    fn remapped(&self, t: f64, (dt_inv, du): (f64, f64)) -> f64 {
+        let ratio: f64 = (t - self.t_old) * dt_inv;
+        self.u_old + ratio * du
+    }
+
+    // The element holding `t_para` from the current one on (at most the last).
+    fn advance_element(&mut self, curve: &Curve, t_para: f64) -> Result<(), Failure> {
+        let k_last: i32 = curve.knots().upper();
+        while knot(curve, self.i_elm + 1)? < t_para && self.i_elm < k_last - 1 {
+            self.i_elm += 1;
+        }
+        Ok(())
+    }
+
+    // Point `ipnt` at `t_para` is kept with the arc-length parameter `u_new`.
+    fn keep(&mut self, u_new: f64, t_para: f64, ipnt: i32) {
+        self.u_old = u_new;
+        self.i_old = self.i_elm;
+        self.t_old = t_para;
+        self.p_old = ipnt;
+    }
+}
+
 // Knots(index) of the curve (a short lock: the curve reads its knots in Length).
 fn knot(curve: &Curve, index: i32) -> Result<f64, Failure> {
     at(&curve.knots(), index)
@@ -369,28 +395,20 @@ fn acr_update(
     (cb_long, s): (f64, &mut Acr),
 ) -> Result<(), Failure> {
     let ti_first: i32 = ti.lower();
-    let k_last: i32 = curve.knots().upper();
     // (2.2), (2.3) Compute the curve length
     let u_new: f64 = curve.length(at(ti, ti_first)?, t_para)? / cb_long;
-    while knot(curve, s.i_elm + 1)? < t_para && s.i_elm < k_last - 1 {
-        s.i_elm += 1;
-    }
+    s.advance_element(curve, t_para)?;
     // (2.4) Update the splitting parameters
     let dt_inv: f64 = 1. / (t_para - s.t_old);
     let du: f64 = u_new - s.u_old;
     for ii in s.i_old + 1..=s.i_elm {
-        let ratio: f64 = (knot(curve, ii)? - s.t_old) * dt_inv;
-        set_knot(curve, ii, s.u_old + ratio * du)?;
+        set_knot(curve, ii, s.remapped(knot(curve, ii)?, (dt_inv, du)))?;
     }
     // (2.5) Update the point parameters ("very strange loop, because it never works").
     for ii in s.p_old + 1..=ipnt - 1 {
-        let ratio: f64 = (at(ti, ii)? - s.t_old) * dt_inv;
-        put(ti, ii, s.u_old + ratio * du)?;
+        put(ti, ii, s.remapped(at(ti, ii)?, (dt_inv, du)))?;
     }
     put(ti, ipnt, u_new)?;
-    s.u_old = u_new;
-    s.i_old = s.i_elm;
-    s.t_old = t_para;
-    s.p_old = ipnt;
+    s.keep(u_new, t_para, ipnt);
     Ok(())
 }
