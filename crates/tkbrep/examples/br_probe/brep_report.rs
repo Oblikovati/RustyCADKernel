@@ -1,6 +1,6 @@
 //! The BRep_Tool reports of a scene, the Rust twin of
-//! tools/oracle/tkbrep_probe_brep_report.cxx. A query that reaches the planar
-//! projection (Standard_NotImplemented here, a projected curve natively) prints `P`.
+//! tools/oracle/tkbrep_probe_brep_report.cxx. A curve projected on a plane by
+//! CurveOnPlane is evaluated.
 use super::brep::{Scene, id, scene};
 use super::common::{Reader, end, failure, flag, int, masked, real, show, text, word};
 use super::graph::{chain, desc};
@@ -8,12 +8,12 @@ use rustycad_tkbrep::brep::{
     BRepCurveOnClosedSurface, BRepCurveOnSurface, BRepCurveRepresentation, BRepGCurve,
     BRepPointRepresentation, BRepTEdge, BRepTFace, BRepTVertex, BRepTool, EdgePCurve,
 };
-use rustycad_tkbrep::topods::{self, Edge, Face, Shape, ShapeIterator, Vertex};
+use rustycad_tkbrep::topods::{self, Edge, Face, Shape, Vertex};
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::dump::DumpStream;
 use rustycad_tkernel::standard::{Failure, Handle};
 use rustycad_tkg3d::geom::{GeomCurve, GeomSurface};
-use rustycad_tkg3d::top_abs::{Orientation, ShapeEnum};
+use rustycad_tkg3d::top_abs::ShapeEnum;
 use rustycad_tkmath::gp::{Point2, Point3};
 use rustycad_tkmath::toploc::Location;
 
@@ -246,23 +246,30 @@ fn face_report(s: &Scene, f: &Face) {
     int(id(&g.triangulations, &tf.active_triangulation()));
 }
 
-/// Whether a failure is the unported projection step.
-fn is_projection(e: &Failure) -> bool {
-    e.exception_type() == "Standard_NotImplemented"
-}
-
-/// `br_pcurve_result` for a Rust result.
+/// `br_pcurve_result`: a projected (not stored) curve is printed as `P`, its dynamic
+/// type, bounds and points at the start, middle and end of the returned range.
 fn pcurve_result(s: &Scene, r: Result<EdgePCurve, Failure>) {
-    match r {
-        Err(e) if is_projection(&e) => word("P"),
-        Err(e) => failure(&e),
-        Ok(r) => {
-            int(id(&s.geometry.pcurves, &r.pcurve));
-            real(r.first);
-            real(r.last);
-            flag(r.is_stored);
+    let r = match r {
+        Err(e) => return failure(&e),
+        Ok(r) => r,
+    };
+    let Some(c) = r.pcurve.get().filter(|_| !r.is_stored) else {
+        int(id(&s.geometry.pcurves, &r.pcurve));
+        real(r.first);
+        real(r.last);
+        return flag(r.is_stored);
+    };
+    word("P");
+    word(c.dynamic_type().name());
+    real(c.first_parameter());
+    real(c.last_parameter());
+    for u in [r.first, (r.first + r.last) / 2.0, r.last] {
+        if !precision::is_infinite(u) {
+            show(c.value(u), pnt2d);
         }
     }
+    real(r.first);
+    real(r.last);
 }
 
 fn edge_on_surface(s: &Scene, e: &Edge, sf: &Handle<dyn GeomSurface>, l: &Location) {
@@ -333,21 +340,6 @@ fn edge_pairs(s: &Scene, e: &Edge) {
     }
 }
 
-/// `br_vertex_at_end`: the vertex is a FORWARD or REVERSED vertex of the edge.
-fn vertex_at_end(v: &Vertex, e: &Edge) -> bool {
-    let mut found = Shape::default();
-    let mut it = ShapeIterator::new(&e.oriented(Orientation::Forward), true, true);
-    while let Ok(child) = it.value() {
-        if v.is_same(child) && (found.is_null() || child.orientation() == v.orientation()) {
-            found = child.clone();
-        }
-        it.next();
-    }
-    !found.is_null()
-        && (found.orientation() == Orientation::Forward
-            || found.orientation() == Orientation::Reversed)
-}
-
 fn vertex_pairs(s: &Scene, v: &Vertex) {
     let g = &s.graph;
     for b in g.shapes.iter().filter(|b| !b.is_null()) {
@@ -364,10 +356,7 @@ fn vertex_pairs(s: &Scene, v: &Vertex) {
         });
         for c in g.shapes.iter().filter(|c| is_type(c, ShapeEnum::Face)) {
             let (sf, l) = BRepTool::surface_with_location(&topods::face(c).unwrap()).unwrap();
-            match BRepTool::parameter_on_surface(v, &e, &sf, &l) {
-                Err(err) if is_projection(&err) && !vertex_at_end(v, &e) => word("P"),
-                r => show(r, real),
-            }
+            show(BRepTool::parameter_on_surface(v, &e, &sf, &l), real);
         }
     }
 }

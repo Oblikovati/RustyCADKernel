@@ -18,8 +18,10 @@ COMPOUND, COMPSOLID, SOLID, SHELL, WIRE = 0, 1, 2, 3, 5
 TWO_PI = 2.0 * math.pi
 
 
-def square_edge(s: BRepScript, face: int, v1: int, v2: int, a, b, uv_a, uv_b) -> int:
-    """A line edge from vertex v1 at a to v2 at b, with its p-curve on `face`."""
+def square_edge(s: BRepScript, face: int, v1: int, v2: int, a, b, uv_a, uv_b,
+                pcurve: bool = True) -> int:
+    """A line edge from vertex v1 at a to v2 at b, with its p-curve on `face` unless
+    `pcurve` is false."""
     d = [b[i] - a[i] for i in range(3)]
     length = sum(c * c for c in d) ** 0.5
     e = s.edge(s.line(a, d))
@@ -27,14 +29,15 @@ def square_edge(s: BRepScript, face: int, v1: int, v2: int, a, b, uv_a, uv_b) ->
     s.add(e, v2, REVERSED)
     s.do(28, e, 0.0, length, 0)
     duv = [(uv_b[i] - uv_a[i]) / length for i in range(2)]
-    s.do(13, e, s.line2d(uv_a, duv), face, 1e-7)
+    if pcurve:
+        s.do(13, e, s.line2d(uv_a, duv), face, 1e-7)
     s.do(34, v1, 0.0, e, 1e-7)
     s.do(34, v2, length, e, 1e-7)
     return e
 
 
-def square_face(s: BRepScript, size: float, z: float,
-                internal: bool = False) -> tuple[int, list[int], int, list[int]]:
+def square_face(s: BRepScript, size: float, z: float, internal: bool = False,
+                pcurves: bool = True) -> tuple[int, list[int], int, list[int]]:
     """A planar face on z with one wire of four line edges and shared vertices; with
     `internal`, the third edge holds an INTERNAL vertex at its middle. Returns the face,
     edges, wire and corner vertices."""
@@ -47,7 +50,8 @@ def square_face(s: BRepScript, size: float, z: float,
     for i in range(4):
         j = (i + 1) % 4
         a, b = (*corners[i], z), (*corners[j], z)
-        edges.append(square_edge(s, face, vertices[i], vertices[j], a, b, corners[i], corners[j]))
+        edges.append(square_edge(s, face, vertices[i], vertices[j], a, b, corners[i], corners[j],
+                                 pcurves))
         if internal and i == 2:
             middle = s.vertex(tuple((a[k] + b[k]) / 2 for k in range(3)))
             s.add(edges[-1], middle, INTERNAL)
@@ -175,10 +179,29 @@ MODIFICATIONS = [
 ]
 
 
+def projection_scene() -> BRepScript:
+    """Planar faces whose edges have no p-curves, so every p-curve query projects the 3D
+    curves on the plane (BRep_Tool::CurveOnPlane): a square, a located copy and a disk."""
+    s = BRepScript()
+    t = s.translation(0.5, -1.0, 0.25)
+    face, _, _, _ = square_face(s, 1.5, 0.5, pcurves=False)
+    s.moved(face, REVERSED, t)
+    disk = s.face(s.plane((0.0, 0.0, 0.0), (0.0, 0.0, 1.0)), 0, 1e-7)
+    circle = s.edge(s.circle((0.0, 0.0, 0.0), (0.0, 0.0, 1.0), 2.0))
+    v = s.vertex((2.0, 0.0, 0.0))
+    s.add(circle, v, FORWARD)
+    s.add(circle, v, REVERSED)
+    s.do(28, circle, 0.0, TWO_PI, 0)
+    wire = s.make(WIRE)
+    s.add(wire, circle, FORWARD)
+    s.add(disk, wire, FORWARD)
+    return s
+
+
 def scenes() -> list[BRepScript]:
     """Every scene of the BRepTools requests."""
     return [solid_scene(), cylinder_scene(), mesh_scene(), edge_scenario(), face_scenario(),
-            plane_scenario(), bezier_scene()]
+            plane_scenario(), bezier_scene(), projection_scene()]
 
 
 def append_tkbrep_breptools_requests(requests: list[str]) -> None:
@@ -191,7 +214,8 @@ def append_tkbrep_breptools_requests(requests: list[str]) -> None:
             requests.append(f'br_tools_mutate {numbers} {code}')
         requests.append(f'br_tools_wire {numbers}')
         requests.append(f'br_adaptor {numbers}')
-    for script in (solid_scene(), cylinder_scene(), mesh_scene(), bezier_scene()):
+    for script in (solid_scene(), cylinder_scene(), mesh_scene(), bezier_scene(),
+                   projection_scene()):
         numbers = text(script.numbers())
         for kind, params, mutable in MODIFICATIONS:
             requests.append(f'br_tools_modif {numbers} {kind} {text(params)} {mutable}'.replace('  ', ' '))

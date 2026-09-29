@@ -108968,24 +108968,24 @@
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRep/BRep_Tool.hxx",
       "rust_item": "rustycad_tkbrep::brep::BRepTool::curve_on_face",
-      "status": "partial",
-      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. Partial: the planar projection of BRep_Tool::CurveOnPlane is ported up to its one GeomProjLib::ProjectOnPlane call (the trim, ProjLib_ProjectedCurve on the plane, Geom2dAdaptor::MakeCurve and the basis of a trimmed result are ported); GeomProjLib is being ported beside TKBRep, so that call raises Standard_NotImplemented naming it. Every other path is ported and compared (the probes print P where both sides reach the projection)."
+      "status": "implemented",
+      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. The planar projection of BRep_Tool::CurveOnPlane (GeomProjLib::ProjectOnPlane along the plane normal, ProjLib_ProjectedCurve, Geom2dAdaptor::MakeCurve, the basis of a trimmed result) is ported and compared through the projected p-curves the br_brep probe evaluates."
     },
     {
       "upstream_id": "BRep_Tool::CurveOnSurface(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&,double&,double&,bool*)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRep/BRep_Tool.hxx",
       "rust_item": "rustycad_tkbrep::brep::BRepTool::curve_on_surface",
-      "status": "partial",
-      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. Partial: the planar projection of BRep_Tool::CurveOnPlane is ported up to its one GeomProjLib::ProjectOnPlane call (the trim, ProjLib_ProjectedCurve on the plane, Geom2dAdaptor::MakeCurve and the basis of a trimmed result are ported); GeomProjLib is being ported beside TKBRep, so that call raises Standard_NotImplemented naming it. Every other path is ported and compared (the probes print P where both sides reach the projection)."
+      "status": "implemented",
+      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. The planar projection of BRep_Tool::CurveOnPlane (GeomProjLib::ProjectOnPlane along the plane normal, ProjLib_ProjectedCurve, Geom2dAdaptor::MakeCurve, the basis of a trimmed result) is ported and compared through the projected p-curves the br_brep probe evaluates."
     },
     {
       "upstream_id": "BRep_Tool::CurveOnPlane(const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&,double&,double&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRep/BRep_Tool.hxx",
       "rust_item": "rustycad_tkbrep::brep::BRepTool::curve_on_plane",
-      "status": "partial",
-      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. Partial: the planar projection of BRep_Tool::CurveOnPlane is ported up to its one GeomProjLib::ProjectOnPlane call (the trim, ProjLib_ProjectedCurve on the plane, Geom2dAdaptor::MakeCurve and the basis of a trimmed result are ported); GeomProjLib is being ported beside TKBRep, so that call raises Standard_NotImplemented naming it. Every other path is ported and compared (the probes print P where both sides reach the projection)."
+      "status": "implemented",
+      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. The planar projection of BRep_Tool::CurveOnPlane (GeomProjLib::ProjectOnPlane along the plane normal, ProjLib_ProjectedCurve, Geom2dAdaptor::MakeCurve, the basis of a trimmed result) is ported and compared through the projected p-curves the br_brep probe evaluates."
     },
     {
       "upstream_id": "BRep_Tool::CurveOnSurface(const TopoDS_Edge&,occ::handle<Geom2d_Curve>&,occ::handle<Geom_Surface>&,TopLoc_Location&,double&,double&)",
@@ -109256,16 +109256,16 @@
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRep/BRep_Tool.hxx",
       "rust_item": "rustycad_tkbrep::brep::BRepTool::parameter_on_face",
-      "status": "partial",
-      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. Partial: the planar projection of BRep_Tool::CurveOnPlane is ported up to its one GeomProjLib::ProjectOnPlane call (the trim, ProjLib_ProjectedCurve on the plane, Geom2dAdaptor::MakeCurve and the basis of a trimmed result are ported); GeomProjLib is being ported beside TKBRep, so that call raises Standard_NotImplemented naming it. Every other path is ported and compared (the probes print P where both sides reach the projection)."
+      "status": "implemented",
+      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. The planar projection of BRep_Tool::CurveOnPlane (GeomProjLib::ProjectOnPlane along the plane normal, ProjLib_ProjectedCurve, Geom2dAdaptor::MakeCurve, the basis of a trimmed result) is ported and compared through the projected p-curves the br_brep probe evaluates."
     },
     {
       "upstream_id": "BRep_Tool::Parameter(const TopoDS_Vertex&,const TopoDS_Edge&,const occ::handle<Geom_Surface>&,const TopLoc_Location&)",
       "toolkit": "TKBRep",
       "source": "src/ModelingData/TKBRep/BRep/BRep_Tool.hxx",
       "rust_item": "rustycad_tkbrep::brep::BRepTool::parameter_on_surface",
-      "status": "partial",
-      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. Partial: the planar projection of BRep_Tool::CurveOnPlane is ported up to its one GeomProjLib::ProjectOnPlane call (the trim, ProjLib_ProjectedCurve on the plane, Geom2dAdaptor::MakeCurve and the basis of a trimmed result are ported); GeomProjLib is being ported beside TKBRep, so that call raises Standard_NotImplemented naming it. Every other path is ported and compared (the probes print P where both sides reach the projection)."
+      "status": "implemented",
+      "notes": "Manual BRep mapping (docs/topology-design.md section 9): the abstract classes are traits over embedded base data, the concrete classes structs with their fields in a SharedState; members that raise natively return Result with the native exception type. Compared with OCCT by the br_brep and br_brep_dump probes. Natively the TShape is reinterpreted without a check; a null shape raises Standard_NullObject and a TShape of another class Standard_TypeMismatch here. The planar projection of BRep_Tool::CurveOnPlane (GeomProjLib::ProjectOnPlane along the plane normal, ProjLib_ProjectedCurve, Geom2dAdaptor::MakeCurve, the basis of a trimmed result) is ported and compared through the projected p-curves the br_brep probe evaluates."
     },
     {
       "upstream_id": "BRep_Tool::Parameters(const TopoDS_Vertex&,const TopoDS_Face&)",
@@ -204470,6 +204470,188 @@
       "rust_target": "brep_adaptor_comp_curve",
       "rust_test": "BRepAdaptor_CompCurve_Test__OCC30422_WireExplorerReorderedEdges",
       "rust_source": "crates/tkbrep/tests/brep_adaptor_comp_curve.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.Pnt_FromVertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__Pnt_FromVertex",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.Tolerance_Vertex",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__Tolerance_Vertex",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.Tolerance_Edge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__Tolerance_Edge",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.Tolerance_Face",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__Tolerance_Face",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.Curve_FromEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__Curve_FromEdge",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.Surface_FromFace",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__Surface_FromFace",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.IsClosed_CircleEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__IsClosed_CircleEdge",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.IsClosed_LineEdge",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__IsClosed_LineEdge",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.Degenerated",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__Degenerated",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.CurveOnPlane_RejectsEdgeRangeOutsideBoundedCurve",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__CurveOnPlane_RejectsEdgeRangeOutsideBoundedCurve",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.CurveOnPlane_ProjectsShiftedPeriodicRange",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__CurveOnPlane_ProjectsShiftedPeriodicRange",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.CurveOnPlane_ProjectsPeriodicEdgeBuiltFromEqualParameters",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__CurveOnPlane_ProjectsPeriodicEdgeBuiltFromEqualParameters",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
+      "status": "translated",
+      "profiles": [
+        "linux-gcc-c-locale"
+      ]
+    },
+    {
+      "upstream_id": "BRep_Tool_Test.CurveOnPlane_RejectsEqualPeriodicRange",
+      "toolkit": "TKBRep",
+      "source": "src/ModelingData/TKBRep/GTests/BRep_Tool_Test.cxx",
+      "source_sha256": "b211e2305992e25eb0ba94512248bbc01ad4a934a931a7894dc925b35dc0f8ad",
+      "rust_package": "rustycad-tkbrep",
+      "rust_target": "brep_tool",
+      "rust_test": "BRep_Tool_Test__CurveOnPlane_RejectsEqualPeriodicRange",
+      "rust_source": "crates/tkbrep/tests/brep_tool.rs",
       "status": "translated",
       "profiles": [
         "linux-gcc-c-locale"

@@ -5,7 +5,7 @@ tools/oracle/tkbrep_probe_brep.cxx and crates/tkbrep/examples/br_probe/brep.rs.
 `BRepScript` numbers the registries as the probes do: locations from 1 (0 is the
 identity), each geometry kind from 0, shapes from 0 in creation order. The scenarios
 build every curve and point representation, located and reversed shapes, the builder
-errors and the queries that reach the planar projection (printed `P` on both sides).
+errors and the queries that project on a plane (the projected p-curves evaluated).
 """
 from __future__ import annotations
 from dataclasses import dataclass, field
@@ -299,7 +299,7 @@ def face_scenario() -> BRepScript:
 
 
 def plane_scenario() -> BRepScript:
-    """Edges without p-curves on planes: the rejected ranges and the projection (`P`)."""
+    """Edges without p-curves on planes: the rejected ranges and the projections."""
     s = BRepScript()
     t = s.translation(0.5, 0.0, 0.0)
     sc = s.scale(3.0)

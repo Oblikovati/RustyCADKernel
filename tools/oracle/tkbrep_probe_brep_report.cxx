@@ -1,8 +1,6 @@
 // BRep oracle, part 2: the BRep_Tool reports of a scene built by tkbrep_probe_brep.cxx.
-// Geometry is printed as registry ids, locations as chains, doubles as bits. The
-// planar projection of CurveOnPlane needs ProjLib, which the port does not have: every
-// query that returns a projected curve prints `P` instead (the Rust twin prints `P`
-// for its Standard_NotImplemented). The Rust twin is
+// Geometry is printed as registry ids, locations as chains, doubles as bits; a curve
+// projected on a plane by CurveOnPlane is evaluated. The Rust twin is
 // crates/tkbrep/examples/br_probe/brep_report.rs.
 #include <BRep_CurveOnClosedSurface.hxx>
 #include <BRep_CurveOnSurface.hxx>
@@ -87,22 +85,13 @@ void br_face_report(const BrScene& s,const TopoDS_Face& f){
  {TopLoc_Location l;const NCollection_List<occ::handle<Poly_Triangulation>>& ts=BRep_Tool::Triangulations(f,l);br_int(ts.Extent());
   for(const occ::handle<Poly_Triangulation>& t:ts)br_int(br_id(G.triangulations,t));br_chain(s.graph,l);}
  br_int(tf->NbTriangulations());br_int(br_id(G.triangulations,tf->ActiveTriangulation()));}
-// A p-curve query that may project: `P` when the result is a projected curve.
+// A p-curve query result. A projected curve (not stored) is printed as `P`, its dynamic
+// type, bounds and points at the start, middle and end of the returned range.
 void br_pcurve_result(const BrScene& s,const occ::handle<Geom2d_Curve>& c,double f,double l,bool stored){
- if(!c.IsNull()&&!stored){br_word("P");return;}
+ if(!c.IsNull()&&!stored){br_word("P");br_word(c->DynamicType()->Name());br_real(c->FirstParameter());br_real(c->LastParameter());
+  for(double u:{f,(f+l)/2,l})if(!Precision::IsInfinite(u))BR_TRY(br_pnt2d(c->Value(u)));
+  br_real(f);br_real(l);return;}
  br_int(br_id(s.geometry.pcurves,c));br_real(f);br_real(l);br_flag(stored);}
-// "Search the vertex in the edge" of BRep_Tool::Parameter(V, E, S, L).
-bool br_vertex_at_end(const TopoDS_Vertex& v,const TopoDS_Edge& e){
- TopoDS_Shape vf;
- for(TopoDS_Iterator it(e.Oriented(TopAbs_FORWARD));it.More();it.Next())
-  if(v.IsSame(it.Value())&&(vf.IsNull()||it.Value().Orientation()==v.Orientation()))vf=it.Value();
- return !vf.IsNull()&&(vf.Orientation()==TopAbs_FORWARD||vf.Orientation()==TopAbs_REVERSED);}
-// Parameter(V, E, S, L) prints `P` when it reaches the projection (INTERNAL vertex
-// and a projected p-curve), else its value or exception.
-void br_parameter_on_surface(const TopoDS_Vertex& v,const TopoDS_Edge& e,const occ::handle<Geom_Surface>& sf,const TopLoc_Location& l){
- if(!br_vertex_at_end(v,e)){bool stored=true;double f,la;occ::handle<Geom2d_Curve> c=BRep_Tool::CurveOnSurface(e,sf,l,f,la,&stored);
-  if(!c.IsNull()&&!stored){br_word("P");return;}}
- BR_TRY(br_real(BRep_Tool::Parameter(v,e,sf,l)));}
 void br_edge_on_surface(const BrScene& s,const TopoDS_Edge& e,const occ::handle<Geom_Surface>& sf,const TopLoc_Location& l){
  const BrGeometry& G=s.geometry;
  {bool stored=true;double f=0,la=0;occ::handle<Geom2d_Curve> c;BR_TRY(c=BRep_Tool::CurveOnSurface(e,sf,l,f,la,&stored);br_pcurve_result(s,c,f,la,stored));}
@@ -139,7 +128,7 @@ void br_pairs_report(const BrScene& s){
    double p=0;bool found=false;BR_TRY(found=BRep_Tool::Parameter(v,e,p);br_flag(found);br_real(found?p:0.0));
    for(const TopoDS_Shape& c:g.shapes){
     if(c.IsNull()||c.ShapeType()!=TopAbs_FACE)continue;TopLoc_Location l;const occ::handle<Geom_Surface>& sf=BRep_Tool::Surface(TopoDS::Face(c),l);
-    br_parameter_on_surface(v,e,sf,l);}}}}
+    BR_TRY(br_real(BRep_Tool::Parameter(v,e,sf,l)));}}}}
 void br_shape_report(const BrScene& s,const TopoDS_Shape& sh){
  br_desc(s.graph,sh);if(sh.IsNull())return;
  BR_TRY(br_flag(BRep_Tool::IsClosed(sh)));

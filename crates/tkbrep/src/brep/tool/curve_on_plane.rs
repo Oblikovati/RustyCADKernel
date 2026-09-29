@@ -18,10 +18,8 @@
 //! `BRep_Tool::CurveOnPlane`: the p-curve of an edge on a plane, built by projection.
 //!
 //! The trimmed 3D curve is projected along the plane normal by
-//! `GeomProjLib::ProjectOnPlane`, then onto the plane parameters by
-//! `ProjLib_ProjectedCurve`. GeomProjLib is being ported beside TKBRep: every step but
-//! that one call is ported, and the call raises Standard_NotImplemented naming the
-//! missing package (docs/tkbrep-progress.md, "Dependency gap").
+//! `GeomProjLib::ProjectOnPlane` (keeping its parametrization), then onto the plane
+//! parameters by `ProjLib_ProjectedCurve`.
 use super::BRepTool;
 use crate::topods::Edge;
 use rustycad_tkernel::precision;
@@ -34,8 +32,8 @@ use rustycad_tkg3d::geom::{
     GeomTrimmedCurve,
 };
 use rustycad_tkg3d::geom_adaptor::{GeomAdaptorCurve, GeomAdaptorSurface};
+use rustycad_tkgeombase::geom_proj_lib;
 use rustycad_tkgeombase::proj_lib::ProjectedCurve;
-use rustycad_tkmath::gp::Direction3;
 use rustycad_tkmath::toploc::Location;
 
 /// The plane of `surface`: the surface itself or the basis of a rectangular trimmed
@@ -119,9 +117,6 @@ impl BRepTool {
     /// projecting the trimmed 3D curve on the plane (the basis of a trimmed result). A
     /// non-planar surface, an edge without a 3D curve and an invalid range return a null
     /// curve, with the range `0, 0` in the first two cases and the edge range in the last.
-    ///
-    /// The projection along the normal needs `GeomProjLib::ProjectOnPlane`, which is not
-    /// ported yet: that step raises Standard_NotImplemented.
     /// `let (pcurve, first, last) = BRepTool::curve_on_plane(&edge, &surface, &location)?;`.
     pub fn curve_on_plane(
         edge: &Edge,
@@ -142,30 +137,10 @@ impl BRepTool {
         let trimmed: Handle<dyn GeomCurve> =
             Handle::new(GeomTrimmedCurve::new(&curve, first, last, true, false)?).cast();
         let normal = plane_ref.position().direction();
-        let projected = project_on_plane(&trimmed, &plane, normal, first, last)?;
+        let projected = geom_proj_lib::project_on_plane(&trimmed, &plane, normal, true)?;
         let pcurve = pcurve_on_plane(&plane, &projected)?;
         Ok((pcurve, reported.0, reported.1))
     }
-}
-
-/// `GeomProjLib::ProjectOnPlane(Curve, Plane, Dir, true)`: GeomProjLib is being ported
-/// beside TKBRep (it needs ProjLib), so this one call raises Standard_NotImplemented.
-fn project_on_plane(
-    _curve: &Handle<dyn GeomCurve>,
-    _plane: &Handle<GeomPlane>,
-    _direction: Direction3,
-    first: f64,
-    last: f64,
-) -> Result<Handle<dyn GeomCurve>, Failure> {
-    Err(Failure::with_type(
-        "Standard_NotImplemented",
-        &format!(
-            "BRep_Tool::CurveOnPlane: projecting the trimmed 3D curve [{first}, {last}] along the \
-             plane normal requires GeomProjLib::ProjectOnPlane (GeomProjLib is not ported); \
-             expected a p-curve stored in the edge"
-        ),
-        "",
-    ))
 }
 
 /// The p-curve of a curve lying in the plane: `ProjLib_ProjectedCurve` on the plane

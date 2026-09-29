@@ -20,7 +20,7 @@ The toolkit test inventory maps these suites (28 declarations):
 | TopoDS_Edge_Test.cxx | topods_edge | 1 | pass | pass |
 | TopoDS_Iterator_Test.cxx | topods_iterator | 17 | pass | pass |
 | TopoDS_TShape_Test.cxx | topods_tshape | 8 | pass | pass |
-| BRep_Tool_Test.cxx | brep_tool (not mapped) | 13 | pass (13) | pass (11 translated) |
+| BRep_Tool_Test.cxx | brep_tool | 13 | pass | pass |
 | BRepTools_ReShape_Test.cxx | brep_tools_reshape | 16 | pass | pass |
 | BRepTools_TrsfModification_Test.cxx | brep_tools_trsf_modification | 4 | pass | pass |
 | BRepTools_GTrsfModification_Test.cxx | brep_tools_gtrsf_modification | 13 | pass | pass |
@@ -41,13 +41,9 @@ TKPrim beside TKTopAlgo (`tools/native_build.py`), and the unchanged file runs n
 like every other suite. The TopExp behaviour is compared with the native kernel by the
 numeric oracle as well (`br_explore`, `br_maps`, `br_vertices`).
 
-`BRep_Tool_Test.cxx` is translated in `crates/tkbrep/tests/brep_tool.rs` for the 11
-declarations that do not project an edge on a plane; all 11 pass in Rust. Its
-`CurveOnPlane_ProjectsShiftedPeriodicRange` and
-`CurveOnPlane_ProjectsPeriodicEdgeBuiltFromEqualParameters` need
-`GeomProjLib::ProjectOnPlane` (see "Dependency gap"), so they are not translated, and
-the suite is not mapped in the ledger: the verifier maps whole files only. The
-unchanged file passes natively (13 of 13, checked with temporary ledger rows). The
+`BRep_Tool_Test.cxx` is translated in `crates/tkbrep/tests/brep_tool.rs`; all 13
+declarations pass natively and in Rust, the two `CurveOnPlane_Projects*` ones through
+the real `GeomProjLib::ProjectOnPlane`. The
 BRepGraph suites wait for their packages.
 
 The BRepTools and BRepAdaptor suites are translated 1:1 in
@@ -207,10 +203,10 @@ edge, internal vertices with points on curves, p-curves and surfaces, seams on a
 cylinder with both UV point pairs, regularities, the quirky seam polygon location,
 triangulation replacement and lists, transfers, empty copies, and the builder errors
 (locked shapes, missing p-curves, infinite parameters, bad triangulation lists).
-`br_brep_dump` compares the JSON dumps of every TShape at depths -1 to 2. A query that
-reaches the unported planar projection prints `P` on both sides: natively when it
-returns a projected curve, in Rust for its Standard_NotImplemented, so the gap is pinned
-to exactly the native projection cases (92 of them in the corpus).
+`br_brep_dump` compares the JSON dumps of every TShape at depths -1 to 2. A p-curve
+projected on a plane by `CurveOnPlane` is printed as `P`, its dynamic type, bounds and
+points at the start, middle and end of the returned range (60 projections in the
+corpus), and `Parameter(V, E, S, L)` is printed for every vertex, edge and face.
 
 The BinTools requests (`br_bin_scalars`, `br_bin_ostream`, `br_bin_istream`,
 `br_bin_geometry`, `br_bin_shape`, `br_bin_read`, `br_bin_truncate`; 281 requests in
@@ -240,12 +236,13 @@ Standard_Failure, whose nested lines keep only the type of a failure of another 
 ends where a byte is read without a check, and a truncation never ends between a table
 tag and its count.
 
-The BRepTools, BRepAdaptor and BRepLProp requests (170 requests in
+The BRepTools, BRepAdaptor and BRepLProp requests (195 requests in
 `tools/tkbrep_breptools_corpus.py` and `tools/tkbrep_breptools_edit_corpus.py`) reuse
 the BRep scene script, which gains Bezier surfaces, over closed scenes (two squares with
 p-curves in a shell, a solid and a compound, with located copies, a mesh, polygons and
 INTERNAL vertices; a cylinder with its seam; triangulation-only faces; a bilinear Bezier
-patch with Bezier edges) and the BRep scenes. `br_tools_text` writes every shape in each
+patch with Bezier edges; planar faces whose edges have no p-curves, so every p-curve
+query projects on the plane) and the BRep scenes. `br_tools_text` writes every shape in each
 format option, reads it back (console and text) and dumps it, and runs one shape set
 over a whole scene in the three versions; `br_tools_read` reads a written face and
 twelve malformed variants. `br_tools_query` prints the UV bounds and boxes, outer wire,
@@ -259,26 +256,15 @@ each face and with UV bounds; `br_tools_reshape`, `br_tools_history`,
 command sequences (lists whose native order follows TShape addresses are sorted).
 `br_adaptor` evaluates every curve, 2D curve, surface and composite curve adaptor at
 five parameters with their trims and copies, the curve and surface local properties
-and the junction continuity. Edge and face pairs are taken from the faces' own edges,
-which carry p-curves, so no request reaches the planar projection.
+and the junction continuity. Edge and face pairs are taken from the faces' own edges.
 
 ## Dependency gap
 
-`BRep_Tool::CurveOnPlane` projects the 3D curve of an edge on a plane with
-`GeomProjLib::ProjectOnPlane` and `ProjLib_ProjectedCurve`, and `CurveOnSurface`
-falls back to it for a plane without a stored p-curve. ProjLib is ported, GeomProjLib
-is being ported beside TKBRep (and is not copied here): the port keeps every step (the
-planar test, the 3D curve lookup, the relative location, the transformed curve and
-parameters, the range validation, the trimmed curve, `ProjLib_ProjectedCurve` on the
-plane, `Geom2dAdaptor::MakeCurve` and the basis of a trimmed result) and raises
-Standard_NotImplemented, naming GeomProjLib, at the one `ProjectOnPlane` call. The api
-rows of `CurveOnPlane`, both `CurveOnSurface(E, S, L, ...)` and
-`CurveOnSurface(E, F, ...)`, and `Parameter(V, E, F)` and `Parameter(V, E, S, L)`
-(which call `CurveOnSurface` for an internal vertex) stay `partial`. Two
-`BRep_Tool_Test.cxx` declarations wait for it.
-
-BinTools reads a version 1 file with `BRepTools::Update(Face)`; it now calls
-`brep_tools::update_face`, and its private copy is deleted.
+None left in TKBRep's own packages. `BRep_Tool::CurveOnPlane` (and the planar fallback
+of `CurveOnSurface`, and `Parameter` for an internal vertex through it) projects the 3D
+curve with `GeomProjLib::ProjectOnPlane` and `ProjLib_ProjectedCurve` from the
+TKGeomBase port. BinTools reads a version 1 file with `BRepTools::Update(Face)` through
+`brep_tools::update_face`; its former private copy is deleted.
 
 ## Preserved native behaviour
 
@@ -441,8 +427,6 @@ BinTools reads a version 1 file with `BRepTools::Update(Face)`; it now calls
 - `BRep_TEdge::Curves()`, `BRep_TVertex::Points()` and `BRep_TFace::Triangulations()`
   return copies of the lists, and `Transfert` walks a copy of the input list, so an
   edge transferred onto itself does not iterate over the representations it adds.
-- The planar projection of `BRep_Tool::CurveOnPlane` raises Standard_NotImplemented
-  ("Dependency gap").
 - BinTools: a byte the native reader leaves uninitialised (`ReadByte` and the float
   normals of the shape reader past the end, a table count when the stream ends between
   the tag and the count) reads 0; an orientation or continuity byte outside its

@@ -248,13 +248,15 @@ fn casts_of_foreign_or_null_tshapes_raise() {
 }
 
 #[test]
-fn planar_projection_is_the_named_gap() {
+fn planar_projection_gives_the_plane_pcurve() {
+    // A line edge in the XOY plane without a stored p-curve: CurveOnSurface projects its
+    // 3D curve on the plane, and the p-curve evaluates to the XY of the 3D points.
     let edge = make_edge(Point3::default(), Point3::new(1.0, 0.0, 0.0));
-    let error = BRepTool::curve_on_surface(&edge, &plane(), &Location::default())
-        .err()
-        .unwrap();
-    assert_eq!(error.exception_type(), "Standard_NotImplemented");
-    assert!(error.message().contains("ProjLib"));
+    let found = BRepTool::curve_on_surface(&edge, &plane(), &Location::default()).unwrap();
+    assert!(!found.is_stored);
+    assert_eq!((found.first, found.last), (0.0, 1.0));
+    let point = found.pcurve.get().unwrap().value(0.5).unwrap();
+    assert!((point.x() - 0.5).abs() <= 1e-12 && point.y().abs() <= 1e-12);
     // A non-planar surface or an edge without 3D curve returns a null curve.
     let mut bare = Edge::default();
     BRepBuilder::default().make_edge(&mut bare).unwrap();
