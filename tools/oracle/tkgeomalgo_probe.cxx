@@ -21,9 +21,26 @@
 #include <gp_XYZ.hxx>
 #include "tkgeomalgo_probe_common.cxx"
 #include "tkgeomalgo_probe_intf.cxx"
+#include "tkgeomalgo_probe_intres2d.cxx"
+#include "tkgeomalgo_probe_intimppargen.cxx"
+#include "tkgeomalgo_probe_intcurve.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // Intf (tkgeomalgo_probe_intf.cxx)
  {"intf_triangle", ga_intf_triangle_case},
+ // IntRes2d (tkgeomalgo_probe_intres2d.cxx)
+ {"intres2d_domain", ga_intres2d_domain_case},
+ {"intres2d_insert", ga_intres2d_insert_case},
+ {"intres2d_append", ga_intres2d_append_case},
+ // IntImpParGen (tkgeomalgo_probe_intimppargen.cxx)
+ {"imppar_transition", ga_imppar_transition_case},
+ {"imppar_domain", ga_imppar_domain_case},
+ // IntCurve (tkgeomalgo_probe_intcurve.cxx)
+ {"intcurve_conics", ga_intcurve_conics_case},
+ {"intcurve_imppar", ga_intcurve_imppar_case},
+ {"intcurve_itool", ga_intcurve_itool_case},
+ {"intcurve_ptool", ga_intcurve_ptool_case},
+ {"intcurve_function", ga_intcurve_function_case},
+ {"intcurve_interval", ga_intcurve_interval_case},
 };
 int main() {
  std::string line;

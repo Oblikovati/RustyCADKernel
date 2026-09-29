@@ -145706,6 +145706,822 @@
       "rust_item": "rustycad_tkgeomalgo::int_res2d::Transition::is_opposite",
       "status": "implemented",
       "notes": "IntRes2d mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload; accessors that raise return Result with the native exception type (Standard_DomainError, StdFail_NotDone, Standard_OutOfRange); covered by crates/tkgeomalgo/tests/int_res2d_behavior.rs and through every intersection probe."
+    },
+    {
+      "upstream_id": "IntImpParGen::DetermineTransition(IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::determine_transition",
+      "status": "implemented",
+      "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
+    },
+    {
+      "upstream_id": "IntImpParGen::DetermineTransition(IntRes2d_Position,gp_Vec2d&,IntRes2d_Transition&,IntRes2d_Position,gp_Vec2d&,IntRes2d_Transition&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::determine_crossing_transition",
+      "status": "implemented",
+      "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
+    },
+    {
+      "upstream_id": "IntImpParGen::DeterminePosition(IntRes2d_Position&,const IntRes2d_Domain&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::determine_position",
+      "status": "implemented",
+      "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
+    },
+    {
+      "upstream_id": "IntImpParGen::NormalizeOnDomain(double&,const IntRes2d_Domain&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::normalize_on_domain",
+      "status": "implemented",
+      "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
+    },
+    {
+      "upstream_id": "IntImpParGen_Tool::NormalizeOnDomain(double&,const IntRes2d_Domain&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::tool::normalize_on_domain",
+      "status": "implemented",
+      "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
+    },
+    {
+      "upstream_id": "IntImpParGen_Tool::Determine_Position(IntRes2d_Position&,const IntRes2d_Domain&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::tool::determine_position",
+      "status": "implemented",
+      "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
+    },
+    {
+      "upstream_id": "IntImpParGen_Tool::Determine_Transition(IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntImpParGen/IntImpParGen_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_imp_par_gen::tool::determine_transition",
+      "status": "implemented",
+      "notes": "IntImpParGen mapping (docs/tkgeomalgo-progress.md): the static members of IntImpParGen and the free functions of IntImpParGen_Tool.hxx are free functions (in-out gp_Vec2d and IntRes2d_Transition arguments as &mut through TransitionSide); domain exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (imppar_transition, imppar_domain)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::new",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool(const IntCurve_IConicTool&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::clone",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool(const gp_Elips2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::from_ellipse",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool(const gp_Lin2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::from_line",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool(const gp_Circ2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::from_circle",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool(const gp_Parab2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::from_parabola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool(const gp_Hypr2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::from_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool::Value(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::value",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool::D1(double,gp_Pnt2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::d1",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool::D2(double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::d2",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool::Distance(const gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::distance",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool::GradDistance(const gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::grad_distance",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IConicTool::FindParameter(const gp_Pnt2d&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IConicTool::find_parameter",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::new",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntImpConicParConic()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntImpConicParConic::new",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_IntImpConicParConic(const IntCurve_IConicTool&,const IntRes2d_Domain&,const IntCurve_PConic&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntImpConicParConic::with_curves",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_IntImpConicParConic::Perform(const IntCurve_IConicTool&,const IntRes2d_Domain&,const IntCurve_PConic&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntImpConicParConic::perform",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_IntImpConicParConic::FindU(double,gp_Pnt2d&,const IntCurve_PConic&,const IntCurve_IConicTool&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntImpConicParConic::find_u",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_IntImpConicParConic::FindV(double,gp_Pnt2d&,const IntCurve_IConicTool&,const IntCurve_PConic&,const IntRes2d_Domain&,double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntImpConicParConic::find_v",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_IntImpConicParConic::And_Domaine_Objet1_Intersections(const IntCurve_IConicTool&,const IntCurve_PConic&,const IntRes2d_Domain&,const IntRes2d_Domain&,int&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,NCollection_Array1<double>&,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntImpConicParConic::and_domaine_objet1_intersections",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_MyImpParToolOfIntImpConicParConic(const IntCurve_IConicTool&,const IntCurve_PConic&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_MyImpParToolOfIntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::MyImpParToolOfIntImpConicParConic::new",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_MyImpParToolOfIntImpConicParConic::Value(double,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_MyImpParToolOfIntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::MyImpParToolOfIntImpConicParConic::value",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_MyImpParToolOfIntImpConicParConic::Derivative(double,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_MyImpParToolOfIntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::MyImpParToolOfIntImpConicParConic::derivative",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_MyImpParToolOfIntImpConicParConic::Values(double,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_MyImpParToolOfIntImpConicParConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::MyImpParToolOfIntImpConicParConic::values",
+      "status": "implemented",
+      "notes": "IntImpParGen_Intersector.gxx instantiated over IntCurve::ConicTypes (docs/geomalgo-design.md); compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_imppar, intcurve_conics)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic(const IntCurve_PConic&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::clone",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic(const gp_Elips2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::from_ellipse",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic(const gp_Circ2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::from_circle",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic(const gp_Parab2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::from_parabola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic(const gp_Hypr2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::from_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic(const gp_Lin2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::from_line",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic::SetEpsX(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::set_eps_x",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic::SetAccuracy(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::set_accuracy",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic::Accuracy() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::accuracy",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic::EpsX() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::eps_x",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic::TypeCurve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::type_curve",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic::Axis2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::axis2",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic::Param1() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::param1",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConic::Param2() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConic::param2",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConicTool::EpsX(const IntCurve_PConic&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConicTool::eps_x",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConicTool::NbSamples(const IntCurve_PConic&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConicTool::nb_samples",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConicTool::NbSamples(const IntCurve_PConic&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConicTool::nb_samples_in",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConicTool::Value(const IntCurve_PConic&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConicTool::value",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConicTool::D1(const IntCurve_PConic&,double,gp_Pnt2d&,gp_Vec2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConicTool::d1",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_PConicTool::D2(const IntCurve_PConic&,double,gp_Pnt2d&,gp_Vec2d&,gp_Vec2d&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_PConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PConicTool::d2",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_ProjectOnPConicTool::FindParameter(const IntCurve_PConic&,const gp_Pnt2d&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_ProjectOnPConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::ProjectOnPConicTool::find_parameter",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_ProjectOnPConicTool::FindParameter(const IntCurve_PConic&,const gp_Pnt2d&,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_ProjectOnPConicTool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::ProjectOnPConicTool::find_parameter_in",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic_Tool::Determine_Transition_LC(IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,IntRes2d_Position,gp_Vec2d&,const gp_Vec2d&,IntRes2d_Transition&,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::determine_transition_lc",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic_Tool::NormalizeOnCircleDomain(double,const IntRes2d_Domain&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::normalize_on_circle_domain",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "Interval()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::default",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "Interval(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::new",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "Interval(const IntRes2d_Domain&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::from_domain",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "Interval(double,bool,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::with_bounds",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "Interval::Length()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::length",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "Interval::IntersectionWithBounded(const Interval&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::Interval::intersection_with_bounded",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval::SetNull()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::set_null",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval::IsNull()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::is_null",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval::Complement()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::complement",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval::Length()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::length",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval(const IntRes2d_Domain&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::from_domain",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::default",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::new",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval::SetValues(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::set_values",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval::Normalize()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::normalize",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval::FirstIntersection(PeriodicInterval&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::first_intersection",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "PeriodicInterval::SecondIntersection(PeriodicInterval&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic_Tool.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::PeriodicInterval::second_intersection",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Lin2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::lines",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Lin2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_lines",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Circ2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::line_circle",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Circ2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_line_circle",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Elips2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::line_ellipse",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Elips2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_line_ellipse",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Parab2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::line_parabola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Parab2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_line_parabola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::line_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Lin2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_line_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Circ2d&,const IntRes2d_Domain&,const gp_Circ2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::circles",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Circ2d&,const IntRes2d_Domain&,const gp_Circ2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_circles",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Circ2d&,const IntRes2d_Domain&,const gp_Elips2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::circle_ellipse",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Circ2d&,const IntRes2d_Domain&,const gp_Elips2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_circle_ellipse",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Circ2d&,const IntRes2d_Domain&,const gp_Parab2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::circle_parabola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Circ2d&,const IntRes2d_Domain&,const gp_Parab2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_circle_parabola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Circ2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::circle_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Circ2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_circle_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Elips2d&,const IntRes2d_Domain&,const gp_Elips2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::ellipses",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Elips2d&,const IntRes2d_Domain&,const gp_Elips2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_ellipses",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Elips2d&,const IntRes2d_Domain&,const gp_Parab2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::ellipse_parabola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Elips2d&,const IntRes2d_Domain&,const gp_Parab2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_ellipse_parabola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Elips2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::ellipse_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Elips2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_ellipse_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Parab2d&,const IntRes2d_Domain&,const gp_Parab2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::parabolas",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Parab2d&,const IntRes2d_Domain&,const gp_Parab2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_parabolas",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Parab2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::parabola_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Parab2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_parabola_hyperbola",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic(const gp_Hypr2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::hyperbolas",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
+    },
+    {
+      "upstream_id": "IntCurve_IntConicConic::Perform(const gp_Hypr2d&,const IntRes2d_Domain&,const gp_Hypr2d&,const IntRes2d_Domain&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/IntCurve/IntCurve_IntConicConic.hxx",
+      "rust_item": "rustycad_tkgeomalgo::int_curve::IntConicConic::perform_hyperbolas",
+      "status": "implemented",
+      "notes": "IntCurve mapping (docs/tkgeomalgo-progress.md): one named Rust constructor per native overload and one perform_* method per Perform overload; D1/D2 outputs as &mut like the native references; domain and gp exceptions returned as Result; compared with OCCT by tools/verify_tkgeomalgo_numeric.py (intcurve_conics, intcurve_imppar, intcurve_itool, intcurve_ptool, intcurve_function, intcurve_interval)."
     }
   ],
   "tests": [

@@ -30,7 +30,7 @@ mod intersection_segment;
 mod transition;
 
 pub use domain::Domain;
-pub(crate) use failures::{construction_error, domain_error, not_done};
+pub(crate) use failures::construction_error;
 pub use intersection::Intersection;
 pub use intersection_point::IntersectionPoint;
 pub use intersection_segment::IntersectionSegment;

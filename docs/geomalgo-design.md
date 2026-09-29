@@ -24,3 +24,28 @@ body is included by one or more `_0.cxx` files after macros name the concrete ty
   monomorphized Rust generic executes the same operations as each C++ instance.
 
 The sections below record each template as it is ported.
+
+## 2. IntImpParGen_Intersector.gxx
+
+`IntImpParGen_Intersector` intersects an implicit curve with a bounded parametric one
+through the roots of the signed distance (`IntImpParGen_MyImpParTool`, expanded natively
+in each `_0.cxx`). It is ported once in `int_imp_par_gen` as
+`Intersector<T: IntersectorTypes>` and `MyImpParTool<'a, T>`:
+
+- `IntersectorTypes` carries the four macros as associated types: `Imp: ImpTool` (the
+  `ImpTool`), `Par: ParTool` (the `ParTool`, whose associated `Curve` is the `ParCurve`)
+  and `Project: ProjectOnPCurveTool` over the same curve. The traits hold the members the
+  template calls, under their native names; `D1`/`D2` write through `&mut` outputs because
+  a native tool may leave an output unchanged (IntCurve_PConicTool::D2 of a line does not
+  write the second derivative) and the template reads the stale value.
+- `MyImpParTool` implements the tkmath `Function`/`FunctionWithDerivative` traits; a curve
+  exception is kept and reported as `false` (the traits carry no error), and Perform
+  returns it once `math_FunctionAllRoots` stops, where the native exception would have
+  left the constructor.
+- The variables that the native Perform keeps across its steps (the D2 outputs, the
+  transitions, the end flags) live in one `PerformState`, so every step reads what the
+  native code reads.
+- Instantiations: `int_curve::ConicTypes` (IConicTool, PConicTool over PConic,
+  ProjectOnPConicTool) gives `IntCurve_IntImpConicParConic` and
+  `IntCurve_MyImpParToolOfIntImpConicParConic` as aliases; Geom2dInt declares the
+  Adaptor2d_Curve2d instantiation (`Geom2dInt_TheIntersectorOfTheIntConicCurveOfGInter`).

@@ -13,3 +13,5 @@ def append_tkgeomalgo_requests(requests: list[str]) -> None:
     """Append every TKGeomAlgo request family in a fixed order."""
     # Intf (tkgeomalgo_corpus_intf.py)
     __import__('tkgeomalgo_corpus_intf').append_intf_requests(requests)
+    # IntRes2d, IntImpParGen, IntCurve (tkgeomalgo_corpus_intcurve.py)
+    __import__('tkgeomalgo_corpus_intcurve').append_intcurve_requests(requests)

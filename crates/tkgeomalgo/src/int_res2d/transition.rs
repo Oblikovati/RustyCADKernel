@@ -171,8 +171,8 @@ impl fmt::Display for Transition {
             return write!(os, "Indeterminee\n\n");
         }
         match self.typetra {
-            TypeTrans::In => write!(os, "Entrante\n")?,
-            TypeTrans::Out => write!(os, "Sortante\n")?,
+            TypeTrans::In => writeln!(os, "Entrante")?,
+            TypeTrans::Out => writeln!(os, "Sortante")?,
             _ => self.fmt_touch(os)?,
         }
         let tangent: &str = if self.tangent { "Oui" } else { "Non" };
