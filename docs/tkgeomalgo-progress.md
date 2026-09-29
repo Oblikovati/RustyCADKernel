@@ -66,6 +66,17 @@ core circle and at seeded random points; `intsurf_transition` drives
 `IntSurf::MakeTransition` through its four branches and `intsurf_same` compares
 `IntSurf_PntOn2S::IsSame` with and without the 2d tolerance.
 
+Law: 266 requests. `law_bspline` builds scalar B-spline laws (clamped, rational,
+periodic, piecewise Bezier, uniform, C0, quintic and invalid data) and compares every
+query and evaluator at the knots, inside, at the ends and outside the range;
+`law_edit` applies each editing member (degree elevation, knot insertion and removal,
+reversal, segmentation, periodicity, origin, weights, knots, poles,
+MovePointAndTangent, Copy) to five laws; `law_function` drives the constant, linear,
+S, B-spline, interpolated and composite laws through every `Law_Function` member for
+every `GeomAbs_Shape`; `law_mix` covers `MixBnd`, `MixTgt`, `Scale`, `ScaleCub`,
+`Reparametrize` (on a circle adaptor) and `Law_BSplineKnotSplitting`;
+`law_interpolate` covers `Law_Interpolate` with and without parameters and tangents.
+
 ## Preserved native behaviour
 
 - `Intf::PlaneEquation` of a degenerate triangle (normal shorter than
@@ -92,3 +103,36 @@ core circle and at seeded random points; `intsurf_transition` drives
   `Value2d`, `AddUV`, `Multiplicity` and `Parameters` dereference natively; the port
   returns `Standard_NullObject` there instead of crashing. A copy of a path point
   shares the parameter sequence, as the native copy of the handle does.
+
+### Law
+
+- `Law_BSpline` is an older copy of `Geom_BSplineCurve` with real poles, and keeps its
+  differences: `DN` evaluates at the given parameter while `D0` to `D3` normalize a
+  periodic parameter first; `LocateU` tests the given, not the normalized, parameter
+  against the first and last knots; `IncreaseMultiplicity` inserts with `Add = false`.
+  `InsertKnots` and `RemoveKnot` natively pass the stored knots and multiplicities as
+  their own outputs when the knot count does not change; the port writes fresh arrays,
+  which gives the same result because BSplCLib reads each entry before rewriting it
+  and `NbPoles` forces equal first and last multiplicities on a periodic law.
+- `Law_BSpline::MovePointAndTangent` on a periodic law makes BSplCLib write past the
+  new pole array (undefined behaviour natively); the port raises
+  `Standard_OutOfRange`. The `Local*` evaluators pass knot indices to the flat-knot
+  `LocateParameter`; when the located flat index exceeds the knot count,
+  `BSplCLib::FlatIndex` reads past the multiplicities natively and the port raises
+  `Standard_OutOfRange`. The corpus avoids both undefined cases.
+- `Law_BSpFunc::NbIntervals` tests the first split knot against the range, but
+  `Intervals` first overwrites it with the start index, so the two can disagree;
+  `Intervals` writes `T(1..n+1)` at absolute indices, then `T(Lower)` and
+  `T(Lower + n)`. `Law_Composite::Intervals` writes `T(1)`, `T(2)` and the following
+  entries at absolute indices too, and `Law_Composite::Continuity` raises
+  `Standard_NotImplemented`.
+- `Law_Composite::ChangeElementaryLaw` and `ChangeLaws` return references natively;
+  the port lends the current law and the list to a closure.
+- `Law_Interpolate` builds chord-length parameters reading `Parameters(ii)` with the
+  point index `ii` (correct for one-based points only), stores the tangent flags that
+  `Load` receives before it checks their length, shares that flag array (Perform marks
+  the end tangents it computes in it) and never reads its tolerance.
+  `Law_Interpolate::ClearTangents` is declared but never defined at this commit, so its
+  row is excluded.
+- `rustycad_tkgeombase::geom2d_convert::split_knots` (the split table of the knot
+  splittings) is public so that `Law_BSplineKnotSplitting` shares it.

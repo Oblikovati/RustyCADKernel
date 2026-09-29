@@ -146154,6 +146154,1214 @@
       "rust_item": "rustycad_tkgeomalgo::int_surf::IntSurfTypeTrans",
       "status": "implemented",
       "notes": "IntSurf mapping (docs/tkgeomalgo-progress.md): value classes are Copy structs, IntSurf_LineOn2S is a handle-shared transient over one lock whose Value(Index) returns a copy; C++ output references become returned tuples (None where the native leaves them unchanged), overloads take distinct Rust names, and exceptions become Failure errors."
+    },
+    {
+      "upstream_id": "Law::MixBnd(const occ::handle<Law_Linear>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::mix_bnd_law",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law::MixBnd(int,const NCollection_Array1<double>&,const NCollection_Array1<int>&,const occ::handle<Law_Linear>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::mix_bnd",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law::MixTgt(int,const NCollection_Array1<double>&,const NCollection_Array1<int>&,bool,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::mix_tgt",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law::Reparametrize(const Adaptor3d_Curve&,double,double,bool,bool,double,double,bool,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::reparametrize",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law::Scale(double,double,bool,bool,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::scale",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law::ScaleCub(double,double,bool,bool,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::scale_cub",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpFunc::new",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc(const occ::handle<Law_BSpline>&,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpFunc::with_curve",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::Continuity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawBSpFunc as rustycad_tkgeomalgo::law::LawFunction>::continuity",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawBSpFunc as rustycad_tkgeomalgo::law::LawFunction>::nb_intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawBSpFunc as rustycad_tkgeomalgo::law::LawFunction>::intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::Value(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawBSpFunc as rustycad_tkgeomalgo::law::LawFunction>::value",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::D1(double,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawBSpFunc as rustycad_tkgeomalgo::law::LawFunction>::d1",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::D2(double,double&,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawBSpFunc as rustycad_tkgeomalgo::law::LawFunction>::d2",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::Trim(double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawBSpFunc as rustycad_tkgeomalgo::law::LawFunction>::trim",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::Bounds(double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawBSpFunc as rustycad_tkgeomalgo::law::LawFunction>::bounds",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::Curve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpFunc::curve",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::SetCurve(const occ::handle<Law_BSpline>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpFunc::set_curve",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpFunc::DEFINE_STANDARD_RTTIEXT(Law_BSpFunc,Law_Function)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpFunc.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpFunc::static_type",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline(const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::new",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline(const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<double>&,const NCollection_Array1<int>&,int,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::with_weights",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::IncreaseDegree(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::increase_degree",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::IncreaseMultiplicity(int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::increase_multiplicity",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::IncreaseMultiplicity(int,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::increase_multiplicity_range",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::IncrementMultiplicity(int,int,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::increment_multiplicity",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::InsertKnot(double,int,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::insert_knot",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::InsertKnots(const NCollection_Array1<double>&,const NCollection_Array1<int>&,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::insert_knots",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::RemoveKnot(int,int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::remove_knot",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Reverse()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::reverse",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::ReversedParameter(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::reversed_parameter",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Segment(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::segment",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::SetKnot(int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::set_knot",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::SetKnots(const NCollection_Array1<double>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::set_knots",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::SetKnot(int,double,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::set_knot_with_mult",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::PeriodicNormalization(double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::periodic_normalization",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::SetPeriodic()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::set_periodic",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::SetOrigin(int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::set_origin",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::SetNotPeriodic()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::set_not_periodic",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::SetPole(int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::set_pole",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::SetPole(int,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::set_pole_with_weight",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::SetWeight(int,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::set_weight",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::IsCN(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::is_cn",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::IsClosed() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::is_closed",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::IsPeriodic() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::is_periodic",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::IsRational() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::is_rational",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Continuity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::continuity",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Degree() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::degree",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Value(double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::value",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::D0(double,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::d0",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::D1(double,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::d1",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::D2(double,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::d2",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::D3(double,double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::d3",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::DN(double,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::dn",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::LocalValue(double,int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::local_value",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::LocalD0(double,int,int,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::local_d0",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::LocalD1(double,int,int,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::local_d1",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::LocalD2(double,int,int,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::local_d2",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::LocalD3(double,int,int,double&,double&,double&,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::local_d3",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::LocalDN(double,int,int,int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::local_dn",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::EndPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::end_point",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::FirstUKnotIndex() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::first_u_knot_index",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::FirstParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::first_parameter",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Knot(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::knot",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Knots(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::knots",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::KnotSequence(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::knot_sequence",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::KnotDistribution() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::knot_distribution",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::LastUKnotIndex() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::last_u_knot_index",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::LastParameter() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::last_parameter",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::LocateU(double,double,int&,int&,bool) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::locate_u",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Multiplicity(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::multiplicity",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Multiplicities(NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::multiplicities",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::NbKnots() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::nb_knots",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::NbPoles() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::nb_poles",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Pole(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::pole",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Poles(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::poles",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::StartPoint() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::start_point",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Weight(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::weight",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Weights(NCollection_Array1<double>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::weights",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::MaxDegree()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::max_degree",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::MovePointAndTangent(double,double,double,double,int,int,int&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::move_point_and_tangent",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Resolution(double,double&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::resolution",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::Copy() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::copy",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSpline::DEFINE_STANDARD_RTTIEXT(Law_BSpline,Standard_Transient)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSpline.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSpline::static_type",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSplineKnotSplitting(const occ::handle<Law_BSpline>&,int)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSplineKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSplineKnotSplitting::new",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSplineKnotSplitting::NbSplits() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSplineKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSplineKnotSplitting::nb_splits",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSplineKnotSplitting::Splitting(NCollection_Array1<int>&) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSplineKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSplineKnotSplitting::splitting",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_BSplineKnotSplitting::SplitValue(int) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_BSplineKnotSplitting.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawBSplineKnotSplitting::split_value",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawComposite::new",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite(double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawComposite::with_range",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::Continuity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawComposite as rustycad_tkgeomalgo::law::LawFunction>::continuity",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawComposite as rustycad_tkgeomalgo::law::LawFunction>::nb_intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawComposite as rustycad_tkgeomalgo::law::LawFunction>::intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::Value(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawComposite as rustycad_tkgeomalgo::law::LawFunction>::value",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::D1(double,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawComposite as rustycad_tkgeomalgo::law::LawFunction>::d1",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::D2(double,double&,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawComposite as rustycad_tkgeomalgo::law::LawFunction>::d2",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::Trim(double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawComposite as rustycad_tkgeomalgo::law::LawFunction>::trim",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::Bounds(double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawComposite as rustycad_tkgeomalgo::law::LawFunction>::bounds",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::ChangeElementaryLaw(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawComposite::change_elementary_law",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::ChangeLaws()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawComposite::change_laws",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::IsPeriodic() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawComposite::is_periodic",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::SetPeriodic()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawComposite::set_periodic",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Composite::DEFINE_STANDARD_RTTIEXT(Law_Composite,Law_Function)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Composite.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawComposite::static_type",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawConstant::new",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::Set(double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawConstant::set",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::Continuity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawConstant as rustycad_tkgeomalgo::law::LawFunction>::continuity",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawConstant as rustycad_tkgeomalgo::law::LawFunction>::nb_intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawConstant as rustycad_tkgeomalgo::law::LawFunction>::intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::Value(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawConstant as rustycad_tkgeomalgo::law::LawFunction>::value",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::D1(double,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawConstant as rustycad_tkgeomalgo::law::LawFunction>::d1",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::D2(double,double&,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawConstant as rustycad_tkgeomalgo::law::LawFunction>::d2",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::Trim(double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawConstant as rustycad_tkgeomalgo::law::LawFunction>::trim",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::Bounds(double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawConstant as rustycad_tkgeomalgo::law::LawFunction>::bounds",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Constant::DEFINE_STANDARD_RTTIEXT(Law_Constant,Law_Function)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Constant.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawConstant::static_type",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Function::Continuity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawFunction::continuity",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Function::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawFunction::nb_intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Function::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawFunction::intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Function::Value(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawFunction::value",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Function::D1(double,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawFunction::d1",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Function::D2(double,double&,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawFunction::d2",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Function::Trim(double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawFunction::trim",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Function::Bounds(double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawFunction::bounds",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Function::DEFINE_STANDARD_RTTIEXT(Law_Function,Standard_Transient)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Function.hxx",
+      "rust_item": "<dyn rustycad_tkgeomalgo::law::LawFunction as rustycad_tkernel::standard::RuntimeTyped>::static_type",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpol()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpol.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpol::new",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpol::Set(const NCollection_Array1<gp_Pnt2d>&,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpol.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpol::set",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpol::SetInRelative(const NCollection_Array1<gp_Pnt2d>&,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpol.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpol::set_in_relative",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpol::Set(const NCollection_Array1<gp_Pnt2d>&,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpol.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpol::set_with_tangents",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpol::SetInRelative(const NCollection_Array1<gp_Pnt2d>&,double,double,double,double,bool)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpol.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpol::set_in_relative_with_tangents",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpol::DEFINE_STANDARD_RTTIEXT(Law_Interpol,Law_BSpFunc)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpol.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpol::static_type",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpolate(const occ::handle<NCollection_HArray1<double>>&,bool,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpolate::new",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpolate(const occ::handle<NCollection_HArray1<double>>&,const occ::handle<NCollection_HArray1<double>>&,bool,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpolate::with_parameters",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpolate::Load(double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpolate::load_ends",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpolate::Load(const NCollection_Array1<double>&,const occ::handle<NCollection_HArray1<bool>>&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpolate::load",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpolate::ClearTangents()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpolate.hxx",
+      "rust_item": null,
+      "status": "excluded",
+      "notes": "Declared in Law_Interpolate.hxx but never defined at this commit: a native call does not link, so there is no behaviour to port."
+    },
+    {
+      "upstream_id": "Law_Interpolate::Perform()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpolate::perform",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpolate::Curve() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpolate::curve",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Interpolate::IsDone() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Interpolate.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawInterpolate::is_done",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawLinear::new",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::Set(double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawLinear::set",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::Continuity() const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawLinear as rustycad_tkgeomalgo::law::LawFunction>::continuity",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::NbIntervals(GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawLinear as rustycad_tkgeomalgo::law::LawFunction>::nb_intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::Intervals(NCollection_Array1<double>&,GeomAbs_Shape) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawLinear as rustycad_tkgeomalgo::law::LawFunction>::intervals",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::Value(double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawLinear as rustycad_tkgeomalgo::law::LawFunction>::value",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::D1(double,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawLinear as rustycad_tkgeomalgo::law::LawFunction>::d1",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::D2(double,double&,double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawLinear as rustycad_tkgeomalgo::law::LawFunction>::d2",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::Trim(double,double,double) const",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawLinear as rustycad_tkgeomalgo::law::LawFunction>::trim",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::Bounds(double&,double&)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "<rustycad_tkgeomalgo::law::LawLinear as rustycad_tkgeomalgo::law::LawFunction>::bounds",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_Linear::DEFINE_STANDARD_RTTIEXT(Law_Linear,Law_Function)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_Linear.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawLinear::static_type",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_S()",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawS::new",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_S::Set(double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawS::set",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_S::Set(double,double,double,double,double,double)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawS::set_with_derivatives",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
+    },
+    {
+      "upstream_id": "Law_S::DEFINE_STANDARD_RTTIEXT(Law_S,Law_BSpFunc)",
+      "toolkit": "TKGeomAlgo",
+      "source": "src/ModelingAlgorithms/TKGeomAlgo/Law/Law_S.hxx",
+      "rust_item": "rustycad_tkgeomalgo::law::LawS::static_type",
+      "status": "implemented",
+      "notes": "Law mapping (docs/tkgeomalgo-progress.md): Law_Function is the LawFunction trait reached through Handle<dyn LawFunction>, whose members all return Result; the laws are handle-shared structs over one lock; Law_S and Law_Interpol embed their Law_BSpFunc parent and forward the inherited members; C++ output references become returned tuples, overloads take distinct Rust names, exceptions become Failure errors and the Law class functions are module functions."
     }
   ],
   "tests": [

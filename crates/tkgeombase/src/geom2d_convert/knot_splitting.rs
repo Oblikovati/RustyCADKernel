@@ -111,9 +111,13 @@ impl BSplineCurveKnotSplitting {
 }
 
 // The native Split table: the first knot, each inner knot below the continuity, then
-// the last knot. GeomConvert's curve and surface knot splittings compute the same
-// table word for word, so they share this function.
-pub(crate) fn split_knots(
+// the last knot. GeomConvert's curve and surface knot splittings and TKGeomAlgo's
+// Law_BSplineKnotSplitting compute the same table word for word, so they share it.
+/// The split table of the B-spline knot splittings: `first_index`, each knot strictly
+/// between the bounds with `Degree - Mult < ContinuityRange`, then the last bound.
+///
+/// `split_knots(&mults, [1, 4], 3, 2)?` lists the knots where a cubic is less than C2.
+pub fn split_knots(
     mults: &Array1<'static, i32>,
     [first_index, last_index]: [i32; 2],
     degree: i32,

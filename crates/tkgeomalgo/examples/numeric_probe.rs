@@ -2,7 +2,7 @@
 //! reads `operation numbers...` lines and prints the same token stream.
 use std::io::{self, BufRead};
 mod ga_probe;
-use ga_probe::{int_surf, intf};
+use ga_probe::{int_surf, intf, law};
 
 /// One probe operation over the numeric fields of a request.
 type ProbeCase = fn(&[f64]);
@@ -17,6 +17,12 @@ const PROBE_CASES: &[(&str, ProbeCase)] = &[
     ("intsurf_quadric_uv", int_surf::quadric_uv_case),
     ("intsurf_transition", int_surf::transition_case),
     ("intsurf_same", int_surf::same_case),
+    // Law (ga_probe/law.rs)
+    ("law_bspline", law::bspline_case),
+    ("law_edit", law::edit_case),
+    ("law_function", law::function_case),
+    ("law_mix", law::mix_case),
+    ("law_interpolate", law::interpolate_case),
 ];
 
 fn main() {
