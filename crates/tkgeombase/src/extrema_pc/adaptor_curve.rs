@@ -23,7 +23,7 @@ use super::{
 };
 use crate::extrema_pc_core::{PcCurveRef, Space3d, is_valid_tolerance};
 use crate::extrema_pc2d;
-use crate::plane_projection as projlib;
+use crate::proj_lib as projlib;
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped, Transient};
 use rustycad_tkg2d::geom2d::Geom2dOffsetCurve;
 use rustycad_tkg2d::geom2d_adaptor::Geom2dAdaptorCurve;
@@ -137,7 +137,7 @@ impl<'a> AdaptorExtrema<'a> {
         let domain2d = Domain1D::new(self.domain.min, self.domain.max);
         let mut evaluator2d = extrema_pc2d::OffsetCurve::with_domain(&adaptor2d, domain2d);
         let mode2d: SearchMode = super::to_search_mode_2d(mode);
-        let point2d = projlib::project_point(&plane, point);
+        let point2d = projlib::project_point_on_plane(&plane, point);
         let result2d = if ends {
             evaluator2d.perform_with_endpoints(point2d, tol, mode2d)?
         } else {
