@@ -246,15 +246,9 @@ where
         (tol_conf, tol): (f64, f64),
         composite: bool,
     ) -> Result<(), Failure> {
-        let inter: &mut IntConicCurveGen<T> = &mut self.intconicurv;
-        inter.set_reversed_parameters(false);
-        match *conic1 {
-            GpConic::Line(l) => inter.perform_line(l, d1, c2, d2, tol_conf, tol)?,
-            GpConic::Circle(c) => inter.perform_circle(c, d1, c2, d2, tol_conf, tol)?,
-            GpConic::Ellipse(e) => inter.perform_ellipse(e, d1, c2, d2, tol_conf, tol)?,
-            GpConic::Parabola(p) => inter.perform_parabola(p, d1, c2, d2, tol_conf, tol)?,
-            GpConic::Hyperbola(h) => inter.perform_hyperbola(h, d1, c2, d2, tol_conf, tol)?,
-        }
+        self.intconicurv.set_reversed_parameters(false);
+        self.intconicurv
+            .perform_any_conic(conic1, d1, c2, d2, tol_conf, tol)?;
         let bounds = [
             self.param1inf,
             self.param1sup,
@@ -267,7 +261,7 @@ where
 
 // `Append(other, param1inf, param1sup, param2inf, param2sup)` for a composite curve,
 // `SetValues(other)` otherwise.
-fn merge_result(
+pub(super) fn merge_result(
     base: &mut Intersection,
     other: &Intersection,
     [f1, l1, f2, l2]: [f64; 4],

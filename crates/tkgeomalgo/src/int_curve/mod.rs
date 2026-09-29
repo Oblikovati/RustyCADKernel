@@ -26,8 +26,11 @@
 //! The curve templates are generics that Geom2dInt instantiates
 //! (docs/geomalgo-design.md): [`IntConicCurveGen`] (IntCurve_IntConicCurveGen.gxx),
 //! [`UserIntConicCurveGen`] (IntCurve_UserIntConicCurveGen.gxx) and
-//! [`DistBetweenPCurvesGen`] (IntCurve_DistBetweenPCurvesGen.gxx), over the curve tool
-//! trait [`PCurveTool`].
+//! [`DistBetweenPCurvesGen`] (IntCurve_DistBetweenPCurvesGen.gxx),
+//! [`Polygon2dGen`] (IntCurve_Polygon2dGen.gxx), [`ExactIntersectionPoint`]
+//! (IntCurve_ExactIntersectionPoint.gxx), [`IntPolyPolyGen`]
+//! (IntCurve_IntPolyPolyGen.gxx) and [`IntCurveCurveGen`]
+//! (IntCurve_IntCurveCurveGen.gxx), over the curve tool trait [`PCurveTool`].
 mod conic_conic_ana;
 mod conic_conic_bounds;
 mod conic_conic_circle_pair;
@@ -40,11 +43,18 @@ mod conic_conic_lines_coincident;
 mod conic_conic_lines_segment;
 mod conic_conic_tool;
 mod dist_between_pcurves_gen;
+mod exact_intersection_point;
 mod iconic_tool;
 mod int_conic_conic;
 mod int_conic_curve_gen;
+mod int_curve_curve_gen;
+mod int_poly_poly_find;
+mod int_poly_poly_gen;
+mod int_poly_poly_self;
+mod int_poly_poly_zone;
 mod pconic;
 mod pcurve_tool;
+mod polygon2d_gen;
 mod project_on_pconic_tool;
 mod user_int_conic_curve_gen;
 
@@ -52,11 +62,15 @@ pub use conic_conic_tool::{
     Interval, PI_P_PI, PeriodicInterval, determine_transition_lc, normalize_on_circle_domain,
 };
 pub use dist_between_pcurves_gen::DistBetweenPCurvesGen;
+pub use exact_intersection_point::{ExactIntersectionPoint, PolygonSeat};
 pub use iconic_tool::IConicTool;
 pub use int_conic_conic::IntConicConic;
 pub use int_conic_curve_gen::IntConicCurveGen;
+pub use int_curve_curve_gen::IntCurveCurveGen;
+pub use int_poly_poly_gen::IntPolyPolyGen;
 pub use pconic::{PConic, PConicTool};
 pub use pcurve_tool::{GpConic, PCurveTool};
+pub use polygon2d_gen::Polygon2dGen;
 pub use project_on_pconic_tool::ProjectOnPConicTool;
 pub use user_int_conic_curve_gen::UserIntConicCurveGen;
 

@@ -28,7 +28,10 @@ mod the_proj_pcur;
 pub use geom2d_curve_tool::{Curve2d, Geom2dCurveTool};
 pub use the_proj_pcur::TheProjPCurOfGInter;
 
-use crate::int_curve::{DistBetweenPCurvesGen, IConicTool, IntConicCurveGen, UserIntConicCurveGen};
+use crate::int_curve::{
+    DistBetweenPCurvesGen, ExactIntersectionPoint, IConicTool, IntConicCurveGen, IntCurveCurveGen,
+    IntPolyPolyGen, Polygon2dGen, UserIntConicCurveGen,
+};
 use crate::int_imp_par_gen::{Intersector, IntersectorTypes, MyImpParTool};
 use rustycad_tkgeombase::extrema::{Curve2dTool, GCurveLocator, GFuncExtPC, GenLocateExtPC};
 
@@ -59,3 +62,14 @@ pub type TheCurveLocatorOfTheProjPCurOfGInter = GCurveLocator<Curve2dTool>;
 pub type TheLocateExtPCOfTheProjPCurOfGInter<'a> = GenLocateExtPC<'a, Curve2dTool>;
 /// `Geom2dInt_PCLocFOfTheLocateExtPCOfTheProjPCurOfGInter`: Extrema_GFuncExtPC.
 pub type PCLocFOfTheLocateExtPCOfTheProjPCurOfGInter<'a> = GFuncExtPC<'a, Curve2dTool>;
+/// `Geom2dInt_ThePolygon2dOfTheIntPCurvePCurveOfGInter`: IntCurve_Polygon2dGen over
+/// [`Geom2dCurveTool`].
+pub type ThePolygon2dOfTheIntPCurvePCurveOfGInter = Polygon2dGen<Geom2dCurveTool>;
+/// `Geom2dInt_ExactIntersectionPointOfTheIntPCurvePCurveOfGInter`:
+/// IntCurve_ExactIntersectionPoint over [`Geom2dCurveTool`].
+pub type ExactIntersectionPointOfTheIntPCurvePCurveOfGInter<'a> =
+    ExactIntersectionPoint<'a, Geom2dCurveTool>;
+/// `Geom2dInt_TheIntPCurvePCurveOfGInter`: IntCurve_IntPolyPolyGen over [`Geom2dTypes`].
+pub type TheIntPCurvePCurveOfGInter = IntPolyPolyGen<Geom2dTypes>;
+/// `Geom2dInt_GInter`: IntCurve_IntCurveCurveGen over [`Geom2dTypes`].
+pub type GInter = IntCurveCurveGen<Geom2dTypes>;

@@ -15,7 +15,7 @@
 
 //! `IntCurve_IntConicCurveGen`: a gp conic against a parametric curve through the
 //! IntImpParGen intersector, the conic being the implicit curve.
-use super::IConicTool;
+use super::{GpConic, IConicTool};
 use crate::int_imp_par_gen::{Intersector, IntersectorTypes, ParTool};
 use crate::int_res2d::{Domain, Intersection};
 use rustycad_tkernel::standard::Failure;
@@ -208,6 +208,26 @@ impl<T: IntersectorTypes<Imp = IConicTool>> IntConicCurveGen<T> {
             d2,
             (tol_conf, tol),
         )
+    }
+
+    /// The Perform overload of the kind of `conic`, as the curve-curve templates
+    /// select it from the curve type. `inter.perform_any_conic(&conic, &d1, &pcurve, &d2, 1e-9, 1e-9)?`.
+    pub(crate) fn perform_any_conic(
+        &mut self,
+        conic: &GpConic,
+        d1: &Domain,
+        pcurve: &PCurveOf<T>,
+        d2: &Domain,
+        tol_conf: f64,
+        tol: f64,
+    ) -> Result<(), Failure> {
+        match *conic {
+            GpConic::Line(l) => self.perform_line(l, d1, pcurve, d2, tol_conf, tol),
+            GpConic::Circle(c) => self.perform_circle(c, d1, pcurve, d2, tol_conf, tol),
+            GpConic::Ellipse(e) => self.perform_ellipse(e, d1, pcurve, d2, tol_conf, tol),
+            GpConic::Parabola(p) => self.perform_parabola(p, d1, pcurve, d2, tol_conf, tol),
+            GpConic::Hyperbola(h) => self.perform_hyperbola(h, d1, pcurve, d2, tol_conf, tol),
+        }
     }
 
     // The private `Perform(IntCurve_IConicTool, ...)`: a fresh intersector with the
