@@ -9,6 +9,7 @@ scenario feeds every report operation.
 """
 from __future__ import annotations
 from dataclasses import dataclass, field
+from tkbrep_brep_corpus import append_tkbrep_brep_requests
 
 COMPOUND, COMPSOLID, SOLID, SHELL, FACE, WIRE, EDGE, VERTEX, SHAPE = range(9)
 FORWARD, REVERSED, INTERNAL, EXTERNAL = range(4)
@@ -306,3 +307,4 @@ def append_tkbrep_requests(requests: list[str]) -> None:
         requests.append('br_locread ' + text(encoded(data)))
     for base, format_nb, data in SET_TEXTS:
         requests.append(f'br_setread {base} {format_nb} ' + text(encoded(data)))
+    append_tkbrep_brep_requests(requests)

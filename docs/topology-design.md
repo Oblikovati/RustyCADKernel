@@ -142,7 +142,8 @@ constructors in `topods::errors`. A null parent or component crashes natively
 (null handle dereference); Rust raises `Standard_NullObject`.
 
 TopoDS itself raises no `Standard_ImmutableObject`: that exception is not used by
-any TKBRep package at the pinned revision. The `Locked` flag is only stored.
+any TKBRep package at the pinned revision. TopoDS only stores the `Locked` flag;
+`BRep_Builder` reads it and raises `TopoDS_LockedShape` (section 9).
 
 ## 6. TopoDS_Iterator and TopExp_Explorer
 
@@ -200,3 +201,48 @@ call the base, as `TopTools_ShapeSet::Write(OS)` is called by derived classes.
 The native file includes `BRep_TFace.hxx` but uses nothing from it, so the whole
 class is ported without BRep. Text written to `std::cout` by `Read` ("Not a TShape
 table"...) goes to the injected `ConsoleOutput` of the GeomTools port.
+
+## 9. The BRep package
+
+`BRep` (module `brep`) adds the geometric TShapes and their representations. It
+follows sections 2 and 3 and geom-design.md sections 1 to 4.
+
+- The concrete TShapes `BRep_TVertex`, `BRep_TEdge` and `BRep_TFace` are the
+  structs `BRepTVertex`, `BRepTEdge` and `BRepTFace`. Each embeds its TopoDS parent
+  (`topods::TVertex`, `topods::TEdge`, `topods::TFace`) as its parent field, so the
+  descriptor chain is `BRep_TEdge -> TopoDS_TEdge -> TopoDS_TShape`, and keeps its own
+  fields (point, tolerance, flags, representation lists, surface, triangulations)
+  in one `SharedState`. The `BRep` prefix keeps the names apart from the TopoDS
+  classes and from the Poly polygons (`poly::Polygon3D` and `BRepPolygon3D`).
+- The abstract `BRep_CurveRepresentation`, `BRep_GCurve`, `BRep_PointRepresentation`
+  and `BRep_PointsOnSurface` are the traits `BRepCurveRepresentation`, `BRepGCurve`,
+  `BRepPointRepresentation` and `BRepPointsOnSurface`, registered with
+  `impl_transient_interface!`. Their protected data (the location, the range, the
+  parameter, the surface) are the structs `CurveRepresentationBase`, `GCurveBase`,
+  `PointRepresentationBase` and `PointsOnSurfaceBase`, each with its own
+  `SharedState`, which the concrete classes embed and the traits read through one
+  required accessor. A virtual member that the base class implements by raising
+  Standard_DomainError is a provided trait method that returns that error, so every
+  such getter and setter returns `Result`.
+- A concrete class derived from a concrete class (`BRep_CurveOnClosedSurface` from
+  `BRep_CurveOnSurface`, `BRep_PolygonOnClosedSurface`,
+  `BRep_PolygonOnClosedTriangulation`) embeds its parent struct as its parent field
+  and forwards the members it does not override, so `down_cast` to the parent class
+  succeeds as natively.
+- `DumpJson` bodies are free functions per class, so that a derived class calls the
+  body of its base class (`OCCT_DUMP_BASE_CLASS`) with the static class name, as the
+  native qualified call does.
+- The lists `Curves()`, `Points()` and `Triangulations()` return copies of the handle
+  lists; `ChangeCurves()` and `ChangePoints()` lend the stored list to a closure. A
+  closure may call the representations, which have their own locks, but never the
+  TShape that lends the list.
+- `BRep_Builder` is `BRepBuilder`, which derefs to `topods::Builder` as the native
+  class derives from `TopoDS_Builder`. `BRep_Tool` is `BRepTool`, a struct of
+  associated functions; its overloads get names that say what they take
+  (`curve_on_surface`, `curve_on_face`, `curve_on_surface_by_index`...), and its
+  output parameters become returned values or small result structs.
+- Natively, `BRep_Builder` and `BRep_Tool` cast the TShape of the shape they get
+  without a check (`static_cast`, or a reinterpretation of the handle): a null
+  shape or a TShape of another class is undefined behaviour. The Rust members
+  raise Standard_NullObject for a null shape and Standard_TypeMismatch for a TShape
+  that is not the expected BRep class.

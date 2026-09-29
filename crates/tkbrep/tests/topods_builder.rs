@@ -12,7 +12,7 @@
 // commercial license or contractual agreement.
 
 //! Direct translation of TopoDS_Builder_Test.cxx at 3d097a0328e71b826377d4814ab05ec3c3d23871.
-//! BRepBuilderAPI_MakeVertex and BRepBuilderAPI_MakeEdge are the topology fakes of
+//! BRepBuilderAPI_MakeVertex and BRepBuilderAPI_MakeEdge are the BRep fakes of
 //! `support` (TKTopAlgo is not ported).
 #![allow(non_snake_case)]
 mod support;

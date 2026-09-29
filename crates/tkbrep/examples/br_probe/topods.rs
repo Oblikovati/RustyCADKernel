@@ -72,7 +72,7 @@ fn flags(s: &Shape) {
         s.tshape()
             .is_kind(<dyn TShape as RuntimeTyped>::static_type()),
     );
-    let copy = t.empty_copy();
+    let copy = t.empty_copy().unwrap();
     word(copy.dynamic_type().unwrap().name());
     int(copy.nb_children());
     int(copy.shape_type() as i32);

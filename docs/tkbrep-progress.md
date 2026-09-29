@@ -16,24 +16,34 @@ The toolkit test inventory maps these suites (28 declarations):
 | Source | Rust target | Declarations | Native | Rust |
 | --- | --- | ---: | --- | --- |
 | TopoDS_Builder_Test.cxx | topods_builder | 19 | pass | pass |
-| TopExp_Test.cxx | topexp | 9 | blocked (TKPrim) | pass |
+| TopExp_Test.cxx | topexp | 9 | pass | pass |
+| TopoDS_Edge_Test.cxx | topods_edge | 1 | pass | pass |
+| TopoDS_Iterator_Test.cxx | topods_iterator | 17 | pass | pass |
+| TopoDS_TShape_Test.cxx | topods_tshape | 8 | pass | pass |
+| BRep_Tool_Test.cxx | brep_tool (not mapped) | 13 | pass (13) | pass (11 translated) |
 
-Both suites build their inputs with BRepBuilderAPI_MakeVertex,
-BRepBuilderAPI_MakeEdge (TKTopAlgo) and BRepPrimAPI_MakeBox (TKPrim). BRep and those
-toolkits are not ported, so the Rust translations use the named fakes of
-`crates/tkbrep/tests/support`: vertex and edge TShapes derived from the abstract
-TopoDS classes (as BRep_TVertex and BRep_TEdge are), and a six-face box that shares
-12 edges and 8 vertices. The suites only assert topology (types, counts, sharing,
-orientations), which the fakes reproduce. They are replaced by the real builders when
-those toolkits are ported.
+The suites build their inputs with BRepBuilderAPI_MakeVertex, BRepBuilderAPI_MakeEdge
+(TKTopAlgo) and BRepPrimAPI_MakeBox (TKPrim). Those toolkits are not ported, so the Rust
+translations use the named fakes of `crates/tkbrep/tests/support`, which replay the
+native builders with the real BRep types: `BRep_Builder` vertices with the BRepLib
+precision, line and curve edges with the vertices, range and closed flag of
+BRepLib_MakeEdge, and a box of six planar faces with a p-curve for each edge, sharing
+12 line edges and 8 vertices as BRepPrim does. They are replaced by the real builders
+when those toolkits are ported.
 
 `TopExp_Test.cxx` calls BRepPrimAPI_MakeBox, so the shared native oracle closure builds
 TKPrim beside TKTopAlgo (`tools/native_build.py`), and the unchanged file runs natively
-like every other suite. The Rust translation builds the box with the fakes above; the
-suite asserts only the topology they reproduce. The TopExp behaviour is compared with the native
-kernel by the numeric oracle as well (`br_explore`, `br_maps`, `br_vertices`). The
-other TKBRep suites (BRep_Tool, BRepTools, BRepAdaptor, BRepGraph, and TopoDS_Edge,
-TopoDS_Iterator and TopoDS_TShape, which also build BRep shapes) wait for BRep.
+like every other suite. The TopExp behaviour is compared with the native kernel by the
+numeric oracle as well (`br_explore`, `br_maps`, `br_vertices`).
+
+`BRep_Tool_Test.cxx` is translated in `crates/tkbrep/tests/brep_tool.rs` for the 11
+declarations that do not project an edge on a plane; all 11 pass in Rust. Its
+`CurveOnPlane_ProjectsShiftedPeriodicRange` and
+`CurveOnPlane_ProjectsPeriodicEdgeBuiltFromEqualParameters` need the projection that
+ProjLib and GeomProjLib provide (see "Dependency gap"), so they are not translated, and
+the suite is not mapped in the ledger: the verifier maps whole files only. The
+unchanged file passes natively (13 of 13, checked with temporary ledger rows). The
+other TKBRep suites (BRepTools, BRepAdaptor, BRepGraph) wait for their packages.
 
 `topods_behavior.rs`, `topexp_behavior.rs` and `toptools_behavior.rs` cover the quirks
 below, the builder errors, the identity levels and hash, the iterator and explorer
@@ -64,9 +74,19 @@ recording console for the readers.
 - The TopExp functions return their output vertices (`vertices` and `wire_vertices`
   return pairs, `common_vertex` an `Option`).
 
-`crates/tkbrep/src/brep.rs` predates this port (the TKernel TopLoc legacy test and
-the TKTopAlgo `MakeVertex` use it). It is not the BRep package: it keeps a vertex
-TShape with a point and a tolerance, now derived from `topods::TVertex`.
+- BRep (docs/topology-design.md section 9): `BRep_TVertex`, `BRep_TEdge` and
+  `BRep_TFace` are `BRepTVertex`, `BRepTEdge` and `BRepTFace`, which embed their TopoDS
+  parent. The abstract `BRep_CurveRepresentation`, `BRep_GCurve`,
+  `BRep_PointRepresentation` and `BRep_PointsOnSurface` are traits over embedded base
+  data; the members their base classes define by raising Standard_DomainError return
+  `Result`. `BRep_Builder` is `BRepBuilder` (it derefs to `topods::Builder`) and
+  `BRep_Tool` is `BRepTool`; their overloads get names that say what they take, and
+  output arguments become returned values (`EdgeCurve3D`, `EdgePCurve`,
+  `EdgeCurveOnSurface`, tuples). `BRepGCurve::set_range`, `Copy` and
+  `TopoDS_TShape::EmptyCopy` return `Result`, because updating a p-curve range
+  evaluates the p-curves.
+- The vertex-only `brep` module that the TKernel TopLoc legacy test and the TKTopAlgo
+  `MakeVertex` used before this port is replaced: both use `BRepBuilder` and `BRepTool`.
 
 ## Verification
 
@@ -106,6 +126,40 @@ type pair, the vertex queries, and the shape set (five format numbers) and locat
 set with their dump, write and read texts. Given texts exercise the readers: missing
 and malformed tags and versions, out-of-range references, singular matrices,
 overflowing numbers, truncated tables and incompatible sub-shapes.
+
+The BRep requests (`br_brep`, `br_brep_dump`; 8 requests in
+`tools/tkbrep_brep_corpus.py`) script a scene: locations, geometry registries (lines,
+circles, Bezier and trimmed curves; planes, cylinders, rectangular trimmed and offset
+surfaces; 2D lines and circles; 3D and 2D polygons, triangulations with mesh purposes
+and node arrays) and `BRep_Builder` commands, then print every `BRep_Tool` query on
+every shape, every edge and face pair, every edge and registry surface or
+triangulation at three locations, and every vertex and edge pair: points, raw and
+floored tolerances, flags, ranges, curves (and transformed copies evaluated), p-curves
+by surface and by index, UV points, polygons and polygons on triangulations, closed
+tests, regularities and their continuity, vertex parameters, and every representation
+with its accessors (or their exceptions), range, point and UV points. The four scenes
+cover located and scaled edges, a closed circle edge, a Bezier edge, a degenerated
+edge, internal vertices with points on curves, p-curves and surfaces, seams on a
+cylinder with both UV point pairs, regularities, the quirky seam polygon location,
+triangulation replacement and lists, transfers, empty copies, and the builder errors
+(locked shapes, missing p-curves, infinite parameters, bad triangulation lists).
+`br_brep_dump` compares the JSON dumps of every TShape at depths -1 to 2. A query that
+reaches the unported planar projection prints `P` on both sides: natively when it
+returns a projected curve, in Rust for its Standard_NotImplemented, so the gap is pinned
+to exactly the native projection cases (92 of them in the corpus).
+
+## Dependency gap
+
+`BRep_Tool::CurveOnPlane` projects the 3D curve of an edge on a plane with
+`GeomProjLib::ProjectOnPlane` and `ProjLib_ProjectedCurve`, and `CurveOnSurface`
+falls back to it for a plane without a stored p-curve. ProjLib and GeomProjLib are not
+ported, so the port keeps every step before the projection (the planar test, the 3D
+curve lookup, the relative location, the transformed curve and parameters, the range
+validation, the trimmed curve) and raises Standard_NotImplemented, naming the missing
+packages, at the projection itself. The api rows of `CurveOnPlane`, both
+`CurveOnSurface(E, S, L, ...)` and `CurveOnSurface(E, F, ...)`, and
+`Parameter(V, E, F)` and `Parameter(V, E, S, L)` (which call `CurveOnSurface` for an
+internal vertex) are `partial`. Two `BRep_Tool_Test.cxx` declarations wait for it.
 
 ## Preserved native behaviour
 
@@ -149,6 +203,34 @@ overflowing numbers, truncated tables and incompatible sub-shapes.
   table with the base class dereferences a null shape (a crash natively); the port
   raises Standard_NullObject.
 
+- BRep_Builder `UpdateCurves` for a 3D curve reassigns its cast at every list item: a
+  new 3D curve takes the range of the last parametric curve read only when the list
+  ends with a parametric curve.
+- `BRep_Builder::UpdateEdge(E, C1, C2, S, L, Tol, Pf, Pl)` sets the UV points of the
+  second p-curve (`SetUVPoints2`); the single p-curve overload removes every curve on
+  the surface, the seam overload only the first one, and the seam overload reads the 3D
+  curve range only from the 3D curves before that first match.
+- `UpdateEdge(E, P1, P2, S, L)` stores the seam polygon at the identity location, not
+  at the edge-relative one, so a later search at that location misses it;
+  `UpdateEdge(E, P, L)` appends a new 3D polygon representation even for a null
+  polygon when the edge has none.
+- `BRep_Builder::Degenerated(E, true)` stores the null 3D curve at the edge location
+  itself, not relative to it; `UpdateVertex(V, P, E, S, L, Tol)` searches the p-curve at
+  `L` itself (xpu020198, BUC60407) but stores the point at the vertex-relative location.
+- `BRep_Builder::Transfert(Ein, Eout)` transfers only the first p-curve of a seam (a
+  seam also answers `IsCurveOnSurface`), with the raw edge tolerance.
+- `BRep_Tool::Range(E, S, L)` (and the Face overload) sets the Modified flag of the
+  edge. `BRep_Tool::Triangulation(F, L)` returns the face location without the TFace
+  location. `BRep_Tool::IsClosed(E, S, L)` is false on planes and on offset and
+  rectangular trimmed planes (NIZNHY-PKV).
+- `BRep_TFace::Triangulations` clears the Active bit of the triangulations before a null
+  member, then raises Standard_ProgramError (a `Standard_ASSERT_RAISE`, raised in release
+  builds too); an active triangulation outside the list raises it after clearing all.
+- `BRep_PointOnCurve` and `BRep_PointOnCurveOnSurface` dump their curve as a pointer
+  number; `BRep_PointOnCurveOnSurface` dumps the `BRep_PointRepresentation` base, not
+  `BRep_PointsOnSurface`, and `BRep_PointOnSurface` dumps as `BRep_PointsOnSurface`.
+- `BRep_CurveOn2Surfaces::D0` always raises Standard_NullObject.
+
 ## Deliberate Rust deviations
 
 - A null TShape dereference (null shape flags, `ShapeType`, a null explored shape in
@@ -159,3 +241,16 @@ overflowing numbers, truncated tables and incompatible sub-shapes.
   natively (the node is freed) and continues at the next index in Rust.
 - `TopExp_Explorer::Next` returns `Result`, and `Explorer` and `ShapeIterator` also
   implement `std::iter::Iterator`.
+- BRep_Builder and BRep_Tool reinterpret the TShape of their shapes without a check
+  natively (a null shape or another TShape class is undefined behaviour); the port
+  raises Standard_NullObject and Standard_TypeMismatch. `BRep_Curve3D::D0` on a null
+  curve, the constructors of p-curve representations on a null p-curve and
+  `BRep_Tool::Parameter` on a matching point with a null p-curve raise
+  Standard_NullObject instead of crashing.
+- `BRep_Tool::CurveOnSurface(E, C, S, L, First, Last, Index)` with an index below 1
+  returns the null result; natively it leaves its output arguments unchanged.
+- `BRep_TEdge::Curves()`, `BRep_TVertex::Points()` and `BRep_TFace::Triangulations()`
+  return copies of the lists, and `Transfert` walks a copy of the input list, so an
+  edge transferred onto itself does not iterate over the representations it adds.
+- The planar projection of `BRep_Tool::CurveOnPlane` raises Standard_NotImplemented
+  ("Dependency gap").

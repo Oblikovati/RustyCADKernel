@@ -2,6 +2,7 @@
 // Each input line is `operation numbers...`; tools/verify_tkbrep_numeric.py compares the
 // output with crates/tkbrep/examples/numeric_probe.rs token for token. Each package adds
 // its own tkbrep_probe_<package>.cxx, included below, and its rows in probe_cases.
+#include <algorithm>
 #include <map>
 #include <vector>
 #include <iostream>
@@ -36,6 +37,8 @@
 #include "tkbrep_probe_topods.cxx"
 #include "tkbrep_probe_topexp.cxx"
 #include "tkbrep_probe_toptools.cxx"
+#include "tkbrep_probe_brep.cxx"
+#include "tkbrep_probe_brep_report.cxx"
 const std::map<std::string,void(*)(std::istream&)> probe_cases={
  // TopoDS (tkbrep_probe_topods.cxx)
  {"br_topods", br_topods_case},
@@ -49,6 +52,9 @@ const std::map<std::string,void(*)(std::istream&)> probe_cases={
  {"br_setread", br_setread_case},
  {"br_locset", br_locset_case},
  {"br_locread", br_locread_case},
+ // BRep (tkbrep_probe_brep.cxx, tkbrep_probe_brep_report.cxx)
+ {"br_brep", br_brep_case},
+ {"br_brep_dump", br_brep_dump_case},
 };
 int main() {
  std::string line;

@@ -20,11 +20,11 @@ impl TShape for ProbeTVertex {
     fn tshape_base(&self) -> &TShapeBase {
         self.parent.tshape_base()
     }
-    fn empty_copy(&self) -> Handle<dyn TShape> {
-        Handle::new(ProbeTVertex {
+    fn empty_copy(&self) -> Result<Handle<dyn TShape>, Failure> {
+        Ok(Handle::new(ProbeTVertex {
             parent: TVertex::new(),
         })
-        .into_cast()
+        .into_cast())
     }
 }
 
@@ -37,7 +37,7 @@ impl TShape for ProbeTEdge {
     fn tshape_base(&self) -> &TShapeBase {
         TShape::tshape_base(&self.parent)
     }
-    fn empty_copy(&self) -> Handle<dyn TShape> {
+    fn empty_copy(&self) -> Result<Handle<dyn TShape>, Failure> {
         TShape::empty_copy(&self.parent)
     }
 }
@@ -100,7 +100,7 @@ impl Graph {
             .position(|s| !s.is_null() && s.is_partner(shape))
             .map_or(-1, |i| i as i32)
     }
-    fn at(&mut self, i: i32) -> &mut Shape {
+    pub fn at(&mut self, i: i32) -> &mut Shape {
         &mut self.shapes[i as usize]
     }
 }
@@ -111,7 +111,7 @@ fn new_datum(g: &mut Graph, t: Transform3) {
     g.locs.push(Location::from_datum(d));
 }
 
-fn read_location(g: &mut Graph, r: &mut Reader<'_>) {
+pub fn read_location(g: &mut Graph, r: &mut Reader<'_>) {
     let kind = r.integer();
     let mut t = Transform3::default();
     match kind {
@@ -202,7 +202,13 @@ fn set_flag(s: &Shape, bit: i32, v: bool) -> Result<(), Failure> {
 }
 
 fn command(g: &mut Graph, r: &mut Reader<'_>) -> Result<(), Failure> {
-    match r.integer() {
+    let code = r.integer();
+    apply(g, r, code)
+}
+
+/// `br_apply_command`: one graph command of the given code (the BRep probe reuses them).
+pub fn apply(g: &mut Graph, r: &mut Reader<'_>, code: i32) -> Result<(), Failure> {
+    match code {
         1 => g.shapes.push(make(r.integer())),
         2 => {
             let p = r.integer();

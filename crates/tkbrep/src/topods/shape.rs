@@ -211,7 +211,9 @@ impl Shape {
     /// `EmptyCopy()`: replaces the TShape by its empty copy; Standard_NullObject for a
     /// null shape; `shape.empty_copy()?`.
     pub fn empty_copy(&mut self) -> Result<(), Failure> {
-        let copy = self.checked_tshape("TopoDS_Shape::EmptyCopy")?.empty_copy();
+        let copy = self
+            .checked_tshape("TopoDS_Shape::EmptyCopy")?
+            .empty_copy()?;
         self.tshape = copy;
         Ok(())
     }

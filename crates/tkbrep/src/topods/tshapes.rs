@@ -20,7 +20,7 @@
 //! The TShape classes of the eight shape types (docs/topology-design.md section 2).
 use super::tshape::{TShape, TShapeBase};
 use rustycad_tkernel::impl_transient;
-use rustycad_tkernel::standard::{Handle, StandardTransient};
+use rustycad_tkernel::standard::{Failure, Handle, StandardTransient};
 use rustycad_tkg3d::top_abs::ShapeEnum;
 
 /// Declares a concrete TShape class: its base data, its descriptor, a constructor
@@ -54,8 +54,8 @@ macro_rules! concrete_tshape {
             fn tshape_base(&self) -> &TShapeBase {
                 &self.tshape
             }
-            fn empty_copy(&self) -> Handle<dyn TShape> {
-                Handle::new(Self::new()).into_cast()
+            fn empty_copy(&self) -> Result<Handle<dyn TShape>, Failure> {
+                Ok(Handle::new(Self::new()).into_cast())
             }
         }
     };

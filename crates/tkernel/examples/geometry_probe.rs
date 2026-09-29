@@ -1,5 +1,5 @@
 //! Exact parser positions, failures, partial writes, and translated vertex coordinates.
-use rustycad_tkbrep::{brep::Tool, topods::Vertex};
+use rustycad_tkbrep::{brep::BRepTool, topods::Vertex};
 use rustycad_tkernel::standard::{
     Failure,
     dump::{self, DumpStream},
@@ -80,7 +80,7 @@ fn geometry(op: &str, input: &mut std::str::SplitWhitespace<'_>) {
         .shape()
         .moved(&Location::new(transform), false)
         .unwrap();
-    let point = Tool::point(&Vertex::unchecked(moved)).unwrap();
+    let point = BRepTool::pnt(&Vertex::unchecked(moved)).unwrap();
     println!(
         "{} {} {}",
         point.x().to_bits(),

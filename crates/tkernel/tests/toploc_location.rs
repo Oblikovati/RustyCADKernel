@@ -15,7 +15,7 @@
 //! OCC25545 translation: actual located vertices are read concurrently.
 #![allow(non_snake_case)]
 use rustycad_tkbrep::{
-    brep::Tool,
+    brep::BRepTool,
     topods::{Shape, Vertex},
 };
 use rustycad_tkernel::osd::Parallel;
@@ -33,7 +33,7 @@ impl TopLocTransformFunctor<'_> {
     fn evaluate(&self, index: usize) {
         if self.races.load(Ordering::SeqCst) == 0 {
             let vertex = Vertex::unchecked(self.shapes[index].clone());
-            let point = Tool::point(&vertex).unwrap();
+            let point = BRepTool::pnt(&vertex).unwrap();
             if point.x() != index as f64 {
                 self.races.fetch_add(1, Ordering::SeqCst);
             }
