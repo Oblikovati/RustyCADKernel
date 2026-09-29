@@ -27,6 +27,7 @@ mod geometry;
 pub use generic::{GenOps, GeometryOps};
 
 use crate::brep_graph::{BRepGraph, CountProvider};
+use rustycad_tkernel::standard::Failure;
 
 /// `BRepGraph::TopoView`: obtained by [`BRepGraph::topo`].
 ///
@@ -50,7 +51,7 @@ impl BRepGraph {
 
 macro_rules! kind_ops {
     ($($(#[$doc:meta])* $ops:ident, $accessor:ident, $id:ident, $def:ident, $get:ident,
-       $nb:ident, $nb_active:ident $(, $relations:ident, $relations_type:ident)?;)*) => {
+       $nb:ident, $nb_active:ident $(, $relations:ident, $try_relations:ident, $relations_type:ident)?;)*) => {
         impl<'g> TopoView<'g> {$(
             #[doc = concat!("The grouped `", stringify!($ops), "` queries.")]
             pub fn $accessor(self) -> $ops<'g> {
@@ -90,6 +91,15 @@ macro_rules! kind_ops {
                     self.graph.inc_storage().$get(id)
                 }
 
+                /// The checked `Definition(theId)`: Standard_OutOfRange for an id past
+                /// the store (undefined behaviour natively).
+                pub fn try_definition(
+                    self,
+                    id: crate::brep_graph::$id,
+                ) -> Result<&'g crate::brep_graph_inc::$def, Failure> {
+                    self.graph.inc_storage().try_def(id)
+                }
+
                 $(
                     /// `Relations(theId)`: the relation record.
                     pub fn relations(
@@ -97,6 +107,15 @@ macro_rules! kind_ops {
                         id: crate::brep_graph::$id,
                     ) -> &'g crate::brep_graph_inc::$relations_type {
                         self.graph.inc_storage().$relations(id)
+                    }
+
+                    /// The checked `Relations(theId)`: Standard_OutOfRange for an id past
+                    /// the table (undefined behaviour natively).
+                    pub fn try_relations(
+                        self,
+                        id: crate::brep_graph::$id,
+                    ) -> Result<&'g crate::brep_graph_inc::$relations_type, Failure> {
+                        self.graph.inc_storage().$try_relations(id)
                     }
                 )?
             }
@@ -113,36 +132,36 @@ macro_rules! kind_ops {
 kind_ops! {
     /// `TopoView::FaceOps`.
     FaceOps, faces, FaceId, FaceDef, face, nb_faces, nb_active_faces,
-        face_relations, FaceRelations;
+        face_relations, try_face_relations, FaceRelations;
     /// `TopoView::EdgeOps`.
     EdgeOps, edges, EdgeId, EdgeDef, edge, nb_edges, nb_active_edges,
-        edge_relations, EdgeRelations;
+        edge_relations, try_edge_relations, EdgeRelations;
     /// `TopoView::VertexOps`.
     VertexOps, vertices, VertexId, VertexDef, vertex, nb_vertices, nb_active_vertices,
-        vertex_relations, VertexRelations;
+        vertex_relations, try_vertex_relations, VertexRelations;
     /// `TopoView::WireOps`.
     WireOps, wires, WireId, WireDef, wire, nb_wires, nb_active_wires,
-        wire_relations, WireRelations;
+        wire_relations, try_wire_relations, WireRelations;
     /// `TopoView::ShellOps`.
     ShellOps, shells, ShellId, ShellDef, shell, nb_shells, nb_active_shells,
-        shell_relations, ShellRelations;
+        shell_relations, try_shell_relations, ShellRelations;
     /// `TopoView::SolidOps`.
     SolidOps, solids, SolidId, SolidDef, solid, nb_solids, nb_active_solids,
-        solid_relations, SolidRelations;
+        solid_relations, try_solid_relations, SolidRelations;
     /// `TopoView::CoEdgeOps`.
     CoEdgeOps, co_edges, CoEdgeId, CoEdgeDef, co_edge, nb_co_edges, nb_active_co_edges;
     /// `TopoView::CompoundOps`.
     CompoundOps, compounds, CompoundId, CompoundDef, compound, nb_compounds,
-        nb_active_compounds, compound_relations, CompoundRelations;
+        nb_active_compounds, compound_relations, try_compound_relations, CompoundRelations;
     /// `TopoView::CompSolidOps`.
     CompSolidOps, comp_solids, CompSolidId, CompSolidDef, comp_solid, nb_comp_solids,
-        nb_active_comp_solids, comp_solid_relations, CompSolidRelations;
+        nb_active_comp_solids, comp_solid_relations, try_comp_solid_relations, CompSolidRelations;
     /// `TopoView::ProductOps`.
     ProductOps, products, ProductId, ProductDef, product, nb_products, nb_active_products,
-        product_relations, ProductRelations;
+        product_relations, try_product_relations, ProductRelations;
     /// `TopoView::OccurrenceOps`.
     OccurrenceOps, occurrences, OccurrenceId, OccurrenceDef, occurrence, nb_occurrences,
-        nb_active_occurrences, occurrence_relations, OccurrenceRelations;
+        nb_active_occurrences, occurrence_relations, try_occurrence_relations, OccurrenceRelations;
 }
 
 impl<'g> TopoView<'g> {

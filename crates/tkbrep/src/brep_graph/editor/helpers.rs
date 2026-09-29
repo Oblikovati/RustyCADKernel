@@ -75,6 +75,20 @@ pub(crate) fn require_item_unlocked(graph: &BRepGraph, item: ItemId) -> Result<(
     require_unlocked(graph, item, "BRepGraph::EditorView: locked item")
 }
 
+/// The checks of an immediate setter on a caller-given id: `requireUnlocked` (first,
+/// as natively), then the range of the record the setter writes. The native setters
+/// write `ChangeVertex(theVertex)`... without a range check (undefined behaviour past
+/// the store); the port returns Standard_OutOfRange instead of panicking.
+pub(crate) fn require_settable<T>(graph: &BRepGraph, id: TypedId<T>) -> Result<(), Failure>
+where
+    T: StoredTag,
+    ItemId: From<<T::Family as IdFamily>::Untyped>,
+{
+    let item = ItemId::from(<T::Family as IdFamily>::untyped(T::RAW_KIND, id.index));
+    require_item_unlocked(graph, item)?;
+    graph.inc_storage().check_id(id).map(|_| ())
+}
+
 /// `BRepGraph_ItemId(theNode)` of a typed or untyped node id.
 pub(crate) fn node_item(node: impl Into<NodeId>) -> ItemId {
     ItemId::from(node.into())

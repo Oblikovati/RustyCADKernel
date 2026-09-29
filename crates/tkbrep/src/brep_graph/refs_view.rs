@@ -16,6 +16,7 @@
 //! `BRepGraph::RefsView`: read-only reference entries, their per-parent lists and the
 //! generic reference queries.
 use crate::brep_graph::*;
+use rustycad_tkernel::standard::Failure;
 use rustycad_tkg3d::top_abs::Orientation;
 use rustycad_tkmath::toploc::Location;
 
@@ -78,6 +79,15 @@ macro_rules! ref_ops {
                 /// `Entry(theRefId)`: the reference entry (an id out of range panics).
                 pub fn entry(self, id: $id) -> &'g crate::brep_graph_inc::$entry {
                     self.graph.inc_storage().$get(id)
+                }
+
+                /// The checked `Entry(theRefId)`: Standard_OutOfRange for an id past the
+                /// store (undefined behaviour natively).
+                pub fn try_entry(
+                    self,
+                    id: $id,
+                ) -> Result<&'g crate::brep_graph_inc::$entry, Failure> {
+                    self.graph.inc_storage().try_entry(id)
                 }
 
                 $(
@@ -182,6 +192,23 @@ impl GenOps<'_> {
     /// `IsValid(theRef)`: a valid id inside its kind's range.
     pub fn is_valid(self, reference: RefId) -> bool {
         reference.is_valid() && reference.index < self.nb(reference.kind)
+    }
+
+    /// The checked form of [`is_valid`](Self::is_valid): the reference's slot, else
+    /// Standard_OutOfRange naming the kind, the index and the valid range.
+    ///
+    /// ```
+    /// use rustycad_tkbrep::brep_graph::{BRepGraph, FaceRefId, RefId};
+    /// let graph = BRepGraph::new();
+    /// assert!(graph.refs().generic().check_in_range(RefId::from(FaceRefId::new(0))).is_err());
+    /// ```
+    pub fn check_in_range(self, reference: RefId) -> Result<usize, Failure> {
+        crate::brep_graph_inc::check_untyped_index(
+            "BRepGraph_RefId",
+            reference.kind.0,
+            reference.index,
+            self.nb(reference.kind),
+        )
     }
 
     /// `IsActive(theRef)`.

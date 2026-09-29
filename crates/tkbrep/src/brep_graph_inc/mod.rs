@@ -59,7 +59,8 @@ pub use representation::{
 pub use shared_bit_flags::SharedBitFlags;
 pub use storage::{
     CachedShape, EntityStore, FlagPlane, NodeTag, OwnershipPlanes, RefTag, RemovalPlanes, RepStore,
-    RepTag, ShapeBindings, Storage, StoredTag, WireCoEdgeOrderStatus,
+    RepTag, ShapeBindings, Storage, StoredTag, WireCoEdgeOrderStatus, check_index,
+    check_typed_index, check_untyped_index,
 };
 pub(crate) use storage::{
     append_unique, build_co_edge_order, co_edge_ids_are_unique, co_edge_oriented_vertices,
