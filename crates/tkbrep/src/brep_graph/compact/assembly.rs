@@ -173,30 +173,15 @@ fn restore_link(
     new_parent: ProductId,
     old_ref: OccurrenceRefId,
 ) -> Result<(), Failure> {
-    let storage = graph.inc_storage();
-    let entry = graph.refs().occurrences().entry(old_ref);
-    let old_occurrence = entry.child_occurrence_id;
-    if storage.is_removed(old_ref) || !old_occurrence.is_valid_in(&graph.topo().occurrences()) {
-        return Ok(());
-    }
-    let child = graph
-        .topo()
-        .occurrences()
-        .definition(old_occurrence)
-        .child_node_id;
-    if storage.is_removed(old_occurrence) || !child.is_valid() || child.kind != NodeKind::PRODUCT {
-        return Ok(());
-    }
-    let Some(&new_child) = maps.products.seek(&ProductId::from_node_id(child)) else {
+    let Some((old_occurrence, child, location)) = product_link(graph, old_ref) else {
         return Ok(());
     };
-    let location = entry.local_location.clone();
-    let (new_occurrence, _) = fresh.editor().products().append(
-        new_parent,
-        new_child,
-        &location,
-        OccurrenceId::invalid(),
-    )?;
+    let Some(&new_child) = maps.products.seek(&child) else {
+        return Ok(());
+    };
+    let invalid = OccurrenceId::invalid();
+    let mut products = fresh.editor().products();
+    let (new_occurrence, _) = products.append(new_parent, new_child, &location, invalid)?;
     if !new_occurrence.is_valid() {
         return Ok(());
     }
@@ -205,22 +190,49 @@ fn restore_link(
     }
     // Occurrence refs are usage records: the identity moves with the exact
     // parent-owned slot, not only with the occurrence definition.
-    let new_refs = fresh
+    if let Some(new_ref) = slot_of(fresh, new_parent, new_occurrence) {
+        refs.occurrence_refs.bind(old_ref, new_ref);
+    }
+    Ok(())
+}
+
+// The occurrence, child product and placement of an active occurrence reference whose
+// active occurrence places a product.
+fn product_link(
+    graph: &BRepGraph,
+    reference: OccurrenceRefId,
+) -> Option<(OccurrenceId, ProductId, Location)> {
+    let storage = graph.inc_storage();
+    let entry = graph.refs().occurrences().entry(reference);
+    let occurrence = entry.child_occurrence_id;
+    if storage.is_removed(reference) || !occurrence.is_valid_in(&graph.topo().occurrences()) {
+        return None;
+    }
+    let child = graph
         .topo()
-        .products()
-        .relations(new_parent)
-        .occurrence_ref_ids
-        .clone();
-    let found = new_refs.into_iter().find(|&reference| {
-        fresh
+        .occurrences()
+        .definition(occurrence)
+        .child_node_id;
+    if storage.is_removed(occurrence) || !child.is_valid() || child.kind != NodeKind::PRODUCT {
+        return None;
+    }
+    let location = entry.local_location.clone();
+    Some((occurrence, ProductId::from_node_id(child), location))
+}
+
+// The parent's first occurrence reference to the occurrence.
+fn slot_of(
+    graph: &BRepGraph,
+    parent: ProductId,
+    occurrence: OccurrenceId,
+) -> Option<OccurrenceRefId> {
+    let refs = &graph.topo().products().relations(parent).occurrence_ref_ids;
+    refs.iter().copied().find(|&reference| {
+        graph
             .refs()
             .occurrences()
             .entry(reference)
             .child_occurrence_id
-            == new_occurrence
-    });
-    if let Some(new_ref) = found {
-        refs.occurrence_refs.bind(old_ref, new_ref);
-    }
-    Ok(())
+            == occurrence
+    })
 }

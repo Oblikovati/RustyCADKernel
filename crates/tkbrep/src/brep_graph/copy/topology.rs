@@ -29,6 +29,7 @@ use crate::brep_graph::tool;
 use crate::brep_graph::{
     BRepGraph, CoEdgeId, EdgeId, FaceId, ItemId, RefId, VertexId, VertexRefId, WireId,
 };
+use crate::brep_graph_inc::EdgeDef;
 use rustycad_tkernel::standard::Failure;
 
 /// `ensureVertex(theCtx, theSrcId)`: the copy of a source vertex (invalid for an id past
@@ -76,8 +77,25 @@ pub(crate) fn ensure_edge(
     if let Some(existing) = context.existing(source) {
         return Ok(existing);
     }
+    let edge = context.source().topo().edges().definition(source).clone();
+    let copied = add_edge_copy(context, source, &edge)?;
+    context.copy_removed(source, copied);
+    if context.mesh != MeshPolicy::Drop && edge.polygon3d_rep_id.is_valid() {
+        ensure_polygon3d_rep(context, edge.polygon3d_rep_id, copied)?;
+    }
+    context.bind_node(source, copied);
+    bind_vertex_refs(context, &edge, copied);
+    Ok(copied)
+}
+
+// The edge over the copied end vertices, with the curve under the geometry policy and
+// the source range and tolerance.
+fn add_edge_copy(
+    context: &mut CopyContext<'_>,
+    source: EdgeId,
+    edge: &EdgeDef,
+) -> Result<EdgeId, Failure> {
     let graph = context.source();
-    let edge = graph.topo().edges().definition(source).clone();
     let start = vertex_of(graph, tool::edge::start_vertex_id(graph, source));
     let end = vertex_of(graph, tool::edge::end_vertex_id(graph, source));
     let curve = tool::edge::curve(graph, source);
@@ -85,19 +103,13 @@ pub(crate) fn ensure_edge(
     let new_start = ensure_vertex(context, start)?;
     let new_end = ensure_vertex(context, end)?;
     let curve = copy_geometry(&curve, context.geom)?;
-    let copied = context.target_mut().editor().edges().add(
-        new_start,
-        new_end,
-        &curve,
-        first,
-        last,
-        edge.tolerance,
-    );
-    context.copy_removed(source, copied);
-    if context.mesh != MeshPolicy::Drop && edge.polygon3d_rep_id.is_valid() {
-        ensure_polygon3d_rep(context, edge.polygon3d_rep_id, copied)?;
-    }
-    context.bind_node(source, copied);
+    let mut edges = context.target_mut().editor().edges();
+    Ok(edges.add(new_start, new_end, &curve, first, last, edge.tolerance))
+}
+
+// The copied edge's vertex references follow the source ones: removed flags first,
+// then the item remap.
+fn bind_vertex_refs(context: &mut CopyContext<'_>, edge: &EdgeDef, copied: EdgeId) {
     let new_edge = context.target().topo().edges().definition(copied);
     let refs = [
         (edge.start_vertex_ref_id, new_edge.start_vertex_ref_id),
@@ -111,7 +123,6 @@ pub(crate) fn ensure_edge(
     for (old_ref, new_ref) in refs {
         context.bind_item(ref_item(old_ref), ref_item(new_ref));
     }
-    Ok(copied)
 }
 
 /// The item of a typed reference id.
@@ -167,21 +178,8 @@ pub(crate) fn ensure_face(
     if let Some(existing) = context.existing(source) {
         return Ok(existing);
     }
-    let graph = context.source();
-    let face = graph.topo().faces().definition(source).clone();
-    let wires: Vec<WireId> = RefsWireOfFace::new(graph, source)
-        .map(|reference| graph.refs().wires().entry(reference).child_wire_id)
-        .collect();
-    let mut outer = WireId::invalid();
-    let mut inner = Vec::new();
-    for wire in wires {
-        let copied = ensure_wire(context, wire)?;
-        if !outer.is_valid() {
-            outer = copied;
-        } else {
-            inner.push(copied);
-        }
-    }
+    let face = context.source().topo().faces().definition(source).clone();
+    let (outer, inner) = copy_face_wires(context, source)?;
     let surface = tool::face::surface(context.source(), source);
     let surface = copy_geometry(&surface, context.geom)?;
     let copied = context
@@ -198,6 +196,29 @@ pub(crate) fn ensure_face(
     // PCurves require both the face and its edges to exist in the result.
     ensure_pcurves_for_face(context, source, copied)?;
     Ok(copied)
+}
+
+// The copies of the wires of the face's active references: the first one is the outer
+// wire, the others the inner ones.
+fn copy_face_wires(
+    context: &mut CopyContext<'_>,
+    source: FaceId,
+) -> Result<(WireId, Vec<WireId>), Failure> {
+    let graph = context.source();
+    let wires: Vec<WireId> = RefsWireOfFace::new(graph, source)
+        .map(|reference| graph.refs().wires().entry(reference).child_wire_id)
+        .collect();
+    let mut outer = WireId::invalid();
+    let mut inner = Vec::new();
+    for wire in wires {
+        let copied = ensure_wire(context, wire)?;
+        if !outer.is_valid() {
+            outer = copied;
+        } else {
+            inner.push(copied);
+        }
+    }
+    Ok((outer, inner))
 }
 
 // The wire references of the source and copied faces, paired up to the shorter list:

@@ -170,57 +170,30 @@ fn copy_node_with(
 }
 
 // The bottom-up walk of `Perform` into a non-empty target: every source entity of every
-// kind, removed ones included.
+// kind, removed ones included. The source is another graph, so its ids are collected
+// kind by kind without changing what the native full iterators visit.
 fn copy_every_entity(context: &mut CopyContext<'_>) -> Result<(), Failure> {
-    let source = context.source();
-    let (vertices, edges, wires) = (
-        full_ids::<VertexTag>(source),
-        full_ids::<EdgeTag>(source),
-        full_ids::<WireTag>(source),
-    );
-    let (faces, shells, solids) = (
-        full_ids::<FaceTag>(source),
-        full_ids::<ShellTag>(source),
-        full_ids::<SolidTag>(source),
-    );
-    let (compounds, comp_solids) = (
-        full_ids::<CompoundTag>(source),
-        full_ids::<CompSolidTag>(source),
-    );
-    let (products, occurrences) = (
-        full_ids::<ProductTag>(source),
-        full_ids::<OccurrenceTag>(source),
-    );
-    vertices
-        .into_iter()
-        .try_for_each(|id| ensure_vertex(context, id).map(drop))?;
-    edges
-        .into_iter()
-        .try_for_each(|id| ensure_edge(context, id).map(drop))?;
-    wires
-        .into_iter()
-        .try_for_each(|id| ensure_wire(context, id).map(drop))?;
-    faces
-        .into_iter()
-        .try_for_each(|id| ensure_face(context, id).map(drop))?;
-    shells
-        .into_iter()
-        .try_for_each(|id| ensure_shell(context, id).map(drop))?;
-    solids
-        .into_iter()
-        .try_for_each(|id| ensure_solid(context, id).map(drop))?;
-    compounds
-        .into_iter()
-        .try_for_each(|id| ensure_compound(context, id).map(drop))?;
-    comp_solids
-        .into_iter()
-        .try_for_each(|id| ensure_comp_solid(context, id).map(drop))?;
-    products
-        .into_iter()
-        .try_for_each(|id| ensure_product(context, id).map(drop))?;
-    occurrences
-        .into_iter()
-        .try_for_each(|id| ensure_occurrence(context, id).map(drop))
+    ensure_all::<VertexTag, _>(context, ensure_vertex)?;
+    ensure_all::<EdgeTag, _>(context, ensure_edge)?;
+    ensure_all::<WireTag, _>(context, ensure_wire)?;
+    ensure_all::<FaceTag, _>(context, ensure_face)?;
+    ensure_all::<ShellTag, _>(context, ensure_shell)?;
+    ensure_all::<SolidTag, _>(context, ensure_solid)?;
+    ensure_all::<CompoundTag, _>(context, ensure_compound)?;
+    ensure_all::<CompSolidTag, _>(context, ensure_comp_solid)?;
+    ensure_all::<ProductTag, _>(context, ensure_product)?;
+    ensure_all::<OccurrenceTag, _>(context, ensure_occurrence)
+}
+
+// One kind of the walk: `ensure` on every source id of the kind.
+fn ensure_all<T: NodeTag, R>(
+    context: &mut CopyContext<'_>,
+    ensure: fn(&mut CopyContext<'_>, TypedId<T>) -> Result<R, Failure>,
+) -> Result<(), Failure> {
+    for id in full_ids::<T>(context.source()) {
+        ensure(context, id)?;
+    }
+    Ok(())
 }
 
 // The tail of `Perform` and `CopyNode`: the UID reverse indexes marked dirty, the

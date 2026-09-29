@@ -164,32 +164,14 @@ pub fn perform_with(graph: &mut BRepGraph, options: &Options) -> Result<CompactR
         result.nb_nodes_after = result.nb_nodes_before;
         return Ok(result);
     }
-    let reachable = if graph.root_product_ids().is_empty() {
-        None
-    } else {
-        Some(maps::reachable_from_root_products(graph)?)
-    };
-    let (mut nodes, mut refs) = (NodeMaps::new(graph), RefMaps::new(graph));
-    bind_topology_maps(graph, &mut nodes, reachable.as_ref());
-    if reachable.is_some() {
-        result.nb_unmapped_active_defs =
-            count_active_topology(graph) - nodes.nb_mapped_topology() as u32;
-    }
+    let mut plan = Plan::new(graph, &mut result)?;
     let history = graph.layer_registry().ensure::<LayerHistory>()?;
     let was_enabled = history.is_enabled();
     history.set_enabled(options.history_mode);
-    let fresh = rebuild(graph, &mut nodes, &mut refs)?;
-    if !is_valid_rebuild(&fresh) {
-        result.nb_nodes_after = result.nb_nodes_before;
+    if !compact_in_place(graph, &mut plan, options, &mut result)? {
         history.set_enabled(was_enabled);
         return Ok(result);
     }
-    let mut fresh = fresh;
-    assembly::rebuild_products(graph, &mut fresh, &mut nodes, &mut refs, reachable.as_ref())?;
-    assembly::restore_product_links(graph, &mut fresh, &mut nodes, &mut refs, reachable.as_ref())?;
-    result.nb_nodes_after = fresh.topo().generic().nb_nodes();
-    swap::finish_uids(&mut fresh, graph);
-    swap::install(graph, fresh, &nodes, &refs, options)?;
     graph.editor().commit_mutation();
     // Re-acquired: the layer migration replaced the history instance.
     graph
@@ -197,6 +179,60 @@ pub fn perform_with(graph: &mut BRepGraph, options: &Options) -> Result<CompactR
         .ensure::<LayerHistory>()?
         .set_enabled(was_enabled);
     Ok(result)
+}
+
+// The kept definitions and their maps: the reachable set when there are root products,
+// the dense old-to-new numbering of every topology kind but the coedges, and the
+// reference maps the rebuild fills.
+struct Plan {
+    reachable: Option<HashSet<NodeId>>,
+    nodes: NodeMaps,
+    refs: RefMaps,
+}
+
+impl Plan {
+    // With root products, the active definitions no map holds are counted.
+    fn new(graph: &BRepGraph, result: &mut CompactResult) -> Result<Self, Failure> {
+        let reachable = if graph.root_product_ids().is_empty() {
+            None
+        } else {
+            Some(maps::reachable_from_root_products(graph)?)
+        };
+        let mut nodes = NodeMaps::new(graph);
+        bind_topology_maps(graph, &mut nodes, reachable.as_ref());
+        if reachable.is_some() {
+            result.nb_unmapped_active_defs =
+                count_active_topology(graph) - nodes.nb_mapped_topology() as u32;
+        }
+        let refs = RefMaps::new(graph);
+        Ok(Self {
+            reachable,
+            nodes,
+            refs,
+        })
+    }
+}
+
+// The rebuild, its validation, the assembly, the UID state and the installation; false
+// (the graph untouched) when the rebuilt graph is not valid.
+fn compact_in_place(
+    graph: &mut BRepGraph,
+    plan: &mut Plan,
+    options: &Options,
+    result: &mut CompactResult,
+) -> Result<bool, Failure> {
+    let (nodes, refs, reachable) = (&mut plan.nodes, &mut plan.refs, plan.reachable.as_ref());
+    let mut fresh = rebuild(graph, nodes, refs)?;
+    if !is_valid_rebuild(&fresh) {
+        result.nb_nodes_after = result.nb_nodes_before;
+        return Ok(false);
+    }
+    assembly::rebuild_products(graph, &mut fresh, nodes, refs, reachable)?;
+    assembly::restore_product_links(graph, &mut fresh, nodes, refs, reachable)?;
+    result.nb_nodes_after = fresh.topo().generic().nb_nodes();
+    swap::finish_uids(&mut fresh, graph);
+    swap::install(graph, fresh, nodes, refs, options)?;
+    Ok(true)
 }
 
 // The removed definitions of each topology kind (slots minus active definitions).
