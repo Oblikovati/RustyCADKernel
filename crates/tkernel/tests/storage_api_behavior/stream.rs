@@ -185,7 +185,11 @@ fn seekg_clears_eof_and_moves_the_input_position() {
     stream.read(&mut bytes);
     assert_eq!(stream.rdstate(), state::EOF | state::FAIL);
     stream.seekg(1);
-    assert_eq!(stream.rdstate(), state::FAIL, "failbit stays: the sentry refuses");
+    assert_eq!(
+        stream.rdstate(),
+        state::FAIL,
+        "failbit stays: the sentry refuses"
+    );
     stream.clear(state::EOF);
     stream.seekg(1);
     assert!(stream.good(), "eofbit alone is cleared before the sentry");
