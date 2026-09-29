@@ -40,10 +40,13 @@ pub mod shell;
 pub mod vertex;
 pub mod wire;
 
-use crate::brep_graph::{BRepGraph, FaceId, FaceRefId, ShellId, ShellRefId, WireId, WireRefId};
+use crate::brep_graph::{
+    BRepGraph, FaceId, FaceRefId, NodeTag, ShellId, ShellRefId, TypedId, WireId, WireRefId,
+};
 use crate::brep_graph_inc::{
     CoEdgeInstance, FaceInstance, ShellInstance, VertexInstance, WireInstance,
 };
+use rustycad_tkernel::standard::Failure;
 
 /// `BRepGraph_Tool::VertexUsage`.
 pub type VertexUsage = VertexInstance;
@@ -57,6 +60,35 @@ pub type WireUsage = WireInstance;
 pub type ShellUsage = ShellInstance;
 
 // `faceOf`: the active face of an active face reference, invalid otherwise.
+/// The checked form of any Tool member that takes a definition id.
+///
+/// The native `BRepGraph_Tool` members that take a definition id (`Vertex::Pnt`,
+/// `Edge::Tolerance`, `CoEdge::Orientation`, `Face::NbWires`, `Wire::FaceOf`...) read
+/// `Definition(theId)` or `Relations(theId)` without a range check, so an id past the
+/// store is undefined behaviour natively and a panic in the fast Rust members. This
+/// wrapper checks the id first and returns Standard_OutOfRange with the id and the
+/// valid range, else the member's result. A member that already returns a `Result`
+/// gives a nested one (`checked_member(...)??`); a usage-based member is checked
+/// through its `def_id` (`checked_member(graph, usage.def_id, |g, _| member(g, &usage))`).
+///
+/// ```
+/// use rustycad_tkbrep::brep_graph::{BRepGraph, VertexId, tool};
+/// use rustycad_tkmath::gp::Point3;
+/// let mut graph = BRepGraph::new();
+/// let vertex = graph.editor().vertices().add(Point3::new(1.0, 2.0, 3.0), 1e-7);
+/// let point = tool::checked_member(&graph, vertex, tool::vertex::pnt).unwrap();
+/// assert_eq!(point.x(), 1.0);
+/// assert!(tool::checked_member(&graph, VertexId::new(5), tool::vertex::pnt).is_err());
+/// ```
+pub fn checked_member<T: NodeTag, R>(
+    graph: &BRepGraph,
+    id: TypedId<T>,
+    member: impl FnOnce(&BRepGraph, TypedId<T>) -> R,
+) -> Result<R, Failure> {
+    graph.inc_storage().check_id(id)?;
+    Ok(member(graph, id))
+}
+
 fn face_of_ref(graph: &BRepGraph, face_ref: FaceRefId) -> FaceId {
     if !face_ref.is_valid() || graph.refs().generic().is_removed(face_ref.into()) {
         return FaceId::default();

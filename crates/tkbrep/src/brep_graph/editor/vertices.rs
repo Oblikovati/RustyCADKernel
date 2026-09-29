@@ -16,7 +16,7 @@
 
 //! `EditorView::VertexOps`: vertex creation and the vertex setters.
 use super::guards::{mutate_node, mutate_ref};
-use super::helpers::{node_item, ref_item, require_item_unlocked};
+use super::helpers::require_settable;
 use crate::brep_graph::mut_guard::MutGuard;
 use crate::brep_graph::{BRepGraph, VertexId, VertexRefId, VertexRefTag, VertexTag};
 use crate::brep_graph_inc::ParityOrientation;
@@ -62,7 +62,7 @@ impl<'g> VertexOps<'g> {
     /// `SetPoint(theVertex, thePoint)`: immediate notification; a locked vertex raises
     /// Standard_ProgramError.
     pub fn set_point(&mut self, vertex: VertexId, point: Point3) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(vertex))?;
+        require_settable(self.graph, vertex)?;
         self.graph.inc_storage_mut().change_vertex(vertex).point = point;
         self.graph.mark_modified(vertex.into());
         Ok(())
@@ -75,7 +75,7 @@ impl<'g> VertexOps<'g> {
 
     /// `SetTolerance(theVertex, theTolerance)`.
     pub fn set_tolerance(&mut self, vertex: VertexId, tolerance: f64) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(vertex))?;
+        require_settable(self.graph, vertex)?;
         self.graph.inc_storage_mut().change_vertex(vertex).tolerance = tolerance;
         self.graph.mark_modified(vertex.into());
         Ok(())
@@ -92,7 +92,7 @@ impl<'g> VertexOps<'g> {
         reference: VertexRefId,
         orientation: ParityOrientation,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         self.graph
             .inc_storage_mut()
             .change_vertex_ref(reference)
@@ -116,7 +116,7 @@ impl<'g> VertexOps<'g> {
         reference: VertexRefId,
         vertex: VertexId,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         let old = self
             .graph
             .inc_storage()

@@ -24,6 +24,7 @@
 use rustycad_tkernel::precision;
 use rustycad_tkernel::standard::{Failure, Handle, RuntimeTyped};
 use rustycad_tkg3d::geom::{GeomBSplineSurface, GeomSurface, SurfaceBounds};
+use rustycad_tkgeombase::scan_step::advanced_scan_parameter;
 
 /// A parametric direction of a surface.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -158,8 +159,9 @@ pub(crate) fn is_bspline_periodic(
 /// Step 1: the points at the two bounds of `axis` coincide at the start and the end of
 /// the across range (`for (aV = aVmin; aV <= aVmax; aV += aVStep)`).
 ///
-/// With an empty across range the native loop never advances; it stops at the first
-/// sample here, whose result it would repeat forever.
+/// When the increment does not move the across parameter (an empty range, a range of
+/// a few ulps, an infinite bound) the native loop never advances; it stops here at
+/// that sample, whose result it would repeat forever.
 fn ends_repeat(
     surface: &dyn GeomSurface,
     axis: Axis,
@@ -174,10 +176,12 @@ fn ends_repeat(
         if first.square_distance(&second) > periodic_tolerance() {
             return Ok(false);
         }
-        if step == 0.0 {
+        // The native increment leaves `aV` unchanged (an empty range, a sub-ulp step or
+        // an infinite bound): the loop would repeat this sample forever.
+        let Some(next) = advanced_scan_parameter(across, step) else {
             break;
-        }
-        across += step;
+        };
+        across = next;
     }
     Ok(true)
 }
@@ -218,4 +222,23 @@ fn outside_samples(smin: f64, smax: f64, low: f64, high: f64) -> Vec<(f64, f64)>
         }
     }
     samples
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use rustycad_tkg3d::geom::GeomCylindricalSurface;
+    use rustycad_tkmath::gp::{Axis3, Direction3, Point3};
+
+    #[test]
+    fn ends_repeat_stops_at_an_infinite_across_bound() {
+        // Regression: over V in [0, +inf] the step is +inf, the second sample is at
+        // +inf and `aV += aVStep` then leaves it there, so the native loop never ends.
+        let z = Direction3::new(0., 0., 1.).unwrap();
+        let x = Direction3::new(1., 0., 0.).unwrap();
+        let frame = Axis3::new(Point3::new(0., 0., 0.), z, x).unwrap();
+        let cylinder = GeomCylindricalSurface::new(frame, 2.).unwrap();
+        let bounds: SurfaceBounds = (0., 2. * std::f64::consts::PI, 0., f64::INFINITY);
+        assert!(ends_repeat(&cylinder, Axis::U, bounds).unwrap());
+    }
 }

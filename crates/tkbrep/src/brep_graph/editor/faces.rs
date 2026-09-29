@@ -17,8 +17,8 @@
 //! `EditorView::FaceOps`: face creation, wire uses and the face setters.
 use super::guards::{mutate_node, mutate_ref};
 use super::helpers::{
-    is_active_node, mark_co_edge_representations_removed, node_item, ref_item,
-    require_item_unlocked, require_mutable,
+    is_active_node, mark_co_edge_representations_removed, node_item, require_mutable,
+    require_settable,
 };
 use super::removals::detach_ordered_parent_ref;
 use crate::brep_graph::mut_guard::MutGuard;
@@ -166,7 +166,7 @@ impl<'g> FaceOps<'g> {
 
     /// `SetTolerance(theFace, theTolerance)`.
     pub fn set_tolerance(&mut self, face: FaceId, tolerance: f64) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(face))?;
+        require_settable(self.graph, face)?;
         self.graph.inc_storage_mut().change_face(face).tolerance = tolerance;
         self.graph.mark_modified(face.into());
         Ok(())
@@ -184,7 +184,7 @@ impl<'g> FaceOps<'g> {
         face: FaceId,
         surface: &Handle<dyn GeomSurface>,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(face))?;
+        require_settable(self.graph, face)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.face(face).surface_rep_id;
         if surface.is_null() {
@@ -207,7 +207,7 @@ impl<'g> FaceOps<'g> {
 
     /// `ClearSurface(theFace)`: removes the surface record (the id stays).
     pub fn clear_surface(&mut self, face: FaceId) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(face))?;
+        require_settable(self.graph, face)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.face(face).surface_rep_id;
         storage.mark_rep_removed(rep.into());
@@ -221,7 +221,7 @@ impl<'g> FaceOps<'g> {
         face: FaceId,
         triangulation: &Handle<Triangulation>,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(face))?;
+        require_settable(self.graph, face)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.face(face).triangulation_rep_id;
         if triangulation.is_null() {
@@ -244,7 +244,7 @@ impl<'g> FaceOps<'g> {
 
     /// `ClearPersistentTriangulation(theFace)`.
     pub fn clear_persistent_triangulation(&mut self, face: FaceId) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, node_item(face))?;
+        require_settable(self.graph, face)?;
         let storage = self.graph.inc_storage_mut();
         let rep = storage.face(face).triangulation_rep_id;
         storage.mark_rep_removed(rep.into());
@@ -258,7 +258,7 @@ impl<'g> FaceOps<'g> {
         reference: FaceRefId,
         orientation: ParityOrientation,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         self.graph
             .inc_storage_mut()
             .change_face_ref(reference)
@@ -278,7 +278,7 @@ impl<'g> FaceOps<'g> {
     /// `SetRefFaceId(theFaceRef, theFace)`: retargets the reference and rebinds the
     /// face-to-shell relations.
     pub fn set_ref_face_id(&mut self, reference: FaceRefId, face: FaceId) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         let storage = self.graph.inc_storage_mut();
         let old = storage.face_ref(reference).child_face_id;
         if old == face {

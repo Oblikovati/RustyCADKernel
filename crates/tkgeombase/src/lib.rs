@@ -55,3 +55,4 @@ mod native_text;
 #[doc(hidden)]
 pub mod probe_support;
 pub mod proj_lib;
+pub mod scan_step;

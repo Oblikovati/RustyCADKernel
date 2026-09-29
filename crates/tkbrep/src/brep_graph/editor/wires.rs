@@ -19,7 +19,7 @@
 //! `EditorView::WireOps`: wire creation, the order prechecks and the wire reference
 //! setters. The structural edits are in `wire_edits`.
 use super::guards::{mutate_node, mutate_ref};
-use super::helpers::{ref_item, require_item_unlocked};
+use super::helpers::require_settable;
 use super::wire_checks::{
     OrderRequest, co_edge_vertices_after_replacement, is_connected_chain, pre_check_co_edge_order,
     to_editor_status,
@@ -278,7 +278,7 @@ impl<'g> WireOps<'g> {
         reference: WireRefId,
         orientation: ParityOrientation,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         self.graph
             .inc_storage_mut()
             .change_wire_ref(reference)
@@ -302,7 +302,7 @@ impl<'g> WireOps<'g> {
         reference: WireRefId,
         wire: WireId,
     ) -> Result<(), Failure> {
-        require_item_unlocked(self.graph, ref_item(reference))?;
+        require_settable(self.graph, reference)?;
         let storage = self.graph.inc_storage_mut();
         let old = storage.wire_ref(reference).child_wire_id;
         if old == wire {
